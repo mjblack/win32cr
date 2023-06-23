@@ -11,23 +11,23 @@ require "../../foundation.cr"
 lib LibWin32
 
   struct IChannelCredentialsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    set_windows_credential : UInt64
-    set_user_name_credential : UInt64
-    set_client_certificate_from_store : UInt64
-    set_client_certificate_from_store_by_name : UInt64
-    set_client_certificate_from_file : UInt64
-    set_default_service_certificate_from_store : UInt64
-    set_default_service_certificate_from_store_by_name : UInt64
-    set_default_service_certificate_from_file : UInt64
-    set_service_certificate_authentication : UInt64
-    set_issued_token : UInt64
+    query_interface : Proc(IChannelCredentials*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IChannelCredentials*, UInt32)
+    release : Proc(IChannelCredentials*, UInt32)
+    get_type_info_count : Proc(IChannelCredentials*, UInt32*, HRESULT)
+    get_type_info : Proc(IChannelCredentials*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IChannelCredentials*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IChannelCredentials*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    set_windows_credential : Proc(IChannelCredentials*, UInt8*, UInt8*, UInt8*, Int32, LibC::BOOL, HRESULT)
+    set_user_name_credential : Proc(IChannelCredentials*, UInt8*, UInt8*, HRESULT)
+    set_client_certificate_from_store : Proc(IChannelCredentials*, UInt8*, UInt8*, UInt8*, VARIANT, HRESULT)
+    set_client_certificate_from_store_by_name : Proc(IChannelCredentials*, UInt8*, UInt8*, UInt8*, HRESULT)
+    set_client_certificate_from_file : Proc(IChannelCredentials*, UInt8*, UInt8*, UInt8*, HRESULT)
+    set_default_service_certificate_from_store : Proc(IChannelCredentials*, UInt8*, UInt8*, UInt8*, VARIANT, HRESULT)
+    set_default_service_certificate_from_store_by_name : Proc(IChannelCredentials*, UInt8*, UInt8*, UInt8*, HRESULT)
+    set_default_service_certificate_from_file : Proc(IChannelCredentials*, UInt8*, UInt8*, UInt8*, HRESULT)
+    set_service_certificate_authentication : Proc(IChannelCredentials*, UInt8*, UInt8*, UInt8*, HRESULT)
+    set_issued_token : Proc(IChannelCredentials*, UInt8*, UInt8*, UInt8*, HRESULT)
   end
 
   IChannelCredentials_GUID = "181b448c-c17c-4b17-ac6d-06699b93198f"
@@ -38,55 +38,55 @@ lib LibWin32
 
 end
 struct LibWin32::IChannelCredentials
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IChannelCredentials*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IChannelCredentials*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IChannelCredentials*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IChannelCredentials*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IChannelCredentials*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IChannelCredentials*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IChannelCredentials*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def set_windows_credential(domain : UInt8*, username : UInt8*, password : UInt8*, impersonationlevel : Int32, allowntlm : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_windows_credential.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, Int32, LibC::BOOL, HRESULT)).call(domain, username, password, impersonationlevel, allowntlm)
+  def set_windows_credential(this : IChannelCredentials*, domain : UInt8*, username : UInt8*, password : UInt8*, impersonationlevel : Int32, allowntlm : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_windows_credential.call(this, domain, username, password, impersonationlevel, allowntlm)
   end
-  def set_user_name_credential(username : UInt8*, password : UInt8*) : HRESULT
-    @lpVtbl.value.set_user_name_credential.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(username, password)
+  def set_user_name_credential(this : IChannelCredentials*, username : UInt8*, password : UInt8*) : HRESULT
+    @lpVtbl.value.set_user_name_credential.call(this, username, password)
   end
-  def set_client_certificate_from_store(storelocation : UInt8*, storename : UInt8*, findyype : UInt8*, findvalue : VARIANT) : HRESULT
-    @lpVtbl.value.set_client_certificate_from_store.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, VARIANT, HRESULT)).call(storelocation, storename, findyype, findvalue)
+  def set_client_certificate_from_store(this : IChannelCredentials*, storelocation : UInt8*, storename : UInt8*, findyype : UInt8*, findvalue : VARIANT) : HRESULT
+    @lpVtbl.value.set_client_certificate_from_store.call(this, storelocation, storename, findyype, findvalue)
   end
-  def set_client_certificate_from_store_by_name(subjectname : UInt8*, storelocation : UInt8*, storename : UInt8*) : HRESULT
-    @lpVtbl.value.set_client_certificate_from_store_by_name.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, HRESULT)).call(subjectname, storelocation, storename)
+  def set_client_certificate_from_store_by_name(this : IChannelCredentials*, subjectname : UInt8*, storelocation : UInt8*, storename : UInt8*) : HRESULT
+    @lpVtbl.value.set_client_certificate_from_store_by_name.call(this, subjectname, storelocation, storename)
   end
-  def set_client_certificate_from_file(filename : UInt8*, password : UInt8*, keystorageflags : UInt8*) : HRESULT
-    @lpVtbl.value.set_client_certificate_from_file.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, HRESULT)).call(filename, password, keystorageflags)
+  def set_client_certificate_from_file(this : IChannelCredentials*, filename : UInt8*, password : UInt8*, keystorageflags : UInt8*) : HRESULT
+    @lpVtbl.value.set_client_certificate_from_file.call(this, filename, password, keystorageflags)
   end
-  def set_default_service_certificate_from_store(storelocation : UInt8*, storename : UInt8*, findtype : UInt8*, findvalue : VARIANT) : HRESULT
-    @lpVtbl.value.set_default_service_certificate_from_store.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, VARIANT, HRESULT)).call(storelocation, storename, findtype, findvalue)
+  def set_default_service_certificate_from_store(this : IChannelCredentials*, storelocation : UInt8*, storename : UInt8*, findtype : UInt8*, findvalue : VARIANT) : HRESULT
+    @lpVtbl.value.set_default_service_certificate_from_store.call(this, storelocation, storename, findtype, findvalue)
   end
-  def set_default_service_certificate_from_store_by_name(subjectname : UInt8*, storelocation : UInt8*, storename : UInt8*) : HRESULT
-    @lpVtbl.value.set_default_service_certificate_from_store_by_name.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, HRESULT)).call(subjectname, storelocation, storename)
+  def set_default_service_certificate_from_store_by_name(this : IChannelCredentials*, subjectname : UInt8*, storelocation : UInt8*, storename : UInt8*) : HRESULT
+    @lpVtbl.value.set_default_service_certificate_from_store_by_name.call(this, subjectname, storelocation, storename)
   end
-  def set_default_service_certificate_from_file(filename : UInt8*, password : UInt8*, keystorageflags : UInt8*) : HRESULT
-    @lpVtbl.value.set_default_service_certificate_from_file.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, HRESULT)).call(filename, password, keystorageflags)
+  def set_default_service_certificate_from_file(this : IChannelCredentials*, filename : UInt8*, password : UInt8*, keystorageflags : UInt8*) : HRESULT
+    @lpVtbl.value.set_default_service_certificate_from_file.call(this, filename, password, keystorageflags)
   end
-  def set_service_certificate_authentication(storelocation : UInt8*, revocationmode : UInt8*, certificatevalidationmode : UInt8*) : HRESULT
-    @lpVtbl.value.set_service_certificate_authentication.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, HRESULT)).call(storelocation, revocationmode, certificatevalidationmode)
+  def set_service_certificate_authentication(this : IChannelCredentials*, storelocation : UInt8*, revocationmode : UInt8*, certificatevalidationmode : UInt8*) : HRESULT
+    @lpVtbl.value.set_service_certificate_authentication.call(this, storelocation, revocationmode, certificatevalidationmode)
   end
-  def set_issued_token(localissueraddres : UInt8*, localissuerbindingtype : UInt8*, localissuerbinding : UInt8*) : HRESULT
-    @lpVtbl.value.set_issued_token.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, HRESULT)).call(localissueraddres, localissuerbindingtype, localissuerbinding)
+  def set_issued_token(this : IChannelCredentials*, localissueraddres : UInt8*, localissuerbindingtype : UInt8*, localissuerbinding : UInt8*) : HRESULT
+    @lpVtbl.value.set_issued_token.call(this, localissueraddres, localissuerbindingtype, localissuerbinding)
   end
 end

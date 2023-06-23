@@ -4004,13 +4004,13 @@ lib LibWin32
 
 
   struct IEnumNetCfgBindingInterfaceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    next : UInt64
-    skip : UInt64
-    reset : UInt64
-    clone : UInt64
+    query_interface : Proc(IEnumNetCfgBindingInterface*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEnumNetCfgBindingInterface*, UInt32)
+    release : Proc(IEnumNetCfgBindingInterface*, UInt32)
+    next : Proc(IEnumNetCfgBindingInterface*, UInt32, INetCfgBindingInterface*, UInt32*, HRESULT)
+    skip : Proc(IEnumNetCfgBindingInterface*, UInt32, HRESULT)
+    reset : Proc(IEnumNetCfgBindingInterface*, HRESULT)
+    clone : Proc(IEnumNetCfgBindingInterface*, IEnumNetCfgBindingInterface*, HRESULT)
   end
 
   IEnumNetCfgBindingInterface_GUID = "c0e8ae90-306e-11d1-aacf-00805fc1270e"
@@ -4020,13 +4020,13 @@ lib LibWin32
   end
 
   struct IEnumNetCfgBindingPathVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    next : UInt64
-    skip : UInt64
-    reset : UInt64
-    clone : UInt64
+    query_interface : Proc(IEnumNetCfgBindingPath*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEnumNetCfgBindingPath*, UInt32)
+    release : Proc(IEnumNetCfgBindingPath*, UInt32)
+    next : Proc(IEnumNetCfgBindingPath*, UInt32, INetCfgBindingPath*, UInt32*, HRESULT)
+    skip : Proc(IEnumNetCfgBindingPath*, UInt32, HRESULT)
+    reset : Proc(IEnumNetCfgBindingPath*, HRESULT)
+    clone : Proc(IEnumNetCfgBindingPath*, IEnumNetCfgBindingPath*, HRESULT)
   end
 
   IEnumNetCfgBindingPath_GUID = "c0e8ae91-306e-11d1-aacf-00805fc1270e"
@@ -4036,13 +4036,13 @@ lib LibWin32
   end
 
   struct IEnumNetCfgComponentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    next : UInt64
-    skip : UInt64
-    reset : UInt64
-    clone : UInt64
+    query_interface : Proc(IEnumNetCfgComponent*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEnumNetCfgComponent*, UInt32)
+    release : Proc(IEnumNetCfgComponent*, UInt32)
+    next : Proc(IEnumNetCfgComponent*, UInt32, INetCfgComponent*, UInt32*, HRESULT)
+    skip : Proc(IEnumNetCfgComponent*, UInt32, HRESULT)
+    reset : Proc(IEnumNetCfgComponent*, HRESULT)
+    clone : Proc(IEnumNetCfgComponent*, IEnumNetCfgComponent*, HRESULT)
   end
 
   IEnumNetCfgComponent_GUID = "c0e8ae92-306e-11d1-aacf-00805fc1270e"
@@ -4052,16 +4052,16 @@ lib LibWin32
   end
 
   struct INetCfgVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    initialize : UInt64
-    uninitialize : UInt64
-    apply : UInt64
-    cancel : UInt64
-    enum_components : UInt64
-    find_component : UInt64
-    query_net_cfg_class : UInt64
+    query_interface : Proc(INetCfg*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INetCfg*, UInt32)
+    release : Proc(INetCfg*, UInt32)
+    initialize : Proc(INetCfg*, Void*, HRESULT)
+    uninitialize : Proc(INetCfg*, HRESULT)
+    apply : Proc(INetCfg*, HRESULT)
+    cancel : Proc(INetCfg*, HRESULT)
+    enum_components : Proc(INetCfg*, Guid*, IEnumNetCfgComponent*, HRESULT)
+    find_component : Proc(INetCfg*, LibC::LPWSTR, INetCfgComponent*, HRESULT)
+    query_net_cfg_class : Proc(INetCfg*, Guid*, Guid*, Void**, HRESULT)
   end
 
   INetCfg_GUID = "c0e8ae93-306e-11d1-aacf-00805fc1270e"
@@ -4071,12 +4071,12 @@ lib LibWin32
   end
 
   struct INetCfgLockVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    acquire_write_lock : UInt64
-    release_write_lock : UInt64
-    is_write_locked : UInt64
+    query_interface : Proc(INetCfgLock*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INetCfgLock*, UInt32)
+    release : Proc(INetCfgLock*, UInt32)
+    acquire_write_lock : Proc(INetCfgLock*, UInt32, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
+    release_write_lock : Proc(INetCfgLock*, HRESULT)
+    is_write_locked : Proc(INetCfgLock*, LibC::LPWSTR*, HRESULT)
   end
 
   INetCfgLock_GUID = "c0e8ae9f-306e-11d1-aacf-00805fc1270e"
@@ -4086,12 +4086,12 @@ lib LibWin32
   end
 
   struct INetCfgBindingInterfaceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_name : UInt64
-    get_upper_component : UInt64
-    get_lower_component : UInt64
+    query_interface : Proc(INetCfgBindingInterface*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INetCfgBindingInterface*, UInt32)
+    release : Proc(INetCfgBindingInterface*, UInt32)
+    get_name : Proc(INetCfgBindingInterface*, LibC::LPWSTR*, HRESULT)
+    get_upper_component : Proc(INetCfgBindingInterface*, INetCfgComponent*, HRESULT)
+    get_lower_component : Proc(INetCfgBindingInterface*, INetCfgComponent*, HRESULT)
   end
 
   INetCfgBindingInterface_GUID = "c0e8ae94-306e-11d1-aacf-00805fc1270e"
@@ -4101,17 +4101,17 @@ lib LibWin32
   end
 
   struct INetCfgBindingPathVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    is_same_path_as : UInt64
-    is_sub_path_of : UInt64
-    is_enabled : UInt64
-    enable : UInt64
-    get_path_token : UInt64
-    get_owner : UInt64
-    get_depth : UInt64
-    enum_binding_interfaces : UInt64
+    query_interface : Proc(INetCfgBindingPath*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INetCfgBindingPath*, UInt32)
+    release : Proc(INetCfgBindingPath*, UInt32)
+    is_same_path_as : Proc(INetCfgBindingPath*, INetCfgBindingPath, HRESULT)
+    is_sub_path_of : Proc(INetCfgBindingPath*, INetCfgBindingPath, HRESULT)
+    is_enabled : Proc(INetCfgBindingPath*, HRESULT)
+    enable : Proc(INetCfgBindingPath*, LibC::BOOL, HRESULT)
+    get_path_token : Proc(INetCfgBindingPath*, LibC::LPWSTR*, HRESULT)
+    get_owner : Proc(INetCfgBindingPath*, INetCfgComponent*, HRESULT)
+    get_depth : Proc(INetCfgBindingPath*, UInt32*, HRESULT)
+    enum_binding_interfaces : Proc(INetCfgBindingPath*, IEnumNetCfgBindingInterface*, HRESULT)
   end
 
   INetCfgBindingPath_GUID = "c0e8ae96-306e-11d1-aacf-00805fc1270e"
@@ -4121,11 +4121,11 @@ lib LibWin32
   end
 
   struct INetCfgClassVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    find_component : UInt64
-    enum_components : UInt64
+    query_interface : Proc(INetCfgClass*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INetCfgClass*, UInt32)
+    release : Proc(INetCfgClass*, UInt32)
+    find_component : Proc(INetCfgClass*, LibC::LPWSTR, INetCfgComponent*, HRESULT)
+    enum_components : Proc(INetCfgClass*, IEnumNetCfgComponent*, HRESULT)
   end
 
   INetCfgClass_GUID = "c0e8ae97-306e-11d1-aacf-00805fc1270e"
@@ -4135,12 +4135,12 @@ lib LibWin32
   end
 
   struct INetCfgClassSetupVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    select_and_install : UInt64
-    install : UInt64
-    de_install : UInt64
+    query_interface : Proc(INetCfgClassSetup*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INetCfgClassSetup*, UInt32)
+    release : Proc(INetCfgClassSetup*, UInt32)
+    select_and_install : Proc(INetCfgClassSetup*, LibC::HANDLE, OBO_TOKEN*, INetCfgComponent*, HRESULT)
+    install : Proc(INetCfgClassSetup*, LibC::LPWSTR, OBO_TOKEN*, UInt32, UInt32, LibC::LPWSTR, LibC::LPWSTR, INetCfgComponent*, HRESULT)
+    de_install : Proc(INetCfgClassSetup*, INetCfgComponent, OBO_TOKEN*, LibC::LPWSTR*, HRESULT)
   end
 
   INetCfgClassSetup_GUID = "c0e8ae9d-306e-11d1-aacf-00805fc1270e"
@@ -4150,13 +4150,13 @@ lib LibWin32
   end
 
   struct INetCfgClassSetup2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    select_and_install : UInt64
-    install : UInt64
-    de_install : UInt64
-    update_non_enumerated_component : UInt64
+    query_interface : Proc(INetCfgClassSetup2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INetCfgClassSetup2*, UInt32)
+    release : Proc(INetCfgClassSetup2*, UInt32)
+    select_and_install : Proc(INetCfgClassSetup2*, LibC::HANDLE, OBO_TOKEN*, INetCfgComponent*, HRESULT)
+    install : Proc(INetCfgClassSetup2*, LibC::LPWSTR, OBO_TOKEN*, UInt32, UInt32, LibC::LPWSTR, LibC::LPWSTR, INetCfgComponent*, HRESULT)
+    de_install : Proc(INetCfgClassSetup2*, INetCfgComponent, OBO_TOKEN*, LibC::LPWSTR*, HRESULT)
+    update_non_enumerated_component : Proc(INetCfgClassSetup2*, INetCfgComponent, UInt32, UInt32, HRESULT)
   end
 
   INetCfgClassSetup2_GUID = "c0e8aea0-306e-11d1-aacf-00805fc1270e"
@@ -4166,21 +4166,21 @@ lib LibWin32
   end
 
   struct INetCfgComponentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_display_name : UInt64
-    set_display_name : UInt64
-    get_help_text : UInt64
-    get_id : UInt64
-    get_characteristics : UInt64
-    get_instance_guid : UInt64
-    get_pnp_dev_node_id : UInt64
-    get_class_guid : UInt64
-    get_bind_name : UInt64
-    get_device_status : UInt64
-    open_param_key : UInt64
-    raise_property_ui : UInt64
+    query_interface : Proc(INetCfgComponent*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INetCfgComponent*, UInt32)
+    release : Proc(INetCfgComponent*, UInt32)
+    get_display_name : Proc(INetCfgComponent*, LibC::LPWSTR*, HRESULT)
+    set_display_name : Proc(INetCfgComponent*, LibC::LPWSTR, HRESULT)
+    get_help_text : Proc(INetCfgComponent*, LibC::LPWSTR*, HRESULT)
+    get_id : Proc(INetCfgComponent*, LibC::LPWSTR*, HRESULT)
+    get_characteristics : Proc(INetCfgComponent*, UInt32*, HRESULT)
+    get_instance_guid : Proc(INetCfgComponent*, Guid*, HRESULT)
+    get_pnp_dev_node_id : Proc(INetCfgComponent*, LibC::LPWSTR*, HRESULT)
+    get_class_guid : Proc(INetCfgComponent*, Guid*, HRESULT)
+    get_bind_name : Proc(INetCfgComponent*, LibC::LPWSTR*, HRESULT)
+    get_device_status : Proc(INetCfgComponent*, UInt32*, HRESULT)
+    open_param_key : Proc(INetCfgComponent*, HKEY*, HRESULT)
+    raise_property_ui : Proc(INetCfgComponent*, LibC::HANDLE, UInt32, IUnknown, HRESULT)
   end
 
   INetCfgComponent_GUID = "c0e8ae99-306e-11d1-aacf-00805fc1270e"
@@ -4190,17 +4190,17 @@ lib LibWin32
   end
 
   struct INetCfgComponentBindingsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    bind_to : UInt64
-    unbind_from : UInt64
-    supports_binding_interface : UInt64
-    is_bound_to : UInt64
-    is_bindable_to : UInt64
-    enum_binding_paths : UInt64
-    move_before : UInt64
-    move_after : UInt64
+    query_interface : Proc(INetCfgComponentBindings*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INetCfgComponentBindings*, UInt32)
+    release : Proc(INetCfgComponentBindings*, UInt32)
+    bind_to : Proc(INetCfgComponentBindings*, INetCfgComponent, HRESULT)
+    unbind_from : Proc(INetCfgComponentBindings*, INetCfgComponent, HRESULT)
+    supports_binding_interface : Proc(INetCfgComponentBindings*, UInt32, LibC::LPWSTR, HRESULT)
+    is_bound_to : Proc(INetCfgComponentBindings*, INetCfgComponent, HRESULT)
+    is_bindable_to : Proc(INetCfgComponentBindings*, INetCfgComponent, HRESULT)
+    enum_binding_paths : Proc(INetCfgComponentBindings*, UInt32, IEnumNetCfgBindingPath*, HRESULT)
+    move_before : Proc(INetCfgComponentBindings*, INetCfgBindingPath, INetCfgBindingPath, HRESULT)
+    move_after : Proc(INetCfgComponentBindings*, INetCfgBindingPath, INetCfgBindingPath, HRESULT)
   end
 
   INetCfgComponentBindings_GUID = "c0e8ae9e-306e-11d1-aacf-00805fc1270e"
@@ -4210,13 +4210,13 @@ lib LibWin32
   end
 
   struct INetCfgSysPrepVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    hr_setup_set_first_dword : UInt64
-    hr_setup_set_first_string : UInt64
-    hr_setup_set_first_string_as_bool : UInt64
-    hr_setup_set_first_multi_sz_field : UInt64
+    query_interface : Proc(INetCfgSysPrep*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INetCfgSysPrep*, UInt32)
+    release : Proc(INetCfgSysPrep*, UInt32)
+    hr_setup_set_first_dword : Proc(INetCfgSysPrep*, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
+    hr_setup_set_first_string : Proc(INetCfgSysPrep*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    hr_setup_set_first_string_as_bool : Proc(INetCfgSysPrep*, LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, HRESULT)
+    hr_setup_set_first_multi_sz_field : Proc(INetCfgSysPrep*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
   INetCfgSysPrep_GUID = "c0e8ae98-306e-11d1-aacf-00805fc1270e"
@@ -4226,10 +4226,10 @@ lib LibWin32
   end
 
   struct INetCfgPnpReconfigCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    send_pnp_reconfig : UInt64
+    query_interface : Proc(INetCfgPnpReconfigCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INetCfgPnpReconfigCallback*, UInt32)
+    release : Proc(INetCfgPnpReconfigCallback*, UInt32)
+    send_pnp_reconfig : Proc(INetCfgPnpReconfigCallback*, NCPNP_RECONFIG_LAYER, LibC::LPWSTR, LibC::LPWSTR, Void*, UInt32, HRESULT)
   end
 
   INetCfgPnpReconfigCallback_GUID = "8d84bd35-e227-11d2-b700-00a0c98a6a85"
@@ -4239,13 +4239,13 @@ lib LibWin32
   end
 
   struct INetCfgComponentControlVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    initialize : UInt64
-    apply_registry_changes : UInt64
-    apply_pnp_changes : UInt64
-    cancel_changes : UInt64
+    query_interface : Proc(INetCfgComponentControl*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INetCfgComponentControl*, UInt32)
+    release : Proc(INetCfgComponentControl*, UInt32)
+    initialize : Proc(INetCfgComponentControl*, INetCfgComponent, INetCfg, LibC::BOOL, HRESULT)
+    apply_registry_changes : Proc(INetCfgComponentControl*, HRESULT)
+    apply_pnp_changes : Proc(INetCfgComponentControl*, INetCfgPnpReconfigCallback, HRESULT)
+    cancel_changes : Proc(INetCfgComponentControl*, HRESULT)
   end
 
   INetCfgComponentControl_GUID = "932238df-bea1-11d0-9298-00c04fc99dcf"
@@ -4255,13 +4255,13 @@ lib LibWin32
   end
 
   struct INetCfgComponentSetupVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    install : UInt64
-    upgrade : UInt64
-    read_answer_file : UInt64
-    removing : UInt64
+    query_interface : Proc(INetCfgComponentSetup*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INetCfgComponentSetup*, UInt32)
+    release : Proc(INetCfgComponentSetup*, UInt32)
+    install : Proc(INetCfgComponentSetup*, UInt32, HRESULT)
+    upgrade : Proc(INetCfgComponentSetup*, UInt32, UInt32, HRESULT)
+    read_answer_file : Proc(INetCfgComponentSetup*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    removing : Proc(INetCfgComponentSetup*, HRESULT)
   end
 
   INetCfgComponentSetup_GUID = "932238e3-bea1-11d0-9298-00c04fc99dcf"
@@ -4271,15 +4271,15 @@ lib LibWin32
   end
 
   struct INetCfgComponentPropertyUiVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    query_property_ui : UInt64
-    set_context : UInt64
-    merge_prop_pages : UInt64
-    validate_properties : UInt64
-    apply_properties : UInt64
-    cancel_properties : UInt64
+    query_interface : Proc(INetCfgComponentPropertyUi*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INetCfgComponentPropertyUi*, UInt32)
+    release : Proc(INetCfgComponentPropertyUi*, UInt32)
+    query_property_ui : Proc(INetCfgComponentPropertyUi*, IUnknown, HRESULT)
+    set_context : Proc(INetCfgComponentPropertyUi*, IUnknown, HRESULT)
+    merge_prop_pages : Proc(INetCfgComponentPropertyUi*, UInt32*, UInt8**, UInt32*, LibC::HANDLE, LibC::LPWSTR*, HRESULT)
+    validate_properties : Proc(INetCfgComponentPropertyUi*, LibC::HANDLE, HRESULT)
+    apply_properties : Proc(INetCfgComponentPropertyUi*, HRESULT)
+    cancel_properties : Proc(INetCfgComponentPropertyUi*, HRESULT)
   end
 
   INetCfgComponentPropertyUi_GUID = "932238e0-bea1-11d0-9298-00c04fc99dcf"
@@ -4289,11 +4289,11 @@ lib LibWin32
   end
 
   struct INetCfgComponentNotifyBindingVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    query_binding_path : UInt64
-    notify_binding_path : UInt64
+    query_interface : Proc(INetCfgComponentNotifyBinding*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INetCfgComponentNotifyBinding*, UInt32)
+    release : Proc(INetCfgComponentNotifyBinding*, UInt32)
+    query_binding_path : Proc(INetCfgComponentNotifyBinding*, UInt32, INetCfgBindingPath, HRESULT)
+    notify_binding_path : Proc(INetCfgComponentNotifyBinding*, UInt32, INetCfgBindingPath, HRESULT)
   end
 
   INetCfgComponentNotifyBinding_GUID = "932238e1-bea1-11d0-9298-00c04fc99dcf"
@@ -4303,13 +4303,13 @@ lib LibWin32
   end
 
   struct INetCfgComponentNotifyGlobalVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_supported_notifications : UInt64
-    sys_query_binding_path : UInt64
-    sys_notify_binding_path : UInt64
-    sys_notify_component : UInt64
+    query_interface : Proc(INetCfgComponentNotifyGlobal*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INetCfgComponentNotifyGlobal*, UInt32)
+    release : Proc(INetCfgComponentNotifyGlobal*, UInt32)
+    get_supported_notifications : Proc(INetCfgComponentNotifyGlobal*, UInt32*, HRESULT)
+    sys_query_binding_path : Proc(INetCfgComponentNotifyGlobal*, UInt32, INetCfgBindingPath, HRESULT)
+    sys_notify_binding_path : Proc(INetCfgComponentNotifyGlobal*, UInt32, INetCfgBindingPath, HRESULT)
+    sys_notify_component : Proc(INetCfgComponentNotifyGlobal*, UInt32, INetCfgComponent, HRESULT)
   end
 
   INetCfgComponentNotifyGlobal_GUID = "932238e2-bea1-11d0-9298-00c04fc99dcf"
@@ -4319,12 +4319,12 @@ lib LibWin32
   end
 
   struct INetCfgComponentUpperEdgeVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_interface_ids_for_adapter : UInt64
-    add_interfaces_to_adapter : UInt64
-    remove_interfaces_from_adapter : UInt64
+    query_interface : Proc(INetCfgComponentUpperEdge*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INetCfgComponentUpperEdge*, UInt32)
+    release : Proc(INetCfgComponentUpperEdge*, UInt32)
+    get_interface_ids_for_adapter : Proc(INetCfgComponentUpperEdge*, INetCfgComponent, UInt32*, Guid**, HRESULT)
+    add_interfaces_to_adapter : Proc(INetCfgComponentUpperEdge*, HRESULT)
+    remove_interfaces_from_adapter : Proc(INetCfgComponentUpperEdge*, INetCfgComponent, UInt32, Guid*, HRESULT)
   end
 
   INetCfgComponentUpperEdge_GUID = "932238e4-bea1-11d0-9298-00c04fc99dcf"
@@ -4334,10 +4334,10 @@ lib LibWin32
   end
 
   struct INetLanConnectionUiInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device_guid : UInt64
+    query_interface : Proc(INetLanConnectionUiInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INetLanConnectionUiInfo*, UInt32)
+    release : Proc(INetLanConnectionUiInfo*, UInt32)
+    get_device_guid : Proc(INetLanConnectionUiInfo*, Guid*, HRESULT)
   end
 
   INetLanConnectionUiInfo_GUID = "c08956a6-1cd3-11d1-b1c5-00805fc1270e"
@@ -4347,10 +4347,10 @@ lib LibWin32
   end
 
   struct INetRasConnectionIpUiInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_ui_info : UInt64
+    query_interface : Proc(INetRasConnectionIpUiInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INetRasConnectionIpUiInfo*, UInt32)
+    release : Proc(INetRasConnectionIpUiInfo*, UInt32)
+    get_ui_info : Proc(INetRasConnectionIpUiInfo*, RASCON_IPUI*, HRESULT)
   end
 
   INetRasConnectionIpUiInfo_GUID = "faedcf58-31fe-11d1-aad2-00805fc1270e"
@@ -4360,11 +4360,11 @@ lib LibWin32
   end
 
   struct INetCfgComponentSysPrepVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    save_adapter_parameters : UInt64
-    restore_adapter_parameters : UInt64
+    query_interface : Proc(INetCfgComponentSysPrep*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INetCfgComponentSysPrep*, UInt32)
+    release : Proc(INetCfgComponentSysPrep*, UInt32)
+    save_adapter_parameters : Proc(INetCfgComponentSysPrep*, INetCfgSysPrep, LibC::LPWSTR, Guid*, HRESULT)
+    restore_adapter_parameters : Proc(INetCfgComponentSysPrep*, LibC::LPWSTR, LibC::LPWSTR, Guid*, HRESULT)
   end
 
   INetCfgComponentSysPrep_GUID = "c0e8ae9a-306e-11d1-aacf-00805fc1270e"
@@ -4374,11 +4374,11 @@ lib LibWin32
   end
 
   struct IProvisioningDomainVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add : UInt64
-    query : UInt64
+    query_interface : Proc(IProvisioningDomain*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IProvisioningDomain*, UInt32)
+    release : Proc(IProvisioningDomain*, UInt32)
+    add : Proc(IProvisioningDomain*, LibC::LPWSTR, HRESULT)
+    query : Proc(IProvisioningDomain*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IXMLDOMNodeList*, HRESULT)
   end
 
   IProvisioningDomain_GUID = "c96fbd50-24dd-11d8-89fb-00904b2ea9c6"
@@ -4388,10 +4388,10 @@ lib LibWin32
   end
 
   struct IProvisioningProfileWirelessVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_profile : UInt64
+    query_interface : Proc(IProvisioningProfileWireless*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IProvisioningProfileWireless*, UInt32)
+    release : Proc(IProvisioningProfileWireless*, UInt32)
+    create_profile : Proc(IProvisioningProfileWireless*, UInt8*, UInt8*, Guid*, UInt32*, HRESULT)
   end
 
   IProvisioningProfileWireless_GUID = "c96fbd51-24dd-11d8-89fb-00904b2ea9c6"
@@ -4927,568 +4927,568 @@ lib LibWin32
   fun MprSetupProtocolFree(lpbuffer : Void*) : UInt32
 end
 struct LibWin32::IEnumNetCfgBindingInterface
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IEnumNetCfgBindingInterface*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IEnumNetCfgBindingInterface*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IEnumNetCfgBindingInterface*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def next(celt : UInt32, rgelt : INetCfgBindingInterface*, pceltfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(UInt32, INetCfgBindingInterface*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  def next(this : IEnumNetCfgBindingInterface*, celt : UInt32, rgelt : INetCfgBindingInterface*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
   end
-  def skip(celt : UInt32) : HRESULT
-    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  def skip(this : IEnumNetCfgBindingInterface*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IEnumNetCfgBindingInterface*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def clone(ppenum : IEnumNetCfgBindingInterface*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IEnumNetCfgBindingInterface*, HRESULT)).call(ppenum)
+  def clone(this : IEnumNetCfgBindingInterface*, ppenum : IEnumNetCfgBindingInterface*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
   end
 end
 struct LibWin32::IEnumNetCfgBindingPath
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IEnumNetCfgBindingPath*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IEnumNetCfgBindingPath*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IEnumNetCfgBindingPath*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def next(celt : UInt32, rgelt : INetCfgBindingPath*, pceltfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(UInt32, INetCfgBindingPath*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  def next(this : IEnumNetCfgBindingPath*, celt : UInt32, rgelt : INetCfgBindingPath*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
   end
-  def skip(celt : UInt32) : HRESULT
-    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  def skip(this : IEnumNetCfgBindingPath*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IEnumNetCfgBindingPath*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def clone(ppenum : IEnumNetCfgBindingPath*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IEnumNetCfgBindingPath*, HRESULT)).call(ppenum)
+  def clone(this : IEnumNetCfgBindingPath*, ppenum : IEnumNetCfgBindingPath*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
   end
 end
 struct LibWin32::IEnumNetCfgComponent
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IEnumNetCfgComponent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IEnumNetCfgComponent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IEnumNetCfgComponent*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def next(celt : UInt32, rgelt : INetCfgComponent*, pceltfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(UInt32, INetCfgComponent*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  def next(this : IEnumNetCfgComponent*, celt : UInt32, rgelt : INetCfgComponent*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
   end
-  def skip(celt : UInt32) : HRESULT
-    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  def skip(this : IEnumNetCfgComponent*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IEnumNetCfgComponent*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def clone(ppenum : IEnumNetCfgComponent*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IEnumNetCfgComponent*, HRESULT)).call(ppenum)
+  def clone(this : IEnumNetCfgComponent*, ppenum : IEnumNetCfgComponent*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
   end
 end
 struct LibWin32::INetCfg
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INetCfg*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INetCfg*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INetCfg*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def initialize(pvreserved : Void*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(Void*, HRESULT)).call(pvreserved)
+  def initialize(this : INetCfg*, pvreserved : Void*) : HRESULT
+    @lpVtbl.value.initialize.call(this, pvreserved)
   end
-  def uninitialize : HRESULT
-    @lpVtbl.value.uninitialize.unsafe_as(Proc(HRESULT)).call
+  def uninitialize(this : INetCfg*) : HRESULT
+    @lpVtbl.value.uninitialize.call(this)
   end
-  def apply : HRESULT
-    @lpVtbl.value.apply.unsafe_as(Proc(HRESULT)).call
+  def apply(this : INetCfg*) : HRESULT
+    @lpVtbl.value.apply.call(this)
   end
-  def cancel : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  def cancel(this : INetCfg*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
   end
-  def enum_components(pguidclass : Guid*, ppenumcomponent : IEnumNetCfgComponent*) : HRESULT
-    @lpVtbl.value.enum_components.unsafe_as(Proc(Guid*, IEnumNetCfgComponent*, HRESULT)).call(pguidclass, ppenumcomponent)
+  def enum_components(this : INetCfg*, pguidclass : Guid*, ppenumcomponent : IEnumNetCfgComponent*) : HRESULT
+    @lpVtbl.value.enum_components.call(this, pguidclass, ppenumcomponent)
   end
-  def find_component(pszwinfid : LibC::LPWSTR, pcomponent : INetCfgComponent*) : HRESULT
-    @lpVtbl.value.find_component.unsafe_as(Proc(LibC::LPWSTR, INetCfgComponent*, HRESULT)).call(pszwinfid, pcomponent)
+  def find_component(this : INetCfg*, pszwinfid : LibC::LPWSTR, pcomponent : INetCfgComponent*) : HRESULT
+    @lpVtbl.value.find_component.call(this, pszwinfid, pcomponent)
   end
-  def query_net_cfg_class(pguidclass : Guid*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_net_cfg_class.unsafe_as(Proc(Guid*, Guid*, Void**, HRESULT)).call(pguidclass, riid, ppvobject)
+  def query_net_cfg_class(this : INetCfg*, pguidclass : Guid*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_net_cfg_class.call(this, pguidclass, riid, ppvobject)
   end
 end
 struct LibWin32::INetCfgLock
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INetCfgLock*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INetCfgLock*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INetCfgLock*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def acquire_write_lock(cmstimeout : UInt32, pszwclientdescription : LibC::LPWSTR, ppszwclientdescription : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.acquire_write_lock.unsafe_as(Proc(UInt32, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)).call(cmstimeout, pszwclientdescription, ppszwclientdescription)
+  def acquire_write_lock(this : INetCfgLock*, cmstimeout : UInt32, pszwclientdescription : LibC::LPWSTR, ppszwclientdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.acquire_write_lock.call(this, cmstimeout, pszwclientdescription, ppszwclientdescription)
   end
-  def release_write_lock : HRESULT
-    @lpVtbl.value.release_write_lock.unsafe_as(Proc(HRESULT)).call
+  def release_write_lock(this : INetCfgLock*) : HRESULT
+    @lpVtbl.value.release_write_lock.call(this)
   end
-  def is_write_locked(ppszwclientdescription : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.is_write_locked.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszwclientdescription)
+  def is_write_locked(this : INetCfgLock*, ppszwclientdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.is_write_locked.call(this, ppszwclientdescription)
   end
 end
 struct LibWin32::INetCfgBindingInterface
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INetCfgBindingInterface*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INetCfgBindingInterface*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INetCfgBindingInterface*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_name(ppszwinterfacename : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszwinterfacename)
+  def get_name(this : INetCfgBindingInterface*, ppszwinterfacename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, ppszwinterfacename)
   end
-  def get_upper_component(ppnccitem : INetCfgComponent*) : HRESULT
-    @lpVtbl.value.get_upper_component.unsafe_as(Proc(INetCfgComponent*, HRESULT)).call(ppnccitem)
+  def get_upper_component(this : INetCfgBindingInterface*, ppnccitem : INetCfgComponent*) : HRESULT
+    @lpVtbl.value.get_upper_component.call(this, ppnccitem)
   end
-  def get_lower_component(ppnccitem : INetCfgComponent*) : HRESULT
-    @lpVtbl.value.get_lower_component.unsafe_as(Proc(INetCfgComponent*, HRESULT)).call(ppnccitem)
+  def get_lower_component(this : INetCfgBindingInterface*, ppnccitem : INetCfgComponent*) : HRESULT
+    @lpVtbl.value.get_lower_component.call(this, ppnccitem)
   end
 end
 struct LibWin32::INetCfgBindingPath
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INetCfgBindingPath*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INetCfgBindingPath*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INetCfgBindingPath*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def is_same_path_as(ppath : INetCfgBindingPath) : HRESULT
-    @lpVtbl.value.is_same_path_as.unsafe_as(Proc(INetCfgBindingPath, HRESULT)).call(ppath)
+  def is_same_path_as(this : INetCfgBindingPath*, ppath : INetCfgBindingPath) : HRESULT
+    @lpVtbl.value.is_same_path_as.call(this, ppath)
   end
-  def is_sub_path_of(ppath : INetCfgBindingPath) : HRESULT
-    @lpVtbl.value.is_sub_path_of.unsafe_as(Proc(INetCfgBindingPath, HRESULT)).call(ppath)
+  def is_sub_path_of(this : INetCfgBindingPath*, ppath : INetCfgBindingPath) : HRESULT
+    @lpVtbl.value.is_sub_path_of.call(this, ppath)
   end
-  def is_enabled : HRESULT
-    @lpVtbl.value.is_enabled.unsafe_as(Proc(HRESULT)).call
+  def is_enabled(this : INetCfgBindingPath*) : HRESULT
+    @lpVtbl.value.is_enabled.call(this)
   end
-  def enable(fenable : LibC::BOOL) : HRESULT
-    @lpVtbl.value.enable.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fenable)
+  def enable(this : INetCfgBindingPath*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable.call(this, fenable)
   end
-  def get_path_token(ppszwpathtoken : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_path_token.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszwpathtoken)
+  def get_path_token(this : INetCfgBindingPath*, ppszwpathtoken : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_path_token.call(this, ppszwpathtoken)
   end
-  def get_owner(ppcomponent : INetCfgComponent*) : HRESULT
-    @lpVtbl.value.get_owner.unsafe_as(Proc(INetCfgComponent*, HRESULT)).call(ppcomponent)
+  def get_owner(this : INetCfgBindingPath*, ppcomponent : INetCfgComponent*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, ppcomponent)
   end
-  def get_depth(pcinterfaces : UInt32*) : HRESULT
-    @lpVtbl.value.get_depth.unsafe_as(Proc(UInt32*, HRESULT)).call(pcinterfaces)
+  def get_depth(this : INetCfgBindingPath*, pcinterfaces : UInt32*) : HRESULT
+    @lpVtbl.value.get_depth.call(this, pcinterfaces)
   end
-  def enum_binding_interfaces(ppenuminterface : IEnumNetCfgBindingInterface*) : HRESULT
-    @lpVtbl.value.enum_binding_interfaces.unsafe_as(Proc(IEnumNetCfgBindingInterface*, HRESULT)).call(ppenuminterface)
+  def enum_binding_interfaces(this : INetCfgBindingPath*, ppenuminterface : IEnumNetCfgBindingInterface*) : HRESULT
+    @lpVtbl.value.enum_binding_interfaces.call(this, ppenuminterface)
   end
 end
 struct LibWin32::INetCfgClass
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INetCfgClass*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INetCfgClass*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INetCfgClass*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def find_component(pszwinfid : LibC::LPWSTR, ppnccitem : INetCfgComponent*) : HRESULT
-    @lpVtbl.value.find_component.unsafe_as(Proc(LibC::LPWSTR, INetCfgComponent*, HRESULT)).call(pszwinfid, ppnccitem)
+  def find_component(this : INetCfgClass*, pszwinfid : LibC::LPWSTR, ppnccitem : INetCfgComponent*) : HRESULT
+    @lpVtbl.value.find_component.call(this, pszwinfid, ppnccitem)
   end
-  def enum_components(ppenumcomponent : IEnumNetCfgComponent*) : HRESULT
-    @lpVtbl.value.enum_components.unsafe_as(Proc(IEnumNetCfgComponent*, HRESULT)).call(ppenumcomponent)
+  def enum_components(this : INetCfgClass*, ppenumcomponent : IEnumNetCfgComponent*) : HRESULT
+    @lpVtbl.value.enum_components.call(this, ppenumcomponent)
   end
 end
 struct LibWin32::INetCfgClassSetup
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INetCfgClassSetup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INetCfgClassSetup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INetCfgClassSetup*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def select_and_install(hwndparent : LibC::HANDLE, pobotoken : OBO_TOKEN*, ppnccitem : INetCfgComponent*) : HRESULT
-    @lpVtbl.value.select_and_install.unsafe_as(Proc(LibC::HANDLE, OBO_TOKEN*, INetCfgComponent*, HRESULT)).call(hwndparent, pobotoken, ppnccitem)
+  def select_and_install(this : INetCfgClassSetup*, hwndparent : LibC::HANDLE, pobotoken : OBO_TOKEN*, ppnccitem : INetCfgComponent*) : HRESULT
+    @lpVtbl.value.select_and_install.call(this, hwndparent, pobotoken, ppnccitem)
   end
-  def install(pszwinfid : LibC::LPWSTR, pobotoken : OBO_TOKEN*, dwsetupflags : UInt32, dwupgradefrombuildno : UInt32, pszwanswerfile : LibC::LPWSTR, pszwanswersections : LibC::LPWSTR, ppnccitem : INetCfgComponent*) : HRESULT
-    @lpVtbl.value.install.unsafe_as(Proc(LibC::LPWSTR, OBO_TOKEN*, UInt32, UInt32, LibC::LPWSTR, LibC::LPWSTR, INetCfgComponent*, HRESULT)).call(pszwinfid, pobotoken, dwsetupflags, dwupgradefrombuildno, pszwanswerfile, pszwanswersections, ppnccitem)
+  def install(this : INetCfgClassSetup*, pszwinfid : LibC::LPWSTR, pobotoken : OBO_TOKEN*, dwsetupflags : UInt32, dwupgradefrombuildno : UInt32, pszwanswerfile : LibC::LPWSTR, pszwanswersections : LibC::LPWSTR, ppnccitem : INetCfgComponent*) : HRESULT
+    @lpVtbl.value.install.call(this, pszwinfid, pobotoken, dwsetupflags, dwupgradefrombuildno, pszwanswerfile, pszwanswersections, ppnccitem)
   end
-  def de_install(pcomponent : INetCfgComponent, pobotoken : OBO_TOKEN*, pmszwrefs : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.de_install.unsafe_as(Proc(INetCfgComponent, OBO_TOKEN*, LibC::LPWSTR*, HRESULT)).call(pcomponent, pobotoken, pmszwrefs)
+  def de_install(this : INetCfgClassSetup*, pcomponent : INetCfgComponent, pobotoken : OBO_TOKEN*, pmszwrefs : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.de_install.call(this, pcomponent, pobotoken, pmszwrefs)
   end
 end
 struct LibWin32::INetCfgClassSetup2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INetCfgClassSetup2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INetCfgClassSetup2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INetCfgClassSetup2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def select_and_install(hwndparent : LibC::HANDLE, pobotoken : OBO_TOKEN*, ppnccitem : INetCfgComponent*) : HRESULT
-    @lpVtbl.value.select_and_install.unsafe_as(Proc(LibC::HANDLE, OBO_TOKEN*, INetCfgComponent*, HRESULT)).call(hwndparent, pobotoken, ppnccitem)
+  def select_and_install(this : INetCfgClassSetup2*, hwndparent : LibC::HANDLE, pobotoken : OBO_TOKEN*, ppnccitem : INetCfgComponent*) : HRESULT
+    @lpVtbl.value.select_and_install.call(this, hwndparent, pobotoken, ppnccitem)
   end
-  def install(pszwinfid : LibC::LPWSTR, pobotoken : OBO_TOKEN*, dwsetupflags : UInt32, dwupgradefrombuildno : UInt32, pszwanswerfile : LibC::LPWSTR, pszwanswersections : LibC::LPWSTR, ppnccitem : INetCfgComponent*) : HRESULT
-    @lpVtbl.value.install.unsafe_as(Proc(LibC::LPWSTR, OBO_TOKEN*, UInt32, UInt32, LibC::LPWSTR, LibC::LPWSTR, INetCfgComponent*, HRESULT)).call(pszwinfid, pobotoken, dwsetupflags, dwupgradefrombuildno, pszwanswerfile, pszwanswersections, ppnccitem)
+  def install(this : INetCfgClassSetup2*, pszwinfid : LibC::LPWSTR, pobotoken : OBO_TOKEN*, dwsetupflags : UInt32, dwupgradefrombuildno : UInt32, pszwanswerfile : LibC::LPWSTR, pszwanswersections : LibC::LPWSTR, ppnccitem : INetCfgComponent*) : HRESULT
+    @lpVtbl.value.install.call(this, pszwinfid, pobotoken, dwsetupflags, dwupgradefrombuildno, pszwanswerfile, pszwanswersections, ppnccitem)
   end
-  def de_install(pcomponent : INetCfgComponent, pobotoken : OBO_TOKEN*, pmszwrefs : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.de_install.unsafe_as(Proc(INetCfgComponent, OBO_TOKEN*, LibC::LPWSTR*, HRESULT)).call(pcomponent, pobotoken, pmszwrefs)
+  def de_install(this : INetCfgClassSetup2*, pcomponent : INetCfgComponent, pobotoken : OBO_TOKEN*, pmszwrefs : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.de_install.call(this, pcomponent, pobotoken, pmszwrefs)
   end
-  def update_non_enumerated_component(picomp : INetCfgComponent, dwsetupflags : UInt32, dwupgradefrombuildno : UInt32) : HRESULT
-    @lpVtbl.value.update_non_enumerated_component.unsafe_as(Proc(INetCfgComponent, UInt32, UInt32, HRESULT)).call(picomp, dwsetupflags, dwupgradefrombuildno)
+  def update_non_enumerated_component(this : INetCfgClassSetup2*, picomp : INetCfgComponent, dwsetupflags : UInt32, dwupgradefrombuildno : UInt32) : HRESULT
+    @lpVtbl.value.update_non_enumerated_component.call(this, picomp, dwsetupflags, dwupgradefrombuildno)
   end
 end
 struct LibWin32::INetCfgComponent
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INetCfgComponent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INetCfgComponent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INetCfgComponent*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_display_name(ppszwdisplayname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_display_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszwdisplayname)
+  def get_display_name(this : INetCfgComponent*, ppszwdisplayname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, ppszwdisplayname)
   end
-  def set_display_name(pszwdisplayname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_display_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszwdisplayname)
+  def set_display_name(this : INetCfgComponent*, pszwdisplayname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_display_name.call(this, pszwdisplayname)
   end
-  def get_help_text(pszwhelptext : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_help_text.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pszwhelptext)
+  def get_help_text(this : INetCfgComponent*, pszwhelptext : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_help_text.call(this, pszwhelptext)
   end
-  def get_id(ppszwid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszwid)
+  def get_id(this : INetCfgComponent*, ppszwid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_id.call(this, ppszwid)
   end
-  def get_characteristics(pdwcharacteristics : UInt32*) : HRESULT
-    @lpVtbl.value.get_characteristics.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcharacteristics)
+  def get_characteristics(this : INetCfgComponent*, pdwcharacteristics : UInt32*) : HRESULT
+    @lpVtbl.value.get_characteristics.call(this, pdwcharacteristics)
   end
-  def get_instance_guid(pguid : Guid*) : HRESULT
-    @lpVtbl.value.get_instance_guid.unsafe_as(Proc(Guid*, HRESULT)).call(pguid)
+  def get_instance_guid(this : INetCfgComponent*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_instance_guid.call(this, pguid)
   end
-  def get_pnp_dev_node_id(ppszwdevnodeid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_pnp_dev_node_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszwdevnodeid)
+  def get_pnp_dev_node_id(this : INetCfgComponent*, ppszwdevnodeid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_pnp_dev_node_id.call(this, ppszwdevnodeid)
   end
-  def get_class_guid(pguid : Guid*) : HRESULT
-    @lpVtbl.value.get_class_guid.unsafe_as(Proc(Guid*, HRESULT)).call(pguid)
+  def get_class_guid(this : INetCfgComponent*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_class_guid.call(this, pguid)
   end
-  def get_bind_name(ppszwbindname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_bind_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszwbindname)
+  def get_bind_name(this : INetCfgComponent*, ppszwbindname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_bind_name.call(this, ppszwbindname)
   end
-  def get_device_status(pulstatus : UInt32*) : HRESULT
-    @lpVtbl.value.get_device_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pulstatus)
+  def get_device_status(this : INetCfgComponent*, pulstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, pulstatus)
   end
-  def open_param_key(phkey : HKEY*) : HRESULT
-    @lpVtbl.value.open_param_key.unsafe_as(Proc(HKEY*, HRESULT)).call(phkey)
+  def open_param_key(this : INetCfgComponent*, phkey : HKEY*) : HRESULT
+    @lpVtbl.value.open_param_key.call(this, phkey)
   end
-  def raise_property_ui(hwndparent : LibC::HANDLE, dwflags : UInt32, punkcontext : IUnknown) : HRESULT
-    @lpVtbl.value.raise_property_ui.unsafe_as(Proc(LibC::HANDLE, UInt32, IUnknown, HRESULT)).call(hwndparent, dwflags, punkcontext)
+  def raise_property_ui(this : INetCfgComponent*, hwndparent : LibC::HANDLE, dwflags : UInt32, punkcontext : IUnknown) : HRESULT
+    @lpVtbl.value.raise_property_ui.call(this, hwndparent, dwflags, punkcontext)
   end
 end
 struct LibWin32::INetCfgComponentBindings
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INetCfgComponentBindings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INetCfgComponentBindings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INetCfgComponentBindings*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def bind_to(pnccitem : INetCfgComponent) : HRESULT
-    @lpVtbl.value.bind_to.unsafe_as(Proc(INetCfgComponent, HRESULT)).call(pnccitem)
+  def bind_to(this : INetCfgComponentBindings*, pnccitem : INetCfgComponent) : HRESULT
+    @lpVtbl.value.bind_to.call(this, pnccitem)
   end
-  def unbind_from(pnccitem : INetCfgComponent) : HRESULT
-    @lpVtbl.value.unbind_from.unsafe_as(Proc(INetCfgComponent, HRESULT)).call(pnccitem)
+  def unbind_from(this : INetCfgComponentBindings*, pnccitem : INetCfgComponent) : HRESULT
+    @lpVtbl.value.unbind_from.call(this, pnccitem)
   end
-  def supports_binding_interface(dwflags : UInt32, pszwinterfacename : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.supports_binding_interface.unsafe_as(Proc(UInt32, LibC::LPWSTR, HRESULT)).call(dwflags, pszwinterfacename)
+  def supports_binding_interface(this : INetCfgComponentBindings*, dwflags : UInt32, pszwinterfacename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.supports_binding_interface.call(this, dwflags, pszwinterfacename)
   end
-  def is_bound_to(pnccitem : INetCfgComponent) : HRESULT
-    @lpVtbl.value.is_bound_to.unsafe_as(Proc(INetCfgComponent, HRESULT)).call(pnccitem)
+  def is_bound_to(this : INetCfgComponentBindings*, pnccitem : INetCfgComponent) : HRESULT
+    @lpVtbl.value.is_bound_to.call(this, pnccitem)
   end
-  def is_bindable_to(pnccitem : INetCfgComponent) : HRESULT
-    @lpVtbl.value.is_bindable_to.unsafe_as(Proc(INetCfgComponent, HRESULT)).call(pnccitem)
+  def is_bindable_to(this : INetCfgComponentBindings*, pnccitem : INetCfgComponent) : HRESULT
+    @lpVtbl.value.is_bindable_to.call(this, pnccitem)
   end
-  def enum_binding_paths(dwflags : UInt32, ppienum : IEnumNetCfgBindingPath*) : HRESULT
-    @lpVtbl.value.enum_binding_paths.unsafe_as(Proc(UInt32, IEnumNetCfgBindingPath*, HRESULT)).call(dwflags, ppienum)
+  def enum_binding_paths(this : INetCfgComponentBindings*, dwflags : UInt32, ppienum : IEnumNetCfgBindingPath*) : HRESULT
+    @lpVtbl.value.enum_binding_paths.call(this, dwflags, ppienum)
   end
-  def move_before(pncbitemsrc : INetCfgBindingPath, pncbitemdest : INetCfgBindingPath) : HRESULT
-    @lpVtbl.value.move_before.unsafe_as(Proc(INetCfgBindingPath, INetCfgBindingPath, HRESULT)).call(pncbitemsrc, pncbitemdest)
+  def move_before(this : INetCfgComponentBindings*, pncbitemsrc : INetCfgBindingPath, pncbitemdest : INetCfgBindingPath) : HRESULT
+    @lpVtbl.value.move_before.call(this, pncbitemsrc, pncbitemdest)
   end
-  def move_after(pncbitemsrc : INetCfgBindingPath, pncbitemdest : INetCfgBindingPath) : HRESULT
-    @lpVtbl.value.move_after.unsafe_as(Proc(INetCfgBindingPath, INetCfgBindingPath, HRESULT)).call(pncbitemsrc, pncbitemdest)
+  def move_after(this : INetCfgComponentBindings*, pncbitemsrc : INetCfgBindingPath, pncbitemdest : INetCfgBindingPath) : HRESULT
+    @lpVtbl.value.move_after.call(this, pncbitemsrc, pncbitemdest)
   end
 end
 struct LibWin32::INetCfgSysPrep
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INetCfgSysPrep*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INetCfgSysPrep*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INetCfgSysPrep*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def hr_setup_set_first_dword(pwszsection : LibC::LPWSTR, pwszkey : LibC::LPWSTR, dwvalue : UInt32) : HRESULT
-    @lpVtbl.value.hr_setup_set_first_dword.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(pwszsection, pwszkey, dwvalue)
+  def hr_setup_set_first_dword(this : INetCfgSysPrep*, pwszsection : LibC::LPWSTR, pwszkey : LibC::LPWSTR, dwvalue : UInt32) : HRESULT
+    @lpVtbl.value.hr_setup_set_first_dword.call(this, pwszsection, pwszkey, dwvalue)
   end
-  def hr_setup_set_first_string(pwszsection : LibC::LPWSTR, pwszkey : LibC::LPWSTR, pwszvalue : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.hr_setup_set_first_string.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pwszsection, pwszkey, pwszvalue)
+  def hr_setup_set_first_string(this : INetCfgSysPrep*, pwszsection : LibC::LPWSTR, pwszkey : LibC::LPWSTR, pwszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.hr_setup_set_first_string.call(this, pwszsection, pwszkey, pwszvalue)
   end
-  def hr_setup_set_first_string_as_bool(pwszsection : LibC::LPWSTR, pwszkey : LibC::LPWSTR, fvalue : LibC::BOOL) : HRESULT
-    @lpVtbl.value.hr_setup_set_first_string_as_bool.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, HRESULT)).call(pwszsection, pwszkey, fvalue)
+  def hr_setup_set_first_string_as_bool(this : INetCfgSysPrep*, pwszsection : LibC::LPWSTR, pwszkey : LibC::LPWSTR, fvalue : LibC::BOOL) : HRESULT
+    @lpVtbl.value.hr_setup_set_first_string_as_bool.call(this, pwszsection, pwszkey, fvalue)
   end
-  def hr_setup_set_first_multi_sz_field(pwszsection : LibC::LPWSTR, pwszkey : LibC::LPWSTR, pmszvalue : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.hr_setup_set_first_multi_sz_field.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pwszsection, pwszkey, pmszvalue)
+  def hr_setup_set_first_multi_sz_field(this : INetCfgSysPrep*, pwszsection : LibC::LPWSTR, pwszkey : LibC::LPWSTR, pmszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.hr_setup_set_first_multi_sz_field.call(this, pwszsection, pwszkey, pmszvalue)
   end
 end
 struct LibWin32::INetCfgPnpReconfigCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INetCfgPnpReconfigCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INetCfgPnpReconfigCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INetCfgPnpReconfigCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def send_pnp_reconfig(layer : NCPNP_RECONFIG_LAYER, pszwupper : LibC::LPWSTR, pszwlower : LibC::LPWSTR, pvdata : Void*, dwsizeofdata : UInt32) : HRESULT
-    @lpVtbl.value.send_pnp_reconfig.unsafe_as(Proc(NCPNP_RECONFIG_LAYER, LibC::LPWSTR, LibC::LPWSTR, Void*, UInt32, HRESULT)).call(layer, pszwupper, pszwlower, pvdata, dwsizeofdata)
+  def send_pnp_reconfig(this : INetCfgPnpReconfigCallback*, layer : NCPNP_RECONFIG_LAYER, pszwupper : LibC::LPWSTR, pszwlower : LibC::LPWSTR, pvdata : Void*, dwsizeofdata : UInt32) : HRESULT
+    @lpVtbl.value.send_pnp_reconfig.call(this, layer, pszwupper, pszwlower, pvdata, dwsizeofdata)
   end
 end
 struct LibWin32::INetCfgComponentControl
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INetCfgComponentControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INetCfgComponentControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INetCfgComponentControl*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def initialize(picomp : INetCfgComponent, pinetcfg : INetCfg, finstalling : LibC::BOOL) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(INetCfgComponent, INetCfg, LibC::BOOL, HRESULT)).call(picomp, pinetcfg, finstalling)
+  def initialize(this : INetCfgComponentControl*, picomp : INetCfgComponent, pinetcfg : INetCfg, finstalling : LibC::BOOL) : HRESULT
+    @lpVtbl.value.initialize.call(this, picomp, pinetcfg, finstalling)
   end
-  def apply_registry_changes : HRESULT
-    @lpVtbl.value.apply_registry_changes.unsafe_as(Proc(HRESULT)).call
+  def apply_registry_changes(this : INetCfgComponentControl*) : HRESULT
+    @lpVtbl.value.apply_registry_changes.call(this)
   end
-  def apply_pnp_changes(picallback : INetCfgPnpReconfigCallback) : HRESULT
-    @lpVtbl.value.apply_pnp_changes.unsafe_as(Proc(INetCfgPnpReconfigCallback, HRESULT)).call(picallback)
+  def apply_pnp_changes(this : INetCfgComponentControl*, picallback : INetCfgPnpReconfigCallback) : HRESULT
+    @lpVtbl.value.apply_pnp_changes.call(this, picallback)
   end
-  def cancel_changes : HRESULT
-    @lpVtbl.value.cancel_changes.unsafe_as(Proc(HRESULT)).call
+  def cancel_changes(this : INetCfgComponentControl*) : HRESULT
+    @lpVtbl.value.cancel_changes.call(this)
   end
 end
 struct LibWin32::INetCfgComponentSetup
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INetCfgComponentSetup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INetCfgComponentSetup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INetCfgComponentSetup*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def install(dwsetupflags : UInt32) : HRESULT
-    @lpVtbl.value.install.unsafe_as(Proc(UInt32, HRESULT)).call(dwsetupflags)
+  def install(this : INetCfgComponentSetup*, dwsetupflags : UInt32) : HRESULT
+    @lpVtbl.value.install.call(this, dwsetupflags)
   end
-  def upgrade(dwsetupflags : UInt32, dwupgradefombuildno : UInt32) : HRESULT
-    @lpVtbl.value.upgrade.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(dwsetupflags, dwupgradefombuildno)
+  def upgrade(this : INetCfgComponentSetup*, dwsetupflags : UInt32, dwupgradefombuildno : UInt32) : HRESULT
+    @lpVtbl.value.upgrade.call(this, dwsetupflags, dwupgradefombuildno)
   end
-  def read_answer_file(pszwanswerfile : LibC::LPWSTR, pszwanswersections : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.read_answer_file.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pszwanswerfile, pszwanswersections)
+  def read_answer_file(this : INetCfgComponentSetup*, pszwanswerfile : LibC::LPWSTR, pszwanswersections : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.read_answer_file.call(this, pszwanswerfile, pszwanswersections)
   end
-  def removing : HRESULT
-    @lpVtbl.value.removing.unsafe_as(Proc(HRESULT)).call
+  def removing(this : INetCfgComponentSetup*) : HRESULT
+    @lpVtbl.value.removing.call(this)
   end
 end
 struct LibWin32::INetCfgComponentPropertyUi
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INetCfgComponentPropertyUi*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INetCfgComponentPropertyUi*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INetCfgComponentPropertyUi*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def query_property_ui(punkreserved : IUnknown) : HRESULT
-    @lpVtbl.value.query_property_ui.unsafe_as(Proc(IUnknown, HRESULT)).call(punkreserved)
+  def query_property_ui(this : INetCfgComponentPropertyUi*, punkreserved : IUnknown) : HRESULT
+    @lpVtbl.value.query_property_ui.call(this, punkreserved)
   end
-  def set_context(punkreserved : IUnknown) : HRESULT
-    @lpVtbl.value.set_context.unsafe_as(Proc(IUnknown, HRESULT)).call(punkreserved)
+  def set_context(this : INetCfgComponentPropertyUi*, punkreserved : IUnknown) : HRESULT
+    @lpVtbl.value.set_context.call(this, punkreserved)
   end
-  def merge_prop_pages(pdwdefpages : UInt32*, pahpspprivate : UInt8**, pcpages : UInt32*, hwndparent : LibC::HANDLE, pszstartpage : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.merge_prop_pages.unsafe_as(Proc(UInt32*, UInt8**, UInt32*, LibC::HANDLE, LibC::LPWSTR*, HRESULT)).call(pdwdefpages, pahpspprivate, pcpages, hwndparent, pszstartpage)
+  def merge_prop_pages(this : INetCfgComponentPropertyUi*, pdwdefpages : UInt32*, pahpspprivate : UInt8**, pcpages : UInt32*, hwndparent : LibC::HANDLE, pszstartpage : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.merge_prop_pages.call(this, pdwdefpages, pahpspprivate, pcpages, hwndparent, pszstartpage)
   end
-  def validate_properties(hwndsheet : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.validate_properties.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hwndsheet)
+  def validate_properties(this : INetCfgComponentPropertyUi*, hwndsheet : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.validate_properties.call(this, hwndsheet)
   end
-  def apply_properties : HRESULT
-    @lpVtbl.value.apply_properties.unsafe_as(Proc(HRESULT)).call
+  def apply_properties(this : INetCfgComponentPropertyUi*) : HRESULT
+    @lpVtbl.value.apply_properties.call(this)
   end
-  def cancel_properties : HRESULT
-    @lpVtbl.value.cancel_properties.unsafe_as(Proc(HRESULT)).call
+  def cancel_properties(this : INetCfgComponentPropertyUi*) : HRESULT
+    @lpVtbl.value.cancel_properties.call(this)
   end
 end
 struct LibWin32::INetCfgComponentNotifyBinding
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INetCfgComponentNotifyBinding*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INetCfgComponentNotifyBinding*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INetCfgComponentNotifyBinding*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def query_binding_path(dwchangeflag : UInt32, pipath : INetCfgBindingPath) : HRESULT
-    @lpVtbl.value.query_binding_path.unsafe_as(Proc(UInt32, INetCfgBindingPath, HRESULT)).call(dwchangeflag, pipath)
+  def query_binding_path(this : INetCfgComponentNotifyBinding*, dwchangeflag : UInt32, pipath : INetCfgBindingPath) : HRESULT
+    @lpVtbl.value.query_binding_path.call(this, dwchangeflag, pipath)
   end
-  def notify_binding_path(dwchangeflag : UInt32, pipath : INetCfgBindingPath) : HRESULT
-    @lpVtbl.value.notify_binding_path.unsafe_as(Proc(UInt32, INetCfgBindingPath, HRESULT)).call(dwchangeflag, pipath)
+  def notify_binding_path(this : INetCfgComponentNotifyBinding*, dwchangeflag : UInt32, pipath : INetCfgBindingPath) : HRESULT
+    @lpVtbl.value.notify_binding_path.call(this, dwchangeflag, pipath)
   end
 end
 struct LibWin32::INetCfgComponentNotifyGlobal
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INetCfgComponentNotifyGlobal*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INetCfgComponentNotifyGlobal*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INetCfgComponentNotifyGlobal*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_supported_notifications(dwnotifications : UInt32*) : HRESULT
-    @lpVtbl.value.get_supported_notifications.unsafe_as(Proc(UInt32*, HRESULT)).call(dwnotifications)
+  def get_supported_notifications(this : INetCfgComponentNotifyGlobal*, dwnotifications : UInt32*) : HRESULT
+    @lpVtbl.value.get_supported_notifications.call(this, dwnotifications)
   end
-  def sys_query_binding_path(dwchangeflag : UInt32, pipath : INetCfgBindingPath) : HRESULT
-    @lpVtbl.value.sys_query_binding_path.unsafe_as(Proc(UInt32, INetCfgBindingPath, HRESULT)).call(dwchangeflag, pipath)
+  def sys_query_binding_path(this : INetCfgComponentNotifyGlobal*, dwchangeflag : UInt32, pipath : INetCfgBindingPath) : HRESULT
+    @lpVtbl.value.sys_query_binding_path.call(this, dwchangeflag, pipath)
   end
-  def sys_notify_binding_path(dwchangeflag : UInt32, pipath : INetCfgBindingPath) : HRESULT
-    @lpVtbl.value.sys_notify_binding_path.unsafe_as(Proc(UInt32, INetCfgBindingPath, HRESULT)).call(dwchangeflag, pipath)
+  def sys_notify_binding_path(this : INetCfgComponentNotifyGlobal*, dwchangeflag : UInt32, pipath : INetCfgBindingPath) : HRESULT
+    @lpVtbl.value.sys_notify_binding_path.call(this, dwchangeflag, pipath)
   end
-  def sys_notify_component(dwchangeflag : UInt32, picomp : INetCfgComponent) : HRESULT
-    @lpVtbl.value.sys_notify_component.unsafe_as(Proc(UInt32, INetCfgComponent, HRESULT)).call(dwchangeflag, picomp)
+  def sys_notify_component(this : INetCfgComponentNotifyGlobal*, dwchangeflag : UInt32, picomp : INetCfgComponent) : HRESULT
+    @lpVtbl.value.sys_notify_component.call(this, dwchangeflag, picomp)
   end
 end
 struct LibWin32::INetCfgComponentUpperEdge
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INetCfgComponentUpperEdge*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INetCfgComponentUpperEdge*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INetCfgComponentUpperEdge*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_interface_ids_for_adapter(padapter : INetCfgComponent, pdwnuminterfaces : UInt32*, ppguidinterfaceids : Guid**) : HRESULT
-    @lpVtbl.value.get_interface_ids_for_adapter.unsafe_as(Proc(INetCfgComponent, UInt32*, Guid**, HRESULT)).call(padapter, pdwnuminterfaces, ppguidinterfaceids)
+  def get_interface_ids_for_adapter(this : INetCfgComponentUpperEdge*, padapter : INetCfgComponent, pdwnuminterfaces : UInt32*, ppguidinterfaceids : Guid**) : HRESULT
+    @lpVtbl.value.get_interface_ids_for_adapter.call(this, padapter, pdwnuminterfaces, ppguidinterfaceids)
   end
-  def add_interfaces_to_adapter : HRESULT
-    @lpVtbl.value.add_interfaces_to_adapter.unsafe_as(Proc(HRESULT)).call
+  def add_interfaces_to_adapter(this : INetCfgComponentUpperEdge*) : HRESULT
+    @lpVtbl.value.add_interfaces_to_adapter.call(this)
   end
-  def remove_interfaces_from_adapter(padapter : INetCfgComponent, dwnuminterfaces : UInt32, pguidinterfaceids : Guid*) : HRESULT
-    @lpVtbl.value.remove_interfaces_from_adapter.unsafe_as(Proc(INetCfgComponent, UInt32, Guid*, HRESULT)).call(padapter, dwnuminterfaces, pguidinterfaceids)
+  def remove_interfaces_from_adapter(this : INetCfgComponentUpperEdge*, padapter : INetCfgComponent, dwnuminterfaces : UInt32, pguidinterfaceids : Guid*) : HRESULT
+    @lpVtbl.value.remove_interfaces_from_adapter.call(this, padapter, dwnuminterfaces, pguidinterfaceids)
   end
 end
 struct LibWin32::INetLanConnectionUiInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INetLanConnectionUiInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INetLanConnectionUiInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INetLanConnectionUiInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device_guid(pguid : Guid*) : HRESULT
-    @lpVtbl.value.get_device_guid.unsafe_as(Proc(Guid*, HRESULT)).call(pguid)
+  def get_device_guid(this : INetLanConnectionUiInfo*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_device_guid.call(this, pguid)
   end
 end
 struct LibWin32::INetRasConnectionIpUiInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INetRasConnectionIpUiInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INetRasConnectionIpUiInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INetRasConnectionIpUiInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_ui_info(pinfo : RASCON_IPUI*) : HRESULT
-    @lpVtbl.value.get_ui_info.unsafe_as(Proc(RASCON_IPUI*, HRESULT)).call(pinfo)
+  def get_ui_info(this : INetRasConnectionIpUiInfo*, pinfo : RASCON_IPUI*) : HRESULT
+    @lpVtbl.value.get_ui_info.call(this, pinfo)
   end
 end
 struct LibWin32::INetCfgComponentSysPrep
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INetCfgComponentSysPrep*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INetCfgComponentSysPrep*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INetCfgComponentSysPrep*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def save_adapter_parameters(pncsp : INetCfgSysPrep, pszwanswersections : LibC::LPWSTR, padapterinstanceguid : Guid*) : HRESULT
-    @lpVtbl.value.save_adapter_parameters.unsafe_as(Proc(INetCfgSysPrep, LibC::LPWSTR, Guid*, HRESULT)).call(pncsp, pszwanswersections, padapterinstanceguid)
+  def save_adapter_parameters(this : INetCfgComponentSysPrep*, pncsp : INetCfgSysPrep, pszwanswersections : LibC::LPWSTR, padapterinstanceguid : Guid*) : HRESULT
+    @lpVtbl.value.save_adapter_parameters.call(this, pncsp, pszwanswersections, padapterinstanceguid)
   end
-  def restore_adapter_parameters(pszwanswerfile : LibC::LPWSTR, pszwanswersection : LibC::LPWSTR, padapterinstanceguid : Guid*) : HRESULT
-    @lpVtbl.value.restore_adapter_parameters.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, Guid*, HRESULT)).call(pszwanswerfile, pszwanswersection, padapterinstanceguid)
+  def restore_adapter_parameters(this : INetCfgComponentSysPrep*, pszwanswerfile : LibC::LPWSTR, pszwanswersection : LibC::LPWSTR, padapterinstanceguid : Guid*) : HRESULT
+    @lpVtbl.value.restore_adapter_parameters.call(this, pszwanswerfile, pszwanswersection, padapterinstanceguid)
   end
 end
 struct LibWin32::IProvisioningDomain
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IProvisioningDomain*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IProvisioningDomain*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IProvisioningDomain*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add(pszwpathtofolder : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszwpathtofolder)
+  def add(this : IProvisioningDomain*, pszwpathtofolder : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add.call(this, pszwpathtofolder)
   end
-  def query(pszwdomain : LibC::LPWSTR, pszwlanguage : LibC::LPWSTR, pszwxpathquery : LibC::LPWSTR, nodes : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.query.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IXMLDOMNodeList*, HRESULT)).call(pszwdomain, pszwlanguage, pszwxpathquery, nodes)
+  def query(this : IProvisioningDomain*, pszwdomain : LibC::LPWSTR, pszwlanguage : LibC::LPWSTR, pszwxpathquery : LibC::LPWSTR, nodes : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.query.call(this, pszwdomain, pszwlanguage, pszwxpathquery, nodes)
   end
 end
 struct LibWin32::IProvisioningProfileWireless
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IProvisioningProfileWireless*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IProvisioningProfileWireless*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IProvisioningProfileWireless*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_profile(bstrxmlwirelessconfigprofile : UInt8*, bstrxmlconnectionconfigprofile : UInt8*, padapterinstanceguid : Guid*, pulstatus : UInt32*) : HRESULT
-    @lpVtbl.value.create_profile.unsafe_as(Proc(UInt8*, UInt8*, Guid*, UInt32*, HRESULT)).call(bstrxmlwirelessconfigprofile, bstrxmlconnectionconfigprofile, padapterinstanceguid, pulstatus)
+  def create_profile(this : IProvisioningProfileWireless*, bstrxmlwirelessconfigprofile : UInt8*, bstrxmlconnectionconfigprofile : UInt8*, padapterinstanceguid : Guid*, pulstatus : UInt32*) : HRESULT
+    @lpVtbl.value.create_profile.call(this, bstrxmlwirelessconfigprofile, bstrxmlconnectionconfigprofile, padapterinstanceguid, pulstatus)
   end
 end

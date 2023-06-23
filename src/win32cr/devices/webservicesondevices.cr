@@ -510,11 +510,11 @@ lib LibWin32
 
 
   struct IWSDAddressVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    serialize : UInt64
-    deserialize : UInt64
+    query_interface : Proc(IWSDAddress*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDAddress*, UInt32)
+    release : Proc(IWSDAddress*, UInt32)
+    serialize : Proc(IWSDAddress*, Char*, UInt32, LibC::BOOL, HRESULT)
+    deserialize : Proc(IWSDAddress*, LibC::LPWSTR, HRESULT)
   end
 
   IWSDAddress_GUID = "b9574c6c-12a6-4f74-93a1-3318ff605759"
@@ -524,16 +524,16 @@ lib LibWin32
   end
 
   struct IWSDTransportAddressVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    serialize : UInt64
-    deserialize : UInt64
-    get_port : UInt64
-    set_port : UInt64
-    get_transport_address : UInt64
-    get_transport_address_ex : UInt64
-    set_transport_address : UInt64
+    query_interface : Proc(IWSDTransportAddress*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDTransportAddress*, UInt32)
+    release : Proc(IWSDTransportAddress*, UInt32)
+    serialize : Proc(IWSDTransportAddress*, Char*, UInt32, LibC::BOOL, HRESULT)
+    deserialize : Proc(IWSDTransportAddress*, LibC::LPWSTR, HRESULT)
+    get_port : Proc(IWSDTransportAddress*, UInt16*, HRESULT)
+    set_port : Proc(IWSDTransportAddress*, UInt16, HRESULT)
+    get_transport_address : Proc(IWSDTransportAddress*, LibC::LPWSTR*, HRESULT)
+    get_transport_address_ex : Proc(IWSDTransportAddress*, LibC::BOOL, LibC::LPWSTR*, HRESULT)
+    set_transport_address : Proc(IWSDTransportAddress*, LibC::LPWSTR, HRESULT)
   end
 
   IWSDTransportAddress_GUID = "70d23498-4ee6-4340-a3df-d845d2235467"
@@ -543,14 +543,14 @@ lib LibWin32
   end
 
   struct IWSDMessageParametersVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_local_address : UInt64
-    set_local_address : UInt64
-    get_remote_address : UInt64
-    set_remote_address : UInt64
-    get_lower_parameters : UInt64
+    query_interface : Proc(IWSDMessageParameters*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDMessageParameters*, UInt32)
+    release : Proc(IWSDMessageParameters*, UInt32)
+    get_local_address : Proc(IWSDMessageParameters*, IWSDAddress*, HRESULT)
+    set_local_address : Proc(IWSDMessageParameters*, IWSDAddress, HRESULT)
+    get_remote_address : Proc(IWSDMessageParameters*, IWSDAddress*, HRESULT)
+    set_remote_address : Proc(IWSDMessageParameters*, IWSDAddress, HRESULT)
+    get_lower_parameters : Proc(IWSDMessageParameters*, IWSDMessageParameters*, HRESULT)
   end
 
   IWSDMessageParameters_GUID = "1fafe8a2-e6fc-4b80-b6cf-b7d45c416d7c"
@@ -560,16 +560,16 @@ lib LibWin32
   end
 
   struct IWSDUdpMessageParametersVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_local_address : UInt64
-    set_local_address : UInt64
-    get_remote_address : UInt64
-    set_remote_address : UInt64
-    get_lower_parameters : UInt64
-    set_retransmit_params : UInt64
-    get_retransmit_params : UInt64
+    query_interface : Proc(IWSDUdpMessageParameters*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDUdpMessageParameters*, UInt32)
+    release : Proc(IWSDUdpMessageParameters*, UInt32)
+    get_local_address : Proc(IWSDUdpMessageParameters*, IWSDAddress*, HRESULT)
+    set_local_address : Proc(IWSDUdpMessageParameters*, IWSDAddress, HRESULT)
+    get_remote_address : Proc(IWSDUdpMessageParameters*, IWSDAddress*, HRESULT)
+    set_remote_address : Proc(IWSDUdpMessageParameters*, IWSDAddress, HRESULT)
+    get_lower_parameters : Proc(IWSDUdpMessageParameters*, IWSDMessageParameters*, HRESULT)
+    set_retransmit_params : Proc(IWSDUdpMessageParameters*, WSDUdpRetransmitParams*, HRESULT)
+    get_retransmit_params : Proc(IWSDUdpMessageParameters*, WSDUdpRetransmitParams*, HRESULT)
   end
 
   IWSDUdpMessageParameters_GUID = "9934149f-8f0c-447b-aa0b-73124b0ca7f0"
@@ -579,26 +579,26 @@ lib LibWin32
   end
 
   struct IWSDUdpAddressVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    serialize : UInt64
-    deserialize : UInt64
-    get_port : UInt64
-    set_port : UInt64
-    get_transport_address : UInt64
-    get_transport_address_ex : UInt64
-    set_transport_address : UInt64
-    set_sockaddr : UInt64
-    get_sockaddr : UInt64
-    set_exclusive : UInt64
-    get_exclusive : UInt64
-    set_message_type : UInt64
-    get_message_type : UInt64
-    set_ttl : UInt64
-    get_ttl : UInt64
-    set_alias : UInt64
-    get_alias : UInt64
+    query_interface : Proc(IWSDUdpAddress*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDUdpAddress*, UInt32)
+    release : Proc(IWSDUdpAddress*, UInt32)
+    serialize : Proc(IWSDUdpAddress*, Char*, UInt32, LibC::BOOL, HRESULT)
+    deserialize : Proc(IWSDUdpAddress*, LibC::LPWSTR, HRESULT)
+    get_port : Proc(IWSDUdpAddress*, UInt16*, HRESULT)
+    set_port : Proc(IWSDUdpAddress*, UInt16, HRESULT)
+    get_transport_address : Proc(IWSDUdpAddress*, LibC::LPWSTR*, HRESULT)
+    get_transport_address_ex : Proc(IWSDUdpAddress*, LibC::BOOL, LibC::LPWSTR*, HRESULT)
+    set_transport_address : Proc(IWSDUdpAddress*, LibC::LPWSTR, HRESULT)
+    set_sockaddr : Proc(IWSDUdpAddress*, SOCKADDR_STORAGE*, HRESULT)
+    get_sockaddr : Proc(IWSDUdpAddress*, SOCKADDR_STORAGE*, HRESULT)
+    set_exclusive : Proc(IWSDUdpAddress*, LibC::BOOL, HRESULT)
+    get_exclusive : Proc(IWSDUdpAddress*, HRESULT)
+    set_message_type : Proc(IWSDUdpAddress*, WSDUdpMessageType, HRESULT)
+    get_message_type : Proc(IWSDUdpAddress*, WSDUdpMessageType*, HRESULT)
+    set_ttl : Proc(IWSDUdpAddress*, UInt32, HRESULT)
+    get_ttl : Proc(IWSDUdpAddress*, UInt32*, HRESULT)
+    set_alias : Proc(IWSDUdpAddress*, Guid*, HRESULT)
+    get_alias : Proc(IWSDUdpAddress*, Guid*, HRESULT)
   end
 
   IWSDUdpAddress_GUID = "74d6124a-a441-4f78-a1eb-97a8d1996893"
@@ -608,23 +608,23 @@ lib LibWin32
   end
 
   struct IWSDHttpMessageParametersVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_local_address : UInt64
-    set_local_address : UInt64
-    get_remote_address : UInt64
-    set_remote_address : UInt64
-    get_lower_parameters : UInt64
-    set_inbound_http_headers : UInt64
-    get_inbound_http_headers : UInt64
-    set_outbound_http_headers : UInt64
-    get_outbound_http_headers : UInt64
-    set_id : UInt64
-    get_id : UInt64
-    set_context : UInt64
-    get_context : UInt64
-    clear : UInt64
+    query_interface : Proc(IWSDHttpMessageParameters*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDHttpMessageParameters*, UInt32)
+    release : Proc(IWSDHttpMessageParameters*, UInt32)
+    get_local_address : Proc(IWSDHttpMessageParameters*, IWSDAddress*, HRESULT)
+    set_local_address : Proc(IWSDHttpMessageParameters*, IWSDAddress, HRESULT)
+    get_remote_address : Proc(IWSDHttpMessageParameters*, IWSDAddress*, HRESULT)
+    set_remote_address : Proc(IWSDHttpMessageParameters*, IWSDAddress, HRESULT)
+    get_lower_parameters : Proc(IWSDHttpMessageParameters*, IWSDMessageParameters*, HRESULT)
+    set_inbound_http_headers : Proc(IWSDHttpMessageParameters*, LibC::LPWSTR, HRESULT)
+    get_inbound_http_headers : Proc(IWSDHttpMessageParameters*, LibC::LPWSTR*, HRESULT)
+    set_outbound_http_headers : Proc(IWSDHttpMessageParameters*, LibC::LPWSTR, HRESULT)
+    get_outbound_http_headers : Proc(IWSDHttpMessageParameters*, LibC::LPWSTR*, HRESULT)
+    set_id : Proc(IWSDHttpMessageParameters*, LibC::LPWSTR, HRESULT)
+    get_id : Proc(IWSDHttpMessageParameters*, LibC::LPWSTR*, HRESULT)
+    set_context : Proc(IWSDHttpMessageParameters*, IUnknown, HRESULT)
+    get_context : Proc(IWSDHttpMessageParameters*, IUnknown*, HRESULT)
+    clear : Proc(IWSDHttpMessageParameters*, HRESULT)
   end
 
   IWSDHttpMessageParameters_GUID = "540bd122-5c83-4dec-b396-ea62a2697fdf"
@@ -634,20 +634,20 @@ lib LibWin32
   end
 
   struct IWSDHttpAddressVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    serialize : UInt64
-    deserialize : UInt64
-    get_port : UInt64
-    set_port : UInt64
-    get_transport_address : UInt64
-    get_transport_address_ex : UInt64
-    set_transport_address : UInt64
-    get_secure : UInt64
-    set_secure : UInt64
-    get_path : UInt64
-    set_path : UInt64
+    query_interface : Proc(IWSDHttpAddress*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDHttpAddress*, UInt32)
+    release : Proc(IWSDHttpAddress*, UInt32)
+    serialize : Proc(IWSDHttpAddress*, Char*, UInt32, LibC::BOOL, HRESULT)
+    deserialize : Proc(IWSDHttpAddress*, LibC::LPWSTR, HRESULT)
+    get_port : Proc(IWSDHttpAddress*, UInt16*, HRESULT)
+    set_port : Proc(IWSDHttpAddress*, UInt16, HRESULT)
+    get_transport_address : Proc(IWSDHttpAddress*, LibC::LPWSTR*, HRESULT)
+    get_transport_address_ex : Proc(IWSDHttpAddress*, LibC::BOOL, LibC::LPWSTR*, HRESULT)
+    set_transport_address : Proc(IWSDHttpAddress*, LibC::LPWSTR, HRESULT)
+    get_secure : Proc(IWSDHttpAddress*, HRESULT)
+    set_secure : Proc(IWSDHttpAddress*, LibC::BOOL, HRESULT)
+    get_path : Proc(IWSDHttpAddress*, LibC::LPWSTR*, HRESULT)
+    set_path : Proc(IWSDHttpAddress*, LibC::LPWSTR, HRESULT)
   end
 
   IWSDHttpAddress_GUID = "d09ac7bd-2a3e-4b85-8605-2737ff3e4ea0"
@@ -657,11 +657,11 @@ lib LibWin32
   end
 
   struct IWSDSSLClientCertificateVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_client_certificate : UInt64
-    get_mapped_access_token : UInt64
+    query_interface : Proc(IWSDSSLClientCertificate*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDSSLClientCertificate*, UInt32)
+    release : Proc(IWSDSSLClientCertificate*, UInt32)
+    get_client_certificate : Proc(IWSDSSLClientCertificate*, CERT_CONTEXT**, HRESULT)
+    get_mapped_access_token : Proc(IWSDSSLClientCertificate*, LibC::HANDLE*, HRESULT)
   end
 
   IWSDSSLClientCertificate_GUID = "de105e87-a0da-418e-98ad-27b9eed87bdc"
@@ -671,11 +671,11 @@ lib LibWin32
   end
 
   struct IWSDHttpAuthParametersVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_client_access_token : UInt64
-    get_auth_type : UInt64
+    query_interface : Proc(IWSDHttpAuthParameters*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDHttpAuthParameters*, UInt32)
+    release : Proc(IWSDHttpAuthParameters*, UInt32)
+    get_client_access_token : Proc(IWSDHttpAuthParameters*, LibC::HANDLE*, HRESULT)
+    get_auth_type : Proc(IWSDHttpAuthParameters*, UInt32*, HRESULT)
   end
 
   IWSDHttpAuthParameters_GUID = "0b476df0-8dac-480d-b05c-99781a5884aa"
@@ -685,14 +685,14 @@ lib LibWin32
   end
 
   struct IWSDSignaturePropertyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    is_message_signed : UInt64
-    is_message_signature_trusted : UInt64
-    get_key_info : UInt64
-    get_signature : UInt64
-    get_signed_info_hash : UInt64
+    query_interface : Proc(IWSDSignatureProperty*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDSignatureProperty*, UInt32)
+    release : Proc(IWSDSignatureProperty*, UInt32)
+    is_message_signed : Proc(IWSDSignatureProperty*, LibC::BOOL*, HRESULT)
+    is_message_signature_trusted : Proc(IWSDSignatureProperty*, LibC::BOOL*, HRESULT)
+    get_key_info : Proc(IWSDSignatureProperty*, UInt8*, UInt32*, HRESULT)
+    get_signature : Proc(IWSDSignatureProperty*, UInt8*, UInt32*, HRESULT)
+    get_signed_info_hash : Proc(IWSDSignatureProperty*, UInt8*, UInt32*, HRESULT)
   end
 
   IWSDSignatureProperty_GUID = "03ce20aa-71c4-45e2-b32e-3766c61c790f"
@@ -702,9 +702,9 @@ lib LibWin32
   end
 
   struct IWSDAttachmentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
+    query_interface : Proc(IWSDAttachment*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDAttachment*, UInt32)
+    release : Proc(IWSDAttachment*, UInt32)
   end
 
   IWSDAttachment_GUID = "5d55a616-9df8-4b09-b156-9ba351a48b76"
@@ -714,12 +714,12 @@ lib LibWin32
   end
 
   struct IWSDOutboundAttachmentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    write : UInt64
-    close : UInt64
-    abort : UInt64
+    query_interface : Proc(IWSDOutboundAttachment*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDOutboundAttachment*, UInt32)
+    release : Proc(IWSDOutboundAttachment*, UInt32)
+    write : Proc(IWSDOutboundAttachment*, UInt8*, UInt32, UInt32*, HRESULT)
+    close : Proc(IWSDOutboundAttachment*, HRESULT)
+    abort : Proc(IWSDOutboundAttachment*, HRESULT)
   end
 
   IWSDOutboundAttachment_GUID = "aa302f8d-5a22-4ba5-b392-aa8486f4c15d"
@@ -729,11 +729,11 @@ lib LibWin32
   end
 
   struct IWSDInboundAttachmentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    read : UInt64
-    close : UInt64
+    query_interface : Proc(IWSDInboundAttachment*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDInboundAttachment*, UInt32)
+    release : Proc(IWSDInboundAttachment*, UInt32)
+    read : Proc(IWSDInboundAttachment*, UInt8*, UInt32, UInt32*, HRESULT)
+    close : Proc(IWSDInboundAttachment*, HRESULT)
   end
 
   IWSDInboundAttachment_GUID = "5bd6ca65-233c-4fb8-9f7a-2641619655c9"
@@ -743,13 +743,13 @@ lib LibWin32
   end
 
   struct IWSDXMLContextVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add_namespace : UInt64
-    add_name_to_namespace : UInt64
-    set_namespaces : UInt64
-    set_types : UInt64
+    query_interface : Proc(IWSDXMLContext*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDXMLContext*, UInt32)
+    release : Proc(IWSDXMLContext*, UInt32)
+    add_namespace : Proc(IWSDXMLContext*, LibC::LPWSTR, LibC::LPWSTR, WSDXML_NAMESPACE**, HRESULT)
+    add_name_to_namespace : Proc(IWSDXMLContext*, LibC::LPWSTR, LibC::LPWSTR, WSDXML_NAME**, HRESULT)
+    set_namespaces : Proc(IWSDXMLContext*, WSDXML_NAMESPACE**, UInt16, UInt8, HRESULT)
+    set_types : Proc(IWSDXMLContext*, WSDXML_TYPE**, UInt32, UInt8, HRESULT)
   end
 
   IWSDXMLContext_GUID = "75d8f3ee-3e5a-43b4-a15a-bcf6887460c0"
@@ -759,16 +759,16 @@ lib LibWin32
   end
 
   struct IWSDiscoveryProviderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_address_family : UInt64
-    attach : UInt64
-    detach : UInt64
-    search_by_id : UInt64
-    search_by_address : UInt64
-    search_by_type : UInt64
-    get_xml_context : UInt64
+    query_interface : Proc(IWSDiscoveryProvider*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDiscoveryProvider*, UInt32)
+    release : Proc(IWSDiscoveryProvider*, UInt32)
+    set_address_family : Proc(IWSDiscoveryProvider*, UInt32, HRESULT)
+    attach : Proc(IWSDiscoveryProvider*, IWSDiscoveryProviderNotify, HRESULT)
+    detach : Proc(IWSDiscoveryProvider*, HRESULT)
+    search_by_id : Proc(IWSDiscoveryProvider*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    search_by_address : Proc(IWSDiscoveryProvider*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    search_by_type : Proc(IWSDiscoveryProvider*, WSD_NAME_LIST*, WSD_URI_LIST*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    get_xml_context : Proc(IWSDiscoveryProvider*, IWSDXMLContext*, HRESULT)
   end
 
   IWSDiscoveryProvider_GUID = "8ffc8e55-f0eb-480f-88b7-b435dd281d45"
@@ -778,13 +778,13 @@ lib LibWin32
   end
 
   struct IWSDiscoveryProviderNotifyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add : UInt64
-    remove : UInt64
-    search_failed : UInt64
-    search_complete : UInt64
+    query_interface : Proc(IWSDiscoveryProviderNotify*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDiscoveryProviderNotify*, UInt32)
+    release : Proc(IWSDiscoveryProviderNotify*, UInt32)
+    add : Proc(IWSDiscoveryProviderNotify*, IWSDiscoveredService, HRESULT)
+    remove : Proc(IWSDiscoveryProviderNotify*, IWSDiscoveredService, HRESULT)
+    search_failed : Proc(IWSDiscoveryProviderNotify*, HRESULT, LibC::LPWSTR, HRESULT)
+    search_complete : Proc(IWSDiscoveryProviderNotify*, LibC::LPWSTR, HRESULT)
   end
 
   IWSDiscoveryProviderNotify_GUID = "73ee3ced-b6e6-4329-a546-3e8ad46563d2"
@@ -794,20 +794,20 @@ lib LibWin32
   end
 
   struct IWSDiscoveredServiceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_endpoint_reference : UInt64
-    get_types : UInt64
-    get_scopes : UInt64
-    get_x_addrs : UInt64
-    get_metadata_version : UInt64
-    get_extended_disco_xml : UInt64
-    get_probe_resolve_tag : UInt64
-    get_remote_transport_address : UInt64
-    get_local_transport_address : UInt64
-    get_local_interface_guid : UInt64
-    get_instance_id : UInt64
+    query_interface : Proc(IWSDiscoveredService*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDiscoveredService*, UInt32)
+    release : Proc(IWSDiscoveredService*, UInt32)
+    get_endpoint_reference : Proc(IWSDiscoveredService*, WSD_ENDPOINT_REFERENCE**, HRESULT)
+    get_types : Proc(IWSDiscoveredService*, WSD_NAME_LIST**, HRESULT)
+    get_scopes : Proc(IWSDiscoveredService*, WSD_URI_LIST**, HRESULT)
+    get_x_addrs : Proc(IWSDiscoveredService*, WSD_URI_LIST**, HRESULT)
+    get_metadata_version : Proc(IWSDiscoveredService*, UInt64*, HRESULT)
+    get_extended_disco_xml : Proc(IWSDiscoveredService*, WSDXML_ELEMENT**, WSDXML_ELEMENT**, HRESULT)
+    get_probe_resolve_tag : Proc(IWSDiscoveredService*, LibC::LPWSTR*, HRESULT)
+    get_remote_transport_address : Proc(IWSDiscoveredService*, LibC::LPWSTR*, HRESULT)
+    get_local_transport_address : Proc(IWSDiscoveredService*, LibC::LPWSTR*, HRESULT)
+    get_local_interface_guid : Proc(IWSDiscoveredService*, Guid*, HRESULT)
+    get_instance_id : Proc(IWSDiscoveredService*, UInt64*, HRESULT)
   end
 
   IWSDiscoveredService_GUID = "4bad8a3b-b374-4420-9632-aac945b374aa"
@@ -817,22 +817,22 @@ lib LibWin32
   end
 
   struct IWSDiscoveryPublisherVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_address_family : UInt64
-    register_notification_sink : UInt64
-    un_register_notification_sink : UInt64
-    publish : UInt64
-    un_publish : UInt64
-    match_probe : UInt64
-    match_resolve : UInt64
-    publish_ex : UInt64
-    match_probe_ex : UInt64
-    match_resolve_ex : UInt64
-    register_scope_matching_rule : UInt64
-    un_register_scope_matching_rule : UInt64
-    get_xml_context : UInt64
+    query_interface : Proc(IWSDiscoveryPublisher*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDiscoveryPublisher*, UInt32)
+    release : Proc(IWSDiscoveryPublisher*, UInt32)
+    set_address_family : Proc(IWSDiscoveryPublisher*, UInt32, HRESULT)
+    register_notification_sink : Proc(IWSDiscoveryPublisher*, IWSDiscoveryPublisherNotify, HRESULT)
+    un_register_notification_sink : Proc(IWSDiscoveryPublisher*, IWSDiscoveryPublisherNotify, HRESULT)
+    publish : Proc(IWSDiscoveryPublisher*, LibC::LPWSTR, UInt64, UInt64, UInt64, LibC::LPWSTR, WSD_NAME_LIST*, WSD_URI_LIST*, WSD_URI_LIST*, HRESULT)
+    un_publish : Proc(IWSDiscoveryPublisher*, LibC::LPWSTR, UInt64, UInt64, LibC::LPWSTR, WSDXML_ELEMENT*, HRESULT)
+    match_probe : Proc(IWSDiscoveryPublisher*, WSD_SOAP_MESSAGE*, IWSDMessageParameters, LibC::LPWSTR, UInt64, UInt64, UInt64, LibC::LPWSTR, WSD_NAME_LIST*, WSD_URI_LIST*, WSD_URI_LIST*, HRESULT)
+    match_resolve : Proc(IWSDiscoveryPublisher*, WSD_SOAP_MESSAGE*, IWSDMessageParameters, LibC::LPWSTR, UInt64, UInt64, UInt64, LibC::LPWSTR, WSD_NAME_LIST*, WSD_URI_LIST*, WSD_URI_LIST*, HRESULT)
+    publish_ex : Proc(IWSDiscoveryPublisher*, LibC::LPWSTR, UInt64, UInt64, UInt64, LibC::LPWSTR, WSD_NAME_LIST*, WSD_URI_LIST*, WSD_URI_LIST*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, HRESULT)
+    match_probe_ex : Proc(IWSDiscoveryPublisher*, WSD_SOAP_MESSAGE*, IWSDMessageParameters, LibC::LPWSTR, UInt64, UInt64, UInt64, LibC::LPWSTR, WSD_NAME_LIST*, WSD_URI_LIST*, WSD_URI_LIST*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, HRESULT)
+    match_resolve_ex : Proc(IWSDiscoveryPublisher*, WSD_SOAP_MESSAGE*, IWSDMessageParameters, LibC::LPWSTR, UInt64, UInt64, UInt64, LibC::LPWSTR, WSD_NAME_LIST*, WSD_URI_LIST*, WSD_URI_LIST*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, HRESULT)
+    register_scope_matching_rule : Proc(IWSDiscoveryPublisher*, IWSDScopeMatchingRule, HRESULT)
+    un_register_scope_matching_rule : Proc(IWSDiscoveryPublisher*, IWSDScopeMatchingRule, HRESULT)
+    get_xml_context : Proc(IWSDiscoveryPublisher*, IWSDXMLContext*, HRESULT)
   end
 
   IWSDiscoveryPublisher_GUID = "ae01e1a8-3ff9-4148-8116-057cc616fe13"
@@ -842,11 +842,11 @@ lib LibWin32
   end
 
   struct IWSDiscoveryPublisherNotifyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    probe_handler : UInt64
-    resolve_handler : UInt64
+    query_interface : Proc(IWSDiscoveryPublisherNotify*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDiscoveryPublisherNotify*, UInt32)
+    release : Proc(IWSDiscoveryPublisherNotify*, UInt32)
+    probe_handler : Proc(IWSDiscoveryPublisherNotify*, WSD_SOAP_MESSAGE*, IWSDMessageParameters, HRESULT)
+    resolve_handler : Proc(IWSDiscoveryPublisherNotify*, WSD_SOAP_MESSAGE*, IWSDMessageParameters, HRESULT)
   end
 
   IWSDiscoveryPublisherNotify_GUID = "e67651b0-337a-4b3c-9758-733388568251"
@@ -856,11 +856,11 @@ lib LibWin32
   end
 
   struct IWSDScopeMatchingRuleVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_scope_rule : UInt64
-    match_scopes : UInt64
+    query_interface : Proc(IWSDScopeMatchingRule*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDScopeMatchingRule*, UInt32)
+    release : Proc(IWSDScopeMatchingRule*, UInt32)
+    get_scope_rule : Proc(IWSDScopeMatchingRule*, LibC::LPWSTR*, HRESULT)
+    match_scopes : Proc(IWSDScopeMatchingRule*, LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL*, HRESULT)
   end
 
   IWSDScopeMatchingRule_GUID = "fcafe424-fef5-481a-bd9f-33ce0574256f"
@@ -870,16 +870,16 @@ lib LibWin32
   end
 
   struct IWSDEndpointProxyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    send_one_way_request : UInt64
-    send_two_way_request : UInt64
-    send_two_way_request_async : UInt64
-    abort_async_operation : UInt64
-    process_fault : UInt64
-    get_error_info : UInt64
-    get_fault_info : UInt64
+    query_interface : Proc(IWSDEndpointProxy*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDEndpointProxy*, UInt32)
+    release : Proc(IWSDEndpointProxy*, UInt32)
+    send_one_way_request : Proc(IWSDEndpointProxy*, Void*, WSD_OPERATION*, HRESULT)
+    send_two_way_request : Proc(IWSDEndpointProxy*, Void*, WSD_OPERATION*, WSD_SYNCHRONOUS_RESPONSE_CONTEXT*, HRESULT)
+    send_two_way_request_async : Proc(IWSDEndpointProxy*, Void*, WSD_OPERATION*, IUnknown, IWSDAsyncCallback, IWSDAsyncResult*, HRESULT)
+    abort_async_operation : Proc(IWSDEndpointProxy*, IWSDAsyncResult, HRESULT)
+    process_fault : Proc(IWSDEndpointProxy*, WSD_SOAP_FAULT*, HRESULT)
+    get_error_info : Proc(IWSDEndpointProxy*, LibC::LPWSTR*, HRESULT)
+    get_fault_info : Proc(IWSDEndpointProxy*, WSD_SOAP_FAULT**, HRESULT)
   end
 
   IWSDEndpointProxy_GUID = "1860d430-b24c-4975-9f90-dbb39baa24ec"
@@ -889,10 +889,10 @@ lib LibWin32
   end
 
   struct IWSDMetadataExchangeVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_metadata : UInt64
+    query_interface : Proc(IWSDMetadataExchange*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDMetadataExchange*, UInt32)
+    release : Proc(IWSDMetadataExchange*, UInt32)
+    get_metadata : Proc(IWSDMetadataExchange*, WSD_METADATA_SECTION_LIST**, HRESULT)
   end
 
   IWSDMetadataExchange_GUID = "06996d57-1d67-4928-9307-3d7833fdb846"
@@ -902,17 +902,17 @@ lib LibWin32
   end
 
   struct IWSDServiceProxyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_metadata : UInt64
-    begin_get_metadata : UInt64
-    end_get_metadata : UInt64
-    get_service_metadata : UInt64
-    subscribe_to_operation : UInt64
-    unsubscribe_to_operation : UInt64
-    set_eventing_status_callback : UInt64
-    get_endpoint_proxy : UInt64
+    query_interface : Proc(IWSDServiceProxy*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDServiceProxy*, UInt32)
+    release : Proc(IWSDServiceProxy*, UInt32)
+    get_metadata : Proc(IWSDServiceProxy*, WSD_METADATA_SECTION_LIST**, HRESULT)
+    begin_get_metadata : Proc(IWSDServiceProxy*, IWSDAsyncResult*, HRESULT)
+    end_get_metadata : Proc(IWSDServiceProxy*, IWSDAsyncResult, WSD_METADATA_SECTION_LIST**, HRESULT)
+    get_service_metadata : Proc(IWSDServiceProxy*, WSD_SERVICE_METADATA**, HRESULT)
+    subscribe_to_operation : Proc(IWSDServiceProxy*, WSD_OPERATION*, IUnknown, WSDXML_ELEMENT*, WSDXML_ELEMENT**, HRESULT)
+    unsubscribe_to_operation : Proc(IWSDServiceProxy*, WSD_OPERATION*, HRESULT)
+    set_eventing_status_callback : Proc(IWSDServiceProxy*, IWSDEventingStatus, HRESULT)
+    get_endpoint_proxy : Proc(IWSDServiceProxy*, IWSDEndpointProxy*, HRESULT)
   end
 
   IWSDServiceProxy_GUID = "d4c7fb9c-03ab-4175-9d67-094fafebf487"
@@ -922,29 +922,29 @@ lib LibWin32
   end
 
   struct IWSDServiceProxyEventingVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_metadata : UInt64
-    begin_get_metadata : UInt64
-    end_get_metadata : UInt64
-    get_service_metadata : UInt64
-    subscribe_to_operation : UInt64
-    unsubscribe_to_operation : UInt64
-    set_eventing_status_callback : UInt64
-    get_endpoint_proxy : UInt64
-    subscribe_to_multiple_operations : UInt64
-    begin_subscribe_to_multiple_operations : UInt64
-    end_subscribe_to_multiple_operations : UInt64
-    unsubscribe_to_multiple_operations : UInt64
-    begin_unsubscribe_to_multiple_operations : UInt64
-    end_unsubscribe_to_multiple_operations : UInt64
-    renew_multiple_operations : UInt64
-    begin_renew_multiple_operations : UInt64
-    end_renew_multiple_operations : UInt64
-    get_status_for_multiple_operations : UInt64
-    begin_get_status_for_multiple_operations : UInt64
-    end_get_status_for_multiple_operations : UInt64
+    query_interface : Proc(IWSDServiceProxyEventing*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDServiceProxyEventing*, UInt32)
+    release : Proc(IWSDServiceProxyEventing*, UInt32)
+    get_metadata : Proc(IWSDServiceProxyEventing*, WSD_METADATA_SECTION_LIST**, HRESULT)
+    begin_get_metadata : Proc(IWSDServiceProxyEventing*, IWSDAsyncResult*, HRESULT)
+    end_get_metadata : Proc(IWSDServiceProxyEventing*, IWSDAsyncResult, WSD_METADATA_SECTION_LIST**, HRESULT)
+    get_service_metadata : Proc(IWSDServiceProxyEventing*, WSD_SERVICE_METADATA**, HRESULT)
+    subscribe_to_operation : Proc(IWSDServiceProxyEventing*, WSD_OPERATION*, IUnknown, WSDXML_ELEMENT*, WSDXML_ELEMENT**, HRESULT)
+    unsubscribe_to_operation : Proc(IWSDServiceProxyEventing*, WSD_OPERATION*, HRESULT)
+    set_eventing_status_callback : Proc(IWSDServiceProxyEventing*, IWSDEventingStatus, HRESULT)
+    get_endpoint_proxy : Proc(IWSDServiceProxyEventing*, IWSDEndpointProxy*, HRESULT)
+    subscribe_to_multiple_operations : Proc(IWSDServiceProxyEventing*, WSD_OPERATION*, UInt32, IUnknown, WSD_EVENTING_EXPIRES*, WSDXML_ELEMENT*, WSD_EVENTING_EXPIRES**, WSDXML_ELEMENT**, HRESULT)
+    begin_subscribe_to_multiple_operations : Proc(IWSDServiceProxyEventing*, WSD_OPERATION*, UInt32, IUnknown, WSD_EVENTING_EXPIRES*, WSDXML_ELEMENT*, IUnknown, IWSDAsyncCallback, IWSDAsyncResult*, HRESULT)
+    end_subscribe_to_multiple_operations : Proc(IWSDServiceProxyEventing*, WSD_OPERATION*, UInt32, IWSDAsyncResult, WSD_EVENTING_EXPIRES**, WSDXML_ELEMENT**, HRESULT)
+    unsubscribe_to_multiple_operations : Proc(IWSDServiceProxyEventing*, WSD_OPERATION*, UInt32, WSDXML_ELEMENT*, HRESULT)
+    begin_unsubscribe_to_multiple_operations : Proc(IWSDServiceProxyEventing*, WSD_OPERATION*, UInt32, WSDXML_ELEMENT*, IUnknown, IWSDAsyncCallback, IWSDAsyncResult*, HRESULT)
+    end_unsubscribe_to_multiple_operations : Proc(IWSDServiceProxyEventing*, WSD_OPERATION*, UInt32, IWSDAsyncResult, HRESULT)
+    renew_multiple_operations : Proc(IWSDServiceProxyEventing*, WSD_OPERATION*, UInt32, WSD_EVENTING_EXPIRES*, WSDXML_ELEMENT*, WSD_EVENTING_EXPIRES**, WSDXML_ELEMENT**, HRESULT)
+    begin_renew_multiple_operations : Proc(IWSDServiceProxyEventing*, WSD_OPERATION*, UInt32, WSD_EVENTING_EXPIRES*, WSDXML_ELEMENT*, IUnknown, IWSDAsyncCallback, IWSDAsyncResult*, HRESULT)
+    end_renew_multiple_operations : Proc(IWSDServiceProxyEventing*, WSD_OPERATION*, UInt32, IWSDAsyncResult, WSD_EVENTING_EXPIRES**, WSDXML_ELEMENT**, HRESULT)
+    get_status_for_multiple_operations : Proc(IWSDServiceProxyEventing*, WSD_OPERATION*, UInt32, WSDXML_ELEMENT*, WSD_EVENTING_EXPIRES**, WSDXML_ELEMENT**, HRESULT)
+    begin_get_status_for_multiple_operations : Proc(IWSDServiceProxyEventing*, WSD_OPERATION*, UInt32, WSDXML_ELEMENT*, IUnknown, IWSDAsyncCallback, IWSDAsyncResult*, HRESULT)
+    end_get_status_for_multiple_operations : Proc(IWSDServiceProxyEventing*, WSD_OPERATION*, UInt32, IWSDAsyncResult, WSD_EVENTING_EXPIRES**, WSDXML_ELEMENT**, HRESULT)
   end
 
   IWSDServiceProxyEventing_GUID = "f9279d6d-1012-4a94-b8cc-fd35d2202bfe"
@@ -954,19 +954,19 @@ lib LibWin32
   end
 
   struct IWSDDeviceProxyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    init : UInt64
-    begin_get_metadata : UInt64
-    end_get_metadata : UInt64
-    get_host_metadata : UInt64
-    get_this_model_metadata : UInt64
-    get_this_device_metadata : UInt64
-    get_all_metadata : UInt64
-    get_service_proxy_by_id : UInt64
-    get_service_proxy_by_type : UInt64
-    get_endpoint_proxy : UInt64
+    query_interface : Proc(IWSDDeviceProxy*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDDeviceProxy*, UInt32)
+    release : Proc(IWSDDeviceProxy*, UInt32)
+    init : Proc(IWSDDeviceProxy*, LibC::LPWSTR, IWSDAddress, LibC::LPWSTR, IWSDXMLContext, IWSDDeviceProxy, HRESULT)
+    begin_get_metadata : Proc(IWSDDeviceProxy*, IWSDAsyncResult*, HRESULT)
+    end_get_metadata : Proc(IWSDDeviceProxy*, IWSDAsyncResult, HRESULT)
+    get_host_metadata : Proc(IWSDDeviceProxy*, WSD_HOST_METADATA**, HRESULT)
+    get_this_model_metadata : Proc(IWSDDeviceProxy*, WSD_THIS_MODEL_METADATA**, HRESULT)
+    get_this_device_metadata : Proc(IWSDDeviceProxy*, WSD_THIS_DEVICE_METADATA**, HRESULT)
+    get_all_metadata : Proc(IWSDDeviceProxy*, WSD_METADATA_SECTION_LIST**, HRESULT)
+    get_service_proxy_by_id : Proc(IWSDDeviceProxy*, LibC::LPWSTR, IWSDServiceProxy*, HRESULT)
+    get_service_proxy_by_type : Proc(IWSDDeviceProxy*, WSDXML_NAME*, IWSDServiceProxy*, HRESULT)
+    get_endpoint_proxy : Proc(IWSDDeviceProxy*, IWSDEndpointProxy*, HRESULT)
   end
 
   IWSDDeviceProxy_GUID = "eee0c031-c578-4c0e-9a3b-973c35f409db"
@@ -976,16 +976,16 @@ lib LibWin32
   end
 
   struct IWSDAsyncResultVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_callback : UInt64
-    set_wait_handle : UInt64
-    has_completed : UInt64
-    get_async_state : UInt64
-    abort : UInt64
-    get_event : UInt64
-    get_endpoint_proxy : UInt64
+    query_interface : Proc(IWSDAsyncResult*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDAsyncResult*, UInt32)
+    release : Proc(IWSDAsyncResult*, UInt32)
+    set_callback : Proc(IWSDAsyncResult*, IWSDAsyncCallback, IUnknown, HRESULT)
+    set_wait_handle : Proc(IWSDAsyncResult*, LibC::HANDLE, HRESULT)
+    has_completed : Proc(IWSDAsyncResult*, HRESULT)
+    get_async_state : Proc(IWSDAsyncResult*, IUnknown*, HRESULT)
+    abort : Proc(IWSDAsyncResult*, HRESULT)
+    get_event : Proc(IWSDAsyncResult*, WSD_EVENT*, HRESULT)
+    get_endpoint_proxy : Proc(IWSDAsyncResult*, IWSDEndpointProxy*, HRESULT)
   end
 
   IWSDAsyncResult_GUID = "11a9852a-8dd8-423e-b537-9356db4fbfb8"
@@ -995,10 +995,10 @@ lib LibWin32
   end
 
   struct IWSDAsyncCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    async_operation_complete : UInt64
+    query_interface : Proc(IWSDAsyncCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDAsyncCallback*, UInt32)
+    release : Proc(IWSDAsyncCallback*, UInt32)
+    async_operation_complete : Proc(IWSDAsyncCallback*, IWSDAsyncResult, IUnknown, HRESULT)
   end
 
   IWSDAsyncCallback_GUID = "a63e109d-ce72-49e2-ba98-e845f5ee1666"
@@ -1008,12 +1008,12 @@ lib LibWin32
   end
 
   struct IWSDEventingStatusVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    subscription_renewed : UInt64
-    subscription_renewal_failed : UInt64
-    subscription_ended : UInt64
+    query_interface : Proc(IWSDEventingStatus*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDEventingStatus*, UInt32)
+    release : Proc(IWSDEventingStatus*, UInt32)
+    subscription_renewed : Proc(IWSDEventingStatus*, LibC::LPWSTR, Void)
+    subscription_renewal_failed : Proc(IWSDEventingStatus*, LibC::LPWSTR, HRESULT, Void)
+    subscription_ended : Proc(IWSDEventingStatus*, LibC::LPWSTR, Void)
   end
 
   IWSDEventingStatus_GUID = "49b17f52-637a-407a-ae99-fbe82a4d38c0"
@@ -1023,21 +1023,21 @@ lib LibWin32
   end
 
   struct IWSDDeviceHostVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    init : UInt64
-    start : UInt64
-    stop : UInt64
-    terminate : UInt64
-    register_port_type : UInt64
-    set_metadata : UInt64
-    register_service : UInt64
-    retire_service : UInt64
-    add_dynamic_service : UInt64
-    remove_dynamic_service : UInt64
-    set_service_discoverable : UInt64
-    signal_event : UInt64
+    query_interface : Proc(IWSDDeviceHost*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDDeviceHost*, UInt32)
+    release : Proc(IWSDDeviceHost*, UInt32)
+    init : Proc(IWSDDeviceHost*, LibC::LPWSTR, IWSDXMLContext, IWSDAddress*, UInt32, HRESULT)
+    start : Proc(IWSDDeviceHost*, UInt64, WSD_URI_LIST*, IWSDDeviceHostNotify, HRESULT)
+    stop : Proc(IWSDDeviceHost*, HRESULT)
+    terminate : Proc(IWSDDeviceHost*, HRESULT)
+    register_port_type : Proc(IWSDDeviceHost*, WSD_PORT_TYPE*, HRESULT)
+    set_metadata : Proc(IWSDDeviceHost*, WSD_THIS_MODEL_METADATA*, WSD_THIS_DEVICE_METADATA*, WSD_HOST_METADATA*, WSD_METADATA_SECTION_LIST*, HRESULT)
+    register_service : Proc(IWSDDeviceHost*, LibC::LPWSTR, IUnknown, HRESULT)
+    retire_service : Proc(IWSDDeviceHost*, LibC::LPWSTR, HRESULT)
+    add_dynamic_service : Proc(IWSDDeviceHost*, LibC::LPWSTR, LibC::LPWSTR, WSD_PORT_TYPE*, WSDXML_NAME*, WSDXML_ELEMENT*, IUnknown, HRESULT)
+    remove_dynamic_service : Proc(IWSDDeviceHost*, LibC::LPWSTR, HRESULT)
+    set_service_discoverable : Proc(IWSDDeviceHost*, LibC::LPWSTR, LibC::BOOL, HRESULT)
+    signal_event : Proc(IWSDDeviceHost*, LibC::LPWSTR, Void*, WSD_OPERATION*, HRESULT)
   end
 
   IWSDDeviceHost_GUID = "917fe891-3d13-4138-9809-934c8abeb12c"
@@ -1047,10 +1047,10 @@ lib LibWin32
   end
 
   struct IWSDDeviceHostNotifyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_service : UInt64
+    query_interface : Proc(IWSDDeviceHostNotify*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDDeviceHostNotify*, UInt32)
+    release : Proc(IWSDDeviceHostNotify*, UInt32)
+    get_service : Proc(IWSDDeviceHostNotify*, LibC::LPWSTR, IUnknown*, HRESULT)
   end
 
   IWSDDeviceHostNotify_GUID = "b5bee9f9-eeda-41fe-96f7-f45e14990fb0"
@@ -1060,11 +1060,11 @@ lib LibWin32
   end
 
   struct IWSDServiceMessagingVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    send_response : UInt64
-    fault_request : UInt64
+    query_interface : Proc(IWSDServiceMessaging*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSDServiceMessaging*, UInt32)
+    release : Proc(IWSDServiceMessaging*, UInt32)
+    send_response : Proc(IWSDServiceMessaging*, Void*, WSD_OPERATION*, IWSDMessageParameters, HRESULT)
+    fault_request : Proc(IWSDServiceMessaging*, WSD_SOAP_HEADER*, IWSDMessageParameters, WSD_SOAP_FAULT*, HRESULT)
   end
 
   IWSDServiceMessaging_GUID = "94974cf4-0cab-460d-a3f6-7a0ad623c0e6"
@@ -1171,919 +1171,919 @@ lib LibWin32
   fun WSDUriDecode(source : Char*, cchsource : UInt32, destout : LibC::LPWSTR*, cchdestout : UInt32*) : HRESULT
 end
 struct LibWin32::IWSDAddress
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDAddress*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDAddress*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDAddress*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def serialize(pszbuffer : Char*, cchlength : UInt32, fsafe : LibC::BOOL) : HRESULT
-    @lpVtbl.value.serialize.unsafe_as(Proc(Char*, UInt32, LibC::BOOL, HRESULT)).call(pszbuffer, cchlength, fsafe)
+  def serialize(this : IWSDAddress*, pszbuffer : Char*, cchlength : UInt32, fsafe : LibC::BOOL) : HRESULT
+    @lpVtbl.value.serialize.call(this, pszbuffer, cchlength, fsafe)
   end
-  def deserialize(pszbuffer : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.deserialize.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszbuffer)
+  def deserialize(this : IWSDAddress*, pszbuffer : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.deserialize.call(this, pszbuffer)
   end
 end
 struct LibWin32::IWSDTransportAddress
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDTransportAddress*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDTransportAddress*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDTransportAddress*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def serialize(pszbuffer : Char*, cchlength : UInt32, fsafe : LibC::BOOL) : HRESULT
-    @lpVtbl.value.serialize.unsafe_as(Proc(Char*, UInt32, LibC::BOOL, HRESULT)).call(pszbuffer, cchlength, fsafe)
+  def serialize(this : IWSDTransportAddress*, pszbuffer : Char*, cchlength : UInt32, fsafe : LibC::BOOL) : HRESULT
+    @lpVtbl.value.serialize.call(this, pszbuffer, cchlength, fsafe)
   end
-  def deserialize(pszbuffer : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.deserialize.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszbuffer)
+  def deserialize(this : IWSDTransportAddress*, pszbuffer : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.deserialize.call(this, pszbuffer)
   end
-  def get_port(pwport : UInt16*) : HRESULT
-    @lpVtbl.value.get_port.unsafe_as(Proc(UInt16*, HRESULT)).call(pwport)
+  def get_port(this : IWSDTransportAddress*, pwport : UInt16*) : HRESULT
+    @lpVtbl.value.get_port.call(this, pwport)
   end
-  def set_port(wport : UInt16) : HRESULT
-    @lpVtbl.value.set_port.unsafe_as(Proc(UInt16, HRESULT)).call(wport)
+  def set_port(this : IWSDTransportAddress*, wport : UInt16) : HRESULT
+    @lpVtbl.value.set_port.call(this, wport)
   end
-  def get_transport_address(ppszaddress : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_transport_address.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszaddress)
+  def get_transport_address(this : IWSDTransportAddress*, ppszaddress : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transport_address.call(this, ppszaddress)
   end
-  def get_transport_address_ex(fsafe : LibC::BOOL, ppszaddress : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_transport_address_ex.unsafe_as(Proc(LibC::BOOL, LibC::LPWSTR*, HRESULT)).call(fsafe, ppszaddress)
+  def get_transport_address_ex(this : IWSDTransportAddress*, fsafe : LibC::BOOL, ppszaddress : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transport_address_ex.call(this, fsafe, ppszaddress)
   end
-  def set_transport_address(pszaddress : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_transport_address.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszaddress)
+  def set_transport_address(this : IWSDTransportAddress*, pszaddress : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transport_address.call(this, pszaddress)
   end
 end
 struct LibWin32::IWSDMessageParameters
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDMessageParameters*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDMessageParameters*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDMessageParameters*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_local_address(ppaddress : IWSDAddress*) : HRESULT
-    @lpVtbl.value.get_local_address.unsafe_as(Proc(IWSDAddress*, HRESULT)).call(ppaddress)
+  def get_local_address(this : IWSDMessageParameters*, ppaddress : IWSDAddress*) : HRESULT
+    @lpVtbl.value.get_local_address.call(this, ppaddress)
   end
-  def set_local_address(paddress : IWSDAddress) : HRESULT
-    @lpVtbl.value.set_local_address.unsafe_as(Proc(IWSDAddress, HRESULT)).call(paddress)
+  def set_local_address(this : IWSDMessageParameters*, paddress : IWSDAddress) : HRESULT
+    @lpVtbl.value.set_local_address.call(this, paddress)
   end
-  def get_remote_address(ppaddress : IWSDAddress*) : HRESULT
-    @lpVtbl.value.get_remote_address.unsafe_as(Proc(IWSDAddress*, HRESULT)).call(ppaddress)
+  def get_remote_address(this : IWSDMessageParameters*, ppaddress : IWSDAddress*) : HRESULT
+    @lpVtbl.value.get_remote_address.call(this, ppaddress)
   end
-  def set_remote_address(paddress : IWSDAddress) : HRESULT
-    @lpVtbl.value.set_remote_address.unsafe_as(Proc(IWSDAddress, HRESULT)).call(paddress)
+  def set_remote_address(this : IWSDMessageParameters*, paddress : IWSDAddress) : HRESULT
+    @lpVtbl.value.set_remote_address.call(this, paddress)
   end
-  def get_lower_parameters(pptxparams : IWSDMessageParameters*) : HRESULT
-    @lpVtbl.value.get_lower_parameters.unsafe_as(Proc(IWSDMessageParameters*, HRESULT)).call(pptxparams)
+  def get_lower_parameters(this : IWSDMessageParameters*, pptxparams : IWSDMessageParameters*) : HRESULT
+    @lpVtbl.value.get_lower_parameters.call(this, pptxparams)
   end
 end
 struct LibWin32::IWSDUdpMessageParameters
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDUdpMessageParameters*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDUdpMessageParameters*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDUdpMessageParameters*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_local_address(ppaddress : IWSDAddress*) : HRESULT
-    @lpVtbl.value.get_local_address.unsafe_as(Proc(IWSDAddress*, HRESULT)).call(ppaddress)
+  def get_local_address(this : IWSDUdpMessageParameters*, ppaddress : IWSDAddress*) : HRESULT
+    @lpVtbl.value.get_local_address.call(this, ppaddress)
   end
-  def set_local_address(paddress : IWSDAddress) : HRESULT
-    @lpVtbl.value.set_local_address.unsafe_as(Proc(IWSDAddress, HRESULT)).call(paddress)
+  def set_local_address(this : IWSDUdpMessageParameters*, paddress : IWSDAddress) : HRESULT
+    @lpVtbl.value.set_local_address.call(this, paddress)
   end
-  def get_remote_address(ppaddress : IWSDAddress*) : HRESULT
-    @lpVtbl.value.get_remote_address.unsafe_as(Proc(IWSDAddress*, HRESULT)).call(ppaddress)
+  def get_remote_address(this : IWSDUdpMessageParameters*, ppaddress : IWSDAddress*) : HRESULT
+    @lpVtbl.value.get_remote_address.call(this, ppaddress)
   end
-  def set_remote_address(paddress : IWSDAddress) : HRESULT
-    @lpVtbl.value.set_remote_address.unsafe_as(Proc(IWSDAddress, HRESULT)).call(paddress)
+  def set_remote_address(this : IWSDUdpMessageParameters*, paddress : IWSDAddress) : HRESULT
+    @lpVtbl.value.set_remote_address.call(this, paddress)
   end
-  def get_lower_parameters(pptxparams : IWSDMessageParameters*) : HRESULT
-    @lpVtbl.value.get_lower_parameters.unsafe_as(Proc(IWSDMessageParameters*, HRESULT)).call(pptxparams)
+  def get_lower_parameters(this : IWSDUdpMessageParameters*, pptxparams : IWSDMessageParameters*) : HRESULT
+    @lpVtbl.value.get_lower_parameters.call(this, pptxparams)
   end
-  def set_retransmit_params(pparams : WSDUdpRetransmitParams*) : HRESULT
-    @lpVtbl.value.set_retransmit_params.unsafe_as(Proc(WSDUdpRetransmitParams*, HRESULT)).call(pparams)
+  def set_retransmit_params(this : IWSDUdpMessageParameters*, pparams : WSDUdpRetransmitParams*) : HRESULT
+    @lpVtbl.value.set_retransmit_params.call(this, pparams)
   end
-  def get_retransmit_params(pparams : WSDUdpRetransmitParams*) : HRESULT
-    @lpVtbl.value.get_retransmit_params.unsafe_as(Proc(WSDUdpRetransmitParams*, HRESULT)).call(pparams)
+  def get_retransmit_params(this : IWSDUdpMessageParameters*, pparams : WSDUdpRetransmitParams*) : HRESULT
+    @lpVtbl.value.get_retransmit_params.call(this, pparams)
   end
 end
 struct LibWin32::IWSDUdpAddress
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDUdpAddress*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDUdpAddress*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDUdpAddress*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def serialize(pszbuffer : Char*, cchlength : UInt32, fsafe : LibC::BOOL) : HRESULT
-    @lpVtbl.value.serialize.unsafe_as(Proc(Char*, UInt32, LibC::BOOL, HRESULT)).call(pszbuffer, cchlength, fsafe)
+  def serialize(this : IWSDUdpAddress*, pszbuffer : Char*, cchlength : UInt32, fsafe : LibC::BOOL) : HRESULT
+    @lpVtbl.value.serialize.call(this, pszbuffer, cchlength, fsafe)
   end
-  def deserialize(pszbuffer : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.deserialize.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszbuffer)
+  def deserialize(this : IWSDUdpAddress*, pszbuffer : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.deserialize.call(this, pszbuffer)
   end
-  def get_port(pwport : UInt16*) : HRESULT
-    @lpVtbl.value.get_port.unsafe_as(Proc(UInt16*, HRESULT)).call(pwport)
+  def get_port(this : IWSDUdpAddress*, pwport : UInt16*) : HRESULT
+    @lpVtbl.value.get_port.call(this, pwport)
   end
-  def set_port(wport : UInt16) : HRESULT
-    @lpVtbl.value.set_port.unsafe_as(Proc(UInt16, HRESULT)).call(wport)
+  def set_port(this : IWSDUdpAddress*, wport : UInt16) : HRESULT
+    @lpVtbl.value.set_port.call(this, wport)
   end
-  def get_transport_address(ppszaddress : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_transport_address.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszaddress)
+  def get_transport_address(this : IWSDUdpAddress*, ppszaddress : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transport_address.call(this, ppszaddress)
   end
-  def get_transport_address_ex(fsafe : LibC::BOOL, ppszaddress : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_transport_address_ex.unsafe_as(Proc(LibC::BOOL, LibC::LPWSTR*, HRESULT)).call(fsafe, ppszaddress)
+  def get_transport_address_ex(this : IWSDUdpAddress*, fsafe : LibC::BOOL, ppszaddress : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transport_address_ex.call(this, fsafe, ppszaddress)
   end
-  def set_transport_address(pszaddress : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_transport_address.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszaddress)
+  def set_transport_address(this : IWSDUdpAddress*, pszaddress : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transport_address.call(this, pszaddress)
   end
-  def set_sockaddr(psockaddr : SOCKADDR_STORAGE*) : HRESULT
-    @lpVtbl.value.set_sockaddr.unsafe_as(Proc(SOCKADDR_STORAGE*, HRESULT)).call(psockaddr)
+  def set_sockaddr(this : IWSDUdpAddress*, psockaddr : SOCKADDR_STORAGE*) : HRESULT
+    @lpVtbl.value.set_sockaddr.call(this, psockaddr)
   end
-  def get_sockaddr(psockaddr : SOCKADDR_STORAGE*) : HRESULT
-    @lpVtbl.value.get_sockaddr.unsafe_as(Proc(SOCKADDR_STORAGE*, HRESULT)).call(psockaddr)
+  def get_sockaddr(this : IWSDUdpAddress*, psockaddr : SOCKADDR_STORAGE*) : HRESULT
+    @lpVtbl.value.get_sockaddr.call(this, psockaddr)
   end
-  def set_exclusive(fexclusive : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_exclusive.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fexclusive)
+  def set_exclusive(this : IWSDUdpAddress*, fexclusive : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_exclusive.call(this, fexclusive)
   end
-  def get_exclusive : HRESULT
-    @lpVtbl.value.get_exclusive.unsafe_as(Proc(HRESULT)).call
+  def get_exclusive(this : IWSDUdpAddress*) : HRESULT
+    @lpVtbl.value.get_exclusive.call(this)
   end
-  def set_message_type(messagetype : WSDUdpMessageType) : HRESULT
-    @lpVtbl.value.set_message_type.unsafe_as(Proc(WSDUdpMessageType, HRESULT)).call(messagetype)
+  def set_message_type(this : IWSDUdpAddress*, messagetype : WSDUdpMessageType) : HRESULT
+    @lpVtbl.value.set_message_type.call(this, messagetype)
   end
-  def get_message_type(pmessagetype : WSDUdpMessageType*) : HRESULT
-    @lpVtbl.value.get_message_type.unsafe_as(Proc(WSDUdpMessageType*, HRESULT)).call(pmessagetype)
+  def get_message_type(this : IWSDUdpAddress*, pmessagetype : WSDUdpMessageType*) : HRESULT
+    @lpVtbl.value.get_message_type.call(this, pmessagetype)
   end
-  def set_ttl(dwttl : UInt32) : HRESULT
-    @lpVtbl.value.set_ttl.unsafe_as(Proc(UInt32, HRESULT)).call(dwttl)
+  def set_ttl(this : IWSDUdpAddress*, dwttl : UInt32) : HRESULT
+    @lpVtbl.value.set_ttl.call(this, dwttl)
   end
-  def get_ttl(pdwttl : UInt32*) : HRESULT
-    @lpVtbl.value.get_ttl.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwttl)
+  def get_ttl(this : IWSDUdpAddress*, pdwttl : UInt32*) : HRESULT
+    @lpVtbl.value.get_ttl.call(this, pdwttl)
   end
-  def set_alias(palias : Guid*) : HRESULT
-    @lpVtbl.value.set_alias.unsafe_as(Proc(Guid*, HRESULT)).call(palias)
+  def set_alias(this : IWSDUdpAddress*, palias : Guid*) : HRESULT
+    @lpVtbl.value.set_alias.call(this, palias)
   end
-  def get_alias(palias : Guid*) : HRESULT
-    @lpVtbl.value.get_alias.unsafe_as(Proc(Guid*, HRESULT)).call(palias)
+  def get_alias(this : IWSDUdpAddress*, palias : Guid*) : HRESULT
+    @lpVtbl.value.get_alias.call(this, palias)
   end
 end
 struct LibWin32::IWSDHttpMessageParameters
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDHttpMessageParameters*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDHttpMessageParameters*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDHttpMessageParameters*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_local_address(ppaddress : IWSDAddress*) : HRESULT
-    @lpVtbl.value.get_local_address.unsafe_as(Proc(IWSDAddress*, HRESULT)).call(ppaddress)
+  def get_local_address(this : IWSDHttpMessageParameters*, ppaddress : IWSDAddress*) : HRESULT
+    @lpVtbl.value.get_local_address.call(this, ppaddress)
   end
-  def set_local_address(paddress : IWSDAddress) : HRESULT
-    @lpVtbl.value.set_local_address.unsafe_as(Proc(IWSDAddress, HRESULT)).call(paddress)
+  def set_local_address(this : IWSDHttpMessageParameters*, paddress : IWSDAddress) : HRESULT
+    @lpVtbl.value.set_local_address.call(this, paddress)
   end
-  def get_remote_address(ppaddress : IWSDAddress*) : HRESULT
-    @lpVtbl.value.get_remote_address.unsafe_as(Proc(IWSDAddress*, HRESULT)).call(ppaddress)
+  def get_remote_address(this : IWSDHttpMessageParameters*, ppaddress : IWSDAddress*) : HRESULT
+    @lpVtbl.value.get_remote_address.call(this, ppaddress)
   end
-  def set_remote_address(paddress : IWSDAddress) : HRESULT
-    @lpVtbl.value.set_remote_address.unsafe_as(Proc(IWSDAddress, HRESULT)).call(paddress)
+  def set_remote_address(this : IWSDHttpMessageParameters*, paddress : IWSDAddress) : HRESULT
+    @lpVtbl.value.set_remote_address.call(this, paddress)
   end
-  def get_lower_parameters(pptxparams : IWSDMessageParameters*) : HRESULT
-    @lpVtbl.value.get_lower_parameters.unsafe_as(Proc(IWSDMessageParameters*, HRESULT)).call(pptxparams)
+  def get_lower_parameters(this : IWSDHttpMessageParameters*, pptxparams : IWSDMessageParameters*) : HRESULT
+    @lpVtbl.value.get_lower_parameters.call(this, pptxparams)
   end
-  def set_inbound_http_headers(pszheaders : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_inbound_http_headers.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszheaders)
+  def set_inbound_http_headers(this : IWSDHttpMessageParameters*, pszheaders : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_inbound_http_headers.call(this, pszheaders)
   end
-  def get_inbound_http_headers(ppszheaders : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_inbound_http_headers.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszheaders)
+  def get_inbound_http_headers(this : IWSDHttpMessageParameters*, ppszheaders : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_inbound_http_headers.call(this, ppszheaders)
   end
-  def set_outbound_http_headers(pszheaders : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_outbound_http_headers.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszheaders)
+  def set_outbound_http_headers(this : IWSDHttpMessageParameters*, pszheaders : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_outbound_http_headers.call(this, pszheaders)
   end
-  def get_outbound_http_headers(ppszheaders : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_outbound_http_headers.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszheaders)
+  def get_outbound_http_headers(this : IWSDHttpMessageParameters*, ppszheaders : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_outbound_http_headers.call(this, ppszheaders)
   end
-  def set_id(pszid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_id.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszid)
+  def set_id(this : IWSDHttpMessageParameters*, pszid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_id.call(this, pszid)
   end
-  def get_id(ppszid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszid)
+  def get_id(this : IWSDHttpMessageParameters*, ppszid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_id.call(this, ppszid)
   end
-  def set_context(pcontext : IUnknown) : HRESULT
-    @lpVtbl.value.set_context.unsafe_as(Proc(IUnknown, HRESULT)).call(pcontext)
+  def set_context(this : IWSDHttpMessageParameters*, pcontext : IUnknown) : HRESULT
+    @lpVtbl.value.set_context.call(this, pcontext)
   end
-  def get_context(ppcontext : IUnknown*) : HRESULT
-    @lpVtbl.value.get_context.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppcontext)
+  def get_context(this : IWSDHttpMessageParameters*, ppcontext : IUnknown*) : HRESULT
+    @lpVtbl.value.get_context.call(this, ppcontext)
   end
-  def clear : HRESULT
-    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  def clear(this : IWSDHttpMessageParameters*) : HRESULT
+    @lpVtbl.value.clear.call(this)
   end
 end
 struct LibWin32::IWSDHttpAddress
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDHttpAddress*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDHttpAddress*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDHttpAddress*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def serialize(pszbuffer : Char*, cchlength : UInt32, fsafe : LibC::BOOL) : HRESULT
-    @lpVtbl.value.serialize.unsafe_as(Proc(Char*, UInt32, LibC::BOOL, HRESULT)).call(pszbuffer, cchlength, fsafe)
+  def serialize(this : IWSDHttpAddress*, pszbuffer : Char*, cchlength : UInt32, fsafe : LibC::BOOL) : HRESULT
+    @lpVtbl.value.serialize.call(this, pszbuffer, cchlength, fsafe)
   end
-  def deserialize(pszbuffer : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.deserialize.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszbuffer)
+  def deserialize(this : IWSDHttpAddress*, pszbuffer : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.deserialize.call(this, pszbuffer)
   end
-  def get_port(pwport : UInt16*) : HRESULT
-    @lpVtbl.value.get_port.unsafe_as(Proc(UInt16*, HRESULT)).call(pwport)
+  def get_port(this : IWSDHttpAddress*, pwport : UInt16*) : HRESULT
+    @lpVtbl.value.get_port.call(this, pwport)
   end
-  def set_port(wport : UInt16) : HRESULT
-    @lpVtbl.value.set_port.unsafe_as(Proc(UInt16, HRESULT)).call(wport)
+  def set_port(this : IWSDHttpAddress*, wport : UInt16) : HRESULT
+    @lpVtbl.value.set_port.call(this, wport)
   end
-  def get_transport_address(ppszaddress : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_transport_address.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszaddress)
+  def get_transport_address(this : IWSDHttpAddress*, ppszaddress : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transport_address.call(this, ppszaddress)
   end
-  def get_transport_address_ex(fsafe : LibC::BOOL, ppszaddress : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_transport_address_ex.unsafe_as(Proc(LibC::BOOL, LibC::LPWSTR*, HRESULT)).call(fsafe, ppszaddress)
+  def get_transport_address_ex(this : IWSDHttpAddress*, fsafe : LibC::BOOL, ppszaddress : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transport_address_ex.call(this, fsafe, ppszaddress)
   end
-  def set_transport_address(pszaddress : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_transport_address.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszaddress)
+  def set_transport_address(this : IWSDHttpAddress*, pszaddress : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transport_address.call(this, pszaddress)
   end
-  def get_secure : HRESULT
-    @lpVtbl.value.get_secure.unsafe_as(Proc(HRESULT)).call
+  def get_secure(this : IWSDHttpAddress*) : HRESULT
+    @lpVtbl.value.get_secure.call(this)
   end
-  def set_secure(fsecure : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_secure.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fsecure)
+  def set_secure(this : IWSDHttpAddress*, fsecure : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_secure.call(this, fsecure)
   end
-  def get_path(ppszpath : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_path.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszpath)
+  def get_path(this : IWSDHttpAddress*, ppszpath : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_path.call(this, ppszpath)
   end
-  def set_path(pszpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_path.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpath)
+  def set_path(this : IWSDHttpAddress*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_path.call(this, pszpath)
   end
 end
 struct LibWin32::IWSDSSLClientCertificate
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDSSLClientCertificate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDSSLClientCertificate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDSSLClientCertificate*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_client_certificate(ppcertcontext : CERT_CONTEXT**) : HRESULT
-    @lpVtbl.value.get_client_certificate.unsafe_as(Proc(CERT_CONTEXT**, HRESULT)).call(ppcertcontext)
+  def get_client_certificate(this : IWSDSSLClientCertificate*, ppcertcontext : CERT_CONTEXT**) : HRESULT
+    @lpVtbl.value.get_client_certificate.call(this, ppcertcontext)
   end
-  def get_mapped_access_token(phtoken : LibC::HANDLE*) : HRESULT
-    @lpVtbl.value.get_mapped_access_token.unsafe_as(Proc(LibC::HANDLE*, HRESULT)).call(phtoken)
+  def get_mapped_access_token(this : IWSDSSLClientCertificate*, phtoken : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.get_mapped_access_token.call(this, phtoken)
   end
 end
 struct LibWin32::IWSDHttpAuthParameters
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDHttpAuthParameters*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDHttpAuthParameters*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDHttpAuthParameters*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_client_access_token(phtoken : LibC::HANDLE*) : HRESULT
-    @lpVtbl.value.get_client_access_token.unsafe_as(Proc(LibC::HANDLE*, HRESULT)).call(phtoken)
+  def get_client_access_token(this : IWSDHttpAuthParameters*, phtoken : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.get_client_access_token.call(this, phtoken)
   end
-  def get_auth_type(pauthtype : UInt32*) : HRESULT
-    @lpVtbl.value.get_auth_type.unsafe_as(Proc(UInt32*, HRESULT)).call(pauthtype)
+  def get_auth_type(this : IWSDHttpAuthParameters*, pauthtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_auth_type.call(this, pauthtype)
   end
 end
 struct LibWin32::IWSDSignatureProperty
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDSignatureProperty*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDSignatureProperty*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDSignatureProperty*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def is_message_signed(pbsigned : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_message_signed.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbsigned)
+  def is_message_signed(this : IWSDSignatureProperty*, pbsigned : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_message_signed.call(this, pbsigned)
   end
-  def is_message_signature_trusted(pbsignaturetrusted : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_message_signature_trusted.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbsignaturetrusted)
+  def is_message_signature_trusted(this : IWSDSignatureProperty*, pbsignaturetrusted : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_message_signature_trusted.call(this, pbsignaturetrusted)
   end
-  def get_key_info(pbkeyinfo : UInt8*, pdwkeyinfosize : UInt32*) : HRESULT
-    @lpVtbl.value.get_key_info.unsafe_as(Proc(UInt8*, UInt32*, HRESULT)).call(pbkeyinfo, pdwkeyinfosize)
+  def get_key_info(this : IWSDSignatureProperty*, pbkeyinfo : UInt8*, pdwkeyinfosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_key_info.call(this, pbkeyinfo, pdwkeyinfosize)
   end
-  def get_signature(pbsignature : UInt8*, pdwsignaturesize : UInt32*) : HRESULT
-    @lpVtbl.value.get_signature.unsafe_as(Proc(UInt8*, UInt32*, HRESULT)).call(pbsignature, pdwsignaturesize)
+  def get_signature(this : IWSDSignatureProperty*, pbsignature : UInt8*, pdwsignaturesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_signature.call(this, pbsignature, pdwsignaturesize)
   end
-  def get_signed_info_hash(pbsignedinfohash : UInt8*, pdwhashsize : UInt32*) : HRESULT
-    @lpVtbl.value.get_signed_info_hash.unsafe_as(Proc(UInt8*, UInt32*, HRESULT)).call(pbsignedinfohash, pdwhashsize)
+  def get_signed_info_hash(this : IWSDSignatureProperty*, pbsignedinfohash : UInt8*, pdwhashsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_signed_info_hash.call(this, pbsignedinfohash, pdwhashsize)
   end
 end
 struct LibWin32::IWSDAttachment
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDAttachment*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDAttachment*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDAttachment*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
 end
 struct LibWin32::IWSDOutboundAttachment
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDOutboundAttachment*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDOutboundAttachment*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDOutboundAttachment*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def write(pbuffer : UInt8*, dwbytestowrite : UInt32, pdwnumberofbyteswritten : UInt32*) : HRESULT
-    @lpVtbl.value.write.unsafe_as(Proc(UInt8*, UInt32, UInt32*, HRESULT)).call(pbuffer, dwbytestowrite, pdwnumberofbyteswritten)
+  def write(this : IWSDOutboundAttachment*, pbuffer : UInt8*, dwbytestowrite : UInt32, pdwnumberofbyteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write.call(this, pbuffer, dwbytestowrite, pdwnumberofbyteswritten)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : IWSDOutboundAttachment*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
-  def abort : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(HRESULT)).call
+  def abort(this : IWSDOutboundAttachment*) : HRESULT
+    @lpVtbl.value.abort.call(this)
   end
 end
 struct LibWin32::IWSDInboundAttachment
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDInboundAttachment*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDInboundAttachment*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDInboundAttachment*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def read(pbuffer : UInt8*, dwbytestoread : UInt32, pdwnumberofbytesread : UInt32*) : HRESULT
-    @lpVtbl.value.read.unsafe_as(Proc(UInt8*, UInt32, UInt32*, HRESULT)).call(pbuffer, dwbytestoread, pdwnumberofbytesread)
+  def read(this : IWSDInboundAttachment*, pbuffer : UInt8*, dwbytestoread : UInt32, pdwnumberofbytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read.call(this, pbuffer, dwbytestoread, pdwnumberofbytesread)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : IWSDInboundAttachment*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
 end
 struct LibWin32::IWSDXMLContext
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDXMLContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDXMLContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDXMLContext*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add_namespace(pszuri : LibC::LPWSTR, pszsuggestedprefix : LibC::LPWSTR, ppnamespace : WSDXML_NAMESPACE**) : HRESULT
-    @lpVtbl.value.add_namespace.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, WSDXML_NAMESPACE**, HRESULT)).call(pszuri, pszsuggestedprefix, ppnamespace)
+  def add_namespace(this : IWSDXMLContext*, pszuri : LibC::LPWSTR, pszsuggestedprefix : LibC::LPWSTR, ppnamespace : WSDXML_NAMESPACE**) : HRESULT
+    @lpVtbl.value.add_namespace.call(this, pszuri, pszsuggestedprefix, ppnamespace)
   end
-  def add_name_to_namespace(pszuri : LibC::LPWSTR, pszname : LibC::LPWSTR, ppname : WSDXML_NAME**) : HRESULT
-    @lpVtbl.value.add_name_to_namespace.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, WSDXML_NAME**, HRESULT)).call(pszuri, pszname, ppname)
+  def add_name_to_namespace(this : IWSDXMLContext*, pszuri : LibC::LPWSTR, pszname : LibC::LPWSTR, ppname : WSDXML_NAME**) : HRESULT
+    @lpVtbl.value.add_name_to_namespace.call(this, pszuri, pszname, ppname)
   end
-  def set_namespaces(pnamespaces : WSDXML_NAMESPACE**, wnamespacescount : UInt16, blayernumber : UInt8) : HRESULT
-    @lpVtbl.value.set_namespaces.unsafe_as(Proc(WSDXML_NAMESPACE**, UInt16, UInt8, HRESULT)).call(pnamespaces, wnamespacescount, blayernumber)
+  def set_namespaces(this : IWSDXMLContext*, pnamespaces : WSDXML_NAMESPACE**, wnamespacescount : UInt16, blayernumber : UInt8) : HRESULT
+    @lpVtbl.value.set_namespaces.call(this, pnamespaces, wnamespacescount, blayernumber)
   end
-  def set_types(ptypes : WSDXML_TYPE**, dwtypescount : UInt32, blayernumber : UInt8) : HRESULT
-    @lpVtbl.value.set_types.unsafe_as(Proc(WSDXML_TYPE**, UInt32, UInt8, HRESULT)).call(ptypes, dwtypescount, blayernumber)
+  def set_types(this : IWSDXMLContext*, ptypes : WSDXML_TYPE**, dwtypescount : UInt32, blayernumber : UInt8) : HRESULT
+    @lpVtbl.value.set_types.call(this, ptypes, dwtypescount, blayernumber)
   end
 end
 struct LibWin32::IWSDiscoveryProvider
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDiscoveryProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDiscoveryProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDiscoveryProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_address_family(dwaddressfamily : UInt32) : HRESULT
-    @lpVtbl.value.set_address_family.unsafe_as(Proc(UInt32, HRESULT)).call(dwaddressfamily)
+  def set_address_family(this : IWSDiscoveryProvider*, dwaddressfamily : UInt32) : HRESULT
+    @lpVtbl.value.set_address_family.call(this, dwaddressfamily)
   end
-  def attach(psink : IWSDiscoveryProviderNotify) : HRESULT
-    @lpVtbl.value.attach.unsafe_as(Proc(IWSDiscoveryProviderNotify, HRESULT)).call(psink)
+  def attach(this : IWSDiscoveryProvider*, psink : IWSDiscoveryProviderNotify) : HRESULT
+    @lpVtbl.value.attach.call(this, psink)
   end
-  def detach : HRESULT
-    @lpVtbl.value.detach.unsafe_as(Proc(HRESULT)).call
+  def detach(this : IWSDiscoveryProvider*) : HRESULT
+    @lpVtbl.value.detach.call(this)
   end
-  def search_by_id(pszid : LibC::LPWSTR, psztag : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.search_by_id.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pszid, psztag)
+  def search_by_id(this : IWSDiscoveryProvider*, pszid : LibC::LPWSTR, psztag : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.search_by_id.call(this, pszid, psztag)
   end
-  def search_by_address(pszaddress : LibC::LPWSTR, psztag : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.search_by_address.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pszaddress, psztag)
+  def search_by_address(this : IWSDiscoveryProvider*, pszaddress : LibC::LPWSTR, psztag : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.search_by_address.call(this, pszaddress, psztag)
   end
-  def search_by_type(ptypeslist : WSD_NAME_LIST*, pscopeslist : WSD_URI_LIST*, pszmatchby : LibC::LPWSTR, psztag : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.search_by_type.unsafe_as(Proc(WSD_NAME_LIST*, WSD_URI_LIST*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(ptypeslist, pscopeslist, pszmatchby, psztag)
+  def search_by_type(this : IWSDiscoveryProvider*, ptypeslist : WSD_NAME_LIST*, pscopeslist : WSD_URI_LIST*, pszmatchby : LibC::LPWSTR, psztag : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.search_by_type.call(this, ptypeslist, pscopeslist, pszmatchby, psztag)
   end
-  def get_xml_context(ppcontext : IWSDXMLContext*) : HRESULT
-    @lpVtbl.value.get_xml_context.unsafe_as(Proc(IWSDXMLContext*, HRESULT)).call(ppcontext)
+  def get_xml_context(this : IWSDiscoveryProvider*, ppcontext : IWSDXMLContext*) : HRESULT
+    @lpVtbl.value.get_xml_context.call(this, ppcontext)
   end
 end
 struct LibWin32::IWSDiscoveryProviderNotify
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDiscoveryProviderNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDiscoveryProviderNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDiscoveryProviderNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add(pservice : IWSDiscoveredService) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(IWSDiscoveredService, HRESULT)).call(pservice)
+  def add(this : IWSDiscoveryProviderNotify*, pservice : IWSDiscoveredService) : HRESULT
+    @lpVtbl.value.add.call(this, pservice)
   end
-  def remove(pservice : IWSDiscoveredService) : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(IWSDiscoveredService, HRESULT)).call(pservice)
+  def remove(this : IWSDiscoveryProviderNotify*, pservice : IWSDiscoveredService) : HRESULT
+    @lpVtbl.value.remove.call(this, pservice)
   end
-  def search_failed(hr : HRESULT, psztag : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.search_failed.unsafe_as(Proc(HRESULT, LibC::LPWSTR, HRESULT)).call(hr, psztag)
+  def search_failed(this : IWSDiscoveryProviderNotify*, hr : HRESULT, psztag : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.search_failed.call(this, hr, psztag)
   end
-  def search_complete(psztag : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.search_complete.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(psztag)
+  def search_complete(this : IWSDiscoveryProviderNotify*, psztag : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.search_complete.call(this, psztag)
   end
 end
 struct LibWin32::IWSDiscoveredService
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDiscoveredService*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDiscoveredService*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDiscoveredService*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_endpoint_reference(ppendpointreference : WSD_ENDPOINT_REFERENCE**) : HRESULT
-    @lpVtbl.value.get_endpoint_reference.unsafe_as(Proc(WSD_ENDPOINT_REFERENCE**, HRESULT)).call(ppendpointreference)
+  def get_endpoint_reference(this : IWSDiscoveredService*, ppendpointreference : WSD_ENDPOINT_REFERENCE**) : HRESULT
+    @lpVtbl.value.get_endpoint_reference.call(this, ppendpointreference)
   end
-  def get_types(pptypeslist : WSD_NAME_LIST**) : HRESULT
-    @lpVtbl.value.get_types.unsafe_as(Proc(WSD_NAME_LIST**, HRESULT)).call(pptypeslist)
+  def get_types(this : IWSDiscoveredService*, pptypeslist : WSD_NAME_LIST**) : HRESULT
+    @lpVtbl.value.get_types.call(this, pptypeslist)
   end
-  def get_scopes(ppscopeslist : WSD_URI_LIST**) : HRESULT
-    @lpVtbl.value.get_scopes.unsafe_as(Proc(WSD_URI_LIST**, HRESULT)).call(ppscopeslist)
+  def get_scopes(this : IWSDiscoveredService*, ppscopeslist : WSD_URI_LIST**) : HRESULT
+    @lpVtbl.value.get_scopes.call(this, ppscopeslist)
   end
-  def get_x_addrs(ppxaddrslist : WSD_URI_LIST**) : HRESULT
-    @lpVtbl.value.get_x_addrs.unsafe_as(Proc(WSD_URI_LIST**, HRESULT)).call(ppxaddrslist)
+  def get_x_addrs(this : IWSDiscoveredService*, ppxaddrslist : WSD_URI_LIST**) : HRESULT
+    @lpVtbl.value.get_x_addrs.call(this, ppxaddrslist)
   end
-  def get_metadata_version(pullmetadataversion : UInt64*) : HRESULT
-    @lpVtbl.value.get_metadata_version.unsafe_as(Proc(UInt64*, HRESULT)).call(pullmetadataversion)
+  def get_metadata_version(this : IWSDiscoveredService*, pullmetadataversion : UInt64*) : HRESULT
+    @lpVtbl.value.get_metadata_version.call(this, pullmetadataversion)
   end
-  def get_extended_disco_xml(ppheaderany : WSDXML_ELEMENT**, ppbodyany : WSDXML_ELEMENT**) : HRESULT
-    @lpVtbl.value.get_extended_disco_xml.unsafe_as(Proc(WSDXML_ELEMENT**, WSDXML_ELEMENT**, HRESULT)).call(ppheaderany, ppbodyany)
+  def get_extended_disco_xml(this : IWSDiscoveredService*, ppheaderany : WSDXML_ELEMENT**, ppbodyany : WSDXML_ELEMENT**) : HRESULT
+    @lpVtbl.value.get_extended_disco_xml.call(this, ppheaderany, ppbodyany)
   end
-  def get_probe_resolve_tag(ppsztag : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_probe_resolve_tag.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppsztag)
+  def get_probe_resolve_tag(this : IWSDiscoveredService*, ppsztag : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_probe_resolve_tag.call(this, ppsztag)
   end
-  def get_remote_transport_address(ppszremotetransportaddress : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_remote_transport_address.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszremotetransportaddress)
+  def get_remote_transport_address(this : IWSDiscoveredService*, ppszremotetransportaddress : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_remote_transport_address.call(this, ppszremotetransportaddress)
   end
-  def get_local_transport_address(ppszlocaltransportaddress : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_local_transport_address.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszlocaltransportaddress)
+  def get_local_transport_address(this : IWSDiscoveredService*, ppszlocaltransportaddress : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_local_transport_address.call(this, ppszlocaltransportaddress)
   end
-  def get_local_interface_guid(pguid : Guid*) : HRESULT
-    @lpVtbl.value.get_local_interface_guid.unsafe_as(Proc(Guid*, HRESULT)).call(pguid)
+  def get_local_interface_guid(this : IWSDiscoveredService*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_local_interface_guid.call(this, pguid)
   end
-  def get_instance_id(pullinstanceid : UInt64*) : HRESULT
-    @lpVtbl.value.get_instance_id.unsafe_as(Proc(UInt64*, HRESULT)).call(pullinstanceid)
+  def get_instance_id(this : IWSDiscoveredService*, pullinstanceid : UInt64*) : HRESULT
+    @lpVtbl.value.get_instance_id.call(this, pullinstanceid)
   end
 end
 struct LibWin32::IWSDiscoveryPublisher
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDiscoveryPublisher*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDiscoveryPublisher*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDiscoveryPublisher*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_address_family(dwaddressfamily : UInt32) : HRESULT
-    @lpVtbl.value.set_address_family.unsafe_as(Proc(UInt32, HRESULT)).call(dwaddressfamily)
+  def set_address_family(this : IWSDiscoveryPublisher*, dwaddressfamily : UInt32) : HRESULT
+    @lpVtbl.value.set_address_family.call(this, dwaddressfamily)
   end
-  def register_notification_sink(psink : IWSDiscoveryPublisherNotify) : HRESULT
-    @lpVtbl.value.register_notification_sink.unsafe_as(Proc(IWSDiscoveryPublisherNotify, HRESULT)).call(psink)
+  def register_notification_sink(this : IWSDiscoveryPublisher*, psink : IWSDiscoveryPublisherNotify) : HRESULT
+    @lpVtbl.value.register_notification_sink.call(this, psink)
   end
-  def un_register_notification_sink(psink : IWSDiscoveryPublisherNotify) : HRESULT
-    @lpVtbl.value.un_register_notification_sink.unsafe_as(Proc(IWSDiscoveryPublisherNotify, HRESULT)).call(psink)
+  def un_register_notification_sink(this : IWSDiscoveryPublisher*, psink : IWSDiscoveryPublisherNotify) : HRESULT
+    @lpVtbl.value.un_register_notification_sink.call(this, psink)
   end
-  def publish(pszid : LibC::LPWSTR, ullmetadataversion : UInt64, ullinstanceid : UInt64, ullmessagenumber : UInt64, pszsessionid : LibC::LPWSTR, ptypeslist : WSD_NAME_LIST*, pscopeslist : WSD_URI_LIST*, pxaddrslist : WSD_URI_LIST*) : HRESULT
-    @lpVtbl.value.publish.unsafe_as(Proc(LibC::LPWSTR, UInt64, UInt64, UInt64, LibC::LPWSTR, WSD_NAME_LIST*, WSD_URI_LIST*, WSD_URI_LIST*, HRESULT)).call(pszid, ullmetadataversion, ullinstanceid, ullmessagenumber, pszsessionid, ptypeslist, pscopeslist, pxaddrslist)
+  def publish(this : IWSDiscoveryPublisher*, pszid : LibC::LPWSTR, ullmetadataversion : UInt64, ullinstanceid : UInt64, ullmessagenumber : UInt64, pszsessionid : LibC::LPWSTR, ptypeslist : WSD_NAME_LIST*, pscopeslist : WSD_URI_LIST*, pxaddrslist : WSD_URI_LIST*) : HRESULT
+    @lpVtbl.value.publish.call(this, pszid, ullmetadataversion, ullinstanceid, ullmessagenumber, pszsessionid, ptypeslist, pscopeslist, pxaddrslist)
   end
-  def un_publish(pszid : LibC::LPWSTR, ullinstanceid : UInt64, ullmessagenumber : UInt64, pszsessionid : LibC::LPWSTR, pany : WSDXML_ELEMENT*) : HRESULT
-    @lpVtbl.value.un_publish.unsafe_as(Proc(LibC::LPWSTR, UInt64, UInt64, LibC::LPWSTR, WSDXML_ELEMENT*, HRESULT)).call(pszid, ullinstanceid, ullmessagenumber, pszsessionid, pany)
+  def un_publish(this : IWSDiscoveryPublisher*, pszid : LibC::LPWSTR, ullinstanceid : UInt64, ullmessagenumber : UInt64, pszsessionid : LibC::LPWSTR, pany : WSDXML_ELEMENT*) : HRESULT
+    @lpVtbl.value.un_publish.call(this, pszid, ullinstanceid, ullmessagenumber, pszsessionid, pany)
   end
-  def match_probe(pprobemessage : WSD_SOAP_MESSAGE*, pmessageparameters : IWSDMessageParameters, pszid : LibC::LPWSTR, ullmetadataversion : UInt64, ullinstanceid : UInt64, ullmessagenumber : UInt64, pszsessionid : LibC::LPWSTR, ptypeslist : WSD_NAME_LIST*, pscopeslist : WSD_URI_LIST*, pxaddrslist : WSD_URI_LIST*) : HRESULT
-    @lpVtbl.value.match_probe.unsafe_as(Proc(WSD_SOAP_MESSAGE*, IWSDMessageParameters, LibC::LPWSTR, UInt64, UInt64, UInt64, LibC::LPWSTR, WSD_NAME_LIST*, WSD_URI_LIST*, WSD_URI_LIST*, HRESULT)).call(pprobemessage, pmessageparameters, pszid, ullmetadataversion, ullinstanceid, ullmessagenumber, pszsessionid, ptypeslist, pscopeslist, pxaddrslist)
+  def match_probe(this : IWSDiscoveryPublisher*, pprobemessage : WSD_SOAP_MESSAGE*, pmessageparameters : IWSDMessageParameters, pszid : LibC::LPWSTR, ullmetadataversion : UInt64, ullinstanceid : UInt64, ullmessagenumber : UInt64, pszsessionid : LibC::LPWSTR, ptypeslist : WSD_NAME_LIST*, pscopeslist : WSD_URI_LIST*, pxaddrslist : WSD_URI_LIST*) : HRESULT
+    @lpVtbl.value.match_probe.call(this, pprobemessage, pmessageparameters, pszid, ullmetadataversion, ullinstanceid, ullmessagenumber, pszsessionid, ptypeslist, pscopeslist, pxaddrslist)
   end
-  def match_resolve(presolvemessage : WSD_SOAP_MESSAGE*, pmessageparameters : IWSDMessageParameters, pszid : LibC::LPWSTR, ullmetadataversion : UInt64, ullinstanceid : UInt64, ullmessagenumber : UInt64, pszsessionid : LibC::LPWSTR, ptypeslist : WSD_NAME_LIST*, pscopeslist : WSD_URI_LIST*, pxaddrslist : WSD_URI_LIST*) : HRESULT
-    @lpVtbl.value.match_resolve.unsafe_as(Proc(WSD_SOAP_MESSAGE*, IWSDMessageParameters, LibC::LPWSTR, UInt64, UInt64, UInt64, LibC::LPWSTR, WSD_NAME_LIST*, WSD_URI_LIST*, WSD_URI_LIST*, HRESULT)).call(presolvemessage, pmessageparameters, pszid, ullmetadataversion, ullinstanceid, ullmessagenumber, pszsessionid, ptypeslist, pscopeslist, pxaddrslist)
+  def match_resolve(this : IWSDiscoveryPublisher*, presolvemessage : WSD_SOAP_MESSAGE*, pmessageparameters : IWSDMessageParameters, pszid : LibC::LPWSTR, ullmetadataversion : UInt64, ullinstanceid : UInt64, ullmessagenumber : UInt64, pszsessionid : LibC::LPWSTR, ptypeslist : WSD_NAME_LIST*, pscopeslist : WSD_URI_LIST*, pxaddrslist : WSD_URI_LIST*) : HRESULT
+    @lpVtbl.value.match_resolve.call(this, presolvemessage, pmessageparameters, pszid, ullmetadataversion, ullinstanceid, ullmessagenumber, pszsessionid, ptypeslist, pscopeslist, pxaddrslist)
   end
-  def publish_ex(pszid : LibC::LPWSTR, ullmetadataversion : UInt64, ullinstanceid : UInt64, ullmessagenumber : UInt64, pszsessionid : LibC::LPWSTR, ptypeslist : WSD_NAME_LIST*, pscopeslist : WSD_URI_LIST*, pxaddrslist : WSD_URI_LIST*, pheaderany : WSDXML_ELEMENT*, preferenceparameterany : WSDXML_ELEMENT*, ppolicyany : WSDXML_ELEMENT*, pendpointreferenceany : WSDXML_ELEMENT*, pany : WSDXML_ELEMENT*) : HRESULT
-    @lpVtbl.value.publish_ex.unsafe_as(Proc(LibC::LPWSTR, UInt64, UInt64, UInt64, LibC::LPWSTR, WSD_NAME_LIST*, WSD_URI_LIST*, WSD_URI_LIST*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, HRESULT)).call(pszid, ullmetadataversion, ullinstanceid, ullmessagenumber, pszsessionid, ptypeslist, pscopeslist, pxaddrslist, pheaderany, preferenceparameterany, ppolicyany, pendpointreferenceany, pany)
+  def publish_ex(this : IWSDiscoveryPublisher*, pszid : LibC::LPWSTR, ullmetadataversion : UInt64, ullinstanceid : UInt64, ullmessagenumber : UInt64, pszsessionid : LibC::LPWSTR, ptypeslist : WSD_NAME_LIST*, pscopeslist : WSD_URI_LIST*, pxaddrslist : WSD_URI_LIST*, pheaderany : WSDXML_ELEMENT*, preferenceparameterany : WSDXML_ELEMENT*, ppolicyany : WSDXML_ELEMENT*, pendpointreferenceany : WSDXML_ELEMENT*, pany : WSDXML_ELEMENT*) : HRESULT
+    @lpVtbl.value.publish_ex.call(this, pszid, ullmetadataversion, ullinstanceid, ullmessagenumber, pszsessionid, ptypeslist, pscopeslist, pxaddrslist, pheaderany, preferenceparameterany, ppolicyany, pendpointreferenceany, pany)
   end
-  def match_probe_ex(pprobemessage : WSD_SOAP_MESSAGE*, pmessageparameters : IWSDMessageParameters, pszid : LibC::LPWSTR, ullmetadataversion : UInt64, ullinstanceid : UInt64, ullmessagenumber : UInt64, pszsessionid : LibC::LPWSTR, ptypeslist : WSD_NAME_LIST*, pscopeslist : WSD_URI_LIST*, pxaddrslist : WSD_URI_LIST*, pheaderany : WSDXML_ELEMENT*, preferenceparameterany : WSDXML_ELEMENT*, ppolicyany : WSDXML_ELEMENT*, pendpointreferenceany : WSDXML_ELEMENT*, pany : WSDXML_ELEMENT*) : HRESULT
-    @lpVtbl.value.match_probe_ex.unsafe_as(Proc(WSD_SOAP_MESSAGE*, IWSDMessageParameters, LibC::LPWSTR, UInt64, UInt64, UInt64, LibC::LPWSTR, WSD_NAME_LIST*, WSD_URI_LIST*, WSD_URI_LIST*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, HRESULT)).call(pprobemessage, pmessageparameters, pszid, ullmetadataversion, ullinstanceid, ullmessagenumber, pszsessionid, ptypeslist, pscopeslist, pxaddrslist, pheaderany, preferenceparameterany, ppolicyany, pendpointreferenceany, pany)
+  def match_probe_ex(this : IWSDiscoveryPublisher*, pprobemessage : WSD_SOAP_MESSAGE*, pmessageparameters : IWSDMessageParameters, pszid : LibC::LPWSTR, ullmetadataversion : UInt64, ullinstanceid : UInt64, ullmessagenumber : UInt64, pszsessionid : LibC::LPWSTR, ptypeslist : WSD_NAME_LIST*, pscopeslist : WSD_URI_LIST*, pxaddrslist : WSD_URI_LIST*, pheaderany : WSDXML_ELEMENT*, preferenceparameterany : WSDXML_ELEMENT*, ppolicyany : WSDXML_ELEMENT*, pendpointreferenceany : WSDXML_ELEMENT*, pany : WSDXML_ELEMENT*) : HRESULT
+    @lpVtbl.value.match_probe_ex.call(this, pprobemessage, pmessageparameters, pszid, ullmetadataversion, ullinstanceid, ullmessagenumber, pszsessionid, ptypeslist, pscopeslist, pxaddrslist, pheaderany, preferenceparameterany, ppolicyany, pendpointreferenceany, pany)
   end
-  def match_resolve_ex(presolvemessage : WSD_SOAP_MESSAGE*, pmessageparameters : IWSDMessageParameters, pszid : LibC::LPWSTR, ullmetadataversion : UInt64, ullinstanceid : UInt64, ullmessagenumber : UInt64, pszsessionid : LibC::LPWSTR, ptypeslist : WSD_NAME_LIST*, pscopeslist : WSD_URI_LIST*, pxaddrslist : WSD_URI_LIST*, pheaderany : WSDXML_ELEMENT*, preferenceparameterany : WSDXML_ELEMENT*, ppolicyany : WSDXML_ELEMENT*, pendpointreferenceany : WSDXML_ELEMENT*, pany : WSDXML_ELEMENT*) : HRESULT
-    @lpVtbl.value.match_resolve_ex.unsafe_as(Proc(WSD_SOAP_MESSAGE*, IWSDMessageParameters, LibC::LPWSTR, UInt64, UInt64, UInt64, LibC::LPWSTR, WSD_NAME_LIST*, WSD_URI_LIST*, WSD_URI_LIST*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, WSDXML_ELEMENT*, HRESULT)).call(presolvemessage, pmessageparameters, pszid, ullmetadataversion, ullinstanceid, ullmessagenumber, pszsessionid, ptypeslist, pscopeslist, pxaddrslist, pheaderany, preferenceparameterany, ppolicyany, pendpointreferenceany, pany)
+  def match_resolve_ex(this : IWSDiscoveryPublisher*, presolvemessage : WSD_SOAP_MESSAGE*, pmessageparameters : IWSDMessageParameters, pszid : LibC::LPWSTR, ullmetadataversion : UInt64, ullinstanceid : UInt64, ullmessagenumber : UInt64, pszsessionid : LibC::LPWSTR, ptypeslist : WSD_NAME_LIST*, pscopeslist : WSD_URI_LIST*, pxaddrslist : WSD_URI_LIST*, pheaderany : WSDXML_ELEMENT*, preferenceparameterany : WSDXML_ELEMENT*, ppolicyany : WSDXML_ELEMENT*, pendpointreferenceany : WSDXML_ELEMENT*, pany : WSDXML_ELEMENT*) : HRESULT
+    @lpVtbl.value.match_resolve_ex.call(this, presolvemessage, pmessageparameters, pszid, ullmetadataversion, ullinstanceid, ullmessagenumber, pszsessionid, ptypeslist, pscopeslist, pxaddrslist, pheaderany, preferenceparameterany, ppolicyany, pendpointreferenceany, pany)
   end
-  def register_scope_matching_rule(pscopematchingrule : IWSDScopeMatchingRule) : HRESULT
-    @lpVtbl.value.register_scope_matching_rule.unsafe_as(Proc(IWSDScopeMatchingRule, HRESULT)).call(pscopematchingrule)
+  def register_scope_matching_rule(this : IWSDiscoveryPublisher*, pscopematchingrule : IWSDScopeMatchingRule) : HRESULT
+    @lpVtbl.value.register_scope_matching_rule.call(this, pscopematchingrule)
   end
-  def un_register_scope_matching_rule(pscopematchingrule : IWSDScopeMatchingRule) : HRESULT
-    @lpVtbl.value.un_register_scope_matching_rule.unsafe_as(Proc(IWSDScopeMatchingRule, HRESULT)).call(pscopematchingrule)
+  def un_register_scope_matching_rule(this : IWSDiscoveryPublisher*, pscopematchingrule : IWSDScopeMatchingRule) : HRESULT
+    @lpVtbl.value.un_register_scope_matching_rule.call(this, pscopematchingrule)
   end
-  def get_xml_context(ppcontext : IWSDXMLContext*) : HRESULT
-    @lpVtbl.value.get_xml_context.unsafe_as(Proc(IWSDXMLContext*, HRESULT)).call(ppcontext)
+  def get_xml_context(this : IWSDiscoveryPublisher*, ppcontext : IWSDXMLContext*) : HRESULT
+    @lpVtbl.value.get_xml_context.call(this, ppcontext)
   end
 end
 struct LibWin32::IWSDiscoveryPublisherNotify
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDiscoveryPublisherNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDiscoveryPublisherNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDiscoveryPublisherNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def probe_handler(psoap : WSD_SOAP_MESSAGE*, pmessageparameters : IWSDMessageParameters) : HRESULT
-    @lpVtbl.value.probe_handler.unsafe_as(Proc(WSD_SOAP_MESSAGE*, IWSDMessageParameters, HRESULT)).call(psoap, pmessageparameters)
+  def probe_handler(this : IWSDiscoveryPublisherNotify*, psoap : WSD_SOAP_MESSAGE*, pmessageparameters : IWSDMessageParameters) : HRESULT
+    @lpVtbl.value.probe_handler.call(this, psoap, pmessageparameters)
   end
-  def resolve_handler(psoap : WSD_SOAP_MESSAGE*, pmessageparameters : IWSDMessageParameters) : HRESULT
-    @lpVtbl.value.resolve_handler.unsafe_as(Proc(WSD_SOAP_MESSAGE*, IWSDMessageParameters, HRESULT)).call(psoap, pmessageparameters)
+  def resolve_handler(this : IWSDiscoveryPublisherNotify*, psoap : WSD_SOAP_MESSAGE*, pmessageparameters : IWSDMessageParameters) : HRESULT
+    @lpVtbl.value.resolve_handler.call(this, psoap, pmessageparameters)
   end
 end
 struct LibWin32::IWSDScopeMatchingRule
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDScopeMatchingRule*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDScopeMatchingRule*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDScopeMatchingRule*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_scope_rule(ppszscopematchingrule : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_scope_rule.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszscopematchingrule)
+  def get_scope_rule(this : IWSDScopeMatchingRule*, ppszscopematchingrule : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_scope_rule.call(this, ppszscopematchingrule)
   end
-  def match_scopes(pszscope1 : LibC::LPWSTR, pszscope2 : LibC::LPWSTR, pfmatch : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.match_scopes.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL*, HRESULT)).call(pszscope1, pszscope2, pfmatch)
+  def match_scopes(this : IWSDScopeMatchingRule*, pszscope1 : LibC::LPWSTR, pszscope2 : LibC::LPWSTR, pfmatch : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.match_scopes.call(this, pszscope1, pszscope2, pfmatch)
   end
 end
 struct LibWin32::IWSDEndpointProxy
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDEndpointProxy*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDEndpointProxy*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDEndpointProxy*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def send_one_way_request(pbody : Void*, poperation : WSD_OPERATION*) : HRESULT
-    @lpVtbl.value.send_one_way_request.unsafe_as(Proc(Void*, WSD_OPERATION*, HRESULT)).call(pbody, poperation)
+  def send_one_way_request(this : IWSDEndpointProxy*, pbody : Void*, poperation : WSD_OPERATION*) : HRESULT
+    @lpVtbl.value.send_one_way_request.call(this, pbody, poperation)
   end
-  def send_two_way_request(pbody : Void*, poperation : WSD_OPERATION*, presponsecontext : WSD_SYNCHRONOUS_RESPONSE_CONTEXT*) : HRESULT
-    @lpVtbl.value.send_two_way_request.unsafe_as(Proc(Void*, WSD_OPERATION*, WSD_SYNCHRONOUS_RESPONSE_CONTEXT*, HRESULT)).call(pbody, poperation, presponsecontext)
+  def send_two_way_request(this : IWSDEndpointProxy*, pbody : Void*, poperation : WSD_OPERATION*, presponsecontext : WSD_SYNCHRONOUS_RESPONSE_CONTEXT*) : HRESULT
+    @lpVtbl.value.send_two_way_request.call(this, pbody, poperation, presponsecontext)
   end
-  def send_two_way_request_async(pbody : Void*, poperation : WSD_OPERATION*, pasyncstate : IUnknown, pcallback : IWSDAsyncCallback, presult : IWSDAsyncResult*) : HRESULT
-    @lpVtbl.value.send_two_way_request_async.unsafe_as(Proc(Void*, WSD_OPERATION*, IUnknown, IWSDAsyncCallback, IWSDAsyncResult*, HRESULT)).call(pbody, poperation, pasyncstate, pcallback, presult)
+  def send_two_way_request_async(this : IWSDEndpointProxy*, pbody : Void*, poperation : WSD_OPERATION*, pasyncstate : IUnknown, pcallback : IWSDAsyncCallback, presult : IWSDAsyncResult*) : HRESULT
+    @lpVtbl.value.send_two_way_request_async.call(this, pbody, poperation, pasyncstate, pcallback, presult)
   end
-  def abort_async_operation(pasyncresult : IWSDAsyncResult) : HRESULT
-    @lpVtbl.value.abort_async_operation.unsafe_as(Proc(IWSDAsyncResult, HRESULT)).call(pasyncresult)
+  def abort_async_operation(this : IWSDEndpointProxy*, pasyncresult : IWSDAsyncResult) : HRESULT
+    @lpVtbl.value.abort_async_operation.call(this, pasyncresult)
   end
-  def process_fault(pfault : WSD_SOAP_FAULT*) : HRESULT
-    @lpVtbl.value.process_fault.unsafe_as(Proc(WSD_SOAP_FAULT*, HRESULT)).call(pfault)
+  def process_fault(this : IWSDEndpointProxy*, pfault : WSD_SOAP_FAULT*) : HRESULT
+    @lpVtbl.value.process_fault.call(this, pfault)
   end
-  def get_error_info(ppszerrorinfo : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_error_info.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszerrorinfo)
+  def get_error_info(this : IWSDEndpointProxy*, ppszerrorinfo : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_error_info.call(this, ppszerrorinfo)
   end
-  def get_fault_info(ppfault : WSD_SOAP_FAULT**) : HRESULT
-    @lpVtbl.value.get_fault_info.unsafe_as(Proc(WSD_SOAP_FAULT**, HRESULT)).call(ppfault)
+  def get_fault_info(this : IWSDEndpointProxy*, ppfault : WSD_SOAP_FAULT**) : HRESULT
+    @lpVtbl.value.get_fault_info.call(this, ppfault)
   end
 end
 struct LibWin32::IWSDMetadataExchange
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDMetadataExchange*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDMetadataExchange*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDMetadataExchange*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_metadata(metadataout : WSD_METADATA_SECTION_LIST**) : HRESULT
-    @lpVtbl.value.get_metadata.unsafe_as(Proc(WSD_METADATA_SECTION_LIST**, HRESULT)).call(metadataout)
+  def get_metadata(this : IWSDMetadataExchange*, metadataout : WSD_METADATA_SECTION_LIST**) : HRESULT
+    @lpVtbl.value.get_metadata.call(this, metadataout)
   end
 end
 struct LibWin32::IWSDServiceProxy
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDServiceProxy*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDServiceProxy*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDServiceProxy*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_metadata(metadataout : WSD_METADATA_SECTION_LIST**) : HRESULT
-    @lpVtbl.value.get_metadata.unsafe_as(Proc(WSD_METADATA_SECTION_LIST**, HRESULT)).call(metadataout)
+  def get_metadata(this : IWSDServiceProxy*, metadataout : WSD_METADATA_SECTION_LIST**) : HRESULT
+    @lpVtbl.value.get_metadata.call(this, metadataout)
   end
-  def begin_get_metadata(ppresult : IWSDAsyncResult*) : HRESULT
-    @lpVtbl.value.begin_get_metadata.unsafe_as(Proc(IWSDAsyncResult*, HRESULT)).call(ppresult)
+  def begin_get_metadata(this : IWSDServiceProxy*, ppresult : IWSDAsyncResult*) : HRESULT
+    @lpVtbl.value.begin_get_metadata.call(this, ppresult)
   end
-  def end_get_metadata(presult : IWSDAsyncResult, ppmetadata : WSD_METADATA_SECTION_LIST**) : HRESULT
-    @lpVtbl.value.end_get_metadata.unsafe_as(Proc(IWSDAsyncResult, WSD_METADATA_SECTION_LIST**, HRESULT)).call(presult, ppmetadata)
+  def end_get_metadata(this : IWSDServiceProxy*, presult : IWSDAsyncResult, ppmetadata : WSD_METADATA_SECTION_LIST**) : HRESULT
+    @lpVtbl.value.end_get_metadata.call(this, presult, ppmetadata)
   end
-  def get_service_metadata(ppservicemetadata : WSD_SERVICE_METADATA**) : HRESULT
-    @lpVtbl.value.get_service_metadata.unsafe_as(Proc(WSD_SERVICE_METADATA**, HRESULT)).call(ppservicemetadata)
+  def get_service_metadata(this : IWSDServiceProxy*, ppservicemetadata : WSD_SERVICE_METADATA**) : HRESULT
+    @lpVtbl.value.get_service_metadata.call(this, ppservicemetadata)
   end
-  def subscribe_to_operation(poperation : WSD_OPERATION*, punknown : IUnknown, pany : WSDXML_ELEMENT*, ppany : WSDXML_ELEMENT**) : HRESULT
-    @lpVtbl.value.subscribe_to_operation.unsafe_as(Proc(WSD_OPERATION*, IUnknown, WSDXML_ELEMENT*, WSDXML_ELEMENT**, HRESULT)).call(poperation, punknown, pany, ppany)
+  def subscribe_to_operation(this : IWSDServiceProxy*, poperation : WSD_OPERATION*, punknown : IUnknown, pany : WSDXML_ELEMENT*, ppany : WSDXML_ELEMENT**) : HRESULT
+    @lpVtbl.value.subscribe_to_operation.call(this, poperation, punknown, pany, ppany)
   end
-  def unsubscribe_to_operation(poperation : WSD_OPERATION*) : HRESULT
-    @lpVtbl.value.unsubscribe_to_operation.unsafe_as(Proc(WSD_OPERATION*, HRESULT)).call(poperation)
+  def unsubscribe_to_operation(this : IWSDServiceProxy*, poperation : WSD_OPERATION*) : HRESULT
+    @lpVtbl.value.unsubscribe_to_operation.call(this, poperation)
   end
-  def set_eventing_status_callback(pstatus : IWSDEventingStatus) : HRESULT
-    @lpVtbl.value.set_eventing_status_callback.unsafe_as(Proc(IWSDEventingStatus, HRESULT)).call(pstatus)
+  def set_eventing_status_callback(this : IWSDServiceProxy*, pstatus : IWSDEventingStatus) : HRESULT
+    @lpVtbl.value.set_eventing_status_callback.call(this, pstatus)
   end
-  def get_endpoint_proxy(ppproxy : IWSDEndpointProxy*) : HRESULT
-    @lpVtbl.value.get_endpoint_proxy.unsafe_as(Proc(IWSDEndpointProxy*, HRESULT)).call(ppproxy)
+  def get_endpoint_proxy(this : IWSDServiceProxy*, ppproxy : IWSDEndpointProxy*) : HRESULT
+    @lpVtbl.value.get_endpoint_proxy.call(this, ppproxy)
   end
 end
 struct LibWin32::IWSDServiceProxyEventing
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDServiceProxyEventing*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDServiceProxyEventing*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDServiceProxyEventing*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_metadata(metadataout : WSD_METADATA_SECTION_LIST**) : HRESULT
-    @lpVtbl.value.get_metadata.unsafe_as(Proc(WSD_METADATA_SECTION_LIST**, HRESULT)).call(metadataout)
+  def get_metadata(this : IWSDServiceProxyEventing*, metadataout : WSD_METADATA_SECTION_LIST**) : HRESULT
+    @lpVtbl.value.get_metadata.call(this, metadataout)
   end
-  def begin_get_metadata(ppresult : IWSDAsyncResult*) : HRESULT
-    @lpVtbl.value.begin_get_metadata.unsafe_as(Proc(IWSDAsyncResult*, HRESULT)).call(ppresult)
+  def begin_get_metadata(this : IWSDServiceProxyEventing*, ppresult : IWSDAsyncResult*) : HRESULT
+    @lpVtbl.value.begin_get_metadata.call(this, ppresult)
   end
-  def end_get_metadata(presult : IWSDAsyncResult, ppmetadata : WSD_METADATA_SECTION_LIST**) : HRESULT
-    @lpVtbl.value.end_get_metadata.unsafe_as(Proc(IWSDAsyncResult, WSD_METADATA_SECTION_LIST**, HRESULT)).call(presult, ppmetadata)
+  def end_get_metadata(this : IWSDServiceProxyEventing*, presult : IWSDAsyncResult, ppmetadata : WSD_METADATA_SECTION_LIST**) : HRESULT
+    @lpVtbl.value.end_get_metadata.call(this, presult, ppmetadata)
   end
-  def get_service_metadata(ppservicemetadata : WSD_SERVICE_METADATA**) : HRESULT
-    @lpVtbl.value.get_service_metadata.unsafe_as(Proc(WSD_SERVICE_METADATA**, HRESULT)).call(ppservicemetadata)
+  def get_service_metadata(this : IWSDServiceProxyEventing*, ppservicemetadata : WSD_SERVICE_METADATA**) : HRESULT
+    @lpVtbl.value.get_service_metadata.call(this, ppservicemetadata)
   end
-  def subscribe_to_operation(poperation : WSD_OPERATION*, punknown : IUnknown, pany : WSDXML_ELEMENT*, ppany : WSDXML_ELEMENT**) : HRESULT
-    @lpVtbl.value.subscribe_to_operation.unsafe_as(Proc(WSD_OPERATION*, IUnknown, WSDXML_ELEMENT*, WSDXML_ELEMENT**, HRESULT)).call(poperation, punknown, pany, ppany)
+  def subscribe_to_operation(this : IWSDServiceProxyEventing*, poperation : WSD_OPERATION*, punknown : IUnknown, pany : WSDXML_ELEMENT*, ppany : WSDXML_ELEMENT**) : HRESULT
+    @lpVtbl.value.subscribe_to_operation.call(this, poperation, punknown, pany, ppany)
   end
-  def unsubscribe_to_operation(poperation : WSD_OPERATION*) : HRESULT
-    @lpVtbl.value.unsubscribe_to_operation.unsafe_as(Proc(WSD_OPERATION*, HRESULT)).call(poperation)
+  def unsubscribe_to_operation(this : IWSDServiceProxyEventing*, poperation : WSD_OPERATION*) : HRESULT
+    @lpVtbl.value.unsubscribe_to_operation.call(this, poperation)
   end
-  def set_eventing_status_callback(pstatus : IWSDEventingStatus) : HRESULT
-    @lpVtbl.value.set_eventing_status_callback.unsafe_as(Proc(IWSDEventingStatus, HRESULT)).call(pstatus)
+  def set_eventing_status_callback(this : IWSDServiceProxyEventing*, pstatus : IWSDEventingStatus) : HRESULT
+    @lpVtbl.value.set_eventing_status_callback.call(this, pstatus)
   end
-  def get_endpoint_proxy(ppproxy : IWSDEndpointProxy*) : HRESULT
-    @lpVtbl.value.get_endpoint_proxy.unsafe_as(Proc(IWSDEndpointProxy*, HRESULT)).call(ppproxy)
+  def get_endpoint_proxy(this : IWSDServiceProxyEventing*, ppproxy : IWSDEndpointProxy*) : HRESULT
+    @lpVtbl.value.get_endpoint_proxy.call(this, ppproxy)
   end
-  def subscribe_to_multiple_operations(poperations : WSD_OPERATION*, dwoperationcount : UInt32, punknown : IUnknown, pexpires : WSD_EVENTING_EXPIRES*, pany : WSDXML_ELEMENT*, ppexpires : WSD_EVENTING_EXPIRES**, ppany : WSDXML_ELEMENT**) : HRESULT
-    @lpVtbl.value.subscribe_to_multiple_operations.unsafe_as(Proc(WSD_OPERATION*, UInt32, IUnknown, WSD_EVENTING_EXPIRES*, WSDXML_ELEMENT*, WSD_EVENTING_EXPIRES**, WSDXML_ELEMENT**, HRESULT)).call(poperations, dwoperationcount, punknown, pexpires, pany, ppexpires, ppany)
+  def subscribe_to_multiple_operations(this : IWSDServiceProxyEventing*, poperations : WSD_OPERATION*, dwoperationcount : UInt32, punknown : IUnknown, pexpires : WSD_EVENTING_EXPIRES*, pany : WSDXML_ELEMENT*, ppexpires : WSD_EVENTING_EXPIRES**, ppany : WSDXML_ELEMENT**) : HRESULT
+    @lpVtbl.value.subscribe_to_multiple_operations.call(this, poperations, dwoperationcount, punknown, pexpires, pany, ppexpires, ppany)
   end
-  def begin_subscribe_to_multiple_operations(poperations : WSD_OPERATION*, dwoperationcount : UInt32, punknown : IUnknown, pexpires : WSD_EVENTING_EXPIRES*, pany : WSDXML_ELEMENT*, pasyncstate : IUnknown, pasynccallback : IWSDAsyncCallback, ppresult : IWSDAsyncResult*) : HRESULT
-    @lpVtbl.value.begin_subscribe_to_multiple_operations.unsafe_as(Proc(WSD_OPERATION*, UInt32, IUnknown, WSD_EVENTING_EXPIRES*, WSDXML_ELEMENT*, IUnknown, IWSDAsyncCallback, IWSDAsyncResult*, HRESULT)).call(poperations, dwoperationcount, punknown, pexpires, pany, pasyncstate, pasynccallback, ppresult)
+  def begin_subscribe_to_multiple_operations(this : IWSDServiceProxyEventing*, poperations : WSD_OPERATION*, dwoperationcount : UInt32, punknown : IUnknown, pexpires : WSD_EVENTING_EXPIRES*, pany : WSDXML_ELEMENT*, pasyncstate : IUnknown, pasynccallback : IWSDAsyncCallback, ppresult : IWSDAsyncResult*) : HRESULT
+    @lpVtbl.value.begin_subscribe_to_multiple_operations.call(this, poperations, dwoperationcount, punknown, pexpires, pany, pasyncstate, pasynccallback, ppresult)
   end
-  def end_subscribe_to_multiple_operations(poperations : WSD_OPERATION*, dwoperationcount : UInt32, presult : IWSDAsyncResult, ppexpires : WSD_EVENTING_EXPIRES**, ppany : WSDXML_ELEMENT**) : HRESULT
-    @lpVtbl.value.end_subscribe_to_multiple_operations.unsafe_as(Proc(WSD_OPERATION*, UInt32, IWSDAsyncResult, WSD_EVENTING_EXPIRES**, WSDXML_ELEMENT**, HRESULT)).call(poperations, dwoperationcount, presult, ppexpires, ppany)
+  def end_subscribe_to_multiple_operations(this : IWSDServiceProxyEventing*, poperations : WSD_OPERATION*, dwoperationcount : UInt32, presult : IWSDAsyncResult, ppexpires : WSD_EVENTING_EXPIRES**, ppany : WSDXML_ELEMENT**) : HRESULT
+    @lpVtbl.value.end_subscribe_to_multiple_operations.call(this, poperations, dwoperationcount, presult, ppexpires, ppany)
   end
-  def unsubscribe_to_multiple_operations(poperations : WSD_OPERATION*, dwoperationcount : UInt32, pany : WSDXML_ELEMENT*) : HRESULT
-    @lpVtbl.value.unsubscribe_to_multiple_operations.unsafe_as(Proc(WSD_OPERATION*, UInt32, WSDXML_ELEMENT*, HRESULT)).call(poperations, dwoperationcount, pany)
+  def unsubscribe_to_multiple_operations(this : IWSDServiceProxyEventing*, poperations : WSD_OPERATION*, dwoperationcount : UInt32, pany : WSDXML_ELEMENT*) : HRESULT
+    @lpVtbl.value.unsubscribe_to_multiple_operations.call(this, poperations, dwoperationcount, pany)
   end
-  def begin_unsubscribe_to_multiple_operations(poperations : WSD_OPERATION*, dwoperationcount : UInt32, pany : WSDXML_ELEMENT*, pasyncstate : IUnknown, pasynccallback : IWSDAsyncCallback, ppresult : IWSDAsyncResult*) : HRESULT
-    @lpVtbl.value.begin_unsubscribe_to_multiple_operations.unsafe_as(Proc(WSD_OPERATION*, UInt32, WSDXML_ELEMENT*, IUnknown, IWSDAsyncCallback, IWSDAsyncResult*, HRESULT)).call(poperations, dwoperationcount, pany, pasyncstate, pasynccallback, ppresult)
+  def begin_unsubscribe_to_multiple_operations(this : IWSDServiceProxyEventing*, poperations : WSD_OPERATION*, dwoperationcount : UInt32, pany : WSDXML_ELEMENT*, pasyncstate : IUnknown, pasynccallback : IWSDAsyncCallback, ppresult : IWSDAsyncResult*) : HRESULT
+    @lpVtbl.value.begin_unsubscribe_to_multiple_operations.call(this, poperations, dwoperationcount, pany, pasyncstate, pasynccallback, ppresult)
   end
-  def end_unsubscribe_to_multiple_operations(poperations : WSD_OPERATION*, dwoperationcount : UInt32, presult : IWSDAsyncResult) : HRESULT
-    @lpVtbl.value.end_unsubscribe_to_multiple_operations.unsafe_as(Proc(WSD_OPERATION*, UInt32, IWSDAsyncResult, HRESULT)).call(poperations, dwoperationcount, presult)
+  def end_unsubscribe_to_multiple_operations(this : IWSDServiceProxyEventing*, poperations : WSD_OPERATION*, dwoperationcount : UInt32, presult : IWSDAsyncResult) : HRESULT
+    @lpVtbl.value.end_unsubscribe_to_multiple_operations.call(this, poperations, dwoperationcount, presult)
   end
-  def renew_multiple_operations(poperations : WSD_OPERATION*, dwoperationcount : UInt32, pexpires : WSD_EVENTING_EXPIRES*, pany : WSDXML_ELEMENT*, ppexpires : WSD_EVENTING_EXPIRES**, ppany : WSDXML_ELEMENT**) : HRESULT
-    @lpVtbl.value.renew_multiple_operations.unsafe_as(Proc(WSD_OPERATION*, UInt32, WSD_EVENTING_EXPIRES*, WSDXML_ELEMENT*, WSD_EVENTING_EXPIRES**, WSDXML_ELEMENT**, HRESULT)).call(poperations, dwoperationcount, pexpires, pany, ppexpires, ppany)
+  def renew_multiple_operations(this : IWSDServiceProxyEventing*, poperations : WSD_OPERATION*, dwoperationcount : UInt32, pexpires : WSD_EVENTING_EXPIRES*, pany : WSDXML_ELEMENT*, ppexpires : WSD_EVENTING_EXPIRES**, ppany : WSDXML_ELEMENT**) : HRESULT
+    @lpVtbl.value.renew_multiple_operations.call(this, poperations, dwoperationcount, pexpires, pany, ppexpires, ppany)
   end
-  def begin_renew_multiple_operations(poperations : WSD_OPERATION*, dwoperationcount : UInt32, pexpires : WSD_EVENTING_EXPIRES*, pany : WSDXML_ELEMENT*, pasyncstate : IUnknown, pasynccallback : IWSDAsyncCallback, ppresult : IWSDAsyncResult*) : HRESULT
-    @lpVtbl.value.begin_renew_multiple_operations.unsafe_as(Proc(WSD_OPERATION*, UInt32, WSD_EVENTING_EXPIRES*, WSDXML_ELEMENT*, IUnknown, IWSDAsyncCallback, IWSDAsyncResult*, HRESULT)).call(poperations, dwoperationcount, pexpires, pany, pasyncstate, pasynccallback, ppresult)
+  def begin_renew_multiple_operations(this : IWSDServiceProxyEventing*, poperations : WSD_OPERATION*, dwoperationcount : UInt32, pexpires : WSD_EVENTING_EXPIRES*, pany : WSDXML_ELEMENT*, pasyncstate : IUnknown, pasynccallback : IWSDAsyncCallback, ppresult : IWSDAsyncResult*) : HRESULT
+    @lpVtbl.value.begin_renew_multiple_operations.call(this, poperations, dwoperationcount, pexpires, pany, pasyncstate, pasynccallback, ppresult)
   end
-  def end_renew_multiple_operations(poperations : WSD_OPERATION*, dwoperationcount : UInt32, presult : IWSDAsyncResult, ppexpires : WSD_EVENTING_EXPIRES**, ppany : WSDXML_ELEMENT**) : HRESULT
-    @lpVtbl.value.end_renew_multiple_operations.unsafe_as(Proc(WSD_OPERATION*, UInt32, IWSDAsyncResult, WSD_EVENTING_EXPIRES**, WSDXML_ELEMENT**, HRESULT)).call(poperations, dwoperationcount, presult, ppexpires, ppany)
+  def end_renew_multiple_operations(this : IWSDServiceProxyEventing*, poperations : WSD_OPERATION*, dwoperationcount : UInt32, presult : IWSDAsyncResult, ppexpires : WSD_EVENTING_EXPIRES**, ppany : WSDXML_ELEMENT**) : HRESULT
+    @lpVtbl.value.end_renew_multiple_operations.call(this, poperations, dwoperationcount, presult, ppexpires, ppany)
   end
-  def get_status_for_multiple_operations(poperations : WSD_OPERATION*, dwoperationcount : UInt32, pany : WSDXML_ELEMENT*, ppexpires : WSD_EVENTING_EXPIRES**, ppany : WSDXML_ELEMENT**) : HRESULT
-    @lpVtbl.value.get_status_for_multiple_operations.unsafe_as(Proc(WSD_OPERATION*, UInt32, WSDXML_ELEMENT*, WSD_EVENTING_EXPIRES**, WSDXML_ELEMENT**, HRESULT)).call(poperations, dwoperationcount, pany, ppexpires, ppany)
+  def get_status_for_multiple_operations(this : IWSDServiceProxyEventing*, poperations : WSD_OPERATION*, dwoperationcount : UInt32, pany : WSDXML_ELEMENT*, ppexpires : WSD_EVENTING_EXPIRES**, ppany : WSDXML_ELEMENT**) : HRESULT
+    @lpVtbl.value.get_status_for_multiple_operations.call(this, poperations, dwoperationcount, pany, ppexpires, ppany)
   end
-  def begin_get_status_for_multiple_operations(poperations : WSD_OPERATION*, dwoperationcount : UInt32, pany : WSDXML_ELEMENT*, pasyncstate : IUnknown, pasynccallback : IWSDAsyncCallback, ppresult : IWSDAsyncResult*) : HRESULT
-    @lpVtbl.value.begin_get_status_for_multiple_operations.unsafe_as(Proc(WSD_OPERATION*, UInt32, WSDXML_ELEMENT*, IUnknown, IWSDAsyncCallback, IWSDAsyncResult*, HRESULT)).call(poperations, dwoperationcount, pany, pasyncstate, pasynccallback, ppresult)
+  def begin_get_status_for_multiple_operations(this : IWSDServiceProxyEventing*, poperations : WSD_OPERATION*, dwoperationcount : UInt32, pany : WSDXML_ELEMENT*, pasyncstate : IUnknown, pasynccallback : IWSDAsyncCallback, ppresult : IWSDAsyncResult*) : HRESULT
+    @lpVtbl.value.begin_get_status_for_multiple_operations.call(this, poperations, dwoperationcount, pany, pasyncstate, pasynccallback, ppresult)
   end
-  def end_get_status_for_multiple_operations(poperations : WSD_OPERATION*, dwoperationcount : UInt32, presult : IWSDAsyncResult, ppexpires : WSD_EVENTING_EXPIRES**, ppany : WSDXML_ELEMENT**) : HRESULT
-    @lpVtbl.value.end_get_status_for_multiple_operations.unsafe_as(Proc(WSD_OPERATION*, UInt32, IWSDAsyncResult, WSD_EVENTING_EXPIRES**, WSDXML_ELEMENT**, HRESULT)).call(poperations, dwoperationcount, presult, ppexpires, ppany)
+  def end_get_status_for_multiple_operations(this : IWSDServiceProxyEventing*, poperations : WSD_OPERATION*, dwoperationcount : UInt32, presult : IWSDAsyncResult, ppexpires : WSD_EVENTING_EXPIRES**, ppany : WSDXML_ELEMENT**) : HRESULT
+    @lpVtbl.value.end_get_status_for_multiple_operations.call(this, poperations, dwoperationcount, presult, ppexpires, ppany)
   end
 end
 struct LibWin32::IWSDDeviceProxy
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDDeviceProxy*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDDeviceProxy*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDDeviceProxy*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def init(pszdeviceid : LibC::LPWSTR, pdeviceaddress : IWSDAddress, pszlocalid : LibC::LPWSTR, pcontext : IWSDXMLContext, psponsor : IWSDDeviceProxy) : HRESULT
-    @lpVtbl.value.init.unsafe_as(Proc(LibC::LPWSTR, IWSDAddress, LibC::LPWSTR, IWSDXMLContext, IWSDDeviceProxy, HRESULT)).call(pszdeviceid, pdeviceaddress, pszlocalid, pcontext, psponsor)
+  def init(this : IWSDDeviceProxy*, pszdeviceid : LibC::LPWSTR, pdeviceaddress : IWSDAddress, pszlocalid : LibC::LPWSTR, pcontext : IWSDXMLContext, psponsor : IWSDDeviceProxy) : HRESULT
+    @lpVtbl.value.init.call(this, pszdeviceid, pdeviceaddress, pszlocalid, pcontext, psponsor)
   end
-  def begin_get_metadata(ppresult : IWSDAsyncResult*) : HRESULT
-    @lpVtbl.value.begin_get_metadata.unsafe_as(Proc(IWSDAsyncResult*, HRESULT)).call(ppresult)
+  def begin_get_metadata(this : IWSDDeviceProxy*, ppresult : IWSDAsyncResult*) : HRESULT
+    @lpVtbl.value.begin_get_metadata.call(this, ppresult)
   end
-  def end_get_metadata(presult : IWSDAsyncResult) : HRESULT
-    @lpVtbl.value.end_get_metadata.unsafe_as(Proc(IWSDAsyncResult, HRESULT)).call(presult)
+  def end_get_metadata(this : IWSDDeviceProxy*, presult : IWSDAsyncResult) : HRESULT
+    @lpVtbl.value.end_get_metadata.call(this, presult)
   end
-  def get_host_metadata(pphostmetadata : WSD_HOST_METADATA**) : HRESULT
-    @lpVtbl.value.get_host_metadata.unsafe_as(Proc(WSD_HOST_METADATA**, HRESULT)).call(pphostmetadata)
+  def get_host_metadata(this : IWSDDeviceProxy*, pphostmetadata : WSD_HOST_METADATA**) : HRESULT
+    @lpVtbl.value.get_host_metadata.call(this, pphostmetadata)
   end
-  def get_this_model_metadata(ppmanufacturermetadata : WSD_THIS_MODEL_METADATA**) : HRESULT
-    @lpVtbl.value.get_this_model_metadata.unsafe_as(Proc(WSD_THIS_MODEL_METADATA**, HRESULT)).call(ppmanufacturermetadata)
+  def get_this_model_metadata(this : IWSDDeviceProxy*, ppmanufacturermetadata : WSD_THIS_MODEL_METADATA**) : HRESULT
+    @lpVtbl.value.get_this_model_metadata.call(this, ppmanufacturermetadata)
   end
-  def get_this_device_metadata(ppthisdevicemetadata : WSD_THIS_DEVICE_METADATA**) : HRESULT
-    @lpVtbl.value.get_this_device_metadata.unsafe_as(Proc(WSD_THIS_DEVICE_METADATA**, HRESULT)).call(ppthisdevicemetadata)
+  def get_this_device_metadata(this : IWSDDeviceProxy*, ppthisdevicemetadata : WSD_THIS_DEVICE_METADATA**) : HRESULT
+    @lpVtbl.value.get_this_device_metadata.call(this, ppthisdevicemetadata)
   end
-  def get_all_metadata(ppmetadata : WSD_METADATA_SECTION_LIST**) : HRESULT
-    @lpVtbl.value.get_all_metadata.unsafe_as(Proc(WSD_METADATA_SECTION_LIST**, HRESULT)).call(ppmetadata)
+  def get_all_metadata(this : IWSDDeviceProxy*, ppmetadata : WSD_METADATA_SECTION_LIST**) : HRESULT
+    @lpVtbl.value.get_all_metadata.call(this, ppmetadata)
   end
-  def get_service_proxy_by_id(pszserviceid : LibC::LPWSTR, ppserviceproxy : IWSDServiceProxy*) : HRESULT
-    @lpVtbl.value.get_service_proxy_by_id.unsafe_as(Proc(LibC::LPWSTR, IWSDServiceProxy*, HRESULT)).call(pszserviceid, ppserviceproxy)
+  def get_service_proxy_by_id(this : IWSDDeviceProxy*, pszserviceid : LibC::LPWSTR, ppserviceproxy : IWSDServiceProxy*) : HRESULT
+    @lpVtbl.value.get_service_proxy_by_id.call(this, pszserviceid, ppserviceproxy)
   end
-  def get_service_proxy_by_type(ptype : WSDXML_NAME*, ppserviceproxy : IWSDServiceProxy*) : HRESULT
-    @lpVtbl.value.get_service_proxy_by_type.unsafe_as(Proc(WSDXML_NAME*, IWSDServiceProxy*, HRESULT)).call(ptype, ppserviceproxy)
+  def get_service_proxy_by_type(this : IWSDDeviceProxy*, ptype : WSDXML_NAME*, ppserviceproxy : IWSDServiceProxy*) : HRESULT
+    @lpVtbl.value.get_service_proxy_by_type.call(this, ptype, ppserviceproxy)
   end
-  def get_endpoint_proxy(ppproxy : IWSDEndpointProxy*) : HRESULT
-    @lpVtbl.value.get_endpoint_proxy.unsafe_as(Proc(IWSDEndpointProxy*, HRESULT)).call(ppproxy)
+  def get_endpoint_proxy(this : IWSDDeviceProxy*, ppproxy : IWSDEndpointProxy*) : HRESULT
+    @lpVtbl.value.get_endpoint_proxy.call(this, ppproxy)
   end
 end
 struct LibWin32::IWSDAsyncResult
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDAsyncResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDAsyncResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDAsyncResult*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_callback(pcallback : IWSDAsyncCallback, pasyncstate : IUnknown) : HRESULT
-    @lpVtbl.value.set_callback.unsafe_as(Proc(IWSDAsyncCallback, IUnknown, HRESULT)).call(pcallback, pasyncstate)
+  def set_callback(this : IWSDAsyncResult*, pcallback : IWSDAsyncCallback, pasyncstate : IUnknown) : HRESULT
+    @lpVtbl.value.set_callback.call(this, pcallback, pasyncstate)
   end
-  def set_wait_handle(hwaithandle : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.set_wait_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hwaithandle)
+  def set_wait_handle(this : IWSDAsyncResult*, hwaithandle : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_wait_handle.call(this, hwaithandle)
   end
-  def has_completed : HRESULT
-    @lpVtbl.value.has_completed.unsafe_as(Proc(HRESULT)).call
+  def has_completed(this : IWSDAsyncResult*) : HRESULT
+    @lpVtbl.value.has_completed.call(this)
   end
-  def get_async_state(ppasyncstate : IUnknown*) : HRESULT
-    @lpVtbl.value.get_async_state.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppasyncstate)
+  def get_async_state(this : IWSDAsyncResult*, ppasyncstate : IUnknown*) : HRESULT
+    @lpVtbl.value.get_async_state.call(this, ppasyncstate)
   end
-  def abort : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(HRESULT)).call
+  def abort(this : IWSDAsyncResult*) : HRESULT
+    @lpVtbl.value.abort.call(this)
   end
-  def get_event(pevent : WSD_EVENT*) : HRESULT
-    @lpVtbl.value.get_event.unsafe_as(Proc(WSD_EVENT*, HRESULT)).call(pevent)
+  def get_event(this : IWSDAsyncResult*, pevent : WSD_EVENT*) : HRESULT
+    @lpVtbl.value.get_event.call(this, pevent)
   end
-  def get_endpoint_proxy(ppendpoint : IWSDEndpointProxy*) : HRESULT
-    @lpVtbl.value.get_endpoint_proxy.unsafe_as(Proc(IWSDEndpointProxy*, HRESULT)).call(ppendpoint)
+  def get_endpoint_proxy(this : IWSDAsyncResult*, ppendpoint : IWSDEndpointProxy*) : HRESULT
+    @lpVtbl.value.get_endpoint_proxy.call(this, ppendpoint)
   end
 end
 struct LibWin32::IWSDAsyncCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDAsyncCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDAsyncCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDAsyncCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def async_operation_complete(pasyncresult : IWSDAsyncResult, pasyncstate : IUnknown) : HRESULT
-    @lpVtbl.value.async_operation_complete.unsafe_as(Proc(IWSDAsyncResult, IUnknown, HRESULT)).call(pasyncresult, pasyncstate)
+  def async_operation_complete(this : IWSDAsyncCallback*, pasyncresult : IWSDAsyncResult, pasyncstate : IUnknown) : HRESULT
+    @lpVtbl.value.async_operation_complete.call(this, pasyncresult, pasyncstate)
   end
 end
 struct LibWin32::IWSDEventingStatus
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDEventingStatus*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDEventingStatus*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDEventingStatus*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def subscription_renewed(pszsubscriptionaction : LibC::LPWSTR) : Void
-    @lpVtbl.value.subscription_renewed.unsafe_as(Proc(LibC::LPWSTR, Void)).call(pszsubscriptionaction)
+  def subscription_renewed(this : IWSDEventingStatus*, pszsubscriptionaction : LibC::LPWSTR) : Void
+    @lpVtbl.value.subscription_renewed.call(this, pszsubscriptionaction)
   end
-  def subscription_renewal_failed(pszsubscriptionaction : LibC::LPWSTR, hr : HRESULT) : Void
-    @lpVtbl.value.subscription_renewal_failed.unsafe_as(Proc(LibC::LPWSTR, HRESULT, Void)).call(pszsubscriptionaction, hr)
+  def subscription_renewal_failed(this : IWSDEventingStatus*, pszsubscriptionaction : LibC::LPWSTR, hr : HRESULT) : Void
+    @lpVtbl.value.subscription_renewal_failed.call(this, pszsubscriptionaction, hr)
   end
-  def subscription_ended(pszsubscriptionaction : LibC::LPWSTR) : Void
-    @lpVtbl.value.subscription_ended.unsafe_as(Proc(LibC::LPWSTR, Void)).call(pszsubscriptionaction)
+  def subscription_ended(this : IWSDEventingStatus*, pszsubscriptionaction : LibC::LPWSTR) : Void
+    @lpVtbl.value.subscription_ended.call(this, pszsubscriptionaction)
   end
 end
 struct LibWin32::IWSDDeviceHost
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDDeviceHost*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDDeviceHost*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDDeviceHost*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def init(pszlocalid : LibC::LPWSTR, pcontext : IWSDXMLContext, pphostaddresses : IWSDAddress*, dwhostaddresscount : UInt32) : HRESULT
-    @lpVtbl.value.init.unsafe_as(Proc(LibC::LPWSTR, IWSDXMLContext, IWSDAddress*, UInt32, HRESULT)).call(pszlocalid, pcontext, pphostaddresses, dwhostaddresscount)
+  def init(this : IWSDDeviceHost*, pszlocalid : LibC::LPWSTR, pcontext : IWSDXMLContext, pphostaddresses : IWSDAddress*, dwhostaddresscount : UInt32) : HRESULT
+    @lpVtbl.value.init.call(this, pszlocalid, pcontext, pphostaddresses, dwhostaddresscount)
   end
-  def start(ullinstanceid : UInt64, pscopelist : WSD_URI_LIST*, pnotificationsink : IWSDDeviceHostNotify) : HRESULT
-    @lpVtbl.value.start.unsafe_as(Proc(UInt64, WSD_URI_LIST*, IWSDDeviceHostNotify, HRESULT)).call(ullinstanceid, pscopelist, pnotificationsink)
+  def start(this : IWSDDeviceHost*, ullinstanceid : UInt64, pscopelist : WSD_URI_LIST*, pnotificationsink : IWSDDeviceHostNotify) : HRESULT
+    @lpVtbl.value.start.call(this, ullinstanceid, pscopelist, pnotificationsink)
   end
-  def stop : HRESULT
-    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  def stop(this : IWSDDeviceHost*) : HRESULT
+    @lpVtbl.value.stop.call(this)
   end
-  def terminate : HRESULT
-    @lpVtbl.value.terminate.unsafe_as(Proc(HRESULT)).call
+  def terminate(this : IWSDDeviceHost*) : HRESULT
+    @lpVtbl.value.terminate.call(this)
   end
-  def register_port_type(pporttype : WSD_PORT_TYPE*) : HRESULT
-    @lpVtbl.value.register_port_type.unsafe_as(Proc(WSD_PORT_TYPE*, HRESULT)).call(pporttype)
+  def register_port_type(this : IWSDDeviceHost*, pporttype : WSD_PORT_TYPE*) : HRESULT
+    @lpVtbl.value.register_port_type.call(this, pporttype)
   end
-  def set_metadata(pthismodelmetadata : WSD_THIS_MODEL_METADATA*, pthisdevicemetadata : WSD_THIS_DEVICE_METADATA*, phostmetadata : WSD_HOST_METADATA*, pcustommetadata : WSD_METADATA_SECTION_LIST*) : HRESULT
-    @lpVtbl.value.set_metadata.unsafe_as(Proc(WSD_THIS_MODEL_METADATA*, WSD_THIS_DEVICE_METADATA*, WSD_HOST_METADATA*, WSD_METADATA_SECTION_LIST*, HRESULT)).call(pthismodelmetadata, pthisdevicemetadata, phostmetadata, pcustommetadata)
+  def set_metadata(this : IWSDDeviceHost*, pthismodelmetadata : WSD_THIS_MODEL_METADATA*, pthisdevicemetadata : WSD_THIS_DEVICE_METADATA*, phostmetadata : WSD_HOST_METADATA*, pcustommetadata : WSD_METADATA_SECTION_LIST*) : HRESULT
+    @lpVtbl.value.set_metadata.call(this, pthismodelmetadata, pthisdevicemetadata, phostmetadata, pcustommetadata)
   end
-  def register_service(pszserviceid : LibC::LPWSTR, pservice : IUnknown) : HRESULT
-    @lpVtbl.value.register_service.unsafe_as(Proc(LibC::LPWSTR, IUnknown, HRESULT)).call(pszserviceid, pservice)
+  def register_service(this : IWSDDeviceHost*, pszserviceid : LibC::LPWSTR, pservice : IUnknown) : HRESULT
+    @lpVtbl.value.register_service.call(this, pszserviceid, pservice)
   end
-  def retire_service(pszserviceid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.retire_service.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszserviceid)
+  def retire_service(this : IWSDDeviceHost*, pszserviceid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.retire_service.call(this, pszserviceid)
   end
-  def add_dynamic_service(pszserviceid : LibC::LPWSTR, pszendpointaddress : LibC::LPWSTR, pporttype : WSD_PORT_TYPE*, pportname : WSDXML_NAME*, pany : WSDXML_ELEMENT*, pservice : IUnknown) : HRESULT
-    @lpVtbl.value.add_dynamic_service.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, WSD_PORT_TYPE*, WSDXML_NAME*, WSDXML_ELEMENT*, IUnknown, HRESULT)).call(pszserviceid, pszendpointaddress, pporttype, pportname, pany, pservice)
+  def add_dynamic_service(this : IWSDDeviceHost*, pszserviceid : LibC::LPWSTR, pszendpointaddress : LibC::LPWSTR, pporttype : WSD_PORT_TYPE*, pportname : WSDXML_NAME*, pany : WSDXML_ELEMENT*, pservice : IUnknown) : HRESULT
+    @lpVtbl.value.add_dynamic_service.call(this, pszserviceid, pszendpointaddress, pporttype, pportname, pany, pservice)
   end
-  def remove_dynamic_service(pszserviceid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.remove_dynamic_service.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszserviceid)
+  def remove_dynamic_service(this : IWSDDeviceHost*, pszserviceid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove_dynamic_service.call(this, pszserviceid)
   end
-  def set_service_discoverable(pszserviceid : LibC::LPWSTR, fdiscoverable : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_service_discoverable.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL, HRESULT)).call(pszserviceid, fdiscoverable)
+  def set_service_discoverable(this : IWSDDeviceHost*, pszserviceid : LibC::LPWSTR, fdiscoverable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_service_discoverable.call(this, pszserviceid, fdiscoverable)
   end
-  def signal_event(pszserviceid : LibC::LPWSTR, pbody : Void*, poperation : WSD_OPERATION*) : HRESULT
-    @lpVtbl.value.signal_event.unsafe_as(Proc(LibC::LPWSTR, Void*, WSD_OPERATION*, HRESULT)).call(pszserviceid, pbody, poperation)
+  def signal_event(this : IWSDDeviceHost*, pszserviceid : LibC::LPWSTR, pbody : Void*, poperation : WSD_OPERATION*) : HRESULT
+    @lpVtbl.value.signal_event.call(this, pszserviceid, pbody, poperation)
   end
 end
 struct LibWin32::IWSDDeviceHostNotify
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDDeviceHostNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDDeviceHostNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDDeviceHostNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_service(pszserviceid : LibC::LPWSTR, ppservice : IUnknown*) : HRESULT
-    @lpVtbl.value.get_service.unsafe_as(Proc(LibC::LPWSTR, IUnknown*, HRESULT)).call(pszserviceid, ppservice)
+  def get_service(this : IWSDDeviceHostNotify*, pszserviceid : LibC::LPWSTR, ppservice : IUnknown*) : HRESULT
+    @lpVtbl.value.get_service.call(this, pszserviceid, ppservice)
   end
 end
 struct LibWin32::IWSDServiceMessaging
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSDServiceMessaging*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSDServiceMessaging*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSDServiceMessaging*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def send_response(pbody : Void*, poperation : WSD_OPERATION*, pmessageparameters : IWSDMessageParameters) : HRESULT
-    @lpVtbl.value.send_response.unsafe_as(Proc(Void*, WSD_OPERATION*, IWSDMessageParameters, HRESULT)).call(pbody, poperation, pmessageparameters)
+  def send_response(this : IWSDServiceMessaging*, pbody : Void*, poperation : WSD_OPERATION*, pmessageparameters : IWSDMessageParameters) : HRESULT
+    @lpVtbl.value.send_response.call(this, pbody, poperation, pmessageparameters)
   end
-  def fault_request(prequestheader : WSD_SOAP_HEADER*, pmessageparameters : IWSDMessageParameters, pfault : WSD_SOAP_FAULT*) : HRESULT
-    @lpVtbl.value.fault_request.unsafe_as(Proc(WSD_SOAP_HEADER*, IWSDMessageParameters, WSD_SOAP_FAULT*, HRESULT)).call(prequestheader, pmessageparameters, pfault)
+  def fault_request(this : IWSDServiceMessaging*, prequestheader : WSD_SOAP_HEADER*, pmessageparameters : IWSDMessageParameters, pfault : WSD_SOAP_FAULT*) : HRESULT
+    @lpVtbl.value.fault_request.call(this, prequestheader, pmessageparameters, pfault)
   end
 end

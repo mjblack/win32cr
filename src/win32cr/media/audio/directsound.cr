@@ -542,17 +542,17 @@ lib LibWin32
 
 
   struct IDirectSoundVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_sound_buffer : UInt64
-    get_caps : UInt64
-    duplicate_sound_buffer : UInt64
-    set_cooperative_level : UInt64
-    compact : UInt64
-    get_speaker_config : UInt64
-    set_speaker_config : UInt64
-    initialize : UInt64
+    query_interface : Proc(IDirectSound*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSound*, UInt32)
+    release : Proc(IDirectSound*, UInt32)
+    create_sound_buffer : Proc(IDirectSound*, DSBUFFERDESC*, IDirectSoundBuffer*, IUnknown, HRESULT)
+    get_caps : Proc(IDirectSound*, DSCAPS*, HRESULT)
+    duplicate_sound_buffer : Proc(IDirectSound*, IDirectSoundBuffer, IDirectSoundBuffer*, HRESULT)
+    set_cooperative_level : Proc(IDirectSound*, LibC::HANDLE, UInt32, HRESULT)
+    compact : Proc(IDirectSound*, HRESULT)
+    get_speaker_config : Proc(IDirectSound*, UInt32*, HRESULT)
+    set_speaker_config : Proc(IDirectSound*, UInt32, HRESULT)
+    initialize : Proc(IDirectSound*, Guid*, HRESULT)
   end
 
   IDirectSound_GUID = "279afa83-4981-11ce-a521-0020af0be560"
@@ -562,18 +562,18 @@ lib LibWin32
   end
 
   struct IDirectSound8VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_sound_buffer : UInt64
-    get_caps : UInt64
-    duplicate_sound_buffer : UInt64
-    set_cooperative_level : UInt64
-    compact : UInt64
-    get_speaker_config : UInt64
-    set_speaker_config : UInt64
-    initialize : UInt64
-    verify_certification : UInt64
+    query_interface : Proc(IDirectSound8*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSound8*, UInt32)
+    release : Proc(IDirectSound8*, UInt32)
+    create_sound_buffer : Proc(IDirectSound8*, DSBUFFERDESC*, IDirectSoundBuffer*, IUnknown, HRESULT)
+    get_caps : Proc(IDirectSound8*, DSCAPS*, HRESULT)
+    duplicate_sound_buffer : Proc(IDirectSound8*, IDirectSoundBuffer, IDirectSoundBuffer*, HRESULT)
+    set_cooperative_level : Proc(IDirectSound8*, LibC::HANDLE, UInt32, HRESULT)
+    compact : Proc(IDirectSound8*, HRESULT)
+    get_speaker_config : Proc(IDirectSound8*, UInt32*, HRESULT)
+    set_speaker_config : Proc(IDirectSound8*, UInt32, HRESULT)
+    initialize : Proc(IDirectSound8*, Guid*, HRESULT)
+    verify_certification : Proc(IDirectSound8*, UInt32*, HRESULT)
   end
 
   IDirectSound8_GUID = "c50a7e93-f395-4834-9ef6-7fa99de50966"
@@ -583,27 +583,27 @@ lib LibWin32
   end
 
   struct IDirectSoundBufferVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_caps : UInt64
-    get_current_position : UInt64
-    get_format : UInt64
-    get_volume : UInt64
-    get_pan : UInt64
-    get_frequency : UInt64
-    get_status : UInt64
-    initialize : UInt64
-    lock : UInt64
-    play : UInt64
-    set_current_position : UInt64
-    set_format : UInt64
-    set_volume : UInt64
-    set_pan : UInt64
-    set_frequency : UInt64
-    stop : UInt64
-    unlock : UInt64
-    restore : UInt64
+    query_interface : Proc(IDirectSoundBuffer*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSoundBuffer*, UInt32)
+    release : Proc(IDirectSoundBuffer*, UInt32)
+    get_caps : Proc(IDirectSoundBuffer*, DSBCAPS*, HRESULT)
+    get_current_position : Proc(IDirectSoundBuffer*, UInt32*, UInt32*, HRESULT)
+    get_format : Proc(IDirectSoundBuffer*, WAVEFORMATEX*, UInt32, UInt32*, HRESULT)
+    get_volume : Proc(IDirectSoundBuffer*, Int32*, HRESULT)
+    get_pan : Proc(IDirectSoundBuffer*, Int32*, HRESULT)
+    get_frequency : Proc(IDirectSoundBuffer*, UInt32*, HRESULT)
+    get_status : Proc(IDirectSoundBuffer*, UInt32*, HRESULT)
+    initialize : Proc(IDirectSoundBuffer*, IDirectSound, DSBUFFERDESC*, HRESULT)
+    lock : Proc(IDirectSoundBuffer*, UInt32, UInt32, Void**, UInt32*, Void**, UInt32*, UInt32, HRESULT)
+    play : Proc(IDirectSoundBuffer*, UInt32, UInt32, UInt32, HRESULT)
+    set_current_position : Proc(IDirectSoundBuffer*, UInt32, HRESULT)
+    set_format : Proc(IDirectSoundBuffer*, WAVEFORMATEX*, HRESULT)
+    set_volume : Proc(IDirectSoundBuffer*, Int32, HRESULT)
+    set_pan : Proc(IDirectSoundBuffer*, Int32, HRESULT)
+    set_frequency : Proc(IDirectSoundBuffer*, UInt32, HRESULT)
+    stop : Proc(IDirectSoundBuffer*, HRESULT)
+    unlock : Proc(IDirectSoundBuffer*, Void*, UInt32, Void*, UInt32, HRESULT)
+    restore : Proc(IDirectSoundBuffer*, HRESULT)
   end
 
   IDirectSoundBuffer_GUID = "279afa85-4981-11ce-a521-0020af0be560"
@@ -613,30 +613,30 @@ lib LibWin32
   end
 
   struct IDirectSoundBuffer8VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_caps : UInt64
-    get_current_position : UInt64
-    get_format : UInt64
-    get_volume : UInt64
-    get_pan : UInt64
-    get_frequency : UInt64
-    get_status : UInt64
-    initialize : UInt64
-    lock : UInt64
-    play : UInt64
-    set_current_position : UInt64
-    set_format : UInt64
-    set_volume : UInt64
-    set_pan : UInt64
-    set_frequency : UInt64
-    stop : UInt64
-    unlock : UInt64
-    restore : UInt64
-    set_fx : UInt64
-    acquire_resources : UInt64
-    get_object_in_path : UInt64
+    query_interface : Proc(IDirectSoundBuffer8*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSoundBuffer8*, UInt32)
+    release : Proc(IDirectSoundBuffer8*, UInt32)
+    get_caps : Proc(IDirectSoundBuffer8*, DSBCAPS*, HRESULT)
+    get_current_position : Proc(IDirectSoundBuffer8*, UInt32*, UInt32*, HRESULT)
+    get_format : Proc(IDirectSoundBuffer8*, WAVEFORMATEX*, UInt32, UInt32*, HRESULT)
+    get_volume : Proc(IDirectSoundBuffer8*, Int32*, HRESULT)
+    get_pan : Proc(IDirectSoundBuffer8*, Int32*, HRESULT)
+    get_frequency : Proc(IDirectSoundBuffer8*, UInt32*, HRESULT)
+    get_status : Proc(IDirectSoundBuffer8*, UInt32*, HRESULT)
+    initialize : Proc(IDirectSoundBuffer8*, IDirectSound, DSBUFFERDESC*, HRESULT)
+    lock : Proc(IDirectSoundBuffer8*, UInt32, UInt32, Void**, UInt32*, Void**, UInt32*, UInt32, HRESULT)
+    play : Proc(IDirectSoundBuffer8*, UInt32, UInt32, UInt32, HRESULT)
+    set_current_position : Proc(IDirectSoundBuffer8*, UInt32, HRESULT)
+    set_format : Proc(IDirectSoundBuffer8*, WAVEFORMATEX*, HRESULT)
+    set_volume : Proc(IDirectSoundBuffer8*, Int32, HRESULT)
+    set_pan : Proc(IDirectSoundBuffer8*, Int32, HRESULT)
+    set_frequency : Proc(IDirectSoundBuffer8*, UInt32, HRESULT)
+    stop : Proc(IDirectSoundBuffer8*, HRESULT)
+    unlock : Proc(IDirectSoundBuffer8*, Void*, UInt32, Void*, UInt32, HRESULT)
+    restore : Proc(IDirectSoundBuffer8*, HRESULT)
+    set_fx : Proc(IDirectSoundBuffer8*, UInt32, DSEFFECTDESC*, UInt32*, HRESULT)
+    acquire_resources : Proc(IDirectSoundBuffer8*, UInt32, UInt32, UInt32*, HRESULT)
+    get_object_in_path : Proc(IDirectSoundBuffer8*, Guid*, UInt32, Guid*, Void**, HRESULT)
   end
 
   IDirectSoundBuffer8_GUID = "6825a449-7524-4d82-920f-50e36ab3ab1e"
@@ -646,24 +646,24 @@ lib LibWin32
   end
 
   struct IDirectSound3DListenerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_all_parameters : UInt64
-    get_distance_factor : UInt64
-    get_doppler_factor : UInt64
-    get_orientation : UInt64
-    get_position : UInt64
-    get_rolloff_factor : UInt64
-    get_velocity : UInt64
-    set_all_parameters : UInt64
-    set_distance_factor : UInt64
-    set_doppler_factor : UInt64
-    set_orientation : UInt64
-    set_position : UInt64
-    set_rolloff_factor : UInt64
-    set_velocity : UInt64
-    commit_deferred_settings : UInt64
+    query_interface : Proc(IDirectSound3DListener*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSound3DListener*, UInt32)
+    release : Proc(IDirectSound3DListener*, UInt32)
+    get_all_parameters : Proc(IDirectSound3DListener*, DS3DLISTENER*, HRESULT)
+    get_distance_factor : Proc(IDirectSound3DListener*, Float32*, HRESULT)
+    get_doppler_factor : Proc(IDirectSound3DListener*, Float32*, HRESULT)
+    get_orientation : Proc(IDirectSound3DListener*, D3DVECTOR*, D3DVECTOR*, HRESULT)
+    get_position : Proc(IDirectSound3DListener*, D3DVECTOR*, HRESULT)
+    get_rolloff_factor : Proc(IDirectSound3DListener*, Float32*, HRESULT)
+    get_velocity : Proc(IDirectSound3DListener*, D3DVECTOR*, HRESULT)
+    set_all_parameters : Proc(IDirectSound3DListener*, DS3DLISTENER*, UInt32, HRESULT)
+    set_distance_factor : Proc(IDirectSound3DListener*, Float32, UInt32, HRESULT)
+    set_doppler_factor : Proc(IDirectSound3DListener*, Float32, UInt32, HRESULT)
+    set_orientation : Proc(IDirectSound3DListener*, Float32, Float32, Float32, Float32, Float32, Float32, UInt32, HRESULT)
+    set_position : Proc(IDirectSound3DListener*, Float32, Float32, Float32, UInt32, HRESULT)
+    set_rolloff_factor : Proc(IDirectSound3DListener*, Float32, UInt32, HRESULT)
+    set_velocity : Proc(IDirectSound3DListener*, Float32, Float32, Float32, UInt32, HRESULT)
+    commit_deferred_settings : Proc(IDirectSound3DListener*, HRESULT)
   end
 
   IDirectSound3DListener_GUID = "279afa84-4981-11ce-a521-0020af0be560"
@@ -673,27 +673,27 @@ lib LibWin32
   end
 
   struct IDirectSound3DBufferVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_all_parameters : UInt64
-    get_cone_angles : UInt64
-    get_cone_orientation : UInt64
-    get_cone_outside_volume : UInt64
-    get_max_distance : UInt64
-    get_min_distance : UInt64
-    get_mode : UInt64
-    get_position : UInt64
-    get_velocity : UInt64
-    set_all_parameters : UInt64
-    set_cone_angles : UInt64
-    set_cone_orientation : UInt64
-    set_cone_outside_volume : UInt64
-    set_max_distance : UInt64
-    set_min_distance : UInt64
-    set_mode : UInt64
-    set_position : UInt64
-    set_velocity : UInt64
+    query_interface : Proc(IDirectSound3DBuffer*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSound3DBuffer*, UInt32)
+    release : Proc(IDirectSound3DBuffer*, UInt32)
+    get_all_parameters : Proc(IDirectSound3DBuffer*, DS3DBUFFER*, HRESULT)
+    get_cone_angles : Proc(IDirectSound3DBuffer*, UInt32*, UInt32*, HRESULT)
+    get_cone_orientation : Proc(IDirectSound3DBuffer*, D3DVECTOR*, HRESULT)
+    get_cone_outside_volume : Proc(IDirectSound3DBuffer*, Int32*, HRESULT)
+    get_max_distance : Proc(IDirectSound3DBuffer*, Float32*, HRESULT)
+    get_min_distance : Proc(IDirectSound3DBuffer*, Float32*, HRESULT)
+    get_mode : Proc(IDirectSound3DBuffer*, UInt32*, HRESULT)
+    get_position : Proc(IDirectSound3DBuffer*, D3DVECTOR*, HRESULT)
+    get_velocity : Proc(IDirectSound3DBuffer*, D3DVECTOR*, HRESULT)
+    set_all_parameters : Proc(IDirectSound3DBuffer*, DS3DBUFFER*, UInt32, HRESULT)
+    set_cone_angles : Proc(IDirectSound3DBuffer*, UInt32, UInt32, UInt32, HRESULT)
+    set_cone_orientation : Proc(IDirectSound3DBuffer*, Float32, Float32, Float32, UInt32, HRESULT)
+    set_cone_outside_volume : Proc(IDirectSound3DBuffer*, Int32, UInt32, HRESULT)
+    set_max_distance : Proc(IDirectSound3DBuffer*, Float32, UInt32, HRESULT)
+    set_min_distance : Proc(IDirectSound3DBuffer*, Float32, UInt32, HRESULT)
+    set_mode : Proc(IDirectSound3DBuffer*, UInt32, UInt32, HRESULT)
+    set_position : Proc(IDirectSound3DBuffer*, Float32, Float32, Float32, UInt32, HRESULT)
+    set_velocity : Proc(IDirectSound3DBuffer*, Float32, Float32, Float32, UInt32, HRESULT)
   end
 
   IDirectSound3DBuffer_GUID = "279afa86-4981-11ce-a521-0020af0be560"
@@ -703,12 +703,12 @@ lib LibWin32
   end
 
   struct IDirectSoundCaptureVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_capture_buffer : UInt64
-    get_caps : UInt64
-    initialize : UInt64
+    query_interface : Proc(IDirectSoundCapture*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSoundCapture*, UInt32)
+    release : Proc(IDirectSoundCapture*, UInt32)
+    create_capture_buffer : Proc(IDirectSoundCapture*, DSCBUFFERDESC*, IDirectSoundCaptureBuffer*, IUnknown, HRESULT)
+    get_caps : Proc(IDirectSoundCapture*, DSCCAPS*, HRESULT)
+    initialize : Proc(IDirectSoundCapture*, Guid*, HRESULT)
   end
 
   IDirectSoundCapture_GUID = "b0210781-89cd-11d0-af08-00a0c925cd16"
@@ -718,18 +718,18 @@ lib LibWin32
   end
 
   struct IDirectSoundCaptureBufferVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_caps : UInt64
-    get_current_position : UInt64
-    get_format : UInt64
-    get_status : UInt64
-    initialize : UInt64
-    lock : UInt64
-    start : UInt64
-    stop : UInt64
-    unlock : UInt64
+    query_interface : Proc(IDirectSoundCaptureBuffer*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSoundCaptureBuffer*, UInt32)
+    release : Proc(IDirectSoundCaptureBuffer*, UInt32)
+    get_caps : Proc(IDirectSoundCaptureBuffer*, DSCBCAPS*, HRESULT)
+    get_current_position : Proc(IDirectSoundCaptureBuffer*, UInt32*, UInt32*, HRESULT)
+    get_format : Proc(IDirectSoundCaptureBuffer*, WAVEFORMATEX*, UInt32, UInt32*, HRESULT)
+    get_status : Proc(IDirectSoundCaptureBuffer*, UInt32*, HRESULT)
+    initialize : Proc(IDirectSoundCaptureBuffer*, IDirectSoundCapture, DSCBUFFERDESC*, HRESULT)
+    lock : Proc(IDirectSoundCaptureBuffer*, UInt32, UInt32, Void**, UInt32*, Void**, UInt32*, UInt32, HRESULT)
+    start : Proc(IDirectSoundCaptureBuffer*, UInt32, HRESULT)
+    stop : Proc(IDirectSoundCaptureBuffer*, HRESULT)
+    unlock : Proc(IDirectSoundCaptureBuffer*, Void*, UInt32, Void*, UInt32, HRESULT)
   end
 
   IDirectSoundCaptureBuffer_GUID = "b0210782-89cd-11d0-af08-00a0c925cd16"
@@ -739,20 +739,20 @@ lib LibWin32
   end
 
   struct IDirectSoundCaptureBuffer8VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_caps : UInt64
-    get_current_position : UInt64
-    get_format : UInt64
-    get_status : UInt64
-    initialize : UInt64
-    lock : UInt64
-    start : UInt64
-    stop : UInt64
-    unlock : UInt64
-    get_object_in_path : UInt64
-    get_fx_status : UInt64
+    query_interface : Proc(IDirectSoundCaptureBuffer8*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSoundCaptureBuffer8*, UInt32)
+    release : Proc(IDirectSoundCaptureBuffer8*, UInt32)
+    get_caps : Proc(IDirectSoundCaptureBuffer8*, DSCBCAPS*, HRESULT)
+    get_current_position : Proc(IDirectSoundCaptureBuffer8*, UInt32*, UInt32*, HRESULT)
+    get_format : Proc(IDirectSoundCaptureBuffer8*, WAVEFORMATEX*, UInt32, UInt32*, HRESULT)
+    get_status : Proc(IDirectSoundCaptureBuffer8*, UInt32*, HRESULT)
+    initialize : Proc(IDirectSoundCaptureBuffer8*, IDirectSoundCapture, DSCBUFFERDESC*, HRESULT)
+    lock : Proc(IDirectSoundCaptureBuffer8*, UInt32, UInt32, Void**, UInt32*, Void**, UInt32*, UInt32, HRESULT)
+    start : Proc(IDirectSoundCaptureBuffer8*, UInt32, HRESULT)
+    stop : Proc(IDirectSoundCaptureBuffer8*, HRESULT)
+    unlock : Proc(IDirectSoundCaptureBuffer8*, Void*, UInt32, Void*, UInt32, HRESULT)
+    get_object_in_path : Proc(IDirectSoundCaptureBuffer8*, Guid*, UInt32, Guid*, Void**, HRESULT)
+    get_fx_status : Proc(IDirectSoundCaptureBuffer8*, UInt32, UInt32*, HRESULT)
   end
 
   IDirectSoundCaptureBuffer8_GUID = "00990df4-0dbb-4872-833e-6d303e80aeb6"
@@ -762,10 +762,10 @@ lib LibWin32
   end
 
   struct IDirectSoundNotifyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_notification_positions : UInt64
+    query_interface : Proc(IDirectSoundNotify*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSoundNotify*, UInt32)
+    release : Proc(IDirectSoundNotify*, UInt32)
+    set_notification_positions : Proc(IDirectSoundNotify*, UInt32, DSBPOSITIONNOTIFY*, HRESULT)
   end
 
   IDirectSoundNotify_GUID = "b0210783-89cd-11d0-af08-00a0c925cd16"
@@ -775,11 +775,11 @@ lib LibWin32
   end
 
   struct IDirectSoundFXGargleVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_all_parameters : UInt64
-    get_all_parameters : UInt64
+    query_interface : Proc(IDirectSoundFXGargle*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSoundFXGargle*, UInt32)
+    release : Proc(IDirectSoundFXGargle*, UInt32)
+    set_all_parameters : Proc(IDirectSoundFXGargle*, DSFXGargle*, HRESULT)
+    get_all_parameters : Proc(IDirectSoundFXGargle*, DSFXGargle*, HRESULT)
   end
 
   IDirectSoundFXGargle_GUID = "d616f352-d622-11ce-aac5-0020af0b99a3"
@@ -789,11 +789,11 @@ lib LibWin32
   end
 
   struct IDirectSoundFXChorusVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_all_parameters : UInt64
-    get_all_parameters : UInt64
+    query_interface : Proc(IDirectSoundFXChorus*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSoundFXChorus*, UInt32)
+    release : Proc(IDirectSoundFXChorus*, UInt32)
+    set_all_parameters : Proc(IDirectSoundFXChorus*, DSFXChorus*, HRESULT)
+    get_all_parameters : Proc(IDirectSoundFXChorus*, DSFXChorus*, HRESULT)
   end
 
   IDirectSoundFXChorus_GUID = "880842e3-145f-43e6-a934-a71806e50547"
@@ -803,11 +803,11 @@ lib LibWin32
   end
 
   struct IDirectSoundFXFlangerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_all_parameters : UInt64
-    get_all_parameters : UInt64
+    query_interface : Proc(IDirectSoundFXFlanger*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSoundFXFlanger*, UInt32)
+    release : Proc(IDirectSoundFXFlanger*, UInt32)
+    set_all_parameters : Proc(IDirectSoundFXFlanger*, DSFXFlanger*, HRESULT)
+    get_all_parameters : Proc(IDirectSoundFXFlanger*, DSFXFlanger*, HRESULT)
   end
 
   IDirectSoundFXFlanger_GUID = "903e9878-2c92-4072-9b2c-ea68f5396783"
@@ -817,11 +817,11 @@ lib LibWin32
   end
 
   struct IDirectSoundFXEchoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_all_parameters : UInt64
-    get_all_parameters : UInt64
+    query_interface : Proc(IDirectSoundFXEcho*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSoundFXEcho*, UInt32)
+    release : Proc(IDirectSoundFXEcho*, UInt32)
+    set_all_parameters : Proc(IDirectSoundFXEcho*, DSFXEcho*, HRESULT)
+    get_all_parameters : Proc(IDirectSoundFXEcho*, DSFXEcho*, HRESULT)
   end
 
   IDirectSoundFXEcho_GUID = "8bd28edf-50db-4e92-a2bd-445488d1ed42"
@@ -831,11 +831,11 @@ lib LibWin32
   end
 
   struct IDirectSoundFXDistortionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_all_parameters : UInt64
-    get_all_parameters : UInt64
+    query_interface : Proc(IDirectSoundFXDistortion*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSoundFXDistortion*, UInt32)
+    release : Proc(IDirectSoundFXDistortion*, UInt32)
+    set_all_parameters : Proc(IDirectSoundFXDistortion*, DSFXDistortion*, HRESULT)
+    get_all_parameters : Proc(IDirectSoundFXDistortion*, DSFXDistortion*, HRESULT)
   end
 
   IDirectSoundFXDistortion_GUID = "8ecf4326-455f-4d8b-bda9-8d5d3e9e3e0b"
@@ -845,11 +845,11 @@ lib LibWin32
   end
 
   struct IDirectSoundFXCompressorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_all_parameters : UInt64
-    get_all_parameters : UInt64
+    query_interface : Proc(IDirectSoundFXCompressor*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSoundFXCompressor*, UInt32)
+    release : Proc(IDirectSoundFXCompressor*, UInt32)
+    set_all_parameters : Proc(IDirectSoundFXCompressor*, DSFXCompressor*, HRESULT)
+    get_all_parameters : Proc(IDirectSoundFXCompressor*, DSFXCompressor*, HRESULT)
   end
 
   IDirectSoundFXCompressor_GUID = "4bbd1154-62f6-4e2c-a15c-d3b6c417f7a0"
@@ -859,11 +859,11 @@ lib LibWin32
   end
 
   struct IDirectSoundFXParamEqVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_all_parameters : UInt64
-    get_all_parameters : UInt64
+    query_interface : Proc(IDirectSoundFXParamEq*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSoundFXParamEq*, UInt32)
+    release : Proc(IDirectSoundFXParamEq*, UInt32)
+    set_all_parameters : Proc(IDirectSoundFXParamEq*, DSFXParamEq*, HRESULT)
+    get_all_parameters : Proc(IDirectSoundFXParamEq*, DSFXParamEq*, HRESULT)
   end
 
   IDirectSoundFXParamEq_GUID = "c03ca9fe-fe90-4204-8078-82334cd177da"
@@ -873,15 +873,15 @@ lib LibWin32
   end
 
   struct IDirectSoundFXI3DL2ReverbVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_all_parameters : UInt64
-    get_all_parameters : UInt64
-    set_preset : UInt64
-    get_preset : UInt64
-    set_quality : UInt64
-    get_quality : UInt64
+    query_interface : Proc(IDirectSoundFXI3DL2Reverb*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSoundFXI3DL2Reverb*, UInt32)
+    release : Proc(IDirectSoundFXI3DL2Reverb*, UInt32)
+    set_all_parameters : Proc(IDirectSoundFXI3DL2Reverb*, DSFXI3DL2Reverb*, HRESULT)
+    get_all_parameters : Proc(IDirectSoundFXI3DL2Reverb*, DSFXI3DL2Reverb*, HRESULT)
+    set_preset : Proc(IDirectSoundFXI3DL2Reverb*, UInt32, HRESULT)
+    get_preset : Proc(IDirectSoundFXI3DL2Reverb*, UInt32*, HRESULT)
+    set_quality : Proc(IDirectSoundFXI3DL2Reverb*, Int32, HRESULT)
+    get_quality : Proc(IDirectSoundFXI3DL2Reverb*, Int32*, HRESULT)
   end
 
   IDirectSoundFXI3DL2Reverb_GUID = "4b166a6a-0d66-43f3-80e3-ee6280dee1a4"
@@ -891,11 +891,11 @@ lib LibWin32
   end
 
   struct IDirectSoundFXWavesReverbVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_all_parameters : UInt64
-    get_all_parameters : UInt64
+    query_interface : Proc(IDirectSoundFXWavesReverb*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSoundFXWavesReverb*, UInt32)
+    release : Proc(IDirectSoundFXWavesReverb*, UInt32)
+    set_all_parameters : Proc(IDirectSoundFXWavesReverb*, DSFXWavesReverb*, HRESULT)
+    get_all_parameters : Proc(IDirectSoundFXWavesReverb*, DSFXWavesReverb*, HRESULT)
   end
 
   IDirectSoundFXWavesReverb_GUID = "46858c3a-0dc6-45e3-b760-d4eef16cb325"
@@ -905,13 +905,13 @@ lib LibWin32
   end
 
   struct IDirectSoundCaptureFXAecVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_all_parameters : UInt64
-    get_all_parameters : UInt64
-    get_status : UInt64
-    reset : UInt64
+    query_interface : Proc(IDirectSoundCaptureFXAec*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSoundCaptureFXAec*, UInt32)
+    release : Proc(IDirectSoundCaptureFXAec*, UInt32)
+    set_all_parameters : Proc(IDirectSoundCaptureFXAec*, DSCFXAec*, HRESULT)
+    get_all_parameters : Proc(IDirectSoundCaptureFXAec*, DSCFXAec*, HRESULT)
+    get_status : Proc(IDirectSoundCaptureFXAec*, UInt32*, HRESULT)
+    reset : Proc(IDirectSoundCaptureFXAec*, HRESULT)
   end
 
   IDirectSoundCaptureFXAec_GUID = "ad74143d-903d-4ab7-8066-28d363036d65"
@@ -921,12 +921,12 @@ lib LibWin32
   end
 
   struct IDirectSoundCaptureFXNoiseSuppressVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_all_parameters : UInt64
-    get_all_parameters : UInt64
-    reset : UInt64
+    query_interface : Proc(IDirectSoundCaptureFXNoiseSuppress*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSoundCaptureFXNoiseSuppress*, UInt32)
+    release : Proc(IDirectSoundCaptureFXNoiseSuppress*, UInt32)
+    set_all_parameters : Proc(IDirectSoundCaptureFXNoiseSuppress*, DSCFXNoiseSuppress*, HRESULT)
+    get_all_parameters : Proc(IDirectSoundCaptureFXNoiseSuppress*, DSCFXNoiseSuppress*, HRESULT)
+    reset : Proc(IDirectSoundCaptureFXNoiseSuppress*, HRESULT)
   end
 
   IDirectSoundCaptureFXNoiseSuppress_GUID = "ed311e41-fbae-4175-9625-cd0854f693ca"
@@ -936,10 +936,10 @@ lib LibWin32
   end
 
   struct IDirectSoundFullDuplexVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    initialize : UInt64
+    query_interface : Proc(IDirectSoundFullDuplex*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectSoundFullDuplex*, UInt32)
+    release : Proc(IDirectSoundFullDuplex*, UInt32)
+    initialize : Proc(IDirectSoundFullDuplex*, Guid*, Guid*, DSCBUFFERDESC*, DSBUFFERDESC*, LibC::HANDLE, UInt32, IDirectSoundCaptureBuffer8*, IDirectSoundBuffer8*, HRESULT)
   end
 
   IDirectSoundFullDuplex_GUID = "edcb4c7a-daab-4216-a42e-6c50596ddc1d"
@@ -980,673 +980,673 @@ lib LibWin32
   fun GetDeviceID(pguidsrc : Guid*, pguiddest : Guid*) : HRESULT
 end
 struct LibWin32::IDirectSound
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSound*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSound*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSound*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_sound_buffer(pcdsbufferdesc : DSBUFFERDESC*, ppdsbuffer : IDirectSoundBuffer*, punkouter : IUnknown) : HRESULT
-    @lpVtbl.value.create_sound_buffer.unsafe_as(Proc(DSBUFFERDESC*, IDirectSoundBuffer*, IUnknown, HRESULT)).call(pcdsbufferdesc, ppdsbuffer, punkouter)
+  def create_sound_buffer(this : IDirectSound*, pcdsbufferdesc : DSBUFFERDESC*, ppdsbuffer : IDirectSoundBuffer*, punkouter : IUnknown) : HRESULT
+    @lpVtbl.value.create_sound_buffer.call(this, pcdsbufferdesc, ppdsbuffer, punkouter)
   end
-  def get_caps(pdscaps : DSCAPS*) : HRESULT
-    @lpVtbl.value.get_caps.unsafe_as(Proc(DSCAPS*, HRESULT)).call(pdscaps)
+  def get_caps(this : IDirectSound*, pdscaps : DSCAPS*) : HRESULT
+    @lpVtbl.value.get_caps.call(this, pdscaps)
   end
-  def duplicate_sound_buffer(pdsbufferoriginal : IDirectSoundBuffer, ppdsbufferduplicate : IDirectSoundBuffer*) : HRESULT
-    @lpVtbl.value.duplicate_sound_buffer.unsafe_as(Proc(IDirectSoundBuffer, IDirectSoundBuffer*, HRESULT)).call(pdsbufferoriginal, ppdsbufferduplicate)
+  def duplicate_sound_buffer(this : IDirectSound*, pdsbufferoriginal : IDirectSoundBuffer, ppdsbufferduplicate : IDirectSoundBuffer*) : HRESULT
+    @lpVtbl.value.duplicate_sound_buffer.call(this, pdsbufferoriginal, ppdsbufferduplicate)
   end
-  def set_cooperative_level(hwnd : LibC::HANDLE, dwlevel : UInt32) : HRESULT
-    @lpVtbl.value.set_cooperative_level.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(hwnd, dwlevel)
+  def set_cooperative_level(this : IDirectSound*, hwnd : LibC::HANDLE, dwlevel : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.call(this, hwnd, dwlevel)
   end
-  def compact : HRESULT
-    @lpVtbl.value.compact.unsafe_as(Proc(HRESULT)).call
+  def compact(this : IDirectSound*) : HRESULT
+    @lpVtbl.value.compact.call(this)
   end
-  def get_speaker_config(pdwspeakerconfig : UInt32*) : HRESULT
-    @lpVtbl.value.get_speaker_config.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwspeakerconfig)
+  def get_speaker_config(this : IDirectSound*, pdwspeakerconfig : UInt32*) : HRESULT
+    @lpVtbl.value.get_speaker_config.call(this, pdwspeakerconfig)
   end
-  def set_speaker_config(dwspeakerconfig : UInt32) : HRESULT
-    @lpVtbl.value.set_speaker_config.unsafe_as(Proc(UInt32, HRESULT)).call(dwspeakerconfig)
+  def set_speaker_config(this : IDirectSound*, dwspeakerconfig : UInt32) : HRESULT
+    @lpVtbl.value.set_speaker_config.call(this, dwspeakerconfig)
   end
-  def initialize(pcguiddevice : Guid*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(Guid*, HRESULT)).call(pcguiddevice)
+  def initialize(this : IDirectSound*, pcguiddevice : Guid*) : HRESULT
+    @lpVtbl.value.initialize.call(this, pcguiddevice)
   end
 end
 struct LibWin32::IDirectSound8
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSound8*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSound8*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSound8*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_sound_buffer(pcdsbufferdesc : DSBUFFERDESC*, ppdsbuffer : IDirectSoundBuffer*, punkouter : IUnknown) : HRESULT
-    @lpVtbl.value.create_sound_buffer.unsafe_as(Proc(DSBUFFERDESC*, IDirectSoundBuffer*, IUnknown, HRESULT)).call(pcdsbufferdesc, ppdsbuffer, punkouter)
+  def create_sound_buffer(this : IDirectSound8*, pcdsbufferdesc : DSBUFFERDESC*, ppdsbuffer : IDirectSoundBuffer*, punkouter : IUnknown) : HRESULT
+    @lpVtbl.value.create_sound_buffer.call(this, pcdsbufferdesc, ppdsbuffer, punkouter)
   end
-  def get_caps(pdscaps : DSCAPS*) : HRESULT
-    @lpVtbl.value.get_caps.unsafe_as(Proc(DSCAPS*, HRESULT)).call(pdscaps)
+  def get_caps(this : IDirectSound8*, pdscaps : DSCAPS*) : HRESULT
+    @lpVtbl.value.get_caps.call(this, pdscaps)
   end
-  def duplicate_sound_buffer(pdsbufferoriginal : IDirectSoundBuffer, ppdsbufferduplicate : IDirectSoundBuffer*) : HRESULT
-    @lpVtbl.value.duplicate_sound_buffer.unsafe_as(Proc(IDirectSoundBuffer, IDirectSoundBuffer*, HRESULT)).call(pdsbufferoriginal, ppdsbufferduplicate)
+  def duplicate_sound_buffer(this : IDirectSound8*, pdsbufferoriginal : IDirectSoundBuffer, ppdsbufferduplicate : IDirectSoundBuffer*) : HRESULT
+    @lpVtbl.value.duplicate_sound_buffer.call(this, pdsbufferoriginal, ppdsbufferduplicate)
   end
-  def set_cooperative_level(hwnd : LibC::HANDLE, dwlevel : UInt32) : HRESULT
-    @lpVtbl.value.set_cooperative_level.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(hwnd, dwlevel)
+  def set_cooperative_level(this : IDirectSound8*, hwnd : LibC::HANDLE, dwlevel : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.call(this, hwnd, dwlevel)
   end
-  def compact : HRESULT
-    @lpVtbl.value.compact.unsafe_as(Proc(HRESULT)).call
+  def compact(this : IDirectSound8*) : HRESULT
+    @lpVtbl.value.compact.call(this)
   end
-  def get_speaker_config(pdwspeakerconfig : UInt32*) : HRESULT
-    @lpVtbl.value.get_speaker_config.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwspeakerconfig)
+  def get_speaker_config(this : IDirectSound8*, pdwspeakerconfig : UInt32*) : HRESULT
+    @lpVtbl.value.get_speaker_config.call(this, pdwspeakerconfig)
   end
-  def set_speaker_config(dwspeakerconfig : UInt32) : HRESULT
-    @lpVtbl.value.set_speaker_config.unsafe_as(Proc(UInt32, HRESULT)).call(dwspeakerconfig)
+  def set_speaker_config(this : IDirectSound8*, dwspeakerconfig : UInt32) : HRESULT
+    @lpVtbl.value.set_speaker_config.call(this, dwspeakerconfig)
   end
-  def initialize(pcguiddevice : Guid*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(Guid*, HRESULT)).call(pcguiddevice)
+  def initialize(this : IDirectSound8*, pcguiddevice : Guid*) : HRESULT
+    @lpVtbl.value.initialize.call(this, pcguiddevice)
   end
-  def verify_certification(pdwcertified : UInt32*) : HRESULT
-    @lpVtbl.value.verify_certification.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcertified)
+  def verify_certification(this : IDirectSound8*, pdwcertified : UInt32*) : HRESULT
+    @lpVtbl.value.verify_certification.call(this, pdwcertified)
   end
 end
 struct LibWin32::IDirectSoundBuffer
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSoundBuffer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSoundBuffer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSoundBuffer*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_caps(pdsbuffercaps : DSBCAPS*) : HRESULT
-    @lpVtbl.value.get_caps.unsafe_as(Proc(DSBCAPS*, HRESULT)).call(pdsbuffercaps)
+  def get_caps(this : IDirectSoundBuffer*, pdsbuffercaps : DSBCAPS*) : HRESULT
+    @lpVtbl.value.get_caps.call(this, pdsbuffercaps)
   end
-  def get_current_position(pdwcurrentplaycursor : UInt32*, pdwcurrentwritecursor : UInt32*) : HRESULT
-    @lpVtbl.value.get_current_position.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwcurrentplaycursor, pdwcurrentwritecursor)
+  def get_current_position(this : IDirectSoundBuffer*, pdwcurrentplaycursor : UInt32*, pdwcurrentwritecursor : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_position.call(this, pdwcurrentplaycursor, pdwcurrentwritecursor)
   end
-  def get_format(pwfxformat : WAVEFORMATEX*, dwsizeallocated : UInt32, pdwsizewritten : UInt32*) : HRESULT
-    @lpVtbl.value.get_format.unsafe_as(Proc(WAVEFORMATEX*, UInt32, UInt32*, HRESULT)).call(pwfxformat, dwsizeallocated, pdwsizewritten)
+  def get_format(this : IDirectSoundBuffer*, pwfxformat : WAVEFORMATEX*, dwsizeallocated : UInt32, pdwsizewritten : UInt32*) : HRESULT
+    @lpVtbl.value.get_format.call(this, pwfxformat, dwsizeallocated, pdwsizewritten)
   end
-  def get_volume(plvolume : Int32*) : HRESULT
-    @lpVtbl.value.get_volume.unsafe_as(Proc(Int32*, HRESULT)).call(plvolume)
+  def get_volume(this : IDirectSoundBuffer*, plvolume : Int32*) : HRESULT
+    @lpVtbl.value.get_volume.call(this, plvolume)
   end
-  def get_pan(plpan : Int32*) : HRESULT
-    @lpVtbl.value.get_pan.unsafe_as(Proc(Int32*, HRESULT)).call(plpan)
+  def get_pan(this : IDirectSoundBuffer*, plpan : Int32*) : HRESULT
+    @lpVtbl.value.get_pan.call(this, plpan)
   end
-  def get_frequency(pdwfrequency : UInt32*) : HRESULT
-    @lpVtbl.value.get_frequency.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwfrequency)
+  def get_frequency(this : IDirectSoundBuffer*, pdwfrequency : UInt32*) : HRESULT
+    @lpVtbl.value.get_frequency.call(this, pdwfrequency)
   end
-  def get_status(pdwstatus : UInt32*) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  def get_status(this : IDirectSoundBuffer*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus)
   end
-  def initialize(pdirectsound : IDirectSound, pcdsbufferdesc : DSBUFFERDESC*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(IDirectSound, DSBUFFERDESC*, HRESULT)).call(pdirectsound, pcdsbufferdesc)
+  def initialize(this : IDirectSoundBuffer*, pdirectsound : IDirectSound, pcdsbufferdesc : DSBUFFERDESC*) : HRESULT
+    @lpVtbl.value.initialize.call(this, pdirectsound, pcdsbufferdesc)
   end
-  def lock(dwoffset : UInt32, dwbytes : UInt32, ppvaudioptr1 : Void**, pdwaudiobytes1 : UInt32*, ppvaudioptr2 : Void**, pdwaudiobytes2 : UInt32*, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.lock.unsafe_as(Proc(UInt32, UInt32, Void**, UInt32*, Void**, UInt32*, UInt32, HRESULT)).call(dwoffset, dwbytes, ppvaudioptr1, pdwaudiobytes1, ppvaudioptr2, pdwaudiobytes2, dwflags)
+  def lock(this : IDirectSoundBuffer*, dwoffset : UInt32, dwbytes : UInt32, ppvaudioptr1 : Void**, pdwaudiobytes1 : UInt32*, ppvaudioptr2 : Void**, pdwaudiobytes2 : UInt32*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.lock.call(this, dwoffset, dwbytes, ppvaudioptr1, pdwaudiobytes1, ppvaudioptr2, pdwaudiobytes2, dwflags)
   end
-  def play(dwreserved1 : UInt32, dwpriority : UInt32, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.play.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(dwreserved1, dwpriority, dwflags)
+  def play(this : IDirectSoundBuffer*, dwreserved1 : UInt32, dwpriority : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.play.call(this, dwreserved1, dwpriority, dwflags)
   end
-  def set_current_position(dwnewposition : UInt32) : HRESULT
-    @lpVtbl.value.set_current_position.unsafe_as(Proc(UInt32, HRESULT)).call(dwnewposition)
+  def set_current_position(this : IDirectSoundBuffer*, dwnewposition : UInt32) : HRESULT
+    @lpVtbl.value.set_current_position.call(this, dwnewposition)
   end
-  def set_format(pcfxformat : WAVEFORMATEX*) : HRESULT
-    @lpVtbl.value.set_format.unsafe_as(Proc(WAVEFORMATEX*, HRESULT)).call(pcfxformat)
+  def set_format(this : IDirectSoundBuffer*, pcfxformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_format.call(this, pcfxformat)
   end
-  def set_volume(lvolume : Int32) : HRESULT
-    @lpVtbl.value.set_volume.unsafe_as(Proc(Int32, HRESULT)).call(lvolume)
+  def set_volume(this : IDirectSoundBuffer*, lvolume : Int32) : HRESULT
+    @lpVtbl.value.set_volume.call(this, lvolume)
   end
-  def set_pan(lpan : Int32) : HRESULT
-    @lpVtbl.value.set_pan.unsafe_as(Proc(Int32, HRESULT)).call(lpan)
+  def set_pan(this : IDirectSoundBuffer*, lpan : Int32) : HRESULT
+    @lpVtbl.value.set_pan.call(this, lpan)
   end
-  def set_frequency(dwfrequency : UInt32) : HRESULT
-    @lpVtbl.value.set_frequency.unsafe_as(Proc(UInt32, HRESULT)).call(dwfrequency)
+  def set_frequency(this : IDirectSoundBuffer*, dwfrequency : UInt32) : HRESULT
+    @lpVtbl.value.set_frequency.call(this, dwfrequency)
   end
-  def stop : HRESULT
-    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  def stop(this : IDirectSoundBuffer*) : HRESULT
+    @lpVtbl.value.stop.call(this)
   end
-  def unlock(pvaudioptr1 : Void*, dwaudiobytes1 : UInt32, pvaudioptr2 : Void*, dwaudiobytes2 : UInt32) : HRESULT
-    @lpVtbl.value.unlock.unsafe_as(Proc(Void*, UInt32, Void*, UInt32, HRESULT)).call(pvaudioptr1, dwaudiobytes1, pvaudioptr2, dwaudiobytes2)
+  def unlock(this : IDirectSoundBuffer*, pvaudioptr1 : Void*, dwaudiobytes1 : UInt32, pvaudioptr2 : Void*, dwaudiobytes2 : UInt32) : HRESULT
+    @lpVtbl.value.unlock.call(this, pvaudioptr1, dwaudiobytes1, pvaudioptr2, dwaudiobytes2)
   end
-  def restore : HRESULT
-    @lpVtbl.value.restore.unsafe_as(Proc(HRESULT)).call
+  def restore(this : IDirectSoundBuffer*) : HRESULT
+    @lpVtbl.value.restore.call(this)
   end
 end
 struct LibWin32::IDirectSoundBuffer8
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSoundBuffer8*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSoundBuffer8*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSoundBuffer8*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_caps(pdsbuffercaps : DSBCAPS*) : HRESULT
-    @lpVtbl.value.get_caps.unsafe_as(Proc(DSBCAPS*, HRESULT)).call(pdsbuffercaps)
+  def get_caps(this : IDirectSoundBuffer8*, pdsbuffercaps : DSBCAPS*) : HRESULT
+    @lpVtbl.value.get_caps.call(this, pdsbuffercaps)
   end
-  def get_current_position(pdwcurrentplaycursor : UInt32*, pdwcurrentwritecursor : UInt32*) : HRESULT
-    @lpVtbl.value.get_current_position.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwcurrentplaycursor, pdwcurrentwritecursor)
+  def get_current_position(this : IDirectSoundBuffer8*, pdwcurrentplaycursor : UInt32*, pdwcurrentwritecursor : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_position.call(this, pdwcurrentplaycursor, pdwcurrentwritecursor)
   end
-  def get_format(pwfxformat : WAVEFORMATEX*, dwsizeallocated : UInt32, pdwsizewritten : UInt32*) : HRESULT
-    @lpVtbl.value.get_format.unsafe_as(Proc(WAVEFORMATEX*, UInt32, UInt32*, HRESULT)).call(pwfxformat, dwsizeallocated, pdwsizewritten)
+  def get_format(this : IDirectSoundBuffer8*, pwfxformat : WAVEFORMATEX*, dwsizeallocated : UInt32, pdwsizewritten : UInt32*) : HRESULT
+    @lpVtbl.value.get_format.call(this, pwfxformat, dwsizeallocated, pdwsizewritten)
   end
-  def get_volume(plvolume : Int32*) : HRESULT
-    @lpVtbl.value.get_volume.unsafe_as(Proc(Int32*, HRESULT)).call(plvolume)
+  def get_volume(this : IDirectSoundBuffer8*, plvolume : Int32*) : HRESULT
+    @lpVtbl.value.get_volume.call(this, plvolume)
   end
-  def get_pan(plpan : Int32*) : HRESULT
-    @lpVtbl.value.get_pan.unsafe_as(Proc(Int32*, HRESULT)).call(plpan)
+  def get_pan(this : IDirectSoundBuffer8*, plpan : Int32*) : HRESULT
+    @lpVtbl.value.get_pan.call(this, plpan)
   end
-  def get_frequency(pdwfrequency : UInt32*) : HRESULT
-    @lpVtbl.value.get_frequency.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwfrequency)
+  def get_frequency(this : IDirectSoundBuffer8*, pdwfrequency : UInt32*) : HRESULT
+    @lpVtbl.value.get_frequency.call(this, pdwfrequency)
   end
-  def get_status(pdwstatus : UInt32*) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  def get_status(this : IDirectSoundBuffer8*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus)
   end
-  def initialize(pdirectsound : IDirectSound, pcdsbufferdesc : DSBUFFERDESC*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(IDirectSound, DSBUFFERDESC*, HRESULT)).call(pdirectsound, pcdsbufferdesc)
+  def initialize(this : IDirectSoundBuffer8*, pdirectsound : IDirectSound, pcdsbufferdesc : DSBUFFERDESC*) : HRESULT
+    @lpVtbl.value.initialize.call(this, pdirectsound, pcdsbufferdesc)
   end
-  def lock(dwoffset : UInt32, dwbytes : UInt32, ppvaudioptr1 : Void**, pdwaudiobytes1 : UInt32*, ppvaudioptr2 : Void**, pdwaudiobytes2 : UInt32*, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.lock.unsafe_as(Proc(UInt32, UInt32, Void**, UInt32*, Void**, UInt32*, UInt32, HRESULT)).call(dwoffset, dwbytes, ppvaudioptr1, pdwaudiobytes1, ppvaudioptr2, pdwaudiobytes2, dwflags)
+  def lock(this : IDirectSoundBuffer8*, dwoffset : UInt32, dwbytes : UInt32, ppvaudioptr1 : Void**, pdwaudiobytes1 : UInt32*, ppvaudioptr2 : Void**, pdwaudiobytes2 : UInt32*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.lock.call(this, dwoffset, dwbytes, ppvaudioptr1, pdwaudiobytes1, ppvaudioptr2, pdwaudiobytes2, dwflags)
   end
-  def play(dwreserved1 : UInt32, dwpriority : UInt32, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.play.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(dwreserved1, dwpriority, dwflags)
+  def play(this : IDirectSoundBuffer8*, dwreserved1 : UInt32, dwpriority : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.play.call(this, dwreserved1, dwpriority, dwflags)
   end
-  def set_current_position(dwnewposition : UInt32) : HRESULT
-    @lpVtbl.value.set_current_position.unsafe_as(Proc(UInt32, HRESULT)).call(dwnewposition)
+  def set_current_position(this : IDirectSoundBuffer8*, dwnewposition : UInt32) : HRESULT
+    @lpVtbl.value.set_current_position.call(this, dwnewposition)
   end
-  def set_format(pcfxformat : WAVEFORMATEX*) : HRESULT
-    @lpVtbl.value.set_format.unsafe_as(Proc(WAVEFORMATEX*, HRESULT)).call(pcfxformat)
+  def set_format(this : IDirectSoundBuffer8*, pcfxformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_format.call(this, pcfxformat)
   end
-  def set_volume(lvolume : Int32) : HRESULT
-    @lpVtbl.value.set_volume.unsafe_as(Proc(Int32, HRESULT)).call(lvolume)
+  def set_volume(this : IDirectSoundBuffer8*, lvolume : Int32) : HRESULT
+    @lpVtbl.value.set_volume.call(this, lvolume)
   end
-  def set_pan(lpan : Int32) : HRESULT
-    @lpVtbl.value.set_pan.unsafe_as(Proc(Int32, HRESULT)).call(lpan)
+  def set_pan(this : IDirectSoundBuffer8*, lpan : Int32) : HRESULT
+    @lpVtbl.value.set_pan.call(this, lpan)
   end
-  def set_frequency(dwfrequency : UInt32) : HRESULT
-    @lpVtbl.value.set_frequency.unsafe_as(Proc(UInt32, HRESULT)).call(dwfrequency)
+  def set_frequency(this : IDirectSoundBuffer8*, dwfrequency : UInt32) : HRESULT
+    @lpVtbl.value.set_frequency.call(this, dwfrequency)
   end
-  def stop : HRESULT
-    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  def stop(this : IDirectSoundBuffer8*) : HRESULT
+    @lpVtbl.value.stop.call(this)
   end
-  def unlock(pvaudioptr1 : Void*, dwaudiobytes1 : UInt32, pvaudioptr2 : Void*, dwaudiobytes2 : UInt32) : HRESULT
-    @lpVtbl.value.unlock.unsafe_as(Proc(Void*, UInt32, Void*, UInt32, HRESULT)).call(pvaudioptr1, dwaudiobytes1, pvaudioptr2, dwaudiobytes2)
+  def unlock(this : IDirectSoundBuffer8*, pvaudioptr1 : Void*, dwaudiobytes1 : UInt32, pvaudioptr2 : Void*, dwaudiobytes2 : UInt32) : HRESULT
+    @lpVtbl.value.unlock.call(this, pvaudioptr1, dwaudiobytes1, pvaudioptr2, dwaudiobytes2)
   end
-  def restore : HRESULT
-    @lpVtbl.value.restore.unsafe_as(Proc(HRESULT)).call
+  def restore(this : IDirectSoundBuffer8*) : HRESULT
+    @lpVtbl.value.restore.call(this)
   end
-  def set_fx(dweffectscount : UInt32, pdsfxdesc : DSEFFECTDESC*, pdwresultcodes : UInt32*) : HRESULT
-    @lpVtbl.value.set_fx.unsafe_as(Proc(UInt32, DSEFFECTDESC*, UInt32*, HRESULT)).call(dweffectscount, pdsfxdesc, pdwresultcodes)
+  def set_fx(this : IDirectSoundBuffer8*, dweffectscount : UInt32, pdsfxdesc : DSEFFECTDESC*, pdwresultcodes : UInt32*) : HRESULT
+    @lpVtbl.value.set_fx.call(this, dweffectscount, pdsfxdesc, pdwresultcodes)
   end
-  def acquire_resources(dwflags : UInt32, dweffectscount : UInt32, pdwresultcodes : UInt32*) : HRESULT
-    @lpVtbl.value.acquire_resources.unsafe_as(Proc(UInt32, UInt32, UInt32*, HRESULT)).call(dwflags, dweffectscount, pdwresultcodes)
+  def acquire_resources(this : IDirectSoundBuffer8*, dwflags : UInt32, dweffectscount : UInt32, pdwresultcodes : UInt32*) : HRESULT
+    @lpVtbl.value.acquire_resources.call(this, dwflags, dweffectscount, pdwresultcodes)
   end
-  def get_object_in_path(rguidobject : Guid*, dwindex : UInt32, rguidinterface : Guid*, ppobject : Void**) : HRESULT
-    @lpVtbl.value.get_object_in_path.unsafe_as(Proc(Guid*, UInt32, Guid*, Void**, HRESULT)).call(rguidobject, dwindex, rguidinterface, ppobject)
+  def get_object_in_path(this : IDirectSoundBuffer8*, rguidobject : Guid*, dwindex : UInt32, rguidinterface : Guid*, ppobject : Void**) : HRESULT
+    @lpVtbl.value.get_object_in_path.call(this, rguidobject, dwindex, rguidinterface, ppobject)
   end
 end
 struct LibWin32::IDirectSound3DListener
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSound3DListener*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSound3DListener*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSound3DListener*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_all_parameters(plistener : DS3DLISTENER*) : HRESULT
-    @lpVtbl.value.get_all_parameters.unsafe_as(Proc(DS3DLISTENER*, HRESULT)).call(plistener)
+  def get_all_parameters(this : IDirectSound3DListener*, plistener : DS3DLISTENER*) : HRESULT
+    @lpVtbl.value.get_all_parameters.call(this, plistener)
   end
-  def get_distance_factor(pfldistancefactor : Float32*) : HRESULT
-    @lpVtbl.value.get_distance_factor.unsafe_as(Proc(Float32*, HRESULT)).call(pfldistancefactor)
+  def get_distance_factor(this : IDirectSound3DListener*, pfldistancefactor : Float32*) : HRESULT
+    @lpVtbl.value.get_distance_factor.call(this, pfldistancefactor)
   end
-  def get_doppler_factor(pfldopplerfactor : Float32*) : HRESULT
-    @lpVtbl.value.get_doppler_factor.unsafe_as(Proc(Float32*, HRESULT)).call(pfldopplerfactor)
+  def get_doppler_factor(this : IDirectSound3DListener*, pfldopplerfactor : Float32*) : HRESULT
+    @lpVtbl.value.get_doppler_factor.call(this, pfldopplerfactor)
   end
-  def get_orientation(pvorientfront : D3DVECTOR*, pvorienttop : D3DVECTOR*) : HRESULT
-    @lpVtbl.value.get_orientation.unsafe_as(Proc(D3DVECTOR*, D3DVECTOR*, HRESULT)).call(pvorientfront, pvorienttop)
+  def get_orientation(this : IDirectSound3DListener*, pvorientfront : D3DVECTOR*, pvorienttop : D3DVECTOR*) : HRESULT
+    @lpVtbl.value.get_orientation.call(this, pvorientfront, pvorienttop)
   end
-  def get_position(pvposition : D3DVECTOR*) : HRESULT
-    @lpVtbl.value.get_position.unsafe_as(Proc(D3DVECTOR*, HRESULT)).call(pvposition)
+  def get_position(this : IDirectSound3DListener*, pvposition : D3DVECTOR*) : HRESULT
+    @lpVtbl.value.get_position.call(this, pvposition)
   end
-  def get_rolloff_factor(pflrollofffactor : Float32*) : HRESULT
-    @lpVtbl.value.get_rolloff_factor.unsafe_as(Proc(Float32*, HRESULT)).call(pflrollofffactor)
+  def get_rolloff_factor(this : IDirectSound3DListener*, pflrollofffactor : Float32*) : HRESULT
+    @lpVtbl.value.get_rolloff_factor.call(this, pflrollofffactor)
   end
-  def get_velocity(pvvelocity : D3DVECTOR*) : HRESULT
-    @lpVtbl.value.get_velocity.unsafe_as(Proc(D3DVECTOR*, HRESULT)).call(pvvelocity)
+  def get_velocity(this : IDirectSound3DListener*, pvvelocity : D3DVECTOR*) : HRESULT
+    @lpVtbl.value.get_velocity.call(this, pvvelocity)
   end
-  def set_all_parameters(pclistener : DS3DLISTENER*, dwapply : UInt32) : HRESULT
-    @lpVtbl.value.set_all_parameters.unsafe_as(Proc(DS3DLISTENER*, UInt32, HRESULT)).call(pclistener, dwapply)
+  def set_all_parameters(this : IDirectSound3DListener*, pclistener : DS3DLISTENER*, dwapply : UInt32) : HRESULT
+    @lpVtbl.value.set_all_parameters.call(this, pclistener, dwapply)
   end
-  def set_distance_factor(fldistancefactor : Float32, dwapply : UInt32) : HRESULT
-    @lpVtbl.value.set_distance_factor.unsafe_as(Proc(Float32, UInt32, HRESULT)).call(fldistancefactor, dwapply)
+  def set_distance_factor(this : IDirectSound3DListener*, fldistancefactor : Float32, dwapply : UInt32) : HRESULT
+    @lpVtbl.value.set_distance_factor.call(this, fldistancefactor, dwapply)
   end
-  def set_doppler_factor(fldopplerfactor : Float32, dwapply : UInt32) : HRESULT
-    @lpVtbl.value.set_doppler_factor.unsafe_as(Proc(Float32, UInt32, HRESULT)).call(fldopplerfactor, dwapply)
+  def set_doppler_factor(this : IDirectSound3DListener*, fldopplerfactor : Float32, dwapply : UInt32) : HRESULT
+    @lpVtbl.value.set_doppler_factor.call(this, fldopplerfactor, dwapply)
   end
-  def set_orientation(xfront : Float32, yfront : Float32, zfront : Float32, xtop : Float32, ytop : Float32, ztop : Float32, dwapply : UInt32) : HRESULT
-    @lpVtbl.value.set_orientation.unsafe_as(Proc(Float32, Float32, Float32, Float32, Float32, Float32, UInt32, HRESULT)).call(xfront, yfront, zfront, xtop, ytop, ztop, dwapply)
+  def set_orientation(this : IDirectSound3DListener*, xfront : Float32, yfront : Float32, zfront : Float32, xtop : Float32, ytop : Float32, ztop : Float32, dwapply : UInt32) : HRESULT
+    @lpVtbl.value.set_orientation.call(this, xfront, yfront, zfront, xtop, ytop, ztop, dwapply)
   end
-  def set_position(x : Float32, y : Float32, z : Float32, dwapply : UInt32) : HRESULT
-    @lpVtbl.value.set_position.unsafe_as(Proc(Float32, Float32, Float32, UInt32, HRESULT)).call(x, y, z, dwapply)
+  def set_position(this : IDirectSound3DListener*, x : Float32, y : Float32, z : Float32, dwapply : UInt32) : HRESULT
+    @lpVtbl.value.set_position.call(this, x, y, z, dwapply)
   end
-  def set_rolloff_factor(flrollofffactor : Float32, dwapply : UInt32) : HRESULT
-    @lpVtbl.value.set_rolloff_factor.unsafe_as(Proc(Float32, UInt32, HRESULT)).call(flrollofffactor, dwapply)
+  def set_rolloff_factor(this : IDirectSound3DListener*, flrollofffactor : Float32, dwapply : UInt32) : HRESULT
+    @lpVtbl.value.set_rolloff_factor.call(this, flrollofffactor, dwapply)
   end
-  def set_velocity(x : Float32, y : Float32, z : Float32, dwapply : UInt32) : HRESULT
-    @lpVtbl.value.set_velocity.unsafe_as(Proc(Float32, Float32, Float32, UInt32, HRESULT)).call(x, y, z, dwapply)
+  def set_velocity(this : IDirectSound3DListener*, x : Float32, y : Float32, z : Float32, dwapply : UInt32) : HRESULT
+    @lpVtbl.value.set_velocity.call(this, x, y, z, dwapply)
   end
-  def commit_deferred_settings : HRESULT
-    @lpVtbl.value.commit_deferred_settings.unsafe_as(Proc(HRESULT)).call
+  def commit_deferred_settings(this : IDirectSound3DListener*) : HRESULT
+    @lpVtbl.value.commit_deferred_settings.call(this)
   end
 end
 struct LibWin32::IDirectSound3DBuffer
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSound3DBuffer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSound3DBuffer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSound3DBuffer*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_all_parameters(pds3dbuffer : DS3DBUFFER*) : HRESULT
-    @lpVtbl.value.get_all_parameters.unsafe_as(Proc(DS3DBUFFER*, HRESULT)).call(pds3dbuffer)
+  def get_all_parameters(this : IDirectSound3DBuffer*, pds3dbuffer : DS3DBUFFER*) : HRESULT
+    @lpVtbl.value.get_all_parameters.call(this, pds3dbuffer)
   end
-  def get_cone_angles(pdwinsideconeangle : UInt32*, pdwoutsideconeangle : UInt32*) : HRESULT
-    @lpVtbl.value.get_cone_angles.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwinsideconeangle, pdwoutsideconeangle)
+  def get_cone_angles(this : IDirectSound3DBuffer*, pdwinsideconeangle : UInt32*, pdwoutsideconeangle : UInt32*) : HRESULT
+    @lpVtbl.value.get_cone_angles.call(this, pdwinsideconeangle, pdwoutsideconeangle)
   end
-  def get_cone_orientation(pvorientation : D3DVECTOR*) : HRESULT
-    @lpVtbl.value.get_cone_orientation.unsafe_as(Proc(D3DVECTOR*, HRESULT)).call(pvorientation)
+  def get_cone_orientation(this : IDirectSound3DBuffer*, pvorientation : D3DVECTOR*) : HRESULT
+    @lpVtbl.value.get_cone_orientation.call(this, pvorientation)
   end
-  def get_cone_outside_volume(plconeoutsidevolume : Int32*) : HRESULT
-    @lpVtbl.value.get_cone_outside_volume.unsafe_as(Proc(Int32*, HRESULT)).call(plconeoutsidevolume)
+  def get_cone_outside_volume(this : IDirectSound3DBuffer*, plconeoutsidevolume : Int32*) : HRESULT
+    @lpVtbl.value.get_cone_outside_volume.call(this, plconeoutsidevolume)
   end
-  def get_max_distance(pflmaxdistance : Float32*) : HRESULT
-    @lpVtbl.value.get_max_distance.unsafe_as(Proc(Float32*, HRESULT)).call(pflmaxdistance)
+  def get_max_distance(this : IDirectSound3DBuffer*, pflmaxdistance : Float32*) : HRESULT
+    @lpVtbl.value.get_max_distance.call(this, pflmaxdistance)
   end
-  def get_min_distance(pflmindistance : Float32*) : HRESULT
-    @lpVtbl.value.get_min_distance.unsafe_as(Proc(Float32*, HRESULT)).call(pflmindistance)
+  def get_min_distance(this : IDirectSound3DBuffer*, pflmindistance : Float32*) : HRESULT
+    @lpVtbl.value.get_min_distance.call(this, pflmindistance)
   end
-  def get_mode(pdwmode : UInt32*) : HRESULT
-    @lpVtbl.value.get_mode.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwmode)
+  def get_mode(this : IDirectSound3DBuffer*, pdwmode : UInt32*) : HRESULT
+    @lpVtbl.value.get_mode.call(this, pdwmode)
   end
-  def get_position(pvposition : D3DVECTOR*) : HRESULT
-    @lpVtbl.value.get_position.unsafe_as(Proc(D3DVECTOR*, HRESULT)).call(pvposition)
+  def get_position(this : IDirectSound3DBuffer*, pvposition : D3DVECTOR*) : HRESULT
+    @lpVtbl.value.get_position.call(this, pvposition)
   end
-  def get_velocity(pvvelocity : D3DVECTOR*) : HRESULT
-    @lpVtbl.value.get_velocity.unsafe_as(Proc(D3DVECTOR*, HRESULT)).call(pvvelocity)
+  def get_velocity(this : IDirectSound3DBuffer*, pvvelocity : D3DVECTOR*) : HRESULT
+    @lpVtbl.value.get_velocity.call(this, pvvelocity)
   end
-  def set_all_parameters(pcds3dbuffer : DS3DBUFFER*, dwapply : UInt32) : HRESULT
-    @lpVtbl.value.set_all_parameters.unsafe_as(Proc(DS3DBUFFER*, UInt32, HRESULT)).call(pcds3dbuffer, dwapply)
+  def set_all_parameters(this : IDirectSound3DBuffer*, pcds3dbuffer : DS3DBUFFER*, dwapply : UInt32) : HRESULT
+    @lpVtbl.value.set_all_parameters.call(this, pcds3dbuffer, dwapply)
   end
-  def set_cone_angles(dwinsideconeangle : UInt32, dwoutsideconeangle : UInt32, dwapply : UInt32) : HRESULT
-    @lpVtbl.value.set_cone_angles.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(dwinsideconeangle, dwoutsideconeangle, dwapply)
+  def set_cone_angles(this : IDirectSound3DBuffer*, dwinsideconeangle : UInt32, dwoutsideconeangle : UInt32, dwapply : UInt32) : HRESULT
+    @lpVtbl.value.set_cone_angles.call(this, dwinsideconeangle, dwoutsideconeangle, dwapply)
   end
-  def set_cone_orientation(x : Float32, y : Float32, z : Float32, dwapply : UInt32) : HRESULT
-    @lpVtbl.value.set_cone_orientation.unsafe_as(Proc(Float32, Float32, Float32, UInt32, HRESULT)).call(x, y, z, dwapply)
+  def set_cone_orientation(this : IDirectSound3DBuffer*, x : Float32, y : Float32, z : Float32, dwapply : UInt32) : HRESULT
+    @lpVtbl.value.set_cone_orientation.call(this, x, y, z, dwapply)
   end
-  def set_cone_outside_volume(lconeoutsidevolume : Int32, dwapply : UInt32) : HRESULT
-    @lpVtbl.value.set_cone_outside_volume.unsafe_as(Proc(Int32, UInt32, HRESULT)).call(lconeoutsidevolume, dwapply)
+  def set_cone_outside_volume(this : IDirectSound3DBuffer*, lconeoutsidevolume : Int32, dwapply : UInt32) : HRESULT
+    @lpVtbl.value.set_cone_outside_volume.call(this, lconeoutsidevolume, dwapply)
   end
-  def set_max_distance(flmaxdistance : Float32, dwapply : UInt32) : HRESULT
-    @lpVtbl.value.set_max_distance.unsafe_as(Proc(Float32, UInt32, HRESULT)).call(flmaxdistance, dwapply)
+  def set_max_distance(this : IDirectSound3DBuffer*, flmaxdistance : Float32, dwapply : UInt32) : HRESULT
+    @lpVtbl.value.set_max_distance.call(this, flmaxdistance, dwapply)
   end
-  def set_min_distance(flmindistance : Float32, dwapply : UInt32) : HRESULT
-    @lpVtbl.value.set_min_distance.unsafe_as(Proc(Float32, UInt32, HRESULT)).call(flmindistance, dwapply)
+  def set_min_distance(this : IDirectSound3DBuffer*, flmindistance : Float32, dwapply : UInt32) : HRESULT
+    @lpVtbl.value.set_min_distance.call(this, flmindistance, dwapply)
   end
-  def set_mode(dwmode : UInt32, dwapply : UInt32) : HRESULT
-    @lpVtbl.value.set_mode.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(dwmode, dwapply)
+  def set_mode(this : IDirectSound3DBuffer*, dwmode : UInt32, dwapply : UInt32) : HRESULT
+    @lpVtbl.value.set_mode.call(this, dwmode, dwapply)
   end
-  def set_position(x : Float32, y : Float32, z : Float32, dwapply : UInt32) : HRESULT
-    @lpVtbl.value.set_position.unsafe_as(Proc(Float32, Float32, Float32, UInt32, HRESULT)).call(x, y, z, dwapply)
+  def set_position(this : IDirectSound3DBuffer*, x : Float32, y : Float32, z : Float32, dwapply : UInt32) : HRESULT
+    @lpVtbl.value.set_position.call(this, x, y, z, dwapply)
   end
-  def set_velocity(x : Float32, y : Float32, z : Float32, dwapply : UInt32) : HRESULT
-    @lpVtbl.value.set_velocity.unsafe_as(Proc(Float32, Float32, Float32, UInt32, HRESULT)).call(x, y, z, dwapply)
+  def set_velocity(this : IDirectSound3DBuffer*, x : Float32, y : Float32, z : Float32, dwapply : UInt32) : HRESULT
+    @lpVtbl.value.set_velocity.call(this, x, y, z, dwapply)
   end
 end
 struct LibWin32::IDirectSoundCapture
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSoundCapture*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSoundCapture*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSoundCapture*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_capture_buffer(pcdscbufferdesc : DSCBUFFERDESC*, ppdscbuffer : IDirectSoundCaptureBuffer*, punkouter : IUnknown) : HRESULT
-    @lpVtbl.value.create_capture_buffer.unsafe_as(Proc(DSCBUFFERDESC*, IDirectSoundCaptureBuffer*, IUnknown, HRESULT)).call(pcdscbufferdesc, ppdscbuffer, punkouter)
+  def create_capture_buffer(this : IDirectSoundCapture*, pcdscbufferdesc : DSCBUFFERDESC*, ppdscbuffer : IDirectSoundCaptureBuffer*, punkouter : IUnknown) : HRESULT
+    @lpVtbl.value.create_capture_buffer.call(this, pcdscbufferdesc, ppdscbuffer, punkouter)
   end
-  def get_caps(pdsccaps : DSCCAPS*) : HRESULT
-    @lpVtbl.value.get_caps.unsafe_as(Proc(DSCCAPS*, HRESULT)).call(pdsccaps)
+  def get_caps(this : IDirectSoundCapture*, pdsccaps : DSCCAPS*) : HRESULT
+    @lpVtbl.value.get_caps.call(this, pdsccaps)
   end
-  def initialize(pcguiddevice : Guid*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(Guid*, HRESULT)).call(pcguiddevice)
+  def initialize(this : IDirectSoundCapture*, pcguiddevice : Guid*) : HRESULT
+    @lpVtbl.value.initialize.call(this, pcguiddevice)
   end
 end
 struct LibWin32::IDirectSoundCaptureBuffer
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSoundCaptureBuffer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSoundCaptureBuffer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSoundCaptureBuffer*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_caps(pdscbcaps : DSCBCAPS*) : HRESULT
-    @lpVtbl.value.get_caps.unsafe_as(Proc(DSCBCAPS*, HRESULT)).call(pdscbcaps)
+  def get_caps(this : IDirectSoundCaptureBuffer*, pdscbcaps : DSCBCAPS*) : HRESULT
+    @lpVtbl.value.get_caps.call(this, pdscbcaps)
   end
-  def get_current_position(pdwcaptureposition : UInt32*, pdwreadposition : UInt32*) : HRESULT
-    @lpVtbl.value.get_current_position.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwcaptureposition, pdwreadposition)
+  def get_current_position(this : IDirectSoundCaptureBuffer*, pdwcaptureposition : UInt32*, pdwreadposition : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_position.call(this, pdwcaptureposition, pdwreadposition)
   end
-  def get_format(pwfxformat : WAVEFORMATEX*, dwsizeallocated : UInt32, pdwsizewritten : UInt32*) : HRESULT
-    @lpVtbl.value.get_format.unsafe_as(Proc(WAVEFORMATEX*, UInt32, UInt32*, HRESULT)).call(pwfxformat, dwsizeallocated, pdwsizewritten)
+  def get_format(this : IDirectSoundCaptureBuffer*, pwfxformat : WAVEFORMATEX*, dwsizeallocated : UInt32, pdwsizewritten : UInt32*) : HRESULT
+    @lpVtbl.value.get_format.call(this, pwfxformat, dwsizeallocated, pdwsizewritten)
   end
-  def get_status(pdwstatus : UInt32*) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  def get_status(this : IDirectSoundCaptureBuffer*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus)
   end
-  def initialize(pdirectsoundcapture : IDirectSoundCapture, pcdscbufferdesc : DSCBUFFERDESC*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(IDirectSoundCapture, DSCBUFFERDESC*, HRESULT)).call(pdirectsoundcapture, pcdscbufferdesc)
+  def initialize(this : IDirectSoundCaptureBuffer*, pdirectsoundcapture : IDirectSoundCapture, pcdscbufferdesc : DSCBUFFERDESC*) : HRESULT
+    @lpVtbl.value.initialize.call(this, pdirectsoundcapture, pcdscbufferdesc)
   end
-  def lock(dwoffset : UInt32, dwbytes : UInt32, ppvaudioptr1 : Void**, pdwaudiobytes1 : UInt32*, ppvaudioptr2 : Void**, pdwaudiobytes2 : UInt32*, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.lock.unsafe_as(Proc(UInt32, UInt32, Void**, UInt32*, Void**, UInt32*, UInt32, HRESULT)).call(dwoffset, dwbytes, ppvaudioptr1, pdwaudiobytes1, ppvaudioptr2, pdwaudiobytes2, dwflags)
+  def lock(this : IDirectSoundCaptureBuffer*, dwoffset : UInt32, dwbytes : UInt32, ppvaudioptr1 : Void**, pdwaudiobytes1 : UInt32*, ppvaudioptr2 : Void**, pdwaudiobytes2 : UInt32*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.lock.call(this, dwoffset, dwbytes, ppvaudioptr1, pdwaudiobytes1, ppvaudioptr2, pdwaudiobytes2, dwflags)
   end
-  def start(dwflags : UInt32) : HRESULT
-    @lpVtbl.value.start.unsafe_as(Proc(UInt32, HRESULT)).call(dwflags)
+  def start(this : IDirectSoundCaptureBuffer*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.start.call(this, dwflags)
   end
-  def stop : HRESULT
-    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  def stop(this : IDirectSoundCaptureBuffer*) : HRESULT
+    @lpVtbl.value.stop.call(this)
   end
-  def unlock(pvaudioptr1 : Void*, dwaudiobytes1 : UInt32, pvaudioptr2 : Void*, dwaudiobytes2 : UInt32) : HRESULT
-    @lpVtbl.value.unlock.unsafe_as(Proc(Void*, UInt32, Void*, UInt32, HRESULT)).call(pvaudioptr1, dwaudiobytes1, pvaudioptr2, dwaudiobytes2)
+  def unlock(this : IDirectSoundCaptureBuffer*, pvaudioptr1 : Void*, dwaudiobytes1 : UInt32, pvaudioptr2 : Void*, dwaudiobytes2 : UInt32) : HRESULT
+    @lpVtbl.value.unlock.call(this, pvaudioptr1, dwaudiobytes1, pvaudioptr2, dwaudiobytes2)
   end
 end
 struct LibWin32::IDirectSoundCaptureBuffer8
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSoundCaptureBuffer8*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSoundCaptureBuffer8*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSoundCaptureBuffer8*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_caps(pdscbcaps : DSCBCAPS*) : HRESULT
-    @lpVtbl.value.get_caps.unsafe_as(Proc(DSCBCAPS*, HRESULT)).call(pdscbcaps)
+  def get_caps(this : IDirectSoundCaptureBuffer8*, pdscbcaps : DSCBCAPS*) : HRESULT
+    @lpVtbl.value.get_caps.call(this, pdscbcaps)
   end
-  def get_current_position(pdwcaptureposition : UInt32*, pdwreadposition : UInt32*) : HRESULT
-    @lpVtbl.value.get_current_position.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwcaptureposition, pdwreadposition)
+  def get_current_position(this : IDirectSoundCaptureBuffer8*, pdwcaptureposition : UInt32*, pdwreadposition : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_position.call(this, pdwcaptureposition, pdwreadposition)
   end
-  def get_format(pwfxformat : WAVEFORMATEX*, dwsizeallocated : UInt32, pdwsizewritten : UInt32*) : HRESULT
-    @lpVtbl.value.get_format.unsafe_as(Proc(WAVEFORMATEX*, UInt32, UInt32*, HRESULT)).call(pwfxformat, dwsizeallocated, pdwsizewritten)
+  def get_format(this : IDirectSoundCaptureBuffer8*, pwfxformat : WAVEFORMATEX*, dwsizeallocated : UInt32, pdwsizewritten : UInt32*) : HRESULT
+    @lpVtbl.value.get_format.call(this, pwfxformat, dwsizeallocated, pdwsizewritten)
   end
-  def get_status(pdwstatus : UInt32*) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  def get_status(this : IDirectSoundCaptureBuffer8*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus)
   end
-  def initialize(pdirectsoundcapture : IDirectSoundCapture, pcdscbufferdesc : DSCBUFFERDESC*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(IDirectSoundCapture, DSCBUFFERDESC*, HRESULT)).call(pdirectsoundcapture, pcdscbufferdesc)
+  def initialize(this : IDirectSoundCaptureBuffer8*, pdirectsoundcapture : IDirectSoundCapture, pcdscbufferdesc : DSCBUFFERDESC*) : HRESULT
+    @lpVtbl.value.initialize.call(this, pdirectsoundcapture, pcdscbufferdesc)
   end
-  def lock(dwoffset : UInt32, dwbytes : UInt32, ppvaudioptr1 : Void**, pdwaudiobytes1 : UInt32*, ppvaudioptr2 : Void**, pdwaudiobytes2 : UInt32*, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.lock.unsafe_as(Proc(UInt32, UInt32, Void**, UInt32*, Void**, UInt32*, UInt32, HRESULT)).call(dwoffset, dwbytes, ppvaudioptr1, pdwaudiobytes1, ppvaudioptr2, pdwaudiobytes2, dwflags)
+  def lock(this : IDirectSoundCaptureBuffer8*, dwoffset : UInt32, dwbytes : UInt32, ppvaudioptr1 : Void**, pdwaudiobytes1 : UInt32*, ppvaudioptr2 : Void**, pdwaudiobytes2 : UInt32*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.lock.call(this, dwoffset, dwbytes, ppvaudioptr1, pdwaudiobytes1, ppvaudioptr2, pdwaudiobytes2, dwflags)
   end
-  def start(dwflags : UInt32) : HRESULT
-    @lpVtbl.value.start.unsafe_as(Proc(UInt32, HRESULT)).call(dwflags)
+  def start(this : IDirectSoundCaptureBuffer8*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.start.call(this, dwflags)
   end
-  def stop : HRESULT
-    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  def stop(this : IDirectSoundCaptureBuffer8*) : HRESULT
+    @lpVtbl.value.stop.call(this)
   end
-  def unlock(pvaudioptr1 : Void*, dwaudiobytes1 : UInt32, pvaudioptr2 : Void*, dwaudiobytes2 : UInt32) : HRESULT
-    @lpVtbl.value.unlock.unsafe_as(Proc(Void*, UInt32, Void*, UInt32, HRESULT)).call(pvaudioptr1, dwaudiobytes1, pvaudioptr2, dwaudiobytes2)
+  def unlock(this : IDirectSoundCaptureBuffer8*, pvaudioptr1 : Void*, dwaudiobytes1 : UInt32, pvaudioptr2 : Void*, dwaudiobytes2 : UInt32) : HRESULT
+    @lpVtbl.value.unlock.call(this, pvaudioptr1, dwaudiobytes1, pvaudioptr2, dwaudiobytes2)
   end
-  def get_object_in_path(rguidobject : Guid*, dwindex : UInt32, rguidinterface : Guid*, ppobject : Void**) : HRESULT
-    @lpVtbl.value.get_object_in_path.unsafe_as(Proc(Guid*, UInt32, Guid*, Void**, HRESULT)).call(rguidobject, dwindex, rguidinterface, ppobject)
+  def get_object_in_path(this : IDirectSoundCaptureBuffer8*, rguidobject : Guid*, dwindex : UInt32, rguidinterface : Guid*, ppobject : Void**) : HRESULT
+    @lpVtbl.value.get_object_in_path.call(this, rguidobject, dwindex, rguidinterface, ppobject)
   end
-  def get_fx_status(dweffectscount : UInt32, pdwfxstatus : UInt32*) : HRESULT
-    @lpVtbl.value.get_fx_status.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(dweffectscount, pdwfxstatus)
+  def get_fx_status(this : IDirectSoundCaptureBuffer8*, dweffectscount : UInt32, pdwfxstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_fx_status.call(this, dweffectscount, pdwfxstatus)
   end
 end
 struct LibWin32::IDirectSoundNotify
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSoundNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSoundNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSoundNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_notification_positions(dwpositionnotifies : UInt32, pcpositionnotifies : DSBPOSITIONNOTIFY*) : HRESULT
-    @lpVtbl.value.set_notification_positions.unsafe_as(Proc(UInt32, DSBPOSITIONNOTIFY*, HRESULT)).call(dwpositionnotifies, pcpositionnotifies)
+  def set_notification_positions(this : IDirectSoundNotify*, dwpositionnotifies : UInt32, pcpositionnotifies : DSBPOSITIONNOTIFY*) : HRESULT
+    @lpVtbl.value.set_notification_positions.call(this, dwpositionnotifies, pcpositionnotifies)
   end
 end
 struct LibWin32::IDirectSoundFXGargle
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSoundFXGargle*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSoundFXGargle*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSoundFXGargle*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_all_parameters(pcdsfxgargle : DSFXGargle*) : HRESULT
-    @lpVtbl.value.set_all_parameters.unsafe_as(Proc(DSFXGargle*, HRESULT)).call(pcdsfxgargle)
+  def set_all_parameters(this : IDirectSoundFXGargle*, pcdsfxgargle : DSFXGargle*) : HRESULT
+    @lpVtbl.value.set_all_parameters.call(this, pcdsfxgargle)
   end
-  def get_all_parameters(pdsfxgargle : DSFXGargle*) : HRESULT
-    @lpVtbl.value.get_all_parameters.unsafe_as(Proc(DSFXGargle*, HRESULT)).call(pdsfxgargle)
+  def get_all_parameters(this : IDirectSoundFXGargle*, pdsfxgargle : DSFXGargle*) : HRESULT
+    @lpVtbl.value.get_all_parameters.call(this, pdsfxgargle)
   end
 end
 struct LibWin32::IDirectSoundFXChorus
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSoundFXChorus*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSoundFXChorus*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSoundFXChorus*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_all_parameters(pcdsfxchorus : DSFXChorus*) : HRESULT
-    @lpVtbl.value.set_all_parameters.unsafe_as(Proc(DSFXChorus*, HRESULT)).call(pcdsfxchorus)
+  def set_all_parameters(this : IDirectSoundFXChorus*, pcdsfxchorus : DSFXChorus*) : HRESULT
+    @lpVtbl.value.set_all_parameters.call(this, pcdsfxchorus)
   end
-  def get_all_parameters(pdsfxchorus : DSFXChorus*) : HRESULT
-    @lpVtbl.value.get_all_parameters.unsafe_as(Proc(DSFXChorus*, HRESULT)).call(pdsfxchorus)
+  def get_all_parameters(this : IDirectSoundFXChorus*, pdsfxchorus : DSFXChorus*) : HRESULT
+    @lpVtbl.value.get_all_parameters.call(this, pdsfxchorus)
   end
 end
 struct LibWin32::IDirectSoundFXFlanger
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSoundFXFlanger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSoundFXFlanger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSoundFXFlanger*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_all_parameters(pcdsfxflanger : DSFXFlanger*) : HRESULT
-    @lpVtbl.value.set_all_parameters.unsafe_as(Proc(DSFXFlanger*, HRESULT)).call(pcdsfxflanger)
+  def set_all_parameters(this : IDirectSoundFXFlanger*, pcdsfxflanger : DSFXFlanger*) : HRESULT
+    @lpVtbl.value.set_all_parameters.call(this, pcdsfxflanger)
   end
-  def get_all_parameters(pdsfxflanger : DSFXFlanger*) : HRESULT
-    @lpVtbl.value.get_all_parameters.unsafe_as(Proc(DSFXFlanger*, HRESULT)).call(pdsfxflanger)
+  def get_all_parameters(this : IDirectSoundFXFlanger*, pdsfxflanger : DSFXFlanger*) : HRESULT
+    @lpVtbl.value.get_all_parameters.call(this, pdsfxflanger)
   end
 end
 struct LibWin32::IDirectSoundFXEcho
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSoundFXEcho*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSoundFXEcho*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSoundFXEcho*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_all_parameters(pcdsfxecho : DSFXEcho*) : HRESULT
-    @lpVtbl.value.set_all_parameters.unsafe_as(Proc(DSFXEcho*, HRESULT)).call(pcdsfxecho)
+  def set_all_parameters(this : IDirectSoundFXEcho*, pcdsfxecho : DSFXEcho*) : HRESULT
+    @lpVtbl.value.set_all_parameters.call(this, pcdsfxecho)
   end
-  def get_all_parameters(pdsfxecho : DSFXEcho*) : HRESULT
-    @lpVtbl.value.get_all_parameters.unsafe_as(Proc(DSFXEcho*, HRESULT)).call(pdsfxecho)
+  def get_all_parameters(this : IDirectSoundFXEcho*, pdsfxecho : DSFXEcho*) : HRESULT
+    @lpVtbl.value.get_all_parameters.call(this, pdsfxecho)
   end
 end
 struct LibWin32::IDirectSoundFXDistortion
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSoundFXDistortion*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSoundFXDistortion*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSoundFXDistortion*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_all_parameters(pcdsfxdistortion : DSFXDistortion*) : HRESULT
-    @lpVtbl.value.set_all_parameters.unsafe_as(Proc(DSFXDistortion*, HRESULT)).call(pcdsfxdistortion)
+  def set_all_parameters(this : IDirectSoundFXDistortion*, pcdsfxdistortion : DSFXDistortion*) : HRESULT
+    @lpVtbl.value.set_all_parameters.call(this, pcdsfxdistortion)
   end
-  def get_all_parameters(pdsfxdistortion : DSFXDistortion*) : HRESULT
-    @lpVtbl.value.get_all_parameters.unsafe_as(Proc(DSFXDistortion*, HRESULT)).call(pdsfxdistortion)
+  def get_all_parameters(this : IDirectSoundFXDistortion*, pdsfxdistortion : DSFXDistortion*) : HRESULT
+    @lpVtbl.value.get_all_parameters.call(this, pdsfxdistortion)
   end
 end
 struct LibWin32::IDirectSoundFXCompressor
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSoundFXCompressor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSoundFXCompressor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSoundFXCompressor*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_all_parameters(pcdsfxcompressor : DSFXCompressor*) : HRESULT
-    @lpVtbl.value.set_all_parameters.unsafe_as(Proc(DSFXCompressor*, HRESULT)).call(pcdsfxcompressor)
+  def set_all_parameters(this : IDirectSoundFXCompressor*, pcdsfxcompressor : DSFXCompressor*) : HRESULT
+    @lpVtbl.value.set_all_parameters.call(this, pcdsfxcompressor)
   end
-  def get_all_parameters(pdsfxcompressor : DSFXCompressor*) : HRESULT
-    @lpVtbl.value.get_all_parameters.unsafe_as(Proc(DSFXCompressor*, HRESULT)).call(pdsfxcompressor)
+  def get_all_parameters(this : IDirectSoundFXCompressor*, pdsfxcompressor : DSFXCompressor*) : HRESULT
+    @lpVtbl.value.get_all_parameters.call(this, pdsfxcompressor)
   end
 end
 struct LibWin32::IDirectSoundFXParamEq
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSoundFXParamEq*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSoundFXParamEq*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSoundFXParamEq*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_all_parameters(pcdsfxparameq : DSFXParamEq*) : HRESULT
-    @lpVtbl.value.set_all_parameters.unsafe_as(Proc(DSFXParamEq*, HRESULT)).call(pcdsfxparameq)
+  def set_all_parameters(this : IDirectSoundFXParamEq*, pcdsfxparameq : DSFXParamEq*) : HRESULT
+    @lpVtbl.value.set_all_parameters.call(this, pcdsfxparameq)
   end
-  def get_all_parameters(pdsfxparameq : DSFXParamEq*) : HRESULT
-    @lpVtbl.value.get_all_parameters.unsafe_as(Proc(DSFXParamEq*, HRESULT)).call(pdsfxparameq)
+  def get_all_parameters(this : IDirectSoundFXParamEq*, pdsfxparameq : DSFXParamEq*) : HRESULT
+    @lpVtbl.value.get_all_parameters.call(this, pdsfxparameq)
   end
 end
 struct LibWin32::IDirectSoundFXI3DL2Reverb
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSoundFXI3DL2Reverb*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSoundFXI3DL2Reverb*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSoundFXI3DL2Reverb*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_all_parameters(pcdsfxi3dl2reverb : DSFXI3DL2Reverb*) : HRESULT
-    @lpVtbl.value.set_all_parameters.unsafe_as(Proc(DSFXI3DL2Reverb*, HRESULT)).call(pcdsfxi3dl2reverb)
+  def set_all_parameters(this : IDirectSoundFXI3DL2Reverb*, pcdsfxi3dl2reverb : DSFXI3DL2Reverb*) : HRESULT
+    @lpVtbl.value.set_all_parameters.call(this, pcdsfxi3dl2reverb)
   end
-  def get_all_parameters(pdsfxi3dl2reverb : DSFXI3DL2Reverb*) : HRESULT
-    @lpVtbl.value.get_all_parameters.unsafe_as(Proc(DSFXI3DL2Reverb*, HRESULT)).call(pdsfxi3dl2reverb)
+  def get_all_parameters(this : IDirectSoundFXI3DL2Reverb*, pdsfxi3dl2reverb : DSFXI3DL2Reverb*) : HRESULT
+    @lpVtbl.value.get_all_parameters.call(this, pdsfxi3dl2reverb)
   end
-  def set_preset(dwpreset : UInt32) : HRESULT
-    @lpVtbl.value.set_preset.unsafe_as(Proc(UInt32, HRESULT)).call(dwpreset)
+  def set_preset(this : IDirectSoundFXI3DL2Reverb*, dwpreset : UInt32) : HRESULT
+    @lpVtbl.value.set_preset.call(this, dwpreset)
   end
-  def get_preset(pdwpreset : UInt32*) : HRESULT
-    @lpVtbl.value.get_preset.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwpreset)
+  def get_preset(this : IDirectSoundFXI3DL2Reverb*, pdwpreset : UInt32*) : HRESULT
+    @lpVtbl.value.get_preset.call(this, pdwpreset)
   end
-  def set_quality(lquality : Int32) : HRESULT
-    @lpVtbl.value.set_quality.unsafe_as(Proc(Int32, HRESULT)).call(lquality)
+  def set_quality(this : IDirectSoundFXI3DL2Reverb*, lquality : Int32) : HRESULT
+    @lpVtbl.value.set_quality.call(this, lquality)
   end
-  def get_quality(plquality : Int32*) : HRESULT
-    @lpVtbl.value.get_quality.unsafe_as(Proc(Int32*, HRESULT)).call(plquality)
+  def get_quality(this : IDirectSoundFXI3DL2Reverb*, plquality : Int32*) : HRESULT
+    @lpVtbl.value.get_quality.call(this, plquality)
   end
 end
 struct LibWin32::IDirectSoundFXWavesReverb
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSoundFXWavesReverb*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSoundFXWavesReverb*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSoundFXWavesReverb*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_all_parameters(pcdsfxwavesreverb : DSFXWavesReverb*) : HRESULT
-    @lpVtbl.value.set_all_parameters.unsafe_as(Proc(DSFXWavesReverb*, HRESULT)).call(pcdsfxwavesreverb)
+  def set_all_parameters(this : IDirectSoundFXWavesReverb*, pcdsfxwavesreverb : DSFXWavesReverb*) : HRESULT
+    @lpVtbl.value.set_all_parameters.call(this, pcdsfxwavesreverb)
   end
-  def get_all_parameters(pdsfxwavesreverb : DSFXWavesReverb*) : HRESULT
-    @lpVtbl.value.get_all_parameters.unsafe_as(Proc(DSFXWavesReverb*, HRESULT)).call(pdsfxwavesreverb)
+  def get_all_parameters(this : IDirectSoundFXWavesReverb*, pdsfxwavesreverb : DSFXWavesReverb*) : HRESULT
+    @lpVtbl.value.get_all_parameters.call(this, pdsfxwavesreverb)
   end
 end
 struct LibWin32::IDirectSoundCaptureFXAec
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSoundCaptureFXAec*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSoundCaptureFXAec*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSoundCaptureFXAec*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_all_parameters(pdscfxaec : DSCFXAec*) : HRESULT
-    @lpVtbl.value.set_all_parameters.unsafe_as(Proc(DSCFXAec*, HRESULT)).call(pdscfxaec)
+  def set_all_parameters(this : IDirectSoundCaptureFXAec*, pdscfxaec : DSCFXAec*) : HRESULT
+    @lpVtbl.value.set_all_parameters.call(this, pdscfxaec)
   end
-  def get_all_parameters(pdscfxaec : DSCFXAec*) : HRESULT
-    @lpVtbl.value.get_all_parameters.unsafe_as(Proc(DSCFXAec*, HRESULT)).call(pdscfxaec)
+  def get_all_parameters(this : IDirectSoundCaptureFXAec*, pdscfxaec : DSCFXAec*) : HRESULT
+    @lpVtbl.value.get_all_parameters.call(this, pdscfxaec)
   end
-  def get_status(pdwstatus : UInt32*) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  def get_status(this : IDirectSoundCaptureFXAec*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IDirectSoundCaptureFXAec*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
 end
 struct LibWin32::IDirectSoundCaptureFXNoiseSuppress
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSoundCaptureFXNoiseSuppress*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSoundCaptureFXNoiseSuppress*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSoundCaptureFXNoiseSuppress*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_all_parameters(pcdscfxnoisesuppress : DSCFXNoiseSuppress*) : HRESULT
-    @lpVtbl.value.set_all_parameters.unsafe_as(Proc(DSCFXNoiseSuppress*, HRESULT)).call(pcdscfxnoisesuppress)
+  def set_all_parameters(this : IDirectSoundCaptureFXNoiseSuppress*, pcdscfxnoisesuppress : DSCFXNoiseSuppress*) : HRESULT
+    @lpVtbl.value.set_all_parameters.call(this, pcdscfxnoisesuppress)
   end
-  def get_all_parameters(pdscfxnoisesuppress : DSCFXNoiseSuppress*) : HRESULT
-    @lpVtbl.value.get_all_parameters.unsafe_as(Proc(DSCFXNoiseSuppress*, HRESULT)).call(pdscfxnoisesuppress)
+  def get_all_parameters(this : IDirectSoundCaptureFXNoiseSuppress*, pdscfxnoisesuppress : DSCFXNoiseSuppress*) : HRESULT
+    @lpVtbl.value.get_all_parameters.call(this, pdscfxnoisesuppress)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IDirectSoundCaptureFXNoiseSuppress*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
 end
 struct LibWin32::IDirectSoundFullDuplex
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectSoundFullDuplex*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectSoundFullDuplex*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectSoundFullDuplex*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def initialize(pcaptureguid : Guid*, prenderguid : Guid*, lpdscbufferdesc : DSCBUFFERDESC*, lpdsbufferdesc : DSBUFFERDESC*, hwnd : LibC::HANDLE, dwlevel : UInt32, lplpdirectsoundcapturebuffer8 : IDirectSoundCaptureBuffer8*, lplpdirectsoundbuffer8 : IDirectSoundBuffer8*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(Guid*, Guid*, DSCBUFFERDESC*, DSBUFFERDESC*, LibC::HANDLE, UInt32, IDirectSoundCaptureBuffer8*, IDirectSoundBuffer8*, HRESULT)).call(pcaptureguid, prenderguid, lpdscbufferdesc, lpdsbufferdesc, hwnd, dwlevel, lplpdirectsoundcapturebuffer8, lplpdirectsoundbuffer8)
+  def initialize(this : IDirectSoundFullDuplex*, pcaptureguid : Guid*, prenderguid : Guid*, lpdscbufferdesc : DSCBUFFERDESC*, lpdsbufferdesc : DSBUFFERDESC*, hwnd : LibC::HANDLE, dwlevel : UInt32, lplpdirectsoundcapturebuffer8 : IDirectSoundCaptureBuffer8*, lplpdirectsoundbuffer8 : IDirectSoundBuffer8*) : HRESULT
+    @lpVtbl.value.initialize.call(this, pcaptureguid, prenderguid, lpdscbufferdesc, lpdsbufferdesc, hwnd, dwlevel, lplpdirectsoundcapturebuffer8, lplpdirectsoundbuffer8)
   end
 end

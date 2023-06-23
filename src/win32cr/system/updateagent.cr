@@ -632,10 +632,10 @@ lib LibWin32
 
 
   struct IUpdateLockdownVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    lock_down : UInt64
+    query_interface : Proc(IUpdateLockdown*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateLockdown*, UInt32)
+    release : Proc(IUpdateLockdown*, UInt32)
+    lock_down : Proc(IUpdateLockdown*, Int32, HRESULT)
   end
 
   IUpdateLockdown_GUID = "a976c28d-75a1-42aa-94ae-8af8b872089a"
@@ -645,23 +645,23 @@ lib LibWin32
   end
 
   struct IStringCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_item : UInt64
-    put_item : UInt64
-    get__new_enum : UInt64
-    get_count : UInt64
-    get_read_only : UInt64
-    add : UInt64
-    clear : UInt64
-    copy : UInt64
-    insert : UInt64
-    remove_at : UInt64
+    query_interface : Proc(IStringCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IStringCollection*, UInt32)
+    release : Proc(IStringCollection*, UInt32)
+    get_type_info_count : Proc(IStringCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(IStringCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IStringCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IStringCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_item : Proc(IStringCollection*, Int32, UInt8**, HRESULT)
+    put_item : Proc(IStringCollection*, Int32, UInt8*, HRESULT)
+    get__new_enum : Proc(IStringCollection*, IUnknown*, HRESULT)
+    get_count : Proc(IStringCollection*, Int32*, HRESULT)
+    get_read_only : Proc(IStringCollection*, Int16*, HRESULT)
+    add : Proc(IStringCollection*, UInt8*, Int32*, HRESULT)
+    clear : Proc(IStringCollection*, HRESULT)
+    copy : Proc(IStringCollection*, IStringCollection*, HRESULT)
+    insert : Proc(IStringCollection*, Int32, UInt8*, HRESULT)
+    remove_at : Proc(IStringCollection*, Int32, HRESULT)
   end
 
   IStringCollection_GUID = "eff90582-2ddc-480f-a06d-60f3fbc362c3"
@@ -671,27 +671,27 @@ lib LibWin32
   end
 
   struct IWebProxyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_address : UInt64
-    put_address : UInt64
-    get_bypass_list : UInt64
-    put_bypass_list : UInt64
-    get_bypass_proxy_on_local : UInt64
-    put_bypass_proxy_on_local : UInt64
-    get_read_only : UInt64
-    get_user_name : UInt64
-    put_user_name : UInt64
-    set_password : UInt64
-    prompt_for_credentials : UInt64
-    prompt_for_credentials_from_hwnd : UInt64
-    get_auto_detect : UInt64
-    put_auto_detect : UInt64
+    query_interface : Proc(IWebProxy*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWebProxy*, UInt32)
+    release : Proc(IWebProxy*, UInt32)
+    get_type_info_count : Proc(IWebProxy*, UInt32*, HRESULT)
+    get_type_info : Proc(IWebProxy*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWebProxy*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWebProxy*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_address : Proc(IWebProxy*, UInt8**, HRESULT)
+    put_address : Proc(IWebProxy*, UInt8*, HRESULT)
+    get_bypass_list : Proc(IWebProxy*, IStringCollection*, HRESULT)
+    put_bypass_list : Proc(IWebProxy*, IStringCollection, HRESULT)
+    get_bypass_proxy_on_local : Proc(IWebProxy*, Int16*, HRESULT)
+    put_bypass_proxy_on_local : Proc(IWebProxy*, Int16, HRESULT)
+    get_read_only : Proc(IWebProxy*, Int16*, HRESULT)
+    get_user_name : Proc(IWebProxy*, UInt8**, HRESULT)
+    put_user_name : Proc(IWebProxy*, UInt8*, HRESULT)
+    set_password : Proc(IWebProxy*, UInt8*, HRESULT)
+    prompt_for_credentials : Proc(IWebProxy*, IUnknown, UInt8*, HRESULT)
+    prompt_for_credentials_from_hwnd : Proc(IWebProxy*, LibC::HANDLE, UInt8*, HRESULT)
+    get_auto_detect : Proc(IWebProxy*, Int16*, HRESULT)
+    put_auto_detect : Proc(IWebProxy*, Int16, HRESULT)
   end
 
   IWebProxy_GUID = "174c81fe-aecd-4dae-b8a0-2c6318dd86a8"
@@ -701,15 +701,15 @@ lib LibWin32
   end
 
   struct ISystemInformationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_oem_hardware_support_link : UInt64
-    get_reboot_required : UInt64
+    query_interface : Proc(ISystemInformation*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISystemInformation*, UInt32)
+    release : Proc(ISystemInformation*, UInt32)
+    get_type_info_count : Proc(ISystemInformation*, UInt32*, HRESULT)
+    get_type_info : Proc(ISystemInformation*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISystemInformation*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISystemInformation*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_oem_hardware_support_link : Proc(ISystemInformation*, UInt8**, HRESULT)
+    get_reboot_required : Proc(ISystemInformation*, Int16*, HRESULT)
   end
 
   ISystemInformation_GUID = "ade87bf7-7b56-4275-8fab-b9b0e591844b"
@@ -719,14 +719,14 @@ lib LibWin32
   end
 
   struct IWindowsUpdateAgentInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_info : UInt64
+    query_interface : Proc(IWindowsUpdateAgentInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWindowsUpdateAgentInfo*, UInt32)
+    release : Proc(IWindowsUpdateAgentInfo*, UInt32)
+    get_type_info_count : Proc(IWindowsUpdateAgentInfo*, UInt32*, HRESULT)
+    get_type_info : Proc(IWindowsUpdateAgentInfo*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWindowsUpdateAgentInfo*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWindowsUpdateAgentInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_info : Proc(IWindowsUpdateAgentInfo*, VARIANT, VARIANT*, HRESULT)
   end
 
   IWindowsUpdateAgentInfo_GUID = "85713fa1-7796-4fa2-be3b-e2d6124dd373"
@@ -736,15 +736,15 @@ lib LibWin32
   end
 
   struct IAutomaticUpdatesResultsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_last_search_success_date : UInt64
-    get_last_installation_success_date : UInt64
+    query_interface : Proc(IAutomaticUpdatesResults*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IAutomaticUpdatesResults*, UInt32)
+    release : Proc(IAutomaticUpdatesResults*, UInt32)
+    get_type_info_count : Proc(IAutomaticUpdatesResults*, UInt32*, HRESULT)
+    get_type_info : Proc(IAutomaticUpdatesResults*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IAutomaticUpdatesResults*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IAutomaticUpdatesResults*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_last_search_success_date : Proc(IAutomaticUpdatesResults*, VARIANT*, HRESULT)
+    get_last_installation_success_date : Proc(IAutomaticUpdatesResults*, VARIANT*, HRESULT)
   end
 
   IAutomaticUpdatesResults_GUID = "e7a4d634-7942-4dd9-a111-82228ba33901"
@@ -754,23 +754,23 @@ lib LibWin32
   end
 
   struct IAutomaticUpdatesSettingsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_notification_level : UInt64
-    put_notification_level : UInt64
-    get_read_only : UInt64
-    get_required : UInt64
-    get_scheduled_installation_day : UInt64
-    put_scheduled_installation_day : UInt64
-    get_scheduled_installation_time : UInt64
-    put_scheduled_installation_time : UInt64
-    refresh : UInt64
-    save : UInt64
+    query_interface : Proc(IAutomaticUpdatesSettings*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IAutomaticUpdatesSettings*, UInt32)
+    release : Proc(IAutomaticUpdatesSettings*, UInt32)
+    get_type_info_count : Proc(IAutomaticUpdatesSettings*, UInt32*, HRESULT)
+    get_type_info : Proc(IAutomaticUpdatesSettings*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IAutomaticUpdatesSettings*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IAutomaticUpdatesSettings*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_notification_level : Proc(IAutomaticUpdatesSettings*, AutomaticUpdatesNotificationLevel*, HRESULT)
+    put_notification_level : Proc(IAutomaticUpdatesSettings*, AutomaticUpdatesNotificationLevel, HRESULT)
+    get_read_only : Proc(IAutomaticUpdatesSettings*, Int16*, HRESULT)
+    get_required : Proc(IAutomaticUpdatesSettings*, Int16*, HRESULT)
+    get_scheduled_installation_day : Proc(IAutomaticUpdatesSettings*, AutomaticUpdatesScheduledInstallationDay*, HRESULT)
+    put_scheduled_installation_day : Proc(IAutomaticUpdatesSettings*, AutomaticUpdatesScheduledInstallationDay, HRESULT)
+    get_scheduled_installation_time : Proc(IAutomaticUpdatesSettings*, Int32*, HRESULT)
+    put_scheduled_installation_time : Proc(IAutomaticUpdatesSettings*, Int32, HRESULT)
+    refresh : Proc(IAutomaticUpdatesSettings*, HRESULT)
+    save : Proc(IAutomaticUpdatesSettings*, HRESULT)
   end
 
   IAutomaticUpdatesSettings_GUID = "2ee48f22-af3c-405f-8970-f71be12ee9a2"
@@ -780,26 +780,26 @@ lib LibWin32
   end
 
   struct IAutomaticUpdatesSettings2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_notification_level : UInt64
-    put_notification_level : UInt64
-    get_read_only : UInt64
-    get_required : UInt64
-    get_scheduled_installation_day : UInt64
-    put_scheduled_installation_day : UInt64
-    get_scheduled_installation_time : UInt64
-    put_scheduled_installation_time : UInt64
-    refresh : UInt64
-    save : UInt64
-    get_include_recommended_updates : UInt64
-    put_include_recommended_updates : UInt64
-    check_permission : UInt64
+    query_interface : Proc(IAutomaticUpdatesSettings2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IAutomaticUpdatesSettings2*, UInt32)
+    release : Proc(IAutomaticUpdatesSettings2*, UInt32)
+    get_type_info_count : Proc(IAutomaticUpdatesSettings2*, UInt32*, HRESULT)
+    get_type_info : Proc(IAutomaticUpdatesSettings2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IAutomaticUpdatesSettings2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IAutomaticUpdatesSettings2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_notification_level : Proc(IAutomaticUpdatesSettings2*, AutomaticUpdatesNotificationLevel*, HRESULT)
+    put_notification_level : Proc(IAutomaticUpdatesSettings2*, AutomaticUpdatesNotificationLevel, HRESULT)
+    get_read_only : Proc(IAutomaticUpdatesSettings2*, Int16*, HRESULT)
+    get_required : Proc(IAutomaticUpdatesSettings2*, Int16*, HRESULT)
+    get_scheduled_installation_day : Proc(IAutomaticUpdatesSettings2*, AutomaticUpdatesScheduledInstallationDay*, HRESULT)
+    put_scheduled_installation_day : Proc(IAutomaticUpdatesSettings2*, AutomaticUpdatesScheduledInstallationDay, HRESULT)
+    get_scheduled_installation_time : Proc(IAutomaticUpdatesSettings2*, Int32*, HRESULT)
+    put_scheduled_installation_time : Proc(IAutomaticUpdatesSettings2*, Int32, HRESULT)
+    refresh : Proc(IAutomaticUpdatesSettings2*, HRESULT)
+    save : Proc(IAutomaticUpdatesSettings2*, HRESULT)
+    get_include_recommended_updates : Proc(IAutomaticUpdatesSettings2*, Int16*, HRESULT)
+    put_include_recommended_updates : Proc(IAutomaticUpdatesSettings2*, Int16, HRESULT)
+    check_permission : Proc(IAutomaticUpdatesSettings2*, AutomaticUpdatesUserType, AutomaticUpdatesPermissionType, Int16*, HRESULT)
   end
 
   IAutomaticUpdatesSettings2_GUID = "6abc136a-c3ca-4384-8171-cb2b1e59b8dc"
@@ -809,30 +809,30 @@ lib LibWin32
   end
 
   struct IAutomaticUpdatesSettings3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_notification_level : UInt64
-    put_notification_level : UInt64
-    get_read_only : UInt64
-    get_required : UInt64
-    get_scheduled_installation_day : UInt64
-    put_scheduled_installation_day : UInt64
-    get_scheduled_installation_time : UInt64
-    put_scheduled_installation_time : UInt64
-    refresh : UInt64
-    save : UInt64
-    get_include_recommended_updates : UInt64
-    put_include_recommended_updates : UInt64
-    check_permission : UInt64
-    get_non_administrators_elevated : UInt64
-    put_non_administrators_elevated : UInt64
-    get_featured_updates_enabled : UInt64
-    put_featured_updates_enabled : UInt64
+    query_interface : Proc(IAutomaticUpdatesSettings3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IAutomaticUpdatesSettings3*, UInt32)
+    release : Proc(IAutomaticUpdatesSettings3*, UInt32)
+    get_type_info_count : Proc(IAutomaticUpdatesSettings3*, UInt32*, HRESULT)
+    get_type_info : Proc(IAutomaticUpdatesSettings3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IAutomaticUpdatesSettings3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IAutomaticUpdatesSettings3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_notification_level : Proc(IAutomaticUpdatesSettings3*, AutomaticUpdatesNotificationLevel*, HRESULT)
+    put_notification_level : Proc(IAutomaticUpdatesSettings3*, AutomaticUpdatesNotificationLevel, HRESULT)
+    get_read_only : Proc(IAutomaticUpdatesSettings3*, Int16*, HRESULT)
+    get_required : Proc(IAutomaticUpdatesSettings3*, Int16*, HRESULT)
+    get_scheduled_installation_day : Proc(IAutomaticUpdatesSettings3*, AutomaticUpdatesScheduledInstallationDay*, HRESULT)
+    put_scheduled_installation_day : Proc(IAutomaticUpdatesSettings3*, AutomaticUpdatesScheduledInstallationDay, HRESULT)
+    get_scheduled_installation_time : Proc(IAutomaticUpdatesSettings3*, Int32*, HRESULT)
+    put_scheduled_installation_time : Proc(IAutomaticUpdatesSettings3*, Int32, HRESULT)
+    refresh : Proc(IAutomaticUpdatesSettings3*, HRESULT)
+    save : Proc(IAutomaticUpdatesSettings3*, HRESULT)
+    get_include_recommended_updates : Proc(IAutomaticUpdatesSettings3*, Int16*, HRESULT)
+    put_include_recommended_updates : Proc(IAutomaticUpdatesSettings3*, Int16, HRESULT)
+    check_permission : Proc(IAutomaticUpdatesSettings3*, AutomaticUpdatesUserType, AutomaticUpdatesPermissionType, Int16*, HRESULT)
+    get_non_administrators_elevated : Proc(IAutomaticUpdatesSettings3*, Int16*, HRESULT)
+    put_non_administrators_elevated : Proc(IAutomaticUpdatesSettings3*, Int16, HRESULT)
+    get_featured_updates_enabled : Proc(IAutomaticUpdatesSettings3*, Int16*, HRESULT)
+    put_featured_updates_enabled : Proc(IAutomaticUpdatesSettings3*, Int16, HRESULT)
   end
 
   IAutomaticUpdatesSettings3_GUID = "b587f5c3-f57e-485f-bbf5-0d181c5cd0dc"
@@ -842,20 +842,20 @@ lib LibWin32
   end
 
   struct IAutomaticUpdatesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    detect_now : UInt64
-    pause : UInt64
-    resume : UInt64
-    show_settings_dialog : UInt64
-    get_settings : UInt64
-    get_service_enabled : UInt64
-    enable_service : UInt64
+    query_interface : Proc(IAutomaticUpdates*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IAutomaticUpdates*, UInt32)
+    release : Proc(IAutomaticUpdates*, UInt32)
+    get_type_info_count : Proc(IAutomaticUpdates*, UInt32*, HRESULT)
+    get_type_info : Proc(IAutomaticUpdates*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IAutomaticUpdates*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IAutomaticUpdates*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    detect_now : Proc(IAutomaticUpdates*, HRESULT)
+    pause : Proc(IAutomaticUpdates*, HRESULT)
+    resume : Proc(IAutomaticUpdates*, HRESULT)
+    show_settings_dialog : Proc(IAutomaticUpdates*, HRESULT)
+    get_settings : Proc(IAutomaticUpdates*, IAutomaticUpdatesSettings*, HRESULT)
+    get_service_enabled : Proc(IAutomaticUpdates*, Int16*, HRESULT)
+    enable_service : Proc(IAutomaticUpdates*, HRESULT)
   end
 
   IAutomaticUpdates_GUID = "673425bf-c082-4c7c-bdfd-569464b8e0ce"
@@ -865,21 +865,21 @@ lib LibWin32
   end
 
   struct IAutomaticUpdates2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    detect_now : UInt64
-    pause : UInt64
-    resume : UInt64
-    show_settings_dialog : UInt64
-    get_settings : UInt64
-    get_service_enabled : UInt64
-    enable_service : UInt64
-    get_results : UInt64
+    query_interface : Proc(IAutomaticUpdates2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IAutomaticUpdates2*, UInt32)
+    release : Proc(IAutomaticUpdates2*, UInt32)
+    get_type_info_count : Proc(IAutomaticUpdates2*, UInt32*, HRESULT)
+    get_type_info : Proc(IAutomaticUpdates2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IAutomaticUpdates2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IAutomaticUpdates2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    detect_now : Proc(IAutomaticUpdates2*, HRESULT)
+    pause : Proc(IAutomaticUpdates2*, HRESULT)
+    resume : Proc(IAutomaticUpdates2*, HRESULT)
+    show_settings_dialog : Proc(IAutomaticUpdates2*, HRESULT)
+    get_settings : Proc(IAutomaticUpdates2*, IAutomaticUpdatesSettings*, HRESULT)
+    get_service_enabled : Proc(IAutomaticUpdates2*, Int16*, HRESULT)
+    enable_service : Proc(IAutomaticUpdates2*, HRESULT)
+    get_results : Proc(IAutomaticUpdates2*, IAutomaticUpdatesResults*, HRESULT)
   end
 
   IAutomaticUpdates2_GUID = "4a2f5c31-cfd9-410e-b7fb-29a653973a0f"
@@ -889,15 +889,15 @@ lib LibWin32
   end
 
   struct IUpdateIdentityVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_revision_number : UInt64
-    get_update_id : UInt64
+    query_interface : Proc(IUpdateIdentity*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateIdentity*, UInt32)
+    release : Proc(IUpdateIdentity*, UInt32)
+    get_type_info_count : Proc(IUpdateIdentity*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateIdentity*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateIdentity*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateIdentity*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_revision_number : Proc(IUpdateIdentity*, Int32*, HRESULT)
+    get_update_id : Proc(IUpdateIdentity*, UInt8**, HRESULT)
   end
 
   IUpdateIdentity_GUID = "46297823-9940-4c09-aed9-cd3ea6d05968"
@@ -907,17 +907,17 @@ lib LibWin32
   end
 
   struct IImageInformationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_alt_text : UInt64
-    get_height : UInt64
-    get_source : UInt64
-    get_width : UInt64
+    query_interface : Proc(IImageInformation*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IImageInformation*, UInt32)
+    release : Proc(IImageInformation*, UInt32)
+    get_type_info_count : Proc(IImageInformation*, UInt32*, HRESULT)
+    get_type_info : Proc(IImageInformation*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IImageInformation*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IImageInformation*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_alt_text : Proc(IImageInformation*, UInt8**, HRESULT)
+    get_height : Proc(IImageInformation*, Int32*, HRESULT)
+    get_source : Proc(IImageInformation*, UInt8**, HRESULT)
+    get_width : Proc(IImageInformation*, Int32*, HRESULT)
   end
 
   IImageInformation_GUID = "7c907864-346c-4aeb-8f3f-57da289f969f"
@@ -927,22 +927,22 @@ lib LibWin32
   end
 
   struct ICategoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_name : UInt64
-    get_category_id : UInt64
-    get_children : UInt64
-    get_description : UInt64
-    get_image : UInt64
-    get_order : UInt64
-    get_parent : UInt64
-    get_type : UInt64
-    get_updates : UInt64
+    query_interface : Proc(ICategory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ICategory*, UInt32)
+    release : Proc(ICategory*, UInt32)
+    get_type_info_count : Proc(ICategory*, UInt32*, HRESULT)
+    get_type_info : Proc(ICategory*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ICategory*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ICategory*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_name : Proc(ICategory*, UInt8**, HRESULT)
+    get_category_id : Proc(ICategory*, UInt8**, HRESULT)
+    get_children : Proc(ICategory*, ICategoryCollection*, HRESULT)
+    get_description : Proc(ICategory*, UInt8**, HRESULT)
+    get_image : Proc(ICategory*, IImageInformation*, HRESULT)
+    get_order : Proc(ICategory*, Int32*, HRESULT)
+    get_parent : Proc(ICategory*, ICategory*, HRESULT)
+    get_type : Proc(ICategory*, UInt8**, HRESULT)
+    get_updates : Proc(ICategory*, IUpdateCollection*, HRESULT)
   end
 
   ICategory_GUID = "81ddc1b8-9d35-47a6-b471-5b80f519223b"
@@ -952,16 +952,16 @@ lib LibWin32
   end
 
   struct ICategoryCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_item : UInt64
-    get__new_enum : UInt64
-    get_count : UInt64
+    query_interface : Proc(ICategoryCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ICategoryCollection*, UInt32)
+    release : Proc(ICategoryCollection*, UInt32)
+    get_type_info_count : Proc(ICategoryCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(ICategoryCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ICategoryCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ICategoryCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_item : Proc(ICategoryCollection*, Int32, ICategory*, HRESULT)
+    get__new_enum : Proc(ICategoryCollection*, IUnknown*, HRESULT)
+    get_count : Proc(ICategoryCollection*, Int32*, HRESULT)
   end
 
   ICategoryCollection_GUID = "3a56bfb8-576c-43f7-9335-fe4838fd7e37"
@@ -971,17 +971,17 @@ lib LibWin32
   end
 
   struct IInstallationBehaviorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_can_request_user_input : UInt64
-    get_impact : UInt64
-    get_reboot_behavior : UInt64
-    get_requires_network_connectivity : UInt64
+    query_interface : Proc(IInstallationBehavior*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInstallationBehavior*, UInt32)
+    release : Proc(IInstallationBehavior*, UInt32)
+    get_type_info_count : Proc(IInstallationBehavior*, UInt32*, HRESULT)
+    get_type_info : Proc(IInstallationBehavior*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IInstallationBehavior*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IInstallationBehavior*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_can_request_user_input : Proc(IInstallationBehavior*, Int16*, HRESULT)
+    get_impact : Proc(IInstallationBehavior*, InstallationImpact*, HRESULT)
+    get_reboot_behavior : Proc(IInstallationBehavior*, InstallationRebootBehavior*, HRESULT)
+    get_requires_network_connectivity : Proc(IInstallationBehavior*, Int16*, HRESULT)
   end
 
   IInstallationBehavior_GUID = "d9a59339-e245-4dbd-9686-4d5763e39624"
@@ -991,14 +991,14 @@ lib LibWin32
   end
 
   struct IUpdateDownloadContentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_download_url : UInt64
+    query_interface : Proc(IUpdateDownloadContent*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateDownloadContent*, UInt32)
+    release : Proc(IUpdateDownloadContent*, UInt32)
+    get_type_info_count : Proc(IUpdateDownloadContent*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateDownloadContent*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateDownloadContent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateDownloadContent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_download_url : Proc(IUpdateDownloadContent*, UInt8**, HRESULT)
   end
 
   IUpdateDownloadContent_GUID = "54a2cb2d-9a0c-48b6-8a50-9abb69ee2d02"
@@ -1008,15 +1008,15 @@ lib LibWin32
   end
 
   struct IUpdateDownloadContent2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_download_url : UInt64
-    get_is_delta_compressed_content : UInt64
+    query_interface : Proc(IUpdateDownloadContent2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateDownloadContent2*, UInt32)
+    release : Proc(IUpdateDownloadContent2*, UInt32)
+    get_type_info_count : Proc(IUpdateDownloadContent2*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateDownloadContent2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateDownloadContent2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateDownloadContent2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_download_url : Proc(IUpdateDownloadContent2*, UInt8**, HRESULT)
+    get_is_delta_compressed_content : Proc(IUpdateDownloadContent2*, Int16*, HRESULT)
   end
 
   IUpdateDownloadContent2_GUID = "c97ad11b-f257-420b-9d9f-377f733f6f68"
@@ -1026,16 +1026,16 @@ lib LibWin32
   end
 
   struct IUpdateDownloadContentCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_item : UInt64
-    get__new_enum : UInt64
-    get_count : UInt64
+    query_interface : Proc(IUpdateDownloadContentCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateDownloadContentCollection*, UInt32)
+    release : Proc(IUpdateDownloadContentCollection*, UInt32)
+    get_type_info_count : Proc(IUpdateDownloadContentCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateDownloadContentCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateDownloadContentCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateDownloadContentCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_item : Proc(IUpdateDownloadContentCollection*, Int32, IUpdateDownloadContent*, HRESULT)
+    get__new_enum : Proc(IUpdateDownloadContentCollection*, IUnknown*, HRESULT)
+    get_count : Proc(IUpdateDownloadContentCollection*, Int32*, HRESULT)
   end
 
   IUpdateDownloadContentCollection_GUID = "bc5513c8-b3b8-4bf7-a4d4-361c0d8c88ba"
@@ -1045,58 +1045,58 @@ lib LibWin32
   end
 
   struct IUpdateVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_title : UInt64
-    get_auto_select_on_web_sites : UInt64
-    get_bundled_updates : UInt64
-    get_can_require_source : UInt64
-    get_categories : UInt64
-    get_deadline : UInt64
-    get_delta_compressed_content_available : UInt64
-    get_delta_compressed_content_preferred : UInt64
-    get_description : UInt64
-    get_eula_accepted : UInt64
-    get_eula_text : UInt64
-    get_handler_id : UInt64
-    get_identity : UInt64
-    get_image : UInt64
-    get_installation_behavior : UInt64
-    get_is_beta : UInt64
-    get_is_downloaded : UInt64
-    get_is_hidden : UInt64
-    put_is_hidden : UInt64
-    get_is_installed : UInt64
-    get_is_mandatory : UInt64
-    get_is_uninstallable : UInt64
-    get_languages : UInt64
-    get_last_deployment_change_time : UInt64
-    get_max_download_size : UInt64
-    get_min_download_size : UInt64
-    get_more_info_urls : UInt64
-    get_msrc_severity : UInt64
-    get_recommended_cpu_speed : UInt64
-    get_recommended_hard_disk_space : UInt64
-    get_recommended_memory : UInt64
-    get_release_notes : UInt64
-    get_security_bulletin_i_ds : UInt64
-    get_superseded_update_i_ds : UInt64
-    get_support_url : UInt64
-    get_type : UInt64
-    get_uninstallation_notes : UInt64
-    get_uninstallation_behavior : UInt64
-    get_uninstallation_steps : UInt64
-    get_kb_article_i_ds : UInt64
-    accept_eula : UInt64
-    get_deployment_action : UInt64
-    copy_from_cache : UInt64
-    get_download_priority : UInt64
-    get_download_contents : UInt64
+    query_interface : Proc(IUpdate*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdate*, UInt32)
+    release : Proc(IUpdate*, UInt32)
+    get_type_info_count : Proc(IUpdate*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdate*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdate*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdate*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_title : Proc(IUpdate*, UInt8**, HRESULT)
+    get_auto_select_on_web_sites : Proc(IUpdate*, Int16*, HRESULT)
+    get_bundled_updates : Proc(IUpdate*, IUpdateCollection*, HRESULT)
+    get_can_require_source : Proc(IUpdate*, Int16*, HRESULT)
+    get_categories : Proc(IUpdate*, ICategoryCollection*, HRESULT)
+    get_deadline : Proc(IUpdate*, VARIANT*, HRESULT)
+    get_delta_compressed_content_available : Proc(IUpdate*, Int16*, HRESULT)
+    get_delta_compressed_content_preferred : Proc(IUpdate*, Int16*, HRESULT)
+    get_description : Proc(IUpdate*, UInt8**, HRESULT)
+    get_eula_accepted : Proc(IUpdate*, Int16*, HRESULT)
+    get_eula_text : Proc(IUpdate*, UInt8**, HRESULT)
+    get_handler_id : Proc(IUpdate*, UInt8**, HRESULT)
+    get_identity : Proc(IUpdate*, IUpdateIdentity*, HRESULT)
+    get_image : Proc(IUpdate*, IImageInformation*, HRESULT)
+    get_installation_behavior : Proc(IUpdate*, IInstallationBehavior*, HRESULT)
+    get_is_beta : Proc(IUpdate*, Int16*, HRESULT)
+    get_is_downloaded : Proc(IUpdate*, Int16*, HRESULT)
+    get_is_hidden : Proc(IUpdate*, Int16*, HRESULT)
+    put_is_hidden : Proc(IUpdate*, Int16, HRESULT)
+    get_is_installed : Proc(IUpdate*, Int16*, HRESULT)
+    get_is_mandatory : Proc(IUpdate*, Int16*, HRESULT)
+    get_is_uninstallable : Proc(IUpdate*, Int16*, HRESULT)
+    get_languages : Proc(IUpdate*, IStringCollection*, HRESULT)
+    get_last_deployment_change_time : Proc(IUpdate*, Float64*, HRESULT)
+    get_max_download_size : Proc(IUpdate*, DECIMAL*, HRESULT)
+    get_min_download_size : Proc(IUpdate*, DECIMAL*, HRESULT)
+    get_more_info_urls : Proc(IUpdate*, IStringCollection*, HRESULT)
+    get_msrc_severity : Proc(IUpdate*, UInt8**, HRESULT)
+    get_recommended_cpu_speed : Proc(IUpdate*, Int32*, HRESULT)
+    get_recommended_hard_disk_space : Proc(IUpdate*, Int32*, HRESULT)
+    get_recommended_memory : Proc(IUpdate*, Int32*, HRESULT)
+    get_release_notes : Proc(IUpdate*, UInt8**, HRESULT)
+    get_security_bulletin_i_ds : Proc(IUpdate*, IStringCollection*, HRESULT)
+    get_superseded_update_i_ds : Proc(IUpdate*, IStringCollection*, HRESULT)
+    get_support_url : Proc(IUpdate*, UInt8**, HRESULT)
+    get_type : Proc(IUpdate*, UpdateType*, HRESULT)
+    get_uninstallation_notes : Proc(IUpdate*, UInt8**, HRESULT)
+    get_uninstallation_behavior : Proc(IUpdate*, IInstallationBehavior*, HRESULT)
+    get_uninstallation_steps : Proc(IUpdate*, IStringCollection*, HRESULT)
+    get_kb_article_i_ds : Proc(IUpdate*, IStringCollection*, HRESULT)
+    accept_eula : Proc(IUpdate*, HRESULT)
+    get_deployment_action : Proc(IUpdate*, DeploymentAction*, HRESULT)
+    copy_from_cache : Proc(IUpdate*, UInt8*, Int16, HRESULT)
+    get_download_priority : Proc(IUpdate*, DownloadPriority*, HRESULT)
+    get_download_contents : Proc(IUpdate*, IUpdateDownloadContentCollection*, HRESULT)
   end
 
   IUpdate_GUID = "6a92b07a-d821-4682-b423-5c805022cc4d"
@@ -1106,66 +1106,66 @@ lib LibWin32
   end
 
   struct IWindowsDriverUpdateVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_title : UInt64
-    get_auto_select_on_web_sites : UInt64
-    get_bundled_updates : UInt64
-    get_can_require_source : UInt64
-    get_categories : UInt64
-    get_deadline : UInt64
-    get_delta_compressed_content_available : UInt64
-    get_delta_compressed_content_preferred : UInt64
-    get_description : UInt64
-    get_eula_accepted : UInt64
-    get_eula_text : UInt64
-    get_handler_id : UInt64
-    get_identity : UInt64
-    get_image : UInt64
-    get_installation_behavior : UInt64
-    get_is_beta : UInt64
-    get_is_downloaded : UInt64
-    get_is_hidden : UInt64
-    put_is_hidden : UInt64
-    get_is_installed : UInt64
-    get_is_mandatory : UInt64
-    get_is_uninstallable : UInt64
-    get_languages : UInt64
-    get_last_deployment_change_time : UInt64
-    get_max_download_size : UInt64
-    get_min_download_size : UInt64
-    get_more_info_urls : UInt64
-    get_msrc_severity : UInt64
-    get_recommended_cpu_speed : UInt64
-    get_recommended_hard_disk_space : UInt64
-    get_recommended_memory : UInt64
-    get_release_notes : UInt64
-    get_security_bulletin_i_ds : UInt64
-    get_superseded_update_i_ds : UInt64
-    get_support_url : UInt64
-    get_type : UInt64
-    get_uninstallation_notes : UInt64
-    get_uninstallation_behavior : UInt64
-    get_uninstallation_steps : UInt64
-    get_kb_article_i_ds : UInt64
-    accept_eula : UInt64
-    get_deployment_action : UInt64
-    copy_from_cache : UInt64
-    get_download_priority : UInt64
-    get_download_contents : UInt64
-    get_driver_class : UInt64
-    get_driver_hardware_id : UInt64
-    get_driver_manufacturer : UInt64
-    get_driver_model : UInt64
-    get_driver_provider : UInt64
-    get_driver_ver_date : UInt64
-    get_device_problem_number : UInt64
-    get_device_status : UInt64
+    query_interface : Proc(IWindowsDriverUpdate*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWindowsDriverUpdate*, UInt32)
+    release : Proc(IWindowsDriverUpdate*, UInt32)
+    get_type_info_count : Proc(IWindowsDriverUpdate*, UInt32*, HRESULT)
+    get_type_info : Proc(IWindowsDriverUpdate*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWindowsDriverUpdate*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWindowsDriverUpdate*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_title : Proc(IWindowsDriverUpdate*, UInt8**, HRESULT)
+    get_auto_select_on_web_sites : Proc(IWindowsDriverUpdate*, Int16*, HRESULT)
+    get_bundled_updates : Proc(IWindowsDriverUpdate*, IUpdateCollection*, HRESULT)
+    get_can_require_source : Proc(IWindowsDriverUpdate*, Int16*, HRESULT)
+    get_categories : Proc(IWindowsDriverUpdate*, ICategoryCollection*, HRESULT)
+    get_deadline : Proc(IWindowsDriverUpdate*, VARIANT*, HRESULT)
+    get_delta_compressed_content_available : Proc(IWindowsDriverUpdate*, Int16*, HRESULT)
+    get_delta_compressed_content_preferred : Proc(IWindowsDriverUpdate*, Int16*, HRESULT)
+    get_description : Proc(IWindowsDriverUpdate*, UInt8**, HRESULT)
+    get_eula_accepted : Proc(IWindowsDriverUpdate*, Int16*, HRESULT)
+    get_eula_text : Proc(IWindowsDriverUpdate*, UInt8**, HRESULT)
+    get_handler_id : Proc(IWindowsDriverUpdate*, UInt8**, HRESULT)
+    get_identity : Proc(IWindowsDriverUpdate*, IUpdateIdentity*, HRESULT)
+    get_image : Proc(IWindowsDriverUpdate*, IImageInformation*, HRESULT)
+    get_installation_behavior : Proc(IWindowsDriverUpdate*, IInstallationBehavior*, HRESULT)
+    get_is_beta : Proc(IWindowsDriverUpdate*, Int16*, HRESULT)
+    get_is_downloaded : Proc(IWindowsDriverUpdate*, Int16*, HRESULT)
+    get_is_hidden : Proc(IWindowsDriverUpdate*, Int16*, HRESULT)
+    put_is_hidden : Proc(IWindowsDriverUpdate*, Int16, HRESULT)
+    get_is_installed : Proc(IWindowsDriverUpdate*, Int16*, HRESULT)
+    get_is_mandatory : Proc(IWindowsDriverUpdate*, Int16*, HRESULT)
+    get_is_uninstallable : Proc(IWindowsDriverUpdate*, Int16*, HRESULT)
+    get_languages : Proc(IWindowsDriverUpdate*, IStringCollection*, HRESULT)
+    get_last_deployment_change_time : Proc(IWindowsDriverUpdate*, Float64*, HRESULT)
+    get_max_download_size : Proc(IWindowsDriverUpdate*, DECIMAL*, HRESULT)
+    get_min_download_size : Proc(IWindowsDriverUpdate*, DECIMAL*, HRESULT)
+    get_more_info_urls : Proc(IWindowsDriverUpdate*, IStringCollection*, HRESULT)
+    get_msrc_severity : Proc(IWindowsDriverUpdate*, UInt8**, HRESULT)
+    get_recommended_cpu_speed : Proc(IWindowsDriverUpdate*, Int32*, HRESULT)
+    get_recommended_hard_disk_space : Proc(IWindowsDriverUpdate*, Int32*, HRESULT)
+    get_recommended_memory : Proc(IWindowsDriverUpdate*, Int32*, HRESULT)
+    get_release_notes : Proc(IWindowsDriverUpdate*, UInt8**, HRESULT)
+    get_security_bulletin_i_ds : Proc(IWindowsDriverUpdate*, IStringCollection*, HRESULT)
+    get_superseded_update_i_ds : Proc(IWindowsDriverUpdate*, IStringCollection*, HRESULT)
+    get_support_url : Proc(IWindowsDriverUpdate*, UInt8**, HRESULT)
+    get_type : Proc(IWindowsDriverUpdate*, UpdateType*, HRESULT)
+    get_uninstallation_notes : Proc(IWindowsDriverUpdate*, UInt8**, HRESULT)
+    get_uninstallation_behavior : Proc(IWindowsDriverUpdate*, IInstallationBehavior*, HRESULT)
+    get_uninstallation_steps : Proc(IWindowsDriverUpdate*, IStringCollection*, HRESULT)
+    get_kb_article_i_ds : Proc(IWindowsDriverUpdate*, IStringCollection*, HRESULT)
+    accept_eula : Proc(IWindowsDriverUpdate*, HRESULT)
+    get_deployment_action : Proc(IWindowsDriverUpdate*, DeploymentAction*, HRESULT)
+    copy_from_cache : Proc(IWindowsDriverUpdate*, UInt8*, Int16, HRESULT)
+    get_download_priority : Proc(IWindowsDriverUpdate*, DownloadPriority*, HRESULT)
+    get_download_contents : Proc(IWindowsDriverUpdate*, IUpdateDownloadContentCollection*, HRESULT)
+    get_driver_class : Proc(IWindowsDriverUpdate*, UInt8**, HRESULT)
+    get_driver_hardware_id : Proc(IWindowsDriverUpdate*, UInt8**, HRESULT)
+    get_driver_manufacturer : Proc(IWindowsDriverUpdate*, UInt8**, HRESULT)
+    get_driver_model : Proc(IWindowsDriverUpdate*, UInt8**, HRESULT)
+    get_driver_provider : Proc(IWindowsDriverUpdate*, UInt8**, HRESULT)
+    get_driver_ver_date : Proc(IWindowsDriverUpdate*, Float64*, HRESULT)
+    get_device_problem_number : Proc(IWindowsDriverUpdate*, Int32*, HRESULT)
+    get_device_status : Proc(IWindowsDriverUpdate*, Int32*, HRESULT)
   end
 
   IWindowsDriverUpdate_GUID = "b383cd1a-5ce9-4504-9f63-764b1236f191"
@@ -1175,62 +1175,62 @@ lib LibWin32
   end
 
   struct IUpdate2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_title : UInt64
-    get_auto_select_on_web_sites : UInt64
-    get_bundled_updates : UInt64
-    get_can_require_source : UInt64
-    get_categories : UInt64
-    get_deadline : UInt64
-    get_delta_compressed_content_available : UInt64
-    get_delta_compressed_content_preferred : UInt64
-    get_description : UInt64
-    get_eula_accepted : UInt64
-    get_eula_text : UInt64
-    get_handler_id : UInt64
-    get_identity : UInt64
-    get_image : UInt64
-    get_installation_behavior : UInt64
-    get_is_beta : UInt64
-    get_is_downloaded : UInt64
-    get_is_hidden : UInt64
-    put_is_hidden : UInt64
-    get_is_installed : UInt64
-    get_is_mandatory : UInt64
-    get_is_uninstallable : UInt64
-    get_languages : UInt64
-    get_last_deployment_change_time : UInt64
-    get_max_download_size : UInt64
-    get_min_download_size : UInt64
-    get_more_info_urls : UInt64
-    get_msrc_severity : UInt64
-    get_recommended_cpu_speed : UInt64
-    get_recommended_hard_disk_space : UInt64
-    get_recommended_memory : UInt64
-    get_release_notes : UInt64
-    get_security_bulletin_i_ds : UInt64
-    get_superseded_update_i_ds : UInt64
-    get_support_url : UInt64
-    get_type : UInt64
-    get_uninstallation_notes : UInt64
-    get_uninstallation_behavior : UInt64
-    get_uninstallation_steps : UInt64
-    get_kb_article_i_ds : UInt64
-    accept_eula : UInt64
-    get_deployment_action : UInt64
-    copy_from_cache : UInt64
-    get_download_priority : UInt64
-    get_download_contents : UInt64
-    get_reboot_required : UInt64
-    get_is_present : UInt64
-    get_cve_i_ds : UInt64
-    copy_to_cache : UInt64
+    query_interface : Proc(IUpdate2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdate2*, UInt32)
+    release : Proc(IUpdate2*, UInt32)
+    get_type_info_count : Proc(IUpdate2*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdate2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdate2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdate2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_title : Proc(IUpdate2*, UInt8**, HRESULT)
+    get_auto_select_on_web_sites : Proc(IUpdate2*, Int16*, HRESULT)
+    get_bundled_updates : Proc(IUpdate2*, IUpdateCollection*, HRESULT)
+    get_can_require_source : Proc(IUpdate2*, Int16*, HRESULT)
+    get_categories : Proc(IUpdate2*, ICategoryCollection*, HRESULT)
+    get_deadline : Proc(IUpdate2*, VARIANT*, HRESULT)
+    get_delta_compressed_content_available : Proc(IUpdate2*, Int16*, HRESULT)
+    get_delta_compressed_content_preferred : Proc(IUpdate2*, Int16*, HRESULT)
+    get_description : Proc(IUpdate2*, UInt8**, HRESULT)
+    get_eula_accepted : Proc(IUpdate2*, Int16*, HRESULT)
+    get_eula_text : Proc(IUpdate2*, UInt8**, HRESULT)
+    get_handler_id : Proc(IUpdate2*, UInt8**, HRESULT)
+    get_identity : Proc(IUpdate2*, IUpdateIdentity*, HRESULT)
+    get_image : Proc(IUpdate2*, IImageInformation*, HRESULT)
+    get_installation_behavior : Proc(IUpdate2*, IInstallationBehavior*, HRESULT)
+    get_is_beta : Proc(IUpdate2*, Int16*, HRESULT)
+    get_is_downloaded : Proc(IUpdate2*, Int16*, HRESULT)
+    get_is_hidden : Proc(IUpdate2*, Int16*, HRESULT)
+    put_is_hidden : Proc(IUpdate2*, Int16, HRESULT)
+    get_is_installed : Proc(IUpdate2*, Int16*, HRESULT)
+    get_is_mandatory : Proc(IUpdate2*, Int16*, HRESULT)
+    get_is_uninstallable : Proc(IUpdate2*, Int16*, HRESULT)
+    get_languages : Proc(IUpdate2*, IStringCollection*, HRESULT)
+    get_last_deployment_change_time : Proc(IUpdate2*, Float64*, HRESULT)
+    get_max_download_size : Proc(IUpdate2*, DECIMAL*, HRESULT)
+    get_min_download_size : Proc(IUpdate2*, DECIMAL*, HRESULT)
+    get_more_info_urls : Proc(IUpdate2*, IStringCollection*, HRESULT)
+    get_msrc_severity : Proc(IUpdate2*, UInt8**, HRESULT)
+    get_recommended_cpu_speed : Proc(IUpdate2*, Int32*, HRESULT)
+    get_recommended_hard_disk_space : Proc(IUpdate2*, Int32*, HRESULT)
+    get_recommended_memory : Proc(IUpdate2*, Int32*, HRESULT)
+    get_release_notes : Proc(IUpdate2*, UInt8**, HRESULT)
+    get_security_bulletin_i_ds : Proc(IUpdate2*, IStringCollection*, HRESULT)
+    get_superseded_update_i_ds : Proc(IUpdate2*, IStringCollection*, HRESULT)
+    get_support_url : Proc(IUpdate2*, UInt8**, HRESULT)
+    get_type : Proc(IUpdate2*, UpdateType*, HRESULT)
+    get_uninstallation_notes : Proc(IUpdate2*, UInt8**, HRESULT)
+    get_uninstallation_behavior : Proc(IUpdate2*, IInstallationBehavior*, HRESULT)
+    get_uninstallation_steps : Proc(IUpdate2*, IStringCollection*, HRESULT)
+    get_kb_article_i_ds : Proc(IUpdate2*, IStringCollection*, HRESULT)
+    accept_eula : Proc(IUpdate2*, HRESULT)
+    get_deployment_action : Proc(IUpdate2*, DeploymentAction*, HRESULT)
+    copy_from_cache : Proc(IUpdate2*, UInt8*, Int16, HRESULT)
+    get_download_priority : Proc(IUpdate2*, DownloadPriority*, HRESULT)
+    get_download_contents : Proc(IUpdate2*, IUpdateDownloadContentCollection*, HRESULT)
+    get_reboot_required : Proc(IUpdate2*, Int16*, HRESULT)
+    get_is_present : Proc(IUpdate2*, Int16*, HRESULT)
+    get_cve_i_ds : Proc(IUpdate2*, IStringCollection*, HRESULT)
+    copy_to_cache : Proc(IUpdate2*, IStringCollection, HRESULT)
   end
 
   IUpdate2_GUID = "144fe9b0-d23d-4a8b-8634-fb4457533b7a"
@@ -1240,63 +1240,63 @@ lib LibWin32
   end
 
   struct IUpdate3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_title : UInt64
-    get_auto_select_on_web_sites : UInt64
-    get_bundled_updates : UInt64
-    get_can_require_source : UInt64
-    get_categories : UInt64
-    get_deadline : UInt64
-    get_delta_compressed_content_available : UInt64
-    get_delta_compressed_content_preferred : UInt64
-    get_description : UInt64
-    get_eula_accepted : UInt64
-    get_eula_text : UInt64
-    get_handler_id : UInt64
-    get_identity : UInt64
-    get_image : UInt64
-    get_installation_behavior : UInt64
-    get_is_beta : UInt64
-    get_is_downloaded : UInt64
-    get_is_hidden : UInt64
-    put_is_hidden : UInt64
-    get_is_installed : UInt64
-    get_is_mandatory : UInt64
-    get_is_uninstallable : UInt64
-    get_languages : UInt64
-    get_last_deployment_change_time : UInt64
-    get_max_download_size : UInt64
-    get_min_download_size : UInt64
-    get_more_info_urls : UInt64
-    get_msrc_severity : UInt64
-    get_recommended_cpu_speed : UInt64
-    get_recommended_hard_disk_space : UInt64
-    get_recommended_memory : UInt64
-    get_release_notes : UInt64
-    get_security_bulletin_i_ds : UInt64
-    get_superseded_update_i_ds : UInt64
-    get_support_url : UInt64
-    get_type : UInt64
-    get_uninstallation_notes : UInt64
-    get_uninstallation_behavior : UInt64
-    get_uninstallation_steps : UInt64
-    get_kb_article_i_ds : UInt64
-    accept_eula : UInt64
-    get_deployment_action : UInt64
-    copy_from_cache : UInt64
-    get_download_priority : UInt64
-    get_download_contents : UInt64
-    get_reboot_required : UInt64
-    get_is_present : UInt64
-    get_cve_i_ds : UInt64
-    copy_to_cache : UInt64
-    get_browse_only : UInt64
+    query_interface : Proc(IUpdate3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdate3*, UInt32)
+    release : Proc(IUpdate3*, UInt32)
+    get_type_info_count : Proc(IUpdate3*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdate3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdate3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdate3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_title : Proc(IUpdate3*, UInt8**, HRESULT)
+    get_auto_select_on_web_sites : Proc(IUpdate3*, Int16*, HRESULT)
+    get_bundled_updates : Proc(IUpdate3*, IUpdateCollection*, HRESULT)
+    get_can_require_source : Proc(IUpdate3*, Int16*, HRESULT)
+    get_categories : Proc(IUpdate3*, ICategoryCollection*, HRESULT)
+    get_deadline : Proc(IUpdate3*, VARIANT*, HRESULT)
+    get_delta_compressed_content_available : Proc(IUpdate3*, Int16*, HRESULT)
+    get_delta_compressed_content_preferred : Proc(IUpdate3*, Int16*, HRESULT)
+    get_description : Proc(IUpdate3*, UInt8**, HRESULT)
+    get_eula_accepted : Proc(IUpdate3*, Int16*, HRESULT)
+    get_eula_text : Proc(IUpdate3*, UInt8**, HRESULT)
+    get_handler_id : Proc(IUpdate3*, UInt8**, HRESULT)
+    get_identity : Proc(IUpdate3*, IUpdateIdentity*, HRESULT)
+    get_image : Proc(IUpdate3*, IImageInformation*, HRESULT)
+    get_installation_behavior : Proc(IUpdate3*, IInstallationBehavior*, HRESULT)
+    get_is_beta : Proc(IUpdate3*, Int16*, HRESULT)
+    get_is_downloaded : Proc(IUpdate3*, Int16*, HRESULT)
+    get_is_hidden : Proc(IUpdate3*, Int16*, HRESULT)
+    put_is_hidden : Proc(IUpdate3*, Int16, HRESULT)
+    get_is_installed : Proc(IUpdate3*, Int16*, HRESULT)
+    get_is_mandatory : Proc(IUpdate3*, Int16*, HRESULT)
+    get_is_uninstallable : Proc(IUpdate3*, Int16*, HRESULT)
+    get_languages : Proc(IUpdate3*, IStringCollection*, HRESULT)
+    get_last_deployment_change_time : Proc(IUpdate3*, Float64*, HRESULT)
+    get_max_download_size : Proc(IUpdate3*, DECIMAL*, HRESULT)
+    get_min_download_size : Proc(IUpdate3*, DECIMAL*, HRESULT)
+    get_more_info_urls : Proc(IUpdate3*, IStringCollection*, HRESULT)
+    get_msrc_severity : Proc(IUpdate3*, UInt8**, HRESULT)
+    get_recommended_cpu_speed : Proc(IUpdate3*, Int32*, HRESULT)
+    get_recommended_hard_disk_space : Proc(IUpdate3*, Int32*, HRESULT)
+    get_recommended_memory : Proc(IUpdate3*, Int32*, HRESULT)
+    get_release_notes : Proc(IUpdate3*, UInt8**, HRESULT)
+    get_security_bulletin_i_ds : Proc(IUpdate3*, IStringCollection*, HRESULT)
+    get_superseded_update_i_ds : Proc(IUpdate3*, IStringCollection*, HRESULT)
+    get_support_url : Proc(IUpdate3*, UInt8**, HRESULT)
+    get_type : Proc(IUpdate3*, UpdateType*, HRESULT)
+    get_uninstallation_notes : Proc(IUpdate3*, UInt8**, HRESULT)
+    get_uninstallation_behavior : Proc(IUpdate3*, IInstallationBehavior*, HRESULT)
+    get_uninstallation_steps : Proc(IUpdate3*, IStringCollection*, HRESULT)
+    get_kb_article_i_ds : Proc(IUpdate3*, IStringCollection*, HRESULT)
+    accept_eula : Proc(IUpdate3*, HRESULT)
+    get_deployment_action : Proc(IUpdate3*, DeploymentAction*, HRESULT)
+    copy_from_cache : Proc(IUpdate3*, UInt8*, Int16, HRESULT)
+    get_download_priority : Proc(IUpdate3*, DownloadPriority*, HRESULT)
+    get_download_contents : Proc(IUpdate3*, IUpdateDownloadContentCollection*, HRESULT)
+    get_reboot_required : Proc(IUpdate3*, Int16*, HRESULT)
+    get_is_present : Proc(IUpdate3*, Int16*, HRESULT)
+    get_cve_i_ds : Proc(IUpdate3*, IStringCollection*, HRESULT)
+    copy_to_cache : Proc(IUpdate3*, IStringCollection, HRESULT)
+    get_browse_only : Proc(IUpdate3*, Int16*, HRESULT)
   end
 
   IUpdate3_GUID = "112eda6b-95b3-476f-9d90-aee82c6b8181"
@@ -1306,64 +1306,64 @@ lib LibWin32
   end
 
   struct IUpdate4VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_title : UInt64
-    get_auto_select_on_web_sites : UInt64
-    get_bundled_updates : UInt64
-    get_can_require_source : UInt64
-    get_categories : UInt64
-    get_deadline : UInt64
-    get_delta_compressed_content_available : UInt64
-    get_delta_compressed_content_preferred : UInt64
-    get_description : UInt64
-    get_eula_accepted : UInt64
-    get_eula_text : UInt64
-    get_handler_id : UInt64
-    get_identity : UInt64
-    get_image : UInt64
-    get_installation_behavior : UInt64
-    get_is_beta : UInt64
-    get_is_downloaded : UInt64
-    get_is_hidden : UInt64
-    put_is_hidden : UInt64
-    get_is_installed : UInt64
-    get_is_mandatory : UInt64
-    get_is_uninstallable : UInt64
-    get_languages : UInt64
-    get_last_deployment_change_time : UInt64
-    get_max_download_size : UInt64
-    get_min_download_size : UInt64
-    get_more_info_urls : UInt64
-    get_msrc_severity : UInt64
-    get_recommended_cpu_speed : UInt64
-    get_recommended_hard_disk_space : UInt64
-    get_recommended_memory : UInt64
-    get_release_notes : UInt64
-    get_security_bulletin_i_ds : UInt64
-    get_superseded_update_i_ds : UInt64
-    get_support_url : UInt64
-    get_type : UInt64
-    get_uninstallation_notes : UInt64
-    get_uninstallation_behavior : UInt64
-    get_uninstallation_steps : UInt64
-    get_kb_article_i_ds : UInt64
-    accept_eula : UInt64
-    get_deployment_action : UInt64
-    copy_from_cache : UInt64
-    get_download_priority : UInt64
-    get_download_contents : UInt64
-    get_reboot_required : UInt64
-    get_is_present : UInt64
-    get_cve_i_ds : UInt64
-    copy_to_cache : UInt64
-    get_browse_only : UInt64
-    get_per_user : UInt64
+    query_interface : Proc(IUpdate4*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdate4*, UInt32)
+    release : Proc(IUpdate4*, UInt32)
+    get_type_info_count : Proc(IUpdate4*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdate4*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdate4*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdate4*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_title : Proc(IUpdate4*, UInt8**, HRESULT)
+    get_auto_select_on_web_sites : Proc(IUpdate4*, Int16*, HRESULT)
+    get_bundled_updates : Proc(IUpdate4*, IUpdateCollection*, HRESULT)
+    get_can_require_source : Proc(IUpdate4*, Int16*, HRESULT)
+    get_categories : Proc(IUpdate4*, ICategoryCollection*, HRESULT)
+    get_deadline : Proc(IUpdate4*, VARIANT*, HRESULT)
+    get_delta_compressed_content_available : Proc(IUpdate4*, Int16*, HRESULT)
+    get_delta_compressed_content_preferred : Proc(IUpdate4*, Int16*, HRESULT)
+    get_description : Proc(IUpdate4*, UInt8**, HRESULT)
+    get_eula_accepted : Proc(IUpdate4*, Int16*, HRESULT)
+    get_eula_text : Proc(IUpdate4*, UInt8**, HRESULT)
+    get_handler_id : Proc(IUpdate4*, UInt8**, HRESULT)
+    get_identity : Proc(IUpdate4*, IUpdateIdentity*, HRESULT)
+    get_image : Proc(IUpdate4*, IImageInformation*, HRESULT)
+    get_installation_behavior : Proc(IUpdate4*, IInstallationBehavior*, HRESULT)
+    get_is_beta : Proc(IUpdate4*, Int16*, HRESULT)
+    get_is_downloaded : Proc(IUpdate4*, Int16*, HRESULT)
+    get_is_hidden : Proc(IUpdate4*, Int16*, HRESULT)
+    put_is_hidden : Proc(IUpdate4*, Int16, HRESULT)
+    get_is_installed : Proc(IUpdate4*, Int16*, HRESULT)
+    get_is_mandatory : Proc(IUpdate4*, Int16*, HRESULT)
+    get_is_uninstallable : Proc(IUpdate4*, Int16*, HRESULT)
+    get_languages : Proc(IUpdate4*, IStringCollection*, HRESULT)
+    get_last_deployment_change_time : Proc(IUpdate4*, Float64*, HRESULT)
+    get_max_download_size : Proc(IUpdate4*, DECIMAL*, HRESULT)
+    get_min_download_size : Proc(IUpdate4*, DECIMAL*, HRESULT)
+    get_more_info_urls : Proc(IUpdate4*, IStringCollection*, HRESULT)
+    get_msrc_severity : Proc(IUpdate4*, UInt8**, HRESULT)
+    get_recommended_cpu_speed : Proc(IUpdate4*, Int32*, HRESULT)
+    get_recommended_hard_disk_space : Proc(IUpdate4*, Int32*, HRESULT)
+    get_recommended_memory : Proc(IUpdate4*, Int32*, HRESULT)
+    get_release_notes : Proc(IUpdate4*, UInt8**, HRESULT)
+    get_security_bulletin_i_ds : Proc(IUpdate4*, IStringCollection*, HRESULT)
+    get_superseded_update_i_ds : Proc(IUpdate4*, IStringCollection*, HRESULT)
+    get_support_url : Proc(IUpdate4*, UInt8**, HRESULT)
+    get_type : Proc(IUpdate4*, UpdateType*, HRESULT)
+    get_uninstallation_notes : Proc(IUpdate4*, UInt8**, HRESULT)
+    get_uninstallation_behavior : Proc(IUpdate4*, IInstallationBehavior*, HRESULT)
+    get_uninstallation_steps : Proc(IUpdate4*, IStringCollection*, HRESULT)
+    get_kb_article_i_ds : Proc(IUpdate4*, IStringCollection*, HRESULT)
+    accept_eula : Proc(IUpdate4*, HRESULT)
+    get_deployment_action : Proc(IUpdate4*, DeploymentAction*, HRESULT)
+    copy_from_cache : Proc(IUpdate4*, UInt8*, Int16, HRESULT)
+    get_download_priority : Proc(IUpdate4*, DownloadPriority*, HRESULT)
+    get_download_contents : Proc(IUpdate4*, IUpdateDownloadContentCollection*, HRESULT)
+    get_reboot_required : Proc(IUpdate4*, Int16*, HRESULT)
+    get_is_present : Proc(IUpdate4*, Int16*, HRESULT)
+    get_cve_i_ds : Proc(IUpdate4*, IStringCollection*, HRESULT)
+    copy_to_cache : Proc(IUpdate4*, IStringCollection, HRESULT)
+    get_browse_only : Proc(IUpdate4*, Int16*, HRESULT)
+    get_per_user : Proc(IUpdate4*, Int16*, HRESULT)
   end
 
   IUpdate4_GUID = "27e94b0d-5139-49a2-9a61-93522dc54652"
@@ -1373,66 +1373,66 @@ lib LibWin32
   end
 
   struct IUpdate5VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_title : UInt64
-    get_auto_select_on_web_sites : UInt64
-    get_bundled_updates : UInt64
-    get_can_require_source : UInt64
-    get_categories : UInt64
-    get_deadline : UInt64
-    get_delta_compressed_content_available : UInt64
-    get_delta_compressed_content_preferred : UInt64
-    get_description : UInt64
-    get_eula_accepted : UInt64
-    get_eula_text : UInt64
-    get_handler_id : UInt64
-    get_identity : UInt64
-    get_image : UInt64
-    get_installation_behavior : UInt64
-    get_is_beta : UInt64
-    get_is_downloaded : UInt64
-    get_is_hidden : UInt64
-    put_is_hidden : UInt64
-    get_is_installed : UInt64
-    get_is_mandatory : UInt64
-    get_is_uninstallable : UInt64
-    get_languages : UInt64
-    get_last_deployment_change_time : UInt64
-    get_max_download_size : UInt64
-    get_min_download_size : UInt64
-    get_more_info_urls : UInt64
-    get_msrc_severity : UInt64
-    get_recommended_cpu_speed : UInt64
-    get_recommended_hard_disk_space : UInt64
-    get_recommended_memory : UInt64
-    get_release_notes : UInt64
-    get_security_bulletin_i_ds : UInt64
-    get_superseded_update_i_ds : UInt64
-    get_support_url : UInt64
-    get_type : UInt64
-    get_uninstallation_notes : UInt64
-    get_uninstallation_behavior : UInt64
-    get_uninstallation_steps : UInt64
-    get_kb_article_i_ds : UInt64
-    accept_eula : UInt64
-    get_deployment_action : UInt64
-    copy_from_cache : UInt64
-    get_download_priority : UInt64
-    get_download_contents : UInt64
-    get_reboot_required : UInt64
-    get_is_present : UInt64
-    get_cve_i_ds : UInt64
-    copy_to_cache : UInt64
-    get_browse_only : UInt64
-    get_per_user : UInt64
-    get_auto_selection : UInt64
-    get_auto_download : UInt64
+    query_interface : Proc(IUpdate5*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdate5*, UInt32)
+    release : Proc(IUpdate5*, UInt32)
+    get_type_info_count : Proc(IUpdate5*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdate5*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdate5*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdate5*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_title : Proc(IUpdate5*, UInt8**, HRESULT)
+    get_auto_select_on_web_sites : Proc(IUpdate5*, Int16*, HRESULT)
+    get_bundled_updates : Proc(IUpdate5*, IUpdateCollection*, HRESULT)
+    get_can_require_source : Proc(IUpdate5*, Int16*, HRESULT)
+    get_categories : Proc(IUpdate5*, ICategoryCollection*, HRESULT)
+    get_deadline : Proc(IUpdate5*, VARIANT*, HRESULT)
+    get_delta_compressed_content_available : Proc(IUpdate5*, Int16*, HRESULT)
+    get_delta_compressed_content_preferred : Proc(IUpdate5*, Int16*, HRESULT)
+    get_description : Proc(IUpdate5*, UInt8**, HRESULT)
+    get_eula_accepted : Proc(IUpdate5*, Int16*, HRESULT)
+    get_eula_text : Proc(IUpdate5*, UInt8**, HRESULT)
+    get_handler_id : Proc(IUpdate5*, UInt8**, HRESULT)
+    get_identity : Proc(IUpdate5*, IUpdateIdentity*, HRESULT)
+    get_image : Proc(IUpdate5*, IImageInformation*, HRESULT)
+    get_installation_behavior : Proc(IUpdate5*, IInstallationBehavior*, HRESULT)
+    get_is_beta : Proc(IUpdate5*, Int16*, HRESULT)
+    get_is_downloaded : Proc(IUpdate5*, Int16*, HRESULT)
+    get_is_hidden : Proc(IUpdate5*, Int16*, HRESULT)
+    put_is_hidden : Proc(IUpdate5*, Int16, HRESULT)
+    get_is_installed : Proc(IUpdate5*, Int16*, HRESULT)
+    get_is_mandatory : Proc(IUpdate5*, Int16*, HRESULT)
+    get_is_uninstallable : Proc(IUpdate5*, Int16*, HRESULT)
+    get_languages : Proc(IUpdate5*, IStringCollection*, HRESULT)
+    get_last_deployment_change_time : Proc(IUpdate5*, Float64*, HRESULT)
+    get_max_download_size : Proc(IUpdate5*, DECIMAL*, HRESULT)
+    get_min_download_size : Proc(IUpdate5*, DECIMAL*, HRESULT)
+    get_more_info_urls : Proc(IUpdate5*, IStringCollection*, HRESULT)
+    get_msrc_severity : Proc(IUpdate5*, UInt8**, HRESULT)
+    get_recommended_cpu_speed : Proc(IUpdate5*, Int32*, HRESULT)
+    get_recommended_hard_disk_space : Proc(IUpdate5*, Int32*, HRESULT)
+    get_recommended_memory : Proc(IUpdate5*, Int32*, HRESULT)
+    get_release_notes : Proc(IUpdate5*, UInt8**, HRESULT)
+    get_security_bulletin_i_ds : Proc(IUpdate5*, IStringCollection*, HRESULT)
+    get_superseded_update_i_ds : Proc(IUpdate5*, IStringCollection*, HRESULT)
+    get_support_url : Proc(IUpdate5*, UInt8**, HRESULT)
+    get_type : Proc(IUpdate5*, UpdateType*, HRESULT)
+    get_uninstallation_notes : Proc(IUpdate5*, UInt8**, HRESULT)
+    get_uninstallation_behavior : Proc(IUpdate5*, IInstallationBehavior*, HRESULT)
+    get_uninstallation_steps : Proc(IUpdate5*, IStringCollection*, HRESULT)
+    get_kb_article_i_ds : Proc(IUpdate5*, IStringCollection*, HRESULT)
+    accept_eula : Proc(IUpdate5*, HRESULT)
+    get_deployment_action : Proc(IUpdate5*, DeploymentAction*, HRESULT)
+    copy_from_cache : Proc(IUpdate5*, UInt8*, Int16, HRESULT)
+    get_download_priority : Proc(IUpdate5*, DownloadPriority*, HRESULT)
+    get_download_contents : Proc(IUpdate5*, IUpdateDownloadContentCollection*, HRESULT)
+    get_reboot_required : Proc(IUpdate5*, Int16*, HRESULT)
+    get_is_present : Proc(IUpdate5*, Int16*, HRESULT)
+    get_cve_i_ds : Proc(IUpdate5*, IStringCollection*, HRESULT)
+    copy_to_cache : Proc(IUpdate5*, IStringCollection, HRESULT)
+    get_browse_only : Proc(IUpdate5*, Int16*, HRESULT)
+    get_per_user : Proc(IUpdate5*, Int16*, HRESULT)
+    get_auto_selection : Proc(IUpdate5*, AutoSelectionMode*, HRESULT)
+    get_auto_download : Proc(IUpdate5*, AutoDownloadMode*, HRESULT)
   end
 
   IUpdate5_GUID = "c1c2f21a-d2f4-4902-b5c6-8a081c19a890"
@@ -1442,70 +1442,70 @@ lib LibWin32
   end
 
   struct IWindowsDriverUpdate2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_title : UInt64
-    get_auto_select_on_web_sites : UInt64
-    get_bundled_updates : UInt64
-    get_can_require_source : UInt64
-    get_categories : UInt64
-    get_deadline : UInt64
-    get_delta_compressed_content_available : UInt64
-    get_delta_compressed_content_preferred : UInt64
-    get_description : UInt64
-    get_eula_accepted : UInt64
-    get_eula_text : UInt64
-    get_handler_id : UInt64
-    get_identity : UInt64
-    get_image : UInt64
-    get_installation_behavior : UInt64
-    get_is_beta : UInt64
-    get_is_downloaded : UInt64
-    get_is_hidden : UInt64
-    put_is_hidden : UInt64
-    get_is_installed : UInt64
-    get_is_mandatory : UInt64
-    get_is_uninstallable : UInt64
-    get_languages : UInt64
-    get_last_deployment_change_time : UInt64
-    get_max_download_size : UInt64
-    get_min_download_size : UInt64
-    get_more_info_urls : UInt64
-    get_msrc_severity : UInt64
-    get_recommended_cpu_speed : UInt64
-    get_recommended_hard_disk_space : UInt64
-    get_recommended_memory : UInt64
-    get_release_notes : UInt64
-    get_security_bulletin_i_ds : UInt64
-    get_superseded_update_i_ds : UInt64
-    get_support_url : UInt64
-    get_type : UInt64
-    get_uninstallation_notes : UInt64
-    get_uninstallation_behavior : UInt64
-    get_uninstallation_steps : UInt64
-    get_kb_article_i_ds : UInt64
-    accept_eula : UInt64
-    get_deployment_action : UInt64
-    copy_from_cache : UInt64
-    get_download_priority : UInt64
-    get_download_contents : UInt64
-    get_driver_class : UInt64
-    get_driver_hardware_id : UInt64
-    get_driver_manufacturer : UInt64
-    get_driver_model : UInt64
-    get_driver_provider : UInt64
-    get_driver_ver_date : UInt64
-    get_device_problem_number : UInt64
-    get_device_status : UInt64
-    get_reboot_required : UInt64
-    get_is_present : UInt64
-    get_cve_i_ds : UInt64
-    copy_to_cache : UInt64
+    query_interface : Proc(IWindowsDriverUpdate2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWindowsDriverUpdate2*, UInt32)
+    release : Proc(IWindowsDriverUpdate2*, UInt32)
+    get_type_info_count : Proc(IWindowsDriverUpdate2*, UInt32*, HRESULT)
+    get_type_info : Proc(IWindowsDriverUpdate2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWindowsDriverUpdate2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWindowsDriverUpdate2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_title : Proc(IWindowsDriverUpdate2*, UInt8**, HRESULT)
+    get_auto_select_on_web_sites : Proc(IWindowsDriverUpdate2*, Int16*, HRESULT)
+    get_bundled_updates : Proc(IWindowsDriverUpdate2*, IUpdateCollection*, HRESULT)
+    get_can_require_source : Proc(IWindowsDriverUpdate2*, Int16*, HRESULT)
+    get_categories : Proc(IWindowsDriverUpdate2*, ICategoryCollection*, HRESULT)
+    get_deadline : Proc(IWindowsDriverUpdate2*, VARIANT*, HRESULT)
+    get_delta_compressed_content_available : Proc(IWindowsDriverUpdate2*, Int16*, HRESULT)
+    get_delta_compressed_content_preferred : Proc(IWindowsDriverUpdate2*, Int16*, HRESULT)
+    get_description : Proc(IWindowsDriverUpdate2*, UInt8**, HRESULT)
+    get_eula_accepted : Proc(IWindowsDriverUpdate2*, Int16*, HRESULT)
+    get_eula_text : Proc(IWindowsDriverUpdate2*, UInt8**, HRESULT)
+    get_handler_id : Proc(IWindowsDriverUpdate2*, UInt8**, HRESULT)
+    get_identity : Proc(IWindowsDriverUpdate2*, IUpdateIdentity*, HRESULT)
+    get_image : Proc(IWindowsDriverUpdate2*, IImageInformation*, HRESULT)
+    get_installation_behavior : Proc(IWindowsDriverUpdate2*, IInstallationBehavior*, HRESULT)
+    get_is_beta : Proc(IWindowsDriverUpdate2*, Int16*, HRESULT)
+    get_is_downloaded : Proc(IWindowsDriverUpdate2*, Int16*, HRESULT)
+    get_is_hidden : Proc(IWindowsDriverUpdate2*, Int16*, HRESULT)
+    put_is_hidden : Proc(IWindowsDriverUpdate2*, Int16, HRESULT)
+    get_is_installed : Proc(IWindowsDriverUpdate2*, Int16*, HRESULT)
+    get_is_mandatory : Proc(IWindowsDriverUpdate2*, Int16*, HRESULT)
+    get_is_uninstallable : Proc(IWindowsDriverUpdate2*, Int16*, HRESULT)
+    get_languages : Proc(IWindowsDriverUpdate2*, IStringCollection*, HRESULT)
+    get_last_deployment_change_time : Proc(IWindowsDriverUpdate2*, Float64*, HRESULT)
+    get_max_download_size : Proc(IWindowsDriverUpdate2*, DECIMAL*, HRESULT)
+    get_min_download_size : Proc(IWindowsDriverUpdate2*, DECIMAL*, HRESULT)
+    get_more_info_urls : Proc(IWindowsDriverUpdate2*, IStringCollection*, HRESULT)
+    get_msrc_severity : Proc(IWindowsDriverUpdate2*, UInt8**, HRESULT)
+    get_recommended_cpu_speed : Proc(IWindowsDriverUpdate2*, Int32*, HRESULT)
+    get_recommended_hard_disk_space : Proc(IWindowsDriverUpdate2*, Int32*, HRESULT)
+    get_recommended_memory : Proc(IWindowsDriverUpdate2*, Int32*, HRESULT)
+    get_release_notes : Proc(IWindowsDriverUpdate2*, UInt8**, HRESULT)
+    get_security_bulletin_i_ds : Proc(IWindowsDriverUpdate2*, IStringCollection*, HRESULT)
+    get_superseded_update_i_ds : Proc(IWindowsDriverUpdate2*, IStringCollection*, HRESULT)
+    get_support_url : Proc(IWindowsDriverUpdate2*, UInt8**, HRESULT)
+    get_type : Proc(IWindowsDriverUpdate2*, UpdateType*, HRESULT)
+    get_uninstallation_notes : Proc(IWindowsDriverUpdate2*, UInt8**, HRESULT)
+    get_uninstallation_behavior : Proc(IWindowsDriverUpdate2*, IInstallationBehavior*, HRESULT)
+    get_uninstallation_steps : Proc(IWindowsDriverUpdate2*, IStringCollection*, HRESULT)
+    get_kb_article_i_ds : Proc(IWindowsDriverUpdate2*, IStringCollection*, HRESULT)
+    accept_eula : Proc(IWindowsDriverUpdate2*, HRESULT)
+    get_deployment_action : Proc(IWindowsDriverUpdate2*, DeploymentAction*, HRESULT)
+    copy_from_cache : Proc(IWindowsDriverUpdate2*, UInt8*, Int16, HRESULT)
+    get_download_priority : Proc(IWindowsDriverUpdate2*, DownloadPriority*, HRESULT)
+    get_download_contents : Proc(IWindowsDriverUpdate2*, IUpdateDownloadContentCollection*, HRESULT)
+    get_driver_class : Proc(IWindowsDriverUpdate2*, UInt8**, HRESULT)
+    get_driver_hardware_id : Proc(IWindowsDriverUpdate2*, UInt8**, HRESULT)
+    get_driver_manufacturer : Proc(IWindowsDriverUpdate2*, UInt8**, HRESULT)
+    get_driver_model : Proc(IWindowsDriverUpdate2*, UInt8**, HRESULT)
+    get_driver_provider : Proc(IWindowsDriverUpdate2*, UInt8**, HRESULT)
+    get_driver_ver_date : Proc(IWindowsDriverUpdate2*, Float64*, HRESULT)
+    get_device_problem_number : Proc(IWindowsDriverUpdate2*, Int32*, HRESULT)
+    get_device_status : Proc(IWindowsDriverUpdate2*, Int32*, HRESULT)
+    get_reboot_required : Proc(IWindowsDriverUpdate2*, Int16*, HRESULT)
+    get_is_present : Proc(IWindowsDriverUpdate2*, Int16*, HRESULT)
+    get_cve_i_ds : Proc(IWindowsDriverUpdate2*, IStringCollection*, HRESULT)
+    copy_to_cache : Proc(IWindowsDriverUpdate2*, IStringCollection, HRESULT)
   end
 
   IWindowsDriverUpdate2_GUID = "615c4269-7a48-43bd-96b7-bf6ca27d6c3e"
@@ -1515,71 +1515,71 @@ lib LibWin32
   end
 
   struct IWindowsDriverUpdate3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_title : UInt64
-    get_auto_select_on_web_sites : UInt64
-    get_bundled_updates : UInt64
-    get_can_require_source : UInt64
-    get_categories : UInt64
-    get_deadline : UInt64
-    get_delta_compressed_content_available : UInt64
-    get_delta_compressed_content_preferred : UInt64
-    get_description : UInt64
-    get_eula_accepted : UInt64
-    get_eula_text : UInt64
-    get_handler_id : UInt64
-    get_identity : UInt64
-    get_image : UInt64
-    get_installation_behavior : UInt64
-    get_is_beta : UInt64
-    get_is_downloaded : UInt64
-    get_is_hidden : UInt64
-    put_is_hidden : UInt64
-    get_is_installed : UInt64
-    get_is_mandatory : UInt64
-    get_is_uninstallable : UInt64
-    get_languages : UInt64
-    get_last_deployment_change_time : UInt64
-    get_max_download_size : UInt64
-    get_min_download_size : UInt64
-    get_more_info_urls : UInt64
-    get_msrc_severity : UInt64
-    get_recommended_cpu_speed : UInt64
-    get_recommended_hard_disk_space : UInt64
-    get_recommended_memory : UInt64
-    get_release_notes : UInt64
-    get_security_bulletin_i_ds : UInt64
-    get_superseded_update_i_ds : UInt64
-    get_support_url : UInt64
-    get_type : UInt64
-    get_uninstallation_notes : UInt64
-    get_uninstallation_behavior : UInt64
-    get_uninstallation_steps : UInt64
-    get_kb_article_i_ds : UInt64
-    accept_eula : UInt64
-    get_deployment_action : UInt64
-    copy_from_cache : UInt64
-    get_download_priority : UInt64
-    get_download_contents : UInt64
-    get_driver_class : UInt64
-    get_driver_hardware_id : UInt64
-    get_driver_manufacturer : UInt64
-    get_driver_model : UInt64
-    get_driver_provider : UInt64
-    get_driver_ver_date : UInt64
-    get_device_problem_number : UInt64
-    get_device_status : UInt64
-    get_reboot_required : UInt64
-    get_is_present : UInt64
-    get_cve_i_ds : UInt64
-    copy_to_cache : UInt64
-    get_browse_only : UInt64
+    query_interface : Proc(IWindowsDriverUpdate3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWindowsDriverUpdate3*, UInt32)
+    release : Proc(IWindowsDriverUpdate3*, UInt32)
+    get_type_info_count : Proc(IWindowsDriverUpdate3*, UInt32*, HRESULT)
+    get_type_info : Proc(IWindowsDriverUpdate3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWindowsDriverUpdate3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWindowsDriverUpdate3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_title : Proc(IWindowsDriverUpdate3*, UInt8**, HRESULT)
+    get_auto_select_on_web_sites : Proc(IWindowsDriverUpdate3*, Int16*, HRESULT)
+    get_bundled_updates : Proc(IWindowsDriverUpdate3*, IUpdateCollection*, HRESULT)
+    get_can_require_source : Proc(IWindowsDriverUpdate3*, Int16*, HRESULT)
+    get_categories : Proc(IWindowsDriverUpdate3*, ICategoryCollection*, HRESULT)
+    get_deadline : Proc(IWindowsDriverUpdate3*, VARIANT*, HRESULT)
+    get_delta_compressed_content_available : Proc(IWindowsDriverUpdate3*, Int16*, HRESULT)
+    get_delta_compressed_content_preferred : Proc(IWindowsDriverUpdate3*, Int16*, HRESULT)
+    get_description : Proc(IWindowsDriverUpdate3*, UInt8**, HRESULT)
+    get_eula_accepted : Proc(IWindowsDriverUpdate3*, Int16*, HRESULT)
+    get_eula_text : Proc(IWindowsDriverUpdate3*, UInt8**, HRESULT)
+    get_handler_id : Proc(IWindowsDriverUpdate3*, UInt8**, HRESULT)
+    get_identity : Proc(IWindowsDriverUpdate3*, IUpdateIdentity*, HRESULT)
+    get_image : Proc(IWindowsDriverUpdate3*, IImageInformation*, HRESULT)
+    get_installation_behavior : Proc(IWindowsDriverUpdate3*, IInstallationBehavior*, HRESULT)
+    get_is_beta : Proc(IWindowsDriverUpdate3*, Int16*, HRESULT)
+    get_is_downloaded : Proc(IWindowsDriverUpdate3*, Int16*, HRESULT)
+    get_is_hidden : Proc(IWindowsDriverUpdate3*, Int16*, HRESULT)
+    put_is_hidden : Proc(IWindowsDriverUpdate3*, Int16, HRESULT)
+    get_is_installed : Proc(IWindowsDriverUpdate3*, Int16*, HRESULT)
+    get_is_mandatory : Proc(IWindowsDriverUpdate3*, Int16*, HRESULT)
+    get_is_uninstallable : Proc(IWindowsDriverUpdate3*, Int16*, HRESULT)
+    get_languages : Proc(IWindowsDriverUpdate3*, IStringCollection*, HRESULT)
+    get_last_deployment_change_time : Proc(IWindowsDriverUpdate3*, Float64*, HRESULT)
+    get_max_download_size : Proc(IWindowsDriverUpdate3*, DECIMAL*, HRESULT)
+    get_min_download_size : Proc(IWindowsDriverUpdate3*, DECIMAL*, HRESULT)
+    get_more_info_urls : Proc(IWindowsDriverUpdate3*, IStringCollection*, HRESULT)
+    get_msrc_severity : Proc(IWindowsDriverUpdate3*, UInt8**, HRESULT)
+    get_recommended_cpu_speed : Proc(IWindowsDriverUpdate3*, Int32*, HRESULT)
+    get_recommended_hard_disk_space : Proc(IWindowsDriverUpdate3*, Int32*, HRESULT)
+    get_recommended_memory : Proc(IWindowsDriverUpdate3*, Int32*, HRESULT)
+    get_release_notes : Proc(IWindowsDriverUpdate3*, UInt8**, HRESULT)
+    get_security_bulletin_i_ds : Proc(IWindowsDriverUpdate3*, IStringCollection*, HRESULT)
+    get_superseded_update_i_ds : Proc(IWindowsDriverUpdate3*, IStringCollection*, HRESULT)
+    get_support_url : Proc(IWindowsDriverUpdate3*, UInt8**, HRESULT)
+    get_type : Proc(IWindowsDriverUpdate3*, UpdateType*, HRESULT)
+    get_uninstallation_notes : Proc(IWindowsDriverUpdate3*, UInt8**, HRESULT)
+    get_uninstallation_behavior : Proc(IWindowsDriverUpdate3*, IInstallationBehavior*, HRESULT)
+    get_uninstallation_steps : Proc(IWindowsDriverUpdate3*, IStringCollection*, HRESULT)
+    get_kb_article_i_ds : Proc(IWindowsDriverUpdate3*, IStringCollection*, HRESULT)
+    accept_eula : Proc(IWindowsDriverUpdate3*, HRESULT)
+    get_deployment_action : Proc(IWindowsDriverUpdate3*, DeploymentAction*, HRESULT)
+    copy_from_cache : Proc(IWindowsDriverUpdate3*, UInt8*, Int16, HRESULT)
+    get_download_priority : Proc(IWindowsDriverUpdate3*, DownloadPriority*, HRESULT)
+    get_download_contents : Proc(IWindowsDriverUpdate3*, IUpdateDownloadContentCollection*, HRESULT)
+    get_driver_class : Proc(IWindowsDriverUpdate3*, UInt8**, HRESULT)
+    get_driver_hardware_id : Proc(IWindowsDriverUpdate3*, UInt8**, HRESULT)
+    get_driver_manufacturer : Proc(IWindowsDriverUpdate3*, UInt8**, HRESULT)
+    get_driver_model : Proc(IWindowsDriverUpdate3*, UInt8**, HRESULT)
+    get_driver_provider : Proc(IWindowsDriverUpdate3*, UInt8**, HRESULT)
+    get_driver_ver_date : Proc(IWindowsDriverUpdate3*, Float64*, HRESULT)
+    get_device_problem_number : Proc(IWindowsDriverUpdate3*, Int32*, HRESULT)
+    get_device_status : Proc(IWindowsDriverUpdate3*, Int32*, HRESULT)
+    get_reboot_required : Proc(IWindowsDriverUpdate3*, Int16*, HRESULT)
+    get_is_present : Proc(IWindowsDriverUpdate3*, Int16*, HRESULT)
+    get_cve_i_ds : Proc(IWindowsDriverUpdate3*, IStringCollection*, HRESULT)
+    copy_to_cache : Proc(IWindowsDriverUpdate3*, IStringCollection, HRESULT)
+    get_browse_only : Proc(IWindowsDriverUpdate3*, Int16*, HRESULT)
   end
 
   IWindowsDriverUpdate3_GUID = "49ebd502-4a96-41bd-9e3e-4c5057f4250c"
@@ -1589,21 +1589,21 @@ lib LibWin32
   end
 
   struct IWindowsDriverUpdateEntryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_driver_class : UInt64
-    get_driver_hardware_id : UInt64
-    get_driver_manufacturer : UInt64
-    get_driver_model : UInt64
-    get_driver_provider : UInt64
-    get_driver_ver_date : UInt64
-    get_device_problem_number : UInt64
-    get_device_status : UInt64
+    query_interface : Proc(IWindowsDriverUpdateEntry*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWindowsDriverUpdateEntry*, UInt32)
+    release : Proc(IWindowsDriverUpdateEntry*, UInt32)
+    get_type_info_count : Proc(IWindowsDriverUpdateEntry*, UInt32*, HRESULT)
+    get_type_info : Proc(IWindowsDriverUpdateEntry*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWindowsDriverUpdateEntry*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWindowsDriverUpdateEntry*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_driver_class : Proc(IWindowsDriverUpdateEntry*, UInt8**, HRESULT)
+    get_driver_hardware_id : Proc(IWindowsDriverUpdateEntry*, UInt8**, HRESULT)
+    get_driver_manufacturer : Proc(IWindowsDriverUpdateEntry*, UInt8**, HRESULT)
+    get_driver_model : Proc(IWindowsDriverUpdateEntry*, UInt8**, HRESULT)
+    get_driver_provider : Proc(IWindowsDriverUpdateEntry*, UInt8**, HRESULT)
+    get_driver_ver_date : Proc(IWindowsDriverUpdateEntry*, Float64*, HRESULT)
+    get_device_problem_number : Proc(IWindowsDriverUpdateEntry*, Int32*, HRESULT)
+    get_device_status : Proc(IWindowsDriverUpdateEntry*, Int32*, HRESULT)
   end
 
   IWindowsDriverUpdateEntry_GUID = "ed8bfe40-a60b-42ea-9652-817dfcfa23ec"
@@ -1613,16 +1613,16 @@ lib LibWin32
   end
 
   struct IWindowsDriverUpdateEntryCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_item : UInt64
-    get__new_enum : UInt64
-    get_count : UInt64
+    query_interface : Proc(IWindowsDriverUpdateEntryCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWindowsDriverUpdateEntryCollection*, UInt32)
+    release : Proc(IWindowsDriverUpdateEntryCollection*, UInt32)
+    get_type_info_count : Proc(IWindowsDriverUpdateEntryCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(IWindowsDriverUpdateEntryCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWindowsDriverUpdateEntryCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWindowsDriverUpdateEntryCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_item : Proc(IWindowsDriverUpdateEntryCollection*, Int32, IWindowsDriverUpdateEntry*, HRESULT)
+    get__new_enum : Proc(IWindowsDriverUpdateEntryCollection*, IUnknown*, HRESULT)
+    get_count : Proc(IWindowsDriverUpdateEntryCollection*, Int32*, HRESULT)
   end
 
   IWindowsDriverUpdateEntryCollection_GUID = "0d521700-a372-4bef-828b-3d00c10adebd"
@@ -1632,73 +1632,73 @@ lib LibWin32
   end
 
   struct IWindowsDriverUpdate4VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_title : UInt64
-    get_auto_select_on_web_sites : UInt64
-    get_bundled_updates : UInt64
-    get_can_require_source : UInt64
-    get_categories : UInt64
-    get_deadline : UInt64
-    get_delta_compressed_content_available : UInt64
-    get_delta_compressed_content_preferred : UInt64
-    get_description : UInt64
-    get_eula_accepted : UInt64
-    get_eula_text : UInt64
-    get_handler_id : UInt64
-    get_identity : UInt64
-    get_image : UInt64
-    get_installation_behavior : UInt64
-    get_is_beta : UInt64
-    get_is_downloaded : UInt64
-    get_is_hidden : UInt64
-    put_is_hidden : UInt64
-    get_is_installed : UInt64
-    get_is_mandatory : UInt64
-    get_is_uninstallable : UInt64
-    get_languages : UInt64
-    get_last_deployment_change_time : UInt64
-    get_max_download_size : UInt64
-    get_min_download_size : UInt64
-    get_more_info_urls : UInt64
-    get_msrc_severity : UInt64
-    get_recommended_cpu_speed : UInt64
-    get_recommended_hard_disk_space : UInt64
-    get_recommended_memory : UInt64
-    get_release_notes : UInt64
-    get_security_bulletin_i_ds : UInt64
-    get_superseded_update_i_ds : UInt64
-    get_support_url : UInt64
-    get_type : UInt64
-    get_uninstallation_notes : UInt64
-    get_uninstallation_behavior : UInt64
-    get_uninstallation_steps : UInt64
-    get_kb_article_i_ds : UInt64
-    accept_eula : UInt64
-    get_deployment_action : UInt64
-    copy_from_cache : UInt64
-    get_download_priority : UInt64
-    get_download_contents : UInt64
-    get_driver_class : UInt64
-    get_driver_hardware_id : UInt64
-    get_driver_manufacturer : UInt64
-    get_driver_model : UInt64
-    get_driver_provider : UInt64
-    get_driver_ver_date : UInt64
-    get_device_problem_number : UInt64
-    get_device_status : UInt64
-    get_reboot_required : UInt64
-    get_is_present : UInt64
-    get_cve_i_ds : UInt64
-    copy_to_cache : UInt64
-    get_browse_only : UInt64
-    get_windows_driver_update_entries : UInt64
-    get_per_user : UInt64
+    query_interface : Proc(IWindowsDriverUpdate4*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWindowsDriverUpdate4*, UInt32)
+    release : Proc(IWindowsDriverUpdate4*, UInt32)
+    get_type_info_count : Proc(IWindowsDriverUpdate4*, UInt32*, HRESULT)
+    get_type_info : Proc(IWindowsDriverUpdate4*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWindowsDriverUpdate4*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWindowsDriverUpdate4*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_title : Proc(IWindowsDriverUpdate4*, UInt8**, HRESULT)
+    get_auto_select_on_web_sites : Proc(IWindowsDriverUpdate4*, Int16*, HRESULT)
+    get_bundled_updates : Proc(IWindowsDriverUpdate4*, IUpdateCollection*, HRESULT)
+    get_can_require_source : Proc(IWindowsDriverUpdate4*, Int16*, HRESULT)
+    get_categories : Proc(IWindowsDriverUpdate4*, ICategoryCollection*, HRESULT)
+    get_deadline : Proc(IWindowsDriverUpdate4*, VARIANT*, HRESULT)
+    get_delta_compressed_content_available : Proc(IWindowsDriverUpdate4*, Int16*, HRESULT)
+    get_delta_compressed_content_preferred : Proc(IWindowsDriverUpdate4*, Int16*, HRESULT)
+    get_description : Proc(IWindowsDriverUpdate4*, UInt8**, HRESULT)
+    get_eula_accepted : Proc(IWindowsDriverUpdate4*, Int16*, HRESULT)
+    get_eula_text : Proc(IWindowsDriverUpdate4*, UInt8**, HRESULT)
+    get_handler_id : Proc(IWindowsDriverUpdate4*, UInt8**, HRESULT)
+    get_identity : Proc(IWindowsDriverUpdate4*, IUpdateIdentity*, HRESULT)
+    get_image : Proc(IWindowsDriverUpdate4*, IImageInformation*, HRESULT)
+    get_installation_behavior : Proc(IWindowsDriverUpdate4*, IInstallationBehavior*, HRESULT)
+    get_is_beta : Proc(IWindowsDriverUpdate4*, Int16*, HRESULT)
+    get_is_downloaded : Proc(IWindowsDriverUpdate4*, Int16*, HRESULT)
+    get_is_hidden : Proc(IWindowsDriverUpdate4*, Int16*, HRESULT)
+    put_is_hidden : Proc(IWindowsDriverUpdate4*, Int16, HRESULT)
+    get_is_installed : Proc(IWindowsDriverUpdate4*, Int16*, HRESULT)
+    get_is_mandatory : Proc(IWindowsDriverUpdate4*, Int16*, HRESULT)
+    get_is_uninstallable : Proc(IWindowsDriverUpdate4*, Int16*, HRESULT)
+    get_languages : Proc(IWindowsDriverUpdate4*, IStringCollection*, HRESULT)
+    get_last_deployment_change_time : Proc(IWindowsDriverUpdate4*, Float64*, HRESULT)
+    get_max_download_size : Proc(IWindowsDriverUpdate4*, DECIMAL*, HRESULT)
+    get_min_download_size : Proc(IWindowsDriverUpdate4*, DECIMAL*, HRESULT)
+    get_more_info_urls : Proc(IWindowsDriverUpdate4*, IStringCollection*, HRESULT)
+    get_msrc_severity : Proc(IWindowsDriverUpdate4*, UInt8**, HRESULT)
+    get_recommended_cpu_speed : Proc(IWindowsDriverUpdate4*, Int32*, HRESULT)
+    get_recommended_hard_disk_space : Proc(IWindowsDriverUpdate4*, Int32*, HRESULT)
+    get_recommended_memory : Proc(IWindowsDriverUpdate4*, Int32*, HRESULT)
+    get_release_notes : Proc(IWindowsDriverUpdate4*, UInt8**, HRESULT)
+    get_security_bulletin_i_ds : Proc(IWindowsDriverUpdate4*, IStringCollection*, HRESULT)
+    get_superseded_update_i_ds : Proc(IWindowsDriverUpdate4*, IStringCollection*, HRESULT)
+    get_support_url : Proc(IWindowsDriverUpdate4*, UInt8**, HRESULT)
+    get_type : Proc(IWindowsDriverUpdate4*, UpdateType*, HRESULT)
+    get_uninstallation_notes : Proc(IWindowsDriverUpdate4*, UInt8**, HRESULT)
+    get_uninstallation_behavior : Proc(IWindowsDriverUpdate4*, IInstallationBehavior*, HRESULT)
+    get_uninstallation_steps : Proc(IWindowsDriverUpdate4*, IStringCollection*, HRESULT)
+    get_kb_article_i_ds : Proc(IWindowsDriverUpdate4*, IStringCollection*, HRESULT)
+    accept_eula : Proc(IWindowsDriverUpdate4*, HRESULT)
+    get_deployment_action : Proc(IWindowsDriverUpdate4*, DeploymentAction*, HRESULT)
+    copy_from_cache : Proc(IWindowsDriverUpdate4*, UInt8*, Int16, HRESULT)
+    get_download_priority : Proc(IWindowsDriverUpdate4*, DownloadPriority*, HRESULT)
+    get_download_contents : Proc(IWindowsDriverUpdate4*, IUpdateDownloadContentCollection*, HRESULT)
+    get_driver_class : Proc(IWindowsDriverUpdate4*, UInt8**, HRESULT)
+    get_driver_hardware_id : Proc(IWindowsDriverUpdate4*, UInt8**, HRESULT)
+    get_driver_manufacturer : Proc(IWindowsDriverUpdate4*, UInt8**, HRESULT)
+    get_driver_model : Proc(IWindowsDriverUpdate4*, UInt8**, HRESULT)
+    get_driver_provider : Proc(IWindowsDriverUpdate4*, UInt8**, HRESULT)
+    get_driver_ver_date : Proc(IWindowsDriverUpdate4*, Float64*, HRESULT)
+    get_device_problem_number : Proc(IWindowsDriverUpdate4*, Int32*, HRESULT)
+    get_device_status : Proc(IWindowsDriverUpdate4*, Int32*, HRESULT)
+    get_reboot_required : Proc(IWindowsDriverUpdate4*, Int16*, HRESULT)
+    get_is_present : Proc(IWindowsDriverUpdate4*, Int16*, HRESULT)
+    get_cve_i_ds : Proc(IWindowsDriverUpdate4*, IStringCollection*, HRESULT)
+    copy_to_cache : Proc(IWindowsDriverUpdate4*, IStringCollection, HRESULT)
+    get_browse_only : Proc(IWindowsDriverUpdate4*, Int16*, HRESULT)
+    get_windows_driver_update_entries : Proc(IWindowsDriverUpdate4*, IWindowsDriverUpdateEntryCollection*, HRESULT)
+    get_per_user : Proc(IWindowsDriverUpdate4*, Int16*, HRESULT)
   end
 
   IWindowsDriverUpdate4_GUID = "004c6a2b-0c19-4c69-9f5c-a269b2560db9"
@@ -1708,75 +1708,75 @@ lib LibWin32
   end
 
   struct IWindowsDriverUpdate5VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_title : UInt64
-    get_auto_select_on_web_sites : UInt64
-    get_bundled_updates : UInt64
-    get_can_require_source : UInt64
-    get_categories : UInt64
-    get_deadline : UInt64
-    get_delta_compressed_content_available : UInt64
-    get_delta_compressed_content_preferred : UInt64
-    get_description : UInt64
-    get_eula_accepted : UInt64
-    get_eula_text : UInt64
-    get_handler_id : UInt64
-    get_identity : UInt64
-    get_image : UInt64
-    get_installation_behavior : UInt64
-    get_is_beta : UInt64
-    get_is_downloaded : UInt64
-    get_is_hidden : UInt64
-    put_is_hidden : UInt64
-    get_is_installed : UInt64
-    get_is_mandatory : UInt64
-    get_is_uninstallable : UInt64
-    get_languages : UInt64
-    get_last_deployment_change_time : UInt64
-    get_max_download_size : UInt64
-    get_min_download_size : UInt64
-    get_more_info_urls : UInt64
-    get_msrc_severity : UInt64
-    get_recommended_cpu_speed : UInt64
-    get_recommended_hard_disk_space : UInt64
-    get_recommended_memory : UInt64
-    get_release_notes : UInt64
-    get_security_bulletin_i_ds : UInt64
-    get_superseded_update_i_ds : UInt64
-    get_support_url : UInt64
-    get_type : UInt64
-    get_uninstallation_notes : UInt64
-    get_uninstallation_behavior : UInt64
-    get_uninstallation_steps : UInt64
-    get_kb_article_i_ds : UInt64
-    accept_eula : UInt64
-    get_deployment_action : UInt64
-    copy_from_cache : UInt64
-    get_download_priority : UInt64
-    get_download_contents : UInt64
-    get_driver_class : UInt64
-    get_driver_hardware_id : UInt64
-    get_driver_manufacturer : UInt64
-    get_driver_model : UInt64
-    get_driver_provider : UInt64
-    get_driver_ver_date : UInt64
-    get_device_problem_number : UInt64
-    get_device_status : UInt64
-    get_reboot_required : UInt64
-    get_is_present : UInt64
-    get_cve_i_ds : UInt64
-    copy_to_cache : UInt64
-    get_browse_only : UInt64
-    get_windows_driver_update_entries : UInt64
-    get_per_user : UInt64
-    get_auto_selection : UInt64
-    get_auto_download : UInt64
+    query_interface : Proc(IWindowsDriverUpdate5*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWindowsDriverUpdate5*, UInt32)
+    release : Proc(IWindowsDriverUpdate5*, UInt32)
+    get_type_info_count : Proc(IWindowsDriverUpdate5*, UInt32*, HRESULT)
+    get_type_info : Proc(IWindowsDriverUpdate5*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWindowsDriverUpdate5*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWindowsDriverUpdate5*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_title : Proc(IWindowsDriverUpdate5*, UInt8**, HRESULT)
+    get_auto_select_on_web_sites : Proc(IWindowsDriverUpdate5*, Int16*, HRESULT)
+    get_bundled_updates : Proc(IWindowsDriverUpdate5*, IUpdateCollection*, HRESULT)
+    get_can_require_source : Proc(IWindowsDriverUpdate5*, Int16*, HRESULT)
+    get_categories : Proc(IWindowsDriverUpdate5*, ICategoryCollection*, HRESULT)
+    get_deadline : Proc(IWindowsDriverUpdate5*, VARIANT*, HRESULT)
+    get_delta_compressed_content_available : Proc(IWindowsDriverUpdate5*, Int16*, HRESULT)
+    get_delta_compressed_content_preferred : Proc(IWindowsDriverUpdate5*, Int16*, HRESULT)
+    get_description : Proc(IWindowsDriverUpdate5*, UInt8**, HRESULT)
+    get_eula_accepted : Proc(IWindowsDriverUpdate5*, Int16*, HRESULT)
+    get_eula_text : Proc(IWindowsDriverUpdate5*, UInt8**, HRESULT)
+    get_handler_id : Proc(IWindowsDriverUpdate5*, UInt8**, HRESULT)
+    get_identity : Proc(IWindowsDriverUpdate5*, IUpdateIdentity*, HRESULT)
+    get_image : Proc(IWindowsDriverUpdate5*, IImageInformation*, HRESULT)
+    get_installation_behavior : Proc(IWindowsDriverUpdate5*, IInstallationBehavior*, HRESULT)
+    get_is_beta : Proc(IWindowsDriverUpdate5*, Int16*, HRESULT)
+    get_is_downloaded : Proc(IWindowsDriverUpdate5*, Int16*, HRESULT)
+    get_is_hidden : Proc(IWindowsDriverUpdate5*, Int16*, HRESULT)
+    put_is_hidden : Proc(IWindowsDriverUpdate5*, Int16, HRESULT)
+    get_is_installed : Proc(IWindowsDriverUpdate5*, Int16*, HRESULT)
+    get_is_mandatory : Proc(IWindowsDriverUpdate5*, Int16*, HRESULT)
+    get_is_uninstallable : Proc(IWindowsDriverUpdate5*, Int16*, HRESULT)
+    get_languages : Proc(IWindowsDriverUpdate5*, IStringCollection*, HRESULT)
+    get_last_deployment_change_time : Proc(IWindowsDriverUpdate5*, Float64*, HRESULT)
+    get_max_download_size : Proc(IWindowsDriverUpdate5*, DECIMAL*, HRESULT)
+    get_min_download_size : Proc(IWindowsDriverUpdate5*, DECIMAL*, HRESULT)
+    get_more_info_urls : Proc(IWindowsDriverUpdate5*, IStringCollection*, HRESULT)
+    get_msrc_severity : Proc(IWindowsDriverUpdate5*, UInt8**, HRESULT)
+    get_recommended_cpu_speed : Proc(IWindowsDriverUpdate5*, Int32*, HRESULT)
+    get_recommended_hard_disk_space : Proc(IWindowsDriverUpdate5*, Int32*, HRESULT)
+    get_recommended_memory : Proc(IWindowsDriverUpdate5*, Int32*, HRESULT)
+    get_release_notes : Proc(IWindowsDriverUpdate5*, UInt8**, HRESULT)
+    get_security_bulletin_i_ds : Proc(IWindowsDriverUpdate5*, IStringCollection*, HRESULT)
+    get_superseded_update_i_ds : Proc(IWindowsDriverUpdate5*, IStringCollection*, HRESULT)
+    get_support_url : Proc(IWindowsDriverUpdate5*, UInt8**, HRESULT)
+    get_type : Proc(IWindowsDriverUpdate5*, UpdateType*, HRESULT)
+    get_uninstallation_notes : Proc(IWindowsDriverUpdate5*, UInt8**, HRESULT)
+    get_uninstallation_behavior : Proc(IWindowsDriverUpdate5*, IInstallationBehavior*, HRESULT)
+    get_uninstallation_steps : Proc(IWindowsDriverUpdate5*, IStringCollection*, HRESULT)
+    get_kb_article_i_ds : Proc(IWindowsDriverUpdate5*, IStringCollection*, HRESULT)
+    accept_eula : Proc(IWindowsDriverUpdate5*, HRESULT)
+    get_deployment_action : Proc(IWindowsDriverUpdate5*, DeploymentAction*, HRESULT)
+    copy_from_cache : Proc(IWindowsDriverUpdate5*, UInt8*, Int16, HRESULT)
+    get_download_priority : Proc(IWindowsDriverUpdate5*, DownloadPriority*, HRESULT)
+    get_download_contents : Proc(IWindowsDriverUpdate5*, IUpdateDownloadContentCollection*, HRESULT)
+    get_driver_class : Proc(IWindowsDriverUpdate5*, UInt8**, HRESULT)
+    get_driver_hardware_id : Proc(IWindowsDriverUpdate5*, UInt8**, HRESULT)
+    get_driver_manufacturer : Proc(IWindowsDriverUpdate5*, UInt8**, HRESULT)
+    get_driver_model : Proc(IWindowsDriverUpdate5*, UInt8**, HRESULT)
+    get_driver_provider : Proc(IWindowsDriverUpdate5*, UInt8**, HRESULT)
+    get_driver_ver_date : Proc(IWindowsDriverUpdate5*, Float64*, HRESULT)
+    get_device_problem_number : Proc(IWindowsDriverUpdate5*, Int32*, HRESULT)
+    get_device_status : Proc(IWindowsDriverUpdate5*, Int32*, HRESULT)
+    get_reboot_required : Proc(IWindowsDriverUpdate5*, Int16*, HRESULT)
+    get_is_present : Proc(IWindowsDriverUpdate5*, Int16*, HRESULT)
+    get_cve_i_ds : Proc(IWindowsDriverUpdate5*, IStringCollection*, HRESULT)
+    copy_to_cache : Proc(IWindowsDriverUpdate5*, IStringCollection, HRESULT)
+    get_browse_only : Proc(IWindowsDriverUpdate5*, Int16*, HRESULT)
+    get_windows_driver_update_entries : Proc(IWindowsDriverUpdate5*, IWindowsDriverUpdateEntryCollection*, HRESULT)
+    get_per_user : Proc(IWindowsDriverUpdate5*, Int16*, HRESULT)
+    get_auto_selection : Proc(IWindowsDriverUpdate5*, AutoSelectionMode*, HRESULT)
+    get_auto_download : Proc(IWindowsDriverUpdate5*, AutoDownloadMode*, HRESULT)
   end
 
   IWindowsDriverUpdate5_GUID = "70cf5c82-8642-42bb-9dbc-0cfd263c6c4f"
@@ -1786,23 +1786,23 @@ lib LibWin32
   end
 
   struct IUpdateCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_item : UInt64
-    put_item : UInt64
-    get__new_enum : UInt64
-    get_count : UInt64
-    get_read_only : UInt64
-    add : UInt64
-    clear : UInt64
-    copy : UInt64
-    insert : UInt64
-    remove_at : UInt64
+    query_interface : Proc(IUpdateCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateCollection*, UInt32)
+    release : Proc(IUpdateCollection*, UInt32)
+    get_type_info_count : Proc(IUpdateCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_item : Proc(IUpdateCollection*, Int32, IUpdate*, HRESULT)
+    put_item : Proc(IUpdateCollection*, Int32, IUpdate, HRESULT)
+    get__new_enum : Proc(IUpdateCollection*, IUnknown*, HRESULT)
+    get_count : Proc(IUpdateCollection*, Int32*, HRESULT)
+    get_read_only : Proc(IUpdateCollection*, Int16*, HRESULT)
+    add : Proc(IUpdateCollection*, IUpdate, Int32*, HRESULT)
+    clear : Proc(IUpdateCollection*, HRESULT)
+    copy : Proc(IUpdateCollection*, IUpdateCollection*, HRESULT)
+    insert : Proc(IUpdateCollection*, Int32, IUpdate, HRESULT)
+    remove_at : Proc(IUpdateCollection*, Int32, HRESULT)
   end
 
   IUpdateCollection_GUID = "07f7438c-7709-4ca5-b518-91279288134e"
@@ -1812,16 +1812,16 @@ lib LibWin32
   end
 
   struct IUpdateExceptionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_message : UInt64
-    get_h_result : UInt64
-    get_context : UInt64
+    query_interface : Proc(IUpdateException*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateException*, UInt32)
+    release : Proc(IUpdateException*, UInt32)
+    get_type_info_count : Proc(IUpdateException*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateException*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateException*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateException*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_message : Proc(IUpdateException*, UInt8**, HRESULT)
+    get_h_result : Proc(IUpdateException*, Int32*, HRESULT)
+    get_context : Proc(IUpdateException*, UpdateExceptionContext*, HRESULT)
   end
 
   IUpdateException_GUID = "a376dd5e-09d4-427f-af7c-fed5b6e1c1d6"
@@ -1831,17 +1831,17 @@ lib LibWin32
   end
 
   struct IInvalidProductLicenseExceptionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_message : UInt64
-    get_h_result : UInt64
-    get_context : UInt64
-    get_product : UInt64
+    query_interface : Proc(IInvalidProductLicenseException*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInvalidProductLicenseException*, UInt32)
+    release : Proc(IInvalidProductLicenseException*, UInt32)
+    get_type_info_count : Proc(IInvalidProductLicenseException*, UInt32*, HRESULT)
+    get_type_info : Proc(IInvalidProductLicenseException*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IInvalidProductLicenseException*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IInvalidProductLicenseException*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_message : Proc(IInvalidProductLicenseException*, UInt8**, HRESULT)
+    get_h_result : Proc(IInvalidProductLicenseException*, Int32*, HRESULT)
+    get_context : Proc(IInvalidProductLicenseException*, UpdateExceptionContext*, HRESULT)
+    get_product : Proc(IInvalidProductLicenseException*, UInt8**, HRESULT)
   end
 
   IInvalidProductLicenseException_GUID = "a37d00f5-7bb0-4953-b414-f9e98326f2e8"
@@ -1851,16 +1851,16 @@ lib LibWin32
   end
 
   struct IUpdateExceptionCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_item : UInt64
-    get__new_enum : UInt64
-    get_count : UInt64
+    query_interface : Proc(IUpdateExceptionCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateExceptionCollection*, UInt32)
+    release : Proc(IUpdateExceptionCollection*, UInt32)
+    get_type_info_count : Proc(IUpdateExceptionCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateExceptionCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateExceptionCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateExceptionCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_item : Proc(IUpdateExceptionCollection*, Int32, IUpdateException*, HRESULT)
+    get__new_enum : Proc(IUpdateExceptionCollection*, IUnknown*, HRESULT)
+    get_count : Proc(IUpdateExceptionCollection*, Int32*, HRESULT)
   end
 
   IUpdateExceptionCollection_GUID = "503626a3-8e14-4729-9355-0fe664bd2321"
@@ -1870,17 +1870,17 @@ lib LibWin32
   end
 
   struct ISearchResultVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_result_code : UInt64
-    get_root_categories : UInt64
-    get_updates : UInt64
-    get_warnings : UInt64
+    query_interface : Proc(ISearchResult*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISearchResult*, UInt32)
+    release : Proc(ISearchResult*, UInt32)
+    get_type_info_count : Proc(ISearchResult*, UInt32*, HRESULT)
+    get_type_info : Proc(ISearchResult*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISearchResult*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISearchResult*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_result_code : Proc(ISearchResult*, OperationResultCode*, HRESULT)
+    get_root_categories : Proc(ISearchResult*, ICategoryCollection*, HRESULT)
+    get_updates : Proc(ISearchResult*, IUpdateCollection*, HRESULT)
+    get_warnings : Proc(ISearchResult*, IUpdateExceptionCollection*, HRESULT)
   end
 
   ISearchResult_GUID = "d40cff62-e08c-4498-941a-01e25f0fd33c"
@@ -1890,17 +1890,17 @@ lib LibWin32
   end
 
   struct ISearchJobVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_async_state : UInt64
-    get_is_completed : UInt64
-    clean_up : UInt64
-    request_abort : UInt64
+    query_interface : Proc(ISearchJob*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISearchJob*, UInt32)
+    release : Proc(ISearchJob*, UInt32)
+    get_type_info_count : Proc(ISearchJob*, UInt32*, HRESULT)
+    get_type_info : Proc(ISearchJob*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISearchJob*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISearchJob*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_async_state : Proc(ISearchJob*, VARIANT*, HRESULT)
+    get_is_completed : Proc(ISearchJob*, Int16*, HRESULT)
+    clean_up : Proc(ISearchJob*, HRESULT)
+    request_abort : Proc(ISearchJob*, HRESULT)
   end
 
   ISearchJob_GUID = "7366ea16-7a1a-4ea2-b042-973d3e9cd99b"
@@ -1910,13 +1910,13 @@ lib LibWin32
   end
 
   struct ISearchCompletedCallbackArgsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
+    query_interface : Proc(ISearchCompletedCallbackArgs*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISearchCompletedCallbackArgs*, UInt32)
+    release : Proc(ISearchCompletedCallbackArgs*, UInt32)
+    get_type_info_count : Proc(ISearchCompletedCallbackArgs*, UInt32*, HRESULT)
+    get_type_info : Proc(ISearchCompletedCallbackArgs*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISearchCompletedCallbackArgs*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISearchCompletedCallbackArgs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
   ISearchCompletedCallbackArgs_GUID = "a700a634-2850-4c47-938a-9e4b6e5af9a6"
@@ -1926,10 +1926,10 @@ lib LibWin32
   end
 
   struct ISearchCompletedCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    invoke : UInt64
+    query_interface : Proc(ISearchCompletedCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISearchCompletedCallback*, UInt32)
+    release : Proc(ISearchCompletedCallback*, UInt32)
+    invoke : Proc(ISearchCompletedCallback*, ISearchJob, ISearchCompletedCallbackArgs, HRESULT)
   end
 
   ISearchCompletedCallback_GUID = "88aee058-d4b0-4725-a2f1-814a67ae964c"
@@ -1939,27 +1939,27 @@ lib LibWin32
   end
 
   struct IUpdateHistoryEntryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_operation : UInt64
-    get_result_code : UInt64
-    get_h_result : UInt64
-    get_date : UInt64
-    get_update_identity : UInt64
-    get_title : UInt64
-    get_description : UInt64
-    get_unmapped_result_code : UInt64
-    get_client_application_id : UInt64
-    get_server_selection : UInt64
-    get_service_id : UInt64
-    get_uninstallation_steps : UInt64
-    get_uninstallation_notes : UInt64
-    get_support_url : UInt64
+    query_interface : Proc(IUpdateHistoryEntry*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateHistoryEntry*, UInt32)
+    release : Proc(IUpdateHistoryEntry*, UInt32)
+    get_type_info_count : Proc(IUpdateHistoryEntry*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateHistoryEntry*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateHistoryEntry*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateHistoryEntry*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_operation : Proc(IUpdateHistoryEntry*, UpdateOperation*, HRESULT)
+    get_result_code : Proc(IUpdateHistoryEntry*, OperationResultCode*, HRESULT)
+    get_h_result : Proc(IUpdateHistoryEntry*, Int32*, HRESULT)
+    get_date : Proc(IUpdateHistoryEntry*, Float64*, HRESULT)
+    get_update_identity : Proc(IUpdateHistoryEntry*, IUpdateIdentity*, HRESULT)
+    get_title : Proc(IUpdateHistoryEntry*, UInt8**, HRESULT)
+    get_description : Proc(IUpdateHistoryEntry*, UInt8**, HRESULT)
+    get_unmapped_result_code : Proc(IUpdateHistoryEntry*, Int32*, HRESULT)
+    get_client_application_id : Proc(IUpdateHistoryEntry*, UInt8**, HRESULT)
+    get_server_selection : Proc(IUpdateHistoryEntry*, ServerSelection*, HRESULT)
+    get_service_id : Proc(IUpdateHistoryEntry*, UInt8**, HRESULT)
+    get_uninstallation_steps : Proc(IUpdateHistoryEntry*, IStringCollection*, HRESULT)
+    get_uninstallation_notes : Proc(IUpdateHistoryEntry*, UInt8**, HRESULT)
+    get_support_url : Proc(IUpdateHistoryEntry*, UInt8**, HRESULT)
   end
 
   IUpdateHistoryEntry_GUID = "be56a644-af0e-4e0e-a311-c1d8e695cbff"
@@ -1969,28 +1969,28 @@ lib LibWin32
   end
 
   struct IUpdateHistoryEntry2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_operation : UInt64
-    get_result_code : UInt64
-    get_h_result : UInt64
-    get_date : UInt64
-    get_update_identity : UInt64
-    get_title : UInt64
-    get_description : UInt64
-    get_unmapped_result_code : UInt64
-    get_client_application_id : UInt64
-    get_server_selection : UInt64
-    get_service_id : UInt64
-    get_uninstallation_steps : UInt64
-    get_uninstallation_notes : UInt64
-    get_support_url : UInt64
-    get_categories : UInt64
+    query_interface : Proc(IUpdateHistoryEntry2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateHistoryEntry2*, UInt32)
+    release : Proc(IUpdateHistoryEntry2*, UInt32)
+    get_type_info_count : Proc(IUpdateHistoryEntry2*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateHistoryEntry2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateHistoryEntry2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateHistoryEntry2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_operation : Proc(IUpdateHistoryEntry2*, UpdateOperation*, HRESULT)
+    get_result_code : Proc(IUpdateHistoryEntry2*, OperationResultCode*, HRESULT)
+    get_h_result : Proc(IUpdateHistoryEntry2*, Int32*, HRESULT)
+    get_date : Proc(IUpdateHistoryEntry2*, Float64*, HRESULT)
+    get_update_identity : Proc(IUpdateHistoryEntry2*, IUpdateIdentity*, HRESULT)
+    get_title : Proc(IUpdateHistoryEntry2*, UInt8**, HRESULT)
+    get_description : Proc(IUpdateHistoryEntry2*, UInt8**, HRESULT)
+    get_unmapped_result_code : Proc(IUpdateHistoryEntry2*, Int32*, HRESULT)
+    get_client_application_id : Proc(IUpdateHistoryEntry2*, UInt8**, HRESULT)
+    get_server_selection : Proc(IUpdateHistoryEntry2*, ServerSelection*, HRESULT)
+    get_service_id : Proc(IUpdateHistoryEntry2*, UInt8**, HRESULT)
+    get_uninstallation_steps : Proc(IUpdateHistoryEntry2*, IStringCollection*, HRESULT)
+    get_uninstallation_notes : Proc(IUpdateHistoryEntry2*, UInt8**, HRESULT)
+    get_support_url : Proc(IUpdateHistoryEntry2*, UInt8**, HRESULT)
+    get_categories : Proc(IUpdateHistoryEntry2*, ICategoryCollection*, HRESULT)
   end
 
   IUpdateHistoryEntry2_GUID = "c2bfb780-4539-4132-ab8c-0a8772013ab6"
@@ -2000,16 +2000,16 @@ lib LibWin32
   end
 
   struct IUpdateHistoryEntryCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_item : UInt64
-    get__new_enum : UInt64
-    get_count : UInt64
+    query_interface : Proc(IUpdateHistoryEntryCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateHistoryEntryCollection*, UInt32)
+    release : Proc(IUpdateHistoryEntryCollection*, UInt32)
+    get_type_info_count : Proc(IUpdateHistoryEntryCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateHistoryEntryCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateHistoryEntryCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateHistoryEntryCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_item : Proc(IUpdateHistoryEntryCollection*, Int32, IUpdateHistoryEntry*, HRESULT)
+    get__new_enum : Proc(IUpdateHistoryEntryCollection*, IUnknown*, HRESULT)
+    get_count : Proc(IUpdateHistoryEntryCollection*, Int32*, HRESULT)
   end
 
   IUpdateHistoryEntryCollection_GUID = "a7f04f3c-a290-435b-aadf-a116c3357a5c"
@@ -2019,31 +2019,31 @@ lib LibWin32
   end
 
   struct IUpdateSearcherVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_can_automatically_upgrade_service : UInt64
-    put_can_automatically_upgrade_service : UInt64
-    get_client_application_id : UInt64
-    put_client_application_id : UInt64
-    get_include_potentially_superseded_updates : UInt64
-    put_include_potentially_superseded_updates : UInt64
-    get_server_selection : UInt64
-    put_server_selection : UInt64
-    begin_search : UInt64
-    end_search : UInt64
-    escape_string : UInt64
-    query_history : UInt64
-    search : UInt64
-    get_online : UInt64
-    put_online : UInt64
-    get_total_history_count : UInt64
-    get_service_id : UInt64
-    put_service_id : UInt64
+    query_interface : Proc(IUpdateSearcher*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateSearcher*, UInt32)
+    release : Proc(IUpdateSearcher*, UInt32)
+    get_type_info_count : Proc(IUpdateSearcher*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateSearcher*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateSearcher*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateSearcher*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_can_automatically_upgrade_service : Proc(IUpdateSearcher*, Int16*, HRESULT)
+    put_can_automatically_upgrade_service : Proc(IUpdateSearcher*, Int16, HRESULT)
+    get_client_application_id : Proc(IUpdateSearcher*, UInt8**, HRESULT)
+    put_client_application_id : Proc(IUpdateSearcher*, UInt8*, HRESULT)
+    get_include_potentially_superseded_updates : Proc(IUpdateSearcher*, Int16*, HRESULT)
+    put_include_potentially_superseded_updates : Proc(IUpdateSearcher*, Int16, HRESULT)
+    get_server_selection : Proc(IUpdateSearcher*, ServerSelection*, HRESULT)
+    put_server_selection : Proc(IUpdateSearcher*, ServerSelection, HRESULT)
+    begin_search : Proc(IUpdateSearcher*, UInt8*, IUnknown, VARIANT, ISearchJob*, HRESULT)
+    end_search : Proc(IUpdateSearcher*, ISearchJob, ISearchResult*, HRESULT)
+    escape_string : Proc(IUpdateSearcher*, UInt8*, UInt8**, HRESULT)
+    query_history : Proc(IUpdateSearcher*, Int32, Int32, IUpdateHistoryEntryCollection*, HRESULT)
+    search : Proc(IUpdateSearcher*, UInt8*, ISearchResult*, HRESULT)
+    get_online : Proc(IUpdateSearcher*, Int16*, HRESULT)
+    put_online : Proc(IUpdateSearcher*, Int16, HRESULT)
+    get_total_history_count : Proc(IUpdateSearcher*, Int32*, HRESULT)
+    get_service_id : Proc(IUpdateSearcher*, UInt8**, HRESULT)
+    put_service_id : Proc(IUpdateSearcher*, UInt8*, HRESULT)
   end
 
   IUpdateSearcher_GUID = "8f45abf1-f9ae-4b95-a933-f0f66e5056ea"
@@ -2053,33 +2053,33 @@ lib LibWin32
   end
 
   struct IUpdateSearcher2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_can_automatically_upgrade_service : UInt64
-    put_can_automatically_upgrade_service : UInt64
-    get_client_application_id : UInt64
-    put_client_application_id : UInt64
-    get_include_potentially_superseded_updates : UInt64
-    put_include_potentially_superseded_updates : UInt64
-    get_server_selection : UInt64
-    put_server_selection : UInt64
-    begin_search : UInt64
-    end_search : UInt64
-    escape_string : UInt64
-    query_history : UInt64
-    search : UInt64
-    get_online : UInt64
-    put_online : UInt64
-    get_total_history_count : UInt64
-    get_service_id : UInt64
-    put_service_id : UInt64
-    get_ignore_download_priority : UInt64
-    put_ignore_download_priority : UInt64
+    query_interface : Proc(IUpdateSearcher2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateSearcher2*, UInt32)
+    release : Proc(IUpdateSearcher2*, UInt32)
+    get_type_info_count : Proc(IUpdateSearcher2*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateSearcher2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateSearcher2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateSearcher2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_can_automatically_upgrade_service : Proc(IUpdateSearcher2*, Int16*, HRESULT)
+    put_can_automatically_upgrade_service : Proc(IUpdateSearcher2*, Int16, HRESULT)
+    get_client_application_id : Proc(IUpdateSearcher2*, UInt8**, HRESULT)
+    put_client_application_id : Proc(IUpdateSearcher2*, UInt8*, HRESULT)
+    get_include_potentially_superseded_updates : Proc(IUpdateSearcher2*, Int16*, HRESULT)
+    put_include_potentially_superseded_updates : Proc(IUpdateSearcher2*, Int16, HRESULT)
+    get_server_selection : Proc(IUpdateSearcher2*, ServerSelection*, HRESULT)
+    put_server_selection : Proc(IUpdateSearcher2*, ServerSelection, HRESULT)
+    begin_search : Proc(IUpdateSearcher2*, UInt8*, IUnknown, VARIANT, ISearchJob*, HRESULT)
+    end_search : Proc(IUpdateSearcher2*, ISearchJob, ISearchResult*, HRESULT)
+    escape_string : Proc(IUpdateSearcher2*, UInt8*, UInt8**, HRESULT)
+    query_history : Proc(IUpdateSearcher2*, Int32, Int32, IUpdateHistoryEntryCollection*, HRESULT)
+    search : Proc(IUpdateSearcher2*, UInt8*, ISearchResult*, HRESULT)
+    get_online : Proc(IUpdateSearcher2*, Int16*, HRESULT)
+    put_online : Proc(IUpdateSearcher2*, Int16, HRESULT)
+    get_total_history_count : Proc(IUpdateSearcher2*, Int32*, HRESULT)
+    get_service_id : Proc(IUpdateSearcher2*, UInt8**, HRESULT)
+    put_service_id : Proc(IUpdateSearcher2*, UInt8*, HRESULT)
+    get_ignore_download_priority : Proc(IUpdateSearcher2*, Int16*, HRESULT)
+    put_ignore_download_priority : Proc(IUpdateSearcher2*, Int16, HRESULT)
   end
 
   IUpdateSearcher2_GUID = "4cbdcb2d-1589-4beb-bd1c-3e582ff0add0"
@@ -2089,35 +2089,35 @@ lib LibWin32
   end
 
   struct IUpdateSearcher3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_can_automatically_upgrade_service : UInt64
-    put_can_automatically_upgrade_service : UInt64
-    get_client_application_id : UInt64
-    put_client_application_id : UInt64
-    get_include_potentially_superseded_updates : UInt64
-    put_include_potentially_superseded_updates : UInt64
-    get_server_selection : UInt64
-    put_server_selection : UInt64
-    begin_search : UInt64
-    end_search : UInt64
-    escape_string : UInt64
-    query_history : UInt64
-    search : UInt64
-    get_online : UInt64
-    put_online : UInt64
-    get_total_history_count : UInt64
-    get_service_id : UInt64
-    put_service_id : UInt64
-    get_ignore_download_priority : UInt64
-    put_ignore_download_priority : UInt64
-    get_search_scope : UInt64
-    put_search_scope : UInt64
+    query_interface : Proc(IUpdateSearcher3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateSearcher3*, UInt32)
+    release : Proc(IUpdateSearcher3*, UInt32)
+    get_type_info_count : Proc(IUpdateSearcher3*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateSearcher3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateSearcher3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateSearcher3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_can_automatically_upgrade_service : Proc(IUpdateSearcher3*, Int16*, HRESULT)
+    put_can_automatically_upgrade_service : Proc(IUpdateSearcher3*, Int16, HRESULT)
+    get_client_application_id : Proc(IUpdateSearcher3*, UInt8**, HRESULT)
+    put_client_application_id : Proc(IUpdateSearcher3*, UInt8*, HRESULT)
+    get_include_potentially_superseded_updates : Proc(IUpdateSearcher3*, Int16*, HRESULT)
+    put_include_potentially_superseded_updates : Proc(IUpdateSearcher3*, Int16, HRESULT)
+    get_server_selection : Proc(IUpdateSearcher3*, ServerSelection*, HRESULT)
+    put_server_selection : Proc(IUpdateSearcher3*, ServerSelection, HRESULT)
+    begin_search : Proc(IUpdateSearcher3*, UInt8*, IUnknown, VARIANT, ISearchJob*, HRESULT)
+    end_search : Proc(IUpdateSearcher3*, ISearchJob, ISearchResult*, HRESULT)
+    escape_string : Proc(IUpdateSearcher3*, UInt8*, UInt8**, HRESULT)
+    query_history : Proc(IUpdateSearcher3*, Int32, Int32, IUpdateHistoryEntryCollection*, HRESULT)
+    search : Proc(IUpdateSearcher3*, UInt8*, ISearchResult*, HRESULT)
+    get_online : Proc(IUpdateSearcher3*, Int16*, HRESULT)
+    put_online : Proc(IUpdateSearcher3*, Int16, HRESULT)
+    get_total_history_count : Proc(IUpdateSearcher3*, Int32*, HRESULT)
+    get_service_id : Proc(IUpdateSearcher3*, UInt8**, HRESULT)
+    put_service_id : Proc(IUpdateSearcher3*, UInt8*, HRESULT)
+    get_ignore_download_priority : Proc(IUpdateSearcher3*, Int16*, HRESULT)
+    put_ignore_download_priority : Proc(IUpdateSearcher3*, Int16, HRESULT)
+    get_search_scope : Proc(IUpdateSearcher3*, SearchScope*, HRESULT)
+    put_search_scope : Proc(IUpdateSearcher3*, SearchScope, HRESULT)
   end
 
   IUpdateSearcher3_GUID = "04c6895d-eaf2-4034-97f3-311de9be413a"
@@ -2127,15 +2127,15 @@ lib LibWin32
   end
 
   struct IUpdateDownloadResultVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_h_result : UInt64
-    get_result_code : UInt64
+    query_interface : Proc(IUpdateDownloadResult*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateDownloadResult*, UInt32)
+    release : Proc(IUpdateDownloadResult*, UInt32)
+    get_type_info_count : Proc(IUpdateDownloadResult*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateDownloadResult*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateDownloadResult*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateDownloadResult*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_h_result : Proc(IUpdateDownloadResult*, Int32*, HRESULT)
+    get_result_code : Proc(IUpdateDownloadResult*, OperationResultCode*, HRESULT)
   end
 
   IUpdateDownloadResult_GUID = "bf99af76-b575-42ad-8aa4-33cbb5477af1"
@@ -2145,16 +2145,16 @@ lib LibWin32
   end
 
   struct IDownloadResultVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_h_result : UInt64
-    get_result_code : UInt64
-    get_update_result : UInt64
+    query_interface : Proc(IDownloadResult*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDownloadResult*, UInt32)
+    release : Proc(IDownloadResult*, UInt32)
+    get_type_info_count : Proc(IDownloadResult*, UInt32*, HRESULT)
+    get_type_info : Proc(IDownloadResult*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IDownloadResult*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IDownloadResult*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_h_result : Proc(IDownloadResult*, Int32*, HRESULT)
+    get_result_code : Proc(IDownloadResult*, OperationResultCode*, HRESULT)
+    get_update_result : Proc(IDownloadResult*, Int32, IUpdateDownloadResult*, HRESULT)
   end
 
   IDownloadResult_GUID = "daa4fdd0-4727-4dbe-a1e7-745dca317144"
@@ -2164,22 +2164,22 @@ lib LibWin32
   end
 
   struct IDownloadProgressVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_current_update_bytes_downloaded : UInt64
-    get_current_update_bytes_to_download : UInt64
-    get_current_update_index : UInt64
-    get_percent_complete : UInt64
-    get_total_bytes_downloaded : UInt64
-    get_total_bytes_to_download : UInt64
-    get_update_result : UInt64
-    get_current_update_download_phase : UInt64
-    get_current_update_percent_complete : UInt64
+    query_interface : Proc(IDownloadProgress*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDownloadProgress*, UInt32)
+    release : Proc(IDownloadProgress*, UInt32)
+    get_type_info_count : Proc(IDownloadProgress*, UInt32*, HRESULT)
+    get_type_info : Proc(IDownloadProgress*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IDownloadProgress*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IDownloadProgress*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_current_update_bytes_downloaded : Proc(IDownloadProgress*, DECIMAL*, HRESULT)
+    get_current_update_bytes_to_download : Proc(IDownloadProgress*, DECIMAL*, HRESULT)
+    get_current_update_index : Proc(IDownloadProgress*, Int32*, HRESULT)
+    get_percent_complete : Proc(IDownloadProgress*, Int32*, HRESULT)
+    get_total_bytes_downloaded : Proc(IDownloadProgress*, DECIMAL*, HRESULT)
+    get_total_bytes_to_download : Proc(IDownloadProgress*, DECIMAL*, HRESULT)
+    get_update_result : Proc(IDownloadProgress*, Int32, IUpdateDownloadResult*, HRESULT)
+    get_current_update_download_phase : Proc(IDownloadProgress*, DownloadPhase*, HRESULT)
+    get_current_update_percent_complete : Proc(IDownloadProgress*, Int32*, HRESULT)
   end
 
   IDownloadProgress_GUID = "d31a5bac-f719-4178-9dbb-5e2cb47fd18a"
@@ -2189,19 +2189,19 @@ lib LibWin32
   end
 
   struct IDownloadJobVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_async_state : UInt64
-    get_is_completed : UInt64
-    get_updates : UInt64
-    clean_up : UInt64
-    get_progress : UInt64
-    request_abort : UInt64
+    query_interface : Proc(IDownloadJob*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDownloadJob*, UInt32)
+    release : Proc(IDownloadJob*, UInt32)
+    get_type_info_count : Proc(IDownloadJob*, UInt32*, HRESULT)
+    get_type_info : Proc(IDownloadJob*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IDownloadJob*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IDownloadJob*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_async_state : Proc(IDownloadJob*, VARIANT*, HRESULT)
+    get_is_completed : Proc(IDownloadJob*, Int16*, HRESULT)
+    get_updates : Proc(IDownloadJob*, IUpdateCollection*, HRESULT)
+    clean_up : Proc(IDownloadJob*, HRESULT)
+    get_progress : Proc(IDownloadJob*, IDownloadProgress*, HRESULT)
+    request_abort : Proc(IDownloadJob*, HRESULT)
   end
 
   IDownloadJob_GUID = "c574de85-7358-43f6-aae8-8697e62d8ba7"
@@ -2211,13 +2211,13 @@ lib LibWin32
   end
 
   struct IDownloadCompletedCallbackArgsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
+    query_interface : Proc(IDownloadCompletedCallbackArgs*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDownloadCompletedCallbackArgs*, UInt32)
+    release : Proc(IDownloadCompletedCallbackArgs*, UInt32)
+    get_type_info_count : Proc(IDownloadCompletedCallbackArgs*, UInt32*, HRESULT)
+    get_type_info : Proc(IDownloadCompletedCallbackArgs*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IDownloadCompletedCallbackArgs*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IDownloadCompletedCallbackArgs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
   IDownloadCompletedCallbackArgs_GUID = "fa565b23-498c-47a0-979d-e7d5b1813360"
@@ -2227,10 +2227,10 @@ lib LibWin32
   end
 
   struct IDownloadCompletedCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    invoke : UInt64
+    query_interface : Proc(IDownloadCompletedCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDownloadCompletedCallback*, UInt32)
+    release : Proc(IDownloadCompletedCallback*, UInt32)
+    invoke : Proc(IDownloadCompletedCallback*, IDownloadJob, IDownloadCompletedCallbackArgs, HRESULT)
   end
 
   IDownloadCompletedCallback_GUID = "77254866-9f5b-4c8e-b9e2-c77a8530d64b"
@@ -2240,14 +2240,14 @@ lib LibWin32
   end
 
   struct IDownloadProgressChangedCallbackArgsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_progress : UInt64
+    query_interface : Proc(IDownloadProgressChangedCallbackArgs*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDownloadProgressChangedCallbackArgs*, UInt32)
+    release : Proc(IDownloadProgressChangedCallbackArgs*, UInt32)
+    get_type_info_count : Proc(IDownloadProgressChangedCallbackArgs*, UInt32*, HRESULT)
+    get_type_info : Proc(IDownloadProgressChangedCallbackArgs*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IDownloadProgressChangedCallbackArgs*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IDownloadProgressChangedCallbackArgs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_progress : Proc(IDownloadProgressChangedCallbackArgs*, IDownloadProgress*, HRESULT)
   end
 
   IDownloadProgressChangedCallbackArgs_GUID = "324ff2c6-4981-4b04-9412-57481745ab24"
@@ -2257,10 +2257,10 @@ lib LibWin32
   end
 
   struct IDownloadProgressChangedCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    invoke : UInt64
+    query_interface : Proc(IDownloadProgressChangedCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDownloadProgressChangedCallback*, UInt32)
+    release : Proc(IDownloadProgressChangedCallback*, UInt32)
+    invoke : Proc(IDownloadProgressChangedCallback*, IDownloadJob, IDownloadProgressChangedCallbackArgs, HRESULT)
   end
 
   IDownloadProgressChangedCallback_GUID = "8c3f1cdd-6173-4591-aebd-a56a53ca77c1"
@@ -2270,24 +2270,24 @@ lib LibWin32
   end
 
   struct IUpdateDownloaderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_client_application_id : UInt64
-    put_client_application_id : UInt64
-    get_is_forced : UInt64
-    put_is_forced : UInt64
-    get_priority : UInt64
-    put_priority : UInt64
-    get_updates : UInt64
-    put_updates : UInt64
-    begin_download : UInt64
-    download : UInt64
-    end_download : UInt64
+    query_interface : Proc(IUpdateDownloader*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateDownloader*, UInt32)
+    release : Proc(IUpdateDownloader*, UInt32)
+    get_type_info_count : Proc(IUpdateDownloader*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateDownloader*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateDownloader*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateDownloader*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_client_application_id : Proc(IUpdateDownloader*, UInt8**, HRESULT)
+    put_client_application_id : Proc(IUpdateDownloader*, UInt8*, HRESULT)
+    get_is_forced : Proc(IUpdateDownloader*, Int16*, HRESULT)
+    put_is_forced : Proc(IUpdateDownloader*, Int16, HRESULT)
+    get_priority : Proc(IUpdateDownloader*, DownloadPriority*, HRESULT)
+    put_priority : Proc(IUpdateDownloader*, DownloadPriority, HRESULT)
+    get_updates : Proc(IUpdateDownloader*, IUpdateCollection*, HRESULT)
+    put_updates : Proc(IUpdateDownloader*, IUpdateCollection, HRESULT)
+    begin_download : Proc(IUpdateDownloader*, IUnknown, IUnknown, VARIANT, IDownloadJob*, HRESULT)
+    download : Proc(IUpdateDownloader*, IDownloadResult*, HRESULT)
+    end_download : Proc(IUpdateDownloader*, IDownloadJob, IDownloadResult*, HRESULT)
   end
 
   IUpdateDownloader_GUID = "68f1c6f9-7ecc-4666-a464-247fe12496c3"
@@ -2297,16 +2297,16 @@ lib LibWin32
   end
 
   struct IUpdateInstallationResultVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_h_result : UInt64
-    get_reboot_required : UInt64
-    get_result_code : UInt64
+    query_interface : Proc(IUpdateInstallationResult*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateInstallationResult*, UInt32)
+    release : Proc(IUpdateInstallationResult*, UInt32)
+    get_type_info_count : Proc(IUpdateInstallationResult*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateInstallationResult*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateInstallationResult*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateInstallationResult*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_h_result : Proc(IUpdateInstallationResult*, Int32*, HRESULT)
+    get_reboot_required : Proc(IUpdateInstallationResult*, Int16*, HRESULT)
+    get_result_code : Proc(IUpdateInstallationResult*, OperationResultCode*, HRESULT)
   end
 
   IUpdateInstallationResult_GUID = "d940f0f8-3cbb-4fd0-993f-471e7f2328ad"
@@ -2316,17 +2316,17 @@ lib LibWin32
   end
 
   struct IInstallationResultVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_h_result : UInt64
-    get_reboot_required : UInt64
-    get_result_code : UInt64
-    get_update_result : UInt64
+    query_interface : Proc(IInstallationResult*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInstallationResult*, UInt32)
+    release : Proc(IInstallationResult*, UInt32)
+    get_type_info_count : Proc(IInstallationResult*, UInt32*, HRESULT)
+    get_type_info : Proc(IInstallationResult*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IInstallationResult*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IInstallationResult*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_h_result : Proc(IInstallationResult*, Int32*, HRESULT)
+    get_reboot_required : Proc(IInstallationResult*, Int16*, HRESULT)
+    get_result_code : Proc(IInstallationResult*, OperationResultCode*, HRESULT)
+    get_update_result : Proc(IInstallationResult*, Int32, IUpdateInstallationResult*, HRESULT)
   end
 
   IInstallationResult_GUID = "a43c56d6-7451-48d4-af96-b6cd2d0d9b7a"
@@ -2336,17 +2336,17 @@ lib LibWin32
   end
 
   struct IInstallationProgressVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_current_update_index : UInt64
-    get_current_update_percent_complete : UInt64
-    get_percent_complete : UInt64
-    get_update_result : UInt64
+    query_interface : Proc(IInstallationProgress*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInstallationProgress*, UInt32)
+    release : Proc(IInstallationProgress*, UInt32)
+    get_type_info_count : Proc(IInstallationProgress*, UInt32*, HRESULT)
+    get_type_info : Proc(IInstallationProgress*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IInstallationProgress*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IInstallationProgress*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_current_update_index : Proc(IInstallationProgress*, Int32*, HRESULT)
+    get_current_update_percent_complete : Proc(IInstallationProgress*, Int32*, HRESULT)
+    get_percent_complete : Proc(IInstallationProgress*, Int32*, HRESULT)
+    get_update_result : Proc(IInstallationProgress*, Int32, IUpdateInstallationResult*, HRESULT)
   end
 
   IInstallationProgress_GUID = "345c8244-43a3-4e32-a368-65f073b76f36"
@@ -2356,19 +2356,19 @@ lib LibWin32
   end
 
   struct IInstallationJobVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_async_state : UInt64
-    get_is_completed : UInt64
-    get_updates : UInt64
-    clean_up : UInt64
-    get_progress : UInt64
-    request_abort : UInt64
+    query_interface : Proc(IInstallationJob*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInstallationJob*, UInt32)
+    release : Proc(IInstallationJob*, UInt32)
+    get_type_info_count : Proc(IInstallationJob*, UInt32*, HRESULT)
+    get_type_info : Proc(IInstallationJob*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IInstallationJob*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IInstallationJob*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_async_state : Proc(IInstallationJob*, VARIANT*, HRESULT)
+    get_is_completed : Proc(IInstallationJob*, Int16*, HRESULT)
+    get_updates : Proc(IInstallationJob*, IUpdateCollection*, HRESULT)
+    clean_up : Proc(IInstallationJob*, HRESULT)
+    get_progress : Proc(IInstallationJob*, IInstallationProgress*, HRESULT)
+    request_abort : Proc(IInstallationJob*, HRESULT)
   end
 
   IInstallationJob_GUID = "5c209f0b-bad5-432a-9556-4699bed2638a"
@@ -2378,13 +2378,13 @@ lib LibWin32
   end
 
   struct IInstallationCompletedCallbackArgsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
+    query_interface : Proc(IInstallationCompletedCallbackArgs*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInstallationCompletedCallbackArgs*, UInt32)
+    release : Proc(IInstallationCompletedCallbackArgs*, UInt32)
+    get_type_info_count : Proc(IInstallationCompletedCallbackArgs*, UInt32*, HRESULT)
+    get_type_info : Proc(IInstallationCompletedCallbackArgs*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IInstallationCompletedCallbackArgs*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IInstallationCompletedCallbackArgs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
   IInstallationCompletedCallbackArgs_GUID = "250e2106-8efb-4705-9653-ef13c581b6a1"
@@ -2394,10 +2394,10 @@ lib LibWin32
   end
 
   struct IInstallationCompletedCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    invoke : UInt64
+    query_interface : Proc(IInstallationCompletedCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInstallationCompletedCallback*, UInt32)
+    release : Proc(IInstallationCompletedCallback*, UInt32)
+    invoke : Proc(IInstallationCompletedCallback*, IInstallationJob, IInstallationCompletedCallbackArgs, HRESULT)
   end
 
   IInstallationCompletedCallback_GUID = "45f4f6f3-d602-4f98-9a8a-3efa152ad2d3"
@@ -2407,14 +2407,14 @@ lib LibWin32
   end
 
   struct IInstallationProgressChangedCallbackArgsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_progress : UInt64
+    query_interface : Proc(IInstallationProgressChangedCallbackArgs*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInstallationProgressChangedCallbackArgs*, UInt32)
+    release : Proc(IInstallationProgressChangedCallbackArgs*, UInt32)
+    get_type_info_count : Proc(IInstallationProgressChangedCallbackArgs*, UInt32*, HRESULT)
+    get_type_info : Proc(IInstallationProgressChangedCallbackArgs*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IInstallationProgressChangedCallbackArgs*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IInstallationProgressChangedCallbackArgs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_progress : Proc(IInstallationProgressChangedCallbackArgs*, IInstallationProgress*, HRESULT)
   end
 
   IInstallationProgressChangedCallbackArgs_GUID = "e4f14e1e-689d-4218-a0b9-bc189c484a01"
@@ -2424,10 +2424,10 @@ lib LibWin32
   end
 
   struct IInstallationProgressChangedCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    invoke : UInt64
+    query_interface : Proc(IInstallationProgressChangedCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInstallationProgressChangedCallback*, UInt32)
+    release : Proc(IInstallationProgressChangedCallback*, UInt32)
+    invoke : Proc(IInstallationProgressChangedCallback*, IInstallationJob, IInstallationProgressChangedCallbackArgs, HRESULT)
   end
 
   IInstallationProgressChangedCallback_GUID = "e01402d5-f8da-43ba-a012-38894bd048f1"
@@ -2437,34 +2437,34 @@ lib LibWin32
   end
 
   struct IUpdateInstallerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_client_application_id : UInt64
-    put_client_application_id : UInt64
-    get_is_forced : UInt64
-    put_is_forced : UInt64
-    get_parent_hwnd : UInt64
-    put_parent_hwnd : UInt64
-    put_parent_window : UInt64
-    get_parent_window : UInt64
-    get_updates : UInt64
-    put_updates : UInt64
-    begin_install : UInt64
-    begin_uninstall : UInt64
-    end_install : UInt64
-    end_uninstall : UInt64
-    install : UInt64
-    run_wizard : UInt64
-    get_is_busy : UInt64
-    uninstall : UInt64
-    get_allow_source_prompts : UInt64
-    put_allow_source_prompts : UInt64
-    get_reboot_required_before_installation : UInt64
+    query_interface : Proc(IUpdateInstaller*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateInstaller*, UInt32)
+    release : Proc(IUpdateInstaller*, UInt32)
+    get_type_info_count : Proc(IUpdateInstaller*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateInstaller*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateInstaller*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateInstaller*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_client_application_id : Proc(IUpdateInstaller*, UInt8**, HRESULT)
+    put_client_application_id : Proc(IUpdateInstaller*, UInt8*, HRESULT)
+    get_is_forced : Proc(IUpdateInstaller*, Int16*, HRESULT)
+    put_is_forced : Proc(IUpdateInstaller*, Int16, HRESULT)
+    get_parent_hwnd : Proc(IUpdateInstaller*, HANDLE*, HRESULT)
+    put_parent_hwnd : Proc(IUpdateInstaller*, LibC::HANDLE, HRESULT)
+    put_parent_window : Proc(IUpdateInstaller*, IUnknown, HRESULT)
+    get_parent_window : Proc(IUpdateInstaller*, IUnknown*, HRESULT)
+    get_updates : Proc(IUpdateInstaller*, IUpdateCollection*, HRESULT)
+    put_updates : Proc(IUpdateInstaller*, IUpdateCollection, HRESULT)
+    begin_install : Proc(IUpdateInstaller*, IUnknown, IUnknown, VARIANT, IInstallationJob*, HRESULT)
+    begin_uninstall : Proc(IUpdateInstaller*, IUnknown, IUnknown, VARIANT, IInstallationJob*, HRESULT)
+    end_install : Proc(IUpdateInstaller*, IInstallationJob, IInstallationResult*, HRESULT)
+    end_uninstall : Proc(IUpdateInstaller*, IInstallationJob, IInstallationResult*, HRESULT)
+    install : Proc(IUpdateInstaller*, IInstallationResult*, HRESULT)
+    run_wizard : Proc(IUpdateInstaller*, UInt8*, IInstallationResult*, HRESULT)
+    get_is_busy : Proc(IUpdateInstaller*, Int16*, HRESULT)
+    uninstall : Proc(IUpdateInstaller*, IInstallationResult*, HRESULT)
+    get_allow_source_prompts : Proc(IUpdateInstaller*, Int16*, HRESULT)
+    put_allow_source_prompts : Proc(IUpdateInstaller*, Int16, HRESULT)
+    get_reboot_required_before_installation : Proc(IUpdateInstaller*, Int16*, HRESULT)
   end
 
   IUpdateInstaller_GUID = "7b929c68-ccdc-4226-96b1-8724600b54c2"
@@ -2474,36 +2474,36 @@ lib LibWin32
   end
 
   struct IUpdateInstaller2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_client_application_id : UInt64
-    put_client_application_id : UInt64
-    get_is_forced : UInt64
-    put_is_forced : UInt64
-    get_parent_hwnd : UInt64
-    put_parent_hwnd : UInt64
-    put_parent_window : UInt64
-    get_parent_window : UInt64
-    get_updates : UInt64
-    put_updates : UInt64
-    begin_install : UInt64
-    begin_uninstall : UInt64
-    end_install : UInt64
-    end_uninstall : UInt64
-    install : UInt64
-    run_wizard : UInt64
-    get_is_busy : UInt64
-    uninstall : UInt64
-    get_allow_source_prompts : UInt64
-    put_allow_source_prompts : UInt64
-    get_reboot_required_before_installation : UInt64
-    get_force_quiet : UInt64
-    put_force_quiet : UInt64
+    query_interface : Proc(IUpdateInstaller2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateInstaller2*, UInt32)
+    release : Proc(IUpdateInstaller2*, UInt32)
+    get_type_info_count : Proc(IUpdateInstaller2*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateInstaller2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateInstaller2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateInstaller2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_client_application_id : Proc(IUpdateInstaller2*, UInt8**, HRESULT)
+    put_client_application_id : Proc(IUpdateInstaller2*, UInt8*, HRESULT)
+    get_is_forced : Proc(IUpdateInstaller2*, Int16*, HRESULT)
+    put_is_forced : Proc(IUpdateInstaller2*, Int16, HRESULT)
+    get_parent_hwnd : Proc(IUpdateInstaller2*, HANDLE*, HRESULT)
+    put_parent_hwnd : Proc(IUpdateInstaller2*, LibC::HANDLE, HRESULT)
+    put_parent_window : Proc(IUpdateInstaller2*, IUnknown, HRESULT)
+    get_parent_window : Proc(IUpdateInstaller2*, IUnknown*, HRESULT)
+    get_updates : Proc(IUpdateInstaller2*, IUpdateCollection*, HRESULT)
+    put_updates : Proc(IUpdateInstaller2*, IUpdateCollection, HRESULT)
+    begin_install : Proc(IUpdateInstaller2*, IUnknown, IUnknown, VARIANT, IInstallationJob*, HRESULT)
+    begin_uninstall : Proc(IUpdateInstaller2*, IUnknown, IUnknown, VARIANT, IInstallationJob*, HRESULT)
+    end_install : Proc(IUpdateInstaller2*, IInstallationJob, IInstallationResult*, HRESULT)
+    end_uninstall : Proc(IUpdateInstaller2*, IInstallationJob, IInstallationResult*, HRESULT)
+    install : Proc(IUpdateInstaller2*, IInstallationResult*, HRESULT)
+    run_wizard : Proc(IUpdateInstaller2*, UInt8*, IInstallationResult*, HRESULT)
+    get_is_busy : Proc(IUpdateInstaller2*, Int16*, HRESULT)
+    uninstall : Proc(IUpdateInstaller2*, IInstallationResult*, HRESULT)
+    get_allow_source_prompts : Proc(IUpdateInstaller2*, Int16*, HRESULT)
+    put_allow_source_prompts : Proc(IUpdateInstaller2*, Int16, HRESULT)
+    get_reboot_required_before_installation : Proc(IUpdateInstaller2*, Int16*, HRESULT)
+    get_force_quiet : Proc(IUpdateInstaller2*, Int16*, HRESULT)
+    put_force_quiet : Proc(IUpdateInstaller2*, Int16, HRESULT)
   end
 
   IUpdateInstaller2_GUID = "3442d4fe-224d-4cee-98cf-30e0c4d229e6"
@@ -2513,38 +2513,38 @@ lib LibWin32
   end
 
   struct IUpdateInstaller3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_client_application_id : UInt64
-    put_client_application_id : UInt64
-    get_is_forced : UInt64
-    put_is_forced : UInt64
-    get_parent_hwnd : UInt64
-    put_parent_hwnd : UInt64
-    put_parent_window : UInt64
-    get_parent_window : UInt64
-    get_updates : UInt64
-    put_updates : UInt64
-    begin_install : UInt64
-    begin_uninstall : UInt64
-    end_install : UInt64
-    end_uninstall : UInt64
-    install : UInt64
-    run_wizard : UInt64
-    get_is_busy : UInt64
-    uninstall : UInt64
-    get_allow_source_prompts : UInt64
-    put_allow_source_prompts : UInt64
-    get_reboot_required_before_installation : UInt64
-    get_force_quiet : UInt64
-    put_force_quiet : UInt64
-    get_attempt_close_apps_if_necessary : UInt64
-    put_attempt_close_apps_if_necessary : UInt64
+    query_interface : Proc(IUpdateInstaller3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateInstaller3*, UInt32)
+    release : Proc(IUpdateInstaller3*, UInt32)
+    get_type_info_count : Proc(IUpdateInstaller3*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateInstaller3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateInstaller3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateInstaller3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_client_application_id : Proc(IUpdateInstaller3*, UInt8**, HRESULT)
+    put_client_application_id : Proc(IUpdateInstaller3*, UInt8*, HRESULT)
+    get_is_forced : Proc(IUpdateInstaller3*, Int16*, HRESULT)
+    put_is_forced : Proc(IUpdateInstaller3*, Int16, HRESULT)
+    get_parent_hwnd : Proc(IUpdateInstaller3*, HANDLE*, HRESULT)
+    put_parent_hwnd : Proc(IUpdateInstaller3*, LibC::HANDLE, HRESULT)
+    put_parent_window : Proc(IUpdateInstaller3*, IUnknown, HRESULT)
+    get_parent_window : Proc(IUpdateInstaller3*, IUnknown*, HRESULT)
+    get_updates : Proc(IUpdateInstaller3*, IUpdateCollection*, HRESULT)
+    put_updates : Proc(IUpdateInstaller3*, IUpdateCollection, HRESULT)
+    begin_install : Proc(IUpdateInstaller3*, IUnknown, IUnknown, VARIANT, IInstallationJob*, HRESULT)
+    begin_uninstall : Proc(IUpdateInstaller3*, IUnknown, IUnknown, VARIANT, IInstallationJob*, HRESULT)
+    end_install : Proc(IUpdateInstaller3*, IInstallationJob, IInstallationResult*, HRESULT)
+    end_uninstall : Proc(IUpdateInstaller3*, IInstallationJob, IInstallationResult*, HRESULT)
+    install : Proc(IUpdateInstaller3*, IInstallationResult*, HRESULT)
+    run_wizard : Proc(IUpdateInstaller3*, UInt8*, IInstallationResult*, HRESULT)
+    get_is_busy : Proc(IUpdateInstaller3*, Int16*, HRESULT)
+    uninstall : Proc(IUpdateInstaller3*, IInstallationResult*, HRESULT)
+    get_allow_source_prompts : Proc(IUpdateInstaller3*, Int16*, HRESULT)
+    put_allow_source_prompts : Proc(IUpdateInstaller3*, Int16, HRESULT)
+    get_reboot_required_before_installation : Proc(IUpdateInstaller3*, Int16*, HRESULT)
+    get_force_quiet : Proc(IUpdateInstaller3*, Int16*, HRESULT)
+    put_force_quiet : Proc(IUpdateInstaller3*, Int16, HRESULT)
+    get_attempt_close_apps_if_necessary : Proc(IUpdateInstaller3*, Int16*, HRESULT)
+    put_attempt_close_apps_if_necessary : Proc(IUpdateInstaller3*, Int16, HRESULT)
   end
 
   IUpdateInstaller3_GUID = "16d11c35-099a-48d0-8338-5fae64047f8e"
@@ -2554,39 +2554,39 @@ lib LibWin32
   end
 
   struct IUpdateInstaller4VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_client_application_id : UInt64
-    put_client_application_id : UInt64
-    get_is_forced : UInt64
-    put_is_forced : UInt64
-    get_parent_hwnd : UInt64
-    put_parent_hwnd : UInt64
-    put_parent_window : UInt64
-    get_parent_window : UInt64
-    get_updates : UInt64
-    put_updates : UInt64
-    begin_install : UInt64
-    begin_uninstall : UInt64
-    end_install : UInt64
-    end_uninstall : UInt64
-    install : UInt64
-    run_wizard : UInt64
-    get_is_busy : UInt64
-    uninstall : UInt64
-    get_allow_source_prompts : UInt64
-    put_allow_source_prompts : UInt64
-    get_reboot_required_before_installation : UInt64
-    get_force_quiet : UInt64
-    put_force_quiet : UInt64
-    get_attempt_close_apps_if_necessary : UInt64
-    put_attempt_close_apps_if_necessary : UInt64
-    commit : UInt64
+    query_interface : Proc(IUpdateInstaller4*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateInstaller4*, UInt32)
+    release : Proc(IUpdateInstaller4*, UInt32)
+    get_type_info_count : Proc(IUpdateInstaller4*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateInstaller4*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateInstaller4*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateInstaller4*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_client_application_id : Proc(IUpdateInstaller4*, UInt8**, HRESULT)
+    put_client_application_id : Proc(IUpdateInstaller4*, UInt8*, HRESULT)
+    get_is_forced : Proc(IUpdateInstaller4*, Int16*, HRESULT)
+    put_is_forced : Proc(IUpdateInstaller4*, Int16, HRESULT)
+    get_parent_hwnd : Proc(IUpdateInstaller4*, HANDLE*, HRESULT)
+    put_parent_hwnd : Proc(IUpdateInstaller4*, LibC::HANDLE, HRESULT)
+    put_parent_window : Proc(IUpdateInstaller4*, IUnknown, HRESULT)
+    get_parent_window : Proc(IUpdateInstaller4*, IUnknown*, HRESULT)
+    get_updates : Proc(IUpdateInstaller4*, IUpdateCollection*, HRESULT)
+    put_updates : Proc(IUpdateInstaller4*, IUpdateCollection, HRESULT)
+    begin_install : Proc(IUpdateInstaller4*, IUnknown, IUnknown, VARIANT, IInstallationJob*, HRESULT)
+    begin_uninstall : Proc(IUpdateInstaller4*, IUnknown, IUnknown, VARIANT, IInstallationJob*, HRESULT)
+    end_install : Proc(IUpdateInstaller4*, IInstallationJob, IInstallationResult*, HRESULT)
+    end_uninstall : Proc(IUpdateInstaller4*, IInstallationJob, IInstallationResult*, HRESULT)
+    install : Proc(IUpdateInstaller4*, IInstallationResult*, HRESULT)
+    run_wizard : Proc(IUpdateInstaller4*, UInt8*, IInstallationResult*, HRESULT)
+    get_is_busy : Proc(IUpdateInstaller4*, Int16*, HRESULT)
+    uninstall : Proc(IUpdateInstaller4*, IInstallationResult*, HRESULT)
+    get_allow_source_prompts : Proc(IUpdateInstaller4*, Int16*, HRESULT)
+    put_allow_source_prompts : Proc(IUpdateInstaller4*, Int16, HRESULT)
+    get_reboot_required_before_installation : Proc(IUpdateInstaller4*, Int16*, HRESULT)
+    get_force_quiet : Proc(IUpdateInstaller4*, Int16*, HRESULT)
+    put_force_quiet : Proc(IUpdateInstaller4*, Int16, HRESULT)
+    get_attempt_close_apps_if_necessary : Proc(IUpdateInstaller4*, Int16*, HRESULT)
+    put_attempt_close_apps_if_necessary : Proc(IUpdateInstaller4*, Int16, HRESULT)
+    commit : Proc(IUpdateInstaller4*, UInt32, HRESULT)
   end
 
   IUpdateInstaller4_GUID = "ef8208ea-2304-492d-9109-23813b0958e1"
@@ -2596,21 +2596,21 @@ lib LibWin32
   end
 
   struct IUpdateSessionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_client_application_id : UInt64
-    put_client_application_id : UInt64
-    get_read_only : UInt64
-    get_web_proxy : UInt64
-    put_web_proxy : UInt64
-    create_update_searcher : UInt64
-    create_update_downloader : UInt64
-    create_update_installer : UInt64
+    query_interface : Proc(IUpdateSession*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateSession*, UInt32)
+    release : Proc(IUpdateSession*, UInt32)
+    get_type_info_count : Proc(IUpdateSession*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateSession*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateSession*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateSession*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_client_application_id : Proc(IUpdateSession*, UInt8**, HRESULT)
+    put_client_application_id : Proc(IUpdateSession*, UInt8*, HRESULT)
+    get_read_only : Proc(IUpdateSession*, Int16*, HRESULT)
+    get_web_proxy : Proc(IUpdateSession*, IWebProxy*, HRESULT)
+    put_web_proxy : Proc(IUpdateSession*, IWebProxy, HRESULT)
+    create_update_searcher : Proc(IUpdateSession*, IUpdateSearcher*, HRESULT)
+    create_update_downloader : Proc(IUpdateSession*, IUpdateDownloader*, HRESULT)
+    create_update_installer : Proc(IUpdateSession*, IUpdateInstaller*, HRESULT)
   end
 
   IUpdateSession_GUID = "816858a4-260d-4260-933a-2585f1abc76b"
@@ -2620,23 +2620,23 @@ lib LibWin32
   end
 
   struct IUpdateSession2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_client_application_id : UInt64
-    put_client_application_id : UInt64
-    get_read_only : UInt64
-    get_web_proxy : UInt64
-    put_web_proxy : UInt64
-    create_update_searcher : UInt64
-    create_update_downloader : UInt64
-    create_update_installer : UInt64
-    get_user_locale : UInt64
-    put_user_locale : UInt64
+    query_interface : Proc(IUpdateSession2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateSession2*, UInt32)
+    release : Proc(IUpdateSession2*, UInt32)
+    get_type_info_count : Proc(IUpdateSession2*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateSession2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateSession2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateSession2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_client_application_id : Proc(IUpdateSession2*, UInt8**, HRESULT)
+    put_client_application_id : Proc(IUpdateSession2*, UInt8*, HRESULT)
+    get_read_only : Proc(IUpdateSession2*, Int16*, HRESULT)
+    get_web_proxy : Proc(IUpdateSession2*, IWebProxy*, HRESULT)
+    put_web_proxy : Proc(IUpdateSession2*, IWebProxy, HRESULT)
+    create_update_searcher : Proc(IUpdateSession2*, IUpdateSearcher*, HRESULT)
+    create_update_downloader : Proc(IUpdateSession2*, IUpdateDownloader*, HRESULT)
+    create_update_installer : Proc(IUpdateSession2*, IUpdateInstaller*, HRESULT)
+    get_user_locale : Proc(IUpdateSession2*, UInt32*, HRESULT)
+    put_user_locale : Proc(IUpdateSession2*, UInt32, HRESULT)
   end
 
   IUpdateSession2_GUID = "91caf7b0-eb23-49ed-9937-c52d817f46f7"
@@ -2646,25 +2646,25 @@ lib LibWin32
   end
 
   struct IUpdateSession3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_client_application_id : UInt64
-    put_client_application_id : UInt64
-    get_read_only : UInt64
-    get_web_proxy : UInt64
-    put_web_proxy : UInt64
-    create_update_searcher : UInt64
-    create_update_downloader : UInt64
-    create_update_installer : UInt64
-    get_user_locale : UInt64
-    put_user_locale : UInt64
-    create_update_service_manager : UInt64
-    query_history : UInt64
+    query_interface : Proc(IUpdateSession3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateSession3*, UInt32)
+    release : Proc(IUpdateSession3*, UInt32)
+    get_type_info_count : Proc(IUpdateSession3*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateSession3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateSession3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateSession3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_client_application_id : Proc(IUpdateSession3*, UInt8**, HRESULT)
+    put_client_application_id : Proc(IUpdateSession3*, UInt8*, HRESULT)
+    get_read_only : Proc(IUpdateSession3*, Int16*, HRESULT)
+    get_web_proxy : Proc(IUpdateSession3*, IWebProxy*, HRESULT)
+    put_web_proxy : Proc(IUpdateSession3*, IWebProxy, HRESULT)
+    create_update_searcher : Proc(IUpdateSession3*, IUpdateSearcher*, HRESULT)
+    create_update_downloader : Proc(IUpdateSession3*, IUpdateDownloader*, HRESULT)
+    create_update_installer : Proc(IUpdateSession3*, IUpdateInstaller*, HRESULT)
+    get_user_locale : Proc(IUpdateSession3*, UInt32*, HRESULT)
+    put_user_locale : Proc(IUpdateSession3*, UInt32, HRESULT)
+    create_update_service_manager : Proc(IUpdateSession3*, IUpdateServiceManager2*, HRESULT)
+    query_history : Proc(IUpdateSession3*, UInt8*, Int32, Int32, IUpdateHistoryEntryCollection*, HRESULT)
   end
 
   IUpdateSession3_GUID = "918efd1e-b5d8-4c90-8540-aeb9bdc56f9d"
@@ -2674,26 +2674,26 @@ lib LibWin32
   end
 
   struct IUpdateServiceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_name : UInt64
-    get_content_validation_cert : UInt64
-    get_expiration_date : UInt64
-    get_is_managed : UInt64
-    get_is_registered_with_au : UInt64
-    get_issue_date : UInt64
-    get_offers_windows_updates : UInt64
-    get_redirect_urls : UInt64
-    get_service_id : UInt64
-    get_is_scan_package_service : UInt64
-    get_can_register_with_au : UInt64
-    get_service_url : UInt64
-    get_setup_prefix : UInt64
+    query_interface : Proc(IUpdateService*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateService*, UInt32)
+    release : Proc(IUpdateService*, UInt32)
+    get_type_info_count : Proc(IUpdateService*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateService*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateService*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateService*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_name : Proc(IUpdateService*, UInt8**, HRESULT)
+    get_content_validation_cert : Proc(IUpdateService*, VARIANT*, HRESULT)
+    get_expiration_date : Proc(IUpdateService*, Float64*, HRESULT)
+    get_is_managed : Proc(IUpdateService*, Int16*, HRESULT)
+    get_is_registered_with_au : Proc(IUpdateService*, Int16*, HRESULT)
+    get_issue_date : Proc(IUpdateService*, Float64*, HRESULT)
+    get_offers_windows_updates : Proc(IUpdateService*, Int16*, HRESULT)
+    get_redirect_urls : Proc(IUpdateService*, IStringCollection*, HRESULT)
+    get_service_id : Proc(IUpdateService*, UInt8**, HRESULT)
+    get_is_scan_package_service : Proc(IUpdateService*, Int16*, HRESULT)
+    get_can_register_with_au : Proc(IUpdateService*, Int16*, HRESULT)
+    get_service_url : Proc(IUpdateService*, UInt8**, HRESULT)
+    get_setup_prefix : Proc(IUpdateService*, UInt8**, HRESULT)
   end
 
   IUpdateService_GUID = "76b3b17e-aed6-4da5-85f0-83587f81abe3"
@@ -2703,27 +2703,27 @@ lib LibWin32
   end
 
   struct IUpdateService2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_name : UInt64
-    get_content_validation_cert : UInt64
-    get_expiration_date : UInt64
-    get_is_managed : UInt64
-    get_is_registered_with_au : UInt64
-    get_issue_date : UInt64
-    get_offers_windows_updates : UInt64
-    get_redirect_urls : UInt64
-    get_service_id : UInt64
-    get_is_scan_package_service : UInt64
-    get_can_register_with_au : UInt64
-    get_service_url : UInt64
-    get_setup_prefix : UInt64
-    get_is_default_au_service : UInt64
+    query_interface : Proc(IUpdateService2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateService2*, UInt32)
+    release : Proc(IUpdateService2*, UInt32)
+    get_type_info_count : Proc(IUpdateService2*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateService2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateService2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateService2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_name : Proc(IUpdateService2*, UInt8**, HRESULT)
+    get_content_validation_cert : Proc(IUpdateService2*, VARIANT*, HRESULT)
+    get_expiration_date : Proc(IUpdateService2*, Float64*, HRESULT)
+    get_is_managed : Proc(IUpdateService2*, Int16*, HRESULT)
+    get_is_registered_with_au : Proc(IUpdateService2*, Int16*, HRESULT)
+    get_issue_date : Proc(IUpdateService2*, Float64*, HRESULT)
+    get_offers_windows_updates : Proc(IUpdateService2*, Int16*, HRESULT)
+    get_redirect_urls : Proc(IUpdateService2*, IStringCollection*, HRESULT)
+    get_service_id : Proc(IUpdateService2*, UInt8**, HRESULT)
+    get_is_scan_package_service : Proc(IUpdateService2*, Int16*, HRESULT)
+    get_can_register_with_au : Proc(IUpdateService2*, Int16*, HRESULT)
+    get_service_url : Proc(IUpdateService2*, UInt8**, HRESULT)
+    get_setup_prefix : Proc(IUpdateService2*, UInt8**, HRESULT)
+    get_is_default_au_service : Proc(IUpdateService2*, Int16*, HRESULT)
   end
 
   IUpdateService2_GUID = "1518b460-6518-4172-940f-c75883b24ceb"
@@ -2733,16 +2733,16 @@ lib LibWin32
   end
 
   struct IUpdateServiceCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_item : UInt64
-    get__new_enum : UInt64
-    get_count : UInt64
+    query_interface : Proc(IUpdateServiceCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateServiceCollection*, UInt32)
+    release : Proc(IUpdateServiceCollection*, UInt32)
+    get_type_info_count : Proc(IUpdateServiceCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateServiceCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateServiceCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateServiceCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_item : Proc(IUpdateServiceCollection*, Int32, IUpdateService*, HRESULT)
+    get__new_enum : Proc(IUpdateServiceCollection*, IUnknown*, HRESULT)
+    get_count : Proc(IUpdateServiceCollection*, Int32*, HRESULT)
   end
 
   IUpdateServiceCollection_GUID = "9b0353aa-0e52-44ff-b8b0-1f7fa0437f88"
@@ -2752,17 +2752,17 @@ lib LibWin32
   end
 
   struct IUpdateServiceRegistrationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_registration_state : UInt64
-    get_service_id : UInt64
-    get_is_pending_registration_with_au : UInt64
-    get_service : UInt64
+    query_interface : Proc(IUpdateServiceRegistration*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateServiceRegistration*, UInt32)
+    release : Proc(IUpdateServiceRegistration*, UInt32)
+    get_type_info_count : Proc(IUpdateServiceRegistration*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateServiceRegistration*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateServiceRegistration*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateServiceRegistration*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_registration_state : Proc(IUpdateServiceRegistration*, UpdateServiceRegistrationState*, HRESULT)
+    get_service_id : Proc(IUpdateServiceRegistration*, UInt8**, HRESULT)
+    get_is_pending_registration_with_au : Proc(IUpdateServiceRegistration*, Int16*, HRESULT)
+    get_service : Proc(IUpdateServiceRegistration*, IUpdateService2*, HRESULT)
   end
 
   IUpdateServiceRegistration_GUID = "dde02280-12b3-4e0b-937b-6747f6acb286"
@@ -2772,20 +2772,20 @@ lib LibWin32
   end
 
   struct IUpdateServiceManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_services : UInt64
-    add_service : UInt64
-    register_service_with_au : UInt64
-    remove_service : UInt64
-    unregister_service_with_au : UInt64
-    add_scan_package_service : UInt64
-    set_option : UInt64
+    query_interface : Proc(IUpdateServiceManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateServiceManager*, UInt32)
+    release : Proc(IUpdateServiceManager*, UInt32)
+    get_type_info_count : Proc(IUpdateServiceManager*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateServiceManager*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateServiceManager*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateServiceManager*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_services : Proc(IUpdateServiceManager*, IUpdateServiceCollection*, HRESULT)
+    add_service : Proc(IUpdateServiceManager*, UInt8*, UInt8*, IUpdateService*, HRESULT)
+    register_service_with_au : Proc(IUpdateServiceManager*, UInt8*, HRESULT)
+    remove_service : Proc(IUpdateServiceManager*, UInt8*, HRESULT)
+    unregister_service_with_au : Proc(IUpdateServiceManager*, UInt8*, HRESULT)
+    add_scan_package_service : Proc(IUpdateServiceManager*, UInt8*, UInt8*, Int32, IUpdateService*, HRESULT)
+    set_option : Proc(IUpdateServiceManager*, UInt8*, VARIANT, HRESULT)
   end
 
   IUpdateServiceManager_GUID = "23857e3c-02ba-44a3-9423-b1c900805f37"
@@ -2795,24 +2795,24 @@ lib LibWin32
   end
 
   struct IUpdateServiceManager2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_services : UInt64
-    add_service : UInt64
-    register_service_with_au : UInt64
-    remove_service : UInt64
-    unregister_service_with_au : UInt64
-    add_scan_package_service : UInt64
-    set_option : UInt64
-    get_client_application_id : UInt64
-    put_client_application_id : UInt64
-    query_service_registration : UInt64
-    add_service2 : UInt64
+    query_interface : Proc(IUpdateServiceManager2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUpdateServiceManager2*, UInt32)
+    release : Proc(IUpdateServiceManager2*, UInt32)
+    get_type_info_count : Proc(IUpdateServiceManager2*, UInt32*, HRESULT)
+    get_type_info : Proc(IUpdateServiceManager2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IUpdateServiceManager2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IUpdateServiceManager2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_services : Proc(IUpdateServiceManager2*, IUpdateServiceCollection*, HRESULT)
+    add_service : Proc(IUpdateServiceManager2*, UInt8*, UInt8*, IUpdateService*, HRESULT)
+    register_service_with_au : Proc(IUpdateServiceManager2*, UInt8*, HRESULT)
+    remove_service : Proc(IUpdateServiceManager2*, UInt8*, HRESULT)
+    unregister_service_with_au : Proc(IUpdateServiceManager2*, UInt8*, HRESULT)
+    add_scan_package_service : Proc(IUpdateServiceManager2*, UInt8*, UInt8*, Int32, IUpdateService*, HRESULT)
+    set_option : Proc(IUpdateServiceManager2*, UInt8*, VARIANT, HRESULT)
+    get_client_application_id : Proc(IUpdateServiceManager2*, UInt8**, HRESULT)
+    put_client_application_id : Proc(IUpdateServiceManager2*, UInt8*, HRESULT)
+    query_service_registration : Proc(IUpdateServiceManager2*, UInt8*, IUpdateServiceRegistration*, HRESULT)
+    add_service2 : Proc(IUpdateServiceManager2*, UInt8*, Int32, UInt8*, IUpdateServiceRegistration*, HRESULT)
   end
 
   IUpdateServiceManager2_GUID = "0bb8531d-7e8d-424f-986c-a0b8f60a3e7b"
@@ -2822,14 +2822,14 @@ lib LibWin32
   end
 
   struct IInstallationAgentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    record_installation_result : UInt64
+    query_interface : Proc(IInstallationAgent*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInstallationAgent*, UInt32)
+    release : Proc(IInstallationAgent*, UInt32)
+    get_type_info_count : Proc(IInstallationAgent*, UInt32*, HRESULT)
+    get_type_info : Proc(IInstallationAgent*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IInstallationAgent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IInstallationAgent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    record_installation_result : Proc(IInstallationAgent*, UInt8*, Int32, IStringCollection, HRESULT)
   end
 
   IInstallationAgent_GUID = "925cbc18-a2ea-4648-bf1c-ec8badcfe20a"
@@ -2840,4723 +2840,4723 @@ lib LibWin32
 
 end
 struct LibWin32::IUpdateLockdown
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateLockdown*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateLockdown*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateLockdown*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def lock_down(flags : Int32) : HRESULT
-    @lpVtbl.value.lock_down.unsafe_as(Proc(Int32, HRESULT)).call(flags)
+  def lock_down(this : IUpdateLockdown*, flags : Int32) : HRESULT
+    @lpVtbl.value.lock_down.call(this, flags)
   end
 end
 struct LibWin32::IStringCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IStringCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IStringCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IStringCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IStringCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IStringCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IStringCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IStringCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(index : Int32, retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(index, retval)
+  def get_item(this : IStringCollection*, index : Int32, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, retval)
   end
-  def put_item(index : Int32, value : UInt8*) : HRESULT
-    @lpVtbl.value.put_item.unsafe_as(Proc(Int32, UInt8*, HRESULT)).call(index, value)
+  def put_item(this : IStringCollection*, index : Int32, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_item.call(this, index, value)
   end
-  def get__new_enum(retval : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(retval)
+  def get__new_enum(this : IStringCollection*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
   end
-  def get_count(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_count(this : IStringCollection*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, retval)
   end
-  def get_read_only(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_read_only.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_read_only(this : IStringCollection*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_read_only.call(this, retval)
   end
-  def add(value : UInt8*, retval : Int32*) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(UInt8*, Int32*, HRESULT)).call(value, retval)
+  def add(this : IStringCollection*, value : UInt8*, retval : Int32*) : HRESULT
+    @lpVtbl.value.add.call(this, value, retval)
   end
-  def clear : HRESULT
-    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  def clear(this : IStringCollection*) : HRESULT
+    @lpVtbl.value.clear.call(this)
   end
-  def copy(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.copy.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def copy(this : IStringCollection*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.copy.call(this, retval)
   end
-  def insert(index : Int32, value : UInt8*) : HRESULT
-    @lpVtbl.value.insert.unsafe_as(Proc(Int32, UInt8*, HRESULT)).call(index, value)
+  def insert(this : IStringCollection*, index : Int32, value : UInt8*) : HRESULT
+    @lpVtbl.value.insert.call(this, index, value)
   end
-  def remove_at(index : Int32) : HRESULT
-    @lpVtbl.value.remove_at.unsafe_as(Proc(Int32, HRESULT)).call(index)
+  def remove_at(this : IStringCollection*, index : Int32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
   end
 end
 struct LibWin32::IWebProxy
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWebProxy*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWebProxy*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWebProxy*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWebProxy*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWebProxy*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWebProxy*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWebProxy*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_address(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_address.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_address(this : IWebProxy*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_address.call(this, retval)
   end
-  def put_address(value : UInt8*) : HRESULT
-    @lpVtbl.value.put_address.unsafe_as(Proc(UInt8*, HRESULT)).call(value)
+  def put_address(this : IWebProxy*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_address.call(this, value)
   end
-  def get_bypass_list(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_bypass_list.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_bypass_list(this : IWebProxy*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_bypass_list.call(this, retval)
   end
-  def put_bypass_list(value : IStringCollection) : HRESULT
-    @lpVtbl.value.put_bypass_list.unsafe_as(Proc(IStringCollection, HRESULT)).call(value)
+  def put_bypass_list(this : IWebProxy*, value : IStringCollection) : HRESULT
+    @lpVtbl.value.put_bypass_list.call(this, value)
   end
-  def get_bypass_proxy_on_local(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_bypass_proxy_on_local.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_bypass_proxy_on_local(this : IWebProxy*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_bypass_proxy_on_local.call(this, retval)
   end
-  def put_bypass_proxy_on_local(value : Int16) : HRESULT
-    @lpVtbl.value.put_bypass_proxy_on_local.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_bypass_proxy_on_local(this : IWebProxy*, value : Int16) : HRESULT
+    @lpVtbl.value.put_bypass_proxy_on_local.call(this, value)
   end
-  def get_read_only(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_read_only.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_read_only(this : IWebProxy*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_read_only.call(this, retval)
   end
-  def get_user_name(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_user_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_user_name(this : IWebProxy*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_name.call(this, retval)
   end
-  def put_user_name(value : UInt8*) : HRESULT
-    @lpVtbl.value.put_user_name.unsafe_as(Proc(UInt8*, HRESULT)).call(value)
+  def put_user_name(this : IWebProxy*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_user_name.call(this, value)
   end
-  def set_password(value : UInt8*) : HRESULT
-    @lpVtbl.value.set_password.unsafe_as(Proc(UInt8*, HRESULT)).call(value)
+  def set_password(this : IWebProxy*, value : UInt8*) : HRESULT
+    @lpVtbl.value.set_password.call(this, value)
   end
-  def prompt_for_credentials(parentwindow : IUnknown, title : UInt8*) : HRESULT
-    @lpVtbl.value.prompt_for_credentials.unsafe_as(Proc(IUnknown, UInt8*, HRESULT)).call(parentwindow, title)
+  def prompt_for_credentials(this : IWebProxy*, parentwindow : IUnknown, title : UInt8*) : HRESULT
+    @lpVtbl.value.prompt_for_credentials.call(this, parentwindow, title)
   end
-  def prompt_for_credentials_from_hwnd(parentwindow : LibC::HANDLE, title : UInt8*) : HRESULT
-    @lpVtbl.value.prompt_for_credentials_from_hwnd.unsafe_as(Proc(LibC::HANDLE, UInt8*, HRESULT)).call(parentwindow, title)
+  def prompt_for_credentials_from_hwnd(this : IWebProxy*, parentwindow : LibC::HANDLE, title : UInt8*) : HRESULT
+    @lpVtbl.value.prompt_for_credentials_from_hwnd.call(this, parentwindow, title)
   end
-  def get_auto_detect(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_auto_detect.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_auto_detect(this : IWebProxy*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_detect.call(this, retval)
   end
-  def put_auto_detect(value : Int16) : HRESULT
-    @lpVtbl.value.put_auto_detect.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_auto_detect(this : IWebProxy*, value : Int16) : HRESULT
+    @lpVtbl.value.put_auto_detect.call(this, value)
   end
 end
 struct LibWin32::ISystemInformation
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISystemInformation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISystemInformation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISystemInformation*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISystemInformation*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISystemInformation*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISystemInformation*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISystemInformation*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_oem_hardware_support_link(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_oem_hardware_support_link.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_oem_hardware_support_link(this : ISystemInformation*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_oem_hardware_support_link.call(this, retval)
   end
-  def get_reboot_required(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_reboot_required.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_reboot_required(this : ISystemInformation*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
   end
 end
 struct LibWin32::IWindowsUpdateAgentInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWindowsUpdateAgentInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWindowsUpdateAgentInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWindowsUpdateAgentInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWindowsUpdateAgentInfo*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWindowsUpdateAgentInfo*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWindowsUpdateAgentInfo*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWindowsUpdateAgentInfo*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_info(varinfoidentifier : VARIANT, retval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_info.unsafe_as(Proc(VARIANT, VARIANT*, HRESULT)).call(varinfoidentifier, retval)
+  def get_info(this : IWindowsUpdateAgentInfo*, varinfoidentifier : VARIANT, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_info.call(this, varinfoidentifier, retval)
   end
 end
 struct LibWin32::IAutomaticUpdatesResults
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IAutomaticUpdatesResults*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IAutomaticUpdatesResults*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IAutomaticUpdatesResults*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IAutomaticUpdatesResults*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IAutomaticUpdatesResults*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IAutomaticUpdatesResults*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IAutomaticUpdatesResults*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_last_search_success_date(retval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_last_search_success_date.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  def get_last_search_success_date(this : IAutomaticUpdatesResults*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_last_search_success_date.call(this, retval)
   end
-  def get_last_installation_success_date(retval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_last_installation_success_date.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  def get_last_installation_success_date(this : IAutomaticUpdatesResults*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_last_installation_success_date.call(this, retval)
   end
 end
 struct LibWin32::IAutomaticUpdatesSettings
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IAutomaticUpdatesSettings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IAutomaticUpdatesSettings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IAutomaticUpdatesSettings*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IAutomaticUpdatesSettings*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IAutomaticUpdatesSettings*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IAutomaticUpdatesSettings*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IAutomaticUpdatesSettings*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_notification_level(retval : AutomaticUpdatesNotificationLevel*) : HRESULT
-    @lpVtbl.value.get_notification_level.unsafe_as(Proc(AutomaticUpdatesNotificationLevel*, HRESULT)).call(retval)
+  def get_notification_level(this : IAutomaticUpdatesSettings*, retval : AutomaticUpdatesNotificationLevel*) : HRESULT
+    @lpVtbl.value.get_notification_level.call(this, retval)
   end
-  def put_notification_level(value : AutomaticUpdatesNotificationLevel) : HRESULT
-    @lpVtbl.value.put_notification_level.unsafe_as(Proc(AutomaticUpdatesNotificationLevel, HRESULT)).call(value)
+  def put_notification_level(this : IAutomaticUpdatesSettings*, value : AutomaticUpdatesNotificationLevel) : HRESULT
+    @lpVtbl.value.put_notification_level.call(this, value)
   end
-  def get_read_only(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_read_only.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_read_only(this : IAutomaticUpdatesSettings*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_read_only.call(this, retval)
   end
-  def get_required(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_required.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_required(this : IAutomaticUpdatesSettings*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_required.call(this, retval)
   end
-  def get_scheduled_installation_day(retval : AutomaticUpdatesScheduledInstallationDay*) : HRESULT
-    @lpVtbl.value.get_scheduled_installation_day.unsafe_as(Proc(AutomaticUpdatesScheduledInstallationDay*, HRESULT)).call(retval)
+  def get_scheduled_installation_day(this : IAutomaticUpdatesSettings*, retval : AutomaticUpdatesScheduledInstallationDay*) : HRESULT
+    @lpVtbl.value.get_scheduled_installation_day.call(this, retval)
   end
-  def put_scheduled_installation_day(value : AutomaticUpdatesScheduledInstallationDay) : HRESULT
-    @lpVtbl.value.put_scheduled_installation_day.unsafe_as(Proc(AutomaticUpdatesScheduledInstallationDay, HRESULT)).call(value)
+  def put_scheduled_installation_day(this : IAutomaticUpdatesSettings*, value : AutomaticUpdatesScheduledInstallationDay) : HRESULT
+    @lpVtbl.value.put_scheduled_installation_day.call(this, value)
   end
-  def get_scheduled_installation_time(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_scheduled_installation_time.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_scheduled_installation_time(this : IAutomaticUpdatesSettings*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_scheduled_installation_time.call(this, retval)
   end
-  def put_scheduled_installation_time(value : Int32) : HRESULT
-    @lpVtbl.value.put_scheduled_installation_time.unsafe_as(Proc(Int32, HRESULT)).call(value)
+  def put_scheduled_installation_time(this : IAutomaticUpdatesSettings*, value : Int32) : HRESULT
+    @lpVtbl.value.put_scheduled_installation_time.call(this, value)
   end
-  def refresh : HRESULT
-    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  def refresh(this : IAutomaticUpdatesSettings*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
   end
-  def save : HRESULT
-    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  def save(this : IAutomaticUpdatesSettings*) : HRESULT
+    @lpVtbl.value.save.call(this)
   end
 end
 struct LibWin32::IAutomaticUpdatesSettings2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IAutomaticUpdatesSettings2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IAutomaticUpdatesSettings2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IAutomaticUpdatesSettings2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IAutomaticUpdatesSettings2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IAutomaticUpdatesSettings2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IAutomaticUpdatesSettings2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IAutomaticUpdatesSettings2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_notification_level(retval : AutomaticUpdatesNotificationLevel*) : HRESULT
-    @lpVtbl.value.get_notification_level.unsafe_as(Proc(AutomaticUpdatesNotificationLevel*, HRESULT)).call(retval)
+  def get_notification_level(this : IAutomaticUpdatesSettings2*, retval : AutomaticUpdatesNotificationLevel*) : HRESULT
+    @lpVtbl.value.get_notification_level.call(this, retval)
   end
-  def put_notification_level(value : AutomaticUpdatesNotificationLevel) : HRESULT
-    @lpVtbl.value.put_notification_level.unsafe_as(Proc(AutomaticUpdatesNotificationLevel, HRESULT)).call(value)
+  def put_notification_level(this : IAutomaticUpdatesSettings2*, value : AutomaticUpdatesNotificationLevel) : HRESULT
+    @lpVtbl.value.put_notification_level.call(this, value)
   end
-  def get_read_only(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_read_only.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_read_only(this : IAutomaticUpdatesSettings2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_read_only.call(this, retval)
   end
-  def get_required(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_required.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_required(this : IAutomaticUpdatesSettings2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_required.call(this, retval)
   end
-  def get_scheduled_installation_day(retval : AutomaticUpdatesScheduledInstallationDay*) : HRESULT
-    @lpVtbl.value.get_scheduled_installation_day.unsafe_as(Proc(AutomaticUpdatesScheduledInstallationDay*, HRESULT)).call(retval)
+  def get_scheduled_installation_day(this : IAutomaticUpdatesSettings2*, retval : AutomaticUpdatesScheduledInstallationDay*) : HRESULT
+    @lpVtbl.value.get_scheduled_installation_day.call(this, retval)
   end
-  def put_scheduled_installation_day(value : AutomaticUpdatesScheduledInstallationDay) : HRESULT
-    @lpVtbl.value.put_scheduled_installation_day.unsafe_as(Proc(AutomaticUpdatesScheduledInstallationDay, HRESULT)).call(value)
+  def put_scheduled_installation_day(this : IAutomaticUpdatesSettings2*, value : AutomaticUpdatesScheduledInstallationDay) : HRESULT
+    @lpVtbl.value.put_scheduled_installation_day.call(this, value)
   end
-  def get_scheduled_installation_time(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_scheduled_installation_time.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_scheduled_installation_time(this : IAutomaticUpdatesSettings2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_scheduled_installation_time.call(this, retval)
   end
-  def put_scheduled_installation_time(value : Int32) : HRESULT
-    @lpVtbl.value.put_scheduled_installation_time.unsafe_as(Proc(Int32, HRESULT)).call(value)
+  def put_scheduled_installation_time(this : IAutomaticUpdatesSettings2*, value : Int32) : HRESULT
+    @lpVtbl.value.put_scheduled_installation_time.call(this, value)
   end
-  def refresh : HRESULT
-    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  def refresh(this : IAutomaticUpdatesSettings2*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
   end
-  def save : HRESULT
-    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  def save(this : IAutomaticUpdatesSettings2*) : HRESULT
+    @lpVtbl.value.save.call(this)
   end
-  def get_include_recommended_updates(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_include_recommended_updates.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_include_recommended_updates(this : IAutomaticUpdatesSettings2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_include_recommended_updates.call(this, retval)
   end
-  def put_include_recommended_updates(value : Int16) : HRESULT
-    @lpVtbl.value.put_include_recommended_updates.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_include_recommended_updates(this : IAutomaticUpdatesSettings2*, value : Int16) : HRESULT
+    @lpVtbl.value.put_include_recommended_updates.call(this, value)
   end
-  def check_permission(usertype : AutomaticUpdatesUserType, permissiontype : AutomaticUpdatesPermissionType, userhaspermission : Int16*) : HRESULT
-    @lpVtbl.value.check_permission.unsafe_as(Proc(AutomaticUpdatesUserType, AutomaticUpdatesPermissionType, Int16*, HRESULT)).call(usertype, permissiontype, userhaspermission)
+  def check_permission(this : IAutomaticUpdatesSettings2*, usertype : AutomaticUpdatesUserType, permissiontype : AutomaticUpdatesPermissionType, userhaspermission : Int16*) : HRESULT
+    @lpVtbl.value.check_permission.call(this, usertype, permissiontype, userhaspermission)
   end
 end
 struct LibWin32::IAutomaticUpdatesSettings3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IAutomaticUpdatesSettings3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IAutomaticUpdatesSettings3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IAutomaticUpdatesSettings3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IAutomaticUpdatesSettings3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IAutomaticUpdatesSettings3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IAutomaticUpdatesSettings3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IAutomaticUpdatesSettings3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_notification_level(retval : AutomaticUpdatesNotificationLevel*) : HRESULT
-    @lpVtbl.value.get_notification_level.unsafe_as(Proc(AutomaticUpdatesNotificationLevel*, HRESULT)).call(retval)
+  def get_notification_level(this : IAutomaticUpdatesSettings3*, retval : AutomaticUpdatesNotificationLevel*) : HRESULT
+    @lpVtbl.value.get_notification_level.call(this, retval)
   end
-  def put_notification_level(value : AutomaticUpdatesNotificationLevel) : HRESULT
-    @lpVtbl.value.put_notification_level.unsafe_as(Proc(AutomaticUpdatesNotificationLevel, HRESULT)).call(value)
+  def put_notification_level(this : IAutomaticUpdatesSettings3*, value : AutomaticUpdatesNotificationLevel) : HRESULT
+    @lpVtbl.value.put_notification_level.call(this, value)
   end
-  def get_read_only(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_read_only.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_read_only(this : IAutomaticUpdatesSettings3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_read_only.call(this, retval)
   end
-  def get_required(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_required.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_required(this : IAutomaticUpdatesSettings3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_required.call(this, retval)
   end
-  def get_scheduled_installation_day(retval : AutomaticUpdatesScheduledInstallationDay*) : HRESULT
-    @lpVtbl.value.get_scheduled_installation_day.unsafe_as(Proc(AutomaticUpdatesScheduledInstallationDay*, HRESULT)).call(retval)
+  def get_scheduled_installation_day(this : IAutomaticUpdatesSettings3*, retval : AutomaticUpdatesScheduledInstallationDay*) : HRESULT
+    @lpVtbl.value.get_scheduled_installation_day.call(this, retval)
   end
-  def put_scheduled_installation_day(value : AutomaticUpdatesScheduledInstallationDay) : HRESULT
-    @lpVtbl.value.put_scheduled_installation_day.unsafe_as(Proc(AutomaticUpdatesScheduledInstallationDay, HRESULT)).call(value)
+  def put_scheduled_installation_day(this : IAutomaticUpdatesSettings3*, value : AutomaticUpdatesScheduledInstallationDay) : HRESULT
+    @lpVtbl.value.put_scheduled_installation_day.call(this, value)
   end
-  def get_scheduled_installation_time(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_scheduled_installation_time.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_scheduled_installation_time(this : IAutomaticUpdatesSettings3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_scheduled_installation_time.call(this, retval)
   end
-  def put_scheduled_installation_time(value : Int32) : HRESULT
-    @lpVtbl.value.put_scheduled_installation_time.unsafe_as(Proc(Int32, HRESULT)).call(value)
+  def put_scheduled_installation_time(this : IAutomaticUpdatesSettings3*, value : Int32) : HRESULT
+    @lpVtbl.value.put_scheduled_installation_time.call(this, value)
   end
-  def refresh : HRESULT
-    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  def refresh(this : IAutomaticUpdatesSettings3*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
   end
-  def save : HRESULT
-    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  def save(this : IAutomaticUpdatesSettings3*) : HRESULT
+    @lpVtbl.value.save.call(this)
   end
-  def get_include_recommended_updates(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_include_recommended_updates.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_include_recommended_updates(this : IAutomaticUpdatesSettings3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_include_recommended_updates.call(this, retval)
   end
-  def put_include_recommended_updates(value : Int16) : HRESULT
-    @lpVtbl.value.put_include_recommended_updates.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_include_recommended_updates(this : IAutomaticUpdatesSettings3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_include_recommended_updates.call(this, value)
   end
-  def check_permission(usertype : AutomaticUpdatesUserType, permissiontype : AutomaticUpdatesPermissionType, userhaspermission : Int16*) : HRESULT
-    @lpVtbl.value.check_permission.unsafe_as(Proc(AutomaticUpdatesUserType, AutomaticUpdatesPermissionType, Int16*, HRESULT)).call(usertype, permissiontype, userhaspermission)
+  def check_permission(this : IAutomaticUpdatesSettings3*, usertype : AutomaticUpdatesUserType, permissiontype : AutomaticUpdatesPermissionType, userhaspermission : Int16*) : HRESULT
+    @lpVtbl.value.check_permission.call(this, usertype, permissiontype, userhaspermission)
   end
-  def get_non_administrators_elevated(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_non_administrators_elevated.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_non_administrators_elevated(this : IAutomaticUpdatesSettings3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_non_administrators_elevated.call(this, retval)
   end
-  def put_non_administrators_elevated(value : Int16) : HRESULT
-    @lpVtbl.value.put_non_administrators_elevated.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_non_administrators_elevated(this : IAutomaticUpdatesSettings3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_non_administrators_elevated.call(this, value)
   end
-  def get_featured_updates_enabled(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_featured_updates_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_featured_updates_enabled(this : IAutomaticUpdatesSettings3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_featured_updates_enabled.call(this, retval)
   end
-  def put_featured_updates_enabled(value : Int16) : HRESULT
-    @lpVtbl.value.put_featured_updates_enabled.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_featured_updates_enabled(this : IAutomaticUpdatesSettings3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_featured_updates_enabled.call(this, value)
   end
 end
 struct LibWin32::IAutomaticUpdates
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IAutomaticUpdates*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IAutomaticUpdates*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IAutomaticUpdates*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IAutomaticUpdates*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IAutomaticUpdates*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IAutomaticUpdates*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IAutomaticUpdates*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def detect_now : HRESULT
-    @lpVtbl.value.detect_now.unsafe_as(Proc(HRESULT)).call
+  def detect_now(this : IAutomaticUpdates*) : HRESULT
+    @lpVtbl.value.detect_now.call(this)
   end
-  def pause : HRESULT
-    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  def pause(this : IAutomaticUpdates*) : HRESULT
+    @lpVtbl.value.pause.call(this)
   end
-  def resume : HRESULT
-    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  def resume(this : IAutomaticUpdates*) : HRESULT
+    @lpVtbl.value.resume.call(this)
   end
-  def show_settings_dialog : HRESULT
-    @lpVtbl.value.show_settings_dialog.unsafe_as(Proc(HRESULT)).call
+  def show_settings_dialog(this : IAutomaticUpdates*) : HRESULT
+    @lpVtbl.value.show_settings_dialog.call(this)
   end
-  def get_settings(retval : IAutomaticUpdatesSettings*) : HRESULT
-    @lpVtbl.value.get_settings.unsafe_as(Proc(IAutomaticUpdatesSettings*, HRESULT)).call(retval)
+  def get_settings(this : IAutomaticUpdates*, retval : IAutomaticUpdatesSettings*) : HRESULT
+    @lpVtbl.value.get_settings.call(this, retval)
   end
-  def get_service_enabled(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_service_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_service_enabled(this : IAutomaticUpdates*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_service_enabled.call(this, retval)
   end
-  def enable_service : HRESULT
-    @lpVtbl.value.enable_service.unsafe_as(Proc(HRESULT)).call
+  def enable_service(this : IAutomaticUpdates*) : HRESULT
+    @lpVtbl.value.enable_service.call(this)
   end
 end
 struct LibWin32::IAutomaticUpdates2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IAutomaticUpdates2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IAutomaticUpdates2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IAutomaticUpdates2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IAutomaticUpdates2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IAutomaticUpdates2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IAutomaticUpdates2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IAutomaticUpdates2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def detect_now : HRESULT
-    @lpVtbl.value.detect_now.unsafe_as(Proc(HRESULT)).call
+  def detect_now(this : IAutomaticUpdates2*) : HRESULT
+    @lpVtbl.value.detect_now.call(this)
   end
-  def pause : HRESULT
-    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  def pause(this : IAutomaticUpdates2*) : HRESULT
+    @lpVtbl.value.pause.call(this)
   end
-  def resume : HRESULT
-    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  def resume(this : IAutomaticUpdates2*) : HRESULT
+    @lpVtbl.value.resume.call(this)
   end
-  def show_settings_dialog : HRESULT
-    @lpVtbl.value.show_settings_dialog.unsafe_as(Proc(HRESULT)).call
+  def show_settings_dialog(this : IAutomaticUpdates2*) : HRESULT
+    @lpVtbl.value.show_settings_dialog.call(this)
   end
-  def get_settings(retval : IAutomaticUpdatesSettings*) : HRESULT
-    @lpVtbl.value.get_settings.unsafe_as(Proc(IAutomaticUpdatesSettings*, HRESULT)).call(retval)
+  def get_settings(this : IAutomaticUpdates2*, retval : IAutomaticUpdatesSettings*) : HRESULT
+    @lpVtbl.value.get_settings.call(this, retval)
   end
-  def get_service_enabled(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_service_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_service_enabled(this : IAutomaticUpdates2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_service_enabled.call(this, retval)
   end
-  def enable_service : HRESULT
-    @lpVtbl.value.enable_service.unsafe_as(Proc(HRESULT)).call
+  def enable_service(this : IAutomaticUpdates2*) : HRESULT
+    @lpVtbl.value.enable_service.call(this)
   end
-  def get_results(retval : IAutomaticUpdatesResults*) : HRESULT
-    @lpVtbl.value.get_results.unsafe_as(Proc(IAutomaticUpdatesResults*, HRESULT)).call(retval)
+  def get_results(this : IAutomaticUpdates2*, retval : IAutomaticUpdatesResults*) : HRESULT
+    @lpVtbl.value.get_results.call(this, retval)
   end
 end
 struct LibWin32::IUpdateIdentity
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateIdentity*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateIdentity*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateIdentity*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateIdentity*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateIdentity*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateIdentity*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateIdentity*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_revision_number(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_revision_number.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_revision_number(this : IUpdateIdentity*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_revision_number.call(this, retval)
   end
-  def get_update_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_update_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_update_id(this : IUpdateIdentity*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_update_id.call(this, retval)
   end
 end
 struct LibWin32::IImageInformation
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IImageInformation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IImageInformation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IImageInformation*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IImageInformation*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IImageInformation*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IImageInformation*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IImageInformation*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_alt_text(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_alt_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_alt_text(this : IImageInformation*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_alt_text.call(this, retval)
   end
-  def get_height(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_height.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_height(this : IImageInformation*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_height.call(this, retval)
   end
-  def get_source(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_source.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_source(this : IImageInformation*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_source.call(this, retval)
   end
-  def get_width(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_width.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_width(this : IImageInformation*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_width.call(this, retval)
   end
 end
 struct LibWin32::ICategory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ICategory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ICategory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ICategory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ICategory*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ICategory*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ICategory*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ICategory*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_name(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_name(this : ICategory*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, retval)
   end
-  def get_category_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_category_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_category_id(this : ICategory*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_category_id.call(this, retval)
   end
-  def get_children(retval : ICategoryCollection*) : HRESULT
-    @lpVtbl.value.get_children.unsafe_as(Proc(ICategoryCollection*, HRESULT)).call(retval)
+  def get_children(this : ICategory*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_children.call(this, retval)
   end
-  def get_description(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_description(this : ICategory*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
   end
-  def get_image(retval : IImageInformation*) : HRESULT
-    @lpVtbl.value.get_image.unsafe_as(Proc(IImageInformation*, HRESULT)).call(retval)
+  def get_image(this : ICategory*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
   end
-  def get_order(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_order.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_order(this : ICategory*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_order.call(this, retval)
   end
-  def get_parent(retval : ICategory*) : HRESULT
-    @lpVtbl.value.get_parent.unsafe_as(Proc(ICategory*, HRESULT)).call(retval)
+  def get_parent(this : ICategory*, retval : ICategory*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, retval)
   end
-  def get_type(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_type(this : ICategory*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
   end
-  def get_updates(retval : IUpdateCollection*) : HRESULT
-    @lpVtbl.value.get_updates.unsafe_as(Proc(IUpdateCollection*, HRESULT)).call(retval)
+  def get_updates(this : ICategory*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_updates.call(this, retval)
   end
 end
 struct LibWin32::ICategoryCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ICategoryCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ICategoryCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ICategoryCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ICategoryCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ICategoryCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ICategoryCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ICategoryCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(index : Int32, retval : ICategory*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, ICategory*, HRESULT)).call(index, retval)
+  def get_item(this : ICategoryCollection*, index : Int32, retval : ICategory*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, retval)
   end
-  def get__new_enum(retval : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(retval)
+  def get__new_enum(this : ICategoryCollection*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
   end
-  def get_count(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_count(this : ICategoryCollection*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, retval)
   end
 end
 struct LibWin32::IInstallationBehavior
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInstallationBehavior*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInstallationBehavior*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInstallationBehavior*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IInstallationBehavior*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IInstallationBehavior*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IInstallationBehavior*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IInstallationBehavior*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_can_request_user_input(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_can_request_user_input.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_can_request_user_input(this : IInstallationBehavior*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_request_user_input.call(this, retval)
   end
-  def get_impact(retval : InstallationImpact*) : HRESULT
-    @lpVtbl.value.get_impact.unsafe_as(Proc(InstallationImpact*, HRESULT)).call(retval)
+  def get_impact(this : IInstallationBehavior*, retval : InstallationImpact*) : HRESULT
+    @lpVtbl.value.get_impact.call(this, retval)
   end
-  def get_reboot_behavior(retval : InstallationRebootBehavior*) : HRESULT
-    @lpVtbl.value.get_reboot_behavior.unsafe_as(Proc(InstallationRebootBehavior*, HRESULT)).call(retval)
+  def get_reboot_behavior(this : IInstallationBehavior*, retval : InstallationRebootBehavior*) : HRESULT
+    @lpVtbl.value.get_reboot_behavior.call(this, retval)
   end
-  def get_requires_network_connectivity(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_requires_network_connectivity.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_requires_network_connectivity(this : IInstallationBehavior*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_requires_network_connectivity.call(this, retval)
   end
 end
 struct LibWin32::IUpdateDownloadContent
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateDownloadContent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateDownloadContent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateDownloadContent*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateDownloadContent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateDownloadContent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateDownloadContent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateDownloadContent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_download_url(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_download_url.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_download_url(this : IUpdateDownloadContent*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_download_url.call(this, retval)
   end
 end
 struct LibWin32::IUpdateDownloadContent2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateDownloadContent2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateDownloadContent2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateDownloadContent2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateDownloadContent2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateDownloadContent2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateDownloadContent2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateDownloadContent2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_download_url(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_download_url.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_download_url(this : IUpdateDownloadContent2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_download_url.call(this, retval)
   end
-  def get_is_delta_compressed_content(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_delta_compressed_content.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_delta_compressed_content(this : IUpdateDownloadContent2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_delta_compressed_content.call(this, retval)
   end
 end
 struct LibWin32::IUpdateDownloadContentCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateDownloadContentCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateDownloadContentCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateDownloadContentCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateDownloadContentCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateDownloadContentCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateDownloadContentCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateDownloadContentCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(index : Int32, retval : IUpdateDownloadContent*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, IUpdateDownloadContent*, HRESULT)).call(index, retval)
+  def get_item(this : IUpdateDownloadContentCollection*, index : Int32, retval : IUpdateDownloadContent*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, retval)
   end
-  def get__new_enum(retval : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(retval)
+  def get__new_enum(this : IUpdateDownloadContentCollection*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
   end
-  def get_count(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_count(this : IUpdateDownloadContentCollection*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, retval)
   end
 end
 struct LibWin32::IUpdate
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdate*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdate*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdate*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdate*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdate*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_title(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_title(this : IUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
   end
-  def get_auto_select_on_web_sites(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_auto_select_on_web_sites.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_auto_select_on_web_sites(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_select_on_web_sites.call(this, retval)
   end
-  def get_bundled_updates(retval : IUpdateCollection*) : HRESULT
-    @lpVtbl.value.get_bundled_updates.unsafe_as(Proc(IUpdateCollection*, HRESULT)).call(retval)
+  def get_bundled_updates(this : IUpdate*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_bundled_updates.call(this, retval)
   end
-  def get_can_require_source(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_can_require_source.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_can_require_source(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_require_source.call(this, retval)
   end
-  def get_categories(retval : ICategoryCollection*) : HRESULT
-    @lpVtbl.value.get_categories.unsafe_as(Proc(ICategoryCollection*, HRESULT)).call(retval)
+  def get_categories(this : IUpdate*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
   end
-  def get_deadline(retval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_deadline.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  def get_deadline(this : IUpdate*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, retval)
   end
-  def get_delta_compressed_content_available(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_delta_compressed_content_available.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_delta_compressed_content_available(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_available.call(this, retval)
   end
-  def get_delta_compressed_content_preferred(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_delta_compressed_content_preferred.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_delta_compressed_content_preferred(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_preferred.call(this, retval)
   end
-  def get_description(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_description(this : IUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
   end
-  def get_eula_accepted(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_eula_accepted.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_eula_accepted(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_eula_accepted.call(this, retval)
   end
-  def get_eula_text(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_eula_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_eula_text(this : IUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_eula_text.call(this, retval)
   end
-  def get_handler_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_handler_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_handler_id(this : IUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_handler_id.call(this, retval)
   end
-  def get_identity(retval : IUpdateIdentity*) : HRESULT
-    @lpVtbl.value.get_identity.unsafe_as(Proc(IUpdateIdentity*, HRESULT)).call(retval)
+  def get_identity(this : IUpdate*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, retval)
   end
-  def get_image(retval : IImageInformation*) : HRESULT
-    @lpVtbl.value.get_image.unsafe_as(Proc(IImageInformation*, HRESULT)).call(retval)
+  def get_image(this : IUpdate*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
   end
-  def get_installation_behavior(retval : IInstallationBehavior*) : HRESULT
-    @lpVtbl.value.get_installation_behavior.unsafe_as(Proc(IInstallationBehavior*, HRESULT)).call(retval)
+  def get_installation_behavior(this : IUpdate*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_installation_behavior.call(this, retval)
   end
-  def get_is_beta(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_beta.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_beta(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_beta.call(this, retval)
   end
-  def get_is_downloaded(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_downloaded.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_downloaded(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_downloaded.call(this, retval)
   end
-  def get_is_hidden(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_hidden.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_hidden(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_hidden.call(this, retval)
   end
-  def put_is_hidden(value : Int16) : HRESULT
-    @lpVtbl.value.put_is_hidden.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_is_hidden(this : IUpdate*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_hidden.call(this, value)
   end
-  def get_is_installed(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_installed.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_installed(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_installed.call(this, retval)
   end
-  def get_is_mandatory(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_mandatory.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_mandatory(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_mandatory.call(this, retval)
   end
-  def get_is_uninstallable(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_uninstallable.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_uninstallable(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, retval)
   end
-  def get_languages(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_languages.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_languages(this : IUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, retval)
   end
-  def get_last_deployment_change_time(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_last_deployment_change_time.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_last_deployment_change_time(this : IUpdate*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_deployment_change_time.call(this, retval)
   end
-  def get_max_download_size(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_max_download_size.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_max_download_size(this : IUpdate*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_max_download_size.call(this, retval)
   end
-  def get_min_download_size(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_min_download_size.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_min_download_size(this : IUpdate*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_min_download_size.call(this, retval)
   end
-  def get_more_info_urls(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_more_info_urls.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_more_info_urls(this : IUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_more_info_urls.call(this, retval)
   end
-  def get_msrc_severity(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_msrc_severity.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_msrc_severity(this : IUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_msrc_severity.call(this, retval)
   end
-  def get_recommended_cpu_speed(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_cpu_speed.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_cpu_speed(this : IUpdate*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_cpu_speed.call(this, retval)
   end
-  def get_recommended_hard_disk_space(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_hard_disk_space.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_hard_disk_space(this : IUpdate*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_hard_disk_space.call(this, retval)
   end
-  def get_recommended_memory(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_memory.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_memory(this : IUpdate*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_memory.call(this, retval)
   end
-  def get_release_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_release_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_release_notes(this : IUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_release_notes.call(this, retval)
   end
-  def get_security_bulletin_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_security_bulletin_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_security_bulletin_i_ds(this : IUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_security_bulletin_i_ds.call(this, retval)
   end
-  def get_superseded_update_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_superseded_update_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_superseded_update_i_ds(this : IUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_superseded_update_i_ds.call(this, retval)
   end
-  def get_support_url(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_support_url.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_support_url(this : IUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
   end
-  def get_type(retval : UpdateType*) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(UpdateType*, HRESULT)).call(retval)
+  def get_type(this : IUpdate*, retval : UpdateType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
   end
-  def get_uninstallation_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_uninstallation_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_uninstallation_notes(this : IUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
   end
-  def get_uninstallation_behavior(retval : IInstallationBehavior*) : HRESULT
-    @lpVtbl.value.get_uninstallation_behavior.unsafe_as(Proc(IInstallationBehavior*, HRESULT)).call(retval)
+  def get_uninstallation_behavior(this : IUpdate*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_uninstallation_behavior.call(this, retval)
   end
-  def get_uninstallation_steps(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_uninstallation_steps.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_uninstallation_steps(this : IUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
   end
-  def get_kb_article_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_kb_article_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_kb_article_i_ds(this : IUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_kb_article_i_ds.call(this, retval)
   end
-  def accept_eula : HRESULT
-    @lpVtbl.value.accept_eula.unsafe_as(Proc(HRESULT)).call
+  def accept_eula(this : IUpdate*) : HRESULT
+    @lpVtbl.value.accept_eula.call(this)
   end
-  def get_deployment_action(retval : DeploymentAction*) : HRESULT
-    @lpVtbl.value.get_deployment_action.unsafe_as(Proc(DeploymentAction*, HRESULT)).call(retval)
+  def get_deployment_action(this : IUpdate*, retval : DeploymentAction*) : HRESULT
+    @lpVtbl.value.get_deployment_action.call(this, retval)
   end
-  def copy_from_cache(path : UInt8*, toextractcabfiles : Int16) : HRESULT
-    @lpVtbl.value.copy_from_cache.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(path, toextractcabfiles)
+  def copy_from_cache(this : IUpdate*, path : UInt8*, toextractcabfiles : Int16) : HRESULT
+    @lpVtbl.value.copy_from_cache.call(this, path, toextractcabfiles)
   end
-  def get_download_priority(retval : DownloadPriority*) : HRESULT
-    @lpVtbl.value.get_download_priority.unsafe_as(Proc(DownloadPriority*, HRESULT)).call(retval)
+  def get_download_priority(this : IUpdate*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_download_priority.call(this, retval)
   end
-  def get_download_contents(retval : IUpdateDownloadContentCollection*) : HRESULT
-    @lpVtbl.value.get_download_contents.unsafe_as(Proc(IUpdateDownloadContentCollection*, HRESULT)).call(retval)
+  def get_download_contents(this : IUpdate*, retval : IUpdateDownloadContentCollection*) : HRESULT
+    @lpVtbl.value.get_download_contents.call(this, retval)
   end
 end
 struct LibWin32::IWindowsDriverUpdate
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWindowsDriverUpdate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWindowsDriverUpdate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWindowsDriverUpdate*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWindowsDriverUpdate*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWindowsDriverUpdate*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWindowsDriverUpdate*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWindowsDriverUpdate*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_title(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_title(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
   end
-  def get_auto_select_on_web_sites(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_auto_select_on_web_sites.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_auto_select_on_web_sites(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_select_on_web_sites.call(this, retval)
   end
-  def get_bundled_updates(retval : IUpdateCollection*) : HRESULT
-    @lpVtbl.value.get_bundled_updates.unsafe_as(Proc(IUpdateCollection*, HRESULT)).call(retval)
+  def get_bundled_updates(this : IWindowsDriverUpdate*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_bundled_updates.call(this, retval)
   end
-  def get_can_require_source(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_can_require_source.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_can_require_source(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_require_source.call(this, retval)
   end
-  def get_categories(retval : ICategoryCollection*) : HRESULT
-    @lpVtbl.value.get_categories.unsafe_as(Proc(ICategoryCollection*, HRESULT)).call(retval)
+  def get_categories(this : IWindowsDriverUpdate*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
   end
-  def get_deadline(retval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_deadline.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  def get_deadline(this : IWindowsDriverUpdate*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, retval)
   end
-  def get_delta_compressed_content_available(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_delta_compressed_content_available.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_delta_compressed_content_available(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_available.call(this, retval)
   end
-  def get_delta_compressed_content_preferred(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_delta_compressed_content_preferred.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_delta_compressed_content_preferred(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_preferred.call(this, retval)
   end
-  def get_description(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_description(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
   end
-  def get_eula_accepted(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_eula_accepted.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_eula_accepted(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_eula_accepted.call(this, retval)
   end
-  def get_eula_text(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_eula_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_eula_text(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_eula_text.call(this, retval)
   end
-  def get_handler_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_handler_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_handler_id(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_handler_id.call(this, retval)
   end
-  def get_identity(retval : IUpdateIdentity*) : HRESULT
-    @lpVtbl.value.get_identity.unsafe_as(Proc(IUpdateIdentity*, HRESULT)).call(retval)
+  def get_identity(this : IWindowsDriverUpdate*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, retval)
   end
-  def get_image(retval : IImageInformation*) : HRESULT
-    @lpVtbl.value.get_image.unsafe_as(Proc(IImageInformation*, HRESULT)).call(retval)
+  def get_image(this : IWindowsDriverUpdate*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
   end
-  def get_installation_behavior(retval : IInstallationBehavior*) : HRESULT
-    @lpVtbl.value.get_installation_behavior.unsafe_as(Proc(IInstallationBehavior*, HRESULT)).call(retval)
+  def get_installation_behavior(this : IWindowsDriverUpdate*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_installation_behavior.call(this, retval)
   end
-  def get_is_beta(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_beta.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_beta(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_beta.call(this, retval)
   end
-  def get_is_downloaded(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_downloaded.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_downloaded(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_downloaded.call(this, retval)
   end
-  def get_is_hidden(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_hidden.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_hidden(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_hidden.call(this, retval)
   end
-  def put_is_hidden(value : Int16) : HRESULT
-    @lpVtbl.value.put_is_hidden.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_is_hidden(this : IWindowsDriverUpdate*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_hidden.call(this, value)
   end
-  def get_is_installed(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_installed.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_installed(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_installed.call(this, retval)
   end
-  def get_is_mandatory(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_mandatory.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_mandatory(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_mandatory.call(this, retval)
   end
-  def get_is_uninstallable(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_uninstallable.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_uninstallable(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, retval)
   end
-  def get_languages(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_languages.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_languages(this : IWindowsDriverUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, retval)
   end
-  def get_last_deployment_change_time(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_last_deployment_change_time.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_last_deployment_change_time(this : IWindowsDriverUpdate*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_deployment_change_time.call(this, retval)
   end
-  def get_max_download_size(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_max_download_size.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_max_download_size(this : IWindowsDriverUpdate*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_max_download_size.call(this, retval)
   end
-  def get_min_download_size(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_min_download_size.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_min_download_size(this : IWindowsDriverUpdate*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_min_download_size.call(this, retval)
   end
-  def get_more_info_urls(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_more_info_urls.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_more_info_urls(this : IWindowsDriverUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_more_info_urls.call(this, retval)
   end
-  def get_msrc_severity(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_msrc_severity.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_msrc_severity(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_msrc_severity.call(this, retval)
   end
-  def get_recommended_cpu_speed(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_cpu_speed.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_cpu_speed(this : IWindowsDriverUpdate*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_cpu_speed.call(this, retval)
   end
-  def get_recommended_hard_disk_space(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_hard_disk_space.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_hard_disk_space(this : IWindowsDriverUpdate*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_hard_disk_space.call(this, retval)
   end
-  def get_recommended_memory(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_memory.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_memory(this : IWindowsDriverUpdate*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_memory.call(this, retval)
   end
-  def get_release_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_release_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_release_notes(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_release_notes.call(this, retval)
   end
-  def get_security_bulletin_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_security_bulletin_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_security_bulletin_i_ds(this : IWindowsDriverUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_security_bulletin_i_ds.call(this, retval)
   end
-  def get_superseded_update_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_superseded_update_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_superseded_update_i_ds(this : IWindowsDriverUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_superseded_update_i_ds.call(this, retval)
   end
-  def get_support_url(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_support_url.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_support_url(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
   end
-  def get_type(retval : UpdateType*) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(UpdateType*, HRESULT)).call(retval)
+  def get_type(this : IWindowsDriverUpdate*, retval : UpdateType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
   end
-  def get_uninstallation_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_uninstallation_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_uninstallation_notes(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
   end
-  def get_uninstallation_behavior(retval : IInstallationBehavior*) : HRESULT
-    @lpVtbl.value.get_uninstallation_behavior.unsafe_as(Proc(IInstallationBehavior*, HRESULT)).call(retval)
+  def get_uninstallation_behavior(this : IWindowsDriverUpdate*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_uninstallation_behavior.call(this, retval)
   end
-  def get_uninstallation_steps(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_uninstallation_steps.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_uninstallation_steps(this : IWindowsDriverUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
   end
-  def get_kb_article_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_kb_article_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_kb_article_i_ds(this : IWindowsDriverUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_kb_article_i_ds.call(this, retval)
   end
-  def accept_eula : HRESULT
-    @lpVtbl.value.accept_eula.unsafe_as(Proc(HRESULT)).call
+  def accept_eula(this : IWindowsDriverUpdate*) : HRESULT
+    @lpVtbl.value.accept_eula.call(this)
   end
-  def get_deployment_action(retval : DeploymentAction*) : HRESULT
-    @lpVtbl.value.get_deployment_action.unsafe_as(Proc(DeploymentAction*, HRESULT)).call(retval)
+  def get_deployment_action(this : IWindowsDriverUpdate*, retval : DeploymentAction*) : HRESULT
+    @lpVtbl.value.get_deployment_action.call(this, retval)
   end
-  def copy_from_cache(path : UInt8*, toextractcabfiles : Int16) : HRESULT
-    @lpVtbl.value.copy_from_cache.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(path, toextractcabfiles)
+  def copy_from_cache(this : IWindowsDriverUpdate*, path : UInt8*, toextractcabfiles : Int16) : HRESULT
+    @lpVtbl.value.copy_from_cache.call(this, path, toextractcabfiles)
   end
-  def get_download_priority(retval : DownloadPriority*) : HRESULT
-    @lpVtbl.value.get_download_priority.unsafe_as(Proc(DownloadPriority*, HRESULT)).call(retval)
+  def get_download_priority(this : IWindowsDriverUpdate*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_download_priority.call(this, retval)
   end
-  def get_download_contents(retval : IUpdateDownloadContentCollection*) : HRESULT
-    @lpVtbl.value.get_download_contents.unsafe_as(Proc(IUpdateDownloadContentCollection*, HRESULT)).call(retval)
+  def get_download_contents(this : IWindowsDriverUpdate*, retval : IUpdateDownloadContentCollection*) : HRESULT
+    @lpVtbl.value.get_download_contents.call(this, retval)
   end
-  def get_driver_class(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_class(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_class.call(this, retval)
   end
-  def get_driver_hardware_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_hardware_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_hardware_id(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_hardware_id.call(this, retval)
   end
-  def get_driver_manufacturer(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_manufacturer.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_manufacturer(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_manufacturer.call(this, retval)
   end
-  def get_driver_model(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_model.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_model(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_model.call(this, retval)
   end
-  def get_driver_provider(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_provider.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_provider(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_provider.call(this, retval)
   end
-  def get_driver_ver_date(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_driver_ver_date.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_driver_ver_date(this : IWindowsDriverUpdate*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_driver_ver_date.call(this, retval)
   end
-  def get_device_problem_number(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_device_problem_number.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_device_problem_number(this : IWindowsDriverUpdate*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_problem_number.call(this, retval)
   end
-  def get_device_status(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_device_status.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_device_status(this : IWindowsDriverUpdate*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, retval)
   end
 end
 struct LibWin32::IUpdate2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdate2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdate2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdate2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdate2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdate2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdate2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdate2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_title(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_title(this : IUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
   end
-  def get_auto_select_on_web_sites(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_auto_select_on_web_sites.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_auto_select_on_web_sites(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_select_on_web_sites.call(this, retval)
   end
-  def get_bundled_updates(retval : IUpdateCollection*) : HRESULT
-    @lpVtbl.value.get_bundled_updates.unsafe_as(Proc(IUpdateCollection*, HRESULT)).call(retval)
+  def get_bundled_updates(this : IUpdate2*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_bundled_updates.call(this, retval)
   end
-  def get_can_require_source(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_can_require_source.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_can_require_source(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_require_source.call(this, retval)
   end
-  def get_categories(retval : ICategoryCollection*) : HRESULT
-    @lpVtbl.value.get_categories.unsafe_as(Proc(ICategoryCollection*, HRESULT)).call(retval)
+  def get_categories(this : IUpdate2*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
   end
-  def get_deadline(retval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_deadline.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  def get_deadline(this : IUpdate2*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, retval)
   end
-  def get_delta_compressed_content_available(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_delta_compressed_content_available.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_delta_compressed_content_available(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_available.call(this, retval)
   end
-  def get_delta_compressed_content_preferred(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_delta_compressed_content_preferred.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_delta_compressed_content_preferred(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_preferred.call(this, retval)
   end
-  def get_description(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_description(this : IUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
   end
-  def get_eula_accepted(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_eula_accepted.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_eula_accepted(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_eula_accepted.call(this, retval)
   end
-  def get_eula_text(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_eula_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_eula_text(this : IUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_eula_text.call(this, retval)
   end
-  def get_handler_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_handler_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_handler_id(this : IUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_handler_id.call(this, retval)
   end
-  def get_identity(retval : IUpdateIdentity*) : HRESULT
-    @lpVtbl.value.get_identity.unsafe_as(Proc(IUpdateIdentity*, HRESULT)).call(retval)
+  def get_identity(this : IUpdate2*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, retval)
   end
-  def get_image(retval : IImageInformation*) : HRESULT
-    @lpVtbl.value.get_image.unsafe_as(Proc(IImageInformation*, HRESULT)).call(retval)
+  def get_image(this : IUpdate2*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
   end
-  def get_installation_behavior(retval : IInstallationBehavior*) : HRESULT
-    @lpVtbl.value.get_installation_behavior.unsafe_as(Proc(IInstallationBehavior*, HRESULT)).call(retval)
+  def get_installation_behavior(this : IUpdate2*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_installation_behavior.call(this, retval)
   end
-  def get_is_beta(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_beta.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_beta(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_beta.call(this, retval)
   end
-  def get_is_downloaded(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_downloaded.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_downloaded(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_downloaded.call(this, retval)
   end
-  def get_is_hidden(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_hidden.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_hidden(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_hidden.call(this, retval)
   end
-  def put_is_hidden(value : Int16) : HRESULT
-    @lpVtbl.value.put_is_hidden.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_is_hidden(this : IUpdate2*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_hidden.call(this, value)
   end
-  def get_is_installed(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_installed.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_installed(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_installed.call(this, retval)
   end
-  def get_is_mandatory(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_mandatory.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_mandatory(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_mandatory.call(this, retval)
   end
-  def get_is_uninstallable(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_uninstallable.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_uninstallable(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, retval)
   end
-  def get_languages(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_languages.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_languages(this : IUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, retval)
   end
-  def get_last_deployment_change_time(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_last_deployment_change_time.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_last_deployment_change_time(this : IUpdate2*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_deployment_change_time.call(this, retval)
   end
-  def get_max_download_size(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_max_download_size.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_max_download_size(this : IUpdate2*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_max_download_size.call(this, retval)
   end
-  def get_min_download_size(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_min_download_size.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_min_download_size(this : IUpdate2*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_min_download_size.call(this, retval)
   end
-  def get_more_info_urls(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_more_info_urls.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_more_info_urls(this : IUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_more_info_urls.call(this, retval)
   end
-  def get_msrc_severity(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_msrc_severity.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_msrc_severity(this : IUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_msrc_severity.call(this, retval)
   end
-  def get_recommended_cpu_speed(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_cpu_speed.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_cpu_speed(this : IUpdate2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_cpu_speed.call(this, retval)
   end
-  def get_recommended_hard_disk_space(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_hard_disk_space.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_hard_disk_space(this : IUpdate2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_hard_disk_space.call(this, retval)
   end
-  def get_recommended_memory(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_memory.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_memory(this : IUpdate2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_memory.call(this, retval)
   end
-  def get_release_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_release_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_release_notes(this : IUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_release_notes.call(this, retval)
   end
-  def get_security_bulletin_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_security_bulletin_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_security_bulletin_i_ds(this : IUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_security_bulletin_i_ds.call(this, retval)
   end
-  def get_superseded_update_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_superseded_update_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_superseded_update_i_ds(this : IUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_superseded_update_i_ds.call(this, retval)
   end
-  def get_support_url(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_support_url.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_support_url(this : IUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
   end
-  def get_type(retval : UpdateType*) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(UpdateType*, HRESULT)).call(retval)
+  def get_type(this : IUpdate2*, retval : UpdateType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
   end
-  def get_uninstallation_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_uninstallation_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_uninstallation_notes(this : IUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
   end
-  def get_uninstallation_behavior(retval : IInstallationBehavior*) : HRESULT
-    @lpVtbl.value.get_uninstallation_behavior.unsafe_as(Proc(IInstallationBehavior*, HRESULT)).call(retval)
+  def get_uninstallation_behavior(this : IUpdate2*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_uninstallation_behavior.call(this, retval)
   end
-  def get_uninstallation_steps(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_uninstallation_steps.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_uninstallation_steps(this : IUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
   end
-  def get_kb_article_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_kb_article_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_kb_article_i_ds(this : IUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_kb_article_i_ds.call(this, retval)
   end
-  def accept_eula : HRESULT
-    @lpVtbl.value.accept_eula.unsafe_as(Proc(HRESULT)).call
+  def accept_eula(this : IUpdate2*) : HRESULT
+    @lpVtbl.value.accept_eula.call(this)
   end
-  def get_deployment_action(retval : DeploymentAction*) : HRESULT
-    @lpVtbl.value.get_deployment_action.unsafe_as(Proc(DeploymentAction*, HRESULT)).call(retval)
+  def get_deployment_action(this : IUpdate2*, retval : DeploymentAction*) : HRESULT
+    @lpVtbl.value.get_deployment_action.call(this, retval)
   end
-  def copy_from_cache(path : UInt8*, toextractcabfiles : Int16) : HRESULT
-    @lpVtbl.value.copy_from_cache.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(path, toextractcabfiles)
+  def copy_from_cache(this : IUpdate2*, path : UInt8*, toextractcabfiles : Int16) : HRESULT
+    @lpVtbl.value.copy_from_cache.call(this, path, toextractcabfiles)
   end
-  def get_download_priority(retval : DownloadPriority*) : HRESULT
-    @lpVtbl.value.get_download_priority.unsafe_as(Proc(DownloadPriority*, HRESULT)).call(retval)
+  def get_download_priority(this : IUpdate2*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_download_priority.call(this, retval)
   end
-  def get_download_contents(retval : IUpdateDownloadContentCollection*) : HRESULT
-    @lpVtbl.value.get_download_contents.unsafe_as(Proc(IUpdateDownloadContentCollection*, HRESULT)).call(retval)
+  def get_download_contents(this : IUpdate2*, retval : IUpdateDownloadContentCollection*) : HRESULT
+    @lpVtbl.value.get_download_contents.call(this, retval)
   end
-  def get_reboot_required(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_reboot_required.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_reboot_required(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
   end
-  def get_is_present(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_present.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_present(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_present.call(this, retval)
   end
-  def get_cve_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_cve_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_cve_i_ds(this : IUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_cve_i_ds.call(this, retval)
   end
-  def copy_to_cache(pfiles : IStringCollection) : HRESULT
-    @lpVtbl.value.copy_to_cache.unsafe_as(Proc(IStringCollection, HRESULT)).call(pfiles)
+  def copy_to_cache(this : IUpdate2*, pfiles : IStringCollection) : HRESULT
+    @lpVtbl.value.copy_to_cache.call(this, pfiles)
   end
 end
 struct LibWin32::IUpdate3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdate3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdate3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdate3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdate3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdate3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdate3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdate3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_title(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_title(this : IUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
   end
-  def get_auto_select_on_web_sites(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_auto_select_on_web_sites.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_auto_select_on_web_sites(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_select_on_web_sites.call(this, retval)
   end
-  def get_bundled_updates(retval : IUpdateCollection*) : HRESULT
-    @lpVtbl.value.get_bundled_updates.unsafe_as(Proc(IUpdateCollection*, HRESULT)).call(retval)
+  def get_bundled_updates(this : IUpdate3*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_bundled_updates.call(this, retval)
   end
-  def get_can_require_source(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_can_require_source.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_can_require_source(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_require_source.call(this, retval)
   end
-  def get_categories(retval : ICategoryCollection*) : HRESULT
-    @lpVtbl.value.get_categories.unsafe_as(Proc(ICategoryCollection*, HRESULT)).call(retval)
+  def get_categories(this : IUpdate3*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
   end
-  def get_deadline(retval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_deadline.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  def get_deadline(this : IUpdate3*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, retval)
   end
-  def get_delta_compressed_content_available(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_delta_compressed_content_available.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_delta_compressed_content_available(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_available.call(this, retval)
   end
-  def get_delta_compressed_content_preferred(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_delta_compressed_content_preferred.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_delta_compressed_content_preferred(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_preferred.call(this, retval)
   end
-  def get_description(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_description(this : IUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
   end
-  def get_eula_accepted(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_eula_accepted.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_eula_accepted(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_eula_accepted.call(this, retval)
   end
-  def get_eula_text(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_eula_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_eula_text(this : IUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_eula_text.call(this, retval)
   end
-  def get_handler_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_handler_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_handler_id(this : IUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_handler_id.call(this, retval)
   end
-  def get_identity(retval : IUpdateIdentity*) : HRESULT
-    @lpVtbl.value.get_identity.unsafe_as(Proc(IUpdateIdentity*, HRESULT)).call(retval)
+  def get_identity(this : IUpdate3*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, retval)
   end
-  def get_image(retval : IImageInformation*) : HRESULT
-    @lpVtbl.value.get_image.unsafe_as(Proc(IImageInformation*, HRESULT)).call(retval)
+  def get_image(this : IUpdate3*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
   end
-  def get_installation_behavior(retval : IInstallationBehavior*) : HRESULT
-    @lpVtbl.value.get_installation_behavior.unsafe_as(Proc(IInstallationBehavior*, HRESULT)).call(retval)
+  def get_installation_behavior(this : IUpdate3*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_installation_behavior.call(this, retval)
   end
-  def get_is_beta(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_beta.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_beta(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_beta.call(this, retval)
   end
-  def get_is_downloaded(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_downloaded.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_downloaded(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_downloaded.call(this, retval)
   end
-  def get_is_hidden(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_hidden.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_hidden(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_hidden.call(this, retval)
   end
-  def put_is_hidden(value : Int16) : HRESULT
-    @lpVtbl.value.put_is_hidden.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_is_hidden(this : IUpdate3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_hidden.call(this, value)
   end
-  def get_is_installed(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_installed.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_installed(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_installed.call(this, retval)
   end
-  def get_is_mandatory(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_mandatory.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_mandatory(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_mandatory.call(this, retval)
   end
-  def get_is_uninstallable(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_uninstallable.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_uninstallable(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, retval)
   end
-  def get_languages(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_languages.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_languages(this : IUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, retval)
   end
-  def get_last_deployment_change_time(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_last_deployment_change_time.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_last_deployment_change_time(this : IUpdate3*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_deployment_change_time.call(this, retval)
   end
-  def get_max_download_size(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_max_download_size.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_max_download_size(this : IUpdate3*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_max_download_size.call(this, retval)
   end
-  def get_min_download_size(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_min_download_size.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_min_download_size(this : IUpdate3*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_min_download_size.call(this, retval)
   end
-  def get_more_info_urls(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_more_info_urls.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_more_info_urls(this : IUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_more_info_urls.call(this, retval)
   end
-  def get_msrc_severity(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_msrc_severity.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_msrc_severity(this : IUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_msrc_severity.call(this, retval)
   end
-  def get_recommended_cpu_speed(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_cpu_speed.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_cpu_speed(this : IUpdate3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_cpu_speed.call(this, retval)
   end
-  def get_recommended_hard_disk_space(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_hard_disk_space.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_hard_disk_space(this : IUpdate3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_hard_disk_space.call(this, retval)
   end
-  def get_recommended_memory(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_memory.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_memory(this : IUpdate3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_memory.call(this, retval)
   end
-  def get_release_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_release_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_release_notes(this : IUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_release_notes.call(this, retval)
   end
-  def get_security_bulletin_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_security_bulletin_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_security_bulletin_i_ds(this : IUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_security_bulletin_i_ds.call(this, retval)
   end
-  def get_superseded_update_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_superseded_update_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_superseded_update_i_ds(this : IUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_superseded_update_i_ds.call(this, retval)
   end
-  def get_support_url(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_support_url.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_support_url(this : IUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
   end
-  def get_type(retval : UpdateType*) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(UpdateType*, HRESULT)).call(retval)
+  def get_type(this : IUpdate3*, retval : UpdateType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
   end
-  def get_uninstallation_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_uninstallation_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_uninstallation_notes(this : IUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
   end
-  def get_uninstallation_behavior(retval : IInstallationBehavior*) : HRESULT
-    @lpVtbl.value.get_uninstallation_behavior.unsafe_as(Proc(IInstallationBehavior*, HRESULT)).call(retval)
+  def get_uninstallation_behavior(this : IUpdate3*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_uninstallation_behavior.call(this, retval)
   end
-  def get_uninstallation_steps(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_uninstallation_steps.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_uninstallation_steps(this : IUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
   end
-  def get_kb_article_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_kb_article_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_kb_article_i_ds(this : IUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_kb_article_i_ds.call(this, retval)
   end
-  def accept_eula : HRESULT
-    @lpVtbl.value.accept_eula.unsafe_as(Proc(HRESULT)).call
+  def accept_eula(this : IUpdate3*) : HRESULT
+    @lpVtbl.value.accept_eula.call(this)
   end
-  def get_deployment_action(retval : DeploymentAction*) : HRESULT
-    @lpVtbl.value.get_deployment_action.unsafe_as(Proc(DeploymentAction*, HRESULT)).call(retval)
+  def get_deployment_action(this : IUpdate3*, retval : DeploymentAction*) : HRESULT
+    @lpVtbl.value.get_deployment_action.call(this, retval)
   end
-  def copy_from_cache(path : UInt8*, toextractcabfiles : Int16) : HRESULT
-    @lpVtbl.value.copy_from_cache.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(path, toextractcabfiles)
+  def copy_from_cache(this : IUpdate3*, path : UInt8*, toextractcabfiles : Int16) : HRESULT
+    @lpVtbl.value.copy_from_cache.call(this, path, toextractcabfiles)
   end
-  def get_download_priority(retval : DownloadPriority*) : HRESULT
-    @lpVtbl.value.get_download_priority.unsafe_as(Proc(DownloadPriority*, HRESULT)).call(retval)
+  def get_download_priority(this : IUpdate3*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_download_priority.call(this, retval)
   end
-  def get_download_contents(retval : IUpdateDownloadContentCollection*) : HRESULT
-    @lpVtbl.value.get_download_contents.unsafe_as(Proc(IUpdateDownloadContentCollection*, HRESULT)).call(retval)
+  def get_download_contents(this : IUpdate3*, retval : IUpdateDownloadContentCollection*) : HRESULT
+    @lpVtbl.value.get_download_contents.call(this, retval)
   end
-  def get_reboot_required(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_reboot_required.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_reboot_required(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
   end
-  def get_is_present(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_present.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_present(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_present.call(this, retval)
   end
-  def get_cve_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_cve_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_cve_i_ds(this : IUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_cve_i_ds.call(this, retval)
   end
-  def copy_to_cache(pfiles : IStringCollection) : HRESULT
-    @lpVtbl.value.copy_to_cache.unsafe_as(Proc(IStringCollection, HRESULT)).call(pfiles)
+  def copy_to_cache(this : IUpdate3*, pfiles : IStringCollection) : HRESULT
+    @lpVtbl.value.copy_to_cache.call(this, pfiles)
   end
-  def get_browse_only(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_browse_only.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_browse_only(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_browse_only.call(this, retval)
   end
 end
 struct LibWin32::IUpdate4
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdate4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdate4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdate4*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdate4*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdate4*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdate4*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdate4*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_title(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_title(this : IUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
   end
-  def get_auto_select_on_web_sites(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_auto_select_on_web_sites.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_auto_select_on_web_sites(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_select_on_web_sites.call(this, retval)
   end
-  def get_bundled_updates(retval : IUpdateCollection*) : HRESULT
-    @lpVtbl.value.get_bundled_updates.unsafe_as(Proc(IUpdateCollection*, HRESULT)).call(retval)
+  def get_bundled_updates(this : IUpdate4*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_bundled_updates.call(this, retval)
   end
-  def get_can_require_source(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_can_require_source.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_can_require_source(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_require_source.call(this, retval)
   end
-  def get_categories(retval : ICategoryCollection*) : HRESULT
-    @lpVtbl.value.get_categories.unsafe_as(Proc(ICategoryCollection*, HRESULT)).call(retval)
+  def get_categories(this : IUpdate4*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
   end
-  def get_deadline(retval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_deadline.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  def get_deadline(this : IUpdate4*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, retval)
   end
-  def get_delta_compressed_content_available(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_delta_compressed_content_available.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_delta_compressed_content_available(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_available.call(this, retval)
   end
-  def get_delta_compressed_content_preferred(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_delta_compressed_content_preferred.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_delta_compressed_content_preferred(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_preferred.call(this, retval)
   end
-  def get_description(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_description(this : IUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
   end
-  def get_eula_accepted(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_eula_accepted.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_eula_accepted(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_eula_accepted.call(this, retval)
   end
-  def get_eula_text(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_eula_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_eula_text(this : IUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_eula_text.call(this, retval)
   end
-  def get_handler_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_handler_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_handler_id(this : IUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_handler_id.call(this, retval)
   end
-  def get_identity(retval : IUpdateIdentity*) : HRESULT
-    @lpVtbl.value.get_identity.unsafe_as(Proc(IUpdateIdentity*, HRESULT)).call(retval)
+  def get_identity(this : IUpdate4*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, retval)
   end
-  def get_image(retval : IImageInformation*) : HRESULT
-    @lpVtbl.value.get_image.unsafe_as(Proc(IImageInformation*, HRESULT)).call(retval)
+  def get_image(this : IUpdate4*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
   end
-  def get_installation_behavior(retval : IInstallationBehavior*) : HRESULT
-    @lpVtbl.value.get_installation_behavior.unsafe_as(Proc(IInstallationBehavior*, HRESULT)).call(retval)
+  def get_installation_behavior(this : IUpdate4*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_installation_behavior.call(this, retval)
   end
-  def get_is_beta(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_beta.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_beta(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_beta.call(this, retval)
   end
-  def get_is_downloaded(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_downloaded.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_downloaded(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_downloaded.call(this, retval)
   end
-  def get_is_hidden(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_hidden.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_hidden(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_hidden.call(this, retval)
   end
-  def put_is_hidden(value : Int16) : HRESULT
-    @lpVtbl.value.put_is_hidden.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_is_hidden(this : IUpdate4*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_hidden.call(this, value)
   end
-  def get_is_installed(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_installed.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_installed(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_installed.call(this, retval)
   end
-  def get_is_mandatory(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_mandatory.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_mandatory(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_mandatory.call(this, retval)
   end
-  def get_is_uninstallable(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_uninstallable.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_uninstallable(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, retval)
   end
-  def get_languages(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_languages.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_languages(this : IUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, retval)
   end
-  def get_last_deployment_change_time(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_last_deployment_change_time.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_last_deployment_change_time(this : IUpdate4*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_deployment_change_time.call(this, retval)
   end
-  def get_max_download_size(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_max_download_size.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_max_download_size(this : IUpdate4*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_max_download_size.call(this, retval)
   end
-  def get_min_download_size(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_min_download_size.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_min_download_size(this : IUpdate4*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_min_download_size.call(this, retval)
   end
-  def get_more_info_urls(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_more_info_urls.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_more_info_urls(this : IUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_more_info_urls.call(this, retval)
   end
-  def get_msrc_severity(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_msrc_severity.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_msrc_severity(this : IUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_msrc_severity.call(this, retval)
   end
-  def get_recommended_cpu_speed(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_cpu_speed.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_cpu_speed(this : IUpdate4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_cpu_speed.call(this, retval)
   end
-  def get_recommended_hard_disk_space(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_hard_disk_space.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_hard_disk_space(this : IUpdate4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_hard_disk_space.call(this, retval)
   end
-  def get_recommended_memory(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_memory.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_memory(this : IUpdate4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_memory.call(this, retval)
   end
-  def get_release_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_release_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_release_notes(this : IUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_release_notes.call(this, retval)
   end
-  def get_security_bulletin_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_security_bulletin_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_security_bulletin_i_ds(this : IUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_security_bulletin_i_ds.call(this, retval)
   end
-  def get_superseded_update_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_superseded_update_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_superseded_update_i_ds(this : IUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_superseded_update_i_ds.call(this, retval)
   end
-  def get_support_url(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_support_url.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_support_url(this : IUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
   end
-  def get_type(retval : UpdateType*) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(UpdateType*, HRESULT)).call(retval)
+  def get_type(this : IUpdate4*, retval : UpdateType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
   end
-  def get_uninstallation_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_uninstallation_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_uninstallation_notes(this : IUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
   end
-  def get_uninstallation_behavior(retval : IInstallationBehavior*) : HRESULT
-    @lpVtbl.value.get_uninstallation_behavior.unsafe_as(Proc(IInstallationBehavior*, HRESULT)).call(retval)
+  def get_uninstallation_behavior(this : IUpdate4*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_uninstallation_behavior.call(this, retval)
   end
-  def get_uninstallation_steps(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_uninstallation_steps.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_uninstallation_steps(this : IUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
   end
-  def get_kb_article_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_kb_article_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_kb_article_i_ds(this : IUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_kb_article_i_ds.call(this, retval)
   end
-  def accept_eula : HRESULT
-    @lpVtbl.value.accept_eula.unsafe_as(Proc(HRESULT)).call
+  def accept_eula(this : IUpdate4*) : HRESULT
+    @lpVtbl.value.accept_eula.call(this)
   end
-  def get_deployment_action(retval : DeploymentAction*) : HRESULT
-    @lpVtbl.value.get_deployment_action.unsafe_as(Proc(DeploymentAction*, HRESULT)).call(retval)
+  def get_deployment_action(this : IUpdate4*, retval : DeploymentAction*) : HRESULT
+    @lpVtbl.value.get_deployment_action.call(this, retval)
   end
-  def copy_from_cache(path : UInt8*, toextractcabfiles : Int16) : HRESULT
-    @lpVtbl.value.copy_from_cache.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(path, toextractcabfiles)
+  def copy_from_cache(this : IUpdate4*, path : UInt8*, toextractcabfiles : Int16) : HRESULT
+    @lpVtbl.value.copy_from_cache.call(this, path, toextractcabfiles)
   end
-  def get_download_priority(retval : DownloadPriority*) : HRESULT
-    @lpVtbl.value.get_download_priority.unsafe_as(Proc(DownloadPriority*, HRESULT)).call(retval)
+  def get_download_priority(this : IUpdate4*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_download_priority.call(this, retval)
   end
-  def get_download_contents(retval : IUpdateDownloadContentCollection*) : HRESULT
-    @lpVtbl.value.get_download_contents.unsafe_as(Proc(IUpdateDownloadContentCollection*, HRESULT)).call(retval)
+  def get_download_contents(this : IUpdate4*, retval : IUpdateDownloadContentCollection*) : HRESULT
+    @lpVtbl.value.get_download_contents.call(this, retval)
   end
-  def get_reboot_required(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_reboot_required.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_reboot_required(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
   end
-  def get_is_present(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_present.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_present(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_present.call(this, retval)
   end
-  def get_cve_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_cve_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_cve_i_ds(this : IUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_cve_i_ds.call(this, retval)
   end
-  def copy_to_cache(pfiles : IStringCollection) : HRESULT
-    @lpVtbl.value.copy_to_cache.unsafe_as(Proc(IStringCollection, HRESULT)).call(pfiles)
+  def copy_to_cache(this : IUpdate4*, pfiles : IStringCollection) : HRESULT
+    @lpVtbl.value.copy_to_cache.call(this, pfiles)
   end
-  def get_browse_only(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_browse_only.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_browse_only(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_browse_only.call(this, retval)
   end
-  def get_per_user(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_per_user.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_per_user(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_per_user.call(this, retval)
   end
 end
 struct LibWin32::IUpdate5
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdate5*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdate5*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdate5*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdate5*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdate5*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdate5*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdate5*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_title(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_title(this : IUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
   end
-  def get_auto_select_on_web_sites(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_auto_select_on_web_sites.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_auto_select_on_web_sites(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_select_on_web_sites.call(this, retval)
   end
-  def get_bundled_updates(retval : IUpdateCollection*) : HRESULT
-    @lpVtbl.value.get_bundled_updates.unsafe_as(Proc(IUpdateCollection*, HRESULT)).call(retval)
+  def get_bundled_updates(this : IUpdate5*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_bundled_updates.call(this, retval)
   end
-  def get_can_require_source(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_can_require_source.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_can_require_source(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_require_source.call(this, retval)
   end
-  def get_categories(retval : ICategoryCollection*) : HRESULT
-    @lpVtbl.value.get_categories.unsafe_as(Proc(ICategoryCollection*, HRESULT)).call(retval)
+  def get_categories(this : IUpdate5*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
   end
-  def get_deadline(retval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_deadline.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  def get_deadline(this : IUpdate5*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, retval)
   end
-  def get_delta_compressed_content_available(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_delta_compressed_content_available.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_delta_compressed_content_available(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_available.call(this, retval)
   end
-  def get_delta_compressed_content_preferred(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_delta_compressed_content_preferred.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_delta_compressed_content_preferred(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_preferred.call(this, retval)
   end
-  def get_description(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_description(this : IUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
   end
-  def get_eula_accepted(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_eula_accepted.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_eula_accepted(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_eula_accepted.call(this, retval)
   end
-  def get_eula_text(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_eula_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_eula_text(this : IUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_eula_text.call(this, retval)
   end
-  def get_handler_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_handler_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_handler_id(this : IUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_handler_id.call(this, retval)
   end
-  def get_identity(retval : IUpdateIdentity*) : HRESULT
-    @lpVtbl.value.get_identity.unsafe_as(Proc(IUpdateIdentity*, HRESULT)).call(retval)
+  def get_identity(this : IUpdate5*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, retval)
   end
-  def get_image(retval : IImageInformation*) : HRESULT
-    @lpVtbl.value.get_image.unsafe_as(Proc(IImageInformation*, HRESULT)).call(retval)
+  def get_image(this : IUpdate5*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
   end
-  def get_installation_behavior(retval : IInstallationBehavior*) : HRESULT
-    @lpVtbl.value.get_installation_behavior.unsafe_as(Proc(IInstallationBehavior*, HRESULT)).call(retval)
+  def get_installation_behavior(this : IUpdate5*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_installation_behavior.call(this, retval)
   end
-  def get_is_beta(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_beta.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_beta(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_beta.call(this, retval)
   end
-  def get_is_downloaded(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_downloaded.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_downloaded(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_downloaded.call(this, retval)
   end
-  def get_is_hidden(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_hidden.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_hidden(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_hidden.call(this, retval)
   end
-  def put_is_hidden(value : Int16) : HRESULT
-    @lpVtbl.value.put_is_hidden.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_is_hidden(this : IUpdate5*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_hidden.call(this, value)
   end
-  def get_is_installed(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_installed.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_installed(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_installed.call(this, retval)
   end
-  def get_is_mandatory(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_mandatory.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_mandatory(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_mandatory.call(this, retval)
   end
-  def get_is_uninstallable(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_uninstallable.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_uninstallable(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, retval)
   end
-  def get_languages(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_languages.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_languages(this : IUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, retval)
   end
-  def get_last_deployment_change_time(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_last_deployment_change_time.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_last_deployment_change_time(this : IUpdate5*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_deployment_change_time.call(this, retval)
   end
-  def get_max_download_size(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_max_download_size.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_max_download_size(this : IUpdate5*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_max_download_size.call(this, retval)
   end
-  def get_min_download_size(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_min_download_size.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_min_download_size(this : IUpdate5*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_min_download_size.call(this, retval)
   end
-  def get_more_info_urls(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_more_info_urls.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_more_info_urls(this : IUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_more_info_urls.call(this, retval)
   end
-  def get_msrc_severity(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_msrc_severity.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_msrc_severity(this : IUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_msrc_severity.call(this, retval)
   end
-  def get_recommended_cpu_speed(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_cpu_speed.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_cpu_speed(this : IUpdate5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_cpu_speed.call(this, retval)
   end
-  def get_recommended_hard_disk_space(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_hard_disk_space.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_hard_disk_space(this : IUpdate5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_hard_disk_space.call(this, retval)
   end
-  def get_recommended_memory(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_memory.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_memory(this : IUpdate5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_memory.call(this, retval)
   end
-  def get_release_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_release_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_release_notes(this : IUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_release_notes.call(this, retval)
   end
-  def get_security_bulletin_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_security_bulletin_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_security_bulletin_i_ds(this : IUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_security_bulletin_i_ds.call(this, retval)
   end
-  def get_superseded_update_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_superseded_update_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_superseded_update_i_ds(this : IUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_superseded_update_i_ds.call(this, retval)
   end
-  def get_support_url(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_support_url.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_support_url(this : IUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
   end
-  def get_type(retval : UpdateType*) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(UpdateType*, HRESULT)).call(retval)
+  def get_type(this : IUpdate5*, retval : UpdateType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
   end
-  def get_uninstallation_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_uninstallation_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_uninstallation_notes(this : IUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
   end
-  def get_uninstallation_behavior(retval : IInstallationBehavior*) : HRESULT
-    @lpVtbl.value.get_uninstallation_behavior.unsafe_as(Proc(IInstallationBehavior*, HRESULT)).call(retval)
+  def get_uninstallation_behavior(this : IUpdate5*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_uninstallation_behavior.call(this, retval)
   end
-  def get_uninstallation_steps(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_uninstallation_steps.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_uninstallation_steps(this : IUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
   end
-  def get_kb_article_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_kb_article_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_kb_article_i_ds(this : IUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_kb_article_i_ds.call(this, retval)
   end
-  def accept_eula : HRESULT
-    @lpVtbl.value.accept_eula.unsafe_as(Proc(HRESULT)).call
+  def accept_eula(this : IUpdate5*) : HRESULT
+    @lpVtbl.value.accept_eula.call(this)
   end
-  def get_deployment_action(retval : DeploymentAction*) : HRESULT
-    @lpVtbl.value.get_deployment_action.unsafe_as(Proc(DeploymentAction*, HRESULT)).call(retval)
+  def get_deployment_action(this : IUpdate5*, retval : DeploymentAction*) : HRESULT
+    @lpVtbl.value.get_deployment_action.call(this, retval)
   end
-  def copy_from_cache(path : UInt8*, toextractcabfiles : Int16) : HRESULT
-    @lpVtbl.value.copy_from_cache.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(path, toextractcabfiles)
+  def copy_from_cache(this : IUpdate5*, path : UInt8*, toextractcabfiles : Int16) : HRESULT
+    @lpVtbl.value.copy_from_cache.call(this, path, toextractcabfiles)
   end
-  def get_download_priority(retval : DownloadPriority*) : HRESULT
-    @lpVtbl.value.get_download_priority.unsafe_as(Proc(DownloadPriority*, HRESULT)).call(retval)
+  def get_download_priority(this : IUpdate5*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_download_priority.call(this, retval)
   end
-  def get_download_contents(retval : IUpdateDownloadContentCollection*) : HRESULT
-    @lpVtbl.value.get_download_contents.unsafe_as(Proc(IUpdateDownloadContentCollection*, HRESULT)).call(retval)
+  def get_download_contents(this : IUpdate5*, retval : IUpdateDownloadContentCollection*) : HRESULT
+    @lpVtbl.value.get_download_contents.call(this, retval)
   end
-  def get_reboot_required(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_reboot_required.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_reboot_required(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
   end
-  def get_is_present(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_present.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_present(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_present.call(this, retval)
   end
-  def get_cve_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_cve_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_cve_i_ds(this : IUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_cve_i_ds.call(this, retval)
   end
-  def copy_to_cache(pfiles : IStringCollection) : HRESULT
-    @lpVtbl.value.copy_to_cache.unsafe_as(Proc(IStringCollection, HRESULT)).call(pfiles)
+  def copy_to_cache(this : IUpdate5*, pfiles : IStringCollection) : HRESULT
+    @lpVtbl.value.copy_to_cache.call(this, pfiles)
   end
-  def get_browse_only(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_browse_only.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_browse_only(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_browse_only.call(this, retval)
   end
-  def get_per_user(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_per_user.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_per_user(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_per_user.call(this, retval)
   end
-  def get_auto_selection(retval : AutoSelectionMode*) : HRESULT
-    @lpVtbl.value.get_auto_selection.unsafe_as(Proc(AutoSelectionMode*, HRESULT)).call(retval)
+  def get_auto_selection(this : IUpdate5*, retval : AutoSelectionMode*) : HRESULT
+    @lpVtbl.value.get_auto_selection.call(this, retval)
   end
-  def get_auto_download(retval : AutoDownloadMode*) : HRESULT
-    @lpVtbl.value.get_auto_download.unsafe_as(Proc(AutoDownloadMode*, HRESULT)).call(retval)
+  def get_auto_download(this : IUpdate5*, retval : AutoDownloadMode*) : HRESULT
+    @lpVtbl.value.get_auto_download.call(this, retval)
   end
 end
 struct LibWin32::IWindowsDriverUpdate2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWindowsDriverUpdate2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWindowsDriverUpdate2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWindowsDriverUpdate2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWindowsDriverUpdate2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWindowsDriverUpdate2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWindowsDriverUpdate2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWindowsDriverUpdate2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_title(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_title(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
   end
-  def get_auto_select_on_web_sites(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_auto_select_on_web_sites.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_auto_select_on_web_sites(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_select_on_web_sites.call(this, retval)
   end
-  def get_bundled_updates(retval : IUpdateCollection*) : HRESULT
-    @lpVtbl.value.get_bundled_updates.unsafe_as(Proc(IUpdateCollection*, HRESULT)).call(retval)
+  def get_bundled_updates(this : IWindowsDriverUpdate2*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_bundled_updates.call(this, retval)
   end
-  def get_can_require_source(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_can_require_source.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_can_require_source(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_require_source.call(this, retval)
   end
-  def get_categories(retval : ICategoryCollection*) : HRESULT
-    @lpVtbl.value.get_categories.unsafe_as(Proc(ICategoryCollection*, HRESULT)).call(retval)
+  def get_categories(this : IWindowsDriverUpdate2*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
   end
-  def get_deadline(retval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_deadline.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  def get_deadline(this : IWindowsDriverUpdate2*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, retval)
   end
-  def get_delta_compressed_content_available(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_delta_compressed_content_available.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_delta_compressed_content_available(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_available.call(this, retval)
   end
-  def get_delta_compressed_content_preferred(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_delta_compressed_content_preferred.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_delta_compressed_content_preferred(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_preferred.call(this, retval)
   end
-  def get_description(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_description(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
   end
-  def get_eula_accepted(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_eula_accepted.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_eula_accepted(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_eula_accepted.call(this, retval)
   end
-  def get_eula_text(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_eula_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_eula_text(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_eula_text.call(this, retval)
   end
-  def get_handler_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_handler_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_handler_id(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_handler_id.call(this, retval)
   end
-  def get_identity(retval : IUpdateIdentity*) : HRESULT
-    @lpVtbl.value.get_identity.unsafe_as(Proc(IUpdateIdentity*, HRESULT)).call(retval)
+  def get_identity(this : IWindowsDriverUpdate2*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, retval)
   end
-  def get_image(retval : IImageInformation*) : HRESULT
-    @lpVtbl.value.get_image.unsafe_as(Proc(IImageInformation*, HRESULT)).call(retval)
+  def get_image(this : IWindowsDriverUpdate2*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
   end
-  def get_installation_behavior(retval : IInstallationBehavior*) : HRESULT
-    @lpVtbl.value.get_installation_behavior.unsafe_as(Proc(IInstallationBehavior*, HRESULT)).call(retval)
+  def get_installation_behavior(this : IWindowsDriverUpdate2*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_installation_behavior.call(this, retval)
   end
-  def get_is_beta(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_beta.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_beta(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_beta.call(this, retval)
   end
-  def get_is_downloaded(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_downloaded.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_downloaded(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_downloaded.call(this, retval)
   end
-  def get_is_hidden(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_hidden.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_hidden(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_hidden.call(this, retval)
   end
-  def put_is_hidden(value : Int16) : HRESULT
-    @lpVtbl.value.put_is_hidden.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_is_hidden(this : IWindowsDriverUpdate2*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_hidden.call(this, value)
   end
-  def get_is_installed(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_installed.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_installed(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_installed.call(this, retval)
   end
-  def get_is_mandatory(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_mandatory.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_mandatory(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_mandatory.call(this, retval)
   end
-  def get_is_uninstallable(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_uninstallable.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_uninstallable(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, retval)
   end
-  def get_languages(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_languages.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_languages(this : IWindowsDriverUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, retval)
   end
-  def get_last_deployment_change_time(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_last_deployment_change_time.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_last_deployment_change_time(this : IWindowsDriverUpdate2*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_deployment_change_time.call(this, retval)
   end
-  def get_max_download_size(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_max_download_size.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_max_download_size(this : IWindowsDriverUpdate2*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_max_download_size.call(this, retval)
   end
-  def get_min_download_size(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_min_download_size.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_min_download_size(this : IWindowsDriverUpdate2*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_min_download_size.call(this, retval)
   end
-  def get_more_info_urls(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_more_info_urls.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_more_info_urls(this : IWindowsDriverUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_more_info_urls.call(this, retval)
   end
-  def get_msrc_severity(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_msrc_severity.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_msrc_severity(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_msrc_severity.call(this, retval)
   end
-  def get_recommended_cpu_speed(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_cpu_speed.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_cpu_speed(this : IWindowsDriverUpdate2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_cpu_speed.call(this, retval)
   end
-  def get_recommended_hard_disk_space(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_hard_disk_space.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_hard_disk_space(this : IWindowsDriverUpdate2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_hard_disk_space.call(this, retval)
   end
-  def get_recommended_memory(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_memory.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_memory(this : IWindowsDriverUpdate2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_memory.call(this, retval)
   end
-  def get_release_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_release_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_release_notes(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_release_notes.call(this, retval)
   end
-  def get_security_bulletin_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_security_bulletin_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_security_bulletin_i_ds(this : IWindowsDriverUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_security_bulletin_i_ds.call(this, retval)
   end
-  def get_superseded_update_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_superseded_update_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_superseded_update_i_ds(this : IWindowsDriverUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_superseded_update_i_ds.call(this, retval)
   end
-  def get_support_url(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_support_url.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_support_url(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
   end
-  def get_type(retval : UpdateType*) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(UpdateType*, HRESULT)).call(retval)
+  def get_type(this : IWindowsDriverUpdate2*, retval : UpdateType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
   end
-  def get_uninstallation_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_uninstallation_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_uninstallation_notes(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
   end
-  def get_uninstallation_behavior(retval : IInstallationBehavior*) : HRESULT
-    @lpVtbl.value.get_uninstallation_behavior.unsafe_as(Proc(IInstallationBehavior*, HRESULT)).call(retval)
+  def get_uninstallation_behavior(this : IWindowsDriverUpdate2*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_uninstallation_behavior.call(this, retval)
   end
-  def get_uninstallation_steps(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_uninstallation_steps.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_uninstallation_steps(this : IWindowsDriverUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
   end
-  def get_kb_article_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_kb_article_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_kb_article_i_ds(this : IWindowsDriverUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_kb_article_i_ds.call(this, retval)
   end
-  def accept_eula : HRESULT
-    @lpVtbl.value.accept_eula.unsafe_as(Proc(HRESULT)).call
+  def accept_eula(this : IWindowsDriverUpdate2*) : HRESULT
+    @lpVtbl.value.accept_eula.call(this)
   end
-  def get_deployment_action(retval : DeploymentAction*) : HRESULT
-    @lpVtbl.value.get_deployment_action.unsafe_as(Proc(DeploymentAction*, HRESULT)).call(retval)
+  def get_deployment_action(this : IWindowsDriverUpdate2*, retval : DeploymentAction*) : HRESULT
+    @lpVtbl.value.get_deployment_action.call(this, retval)
   end
-  def copy_from_cache(path : UInt8*, toextractcabfiles : Int16) : HRESULT
-    @lpVtbl.value.copy_from_cache.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(path, toextractcabfiles)
+  def copy_from_cache(this : IWindowsDriverUpdate2*, path : UInt8*, toextractcabfiles : Int16) : HRESULT
+    @lpVtbl.value.copy_from_cache.call(this, path, toextractcabfiles)
   end
-  def get_download_priority(retval : DownloadPriority*) : HRESULT
-    @lpVtbl.value.get_download_priority.unsafe_as(Proc(DownloadPriority*, HRESULT)).call(retval)
+  def get_download_priority(this : IWindowsDriverUpdate2*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_download_priority.call(this, retval)
   end
-  def get_download_contents(retval : IUpdateDownloadContentCollection*) : HRESULT
-    @lpVtbl.value.get_download_contents.unsafe_as(Proc(IUpdateDownloadContentCollection*, HRESULT)).call(retval)
+  def get_download_contents(this : IWindowsDriverUpdate2*, retval : IUpdateDownloadContentCollection*) : HRESULT
+    @lpVtbl.value.get_download_contents.call(this, retval)
   end
-  def get_driver_class(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_class(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_class.call(this, retval)
   end
-  def get_driver_hardware_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_hardware_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_hardware_id(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_hardware_id.call(this, retval)
   end
-  def get_driver_manufacturer(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_manufacturer.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_manufacturer(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_manufacturer.call(this, retval)
   end
-  def get_driver_model(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_model.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_model(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_model.call(this, retval)
   end
-  def get_driver_provider(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_provider.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_provider(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_provider.call(this, retval)
   end
-  def get_driver_ver_date(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_driver_ver_date.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_driver_ver_date(this : IWindowsDriverUpdate2*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_driver_ver_date.call(this, retval)
   end
-  def get_device_problem_number(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_device_problem_number.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_device_problem_number(this : IWindowsDriverUpdate2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_problem_number.call(this, retval)
   end
-  def get_device_status(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_device_status.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_device_status(this : IWindowsDriverUpdate2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, retval)
   end
-  def get_reboot_required(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_reboot_required.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_reboot_required(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
   end
-  def get_is_present(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_present.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_present(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_present.call(this, retval)
   end
-  def get_cve_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_cve_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_cve_i_ds(this : IWindowsDriverUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_cve_i_ds.call(this, retval)
   end
-  def copy_to_cache(pfiles : IStringCollection) : HRESULT
-    @lpVtbl.value.copy_to_cache.unsafe_as(Proc(IStringCollection, HRESULT)).call(pfiles)
+  def copy_to_cache(this : IWindowsDriverUpdate2*, pfiles : IStringCollection) : HRESULT
+    @lpVtbl.value.copy_to_cache.call(this, pfiles)
   end
 end
 struct LibWin32::IWindowsDriverUpdate3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWindowsDriverUpdate3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWindowsDriverUpdate3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWindowsDriverUpdate3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWindowsDriverUpdate3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWindowsDriverUpdate3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWindowsDriverUpdate3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWindowsDriverUpdate3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_title(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_title(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
   end
-  def get_auto_select_on_web_sites(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_auto_select_on_web_sites.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_auto_select_on_web_sites(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_select_on_web_sites.call(this, retval)
   end
-  def get_bundled_updates(retval : IUpdateCollection*) : HRESULT
-    @lpVtbl.value.get_bundled_updates.unsafe_as(Proc(IUpdateCollection*, HRESULT)).call(retval)
+  def get_bundled_updates(this : IWindowsDriverUpdate3*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_bundled_updates.call(this, retval)
   end
-  def get_can_require_source(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_can_require_source.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_can_require_source(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_require_source.call(this, retval)
   end
-  def get_categories(retval : ICategoryCollection*) : HRESULT
-    @lpVtbl.value.get_categories.unsafe_as(Proc(ICategoryCollection*, HRESULT)).call(retval)
+  def get_categories(this : IWindowsDriverUpdate3*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
   end
-  def get_deadline(retval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_deadline.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  def get_deadline(this : IWindowsDriverUpdate3*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, retval)
   end
-  def get_delta_compressed_content_available(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_delta_compressed_content_available.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_delta_compressed_content_available(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_available.call(this, retval)
   end
-  def get_delta_compressed_content_preferred(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_delta_compressed_content_preferred.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_delta_compressed_content_preferred(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_preferred.call(this, retval)
   end
-  def get_description(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_description(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
   end
-  def get_eula_accepted(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_eula_accepted.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_eula_accepted(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_eula_accepted.call(this, retval)
   end
-  def get_eula_text(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_eula_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_eula_text(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_eula_text.call(this, retval)
   end
-  def get_handler_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_handler_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_handler_id(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_handler_id.call(this, retval)
   end
-  def get_identity(retval : IUpdateIdentity*) : HRESULT
-    @lpVtbl.value.get_identity.unsafe_as(Proc(IUpdateIdentity*, HRESULT)).call(retval)
+  def get_identity(this : IWindowsDriverUpdate3*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, retval)
   end
-  def get_image(retval : IImageInformation*) : HRESULT
-    @lpVtbl.value.get_image.unsafe_as(Proc(IImageInformation*, HRESULT)).call(retval)
+  def get_image(this : IWindowsDriverUpdate3*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
   end
-  def get_installation_behavior(retval : IInstallationBehavior*) : HRESULT
-    @lpVtbl.value.get_installation_behavior.unsafe_as(Proc(IInstallationBehavior*, HRESULT)).call(retval)
+  def get_installation_behavior(this : IWindowsDriverUpdate3*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_installation_behavior.call(this, retval)
   end
-  def get_is_beta(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_beta.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_beta(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_beta.call(this, retval)
   end
-  def get_is_downloaded(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_downloaded.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_downloaded(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_downloaded.call(this, retval)
   end
-  def get_is_hidden(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_hidden.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_hidden(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_hidden.call(this, retval)
   end
-  def put_is_hidden(value : Int16) : HRESULT
-    @lpVtbl.value.put_is_hidden.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_is_hidden(this : IWindowsDriverUpdate3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_hidden.call(this, value)
   end
-  def get_is_installed(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_installed.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_installed(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_installed.call(this, retval)
   end
-  def get_is_mandatory(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_mandatory.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_mandatory(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_mandatory.call(this, retval)
   end
-  def get_is_uninstallable(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_uninstallable.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_uninstallable(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, retval)
   end
-  def get_languages(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_languages.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_languages(this : IWindowsDriverUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, retval)
   end
-  def get_last_deployment_change_time(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_last_deployment_change_time.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_last_deployment_change_time(this : IWindowsDriverUpdate3*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_deployment_change_time.call(this, retval)
   end
-  def get_max_download_size(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_max_download_size.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_max_download_size(this : IWindowsDriverUpdate3*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_max_download_size.call(this, retval)
   end
-  def get_min_download_size(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_min_download_size.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_min_download_size(this : IWindowsDriverUpdate3*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_min_download_size.call(this, retval)
   end
-  def get_more_info_urls(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_more_info_urls.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_more_info_urls(this : IWindowsDriverUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_more_info_urls.call(this, retval)
   end
-  def get_msrc_severity(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_msrc_severity.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_msrc_severity(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_msrc_severity.call(this, retval)
   end
-  def get_recommended_cpu_speed(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_cpu_speed.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_cpu_speed(this : IWindowsDriverUpdate3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_cpu_speed.call(this, retval)
   end
-  def get_recommended_hard_disk_space(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_hard_disk_space.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_hard_disk_space(this : IWindowsDriverUpdate3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_hard_disk_space.call(this, retval)
   end
-  def get_recommended_memory(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_memory.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_memory(this : IWindowsDriverUpdate3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_memory.call(this, retval)
   end
-  def get_release_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_release_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_release_notes(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_release_notes.call(this, retval)
   end
-  def get_security_bulletin_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_security_bulletin_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_security_bulletin_i_ds(this : IWindowsDriverUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_security_bulletin_i_ds.call(this, retval)
   end
-  def get_superseded_update_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_superseded_update_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_superseded_update_i_ds(this : IWindowsDriverUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_superseded_update_i_ds.call(this, retval)
   end
-  def get_support_url(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_support_url.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_support_url(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
   end
-  def get_type(retval : UpdateType*) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(UpdateType*, HRESULT)).call(retval)
+  def get_type(this : IWindowsDriverUpdate3*, retval : UpdateType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
   end
-  def get_uninstallation_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_uninstallation_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_uninstallation_notes(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
   end
-  def get_uninstallation_behavior(retval : IInstallationBehavior*) : HRESULT
-    @lpVtbl.value.get_uninstallation_behavior.unsafe_as(Proc(IInstallationBehavior*, HRESULT)).call(retval)
+  def get_uninstallation_behavior(this : IWindowsDriverUpdate3*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_uninstallation_behavior.call(this, retval)
   end
-  def get_uninstallation_steps(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_uninstallation_steps.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_uninstallation_steps(this : IWindowsDriverUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
   end
-  def get_kb_article_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_kb_article_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_kb_article_i_ds(this : IWindowsDriverUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_kb_article_i_ds.call(this, retval)
   end
-  def accept_eula : HRESULT
-    @lpVtbl.value.accept_eula.unsafe_as(Proc(HRESULT)).call
+  def accept_eula(this : IWindowsDriverUpdate3*) : HRESULT
+    @lpVtbl.value.accept_eula.call(this)
   end
-  def get_deployment_action(retval : DeploymentAction*) : HRESULT
-    @lpVtbl.value.get_deployment_action.unsafe_as(Proc(DeploymentAction*, HRESULT)).call(retval)
+  def get_deployment_action(this : IWindowsDriverUpdate3*, retval : DeploymentAction*) : HRESULT
+    @lpVtbl.value.get_deployment_action.call(this, retval)
   end
-  def copy_from_cache(path : UInt8*, toextractcabfiles : Int16) : HRESULT
-    @lpVtbl.value.copy_from_cache.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(path, toextractcabfiles)
+  def copy_from_cache(this : IWindowsDriverUpdate3*, path : UInt8*, toextractcabfiles : Int16) : HRESULT
+    @lpVtbl.value.copy_from_cache.call(this, path, toextractcabfiles)
   end
-  def get_download_priority(retval : DownloadPriority*) : HRESULT
-    @lpVtbl.value.get_download_priority.unsafe_as(Proc(DownloadPriority*, HRESULT)).call(retval)
+  def get_download_priority(this : IWindowsDriverUpdate3*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_download_priority.call(this, retval)
   end
-  def get_download_contents(retval : IUpdateDownloadContentCollection*) : HRESULT
-    @lpVtbl.value.get_download_contents.unsafe_as(Proc(IUpdateDownloadContentCollection*, HRESULT)).call(retval)
+  def get_download_contents(this : IWindowsDriverUpdate3*, retval : IUpdateDownloadContentCollection*) : HRESULT
+    @lpVtbl.value.get_download_contents.call(this, retval)
   end
-  def get_driver_class(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_class(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_class.call(this, retval)
   end
-  def get_driver_hardware_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_hardware_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_hardware_id(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_hardware_id.call(this, retval)
   end
-  def get_driver_manufacturer(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_manufacturer.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_manufacturer(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_manufacturer.call(this, retval)
   end
-  def get_driver_model(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_model.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_model(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_model.call(this, retval)
   end
-  def get_driver_provider(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_provider.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_provider(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_provider.call(this, retval)
   end
-  def get_driver_ver_date(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_driver_ver_date.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_driver_ver_date(this : IWindowsDriverUpdate3*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_driver_ver_date.call(this, retval)
   end
-  def get_device_problem_number(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_device_problem_number.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_device_problem_number(this : IWindowsDriverUpdate3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_problem_number.call(this, retval)
   end
-  def get_device_status(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_device_status.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_device_status(this : IWindowsDriverUpdate3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, retval)
   end
-  def get_reboot_required(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_reboot_required.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_reboot_required(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
   end
-  def get_is_present(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_present.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_present(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_present.call(this, retval)
   end
-  def get_cve_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_cve_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_cve_i_ds(this : IWindowsDriverUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_cve_i_ds.call(this, retval)
   end
-  def copy_to_cache(pfiles : IStringCollection) : HRESULT
-    @lpVtbl.value.copy_to_cache.unsafe_as(Proc(IStringCollection, HRESULT)).call(pfiles)
+  def copy_to_cache(this : IWindowsDriverUpdate3*, pfiles : IStringCollection) : HRESULT
+    @lpVtbl.value.copy_to_cache.call(this, pfiles)
   end
-  def get_browse_only(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_browse_only.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_browse_only(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_browse_only.call(this, retval)
   end
 end
 struct LibWin32::IWindowsDriverUpdateEntry
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWindowsDriverUpdateEntry*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWindowsDriverUpdateEntry*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWindowsDriverUpdateEntry*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWindowsDriverUpdateEntry*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWindowsDriverUpdateEntry*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWindowsDriverUpdateEntry*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWindowsDriverUpdateEntry*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_driver_class(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_class(this : IWindowsDriverUpdateEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_class.call(this, retval)
   end
-  def get_driver_hardware_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_hardware_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_hardware_id(this : IWindowsDriverUpdateEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_hardware_id.call(this, retval)
   end
-  def get_driver_manufacturer(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_manufacturer.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_manufacturer(this : IWindowsDriverUpdateEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_manufacturer.call(this, retval)
   end
-  def get_driver_model(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_model.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_model(this : IWindowsDriverUpdateEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_model.call(this, retval)
   end
-  def get_driver_provider(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_provider.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_provider(this : IWindowsDriverUpdateEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_provider.call(this, retval)
   end
-  def get_driver_ver_date(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_driver_ver_date.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_driver_ver_date(this : IWindowsDriverUpdateEntry*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_driver_ver_date.call(this, retval)
   end
-  def get_device_problem_number(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_device_problem_number.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_device_problem_number(this : IWindowsDriverUpdateEntry*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_problem_number.call(this, retval)
   end
-  def get_device_status(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_device_status.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_device_status(this : IWindowsDriverUpdateEntry*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, retval)
   end
 end
 struct LibWin32::IWindowsDriverUpdateEntryCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWindowsDriverUpdateEntryCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWindowsDriverUpdateEntryCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWindowsDriverUpdateEntryCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWindowsDriverUpdateEntryCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWindowsDriverUpdateEntryCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWindowsDriverUpdateEntryCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWindowsDriverUpdateEntryCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(index : Int32, retval : IWindowsDriverUpdateEntry*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, IWindowsDriverUpdateEntry*, HRESULT)).call(index, retval)
+  def get_item(this : IWindowsDriverUpdateEntryCollection*, index : Int32, retval : IWindowsDriverUpdateEntry*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, retval)
   end
-  def get__new_enum(retval : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(retval)
+  def get__new_enum(this : IWindowsDriverUpdateEntryCollection*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
   end
-  def get_count(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_count(this : IWindowsDriverUpdateEntryCollection*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, retval)
   end
 end
 struct LibWin32::IWindowsDriverUpdate4
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWindowsDriverUpdate4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWindowsDriverUpdate4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWindowsDriverUpdate4*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWindowsDriverUpdate4*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWindowsDriverUpdate4*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWindowsDriverUpdate4*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWindowsDriverUpdate4*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_title(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_title(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
   end
-  def get_auto_select_on_web_sites(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_auto_select_on_web_sites.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_auto_select_on_web_sites(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_select_on_web_sites.call(this, retval)
   end
-  def get_bundled_updates(retval : IUpdateCollection*) : HRESULT
-    @lpVtbl.value.get_bundled_updates.unsafe_as(Proc(IUpdateCollection*, HRESULT)).call(retval)
+  def get_bundled_updates(this : IWindowsDriverUpdate4*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_bundled_updates.call(this, retval)
   end
-  def get_can_require_source(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_can_require_source.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_can_require_source(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_require_source.call(this, retval)
   end
-  def get_categories(retval : ICategoryCollection*) : HRESULT
-    @lpVtbl.value.get_categories.unsafe_as(Proc(ICategoryCollection*, HRESULT)).call(retval)
+  def get_categories(this : IWindowsDriverUpdate4*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
   end
-  def get_deadline(retval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_deadline.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  def get_deadline(this : IWindowsDriverUpdate4*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, retval)
   end
-  def get_delta_compressed_content_available(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_delta_compressed_content_available.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_delta_compressed_content_available(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_available.call(this, retval)
   end
-  def get_delta_compressed_content_preferred(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_delta_compressed_content_preferred.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_delta_compressed_content_preferred(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_preferred.call(this, retval)
   end
-  def get_description(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_description(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
   end
-  def get_eula_accepted(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_eula_accepted.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_eula_accepted(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_eula_accepted.call(this, retval)
   end
-  def get_eula_text(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_eula_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_eula_text(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_eula_text.call(this, retval)
   end
-  def get_handler_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_handler_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_handler_id(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_handler_id.call(this, retval)
   end
-  def get_identity(retval : IUpdateIdentity*) : HRESULT
-    @lpVtbl.value.get_identity.unsafe_as(Proc(IUpdateIdentity*, HRESULT)).call(retval)
+  def get_identity(this : IWindowsDriverUpdate4*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, retval)
   end
-  def get_image(retval : IImageInformation*) : HRESULT
-    @lpVtbl.value.get_image.unsafe_as(Proc(IImageInformation*, HRESULT)).call(retval)
+  def get_image(this : IWindowsDriverUpdate4*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
   end
-  def get_installation_behavior(retval : IInstallationBehavior*) : HRESULT
-    @lpVtbl.value.get_installation_behavior.unsafe_as(Proc(IInstallationBehavior*, HRESULT)).call(retval)
+  def get_installation_behavior(this : IWindowsDriverUpdate4*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_installation_behavior.call(this, retval)
   end
-  def get_is_beta(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_beta.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_beta(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_beta.call(this, retval)
   end
-  def get_is_downloaded(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_downloaded.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_downloaded(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_downloaded.call(this, retval)
   end
-  def get_is_hidden(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_hidden.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_hidden(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_hidden.call(this, retval)
   end
-  def put_is_hidden(value : Int16) : HRESULT
-    @lpVtbl.value.put_is_hidden.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_is_hidden(this : IWindowsDriverUpdate4*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_hidden.call(this, value)
   end
-  def get_is_installed(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_installed.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_installed(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_installed.call(this, retval)
   end
-  def get_is_mandatory(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_mandatory.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_mandatory(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_mandatory.call(this, retval)
   end
-  def get_is_uninstallable(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_uninstallable.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_uninstallable(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, retval)
   end
-  def get_languages(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_languages.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_languages(this : IWindowsDriverUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, retval)
   end
-  def get_last_deployment_change_time(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_last_deployment_change_time.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_last_deployment_change_time(this : IWindowsDriverUpdate4*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_deployment_change_time.call(this, retval)
   end
-  def get_max_download_size(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_max_download_size.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_max_download_size(this : IWindowsDriverUpdate4*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_max_download_size.call(this, retval)
   end
-  def get_min_download_size(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_min_download_size.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_min_download_size(this : IWindowsDriverUpdate4*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_min_download_size.call(this, retval)
   end
-  def get_more_info_urls(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_more_info_urls.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_more_info_urls(this : IWindowsDriverUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_more_info_urls.call(this, retval)
   end
-  def get_msrc_severity(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_msrc_severity.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_msrc_severity(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_msrc_severity.call(this, retval)
   end
-  def get_recommended_cpu_speed(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_cpu_speed.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_cpu_speed(this : IWindowsDriverUpdate4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_cpu_speed.call(this, retval)
   end
-  def get_recommended_hard_disk_space(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_hard_disk_space.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_hard_disk_space(this : IWindowsDriverUpdate4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_hard_disk_space.call(this, retval)
   end
-  def get_recommended_memory(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_memory.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_memory(this : IWindowsDriverUpdate4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_memory.call(this, retval)
   end
-  def get_release_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_release_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_release_notes(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_release_notes.call(this, retval)
   end
-  def get_security_bulletin_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_security_bulletin_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_security_bulletin_i_ds(this : IWindowsDriverUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_security_bulletin_i_ds.call(this, retval)
   end
-  def get_superseded_update_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_superseded_update_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_superseded_update_i_ds(this : IWindowsDriverUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_superseded_update_i_ds.call(this, retval)
   end
-  def get_support_url(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_support_url.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_support_url(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
   end
-  def get_type(retval : UpdateType*) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(UpdateType*, HRESULT)).call(retval)
+  def get_type(this : IWindowsDriverUpdate4*, retval : UpdateType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
   end
-  def get_uninstallation_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_uninstallation_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_uninstallation_notes(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
   end
-  def get_uninstallation_behavior(retval : IInstallationBehavior*) : HRESULT
-    @lpVtbl.value.get_uninstallation_behavior.unsafe_as(Proc(IInstallationBehavior*, HRESULT)).call(retval)
+  def get_uninstallation_behavior(this : IWindowsDriverUpdate4*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_uninstallation_behavior.call(this, retval)
   end
-  def get_uninstallation_steps(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_uninstallation_steps.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_uninstallation_steps(this : IWindowsDriverUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
   end
-  def get_kb_article_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_kb_article_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_kb_article_i_ds(this : IWindowsDriverUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_kb_article_i_ds.call(this, retval)
   end
-  def accept_eula : HRESULT
-    @lpVtbl.value.accept_eula.unsafe_as(Proc(HRESULT)).call
+  def accept_eula(this : IWindowsDriverUpdate4*) : HRESULT
+    @lpVtbl.value.accept_eula.call(this)
   end
-  def get_deployment_action(retval : DeploymentAction*) : HRESULT
-    @lpVtbl.value.get_deployment_action.unsafe_as(Proc(DeploymentAction*, HRESULT)).call(retval)
+  def get_deployment_action(this : IWindowsDriverUpdate4*, retval : DeploymentAction*) : HRESULT
+    @lpVtbl.value.get_deployment_action.call(this, retval)
   end
-  def copy_from_cache(path : UInt8*, toextractcabfiles : Int16) : HRESULT
-    @lpVtbl.value.copy_from_cache.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(path, toextractcabfiles)
+  def copy_from_cache(this : IWindowsDriverUpdate4*, path : UInt8*, toextractcabfiles : Int16) : HRESULT
+    @lpVtbl.value.copy_from_cache.call(this, path, toextractcabfiles)
   end
-  def get_download_priority(retval : DownloadPriority*) : HRESULT
-    @lpVtbl.value.get_download_priority.unsafe_as(Proc(DownloadPriority*, HRESULT)).call(retval)
+  def get_download_priority(this : IWindowsDriverUpdate4*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_download_priority.call(this, retval)
   end
-  def get_download_contents(retval : IUpdateDownloadContentCollection*) : HRESULT
-    @lpVtbl.value.get_download_contents.unsafe_as(Proc(IUpdateDownloadContentCollection*, HRESULT)).call(retval)
+  def get_download_contents(this : IWindowsDriverUpdate4*, retval : IUpdateDownloadContentCollection*) : HRESULT
+    @lpVtbl.value.get_download_contents.call(this, retval)
   end
-  def get_driver_class(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_class(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_class.call(this, retval)
   end
-  def get_driver_hardware_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_hardware_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_hardware_id(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_hardware_id.call(this, retval)
   end
-  def get_driver_manufacturer(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_manufacturer.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_manufacturer(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_manufacturer.call(this, retval)
   end
-  def get_driver_model(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_model.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_model(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_model.call(this, retval)
   end
-  def get_driver_provider(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_provider.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_provider(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_provider.call(this, retval)
   end
-  def get_driver_ver_date(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_driver_ver_date.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_driver_ver_date(this : IWindowsDriverUpdate4*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_driver_ver_date.call(this, retval)
   end
-  def get_device_problem_number(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_device_problem_number.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_device_problem_number(this : IWindowsDriverUpdate4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_problem_number.call(this, retval)
   end
-  def get_device_status(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_device_status.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_device_status(this : IWindowsDriverUpdate4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, retval)
   end
-  def get_reboot_required(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_reboot_required.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_reboot_required(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
   end
-  def get_is_present(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_present.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_present(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_present.call(this, retval)
   end
-  def get_cve_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_cve_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_cve_i_ds(this : IWindowsDriverUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_cve_i_ds.call(this, retval)
   end
-  def copy_to_cache(pfiles : IStringCollection) : HRESULT
-    @lpVtbl.value.copy_to_cache.unsafe_as(Proc(IStringCollection, HRESULT)).call(pfiles)
+  def copy_to_cache(this : IWindowsDriverUpdate4*, pfiles : IStringCollection) : HRESULT
+    @lpVtbl.value.copy_to_cache.call(this, pfiles)
   end
-  def get_browse_only(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_browse_only.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_browse_only(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_browse_only.call(this, retval)
   end
-  def get_windows_driver_update_entries(retval : IWindowsDriverUpdateEntryCollection*) : HRESULT
-    @lpVtbl.value.get_windows_driver_update_entries.unsafe_as(Proc(IWindowsDriverUpdateEntryCollection*, HRESULT)).call(retval)
+  def get_windows_driver_update_entries(this : IWindowsDriverUpdate4*, retval : IWindowsDriverUpdateEntryCollection*) : HRESULT
+    @lpVtbl.value.get_windows_driver_update_entries.call(this, retval)
   end
-  def get_per_user(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_per_user.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_per_user(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_per_user.call(this, retval)
   end
 end
 struct LibWin32::IWindowsDriverUpdate5
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWindowsDriverUpdate5*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWindowsDriverUpdate5*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWindowsDriverUpdate5*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWindowsDriverUpdate5*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWindowsDriverUpdate5*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWindowsDriverUpdate5*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWindowsDriverUpdate5*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_title(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_title(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
   end
-  def get_auto_select_on_web_sites(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_auto_select_on_web_sites.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_auto_select_on_web_sites(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_select_on_web_sites.call(this, retval)
   end
-  def get_bundled_updates(retval : IUpdateCollection*) : HRESULT
-    @lpVtbl.value.get_bundled_updates.unsafe_as(Proc(IUpdateCollection*, HRESULT)).call(retval)
+  def get_bundled_updates(this : IWindowsDriverUpdate5*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_bundled_updates.call(this, retval)
   end
-  def get_can_require_source(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_can_require_source.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_can_require_source(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_require_source.call(this, retval)
   end
-  def get_categories(retval : ICategoryCollection*) : HRESULT
-    @lpVtbl.value.get_categories.unsafe_as(Proc(ICategoryCollection*, HRESULT)).call(retval)
+  def get_categories(this : IWindowsDriverUpdate5*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
   end
-  def get_deadline(retval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_deadline.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  def get_deadline(this : IWindowsDriverUpdate5*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, retval)
   end
-  def get_delta_compressed_content_available(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_delta_compressed_content_available.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_delta_compressed_content_available(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_available.call(this, retval)
   end
-  def get_delta_compressed_content_preferred(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_delta_compressed_content_preferred.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_delta_compressed_content_preferred(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_preferred.call(this, retval)
   end
-  def get_description(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_description(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
   end
-  def get_eula_accepted(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_eula_accepted.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_eula_accepted(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_eula_accepted.call(this, retval)
   end
-  def get_eula_text(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_eula_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_eula_text(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_eula_text.call(this, retval)
   end
-  def get_handler_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_handler_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_handler_id(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_handler_id.call(this, retval)
   end
-  def get_identity(retval : IUpdateIdentity*) : HRESULT
-    @lpVtbl.value.get_identity.unsafe_as(Proc(IUpdateIdentity*, HRESULT)).call(retval)
+  def get_identity(this : IWindowsDriverUpdate5*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, retval)
   end
-  def get_image(retval : IImageInformation*) : HRESULT
-    @lpVtbl.value.get_image.unsafe_as(Proc(IImageInformation*, HRESULT)).call(retval)
+  def get_image(this : IWindowsDriverUpdate5*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
   end
-  def get_installation_behavior(retval : IInstallationBehavior*) : HRESULT
-    @lpVtbl.value.get_installation_behavior.unsafe_as(Proc(IInstallationBehavior*, HRESULT)).call(retval)
+  def get_installation_behavior(this : IWindowsDriverUpdate5*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_installation_behavior.call(this, retval)
   end
-  def get_is_beta(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_beta.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_beta(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_beta.call(this, retval)
   end
-  def get_is_downloaded(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_downloaded.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_downloaded(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_downloaded.call(this, retval)
   end
-  def get_is_hidden(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_hidden.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_hidden(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_hidden.call(this, retval)
   end
-  def put_is_hidden(value : Int16) : HRESULT
-    @lpVtbl.value.put_is_hidden.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_is_hidden(this : IWindowsDriverUpdate5*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_hidden.call(this, value)
   end
-  def get_is_installed(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_installed.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_installed(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_installed.call(this, retval)
   end
-  def get_is_mandatory(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_mandatory.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_mandatory(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_mandatory.call(this, retval)
   end
-  def get_is_uninstallable(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_uninstallable.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_uninstallable(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, retval)
   end
-  def get_languages(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_languages.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_languages(this : IWindowsDriverUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, retval)
   end
-  def get_last_deployment_change_time(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_last_deployment_change_time.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_last_deployment_change_time(this : IWindowsDriverUpdate5*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_deployment_change_time.call(this, retval)
   end
-  def get_max_download_size(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_max_download_size.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_max_download_size(this : IWindowsDriverUpdate5*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_max_download_size.call(this, retval)
   end
-  def get_min_download_size(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_min_download_size.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_min_download_size(this : IWindowsDriverUpdate5*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_min_download_size.call(this, retval)
   end
-  def get_more_info_urls(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_more_info_urls.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_more_info_urls(this : IWindowsDriverUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_more_info_urls.call(this, retval)
   end
-  def get_msrc_severity(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_msrc_severity.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_msrc_severity(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_msrc_severity.call(this, retval)
   end
-  def get_recommended_cpu_speed(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_cpu_speed.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_cpu_speed(this : IWindowsDriverUpdate5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_cpu_speed.call(this, retval)
   end
-  def get_recommended_hard_disk_space(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_hard_disk_space.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_hard_disk_space(this : IWindowsDriverUpdate5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_hard_disk_space.call(this, retval)
   end
-  def get_recommended_memory(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_recommended_memory.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_recommended_memory(this : IWindowsDriverUpdate5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_memory.call(this, retval)
   end
-  def get_release_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_release_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_release_notes(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_release_notes.call(this, retval)
   end
-  def get_security_bulletin_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_security_bulletin_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_security_bulletin_i_ds(this : IWindowsDriverUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_security_bulletin_i_ds.call(this, retval)
   end
-  def get_superseded_update_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_superseded_update_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_superseded_update_i_ds(this : IWindowsDriverUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_superseded_update_i_ds.call(this, retval)
   end
-  def get_support_url(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_support_url.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_support_url(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
   end
-  def get_type(retval : UpdateType*) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(UpdateType*, HRESULT)).call(retval)
+  def get_type(this : IWindowsDriverUpdate5*, retval : UpdateType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
   end
-  def get_uninstallation_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_uninstallation_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_uninstallation_notes(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
   end
-  def get_uninstallation_behavior(retval : IInstallationBehavior*) : HRESULT
-    @lpVtbl.value.get_uninstallation_behavior.unsafe_as(Proc(IInstallationBehavior*, HRESULT)).call(retval)
+  def get_uninstallation_behavior(this : IWindowsDriverUpdate5*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_uninstallation_behavior.call(this, retval)
   end
-  def get_uninstallation_steps(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_uninstallation_steps.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_uninstallation_steps(this : IWindowsDriverUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
   end
-  def get_kb_article_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_kb_article_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_kb_article_i_ds(this : IWindowsDriverUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_kb_article_i_ds.call(this, retval)
   end
-  def accept_eula : HRESULT
-    @lpVtbl.value.accept_eula.unsafe_as(Proc(HRESULT)).call
+  def accept_eula(this : IWindowsDriverUpdate5*) : HRESULT
+    @lpVtbl.value.accept_eula.call(this)
   end
-  def get_deployment_action(retval : DeploymentAction*) : HRESULT
-    @lpVtbl.value.get_deployment_action.unsafe_as(Proc(DeploymentAction*, HRESULT)).call(retval)
+  def get_deployment_action(this : IWindowsDriverUpdate5*, retval : DeploymentAction*) : HRESULT
+    @lpVtbl.value.get_deployment_action.call(this, retval)
   end
-  def copy_from_cache(path : UInt8*, toextractcabfiles : Int16) : HRESULT
-    @lpVtbl.value.copy_from_cache.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(path, toextractcabfiles)
+  def copy_from_cache(this : IWindowsDriverUpdate5*, path : UInt8*, toextractcabfiles : Int16) : HRESULT
+    @lpVtbl.value.copy_from_cache.call(this, path, toextractcabfiles)
   end
-  def get_download_priority(retval : DownloadPriority*) : HRESULT
-    @lpVtbl.value.get_download_priority.unsafe_as(Proc(DownloadPriority*, HRESULT)).call(retval)
+  def get_download_priority(this : IWindowsDriverUpdate5*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_download_priority.call(this, retval)
   end
-  def get_download_contents(retval : IUpdateDownloadContentCollection*) : HRESULT
-    @lpVtbl.value.get_download_contents.unsafe_as(Proc(IUpdateDownloadContentCollection*, HRESULT)).call(retval)
+  def get_download_contents(this : IWindowsDriverUpdate5*, retval : IUpdateDownloadContentCollection*) : HRESULT
+    @lpVtbl.value.get_download_contents.call(this, retval)
   end
-  def get_driver_class(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_class(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_class.call(this, retval)
   end
-  def get_driver_hardware_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_hardware_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_hardware_id(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_hardware_id.call(this, retval)
   end
-  def get_driver_manufacturer(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_manufacturer.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_manufacturer(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_manufacturer.call(this, retval)
   end
-  def get_driver_model(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_model.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_model(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_model.call(this, retval)
   end
-  def get_driver_provider(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_driver_provider.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_driver_provider(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_provider.call(this, retval)
   end
-  def get_driver_ver_date(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_driver_ver_date.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_driver_ver_date(this : IWindowsDriverUpdate5*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_driver_ver_date.call(this, retval)
   end
-  def get_device_problem_number(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_device_problem_number.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_device_problem_number(this : IWindowsDriverUpdate5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_problem_number.call(this, retval)
   end
-  def get_device_status(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_device_status.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_device_status(this : IWindowsDriverUpdate5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, retval)
   end
-  def get_reboot_required(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_reboot_required.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_reboot_required(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
   end
-  def get_is_present(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_present.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_present(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_present.call(this, retval)
   end
-  def get_cve_i_ds(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_cve_i_ds.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_cve_i_ds(this : IWindowsDriverUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_cve_i_ds.call(this, retval)
   end
-  def copy_to_cache(pfiles : IStringCollection) : HRESULT
-    @lpVtbl.value.copy_to_cache.unsafe_as(Proc(IStringCollection, HRESULT)).call(pfiles)
+  def copy_to_cache(this : IWindowsDriverUpdate5*, pfiles : IStringCollection) : HRESULT
+    @lpVtbl.value.copy_to_cache.call(this, pfiles)
   end
-  def get_browse_only(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_browse_only.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_browse_only(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_browse_only.call(this, retval)
   end
-  def get_windows_driver_update_entries(retval : IWindowsDriverUpdateEntryCollection*) : HRESULT
-    @lpVtbl.value.get_windows_driver_update_entries.unsafe_as(Proc(IWindowsDriverUpdateEntryCollection*, HRESULT)).call(retval)
+  def get_windows_driver_update_entries(this : IWindowsDriverUpdate5*, retval : IWindowsDriverUpdateEntryCollection*) : HRESULT
+    @lpVtbl.value.get_windows_driver_update_entries.call(this, retval)
   end
-  def get_per_user(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_per_user.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_per_user(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_per_user.call(this, retval)
   end
-  def get_auto_selection(retval : AutoSelectionMode*) : HRESULT
-    @lpVtbl.value.get_auto_selection.unsafe_as(Proc(AutoSelectionMode*, HRESULT)).call(retval)
+  def get_auto_selection(this : IWindowsDriverUpdate5*, retval : AutoSelectionMode*) : HRESULT
+    @lpVtbl.value.get_auto_selection.call(this, retval)
   end
-  def get_auto_download(retval : AutoDownloadMode*) : HRESULT
-    @lpVtbl.value.get_auto_download.unsafe_as(Proc(AutoDownloadMode*, HRESULT)).call(retval)
+  def get_auto_download(this : IWindowsDriverUpdate5*, retval : AutoDownloadMode*) : HRESULT
+    @lpVtbl.value.get_auto_download.call(this, retval)
   end
 end
 struct LibWin32::IUpdateCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(index : Int32, retval : IUpdate*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, IUpdate*, HRESULT)).call(index, retval)
+  def get_item(this : IUpdateCollection*, index : Int32, retval : IUpdate*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, retval)
   end
-  def put_item(index : Int32, value : IUpdate) : HRESULT
-    @lpVtbl.value.put_item.unsafe_as(Proc(Int32, IUpdate, HRESULT)).call(index, value)
+  def put_item(this : IUpdateCollection*, index : Int32, value : IUpdate) : HRESULT
+    @lpVtbl.value.put_item.call(this, index, value)
   end
-  def get__new_enum(retval : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(retval)
+  def get__new_enum(this : IUpdateCollection*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
   end
-  def get_count(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_count(this : IUpdateCollection*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, retval)
   end
-  def get_read_only(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_read_only.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_read_only(this : IUpdateCollection*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_read_only.call(this, retval)
   end
-  def add(value : IUpdate, retval : Int32*) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(IUpdate, Int32*, HRESULT)).call(value, retval)
+  def add(this : IUpdateCollection*, value : IUpdate, retval : Int32*) : HRESULT
+    @lpVtbl.value.add.call(this, value, retval)
   end
-  def clear : HRESULT
-    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  def clear(this : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.clear.call(this)
   end
-  def copy(retval : IUpdateCollection*) : HRESULT
-    @lpVtbl.value.copy.unsafe_as(Proc(IUpdateCollection*, HRESULT)).call(retval)
+  def copy(this : IUpdateCollection*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.copy.call(this, retval)
   end
-  def insert(index : Int32, value : IUpdate) : HRESULT
-    @lpVtbl.value.insert.unsafe_as(Proc(Int32, IUpdate, HRESULT)).call(index, value)
+  def insert(this : IUpdateCollection*, index : Int32, value : IUpdate) : HRESULT
+    @lpVtbl.value.insert.call(this, index, value)
   end
-  def remove_at(index : Int32) : HRESULT
-    @lpVtbl.value.remove_at.unsafe_as(Proc(Int32, HRESULT)).call(index)
+  def remove_at(this : IUpdateCollection*, index : Int32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
   end
 end
 struct LibWin32::IUpdateException
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateException*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateException*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateException*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateException*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateException*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateException*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateException*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_message(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_message.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_message(this : IUpdateException*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_message.call(this, retval)
   end
-  def get_h_result(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_h_result.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_h_result(this : IUpdateException*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_h_result.call(this, retval)
   end
-  def get_context(retval : UpdateExceptionContext*) : HRESULT
-    @lpVtbl.value.get_context.unsafe_as(Proc(UpdateExceptionContext*, HRESULT)).call(retval)
+  def get_context(this : IUpdateException*, retval : UpdateExceptionContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, retval)
   end
 end
 struct LibWin32::IInvalidProductLicenseException
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInvalidProductLicenseException*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInvalidProductLicenseException*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInvalidProductLicenseException*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IInvalidProductLicenseException*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IInvalidProductLicenseException*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IInvalidProductLicenseException*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IInvalidProductLicenseException*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_message(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_message.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_message(this : IInvalidProductLicenseException*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_message.call(this, retval)
   end
-  def get_h_result(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_h_result.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_h_result(this : IInvalidProductLicenseException*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_h_result.call(this, retval)
   end
-  def get_context(retval : UpdateExceptionContext*) : HRESULT
-    @lpVtbl.value.get_context.unsafe_as(Proc(UpdateExceptionContext*, HRESULT)).call(retval)
+  def get_context(this : IInvalidProductLicenseException*, retval : UpdateExceptionContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, retval)
   end
-  def get_product(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_product.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_product(this : IInvalidProductLicenseException*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_product.call(this, retval)
   end
 end
 struct LibWin32::IUpdateExceptionCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateExceptionCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateExceptionCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateExceptionCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateExceptionCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateExceptionCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateExceptionCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateExceptionCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(index : Int32, retval : IUpdateException*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, IUpdateException*, HRESULT)).call(index, retval)
+  def get_item(this : IUpdateExceptionCollection*, index : Int32, retval : IUpdateException*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, retval)
   end
-  def get__new_enum(retval : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(retval)
+  def get__new_enum(this : IUpdateExceptionCollection*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
   end
-  def get_count(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_count(this : IUpdateExceptionCollection*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, retval)
   end
 end
 struct LibWin32::ISearchResult
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISearchResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISearchResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISearchResult*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISearchResult*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISearchResult*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISearchResult*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISearchResult*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_result_code(retval : OperationResultCode*) : HRESULT
-    @lpVtbl.value.get_result_code.unsafe_as(Proc(OperationResultCode*, HRESULT)).call(retval)
+  def get_result_code(this : ISearchResult*, retval : OperationResultCode*) : HRESULT
+    @lpVtbl.value.get_result_code.call(this, retval)
   end
-  def get_root_categories(retval : ICategoryCollection*) : HRESULT
-    @lpVtbl.value.get_root_categories.unsafe_as(Proc(ICategoryCollection*, HRESULT)).call(retval)
+  def get_root_categories(this : ISearchResult*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_root_categories.call(this, retval)
   end
-  def get_updates(retval : IUpdateCollection*) : HRESULT
-    @lpVtbl.value.get_updates.unsafe_as(Proc(IUpdateCollection*, HRESULT)).call(retval)
+  def get_updates(this : ISearchResult*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_updates.call(this, retval)
   end
-  def get_warnings(retval : IUpdateExceptionCollection*) : HRESULT
-    @lpVtbl.value.get_warnings.unsafe_as(Proc(IUpdateExceptionCollection*, HRESULT)).call(retval)
+  def get_warnings(this : ISearchResult*, retval : IUpdateExceptionCollection*) : HRESULT
+    @lpVtbl.value.get_warnings.call(this, retval)
   end
 end
 struct LibWin32::ISearchJob
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISearchJob*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISearchJob*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISearchJob*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISearchJob*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISearchJob*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISearchJob*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISearchJob*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_async_state(retval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_async_state.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  def get_async_state(this : ISearchJob*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_async_state.call(this, retval)
   end
-  def get_is_completed(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_completed.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_completed(this : ISearchJob*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_completed.call(this, retval)
   end
-  def clean_up : HRESULT
-    @lpVtbl.value.clean_up.unsafe_as(Proc(HRESULT)).call
+  def clean_up(this : ISearchJob*) : HRESULT
+    @lpVtbl.value.clean_up.call(this)
   end
-  def request_abort : HRESULT
-    @lpVtbl.value.request_abort.unsafe_as(Proc(HRESULT)).call
+  def request_abort(this : ISearchJob*) : HRESULT
+    @lpVtbl.value.request_abort.call(this)
   end
 end
 struct LibWin32::ISearchCompletedCallbackArgs
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISearchCompletedCallbackArgs*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISearchCompletedCallbackArgs*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISearchCompletedCallbackArgs*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISearchCompletedCallbackArgs*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISearchCompletedCallbackArgs*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISearchCompletedCallbackArgs*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISearchCompletedCallbackArgs*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
 end
 struct LibWin32::ISearchCompletedCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISearchCompletedCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISearchCompletedCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISearchCompletedCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def invoke(searchjob : ISearchJob, callbackargs : ISearchCompletedCallbackArgs) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(ISearchJob, ISearchCompletedCallbackArgs, HRESULT)).call(searchjob, callbackargs)
+  def invoke(this : ISearchCompletedCallback*, searchjob : ISearchJob, callbackargs : ISearchCompletedCallbackArgs) : HRESULT
+    @lpVtbl.value.invoke.call(this, searchjob, callbackargs)
   end
 end
 struct LibWin32::IUpdateHistoryEntry
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateHistoryEntry*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateHistoryEntry*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateHistoryEntry*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateHistoryEntry*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateHistoryEntry*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateHistoryEntry*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateHistoryEntry*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_operation(retval : UpdateOperation*) : HRESULT
-    @lpVtbl.value.get_operation.unsafe_as(Proc(UpdateOperation*, HRESULT)).call(retval)
+  def get_operation(this : IUpdateHistoryEntry*, retval : UpdateOperation*) : HRESULT
+    @lpVtbl.value.get_operation.call(this, retval)
   end
-  def get_result_code(retval : OperationResultCode*) : HRESULT
-    @lpVtbl.value.get_result_code.unsafe_as(Proc(OperationResultCode*, HRESULT)).call(retval)
+  def get_result_code(this : IUpdateHistoryEntry*, retval : OperationResultCode*) : HRESULT
+    @lpVtbl.value.get_result_code.call(this, retval)
   end
-  def get_h_result(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_h_result.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_h_result(this : IUpdateHistoryEntry*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_h_result.call(this, retval)
   end
-  def get_date(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_date.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_date(this : IUpdateHistoryEntry*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_date.call(this, retval)
   end
-  def get_update_identity(retval : IUpdateIdentity*) : HRESULT
-    @lpVtbl.value.get_update_identity.unsafe_as(Proc(IUpdateIdentity*, HRESULT)).call(retval)
+  def get_update_identity(this : IUpdateHistoryEntry*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_update_identity.call(this, retval)
   end
-  def get_title(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_title(this : IUpdateHistoryEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
   end
-  def get_description(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_description(this : IUpdateHistoryEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
   end
-  def get_unmapped_result_code(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_unmapped_result_code.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_unmapped_result_code(this : IUpdateHistoryEntry*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_unmapped_result_code.call(this, retval)
   end
-  def get_client_application_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_client_application_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_client_application_id(this : IUpdateHistoryEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
   end
-  def get_server_selection(retval : ServerSelection*) : HRESULT
-    @lpVtbl.value.get_server_selection.unsafe_as(Proc(ServerSelection*, HRESULT)).call(retval)
+  def get_server_selection(this : IUpdateHistoryEntry*, retval : ServerSelection*) : HRESULT
+    @lpVtbl.value.get_server_selection.call(this, retval)
   end
-  def get_service_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_service_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_service_id(this : IUpdateHistoryEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_id.call(this, retval)
   end
-  def get_uninstallation_steps(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_uninstallation_steps.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_uninstallation_steps(this : IUpdateHistoryEntry*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
   end
-  def get_uninstallation_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_uninstallation_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_uninstallation_notes(this : IUpdateHistoryEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
   end
-  def get_support_url(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_support_url.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_support_url(this : IUpdateHistoryEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
   end
 end
 struct LibWin32::IUpdateHistoryEntry2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateHistoryEntry2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateHistoryEntry2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateHistoryEntry2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateHistoryEntry2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateHistoryEntry2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateHistoryEntry2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateHistoryEntry2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_operation(retval : UpdateOperation*) : HRESULT
-    @lpVtbl.value.get_operation.unsafe_as(Proc(UpdateOperation*, HRESULT)).call(retval)
+  def get_operation(this : IUpdateHistoryEntry2*, retval : UpdateOperation*) : HRESULT
+    @lpVtbl.value.get_operation.call(this, retval)
   end
-  def get_result_code(retval : OperationResultCode*) : HRESULT
-    @lpVtbl.value.get_result_code.unsafe_as(Proc(OperationResultCode*, HRESULT)).call(retval)
+  def get_result_code(this : IUpdateHistoryEntry2*, retval : OperationResultCode*) : HRESULT
+    @lpVtbl.value.get_result_code.call(this, retval)
   end
-  def get_h_result(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_h_result.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_h_result(this : IUpdateHistoryEntry2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_h_result.call(this, retval)
   end
-  def get_date(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_date.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_date(this : IUpdateHistoryEntry2*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_date.call(this, retval)
   end
-  def get_update_identity(retval : IUpdateIdentity*) : HRESULT
-    @lpVtbl.value.get_update_identity.unsafe_as(Proc(IUpdateIdentity*, HRESULT)).call(retval)
+  def get_update_identity(this : IUpdateHistoryEntry2*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_update_identity.call(this, retval)
   end
-  def get_title(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_title(this : IUpdateHistoryEntry2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
   end
-  def get_description(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_description(this : IUpdateHistoryEntry2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
   end
-  def get_unmapped_result_code(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_unmapped_result_code.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_unmapped_result_code(this : IUpdateHistoryEntry2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_unmapped_result_code.call(this, retval)
   end
-  def get_client_application_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_client_application_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_client_application_id(this : IUpdateHistoryEntry2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
   end
-  def get_server_selection(retval : ServerSelection*) : HRESULT
-    @lpVtbl.value.get_server_selection.unsafe_as(Proc(ServerSelection*, HRESULT)).call(retval)
+  def get_server_selection(this : IUpdateHistoryEntry2*, retval : ServerSelection*) : HRESULT
+    @lpVtbl.value.get_server_selection.call(this, retval)
   end
-  def get_service_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_service_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_service_id(this : IUpdateHistoryEntry2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_id.call(this, retval)
   end
-  def get_uninstallation_steps(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_uninstallation_steps.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_uninstallation_steps(this : IUpdateHistoryEntry2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
   end
-  def get_uninstallation_notes(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_uninstallation_notes.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_uninstallation_notes(this : IUpdateHistoryEntry2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
   end
-  def get_support_url(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_support_url.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_support_url(this : IUpdateHistoryEntry2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
   end
-  def get_categories(retval : ICategoryCollection*) : HRESULT
-    @lpVtbl.value.get_categories.unsafe_as(Proc(ICategoryCollection*, HRESULT)).call(retval)
+  def get_categories(this : IUpdateHistoryEntry2*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
   end
 end
 struct LibWin32::IUpdateHistoryEntryCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateHistoryEntryCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateHistoryEntryCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateHistoryEntryCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateHistoryEntryCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateHistoryEntryCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateHistoryEntryCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateHistoryEntryCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(index : Int32, retval : IUpdateHistoryEntry*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, IUpdateHistoryEntry*, HRESULT)).call(index, retval)
+  def get_item(this : IUpdateHistoryEntryCollection*, index : Int32, retval : IUpdateHistoryEntry*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, retval)
   end
-  def get__new_enum(retval : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(retval)
+  def get__new_enum(this : IUpdateHistoryEntryCollection*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
   end
-  def get_count(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_count(this : IUpdateHistoryEntryCollection*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, retval)
   end
 end
 struct LibWin32::IUpdateSearcher
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateSearcher*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateSearcher*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateSearcher*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateSearcher*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateSearcher*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateSearcher*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateSearcher*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_can_automatically_upgrade_service(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_can_automatically_upgrade_service.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_can_automatically_upgrade_service(this : IUpdateSearcher*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_automatically_upgrade_service.call(this, retval)
   end
-  def put_can_automatically_upgrade_service(value : Int16) : HRESULT
-    @lpVtbl.value.put_can_automatically_upgrade_service.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_can_automatically_upgrade_service(this : IUpdateSearcher*, value : Int16) : HRESULT
+    @lpVtbl.value.put_can_automatically_upgrade_service.call(this, value)
   end
-  def get_client_application_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_client_application_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_client_application_id(this : IUpdateSearcher*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
   end
-  def put_client_application_id(value : UInt8*) : HRESULT
-    @lpVtbl.value.put_client_application_id.unsafe_as(Proc(UInt8*, HRESULT)).call(value)
+  def put_client_application_id(this : IUpdateSearcher*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
   end
-  def get_include_potentially_superseded_updates(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_include_potentially_superseded_updates.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_include_potentially_superseded_updates(this : IUpdateSearcher*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_include_potentially_superseded_updates.call(this, retval)
   end
-  def put_include_potentially_superseded_updates(value : Int16) : HRESULT
-    @lpVtbl.value.put_include_potentially_superseded_updates.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_include_potentially_superseded_updates(this : IUpdateSearcher*, value : Int16) : HRESULT
+    @lpVtbl.value.put_include_potentially_superseded_updates.call(this, value)
   end
-  def get_server_selection(retval : ServerSelection*) : HRESULT
-    @lpVtbl.value.get_server_selection.unsafe_as(Proc(ServerSelection*, HRESULT)).call(retval)
+  def get_server_selection(this : IUpdateSearcher*, retval : ServerSelection*) : HRESULT
+    @lpVtbl.value.get_server_selection.call(this, retval)
   end
-  def put_server_selection(value : ServerSelection) : HRESULT
-    @lpVtbl.value.put_server_selection.unsafe_as(Proc(ServerSelection, HRESULT)).call(value)
+  def put_server_selection(this : IUpdateSearcher*, value : ServerSelection) : HRESULT
+    @lpVtbl.value.put_server_selection.call(this, value)
   end
-  def begin_search(criteria : UInt8*, oncompleted : IUnknown, state : VARIANT, retval : ISearchJob*) : HRESULT
-    @lpVtbl.value.begin_search.unsafe_as(Proc(UInt8*, IUnknown, VARIANT, ISearchJob*, HRESULT)).call(criteria, oncompleted, state, retval)
+  def begin_search(this : IUpdateSearcher*, criteria : UInt8*, oncompleted : IUnknown, state : VARIANT, retval : ISearchJob*) : HRESULT
+    @lpVtbl.value.begin_search.call(this, criteria, oncompleted, state, retval)
   end
-  def end_search(searchjob : ISearchJob, retval : ISearchResult*) : HRESULT
-    @lpVtbl.value.end_search.unsafe_as(Proc(ISearchJob, ISearchResult*, HRESULT)).call(searchjob, retval)
+  def end_search(this : IUpdateSearcher*, searchjob : ISearchJob, retval : ISearchResult*) : HRESULT
+    @lpVtbl.value.end_search.call(this, searchjob, retval)
   end
-  def escape_string(unescaped : UInt8*, retval : UInt8**) : HRESULT
-    @lpVtbl.value.escape_string.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(unescaped, retval)
+  def escape_string(this : IUpdateSearcher*, unescaped : UInt8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.escape_string.call(this, unescaped, retval)
   end
-  def query_history(startindex : Int32, count : Int32, retval : IUpdateHistoryEntryCollection*) : HRESULT
-    @lpVtbl.value.query_history.unsafe_as(Proc(Int32, Int32, IUpdateHistoryEntryCollection*, HRESULT)).call(startindex, count, retval)
+  def query_history(this : IUpdateSearcher*, startindex : Int32, count : Int32, retval : IUpdateHistoryEntryCollection*) : HRESULT
+    @lpVtbl.value.query_history.call(this, startindex, count, retval)
   end
-  def search(criteria : UInt8*, retval : ISearchResult*) : HRESULT
-    @lpVtbl.value.search.unsafe_as(Proc(UInt8*, ISearchResult*, HRESULT)).call(criteria, retval)
+  def search(this : IUpdateSearcher*, criteria : UInt8*, retval : ISearchResult*) : HRESULT
+    @lpVtbl.value.search.call(this, criteria, retval)
   end
-  def get_online(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_online.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_online(this : IUpdateSearcher*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_online.call(this, retval)
   end
-  def put_online(value : Int16) : HRESULT
-    @lpVtbl.value.put_online.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_online(this : IUpdateSearcher*, value : Int16) : HRESULT
+    @lpVtbl.value.put_online.call(this, value)
   end
-  def get_total_history_count(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_total_history_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_total_history_count(this : IUpdateSearcher*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_total_history_count.call(this, retval)
   end
-  def get_service_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_service_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_service_id(this : IUpdateSearcher*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_id.call(this, retval)
   end
-  def put_service_id(value : UInt8*) : HRESULT
-    @lpVtbl.value.put_service_id.unsafe_as(Proc(UInt8*, HRESULT)).call(value)
+  def put_service_id(this : IUpdateSearcher*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_service_id.call(this, value)
   end
 end
 struct LibWin32::IUpdateSearcher2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateSearcher2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateSearcher2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateSearcher2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateSearcher2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateSearcher2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateSearcher2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateSearcher2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_can_automatically_upgrade_service(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_can_automatically_upgrade_service.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_can_automatically_upgrade_service(this : IUpdateSearcher2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_automatically_upgrade_service.call(this, retval)
   end
-  def put_can_automatically_upgrade_service(value : Int16) : HRESULT
-    @lpVtbl.value.put_can_automatically_upgrade_service.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_can_automatically_upgrade_service(this : IUpdateSearcher2*, value : Int16) : HRESULT
+    @lpVtbl.value.put_can_automatically_upgrade_service.call(this, value)
   end
-  def get_client_application_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_client_application_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_client_application_id(this : IUpdateSearcher2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
   end
-  def put_client_application_id(value : UInt8*) : HRESULT
-    @lpVtbl.value.put_client_application_id.unsafe_as(Proc(UInt8*, HRESULT)).call(value)
+  def put_client_application_id(this : IUpdateSearcher2*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
   end
-  def get_include_potentially_superseded_updates(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_include_potentially_superseded_updates.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_include_potentially_superseded_updates(this : IUpdateSearcher2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_include_potentially_superseded_updates.call(this, retval)
   end
-  def put_include_potentially_superseded_updates(value : Int16) : HRESULT
-    @lpVtbl.value.put_include_potentially_superseded_updates.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_include_potentially_superseded_updates(this : IUpdateSearcher2*, value : Int16) : HRESULT
+    @lpVtbl.value.put_include_potentially_superseded_updates.call(this, value)
   end
-  def get_server_selection(retval : ServerSelection*) : HRESULT
-    @lpVtbl.value.get_server_selection.unsafe_as(Proc(ServerSelection*, HRESULT)).call(retval)
+  def get_server_selection(this : IUpdateSearcher2*, retval : ServerSelection*) : HRESULT
+    @lpVtbl.value.get_server_selection.call(this, retval)
   end
-  def put_server_selection(value : ServerSelection) : HRESULT
-    @lpVtbl.value.put_server_selection.unsafe_as(Proc(ServerSelection, HRESULT)).call(value)
+  def put_server_selection(this : IUpdateSearcher2*, value : ServerSelection) : HRESULT
+    @lpVtbl.value.put_server_selection.call(this, value)
   end
-  def begin_search(criteria : UInt8*, oncompleted : IUnknown, state : VARIANT, retval : ISearchJob*) : HRESULT
-    @lpVtbl.value.begin_search.unsafe_as(Proc(UInt8*, IUnknown, VARIANT, ISearchJob*, HRESULT)).call(criteria, oncompleted, state, retval)
+  def begin_search(this : IUpdateSearcher2*, criteria : UInt8*, oncompleted : IUnknown, state : VARIANT, retval : ISearchJob*) : HRESULT
+    @lpVtbl.value.begin_search.call(this, criteria, oncompleted, state, retval)
   end
-  def end_search(searchjob : ISearchJob, retval : ISearchResult*) : HRESULT
-    @lpVtbl.value.end_search.unsafe_as(Proc(ISearchJob, ISearchResult*, HRESULT)).call(searchjob, retval)
+  def end_search(this : IUpdateSearcher2*, searchjob : ISearchJob, retval : ISearchResult*) : HRESULT
+    @lpVtbl.value.end_search.call(this, searchjob, retval)
   end
-  def escape_string(unescaped : UInt8*, retval : UInt8**) : HRESULT
-    @lpVtbl.value.escape_string.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(unescaped, retval)
+  def escape_string(this : IUpdateSearcher2*, unescaped : UInt8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.escape_string.call(this, unescaped, retval)
   end
-  def query_history(startindex : Int32, count : Int32, retval : IUpdateHistoryEntryCollection*) : HRESULT
-    @lpVtbl.value.query_history.unsafe_as(Proc(Int32, Int32, IUpdateHistoryEntryCollection*, HRESULT)).call(startindex, count, retval)
+  def query_history(this : IUpdateSearcher2*, startindex : Int32, count : Int32, retval : IUpdateHistoryEntryCollection*) : HRESULT
+    @lpVtbl.value.query_history.call(this, startindex, count, retval)
   end
-  def search(criteria : UInt8*, retval : ISearchResult*) : HRESULT
-    @lpVtbl.value.search.unsafe_as(Proc(UInt8*, ISearchResult*, HRESULT)).call(criteria, retval)
+  def search(this : IUpdateSearcher2*, criteria : UInt8*, retval : ISearchResult*) : HRESULT
+    @lpVtbl.value.search.call(this, criteria, retval)
   end
-  def get_online(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_online.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_online(this : IUpdateSearcher2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_online.call(this, retval)
   end
-  def put_online(value : Int16) : HRESULT
-    @lpVtbl.value.put_online.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_online(this : IUpdateSearcher2*, value : Int16) : HRESULT
+    @lpVtbl.value.put_online.call(this, value)
   end
-  def get_total_history_count(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_total_history_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_total_history_count(this : IUpdateSearcher2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_total_history_count.call(this, retval)
   end
-  def get_service_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_service_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_service_id(this : IUpdateSearcher2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_id.call(this, retval)
   end
-  def put_service_id(value : UInt8*) : HRESULT
-    @lpVtbl.value.put_service_id.unsafe_as(Proc(UInt8*, HRESULT)).call(value)
+  def put_service_id(this : IUpdateSearcher2*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_service_id.call(this, value)
   end
-  def get_ignore_download_priority(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_ignore_download_priority.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_ignore_download_priority(this : IUpdateSearcher2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_ignore_download_priority.call(this, retval)
   end
-  def put_ignore_download_priority(value : Int16) : HRESULT
-    @lpVtbl.value.put_ignore_download_priority.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_ignore_download_priority(this : IUpdateSearcher2*, value : Int16) : HRESULT
+    @lpVtbl.value.put_ignore_download_priority.call(this, value)
   end
 end
 struct LibWin32::IUpdateSearcher3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateSearcher3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateSearcher3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateSearcher3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateSearcher3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateSearcher3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateSearcher3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateSearcher3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_can_automatically_upgrade_service(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_can_automatically_upgrade_service.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_can_automatically_upgrade_service(this : IUpdateSearcher3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_automatically_upgrade_service.call(this, retval)
   end
-  def put_can_automatically_upgrade_service(value : Int16) : HRESULT
-    @lpVtbl.value.put_can_automatically_upgrade_service.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_can_automatically_upgrade_service(this : IUpdateSearcher3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_can_automatically_upgrade_service.call(this, value)
   end
-  def get_client_application_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_client_application_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_client_application_id(this : IUpdateSearcher3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
   end
-  def put_client_application_id(value : UInt8*) : HRESULT
-    @lpVtbl.value.put_client_application_id.unsafe_as(Proc(UInt8*, HRESULT)).call(value)
+  def put_client_application_id(this : IUpdateSearcher3*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
   end
-  def get_include_potentially_superseded_updates(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_include_potentially_superseded_updates.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_include_potentially_superseded_updates(this : IUpdateSearcher3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_include_potentially_superseded_updates.call(this, retval)
   end
-  def put_include_potentially_superseded_updates(value : Int16) : HRESULT
-    @lpVtbl.value.put_include_potentially_superseded_updates.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_include_potentially_superseded_updates(this : IUpdateSearcher3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_include_potentially_superseded_updates.call(this, value)
   end
-  def get_server_selection(retval : ServerSelection*) : HRESULT
-    @lpVtbl.value.get_server_selection.unsafe_as(Proc(ServerSelection*, HRESULT)).call(retval)
+  def get_server_selection(this : IUpdateSearcher3*, retval : ServerSelection*) : HRESULT
+    @lpVtbl.value.get_server_selection.call(this, retval)
   end
-  def put_server_selection(value : ServerSelection) : HRESULT
-    @lpVtbl.value.put_server_selection.unsafe_as(Proc(ServerSelection, HRESULT)).call(value)
+  def put_server_selection(this : IUpdateSearcher3*, value : ServerSelection) : HRESULT
+    @lpVtbl.value.put_server_selection.call(this, value)
   end
-  def begin_search(criteria : UInt8*, oncompleted : IUnknown, state : VARIANT, retval : ISearchJob*) : HRESULT
-    @lpVtbl.value.begin_search.unsafe_as(Proc(UInt8*, IUnknown, VARIANT, ISearchJob*, HRESULT)).call(criteria, oncompleted, state, retval)
+  def begin_search(this : IUpdateSearcher3*, criteria : UInt8*, oncompleted : IUnknown, state : VARIANT, retval : ISearchJob*) : HRESULT
+    @lpVtbl.value.begin_search.call(this, criteria, oncompleted, state, retval)
   end
-  def end_search(searchjob : ISearchJob, retval : ISearchResult*) : HRESULT
-    @lpVtbl.value.end_search.unsafe_as(Proc(ISearchJob, ISearchResult*, HRESULT)).call(searchjob, retval)
+  def end_search(this : IUpdateSearcher3*, searchjob : ISearchJob, retval : ISearchResult*) : HRESULT
+    @lpVtbl.value.end_search.call(this, searchjob, retval)
   end
-  def escape_string(unescaped : UInt8*, retval : UInt8**) : HRESULT
-    @lpVtbl.value.escape_string.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(unescaped, retval)
+  def escape_string(this : IUpdateSearcher3*, unescaped : UInt8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.escape_string.call(this, unescaped, retval)
   end
-  def query_history(startindex : Int32, count : Int32, retval : IUpdateHistoryEntryCollection*) : HRESULT
-    @lpVtbl.value.query_history.unsafe_as(Proc(Int32, Int32, IUpdateHistoryEntryCollection*, HRESULT)).call(startindex, count, retval)
+  def query_history(this : IUpdateSearcher3*, startindex : Int32, count : Int32, retval : IUpdateHistoryEntryCollection*) : HRESULT
+    @lpVtbl.value.query_history.call(this, startindex, count, retval)
   end
-  def search(criteria : UInt8*, retval : ISearchResult*) : HRESULT
-    @lpVtbl.value.search.unsafe_as(Proc(UInt8*, ISearchResult*, HRESULT)).call(criteria, retval)
+  def search(this : IUpdateSearcher3*, criteria : UInt8*, retval : ISearchResult*) : HRESULT
+    @lpVtbl.value.search.call(this, criteria, retval)
   end
-  def get_online(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_online.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_online(this : IUpdateSearcher3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_online.call(this, retval)
   end
-  def put_online(value : Int16) : HRESULT
-    @lpVtbl.value.put_online.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_online(this : IUpdateSearcher3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_online.call(this, value)
   end
-  def get_total_history_count(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_total_history_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_total_history_count(this : IUpdateSearcher3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_total_history_count.call(this, retval)
   end
-  def get_service_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_service_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_service_id(this : IUpdateSearcher3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_id.call(this, retval)
   end
-  def put_service_id(value : UInt8*) : HRESULT
-    @lpVtbl.value.put_service_id.unsafe_as(Proc(UInt8*, HRESULT)).call(value)
+  def put_service_id(this : IUpdateSearcher3*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_service_id.call(this, value)
   end
-  def get_ignore_download_priority(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_ignore_download_priority.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_ignore_download_priority(this : IUpdateSearcher3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_ignore_download_priority.call(this, retval)
   end
-  def put_ignore_download_priority(value : Int16) : HRESULT
-    @lpVtbl.value.put_ignore_download_priority.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_ignore_download_priority(this : IUpdateSearcher3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_ignore_download_priority.call(this, value)
   end
-  def get_search_scope(retval : SearchScope*) : HRESULT
-    @lpVtbl.value.get_search_scope.unsafe_as(Proc(SearchScope*, HRESULT)).call(retval)
+  def get_search_scope(this : IUpdateSearcher3*, retval : SearchScope*) : HRESULT
+    @lpVtbl.value.get_search_scope.call(this, retval)
   end
-  def put_search_scope(value : SearchScope) : HRESULT
-    @lpVtbl.value.put_search_scope.unsafe_as(Proc(SearchScope, HRESULT)).call(value)
+  def put_search_scope(this : IUpdateSearcher3*, value : SearchScope) : HRESULT
+    @lpVtbl.value.put_search_scope.call(this, value)
   end
 end
 struct LibWin32::IUpdateDownloadResult
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateDownloadResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateDownloadResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateDownloadResult*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateDownloadResult*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateDownloadResult*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateDownloadResult*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateDownloadResult*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_h_result(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_h_result.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_h_result(this : IUpdateDownloadResult*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_h_result.call(this, retval)
   end
-  def get_result_code(retval : OperationResultCode*) : HRESULT
-    @lpVtbl.value.get_result_code.unsafe_as(Proc(OperationResultCode*, HRESULT)).call(retval)
+  def get_result_code(this : IUpdateDownloadResult*, retval : OperationResultCode*) : HRESULT
+    @lpVtbl.value.get_result_code.call(this, retval)
   end
 end
 struct LibWin32::IDownloadResult
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDownloadResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDownloadResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDownloadResult*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IDownloadResult*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IDownloadResult*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IDownloadResult*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IDownloadResult*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_h_result(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_h_result.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_h_result(this : IDownloadResult*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_h_result.call(this, retval)
   end
-  def get_result_code(retval : OperationResultCode*) : HRESULT
-    @lpVtbl.value.get_result_code.unsafe_as(Proc(OperationResultCode*, HRESULT)).call(retval)
+  def get_result_code(this : IDownloadResult*, retval : OperationResultCode*) : HRESULT
+    @lpVtbl.value.get_result_code.call(this, retval)
   end
-  def get_update_result(updateindex : Int32, retval : IUpdateDownloadResult*) : HRESULT
-    @lpVtbl.value.get_update_result.unsafe_as(Proc(Int32, IUpdateDownloadResult*, HRESULT)).call(updateindex, retval)
+  def get_update_result(this : IDownloadResult*, updateindex : Int32, retval : IUpdateDownloadResult*) : HRESULT
+    @lpVtbl.value.get_update_result.call(this, updateindex, retval)
   end
 end
 struct LibWin32::IDownloadProgress
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDownloadProgress*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDownloadProgress*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDownloadProgress*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IDownloadProgress*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IDownloadProgress*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IDownloadProgress*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IDownloadProgress*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_current_update_bytes_downloaded(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_current_update_bytes_downloaded.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_current_update_bytes_downloaded(this : IDownloadProgress*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_current_update_bytes_downloaded.call(this, retval)
   end
-  def get_current_update_bytes_to_download(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_current_update_bytes_to_download.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_current_update_bytes_to_download(this : IDownloadProgress*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_current_update_bytes_to_download.call(this, retval)
   end
-  def get_current_update_index(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_current_update_index.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_current_update_index(this : IDownloadProgress*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_update_index.call(this, retval)
   end
-  def get_percent_complete(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_percent_complete.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_percent_complete(this : IDownloadProgress*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_percent_complete.call(this, retval)
   end
-  def get_total_bytes_downloaded(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_total_bytes_downloaded.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_total_bytes_downloaded(this : IDownloadProgress*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_total_bytes_downloaded.call(this, retval)
   end
-  def get_total_bytes_to_download(retval : DECIMAL*) : HRESULT
-    @lpVtbl.value.get_total_bytes_to_download.unsafe_as(Proc(DECIMAL*, HRESULT)).call(retval)
+  def get_total_bytes_to_download(this : IDownloadProgress*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_total_bytes_to_download.call(this, retval)
   end
-  def get_update_result(updateindex : Int32, retval : IUpdateDownloadResult*) : HRESULT
-    @lpVtbl.value.get_update_result.unsafe_as(Proc(Int32, IUpdateDownloadResult*, HRESULT)).call(updateindex, retval)
+  def get_update_result(this : IDownloadProgress*, updateindex : Int32, retval : IUpdateDownloadResult*) : HRESULT
+    @lpVtbl.value.get_update_result.call(this, updateindex, retval)
   end
-  def get_current_update_download_phase(retval : DownloadPhase*) : HRESULT
-    @lpVtbl.value.get_current_update_download_phase.unsafe_as(Proc(DownloadPhase*, HRESULT)).call(retval)
+  def get_current_update_download_phase(this : IDownloadProgress*, retval : DownloadPhase*) : HRESULT
+    @lpVtbl.value.get_current_update_download_phase.call(this, retval)
   end
-  def get_current_update_percent_complete(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_current_update_percent_complete.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_current_update_percent_complete(this : IDownloadProgress*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_update_percent_complete.call(this, retval)
   end
 end
 struct LibWin32::IDownloadJob
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDownloadJob*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDownloadJob*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDownloadJob*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IDownloadJob*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IDownloadJob*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IDownloadJob*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IDownloadJob*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_async_state(retval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_async_state.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  def get_async_state(this : IDownloadJob*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_async_state.call(this, retval)
   end
-  def get_is_completed(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_completed.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_completed(this : IDownloadJob*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_completed.call(this, retval)
   end
-  def get_updates(retval : IUpdateCollection*) : HRESULT
-    @lpVtbl.value.get_updates.unsafe_as(Proc(IUpdateCollection*, HRESULT)).call(retval)
+  def get_updates(this : IDownloadJob*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_updates.call(this, retval)
   end
-  def clean_up : HRESULT
-    @lpVtbl.value.clean_up.unsafe_as(Proc(HRESULT)).call
+  def clean_up(this : IDownloadJob*) : HRESULT
+    @lpVtbl.value.clean_up.call(this)
   end
-  def get_progress(retval : IDownloadProgress*) : HRESULT
-    @lpVtbl.value.get_progress.unsafe_as(Proc(IDownloadProgress*, HRESULT)).call(retval)
+  def get_progress(this : IDownloadJob*, retval : IDownloadProgress*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, retval)
   end
-  def request_abort : HRESULT
-    @lpVtbl.value.request_abort.unsafe_as(Proc(HRESULT)).call
+  def request_abort(this : IDownloadJob*) : HRESULT
+    @lpVtbl.value.request_abort.call(this)
   end
 end
 struct LibWin32::IDownloadCompletedCallbackArgs
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDownloadCompletedCallbackArgs*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDownloadCompletedCallbackArgs*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDownloadCompletedCallbackArgs*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IDownloadCompletedCallbackArgs*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IDownloadCompletedCallbackArgs*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IDownloadCompletedCallbackArgs*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IDownloadCompletedCallbackArgs*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
 end
 struct LibWin32::IDownloadCompletedCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDownloadCompletedCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDownloadCompletedCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDownloadCompletedCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def invoke(downloadjob : IDownloadJob, callbackargs : IDownloadCompletedCallbackArgs) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(IDownloadJob, IDownloadCompletedCallbackArgs, HRESULT)).call(downloadjob, callbackargs)
+  def invoke(this : IDownloadCompletedCallback*, downloadjob : IDownloadJob, callbackargs : IDownloadCompletedCallbackArgs) : HRESULT
+    @lpVtbl.value.invoke.call(this, downloadjob, callbackargs)
   end
 end
 struct LibWin32::IDownloadProgressChangedCallbackArgs
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDownloadProgressChangedCallbackArgs*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDownloadProgressChangedCallbackArgs*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDownloadProgressChangedCallbackArgs*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IDownloadProgressChangedCallbackArgs*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IDownloadProgressChangedCallbackArgs*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IDownloadProgressChangedCallbackArgs*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IDownloadProgressChangedCallbackArgs*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_progress(retval : IDownloadProgress*) : HRESULT
-    @lpVtbl.value.get_progress.unsafe_as(Proc(IDownloadProgress*, HRESULT)).call(retval)
+  def get_progress(this : IDownloadProgressChangedCallbackArgs*, retval : IDownloadProgress*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, retval)
   end
 end
 struct LibWin32::IDownloadProgressChangedCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDownloadProgressChangedCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDownloadProgressChangedCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDownloadProgressChangedCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def invoke(downloadjob : IDownloadJob, callbackargs : IDownloadProgressChangedCallbackArgs) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(IDownloadJob, IDownloadProgressChangedCallbackArgs, HRESULT)).call(downloadjob, callbackargs)
+  def invoke(this : IDownloadProgressChangedCallback*, downloadjob : IDownloadJob, callbackargs : IDownloadProgressChangedCallbackArgs) : HRESULT
+    @lpVtbl.value.invoke.call(this, downloadjob, callbackargs)
   end
 end
 struct LibWin32::IUpdateDownloader
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateDownloader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateDownloader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateDownloader*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateDownloader*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateDownloader*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateDownloader*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateDownloader*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_client_application_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_client_application_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_client_application_id(this : IUpdateDownloader*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
   end
-  def put_client_application_id(value : UInt8*) : HRESULT
-    @lpVtbl.value.put_client_application_id.unsafe_as(Proc(UInt8*, HRESULT)).call(value)
+  def put_client_application_id(this : IUpdateDownloader*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
   end
-  def get_is_forced(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_forced.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_forced(this : IUpdateDownloader*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_forced.call(this, retval)
   end
-  def put_is_forced(value : Int16) : HRESULT
-    @lpVtbl.value.put_is_forced.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_is_forced(this : IUpdateDownloader*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_forced.call(this, value)
   end
-  def get_priority(retval : DownloadPriority*) : HRESULT
-    @lpVtbl.value.get_priority.unsafe_as(Proc(DownloadPriority*, HRESULT)).call(retval)
+  def get_priority(this : IUpdateDownloader*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, retval)
   end
-  def put_priority(value : DownloadPriority) : HRESULT
-    @lpVtbl.value.put_priority.unsafe_as(Proc(DownloadPriority, HRESULT)).call(value)
+  def put_priority(this : IUpdateDownloader*, value : DownloadPriority) : HRESULT
+    @lpVtbl.value.put_priority.call(this, value)
   end
-  def get_updates(retval : IUpdateCollection*) : HRESULT
-    @lpVtbl.value.get_updates.unsafe_as(Proc(IUpdateCollection*, HRESULT)).call(retval)
+  def get_updates(this : IUpdateDownloader*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_updates.call(this, retval)
   end
-  def put_updates(value : IUpdateCollection) : HRESULT
-    @lpVtbl.value.put_updates.unsafe_as(Proc(IUpdateCollection, HRESULT)).call(value)
+  def put_updates(this : IUpdateDownloader*, value : IUpdateCollection) : HRESULT
+    @lpVtbl.value.put_updates.call(this, value)
   end
-  def begin_download(onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IDownloadJob*) : HRESULT
-    @lpVtbl.value.begin_download.unsafe_as(Proc(IUnknown, IUnknown, VARIANT, IDownloadJob*, HRESULT)).call(onprogresschanged, oncompleted, state, retval)
+  def begin_download(this : IUpdateDownloader*, onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IDownloadJob*) : HRESULT
+    @lpVtbl.value.begin_download.call(this, onprogresschanged, oncompleted, state, retval)
   end
-  def download(retval : IDownloadResult*) : HRESULT
-    @lpVtbl.value.download.unsafe_as(Proc(IDownloadResult*, HRESULT)).call(retval)
+  def download(this : IUpdateDownloader*, retval : IDownloadResult*) : HRESULT
+    @lpVtbl.value.download.call(this, retval)
   end
-  def end_download(value : IDownloadJob, retval : IDownloadResult*) : HRESULT
-    @lpVtbl.value.end_download.unsafe_as(Proc(IDownloadJob, IDownloadResult*, HRESULT)).call(value, retval)
+  def end_download(this : IUpdateDownloader*, value : IDownloadJob, retval : IDownloadResult*) : HRESULT
+    @lpVtbl.value.end_download.call(this, value, retval)
   end
 end
 struct LibWin32::IUpdateInstallationResult
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateInstallationResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateInstallationResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateInstallationResult*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateInstallationResult*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateInstallationResult*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateInstallationResult*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateInstallationResult*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_h_result(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_h_result.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_h_result(this : IUpdateInstallationResult*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_h_result.call(this, retval)
   end
-  def get_reboot_required(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_reboot_required.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_reboot_required(this : IUpdateInstallationResult*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
   end
-  def get_result_code(retval : OperationResultCode*) : HRESULT
-    @lpVtbl.value.get_result_code.unsafe_as(Proc(OperationResultCode*, HRESULT)).call(retval)
+  def get_result_code(this : IUpdateInstallationResult*, retval : OperationResultCode*) : HRESULT
+    @lpVtbl.value.get_result_code.call(this, retval)
   end
 end
 struct LibWin32::IInstallationResult
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInstallationResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInstallationResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInstallationResult*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IInstallationResult*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IInstallationResult*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IInstallationResult*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IInstallationResult*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_h_result(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_h_result.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_h_result(this : IInstallationResult*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_h_result.call(this, retval)
   end
-  def get_reboot_required(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_reboot_required.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_reboot_required(this : IInstallationResult*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
   end
-  def get_result_code(retval : OperationResultCode*) : HRESULT
-    @lpVtbl.value.get_result_code.unsafe_as(Proc(OperationResultCode*, HRESULT)).call(retval)
+  def get_result_code(this : IInstallationResult*, retval : OperationResultCode*) : HRESULT
+    @lpVtbl.value.get_result_code.call(this, retval)
   end
-  def get_update_result(updateindex : Int32, retval : IUpdateInstallationResult*) : HRESULT
-    @lpVtbl.value.get_update_result.unsafe_as(Proc(Int32, IUpdateInstallationResult*, HRESULT)).call(updateindex, retval)
+  def get_update_result(this : IInstallationResult*, updateindex : Int32, retval : IUpdateInstallationResult*) : HRESULT
+    @lpVtbl.value.get_update_result.call(this, updateindex, retval)
   end
 end
 struct LibWin32::IInstallationProgress
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInstallationProgress*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInstallationProgress*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInstallationProgress*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IInstallationProgress*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IInstallationProgress*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IInstallationProgress*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IInstallationProgress*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_current_update_index(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_current_update_index.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_current_update_index(this : IInstallationProgress*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_update_index.call(this, retval)
   end
-  def get_current_update_percent_complete(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_current_update_percent_complete.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_current_update_percent_complete(this : IInstallationProgress*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_update_percent_complete.call(this, retval)
   end
-  def get_percent_complete(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_percent_complete.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_percent_complete(this : IInstallationProgress*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_percent_complete.call(this, retval)
   end
-  def get_update_result(updateindex : Int32, retval : IUpdateInstallationResult*) : HRESULT
-    @lpVtbl.value.get_update_result.unsafe_as(Proc(Int32, IUpdateInstallationResult*, HRESULT)).call(updateindex, retval)
+  def get_update_result(this : IInstallationProgress*, updateindex : Int32, retval : IUpdateInstallationResult*) : HRESULT
+    @lpVtbl.value.get_update_result.call(this, updateindex, retval)
   end
 end
 struct LibWin32::IInstallationJob
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInstallationJob*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInstallationJob*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInstallationJob*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IInstallationJob*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IInstallationJob*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IInstallationJob*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IInstallationJob*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_async_state(retval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_async_state.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  def get_async_state(this : IInstallationJob*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_async_state.call(this, retval)
   end
-  def get_is_completed(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_completed.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_completed(this : IInstallationJob*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_completed.call(this, retval)
   end
-  def get_updates(retval : IUpdateCollection*) : HRESULT
-    @lpVtbl.value.get_updates.unsafe_as(Proc(IUpdateCollection*, HRESULT)).call(retval)
+  def get_updates(this : IInstallationJob*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_updates.call(this, retval)
   end
-  def clean_up : HRESULT
-    @lpVtbl.value.clean_up.unsafe_as(Proc(HRESULT)).call
+  def clean_up(this : IInstallationJob*) : HRESULT
+    @lpVtbl.value.clean_up.call(this)
   end
-  def get_progress(retval : IInstallationProgress*) : HRESULT
-    @lpVtbl.value.get_progress.unsafe_as(Proc(IInstallationProgress*, HRESULT)).call(retval)
+  def get_progress(this : IInstallationJob*, retval : IInstallationProgress*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, retval)
   end
-  def request_abort : HRESULT
-    @lpVtbl.value.request_abort.unsafe_as(Proc(HRESULT)).call
+  def request_abort(this : IInstallationJob*) : HRESULT
+    @lpVtbl.value.request_abort.call(this)
   end
 end
 struct LibWin32::IInstallationCompletedCallbackArgs
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInstallationCompletedCallbackArgs*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInstallationCompletedCallbackArgs*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInstallationCompletedCallbackArgs*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IInstallationCompletedCallbackArgs*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IInstallationCompletedCallbackArgs*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IInstallationCompletedCallbackArgs*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IInstallationCompletedCallbackArgs*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
 end
 struct LibWin32::IInstallationCompletedCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInstallationCompletedCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInstallationCompletedCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInstallationCompletedCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def invoke(installationjob : IInstallationJob, callbackargs : IInstallationCompletedCallbackArgs) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(IInstallationJob, IInstallationCompletedCallbackArgs, HRESULT)).call(installationjob, callbackargs)
+  def invoke(this : IInstallationCompletedCallback*, installationjob : IInstallationJob, callbackargs : IInstallationCompletedCallbackArgs) : HRESULT
+    @lpVtbl.value.invoke.call(this, installationjob, callbackargs)
   end
 end
 struct LibWin32::IInstallationProgressChangedCallbackArgs
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInstallationProgressChangedCallbackArgs*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInstallationProgressChangedCallbackArgs*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInstallationProgressChangedCallbackArgs*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IInstallationProgressChangedCallbackArgs*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IInstallationProgressChangedCallbackArgs*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IInstallationProgressChangedCallbackArgs*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IInstallationProgressChangedCallbackArgs*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_progress(retval : IInstallationProgress*) : HRESULT
-    @lpVtbl.value.get_progress.unsafe_as(Proc(IInstallationProgress*, HRESULT)).call(retval)
+  def get_progress(this : IInstallationProgressChangedCallbackArgs*, retval : IInstallationProgress*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, retval)
   end
 end
 struct LibWin32::IInstallationProgressChangedCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInstallationProgressChangedCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInstallationProgressChangedCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInstallationProgressChangedCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def invoke(installationjob : IInstallationJob, callbackargs : IInstallationProgressChangedCallbackArgs) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(IInstallationJob, IInstallationProgressChangedCallbackArgs, HRESULT)).call(installationjob, callbackargs)
+  def invoke(this : IInstallationProgressChangedCallback*, installationjob : IInstallationJob, callbackargs : IInstallationProgressChangedCallbackArgs) : HRESULT
+    @lpVtbl.value.invoke.call(this, installationjob, callbackargs)
   end
 end
 struct LibWin32::IUpdateInstaller
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateInstaller*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateInstaller*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateInstaller*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateInstaller*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateInstaller*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateInstaller*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateInstaller*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_client_application_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_client_application_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_client_application_id(this : IUpdateInstaller*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
   end
-  def put_client_application_id(value : UInt8*) : HRESULT
-    @lpVtbl.value.put_client_application_id.unsafe_as(Proc(UInt8*, HRESULT)).call(value)
+  def put_client_application_id(this : IUpdateInstaller*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
   end
-  def get_is_forced(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_forced.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_forced(this : IUpdateInstaller*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_forced.call(this, retval)
   end
-  def put_is_forced(value : Int16) : HRESULT
-    @lpVtbl.value.put_is_forced.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_is_forced(this : IUpdateInstaller*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_forced.call(this, value)
   end
-  def get_parent_hwnd(retval : HANDLE*) : HRESULT
-    @lpVtbl.value.get_parent_hwnd.unsafe_as(Proc(HANDLE*, HRESULT)).call(retval)
+  def get_parent_hwnd(this : IUpdateInstaller*, retval : HANDLE*) : HRESULT
+    @lpVtbl.value.get_parent_hwnd.call(this, retval)
   end
-  def put_parent_hwnd(value : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.put_parent_hwnd.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(value)
+  def put_parent_hwnd(this : IUpdateInstaller*, value : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.put_parent_hwnd.call(this, value)
   end
-  def put_parent_window(value : IUnknown) : HRESULT
-    @lpVtbl.value.put_parent_window.unsafe_as(Proc(IUnknown, HRESULT)).call(value)
+  def put_parent_window(this : IUpdateInstaller*, value : IUnknown) : HRESULT
+    @lpVtbl.value.put_parent_window.call(this, value)
   end
-  def get_parent_window(retval : IUnknown*) : HRESULT
-    @lpVtbl.value.get_parent_window.unsafe_as(Proc(IUnknown*, HRESULT)).call(retval)
+  def get_parent_window(this : IUpdateInstaller*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_parent_window.call(this, retval)
   end
-  def get_updates(retval : IUpdateCollection*) : HRESULT
-    @lpVtbl.value.get_updates.unsafe_as(Proc(IUpdateCollection*, HRESULT)).call(retval)
+  def get_updates(this : IUpdateInstaller*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_updates.call(this, retval)
   end
-  def put_updates(value : IUpdateCollection) : HRESULT
-    @lpVtbl.value.put_updates.unsafe_as(Proc(IUpdateCollection, HRESULT)).call(value)
+  def put_updates(this : IUpdateInstaller*, value : IUpdateCollection) : HRESULT
+    @lpVtbl.value.put_updates.call(this, value)
   end
-  def begin_install(onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
-    @lpVtbl.value.begin_install.unsafe_as(Proc(IUnknown, IUnknown, VARIANT, IInstallationJob*, HRESULT)).call(onprogresschanged, oncompleted, state, retval)
+  def begin_install(this : IUpdateInstaller*, onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
+    @lpVtbl.value.begin_install.call(this, onprogresschanged, oncompleted, state, retval)
   end
-  def begin_uninstall(onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
-    @lpVtbl.value.begin_uninstall.unsafe_as(Proc(IUnknown, IUnknown, VARIANT, IInstallationJob*, HRESULT)).call(onprogresschanged, oncompleted, state, retval)
+  def begin_uninstall(this : IUpdateInstaller*, onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
+    @lpVtbl.value.begin_uninstall.call(this, onprogresschanged, oncompleted, state, retval)
   end
-  def end_install(value : IInstallationJob, retval : IInstallationResult*) : HRESULT
-    @lpVtbl.value.end_install.unsafe_as(Proc(IInstallationJob, IInstallationResult*, HRESULT)).call(value, retval)
+  def end_install(this : IUpdateInstaller*, value : IInstallationJob, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.end_install.call(this, value, retval)
   end
-  def end_uninstall(value : IInstallationJob, retval : IInstallationResult*) : HRESULT
-    @lpVtbl.value.end_uninstall.unsafe_as(Proc(IInstallationJob, IInstallationResult*, HRESULT)).call(value, retval)
+  def end_uninstall(this : IUpdateInstaller*, value : IInstallationJob, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.end_uninstall.call(this, value, retval)
   end
-  def install(retval : IInstallationResult*) : HRESULT
-    @lpVtbl.value.install.unsafe_as(Proc(IInstallationResult*, HRESULT)).call(retval)
+  def install(this : IUpdateInstaller*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.install.call(this, retval)
   end
-  def run_wizard(dialogtitle : UInt8*, retval : IInstallationResult*) : HRESULT
-    @lpVtbl.value.run_wizard.unsafe_as(Proc(UInt8*, IInstallationResult*, HRESULT)).call(dialogtitle, retval)
+  def run_wizard(this : IUpdateInstaller*, dialogtitle : UInt8*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.run_wizard.call(this, dialogtitle, retval)
   end
-  def get_is_busy(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_busy.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_busy(this : IUpdateInstaller*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_busy.call(this, retval)
   end
-  def uninstall(retval : IInstallationResult*) : HRESULT
-    @lpVtbl.value.uninstall.unsafe_as(Proc(IInstallationResult*, HRESULT)).call(retval)
+  def uninstall(this : IUpdateInstaller*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.uninstall.call(this, retval)
   end
-  def get_allow_source_prompts(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_allow_source_prompts.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_allow_source_prompts(this : IUpdateInstaller*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_source_prompts.call(this, retval)
   end
-  def put_allow_source_prompts(value : Int16) : HRESULT
-    @lpVtbl.value.put_allow_source_prompts.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_allow_source_prompts(this : IUpdateInstaller*, value : Int16) : HRESULT
+    @lpVtbl.value.put_allow_source_prompts.call(this, value)
   end
-  def get_reboot_required_before_installation(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_reboot_required_before_installation.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_reboot_required_before_installation(this : IUpdateInstaller*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required_before_installation.call(this, retval)
   end
 end
 struct LibWin32::IUpdateInstaller2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateInstaller2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateInstaller2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateInstaller2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateInstaller2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateInstaller2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateInstaller2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateInstaller2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_client_application_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_client_application_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_client_application_id(this : IUpdateInstaller2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
   end
-  def put_client_application_id(value : UInt8*) : HRESULT
-    @lpVtbl.value.put_client_application_id.unsafe_as(Proc(UInt8*, HRESULT)).call(value)
+  def put_client_application_id(this : IUpdateInstaller2*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
   end
-  def get_is_forced(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_forced.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_forced(this : IUpdateInstaller2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_forced.call(this, retval)
   end
-  def put_is_forced(value : Int16) : HRESULT
-    @lpVtbl.value.put_is_forced.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_is_forced(this : IUpdateInstaller2*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_forced.call(this, value)
   end
-  def get_parent_hwnd(retval : HANDLE*) : HRESULT
-    @lpVtbl.value.get_parent_hwnd.unsafe_as(Proc(HANDLE*, HRESULT)).call(retval)
+  def get_parent_hwnd(this : IUpdateInstaller2*, retval : HANDLE*) : HRESULT
+    @lpVtbl.value.get_parent_hwnd.call(this, retval)
   end
-  def put_parent_hwnd(value : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.put_parent_hwnd.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(value)
+  def put_parent_hwnd(this : IUpdateInstaller2*, value : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.put_parent_hwnd.call(this, value)
   end
-  def put_parent_window(value : IUnknown) : HRESULT
-    @lpVtbl.value.put_parent_window.unsafe_as(Proc(IUnknown, HRESULT)).call(value)
+  def put_parent_window(this : IUpdateInstaller2*, value : IUnknown) : HRESULT
+    @lpVtbl.value.put_parent_window.call(this, value)
   end
-  def get_parent_window(retval : IUnknown*) : HRESULT
-    @lpVtbl.value.get_parent_window.unsafe_as(Proc(IUnknown*, HRESULT)).call(retval)
+  def get_parent_window(this : IUpdateInstaller2*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_parent_window.call(this, retval)
   end
-  def get_updates(retval : IUpdateCollection*) : HRESULT
-    @lpVtbl.value.get_updates.unsafe_as(Proc(IUpdateCollection*, HRESULT)).call(retval)
+  def get_updates(this : IUpdateInstaller2*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_updates.call(this, retval)
   end
-  def put_updates(value : IUpdateCollection) : HRESULT
-    @lpVtbl.value.put_updates.unsafe_as(Proc(IUpdateCollection, HRESULT)).call(value)
+  def put_updates(this : IUpdateInstaller2*, value : IUpdateCollection) : HRESULT
+    @lpVtbl.value.put_updates.call(this, value)
   end
-  def begin_install(onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
-    @lpVtbl.value.begin_install.unsafe_as(Proc(IUnknown, IUnknown, VARIANT, IInstallationJob*, HRESULT)).call(onprogresschanged, oncompleted, state, retval)
+  def begin_install(this : IUpdateInstaller2*, onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
+    @lpVtbl.value.begin_install.call(this, onprogresschanged, oncompleted, state, retval)
   end
-  def begin_uninstall(onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
-    @lpVtbl.value.begin_uninstall.unsafe_as(Proc(IUnknown, IUnknown, VARIANT, IInstallationJob*, HRESULT)).call(onprogresschanged, oncompleted, state, retval)
+  def begin_uninstall(this : IUpdateInstaller2*, onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
+    @lpVtbl.value.begin_uninstall.call(this, onprogresschanged, oncompleted, state, retval)
   end
-  def end_install(value : IInstallationJob, retval : IInstallationResult*) : HRESULT
-    @lpVtbl.value.end_install.unsafe_as(Proc(IInstallationJob, IInstallationResult*, HRESULT)).call(value, retval)
+  def end_install(this : IUpdateInstaller2*, value : IInstallationJob, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.end_install.call(this, value, retval)
   end
-  def end_uninstall(value : IInstallationJob, retval : IInstallationResult*) : HRESULT
-    @lpVtbl.value.end_uninstall.unsafe_as(Proc(IInstallationJob, IInstallationResult*, HRESULT)).call(value, retval)
+  def end_uninstall(this : IUpdateInstaller2*, value : IInstallationJob, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.end_uninstall.call(this, value, retval)
   end
-  def install(retval : IInstallationResult*) : HRESULT
-    @lpVtbl.value.install.unsafe_as(Proc(IInstallationResult*, HRESULT)).call(retval)
+  def install(this : IUpdateInstaller2*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.install.call(this, retval)
   end
-  def run_wizard(dialogtitle : UInt8*, retval : IInstallationResult*) : HRESULT
-    @lpVtbl.value.run_wizard.unsafe_as(Proc(UInt8*, IInstallationResult*, HRESULT)).call(dialogtitle, retval)
+  def run_wizard(this : IUpdateInstaller2*, dialogtitle : UInt8*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.run_wizard.call(this, dialogtitle, retval)
   end
-  def get_is_busy(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_busy.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_busy(this : IUpdateInstaller2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_busy.call(this, retval)
   end
-  def uninstall(retval : IInstallationResult*) : HRESULT
-    @lpVtbl.value.uninstall.unsafe_as(Proc(IInstallationResult*, HRESULT)).call(retval)
+  def uninstall(this : IUpdateInstaller2*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.uninstall.call(this, retval)
   end
-  def get_allow_source_prompts(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_allow_source_prompts.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_allow_source_prompts(this : IUpdateInstaller2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_source_prompts.call(this, retval)
   end
-  def put_allow_source_prompts(value : Int16) : HRESULT
-    @lpVtbl.value.put_allow_source_prompts.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_allow_source_prompts(this : IUpdateInstaller2*, value : Int16) : HRESULT
+    @lpVtbl.value.put_allow_source_prompts.call(this, value)
   end
-  def get_reboot_required_before_installation(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_reboot_required_before_installation.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_reboot_required_before_installation(this : IUpdateInstaller2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required_before_installation.call(this, retval)
   end
-  def get_force_quiet(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_force_quiet.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_force_quiet(this : IUpdateInstaller2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_force_quiet.call(this, retval)
   end
-  def put_force_quiet(value : Int16) : HRESULT
-    @lpVtbl.value.put_force_quiet.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_force_quiet(this : IUpdateInstaller2*, value : Int16) : HRESULT
+    @lpVtbl.value.put_force_quiet.call(this, value)
   end
 end
 struct LibWin32::IUpdateInstaller3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateInstaller3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateInstaller3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateInstaller3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateInstaller3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateInstaller3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateInstaller3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateInstaller3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_client_application_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_client_application_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_client_application_id(this : IUpdateInstaller3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
   end
-  def put_client_application_id(value : UInt8*) : HRESULT
-    @lpVtbl.value.put_client_application_id.unsafe_as(Proc(UInt8*, HRESULT)).call(value)
+  def put_client_application_id(this : IUpdateInstaller3*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
   end
-  def get_is_forced(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_forced.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_forced(this : IUpdateInstaller3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_forced.call(this, retval)
   end
-  def put_is_forced(value : Int16) : HRESULT
-    @lpVtbl.value.put_is_forced.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_is_forced(this : IUpdateInstaller3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_forced.call(this, value)
   end
-  def get_parent_hwnd(retval : HANDLE*) : HRESULT
-    @lpVtbl.value.get_parent_hwnd.unsafe_as(Proc(HANDLE*, HRESULT)).call(retval)
+  def get_parent_hwnd(this : IUpdateInstaller3*, retval : HANDLE*) : HRESULT
+    @lpVtbl.value.get_parent_hwnd.call(this, retval)
   end
-  def put_parent_hwnd(value : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.put_parent_hwnd.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(value)
+  def put_parent_hwnd(this : IUpdateInstaller3*, value : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.put_parent_hwnd.call(this, value)
   end
-  def put_parent_window(value : IUnknown) : HRESULT
-    @lpVtbl.value.put_parent_window.unsafe_as(Proc(IUnknown, HRESULT)).call(value)
+  def put_parent_window(this : IUpdateInstaller3*, value : IUnknown) : HRESULT
+    @lpVtbl.value.put_parent_window.call(this, value)
   end
-  def get_parent_window(retval : IUnknown*) : HRESULT
-    @lpVtbl.value.get_parent_window.unsafe_as(Proc(IUnknown*, HRESULT)).call(retval)
+  def get_parent_window(this : IUpdateInstaller3*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_parent_window.call(this, retval)
   end
-  def get_updates(retval : IUpdateCollection*) : HRESULT
-    @lpVtbl.value.get_updates.unsafe_as(Proc(IUpdateCollection*, HRESULT)).call(retval)
+  def get_updates(this : IUpdateInstaller3*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_updates.call(this, retval)
   end
-  def put_updates(value : IUpdateCollection) : HRESULT
-    @lpVtbl.value.put_updates.unsafe_as(Proc(IUpdateCollection, HRESULT)).call(value)
+  def put_updates(this : IUpdateInstaller3*, value : IUpdateCollection) : HRESULT
+    @lpVtbl.value.put_updates.call(this, value)
   end
-  def begin_install(onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
-    @lpVtbl.value.begin_install.unsafe_as(Proc(IUnknown, IUnknown, VARIANT, IInstallationJob*, HRESULT)).call(onprogresschanged, oncompleted, state, retval)
+  def begin_install(this : IUpdateInstaller3*, onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
+    @lpVtbl.value.begin_install.call(this, onprogresschanged, oncompleted, state, retval)
   end
-  def begin_uninstall(onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
-    @lpVtbl.value.begin_uninstall.unsafe_as(Proc(IUnknown, IUnknown, VARIANT, IInstallationJob*, HRESULT)).call(onprogresschanged, oncompleted, state, retval)
+  def begin_uninstall(this : IUpdateInstaller3*, onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
+    @lpVtbl.value.begin_uninstall.call(this, onprogresschanged, oncompleted, state, retval)
   end
-  def end_install(value : IInstallationJob, retval : IInstallationResult*) : HRESULT
-    @lpVtbl.value.end_install.unsafe_as(Proc(IInstallationJob, IInstallationResult*, HRESULT)).call(value, retval)
+  def end_install(this : IUpdateInstaller3*, value : IInstallationJob, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.end_install.call(this, value, retval)
   end
-  def end_uninstall(value : IInstallationJob, retval : IInstallationResult*) : HRESULT
-    @lpVtbl.value.end_uninstall.unsafe_as(Proc(IInstallationJob, IInstallationResult*, HRESULT)).call(value, retval)
+  def end_uninstall(this : IUpdateInstaller3*, value : IInstallationJob, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.end_uninstall.call(this, value, retval)
   end
-  def install(retval : IInstallationResult*) : HRESULT
-    @lpVtbl.value.install.unsafe_as(Proc(IInstallationResult*, HRESULT)).call(retval)
+  def install(this : IUpdateInstaller3*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.install.call(this, retval)
   end
-  def run_wizard(dialogtitle : UInt8*, retval : IInstallationResult*) : HRESULT
-    @lpVtbl.value.run_wizard.unsafe_as(Proc(UInt8*, IInstallationResult*, HRESULT)).call(dialogtitle, retval)
+  def run_wizard(this : IUpdateInstaller3*, dialogtitle : UInt8*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.run_wizard.call(this, dialogtitle, retval)
   end
-  def get_is_busy(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_busy.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_busy(this : IUpdateInstaller3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_busy.call(this, retval)
   end
-  def uninstall(retval : IInstallationResult*) : HRESULT
-    @lpVtbl.value.uninstall.unsafe_as(Proc(IInstallationResult*, HRESULT)).call(retval)
+  def uninstall(this : IUpdateInstaller3*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.uninstall.call(this, retval)
   end
-  def get_allow_source_prompts(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_allow_source_prompts.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_allow_source_prompts(this : IUpdateInstaller3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_source_prompts.call(this, retval)
   end
-  def put_allow_source_prompts(value : Int16) : HRESULT
-    @lpVtbl.value.put_allow_source_prompts.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_allow_source_prompts(this : IUpdateInstaller3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_allow_source_prompts.call(this, value)
   end
-  def get_reboot_required_before_installation(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_reboot_required_before_installation.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_reboot_required_before_installation(this : IUpdateInstaller3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required_before_installation.call(this, retval)
   end
-  def get_force_quiet(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_force_quiet.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_force_quiet(this : IUpdateInstaller3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_force_quiet.call(this, retval)
   end
-  def put_force_quiet(value : Int16) : HRESULT
-    @lpVtbl.value.put_force_quiet.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_force_quiet(this : IUpdateInstaller3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_force_quiet.call(this, value)
   end
-  def get_attempt_close_apps_if_necessary(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_attempt_close_apps_if_necessary.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_attempt_close_apps_if_necessary(this : IUpdateInstaller3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_attempt_close_apps_if_necessary.call(this, retval)
   end
-  def put_attempt_close_apps_if_necessary(value : Int16) : HRESULT
-    @lpVtbl.value.put_attempt_close_apps_if_necessary.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_attempt_close_apps_if_necessary(this : IUpdateInstaller3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_attempt_close_apps_if_necessary.call(this, value)
   end
 end
 struct LibWin32::IUpdateInstaller4
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateInstaller4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateInstaller4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateInstaller4*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateInstaller4*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateInstaller4*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateInstaller4*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateInstaller4*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_client_application_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_client_application_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_client_application_id(this : IUpdateInstaller4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
   end
-  def put_client_application_id(value : UInt8*) : HRESULT
-    @lpVtbl.value.put_client_application_id.unsafe_as(Proc(UInt8*, HRESULT)).call(value)
+  def put_client_application_id(this : IUpdateInstaller4*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
   end
-  def get_is_forced(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_forced.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_forced(this : IUpdateInstaller4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_forced.call(this, retval)
   end
-  def put_is_forced(value : Int16) : HRESULT
-    @lpVtbl.value.put_is_forced.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_is_forced(this : IUpdateInstaller4*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_forced.call(this, value)
   end
-  def get_parent_hwnd(retval : HANDLE*) : HRESULT
-    @lpVtbl.value.get_parent_hwnd.unsafe_as(Proc(HANDLE*, HRESULT)).call(retval)
+  def get_parent_hwnd(this : IUpdateInstaller4*, retval : HANDLE*) : HRESULT
+    @lpVtbl.value.get_parent_hwnd.call(this, retval)
   end
-  def put_parent_hwnd(value : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.put_parent_hwnd.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(value)
+  def put_parent_hwnd(this : IUpdateInstaller4*, value : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.put_parent_hwnd.call(this, value)
   end
-  def put_parent_window(value : IUnknown) : HRESULT
-    @lpVtbl.value.put_parent_window.unsafe_as(Proc(IUnknown, HRESULT)).call(value)
+  def put_parent_window(this : IUpdateInstaller4*, value : IUnknown) : HRESULT
+    @lpVtbl.value.put_parent_window.call(this, value)
   end
-  def get_parent_window(retval : IUnknown*) : HRESULT
-    @lpVtbl.value.get_parent_window.unsafe_as(Proc(IUnknown*, HRESULT)).call(retval)
+  def get_parent_window(this : IUpdateInstaller4*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_parent_window.call(this, retval)
   end
-  def get_updates(retval : IUpdateCollection*) : HRESULT
-    @lpVtbl.value.get_updates.unsafe_as(Proc(IUpdateCollection*, HRESULT)).call(retval)
+  def get_updates(this : IUpdateInstaller4*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_updates.call(this, retval)
   end
-  def put_updates(value : IUpdateCollection) : HRESULT
-    @lpVtbl.value.put_updates.unsafe_as(Proc(IUpdateCollection, HRESULT)).call(value)
+  def put_updates(this : IUpdateInstaller4*, value : IUpdateCollection) : HRESULT
+    @lpVtbl.value.put_updates.call(this, value)
   end
-  def begin_install(onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
-    @lpVtbl.value.begin_install.unsafe_as(Proc(IUnknown, IUnknown, VARIANT, IInstallationJob*, HRESULT)).call(onprogresschanged, oncompleted, state, retval)
+  def begin_install(this : IUpdateInstaller4*, onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
+    @lpVtbl.value.begin_install.call(this, onprogresschanged, oncompleted, state, retval)
   end
-  def begin_uninstall(onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
-    @lpVtbl.value.begin_uninstall.unsafe_as(Proc(IUnknown, IUnknown, VARIANT, IInstallationJob*, HRESULT)).call(onprogresschanged, oncompleted, state, retval)
+  def begin_uninstall(this : IUpdateInstaller4*, onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
+    @lpVtbl.value.begin_uninstall.call(this, onprogresschanged, oncompleted, state, retval)
   end
-  def end_install(value : IInstallationJob, retval : IInstallationResult*) : HRESULT
-    @lpVtbl.value.end_install.unsafe_as(Proc(IInstallationJob, IInstallationResult*, HRESULT)).call(value, retval)
+  def end_install(this : IUpdateInstaller4*, value : IInstallationJob, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.end_install.call(this, value, retval)
   end
-  def end_uninstall(value : IInstallationJob, retval : IInstallationResult*) : HRESULT
-    @lpVtbl.value.end_uninstall.unsafe_as(Proc(IInstallationJob, IInstallationResult*, HRESULT)).call(value, retval)
+  def end_uninstall(this : IUpdateInstaller4*, value : IInstallationJob, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.end_uninstall.call(this, value, retval)
   end
-  def install(retval : IInstallationResult*) : HRESULT
-    @lpVtbl.value.install.unsafe_as(Proc(IInstallationResult*, HRESULT)).call(retval)
+  def install(this : IUpdateInstaller4*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.install.call(this, retval)
   end
-  def run_wizard(dialogtitle : UInt8*, retval : IInstallationResult*) : HRESULT
-    @lpVtbl.value.run_wizard.unsafe_as(Proc(UInt8*, IInstallationResult*, HRESULT)).call(dialogtitle, retval)
+  def run_wizard(this : IUpdateInstaller4*, dialogtitle : UInt8*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.run_wizard.call(this, dialogtitle, retval)
   end
-  def get_is_busy(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_busy.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_busy(this : IUpdateInstaller4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_busy.call(this, retval)
   end
-  def uninstall(retval : IInstallationResult*) : HRESULT
-    @lpVtbl.value.uninstall.unsafe_as(Proc(IInstallationResult*, HRESULT)).call(retval)
+  def uninstall(this : IUpdateInstaller4*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.uninstall.call(this, retval)
   end
-  def get_allow_source_prompts(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_allow_source_prompts.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_allow_source_prompts(this : IUpdateInstaller4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_source_prompts.call(this, retval)
   end
-  def put_allow_source_prompts(value : Int16) : HRESULT
-    @lpVtbl.value.put_allow_source_prompts.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_allow_source_prompts(this : IUpdateInstaller4*, value : Int16) : HRESULT
+    @lpVtbl.value.put_allow_source_prompts.call(this, value)
   end
-  def get_reboot_required_before_installation(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_reboot_required_before_installation.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_reboot_required_before_installation(this : IUpdateInstaller4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required_before_installation.call(this, retval)
   end
-  def get_force_quiet(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_force_quiet.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_force_quiet(this : IUpdateInstaller4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_force_quiet.call(this, retval)
   end
-  def put_force_quiet(value : Int16) : HRESULT
-    @lpVtbl.value.put_force_quiet.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_force_quiet(this : IUpdateInstaller4*, value : Int16) : HRESULT
+    @lpVtbl.value.put_force_quiet.call(this, value)
   end
-  def get_attempt_close_apps_if_necessary(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_attempt_close_apps_if_necessary.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_attempt_close_apps_if_necessary(this : IUpdateInstaller4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_attempt_close_apps_if_necessary.call(this, retval)
   end
-  def put_attempt_close_apps_if_necessary(value : Int16) : HRESULT
-    @lpVtbl.value.put_attempt_close_apps_if_necessary.unsafe_as(Proc(Int16, HRESULT)).call(value)
+  def put_attempt_close_apps_if_necessary(this : IUpdateInstaller4*, value : Int16) : HRESULT
+    @lpVtbl.value.put_attempt_close_apps_if_necessary.call(this, value)
   end
-  def commit(dwflags : UInt32) : HRESULT
-    @lpVtbl.value.commit.unsafe_as(Proc(UInt32, HRESULT)).call(dwflags)
+  def commit(this : IUpdateInstaller4*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.commit.call(this, dwflags)
   end
 end
 struct LibWin32::IUpdateSession
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateSession*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateSession*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateSession*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateSession*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateSession*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateSession*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateSession*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_client_application_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_client_application_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_client_application_id(this : IUpdateSession*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
   end
-  def put_client_application_id(value : UInt8*) : HRESULT
-    @lpVtbl.value.put_client_application_id.unsafe_as(Proc(UInt8*, HRESULT)).call(value)
+  def put_client_application_id(this : IUpdateSession*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
   end
-  def get_read_only(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_read_only.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_read_only(this : IUpdateSession*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_read_only.call(this, retval)
   end
-  def get_web_proxy(retval : IWebProxy*) : HRESULT
-    @lpVtbl.value.get_web_proxy.unsafe_as(Proc(IWebProxy*, HRESULT)).call(retval)
+  def get_web_proxy(this : IUpdateSession*, retval : IWebProxy*) : HRESULT
+    @lpVtbl.value.get_web_proxy.call(this, retval)
   end
-  def put_web_proxy(value : IWebProxy) : HRESULT
-    @lpVtbl.value.put_web_proxy.unsafe_as(Proc(IWebProxy, HRESULT)).call(value)
+  def put_web_proxy(this : IUpdateSession*, value : IWebProxy) : HRESULT
+    @lpVtbl.value.put_web_proxy.call(this, value)
   end
-  def create_update_searcher(retval : IUpdateSearcher*) : HRESULT
-    @lpVtbl.value.create_update_searcher.unsafe_as(Proc(IUpdateSearcher*, HRESULT)).call(retval)
+  def create_update_searcher(this : IUpdateSession*, retval : IUpdateSearcher*) : HRESULT
+    @lpVtbl.value.create_update_searcher.call(this, retval)
   end
-  def create_update_downloader(retval : IUpdateDownloader*) : HRESULT
-    @lpVtbl.value.create_update_downloader.unsafe_as(Proc(IUpdateDownloader*, HRESULT)).call(retval)
+  def create_update_downloader(this : IUpdateSession*, retval : IUpdateDownloader*) : HRESULT
+    @lpVtbl.value.create_update_downloader.call(this, retval)
   end
-  def create_update_installer(retval : IUpdateInstaller*) : HRESULT
-    @lpVtbl.value.create_update_installer.unsafe_as(Proc(IUpdateInstaller*, HRESULT)).call(retval)
+  def create_update_installer(this : IUpdateSession*, retval : IUpdateInstaller*) : HRESULT
+    @lpVtbl.value.create_update_installer.call(this, retval)
   end
 end
 struct LibWin32::IUpdateSession2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateSession2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateSession2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateSession2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateSession2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateSession2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateSession2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateSession2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_client_application_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_client_application_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_client_application_id(this : IUpdateSession2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
   end
-  def put_client_application_id(value : UInt8*) : HRESULT
-    @lpVtbl.value.put_client_application_id.unsafe_as(Proc(UInt8*, HRESULT)).call(value)
+  def put_client_application_id(this : IUpdateSession2*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
   end
-  def get_read_only(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_read_only.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_read_only(this : IUpdateSession2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_read_only.call(this, retval)
   end
-  def get_web_proxy(retval : IWebProxy*) : HRESULT
-    @lpVtbl.value.get_web_proxy.unsafe_as(Proc(IWebProxy*, HRESULT)).call(retval)
+  def get_web_proxy(this : IUpdateSession2*, retval : IWebProxy*) : HRESULT
+    @lpVtbl.value.get_web_proxy.call(this, retval)
   end
-  def put_web_proxy(value : IWebProxy) : HRESULT
-    @lpVtbl.value.put_web_proxy.unsafe_as(Proc(IWebProxy, HRESULT)).call(value)
+  def put_web_proxy(this : IUpdateSession2*, value : IWebProxy) : HRESULT
+    @lpVtbl.value.put_web_proxy.call(this, value)
   end
-  def create_update_searcher(retval : IUpdateSearcher*) : HRESULT
-    @lpVtbl.value.create_update_searcher.unsafe_as(Proc(IUpdateSearcher*, HRESULT)).call(retval)
+  def create_update_searcher(this : IUpdateSession2*, retval : IUpdateSearcher*) : HRESULT
+    @lpVtbl.value.create_update_searcher.call(this, retval)
   end
-  def create_update_downloader(retval : IUpdateDownloader*) : HRESULT
-    @lpVtbl.value.create_update_downloader.unsafe_as(Proc(IUpdateDownloader*, HRESULT)).call(retval)
+  def create_update_downloader(this : IUpdateSession2*, retval : IUpdateDownloader*) : HRESULT
+    @lpVtbl.value.create_update_downloader.call(this, retval)
   end
-  def create_update_installer(retval : IUpdateInstaller*) : HRESULT
-    @lpVtbl.value.create_update_installer.unsafe_as(Proc(IUpdateInstaller*, HRESULT)).call(retval)
+  def create_update_installer(this : IUpdateSession2*, retval : IUpdateInstaller*) : HRESULT
+    @lpVtbl.value.create_update_installer.call(this, retval)
   end
-  def get_user_locale(retval : UInt32*) : HRESULT
-    @lpVtbl.value.get_user_locale.unsafe_as(Proc(UInt32*, HRESULT)).call(retval)
+  def get_user_locale(this : IUpdateSession2*, retval : UInt32*) : HRESULT
+    @lpVtbl.value.get_user_locale.call(this, retval)
   end
-  def put_user_locale(lcid : UInt32) : HRESULT
-    @lpVtbl.value.put_user_locale.unsafe_as(Proc(UInt32, HRESULT)).call(lcid)
+  def put_user_locale(this : IUpdateSession2*, lcid : UInt32) : HRESULT
+    @lpVtbl.value.put_user_locale.call(this, lcid)
   end
 end
 struct LibWin32::IUpdateSession3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateSession3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateSession3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateSession3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateSession3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateSession3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateSession3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateSession3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_client_application_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_client_application_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_client_application_id(this : IUpdateSession3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
   end
-  def put_client_application_id(value : UInt8*) : HRESULT
-    @lpVtbl.value.put_client_application_id.unsafe_as(Proc(UInt8*, HRESULT)).call(value)
+  def put_client_application_id(this : IUpdateSession3*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
   end
-  def get_read_only(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_read_only.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_read_only(this : IUpdateSession3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_read_only.call(this, retval)
   end
-  def get_web_proxy(retval : IWebProxy*) : HRESULT
-    @lpVtbl.value.get_web_proxy.unsafe_as(Proc(IWebProxy*, HRESULT)).call(retval)
+  def get_web_proxy(this : IUpdateSession3*, retval : IWebProxy*) : HRESULT
+    @lpVtbl.value.get_web_proxy.call(this, retval)
   end
-  def put_web_proxy(value : IWebProxy) : HRESULT
-    @lpVtbl.value.put_web_proxy.unsafe_as(Proc(IWebProxy, HRESULT)).call(value)
+  def put_web_proxy(this : IUpdateSession3*, value : IWebProxy) : HRESULT
+    @lpVtbl.value.put_web_proxy.call(this, value)
   end
-  def create_update_searcher(retval : IUpdateSearcher*) : HRESULT
-    @lpVtbl.value.create_update_searcher.unsafe_as(Proc(IUpdateSearcher*, HRESULT)).call(retval)
+  def create_update_searcher(this : IUpdateSession3*, retval : IUpdateSearcher*) : HRESULT
+    @lpVtbl.value.create_update_searcher.call(this, retval)
   end
-  def create_update_downloader(retval : IUpdateDownloader*) : HRESULT
-    @lpVtbl.value.create_update_downloader.unsafe_as(Proc(IUpdateDownloader*, HRESULT)).call(retval)
+  def create_update_downloader(this : IUpdateSession3*, retval : IUpdateDownloader*) : HRESULT
+    @lpVtbl.value.create_update_downloader.call(this, retval)
   end
-  def create_update_installer(retval : IUpdateInstaller*) : HRESULT
-    @lpVtbl.value.create_update_installer.unsafe_as(Proc(IUpdateInstaller*, HRESULT)).call(retval)
+  def create_update_installer(this : IUpdateSession3*, retval : IUpdateInstaller*) : HRESULT
+    @lpVtbl.value.create_update_installer.call(this, retval)
   end
-  def get_user_locale(retval : UInt32*) : HRESULT
-    @lpVtbl.value.get_user_locale.unsafe_as(Proc(UInt32*, HRESULT)).call(retval)
+  def get_user_locale(this : IUpdateSession3*, retval : UInt32*) : HRESULT
+    @lpVtbl.value.get_user_locale.call(this, retval)
   end
-  def put_user_locale(lcid : UInt32) : HRESULT
-    @lpVtbl.value.put_user_locale.unsafe_as(Proc(UInt32, HRESULT)).call(lcid)
+  def put_user_locale(this : IUpdateSession3*, lcid : UInt32) : HRESULT
+    @lpVtbl.value.put_user_locale.call(this, lcid)
   end
-  def create_update_service_manager(retval : IUpdateServiceManager2*) : HRESULT
-    @lpVtbl.value.create_update_service_manager.unsafe_as(Proc(IUpdateServiceManager2*, HRESULT)).call(retval)
+  def create_update_service_manager(this : IUpdateSession3*, retval : IUpdateServiceManager2*) : HRESULT
+    @lpVtbl.value.create_update_service_manager.call(this, retval)
   end
-  def query_history(criteria : UInt8*, startindex : Int32, count : Int32, retval : IUpdateHistoryEntryCollection*) : HRESULT
-    @lpVtbl.value.query_history.unsafe_as(Proc(UInt8*, Int32, Int32, IUpdateHistoryEntryCollection*, HRESULT)).call(criteria, startindex, count, retval)
+  def query_history(this : IUpdateSession3*, criteria : UInt8*, startindex : Int32, count : Int32, retval : IUpdateHistoryEntryCollection*) : HRESULT
+    @lpVtbl.value.query_history.call(this, criteria, startindex, count, retval)
   end
 end
 struct LibWin32::IUpdateService
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateService*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateService*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateService*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateService*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateService*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateService*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateService*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_name(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_name(this : IUpdateService*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, retval)
   end
-  def get_content_validation_cert(retval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_content_validation_cert.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  def get_content_validation_cert(this : IUpdateService*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_content_validation_cert.call(this, retval)
   end
-  def get_expiration_date(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_expiration_date.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_expiration_date(this : IUpdateService*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_expiration_date.call(this, retval)
   end
-  def get_is_managed(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_managed.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_managed(this : IUpdateService*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_managed.call(this, retval)
   end
-  def get_is_registered_with_au(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_registered_with_au.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_registered_with_au(this : IUpdateService*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_registered_with_au.call(this, retval)
   end
-  def get_issue_date(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_issue_date.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_issue_date(this : IUpdateService*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_issue_date.call(this, retval)
   end
-  def get_offers_windows_updates(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_offers_windows_updates.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_offers_windows_updates(this : IUpdateService*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_offers_windows_updates.call(this, retval)
   end
-  def get_redirect_urls(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_redirect_urls.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_redirect_urls(this : IUpdateService*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_redirect_urls.call(this, retval)
   end
-  def get_service_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_service_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_service_id(this : IUpdateService*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_id.call(this, retval)
   end
-  def get_is_scan_package_service(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_scan_package_service.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_scan_package_service(this : IUpdateService*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_scan_package_service.call(this, retval)
   end
-  def get_can_register_with_au(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_can_register_with_au.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_can_register_with_au(this : IUpdateService*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_register_with_au.call(this, retval)
   end
-  def get_service_url(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_service_url.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_service_url(this : IUpdateService*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_url.call(this, retval)
   end
-  def get_setup_prefix(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_setup_prefix.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_setup_prefix(this : IUpdateService*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_setup_prefix.call(this, retval)
   end
 end
 struct LibWin32::IUpdateService2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateService2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateService2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateService2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateService2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateService2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateService2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateService2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_name(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_name(this : IUpdateService2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, retval)
   end
-  def get_content_validation_cert(retval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_content_validation_cert.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  def get_content_validation_cert(this : IUpdateService2*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_content_validation_cert.call(this, retval)
   end
-  def get_expiration_date(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_expiration_date.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_expiration_date(this : IUpdateService2*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_expiration_date.call(this, retval)
   end
-  def get_is_managed(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_managed.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_managed(this : IUpdateService2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_managed.call(this, retval)
   end
-  def get_is_registered_with_au(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_registered_with_au.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_registered_with_au(this : IUpdateService2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_registered_with_au.call(this, retval)
   end
-  def get_issue_date(retval : Float64*) : HRESULT
-    @lpVtbl.value.get_issue_date.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  def get_issue_date(this : IUpdateService2*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_issue_date.call(this, retval)
   end
-  def get_offers_windows_updates(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_offers_windows_updates.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_offers_windows_updates(this : IUpdateService2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_offers_windows_updates.call(this, retval)
   end
-  def get_redirect_urls(retval : IStringCollection*) : HRESULT
-    @lpVtbl.value.get_redirect_urls.unsafe_as(Proc(IStringCollection*, HRESULT)).call(retval)
+  def get_redirect_urls(this : IUpdateService2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_redirect_urls.call(this, retval)
   end
-  def get_service_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_service_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_service_id(this : IUpdateService2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_id.call(this, retval)
   end
-  def get_is_scan_package_service(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_scan_package_service.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_scan_package_service(this : IUpdateService2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_scan_package_service.call(this, retval)
   end
-  def get_can_register_with_au(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_can_register_with_au.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_can_register_with_au(this : IUpdateService2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_register_with_au.call(this, retval)
   end
-  def get_service_url(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_service_url.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_service_url(this : IUpdateService2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_url.call(this, retval)
   end
-  def get_setup_prefix(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_setup_prefix.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_setup_prefix(this : IUpdateService2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_setup_prefix.call(this, retval)
   end
-  def get_is_default_au_service(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_default_au_service.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_default_au_service(this : IUpdateService2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_default_au_service.call(this, retval)
   end
 end
 struct LibWin32::IUpdateServiceCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateServiceCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateServiceCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateServiceCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateServiceCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateServiceCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateServiceCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateServiceCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(index : Int32, retval : IUpdateService*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, IUpdateService*, HRESULT)).call(index, retval)
+  def get_item(this : IUpdateServiceCollection*, index : Int32, retval : IUpdateService*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, retval)
   end
-  def get__new_enum(retval : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(retval)
+  def get__new_enum(this : IUpdateServiceCollection*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
   end
-  def get_count(retval : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  def get_count(this : IUpdateServiceCollection*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, retval)
   end
 end
 struct LibWin32::IUpdateServiceRegistration
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateServiceRegistration*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateServiceRegistration*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateServiceRegistration*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateServiceRegistration*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateServiceRegistration*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateServiceRegistration*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateServiceRegistration*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_registration_state(retval : UpdateServiceRegistrationState*) : HRESULT
-    @lpVtbl.value.get_registration_state.unsafe_as(Proc(UpdateServiceRegistrationState*, HRESULT)).call(retval)
+  def get_registration_state(this : IUpdateServiceRegistration*, retval : UpdateServiceRegistrationState*) : HRESULT
+    @lpVtbl.value.get_registration_state.call(this, retval)
   end
-  def get_service_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_service_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_service_id(this : IUpdateServiceRegistration*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_id.call(this, retval)
   end
-  def get_is_pending_registration_with_au(retval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_pending_registration_with_au.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  def get_is_pending_registration_with_au(this : IUpdateServiceRegistration*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_pending_registration_with_au.call(this, retval)
   end
-  def get_service(retval : IUpdateService2*) : HRESULT
-    @lpVtbl.value.get_service.unsafe_as(Proc(IUpdateService2*, HRESULT)).call(retval)
+  def get_service(this : IUpdateServiceRegistration*, retval : IUpdateService2*) : HRESULT
+    @lpVtbl.value.get_service.call(this, retval)
   end
 end
 struct LibWin32::IUpdateServiceManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateServiceManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateServiceManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateServiceManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateServiceManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateServiceManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateServiceManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateServiceManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_services(retval : IUpdateServiceCollection*) : HRESULT
-    @lpVtbl.value.get_services.unsafe_as(Proc(IUpdateServiceCollection*, HRESULT)).call(retval)
+  def get_services(this : IUpdateServiceManager*, retval : IUpdateServiceCollection*) : HRESULT
+    @lpVtbl.value.get_services.call(this, retval)
   end
-  def add_service(serviceid : UInt8*, authorizationcabpath : UInt8*, retval : IUpdateService*) : HRESULT
-    @lpVtbl.value.add_service.unsafe_as(Proc(UInt8*, UInt8*, IUpdateService*, HRESULT)).call(serviceid, authorizationcabpath, retval)
+  def add_service(this : IUpdateServiceManager*, serviceid : UInt8*, authorizationcabpath : UInt8*, retval : IUpdateService*) : HRESULT
+    @lpVtbl.value.add_service.call(this, serviceid, authorizationcabpath, retval)
   end
-  def register_service_with_au(serviceid : UInt8*) : HRESULT
-    @lpVtbl.value.register_service_with_au.unsafe_as(Proc(UInt8*, HRESULT)).call(serviceid)
+  def register_service_with_au(this : IUpdateServiceManager*, serviceid : UInt8*) : HRESULT
+    @lpVtbl.value.register_service_with_au.call(this, serviceid)
   end
-  def remove_service(serviceid : UInt8*) : HRESULT
-    @lpVtbl.value.remove_service.unsafe_as(Proc(UInt8*, HRESULT)).call(serviceid)
+  def remove_service(this : IUpdateServiceManager*, serviceid : UInt8*) : HRESULT
+    @lpVtbl.value.remove_service.call(this, serviceid)
   end
-  def unregister_service_with_au(serviceid : UInt8*) : HRESULT
-    @lpVtbl.value.unregister_service_with_au.unsafe_as(Proc(UInt8*, HRESULT)).call(serviceid)
+  def unregister_service_with_au(this : IUpdateServiceManager*, serviceid : UInt8*) : HRESULT
+    @lpVtbl.value.unregister_service_with_au.call(this, serviceid)
   end
-  def add_scan_package_service(servicename : UInt8*, scanfilelocation : UInt8*, flags : Int32, ppservice : IUpdateService*) : HRESULT
-    @lpVtbl.value.add_scan_package_service.unsafe_as(Proc(UInt8*, UInt8*, Int32, IUpdateService*, HRESULT)).call(servicename, scanfilelocation, flags, ppservice)
+  def add_scan_package_service(this : IUpdateServiceManager*, servicename : UInt8*, scanfilelocation : UInt8*, flags : Int32, ppservice : IUpdateService*) : HRESULT
+    @lpVtbl.value.add_scan_package_service.call(this, servicename, scanfilelocation, flags, ppservice)
   end
-  def set_option(optionname : UInt8*, optionvalue : VARIANT) : HRESULT
-    @lpVtbl.value.set_option.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(optionname, optionvalue)
+  def set_option(this : IUpdateServiceManager*, optionname : UInt8*, optionvalue : VARIANT) : HRESULT
+    @lpVtbl.value.set_option.call(this, optionname, optionvalue)
   end
 end
 struct LibWin32::IUpdateServiceManager2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUpdateServiceManager2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUpdateServiceManager2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUpdateServiceManager2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IUpdateServiceManager2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IUpdateServiceManager2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IUpdateServiceManager2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IUpdateServiceManager2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_services(retval : IUpdateServiceCollection*) : HRESULT
-    @lpVtbl.value.get_services.unsafe_as(Proc(IUpdateServiceCollection*, HRESULT)).call(retval)
+  def get_services(this : IUpdateServiceManager2*, retval : IUpdateServiceCollection*) : HRESULT
+    @lpVtbl.value.get_services.call(this, retval)
   end
-  def add_service(serviceid : UInt8*, authorizationcabpath : UInt8*, retval : IUpdateService*) : HRESULT
-    @lpVtbl.value.add_service.unsafe_as(Proc(UInt8*, UInt8*, IUpdateService*, HRESULT)).call(serviceid, authorizationcabpath, retval)
+  def add_service(this : IUpdateServiceManager2*, serviceid : UInt8*, authorizationcabpath : UInt8*, retval : IUpdateService*) : HRESULT
+    @lpVtbl.value.add_service.call(this, serviceid, authorizationcabpath, retval)
   end
-  def register_service_with_au(serviceid : UInt8*) : HRESULT
-    @lpVtbl.value.register_service_with_au.unsafe_as(Proc(UInt8*, HRESULT)).call(serviceid)
+  def register_service_with_au(this : IUpdateServiceManager2*, serviceid : UInt8*) : HRESULT
+    @lpVtbl.value.register_service_with_au.call(this, serviceid)
   end
-  def remove_service(serviceid : UInt8*) : HRESULT
-    @lpVtbl.value.remove_service.unsafe_as(Proc(UInt8*, HRESULT)).call(serviceid)
+  def remove_service(this : IUpdateServiceManager2*, serviceid : UInt8*) : HRESULT
+    @lpVtbl.value.remove_service.call(this, serviceid)
   end
-  def unregister_service_with_au(serviceid : UInt8*) : HRESULT
-    @lpVtbl.value.unregister_service_with_au.unsafe_as(Proc(UInt8*, HRESULT)).call(serviceid)
+  def unregister_service_with_au(this : IUpdateServiceManager2*, serviceid : UInt8*) : HRESULT
+    @lpVtbl.value.unregister_service_with_au.call(this, serviceid)
   end
-  def add_scan_package_service(servicename : UInt8*, scanfilelocation : UInt8*, flags : Int32, ppservice : IUpdateService*) : HRESULT
-    @lpVtbl.value.add_scan_package_service.unsafe_as(Proc(UInt8*, UInt8*, Int32, IUpdateService*, HRESULT)).call(servicename, scanfilelocation, flags, ppservice)
+  def add_scan_package_service(this : IUpdateServiceManager2*, servicename : UInt8*, scanfilelocation : UInt8*, flags : Int32, ppservice : IUpdateService*) : HRESULT
+    @lpVtbl.value.add_scan_package_service.call(this, servicename, scanfilelocation, flags, ppservice)
   end
-  def set_option(optionname : UInt8*, optionvalue : VARIANT) : HRESULT
-    @lpVtbl.value.set_option.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(optionname, optionvalue)
+  def set_option(this : IUpdateServiceManager2*, optionname : UInt8*, optionvalue : VARIANT) : HRESULT
+    @lpVtbl.value.set_option.call(this, optionname, optionvalue)
   end
-  def get_client_application_id(retval : UInt8**) : HRESULT
-    @lpVtbl.value.get_client_application_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  def get_client_application_id(this : IUpdateServiceManager2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
   end
-  def put_client_application_id(value : UInt8*) : HRESULT
-    @lpVtbl.value.put_client_application_id.unsafe_as(Proc(UInt8*, HRESULT)).call(value)
+  def put_client_application_id(this : IUpdateServiceManager2*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
   end
-  def query_service_registration(serviceid : UInt8*, retval : IUpdateServiceRegistration*) : HRESULT
-    @lpVtbl.value.query_service_registration.unsafe_as(Proc(UInt8*, IUpdateServiceRegistration*, HRESULT)).call(serviceid, retval)
+  def query_service_registration(this : IUpdateServiceManager2*, serviceid : UInt8*, retval : IUpdateServiceRegistration*) : HRESULT
+    @lpVtbl.value.query_service_registration.call(this, serviceid, retval)
   end
-  def add_service2(serviceid : UInt8*, flags : Int32, authorizationcabpath : UInt8*, retval : IUpdateServiceRegistration*) : HRESULT
-    @lpVtbl.value.add_service2.unsafe_as(Proc(UInt8*, Int32, UInt8*, IUpdateServiceRegistration*, HRESULT)).call(serviceid, flags, authorizationcabpath, retval)
+  def add_service2(this : IUpdateServiceManager2*, serviceid : UInt8*, flags : Int32, authorizationcabpath : UInt8*, retval : IUpdateServiceRegistration*) : HRESULT
+    @lpVtbl.value.add_service2.call(this, serviceid, flags, authorizationcabpath, retval)
   end
 end
 struct LibWin32::IInstallationAgent
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInstallationAgent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInstallationAgent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInstallationAgent*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IInstallationAgent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IInstallationAgent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IInstallationAgent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IInstallationAgent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def record_installation_result(installationresultcookie : UInt8*, hresult : Int32, extendedreportingdata : IStringCollection) : HRESULT
-    @lpVtbl.value.record_installation_result.unsafe_as(Proc(UInt8*, Int32, IStringCollection, HRESULT)).call(installationresultcookie, hresult, extendedreportingdata)
+  def record_installation_result(this : IInstallationAgent*, installationresultcookie : UInt8*, hresult : Int32, extendedreportingdata : IStringCollection) : HRESULT
+    @lpVtbl.value.record_installation_result.call(this, installationresultcookie, hresult, extendedreportingdata)
   end
 end

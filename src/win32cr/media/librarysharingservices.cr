@@ -20,15 +20,15 @@ lib LibWin32
 
 
   struct IWindowsMediaLibrarySharingDevicePropertyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_name : UInt64
-    get_value : UInt64
+    query_interface : Proc(IWindowsMediaLibrarySharingDeviceProperty*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWindowsMediaLibrarySharingDeviceProperty*, UInt32)
+    release : Proc(IWindowsMediaLibrarySharingDeviceProperty*, UInt32)
+    get_type_info_count : Proc(IWindowsMediaLibrarySharingDeviceProperty*, UInt32*, HRESULT)
+    get_type_info : Proc(IWindowsMediaLibrarySharingDeviceProperty*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWindowsMediaLibrarySharingDeviceProperty*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWindowsMediaLibrarySharingDeviceProperty*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_name : Proc(IWindowsMediaLibrarySharingDeviceProperty*, UInt8**, HRESULT)
+    get_value : Proc(IWindowsMediaLibrarySharingDeviceProperty*, VARIANT*, HRESULT)
   end
 
   IWindowsMediaLibrarySharingDeviceProperty_GUID = "81e26927-7a7d-40a7-81d4-bddc02960e3e"
@@ -38,16 +38,16 @@ lib LibWin32
   end
 
   struct IWindowsMediaLibrarySharingDevicePropertiesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_item : UInt64
-    get_count : UInt64
-    get_property : UInt64
+    query_interface : Proc(IWindowsMediaLibrarySharingDeviceProperties*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWindowsMediaLibrarySharingDeviceProperties*, UInt32)
+    release : Proc(IWindowsMediaLibrarySharingDeviceProperties*, UInt32)
+    get_type_info_count : Proc(IWindowsMediaLibrarySharingDeviceProperties*, UInt32*, HRESULT)
+    get_type_info : Proc(IWindowsMediaLibrarySharingDeviceProperties*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWindowsMediaLibrarySharingDeviceProperties*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWindowsMediaLibrarySharingDeviceProperties*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_item : Proc(IWindowsMediaLibrarySharingDeviceProperties*, Int32, IWindowsMediaLibrarySharingDeviceProperty*, HRESULT)
+    get_count : Proc(IWindowsMediaLibrarySharingDeviceProperties*, Int32*, HRESULT)
+    get_property : Proc(IWindowsMediaLibrarySharingDeviceProperties*, UInt8*, IWindowsMediaLibrarySharingDeviceProperty*, HRESULT)
   end
 
   IWindowsMediaLibrarySharingDeviceProperties_GUID = "c4623214-6b06-40c5-a623-b2ff4c076bfd"
@@ -57,17 +57,17 @@ lib LibWin32
   end
 
   struct IWindowsMediaLibrarySharingDeviceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_device_id : UInt64
-    get_authorization : UInt64
-    put_authorization : UInt64
-    get_properties : UInt64
+    query_interface : Proc(IWindowsMediaLibrarySharingDevice*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWindowsMediaLibrarySharingDevice*, UInt32)
+    release : Proc(IWindowsMediaLibrarySharingDevice*, UInt32)
+    get_type_info_count : Proc(IWindowsMediaLibrarySharingDevice*, UInt32*, HRESULT)
+    get_type_info : Proc(IWindowsMediaLibrarySharingDevice*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWindowsMediaLibrarySharingDevice*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWindowsMediaLibrarySharingDevice*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_device_id : Proc(IWindowsMediaLibrarySharingDevice*, UInt8**, HRESULT)
+    get_authorization : Proc(IWindowsMediaLibrarySharingDevice*, WindowsMediaLibrarySharingDeviceAuthorizationStatus*, HRESULT)
+    put_authorization : Proc(IWindowsMediaLibrarySharingDevice*, WindowsMediaLibrarySharingDeviceAuthorizationStatus, HRESULT)
+    get_properties : Proc(IWindowsMediaLibrarySharingDevice*, IWindowsMediaLibrarySharingDeviceProperties*, HRESULT)
   end
 
   IWindowsMediaLibrarySharingDevice_GUID = "3dccc293-4fd9-4191-a25b-8e57c5d27bd4"
@@ -77,16 +77,16 @@ lib LibWin32
   end
 
   struct IWindowsMediaLibrarySharingDevicesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_item : UInt64
-    get_count : UInt64
-    get_device : UInt64
+    query_interface : Proc(IWindowsMediaLibrarySharingDevices*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWindowsMediaLibrarySharingDevices*, UInt32)
+    release : Proc(IWindowsMediaLibrarySharingDevices*, UInt32)
+    get_type_info_count : Proc(IWindowsMediaLibrarySharingDevices*, UInt32*, HRESULT)
+    get_type_info : Proc(IWindowsMediaLibrarySharingDevices*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWindowsMediaLibrarySharingDevices*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWindowsMediaLibrarySharingDevices*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_item : Proc(IWindowsMediaLibrarySharingDevices*, Int32, IWindowsMediaLibrarySharingDevice*, HRESULT)
+    get_count : Proc(IWindowsMediaLibrarySharingDevices*, Int32*, HRESULT)
+    get_device : Proc(IWindowsMediaLibrarySharingDevices*, UInt8*, IWindowsMediaLibrarySharingDevice*, HRESULT)
   end
 
   IWindowsMediaLibrarySharingDevices_GUID = "1803f9d6-fe6d-4546-bf5b-992fe8ec12d1"
@@ -96,32 +96,32 @@ lib LibWin32
   end
 
   struct IWindowsMediaLibrarySharingServicesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    show_share_media_cpl : UInt64
-    get_user_home_media_sharing_state : UInt64
-    put_user_home_media_sharing_state : UInt64
-    get_user_home_media_sharing_library_name : UInt64
-    put_user_home_media_sharing_library_name : UInt64
-    get_computer_home_media_sharing_allowed_state : UInt64
-    put_computer_home_media_sharing_allowed_state : UInt64
-    get_user_internet_media_sharing_state : UInt64
-    put_user_internet_media_sharing_state : UInt64
-    get_computer_internet_media_sharing_allowed_state : UInt64
-    put_computer_internet_media_sharing_allowed_state : UInt64
-    get_internet_media_sharing_security_group : UInt64
-    put_internet_media_sharing_security_group : UInt64
-    get_allow_sharing_to_all_devices : UInt64
-    put_allow_sharing_to_all_devices : UInt64
-    set_default_authorization : UInt64
-    set_authorization_state : UInt64
-    get_all_devices : UInt64
-    get_custom_settings_applied : UInt64
+    query_interface : Proc(IWindowsMediaLibrarySharingServices*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWindowsMediaLibrarySharingServices*, UInt32)
+    release : Proc(IWindowsMediaLibrarySharingServices*, UInt32)
+    get_type_info_count : Proc(IWindowsMediaLibrarySharingServices*, UInt32*, HRESULT)
+    get_type_info : Proc(IWindowsMediaLibrarySharingServices*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWindowsMediaLibrarySharingServices*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWindowsMediaLibrarySharingServices*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    show_share_media_cpl : Proc(IWindowsMediaLibrarySharingServices*, UInt8*, HRESULT)
+    get_user_home_media_sharing_state : Proc(IWindowsMediaLibrarySharingServices*, Int16*, HRESULT)
+    put_user_home_media_sharing_state : Proc(IWindowsMediaLibrarySharingServices*, Int16, HRESULT)
+    get_user_home_media_sharing_library_name : Proc(IWindowsMediaLibrarySharingServices*, UInt8**, HRESULT)
+    put_user_home_media_sharing_library_name : Proc(IWindowsMediaLibrarySharingServices*, UInt8*, HRESULT)
+    get_computer_home_media_sharing_allowed_state : Proc(IWindowsMediaLibrarySharingServices*, Int16*, HRESULT)
+    put_computer_home_media_sharing_allowed_state : Proc(IWindowsMediaLibrarySharingServices*, Int16, HRESULT)
+    get_user_internet_media_sharing_state : Proc(IWindowsMediaLibrarySharingServices*, Int16*, HRESULT)
+    put_user_internet_media_sharing_state : Proc(IWindowsMediaLibrarySharingServices*, Int16, HRESULT)
+    get_computer_internet_media_sharing_allowed_state : Proc(IWindowsMediaLibrarySharingServices*, Int16*, HRESULT)
+    put_computer_internet_media_sharing_allowed_state : Proc(IWindowsMediaLibrarySharingServices*, Int16, HRESULT)
+    get_internet_media_sharing_security_group : Proc(IWindowsMediaLibrarySharingServices*, UInt8**, HRESULT)
+    put_internet_media_sharing_security_group : Proc(IWindowsMediaLibrarySharingServices*, UInt8*, HRESULT)
+    get_allow_sharing_to_all_devices : Proc(IWindowsMediaLibrarySharingServices*, Int16*, HRESULT)
+    put_allow_sharing_to_all_devices : Proc(IWindowsMediaLibrarySharingServices*, Int16, HRESULT)
+    set_default_authorization : Proc(IWindowsMediaLibrarySharingServices*, UInt8*, UInt8*, Int16, HRESULT)
+    set_authorization_state : Proc(IWindowsMediaLibrarySharingServices*, UInt8*, Int16, HRESULT)
+    get_all_devices : Proc(IWindowsMediaLibrarySharingServices*, IWindowsMediaLibrarySharingDevices*, HRESULT)
+    get_custom_settings_applied : Proc(IWindowsMediaLibrarySharingServices*, Int16*, HRESULT)
   end
 
   IWindowsMediaLibrarySharingServices_GUID = "01f5f85e-0a81-40da-a7c8-21ef3af8440c"
@@ -132,210 +132,210 @@ lib LibWin32
 
 end
 struct LibWin32::IWindowsMediaLibrarySharingDeviceProperty
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWindowsMediaLibrarySharingDeviceProperty*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWindowsMediaLibrarySharingDeviceProperty*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWindowsMediaLibrarySharingDeviceProperty*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWindowsMediaLibrarySharingDeviceProperty*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWindowsMediaLibrarySharingDeviceProperty*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWindowsMediaLibrarySharingDeviceProperty*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWindowsMediaLibrarySharingDeviceProperty*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_name(this : IWindowsMediaLibrarySharingDeviceProperty*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
   end
-  def get_value(value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  def get_value(this : IWindowsMediaLibrarySharingDeviceProperty*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, value)
   end
 end
 struct LibWin32::IWindowsMediaLibrarySharingDeviceProperties
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWindowsMediaLibrarySharingDeviceProperties*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWindowsMediaLibrarySharingDeviceProperties*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWindowsMediaLibrarySharingDeviceProperties*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWindowsMediaLibrarySharingDeviceProperties*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWindowsMediaLibrarySharingDeviceProperties*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWindowsMediaLibrarySharingDeviceProperties*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWindowsMediaLibrarySharingDeviceProperties*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(index : Int32, property : IWindowsMediaLibrarySharingDeviceProperty*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, IWindowsMediaLibrarySharingDeviceProperty*, HRESULT)).call(index, property)
+  def get_item(this : IWindowsMediaLibrarySharingDeviceProperties*, index : Int32, property : IWindowsMediaLibrarySharingDeviceProperty*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, property)
   end
-  def get_count(count : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(count)
+  def get_count(this : IWindowsMediaLibrarySharingDeviceProperties*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
   end
-  def get_property(name : UInt8*, property : IWindowsMediaLibrarySharingDeviceProperty*) : HRESULT
-    @lpVtbl.value.get_property.unsafe_as(Proc(UInt8*, IWindowsMediaLibrarySharingDeviceProperty*, HRESULT)).call(name, property)
+  def get_property(this : IWindowsMediaLibrarySharingDeviceProperties*, name : UInt8*, property : IWindowsMediaLibrarySharingDeviceProperty*) : HRESULT
+    @lpVtbl.value.get_property.call(this, name, property)
   end
 end
 struct LibWin32::IWindowsMediaLibrarySharingDevice
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWindowsMediaLibrarySharingDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWindowsMediaLibrarySharingDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWindowsMediaLibrarySharingDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWindowsMediaLibrarySharingDevice*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWindowsMediaLibrarySharingDevice*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWindowsMediaLibrarySharingDevice*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWindowsMediaLibrarySharingDevice*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_device_id(deviceid : UInt8**) : HRESULT
-    @lpVtbl.value.get_device_id.unsafe_as(Proc(UInt8**, HRESULT)).call(deviceid)
+  def get_device_id(this : IWindowsMediaLibrarySharingDevice*, deviceid : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_id.call(this, deviceid)
   end
-  def get_authorization(authorization : WindowsMediaLibrarySharingDeviceAuthorizationStatus*) : HRESULT
-    @lpVtbl.value.get_authorization.unsafe_as(Proc(WindowsMediaLibrarySharingDeviceAuthorizationStatus*, HRESULT)).call(authorization)
+  def get_authorization(this : IWindowsMediaLibrarySharingDevice*, authorization : WindowsMediaLibrarySharingDeviceAuthorizationStatus*) : HRESULT
+    @lpVtbl.value.get_authorization.call(this, authorization)
   end
-  def put_authorization(authorization : WindowsMediaLibrarySharingDeviceAuthorizationStatus) : HRESULT
-    @lpVtbl.value.put_authorization.unsafe_as(Proc(WindowsMediaLibrarySharingDeviceAuthorizationStatus, HRESULT)).call(authorization)
+  def put_authorization(this : IWindowsMediaLibrarySharingDevice*, authorization : WindowsMediaLibrarySharingDeviceAuthorizationStatus) : HRESULT
+    @lpVtbl.value.put_authorization.call(this, authorization)
   end
-  def get_properties(deviceproperties : IWindowsMediaLibrarySharingDeviceProperties*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IWindowsMediaLibrarySharingDeviceProperties*, HRESULT)).call(deviceproperties)
+  def get_properties(this : IWindowsMediaLibrarySharingDevice*, deviceproperties : IWindowsMediaLibrarySharingDeviceProperties*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, deviceproperties)
   end
 end
 struct LibWin32::IWindowsMediaLibrarySharingDevices
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWindowsMediaLibrarySharingDevices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWindowsMediaLibrarySharingDevices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWindowsMediaLibrarySharingDevices*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWindowsMediaLibrarySharingDevices*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWindowsMediaLibrarySharingDevices*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWindowsMediaLibrarySharingDevices*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWindowsMediaLibrarySharingDevices*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(index : Int32, device : IWindowsMediaLibrarySharingDevice*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, IWindowsMediaLibrarySharingDevice*, HRESULT)).call(index, device)
+  def get_item(this : IWindowsMediaLibrarySharingDevices*, index : Int32, device : IWindowsMediaLibrarySharingDevice*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, device)
   end
-  def get_count(count : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(count)
+  def get_count(this : IWindowsMediaLibrarySharingDevices*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
   end
-  def get_device(deviceid : UInt8*, device : IWindowsMediaLibrarySharingDevice*) : HRESULT
-    @lpVtbl.value.get_device.unsafe_as(Proc(UInt8*, IWindowsMediaLibrarySharingDevice*, HRESULT)).call(deviceid, device)
+  def get_device(this : IWindowsMediaLibrarySharingDevices*, deviceid : UInt8*, device : IWindowsMediaLibrarySharingDevice*) : HRESULT
+    @lpVtbl.value.get_device.call(this, deviceid, device)
   end
 end
 struct LibWin32::IWindowsMediaLibrarySharingServices
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWindowsMediaLibrarySharingServices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWindowsMediaLibrarySharingServices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWindowsMediaLibrarySharingServices*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWindowsMediaLibrarySharingServices*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWindowsMediaLibrarySharingServices*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWindowsMediaLibrarySharingServices*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWindowsMediaLibrarySharingServices*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def show_share_media_cpl(device : UInt8*) : HRESULT
-    @lpVtbl.value.show_share_media_cpl.unsafe_as(Proc(UInt8*, HRESULT)).call(device)
+  def show_share_media_cpl(this : IWindowsMediaLibrarySharingServices*, device : UInt8*) : HRESULT
+    @lpVtbl.value.show_share_media_cpl.call(this, device)
   end
-  def get_user_home_media_sharing_state(sharingenabled : Int16*) : HRESULT
-    @lpVtbl.value.get_user_home_media_sharing_state.unsafe_as(Proc(Int16*, HRESULT)).call(sharingenabled)
+  def get_user_home_media_sharing_state(this : IWindowsMediaLibrarySharingServices*, sharingenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_user_home_media_sharing_state.call(this, sharingenabled)
   end
-  def put_user_home_media_sharing_state(sharingenabled : Int16) : HRESULT
-    @lpVtbl.value.put_user_home_media_sharing_state.unsafe_as(Proc(Int16, HRESULT)).call(sharingenabled)
+  def put_user_home_media_sharing_state(this : IWindowsMediaLibrarySharingServices*, sharingenabled : Int16) : HRESULT
+    @lpVtbl.value.put_user_home_media_sharing_state.call(this, sharingenabled)
   end
-  def get_user_home_media_sharing_library_name(libraryname : UInt8**) : HRESULT
-    @lpVtbl.value.get_user_home_media_sharing_library_name.unsafe_as(Proc(UInt8**, HRESULT)).call(libraryname)
+  def get_user_home_media_sharing_library_name(this : IWindowsMediaLibrarySharingServices*, libraryname : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_home_media_sharing_library_name.call(this, libraryname)
   end
-  def put_user_home_media_sharing_library_name(libraryname : UInt8*) : HRESULT
-    @lpVtbl.value.put_user_home_media_sharing_library_name.unsafe_as(Proc(UInt8*, HRESULT)).call(libraryname)
+  def put_user_home_media_sharing_library_name(this : IWindowsMediaLibrarySharingServices*, libraryname : UInt8*) : HRESULT
+    @lpVtbl.value.put_user_home_media_sharing_library_name.call(this, libraryname)
   end
-  def get_computer_home_media_sharing_allowed_state(sharingallowed : Int16*) : HRESULT
-    @lpVtbl.value.get_computer_home_media_sharing_allowed_state.unsafe_as(Proc(Int16*, HRESULT)).call(sharingallowed)
+  def get_computer_home_media_sharing_allowed_state(this : IWindowsMediaLibrarySharingServices*, sharingallowed : Int16*) : HRESULT
+    @lpVtbl.value.get_computer_home_media_sharing_allowed_state.call(this, sharingallowed)
   end
-  def put_computer_home_media_sharing_allowed_state(sharingallowed : Int16) : HRESULT
-    @lpVtbl.value.put_computer_home_media_sharing_allowed_state.unsafe_as(Proc(Int16, HRESULT)).call(sharingallowed)
+  def put_computer_home_media_sharing_allowed_state(this : IWindowsMediaLibrarySharingServices*, sharingallowed : Int16) : HRESULT
+    @lpVtbl.value.put_computer_home_media_sharing_allowed_state.call(this, sharingallowed)
   end
-  def get_user_internet_media_sharing_state(sharingenabled : Int16*) : HRESULT
-    @lpVtbl.value.get_user_internet_media_sharing_state.unsafe_as(Proc(Int16*, HRESULT)).call(sharingenabled)
+  def get_user_internet_media_sharing_state(this : IWindowsMediaLibrarySharingServices*, sharingenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_user_internet_media_sharing_state.call(this, sharingenabled)
   end
-  def put_user_internet_media_sharing_state(sharingenabled : Int16) : HRESULT
-    @lpVtbl.value.put_user_internet_media_sharing_state.unsafe_as(Proc(Int16, HRESULT)).call(sharingenabled)
+  def put_user_internet_media_sharing_state(this : IWindowsMediaLibrarySharingServices*, sharingenabled : Int16) : HRESULT
+    @lpVtbl.value.put_user_internet_media_sharing_state.call(this, sharingenabled)
   end
-  def get_computer_internet_media_sharing_allowed_state(sharingallowed : Int16*) : HRESULT
-    @lpVtbl.value.get_computer_internet_media_sharing_allowed_state.unsafe_as(Proc(Int16*, HRESULT)).call(sharingallowed)
+  def get_computer_internet_media_sharing_allowed_state(this : IWindowsMediaLibrarySharingServices*, sharingallowed : Int16*) : HRESULT
+    @lpVtbl.value.get_computer_internet_media_sharing_allowed_state.call(this, sharingallowed)
   end
-  def put_computer_internet_media_sharing_allowed_state(sharingallowed : Int16) : HRESULT
-    @lpVtbl.value.put_computer_internet_media_sharing_allowed_state.unsafe_as(Proc(Int16, HRESULT)).call(sharingallowed)
+  def put_computer_internet_media_sharing_allowed_state(this : IWindowsMediaLibrarySharingServices*, sharingallowed : Int16) : HRESULT
+    @lpVtbl.value.put_computer_internet_media_sharing_allowed_state.call(this, sharingallowed)
   end
-  def get_internet_media_sharing_security_group(securitygroup : UInt8**) : HRESULT
-    @lpVtbl.value.get_internet_media_sharing_security_group.unsafe_as(Proc(UInt8**, HRESULT)).call(securitygroup)
+  def get_internet_media_sharing_security_group(this : IWindowsMediaLibrarySharingServices*, securitygroup : UInt8**) : HRESULT
+    @lpVtbl.value.get_internet_media_sharing_security_group.call(this, securitygroup)
   end
-  def put_internet_media_sharing_security_group(securitygroup : UInt8*) : HRESULT
-    @lpVtbl.value.put_internet_media_sharing_security_group.unsafe_as(Proc(UInt8*, HRESULT)).call(securitygroup)
+  def put_internet_media_sharing_security_group(this : IWindowsMediaLibrarySharingServices*, securitygroup : UInt8*) : HRESULT
+    @lpVtbl.value.put_internet_media_sharing_security_group.call(this, securitygroup)
   end
-  def get_allow_sharing_to_all_devices(sharingenabled : Int16*) : HRESULT
-    @lpVtbl.value.get_allow_sharing_to_all_devices.unsafe_as(Proc(Int16*, HRESULT)).call(sharingenabled)
+  def get_allow_sharing_to_all_devices(this : IWindowsMediaLibrarySharingServices*, sharingenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_sharing_to_all_devices.call(this, sharingenabled)
   end
-  def put_allow_sharing_to_all_devices(sharingenabled : Int16) : HRESULT
-    @lpVtbl.value.put_allow_sharing_to_all_devices.unsafe_as(Proc(Int16, HRESULT)).call(sharingenabled)
+  def put_allow_sharing_to_all_devices(this : IWindowsMediaLibrarySharingServices*, sharingenabled : Int16) : HRESULT
+    @lpVtbl.value.put_allow_sharing_to_all_devices.call(this, sharingenabled)
   end
-  def set_default_authorization(macaddresses : UInt8*, friendlyname : UInt8*, authorization : Int16) : HRESULT
-    @lpVtbl.value.set_default_authorization.unsafe_as(Proc(UInt8*, UInt8*, Int16, HRESULT)).call(macaddresses, friendlyname, authorization)
+  def set_default_authorization(this : IWindowsMediaLibrarySharingServices*, macaddresses : UInt8*, friendlyname : UInt8*, authorization : Int16) : HRESULT
+    @lpVtbl.value.set_default_authorization.call(this, macaddresses, friendlyname, authorization)
   end
-  def set_authorization_state(macaddress : UInt8*, authorizationstate : Int16) : HRESULT
-    @lpVtbl.value.set_authorization_state.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(macaddress, authorizationstate)
+  def set_authorization_state(this : IWindowsMediaLibrarySharingServices*, macaddress : UInt8*, authorizationstate : Int16) : HRESULT
+    @lpVtbl.value.set_authorization_state.call(this, macaddress, authorizationstate)
   end
-  def get_all_devices(devices : IWindowsMediaLibrarySharingDevices*) : HRESULT
-    @lpVtbl.value.get_all_devices.unsafe_as(Proc(IWindowsMediaLibrarySharingDevices*, HRESULT)).call(devices)
+  def get_all_devices(this : IWindowsMediaLibrarySharingServices*, devices : IWindowsMediaLibrarySharingDevices*) : HRESULT
+    @lpVtbl.value.get_all_devices.call(this, devices)
   end
-  def get_custom_settings_applied(customsettingsapplied : Int16*) : HRESULT
-    @lpVtbl.value.get_custom_settings_applied.unsafe_as(Proc(Int16*, HRESULT)).call(customsettingsapplied)
+  def get_custom_settings_applied(this : IWindowsMediaLibrarySharingServices*, customsettingsapplied : Int16*) : HRESULT
+    @lpVtbl.value.get_custom_settings_applied.call(this, customsettingsapplied)
   end
 end

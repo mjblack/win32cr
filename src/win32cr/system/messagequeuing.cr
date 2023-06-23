@@ -592,14 +592,14 @@ lib LibWin32
 
 
   struct IMSMQQueryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    lookup_queue : UInt64
+    query_interface : Proc(IMSMQQuery*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQQuery*, UInt32)
+    release : Proc(IMSMQQuery*, UInt32)
+    get_type_info_count : Proc(IMSMQQuery*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQQuery*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQQuery*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQQuery*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    lookup_queue : Proc(IMSMQQuery*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQQueueInfos*, HRESULT)
   end
 
   IMSMQQuery_GUID = "d7d6e072-dccd-11d0-aa4b-0060970debae"
@@ -609,43 +609,43 @@ lib LibWin32
   end
 
   struct IMSMQQueueInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_queue_guid : UInt64
-    get_service_type_guid : UInt64
-    put_service_type_guid : UInt64
-    get_label : UInt64
-    put_label : UInt64
-    get_path_name : UInt64
-    put_path_name : UInt64
-    get_format_name : UInt64
-    put_format_name : UInt64
-    get_is_transactional : UInt64
-    get_priv_level : UInt64
-    put_priv_level : UInt64
-    get_journal : UInt64
-    put_journal : UInt64
-    get_quota : UInt64
-    put_quota : UInt64
-    get_base_priority : UInt64
-    put_base_priority : UInt64
-    get_create_time : UInt64
-    get_modify_time : UInt64
-    get_authenticate : UInt64
-    put_authenticate : UInt64
-    get_journal_quota : UInt64
-    put_journal_quota : UInt64
-    get_is_world_readable : UInt64
-    create : UInt64
-    delete : UInt64
-    open : UInt64
-    refresh : UInt64
-    update : UInt64
+    query_interface : Proc(IMSMQQueueInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQQueueInfo*, UInt32)
+    release : Proc(IMSMQQueueInfo*, UInt32)
+    get_type_info_count : Proc(IMSMQQueueInfo*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQQueueInfo*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQQueueInfo*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQQueueInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_queue_guid : Proc(IMSMQQueueInfo*, UInt8**, HRESULT)
+    get_service_type_guid : Proc(IMSMQQueueInfo*, UInt8**, HRESULT)
+    put_service_type_guid : Proc(IMSMQQueueInfo*, UInt8*, HRESULT)
+    get_label : Proc(IMSMQQueueInfo*, UInt8**, HRESULT)
+    put_label : Proc(IMSMQQueueInfo*, UInt8*, HRESULT)
+    get_path_name : Proc(IMSMQQueueInfo*, UInt8**, HRESULT)
+    put_path_name : Proc(IMSMQQueueInfo*, UInt8*, HRESULT)
+    get_format_name : Proc(IMSMQQueueInfo*, UInt8**, HRESULT)
+    put_format_name : Proc(IMSMQQueueInfo*, UInt8*, HRESULT)
+    get_is_transactional : Proc(IMSMQQueueInfo*, Int16*, HRESULT)
+    get_priv_level : Proc(IMSMQQueueInfo*, Int32*, HRESULT)
+    put_priv_level : Proc(IMSMQQueueInfo*, Int32, HRESULT)
+    get_journal : Proc(IMSMQQueueInfo*, Int32*, HRESULT)
+    put_journal : Proc(IMSMQQueueInfo*, Int32, HRESULT)
+    get_quota : Proc(IMSMQQueueInfo*, Int32*, HRESULT)
+    put_quota : Proc(IMSMQQueueInfo*, Int32, HRESULT)
+    get_base_priority : Proc(IMSMQQueueInfo*, Int32*, HRESULT)
+    put_base_priority : Proc(IMSMQQueueInfo*, Int32, HRESULT)
+    get_create_time : Proc(IMSMQQueueInfo*, VARIANT*, HRESULT)
+    get_modify_time : Proc(IMSMQQueueInfo*, VARIANT*, HRESULT)
+    get_authenticate : Proc(IMSMQQueueInfo*, Int32*, HRESULT)
+    put_authenticate : Proc(IMSMQQueueInfo*, Int32, HRESULT)
+    get_journal_quota : Proc(IMSMQQueueInfo*, Int32*, HRESULT)
+    put_journal_quota : Proc(IMSMQQueueInfo*, Int32, HRESULT)
+    get_is_world_readable : Proc(IMSMQQueueInfo*, Int16*, HRESULT)
+    create : Proc(IMSMQQueueInfo*, VARIANT*, VARIANT*, HRESULT)
+    delete : Proc(IMSMQQueueInfo*, HRESULT)
+    open : Proc(IMSMQQueueInfo*, Int32, Int32, IMSMQQueue*, HRESULT)
+    refresh : Proc(IMSMQQueueInfo*, HRESULT)
+    update : Proc(IMSMQQueueInfo*, HRESULT)
   end
 
   IMSMQQueueInfo_GUID = "d7d6e07b-dccd-11d0-aa4b-0060970debae"
@@ -655,47 +655,47 @@ lib LibWin32
   end
 
   struct IMSMQQueueInfo2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_queue_guid : UInt64
-    get_service_type_guid : UInt64
-    put_service_type_guid : UInt64
-    get_label : UInt64
-    put_label : UInt64
-    get_path_name : UInt64
-    put_path_name : UInt64
-    get_format_name : UInt64
-    put_format_name : UInt64
-    get_is_transactional : UInt64
-    get_priv_level : UInt64
-    put_priv_level : UInt64
-    get_journal : UInt64
-    put_journal : UInt64
-    get_quota : UInt64
-    put_quota : UInt64
-    get_base_priority : UInt64
-    put_base_priority : UInt64
-    get_create_time : UInt64
-    get_modify_time : UInt64
-    get_authenticate : UInt64
-    put_authenticate : UInt64
-    get_journal_quota : UInt64
-    put_journal_quota : UInt64
-    get_is_world_readable : UInt64
-    create : UInt64
-    delete : UInt64
-    open : UInt64
-    refresh : UInt64
-    update : UInt64
-    get_path_name_dns : UInt64
-    get_properties : UInt64
-    get_security : UInt64
-    put_security : UInt64
+    query_interface : Proc(IMSMQQueueInfo2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQQueueInfo2*, UInt32)
+    release : Proc(IMSMQQueueInfo2*, UInt32)
+    get_type_info_count : Proc(IMSMQQueueInfo2*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQQueueInfo2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQQueueInfo2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQQueueInfo2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_queue_guid : Proc(IMSMQQueueInfo2*, UInt8**, HRESULT)
+    get_service_type_guid : Proc(IMSMQQueueInfo2*, UInt8**, HRESULT)
+    put_service_type_guid : Proc(IMSMQQueueInfo2*, UInt8*, HRESULT)
+    get_label : Proc(IMSMQQueueInfo2*, UInt8**, HRESULT)
+    put_label : Proc(IMSMQQueueInfo2*, UInt8*, HRESULT)
+    get_path_name : Proc(IMSMQQueueInfo2*, UInt8**, HRESULT)
+    put_path_name : Proc(IMSMQQueueInfo2*, UInt8*, HRESULT)
+    get_format_name : Proc(IMSMQQueueInfo2*, UInt8**, HRESULT)
+    put_format_name : Proc(IMSMQQueueInfo2*, UInt8*, HRESULT)
+    get_is_transactional : Proc(IMSMQQueueInfo2*, Int16*, HRESULT)
+    get_priv_level : Proc(IMSMQQueueInfo2*, Int32*, HRESULT)
+    put_priv_level : Proc(IMSMQQueueInfo2*, Int32, HRESULT)
+    get_journal : Proc(IMSMQQueueInfo2*, Int32*, HRESULT)
+    put_journal : Proc(IMSMQQueueInfo2*, Int32, HRESULT)
+    get_quota : Proc(IMSMQQueueInfo2*, Int32*, HRESULT)
+    put_quota : Proc(IMSMQQueueInfo2*, Int32, HRESULT)
+    get_base_priority : Proc(IMSMQQueueInfo2*, Int32*, HRESULT)
+    put_base_priority : Proc(IMSMQQueueInfo2*, Int32, HRESULT)
+    get_create_time : Proc(IMSMQQueueInfo2*, VARIANT*, HRESULT)
+    get_modify_time : Proc(IMSMQQueueInfo2*, VARIANT*, HRESULT)
+    get_authenticate : Proc(IMSMQQueueInfo2*, Int32*, HRESULT)
+    put_authenticate : Proc(IMSMQQueueInfo2*, Int32, HRESULT)
+    get_journal_quota : Proc(IMSMQQueueInfo2*, Int32*, HRESULT)
+    put_journal_quota : Proc(IMSMQQueueInfo2*, Int32, HRESULT)
+    get_is_world_readable : Proc(IMSMQQueueInfo2*, Int16*, HRESULT)
+    create : Proc(IMSMQQueueInfo2*, VARIANT*, VARIANT*, HRESULT)
+    delete : Proc(IMSMQQueueInfo2*, HRESULT)
+    open : Proc(IMSMQQueueInfo2*, Int32, Int32, IMSMQQueue2*, HRESULT)
+    refresh : Proc(IMSMQQueueInfo2*, HRESULT)
+    update : Proc(IMSMQQueueInfo2*, HRESULT)
+    get_path_name_dns : Proc(IMSMQQueueInfo2*, UInt8**, HRESULT)
+    get_properties : Proc(IMSMQQueueInfo2*, IDispatch*, HRESULT)
+    get_security : Proc(IMSMQQueueInfo2*, VARIANT*, HRESULT)
+    put_security : Proc(IMSMQQueueInfo2*, VARIANT, HRESULT)
   end
 
   IMSMQQueueInfo2_GUID = "fd174a80-89cf-11d2-b0f2-00e02c074f6b"
@@ -705,52 +705,52 @@ lib LibWin32
   end
 
   struct IMSMQQueueInfo3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_queue_guid : UInt64
-    get_service_type_guid : UInt64
-    put_service_type_guid : UInt64
-    get_label : UInt64
-    put_label : UInt64
-    get_path_name : UInt64
-    put_path_name : UInt64
-    get_format_name : UInt64
-    put_format_name : UInt64
-    get_is_transactional : UInt64
-    get_priv_level : UInt64
-    put_priv_level : UInt64
-    get_journal : UInt64
-    put_journal : UInt64
-    get_quota : UInt64
-    put_quota : UInt64
-    get_base_priority : UInt64
-    put_base_priority : UInt64
-    get_create_time : UInt64
-    get_modify_time : UInt64
-    get_authenticate : UInt64
-    put_authenticate : UInt64
-    get_journal_quota : UInt64
-    put_journal_quota : UInt64
-    get_is_world_readable : UInt64
-    create : UInt64
-    delete : UInt64
-    open : UInt64
-    refresh : UInt64
-    update : UInt64
-    get_path_name_dns : UInt64
-    get_properties : UInt64
-    get_security : UInt64
-    put_security : UInt64
-    get_is_transactional2 : UInt64
-    get_is_world_readable2 : UInt64
-    get_multicast_address : UInt64
-    put_multicast_address : UInt64
-    get_a_ds_path : UInt64
+    query_interface : Proc(IMSMQQueueInfo3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQQueueInfo3*, UInt32)
+    release : Proc(IMSMQQueueInfo3*, UInt32)
+    get_type_info_count : Proc(IMSMQQueueInfo3*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQQueueInfo3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQQueueInfo3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQQueueInfo3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_queue_guid : Proc(IMSMQQueueInfo3*, UInt8**, HRESULT)
+    get_service_type_guid : Proc(IMSMQQueueInfo3*, UInt8**, HRESULT)
+    put_service_type_guid : Proc(IMSMQQueueInfo3*, UInt8*, HRESULT)
+    get_label : Proc(IMSMQQueueInfo3*, UInt8**, HRESULT)
+    put_label : Proc(IMSMQQueueInfo3*, UInt8*, HRESULT)
+    get_path_name : Proc(IMSMQQueueInfo3*, UInt8**, HRESULT)
+    put_path_name : Proc(IMSMQQueueInfo3*, UInt8*, HRESULT)
+    get_format_name : Proc(IMSMQQueueInfo3*, UInt8**, HRESULT)
+    put_format_name : Proc(IMSMQQueueInfo3*, UInt8*, HRESULT)
+    get_is_transactional : Proc(IMSMQQueueInfo3*, Int16*, HRESULT)
+    get_priv_level : Proc(IMSMQQueueInfo3*, Int32*, HRESULT)
+    put_priv_level : Proc(IMSMQQueueInfo3*, Int32, HRESULT)
+    get_journal : Proc(IMSMQQueueInfo3*, Int32*, HRESULT)
+    put_journal : Proc(IMSMQQueueInfo3*, Int32, HRESULT)
+    get_quota : Proc(IMSMQQueueInfo3*, Int32*, HRESULT)
+    put_quota : Proc(IMSMQQueueInfo3*, Int32, HRESULT)
+    get_base_priority : Proc(IMSMQQueueInfo3*, Int32*, HRESULT)
+    put_base_priority : Proc(IMSMQQueueInfo3*, Int32, HRESULT)
+    get_create_time : Proc(IMSMQQueueInfo3*, VARIANT*, HRESULT)
+    get_modify_time : Proc(IMSMQQueueInfo3*, VARIANT*, HRESULT)
+    get_authenticate : Proc(IMSMQQueueInfo3*, Int32*, HRESULT)
+    put_authenticate : Proc(IMSMQQueueInfo3*, Int32, HRESULT)
+    get_journal_quota : Proc(IMSMQQueueInfo3*, Int32*, HRESULT)
+    put_journal_quota : Proc(IMSMQQueueInfo3*, Int32, HRESULT)
+    get_is_world_readable : Proc(IMSMQQueueInfo3*, Int16*, HRESULT)
+    create : Proc(IMSMQQueueInfo3*, VARIANT*, VARIANT*, HRESULT)
+    delete : Proc(IMSMQQueueInfo3*, HRESULT)
+    open : Proc(IMSMQQueueInfo3*, Int32, Int32, IMSMQQueue3*, HRESULT)
+    refresh : Proc(IMSMQQueueInfo3*, HRESULT)
+    update : Proc(IMSMQQueueInfo3*, HRESULT)
+    get_path_name_dns : Proc(IMSMQQueueInfo3*, UInt8**, HRESULT)
+    get_properties : Proc(IMSMQQueueInfo3*, IDispatch*, HRESULT)
+    get_security : Proc(IMSMQQueueInfo3*, VARIANT*, HRESULT)
+    put_security : Proc(IMSMQQueueInfo3*, VARIANT, HRESULT)
+    get_is_transactional2 : Proc(IMSMQQueueInfo3*, Int16*, HRESULT)
+    get_is_world_readable2 : Proc(IMSMQQueueInfo3*, Int16*, HRESULT)
+    get_multicast_address : Proc(IMSMQQueueInfo3*, UInt8**, HRESULT)
+    put_multicast_address : Proc(IMSMQQueueInfo3*, UInt8*, HRESULT)
+    get_a_ds_path : Proc(IMSMQQueueInfo3*, UInt8**, HRESULT)
   end
 
   IMSMQQueueInfo3_GUID = "eba96b1d-2168-11d3-898c-00e02c074f6b"
@@ -760,52 +760,52 @@ lib LibWin32
   end
 
   struct IMSMQQueueInfo4VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_queue_guid : UInt64
-    get_service_type_guid : UInt64
-    put_service_type_guid : UInt64
-    get_label : UInt64
-    put_label : UInt64
-    get_path_name : UInt64
-    put_path_name : UInt64
-    get_format_name : UInt64
-    put_format_name : UInt64
-    get_is_transactional : UInt64
-    get_priv_level : UInt64
-    put_priv_level : UInt64
-    get_journal : UInt64
-    put_journal : UInt64
-    get_quota : UInt64
-    put_quota : UInt64
-    get_base_priority : UInt64
-    put_base_priority : UInt64
-    get_create_time : UInt64
-    get_modify_time : UInt64
-    get_authenticate : UInt64
-    put_authenticate : UInt64
-    get_journal_quota : UInt64
-    put_journal_quota : UInt64
-    get_is_world_readable : UInt64
-    create : UInt64
-    delete : UInt64
-    open : UInt64
-    refresh : UInt64
-    update : UInt64
-    get_path_name_dns : UInt64
-    get_properties : UInt64
-    get_security : UInt64
-    put_security : UInt64
-    get_is_transactional2 : UInt64
-    get_is_world_readable2 : UInt64
-    get_multicast_address : UInt64
-    put_multicast_address : UInt64
-    get_a_ds_path : UInt64
+    query_interface : Proc(IMSMQQueueInfo4*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQQueueInfo4*, UInt32)
+    release : Proc(IMSMQQueueInfo4*, UInt32)
+    get_type_info_count : Proc(IMSMQQueueInfo4*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQQueueInfo4*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQQueueInfo4*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQQueueInfo4*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_queue_guid : Proc(IMSMQQueueInfo4*, UInt8**, HRESULT)
+    get_service_type_guid : Proc(IMSMQQueueInfo4*, UInt8**, HRESULT)
+    put_service_type_guid : Proc(IMSMQQueueInfo4*, UInt8*, HRESULT)
+    get_label : Proc(IMSMQQueueInfo4*, UInt8**, HRESULT)
+    put_label : Proc(IMSMQQueueInfo4*, UInt8*, HRESULT)
+    get_path_name : Proc(IMSMQQueueInfo4*, UInt8**, HRESULT)
+    put_path_name : Proc(IMSMQQueueInfo4*, UInt8*, HRESULT)
+    get_format_name : Proc(IMSMQQueueInfo4*, UInt8**, HRESULT)
+    put_format_name : Proc(IMSMQQueueInfo4*, UInt8*, HRESULT)
+    get_is_transactional : Proc(IMSMQQueueInfo4*, Int16*, HRESULT)
+    get_priv_level : Proc(IMSMQQueueInfo4*, Int32*, HRESULT)
+    put_priv_level : Proc(IMSMQQueueInfo4*, Int32, HRESULT)
+    get_journal : Proc(IMSMQQueueInfo4*, Int32*, HRESULT)
+    put_journal : Proc(IMSMQQueueInfo4*, Int32, HRESULT)
+    get_quota : Proc(IMSMQQueueInfo4*, Int32*, HRESULT)
+    put_quota : Proc(IMSMQQueueInfo4*, Int32, HRESULT)
+    get_base_priority : Proc(IMSMQQueueInfo4*, Int32*, HRESULT)
+    put_base_priority : Proc(IMSMQQueueInfo4*, Int32, HRESULT)
+    get_create_time : Proc(IMSMQQueueInfo4*, VARIANT*, HRESULT)
+    get_modify_time : Proc(IMSMQQueueInfo4*, VARIANT*, HRESULT)
+    get_authenticate : Proc(IMSMQQueueInfo4*, Int32*, HRESULT)
+    put_authenticate : Proc(IMSMQQueueInfo4*, Int32, HRESULT)
+    get_journal_quota : Proc(IMSMQQueueInfo4*, Int32*, HRESULT)
+    put_journal_quota : Proc(IMSMQQueueInfo4*, Int32, HRESULT)
+    get_is_world_readable : Proc(IMSMQQueueInfo4*, Int16*, HRESULT)
+    create : Proc(IMSMQQueueInfo4*, VARIANT*, VARIANT*, HRESULT)
+    delete : Proc(IMSMQQueueInfo4*, HRESULT)
+    open : Proc(IMSMQQueueInfo4*, Int32, Int32, IMSMQQueue4*, HRESULT)
+    refresh : Proc(IMSMQQueueInfo4*, HRESULT)
+    update : Proc(IMSMQQueueInfo4*, HRESULT)
+    get_path_name_dns : Proc(IMSMQQueueInfo4*, UInt8**, HRESULT)
+    get_properties : Proc(IMSMQQueueInfo4*, IDispatch*, HRESULT)
+    get_security : Proc(IMSMQQueueInfo4*, VARIANT*, HRESULT)
+    put_security : Proc(IMSMQQueueInfo4*, VARIANT, HRESULT)
+    get_is_transactional2 : Proc(IMSMQQueueInfo4*, Int16*, HRESULT)
+    get_is_world_readable2 : Proc(IMSMQQueueInfo4*, Int16*, HRESULT)
+    get_multicast_address : Proc(IMSMQQueueInfo4*, UInt8**, HRESULT)
+    put_multicast_address : Proc(IMSMQQueueInfo4*, UInt8*, HRESULT)
+    get_a_ds_path : Proc(IMSMQQueueInfo4*, UInt8**, HRESULT)
   end
 
   IMSMQQueueInfo4_GUID = "eba96b21-2168-11d3-898c-00e02c074f6b"
@@ -815,26 +815,26 @@ lib LibWin32
   end
 
   struct IMSMQQueueVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_access : UInt64
-    get_share_mode : UInt64
-    get_queue_info : UInt64
-    get_handle : UInt64
-    get_is_open : UInt64
-    close : UInt64
-    receive : UInt64
-    peek : UInt64
-    enable_notification : UInt64
-    reset : UInt64
-    receive_current : UInt64
-    peek_next : UInt64
-    peek_current : UInt64
+    query_interface : Proc(IMSMQQueue*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQQueue*, UInt32)
+    release : Proc(IMSMQQueue*, UInt32)
+    get_type_info_count : Proc(IMSMQQueue*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQQueue*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQQueue*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQQueue*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_access : Proc(IMSMQQueue*, Int32*, HRESULT)
+    get_share_mode : Proc(IMSMQQueue*, Int32*, HRESULT)
+    get_queue_info : Proc(IMSMQQueue*, IMSMQQueueInfo*, HRESULT)
+    get_handle : Proc(IMSMQQueue*, Int32*, HRESULT)
+    get_is_open : Proc(IMSMQQueue*, Int16*, HRESULT)
+    close : Proc(IMSMQQueue*, HRESULT)
+    receive : Proc(IMSMQQueue*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
+    peek : Proc(IMSMQQueue*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
+    enable_notification : Proc(IMSMQQueue*, IMSMQEvent, VARIANT*, VARIANT*, HRESULT)
+    reset : Proc(IMSMQQueue*, HRESULT)
+    receive_current : Proc(IMSMQQueue*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
+    peek_next : Proc(IMSMQQueue*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
+    peek_current : Proc(IMSMQQueue*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
   end
 
   IMSMQQueue_GUID = "d7d6e076-dccd-11d0-aa4b-0060970debae"
@@ -844,32 +844,32 @@ lib LibWin32
   end
 
   struct IMSMQQueue2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_access : UInt64
-    get_share_mode : UInt64
-    get_queue_info : UInt64
-    get_handle : UInt64
-    get_is_open : UInt64
-    close : UInt64
-    receive_v1 : UInt64
-    peek_v1 : UInt64
-    enable_notification : UInt64
-    reset : UInt64
-    receive_current_v1 : UInt64
-    peek_next_v1 : UInt64
-    peek_current_v1 : UInt64
-    receive : UInt64
-    peek : UInt64
-    receive_current : UInt64
-    peek_next : UInt64
-    peek_current : UInt64
-    get_properties : UInt64
+    query_interface : Proc(IMSMQQueue2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQQueue2*, UInt32)
+    release : Proc(IMSMQQueue2*, UInt32)
+    get_type_info_count : Proc(IMSMQQueue2*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQQueue2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQQueue2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQQueue2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_access : Proc(IMSMQQueue2*, Int32*, HRESULT)
+    get_share_mode : Proc(IMSMQQueue2*, Int32*, HRESULT)
+    get_queue_info : Proc(IMSMQQueue2*, IMSMQQueueInfo2*, HRESULT)
+    get_handle : Proc(IMSMQQueue2*, Int32*, HRESULT)
+    get_is_open : Proc(IMSMQQueue2*, Int16*, HRESULT)
+    close : Proc(IMSMQQueue2*, HRESULT)
+    receive_v1 : Proc(IMSMQQueue2*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
+    peek_v1 : Proc(IMSMQQueue2*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
+    enable_notification : Proc(IMSMQQueue2*, IMSMQEvent2, VARIANT*, VARIANT*, HRESULT)
+    reset : Proc(IMSMQQueue2*, HRESULT)
+    receive_current_v1 : Proc(IMSMQQueue2*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
+    peek_next_v1 : Proc(IMSMQQueue2*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
+    peek_current_v1 : Proc(IMSMQQueue2*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
+    receive : Proc(IMSMQQueue2*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage2*, HRESULT)
+    peek : Proc(IMSMQQueue2*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage2*, HRESULT)
+    receive_current : Proc(IMSMQQueue2*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage2*, HRESULT)
+    peek_next : Proc(IMSMQQueue2*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage2*, HRESULT)
+    peek_current : Proc(IMSMQQueue2*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage2*, HRESULT)
+    get_properties : Proc(IMSMQQueue2*, IDispatch*, HRESULT)
   end
 
   IMSMQQueue2_GUID = "ef0574e0-06d8-11d3-b100-00e02c074f6b"
@@ -879,45 +879,45 @@ lib LibWin32
   end
 
   struct IMSMQQueue3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_access : UInt64
-    get_share_mode : UInt64
-    get_queue_info : UInt64
-    get_handle : UInt64
-    get_is_open : UInt64
-    close : UInt64
-    receive_v1 : UInt64
-    peek_v1 : UInt64
-    enable_notification : UInt64
-    reset : UInt64
-    receive_current_v1 : UInt64
-    peek_next_v1 : UInt64
-    peek_current_v1 : UInt64
-    receive : UInt64
-    peek : UInt64
-    receive_current : UInt64
-    peek_next : UInt64
-    peek_current : UInt64
-    get_properties : UInt64
-    get_handle2 : UInt64
-    receive_by_lookup_id : UInt64
-    receive_next_by_lookup_id : UInt64
-    receive_previous_by_lookup_id : UInt64
-    receive_first_by_lookup_id : UInt64
-    receive_last_by_lookup_id : UInt64
-    peek_by_lookup_id : UInt64
-    peek_next_by_lookup_id : UInt64
-    peek_previous_by_lookup_id : UInt64
-    peek_first_by_lookup_id : UInt64
-    peek_last_by_lookup_id : UInt64
-    purge : UInt64
-    get_is_open2 : UInt64
+    query_interface : Proc(IMSMQQueue3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQQueue3*, UInt32)
+    release : Proc(IMSMQQueue3*, UInt32)
+    get_type_info_count : Proc(IMSMQQueue3*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQQueue3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQQueue3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQQueue3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_access : Proc(IMSMQQueue3*, Int32*, HRESULT)
+    get_share_mode : Proc(IMSMQQueue3*, Int32*, HRESULT)
+    get_queue_info : Proc(IMSMQQueue3*, IMSMQQueueInfo3*, HRESULT)
+    get_handle : Proc(IMSMQQueue3*, Int32*, HRESULT)
+    get_is_open : Proc(IMSMQQueue3*, Int16*, HRESULT)
+    close : Proc(IMSMQQueue3*, HRESULT)
+    receive_v1 : Proc(IMSMQQueue3*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
+    peek_v1 : Proc(IMSMQQueue3*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
+    enable_notification : Proc(IMSMQQueue3*, IMSMQEvent3, VARIANT*, VARIANT*, HRESULT)
+    reset : Proc(IMSMQQueue3*, HRESULT)
+    receive_current_v1 : Proc(IMSMQQueue3*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
+    peek_next_v1 : Proc(IMSMQQueue3*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
+    peek_current_v1 : Proc(IMSMQQueue3*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
+    receive : Proc(IMSMQQueue3*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)
+    peek : Proc(IMSMQQueue3*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)
+    receive_current : Proc(IMSMQQueue3*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)
+    peek_next : Proc(IMSMQQueue3*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)
+    peek_current : Proc(IMSMQQueue3*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)
+    get_properties : Proc(IMSMQQueue3*, IDispatch*, HRESULT)
+    get_handle2 : Proc(IMSMQQueue3*, VARIANT*, HRESULT)
+    receive_by_lookup_id : Proc(IMSMQQueue3*, VARIANT, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)
+    receive_next_by_lookup_id : Proc(IMSMQQueue3*, VARIANT, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)
+    receive_previous_by_lookup_id : Proc(IMSMQQueue3*, VARIANT, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)
+    receive_first_by_lookup_id : Proc(IMSMQQueue3*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)
+    receive_last_by_lookup_id : Proc(IMSMQQueue3*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)
+    peek_by_lookup_id : Proc(IMSMQQueue3*, VARIANT, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)
+    peek_next_by_lookup_id : Proc(IMSMQQueue3*, VARIANT, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)
+    peek_previous_by_lookup_id : Proc(IMSMQQueue3*, VARIANT, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)
+    peek_first_by_lookup_id : Proc(IMSMQQueue3*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)
+    peek_last_by_lookup_id : Proc(IMSMQQueue3*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)
+    purge : Proc(IMSMQQueue3*, HRESULT)
+    get_is_open2 : Proc(IMSMQQueue3*, Int16*, HRESULT)
   end
 
   IMSMQQueue3_GUID = "eba96b1b-2168-11d3-898c-00e02c074f6b"
@@ -927,46 +927,46 @@ lib LibWin32
   end
 
   struct IMSMQQueue4VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_access : UInt64
-    get_share_mode : UInt64
-    get_queue_info : UInt64
-    get_handle : UInt64
-    get_is_open : UInt64
-    close : UInt64
-    receive_v1 : UInt64
-    peek_v1 : UInt64
-    enable_notification : UInt64
-    reset : UInt64
-    receive_current_v1 : UInt64
-    peek_next_v1 : UInt64
-    peek_current_v1 : UInt64
-    receive : UInt64
-    peek : UInt64
-    receive_current : UInt64
-    peek_next : UInt64
-    peek_current : UInt64
-    get_properties : UInt64
-    get_handle2 : UInt64
-    receive_by_lookup_id : UInt64
-    receive_next_by_lookup_id : UInt64
-    receive_previous_by_lookup_id : UInt64
-    receive_first_by_lookup_id : UInt64
-    receive_last_by_lookup_id : UInt64
-    peek_by_lookup_id : UInt64
-    peek_next_by_lookup_id : UInt64
-    peek_previous_by_lookup_id : UInt64
-    peek_first_by_lookup_id : UInt64
-    peek_last_by_lookup_id : UInt64
-    purge : UInt64
-    get_is_open2 : UInt64
-    receive_by_lookup_id_allow_peek : UInt64
+    query_interface : Proc(IMSMQQueue4*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQQueue4*, UInt32)
+    release : Proc(IMSMQQueue4*, UInt32)
+    get_type_info_count : Proc(IMSMQQueue4*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQQueue4*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQQueue4*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQQueue4*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_access : Proc(IMSMQQueue4*, Int32*, HRESULT)
+    get_share_mode : Proc(IMSMQQueue4*, Int32*, HRESULT)
+    get_queue_info : Proc(IMSMQQueue4*, IMSMQQueueInfo4*, HRESULT)
+    get_handle : Proc(IMSMQQueue4*, Int32*, HRESULT)
+    get_is_open : Proc(IMSMQQueue4*, Int16*, HRESULT)
+    close : Proc(IMSMQQueue4*, HRESULT)
+    receive_v1 : Proc(IMSMQQueue4*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
+    peek_v1 : Proc(IMSMQQueue4*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
+    enable_notification : Proc(IMSMQQueue4*, IMSMQEvent3, VARIANT*, VARIANT*, HRESULT)
+    reset : Proc(IMSMQQueue4*, HRESULT)
+    receive_current_v1 : Proc(IMSMQQueue4*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
+    peek_next_v1 : Proc(IMSMQQueue4*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
+    peek_current_v1 : Proc(IMSMQQueue4*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
+    receive : Proc(IMSMQQueue4*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)
+    peek : Proc(IMSMQQueue4*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)
+    receive_current : Proc(IMSMQQueue4*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)
+    peek_next : Proc(IMSMQQueue4*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)
+    peek_current : Proc(IMSMQQueue4*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)
+    get_properties : Proc(IMSMQQueue4*, IDispatch*, HRESULT)
+    get_handle2 : Proc(IMSMQQueue4*, VARIANT*, HRESULT)
+    receive_by_lookup_id : Proc(IMSMQQueue4*, VARIANT, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)
+    receive_next_by_lookup_id : Proc(IMSMQQueue4*, VARIANT, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)
+    receive_previous_by_lookup_id : Proc(IMSMQQueue4*, VARIANT, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)
+    receive_first_by_lookup_id : Proc(IMSMQQueue4*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)
+    receive_last_by_lookup_id : Proc(IMSMQQueue4*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)
+    peek_by_lookup_id : Proc(IMSMQQueue4*, VARIANT, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)
+    peek_next_by_lookup_id : Proc(IMSMQQueue4*, VARIANT, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)
+    peek_previous_by_lookup_id : Proc(IMSMQQueue4*, VARIANT, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)
+    peek_first_by_lookup_id : Proc(IMSMQQueue4*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)
+    peek_last_by_lookup_id : Proc(IMSMQQueue4*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)
+    purge : Proc(IMSMQQueue4*, HRESULT)
+    get_is_open2 : Proc(IMSMQQueue4*, Int16*, HRESULT)
+    receive_by_lookup_id_allow_peek : Proc(IMSMQQueue4*, VARIANT, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)
   end
 
   IMSMQQueue4_GUID = "eba96b20-2168-11d3-898c-00e02c074f6b"
@@ -976,62 +976,62 @@ lib LibWin32
   end
 
   struct IMSMQMessageVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_class : UInt64
-    get_priv_level : UInt64
-    put_priv_level : UInt64
-    get_auth_level : UInt64
-    put_auth_level : UInt64
-    get_is_authenticated : UInt64
-    get_delivery : UInt64
-    put_delivery : UInt64
-    get_trace : UInt64
-    put_trace : UInt64
-    get_priority : UInt64
-    put_priority : UInt64
-    get_journal : UInt64
-    put_journal : UInt64
-    get_response_queue_info : UInt64
-    putref_response_queue_info : UInt64
-    get_app_specific : UInt64
-    put_app_specific : UInt64
-    get_source_machine_guid : UInt64
-    get_body_length : UInt64
-    get_body : UInt64
-    put_body : UInt64
-    get_admin_queue_info : UInt64
-    putref_admin_queue_info : UInt64
-    get_id : UInt64
-    get_correlation_id : UInt64
-    put_correlation_id : UInt64
-    get_ack : UInt64
-    put_ack : UInt64
-    get_label : UInt64
-    put_label : UInt64
-    get_max_time_to_reach_queue : UInt64
-    put_max_time_to_reach_queue : UInt64
-    get_max_time_to_receive : UInt64
-    put_max_time_to_receive : UInt64
-    get_hash_algorithm : UInt64
-    put_hash_algorithm : UInt64
-    get_encrypt_algorithm : UInt64
-    put_encrypt_algorithm : UInt64
-    get_sent_time : UInt64
-    get_arrived_time : UInt64
-    get_destination_queue_info : UInt64
-    get_sender_certificate : UInt64
-    put_sender_certificate : UInt64
-    get_sender_id : UInt64
-    get_sender_id_type : UInt64
-    put_sender_id_type : UInt64
-    send : UInt64
-    attach_current_security_context : UInt64
+    query_interface : Proc(IMSMQMessage*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQMessage*, UInt32)
+    release : Proc(IMSMQMessage*, UInt32)
+    get_type_info_count : Proc(IMSMQMessage*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQMessage*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQMessage*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQMessage*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_class : Proc(IMSMQMessage*, Int32*, HRESULT)
+    get_priv_level : Proc(IMSMQMessage*, Int32*, HRESULT)
+    put_priv_level : Proc(IMSMQMessage*, Int32, HRESULT)
+    get_auth_level : Proc(IMSMQMessage*, Int32*, HRESULT)
+    put_auth_level : Proc(IMSMQMessage*, Int32, HRESULT)
+    get_is_authenticated : Proc(IMSMQMessage*, Int16*, HRESULT)
+    get_delivery : Proc(IMSMQMessage*, Int32*, HRESULT)
+    put_delivery : Proc(IMSMQMessage*, Int32, HRESULT)
+    get_trace : Proc(IMSMQMessage*, Int32*, HRESULT)
+    put_trace : Proc(IMSMQMessage*, Int32, HRESULT)
+    get_priority : Proc(IMSMQMessage*, Int32*, HRESULT)
+    put_priority : Proc(IMSMQMessage*, Int32, HRESULT)
+    get_journal : Proc(IMSMQMessage*, Int32*, HRESULT)
+    put_journal : Proc(IMSMQMessage*, Int32, HRESULT)
+    get_response_queue_info : Proc(IMSMQMessage*, IMSMQQueueInfo*, HRESULT)
+    putref_response_queue_info : Proc(IMSMQMessage*, IMSMQQueueInfo, HRESULT)
+    get_app_specific : Proc(IMSMQMessage*, Int32*, HRESULT)
+    put_app_specific : Proc(IMSMQMessage*, Int32, HRESULT)
+    get_source_machine_guid : Proc(IMSMQMessage*, UInt8**, HRESULT)
+    get_body_length : Proc(IMSMQMessage*, Int32*, HRESULT)
+    get_body : Proc(IMSMQMessage*, VARIANT*, HRESULT)
+    put_body : Proc(IMSMQMessage*, VARIANT, HRESULT)
+    get_admin_queue_info : Proc(IMSMQMessage*, IMSMQQueueInfo*, HRESULT)
+    putref_admin_queue_info : Proc(IMSMQMessage*, IMSMQQueueInfo, HRESULT)
+    get_id : Proc(IMSMQMessage*, VARIANT*, HRESULT)
+    get_correlation_id : Proc(IMSMQMessage*, VARIANT*, HRESULT)
+    put_correlation_id : Proc(IMSMQMessage*, VARIANT, HRESULT)
+    get_ack : Proc(IMSMQMessage*, Int32*, HRESULT)
+    put_ack : Proc(IMSMQMessage*, Int32, HRESULT)
+    get_label : Proc(IMSMQMessage*, UInt8**, HRESULT)
+    put_label : Proc(IMSMQMessage*, UInt8*, HRESULT)
+    get_max_time_to_reach_queue : Proc(IMSMQMessage*, Int32*, HRESULT)
+    put_max_time_to_reach_queue : Proc(IMSMQMessage*, Int32, HRESULT)
+    get_max_time_to_receive : Proc(IMSMQMessage*, Int32*, HRESULT)
+    put_max_time_to_receive : Proc(IMSMQMessage*, Int32, HRESULT)
+    get_hash_algorithm : Proc(IMSMQMessage*, Int32*, HRESULT)
+    put_hash_algorithm : Proc(IMSMQMessage*, Int32, HRESULT)
+    get_encrypt_algorithm : Proc(IMSMQMessage*, Int32*, HRESULT)
+    put_encrypt_algorithm : Proc(IMSMQMessage*, Int32, HRESULT)
+    get_sent_time : Proc(IMSMQMessage*, VARIANT*, HRESULT)
+    get_arrived_time : Proc(IMSMQMessage*, VARIANT*, HRESULT)
+    get_destination_queue_info : Proc(IMSMQMessage*, IMSMQQueueInfo*, HRESULT)
+    get_sender_certificate : Proc(IMSMQMessage*, VARIANT*, HRESULT)
+    put_sender_certificate : Proc(IMSMQMessage*, VARIANT, HRESULT)
+    get_sender_id : Proc(IMSMQMessage*, VARIANT*, HRESULT)
+    get_sender_id_type : Proc(IMSMQMessage*, Int32*, HRESULT)
+    put_sender_id_type : Proc(IMSMQMessage*, Int32, HRESULT)
+    send : Proc(IMSMQMessage*, IMSMQQueue, VARIANT*, HRESULT)
+    attach_current_security_context : Proc(IMSMQMessage*, HRESULT)
   end
 
   IMSMQMessage_GUID = "d7d6e074-dccd-11d0-aa4b-0060970debae"
@@ -1041,15 +1041,15 @@ lib LibWin32
   end
 
   struct IMSMQQueueInfosVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    reset : UInt64
-    next : UInt64
+    query_interface : Proc(IMSMQQueueInfos*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQQueueInfos*, UInt32)
+    release : Proc(IMSMQQueueInfos*, UInt32)
+    get_type_info_count : Proc(IMSMQQueueInfos*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQQueueInfos*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQQueueInfos*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQQueueInfos*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    reset : Proc(IMSMQQueueInfos*, HRESULT)
+    next : Proc(IMSMQQueueInfos*, IMSMQQueueInfo*, HRESULT)
   end
 
   IMSMQQueueInfos_GUID = "d7d6e07d-dccd-11d0-aa4b-0060970debae"
@@ -1059,16 +1059,16 @@ lib LibWin32
   end
 
   struct IMSMQQueueInfos2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    reset : UInt64
-    next : UInt64
-    get_properties : UInt64
+    query_interface : Proc(IMSMQQueueInfos2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQQueueInfos2*, UInt32)
+    release : Proc(IMSMQQueueInfos2*, UInt32)
+    get_type_info_count : Proc(IMSMQQueueInfos2*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQQueueInfos2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQQueueInfos2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQQueueInfos2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    reset : Proc(IMSMQQueueInfos2*, HRESULT)
+    next : Proc(IMSMQQueueInfos2*, IMSMQQueueInfo2*, HRESULT)
+    get_properties : Proc(IMSMQQueueInfos2*, IDispatch*, HRESULT)
   end
 
   IMSMQQueueInfos2_GUID = "eba96b0f-2168-11d3-898c-00e02c074f6b"
@@ -1078,16 +1078,16 @@ lib LibWin32
   end
 
   struct IMSMQQueueInfos3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    reset : UInt64
-    next : UInt64
-    get_properties : UInt64
+    query_interface : Proc(IMSMQQueueInfos3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQQueueInfos3*, UInt32)
+    release : Proc(IMSMQQueueInfos3*, UInt32)
+    get_type_info_count : Proc(IMSMQQueueInfos3*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQQueueInfos3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQQueueInfos3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQQueueInfos3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    reset : Proc(IMSMQQueueInfos3*, HRESULT)
+    next : Proc(IMSMQQueueInfos3*, IMSMQQueueInfo3*, HRESULT)
+    get_properties : Proc(IMSMQQueueInfos3*, IDispatch*, HRESULT)
   end
 
   IMSMQQueueInfos3_GUID = "eba96b1e-2168-11d3-898c-00e02c074f6b"
@@ -1097,16 +1097,16 @@ lib LibWin32
   end
 
   struct IMSMQQueueInfos4VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    reset : UInt64
-    next : UInt64
-    get_properties : UInt64
+    query_interface : Proc(IMSMQQueueInfos4*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQQueueInfos4*, UInt32)
+    release : Proc(IMSMQQueueInfos4*, UInt32)
+    get_type_info_count : Proc(IMSMQQueueInfos4*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQQueueInfos4*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQQueueInfos4*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQQueueInfos4*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    reset : Proc(IMSMQQueueInfos4*, HRESULT)
+    next : Proc(IMSMQQueueInfos4*, IMSMQQueueInfo4*, HRESULT)
+    get_properties : Proc(IMSMQQueueInfos4*, IDispatch*, HRESULT)
   end
 
   IMSMQQueueInfos4_GUID = "eba96b22-2168-11d3-898c-00e02c074f6b"
@@ -1116,13 +1116,13 @@ lib LibWin32
   end
 
   struct IMSMQEventVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
+    query_interface : Proc(IMSMQEvent*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQEvent*, UInt32)
+    release : Proc(IMSMQEvent*, UInt32)
+    get_type_info_count : Proc(IMSMQEvent*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
   IMSMQEvent_GUID = "d7d6e077-dccd-11d0-aa4b-0060970debae"
@@ -1132,14 +1132,14 @@ lib LibWin32
   end
 
   struct IMSMQEvent2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_properties : UInt64
+    query_interface : Proc(IMSMQEvent2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQEvent2*, UInt32)
+    release : Proc(IMSMQEvent2*, UInt32)
+    get_type_info_count : Proc(IMSMQEvent2*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQEvent2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQEvent2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQEvent2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_properties : Proc(IMSMQEvent2*, IDispatch*, HRESULT)
   end
 
   IMSMQEvent2_GUID = "eba96b12-2168-11d3-898c-00e02c074f6b"
@@ -1149,14 +1149,14 @@ lib LibWin32
   end
 
   struct IMSMQEvent3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_properties : UInt64
+    query_interface : Proc(IMSMQEvent3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQEvent3*, UInt32)
+    release : Proc(IMSMQEvent3*, UInt32)
+    get_type_info_count : Proc(IMSMQEvent3*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQEvent3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQEvent3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQEvent3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_properties : Proc(IMSMQEvent3*, IDispatch*, HRESULT)
   end
 
   IMSMQEvent3_GUID = "eba96b1c-2168-11d3-898c-00e02c074f6b"
@@ -1166,16 +1166,16 @@ lib LibWin32
   end
 
   struct IMSMQTransactionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_transaction : UInt64
-    commit : UInt64
-    abort : UInt64
+    query_interface : Proc(IMSMQTransaction*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQTransaction*, UInt32)
+    release : Proc(IMSMQTransaction*, UInt32)
+    get_type_info_count : Proc(IMSMQTransaction*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQTransaction*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQTransaction*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQTransaction*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_transaction : Proc(IMSMQTransaction*, Int32*, HRESULT)
+    commit : Proc(IMSMQTransaction*, VARIANT*, VARIANT*, VARIANT*, HRESULT)
+    abort : Proc(IMSMQTransaction*, VARIANT*, VARIANT*, HRESULT)
   end
 
   IMSMQTransaction_GUID = "d7d6e07f-dccd-11d0-aa4b-0060970debae"
@@ -1185,14 +1185,14 @@ lib LibWin32
   end
 
   struct IMSMQCoordinatedTransactionDispenserVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    begin_transaction : UInt64
+    query_interface : Proc(IMSMQCoordinatedTransactionDispenser*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQCoordinatedTransactionDispenser*, UInt32)
+    release : Proc(IMSMQCoordinatedTransactionDispenser*, UInt32)
+    get_type_info_count : Proc(IMSMQCoordinatedTransactionDispenser*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQCoordinatedTransactionDispenser*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQCoordinatedTransactionDispenser*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQCoordinatedTransactionDispenser*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    begin_transaction : Proc(IMSMQCoordinatedTransactionDispenser*, IMSMQTransaction*, HRESULT)
   end
 
   IMSMQCoordinatedTransactionDispenser_GUID = "d7d6e081-dccd-11d0-aa4b-0060970debae"
@@ -1202,14 +1202,14 @@ lib LibWin32
   end
 
   struct IMSMQTransactionDispenserVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    begin_transaction : UInt64
+    query_interface : Proc(IMSMQTransactionDispenser*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQTransactionDispenser*, UInt32)
+    release : Proc(IMSMQTransactionDispenser*, UInt32)
+    get_type_info_count : Proc(IMSMQTransactionDispenser*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQTransactionDispenser*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQTransactionDispenser*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQTransactionDispenser*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    begin_transaction : Proc(IMSMQTransactionDispenser*, IMSMQTransaction*, HRESULT)
   end
 
   IMSMQTransactionDispenser_GUID = "d7d6e083-dccd-11d0-aa4b-0060970debae"
@@ -1219,15 +1219,15 @@ lib LibWin32
   end
 
   struct IMSMQQuery2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    lookup_queue : UInt64
-    get_properties : UInt64
+    query_interface : Proc(IMSMQQuery2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQQuery2*, UInt32)
+    release : Proc(IMSMQQuery2*, UInt32)
+    get_type_info_count : Proc(IMSMQQuery2*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQQuery2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQQuery2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQQuery2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    lookup_queue : Proc(IMSMQQuery2*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQQueueInfos2*, HRESULT)
+    get_properties : Proc(IMSMQQuery2*, IDispatch*, HRESULT)
   end
 
   IMSMQQuery2_GUID = "eba96b0e-2168-11d3-898c-00e02c074f6b"
@@ -1237,16 +1237,16 @@ lib LibWin32
   end
 
   struct IMSMQQuery3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    lookup_queue_v2 : UInt64
-    get_properties : UInt64
-    lookup_queue : UInt64
+    query_interface : Proc(IMSMQQuery3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQQuery3*, UInt32)
+    release : Proc(IMSMQQuery3*, UInt32)
+    get_type_info_count : Proc(IMSMQQuery3*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQQuery3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQQuery3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQQuery3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    lookup_queue_v2 : Proc(IMSMQQuery3*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQQueueInfos3*, HRESULT)
+    get_properties : Proc(IMSMQQuery3*, IDispatch*, HRESULT)
+    lookup_queue : Proc(IMSMQQuery3*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQQueueInfos3*, HRESULT)
   end
 
   IMSMQQuery3_GUID = "eba96b19-2168-11d3-898c-00e02c074f6b"
@@ -1256,16 +1256,16 @@ lib LibWin32
   end
 
   struct IMSMQQuery4VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    lookup_queue_v2 : UInt64
-    get_properties : UInt64
-    lookup_queue : UInt64
+    query_interface : Proc(IMSMQQuery4*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQQuery4*, UInt32)
+    release : Proc(IMSMQQuery4*, UInt32)
+    get_type_info_count : Proc(IMSMQQuery4*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQQuery4*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQQuery4*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQQuery4*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    lookup_queue_v2 : Proc(IMSMQQuery4*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQQueueInfos4*, HRESULT)
+    get_properties : Proc(IMSMQQuery4*, IDispatch*, HRESULT)
+    lookup_queue : Proc(IMSMQQuery4*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQQueueInfos4*, HRESULT)
   end
 
   IMSMQQuery4_GUID = "eba96b24-2168-11d3-898c-00e02c074f6b"
@@ -1275,88 +1275,88 @@ lib LibWin32
   end
 
   struct IMSMQMessage2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_class : UInt64
-    get_priv_level : UInt64
-    put_priv_level : UInt64
-    get_auth_level : UInt64
-    put_auth_level : UInt64
-    get_is_authenticated : UInt64
-    get_delivery : UInt64
-    put_delivery : UInt64
-    get_trace : UInt64
-    put_trace : UInt64
-    get_priority : UInt64
-    put_priority : UInt64
-    get_journal : UInt64
-    put_journal : UInt64
-    get_response_queue_info_v1 : UInt64
-    putref_response_queue_info_v1 : UInt64
-    get_app_specific : UInt64
-    put_app_specific : UInt64
-    get_source_machine_guid : UInt64
-    get_body_length : UInt64
-    get_body : UInt64
-    put_body : UInt64
-    get_admin_queue_info_v1 : UInt64
-    putref_admin_queue_info_v1 : UInt64
-    get_id : UInt64
-    get_correlation_id : UInt64
-    put_correlation_id : UInt64
-    get_ack : UInt64
-    put_ack : UInt64
-    get_label : UInt64
-    put_label : UInt64
-    get_max_time_to_reach_queue : UInt64
-    put_max_time_to_reach_queue : UInt64
-    get_max_time_to_receive : UInt64
-    put_max_time_to_receive : UInt64
-    get_hash_algorithm : UInt64
-    put_hash_algorithm : UInt64
-    get_encrypt_algorithm : UInt64
-    put_encrypt_algorithm : UInt64
-    get_sent_time : UInt64
-    get_arrived_time : UInt64
-    get_destination_queue_info : UInt64
-    get_sender_certificate : UInt64
-    put_sender_certificate : UInt64
-    get_sender_id : UInt64
-    get_sender_id_type : UInt64
-    put_sender_id_type : UInt64
-    send : UInt64
-    attach_current_security_context : UInt64
-    get_sender_version : UInt64
-    get_extension : UInt64
-    put_extension : UInt64
-    get_connector_type_guid : UInt64
-    put_connector_type_guid : UInt64
-    get_transaction_status_queue_info : UInt64
-    get_destination_symmetric_key : UInt64
-    put_destination_symmetric_key : UInt64
-    get_signature : UInt64
-    put_signature : UInt64
-    get_authentication_provider_type : UInt64
-    put_authentication_provider_type : UInt64
-    get_authentication_provider_name : UInt64
-    put_authentication_provider_name : UInt64
-    put_sender_id : UInt64
-    get_msg_class : UInt64
-    put_msg_class : UInt64
-    get_properties : UInt64
-    get_transaction_id : UInt64
-    get_is_first_in_transaction : UInt64
-    get_is_last_in_transaction : UInt64
-    get_response_queue_info : UInt64
-    putref_response_queue_info : UInt64
-    get_admin_queue_info : UInt64
-    putref_admin_queue_info : UInt64
-    get_received_authentication_level : UInt64
+    query_interface : Proc(IMSMQMessage2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQMessage2*, UInt32)
+    release : Proc(IMSMQMessage2*, UInt32)
+    get_type_info_count : Proc(IMSMQMessage2*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQMessage2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQMessage2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQMessage2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_class : Proc(IMSMQMessage2*, Int32*, HRESULT)
+    get_priv_level : Proc(IMSMQMessage2*, Int32*, HRESULT)
+    put_priv_level : Proc(IMSMQMessage2*, Int32, HRESULT)
+    get_auth_level : Proc(IMSMQMessage2*, Int32*, HRESULT)
+    put_auth_level : Proc(IMSMQMessage2*, Int32, HRESULT)
+    get_is_authenticated : Proc(IMSMQMessage2*, Int16*, HRESULT)
+    get_delivery : Proc(IMSMQMessage2*, Int32*, HRESULT)
+    put_delivery : Proc(IMSMQMessage2*, Int32, HRESULT)
+    get_trace : Proc(IMSMQMessage2*, Int32*, HRESULT)
+    put_trace : Proc(IMSMQMessage2*, Int32, HRESULT)
+    get_priority : Proc(IMSMQMessage2*, Int32*, HRESULT)
+    put_priority : Proc(IMSMQMessage2*, Int32, HRESULT)
+    get_journal : Proc(IMSMQMessage2*, Int32*, HRESULT)
+    put_journal : Proc(IMSMQMessage2*, Int32, HRESULT)
+    get_response_queue_info_v1 : Proc(IMSMQMessage2*, IMSMQQueueInfo*, HRESULT)
+    putref_response_queue_info_v1 : Proc(IMSMQMessage2*, IMSMQQueueInfo, HRESULT)
+    get_app_specific : Proc(IMSMQMessage2*, Int32*, HRESULT)
+    put_app_specific : Proc(IMSMQMessage2*, Int32, HRESULT)
+    get_source_machine_guid : Proc(IMSMQMessage2*, UInt8**, HRESULT)
+    get_body_length : Proc(IMSMQMessage2*, Int32*, HRESULT)
+    get_body : Proc(IMSMQMessage2*, VARIANT*, HRESULT)
+    put_body : Proc(IMSMQMessage2*, VARIANT, HRESULT)
+    get_admin_queue_info_v1 : Proc(IMSMQMessage2*, IMSMQQueueInfo*, HRESULT)
+    putref_admin_queue_info_v1 : Proc(IMSMQMessage2*, IMSMQQueueInfo, HRESULT)
+    get_id : Proc(IMSMQMessage2*, VARIANT*, HRESULT)
+    get_correlation_id : Proc(IMSMQMessage2*, VARIANT*, HRESULT)
+    put_correlation_id : Proc(IMSMQMessage2*, VARIANT, HRESULT)
+    get_ack : Proc(IMSMQMessage2*, Int32*, HRESULT)
+    put_ack : Proc(IMSMQMessage2*, Int32, HRESULT)
+    get_label : Proc(IMSMQMessage2*, UInt8**, HRESULT)
+    put_label : Proc(IMSMQMessage2*, UInt8*, HRESULT)
+    get_max_time_to_reach_queue : Proc(IMSMQMessage2*, Int32*, HRESULT)
+    put_max_time_to_reach_queue : Proc(IMSMQMessage2*, Int32, HRESULT)
+    get_max_time_to_receive : Proc(IMSMQMessage2*, Int32*, HRESULT)
+    put_max_time_to_receive : Proc(IMSMQMessage2*, Int32, HRESULT)
+    get_hash_algorithm : Proc(IMSMQMessage2*, Int32*, HRESULT)
+    put_hash_algorithm : Proc(IMSMQMessage2*, Int32, HRESULT)
+    get_encrypt_algorithm : Proc(IMSMQMessage2*, Int32*, HRESULT)
+    put_encrypt_algorithm : Proc(IMSMQMessage2*, Int32, HRESULT)
+    get_sent_time : Proc(IMSMQMessage2*, VARIANT*, HRESULT)
+    get_arrived_time : Proc(IMSMQMessage2*, VARIANT*, HRESULT)
+    get_destination_queue_info : Proc(IMSMQMessage2*, IMSMQQueueInfo2*, HRESULT)
+    get_sender_certificate : Proc(IMSMQMessage2*, VARIANT*, HRESULT)
+    put_sender_certificate : Proc(IMSMQMessage2*, VARIANT, HRESULT)
+    get_sender_id : Proc(IMSMQMessage2*, VARIANT*, HRESULT)
+    get_sender_id_type : Proc(IMSMQMessage2*, Int32*, HRESULT)
+    put_sender_id_type : Proc(IMSMQMessage2*, Int32, HRESULT)
+    send : Proc(IMSMQMessage2*, IMSMQQueue2, VARIANT*, HRESULT)
+    attach_current_security_context : Proc(IMSMQMessage2*, HRESULT)
+    get_sender_version : Proc(IMSMQMessage2*, Int32*, HRESULT)
+    get_extension : Proc(IMSMQMessage2*, VARIANT*, HRESULT)
+    put_extension : Proc(IMSMQMessage2*, VARIANT, HRESULT)
+    get_connector_type_guid : Proc(IMSMQMessage2*, UInt8**, HRESULT)
+    put_connector_type_guid : Proc(IMSMQMessage2*, UInt8*, HRESULT)
+    get_transaction_status_queue_info : Proc(IMSMQMessage2*, IMSMQQueueInfo2*, HRESULT)
+    get_destination_symmetric_key : Proc(IMSMQMessage2*, VARIANT*, HRESULT)
+    put_destination_symmetric_key : Proc(IMSMQMessage2*, VARIANT, HRESULT)
+    get_signature : Proc(IMSMQMessage2*, VARIANT*, HRESULT)
+    put_signature : Proc(IMSMQMessage2*, VARIANT, HRESULT)
+    get_authentication_provider_type : Proc(IMSMQMessage2*, Int32*, HRESULT)
+    put_authentication_provider_type : Proc(IMSMQMessage2*, Int32, HRESULT)
+    get_authentication_provider_name : Proc(IMSMQMessage2*, UInt8**, HRESULT)
+    put_authentication_provider_name : Proc(IMSMQMessage2*, UInt8*, HRESULT)
+    put_sender_id : Proc(IMSMQMessage2*, VARIANT, HRESULT)
+    get_msg_class : Proc(IMSMQMessage2*, Int32*, HRESULT)
+    put_msg_class : Proc(IMSMQMessage2*, Int32, HRESULT)
+    get_properties : Proc(IMSMQMessage2*, IDispatch*, HRESULT)
+    get_transaction_id : Proc(IMSMQMessage2*, VARIANT*, HRESULT)
+    get_is_first_in_transaction : Proc(IMSMQMessage2*, Int16*, HRESULT)
+    get_is_last_in_transaction : Proc(IMSMQMessage2*, Int16*, HRESULT)
+    get_response_queue_info : Proc(IMSMQMessage2*, IMSMQQueueInfo2*, HRESULT)
+    putref_response_queue_info : Proc(IMSMQMessage2*, IMSMQQueueInfo2, HRESULT)
+    get_admin_queue_info : Proc(IMSMQMessage2*, IMSMQQueueInfo2*, HRESULT)
+    putref_admin_queue_info : Proc(IMSMQMessage2*, IMSMQQueueInfo2, HRESULT)
+    get_received_authentication_level : Proc(IMSMQMessage2*, Int16*, HRESULT)
   end
 
   IMSMQMessage2_GUID = "d9933be0-a567-11d2-b0f3-00e02c074f6b"
@@ -1366,104 +1366,104 @@ lib LibWin32
   end
 
   struct IMSMQMessage3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_class : UInt64
-    get_priv_level : UInt64
-    put_priv_level : UInt64
-    get_auth_level : UInt64
-    put_auth_level : UInt64
-    get_is_authenticated : UInt64
-    get_delivery : UInt64
-    put_delivery : UInt64
-    get_trace : UInt64
-    put_trace : UInt64
-    get_priority : UInt64
-    put_priority : UInt64
-    get_journal : UInt64
-    put_journal : UInt64
-    get_response_queue_info_v1 : UInt64
-    putref_response_queue_info_v1 : UInt64
-    get_app_specific : UInt64
-    put_app_specific : UInt64
-    get_source_machine_guid : UInt64
-    get_body_length : UInt64
-    get_body : UInt64
-    put_body : UInt64
-    get_admin_queue_info_v1 : UInt64
-    putref_admin_queue_info_v1 : UInt64
-    get_id : UInt64
-    get_correlation_id : UInt64
-    put_correlation_id : UInt64
-    get_ack : UInt64
-    put_ack : UInt64
-    get_label : UInt64
-    put_label : UInt64
-    get_max_time_to_reach_queue : UInt64
-    put_max_time_to_reach_queue : UInt64
-    get_max_time_to_receive : UInt64
-    put_max_time_to_receive : UInt64
-    get_hash_algorithm : UInt64
-    put_hash_algorithm : UInt64
-    get_encrypt_algorithm : UInt64
-    put_encrypt_algorithm : UInt64
-    get_sent_time : UInt64
-    get_arrived_time : UInt64
-    get_destination_queue_info : UInt64
-    get_sender_certificate : UInt64
-    put_sender_certificate : UInt64
-    get_sender_id : UInt64
-    get_sender_id_type : UInt64
-    put_sender_id_type : UInt64
-    send : UInt64
-    attach_current_security_context : UInt64
-    get_sender_version : UInt64
-    get_extension : UInt64
-    put_extension : UInt64
-    get_connector_type_guid : UInt64
-    put_connector_type_guid : UInt64
-    get_transaction_status_queue_info : UInt64
-    get_destination_symmetric_key : UInt64
-    put_destination_symmetric_key : UInt64
-    get_signature : UInt64
-    put_signature : UInt64
-    get_authentication_provider_type : UInt64
-    put_authentication_provider_type : UInt64
-    get_authentication_provider_name : UInt64
-    put_authentication_provider_name : UInt64
-    put_sender_id : UInt64
-    get_msg_class : UInt64
-    put_msg_class : UInt64
-    get_properties : UInt64
-    get_transaction_id : UInt64
-    get_is_first_in_transaction : UInt64
-    get_is_last_in_transaction : UInt64
-    get_response_queue_info_v2 : UInt64
-    putref_response_queue_info_v2 : UInt64
-    get_admin_queue_info_v2 : UInt64
-    putref_admin_queue_info_v2 : UInt64
-    get_received_authentication_level : UInt64
-    get_response_queue_info : UInt64
-    putref_response_queue_info : UInt64
-    get_admin_queue_info : UInt64
-    putref_admin_queue_info : UInt64
-    get_response_destination : UInt64
-    putref_response_destination : UInt64
-    get_destination : UInt64
-    get_lookup_id : UInt64
-    get_is_authenticated2 : UInt64
-    get_is_first_in_transaction2 : UInt64
-    get_is_last_in_transaction2 : UInt64
-    attach_current_security_context2 : UInt64
-    get_soap_envelope : UInt64
-    get_compound_message : UInt64
-    put_soap_header : UInt64
-    put_soap_body : UInt64
+    query_interface : Proc(IMSMQMessage3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQMessage3*, UInt32)
+    release : Proc(IMSMQMessage3*, UInt32)
+    get_type_info_count : Proc(IMSMQMessage3*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQMessage3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQMessage3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQMessage3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_class : Proc(IMSMQMessage3*, Int32*, HRESULT)
+    get_priv_level : Proc(IMSMQMessage3*, Int32*, HRESULT)
+    put_priv_level : Proc(IMSMQMessage3*, Int32, HRESULT)
+    get_auth_level : Proc(IMSMQMessage3*, Int32*, HRESULT)
+    put_auth_level : Proc(IMSMQMessage3*, Int32, HRESULT)
+    get_is_authenticated : Proc(IMSMQMessage3*, Int16*, HRESULT)
+    get_delivery : Proc(IMSMQMessage3*, Int32*, HRESULT)
+    put_delivery : Proc(IMSMQMessage3*, Int32, HRESULT)
+    get_trace : Proc(IMSMQMessage3*, Int32*, HRESULT)
+    put_trace : Proc(IMSMQMessage3*, Int32, HRESULT)
+    get_priority : Proc(IMSMQMessage3*, Int32*, HRESULT)
+    put_priority : Proc(IMSMQMessage3*, Int32, HRESULT)
+    get_journal : Proc(IMSMQMessage3*, Int32*, HRESULT)
+    put_journal : Proc(IMSMQMessage3*, Int32, HRESULT)
+    get_response_queue_info_v1 : Proc(IMSMQMessage3*, IMSMQQueueInfo*, HRESULT)
+    putref_response_queue_info_v1 : Proc(IMSMQMessage3*, IMSMQQueueInfo, HRESULT)
+    get_app_specific : Proc(IMSMQMessage3*, Int32*, HRESULT)
+    put_app_specific : Proc(IMSMQMessage3*, Int32, HRESULT)
+    get_source_machine_guid : Proc(IMSMQMessage3*, UInt8**, HRESULT)
+    get_body_length : Proc(IMSMQMessage3*, Int32*, HRESULT)
+    get_body : Proc(IMSMQMessage3*, VARIANT*, HRESULT)
+    put_body : Proc(IMSMQMessage3*, VARIANT, HRESULT)
+    get_admin_queue_info_v1 : Proc(IMSMQMessage3*, IMSMQQueueInfo*, HRESULT)
+    putref_admin_queue_info_v1 : Proc(IMSMQMessage3*, IMSMQQueueInfo, HRESULT)
+    get_id : Proc(IMSMQMessage3*, VARIANT*, HRESULT)
+    get_correlation_id : Proc(IMSMQMessage3*, VARIANT*, HRESULT)
+    put_correlation_id : Proc(IMSMQMessage3*, VARIANT, HRESULT)
+    get_ack : Proc(IMSMQMessage3*, Int32*, HRESULT)
+    put_ack : Proc(IMSMQMessage3*, Int32, HRESULT)
+    get_label : Proc(IMSMQMessage3*, UInt8**, HRESULT)
+    put_label : Proc(IMSMQMessage3*, UInt8*, HRESULT)
+    get_max_time_to_reach_queue : Proc(IMSMQMessage3*, Int32*, HRESULT)
+    put_max_time_to_reach_queue : Proc(IMSMQMessage3*, Int32, HRESULT)
+    get_max_time_to_receive : Proc(IMSMQMessage3*, Int32*, HRESULT)
+    put_max_time_to_receive : Proc(IMSMQMessage3*, Int32, HRESULT)
+    get_hash_algorithm : Proc(IMSMQMessage3*, Int32*, HRESULT)
+    put_hash_algorithm : Proc(IMSMQMessage3*, Int32, HRESULT)
+    get_encrypt_algorithm : Proc(IMSMQMessage3*, Int32*, HRESULT)
+    put_encrypt_algorithm : Proc(IMSMQMessage3*, Int32, HRESULT)
+    get_sent_time : Proc(IMSMQMessage3*, VARIANT*, HRESULT)
+    get_arrived_time : Proc(IMSMQMessage3*, VARIANT*, HRESULT)
+    get_destination_queue_info : Proc(IMSMQMessage3*, IMSMQQueueInfo3*, HRESULT)
+    get_sender_certificate : Proc(IMSMQMessage3*, VARIANT*, HRESULT)
+    put_sender_certificate : Proc(IMSMQMessage3*, VARIANT, HRESULT)
+    get_sender_id : Proc(IMSMQMessage3*, VARIANT*, HRESULT)
+    get_sender_id_type : Proc(IMSMQMessage3*, Int32*, HRESULT)
+    put_sender_id_type : Proc(IMSMQMessage3*, Int32, HRESULT)
+    send : Proc(IMSMQMessage3*, IDispatch, VARIANT*, HRESULT)
+    attach_current_security_context : Proc(IMSMQMessage3*, HRESULT)
+    get_sender_version : Proc(IMSMQMessage3*, Int32*, HRESULT)
+    get_extension : Proc(IMSMQMessage3*, VARIANT*, HRESULT)
+    put_extension : Proc(IMSMQMessage3*, VARIANT, HRESULT)
+    get_connector_type_guid : Proc(IMSMQMessage3*, UInt8**, HRESULT)
+    put_connector_type_guid : Proc(IMSMQMessage3*, UInt8*, HRESULT)
+    get_transaction_status_queue_info : Proc(IMSMQMessage3*, IMSMQQueueInfo3*, HRESULT)
+    get_destination_symmetric_key : Proc(IMSMQMessage3*, VARIANT*, HRESULT)
+    put_destination_symmetric_key : Proc(IMSMQMessage3*, VARIANT, HRESULT)
+    get_signature : Proc(IMSMQMessage3*, VARIANT*, HRESULT)
+    put_signature : Proc(IMSMQMessage3*, VARIANT, HRESULT)
+    get_authentication_provider_type : Proc(IMSMQMessage3*, Int32*, HRESULT)
+    put_authentication_provider_type : Proc(IMSMQMessage3*, Int32, HRESULT)
+    get_authentication_provider_name : Proc(IMSMQMessage3*, UInt8**, HRESULT)
+    put_authentication_provider_name : Proc(IMSMQMessage3*, UInt8*, HRESULT)
+    put_sender_id : Proc(IMSMQMessage3*, VARIANT, HRESULT)
+    get_msg_class : Proc(IMSMQMessage3*, Int32*, HRESULT)
+    put_msg_class : Proc(IMSMQMessage3*, Int32, HRESULT)
+    get_properties : Proc(IMSMQMessage3*, IDispatch*, HRESULT)
+    get_transaction_id : Proc(IMSMQMessage3*, VARIANT*, HRESULT)
+    get_is_first_in_transaction : Proc(IMSMQMessage3*, Int16*, HRESULT)
+    get_is_last_in_transaction : Proc(IMSMQMessage3*, Int16*, HRESULT)
+    get_response_queue_info_v2 : Proc(IMSMQMessage3*, IMSMQQueueInfo2*, HRESULT)
+    putref_response_queue_info_v2 : Proc(IMSMQMessage3*, IMSMQQueueInfo2, HRESULT)
+    get_admin_queue_info_v2 : Proc(IMSMQMessage3*, IMSMQQueueInfo2*, HRESULT)
+    putref_admin_queue_info_v2 : Proc(IMSMQMessage3*, IMSMQQueueInfo2, HRESULT)
+    get_received_authentication_level : Proc(IMSMQMessage3*, Int16*, HRESULT)
+    get_response_queue_info : Proc(IMSMQMessage3*, IMSMQQueueInfo3*, HRESULT)
+    putref_response_queue_info : Proc(IMSMQMessage3*, IMSMQQueueInfo3, HRESULT)
+    get_admin_queue_info : Proc(IMSMQMessage3*, IMSMQQueueInfo3*, HRESULT)
+    putref_admin_queue_info : Proc(IMSMQMessage3*, IMSMQQueueInfo3, HRESULT)
+    get_response_destination : Proc(IMSMQMessage3*, IDispatch*, HRESULT)
+    putref_response_destination : Proc(IMSMQMessage3*, IDispatch, HRESULT)
+    get_destination : Proc(IMSMQMessage3*, IDispatch*, HRESULT)
+    get_lookup_id : Proc(IMSMQMessage3*, VARIANT*, HRESULT)
+    get_is_authenticated2 : Proc(IMSMQMessage3*, Int16*, HRESULT)
+    get_is_first_in_transaction2 : Proc(IMSMQMessage3*, Int16*, HRESULT)
+    get_is_last_in_transaction2 : Proc(IMSMQMessage3*, Int16*, HRESULT)
+    attach_current_security_context2 : Proc(IMSMQMessage3*, HRESULT)
+    get_soap_envelope : Proc(IMSMQMessage3*, UInt8**, HRESULT)
+    get_compound_message : Proc(IMSMQMessage3*, VARIANT*, HRESULT)
+    put_soap_header : Proc(IMSMQMessage3*, UInt8*, HRESULT)
+    put_soap_body : Proc(IMSMQMessage3*, UInt8*, HRESULT)
   end
 
   IMSMQMessage3_GUID = "eba96b1a-2168-11d3-898c-00e02c074f6b"
@@ -1473,104 +1473,104 @@ lib LibWin32
   end
 
   struct IMSMQMessage4VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_class : UInt64
-    get_priv_level : UInt64
-    put_priv_level : UInt64
-    get_auth_level : UInt64
-    put_auth_level : UInt64
-    get_is_authenticated : UInt64
-    get_delivery : UInt64
-    put_delivery : UInt64
-    get_trace : UInt64
-    put_trace : UInt64
-    get_priority : UInt64
-    put_priority : UInt64
-    get_journal : UInt64
-    put_journal : UInt64
-    get_response_queue_info_v1 : UInt64
-    putref_response_queue_info_v1 : UInt64
-    get_app_specific : UInt64
-    put_app_specific : UInt64
-    get_source_machine_guid : UInt64
-    get_body_length : UInt64
-    get_body : UInt64
-    put_body : UInt64
-    get_admin_queue_info_v1 : UInt64
-    putref_admin_queue_info_v1 : UInt64
-    get_id : UInt64
-    get_correlation_id : UInt64
-    put_correlation_id : UInt64
-    get_ack : UInt64
-    put_ack : UInt64
-    get_label : UInt64
-    put_label : UInt64
-    get_max_time_to_reach_queue : UInt64
-    put_max_time_to_reach_queue : UInt64
-    get_max_time_to_receive : UInt64
-    put_max_time_to_receive : UInt64
-    get_hash_algorithm : UInt64
-    put_hash_algorithm : UInt64
-    get_encrypt_algorithm : UInt64
-    put_encrypt_algorithm : UInt64
-    get_sent_time : UInt64
-    get_arrived_time : UInt64
-    get_destination_queue_info : UInt64
-    get_sender_certificate : UInt64
-    put_sender_certificate : UInt64
-    get_sender_id : UInt64
-    get_sender_id_type : UInt64
-    put_sender_id_type : UInt64
-    send : UInt64
-    attach_current_security_context : UInt64
-    get_sender_version : UInt64
-    get_extension : UInt64
-    put_extension : UInt64
-    get_connector_type_guid : UInt64
-    put_connector_type_guid : UInt64
-    get_transaction_status_queue_info : UInt64
-    get_destination_symmetric_key : UInt64
-    put_destination_symmetric_key : UInt64
-    get_signature : UInt64
-    put_signature : UInt64
-    get_authentication_provider_type : UInt64
-    put_authentication_provider_type : UInt64
-    get_authentication_provider_name : UInt64
-    put_authentication_provider_name : UInt64
-    put_sender_id : UInt64
-    get_msg_class : UInt64
-    put_msg_class : UInt64
-    get_properties : UInt64
-    get_transaction_id : UInt64
-    get_is_first_in_transaction : UInt64
-    get_is_last_in_transaction : UInt64
-    get_response_queue_info_v2 : UInt64
-    putref_response_queue_info_v2 : UInt64
-    get_admin_queue_info_v2 : UInt64
-    putref_admin_queue_info_v2 : UInt64
-    get_received_authentication_level : UInt64
-    get_response_queue_info : UInt64
-    putref_response_queue_info : UInt64
-    get_admin_queue_info : UInt64
-    putref_admin_queue_info : UInt64
-    get_response_destination : UInt64
-    putref_response_destination : UInt64
-    get_destination : UInt64
-    get_lookup_id : UInt64
-    get_is_authenticated2 : UInt64
-    get_is_first_in_transaction2 : UInt64
-    get_is_last_in_transaction2 : UInt64
-    attach_current_security_context2 : UInt64
-    get_soap_envelope : UInt64
-    get_compound_message : UInt64
-    put_soap_header : UInt64
-    put_soap_body : UInt64
+    query_interface : Proc(IMSMQMessage4*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQMessage4*, UInt32)
+    release : Proc(IMSMQMessage4*, UInt32)
+    get_type_info_count : Proc(IMSMQMessage4*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQMessage4*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQMessage4*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQMessage4*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_class : Proc(IMSMQMessage4*, Int32*, HRESULT)
+    get_priv_level : Proc(IMSMQMessage4*, Int32*, HRESULT)
+    put_priv_level : Proc(IMSMQMessage4*, Int32, HRESULT)
+    get_auth_level : Proc(IMSMQMessage4*, Int32*, HRESULT)
+    put_auth_level : Proc(IMSMQMessage4*, Int32, HRESULT)
+    get_is_authenticated : Proc(IMSMQMessage4*, Int16*, HRESULT)
+    get_delivery : Proc(IMSMQMessage4*, Int32*, HRESULT)
+    put_delivery : Proc(IMSMQMessage4*, Int32, HRESULT)
+    get_trace : Proc(IMSMQMessage4*, Int32*, HRESULT)
+    put_trace : Proc(IMSMQMessage4*, Int32, HRESULT)
+    get_priority : Proc(IMSMQMessage4*, Int32*, HRESULT)
+    put_priority : Proc(IMSMQMessage4*, Int32, HRESULT)
+    get_journal : Proc(IMSMQMessage4*, Int32*, HRESULT)
+    put_journal : Proc(IMSMQMessage4*, Int32, HRESULT)
+    get_response_queue_info_v1 : Proc(IMSMQMessage4*, IMSMQQueueInfo*, HRESULT)
+    putref_response_queue_info_v1 : Proc(IMSMQMessage4*, IMSMQQueueInfo, HRESULT)
+    get_app_specific : Proc(IMSMQMessage4*, Int32*, HRESULT)
+    put_app_specific : Proc(IMSMQMessage4*, Int32, HRESULT)
+    get_source_machine_guid : Proc(IMSMQMessage4*, UInt8**, HRESULT)
+    get_body_length : Proc(IMSMQMessage4*, Int32*, HRESULT)
+    get_body : Proc(IMSMQMessage4*, VARIANT*, HRESULT)
+    put_body : Proc(IMSMQMessage4*, VARIANT, HRESULT)
+    get_admin_queue_info_v1 : Proc(IMSMQMessage4*, IMSMQQueueInfo*, HRESULT)
+    putref_admin_queue_info_v1 : Proc(IMSMQMessage4*, IMSMQQueueInfo, HRESULT)
+    get_id : Proc(IMSMQMessage4*, VARIANT*, HRESULT)
+    get_correlation_id : Proc(IMSMQMessage4*, VARIANT*, HRESULT)
+    put_correlation_id : Proc(IMSMQMessage4*, VARIANT, HRESULT)
+    get_ack : Proc(IMSMQMessage4*, Int32*, HRESULT)
+    put_ack : Proc(IMSMQMessage4*, Int32, HRESULT)
+    get_label : Proc(IMSMQMessage4*, UInt8**, HRESULT)
+    put_label : Proc(IMSMQMessage4*, UInt8*, HRESULT)
+    get_max_time_to_reach_queue : Proc(IMSMQMessage4*, Int32*, HRESULT)
+    put_max_time_to_reach_queue : Proc(IMSMQMessage4*, Int32, HRESULT)
+    get_max_time_to_receive : Proc(IMSMQMessage4*, Int32*, HRESULT)
+    put_max_time_to_receive : Proc(IMSMQMessage4*, Int32, HRESULT)
+    get_hash_algorithm : Proc(IMSMQMessage4*, Int32*, HRESULT)
+    put_hash_algorithm : Proc(IMSMQMessage4*, Int32, HRESULT)
+    get_encrypt_algorithm : Proc(IMSMQMessage4*, Int32*, HRESULT)
+    put_encrypt_algorithm : Proc(IMSMQMessage4*, Int32, HRESULT)
+    get_sent_time : Proc(IMSMQMessage4*, VARIANT*, HRESULT)
+    get_arrived_time : Proc(IMSMQMessage4*, VARIANT*, HRESULT)
+    get_destination_queue_info : Proc(IMSMQMessage4*, IMSMQQueueInfo4*, HRESULT)
+    get_sender_certificate : Proc(IMSMQMessage4*, VARIANT*, HRESULT)
+    put_sender_certificate : Proc(IMSMQMessage4*, VARIANT, HRESULT)
+    get_sender_id : Proc(IMSMQMessage4*, VARIANT*, HRESULT)
+    get_sender_id_type : Proc(IMSMQMessage4*, Int32*, HRESULT)
+    put_sender_id_type : Proc(IMSMQMessage4*, Int32, HRESULT)
+    send : Proc(IMSMQMessage4*, IDispatch, VARIANT*, HRESULT)
+    attach_current_security_context : Proc(IMSMQMessage4*, HRESULT)
+    get_sender_version : Proc(IMSMQMessage4*, Int32*, HRESULT)
+    get_extension : Proc(IMSMQMessage4*, VARIANT*, HRESULT)
+    put_extension : Proc(IMSMQMessage4*, VARIANT, HRESULT)
+    get_connector_type_guid : Proc(IMSMQMessage4*, UInt8**, HRESULT)
+    put_connector_type_guid : Proc(IMSMQMessage4*, UInt8*, HRESULT)
+    get_transaction_status_queue_info : Proc(IMSMQMessage4*, IMSMQQueueInfo4*, HRESULT)
+    get_destination_symmetric_key : Proc(IMSMQMessage4*, VARIANT*, HRESULT)
+    put_destination_symmetric_key : Proc(IMSMQMessage4*, VARIANT, HRESULT)
+    get_signature : Proc(IMSMQMessage4*, VARIANT*, HRESULT)
+    put_signature : Proc(IMSMQMessage4*, VARIANT, HRESULT)
+    get_authentication_provider_type : Proc(IMSMQMessage4*, Int32*, HRESULT)
+    put_authentication_provider_type : Proc(IMSMQMessage4*, Int32, HRESULT)
+    get_authentication_provider_name : Proc(IMSMQMessage4*, UInt8**, HRESULT)
+    put_authentication_provider_name : Proc(IMSMQMessage4*, UInt8*, HRESULT)
+    put_sender_id : Proc(IMSMQMessage4*, VARIANT, HRESULT)
+    get_msg_class : Proc(IMSMQMessage4*, Int32*, HRESULT)
+    put_msg_class : Proc(IMSMQMessage4*, Int32, HRESULT)
+    get_properties : Proc(IMSMQMessage4*, IDispatch*, HRESULT)
+    get_transaction_id : Proc(IMSMQMessage4*, VARIANT*, HRESULT)
+    get_is_first_in_transaction : Proc(IMSMQMessage4*, Int16*, HRESULT)
+    get_is_last_in_transaction : Proc(IMSMQMessage4*, Int16*, HRESULT)
+    get_response_queue_info_v2 : Proc(IMSMQMessage4*, IMSMQQueueInfo2*, HRESULT)
+    putref_response_queue_info_v2 : Proc(IMSMQMessage4*, IMSMQQueueInfo2, HRESULT)
+    get_admin_queue_info_v2 : Proc(IMSMQMessage4*, IMSMQQueueInfo2*, HRESULT)
+    putref_admin_queue_info_v2 : Proc(IMSMQMessage4*, IMSMQQueueInfo2, HRESULT)
+    get_received_authentication_level : Proc(IMSMQMessage4*, Int16*, HRESULT)
+    get_response_queue_info : Proc(IMSMQMessage4*, IMSMQQueueInfo4*, HRESULT)
+    putref_response_queue_info : Proc(IMSMQMessage4*, IMSMQQueueInfo4, HRESULT)
+    get_admin_queue_info : Proc(IMSMQMessage4*, IMSMQQueueInfo4*, HRESULT)
+    putref_admin_queue_info : Proc(IMSMQMessage4*, IMSMQQueueInfo4, HRESULT)
+    get_response_destination : Proc(IMSMQMessage4*, IDispatch*, HRESULT)
+    putref_response_destination : Proc(IMSMQMessage4*, IDispatch, HRESULT)
+    get_destination : Proc(IMSMQMessage4*, IDispatch*, HRESULT)
+    get_lookup_id : Proc(IMSMQMessage4*, VARIANT*, HRESULT)
+    get_is_authenticated2 : Proc(IMSMQMessage4*, Int16*, HRESULT)
+    get_is_first_in_transaction2 : Proc(IMSMQMessage4*, Int16*, HRESULT)
+    get_is_last_in_transaction2 : Proc(IMSMQMessage4*, Int16*, HRESULT)
+    attach_current_security_context2 : Proc(IMSMQMessage4*, HRESULT)
+    get_soap_envelope : Proc(IMSMQMessage4*, UInt8**, HRESULT)
+    get_compound_message : Proc(IMSMQMessage4*, VARIANT*, HRESULT)
+    put_soap_header : Proc(IMSMQMessage4*, UInt8*, HRESULT)
+    put_soap_body : Proc(IMSMQMessage4*, UInt8*, HRESULT)
   end
 
   IMSMQMessage4_GUID = "eba96b23-2168-11d3-898c-00e02c074f6b"
@@ -1580,16 +1580,16 @@ lib LibWin32
   end
 
   struct IMSMQPrivateEventVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_hwnd : UInt64
-    fire_arrived_event : UInt64
-    fire_arrived_error_event : UInt64
+    query_interface : Proc(IMSMQPrivateEvent*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQPrivateEvent*, UInt32)
+    release : Proc(IMSMQPrivateEvent*, UInt32)
+    get_type_info_count : Proc(IMSMQPrivateEvent*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQPrivateEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQPrivateEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQPrivateEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_hwnd : Proc(IMSMQPrivateEvent*, Int32*, HRESULT)
+    fire_arrived_event : Proc(IMSMQPrivateEvent*, IMSMQQueue, Int32, HRESULT)
+    fire_arrived_error_event : Proc(IMSMQPrivateEvent*, IMSMQQueue, HRESULT, Int32, HRESULT)
   end
 
   IMSMQPrivateEvent_GUID = "d7ab3341-c9d3-11d1-bb47-0080c7c5a2c0"
@@ -1599,13 +1599,13 @@ lib LibWin32
   end
 
   struct IDMSMQEventEventsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
+    query_interface : Proc(IDMSMQEventEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDMSMQEventEvents*, UInt32)
+    release : Proc(IDMSMQEventEvents*, UInt32)
+    get_type_info_count : Proc(IDMSMQEventEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IDMSMQEventEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IDMSMQEventEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IDMSMQEventEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
   IDMSMQEventEvents_GUID = "d7d6e078-dccd-11d0-aa4b-0060970debae"
@@ -1615,18 +1615,18 @@ lib LibWin32
   end
 
   struct IMSMQTransaction2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_transaction : UInt64
-    commit : UInt64
-    abort : UInt64
-    init_new : UInt64
-    get_properties : UInt64
+    query_interface : Proc(IMSMQTransaction2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQTransaction2*, UInt32)
+    release : Proc(IMSMQTransaction2*, UInt32)
+    get_type_info_count : Proc(IMSMQTransaction2*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQTransaction2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQTransaction2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQTransaction2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_transaction : Proc(IMSMQTransaction2*, Int32*, HRESULT)
+    commit : Proc(IMSMQTransaction2*, VARIANT*, VARIANT*, VARIANT*, HRESULT)
+    abort : Proc(IMSMQTransaction2*, VARIANT*, VARIANT*, HRESULT)
+    init_new : Proc(IMSMQTransaction2*, VARIANT, HRESULT)
+    get_properties : Proc(IMSMQTransaction2*, IDispatch*, HRESULT)
   end
 
   IMSMQTransaction2_GUID = "2ce0c5b0-6e67-11d2-b0e6-00e02c074f6b"
@@ -1636,19 +1636,19 @@ lib LibWin32
   end
 
   struct IMSMQTransaction3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_transaction : UInt64
-    commit : UInt64
-    abort : UInt64
-    init_new : UInt64
-    get_properties : UInt64
-    get_i_transaction : UInt64
+    query_interface : Proc(IMSMQTransaction3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQTransaction3*, UInt32)
+    release : Proc(IMSMQTransaction3*, UInt32)
+    get_type_info_count : Proc(IMSMQTransaction3*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQTransaction3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQTransaction3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQTransaction3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_transaction : Proc(IMSMQTransaction3*, Int32*, HRESULT)
+    commit : Proc(IMSMQTransaction3*, VARIANT*, VARIANT*, VARIANT*, HRESULT)
+    abort : Proc(IMSMQTransaction3*, VARIANT*, VARIANT*, HRESULT)
+    init_new : Proc(IMSMQTransaction3*, VARIANT, HRESULT)
+    get_properties : Proc(IMSMQTransaction3*, IDispatch*, HRESULT)
+    get_i_transaction : Proc(IMSMQTransaction3*, VARIANT*, HRESULT)
   end
 
   IMSMQTransaction3_GUID = "eba96b13-2168-11d3-898c-00e02c074f6b"
@@ -1658,15 +1658,15 @@ lib LibWin32
   end
 
   struct IMSMQCoordinatedTransactionDispenser2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    begin_transaction : UInt64
-    get_properties : UInt64
+    query_interface : Proc(IMSMQCoordinatedTransactionDispenser2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQCoordinatedTransactionDispenser2*, UInt32)
+    release : Proc(IMSMQCoordinatedTransactionDispenser2*, UInt32)
+    get_type_info_count : Proc(IMSMQCoordinatedTransactionDispenser2*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQCoordinatedTransactionDispenser2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQCoordinatedTransactionDispenser2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQCoordinatedTransactionDispenser2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    begin_transaction : Proc(IMSMQCoordinatedTransactionDispenser2*, IMSMQTransaction2*, HRESULT)
+    get_properties : Proc(IMSMQCoordinatedTransactionDispenser2*, IDispatch*, HRESULT)
   end
 
   IMSMQCoordinatedTransactionDispenser2_GUID = "eba96b10-2168-11d3-898c-00e02c074f6b"
@@ -1676,15 +1676,15 @@ lib LibWin32
   end
 
   struct IMSMQCoordinatedTransactionDispenser3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    begin_transaction : UInt64
-    get_properties : UInt64
+    query_interface : Proc(IMSMQCoordinatedTransactionDispenser3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQCoordinatedTransactionDispenser3*, UInt32)
+    release : Proc(IMSMQCoordinatedTransactionDispenser3*, UInt32)
+    get_type_info_count : Proc(IMSMQCoordinatedTransactionDispenser3*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQCoordinatedTransactionDispenser3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQCoordinatedTransactionDispenser3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQCoordinatedTransactionDispenser3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    begin_transaction : Proc(IMSMQCoordinatedTransactionDispenser3*, IMSMQTransaction3*, HRESULT)
+    get_properties : Proc(IMSMQCoordinatedTransactionDispenser3*, IDispatch*, HRESULT)
   end
 
   IMSMQCoordinatedTransactionDispenser3_GUID = "eba96b14-2168-11d3-898c-00e02c074f6b"
@@ -1694,15 +1694,15 @@ lib LibWin32
   end
 
   struct IMSMQTransactionDispenser2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    begin_transaction : UInt64
-    get_properties : UInt64
+    query_interface : Proc(IMSMQTransactionDispenser2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQTransactionDispenser2*, UInt32)
+    release : Proc(IMSMQTransactionDispenser2*, UInt32)
+    get_type_info_count : Proc(IMSMQTransactionDispenser2*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQTransactionDispenser2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQTransactionDispenser2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQTransactionDispenser2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    begin_transaction : Proc(IMSMQTransactionDispenser2*, IMSMQTransaction2*, HRESULT)
+    get_properties : Proc(IMSMQTransactionDispenser2*, IDispatch*, HRESULT)
   end
 
   IMSMQTransactionDispenser2_GUID = "eba96b11-2168-11d3-898c-00e02c074f6b"
@@ -1712,15 +1712,15 @@ lib LibWin32
   end
 
   struct IMSMQTransactionDispenser3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    begin_transaction : UInt64
-    get_properties : UInt64
+    query_interface : Proc(IMSMQTransactionDispenser3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQTransactionDispenser3*, UInt32)
+    release : Proc(IMSMQTransactionDispenser3*, UInt32)
+    get_type_info_count : Proc(IMSMQTransactionDispenser3*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQTransactionDispenser3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQTransactionDispenser3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQTransactionDispenser3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    begin_transaction : Proc(IMSMQTransactionDispenser3*, IMSMQTransaction3*, HRESULT)
+    get_properties : Proc(IMSMQTransactionDispenser3*, IDispatch*, HRESULT)
   end
 
   IMSMQTransactionDispenser3_GUID = "eba96b15-2168-11d3-898c-00e02c074f6b"
@@ -1730,14 +1730,14 @@ lib LibWin32
   end
 
   struct IMSMQApplicationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    machine_id_of_machine_name : UInt64
+    query_interface : Proc(IMSMQApplication*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQApplication*, UInt32)
+    release : Proc(IMSMQApplication*, UInt32)
+    get_type_info_count : Proc(IMSMQApplication*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQApplication*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQApplication*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQApplication*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    machine_id_of_machine_name : Proc(IMSMQApplication*, UInt8*, UInt8**, HRESULT)
   end
 
   IMSMQApplication_GUID = "d7d6e085-dccd-11d0-aa4b-0060970debae"
@@ -1747,21 +1747,21 @@ lib LibWin32
   end
 
   struct IMSMQApplication2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    machine_id_of_machine_name : UInt64
-    register_certificate : UInt64
-    machine_name_of_machine_id : UInt64
-    get_msmq_version_major : UInt64
-    get_msmq_version_minor : UInt64
-    get_msmq_version_build : UInt64
-    get_is_ds_enabled : UInt64
-    get_properties : UInt64
+    query_interface : Proc(IMSMQApplication2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQApplication2*, UInt32)
+    release : Proc(IMSMQApplication2*, UInt32)
+    get_type_info_count : Proc(IMSMQApplication2*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQApplication2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQApplication2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQApplication2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    machine_id_of_machine_name : Proc(IMSMQApplication2*, UInt8*, UInt8**, HRESULT)
+    register_certificate : Proc(IMSMQApplication2*, VARIANT*, VARIANT*, HRESULT)
+    machine_name_of_machine_id : Proc(IMSMQApplication2*, UInt8*, UInt8**, HRESULT)
+    get_msmq_version_major : Proc(IMSMQApplication2*, Int16*, HRESULT)
+    get_msmq_version_minor : Proc(IMSMQApplication2*, Int16*, HRESULT)
+    get_msmq_version_build : Proc(IMSMQApplication2*, Int16*, HRESULT)
+    get_is_ds_enabled : Proc(IMSMQApplication2*, Int16*, HRESULT)
+    get_properties : Proc(IMSMQApplication2*, IDispatch*, HRESULT)
   end
 
   IMSMQApplication2_GUID = "12a30900-7300-11d2-b0e6-00e02c074f6b"
@@ -1771,31 +1771,31 @@ lib LibWin32
   end
 
   struct IMSMQApplication3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    machine_id_of_machine_name : UInt64
-    register_certificate : UInt64
-    machine_name_of_machine_id : UInt64
-    get_msmq_version_major : UInt64
-    get_msmq_version_minor : UInt64
-    get_msmq_version_build : UInt64
-    get_is_ds_enabled : UInt64
-    get_properties : UInt64
-    get_active_queues : UInt64
-    get_private_queues : UInt64
-    get_directory_service_server : UInt64
-    get_is_connected : UInt64
-    get_bytes_in_all_queues : UInt64
-    put_machine : UInt64
-    get_machine : UInt64
-    connect : UInt64
-    disconnect : UInt64
-    tidy : UInt64
+    query_interface : Proc(IMSMQApplication3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQApplication3*, UInt32)
+    release : Proc(IMSMQApplication3*, UInt32)
+    get_type_info_count : Proc(IMSMQApplication3*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQApplication3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQApplication3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQApplication3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    machine_id_of_machine_name : Proc(IMSMQApplication3*, UInt8*, UInt8**, HRESULT)
+    register_certificate : Proc(IMSMQApplication3*, VARIANT*, VARIANT*, HRESULT)
+    machine_name_of_machine_id : Proc(IMSMQApplication3*, UInt8*, UInt8**, HRESULT)
+    get_msmq_version_major : Proc(IMSMQApplication3*, Int16*, HRESULT)
+    get_msmq_version_minor : Proc(IMSMQApplication3*, Int16*, HRESULT)
+    get_msmq_version_build : Proc(IMSMQApplication3*, Int16*, HRESULT)
+    get_is_ds_enabled : Proc(IMSMQApplication3*, Int16*, HRESULT)
+    get_properties : Proc(IMSMQApplication3*, IDispatch*, HRESULT)
+    get_active_queues : Proc(IMSMQApplication3*, VARIANT*, HRESULT)
+    get_private_queues : Proc(IMSMQApplication3*, VARIANT*, HRESULT)
+    get_directory_service_server : Proc(IMSMQApplication3*, UInt8**, HRESULT)
+    get_is_connected : Proc(IMSMQApplication3*, Int16*, HRESULT)
+    get_bytes_in_all_queues : Proc(IMSMQApplication3*, VARIANT*, HRESULT)
+    put_machine : Proc(IMSMQApplication3*, UInt8*, HRESULT)
+    get_machine : Proc(IMSMQApplication3*, UInt8**, HRESULT)
+    connect : Proc(IMSMQApplication3*, HRESULT)
+    disconnect : Proc(IMSMQApplication3*, HRESULT)
+    tidy : Proc(IMSMQApplication3*, HRESULT)
   end
 
   IMSMQApplication3_GUID = "eba96b1f-2168-11d3-898c-00e02c074f6b"
@@ -1805,27 +1805,27 @@ lib LibWin32
   end
 
   struct IMSMQDestinationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    open : UInt64
-    close : UInt64
-    get_is_open : UInt64
-    get_ia_ds : UInt64
-    putref_ia_ds : UInt64
-    get_a_ds_path : UInt64
-    put_a_ds_path : UInt64
-    get_path_name : UInt64
-    put_path_name : UInt64
-    get_format_name : UInt64
-    put_format_name : UInt64
-    get_destinations : UInt64
-    putref_destinations : UInt64
-    get_properties : UInt64
+    query_interface : Proc(IMSMQDestination*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQDestination*, UInt32)
+    release : Proc(IMSMQDestination*, UInt32)
+    get_type_info_count : Proc(IMSMQDestination*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQDestination*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQDestination*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQDestination*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    open : Proc(IMSMQDestination*, HRESULT)
+    close : Proc(IMSMQDestination*, HRESULT)
+    get_is_open : Proc(IMSMQDestination*, Int16*, HRESULT)
+    get_ia_ds : Proc(IMSMQDestination*, IDispatch*, HRESULT)
+    putref_ia_ds : Proc(IMSMQDestination*, IDispatch, HRESULT)
+    get_a_ds_path : Proc(IMSMQDestination*, UInt8**, HRESULT)
+    put_a_ds_path : Proc(IMSMQDestination*, UInt8*, HRESULT)
+    get_path_name : Proc(IMSMQDestination*, UInt8**, HRESULT)
+    put_path_name : Proc(IMSMQDestination*, UInt8*, HRESULT)
+    get_format_name : Proc(IMSMQDestination*, UInt8**, HRESULT)
+    put_format_name : Proc(IMSMQDestination*, UInt8*, HRESULT)
+    get_destinations : Proc(IMSMQDestination*, IDispatch*, HRESULT)
+    putref_destinations : Proc(IMSMQDestination*, IDispatch, HRESULT)
+    get_properties : Proc(IMSMQDestination*, IDispatch*, HRESULT)
   end
 
   IMSMQDestination_GUID = "eba96b16-2168-11d3-898c-00e02c074f6b"
@@ -1835,15 +1835,15 @@ lib LibWin32
   end
 
   struct IMSMQPrivateDestinationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_handle : UInt64
-    put_handle : UInt64
+    query_interface : Proc(IMSMQPrivateDestination*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQPrivateDestination*, UInt32)
+    release : Proc(IMSMQPrivateDestination*, UInt32)
+    get_type_info_count : Proc(IMSMQPrivateDestination*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQPrivateDestination*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQPrivateDestination*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQPrivateDestination*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_handle : Proc(IMSMQPrivateDestination*, VARIANT*, HRESULT)
+    put_handle : Proc(IMSMQPrivateDestination*, VARIANT, HRESULT)
   end
 
   IMSMQPrivateDestination_GUID = "eba96b17-2168-11d3-898c-00e02c074f6b"
@@ -1853,16 +1853,16 @@ lib LibWin32
   end
 
   struct IMSMQCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    item : UInt64
-    get_count : UInt64
-    _new_enum : UInt64
+    query_interface : Proc(IMSMQCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQCollection*, UInt32)
+    release : Proc(IMSMQCollection*, UInt32)
+    get_type_info_count : Proc(IMSMQCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    item : Proc(IMSMQCollection*, VARIANT*, VARIANT*, HRESULT)
+    get_count : Proc(IMSMQCollection*, Int32*, HRESULT)
+    _new_enum : Proc(IMSMQCollection*, IUnknown*, HRESULT)
   end
 
   IMSMQCollection_GUID = "0188ac2f-ecb3-4173-9779-635ca2039c72"
@@ -1872,22 +1872,22 @@ lib LibWin32
   end
 
   struct IMSMQManagementVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    init : UInt64
-    get_format_name : UInt64
-    get_machine : UInt64
-    get_message_count : UInt64
-    get_foreign_status : UInt64
-    get_queue_type : UInt64
-    get_is_local : UInt64
-    get_transactional_status : UInt64
-    get_bytes_in_queue : UInt64
+    query_interface : Proc(IMSMQManagement*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQManagement*, UInt32)
+    release : Proc(IMSMQManagement*, UInt32)
+    get_type_info_count : Proc(IMSMQManagement*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQManagement*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQManagement*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQManagement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    init : Proc(IMSMQManagement*, VARIANT*, VARIANT*, VARIANT*, HRESULT)
+    get_format_name : Proc(IMSMQManagement*, UInt8**, HRESULT)
+    get_machine : Proc(IMSMQManagement*, UInt8**, HRESULT)
+    get_message_count : Proc(IMSMQManagement*, Int32*, HRESULT)
+    get_foreign_status : Proc(IMSMQManagement*, Int32*, HRESULT)
+    get_queue_type : Proc(IMSMQManagement*, Int32*, HRESULT)
+    get_is_local : Proc(IMSMQManagement*, Int16*, HRESULT)
+    get_transactional_status : Proc(IMSMQManagement*, Int32*, HRESULT)
+    get_bytes_in_queue : Proc(IMSMQManagement*, VARIANT*, HRESULT)
   end
 
   IMSMQManagement_GUID = "be5f0241-e489-4957-8cc4-a452fcf3e23e"
@@ -1897,28 +1897,28 @@ lib LibWin32
   end
 
   struct IMSMQOutgoingQueueManagementVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    init : UInt64
-    get_format_name : UInt64
-    get_machine : UInt64
-    get_message_count : UInt64
-    get_foreign_status : UInt64
-    get_queue_type : UInt64
-    get_is_local : UInt64
-    get_transactional_status : UInt64
-    get_bytes_in_queue : UInt64
-    get_state : UInt64
-    get_next_hops : UInt64
-    eod_get_send_info : UInt64
-    resume : UInt64
-    pause : UInt64
-    eod_resend : UInt64
+    query_interface : Proc(IMSMQOutgoingQueueManagement*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQOutgoingQueueManagement*, UInt32)
+    release : Proc(IMSMQOutgoingQueueManagement*, UInt32)
+    get_type_info_count : Proc(IMSMQOutgoingQueueManagement*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQOutgoingQueueManagement*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQOutgoingQueueManagement*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQOutgoingQueueManagement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    init : Proc(IMSMQOutgoingQueueManagement*, VARIANT*, VARIANT*, VARIANT*, HRESULT)
+    get_format_name : Proc(IMSMQOutgoingQueueManagement*, UInt8**, HRESULT)
+    get_machine : Proc(IMSMQOutgoingQueueManagement*, UInt8**, HRESULT)
+    get_message_count : Proc(IMSMQOutgoingQueueManagement*, Int32*, HRESULT)
+    get_foreign_status : Proc(IMSMQOutgoingQueueManagement*, Int32*, HRESULT)
+    get_queue_type : Proc(IMSMQOutgoingQueueManagement*, Int32*, HRESULT)
+    get_is_local : Proc(IMSMQOutgoingQueueManagement*, Int16*, HRESULT)
+    get_transactional_status : Proc(IMSMQOutgoingQueueManagement*, Int32*, HRESULT)
+    get_bytes_in_queue : Proc(IMSMQOutgoingQueueManagement*, VARIANT*, HRESULT)
+    get_state : Proc(IMSMQOutgoingQueueManagement*, Int32*, HRESULT)
+    get_next_hops : Proc(IMSMQOutgoingQueueManagement*, VARIANT*, HRESULT)
+    eod_get_send_info : Proc(IMSMQOutgoingQueueManagement*, IMSMQCollection*, HRESULT)
+    resume : Proc(IMSMQOutgoingQueueManagement*, HRESULT)
+    pause : Proc(IMSMQOutgoingQueueManagement*, HRESULT)
+    eod_resend : Proc(IMSMQOutgoingQueueManagement*, HRESULT)
   end
 
   IMSMQOutgoingQueueManagement_GUID = "64c478fb-f9b0-4695-8a7f-439ac94326d3"
@@ -1928,25 +1928,25 @@ lib LibWin32
   end
 
   struct IMSMQQueueManagementVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    init : UInt64
-    get_format_name : UInt64
-    get_machine : UInt64
-    get_message_count : UInt64
-    get_foreign_status : UInt64
-    get_queue_type : UInt64
-    get_is_local : UInt64
-    get_transactional_status : UInt64
-    get_bytes_in_queue : UInt64
-    get_journal_message_count : UInt64
-    get_bytes_in_journal : UInt64
-    eod_get_receive_info : UInt64
+    query_interface : Proc(IMSMQQueueManagement*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMSMQQueueManagement*, UInt32)
+    release : Proc(IMSMQQueueManagement*, UInt32)
+    get_type_info_count : Proc(IMSMQQueueManagement*, UInt32*, HRESULT)
+    get_type_info : Proc(IMSMQQueueManagement*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMSMQQueueManagement*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMSMQQueueManagement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    init : Proc(IMSMQQueueManagement*, VARIANT*, VARIANT*, VARIANT*, HRESULT)
+    get_format_name : Proc(IMSMQQueueManagement*, UInt8**, HRESULT)
+    get_machine : Proc(IMSMQQueueManagement*, UInt8**, HRESULT)
+    get_message_count : Proc(IMSMQQueueManagement*, Int32*, HRESULT)
+    get_foreign_status : Proc(IMSMQQueueManagement*, Int32*, HRESULT)
+    get_queue_type : Proc(IMSMQQueueManagement*, Int32*, HRESULT)
+    get_is_local : Proc(IMSMQQueueManagement*, Int16*, HRESULT)
+    get_transactional_status : Proc(IMSMQQueueManagement*, Int32*, HRESULT)
+    get_bytes_in_queue : Proc(IMSMQQueueManagement*, VARIANT*, HRESULT)
+    get_journal_message_count : Proc(IMSMQQueueManagement*, Int32*, HRESULT)
+    get_bytes_in_journal : Proc(IMSMQQueueManagement*, VARIANT*, HRESULT)
+    eod_get_receive_info : Proc(IMSMQQueueManagement*, VARIANT*, HRESULT)
   end
 
   IMSMQQueueManagement_GUID = "7fbe7759-5760-444d-b8a5-5e7ab9a84cce"
@@ -1957,3019 +1957,3019 @@ lib LibWin32
 
 end
 struct LibWin32::IMSMQQuery
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQQuery*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQQuery*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQQuery*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQQuery*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQQuery*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQQuery*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQQuery*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def lookup_queue(queueguid : VARIANT*, servicetypeguid : VARIANT*, label : VARIANT*, createtime : VARIANT*, modifytime : VARIANT*, relservicetype : VARIANT*, rellabel : VARIANT*, relcreatetime : VARIANT*, relmodifytime : VARIANT*, ppqinfos : IMSMQQueueInfos*) : HRESULT
-    @lpVtbl.value.lookup_queue.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQQueueInfos*, HRESULT)).call(queueguid, servicetypeguid, label, createtime, modifytime, relservicetype, rellabel, relcreatetime, relmodifytime, ppqinfos)
+  def lookup_queue(this : IMSMQQuery*, queueguid : VARIANT*, servicetypeguid : VARIANT*, label : VARIANT*, createtime : VARIANT*, modifytime : VARIANT*, relservicetype : VARIANT*, rellabel : VARIANT*, relcreatetime : VARIANT*, relmodifytime : VARIANT*, ppqinfos : IMSMQQueueInfos*) : HRESULT
+    @lpVtbl.value.lookup_queue.call(this, queueguid, servicetypeguid, label, createtime, modifytime, relservicetype, rellabel, relcreatetime, relmodifytime, ppqinfos)
   end
 end
 struct LibWin32::IMSMQQueueInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQQueueInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQQueueInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQQueueInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQQueueInfo*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQQueueInfo*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQQueueInfo*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQQueueInfo*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_queue_guid(pbstrguidqueue : UInt8**) : HRESULT
-    @lpVtbl.value.get_queue_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrguidqueue)
+  def get_queue_guid(this : IMSMQQueueInfo*, pbstrguidqueue : UInt8**) : HRESULT
+    @lpVtbl.value.get_queue_guid.call(this, pbstrguidqueue)
   end
-  def get_service_type_guid(pbstrguidservicetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_service_type_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrguidservicetype)
+  def get_service_type_guid(this : IMSMQQueueInfo*, pbstrguidservicetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_type_guid.call(this, pbstrguidservicetype)
   end
-  def put_service_type_guid(bstrguidservicetype : UInt8*) : HRESULT
-    @lpVtbl.value.put_service_type_guid.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrguidservicetype)
+  def put_service_type_guid(this : IMSMQQueueInfo*, bstrguidservicetype : UInt8*) : HRESULT
+    @lpVtbl.value.put_service_type_guid.call(this, bstrguidservicetype)
   end
-  def get_label(pbstrlabel : UInt8**) : HRESULT
-    @lpVtbl.value.get_label.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrlabel)
+  def get_label(this : IMSMQQueueInfo*, pbstrlabel : UInt8**) : HRESULT
+    @lpVtbl.value.get_label.call(this, pbstrlabel)
   end
-  def put_label(bstrlabel : UInt8*) : HRESULT
-    @lpVtbl.value.put_label.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrlabel)
+  def put_label(this : IMSMQQueueInfo*, bstrlabel : UInt8*) : HRESULT
+    @lpVtbl.value.put_label.call(this, bstrlabel)
   end
-  def get_path_name(pbstrpathname : UInt8**) : HRESULT
-    @lpVtbl.value.get_path_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrpathname)
+  def get_path_name(this : IMSMQQueueInfo*, pbstrpathname : UInt8**) : HRESULT
+    @lpVtbl.value.get_path_name.call(this, pbstrpathname)
   end
-  def put_path_name(bstrpathname : UInt8*) : HRESULT
-    @lpVtbl.value.put_path_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrpathname)
+  def put_path_name(this : IMSMQQueueInfo*, bstrpathname : UInt8*) : HRESULT
+    @lpVtbl.value.put_path_name.call(this, bstrpathname)
   end
-  def get_format_name(pbstrformatname : UInt8**) : HRESULT
-    @lpVtbl.value.get_format_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrformatname)
+  def get_format_name(this : IMSMQQueueInfo*, pbstrformatname : UInt8**) : HRESULT
+    @lpVtbl.value.get_format_name.call(this, pbstrformatname)
   end
-  def put_format_name(bstrformatname : UInt8*) : HRESULT
-    @lpVtbl.value.put_format_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrformatname)
+  def put_format_name(this : IMSMQQueueInfo*, bstrformatname : UInt8*) : HRESULT
+    @lpVtbl.value.put_format_name.call(this, bstrformatname)
   end
-  def get_is_transactional(pistransactional : Int16*) : HRESULT
-    @lpVtbl.value.get_is_transactional.unsafe_as(Proc(Int16*, HRESULT)).call(pistransactional)
+  def get_is_transactional(this : IMSMQQueueInfo*, pistransactional : Int16*) : HRESULT
+    @lpVtbl.value.get_is_transactional.call(this, pistransactional)
   end
-  def get_priv_level(plprivlevel : Int32*) : HRESULT
-    @lpVtbl.value.get_priv_level.unsafe_as(Proc(Int32*, HRESULT)).call(plprivlevel)
+  def get_priv_level(this : IMSMQQueueInfo*, plprivlevel : Int32*) : HRESULT
+    @lpVtbl.value.get_priv_level.call(this, plprivlevel)
   end
-  def put_priv_level(lprivlevel : Int32) : HRESULT
-    @lpVtbl.value.put_priv_level.unsafe_as(Proc(Int32, HRESULT)).call(lprivlevel)
+  def put_priv_level(this : IMSMQQueueInfo*, lprivlevel : Int32) : HRESULT
+    @lpVtbl.value.put_priv_level.call(this, lprivlevel)
   end
-  def get_journal(pljournal : Int32*) : HRESULT
-    @lpVtbl.value.get_journal.unsafe_as(Proc(Int32*, HRESULT)).call(pljournal)
+  def get_journal(this : IMSMQQueueInfo*, pljournal : Int32*) : HRESULT
+    @lpVtbl.value.get_journal.call(this, pljournal)
   end
-  def put_journal(ljournal : Int32) : HRESULT
-    @lpVtbl.value.put_journal.unsafe_as(Proc(Int32, HRESULT)).call(ljournal)
+  def put_journal(this : IMSMQQueueInfo*, ljournal : Int32) : HRESULT
+    @lpVtbl.value.put_journal.call(this, ljournal)
   end
-  def get_quota(plquota : Int32*) : HRESULT
-    @lpVtbl.value.get_quota.unsafe_as(Proc(Int32*, HRESULT)).call(plquota)
+  def get_quota(this : IMSMQQueueInfo*, plquota : Int32*) : HRESULT
+    @lpVtbl.value.get_quota.call(this, plquota)
   end
-  def put_quota(lquota : Int32) : HRESULT
-    @lpVtbl.value.put_quota.unsafe_as(Proc(Int32, HRESULT)).call(lquota)
+  def put_quota(this : IMSMQQueueInfo*, lquota : Int32) : HRESULT
+    @lpVtbl.value.put_quota.call(this, lquota)
   end
-  def get_base_priority(plbasepriority : Int32*) : HRESULT
-    @lpVtbl.value.get_base_priority.unsafe_as(Proc(Int32*, HRESULT)).call(plbasepriority)
+  def get_base_priority(this : IMSMQQueueInfo*, plbasepriority : Int32*) : HRESULT
+    @lpVtbl.value.get_base_priority.call(this, plbasepriority)
   end
-  def put_base_priority(lbasepriority : Int32) : HRESULT
-    @lpVtbl.value.put_base_priority.unsafe_as(Proc(Int32, HRESULT)).call(lbasepriority)
+  def put_base_priority(this : IMSMQQueueInfo*, lbasepriority : Int32) : HRESULT
+    @lpVtbl.value.put_base_priority.call(this, lbasepriority)
   end
-  def get_create_time(pvarcreatetime : VARIANT*) : HRESULT
-    @lpVtbl.value.get_create_time.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarcreatetime)
+  def get_create_time(this : IMSMQQueueInfo*, pvarcreatetime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_create_time.call(this, pvarcreatetime)
   end
-  def get_modify_time(pvarmodifytime : VARIANT*) : HRESULT
-    @lpVtbl.value.get_modify_time.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarmodifytime)
+  def get_modify_time(this : IMSMQQueueInfo*, pvarmodifytime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_modify_time.call(this, pvarmodifytime)
   end
-  def get_authenticate(plauthenticate : Int32*) : HRESULT
-    @lpVtbl.value.get_authenticate.unsafe_as(Proc(Int32*, HRESULT)).call(plauthenticate)
+  def get_authenticate(this : IMSMQQueueInfo*, plauthenticate : Int32*) : HRESULT
+    @lpVtbl.value.get_authenticate.call(this, plauthenticate)
   end
-  def put_authenticate(lauthenticate : Int32) : HRESULT
-    @lpVtbl.value.put_authenticate.unsafe_as(Proc(Int32, HRESULT)).call(lauthenticate)
+  def put_authenticate(this : IMSMQQueueInfo*, lauthenticate : Int32) : HRESULT
+    @lpVtbl.value.put_authenticate.call(this, lauthenticate)
   end
-  def get_journal_quota(pljournalquota : Int32*) : HRESULT
-    @lpVtbl.value.get_journal_quota.unsafe_as(Proc(Int32*, HRESULT)).call(pljournalquota)
+  def get_journal_quota(this : IMSMQQueueInfo*, pljournalquota : Int32*) : HRESULT
+    @lpVtbl.value.get_journal_quota.call(this, pljournalquota)
   end
-  def put_journal_quota(ljournalquota : Int32) : HRESULT
-    @lpVtbl.value.put_journal_quota.unsafe_as(Proc(Int32, HRESULT)).call(ljournalquota)
+  def put_journal_quota(this : IMSMQQueueInfo*, ljournalquota : Int32) : HRESULT
+    @lpVtbl.value.put_journal_quota.call(this, ljournalquota)
   end
-  def get_is_world_readable(pisworldreadable : Int16*) : HRESULT
-    @lpVtbl.value.get_is_world_readable.unsafe_as(Proc(Int16*, HRESULT)).call(pisworldreadable)
+  def get_is_world_readable(this : IMSMQQueueInfo*, pisworldreadable : Int16*) : HRESULT
+    @lpVtbl.value.get_is_world_readable.call(this, pisworldreadable)
   end
-  def create(istransactional : VARIANT*, isworldreadable : VARIANT*) : HRESULT
-    @lpVtbl.value.create.unsafe_as(Proc(VARIANT*, VARIANT*, HRESULT)).call(istransactional, isworldreadable)
+  def create(this : IMSMQQueueInfo*, istransactional : VARIANT*, isworldreadable : VARIANT*) : HRESULT
+    @lpVtbl.value.create.call(this, istransactional, isworldreadable)
   end
-  def delete : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  def delete(this : IMSMQQueueInfo*) : HRESULT
+    @lpVtbl.value.delete.call(this)
   end
-  def open(access : Int32, sharemode : Int32, ppq : IMSMQQueue*) : HRESULT
-    @lpVtbl.value.open.unsafe_as(Proc(Int32, Int32, IMSMQQueue*, HRESULT)).call(access, sharemode, ppq)
+  def open(this : IMSMQQueueInfo*, access : Int32, sharemode : Int32, ppq : IMSMQQueue*) : HRESULT
+    @lpVtbl.value.open.call(this, access, sharemode, ppq)
   end
-  def refresh : HRESULT
-    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  def refresh(this : IMSMQQueueInfo*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
   end
-  def update : HRESULT
-    @lpVtbl.value.update.unsafe_as(Proc(HRESULT)).call
+  def update(this : IMSMQQueueInfo*) : HRESULT
+    @lpVtbl.value.update.call(this)
   end
 end
 struct LibWin32::IMSMQQueueInfo2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQQueueInfo2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQQueueInfo2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQQueueInfo2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQQueueInfo2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQQueueInfo2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQQueueInfo2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQQueueInfo2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_queue_guid(pbstrguidqueue : UInt8**) : HRESULT
-    @lpVtbl.value.get_queue_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrguidqueue)
+  def get_queue_guid(this : IMSMQQueueInfo2*, pbstrguidqueue : UInt8**) : HRESULT
+    @lpVtbl.value.get_queue_guid.call(this, pbstrguidqueue)
   end
-  def get_service_type_guid(pbstrguidservicetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_service_type_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrguidservicetype)
+  def get_service_type_guid(this : IMSMQQueueInfo2*, pbstrguidservicetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_type_guid.call(this, pbstrguidservicetype)
   end
-  def put_service_type_guid(bstrguidservicetype : UInt8*) : HRESULT
-    @lpVtbl.value.put_service_type_guid.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrguidservicetype)
+  def put_service_type_guid(this : IMSMQQueueInfo2*, bstrguidservicetype : UInt8*) : HRESULT
+    @lpVtbl.value.put_service_type_guid.call(this, bstrguidservicetype)
   end
-  def get_label(pbstrlabel : UInt8**) : HRESULT
-    @lpVtbl.value.get_label.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrlabel)
+  def get_label(this : IMSMQQueueInfo2*, pbstrlabel : UInt8**) : HRESULT
+    @lpVtbl.value.get_label.call(this, pbstrlabel)
   end
-  def put_label(bstrlabel : UInt8*) : HRESULT
-    @lpVtbl.value.put_label.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrlabel)
+  def put_label(this : IMSMQQueueInfo2*, bstrlabel : UInt8*) : HRESULT
+    @lpVtbl.value.put_label.call(this, bstrlabel)
   end
-  def get_path_name(pbstrpathname : UInt8**) : HRESULT
-    @lpVtbl.value.get_path_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrpathname)
+  def get_path_name(this : IMSMQQueueInfo2*, pbstrpathname : UInt8**) : HRESULT
+    @lpVtbl.value.get_path_name.call(this, pbstrpathname)
   end
-  def put_path_name(bstrpathname : UInt8*) : HRESULT
-    @lpVtbl.value.put_path_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrpathname)
+  def put_path_name(this : IMSMQQueueInfo2*, bstrpathname : UInt8*) : HRESULT
+    @lpVtbl.value.put_path_name.call(this, bstrpathname)
   end
-  def get_format_name(pbstrformatname : UInt8**) : HRESULT
-    @lpVtbl.value.get_format_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrformatname)
+  def get_format_name(this : IMSMQQueueInfo2*, pbstrformatname : UInt8**) : HRESULT
+    @lpVtbl.value.get_format_name.call(this, pbstrformatname)
   end
-  def put_format_name(bstrformatname : UInt8*) : HRESULT
-    @lpVtbl.value.put_format_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrformatname)
+  def put_format_name(this : IMSMQQueueInfo2*, bstrformatname : UInt8*) : HRESULT
+    @lpVtbl.value.put_format_name.call(this, bstrformatname)
   end
-  def get_is_transactional(pistransactional : Int16*) : HRESULT
-    @lpVtbl.value.get_is_transactional.unsafe_as(Proc(Int16*, HRESULT)).call(pistransactional)
+  def get_is_transactional(this : IMSMQQueueInfo2*, pistransactional : Int16*) : HRESULT
+    @lpVtbl.value.get_is_transactional.call(this, pistransactional)
   end
-  def get_priv_level(plprivlevel : Int32*) : HRESULT
-    @lpVtbl.value.get_priv_level.unsafe_as(Proc(Int32*, HRESULT)).call(plprivlevel)
+  def get_priv_level(this : IMSMQQueueInfo2*, plprivlevel : Int32*) : HRESULT
+    @lpVtbl.value.get_priv_level.call(this, plprivlevel)
   end
-  def put_priv_level(lprivlevel : Int32) : HRESULT
-    @lpVtbl.value.put_priv_level.unsafe_as(Proc(Int32, HRESULT)).call(lprivlevel)
+  def put_priv_level(this : IMSMQQueueInfo2*, lprivlevel : Int32) : HRESULT
+    @lpVtbl.value.put_priv_level.call(this, lprivlevel)
   end
-  def get_journal(pljournal : Int32*) : HRESULT
-    @lpVtbl.value.get_journal.unsafe_as(Proc(Int32*, HRESULT)).call(pljournal)
+  def get_journal(this : IMSMQQueueInfo2*, pljournal : Int32*) : HRESULT
+    @lpVtbl.value.get_journal.call(this, pljournal)
   end
-  def put_journal(ljournal : Int32) : HRESULT
-    @lpVtbl.value.put_journal.unsafe_as(Proc(Int32, HRESULT)).call(ljournal)
+  def put_journal(this : IMSMQQueueInfo2*, ljournal : Int32) : HRESULT
+    @lpVtbl.value.put_journal.call(this, ljournal)
   end
-  def get_quota(plquota : Int32*) : HRESULT
-    @lpVtbl.value.get_quota.unsafe_as(Proc(Int32*, HRESULT)).call(plquota)
+  def get_quota(this : IMSMQQueueInfo2*, plquota : Int32*) : HRESULT
+    @lpVtbl.value.get_quota.call(this, plquota)
   end
-  def put_quota(lquota : Int32) : HRESULT
-    @lpVtbl.value.put_quota.unsafe_as(Proc(Int32, HRESULT)).call(lquota)
+  def put_quota(this : IMSMQQueueInfo2*, lquota : Int32) : HRESULT
+    @lpVtbl.value.put_quota.call(this, lquota)
   end
-  def get_base_priority(plbasepriority : Int32*) : HRESULT
-    @lpVtbl.value.get_base_priority.unsafe_as(Proc(Int32*, HRESULT)).call(plbasepriority)
+  def get_base_priority(this : IMSMQQueueInfo2*, plbasepriority : Int32*) : HRESULT
+    @lpVtbl.value.get_base_priority.call(this, plbasepriority)
   end
-  def put_base_priority(lbasepriority : Int32) : HRESULT
-    @lpVtbl.value.put_base_priority.unsafe_as(Proc(Int32, HRESULT)).call(lbasepriority)
+  def put_base_priority(this : IMSMQQueueInfo2*, lbasepriority : Int32) : HRESULT
+    @lpVtbl.value.put_base_priority.call(this, lbasepriority)
   end
-  def get_create_time(pvarcreatetime : VARIANT*) : HRESULT
-    @lpVtbl.value.get_create_time.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarcreatetime)
+  def get_create_time(this : IMSMQQueueInfo2*, pvarcreatetime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_create_time.call(this, pvarcreatetime)
   end
-  def get_modify_time(pvarmodifytime : VARIANT*) : HRESULT
-    @lpVtbl.value.get_modify_time.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarmodifytime)
+  def get_modify_time(this : IMSMQQueueInfo2*, pvarmodifytime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_modify_time.call(this, pvarmodifytime)
   end
-  def get_authenticate(plauthenticate : Int32*) : HRESULT
-    @lpVtbl.value.get_authenticate.unsafe_as(Proc(Int32*, HRESULT)).call(plauthenticate)
+  def get_authenticate(this : IMSMQQueueInfo2*, plauthenticate : Int32*) : HRESULT
+    @lpVtbl.value.get_authenticate.call(this, plauthenticate)
   end
-  def put_authenticate(lauthenticate : Int32) : HRESULT
-    @lpVtbl.value.put_authenticate.unsafe_as(Proc(Int32, HRESULT)).call(lauthenticate)
+  def put_authenticate(this : IMSMQQueueInfo2*, lauthenticate : Int32) : HRESULT
+    @lpVtbl.value.put_authenticate.call(this, lauthenticate)
   end
-  def get_journal_quota(pljournalquota : Int32*) : HRESULT
-    @lpVtbl.value.get_journal_quota.unsafe_as(Proc(Int32*, HRESULT)).call(pljournalquota)
+  def get_journal_quota(this : IMSMQQueueInfo2*, pljournalquota : Int32*) : HRESULT
+    @lpVtbl.value.get_journal_quota.call(this, pljournalquota)
   end
-  def put_journal_quota(ljournalquota : Int32) : HRESULT
-    @lpVtbl.value.put_journal_quota.unsafe_as(Proc(Int32, HRESULT)).call(ljournalquota)
+  def put_journal_quota(this : IMSMQQueueInfo2*, ljournalquota : Int32) : HRESULT
+    @lpVtbl.value.put_journal_quota.call(this, ljournalquota)
   end
-  def get_is_world_readable(pisworldreadable : Int16*) : HRESULT
-    @lpVtbl.value.get_is_world_readable.unsafe_as(Proc(Int16*, HRESULT)).call(pisworldreadable)
+  def get_is_world_readable(this : IMSMQQueueInfo2*, pisworldreadable : Int16*) : HRESULT
+    @lpVtbl.value.get_is_world_readable.call(this, pisworldreadable)
   end
-  def create(istransactional : VARIANT*, isworldreadable : VARIANT*) : HRESULT
-    @lpVtbl.value.create.unsafe_as(Proc(VARIANT*, VARIANT*, HRESULT)).call(istransactional, isworldreadable)
+  def create(this : IMSMQQueueInfo2*, istransactional : VARIANT*, isworldreadable : VARIANT*) : HRESULT
+    @lpVtbl.value.create.call(this, istransactional, isworldreadable)
   end
-  def delete : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  def delete(this : IMSMQQueueInfo2*) : HRESULT
+    @lpVtbl.value.delete.call(this)
   end
-  def open(access : Int32, sharemode : Int32, ppq : IMSMQQueue2*) : HRESULT
-    @lpVtbl.value.open.unsafe_as(Proc(Int32, Int32, IMSMQQueue2*, HRESULT)).call(access, sharemode, ppq)
+  def open(this : IMSMQQueueInfo2*, access : Int32, sharemode : Int32, ppq : IMSMQQueue2*) : HRESULT
+    @lpVtbl.value.open.call(this, access, sharemode, ppq)
   end
-  def refresh : HRESULT
-    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  def refresh(this : IMSMQQueueInfo2*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
   end
-  def update : HRESULT
-    @lpVtbl.value.update.unsafe_as(Proc(HRESULT)).call
+  def update(this : IMSMQQueueInfo2*) : HRESULT
+    @lpVtbl.value.update.call(this)
   end
-  def get_path_name_dns(pbstrpathnamedns : UInt8**) : HRESULT
-    @lpVtbl.value.get_path_name_dns.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrpathnamedns)
+  def get_path_name_dns(this : IMSMQQueueInfo2*, pbstrpathnamedns : UInt8**) : HRESULT
+    @lpVtbl.value.get_path_name_dns.call(this, pbstrpathnamedns)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQQueueInfo2*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
-  def get_security(pvarsecurity : VARIANT*) : HRESULT
-    @lpVtbl.value.get_security.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarsecurity)
+  def get_security(this : IMSMQQueueInfo2*, pvarsecurity : VARIANT*) : HRESULT
+    @lpVtbl.value.get_security.call(this, pvarsecurity)
   end
-  def put_security(varsecurity : VARIANT) : HRESULT
-    @lpVtbl.value.put_security.unsafe_as(Proc(VARIANT, HRESULT)).call(varsecurity)
+  def put_security(this : IMSMQQueueInfo2*, varsecurity : VARIANT) : HRESULT
+    @lpVtbl.value.put_security.call(this, varsecurity)
   end
 end
 struct LibWin32::IMSMQQueueInfo3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQQueueInfo3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQQueueInfo3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQQueueInfo3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQQueueInfo3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQQueueInfo3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQQueueInfo3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQQueueInfo3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_queue_guid(pbstrguidqueue : UInt8**) : HRESULT
-    @lpVtbl.value.get_queue_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrguidqueue)
+  def get_queue_guid(this : IMSMQQueueInfo3*, pbstrguidqueue : UInt8**) : HRESULT
+    @lpVtbl.value.get_queue_guid.call(this, pbstrguidqueue)
   end
-  def get_service_type_guid(pbstrguidservicetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_service_type_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrguidservicetype)
+  def get_service_type_guid(this : IMSMQQueueInfo3*, pbstrguidservicetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_type_guid.call(this, pbstrguidservicetype)
   end
-  def put_service_type_guid(bstrguidservicetype : UInt8*) : HRESULT
-    @lpVtbl.value.put_service_type_guid.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrguidservicetype)
+  def put_service_type_guid(this : IMSMQQueueInfo3*, bstrguidservicetype : UInt8*) : HRESULT
+    @lpVtbl.value.put_service_type_guid.call(this, bstrguidservicetype)
   end
-  def get_label(pbstrlabel : UInt8**) : HRESULT
-    @lpVtbl.value.get_label.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrlabel)
+  def get_label(this : IMSMQQueueInfo3*, pbstrlabel : UInt8**) : HRESULT
+    @lpVtbl.value.get_label.call(this, pbstrlabel)
   end
-  def put_label(bstrlabel : UInt8*) : HRESULT
-    @lpVtbl.value.put_label.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrlabel)
+  def put_label(this : IMSMQQueueInfo3*, bstrlabel : UInt8*) : HRESULT
+    @lpVtbl.value.put_label.call(this, bstrlabel)
   end
-  def get_path_name(pbstrpathname : UInt8**) : HRESULT
-    @lpVtbl.value.get_path_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrpathname)
+  def get_path_name(this : IMSMQQueueInfo3*, pbstrpathname : UInt8**) : HRESULT
+    @lpVtbl.value.get_path_name.call(this, pbstrpathname)
   end
-  def put_path_name(bstrpathname : UInt8*) : HRESULT
-    @lpVtbl.value.put_path_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrpathname)
+  def put_path_name(this : IMSMQQueueInfo3*, bstrpathname : UInt8*) : HRESULT
+    @lpVtbl.value.put_path_name.call(this, bstrpathname)
   end
-  def get_format_name(pbstrformatname : UInt8**) : HRESULT
-    @lpVtbl.value.get_format_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrformatname)
+  def get_format_name(this : IMSMQQueueInfo3*, pbstrformatname : UInt8**) : HRESULT
+    @lpVtbl.value.get_format_name.call(this, pbstrformatname)
   end
-  def put_format_name(bstrformatname : UInt8*) : HRESULT
-    @lpVtbl.value.put_format_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrformatname)
+  def put_format_name(this : IMSMQQueueInfo3*, bstrformatname : UInt8*) : HRESULT
+    @lpVtbl.value.put_format_name.call(this, bstrformatname)
   end
-  def get_is_transactional(pistransactional : Int16*) : HRESULT
-    @lpVtbl.value.get_is_transactional.unsafe_as(Proc(Int16*, HRESULT)).call(pistransactional)
+  def get_is_transactional(this : IMSMQQueueInfo3*, pistransactional : Int16*) : HRESULT
+    @lpVtbl.value.get_is_transactional.call(this, pistransactional)
   end
-  def get_priv_level(plprivlevel : Int32*) : HRESULT
-    @lpVtbl.value.get_priv_level.unsafe_as(Proc(Int32*, HRESULT)).call(plprivlevel)
+  def get_priv_level(this : IMSMQQueueInfo3*, plprivlevel : Int32*) : HRESULT
+    @lpVtbl.value.get_priv_level.call(this, plprivlevel)
   end
-  def put_priv_level(lprivlevel : Int32) : HRESULT
-    @lpVtbl.value.put_priv_level.unsafe_as(Proc(Int32, HRESULT)).call(lprivlevel)
+  def put_priv_level(this : IMSMQQueueInfo3*, lprivlevel : Int32) : HRESULT
+    @lpVtbl.value.put_priv_level.call(this, lprivlevel)
   end
-  def get_journal(pljournal : Int32*) : HRESULT
-    @lpVtbl.value.get_journal.unsafe_as(Proc(Int32*, HRESULT)).call(pljournal)
+  def get_journal(this : IMSMQQueueInfo3*, pljournal : Int32*) : HRESULT
+    @lpVtbl.value.get_journal.call(this, pljournal)
   end
-  def put_journal(ljournal : Int32) : HRESULT
-    @lpVtbl.value.put_journal.unsafe_as(Proc(Int32, HRESULT)).call(ljournal)
+  def put_journal(this : IMSMQQueueInfo3*, ljournal : Int32) : HRESULT
+    @lpVtbl.value.put_journal.call(this, ljournal)
   end
-  def get_quota(plquota : Int32*) : HRESULT
-    @lpVtbl.value.get_quota.unsafe_as(Proc(Int32*, HRESULT)).call(plquota)
+  def get_quota(this : IMSMQQueueInfo3*, plquota : Int32*) : HRESULT
+    @lpVtbl.value.get_quota.call(this, plquota)
   end
-  def put_quota(lquota : Int32) : HRESULT
-    @lpVtbl.value.put_quota.unsafe_as(Proc(Int32, HRESULT)).call(lquota)
+  def put_quota(this : IMSMQQueueInfo3*, lquota : Int32) : HRESULT
+    @lpVtbl.value.put_quota.call(this, lquota)
   end
-  def get_base_priority(plbasepriority : Int32*) : HRESULT
-    @lpVtbl.value.get_base_priority.unsafe_as(Proc(Int32*, HRESULT)).call(plbasepriority)
+  def get_base_priority(this : IMSMQQueueInfo3*, plbasepriority : Int32*) : HRESULT
+    @lpVtbl.value.get_base_priority.call(this, plbasepriority)
   end
-  def put_base_priority(lbasepriority : Int32) : HRESULT
-    @lpVtbl.value.put_base_priority.unsafe_as(Proc(Int32, HRESULT)).call(lbasepriority)
+  def put_base_priority(this : IMSMQQueueInfo3*, lbasepriority : Int32) : HRESULT
+    @lpVtbl.value.put_base_priority.call(this, lbasepriority)
   end
-  def get_create_time(pvarcreatetime : VARIANT*) : HRESULT
-    @lpVtbl.value.get_create_time.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarcreatetime)
+  def get_create_time(this : IMSMQQueueInfo3*, pvarcreatetime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_create_time.call(this, pvarcreatetime)
   end
-  def get_modify_time(pvarmodifytime : VARIANT*) : HRESULT
-    @lpVtbl.value.get_modify_time.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarmodifytime)
+  def get_modify_time(this : IMSMQQueueInfo3*, pvarmodifytime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_modify_time.call(this, pvarmodifytime)
   end
-  def get_authenticate(plauthenticate : Int32*) : HRESULT
-    @lpVtbl.value.get_authenticate.unsafe_as(Proc(Int32*, HRESULT)).call(plauthenticate)
+  def get_authenticate(this : IMSMQQueueInfo3*, plauthenticate : Int32*) : HRESULT
+    @lpVtbl.value.get_authenticate.call(this, plauthenticate)
   end
-  def put_authenticate(lauthenticate : Int32) : HRESULT
-    @lpVtbl.value.put_authenticate.unsafe_as(Proc(Int32, HRESULT)).call(lauthenticate)
+  def put_authenticate(this : IMSMQQueueInfo3*, lauthenticate : Int32) : HRESULT
+    @lpVtbl.value.put_authenticate.call(this, lauthenticate)
   end
-  def get_journal_quota(pljournalquota : Int32*) : HRESULT
-    @lpVtbl.value.get_journal_quota.unsafe_as(Proc(Int32*, HRESULT)).call(pljournalquota)
+  def get_journal_quota(this : IMSMQQueueInfo3*, pljournalquota : Int32*) : HRESULT
+    @lpVtbl.value.get_journal_quota.call(this, pljournalquota)
   end
-  def put_journal_quota(ljournalquota : Int32) : HRESULT
-    @lpVtbl.value.put_journal_quota.unsafe_as(Proc(Int32, HRESULT)).call(ljournalquota)
+  def put_journal_quota(this : IMSMQQueueInfo3*, ljournalquota : Int32) : HRESULT
+    @lpVtbl.value.put_journal_quota.call(this, ljournalquota)
   end
-  def get_is_world_readable(pisworldreadable : Int16*) : HRESULT
-    @lpVtbl.value.get_is_world_readable.unsafe_as(Proc(Int16*, HRESULT)).call(pisworldreadable)
+  def get_is_world_readable(this : IMSMQQueueInfo3*, pisworldreadable : Int16*) : HRESULT
+    @lpVtbl.value.get_is_world_readable.call(this, pisworldreadable)
   end
-  def create(istransactional : VARIANT*, isworldreadable : VARIANT*) : HRESULT
-    @lpVtbl.value.create.unsafe_as(Proc(VARIANT*, VARIANT*, HRESULT)).call(istransactional, isworldreadable)
+  def create(this : IMSMQQueueInfo3*, istransactional : VARIANT*, isworldreadable : VARIANT*) : HRESULT
+    @lpVtbl.value.create.call(this, istransactional, isworldreadable)
   end
-  def delete : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  def delete(this : IMSMQQueueInfo3*) : HRESULT
+    @lpVtbl.value.delete.call(this)
   end
-  def open(access : Int32, sharemode : Int32, ppq : IMSMQQueue3*) : HRESULT
-    @lpVtbl.value.open.unsafe_as(Proc(Int32, Int32, IMSMQQueue3*, HRESULT)).call(access, sharemode, ppq)
+  def open(this : IMSMQQueueInfo3*, access : Int32, sharemode : Int32, ppq : IMSMQQueue3*) : HRESULT
+    @lpVtbl.value.open.call(this, access, sharemode, ppq)
   end
-  def refresh : HRESULT
-    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  def refresh(this : IMSMQQueueInfo3*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
   end
-  def update : HRESULT
-    @lpVtbl.value.update.unsafe_as(Proc(HRESULT)).call
+  def update(this : IMSMQQueueInfo3*) : HRESULT
+    @lpVtbl.value.update.call(this)
   end
-  def get_path_name_dns(pbstrpathnamedns : UInt8**) : HRESULT
-    @lpVtbl.value.get_path_name_dns.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrpathnamedns)
+  def get_path_name_dns(this : IMSMQQueueInfo3*, pbstrpathnamedns : UInt8**) : HRESULT
+    @lpVtbl.value.get_path_name_dns.call(this, pbstrpathnamedns)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQQueueInfo3*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
-  def get_security(pvarsecurity : VARIANT*) : HRESULT
-    @lpVtbl.value.get_security.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarsecurity)
+  def get_security(this : IMSMQQueueInfo3*, pvarsecurity : VARIANT*) : HRESULT
+    @lpVtbl.value.get_security.call(this, pvarsecurity)
   end
-  def put_security(varsecurity : VARIANT) : HRESULT
-    @lpVtbl.value.put_security.unsafe_as(Proc(VARIANT, HRESULT)).call(varsecurity)
+  def put_security(this : IMSMQQueueInfo3*, varsecurity : VARIANT) : HRESULT
+    @lpVtbl.value.put_security.call(this, varsecurity)
   end
-  def get_is_transactional2(pistransactional : Int16*) : HRESULT
-    @lpVtbl.value.get_is_transactional2.unsafe_as(Proc(Int16*, HRESULT)).call(pistransactional)
+  def get_is_transactional2(this : IMSMQQueueInfo3*, pistransactional : Int16*) : HRESULT
+    @lpVtbl.value.get_is_transactional2.call(this, pistransactional)
   end
-  def get_is_world_readable2(pisworldreadable : Int16*) : HRESULT
-    @lpVtbl.value.get_is_world_readable2.unsafe_as(Proc(Int16*, HRESULT)).call(pisworldreadable)
+  def get_is_world_readable2(this : IMSMQQueueInfo3*, pisworldreadable : Int16*) : HRESULT
+    @lpVtbl.value.get_is_world_readable2.call(this, pisworldreadable)
   end
-  def get_multicast_address(pbstrmulticastaddress : UInt8**) : HRESULT
-    @lpVtbl.value.get_multicast_address.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrmulticastaddress)
+  def get_multicast_address(this : IMSMQQueueInfo3*, pbstrmulticastaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_multicast_address.call(this, pbstrmulticastaddress)
   end
-  def put_multicast_address(bstrmulticastaddress : UInt8*) : HRESULT
-    @lpVtbl.value.put_multicast_address.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrmulticastaddress)
+  def put_multicast_address(this : IMSMQQueueInfo3*, bstrmulticastaddress : UInt8*) : HRESULT
+    @lpVtbl.value.put_multicast_address.call(this, bstrmulticastaddress)
   end
-  def get_a_ds_path(pbstradspath : UInt8**) : HRESULT
-    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstradspath)
+  def get_a_ds_path(this : IMSMQQueueInfo3*, pbstradspath : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.call(this, pbstradspath)
   end
 end
 struct LibWin32::IMSMQQueueInfo4
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQQueueInfo4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQQueueInfo4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQQueueInfo4*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQQueueInfo4*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQQueueInfo4*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQQueueInfo4*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQQueueInfo4*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_queue_guid(pbstrguidqueue : UInt8**) : HRESULT
-    @lpVtbl.value.get_queue_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrguidqueue)
+  def get_queue_guid(this : IMSMQQueueInfo4*, pbstrguidqueue : UInt8**) : HRESULT
+    @lpVtbl.value.get_queue_guid.call(this, pbstrguidqueue)
   end
-  def get_service_type_guid(pbstrguidservicetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_service_type_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrguidservicetype)
+  def get_service_type_guid(this : IMSMQQueueInfo4*, pbstrguidservicetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_type_guid.call(this, pbstrguidservicetype)
   end
-  def put_service_type_guid(bstrguidservicetype : UInt8*) : HRESULT
-    @lpVtbl.value.put_service_type_guid.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrguidservicetype)
+  def put_service_type_guid(this : IMSMQQueueInfo4*, bstrguidservicetype : UInt8*) : HRESULT
+    @lpVtbl.value.put_service_type_guid.call(this, bstrguidservicetype)
   end
-  def get_label(pbstrlabel : UInt8**) : HRESULT
-    @lpVtbl.value.get_label.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrlabel)
+  def get_label(this : IMSMQQueueInfo4*, pbstrlabel : UInt8**) : HRESULT
+    @lpVtbl.value.get_label.call(this, pbstrlabel)
   end
-  def put_label(bstrlabel : UInt8*) : HRESULT
-    @lpVtbl.value.put_label.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrlabel)
+  def put_label(this : IMSMQQueueInfo4*, bstrlabel : UInt8*) : HRESULT
+    @lpVtbl.value.put_label.call(this, bstrlabel)
   end
-  def get_path_name(pbstrpathname : UInt8**) : HRESULT
-    @lpVtbl.value.get_path_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrpathname)
+  def get_path_name(this : IMSMQQueueInfo4*, pbstrpathname : UInt8**) : HRESULT
+    @lpVtbl.value.get_path_name.call(this, pbstrpathname)
   end
-  def put_path_name(bstrpathname : UInt8*) : HRESULT
-    @lpVtbl.value.put_path_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrpathname)
+  def put_path_name(this : IMSMQQueueInfo4*, bstrpathname : UInt8*) : HRESULT
+    @lpVtbl.value.put_path_name.call(this, bstrpathname)
   end
-  def get_format_name(pbstrformatname : UInt8**) : HRESULT
-    @lpVtbl.value.get_format_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrformatname)
+  def get_format_name(this : IMSMQQueueInfo4*, pbstrformatname : UInt8**) : HRESULT
+    @lpVtbl.value.get_format_name.call(this, pbstrformatname)
   end
-  def put_format_name(bstrformatname : UInt8*) : HRESULT
-    @lpVtbl.value.put_format_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrformatname)
+  def put_format_name(this : IMSMQQueueInfo4*, bstrformatname : UInt8*) : HRESULT
+    @lpVtbl.value.put_format_name.call(this, bstrformatname)
   end
-  def get_is_transactional(pistransactional : Int16*) : HRESULT
-    @lpVtbl.value.get_is_transactional.unsafe_as(Proc(Int16*, HRESULT)).call(pistransactional)
+  def get_is_transactional(this : IMSMQQueueInfo4*, pistransactional : Int16*) : HRESULT
+    @lpVtbl.value.get_is_transactional.call(this, pistransactional)
   end
-  def get_priv_level(plprivlevel : Int32*) : HRESULT
-    @lpVtbl.value.get_priv_level.unsafe_as(Proc(Int32*, HRESULT)).call(plprivlevel)
+  def get_priv_level(this : IMSMQQueueInfo4*, plprivlevel : Int32*) : HRESULT
+    @lpVtbl.value.get_priv_level.call(this, plprivlevel)
   end
-  def put_priv_level(lprivlevel : Int32) : HRESULT
-    @lpVtbl.value.put_priv_level.unsafe_as(Proc(Int32, HRESULT)).call(lprivlevel)
+  def put_priv_level(this : IMSMQQueueInfo4*, lprivlevel : Int32) : HRESULT
+    @lpVtbl.value.put_priv_level.call(this, lprivlevel)
   end
-  def get_journal(pljournal : Int32*) : HRESULT
-    @lpVtbl.value.get_journal.unsafe_as(Proc(Int32*, HRESULT)).call(pljournal)
+  def get_journal(this : IMSMQQueueInfo4*, pljournal : Int32*) : HRESULT
+    @lpVtbl.value.get_journal.call(this, pljournal)
   end
-  def put_journal(ljournal : Int32) : HRESULT
-    @lpVtbl.value.put_journal.unsafe_as(Proc(Int32, HRESULT)).call(ljournal)
+  def put_journal(this : IMSMQQueueInfo4*, ljournal : Int32) : HRESULT
+    @lpVtbl.value.put_journal.call(this, ljournal)
   end
-  def get_quota(plquota : Int32*) : HRESULT
-    @lpVtbl.value.get_quota.unsafe_as(Proc(Int32*, HRESULT)).call(plquota)
+  def get_quota(this : IMSMQQueueInfo4*, plquota : Int32*) : HRESULT
+    @lpVtbl.value.get_quota.call(this, plquota)
   end
-  def put_quota(lquota : Int32) : HRESULT
-    @lpVtbl.value.put_quota.unsafe_as(Proc(Int32, HRESULT)).call(lquota)
+  def put_quota(this : IMSMQQueueInfo4*, lquota : Int32) : HRESULT
+    @lpVtbl.value.put_quota.call(this, lquota)
   end
-  def get_base_priority(plbasepriority : Int32*) : HRESULT
-    @lpVtbl.value.get_base_priority.unsafe_as(Proc(Int32*, HRESULT)).call(plbasepriority)
+  def get_base_priority(this : IMSMQQueueInfo4*, plbasepriority : Int32*) : HRESULT
+    @lpVtbl.value.get_base_priority.call(this, plbasepriority)
   end
-  def put_base_priority(lbasepriority : Int32) : HRESULT
-    @lpVtbl.value.put_base_priority.unsafe_as(Proc(Int32, HRESULT)).call(lbasepriority)
+  def put_base_priority(this : IMSMQQueueInfo4*, lbasepriority : Int32) : HRESULT
+    @lpVtbl.value.put_base_priority.call(this, lbasepriority)
   end
-  def get_create_time(pvarcreatetime : VARIANT*) : HRESULT
-    @lpVtbl.value.get_create_time.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarcreatetime)
+  def get_create_time(this : IMSMQQueueInfo4*, pvarcreatetime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_create_time.call(this, pvarcreatetime)
   end
-  def get_modify_time(pvarmodifytime : VARIANT*) : HRESULT
-    @lpVtbl.value.get_modify_time.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarmodifytime)
+  def get_modify_time(this : IMSMQQueueInfo4*, pvarmodifytime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_modify_time.call(this, pvarmodifytime)
   end
-  def get_authenticate(plauthenticate : Int32*) : HRESULT
-    @lpVtbl.value.get_authenticate.unsafe_as(Proc(Int32*, HRESULT)).call(plauthenticate)
+  def get_authenticate(this : IMSMQQueueInfo4*, plauthenticate : Int32*) : HRESULT
+    @lpVtbl.value.get_authenticate.call(this, plauthenticate)
   end
-  def put_authenticate(lauthenticate : Int32) : HRESULT
-    @lpVtbl.value.put_authenticate.unsafe_as(Proc(Int32, HRESULT)).call(lauthenticate)
+  def put_authenticate(this : IMSMQQueueInfo4*, lauthenticate : Int32) : HRESULT
+    @lpVtbl.value.put_authenticate.call(this, lauthenticate)
   end
-  def get_journal_quota(pljournalquota : Int32*) : HRESULT
-    @lpVtbl.value.get_journal_quota.unsafe_as(Proc(Int32*, HRESULT)).call(pljournalquota)
+  def get_journal_quota(this : IMSMQQueueInfo4*, pljournalquota : Int32*) : HRESULT
+    @lpVtbl.value.get_journal_quota.call(this, pljournalquota)
   end
-  def put_journal_quota(ljournalquota : Int32) : HRESULT
-    @lpVtbl.value.put_journal_quota.unsafe_as(Proc(Int32, HRESULT)).call(ljournalquota)
+  def put_journal_quota(this : IMSMQQueueInfo4*, ljournalquota : Int32) : HRESULT
+    @lpVtbl.value.put_journal_quota.call(this, ljournalquota)
   end
-  def get_is_world_readable(pisworldreadable : Int16*) : HRESULT
-    @lpVtbl.value.get_is_world_readable.unsafe_as(Proc(Int16*, HRESULT)).call(pisworldreadable)
+  def get_is_world_readable(this : IMSMQQueueInfo4*, pisworldreadable : Int16*) : HRESULT
+    @lpVtbl.value.get_is_world_readable.call(this, pisworldreadable)
   end
-  def create(istransactional : VARIANT*, isworldreadable : VARIANT*) : HRESULT
-    @lpVtbl.value.create.unsafe_as(Proc(VARIANT*, VARIANT*, HRESULT)).call(istransactional, isworldreadable)
+  def create(this : IMSMQQueueInfo4*, istransactional : VARIANT*, isworldreadable : VARIANT*) : HRESULT
+    @lpVtbl.value.create.call(this, istransactional, isworldreadable)
   end
-  def delete : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  def delete(this : IMSMQQueueInfo4*) : HRESULT
+    @lpVtbl.value.delete.call(this)
   end
-  def open(access : Int32, sharemode : Int32, ppq : IMSMQQueue4*) : HRESULT
-    @lpVtbl.value.open.unsafe_as(Proc(Int32, Int32, IMSMQQueue4*, HRESULT)).call(access, sharemode, ppq)
+  def open(this : IMSMQQueueInfo4*, access : Int32, sharemode : Int32, ppq : IMSMQQueue4*) : HRESULT
+    @lpVtbl.value.open.call(this, access, sharemode, ppq)
   end
-  def refresh : HRESULT
-    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  def refresh(this : IMSMQQueueInfo4*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
   end
-  def update : HRESULT
-    @lpVtbl.value.update.unsafe_as(Proc(HRESULT)).call
+  def update(this : IMSMQQueueInfo4*) : HRESULT
+    @lpVtbl.value.update.call(this)
   end
-  def get_path_name_dns(pbstrpathnamedns : UInt8**) : HRESULT
-    @lpVtbl.value.get_path_name_dns.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrpathnamedns)
+  def get_path_name_dns(this : IMSMQQueueInfo4*, pbstrpathnamedns : UInt8**) : HRESULT
+    @lpVtbl.value.get_path_name_dns.call(this, pbstrpathnamedns)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQQueueInfo4*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
-  def get_security(pvarsecurity : VARIANT*) : HRESULT
-    @lpVtbl.value.get_security.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarsecurity)
+  def get_security(this : IMSMQQueueInfo4*, pvarsecurity : VARIANT*) : HRESULT
+    @lpVtbl.value.get_security.call(this, pvarsecurity)
   end
-  def put_security(varsecurity : VARIANT) : HRESULT
-    @lpVtbl.value.put_security.unsafe_as(Proc(VARIANT, HRESULT)).call(varsecurity)
+  def put_security(this : IMSMQQueueInfo4*, varsecurity : VARIANT) : HRESULT
+    @lpVtbl.value.put_security.call(this, varsecurity)
   end
-  def get_is_transactional2(pistransactional : Int16*) : HRESULT
-    @lpVtbl.value.get_is_transactional2.unsafe_as(Proc(Int16*, HRESULT)).call(pistransactional)
+  def get_is_transactional2(this : IMSMQQueueInfo4*, pistransactional : Int16*) : HRESULT
+    @lpVtbl.value.get_is_transactional2.call(this, pistransactional)
   end
-  def get_is_world_readable2(pisworldreadable : Int16*) : HRESULT
-    @lpVtbl.value.get_is_world_readable2.unsafe_as(Proc(Int16*, HRESULT)).call(pisworldreadable)
+  def get_is_world_readable2(this : IMSMQQueueInfo4*, pisworldreadable : Int16*) : HRESULT
+    @lpVtbl.value.get_is_world_readable2.call(this, pisworldreadable)
   end
-  def get_multicast_address(pbstrmulticastaddress : UInt8**) : HRESULT
-    @lpVtbl.value.get_multicast_address.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrmulticastaddress)
+  def get_multicast_address(this : IMSMQQueueInfo4*, pbstrmulticastaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_multicast_address.call(this, pbstrmulticastaddress)
   end
-  def put_multicast_address(bstrmulticastaddress : UInt8*) : HRESULT
-    @lpVtbl.value.put_multicast_address.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrmulticastaddress)
+  def put_multicast_address(this : IMSMQQueueInfo4*, bstrmulticastaddress : UInt8*) : HRESULT
+    @lpVtbl.value.put_multicast_address.call(this, bstrmulticastaddress)
   end
-  def get_a_ds_path(pbstradspath : UInt8**) : HRESULT
-    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstradspath)
+  def get_a_ds_path(this : IMSMQQueueInfo4*, pbstradspath : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.call(this, pbstradspath)
   end
 end
 struct LibWin32::IMSMQQueue
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQQueue*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQQueue*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQQueue*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQQueue*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQQueue*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQQueue*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQQueue*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_access(placcess : Int32*) : HRESULT
-    @lpVtbl.value.get_access.unsafe_as(Proc(Int32*, HRESULT)).call(placcess)
+  def get_access(this : IMSMQQueue*, placcess : Int32*) : HRESULT
+    @lpVtbl.value.get_access.call(this, placcess)
   end
-  def get_share_mode(plsharemode : Int32*) : HRESULT
-    @lpVtbl.value.get_share_mode.unsafe_as(Proc(Int32*, HRESULT)).call(plsharemode)
+  def get_share_mode(this : IMSMQQueue*, plsharemode : Int32*) : HRESULT
+    @lpVtbl.value.get_share_mode.call(this, plsharemode)
   end
-  def get_queue_info(ppqinfo : IMSMQQueueInfo*) : HRESULT
-    @lpVtbl.value.get_queue_info.unsafe_as(Proc(IMSMQQueueInfo*, HRESULT)).call(ppqinfo)
+  def get_queue_info(this : IMSMQQueue*, ppqinfo : IMSMQQueueInfo*) : HRESULT
+    @lpVtbl.value.get_queue_info.call(this, ppqinfo)
   end
-  def get_handle(plhandle : Int32*) : HRESULT
-    @lpVtbl.value.get_handle.unsafe_as(Proc(Int32*, HRESULT)).call(plhandle)
+  def get_handle(this : IMSMQQueue*, plhandle : Int32*) : HRESULT
+    @lpVtbl.value.get_handle.call(this, plhandle)
   end
-  def get_is_open(pisopen : Int16*) : HRESULT
-    @lpVtbl.value.get_is_open.unsafe_as(Proc(Int16*, HRESULT)).call(pisopen)
+  def get_is_open(this : IMSMQQueue*, pisopen : Int16*) : HRESULT
+    @lpVtbl.value.get_is_open.call(this, pisopen)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : IMSMQQueue*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
-  def receive(transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
-    @lpVtbl.value.receive.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)).call(transaction, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
+  def receive(this : IMSMQQueue*, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.receive.call(this, transaction, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
   end
-  def peek(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
-    @lpVtbl.value.peek.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, ppmsg)
+  def peek(this : IMSMQQueue*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.peek.call(this, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
   end
-  def enable_notification(event : IMSMQEvent, cursor : VARIANT*, receivetimeout : VARIANT*) : HRESULT
-    @lpVtbl.value.enable_notification.unsafe_as(Proc(IMSMQEvent, VARIANT*, VARIANT*, HRESULT)).call(event, cursor, receivetimeout)
+  def enable_notification(this : IMSMQQueue*, event : IMSMQEvent, cursor : VARIANT*, receivetimeout : VARIANT*) : HRESULT
+    @lpVtbl.value.enable_notification.call(this, event, cursor, receivetimeout)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IMSMQQueue*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def receive_current(transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
-    @lpVtbl.value.receive_current.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)).call(transaction, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
+  def receive_current(this : IMSMQQueue*, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.receive_current.call(this, transaction, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
   end
-  def peek_next(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
-    @lpVtbl.value.peek_next.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, ppmsg)
+  def peek_next(this : IMSMQQueue*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.peek_next.call(this, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
   end
-  def peek_current(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
-    @lpVtbl.value.peek_current.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, ppmsg)
+  def peek_current(this : IMSMQQueue*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.peek_current.call(this, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
   end
 end
 struct LibWin32::IMSMQQueue2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQQueue2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQQueue2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQQueue2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQQueue2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQQueue2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQQueue2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQQueue2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_access(placcess : Int32*) : HRESULT
-    @lpVtbl.value.get_access.unsafe_as(Proc(Int32*, HRESULT)).call(placcess)
+  def get_access(this : IMSMQQueue2*, placcess : Int32*) : HRESULT
+    @lpVtbl.value.get_access.call(this, placcess)
   end
-  def get_share_mode(plsharemode : Int32*) : HRESULT
-    @lpVtbl.value.get_share_mode.unsafe_as(Proc(Int32*, HRESULT)).call(plsharemode)
+  def get_share_mode(this : IMSMQQueue2*, plsharemode : Int32*) : HRESULT
+    @lpVtbl.value.get_share_mode.call(this, plsharemode)
   end
-  def get_queue_info(ppqinfo : IMSMQQueueInfo2*) : HRESULT
-    @lpVtbl.value.get_queue_info.unsafe_as(Proc(IMSMQQueueInfo2*, HRESULT)).call(ppqinfo)
+  def get_queue_info(this : IMSMQQueue2*, ppqinfo : IMSMQQueueInfo2*) : HRESULT
+    @lpVtbl.value.get_queue_info.call(this, ppqinfo)
   end
-  def get_handle(plhandle : Int32*) : HRESULT
-    @lpVtbl.value.get_handle.unsafe_as(Proc(Int32*, HRESULT)).call(plhandle)
+  def get_handle(this : IMSMQQueue2*, plhandle : Int32*) : HRESULT
+    @lpVtbl.value.get_handle.call(this, plhandle)
   end
-  def get_is_open(pisopen : Int16*) : HRESULT
-    @lpVtbl.value.get_is_open.unsafe_as(Proc(Int16*, HRESULT)).call(pisopen)
+  def get_is_open(this : IMSMQQueue2*, pisopen : Int16*) : HRESULT
+    @lpVtbl.value.get_is_open.call(this, pisopen)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : IMSMQQueue2*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
-  def receive_v1(transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
-    @lpVtbl.value.receive_v1.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)).call(transaction, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
+  def receive_v1(this : IMSMQQueue2*, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.receive_v1.call(this, transaction, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
   end
-  def peek_v1(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
-    @lpVtbl.value.peek_v1.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, ppmsg)
+  def peek_v1(this : IMSMQQueue2*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.peek_v1.call(this, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
   end
-  def enable_notification(event : IMSMQEvent2, cursor : VARIANT*, receivetimeout : VARIANT*) : HRESULT
-    @lpVtbl.value.enable_notification.unsafe_as(Proc(IMSMQEvent2, VARIANT*, VARIANT*, HRESULT)).call(event, cursor, receivetimeout)
+  def enable_notification(this : IMSMQQueue2*, event : IMSMQEvent2, cursor : VARIANT*, receivetimeout : VARIANT*) : HRESULT
+    @lpVtbl.value.enable_notification.call(this, event, cursor, receivetimeout)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IMSMQQueue2*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def receive_current_v1(transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
-    @lpVtbl.value.receive_current_v1.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)).call(transaction, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
+  def receive_current_v1(this : IMSMQQueue2*, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.receive_current_v1.call(this, transaction, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
   end
-  def peek_next_v1(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
-    @lpVtbl.value.peek_next_v1.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, ppmsg)
+  def peek_next_v1(this : IMSMQQueue2*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.peek_next_v1.call(this, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
   end
-  def peek_current_v1(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
-    @lpVtbl.value.peek_current_v1.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, ppmsg)
+  def peek_current_v1(this : IMSMQQueue2*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.peek_current_v1.call(this, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
   end
-  def receive(transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage2*) : HRESULT
-    @lpVtbl.value.receive.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage2*, HRESULT)).call(transaction, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
+  def receive(this : IMSMQQueue2*, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage2*) : HRESULT
+    @lpVtbl.value.receive.call(this, transaction, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
   end
-  def peek(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage2*) : HRESULT
-    @lpVtbl.value.peek.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage2*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
+  def peek(this : IMSMQQueue2*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage2*) : HRESULT
+    @lpVtbl.value.peek.call(this, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
   end
-  def receive_current(transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage2*) : HRESULT
-    @lpVtbl.value.receive_current.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage2*, HRESULT)).call(transaction, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
+  def receive_current(this : IMSMQQueue2*, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage2*) : HRESULT
+    @lpVtbl.value.receive_current.call(this, transaction, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
   end
-  def peek_next(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage2*) : HRESULT
-    @lpVtbl.value.peek_next.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage2*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
+  def peek_next(this : IMSMQQueue2*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage2*) : HRESULT
+    @lpVtbl.value.peek_next.call(this, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
   end
-  def peek_current(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage2*) : HRESULT
-    @lpVtbl.value.peek_current.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage2*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
+  def peek_current(this : IMSMQQueue2*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage2*) : HRESULT
+    @lpVtbl.value.peek_current.call(this, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQQueue2*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
 end
 struct LibWin32::IMSMQQueue3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQQueue3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQQueue3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQQueue3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQQueue3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQQueue3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQQueue3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQQueue3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_access(placcess : Int32*) : HRESULT
-    @lpVtbl.value.get_access.unsafe_as(Proc(Int32*, HRESULT)).call(placcess)
+  def get_access(this : IMSMQQueue3*, placcess : Int32*) : HRESULT
+    @lpVtbl.value.get_access.call(this, placcess)
   end
-  def get_share_mode(plsharemode : Int32*) : HRESULT
-    @lpVtbl.value.get_share_mode.unsafe_as(Proc(Int32*, HRESULT)).call(plsharemode)
+  def get_share_mode(this : IMSMQQueue3*, plsharemode : Int32*) : HRESULT
+    @lpVtbl.value.get_share_mode.call(this, plsharemode)
   end
-  def get_queue_info(ppqinfo : IMSMQQueueInfo3*) : HRESULT
-    @lpVtbl.value.get_queue_info.unsafe_as(Proc(IMSMQQueueInfo3*, HRESULT)).call(ppqinfo)
+  def get_queue_info(this : IMSMQQueue3*, ppqinfo : IMSMQQueueInfo3*) : HRESULT
+    @lpVtbl.value.get_queue_info.call(this, ppqinfo)
   end
-  def get_handle(plhandle : Int32*) : HRESULT
-    @lpVtbl.value.get_handle.unsafe_as(Proc(Int32*, HRESULT)).call(plhandle)
+  def get_handle(this : IMSMQQueue3*, plhandle : Int32*) : HRESULT
+    @lpVtbl.value.get_handle.call(this, plhandle)
   end
-  def get_is_open(pisopen : Int16*) : HRESULT
-    @lpVtbl.value.get_is_open.unsafe_as(Proc(Int16*, HRESULT)).call(pisopen)
+  def get_is_open(this : IMSMQQueue3*, pisopen : Int16*) : HRESULT
+    @lpVtbl.value.get_is_open.call(this, pisopen)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : IMSMQQueue3*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
-  def receive_v1(transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
-    @lpVtbl.value.receive_v1.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)).call(transaction, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
+  def receive_v1(this : IMSMQQueue3*, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.receive_v1.call(this, transaction, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
   end
-  def peek_v1(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
-    @lpVtbl.value.peek_v1.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, ppmsg)
+  def peek_v1(this : IMSMQQueue3*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.peek_v1.call(this, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
   end
-  def enable_notification(event : IMSMQEvent3, cursor : VARIANT*, receivetimeout : VARIANT*) : HRESULT
-    @lpVtbl.value.enable_notification.unsafe_as(Proc(IMSMQEvent3, VARIANT*, VARIANT*, HRESULT)).call(event, cursor, receivetimeout)
+  def enable_notification(this : IMSMQQueue3*, event : IMSMQEvent3, cursor : VARIANT*, receivetimeout : VARIANT*) : HRESULT
+    @lpVtbl.value.enable_notification.call(this, event, cursor, receivetimeout)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IMSMQQueue3*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def receive_current_v1(transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
-    @lpVtbl.value.receive_current_v1.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)).call(transaction, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
+  def receive_current_v1(this : IMSMQQueue3*, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.receive_current_v1.call(this, transaction, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
   end
-  def peek_next_v1(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
-    @lpVtbl.value.peek_next_v1.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, ppmsg)
+  def peek_next_v1(this : IMSMQQueue3*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.peek_next_v1.call(this, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
   end
-  def peek_current_v1(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
-    @lpVtbl.value.peek_current_v1.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, ppmsg)
+  def peek_current_v1(this : IMSMQQueue3*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.peek_current_v1.call(this, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
   end
-  def receive(transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
-    @lpVtbl.value.receive.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)).call(transaction, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
+  def receive(this : IMSMQQueue3*, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
+    @lpVtbl.value.receive.call(this, transaction, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
   end
-  def peek(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
-    @lpVtbl.value.peek.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
+  def peek(this : IMSMQQueue3*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
+    @lpVtbl.value.peek.call(this, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
   end
-  def receive_current(transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
-    @lpVtbl.value.receive_current.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)).call(transaction, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
+  def receive_current(this : IMSMQQueue3*, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
+    @lpVtbl.value.receive_current.call(this, transaction, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
   end
-  def peek_next(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
-    @lpVtbl.value.peek_next.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
+  def peek_next(this : IMSMQQueue3*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
+    @lpVtbl.value.peek_next.call(this, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
   end
-  def peek_current(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
-    @lpVtbl.value.peek_current.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
+  def peek_current(this : IMSMQQueue3*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
+    @lpVtbl.value.peek_current.call(this, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQQueue3*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
-  def get_handle2(pvarhandle : VARIANT*) : HRESULT
-    @lpVtbl.value.get_handle2.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarhandle)
+  def get_handle2(this : IMSMQQueue3*, pvarhandle : VARIANT*) : HRESULT
+    @lpVtbl.value.get_handle2.call(this, pvarhandle)
   end
-  def receive_by_lookup_id(lookupid : VARIANT, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
-    @lpVtbl.value.receive_by_lookup_id.unsafe_as(Proc(VARIANT, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)).call(lookupid, transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def receive_by_lookup_id(this : IMSMQQueue3*, lookupid : VARIANT, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
+    @lpVtbl.value.receive_by_lookup_id.call(this, lookupid, transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
-  def receive_next_by_lookup_id(lookupid : VARIANT, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
-    @lpVtbl.value.receive_next_by_lookup_id.unsafe_as(Proc(VARIANT, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)).call(lookupid, transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def receive_next_by_lookup_id(this : IMSMQQueue3*, lookupid : VARIANT, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
+    @lpVtbl.value.receive_next_by_lookup_id.call(this, lookupid, transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
-  def receive_previous_by_lookup_id(lookupid : VARIANT, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
-    @lpVtbl.value.receive_previous_by_lookup_id.unsafe_as(Proc(VARIANT, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)).call(lookupid, transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def receive_previous_by_lookup_id(this : IMSMQQueue3*, lookupid : VARIANT, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
+    @lpVtbl.value.receive_previous_by_lookup_id.call(this, lookupid, transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
-  def receive_first_by_lookup_id(transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
-    @lpVtbl.value.receive_first_by_lookup_id.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)).call(transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def receive_first_by_lookup_id(this : IMSMQQueue3*, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
+    @lpVtbl.value.receive_first_by_lookup_id.call(this, transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
-  def receive_last_by_lookup_id(transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
-    @lpVtbl.value.receive_last_by_lookup_id.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)).call(transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def receive_last_by_lookup_id(this : IMSMQQueue3*, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
+    @lpVtbl.value.receive_last_by_lookup_id.call(this, transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
-  def peek_by_lookup_id(lookupid : VARIANT, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
-    @lpVtbl.value.peek_by_lookup_id.unsafe_as(Proc(VARIANT, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)).call(lookupid, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def peek_by_lookup_id(this : IMSMQQueue3*, lookupid : VARIANT, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
+    @lpVtbl.value.peek_by_lookup_id.call(this, lookupid, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
-  def peek_next_by_lookup_id(lookupid : VARIANT, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
-    @lpVtbl.value.peek_next_by_lookup_id.unsafe_as(Proc(VARIANT, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)).call(lookupid, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def peek_next_by_lookup_id(this : IMSMQQueue3*, lookupid : VARIANT, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
+    @lpVtbl.value.peek_next_by_lookup_id.call(this, lookupid, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
-  def peek_previous_by_lookup_id(lookupid : VARIANT, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
-    @lpVtbl.value.peek_previous_by_lookup_id.unsafe_as(Proc(VARIANT, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)).call(lookupid, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def peek_previous_by_lookup_id(this : IMSMQQueue3*, lookupid : VARIANT, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
+    @lpVtbl.value.peek_previous_by_lookup_id.call(this, lookupid, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
-  def peek_first_by_lookup_id(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
-    @lpVtbl.value.peek_first_by_lookup_id.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)).call(wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def peek_first_by_lookup_id(this : IMSMQQueue3*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
+    @lpVtbl.value.peek_first_by_lookup_id.call(this, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
-  def peek_last_by_lookup_id(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
-    @lpVtbl.value.peek_last_by_lookup_id.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, IMSMQMessage3*, HRESULT)).call(wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def peek_last_by_lookup_id(this : IMSMQQueue3*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage3*) : HRESULT
+    @lpVtbl.value.peek_last_by_lookup_id.call(this, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
-  def purge : HRESULT
-    @lpVtbl.value.purge.unsafe_as(Proc(HRESULT)).call
+  def purge(this : IMSMQQueue3*) : HRESULT
+    @lpVtbl.value.purge.call(this)
   end
-  def get_is_open2(pisopen : Int16*) : HRESULT
-    @lpVtbl.value.get_is_open2.unsafe_as(Proc(Int16*, HRESULT)).call(pisopen)
+  def get_is_open2(this : IMSMQQueue3*, pisopen : Int16*) : HRESULT
+    @lpVtbl.value.get_is_open2.call(this, pisopen)
   end
 end
 struct LibWin32::IMSMQQueue4
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQQueue4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQQueue4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQQueue4*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQQueue4*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQQueue4*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQQueue4*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQQueue4*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_access(placcess : Int32*) : HRESULT
-    @lpVtbl.value.get_access.unsafe_as(Proc(Int32*, HRESULT)).call(placcess)
+  def get_access(this : IMSMQQueue4*, placcess : Int32*) : HRESULT
+    @lpVtbl.value.get_access.call(this, placcess)
   end
-  def get_share_mode(plsharemode : Int32*) : HRESULT
-    @lpVtbl.value.get_share_mode.unsafe_as(Proc(Int32*, HRESULT)).call(plsharemode)
+  def get_share_mode(this : IMSMQQueue4*, plsharemode : Int32*) : HRESULT
+    @lpVtbl.value.get_share_mode.call(this, plsharemode)
   end
-  def get_queue_info(ppqinfo : IMSMQQueueInfo4*) : HRESULT
-    @lpVtbl.value.get_queue_info.unsafe_as(Proc(IMSMQQueueInfo4*, HRESULT)).call(ppqinfo)
+  def get_queue_info(this : IMSMQQueue4*, ppqinfo : IMSMQQueueInfo4*) : HRESULT
+    @lpVtbl.value.get_queue_info.call(this, ppqinfo)
   end
-  def get_handle(plhandle : Int32*) : HRESULT
-    @lpVtbl.value.get_handle.unsafe_as(Proc(Int32*, HRESULT)).call(plhandle)
+  def get_handle(this : IMSMQQueue4*, plhandle : Int32*) : HRESULT
+    @lpVtbl.value.get_handle.call(this, plhandle)
   end
-  def get_is_open(pisopen : Int16*) : HRESULT
-    @lpVtbl.value.get_is_open.unsafe_as(Proc(Int16*, HRESULT)).call(pisopen)
+  def get_is_open(this : IMSMQQueue4*, pisopen : Int16*) : HRESULT
+    @lpVtbl.value.get_is_open.call(this, pisopen)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : IMSMQQueue4*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
-  def receive_v1(transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
-    @lpVtbl.value.receive_v1.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)).call(transaction, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
+  def receive_v1(this : IMSMQQueue4*, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.receive_v1.call(this, transaction, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
   end
-  def peek_v1(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
-    @lpVtbl.value.peek_v1.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, ppmsg)
+  def peek_v1(this : IMSMQQueue4*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.peek_v1.call(this, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
   end
-  def enable_notification(event : IMSMQEvent3, cursor : VARIANT*, receivetimeout : VARIANT*) : HRESULT
-    @lpVtbl.value.enable_notification.unsafe_as(Proc(IMSMQEvent3, VARIANT*, VARIANT*, HRESULT)).call(event, cursor, receivetimeout)
+  def enable_notification(this : IMSMQQueue4*, event : IMSMQEvent3, cursor : VARIANT*, receivetimeout : VARIANT*) : HRESULT
+    @lpVtbl.value.enable_notification.call(this, event, cursor, receivetimeout)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IMSMQQueue4*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def receive_current_v1(transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
-    @lpVtbl.value.receive_current_v1.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)).call(transaction, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
+  def receive_current_v1(this : IMSMQQueue4*, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.receive_current_v1.call(this, transaction, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
   end
-  def peek_next_v1(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
-    @lpVtbl.value.peek_next_v1.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, ppmsg)
+  def peek_next_v1(this : IMSMQQueue4*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.peek_next_v1.call(this, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
   end
-  def peek_current_v1(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
-    @lpVtbl.value.peek_current_v1.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, ppmsg)
+  def peek_current_v1(this : IMSMQQueue4*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, ppmsg : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.peek_current_v1.call(this, wantdestinationqueue, wantbody, receivetimeout, ppmsg)
   end
-  def receive(transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
-    @lpVtbl.value.receive.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)).call(transaction, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
+  def receive(this : IMSMQQueue4*, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
+    @lpVtbl.value.receive.call(this, transaction, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
   end
-  def peek(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
-    @lpVtbl.value.peek.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
+  def peek(this : IMSMQQueue4*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
+    @lpVtbl.value.peek.call(this, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
   end
-  def receive_current(transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
-    @lpVtbl.value.receive_current.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)).call(transaction, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
+  def receive_current(this : IMSMQQueue4*, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
+    @lpVtbl.value.receive_current.call(this, transaction, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
   end
-  def peek_next(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
-    @lpVtbl.value.peek_next.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
+  def peek_next(this : IMSMQQueue4*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
+    @lpVtbl.value.peek_next.call(this, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
   end
-  def peek_current(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
-    @lpVtbl.value.peek_current.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)).call(wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
+  def peek_current(this : IMSMQQueue4*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, receivetimeout : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
+    @lpVtbl.value.peek_current.call(this, wantdestinationqueue, wantbody, receivetimeout, wantconnectortype, ppmsg)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQQueue4*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
-  def get_handle2(pvarhandle : VARIANT*) : HRESULT
-    @lpVtbl.value.get_handle2.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarhandle)
+  def get_handle2(this : IMSMQQueue4*, pvarhandle : VARIANT*) : HRESULT
+    @lpVtbl.value.get_handle2.call(this, pvarhandle)
   end
-  def receive_by_lookup_id(lookupid : VARIANT, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
-    @lpVtbl.value.receive_by_lookup_id.unsafe_as(Proc(VARIANT, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)).call(lookupid, transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def receive_by_lookup_id(this : IMSMQQueue4*, lookupid : VARIANT, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
+    @lpVtbl.value.receive_by_lookup_id.call(this, lookupid, transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
-  def receive_next_by_lookup_id(lookupid : VARIANT, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
-    @lpVtbl.value.receive_next_by_lookup_id.unsafe_as(Proc(VARIANT, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)).call(lookupid, transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def receive_next_by_lookup_id(this : IMSMQQueue4*, lookupid : VARIANT, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
+    @lpVtbl.value.receive_next_by_lookup_id.call(this, lookupid, transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
-  def receive_previous_by_lookup_id(lookupid : VARIANT, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
-    @lpVtbl.value.receive_previous_by_lookup_id.unsafe_as(Proc(VARIANT, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)).call(lookupid, transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def receive_previous_by_lookup_id(this : IMSMQQueue4*, lookupid : VARIANT, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
+    @lpVtbl.value.receive_previous_by_lookup_id.call(this, lookupid, transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
-  def receive_first_by_lookup_id(transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
-    @lpVtbl.value.receive_first_by_lookup_id.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)).call(transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def receive_first_by_lookup_id(this : IMSMQQueue4*, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
+    @lpVtbl.value.receive_first_by_lookup_id.call(this, transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
-  def receive_last_by_lookup_id(transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
-    @lpVtbl.value.receive_last_by_lookup_id.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)).call(transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def receive_last_by_lookup_id(this : IMSMQQueue4*, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
+    @lpVtbl.value.receive_last_by_lookup_id.call(this, transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
-  def peek_by_lookup_id(lookupid : VARIANT, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
-    @lpVtbl.value.peek_by_lookup_id.unsafe_as(Proc(VARIANT, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)).call(lookupid, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def peek_by_lookup_id(this : IMSMQQueue4*, lookupid : VARIANT, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
+    @lpVtbl.value.peek_by_lookup_id.call(this, lookupid, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
-  def peek_next_by_lookup_id(lookupid : VARIANT, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
-    @lpVtbl.value.peek_next_by_lookup_id.unsafe_as(Proc(VARIANT, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)).call(lookupid, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def peek_next_by_lookup_id(this : IMSMQQueue4*, lookupid : VARIANT, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
+    @lpVtbl.value.peek_next_by_lookup_id.call(this, lookupid, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
-  def peek_previous_by_lookup_id(lookupid : VARIANT, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
-    @lpVtbl.value.peek_previous_by_lookup_id.unsafe_as(Proc(VARIANT, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)).call(lookupid, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def peek_previous_by_lookup_id(this : IMSMQQueue4*, lookupid : VARIANT, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
+    @lpVtbl.value.peek_previous_by_lookup_id.call(this, lookupid, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
-  def peek_first_by_lookup_id(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
-    @lpVtbl.value.peek_first_by_lookup_id.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)).call(wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def peek_first_by_lookup_id(this : IMSMQQueue4*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
+    @lpVtbl.value.peek_first_by_lookup_id.call(this, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
-  def peek_last_by_lookup_id(wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
-    @lpVtbl.value.peek_last_by_lookup_id.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)).call(wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def peek_last_by_lookup_id(this : IMSMQQueue4*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
+    @lpVtbl.value.peek_last_by_lookup_id.call(this, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
-  def purge : HRESULT
-    @lpVtbl.value.purge.unsafe_as(Proc(HRESULT)).call
+  def purge(this : IMSMQQueue4*) : HRESULT
+    @lpVtbl.value.purge.call(this)
   end
-  def get_is_open2(pisopen : Int16*) : HRESULT
-    @lpVtbl.value.get_is_open2.unsafe_as(Proc(Int16*, HRESULT)).call(pisopen)
+  def get_is_open2(this : IMSMQQueue4*, pisopen : Int16*) : HRESULT
+    @lpVtbl.value.get_is_open2.call(this, pisopen)
   end
-  def receive_by_lookup_id_allow_peek(lookupid : VARIANT, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
-    @lpVtbl.value.receive_by_lookup_id_allow_peek.unsafe_as(Proc(VARIANT, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)).call(lookupid, transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
+  def receive_by_lookup_id_allow_peek(this : IMSMQQueue4*, lookupid : VARIANT, transaction : VARIANT*, wantdestinationqueue : VARIANT*, wantbody : VARIANT*, wantconnectortype : VARIANT*, ppmsg : IMSMQMessage4*) : HRESULT
+    @lpVtbl.value.receive_by_lookup_id_allow_peek.call(this, lookupid, transaction, wantdestinationqueue, wantbody, wantconnectortype, ppmsg)
   end
 end
 struct LibWin32::IMSMQMessage
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQMessage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQMessage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQMessage*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQMessage*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQMessage*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQMessage*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQMessage*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_class(plclass : Int32*) : HRESULT
-    @lpVtbl.value.get_class.unsafe_as(Proc(Int32*, HRESULT)).call(plclass)
+  def get_class(this : IMSMQMessage*, plclass : Int32*) : HRESULT
+    @lpVtbl.value.get_class.call(this, plclass)
   end
-  def get_priv_level(plprivlevel : Int32*) : HRESULT
-    @lpVtbl.value.get_priv_level.unsafe_as(Proc(Int32*, HRESULT)).call(plprivlevel)
+  def get_priv_level(this : IMSMQMessage*, plprivlevel : Int32*) : HRESULT
+    @lpVtbl.value.get_priv_level.call(this, plprivlevel)
   end
-  def put_priv_level(lprivlevel : Int32) : HRESULT
-    @lpVtbl.value.put_priv_level.unsafe_as(Proc(Int32, HRESULT)).call(lprivlevel)
+  def put_priv_level(this : IMSMQMessage*, lprivlevel : Int32) : HRESULT
+    @lpVtbl.value.put_priv_level.call(this, lprivlevel)
   end
-  def get_auth_level(plauthlevel : Int32*) : HRESULT
-    @lpVtbl.value.get_auth_level.unsafe_as(Proc(Int32*, HRESULT)).call(plauthlevel)
+  def get_auth_level(this : IMSMQMessage*, plauthlevel : Int32*) : HRESULT
+    @lpVtbl.value.get_auth_level.call(this, plauthlevel)
   end
-  def put_auth_level(lauthlevel : Int32) : HRESULT
-    @lpVtbl.value.put_auth_level.unsafe_as(Proc(Int32, HRESULT)).call(lauthlevel)
+  def put_auth_level(this : IMSMQMessage*, lauthlevel : Int32) : HRESULT
+    @lpVtbl.value.put_auth_level.call(this, lauthlevel)
   end
-  def get_is_authenticated(pisauthenticated : Int16*) : HRESULT
-    @lpVtbl.value.get_is_authenticated.unsafe_as(Proc(Int16*, HRESULT)).call(pisauthenticated)
+  def get_is_authenticated(this : IMSMQMessage*, pisauthenticated : Int16*) : HRESULT
+    @lpVtbl.value.get_is_authenticated.call(this, pisauthenticated)
   end
-  def get_delivery(pldelivery : Int32*) : HRESULT
-    @lpVtbl.value.get_delivery.unsafe_as(Proc(Int32*, HRESULT)).call(pldelivery)
+  def get_delivery(this : IMSMQMessage*, pldelivery : Int32*) : HRESULT
+    @lpVtbl.value.get_delivery.call(this, pldelivery)
   end
-  def put_delivery(ldelivery : Int32) : HRESULT
-    @lpVtbl.value.put_delivery.unsafe_as(Proc(Int32, HRESULT)).call(ldelivery)
+  def put_delivery(this : IMSMQMessage*, ldelivery : Int32) : HRESULT
+    @lpVtbl.value.put_delivery.call(this, ldelivery)
   end
-  def get_trace(pltrace : Int32*) : HRESULT
-    @lpVtbl.value.get_trace.unsafe_as(Proc(Int32*, HRESULT)).call(pltrace)
+  def get_trace(this : IMSMQMessage*, pltrace : Int32*) : HRESULT
+    @lpVtbl.value.get_trace.call(this, pltrace)
   end
-  def put_trace(ltrace : Int32) : HRESULT
-    @lpVtbl.value.put_trace.unsafe_as(Proc(Int32, HRESULT)).call(ltrace)
+  def put_trace(this : IMSMQMessage*, ltrace : Int32) : HRESULT
+    @lpVtbl.value.put_trace.call(this, ltrace)
   end
-  def get_priority(plpriority : Int32*) : HRESULT
-    @lpVtbl.value.get_priority.unsafe_as(Proc(Int32*, HRESULT)).call(plpriority)
+  def get_priority(this : IMSMQMessage*, plpriority : Int32*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, plpriority)
   end
-  def put_priority(lpriority : Int32) : HRESULT
-    @lpVtbl.value.put_priority.unsafe_as(Proc(Int32, HRESULT)).call(lpriority)
+  def put_priority(this : IMSMQMessage*, lpriority : Int32) : HRESULT
+    @lpVtbl.value.put_priority.call(this, lpriority)
   end
-  def get_journal(pljournal : Int32*) : HRESULT
-    @lpVtbl.value.get_journal.unsafe_as(Proc(Int32*, HRESULT)).call(pljournal)
+  def get_journal(this : IMSMQMessage*, pljournal : Int32*) : HRESULT
+    @lpVtbl.value.get_journal.call(this, pljournal)
   end
-  def put_journal(ljournal : Int32) : HRESULT
-    @lpVtbl.value.put_journal.unsafe_as(Proc(Int32, HRESULT)).call(ljournal)
+  def put_journal(this : IMSMQMessage*, ljournal : Int32) : HRESULT
+    @lpVtbl.value.put_journal.call(this, ljournal)
   end
-  def get_response_queue_info(ppqinforesponse : IMSMQQueueInfo*) : HRESULT
-    @lpVtbl.value.get_response_queue_info.unsafe_as(Proc(IMSMQQueueInfo*, HRESULT)).call(ppqinforesponse)
+  def get_response_queue_info(this : IMSMQMessage*, ppqinforesponse : IMSMQQueueInfo*) : HRESULT
+    @lpVtbl.value.get_response_queue_info.call(this, ppqinforesponse)
   end
-  def putref_response_queue_info(pqinforesponse : IMSMQQueueInfo) : HRESULT
-    @lpVtbl.value.putref_response_queue_info.unsafe_as(Proc(IMSMQQueueInfo, HRESULT)).call(pqinforesponse)
+  def putref_response_queue_info(this : IMSMQMessage*, pqinforesponse : IMSMQQueueInfo) : HRESULT
+    @lpVtbl.value.putref_response_queue_info.call(this, pqinforesponse)
   end
-  def get_app_specific(plappspecific : Int32*) : HRESULT
-    @lpVtbl.value.get_app_specific.unsafe_as(Proc(Int32*, HRESULT)).call(plappspecific)
+  def get_app_specific(this : IMSMQMessage*, plappspecific : Int32*) : HRESULT
+    @lpVtbl.value.get_app_specific.call(this, plappspecific)
   end
-  def put_app_specific(lappspecific : Int32) : HRESULT
-    @lpVtbl.value.put_app_specific.unsafe_as(Proc(Int32, HRESULT)).call(lappspecific)
+  def put_app_specific(this : IMSMQMessage*, lappspecific : Int32) : HRESULT
+    @lpVtbl.value.put_app_specific.call(this, lappspecific)
   end
-  def get_source_machine_guid(pbstrguidsrcmachine : UInt8**) : HRESULT
-    @lpVtbl.value.get_source_machine_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrguidsrcmachine)
+  def get_source_machine_guid(this : IMSMQMessage*, pbstrguidsrcmachine : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_machine_guid.call(this, pbstrguidsrcmachine)
   end
-  def get_body_length(pcbbody : Int32*) : HRESULT
-    @lpVtbl.value.get_body_length.unsafe_as(Proc(Int32*, HRESULT)).call(pcbbody)
+  def get_body_length(this : IMSMQMessage*, pcbbody : Int32*) : HRESULT
+    @lpVtbl.value.get_body_length.call(this, pcbbody)
   end
-  def get_body(pvarbody : VARIANT*) : HRESULT
-    @lpVtbl.value.get_body.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarbody)
+  def get_body(this : IMSMQMessage*, pvarbody : VARIANT*) : HRESULT
+    @lpVtbl.value.get_body.call(this, pvarbody)
   end
-  def put_body(varbody : VARIANT) : HRESULT
-    @lpVtbl.value.put_body.unsafe_as(Proc(VARIANT, HRESULT)).call(varbody)
+  def put_body(this : IMSMQMessage*, varbody : VARIANT) : HRESULT
+    @lpVtbl.value.put_body.call(this, varbody)
   end
-  def get_admin_queue_info(ppqinfoadmin : IMSMQQueueInfo*) : HRESULT
-    @lpVtbl.value.get_admin_queue_info.unsafe_as(Proc(IMSMQQueueInfo*, HRESULT)).call(ppqinfoadmin)
+  def get_admin_queue_info(this : IMSMQMessage*, ppqinfoadmin : IMSMQQueueInfo*) : HRESULT
+    @lpVtbl.value.get_admin_queue_info.call(this, ppqinfoadmin)
   end
-  def putref_admin_queue_info(pqinfoadmin : IMSMQQueueInfo) : HRESULT
-    @lpVtbl.value.putref_admin_queue_info.unsafe_as(Proc(IMSMQQueueInfo, HRESULT)).call(pqinfoadmin)
+  def putref_admin_queue_info(this : IMSMQMessage*, pqinfoadmin : IMSMQQueueInfo) : HRESULT
+    @lpVtbl.value.putref_admin_queue_info.call(this, pqinfoadmin)
   end
-  def get_id(pvarmsgid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarmsgid)
+  def get_id(this : IMSMQMessage*, pvarmsgid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pvarmsgid)
   end
-  def get_correlation_id(pvarmsgid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_correlation_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarmsgid)
+  def get_correlation_id(this : IMSMQMessage*, pvarmsgid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_correlation_id.call(this, pvarmsgid)
   end
-  def put_correlation_id(varmsgid : VARIANT) : HRESULT
-    @lpVtbl.value.put_correlation_id.unsafe_as(Proc(VARIANT, HRESULT)).call(varmsgid)
+  def put_correlation_id(this : IMSMQMessage*, varmsgid : VARIANT) : HRESULT
+    @lpVtbl.value.put_correlation_id.call(this, varmsgid)
   end
-  def get_ack(plack : Int32*) : HRESULT
-    @lpVtbl.value.get_ack.unsafe_as(Proc(Int32*, HRESULT)).call(plack)
+  def get_ack(this : IMSMQMessage*, plack : Int32*) : HRESULT
+    @lpVtbl.value.get_ack.call(this, plack)
   end
-  def put_ack(lack : Int32) : HRESULT
-    @lpVtbl.value.put_ack.unsafe_as(Proc(Int32, HRESULT)).call(lack)
+  def put_ack(this : IMSMQMessage*, lack : Int32) : HRESULT
+    @lpVtbl.value.put_ack.call(this, lack)
   end
-  def get_label(pbstrlabel : UInt8**) : HRESULT
-    @lpVtbl.value.get_label.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrlabel)
+  def get_label(this : IMSMQMessage*, pbstrlabel : UInt8**) : HRESULT
+    @lpVtbl.value.get_label.call(this, pbstrlabel)
   end
-  def put_label(bstrlabel : UInt8*) : HRESULT
-    @lpVtbl.value.put_label.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrlabel)
+  def put_label(this : IMSMQMessage*, bstrlabel : UInt8*) : HRESULT
+    @lpVtbl.value.put_label.call(this, bstrlabel)
   end
-  def get_max_time_to_reach_queue(plmaxtimetoreachqueue : Int32*) : HRESULT
-    @lpVtbl.value.get_max_time_to_reach_queue.unsafe_as(Proc(Int32*, HRESULT)).call(plmaxtimetoreachqueue)
+  def get_max_time_to_reach_queue(this : IMSMQMessage*, plmaxtimetoreachqueue : Int32*) : HRESULT
+    @lpVtbl.value.get_max_time_to_reach_queue.call(this, plmaxtimetoreachqueue)
   end
-  def put_max_time_to_reach_queue(lmaxtimetoreachqueue : Int32) : HRESULT
-    @lpVtbl.value.put_max_time_to_reach_queue.unsafe_as(Proc(Int32, HRESULT)).call(lmaxtimetoreachqueue)
+  def put_max_time_to_reach_queue(this : IMSMQMessage*, lmaxtimetoreachqueue : Int32) : HRESULT
+    @lpVtbl.value.put_max_time_to_reach_queue.call(this, lmaxtimetoreachqueue)
   end
-  def get_max_time_to_receive(plmaxtimetoreceive : Int32*) : HRESULT
-    @lpVtbl.value.get_max_time_to_receive.unsafe_as(Proc(Int32*, HRESULT)).call(plmaxtimetoreceive)
+  def get_max_time_to_receive(this : IMSMQMessage*, plmaxtimetoreceive : Int32*) : HRESULT
+    @lpVtbl.value.get_max_time_to_receive.call(this, plmaxtimetoreceive)
   end
-  def put_max_time_to_receive(lmaxtimetoreceive : Int32) : HRESULT
-    @lpVtbl.value.put_max_time_to_receive.unsafe_as(Proc(Int32, HRESULT)).call(lmaxtimetoreceive)
+  def put_max_time_to_receive(this : IMSMQMessage*, lmaxtimetoreceive : Int32) : HRESULT
+    @lpVtbl.value.put_max_time_to_receive.call(this, lmaxtimetoreceive)
   end
-  def get_hash_algorithm(plhashalg : Int32*) : HRESULT
-    @lpVtbl.value.get_hash_algorithm.unsafe_as(Proc(Int32*, HRESULT)).call(plhashalg)
+  def get_hash_algorithm(this : IMSMQMessage*, plhashalg : Int32*) : HRESULT
+    @lpVtbl.value.get_hash_algorithm.call(this, plhashalg)
   end
-  def put_hash_algorithm(lhashalg : Int32) : HRESULT
-    @lpVtbl.value.put_hash_algorithm.unsafe_as(Proc(Int32, HRESULT)).call(lhashalg)
+  def put_hash_algorithm(this : IMSMQMessage*, lhashalg : Int32) : HRESULT
+    @lpVtbl.value.put_hash_algorithm.call(this, lhashalg)
   end
-  def get_encrypt_algorithm(plencryptalg : Int32*) : HRESULT
-    @lpVtbl.value.get_encrypt_algorithm.unsafe_as(Proc(Int32*, HRESULT)).call(plencryptalg)
+  def get_encrypt_algorithm(this : IMSMQMessage*, plencryptalg : Int32*) : HRESULT
+    @lpVtbl.value.get_encrypt_algorithm.call(this, plencryptalg)
   end
-  def put_encrypt_algorithm(lencryptalg : Int32) : HRESULT
-    @lpVtbl.value.put_encrypt_algorithm.unsafe_as(Proc(Int32, HRESULT)).call(lencryptalg)
+  def put_encrypt_algorithm(this : IMSMQMessage*, lencryptalg : Int32) : HRESULT
+    @lpVtbl.value.put_encrypt_algorithm.call(this, lencryptalg)
   end
-  def get_sent_time(pvarsenttime : VARIANT*) : HRESULT
-    @lpVtbl.value.get_sent_time.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarsenttime)
+  def get_sent_time(this : IMSMQMessage*, pvarsenttime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sent_time.call(this, pvarsenttime)
   end
-  def get_arrived_time(plarrivedtime : VARIANT*) : HRESULT
-    @lpVtbl.value.get_arrived_time.unsafe_as(Proc(VARIANT*, HRESULT)).call(plarrivedtime)
+  def get_arrived_time(this : IMSMQMessage*, plarrivedtime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_arrived_time.call(this, plarrivedtime)
   end
-  def get_destination_queue_info(ppqinfodest : IMSMQQueueInfo*) : HRESULT
-    @lpVtbl.value.get_destination_queue_info.unsafe_as(Proc(IMSMQQueueInfo*, HRESULT)).call(ppqinfodest)
+  def get_destination_queue_info(this : IMSMQMessage*, ppqinfodest : IMSMQQueueInfo*) : HRESULT
+    @lpVtbl.value.get_destination_queue_info.call(this, ppqinfodest)
   end
-  def get_sender_certificate(pvarsendercert : VARIANT*) : HRESULT
-    @lpVtbl.value.get_sender_certificate.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarsendercert)
+  def get_sender_certificate(this : IMSMQMessage*, pvarsendercert : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sender_certificate.call(this, pvarsendercert)
   end
-  def put_sender_certificate(varsendercert : VARIANT) : HRESULT
-    @lpVtbl.value.put_sender_certificate.unsafe_as(Proc(VARIANT, HRESULT)).call(varsendercert)
+  def put_sender_certificate(this : IMSMQMessage*, varsendercert : VARIANT) : HRESULT
+    @lpVtbl.value.put_sender_certificate.call(this, varsendercert)
   end
-  def get_sender_id(pvarsenderid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_sender_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarsenderid)
+  def get_sender_id(this : IMSMQMessage*, pvarsenderid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sender_id.call(this, pvarsenderid)
   end
-  def get_sender_id_type(plsenderidtype : Int32*) : HRESULT
-    @lpVtbl.value.get_sender_id_type.unsafe_as(Proc(Int32*, HRESULT)).call(plsenderidtype)
+  def get_sender_id_type(this : IMSMQMessage*, plsenderidtype : Int32*) : HRESULT
+    @lpVtbl.value.get_sender_id_type.call(this, plsenderidtype)
   end
-  def put_sender_id_type(lsenderidtype : Int32) : HRESULT
-    @lpVtbl.value.put_sender_id_type.unsafe_as(Proc(Int32, HRESULT)).call(lsenderidtype)
+  def put_sender_id_type(this : IMSMQMessage*, lsenderidtype : Int32) : HRESULT
+    @lpVtbl.value.put_sender_id_type.call(this, lsenderidtype)
   end
-  def send(destinationqueue : IMSMQQueue, transaction : VARIANT*) : HRESULT
-    @lpVtbl.value.send.unsafe_as(Proc(IMSMQQueue, VARIANT*, HRESULT)).call(destinationqueue, transaction)
+  def send(this : IMSMQMessage*, destinationqueue : IMSMQQueue, transaction : VARIANT*) : HRESULT
+    @lpVtbl.value.send.call(this, destinationqueue, transaction)
   end
-  def attach_current_security_context : HRESULT
-    @lpVtbl.value.attach_current_security_context.unsafe_as(Proc(HRESULT)).call
+  def attach_current_security_context(this : IMSMQMessage*) : HRESULT
+    @lpVtbl.value.attach_current_security_context.call(this)
   end
 end
 struct LibWin32::IMSMQQueueInfos
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQQueueInfos*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQQueueInfos*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQQueueInfos*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQQueueInfos*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQQueueInfos*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQQueueInfos*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQQueueInfos*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IMSMQQueueInfos*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def next(ppqinfonext : IMSMQQueueInfo*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(IMSMQQueueInfo*, HRESULT)).call(ppqinfonext)
+  def next(this : IMSMQQueueInfos*, ppqinfonext : IMSMQQueueInfo*) : HRESULT
+    @lpVtbl.value.next.call(this, ppqinfonext)
   end
 end
 struct LibWin32::IMSMQQueueInfos2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQQueueInfos2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQQueueInfos2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQQueueInfos2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQQueueInfos2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQQueueInfos2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQQueueInfos2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQQueueInfos2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IMSMQQueueInfos2*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def next(ppqinfonext : IMSMQQueueInfo2*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(IMSMQQueueInfo2*, HRESULT)).call(ppqinfonext)
+  def next(this : IMSMQQueueInfos2*, ppqinfonext : IMSMQQueueInfo2*) : HRESULT
+    @lpVtbl.value.next.call(this, ppqinfonext)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQQueueInfos2*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
 end
 struct LibWin32::IMSMQQueueInfos3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQQueueInfos3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQQueueInfos3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQQueueInfos3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQQueueInfos3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQQueueInfos3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQQueueInfos3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQQueueInfos3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IMSMQQueueInfos3*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def next(ppqinfonext : IMSMQQueueInfo3*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(IMSMQQueueInfo3*, HRESULT)).call(ppqinfonext)
+  def next(this : IMSMQQueueInfos3*, ppqinfonext : IMSMQQueueInfo3*) : HRESULT
+    @lpVtbl.value.next.call(this, ppqinfonext)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQQueueInfos3*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
 end
 struct LibWin32::IMSMQQueueInfos4
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQQueueInfos4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQQueueInfos4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQQueueInfos4*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQQueueInfos4*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQQueueInfos4*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQQueueInfos4*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQQueueInfos4*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IMSMQQueueInfos4*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def next(ppqinfonext : IMSMQQueueInfo4*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(IMSMQQueueInfo4*, HRESULT)).call(ppqinfonext)
+  def next(this : IMSMQQueueInfos4*, ppqinfonext : IMSMQQueueInfo4*) : HRESULT
+    @lpVtbl.value.next.call(this, ppqinfonext)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQQueueInfos4*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
 end
 struct LibWin32::IMSMQEvent
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
 end
 struct LibWin32::IMSMQEvent2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQEvent2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQEvent2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQEvent2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQEvent2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQEvent2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQEvent2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQEvent2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQEvent2*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
 end
 struct LibWin32::IMSMQEvent3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQEvent3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQEvent3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQEvent3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQEvent3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQEvent3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQEvent3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQEvent3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQEvent3*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
 end
 struct LibWin32::IMSMQTransaction
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQTransaction*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQTransaction*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQTransaction*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQTransaction*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQTransaction*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQTransaction*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQTransaction*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_transaction(pltransaction : Int32*) : HRESULT
-    @lpVtbl.value.get_transaction.unsafe_as(Proc(Int32*, HRESULT)).call(pltransaction)
+  def get_transaction(this : IMSMQTransaction*, pltransaction : Int32*) : HRESULT
+    @lpVtbl.value.get_transaction.call(this, pltransaction)
   end
-  def commit(fretaining : VARIANT*, grftc : VARIANT*, grfrm : VARIANT*) : HRESULT
-    @lpVtbl.value.commit.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, HRESULT)).call(fretaining, grftc, grfrm)
+  def commit(this : IMSMQTransaction*, fretaining : VARIANT*, grftc : VARIANT*, grfrm : VARIANT*) : HRESULT
+    @lpVtbl.value.commit.call(this, fretaining, grftc, grfrm)
   end
-  def abort(fretaining : VARIANT*, fasync : VARIANT*) : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(VARIANT*, VARIANT*, HRESULT)).call(fretaining, fasync)
+  def abort(this : IMSMQTransaction*, fretaining : VARIANT*, fasync : VARIANT*) : HRESULT
+    @lpVtbl.value.abort.call(this, fretaining, fasync)
   end
 end
 struct LibWin32::IMSMQCoordinatedTransactionDispenser
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQCoordinatedTransactionDispenser*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQCoordinatedTransactionDispenser*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQCoordinatedTransactionDispenser*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQCoordinatedTransactionDispenser*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQCoordinatedTransactionDispenser*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQCoordinatedTransactionDispenser*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQCoordinatedTransactionDispenser*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def begin_transaction(ptransaction : IMSMQTransaction*) : HRESULT
-    @lpVtbl.value.begin_transaction.unsafe_as(Proc(IMSMQTransaction*, HRESULT)).call(ptransaction)
+  def begin_transaction(this : IMSMQCoordinatedTransactionDispenser*, ptransaction : IMSMQTransaction*) : HRESULT
+    @lpVtbl.value.begin_transaction.call(this, ptransaction)
   end
 end
 struct LibWin32::IMSMQTransactionDispenser
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQTransactionDispenser*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQTransactionDispenser*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQTransactionDispenser*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQTransactionDispenser*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQTransactionDispenser*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQTransactionDispenser*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQTransactionDispenser*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def begin_transaction(ptransaction : IMSMQTransaction*) : HRESULT
-    @lpVtbl.value.begin_transaction.unsafe_as(Proc(IMSMQTransaction*, HRESULT)).call(ptransaction)
+  def begin_transaction(this : IMSMQTransactionDispenser*, ptransaction : IMSMQTransaction*) : HRESULT
+    @lpVtbl.value.begin_transaction.call(this, ptransaction)
   end
 end
 struct LibWin32::IMSMQQuery2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQQuery2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQQuery2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQQuery2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQQuery2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQQuery2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQQuery2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQQuery2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def lookup_queue(queueguid : VARIANT*, servicetypeguid : VARIANT*, label : VARIANT*, createtime : VARIANT*, modifytime : VARIANT*, relservicetype : VARIANT*, rellabel : VARIANT*, relcreatetime : VARIANT*, relmodifytime : VARIANT*, ppqinfos : IMSMQQueueInfos2*) : HRESULT
-    @lpVtbl.value.lookup_queue.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQQueueInfos2*, HRESULT)).call(queueguid, servicetypeguid, label, createtime, modifytime, relservicetype, rellabel, relcreatetime, relmodifytime, ppqinfos)
+  def lookup_queue(this : IMSMQQuery2*, queueguid : VARIANT*, servicetypeguid : VARIANT*, label : VARIANT*, createtime : VARIANT*, modifytime : VARIANT*, relservicetype : VARIANT*, rellabel : VARIANT*, relcreatetime : VARIANT*, relmodifytime : VARIANT*, ppqinfos : IMSMQQueueInfos2*) : HRESULT
+    @lpVtbl.value.lookup_queue.call(this, queueguid, servicetypeguid, label, createtime, modifytime, relservicetype, rellabel, relcreatetime, relmodifytime, ppqinfos)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQQuery2*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
 end
 struct LibWin32::IMSMQQuery3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQQuery3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQQuery3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQQuery3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQQuery3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQQuery3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQQuery3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQQuery3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def lookup_queue_v2(queueguid : VARIANT*, servicetypeguid : VARIANT*, label : VARIANT*, createtime : VARIANT*, modifytime : VARIANT*, relservicetype : VARIANT*, rellabel : VARIANT*, relcreatetime : VARIANT*, relmodifytime : VARIANT*, ppqinfos : IMSMQQueueInfos3*) : HRESULT
-    @lpVtbl.value.lookup_queue_v2.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQQueueInfos3*, HRESULT)).call(queueguid, servicetypeguid, label, createtime, modifytime, relservicetype, rellabel, relcreatetime, relmodifytime, ppqinfos)
+  def lookup_queue_v2(this : IMSMQQuery3*, queueguid : VARIANT*, servicetypeguid : VARIANT*, label : VARIANT*, createtime : VARIANT*, modifytime : VARIANT*, relservicetype : VARIANT*, rellabel : VARIANT*, relcreatetime : VARIANT*, relmodifytime : VARIANT*, ppqinfos : IMSMQQueueInfos3*) : HRESULT
+    @lpVtbl.value.lookup_queue_v2.call(this, queueguid, servicetypeguid, label, createtime, modifytime, relservicetype, rellabel, relcreatetime, relmodifytime, ppqinfos)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQQuery3*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
-  def lookup_queue(queueguid : VARIANT*, servicetypeguid : VARIANT*, label : VARIANT*, createtime : VARIANT*, modifytime : VARIANT*, relservicetype : VARIANT*, rellabel : VARIANT*, relcreatetime : VARIANT*, relmodifytime : VARIANT*, multicastaddress : VARIANT*, relmulticastaddress : VARIANT*, ppqinfos : IMSMQQueueInfos3*) : HRESULT
-    @lpVtbl.value.lookup_queue.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQQueueInfos3*, HRESULT)).call(queueguid, servicetypeguid, label, createtime, modifytime, relservicetype, rellabel, relcreatetime, relmodifytime, multicastaddress, relmulticastaddress, ppqinfos)
+  def lookup_queue(this : IMSMQQuery3*, queueguid : VARIANT*, servicetypeguid : VARIANT*, label : VARIANT*, createtime : VARIANT*, modifytime : VARIANT*, relservicetype : VARIANT*, rellabel : VARIANT*, relcreatetime : VARIANT*, relmodifytime : VARIANT*, multicastaddress : VARIANT*, relmulticastaddress : VARIANT*, ppqinfos : IMSMQQueueInfos3*) : HRESULT
+    @lpVtbl.value.lookup_queue.call(this, queueguid, servicetypeguid, label, createtime, modifytime, relservicetype, rellabel, relcreatetime, relmodifytime, multicastaddress, relmulticastaddress, ppqinfos)
   end
 end
 struct LibWin32::IMSMQQuery4
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQQuery4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQQuery4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQQuery4*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQQuery4*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQQuery4*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQQuery4*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQQuery4*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def lookup_queue_v2(queueguid : VARIANT*, servicetypeguid : VARIANT*, label : VARIANT*, createtime : VARIANT*, modifytime : VARIANT*, relservicetype : VARIANT*, rellabel : VARIANT*, relcreatetime : VARIANT*, relmodifytime : VARIANT*, ppqinfos : IMSMQQueueInfos4*) : HRESULT
-    @lpVtbl.value.lookup_queue_v2.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQQueueInfos4*, HRESULT)).call(queueguid, servicetypeguid, label, createtime, modifytime, relservicetype, rellabel, relcreatetime, relmodifytime, ppqinfos)
+  def lookup_queue_v2(this : IMSMQQuery4*, queueguid : VARIANT*, servicetypeguid : VARIANT*, label : VARIANT*, createtime : VARIANT*, modifytime : VARIANT*, relservicetype : VARIANT*, rellabel : VARIANT*, relcreatetime : VARIANT*, relmodifytime : VARIANT*, ppqinfos : IMSMQQueueInfos4*) : HRESULT
+    @lpVtbl.value.lookup_queue_v2.call(this, queueguid, servicetypeguid, label, createtime, modifytime, relservicetype, rellabel, relcreatetime, relmodifytime, ppqinfos)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQQuery4*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
-  def lookup_queue(queueguid : VARIANT*, servicetypeguid : VARIANT*, label : VARIANT*, createtime : VARIANT*, modifytime : VARIANT*, relservicetype : VARIANT*, rellabel : VARIANT*, relcreatetime : VARIANT*, relmodifytime : VARIANT*, multicastaddress : VARIANT*, relmulticastaddress : VARIANT*, ppqinfos : IMSMQQueueInfos4*) : HRESULT
-    @lpVtbl.value.lookup_queue.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQQueueInfos4*, HRESULT)).call(queueguid, servicetypeguid, label, createtime, modifytime, relservicetype, rellabel, relcreatetime, relmodifytime, multicastaddress, relmulticastaddress, ppqinfos)
+  def lookup_queue(this : IMSMQQuery4*, queueguid : VARIANT*, servicetypeguid : VARIANT*, label : VARIANT*, createtime : VARIANT*, modifytime : VARIANT*, relservicetype : VARIANT*, rellabel : VARIANT*, relcreatetime : VARIANT*, relmodifytime : VARIANT*, multicastaddress : VARIANT*, relmulticastaddress : VARIANT*, ppqinfos : IMSMQQueueInfos4*) : HRESULT
+    @lpVtbl.value.lookup_queue.call(this, queueguid, servicetypeguid, label, createtime, modifytime, relservicetype, rellabel, relcreatetime, relmodifytime, multicastaddress, relmulticastaddress, ppqinfos)
   end
 end
 struct LibWin32::IMSMQMessage2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQMessage2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQMessage2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQMessage2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQMessage2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQMessage2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQMessage2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQMessage2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_class(plclass : Int32*) : HRESULT
-    @lpVtbl.value.get_class.unsafe_as(Proc(Int32*, HRESULT)).call(plclass)
+  def get_class(this : IMSMQMessage2*, plclass : Int32*) : HRESULT
+    @lpVtbl.value.get_class.call(this, plclass)
   end
-  def get_priv_level(plprivlevel : Int32*) : HRESULT
-    @lpVtbl.value.get_priv_level.unsafe_as(Proc(Int32*, HRESULT)).call(plprivlevel)
+  def get_priv_level(this : IMSMQMessage2*, plprivlevel : Int32*) : HRESULT
+    @lpVtbl.value.get_priv_level.call(this, plprivlevel)
   end
-  def put_priv_level(lprivlevel : Int32) : HRESULT
-    @lpVtbl.value.put_priv_level.unsafe_as(Proc(Int32, HRESULT)).call(lprivlevel)
+  def put_priv_level(this : IMSMQMessage2*, lprivlevel : Int32) : HRESULT
+    @lpVtbl.value.put_priv_level.call(this, lprivlevel)
   end
-  def get_auth_level(plauthlevel : Int32*) : HRESULT
-    @lpVtbl.value.get_auth_level.unsafe_as(Proc(Int32*, HRESULT)).call(plauthlevel)
+  def get_auth_level(this : IMSMQMessage2*, plauthlevel : Int32*) : HRESULT
+    @lpVtbl.value.get_auth_level.call(this, plauthlevel)
   end
-  def put_auth_level(lauthlevel : Int32) : HRESULT
-    @lpVtbl.value.put_auth_level.unsafe_as(Proc(Int32, HRESULT)).call(lauthlevel)
+  def put_auth_level(this : IMSMQMessage2*, lauthlevel : Int32) : HRESULT
+    @lpVtbl.value.put_auth_level.call(this, lauthlevel)
   end
-  def get_is_authenticated(pisauthenticated : Int16*) : HRESULT
-    @lpVtbl.value.get_is_authenticated.unsafe_as(Proc(Int16*, HRESULT)).call(pisauthenticated)
+  def get_is_authenticated(this : IMSMQMessage2*, pisauthenticated : Int16*) : HRESULT
+    @lpVtbl.value.get_is_authenticated.call(this, pisauthenticated)
   end
-  def get_delivery(pldelivery : Int32*) : HRESULT
-    @lpVtbl.value.get_delivery.unsafe_as(Proc(Int32*, HRESULT)).call(pldelivery)
+  def get_delivery(this : IMSMQMessage2*, pldelivery : Int32*) : HRESULT
+    @lpVtbl.value.get_delivery.call(this, pldelivery)
   end
-  def put_delivery(ldelivery : Int32) : HRESULT
-    @lpVtbl.value.put_delivery.unsafe_as(Proc(Int32, HRESULT)).call(ldelivery)
+  def put_delivery(this : IMSMQMessage2*, ldelivery : Int32) : HRESULT
+    @lpVtbl.value.put_delivery.call(this, ldelivery)
   end
-  def get_trace(pltrace : Int32*) : HRESULT
-    @lpVtbl.value.get_trace.unsafe_as(Proc(Int32*, HRESULT)).call(pltrace)
+  def get_trace(this : IMSMQMessage2*, pltrace : Int32*) : HRESULT
+    @lpVtbl.value.get_trace.call(this, pltrace)
   end
-  def put_trace(ltrace : Int32) : HRESULT
-    @lpVtbl.value.put_trace.unsafe_as(Proc(Int32, HRESULT)).call(ltrace)
+  def put_trace(this : IMSMQMessage2*, ltrace : Int32) : HRESULT
+    @lpVtbl.value.put_trace.call(this, ltrace)
   end
-  def get_priority(plpriority : Int32*) : HRESULT
-    @lpVtbl.value.get_priority.unsafe_as(Proc(Int32*, HRESULT)).call(plpriority)
+  def get_priority(this : IMSMQMessage2*, plpriority : Int32*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, plpriority)
   end
-  def put_priority(lpriority : Int32) : HRESULT
-    @lpVtbl.value.put_priority.unsafe_as(Proc(Int32, HRESULT)).call(lpriority)
+  def put_priority(this : IMSMQMessage2*, lpriority : Int32) : HRESULT
+    @lpVtbl.value.put_priority.call(this, lpriority)
   end
-  def get_journal(pljournal : Int32*) : HRESULT
-    @lpVtbl.value.get_journal.unsafe_as(Proc(Int32*, HRESULT)).call(pljournal)
+  def get_journal(this : IMSMQMessage2*, pljournal : Int32*) : HRESULT
+    @lpVtbl.value.get_journal.call(this, pljournal)
   end
-  def put_journal(ljournal : Int32) : HRESULT
-    @lpVtbl.value.put_journal.unsafe_as(Proc(Int32, HRESULT)).call(ljournal)
+  def put_journal(this : IMSMQMessage2*, ljournal : Int32) : HRESULT
+    @lpVtbl.value.put_journal.call(this, ljournal)
   end
-  def get_response_queue_info_v1(ppqinforesponse : IMSMQQueueInfo*) : HRESULT
-    @lpVtbl.value.get_response_queue_info_v1.unsafe_as(Proc(IMSMQQueueInfo*, HRESULT)).call(ppqinforesponse)
+  def get_response_queue_info_v1(this : IMSMQMessage2*, ppqinforesponse : IMSMQQueueInfo*) : HRESULT
+    @lpVtbl.value.get_response_queue_info_v1.call(this, ppqinforesponse)
   end
-  def putref_response_queue_info_v1(pqinforesponse : IMSMQQueueInfo) : HRESULT
-    @lpVtbl.value.putref_response_queue_info_v1.unsafe_as(Proc(IMSMQQueueInfo, HRESULT)).call(pqinforesponse)
+  def putref_response_queue_info_v1(this : IMSMQMessage2*, pqinforesponse : IMSMQQueueInfo) : HRESULT
+    @lpVtbl.value.putref_response_queue_info_v1.call(this, pqinforesponse)
   end
-  def get_app_specific(plappspecific : Int32*) : HRESULT
-    @lpVtbl.value.get_app_specific.unsafe_as(Proc(Int32*, HRESULT)).call(plappspecific)
+  def get_app_specific(this : IMSMQMessage2*, plappspecific : Int32*) : HRESULT
+    @lpVtbl.value.get_app_specific.call(this, plappspecific)
   end
-  def put_app_specific(lappspecific : Int32) : HRESULT
-    @lpVtbl.value.put_app_specific.unsafe_as(Proc(Int32, HRESULT)).call(lappspecific)
+  def put_app_specific(this : IMSMQMessage2*, lappspecific : Int32) : HRESULT
+    @lpVtbl.value.put_app_specific.call(this, lappspecific)
   end
-  def get_source_machine_guid(pbstrguidsrcmachine : UInt8**) : HRESULT
-    @lpVtbl.value.get_source_machine_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrguidsrcmachine)
+  def get_source_machine_guid(this : IMSMQMessage2*, pbstrguidsrcmachine : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_machine_guid.call(this, pbstrguidsrcmachine)
   end
-  def get_body_length(pcbbody : Int32*) : HRESULT
-    @lpVtbl.value.get_body_length.unsafe_as(Proc(Int32*, HRESULT)).call(pcbbody)
+  def get_body_length(this : IMSMQMessage2*, pcbbody : Int32*) : HRESULT
+    @lpVtbl.value.get_body_length.call(this, pcbbody)
   end
-  def get_body(pvarbody : VARIANT*) : HRESULT
-    @lpVtbl.value.get_body.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarbody)
+  def get_body(this : IMSMQMessage2*, pvarbody : VARIANT*) : HRESULT
+    @lpVtbl.value.get_body.call(this, pvarbody)
   end
-  def put_body(varbody : VARIANT) : HRESULT
-    @lpVtbl.value.put_body.unsafe_as(Proc(VARIANT, HRESULT)).call(varbody)
+  def put_body(this : IMSMQMessage2*, varbody : VARIANT) : HRESULT
+    @lpVtbl.value.put_body.call(this, varbody)
   end
-  def get_admin_queue_info_v1(ppqinfoadmin : IMSMQQueueInfo*) : HRESULT
-    @lpVtbl.value.get_admin_queue_info_v1.unsafe_as(Proc(IMSMQQueueInfo*, HRESULT)).call(ppqinfoadmin)
+  def get_admin_queue_info_v1(this : IMSMQMessage2*, ppqinfoadmin : IMSMQQueueInfo*) : HRESULT
+    @lpVtbl.value.get_admin_queue_info_v1.call(this, ppqinfoadmin)
   end
-  def putref_admin_queue_info_v1(pqinfoadmin : IMSMQQueueInfo) : HRESULT
-    @lpVtbl.value.putref_admin_queue_info_v1.unsafe_as(Proc(IMSMQQueueInfo, HRESULT)).call(pqinfoadmin)
+  def putref_admin_queue_info_v1(this : IMSMQMessage2*, pqinfoadmin : IMSMQQueueInfo) : HRESULT
+    @lpVtbl.value.putref_admin_queue_info_v1.call(this, pqinfoadmin)
   end
-  def get_id(pvarmsgid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarmsgid)
+  def get_id(this : IMSMQMessage2*, pvarmsgid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pvarmsgid)
   end
-  def get_correlation_id(pvarmsgid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_correlation_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarmsgid)
+  def get_correlation_id(this : IMSMQMessage2*, pvarmsgid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_correlation_id.call(this, pvarmsgid)
   end
-  def put_correlation_id(varmsgid : VARIANT) : HRESULT
-    @lpVtbl.value.put_correlation_id.unsafe_as(Proc(VARIANT, HRESULT)).call(varmsgid)
+  def put_correlation_id(this : IMSMQMessage2*, varmsgid : VARIANT) : HRESULT
+    @lpVtbl.value.put_correlation_id.call(this, varmsgid)
   end
-  def get_ack(plack : Int32*) : HRESULT
-    @lpVtbl.value.get_ack.unsafe_as(Proc(Int32*, HRESULT)).call(plack)
+  def get_ack(this : IMSMQMessage2*, plack : Int32*) : HRESULT
+    @lpVtbl.value.get_ack.call(this, plack)
   end
-  def put_ack(lack : Int32) : HRESULT
-    @lpVtbl.value.put_ack.unsafe_as(Proc(Int32, HRESULT)).call(lack)
+  def put_ack(this : IMSMQMessage2*, lack : Int32) : HRESULT
+    @lpVtbl.value.put_ack.call(this, lack)
   end
-  def get_label(pbstrlabel : UInt8**) : HRESULT
-    @lpVtbl.value.get_label.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrlabel)
+  def get_label(this : IMSMQMessage2*, pbstrlabel : UInt8**) : HRESULT
+    @lpVtbl.value.get_label.call(this, pbstrlabel)
   end
-  def put_label(bstrlabel : UInt8*) : HRESULT
-    @lpVtbl.value.put_label.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrlabel)
+  def put_label(this : IMSMQMessage2*, bstrlabel : UInt8*) : HRESULT
+    @lpVtbl.value.put_label.call(this, bstrlabel)
   end
-  def get_max_time_to_reach_queue(plmaxtimetoreachqueue : Int32*) : HRESULT
-    @lpVtbl.value.get_max_time_to_reach_queue.unsafe_as(Proc(Int32*, HRESULT)).call(plmaxtimetoreachqueue)
+  def get_max_time_to_reach_queue(this : IMSMQMessage2*, plmaxtimetoreachqueue : Int32*) : HRESULT
+    @lpVtbl.value.get_max_time_to_reach_queue.call(this, plmaxtimetoreachqueue)
   end
-  def put_max_time_to_reach_queue(lmaxtimetoreachqueue : Int32) : HRESULT
-    @lpVtbl.value.put_max_time_to_reach_queue.unsafe_as(Proc(Int32, HRESULT)).call(lmaxtimetoreachqueue)
+  def put_max_time_to_reach_queue(this : IMSMQMessage2*, lmaxtimetoreachqueue : Int32) : HRESULT
+    @lpVtbl.value.put_max_time_to_reach_queue.call(this, lmaxtimetoreachqueue)
   end
-  def get_max_time_to_receive(plmaxtimetoreceive : Int32*) : HRESULT
-    @lpVtbl.value.get_max_time_to_receive.unsafe_as(Proc(Int32*, HRESULT)).call(plmaxtimetoreceive)
+  def get_max_time_to_receive(this : IMSMQMessage2*, plmaxtimetoreceive : Int32*) : HRESULT
+    @lpVtbl.value.get_max_time_to_receive.call(this, plmaxtimetoreceive)
   end
-  def put_max_time_to_receive(lmaxtimetoreceive : Int32) : HRESULT
-    @lpVtbl.value.put_max_time_to_receive.unsafe_as(Proc(Int32, HRESULT)).call(lmaxtimetoreceive)
+  def put_max_time_to_receive(this : IMSMQMessage2*, lmaxtimetoreceive : Int32) : HRESULT
+    @lpVtbl.value.put_max_time_to_receive.call(this, lmaxtimetoreceive)
   end
-  def get_hash_algorithm(plhashalg : Int32*) : HRESULT
-    @lpVtbl.value.get_hash_algorithm.unsafe_as(Proc(Int32*, HRESULT)).call(plhashalg)
+  def get_hash_algorithm(this : IMSMQMessage2*, plhashalg : Int32*) : HRESULT
+    @lpVtbl.value.get_hash_algorithm.call(this, plhashalg)
   end
-  def put_hash_algorithm(lhashalg : Int32) : HRESULT
-    @lpVtbl.value.put_hash_algorithm.unsafe_as(Proc(Int32, HRESULT)).call(lhashalg)
+  def put_hash_algorithm(this : IMSMQMessage2*, lhashalg : Int32) : HRESULT
+    @lpVtbl.value.put_hash_algorithm.call(this, lhashalg)
   end
-  def get_encrypt_algorithm(plencryptalg : Int32*) : HRESULT
-    @lpVtbl.value.get_encrypt_algorithm.unsafe_as(Proc(Int32*, HRESULT)).call(plencryptalg)
+  def get_encrypt_algorithm(this : IMSMQMessage2*, plencryptalg : Int32*) : HRESULT
+    @lpVtbl.value.get_encrypt_algorithm.call(this, plencryptalg)
   end
-  def put_encrypt_algorithm(lencryptalg : Int32) : HRESULT
-    @lpVtbl.value.put_encrypt_algorithm.unsafe_as(Proc(Int32, HRESULT)).call(lencryptalg)
+  def put_encrypt_algorithm(this : IMSMQMessage2*, lencryptalg : Int32) : HRESULT
+    @lpVtbl.value.put_encrypt_algorithm.call(this, lencryptalg)
   end
-  def get_sent_time(pvarsenttime : VARIANT*) : HRESULT
-    @lpVtbl.value.get_sent_time.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarsenttime)
+  def get_sent_time(this : IMSMQMessage2*, pvarsenttime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sent_time.call(this, pvarsenttime)
   end
-  def get_arrived_time(plarrivedtime : VARIANT*) : HRESULT
-    @lpVtbl.value.get_arrived_time.unsafe_as(Proc(VARIANT*, HRESULT)).call(plarrivedtime)
+  def get_arrived_time(this : IMSMQMessage2*, plarrivedtime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_arrived_time.call(this, plarrivedtime)
   end
-  def get_destination_queue_info(ppqinfodest : IMSMQQueueInfo2*) : HRESULT
-    @lpVtbl.value.get_destination_queue_info.unsafe_as(Proc(IMSMQQueueInfo2*, HRESULT)).call(ppqinfodest)
+  def get_destination_queue_info(this : IMSMQMessage2*, ppqinfodest : IMSMQQueueInfo2*) : HRESULT
+    @lpVtbl.value.get_destination_queue_info.call(this, ppqinfodest)
   end
-  def get_sender_certificate(pvarsendercert : VARIANT*) : HRESULT
-    @lpVtbl.value.get_sender_certificate.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarsendercert)
+  def get_sender_certificate(this : IMSMQMessage2*, pvarsendercert : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sender_certificate.call(this, pvarsendercert)
   end
-  def put_sender_certificate(varsendercert : VARIANT) : HRESULT
-    @lpVtbl.value.put_sender_certificate.unsafe_as(Proc(VARIANT, HRESULT)).call(varsendercert)
+  def put_sender_certificate(this : IMSMQMessage2*, varsendercert : VARIANT) : HRESULT
+    @lpVtbl.value.put_sender_certificate.call(this, varsendercert)
   end
-  def get_sender_id(pvarsenderid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_sender_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarsenderid)
+  def get_sender_id(this : IMSMQMessage2*, pvarsenderid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sender_id.call(this, pvarsenderid)
   end
-  def get_sender_id_type(plsenderidtype : Int32*) : HRESULT
-    @lpVtbl.value.get_sender_id_type.unsafe_as(Proc(Int32*, HRESULT)).call(plsenderidtype)
+  def get_sender_id_type(this : IMSMQMessage2*, plsenderidtype : Int32*) : HRESULT
+    @lpVtbl.value.get_sender_id_type.call(this, plsenderidtype)
   end
-  def put_sender_id_type(lsenderidtype : Int32) : HRESULT
-    @lpVtbl.value.put_sender_id_type.unsafe_as(Proc(Int32, HRESULT)).call(lsenderidtype)
+  def put_sender_id_type(this : IMSMQMessage2*, lsenderidtype : Int32) : HRESULT
+    @lpVtbl.value.put_sender_id_type.call(this, lsenderidtype)
   end
-  def send(destinationqueue : IMSMQQueue2, transaction : VARIANT*) : HRESULT
-    @lpVtbl.value.send.unsafe_as(Proc(IMSMQQueue2, VARIANT*, HRESULT)).call(destinationqueue, transaction)
+  def send(this : IMSMQMessage2*, destinationqueue : IMSMQQueue2, transaction : VARIANT*) : HRESULT
+    @lpVtbl.value.send.call(this, destinationqueue, transaction)
   end
-  def attach_current_security_context : HRESULT
-    @lpVtbl.value.attach_current_security_context.unsafe_as(Proc(HRESULT)).call
+  def attach_current_security_context(this : IMSMQMessage2*) : HRESULT
+    @lpVtbl.value.attach_current_security_context.call(this)
   end
-  def get_sender_version(plsenderversion : Int32*) : HRESULT
-    @lpVtbl.value.get_sender_version.unsafe_as(Proc(Int32*, HRESULT)).call(plsenderversion)
+  def get_sender_version(this : IMSMQMessage2*, plsenderversion : Int32*) : HRESULT
+    @lpVtbl.value.get_sender_version.call(this, plsenderversion)
   end
-  def get_extension(pvarextension : VARIANT*) : HRESULT
-    @lpVtbl.value.get_extension.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarextension)
+  def get_extension(this : IMSMQMessage2*, pvarextension : VARIANT*) : HRESULT
+    @lpVtbl.value.get_extension.call(this, pvarextension)
   end
-  def put_extension(varextension : VARIANT) : HRESULT
-    @lpVtbl.value.put_extension.unsafe_as(Proc(VARIANT, HRESULT)).call(varextension)
+  def put_extension(this : IMSMQMessage2*, varextension : VARIANT) : HRESULT
+    @lpVtbl.value.put_extension.call(this, varextension)
   end
-  def get_connector_type_guid(pbstrguidconnectortype : UInt8**) : HRESULT
-    @lpVtbl.value.get_connector_type_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrguidconnectortype)
+  def get_connector_type_guid(this : IMSMQMessage2*, pbstrguidconnectortype : UInt8**) : HRESULT
+    @lpVtbl.value.get_connector_type_guid.call(this, pbstrguidconnectortype)
   end
-  def put_connector_type_guid(bstrguidconnectortype : UInt8*) : HRESULT
-    @lpVtbl.value.put_connector_type_guid.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrguidconnectortype)
+  def put_connector_type_guid(this : IMSMQMessage2*, bstrguidconnectortype : UInt8*) : HRESULT
+    @lpVtbl.value.put_connector_type_guid.call(this, bstrguidconnectortype)
   end
-  def get_transaction_status_queue_info(ppqinfoxactstatus : IMSMQQueueInfo2*) : HRESULT
-    @lpVtbl.value.get_transaction_status_queue_info.unsafe_as(Proc(IMSMQQueueInfo2*, HRESULT)).call(ppqinfoxactstatus)
+  def get_transaction_status_queue_info(this : IMSMQMessage2*, ppqinfoxactstatus : IMSMQQueueInfo2*) : HRESULT
+    @lpVtbl.value.get_transaction_status_queue_info.call(this, ppqinfoxactstatus)
   end
-  def get_destination_symmetric_key(pvardestsymmkey : VARIANT*) : HRESULT
-    @lpVtbl.value.get_destination_symmetric_key.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvardestsymmkey)
+  def get_destination_symmetric_key(this : IMSMQMessage2*, pvardestsymmkey : VARIANT*) : HRESULT
+    @lpVtbl.value.get_destination_symmetric_key.call(this, pvardestsymmkey)
   end
-  def put_destination_symmetric_key(vardestsymmkey : VARIANT) : HRESULT
-    @lpVtbl.value.put_destination_symmetric_key.unsafe_as(Proc(VARIANT, HRESULT)).call(vardestsymmkey)
+  def put_destination_symmetric_key(this : IMSMQMessage2*, vardestsymmkey : VARIANT) : HRESULT
+    @lpVtbl.value.put_destination_symmetric_key.call(this, vardestsymmkey)
   end
-  def get_signature(pvarsignature : VARIANT*) : HRESULT
-    @lpVtbl.value.get_signature.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarsignature)
+  def get_signature(this : IMSMQMessage2*, pvarsignature : VARIANT*) : HRESULT
+    @lpVtbl.value.get_signature.call(this, pvarsignature)
   end
-  def put_signature(varsignature : VARIANT) : HRESULT
-    @lpVtbl.value.put_signature.unsafe_as(Proc(VARIANT, HRESULT)).call(varsignature)
+  def put_signature(this : IMSMQMessage2*, varsignature : VARIANT) : HRESULT
+    @lpVtbl.value.put_signature.call(this, varsignature)
   end
-  def get_authentication_provider_type(plauthprovtype : Int32*) : HRESULT
-    @lpVtbl.value.get_authentication_provider_type.unsafe_as(Proc(Int32*, HRESULT)).call(plauthprovtype)
+  def get_authentication_provider_type(this : IMSMQMessage2*, plauthprovtype : Int32*) : HRESULT
+    @lpVtbl.value.get_authentication_provider_type.call(this, plauthprovtype)
   end
-  def put_authentication_provider_type(lauthprovtype : Int32) : HRESULT
-    @lpVtbl.value.put_authentication_provider_type.unsafe_as(Proc(Int32, HRESULT)).call(lauthprovtype)
+  def put_authentication_provider_type(this : IMSMQMessage2*, lauthprovtype : Int32) : HRESULT
+    @lpVtbl.value.put_authentication_provider_type.call(this, lauthprovtype)
   end
-  def get_authentication_provider_name(pbstrauthprovname : UInt8**) : HRESULT
-    @lpVtbl.value.get_authentication_provider_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrauthprovname)
+  def get_authentication_provider_name(this : IMSMQMessage2*, pbstrauthprovname : UInt8**) : HRESULT
+    @lpVtbl.value.get_authentication_provider_name.call(this, pbstrauthprovname)
   end
-  def put_authentication_provider_name(bstrauthprovname : UInt8*) : HRESULT
-    @lpVtbl.value.put_authentication_provider_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrauthprovname)
+  def put_authentication_provider_name(this : IMSMQMessage2*, bstrauthprovname : UInt8*) : HRESULT
+    @lpVtbl.value.put_authentication_provider_name.call(this, bstrauthprovname)
   end
-  def put_sender_id(varsenderid : VARIANT) : HRESULT
-    @lpVtbl.value.put_sender_id.unsafe_as(Proc(VARIANT, HRESULT)).call(varsenderid)
+  def put_sender_id(this : IMSMQMessage2*, varsenderid : VARIANT) : HRESULT
+    @lpVtbl.value.put_sender_id.call(this, varsenderid)
   end
-  def get_msg_class(plmsgclass : Int32*) : HRESULT
-    @lpVtbl.value.get_msg_class.unsafe_as(Proc(Int32*, HRESULT)).call(plmsgclass)
+  def get_msg_class(this : IMSMQMessage2*, plmsgclass : Int32*) : HRESULT
+    @lpVtbl.value.get_msg_class.call(this, plmsgclass)
   end
-  def put_msg_class(lmsgclass : Int32) : HRESULT
-    @lpVtbl.value.put_msg_class.unsafe_as(Proc(Int32, HRESULT)).call(lmsgclass)
+  def put_msg_class(this : IMSMQMessage2*, lmsgclass : Int32) : HRESULT
+    @lpVtbl.value.put_msg_class.call(this, lmsgclass)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQMessage2*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
-  def get_transaction_id(pvarxactid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_transaction_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarxactid)
+  def get_transaction_id(this : IMSMQMessage2*, pvarxactid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_transaction_id.call(this, pvarxactid)
   end
-  def get_is_first_in_transaction(pisfirstinxact : Int16*) : HRESULT
-    @lpVtbl.value.get_is_first_in_transaction.unsafe_as(Proc(Int16*, HRESULT)).call(pisfirstinxact)
+  def get_is_first_in_transaction(this : IMSMQMessage2*, pisfirstinxact : Int16*) : HRESULT
+    @lpVtbl.value.get_is_first_in_transaction.call(this, pisfirstinxact)
   end
-  def get_is_last_in_transaction(pislastinxact : Int16*) : HRESULT
-    @lpVtbl.value.get_is_last_in_transaction.unsafe_as(Proc(Int16*, HRESULT)).call(pislastinxact)
+  def get_is_last_in_transaction(this : IMSMQMessage2*, pislastinxact : Int16*) : HRESULT
+    @lpVtbl.value.get_is_last_in_transaction.call(this, pislastinxact)
   end
-  def get_response_queue_info(ppqinforesponse : IMSMQQueueInfo2*) : HRESULT
-    @lpVtbl.value.get_response_queue_info.unsafe_as(Proc(IMSMQQueueInfo2*, HRESULT)).call(ppqinforesponse)
+  def get_response_queue_info(this : IMSMQMessage2*, ppqinforesponse : IMSMQQueueInfo2*) : HRESULT
+    @lpVtbl.value.get_response_queue_info.call(this, ppqinforesponse)
   end
-  def putref_response_queue_info(pqinforesponse : IMSMQQueueInfo2) : HRESULT
-    @lpVtbl.value.putref_response_queue_info.unsafe_as(Proc(IMSMQQueueInfo2, HRESULT)).call(pqinforesponse)
+  def putref_response_queue_info(this : IMSMQMessage2*, pqinforesponse : IMSMQQueueInfo2) : HRESULT
+    @lpVtbl.value.putref_response_queue_info.call(this, pqinforesponse)
   end
-  def get_admin_queue_info(ppqinfoadmin : IMSMQQueueInfo2*) : HRESULT
-    @lpVtbl.value.get_admin_queue_info.unsafe_as(Proc(IMSMQQueueInfo2*, HRESULT)).call(ppqinfoadmin)
+  def get_admin_queue_info(this : IMSMQMessage2*, ppqinfoadmin : IMSMQQueueInfo2*) : HRESULT
+    @lpVtbl.value.get_admin_queue_info.call(this, ppqinfoadmin)
   end
-  def putref_admin_queue_info(pqinfoadmin : IMSMQQueueInfo2) : HRESULT
-    @lpVtbl.value.putref_admin_queue_info.unsafe_as(Proc(IMSMQQueueInfo2, HRESULT)).call(pqinfoadmin)
+  def putref_admin_queue_info(this : IMSMQMessage2*, pqinfoadmin : IMSMQQueueInfo2) : HRESULT
+    @lpVtbl.value.putref_admin_queue_info.call(this, pqinfoadmin)
   end
-  def get_received_authentication_level(psreceivedauthenticationlevel : Int16*) : HRESULT
-    @lpVtbl.value.get_received_authentication_level.unsafe_as(Proc(Int16*, HRESULT)).call(psreceivedauthenticationlevel)
+  def get_received_authentication_level(this : IMSMQMessage2*, psreceivedauthenticationlevel : Int16*) : HRESULT
+    @lpVtbl.value.get_received_authentication_level.call(this, psreceivedauthenticationlevel)
   end
 end
 struct LibWin32::IMSMQMessage3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQMessage3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQMessage3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQMessage3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQMessage3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQMessage3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQMessage3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQMessage3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_class(plclass : Int32*) : HRESULT
-    @lpVtbl.value.get_class.unsafe_as(Proc(Int32*, HRESULT)).call(plclass)
+  def get_class(this : IMSMQMessage3*, plclass : Int32*) : HRESULT
+    @lpVtbl.value.get_class.call(this, plclass)
   end
-  def get_priv_level(plprivlevel : Int32*) : HRESULT
-    @lpVtbl.value.get_priv_level.unsafe_as(Proc(Int32*, HRESULT)).call(plprivlevel)
+  def get_priv_level(this : IMSMQMessage3*, plprivlevel : Int32*) : HRESULT
+    @lpVtbl.value.get_priv_level.call(this, plprivlevel)
   end
-  def put_priv_level(lprivlevel : Int32) : HRESULT
-    @lpVtbl.value.put_priv_level.unsafe_as(Proc(Int32, HRESULT)).call(lprivlevel)
+  def put_priv_level(this : IMSMQMessage3*, lprivlevel : Int32) : HRESULT
+    @lpVtbl.value.put_priv_level.call(this, lprivlevel)
   end
-  def get_auth_level(plauthlevel : Int32*) : HRESULT
-    @lpVtbl.value.get_auth_level.unsafe_as(Proc(Int32*, HRESULT)).call(plauthlevel)
+  def get_auth_level(this : IMSMQMessage3*, plauthlevel : Int32*) : HRESULT
+    @lpVtbl.value.get_auth_level.call(this, plauthlevel)
   end
-  def put_auth_level(lauthlevel : Int32) : HRESULT
-    @lpVtbl.value.put_auth_level.unsafe_as(Proc(Int32, HRESULT)).call(lauthlevel)
+  def put_auth_level(this : IMSMQMessage3*, lauthlevel : Int32) : HRESULT
+    @lpVtbl.value.put_auth_level.call(this, lauthlevel)
   end
-  def get_is_authenticated(pisauthenticated : Int16*) : HRESULT
-    @lpVtbl.value.get_is_authenticated.unsafe_as(Proc(Int16*, HRESULT)).call(pisauthenticated)
+  def get_is_authenticated(this : IMSMQMessage3*, pisauthenticated : Int16*) : HRESULT
+    @lpVtbl.value.get_is_authenticated.call(this, pisauthenticated)
   end
-  def get_delivery(pldelivery : Int32*) : HRESULT
-    @lpVtbl.value.get_delivery.unsafe_as(Proc(Int32*, HRESULT)).call(pldelivery)
+  def get_delivery(this : IMSMQMessage3*, pldelivery : Int32*) : HRESULT
+    @lpVtbl.value.get_delivery.call(this, pldelivery)
   end
-  def put_delivery(ldelivery : Int32) : HRESULT
-    @lpVtbl.value.put_delivery.unsafe_as(Proc(Int32, HRESULT)).call(ldelivery)
+  def put_delivery(this : IMSMQMessage3*, ldelivery : Int32) : HRESULT
+    @lpVtbl.value.put_delivery.call(this, ldelivery)
   end
-  def get_trace(pltrace : Int32*) : HRESULT
-    @lpVtbl.value.get_trace.unsafe_as(Proc(Int32*, HRESULT)).call(pltrace)
+  def get_trace(this : IMSMQMessage3*, pltrace : Int32*) : HRESULT
+    @lpVtbl.value.get_trace.call(this, pltrace)
   end
-  def put_trace(ltrace : Int32) : HRESULT
-    @lpVtbl.value.put_trace.unsafe_as(Proc(Int32, HRESULT)).call(ltrace)
+  def put_trace(this : IMSMQMessage3*, ltrace : Int32) : HRESULT
+    @lpVtbl.value.put_trace.call(this, ltrace)
   end
-  def get_priority(plpriority : Int32*) : HRESULT
-    @lpVtbl.value.get_priority.unsafe_as(Proc(Int32*, HRESULT)).call(plpriority)
+  def get_priority(this : IMSMQMessage3*, plpriority : Int32*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, plpriority)
   end
-  def put_priority(lpriority : Int32) : HRESULT
-    @lpVtbl.value.put_priority.unsafe_as(Proc(Int32, HRESULT)).call(lpriority)
+  def put_priority(this : IMSMQMessage3*, lpriority : Int32) : HRESULT
+    @lpVtbl.value.put_priority.call(this, lpriority)
   end
-  def get_journal(pljournal : Int32*) : HRESULT
-    @lpVtbl.value.get_journal.unsafe_as(Proc(Int32*, HRESULT)).call(pljournal)
+  def get_journal(this : IMSMQMessage3*, pljournal : Int32*) : HRESULT
+    @lpVtbl.value.get_journal.call(this, pljournal)
   end
-  def put_journal(ljournal : Int32) : HRESULT
-    @lpVtbl.value.put_journal.unsafe_as(Proc(Int32, HRESULT)).call(ljournal)
+  def put_journal(this : IMSMQMessage3*, ljournal : Int32) : HRESULT
+    @lpVtbl.value.put_journal.call(this, ljournal)
   end
-  def get_response_queue_info_v1(ppqinforesponse : IMSMQQueueInfo*) : HRESULT
-    @lpVtbl.value.get_response_queue_info_v1.unsafe_as(Proc(IMSMQQueueInfo*, HRESULT)).call(ppqinforesponse)
+  def get_response_queue_info_v1(this : IMSMQMessage3*, ppqinforesponse : IMSMQQueueInfo*) : HRESULT
+    @lpVtbl.value.get_response_queue_info_v1.call(this, ppqinforesponse)
   end
-  def putref_response_queue_info_v1(pqinforesponse : IMSMQQueueInfo) : HRESULT
-    @lpVtbl.value.putref_response_queue_info_v1.unsafe_as(Proc(IMSMQQueueInfo, HRESULT)).call(pqinforesponse)
+  def putref_response_queue_info_v1(this : IMSMQMessage3*, pqinforesponse : IMSMQQueueInfo) : HRESULT
+    @lpVtbl.value.putref_response_queue_info_v1.call(this, pqinforesponse)
   end
-  def get_app_specific(plappspecific : Int32*) : HRESULT
-    @lpVtbl.value.get_app_specific.unsafe_as(Proc(Int32*, HRESULT)).call(plappspecific)
+  def get_app_specific(this : IMSMQMessage3*, plappspecific : Int32*) : HRESULT
+    @lpVtbl.value.get_app_specific.call(this, plappspecific)
   end
-  def put_app_specific(lappspecific : Int32) : HRESULT
-    @lpVtbl.value.put_app_specific.unsafe_as(Proc(Int32, HRESULT)).call(lappspecific)
+  def put_app_specific(this : IMSMQMessage3*, lappspecific : Int32) : HRESULT
+    @lpVtbl.value.put_app_specific.call(this, lappspecific)
   end
-  def get_source_machine_guid(pbstrguidsrcmachine : UInt8**) : HRESULT
-    @lpVtbl.value.get_source_machine_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrguidsrcmachine)
+  def get_source_machine_guid(this : IMSMQMessage3*, pbstrguidsrcmachine : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_machine_guid.call(this, pbstrguidsrcmachine)
   end
-  def get_body_length(pcbbody : Int32*) : HRESULT
-    @lpVtbl.value.get_body_length.unsafe_as(Proc(Int32*, HRESULT)).call(pcbbody)
+  def get_body_length(this : IMSMQMessage3*, pcbbody : Int32*) : HRESULT
+    @lpVtbl.value.get_body_length.call(this, pcbbody)
   end
-  def get_body(pvarbody : VARIANT*) : HRESULT
-    @lpVtbl.value.get_body.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarbody)
+  def get_body(this : IMSMQMessage3*, pvarbody : VARIANT*) : HRESULT
+    @lpVtbl.value.get_body.call(this, pvarbody)
   end
-  def put_body(varbody : VARIANT) : HRESULT
-    @lpVtbl.value.put_body.unsafe_as(Proc(VARIANT, HRESULT)).call(varbody)
+  def put_body(this : IMSMQMessage3*, varbody : VARIANT) : HRESULT
+    @lpVtbl.value.put_body.call(this, varbody)
   end
-  def get_admin_queue_info_v1(ppqinfoadmin : IMSMQQueueInfo*) : HRESULT
-    @lpVtbl.value.get_admin_queue_info_v1.unsafe_as(Proc(IMSMQQueueInfo*, HRESULT)).call(ppqinfoadmin)
+  def get_admin_queue_info_v1(this : IMSMQMessage3*, ppqinfoadmin : IMSMQQueueInfo*) : HRESULT
+    @lpVtbl.value.get_admin_queue_info_v1.call(this, ppqinfoadmin)
   end
-  def putref_admin_queue_info_v1(pqinfoadmin : IMSMQQueueInfo) : HRESULT
-    @lpVtbl.value.putref_admin_queue_info_v1.unsafe_as(Proc(IMSMQQueueInfo, HRESULT)).call(pqinfoadmin)
+  def putref_admin_queue_info_v1(this : IMSMQMessage3*, pqinfoadmin : IMSMQQueueInfo) : HRESULT
+    @lpVtbl.value.putref_admin_queue_info_v1.call(this, pqinfoadmin)
   end
-  def get_id(pvarmsgid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarmsgid)
+  def get_id(this : IMSMQMessage3*, pvarmsgid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pvarmsgid)
   end
-  def get_correlation_id(pvarmsgid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_correlation_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarmsgid)
+  def get_correlation_id(this : IMSMQMessage3*, pvarmsgid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_correlation_id.call(this, pvarmsgid)
   end
-  def put_correlation_id(varmsgid : VARIANT) : HRESULT
-    @lpVtbl.value.put_correlation_id.unsafe_as(Proc(VARIANT, HRESULT)).call(varmsgid)
+  def put_correlation_id(this : IMSMQMessage3*, varmsgid : VARIANT) : HRESULT
+    @lpVtbl.value.put_correlation_id.call(this, varmsgid)
   end
-  def get_ack(plack : Int32*) : HRESULT
-    @lpVtbl.value.get_ack.unsafe_as(Proc(Int32*, HRESULT)).call(plack)
+  def get_ack(this : IMSMQMessage3*, plack : Int32*) : HRESULT
+    @lpVtbl.value.get_ack.call(this, plack)
   end
-  def put_ack(lack : Int32) : HRESULT
-    @lpVtbl.value.put_ack.unsafe_as(Proc(Int32, HRESULT)).call(lack)
+  def put_ack(this : IMSMQMessage3*, lack : Int32) : HRESULT
+    @lpVtbl.value.put_ack.call(this, lack)
   end
-  def get_label(pbstrlabel : UInt8**) : HRESULT
-    @lpVtbl.value.get_label.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrlabel)
+  def get_label(this : IMSMQMessage3*, pbstrlabel : UInt8**) : HRESULT
+    @lpVtbl.value.get_label.call(this, pbstrlabel)
   end
-  def put_label(bstrlabel : UInt8*) : HRESULT
-    @lpVtbl.value.put_label.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrlabel)
+  def put_label(this : IMSMQMessage3*, bstrlabel : UInt8*) : HRESULT
+    @lpVtbl.value.put_label.call(this, bstrlabel)
   end
-  def get_max_time_to_reach_queue(plmaxtimetoreachqueue : Int32*) : HRESULT
-    @lpVtbl.value.get_max_time_to_reach_queue.unsafe_as(Proc(Int32*, HRESULT)).call(plmaxtimetoreachqueue)
+  def get_max_time_to_reach_queue(this : IMSMQMessage3*, plmaxtimetoreachqueue : Int32*) : HRESULT
+    @lpVtbl.value.get_max_time_to_reach_queue.call(this, plmaxtimetoreachqueue)
   end
-  def put_max_time_to_reach_queue(lmaxtimetoreachqueue : Int32) : HRESULT
-    @lpVtbl.value.put_max_time_to_reach_queue.unsafe_as(Proc(Int32, HRESULT)).call(lmaxtimetoreachqueue)
+  def put_max_time_to_reach_queue(this : IMSMQMessage3*, lmaxtimetoreachqueue : Int32) : HRESULT
+    @lpVtbl.value.put_max_time_to_reach_queue.call(this, lmaxtimetoreachqueue)
   end
-  def get_max_time_to_receive(plmaxtimetoreceive : Int32*) : HRESULT
-    @lpVtbl.value.get_max_time_to_receive.unsafe_as(Proc(Int32*, HRESULT)).call(plmaxtimetoreceive)
+  def get_max_time_to_receive(this : IMSMQMessage3*, plmaxtimetoreceive : Int32*) : HRESULT
+    @lpVtbl.value.get_max_time_to_receive.call(this, plmaxtimetoreceive)
   end
-  def put_max_time_to_receive(lmaxtimetoreceive : Int32) : HRESULT
-    @lpVtbl.value.put_max_time_to_receive.unsafe_as(Proc(Int32, HRESULT)).call(lmaxtimetoreceive)
+  def put_max_time_to_receive(this : IMSMQMessage3*, lmaxtimetoreceive : Int32) : HRESULT
+    @lpVtbl.value.put_max_time_to_receive.call(this, lmaxtimetoreceive)
   end
-  def get_hash_algorithm(plhashalg : Int32*) : HRESULT
-    @lpVtbl.value.get_hash_algorithm.unsafe_as(Proc(Int32*, HRESULT)).call(plhashalg)
+  def get_hash_algorithm(this : IMSMQMessage3*, plhashalg : Int32*) : HRESULT
+    @lpVtbl.value.get_hash_algorithm.call(this, plhashalg)
   end
-  def put_hash_algorithm(lhashalg : Int32) : HRESULT
-    @lpVtbl.value.put_hash_algorithm.unsafe_as(Proc(Int32, HRESULT)).call(lhashalg)
+  def put_hash_algorithm(this : IMSMQMessage3*, lhashalg : Int32) : HRESULT
+    @lpVtbl.value.put_hash_algorithm.call(this, lhashalg)
   end
-  def get_encrypt_algorithm(plencryptalg : Int32*) : HRESULT
-    @lpVtbl.value.get_encrypt_algorithm.unsafe_as(Proc(Int32*, HRESULT)).call(plencryptalg)
+  def get_encrypt_algorithm(this : IMSMQMessage3*, plencryptalg : Int32*) : HRESULT
+    @lpVtbl.value.get_encrypt_algorithm.call(this, plencryptalg)
   end
-  def put_encrypt_algorithm(lencryptalg : Int32) : HRESULT
-    @lpVtbl.value.put_encrypt_algorithm.unsafe_as(Proc(Int32, HRESULT)).call(lencryptalg)
+  def put_encrypt_algorithm(this : IMSMQMessage3*, lencryptalg : Int32) : HRESULT
+    @lpVtbl.value.put_encrypt_algorithm.call(this, lencryptalg)
   end
-  def get_sent_time(pvarsenttime : VARIANT*) : HRESULT
-    @lpVtbl.value.get_sent_time.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarsenttime)
+  def get_sent_time(this : IMSMQMessage3*, pvarsenttime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sent_time.call(this, pvarsenttime)
   end
-  def get_arrived_time(plarrivedtime : VARIANT*) : HRESULT
-    @lpVtbl.value.get_arrived_time.unsafe_as(Proc(VARIANT*, HRESULT)).call(plarrivedtime)
+  def get_arrived_time(this : IMSMQMessage3*, plarrivedtime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_arrived_time.call(this, plarrivedtime)
   end
-  def get_destination_queue_info(ppqinfodest : IMSMQQueueInfo3*) : HRESULT
-    @lpVtbl.value.get_destination_queue_info.unsafe_as(Proc(IMSMQQueueInfo3*, HRESULT)).call(ppqinfodest)
+  def get_destination_queue_info(this : IMSMQMessage3*, ppqinfodest : IMSMQQueueInfo3*) : HRESULT
+    @lpVtbl.value.get_destination_queue_info.call(this, ppqinfodest)
   end
-  def get_sender_certificate(pvarsendercert : VARIANT*) : HRESULT
-    @lpVtbl.value.get_sender_certificate.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarsendercert)
+  def get_sender_certificate(this : IMSMQMessage3*, pvarsendercert : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sender_certificate.call(this, pvarsendercert)
   end
-  def put_sender_certificate(varsendercert : VARIANT) : HRESULT
-    @lpVtbl.value.put_sender_certificate.unsafe_as(Proc(VARIANT, HRESULT)).call(varsendercert)
+  def put_sender_certificate(this : IMSMQMessage3*, varsendercert : VARIANT) : HRESULT
+    @lpVtbl.value.put_sender_certificate.call(this, varsendercert)
   end
-  def get_sender_id(pvarsenderid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_sender_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarsenderid)
+  def get_sender_id(this : IMSMQMessage3*, pvarsenderid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sender_id.call(this, pvarsenderid)
   end
-  def get_sender_id_type(plsenderidtype : Int32*) : HRESULT
-    @lpVtbl.value.get_sender_id_type.unsafe_as(Proc(Int32*, HRESULT)).call(plsenderidtype)
+  def get_sender_id_type(this : IMSMQMessage3*, plsenderidtype : Int32*) : HRESULT
+    @lpVtbl.value.get_sender_id_type.call(this, plsenderidtype)
   end
-  def put_sender_id_type(lsenderidtype : Int32) : HRESULT
-    @lpVtbl.value.put_sender_id_type.unsafe_as(Proc(Int32, HRESULT)).call(lsenderidtype)
+  def put_sender_id_type(this : IMSMQMessage3*, lsenderidtype : Int32) : HRESULT
+    @lpVtbl.value.put_sender_id_type.call(this, lsenderidtype)
   end
-  def send(destinationqueue : IDispatch, transaction : VARIANT*) : HRESULT
-    @lpVtbl.value.send.unsafe_as(Proc(IDispatch, VARIANT*, HRESULT)).call(destinationqueue, transaction)
+  def send(this : IMSMQMessage3*, destinationqueue : IDispatch, transaction : VARIANT*) : HRESULT
+    @lpVtbl.value.send.call(this, destinationqueue, transaction)
   end
-  def attach_current_security_context : HRESULT
-    @lpVtbl.value.attach_current_security_context.unsafe_as(Proc(HRESULT)).call
+  def attach_current_security_context(this : IMSMQMessage3*) : HRESULT
+    @lpVtbl.value.attach_current_security_context.call(this)
   end
-  def get_sender_version(plsenderversion : Int32*) : HRESULT
-    @lpVtbl.value.get_sender_version.unsafe_as(Proc(Int32*, HRESULT)).call(plsenderversion)
+  def get_sender_version(this : IMSMQMessage3*, plsenderversion : Int32*) : HRESULT
+    @lpVtbl.value.get_sender_version.call(this, plsenderversion)
   end
-  def get_extension(pvarextension : VARIANT*) : HRESULT
-    @lpVtbl.value.get_extension.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarextension)
+  def get_extension(this : IMSMQMessage3*, pvarextension : VARIANT*) : HRESULT
+    @lpVtbl.value.get_extension.call(this, pvarextension)
   end
-  def put_extension(varextension : VARIANT) : HRESULT
-    @lpVtbl.value.put_extension.unsafe_as(Proc(VARIANT, HRESULT)).call(varextension)
+  def put_extension(this : IMSMQMessage3*, varextension : VARIANT) : HRESULT
+    @lpVtbl.value.put_extension.call(this, varextension)
   end
-  def get_connector_type_guid(pbstrguidconnectortype : UInt8**) : HRESULT
-    @lpVtbl.value.get_connector_type_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrguidconnectortype)
+  def get_connector_type_guid(this : IMSMQMessage3*, pbstrguidconnectortype : UInt8**) : HRESULT
+    @lpVtbl.value.get_connector_type_guid.call(this, pbstrguidconnectortype)
   end
-  def put_connector_type_guid(bstrguidconnectortype : UInt8*) : HRESULT
-    @lpVtbl.value.put_connector_type_guid.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrguidconnectortype)
+  def put_connector_type_guid(this : IMSMQMessage3*, bstrguidconnectortype : UInt8*) : HRESULT
+    @lpVtbl.value.put_connector_type_guid.call(this, bstrguidconnectortype)
   end
-  def get_transaction_status_queue_info(ppqinfoxactstatus : IMSMQQueueInfo3*) : HRESULT
-    @lpVtbl.value.get_transaction_status_queue_info.unsafe_as(Proc(IMSMQQueueInfo3*, HRESULT)).call(ppqinfoxactstatus)
+  def get_transaction_status_queue_info(this : IMSMQMessage3*, ppqinfoxactstatus : IMSMQQueueInfo3*) : HRESULT
+    @lpVtbl.value.get_transaction_status_queue_info.call(this, ppqinfoxactstatus)
   end
-  def get_destination_symmetric_key(pvardestsymmkey : VARIANT*) : HRESULT
-    @lpVtbl.value.get_destination_symmetric_key.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvardestsymmkey)
+  def get_destination_symmetric_key(this : IMSMQMessage3*, pvardestsymmkey : VARIANT*) : HRESULT
+    @lpVtbl.value.get_destination_symmetric_key.call(this, pvardestsymmkey)
   end
-  def put_destination_symmetric_key(vardestsymmkey : VARIANT) : HRESULT
-    @lpVtbl.value.put_destination_symmetric_key.unsafe_as(Proc(VARIANT, HRESULT)).call(vardestsymmkey)
+  def put_destination_symmetric_key(this : IMSMQMessage3*, vardestsymmkey : VARIANT) : HRESULT
+    @lpVtbl.value.put_destination_symmetric_key.call(this, vardestsymmkey)
   end
-  def get_signature(pvarsignature : VARIANT*) : HRESULT
-    @lpVtbl.value.get_signature.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarsignature)
+  def get_signature(this : IMSMQMessage3*, pvarsignature : VARIANT*) : HRESULT
+    @lpVtbl.value.get_signature.call(this, pvarsignature)
   end
-  def put_signature(varsignature : VARIANT) : HRESULT
-    @lpVtbl.value.put_signature.unsafe_as(Proc(VARIANT, HRESULT)).call(varsignature)
+  def put_signature(this : IMSMQMessage3*, varsignature : VARIANT) : HRESULT
+    @lpVtbl.value.put_signature.call(this, varsignature)
   end
-  def get_authentication_provider_type(plauthprovtype : Int32*) : HRESULT
-    @lpVtbl.value.get_authentication_provider_type.unsafe_as(Proc(Int32*, HRESULT)).call(plauthprovtype)
+  def get_authentication_provider_type(this : IMSMQMessage3*, plauthprovtype : Int32*) : HRESULT
+    @lpVtbl.value.get_authentication_provider_type.call(this, plauthprovtype)
   end
-  def put_authentication_provider_type(lauthprovtype : Int32) : HRESULT
-    @lpVtbl.value.put_authentication_provider_type.unsafe_as(Proc(Int32, HRESULT)).call(lauthprovtype)
+  def put_authentication_provider_type(this : IMSMQMessage3*, lauthprovtype : Int32) : HRESULT
+    @lpVtbl.value.put_authentication_provider_type.call(this, lauthprovtype)
   end
-  def get_authentication_provider_name(pbstrauthprovname : UInt8**) : HRESULT
-    @lpVtbl.value.get_authentication_provider_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrauthprovname)
+  def get_authentication_provider_name(this : IMSMQMessage3*, pbstrauthprovname : UInt8**) : HRESULT
+    @lpVtbl.value.get_authentication_provider_name.call(this, pbstrauthprovname)
   end
-  def put_authentication_provider_name(bstrauthprovname : UInt8*) : HRESULT
-    @lpVtbl.value.put_authentication_provider_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrauthprovname)
+  def put_authentication_provider_name(this : IMSMQMessage3*, bstrauthprovname : UInt8*) : HRESULT
+    @lpVtbl.value.put_authentication_provider_name.call(this, bstrauthprovname)
   end
-  def put_sender_id(varsenderid : VARIANT) : HRESULT
-    @lpVtbl.value.put_sender_id.unsafe_as(Proc(VARIANT, HRESULT)).call(varsenderid)
+  def put_sender_id(this : IMSMQMessage3*, varsenderid : VARIANT) : HRESULT
+    @lpVtbl.value.put_sender_id.call(this, varsenderid)
   end
-  def get_msg_class(plmsgclass : Int32*) : HRESULT
-    @lpVtbl.value.get_msg_class.unsafe_as(Proc(Int32*, HRESULT)).call(plmsgclass)
+  def get_msg_class(this : IMSMQMessage3*, plmsgclass : Int32*) : HRESULT
+    @lpVtbl.value.get_msg_class.call(this, plmsgclass)
   end
-  def put_msg_class(lmsgclass : Int32) : HRESULT
-    @lpVtbl.value.put_msg_class.unsafe_as(Proc(Int32, HRESULT)).call(lmsgclass)
+  def put_msg_class(this : IMSMQMessage3*, lmsgclass : Int32) : HRESULT
+    @lpVtbl.value.put_msg_class.call(this, lmsgclass)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQMessage3*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
-  def get_transaction_id(pvarxactid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_transaction_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarxactid)
+  def get_transaction_id(this : IMSMQMessage3*, pvarxactid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_transaction_id.call(this, pvarxactid)
   end
-  def get_is_first_in_transaction(pisfirstinxact : Int16*) : HRESULT
-    @lpVtbl.value.get_is_first_in_transaction.unsafe_as(Proc(Int16*, HRESULT)).call(pisfirstinxact)
+  def get_is_first_in_transaction(this : IMSMQMessage3*, pisfirstinxact : Int16*) : HRESULT
+    @lpVtbl.value.get_is_first_in_transaction.call(this, pisfirstinxact)
   end
-  def get_is_last_in_transaction(pislastinxact : Int16*) : HRESULT
-    @lpVtbl.value.get_is_last_in_transaction.unsafe_as(Proc(Int16*, HRESULT)).call(pislastinxact)
+  def get_is_last_in_transaction(this : IMSMQMessage3*, pislastinxact : Int16*) : HRESULT
+    @lpVtbl.value.get_is_last_in_transaction.call(this, pislastinxact)
   end
-  def get_response_queue_info_v2(ppqinforesponse : IMSMQQueueInfo2*) : HRESULT
-    @lpVtbl.value.get_response_queue_info_v2.unsafe_as(Proc(IMSMQQueueInfo2*, HRESULT)).call(ppqinforesponse)
+  def get_response_queue_info_v2(this : IMSMQMessage3*, ppqinforesponse : IMSMQQueueInfo2*) : HRESULT
+    @lpVtbl.value.get_response_queue_info_v2.call(this, ppqinforesponse)
   end
-  def putref_response_queue_info_v2(pqinforesponse : IMSMQQueueInfo2) : HRESULT
-    @lpVtbl.value.putref_response_queue_info_v2.unsafe_as(Proc(IMSMQQueueInfo2, HRESULT)).call(pqinforesponse)
+  def putref_response_queue_info_v2(this : IMSMQMessage3*, pqinforesponse : IMSMQQueueInfo2) : HRESULT
+    @lpVtbl.value.putref_response_queue_info_v2.call(this, pqinforesponse)
   end
-  def get_admin_queue_info_v2(ppqinfoadmin : IMSMQQueueInfo2*) : HRESULT
-    @lpVtbl.value.get_admin_queue_info_v2.unsafe_as(Proc(IMSMQQueueInfo2*, HRESULT)).call(ppqinfoadmin)
+  def get_admin_queue_info_v2(this : IMSMQMessage3*, ppqinfoadmin : IMSMQQueueInfo2*) : HRESULT
+    @lpVtbl.value.get_admin_queue_info_v2.call(this, ppqinfoadmin)
   end
-  def putref_admin_queue_info_v2(pqinfoadmin : IMSMQQueueInfo2) : HRESULT
-    @lpVtbl.value.putref_admin_queue_info_v2.unsafe_as(Proc(IMSMQQueueInfo2, HRESULT)).call(pqinfoadmin)
+  def putref_admin_queue_info_v2(this : IMSMQMessage3*, pqinfoadmin : IMSMQQueueInfo2) : HRESULT
+    @lpVtbl.value.putref_admin_queue_info_v2.call(this, pqinfoadmin)
   end
-  def get_received_authentication_level(psreceivedauthenticationlevel : Int16*) : HRESULT
-    @lpVtbl.value.get_received_authentication_level.unsafe_as(Proc(Int16*, HRESULT)).call(psreceivedauthenticationlevel)
+  def get_received_authentication_level(this : IMSMQMessage3*, psreceivedauthenticationlevel : Int16*) : HRESULT
+    @lpVtbl.value.get_received_authentication_level.call(this, psreceivedauthenticationlevel)
   end
-  def get_response_queue_info(ppqinforesponse : IMSMQQueueInfo3*) : HRESULT
-    @lpVtbl.value.get_response_queue_info.unsafe_as(Proc(IMSMQQueueInfo3*, HRESULT)).call(ppqinforesponse)
+  def get_response_queue_info(this : IMSMQMessage3*, ppqinforesponse : IMSMQQueueInfo3*) : HRESULT
+    @lpVtbl.value.get_response_queue_info.call(this, ppqinforesponse)
   end
-  def putref_response_queue_info(pqinforesponse : IMSMQQueueInfo3) : HRESULT
-    @lpVtbl.value.putref_response_queue_info.unsafe_as(Proc(IMSMQQueueInfo3, HRESULT)).call(pqinforesponse)
+  def putref_response_queue_info(this : IMSMQMessage3*, pqinforesponse : IMSMQQueueInfo3) : HRESULT
+    @lpVtbl.value.putref_response_queue_info.call(this, pqinforesponse)
   end
-  def get_admin_queue_info(ppqinfoadmin : IMSMQQueueInfo3*) : HRESULT
-    @lpVtbl.value.get_admin_queue_info.unsafe_as(Proc(IMSMQQueueInfo3*, HRESULT)).call(ppqinfoadmin)
+  def get_admin_queue_info(this : IMSMQMessage3*, ppqinfoadmin : IMSMQQueueInfo3*) : HRESULT
+    @lpVtbl.value.get_admin_queue_info.call(this, ppqinfoadmin)
   end
-  def putref_admin_queue_info(pqinfoadmin : IMSMQQueueInfo3) : HRESULT
-    @lpVtbl.value.putref_admin_queue_info.unsafe_as(Proc(IMSMQQueueInfo3, HRESULT)).call(pqinfoadmin)
+  def putref_admin_queue_info(this : IMSMQMessage3*, pqinfoadmin : IMSMQQueueInfo3) : HRESULT
+    @lpVtbl.value.putref_admin_queue_info.call(this, pqinfoadmin)
   end
-  def get_response_destination(ppdestresponse : IDispatch*) : HRESULT
-    @lpVtbl.value.get_response_destination.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppdestresponse)
+  def get_response_destination(this : IMSMQMessage3*, ppdestresponse : IDispatch*) : HRESULT
+    @lpVtbl.value.get_response_destination.call(this, ppdestresponse)
   end
-  def putref_response_destination(pdestresponse : IDispatch) : HRESULT
-    @lpVtbl.value.putref_response_destination.unsafe_as(Proc(IDispatch, HRESULT)).call(pdestresponse)
+  def putref_response_destination(this : IMSMQMessage3*, pdestresponse : IDispatch) : HRESULT
+    @lpVtbl.value.putref_response_destination.call(this, pdestresponse)
   end
-  def get_destination(ppdestdestination : IDispatch*) : HRESULT
-    @lpVtbl.value.get_destination.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppdestdestination)
+  def get_destination(this : IMSMQMessage3*, ppdestdestination : IDispatch*) : HRESULT
+    @lpVtbl.value.get_destination.call(this, ppdestdestination)
   end
-  def get_lookup_id(pvarlookupid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_lookup_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarlookupid)
+  def get_lookup_id(this : IMSMQMessage3*, pvarlookupid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_lookup_id.call(this, pvarlookupid)
   end
-  def get_is_authenticated2(pisauthenticated : Int16*) : HRESULT
-    @lpVtbl.value.get_is_authenticated2.unsafe_as(Proc(Int16*, HRESULT)).call(pisauthenticated)
+  def get_is_authenticated2(this : IMSMQMessage3*, pisauthenticated : Int16*) : HRESULT
+    @lpVtbl.value.get_is_authenticated2.call(this, pisauthenticated)
   end
-  def get_is_first_in_transaction2(pisfirstinxact : Int16*) : HRESULT
-    @lpVtbl.value.get_is_first_in_transaction2.unsafe_as(Proc(Int16*, HRESULT)).call(pisfirstinxact)
+  def get_is_first_in_transaction2(this : IMSMQMessage3*, pisfirstinxact : Int16*) : HRESULT
+    @lpVtbl.value.get_is_first_in_transaction2.call(this, pisfirstinxact)
   end
-  def get_is_last_in_transaction2(pislastinxact : Int16*) : HRESULT
-    @lpVtbl.value.get_is_last_in_transaction2.unsafe_as(Proc(Int16*, HRESULT)).call(pislastinxact)
+  def get_is_last_in_transaction2(this : IMSMQMessage3*, pislastinxact : Int16*) : HRESULT
+    @lpVtbl.value.get_is_last_in_transaction2.call(this, pislastinxact)
   end
-  def attach_current_security_context2 : HRESULT
-    @lpVtbl.value.attach_current_security_context2.unsafe_as(Proc(HRESULT)).call
+  def attach_current_security_context2(this : IMSMQMessage3*) : HRESULT
+    @lpVtbl.value.attach_current_security_context2.call(this)
   end
-  def get_soap_envelope(pbstrsoapenvelope : UInt8**) : HRESULT
-    @lpVtbl.value.get_soap_envelope.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsoapenvelope)
+  def get_soap_envelope(this : IMSMQMessage3*, pbstrsoapenvelope : UInt8**) : HRESULT
+    @lpVtbl.value.get_soap_envelope.call(this, pbstrsoapenvelope)
   end
-  def get_compound_message(pvarcompoundmessage : VARIANT*) : HRESULT
-    @lpVtbl.value.get_compound_message.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarcompoundmessage)
+  def get_compound_message(this : IMSMQMessage3*, pvarcompoundmessage : VARIANT*) : HRESULT
+    @lpVtbl.value.get_compound_message.call(this, pvarcompoundmessage)
   end
-  def put_soap_header(bstrsoapheader : UInt8*) : HRESULT
-    @lpVtbl.value.put_soap_header.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsoapheader)
+  def put_soap_header(this : IMSMQMessage3*, bstrsoapheader : UInt8*) : HRESULT
+    @lpVtbl.value.put_soap_header.call(this, bstrsoapheader)
   end
-  def put_soap_body(bstrsoapbody : UInt8*) : HRESULT
-    @lpVtbl.value.put_soap_body.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsoapbody)
+  def put_soap_body(this : IMSMQMessage3*, bstrsoapbody : UInt8*) : HRESULT
+    @lpVtbl.value.put_soap_body.call(this, bstrsoapbody)
   end
 end
 struct LibWin32::IMSMQMessage4
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQMessage4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQMessage4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQMessage4*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQMessage4*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQMessage4*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQMessage4*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQMessage4*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_class(plclass : Int32*) : HRESULT
-    @lpVtbl.value.get_class.unsafe_as(Proc(Int32*, HRESULT)).call(plclass)
+  def get_class(this : IMSMQMessage4*, plclass : Int32*) : HRESULT
+    @lpVtbl.value.get_class.call(this, plclass)
   end
-  def get_priv_level(plprivlevel : Int32*) : HRESULT
-    @lpVtbl.value.get_priv_level.unsafe_as(Proc(Int32*, HRESULT)).call(plprivlevel)
+  def get_priv_level(this : IMSMQMessage4*, plprivlevel : Int32*) : HRESULT
+    @lpVtbl.value.get_priv_level.call(this, plprivlevel)
   end
-  def put_priv_level(lprivlevel : Int32) : HRESULT
-    @lpVtbl.value.put_priv_level.unsafe_as(Proc(Int32, HRESULT)).call(lprivlevel)
+  def put_priv_level(this : IMSMQMessage4*, lprivlevel : Int32) : HRESULT
+    @lpVtbl.value.put_priv_level.call(this, lprivlevel)
   end
-  def get_auth_level(plauthlevel : Int32*) : HRESULT
-    @lpVtbl.value.get_auth_level.unsafe_as(Proc(Int32*, HRESULT)).call(plauthlevel)
+  def get_auth_level(this : IMSMQMessage4*, plauthlevel : Int32*) : HRESULT
+    @lpVtbl.value.get_auth_level.call(this, plauthlevel)
   end
-  def put_auth_level(lauthlevel : Int32) : HRESULT
-    @lpVtbl.value.put_auth_level.unsafe_as(Proc(Int32, HRESULT)).call(lauthlevel)
+  def put_auth_level(this : IMSMQMessage4*, lauthlevel : Int32) : HRESULT
+    @lpVtbl.value.put_auth_level.call(this, lauthlevel)
   end
-  def get_is_authenticated(pisauthenticated : Int16*) : HRESULT
-    @lpVtbl.value.get_is_authenticated.unsafe_as(Proc(Int16*, HRESULT)).call(pisauthenticated)
+  def get_is_authenticated(this : IMSMQMessage4*, pisauthenticated : Int16*) : HRESULT
+    @lpVtbl.value.get_is_authenticated.call(this, pisauthenticated)
   end
-  def get_delivery(pldelivery : Int32*) : HRESULT
-    @lpVtbl.value.get_delivery.unsafe_as(Proc(Int32*, HRESULT)).call(pldelivery)
+  def get_delivery(this : IMSMQMessage4*, pldelivery : Int32*) : HRESULT
+    @lpVtbl.value.get_delivery.call(this, pldelivery)
   end
-  def put_delivery(ldelivery : Int32) : HRESULT
-    @lpVtbl.value.put_delivery.unsafe_as(Proc(Int32, HRESULT)).call(ldelivery)
+  def put_delivery(this : IMSMQMessage4*, ldelivery : Int32) : HRESULT
+    @lpVtbl.value.put_delivery.call(this, ldelivery)
   end
-  def get_trace(pltrace : Int32*) : HRESULT
-    @lpVtbl.value.get_trace.unsafe_as(Proc(Int32*, HRESULT)).call(pltrace)
+  def get_trace(this : IMSMQMessage4*, pltrace : Int32*) : HRESULT
+    @lpVtbl.value.get_trace.call(this, pltrace)
   end
-  def put_trace(ltrace : Int32) : HRESULT
-    @lpVtbl.value.put_trace.unsafe_as(Proc(Int32, HRESULT)).call(ltrace)
+  def put_trace(this : IMSMQMessage4*, ltrace : Int32) : HRESULT
+    @lpVtbl.value.put_trace.call(this, ltrace)
   end
-  def get_priority(plpriority : Int32*) : HRESULT
-    @lpVtbl.value.get_priority.unsafe_as(Proc(Int32*, HRESULT)).call(plpriority)
+  def get_priority(this : IMSMQMessage4*, plpriority : Int32*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, plpriority)
   end
-  def put_priority(lpriority : Int32) : HRESULT
-    @lpVtbl.value.put_priority.unsafe_as(Proc(Int32, HRESULT)).call(lpriority)
+  def put_priority(this : IMSMQMessage4*, lpriority : Int32) : HRESULT
+    @lpVtbl.value.put_priority.call(this, lpriority)
   end
-  def get_journal(pljournal : Int32*) : HRESULT
-    @lpVtbl.value.get_journal.unsafe_as(Proc(Int32*, HRESULT)).call(pljournal)
+  def get_journal(this : IMSMQMessage4*, pljournal : Int32*) : HRESULT
+    @lpVtbl.value.get_journal.call(this, pljournal)
   end
-  def put_journal(ljournal : Int32) : HRESULT
-    @lpVtbl.value.put_journal.unsafe_as(Proc(Int32, HRESULT)).call(ljournal)
+  def put_journal(this : IMSMQMessage4*, ljournal : Int32) : HRESULT
+    @lpVtbl.value.put_journal.call(this, ljournal)
   end
-  def get_response_queue_info_v1(ppqinforesponse : IMSMQQueueInfo*) : HRESULT
-    @lpVtbl.value.get_response_queue_info_v1.unsafe_as(Proc(IMSMQQueueInfo*, HRESULT)).call(ppqinforesponse)
+  def get_response_queue_info_v1(this : IMSMQMessage4*, ppqinforesponse : IMSMQQueueInfo*) : HRESULT
+    @lpVtbl.value.get_response_queue_info_v1.call(this, ppqinforesponse)
   end
-  def putref_response_queue_info_v1(pqinforesponse : IMSMQQueueInfo) : HRESULT
-    @lpVtbl.value.putref_response_queue_info_v1.unsafe_as(Proc(IMSMQQueueInfo, HRESULT)).call(pqinforesponse)
+  def putref_response_queue_info_v1(this : IMSMQMessage4*, pqinforesponse : IMSMQQueueInfo) : HRESULT
+    @lpVtbl.value.putref_response_queue_info_v1.call(this, pqinforesponse)
   end
-  def get_app_specific(plappspecific : Int32*) : HRESULT
-    @lpVtbl.value.get_app_specific.unsafe_as(Proc(Int32*, HRESULT)).call(plappspecific)
+  def get_app_specific(this : IMSMQMessage4*, plappspecific : Int32*) : HRESULT
+    @lpVtbl.value.get_app_specific.call(this, plappspecific)
   end
-  def put_app_specific(lappspecific : Int32) : HRESULT
-    @lpVtbl.value.put_app_specific.unsafe_as(Proc(Int32, HRESULT)).call(lappspecific)
+  def put_app_specific(this : IMSMQMessage4*, lappspecific : Int32) : HRESULT
+    @lpVtbl.value.put_app_specific.call(this, lappspecific)
   end
-  def get_source_machine_guid(pbstrguidsrcmachine : UInt8**) : HRESULT
-    @lpVtbl.value.get_source_machine_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrguidsrcmachine)
+  def get_source_machine_guid(this : IMSMQMessage4*, pbstrguidsrcmachine : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_machine_guid.call(this, pbstrguidsrcmachine)
   end
-  def get_body_length(pcbbody : Int32*) : HRESULT
-    @lpVtbl.value.get_body_length.unsafe_as(Proc(Int32*, HRESULT)).call(pcbbody)
+  def get_body_length(this : IMSMQMessage4*, pcbbody : Int32*) : HRESULT
+    @lpVtbl.value.get_body_length.call(this, pcbbody)
   end
-  def get_body(pvarbody : VARIANT*) : HRESULT
-    @lpVtbl.value.get_body.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarbody)
+  def get_body(this : IMSMQMessage4*, pvarbody : VARIANT*) : HRESULT
+    @lpVtbl.value.get_body.call(this, pvarbody)
   end
-  def put_body(varbody : VARIANT) : HRESULT
-    @lpVtbl.value.put_body.unsafe_as(Proc(VARIANT, HRESULT)).call(varbody)
+  def put_body(this : IMSMQMessage4*, varbody : VARIANT) : HRESULT
+    @lpVtbl.value.put_body.call(this, varbody)
   end
-  def get_admin_queue_info_v1(ppqinfoadmin : IMSMQQueueInfo*) : HRESULT
-    @lpVtbl.value.get_admin_queue_info_v1.unsafe_as(Proc(IMSMQQueueInfo*, HRESULT)).call(ppqinfoadmin)
+  def get_admin_queue_info_v1(this : IMSMQMessage4*, ppqinfoadmin : IMSMQQueueInfo*) : HRESULT
+    @lpVtbl.value.get_admin_queue_info_v1.call(this, ppqinfoadmin)
   end
-  def putref_admin_queue_info_v1(pqinfoadmin : IMSMQQueueInfo) : HRESULT
-    @lpVtbl.value.putref_admin_queue_info_v1.unsafe_as(Proc(IMSMQQueueInfo, HRESULT)).call(pqinfoadmin)
+  def putref_admin_queue_info_v1(this : IMSMQMessage4*, pqinfoadmin : IMSMQQueueInfo) : HRESULT
+    @lpVtbl.value.putref_admin_queue_info_v1.call(this, pqinfoadmin)
   end
-  def get_id(pvarmsgid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarmsgid)
+  def get_id(this : IMSMQMessage4*, pvarmsgid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pvarmsgid)
   end
-  def get_correlation_id(pvarmsgid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_correlation_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarmsgid)
+  def get_correlation_id(this : IMSMQMessage4*, pvarmsgid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_correlation_id.call(this, pvarmsgid)
   end
-  def put_correlation_id(varmsgid : VARIANT) : HRESULT
-    @lpVtbl.value.put_correlation_id.unsafe_as(Proc(VARIANT, HRESULT)).call(varmsgid)
+  def put_correlation_id(this : IMSMQMessage4*, varmsgid : VARIANT) : HRESULT
+    @lpVtbl.value.put_correlation_id.call(this, varmsgid)
   end
-  def get_ack(plack : Int32*) : HRESULT
-    @lpVtbl.value.get_ack.unsafe_as(Proc(Int32*, HRESULT)).call(plack)
+  def get_ack(this : IMSMQMessage4*, plack : Int32*) : HRESULT
+    @lpVtbl.value.get_ack.call(this, plack)
   end
-  def put_ack(lack : Int32) : HRESULT
-    @lpVtbl.value.put_ack.unsafe_as(Proc(Int32, HRESULT)).call(lack)
+  def put_ack(this : IMSMQMessage4*, lack : Int32) : HRESULT
+    @lpVtbl.value.put_ack.call(this, lack)
   end
-  def get_label(pbstrlabel : UInt8**) : HRESULT
-    @lpVtbl.value.get_label.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrlabel)
+  def get_label(this : IMSMQMessage4*, pbstrlabel : UInt8**) : HRESULT
+    @lpVtbl.value.get_label.call(this, pbstrlabel)
   end
-  def put_label(bstrlabel : UInt8*) : HRESULT
-    @lpVtbl.value.put_label.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrlabel)
+  def put_label(this : IMSMQMessage4*, bstrlabel : UInt8*) : HRESULT
+    @lpVtbl.value.put_label.call(this, bstrlabel)
   end
-  def get_max_time_to_reach_queue(plmaxtimetoreachqueue : Int32*) : HRESULT
-    @lpVtbl.value.get_max_time_to_reach_queue.unsafe_as(Proc(Int32*, HRESULT)).call(plmaxtimetoreachqueue)
+  def get_max_time_to_reach_queue(this : IMSMQMessage4*, plmaxtimetoreachqueue : Int32*) : HRESULT
+    @lpVtbl.value.get_max_time_to_reach_queue.call(this, plmaxtimetoreachqueue)
   end
-  def put_max_time_to_reach_queue(lmaxtimetoreachqueue : Int32) : HRESULT
-    @lpVtbl.value.put_max_time_to_reach_queue.unsafe_as(Proc(Int32, HRESULT)).call(lmaxtimetoreachqueue)
+  def put_max_time_to_reach_queue(this : IMSMQMessage4*, lmaxtimetoreachqueue : Int32) : HRESULT
+    @lpVtbl.value.put_max_time_to_reach_queue.call(this, lmaxtimetoreachqueue)
   end
-  def get_max_time_to_receive(plmaxtimetoreceive : Int32*) : HRESULT
-    @lpVtbl.value.get_max_time_to_receive.unsafe_as(Proc(Int32*, HRESULT)).call(plmaxtimetoreceive)
+  def get_max_time_to_receive(this : IMSMQMessage4*, plmaxtimetoreceive : Int32*) : HRESULT
+    @lpVtbl.value.get_max_time_to_receive.call(this, plmaxtimetoreceive)
   end
-  def put_max_time_to_receive(lmaxtimetoreceive : Int32) : HRESULT
-    @lpVtbl.value.put_max_time_to_receive.unsafe_as(Proc(Int32, HRESULT)).call(lmaxtimetoreceive)
+  def put_max_time_to_receive(this : IMSMQMessage4*, lmaxtimetoreceive : Int32) : HRESULT
+    @lpVtbl.value.put_max_time_to_receive.call(this, lmaxtimetoreceive)
   end
-  def get_hash_algorithm(plhashalg : Int32*) : HRESULT
-    @lpVtbl.value.get_hash_algorithm.unsafe_as(Proc(Int32*, HRESULT)).call(plhashalg)
+  def get_hash_algorithm(this : IMSMQMessage4*, plhashalg : Int32*) : HRESULT
+    @lpVtbl.value.get_hash_algorithm.call(this, plhashalg)
   end
-  def put_hash_algorithm(lhashalg : Int32) : HRESULT
-    @lpVtbl.value.put_hash_algorithm.unsafe_as(Proc(Int32, HRESULT)).call(lhashalg)
+  def put_hash_algorithm(this : IMSMQMessage4*, lhashalg : Int32) : HRESULT
+    @lpVtbl.value.put_hash_algorithm.call(this, lhashalg)
   end
-  def get_encrypt_algorithm(plencryptalg : Int32*) : HRESULT
-    @lpVtbl.value.get_encrypt_algorithm.unsafe_as(Proc(Int32*, HRESULT)).call(plencryptalg)
+  def get_encrypt_algorithm(this : IMSMQMessage4*, plencryptalg : Int32*) : HRESULT
+    @lpVtbl.value.get_encrypt_algorithm.call(this, plencryptalg)
   end
-  def put_encrypt_algorithm(lencryptalg : Int32) : HRESULT
-    @lpVtbl.value.put_encrypt_algorithm.unsafe_as(Proc(Int32, HRESULT)).call(lencryptalg)
+  def put_encrypt_algorithm(this : IMSMQMessage4*, lencryptalg : Int32) : HRESULT
+    @lpVtbl.value.put_encrypt_algorithm.call(this, lencryptalg)
   end
-  def get_sent_time(pvarsenttime : VARIANT*) : HRESULT
-    @lpVtbl.value.get_sent_time.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarsenttime)
+  def get_sent_time(this : IMSMQMessage4*, pvarsenttime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sent_time.call(this, pvarsenttime)
   end
-  def get_arrived_time(plarrivedtime : VARIANT*) : HRESULT
-    @lpVtbl.value.get_arrived_time.unsafe_as(Proc(VARIANT*, HRESULT)).call(plarrivedtime)
+  def get_arrived_time(this : IMSMQMessage4*, plarrivedtime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_arrived_time.call(this, plarrivedtime)
   end
-  def get_destination_queue_info(ppqinfodest : IMSMQQueueInfo4*) : HRESULT
-    @lpVtbl.value.get_destination_queue_info.unsafe_as(Proc(IMSMQQueueInfo4*, HRESULT)).call(ppqinfodest)
+  def get_destination_queue_info(this : IMSMQMessage4*, ppqinfodest : IMSMQQueueInfo4*) : HRESULT
+    @lpVtbl.value.get_destination_queue_info.call(this, ppqinfodest)
   end
-  def get_sender_certificate(pvarsendercert : VARIANT*) : HRESULT
-    @lpVtbl.value.get_sender_certificate.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarsendercert)
+  def get_sender_certificate(this : IMSMQMessage4*, pvarsendercert : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sender_certificate.call(this, pvarsendercert)
   end
-  def put_sender_certificate(varsendercert : VARIANT) : HRESULT
-    @lpVtbl.value.put_sender_certificate.unsafe_as(Proc(VARIANT, HRESULT)).call(varsendercert)
+  def put_sender_certificate(this : IMSMQMessage4*, varsendercert : VARIANT) : HRESULT
+    @lpVtbl.value.put_sender_certificate.call(this, varsendercert)
   end
-  def get_sender_id(pvarsenderid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_sender_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarsenderid)
+  def get_sender_id(this : IMSMQMessage4*, pvarsenderid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sender_id.call(this, pvarsenderid)
   end
-  def get_sender_id_type(plsenderidtype : Int32*) : HRESULT
-    @lpVtbl.value.get_sender_id_type.unsafe_as(Proc(Int32*, HRESULT)).call(plsenderidtype)
+  def get_sender_id_type(this : IMSMQMessage4*, plsenderidtype : Int32*) : HRESULT
+    @lpVtbl.value.get_sender_id_type.call(this, plsenderidtype)
   end
-  def put_sender_id_type(lsenderidtype : Int32) : HRESULT
-    @lpVtbl.value.put_sender_id_type.unsafe_as(Proc(Int32, HRESULT)).call(lsenderidtype)
+  def put_sender_id_type(this : IMSMQMessage4*, lsenderidtype : Int32) : HRESULT
+    @lpVtbl.value.put_sender_id_type.call(this, lsenderidtype)
   end
-  def send(destinationqueue : IDispatch, transaction : VARIANT*) : HRESULT
-    @lpVtbl.value.send.unsafe_as(Proc(IDispatch, VARIANT*, HRESULT)).call(destinationqueue, transaction)
+  def send(this : IMSMQMessage4*, destinationqueue : IDispatch, transaction : VARIANT*) : HRESULT
+    @lpVtbl.value.send.call(this, destinationqueue, transaction)
   end
-  def attach_current_security_context : HRESULT
-    @lpVtbl.value.attach_current_security_context.unsafe_as(Proc(HRESULT)).call
+  def attach_current_security_context(this : IMSMQMessage4*) : HRESULT
+    @lpVtbl.value.attach_current_security_context.call(this)
   end
-  def get_sender_version(plsenderversion : Int32*) : HRESULT
-    @lpVtbl.value.get_sender_version.unsafe_as(Proc(Int32*, HRESULT)).call(plsenderversion)
+  def get_sender_version(this : IMSMQMessage4*, plsenderversion : Int32*) : HRESULT
+    @lpVtbl.value.get_sender_version.call(this, plsenderversion)
   end
-  def get_extension(pvarextension : VARIANT*) : HRESULT
-    @lpVtbl.value.get_extension.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarextension)
+  def get_extension(this : IMSMQMessage4*, pvarextension : VARIANT*) : HRESULT
+    @lpVtbl.value.get_extension.call(this, pvarextension)
   end
-  def put_extension(varextension : VARIANT) : HRESULT
-    @lpVtbl.value.put_extension.unsafe_as(Proc(VARIANT, HRESULT)).call(varextension)
+  def put_extension(this : IMSMQMessage4*, varextension : VARIANT) : HRESULT
+    @lpVtbl.value.put_extension.call(this, varextension)
   end
-  def get_connector_type_guid(pbstrguidconnectortype : UInt8**) : HRESULT
-    @lpVtbl.value.get_connector_type_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrguidconnectortype)
+  def get_connector_type_guid(this : IMSMQMessage4*, pbstrguidconnectortype : UInt8**) : HRESULT
+    @lpVtbl.value.get_connector_type_guid.call(this, pbstrguidconnectortype)
   end
-  def put_connector_type_guid(bstrguidconnectortype : UInt8*) : HRESULT
-    @lpVtbl.value.put_connector_type_guid.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrguidconnectortype)
+  def put_connector_type_guid(this : IMSMQMessage4*, bstrguidconnectortype : UInt8*) : HRESULT
+    @lpVtbl.value.put_connector_type_guid.call(this, bstrguidconnectortype)
   end
-  def get_transaction_status_queue_info(ppqinfoxactstatus : IMSMQQueueInfo4*) : HRESULT
-    @lpVtbl.value.get_transaction_status_queue_info.unsafe_as(Proc(IMSMQQueueInfo4*, HRESULT)).call(ppqinfoxactstatus)
+  def get_transaction_status_queue_info(this : IMSMQMessage4*, ppqinfoxactstatus : IMSMQQueueInfo4*) : HRESULT
+    @lpVtbl.value.get_transaction_status_queue_info.call(this, ppqinfoxactstatus)
   end
-  def get_destination_symmetric_key(pvardestsymmkey : VARIANT*) : HRESULT
-    @lpVtbl.value.get_destination_symmetric_key.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvardestsymmkey)
+  def get_destination_symmetric_key(this : IMSMQMessage4*, pvardestsymmkey : VARIANT*) : HRESULT
+    @lpVtbl.value.get_destination_symmetric_key.call(this, pvardestsymmkey)
   end
-  def put_destination_symmetric_key(vardestsymmkey : VARIANT) : HRESULT
-    @lpVtbl.value.put_destination_symmetric_key.unsafe_as(Proc(VARIANT, HRESULT)).call(vardestsymmkey)
+  def put_destination_symmetric_key(this : IMSMQMessage4*, vardestsymmkey : VARIANT) : HRESULT
+    @lpVtbl.value.put_destination_symmetric_key.call(this, vardestsymmkey)
   end
-  def get_signature(pvarsignature : VARIANT*) : HRESULT
-    @lpVtbl.value.get_signature.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarsignature)
+  def get_signature(this : IMSMQMessage4*, pvarsignature : VARIANT*) : HRESULT
+    @lpVtbl.value.get_signature.call(this, pvarsignature)
   end
-  def put_signature(varsignature : VARIANT) : HRESULT
-    @lpVtbl.value.put_signature.unsafe_as(Proc(VARIANT, HRESULT)).call(varsignature)
+  def put_signature(this : IMSMQMessage4*, varsignature : VARIANT) : HRESULT
+    @lpVtbl.value.put_signature.call(this, varsignature)
   end
-  def get_authentication_provider_type(plauthprovtype : Int32*) : HRESULT
-    @lpVtbl.value.get_authentication_provider_type.unsafe_as(Proc(Int32*, HRESULT)).call(plauthprovtype)
+  def get_authentication_provider_type(this : IMSMQMessage4*, plauthprovtype : Int32*) : HRESULT
+    @lpVtbl.value.get_authentication_provider_type.call(this, plauthprovtype)
   end
-  def put_authentication_provider_type(lauthprovtype : Int32) : HRESULT
-    @lpVtbl.value.put_authentication_provider_type.unsafe_as(Proc(Int32, HRESULT)).call(lauthprovtype)
+  def put_authentication_provider_type(this : IMSMQMessage4*, lauthprovtype : Int32) : HRESULT
+    @lpVtbl.value.put_authentication_provider_type.call(this, lauthprovtype)
   end
-  def get_authentication_provider_name(pbstrauthprovname : UInt8**) : HRESULT
-    @lpVtbl.value.get_authentication_provider_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrauthprovname)
+  def get_authentication_provider_name(this : IMSMQMessage4*, pbstrauthprovname : UInt8**) : HRESULT
+    @lpVtbl.value.get_authentication_provider_name.call(this, pbstrauthprovname)
   end
-  def put_authentication_provider_name(bstrauthprovname : UInt8*) : HRESULT
-    @lpVtbl.value.put_authentication_provider_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrauthprovname)
+  def put_authentication_provider_name(this : IMSMQMessage4*, bstrauthprovname : UInt8*) : HRESULT
+    @lpVtbl.value.put_authentication_provider_name.call(this, bstrauthprovname)
   end
-  def put_sender_id(varsenderid : VARIANT) : HRESULT
-    @lpVtbl.value.put_sender_id.unsafe_as(Proc(VARIANT, HRESULT)).call(varsenderid)
+  def put_sender_id(this : IMSMQMessage4*, varsenderid : VARIANT) : HRESULT
+    @lpVtbl.value.put_sender_id.call(this, varsenderid)
   end
-  def get_msg_class(plmsgclass : Int32*) : HRESULT
-    @lpVtbl.value.get_msg_class.unsafe_as(Proc(Int32*, HRESULT)).call(plmsgclass)
+  def get_msg_class(this : IMSMQMessage4*, plmsgclass : Int32*) : HRESULT
+    @lpVtbl.value.get_msg_class.call(this, plmsgclass)
   end
-  def put_msg_class(lmsgclass : Int32) : HRESULT
-    @lpVtbl.value.put_msg_class.unsafe_as(Proc(Int32, HRESULT)).call(lmsgclass)
+  def put_msg_class(this : IMSMQMessage4*, lmsgclass : Int32) : HRESULT
+    @lpVtbl.value.put_msg_class.call(this, lmsgclass)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQMessage4*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
-  def get_transaction_id(pvarxactid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_transaction_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarxactid)
+  def get_transaction_id(this : IMSMQMessage4*, pvarxactid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_transaction_id.call(this, pvarxactid)
   end
-  def get_is_first_in_transaction(pisfirstinxact : Int16*) : HRESULT
-    @lpVtbl.value.get_is_first_in_transaction.unsafe_as(Proc(Int16*, HRESULT)).call(pisfirstinxact)
+  def get_is_first_in_transaction(this : IMSMQMessage4*, pisfirstinxact : Int16*) : HRESULT
+    @lpVtbl.value.get_is_first_in_transaction.call(this, pisfirstinxact)
   end
-  def get_is_last_in_transaction(pislastinxact : Int16*) : HRESULT
-    @lpVtbl.value.get_is_last_in_transaction.unsafe_as(Proc(Int16*, HRESULT)).call(pislastinxact)
+  def get_is_last_in_transaction(this : IMSMQMessage4*, pislastinxact : Int16*) : HRESULT
+    @lpVtbl.value.get_is_last_in_transaction.call(this, pislastinxact)
   end
-  def get_response_queue_info_v2(ppqinforesponse : IMSMQQueueInfo2*) : HRESULT
-    @lpVtbl.value.get_response_queue_info_v2.unsafe_as(Proc(IMSMQQueueInfo2*, HRESULT)).call(ppqinforesponse)
+  def get_response_queue_info_v2(this : IMSMQMessage4*, ppqinforesponse : IMSMQQueueInfo2*) : HRESULT
+    @lpVtbl.value.get_response_queue_info_v2.call(this, ppqinforesponse)
   end
-  def putref_response_queue_info_v2(pqinforesponse : IMSMQQueueInfo2) : HRESULT
-    @lpVtbl.value.putref_response_queue_info_v2.unsafe_as(Proc(IMSMQQueueInfo2, HRESULT)).call(pqinforesponse)
+  def putref_response_queue_info_v2(this : IMSMQMessage4*, pqinforesponse : IMSMQQueueInfo2) : HRESULT
+    @lpVtbl.value.putref_response_queue_info_v2.call(this, pqinforesponse)
   end
-  def get_admin_queue_info_v2(ppqinfoadmin : IMSMQQueueInfo2*) : HRESULT
-    @lpVtbl.value.get_admin_queue_info_v2.unsafe_as(Proc(IMSMQQueueInfo2*, HRESULT)).call(ppqinfoadmin)
+  def get_admin_queue_info_v2(this : IMSMQMessage4*, ppqinfoadmin : IMSMQQueueInfo2*) : HRESULT
+    @lpVtbl.value.get_admin_queue_info_v2.call(this, ppqinfoadmin)
   end
-  def putref_admin_queue_info_v2(pqinfoadmin : IMSMQQueueInfo2) : HRESULT
-    @lpVtbl.value.putref_admin_queue_info_v2.unsafe_as(Proc(IMSMQQueueInfo2, HRESULT)).call(pqinfoadmin)
+  def putref_admin_queue_info_v2(this : IMSMQMessage4*, pqinfoadmin : IMSMQQueueInfo2) : HRESULT
+    @lpVtbl.value.putref_admin_queue_info_v2.call(this, pqinfoadmin)
   end
-  def get_received_authentication_level(psreceivedauthenticationlevel : Int16*) : HRESULT
-    @lpVtbl.value.get_received_authentication_level.unsafe_as(Proc(Int16*, HRESULT)).call(psreceivedauthenticationlevel)
+  def get_received_authentication_level(this : IMSMQMessage4*, psreceivedauthenticationlevel : Int16*) : HRESULT
+    @lpVtbl.value.get_received_authentication_level.call(this, psreceivedauthenticationlevel)
   end
-  def get_response_queue_info(ppqinforesponse : IMSMQQueueInfo4*) : HRESULT
-    @lpVtbl.value.get_response_queue_info.unsafe_as(Proc(IMSMQQueueInfo4*, HRESULT)).call(ppqinforesponse)
+  def get_response_queue_info(this : IMSMQMessage4*, ppqinforesponse : IMSMQQueueInfo4*) : HRESULT
+    @lpVtbl.value.get_response_queue_info.call(this, ppqinforesponse)
   end
-  def putref_response_queue_info(pqinforesponse : IMSMQQueueInfo4) : HRESULT
-    @lpVtbl.value.putref_response_queue_info.unsafe_as(Proc(IMSMQQueueInfo4, HRESULT)).call(pqinforesponse)
+  def putref_response_queue_info(this : IMSMQMessage4*, pqinforesponse : IMSMQQueueInfo4) : HRESULT
+    @lpVtbl.value.putref_response_queue_info.call(this, pqinforesponse)
   end
-  def get_admin_queue_info(ppqinfoadmin : IMSMQQueueInfo4*) : HRESULT
-    @lpVtbl.value.get_admin_queue_info.unsafe_as(Proc(IMSMQQueueInfo4*, HRESULT)).call(ppqinfoadmin)
+  def get_admin_queue_info(this : IMSMQMessage4*, ppqinfoadmin : IMSMQQueueInfo4*) : HRESULT
+    @lpVtbl.value.get_admin_queue_info.call(this, ppqinfoadmin)
   end
-  def putref_admin_queue_info(pqinfoadmin : IMSMQQueueInfo4) : HRESULT
-    @lpVtbl.value.putref_admin_queue_info.unsafe_as(Proc(IMSMQQueueInfo4, HRESULT)).call(pqinfoadmin)
+  def putref_admin_queue_info(this : IMSMQMessage4*, pqinfoadmin : IMSMQQueueInfo4) : HRESULT
+    @lpVtbl.value.putref_admin_queue_info.call(this, pqinfoadmin)
   end
-  def get_response_destination(ppdestresponse : IDispatch*) : HRESULT
-    @lpVtbl.value.get_response_destination.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppdestresponse)
+  def get_response_destination(this : IMSMQMessage4*, ppdestresponse : IDispatch*) : HRESULT
+    @lpVtbl.value.get_response_destination.call(this, ppdestresponse)
   end
-  def putref_response_destination(pdestresponse : IDispatch) : HRESULT
-    @lpVtbl.value.putref_response_destination.unsafe_as(Proc(IDispatch, HRESULT)).call(pdestresponse)
+  def putref_response_destination(this : IMSMQMessage4*, pdestresponse : IDispatch) : HRESULT
+    @lpVtbl.value.putref_response_destination.call(this, pdestresponse)
   end
-  def get_destination(ppdestdestination : IDispatch*) : HRESULT
-    @lpVtbl.value.get_destination.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppdestdestination)
+  def get_destination(this : IMSMQMessage4*, ppdestdestination : IDispatch*) : HRESULT
+    @lpVtbl.value.get_destination.call(this, ppdestdestination)
   end
-  def get_lookup_id(pvarlookupid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_lookup_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarlookupid)
+  def get_lookup_id(this : IMSMQMessage4*, pvarlookupid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_lookup_id.call(this, pvarlookupid)
   end
-  def get_is_authenticated2(pisauthenticated : Int16*) : HRESULT
-    @lpVtbl.value.get_is_authenticated2.unsafe_as(Proc(Int16*, HRESULT)).call(pisauthenticated)
+  def get_is_authenticated2(this : IMSMQMessage4*, pisauthenticated : Int16*) : HRESULT
+    @lpVtbl.value.get_is_authenticated2.call(this, pisauthenticated)
   end
-  def get_is_first_in_transaction2(pisfirstinxact : Int16*) : HRESULT
-    @lpVtbl.value.get_is_first_in_transaction2.unsafe_as(Proc(Int16*, HRESULT)).call(pisfirstinxact)
+  def get_is_first_in_transaction2(this : IMSMQMessage4*, pisfirstinxact : Int16*) : HRESULT
+    @lpVtbl.value.get_is_first_in_transaction2.call(this, pisfirstinxact)
   end
-  def get_is_last_in_transaction2(pislastinxact : Int16*) : HRESULT
-    @lpVtbl.value.get_is_last_in_transaction2.unsafe_as(Proc(Int16*, HRESULT)).call(pislastinxact)
+  def get_is_last_in_transaction2(this : IMSMQMessage4*, pislastinxact : Int16*) : HRESULT
+    @lpVtbl.value.get_is_last_in_transaction2.call(this, pislastinxact)
   end
-  def attach_current_security_context2 : HRESULT
-    @lpVtbl.value.attach_current_security_context2.unsafe_as(Proc(HRESULT)).call
+  def attach_current_security_context2(this : IMSMQMessage4*) : HRESULT
+    @lpVtbl.value.attach_current_security_context2.call(this)
   end
-  def get_soap_envelope(pbstrsoapenvelope : UInt8**) : HRESULT
-    @lpVtbl.value.get_soap_envelope.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsoapenvelope)
+  def get_soap_envelope(this : IMSMQMessage4*, pbstrsoapenvelope : UInt8**) : HRESULT
+    @lpVtbl.value.get_soap_envelope.call(this, pbstrsoapenvelope)
   end
-  def get_compound_message(pvarcompoundmessage : VARIANT*) : HRESULT
-    @lpVtbl.value.get_compound_message.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarcompoundmessage)
+  def get_compound_message(this : IMSMQMessage4*, pvarcompoundmessage : VARIANT*) : HRESULT
+    @lpVtbl.value.get_compound_message.call(this, pvarcompoundmessage)
   end
-  def put_soap_header(bstrsoapheader : UInt8*) : HRESULT
-    @lpVtbl.value.put_soap_header.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsoapheader)
+  def put_soap_header(this : IMSMQMessage4*, bstrsoapheader : UInt8*) : HRESULT
+    @lpVtbl.value.put_soap_header.call(this, bstrsoapheader)
   end
-  def put_soap_body(bstrsoapbody : UInt8*) : HRESULT
-    @lpVtbl.value.put_soap_body.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsoapbody)
+  def put_soap_body(this : IMSMQMessage4*, bstrsoapbody : UInt8*) : HRESULT
+    @lpVtbl.value.put_soap_body.call(this, bstrsoapbody)
   end
 end
 struct LibWin32::IMSMQPrivateEvent
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQPrivateEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQPrivateEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQPrivateEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQPrivateEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQPrivateEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQPrivateEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQPrivateEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_hwnd(phwnd : Int32*) : HRESULT
-    @lpVtbl.value.get_hwnd.unsafe_as(Proc(Int32*, HRESULT)).call(phwnd)
+  def get_hwnd(this : IMSMQPrivateEvent*, phwnd : Int32*) : HRESULT
+    @lpVtbl.value.get_hwnd.call(this, phwnd)
   end
-  def fire_arrived_event(pq : IMSMQQueue, msgcursor : Int32) : HRESULT
-    @lpVtbl.value.fire_arrived_event.unsafe_as(Proc(IMSMQQueue, Int32, HRESULT)).call(pq, msgcursor)
+  def fire_arrived_event(this : IMSMQPrivateEvent*, pq : IMSMQQueue, msgcursor : Int32) : HRESULT
+    @lpVtbl.value.fire_arrived_event.call(this, pq, msgcursor)
   end
-  def fire_arrived_error_event(pq : IMSMQQueue, hrstatus : HRESULT, msgcursor : Int32) : HRESULT
-    @lpVtbl.value.fire_arrived_error_event.unsafe_as(Proc(IMSMQQueue, HRESULT, Int32, HRESULT)).call(pq, hrstatus, msgcursor)
+  def fire_arrived_error_event(this : IMSMQPrivateEvent*, pq : IMSMQQueue, hrstatus : HRESULT, msgcursor : Int32) : HRESULT
+    @lpVtbl.value.fire_arrived_error_event.call(this, pq, hrstatus, msgcursor)
   end
 end
 struct LibWin32::IDMSMQEventEvents
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDMSMQEventEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDMSMQEventEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDMSMQEventEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IDMSMQEventEvents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IDMSMQEventEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IDMSMQEventEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IDMSMQEventEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
 end
 struct LibWin32::IMSMQTransaction2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQTransaction2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQTransaction2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQTransaction2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQTransaction2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQTransaction2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQTransaction2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQTransaction2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_transaction(pltransaction : Int32*) : HRESULT
-    @lpVtbl.value.get_transaction.unsafe_as(Proc(Int32*, HRESULT)).call(pltransaction)
+  def get_transaction(this : IMSMQTransaction2*, pltransaction : Int32*) : HRESULT
+    @lpVtbl.value.get_transaction.call(this, pltransaction)
   end
-  def commit(fretaining : VARIANT*, grftc : VARIANT*, grfrm : VARIANT*) : HRESULT
-    @lpVtbl.value.commit.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, HRESULT)).call(fretaining, grftc, grfrm)
+  def commit(this : IMSMQTransaction2*, fretaining : VARIANT*, grftc : VARIANT*, grfrm : VARIANT*) : HRESULT
+    @lpVtbl.value.commit.call(this, fretaining, grftc, grfrm)
   end
-  def abort(fretaining : VARIANT*, fasync : VARIANT*) : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(VARIANT*, VARIANT*, HRESULT)).call(fretaining, fasync)
+  def abort(this : IMSMQTransaction2*, fretaining : VARIANT*, fasync : VARIANT*) : HRESULT
+    @lpVtbl.value.abort.call(this, fretaining, fasync)
   end
-  def init_new(vartransaction : VARIANT) : HRESULT
-    @lpVtbl.value.init_new.unsafe_as(Proc(VARIANT, HRESULT)).call(vartransaction)
+  def init_new(this : IMSMQTransaction2*, vartransaction : VARIANT) : HRESULT
+    @lpVtbl.value.init_new.call(this, vartransaction)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQTransaction2*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
 end
 struct LibWin32::IMSMQTransaction3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQTransaction3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQTransaction3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQTransaction3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQTransaction3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQTransaction3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQTransaction3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQTransaction3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_transaction(pltransaction : Int32*) : HRESULT
-    @lpVtbl.value.get_transaction.unsafe_as(Proc(Int32*, HRESULT)).call(pltransaction)
+  def get_transaction(this : IMSMQTransaction3*, pltransaction : Int32*) : HRESULT
+    @lpVtbl.value.get_transaction.call(this, pltransaction)
   end
-  def commit(fretaining : VARIANT*, grftc : VARIANT*, grfrm : VARIANT*) : HRESULT
-    @lpVtbl.value.commit.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, HRESULT)).call(fretaining, grftc, grfrm)
+  def commit(this : IMSMQTransaction3*, fretaining : VARIANT*, grftc : VARIANT*, grfrm : VARIANT*) : HRESULT
+    @lpVtbl.value.commit.call(this, fretaining, grftc, grfrm)
   end
-  def abort(fretaining : VARIANT*, fasync : VARIANT*) : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(VARIANT*, VARIANT*, HRESULT)).call(fretaining, fasync)
+  def abort(this : IMSMQTransaction3*, fretaining : VARIANT*, fasync : VARIANT*) : HRESULT
+    @lpVtbl.value.abort.call(this, fretaining, fasync)
   end
-  def init_new(vartransaction : VARIANT) : HRESULT
-    @lpVtbl.value.init_new.unsafe_as(Proc(VARIANT, HRESULT)).call(vartransaction)
+  def init_new(this : IMSMQTransaction3*, vartransaction : VARIANT) : HRESULT
+    @lpVtbl.value.init_new.call(this, vartransaction)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQTransaction3*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
-  def get_i_transaction(pvaritransaction : VARIANT*) : HRESULT
-    @lpVtbl.value.get_i_transaction.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvaritransaction)
+  def get_i_transaction(this : IMSMQTransaction3*, pvaritransaction : VARIANT*) : HRESULT
+    @lpVtbl.value.get_i_transaction.call(this, pvaritransaction)
   end
 end
 struct LibWin32::IMSMQCoordinatedTransactionDispenser2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQCoordinatedTransactionDispenser2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQCoordinatedTransactionDispenser2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQCoordinatedTransactionDispenser2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQCoordinatedTransactionDispenser2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQCoordinatedTransactionDispenser2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQCoordinatedTransactionDispenser2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQCoordinatedTransactionDispenser2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def begin_transaction(ptransaction : IMSMQTransaction2*) : HRESULT
-    @lpVtbl.value.begin_transaction.unsafe_as(Proc(IMSMQTransaction2*, HRESULT)).call(ptransaction)
+  def begin_transaction(this : IMSMQCoordinatedTransactionDispenser2*, ptransaction : IMSMQTransaction2*) : HRESULT
+    @lpVtbl.value.begin_transaction.call(this, ptransaction)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQCoordinatedTransactionDispenser2*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
 end
 struct LibWin32::IMSMQCoordinatedTransactionDispenser3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQCoordinatedTransactionDispenser3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQCoordinatedTransactionDispenser3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQCoordinatedTransactionDispenser3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQCoordinatedTransactionDispenser3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQCoordinatedTransactionDispenser3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQCoordinatedTransactionDispenser3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQCoordinatedTransactionDispenser3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def begin_transaction(ptransaction : IMSMQTransaction3*) : HRESULT
-    @lpVtbl.value.begin_transaction.unsafe_as(Proc(IMSMQTransaction3*, HRESULT)).call(ptransaction)
+  def begin_transaction(this : IMSMQCoordinatedTransactionDispenser3*, ptransaction : IMSMQTransaction3*) : HRESULT
+    @lpVtbl.value.begin_transaction.call(this, ptransaction)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQCoordinatedTransactionDispenser3*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
 end
 struct LibWin32::IMSMQTransactionDispenser2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQTransactionDispenser2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQTransactionDispenser2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQTransactionDispenser2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQTransactionDispenser2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQTransactionDispenser2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQTransactionDispenser2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQTransactionDispenser2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def begin_transaction(ptransaction : IMSMQTransaction2*) : HRESULT
-    @lpVtbl.value.begin_transaction.unsafe_as(Proc(IMSMQTransaction2*, HRESULT)).call(ptransaction)
+  def begin_transaction(this : IMSMQTransactionDispenser2*, ptransaction : IMSMQTransaction2*) : HRESULT
+    @lpVtbl.value.begin_transaction.call(this, ptransaction)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQTransactionDispenser2*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
 end
 struct LibWin32::IMSMQTransactionDispenser3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQTransactionDispenser3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQTransactionDispenser3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQTransactionDispenser3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQTransactionDispenser3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQTransactionDispenser3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQTransactionDispenser3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQTransactionDispenser3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def begin_transaction(ptransaction : IMSMQTransaction3*) : HRESULT
-    @lpVtbl.value.begin_transaction.unsafe_as(Proc(IMSMQTransaction3*, HRESULT)).call(ptransaction)
+  def begin_transaction(this : IMSMQTransactionDispenser3*, ptransaction : IMSMQTransaction3*) : HRESULT
+    @lpVtbl.value.begin_transaction.call(this, ptransaction)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQTransactionDispenser3*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
 end
 struct LibWin32::IMSMQApplication
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQApplication*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQApplication*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQApplication*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQApplication*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQApplication*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQApplication*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQApplication*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def machine_id_of_machine_name(machinename : UInt8*, pbstrguid : UInt8**) : HRESULT
-    @lpVtbl.value.machine_id_of_machine_name.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(machinename, pbstrguid)
+  def machine_id_of_machine_name(this : IMSMQApplication*, machinename : UInt8*, pbstrguid : UInt8**) : HRESULT
+    @lpVtbl.value.machine_id_of_machine_name.call(this, machinename, pbstrguid)
   end
 end
 struct LibWin32::IMSMQApplication2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQApplication2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQApplication2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQApplication2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQApplication2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQApplication2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQApplication2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQApplication2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def machine_id_of_machine_name(machinename : UInt8*, pbstrguid : UInt8**) : HRESULT
-    @lpVtbl.value.machine_id_of_machine_name.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(machinename, pbstrguid)
+  def machine_id_of_machine_name(this : IMSMQApplication2*, machinename : UInt8*, pbstrguid : UInt8**) : HRESULT
+    @lpVtbl.value.machine_id_of_machine_name.call(this, machinename, pbstrguid)
   end
-  def register_certificate(flags : VARIANT*, externalcertificate : VARIANT*) : HRESULT
-    @lpVtbl.value.register_certificate.unsafe_as(Proc(VARIANT*, VARIANT*, HRESULT)).call(flags, externalcertificate)
+  def register_certificate(this : IMSMQApplication2*, flags : VARIANT*, externalcertificate : VARIANT*) : HRESULT
+    @lpVtbl.value.register_certificate.call(this, flags, externalcertificate)
   end
-  def machine_name_of_machine_id(bstrguid : UInt8*, pbstrmachinename : UInt8**) : HRESULT
-    @lpVtbl.value.machine_name_of_machine_id.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstrguid, pbstrmachinename)
+  def machine_name_of_machine_id(this : IMSMQApplication2*, bstrguid : UInt8*, pbstrmachinename : UInt8**) : HRESULT
+    @lpVtbl.value.machine_name_of_machine_id.call(this, bstrguid, pbstrmachinename)
   end
-  def get_msmq_version_major(psmsmqversionmajor : Int16*) : HRESULT
-    @lpVtbl.value.get_msmq_version_major.unsafe_as(Proc(Int16*, HRESULT)).call(psmsmqversionmajor)
+  def get_msmq_version_major(this : IMSMQApplication2*, psmsmqversionmajor : Int16*) : HRESULT
+    @lpVtbl.value.get_msmq_version_major.call(this, psmsmqversionmajor)
   end
-  def get_msmq_version_minor(psmsmqversionminor : Int16*) : HRESULT
-    @lpVtbl.value.get_msmq_version_minor.unsafe_as(Proc(Int16*, HRESULT)).call(psmsmqversionminor)
+  def get_msmq_version_minor(this : IMSMQApplication2*, psmsmqversionminor : Int16*) : HRESULT
+    @lpVtbl.value.get_msmq_version_minor.call(this, psmsmqversionminor)
   end
-  def get_msmq_version_build(psmsmqversionbuild : Int16*) : HRESULT
-    @lpVtbl.value.get_msmq_version_build.unsafe_as(Proc(Int16*, HRESULT)).call(psmsmqversionbuild)
+  def get_msmq_version_build(this : IMSMQApplication2*, psmsmqversionbuild : Int16*) : HRESULT
+    @lpVtbl.value.get_msmq_version_build.call(this, psmsmqversionbuild)
   end
-  def get_is_ds_enabled(pfisdsenabled : Int16*) : HRESULT
-    @lpVtbl.value.get_is_ds_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pfisdsenabled)
+  def get_is_ds_enabled(this : IMSMQApplication2*, pfisdsenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_is_ds_enabled.call(this, pfisdsenabled)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQApplication2*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
 end
 struct LibWin32::IMSMQApplication3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQApplication3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQApplication3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQApplication3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQApplication3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQApplication3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQApplication3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQApplication3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def machine_id_of_machine_name(machinename : UInt8*, pbstrguid : UInt8**) : HRESULT
-    @lpVtbl.value.machine_id_of_machine_name.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(machinename, pbstrguid)
+  def machine_id_of_machine_name(this : IMSMQApplication3*, machinename : UInt8*, pbstrguid : UInt8**) : HRESULT
+    @lpVtbl.value.machine_id_of_machine_name.call(this, machinename, pbstrguid)
   end
-  def register_certificate(flags : VARIANT*, externalcertificate : VARIANT*) : HRESULT
-    @lpVtbl.value.register_certificate.unsafe_as(Proc(VARIANT*, VARIANT*, HRESULT)).call(flags, externalcertificate)
+  def register_certificate(this : IMSMQApplication3*, flags : VARIANT*, externalcertificate : VARIANT*) : HRESULT
+    @lpVtbl.value.register_certificate.call(this, flags, externalcertificate)
   end
-  def machine_name_of_machine_id(bstrguid : UInt8*, pbstrmachinename : UInt8**) : HRESULT
-    @lpVtbl.value.machine_name_of_machine_id.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstrguid, pbstrmachinename)
+  def machine_name_of_machine_id(this : IMSMQApplication3*, bstrguid : UInt8*, pbstrmachinename : UInt8**) : HRESULT
+    @lpVtbl.value.machine_name_of_machine_id.call(this, bstrguid, pbstrmachinename)
   end
-  def get_msmq_version_major(psmsmqversionmajor : Int16*) : HRESULT
-    @lpVtbl.value.get_msmq_version_major.unsafe_as(Proc(Int16*, HRESULT)).call(psmsmqversionmajor)
+  def get_msmq_version_major(this : IMSMQApplication3*, psmsmqversionmajor : Int16*) : HRESULT
+    @lpVtbl.value.get_msmq_version_major.call(this, psmsmqversionmajor)
   end
-  def get_msmq_version_minor(psmsmqversionminor : Int16*) : HRESULT
-    @lpVtbl.value.get_msmq_version_minor.unsafe_as(Proc(Int16*, HRESULT)).call(psmsmqversionminor)
+  def get_msmq_version_minor(this : IMSMQApplication3*, psmsmqversionminor : Int16*) : HRESULT
+    @lpVtbl.value.get_msmq_version_minor.call(this, psmsmqversionminor)
   end
-  def get_msmq_version_build(psmsmqversionbuild : Int16*) : HRESULT
-    @lpVtbl.value.get_msmq_version_build.unsafe_as(Proc(Int16*, HRESULT)).call(psmsmqversionbuild)
+  def get_msmq_version_build(this : IMSMQApplication3*, psmsmqversionbuild : Int16*) : HRESULT
+    @lpVtbl.value.get_msmq_version_build.call(this, psmsmqversionbuild)
   end
-  def get_is_ds_enabled(pfisdsenabled : Int16*) : HRESULT
-    @lpVtbl.value.get_is_ds_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pfisdsenabled)
+  def get_is_ds_enabled(this : IMSMQApplication3*, pfisdsenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_is_ds_enabled.call(this, pfisdsenabled)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQApplication3*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
-  def get_active_queues(pvactivequeues : VARIANT*) : HRESULT
-    @lpVtbl.value.get_active_queues.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvactivequeues)
+  def get_active_queues(this : IMSMQApplication3*, pvactivequeues : VARIANT*) : HRESULT
+    @lpVtbl.value.get_active_queues.call(this, pvactivequeues)
   end
-  def get_private_queues(pvprivatequeues : VARIANT*) : HRESULT
-    @lpVtbl.value.get_private_queues.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvprivatequeues)
+  def get_private_queues(this : IMSMQApplication3*, pvprivatequeues : VARIANT*) : HRESULT
+    @lpVtbl.value.get_private_queues.call(this, pvprivatequeues)
   end
-  def get_directory_service_server(pbstrdirectoryserviceserver : UInt8**) : HRESULT
-    @lpVtbl.value.get_directory_service_server.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdirectoryserviceserver)
+  def get_directory_service_server(this : IMSMQApplication3*, pbstrdirectoryserviceserver : UInt8**) : HRESULT
+    @lpVtbl.value.get_directory_service_server.call(this, pbstrdirectoryserviceserver)
   end
-  def get_is_connected(pfisconnected : Int16*) : HRESULT
-    @lpVtbl.value.get_is_connected.unsafe_as(Proc(Int16*, HRESULT)).call(pfisconnected)
+  def get_is_connected(this : IMSMQApplication3*, pfisconnected : Int16*) : HRESULT
+    @lpVtbl.value.get_is_connected.call(this, pfisconnected)
   end
-  def get_bytes_in_all_queues(pvbytesinallqueues : VARIANT*) : HRESULT
-    @lpVtbl.value.get_bytes_in_all_queues.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvbytesinallqueues)
+  def get_bytes_in_all_queues(this : IMSMQApplication3*, pvbytesinallqueues : VARIANT*) : HRESULT
+    @lpVtbl.value.get_bytes_in_all_queues.call(this, pvbytesinallqueues)
   end
-  def put_machine(bstrmachine : UInt8*) : HRESULT
-    @lpVtbl.value.put_machine.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrmachine)
+  def put_machine(this : IMSMQApplication3*, bstrmachine : UInt8*) : HRESULT
+    @lpVtbl.value.put_machine.call(this, bstrmachine)
   end
-  def get_machine(pbstrmachine : UInt8**) : HRESULT
-    @lpVtbl.value.get_machine.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrmachine)
+  def get_machine(this : IMSMQApplication3*, pbstrmachine : UInt8**) : HRESULT
+    @lpVtbl.value.get_machine.call(this, pbstrmachine)
   end
-  def connect : HRESULT
-    @lpVtbl.value.connect.unsafe_as(Proc(HRESULT)).call
+  def connect(this : IMSMQApplication3*) : HRESULT
+    @lpVtbl.value.connect.call(this)
   end
-  def disconnect : HRESULT
-    @lpVtbl.value.disconnect.unsafe_as(Proc(HRESULT)).call
+  def disconnect(this : IMSMQApplication3*) : HRESULT
+    @lpVtbl.value.disconnect.call(this)
   end
-  def tidy : HRESULT
-    @lpVtbl.value.tidy.unsafe_as(Proc(HRESULT)).call
+  def tidy(this : IMSMQApplication3*) : HRESULT
+    @lpVtbl.value.tidy.call(this)
   end
 end
 struct LibWin32::IMSMQDestination
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQDestination*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQDestination*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQDestination*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQDestination*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQDestination*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQDestination*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQDestination*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def open : HRESULT
-    @lpVtbl.value.open.unsafe_as(Proc(HRESULT)).call
+  def open(this : IMSMQDestination*) : HRESULT
+    @lpVtbl.value.open.call(this)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : IMSMQDestination*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
-  def get_is_open(pfisopen : Int16*) : HRESULT
-    @lpVtbl.value.get_is_open.unsafe_as(Proc(Int16*, HRESULT)).call(pfisopen)
+  def get_is_open(this : IMSMQDestination*, pfisopen : Int16*) : HRESULT
+    @lpVtbl.value.get_is_open.call(this, pfisopen)
   end
-  def get_ia_ds(ppiads : IDispatch*) : HRESULT
-    @lpVtbl.value.get_ia_ds.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppiads)
+  def get_ia_ds(this : IMSMQDestination*, ppiads : IDispatch*) : HRESULT
+    @lpVtbl.value.get_ia_ds.call(this, ppiads)
   end
-  def putref_ia_ds(piads : IDispatch) : HRESULT
-    @lpVtbl.value.putref_ia_ds.unsafe_as(Proc(IDispatch, HRESULT)).call(piads)
+  def putref_ia_ds(this : IMSMQDestination*, piads : IDispatch) : HRESULT
+    @lpVtbl.value.putref_ia_ds.call(this, piads)
   end
-  def get_a_ds_path(pbstradspath : UInt8**) : HRESULT
-    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstradspath)
+  def get_a_ds_path(this : IMSMQDestination*, pbstradspath : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.call(this, pbstradspath)
   end
-  def put_a_ds_path(bstradspath : UInt8*) : HRESULT
-    @lpVtbl.value.put_a_ds_path.unsafe_as(Proc(UInt8*, HRESULT)).call(bstradspath)
+  def put_a_ds_path(this : IMSMQDestination*, bstradspath : UInt8*) : HRESULT
+    @lpVtbl.value.put_a_ds_path.call(this, bstradspath)
   end
-  def get_path_name(pbstrpathname : UInt8**) : HRESULT
-    @lpVtbl.value.get_path_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrpathname)
+  def get_path_name(this : IMSMQDestination*, pbstrpathname : UInt8**) : HRESULT
+    @lpVtbl.value.get_path_name.call(this, pbstrpathname)
   end
-  def put_path_name(bstrpathname : UInt8*) : HRESULT
-    @lpVtbl.value.put_path_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrpathname)
+  def put_path_name(this : IMSMQDestination*, bstrpathname : UInt8*) : HRESULT
+    @lpVtbl.value.put_path_name.call(this, bstrpathname)
   end
-  def get_format_name(pbstrformatname : UInt8**) : HRESULT
-    @lpVtbl.value.get_format_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrformatname)
+  def get_format_name(this : IMSMQDestination*, pbstrformatname : UInt8**) : HRESULT
+    @lpVtbl.value.get_format_name.call(this, pbstrformatname)
   end
-  def put_format_name(bstrformatname : UInt8*) : HRESULT
-    @lpVtbl.value.put_format_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrformatname)
+  def put_format_name(this : IMSMQDestination*, bstrformatname : UInt8*) : HRESULT
+    @lpVtbl.value.put_format_name.call(this, bstrformatname)
   end
-  def get_destinations(ppdestinations : IDispatch*) : HRESULT
-    @lpVtbl.value.get_destinations.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppdestinations)
+  def get_destinations(this : IMSMQDestination*, ppdestinations : IDispatch*) : HRESULT
+    @lpVtbl.value.get_destinations.call(this, ppdestinations)
   end
-  def putref_destinations(pdestinations : IDispatch) : HRESULT
-    @lpVtbl.value.putref_destinations.unsafe_as(Proc(IDispatch, HRESULT)).call(pdestinations)
+  def putref_destinations(this : IMSMQDestination*, pdestinations : IDispatch) : HRESULT
+    @lpVtbl.value.putref_destinations.call(this, pdestinations)
   end
-  def get_properties(ppcolproperties : IDispatch*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppcolproperties)
+  def get_properties(this : IMSMQDestination*, ppcolproperties : IDispatch*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppcolproperties)
   end
 end
 struct LibWin32::IMSMQPrivateDestination
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQPrivateDestination*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQPrivateDestination*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQPrivateDestination*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQPrivateDestination*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQPrivateDestination*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQPrivateDestination*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQPrivateDestination*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_handle(pvarhandle : VARIANT*) : HRESULT
-    @lpVtbl.value.get_handle.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarhandle)
+  def get_handle(this : IMSMQPrivateDestination*, pvarhandle : VARIANT*) : HRESULT
+    @lpVtbl.value.get_handle.call(this, pvarhandle)
   end
-  def put_handle(varhandle : VARIANT) : HRESULT
-    @lpVtbl.value.put_handle.unsafe_as(Proc(VARIANT, HRESULT)).call(varhandle)
+  def put_handle(this : IMSMQPrivateDestination*, varhandle : VARIANT) : HRESULT
+    @lpVtbl.value.put_handle.call(this, varhandle)
   end
 end
 struct LibWin32::IMSMQCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def item(index : VARIANT*, pvarret : VARIANT*) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(VARIANT*, VARIANT*, HRESULT)).call(index, pvarret)
+  def item(this : IMSMQCollection*, index : VARIANT*, pvarret : VARIANT*) : HRESULT
+    @lpVtbl.value.item.call(this, index, pvarret)
   end
-  def get_count(pcount : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pcount)
+  def get_count(this : IMSMQCollection*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
   end
-  def _new_enum(ppunk : IUnknown*) : HRESULT
-    @lpVtbl.value._new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  def _new_enum(this : IMSMQCollection*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value._new_enum.call(this, ppunk)
   end
 end
 struct LibWin32::IMSMQManagement
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQManagement*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQManagement*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQManagement*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQManagement*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQManagement*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQManagement*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQManagement*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def init(machine : VARIANT*, pathname : VARIANT*, formatname : VARIANT*) : HRESULT
-    @lpVtbl.value.init.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, HRESULT)).call(machine, pathname, formatname)
+  def init(this : IMSMQManagement*, machine : VARIANT*, pathname : VARIANT*, formatname : VARIANT*) : HRESULT
+    @lpVtbl.value.init.call(this, machine, pathname, formatname)
   end
-  def get_format_name(pbstrformatname : UInt8**) : HRESULT
-    @lpVtbl.value.get_format_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrformatname)
+  def get_format_name(this : IMSMQManagement*, pbstrformatname : UInt8**) : HRESULT
+    @lpVtbl.value.get_format_name.call(this, pbstrformatname)
   end
-  def get_machine(pbstrmachine : UInt8**) : HRESULT
-    @lpVtbl.value.get_machine.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrmachine)
+  def get_machine(this : IMSMQManagement*, pbstrmachine : UInt8**) : HRESULT
+    @lpVtbl.value.get_machine.call(this, pbstrmachine)
   end
-  def get_message_count(plmessagecount : Int32*) : HRESULT
-    @lpVtbl.value.get_message_count.unsafe_as(Proc(Int32*, HRESULT)).call(plmessagecount)
+  def get_message_count(this : IMSMQManagement*, plmessagecount : Int32*) : HRESULT
+    @lpVtbl.value.get_message_count.call(this, plmessagecount)
   end
-  def get_foreign_status(plforeignstatus : Int32*) : HRESULT
-    @lpVtbl.value.get_foreign_status.unsafe_as(Proc(Int32*, HRESULT)).call(plforeignstatus)
+  def get_foreign_status(this : IMSMQManagement*, plforeignstatus : Int32*) : HRESULT
+    @lpVtbl.value.get_foreign_status.call(this, plforeignstatus)
   end
-  def get_queue_type(plqueuetype : Int32*) : HRESULT
-    @lpVtbl.value.get_queue_type.unsafe_as(Proc(Int32*, HRESULT)).call(plqueuetype)
+  def get_queue_type(this : IMSMQManagement*, plqueuetype : Int32*) : HRESULT
+    @lpVtbl.value.get_queue_type.call(this, plqueuetype)
   end
-  def get_is_local(pfislocal : Int16*) : HRESULT
-    @lpVtbl.value.get_is_local.unsafe_as(Proc(Int16*, HRESULT)).call(pfislocal)
+  def get_is_local(this : IMSMQManagement*, pfislocal : Int16*) : HRESULT
+    @lpVtbl.value.get_is_local.call(this, pfislocal)
   end
-  def get_transactional_status(pltransactionalstatus : Int32*) : HRESULT
-    @lpVtbl.value.get_transactional_status.unsafe_as(Proc(Int32*, HRESULT)).call(pltransactionalstatus)
+  def get_transactional_status(this : IMSMQManagement*, pltransactionalstatus : Int32*) : HRESULT
+    @lpVtbl.value.get_transactional_status.call(this, pltransactionalstatus)
   end
-  def get_bytes_in_queue(pvbytesinqueue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_bytes_in_queue.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvbytesinqueue)
+  def get_bytes_in_queue(this : IMSMQManagement*, pvbytesinqueue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_bytes_in_queue.call(this, pvbytesinqueue)
   end
 end
 struct LibWin32::IMSMQOutgoingQueueManagement
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQOutgoingQueueManagement*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQOutgoingQueueManagement*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQOutgoingQueueManagement*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQOutgoingQueueManagement*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQOutgoingQueueManagement*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQOutgoingQueueManagement*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQOutgoingQueueManagement*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def init(machine : VARIANT*, pathname : VARIANT*, formatname : VARIANT*) : HRESULT
-    @lpVtbl.value.init.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, HRESULT)).call(machine, pathname, formatname)
+  def init(this : IMSMQOutgoingQueueManagement*, machine : VARIANT*, pathname : VARIANT*, formatname : VARIANT*) : HRESULT
+    @lpVtbl.value.init.call(this, machine, pathname, formatname)
   end
-  def get_format_name(pbstrformatname : UInt8**) : HRESULT
-    @lpVtbl.value.get_format_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrformatname)
+  def get_format_name(this : IMSMQOutgoingQueueManagement*, pbstrformatname : UInt8**) : HRESULT
+    @lpVtbl.value.get_format_name.call(this, pbstrformatname)
   end
-  def get_machine(pbstrmachine : UInt8**) : HRESULT
-    @lpVtbl.value.get_machine.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrmachine)
+  def get_machine(this : IMSMQOutgoingQueueManagement*, pbstrmachine : UInt8**) : HRESULT
+    @lpVtbl.value.get_machine.call(this, pbstrmachine)
   end
-  def get_message_count(plmessagecount : Int32*) : HRESULT
-    @lpVtbl.value.get_message_count.unsafe_as(Proc(Int32*, HRESULT)).call(plmessagecount)
+  def get_message_count(this : IMSMQOutgoingQueueManagement*, plmessagecount : Int32*) : HRESULT
+    @lpVtbl.value.get_message_count.call(this, plmessagecount)
   end
-  def get_foreign_status(plforeignstatus : Int32*) : HRESULT
-    @lpVtbl.value.get_foreign_status.unsafe_as(Proc(Int32*, HRESULT)).call(plforeignstatus)
+  def get_foreign_status(this : IMSMQOutgoingQueueManagement*, plforeignstatus : Int32*) : HRESULT
+    @lpVtbl.value.get_foreign_status.call(this, plforeignstatus)
   end
-  def get_queue_type(plqueuetype : Int32*) : HRESULT
-    @lpVtbl.value.get_queue_type.unsafe_as(Proc(Int32*, HRESULT)).call(plqueuetype)
+  def get_queue_type(this : IMSMQOutgoingQueueManagement*, plqueuetype : Int32*) : HRESULT
+    @lpVtbl.value.get_queue_type.call(this, plqueuetype)
   end
-  def get_is_local(pfislocal : Int16*) : HRESULT
-    @lpVtbl.value.get_is_local.unsafe_as(Proc(Int16*, HRESULT)).call(pfislocal)
+  def get_is_local(this : IMSMQOutgoingQueueManagement*, pfislocal : Int16*) : HRESULT
+    @lpVtbl.value.get_is_local.call(this, pfislocal)
   end
-  def get_transactional_status(pltransactionalstatus : Int32*) : HRESULT
-    @lpVtbl.value.get_transactional_status.unsafe_as(Proc(Int32*, HRESULT)).call(pltransactionalstatus)
+  def get_transactional_status(this : IMSMQOutgoingQueueManagement*, pltransactionalstatus : Int32*) : HRESULT
+    @lpVtbl.value.get_transactional_status.call(this, pltransactionalstatus)
   end
-  def get_bytes_in_queue(pvbytesinqueue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_bytes_in_queue.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvbytesinqueue)
+  def get_bytes_in_queue(this : IMSMQOutgoingQueueManagement*, pvbytesinqueue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_bytes_in_queue.call(this, pvbytesinqueue)
   end
-  def get_state(plstate : Int32*) : HRESULT
-    @lpVtbl.value.get_state.unsafe_as(Proc(Int32*, HRESULT)).call(plstate)
+  def get_state(this : IMSMQOutgoingQueueManagement*, plstate : Int32*) : HRESULT
+    @lpVtbl.value.get_state.call(this, plstate)
   end
-  def get_next_hops(pvnexthops : VARIANT*) : HRESULT
-    @lpVtbl.value.get_next_hops.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvnexthops)
+  def get_next_hops(this : IMSMQOutgoingQueueManagement*, pvnexthops : VARIANT*) : HRESULT
+    @lpVtbl.value.get_next_hops.call(this, pvnexthops)
   end
-  def eod_get_send_info(ppcollection : IMSMQCollection*) : HRESULT
-    @lpVtbl.value.eod_get_send_info.unsafe_as(Proc(IMSMQCollection*, HRESULT)).call(ppcollection)
+  def eod_get_send_info(this : IMSMQOutgoingQueueManagement*, ppcollection : IMSMQCollection*) : HRESULT
+    @lpVtbl.value.eod_get_send_info.call(this, ppcollection)
   end
-  def resume : HRESULT
-    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  def resume(this : IMSMQOutgoingQueueManagement*) : HRESULT
+    @lpVtbl.value.resume.call(this)
   end
-  def pause : HRESULT
-    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  def pause(this : IMSMQOutgoingQueueManagement*) : HRESULT
+    @lpVtbl.value.pause.call(this)
   end
-  def eod_resend : HRESULT
-    @lpVtbl.value.eod_resend.unsafe_as(Proc(HRESULT)).call
+  def eod_resend(this : IMSMQOutgoingQueueManagement*) : HRESULT
+    @lpVtbl.value.eod_resend.call(this)
   end
 end
 struct LibWin32::IMSMQQueueManagement
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMSMQQueueManagement*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMSMQQueueManagement*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMSMQQueueManagement*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMSMQQueueManagement*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMSMQQueueManagement*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMSMQQueueManagement*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMSMQQueueManagement*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def init(machine : VARIANT*, pathname : VARIANT*, formatname : VARIANT*) : HRESULT
-    @lpVtbl.value.init.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, HRESULT)).call(machine, pathname, formatname)
+  def init(this : IMSMQQueueManagement*, machine : VARIANT*, pathname : VARIANT*, formatname : VARIANT*) : HRESULT
+    @lpVtbl.value.init.call(this, machine, pathname, formatname)
   end
-  def get_format_name(pbstrformatname : UInt8**) : HRESULT
-    @lpVtbl.value.get_format_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrformatname)
+  def get_format_name(this : IMSMQQueueManagement*, pbstrformatname : UInt8**) : HRESULT
+    @lpVtbl.value.get_format_name.call(this, pbstrformatname)
   end
-  def get_machine(pbstrmachine : UInt8**) : HRESULT
-    @lpVtbl.value.get_machine.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrmachine)
+  def get_machine(this : IMSMQQueueManagement*, pbstrmachine : UInt8**) : HRESULT
+    @lpVtbl.value.get_machine.call(this, pbstrmachine)
   end
-  def get_message_count(plmessagecount : Int32*) : HRESULT
-    @lpVtbl.value.get_message_count.unsafe_as(Proc(Int32*, HRESULT)).call(plmessagecount)
+  def get_message_count(this : IMSMQQueueManagement*, plmessagecount : Int32*) : HRESULT
+    @lpVtbl.value.get_message_count.call(this, plmessagecount)
   end
-  def get_foreign_status(plforeignstatus : Int32*) : HRESULT
-    @lpVtbl.value.get_foreign_status.unsafe_as(Proc(Int32*, HRESULT)).call(plforeignstatus)
+  def get_foreign_status(this : IMSMQQueueManagement*, plforeignstatus : Int32*) : HRESULT
+    @lpVtbl.value.get_foreign_status.call(this, plforeignstatus)
   end
-  def get_queue_type(plqueuetype : Int32*) : HRESULT
-    @lpVtbl.value.get_queue_type.unsafe_as(Proc(Int32*, HRESULT)).call(plqueuetype)
+  def get_queue_type(this : IMSMQQueueManagement*, plqueuetype : Int32*) : HRESULT
+    @lpVtbl.value.get_queue_type.call(this, plqueuetype)
   end
-  def get_is_local(pfislocal : Int16*) : HRESULT
-    @lpVtbl.value.get_is_local.unsafe_as(Proc(Int16*, HRESULT)).call(pfislocal)
+  def get_is_local(this : IMSMQQueueManagement*, pfislocal : Int16*) : HRESULT
+    @lpVtbl.value.get_is_local.call(this, pfislocal)
   end
-  def get_transactional_status(pltransactionalstatus : Int32*) : HRESULT
-    @lpVtbl.value.get_transactional_status.unsafe_as(Proc(Int32*, HRESULT)).call(pltransactionalstatus)
+  def get_transactional_status(this : IMSMQQueueManagement*, pltransactionalstatus : Int32*) : HRESULT
+    @lpVtbl.value.get_transactional_status.call(this, pltransactionalstatus)
   end
-  def get_bytes_in_queue(pvbytesinqueue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_bytes_in_queue.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvbytesinqueue)
+  def get_bytes_in_queue(this : IMSMQQueueManagement*, pvbytesinqueue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_bytes_in_queue.call(this, pvbytesinqueue)
   end
-  def get_journal_message_count(pljournalmessagecount : Int32*) : HRESULT
-    @lpVtbl.value.get_journal_message_count.unsafe_as(Proc(Int32*, HRESULT)).call(pljournalmessagecount)
+  def get_journal_message_count(this : IMSMQQueueManagement*, pljournalmessagecount : Int32*) : HRESULT
+    @lpVtbl.value.get_journal_message_count.call(this, pljournalmessagecount)
   end
-  def get_bytes_in_journal(pvbytesinjournal : VARIANT*) : HRESULT
-    @lpVtbl.value.get_bytes_in_journal.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvbytesinjournal)
+  def get_bytes_in_journal(this : IMSMQQueueManagement*, pvbytesinjournal : VARIANT*) : HRESULT
+    @lpVtbl.value.get_bytes_in_journal.call(this, pvbytesinjournal)
   end
-  def eod_get_receive_info(pvcollection : VARIANT*) : HRESULT
-    @lpVtbl.value.eod_get_receive_info.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvcollection)
+  def eod_get_receive_info(this : IMSMQQueueManagement*, pvcollection : VARIANT*) : HRESULT
+    @lpVtbl.value.eod_get_receive_info.call(this, pvcollection)
   end
 end

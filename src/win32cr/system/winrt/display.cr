@@ -13,11 +13,11 @@ require "../../security.cr"
 lib LibWin32
 
   struct IDisplayDeviceInteropVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_shared_handle : UInt64
-    open_shared_handle : UInt64
+    query_interface : Proc(IDisplayDeviceInterop*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDisplayDeviceInterop*, UInt32)
+    release : Proc(IDisplayDeviceInterop*, UInt32)
+    create_shared_handle : Proc(IDisplayDeviceInterop*, IInspectable, SECURITY_ATTRIBUTES*, UInt32, HSTRING, LibC::HANDLE*, HRESULT)
+    open_shared_handle : Proc(IDisplayDeviceInterop*, LibC::HANDLE, Guid, Void**, HRESULT)
   end
 
   IDisplayDeviceInterop_GUID = "64338358-366a-471b-bd56-dd8ef48e439b"
@@ -27,11 +27,11 @@ lib LibWin32
   end
 
   struct IDisplayPathInteropVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_source_presentation_handle : UInt64
-    get_source_id : UInt64
+    query_interface : Proc(IDisplayPathInterop*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDisplayPathInterop*, UInt32)
+    release : Proc(IDisplayPathInterop*, UInt32)
+    create_source_presentation_handle : Proc(IDisplayPathInterop*, LibC::HANDLE*, HRESULT)
+    get_source_id : Proc(IDisplayPathInterop*, UInt32*, HRESULT)
   end
 
   IDisplayPathInterop_GUID = "a6ba4205-e59e-4e71-b25b-4e436d21ee3d"
@@ -42,36 +42,36 @@ lib LibWin32
 
 end
 struct LibWin32::IDisplayDeviceInterop
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDisplayDeviceInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDisplayDeviceInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDisplayDeviceInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_shared_handle(pobject : IInspectable, psecurityattributes : SECURITY_ATTRIBUTES*, access : UInt32, name : HSTRING, phandle : LibC::HANDLE*) : HRESULT
-    @lpVtbl.value.create_shared_handle.unsafe_as(Proc(IInspectable, SECURITY_ATTRIBUTES*, UInt32, HSTRING, LibC::HANDLE*, HRESULT)).call(pobject, psecurityattributes, access, name, phandle)
+  def create_shared_handle(this : IDisplayDeviceInterop*, pobject : IInspectable, psecurityattributes : SECURITY_ATTRIBUTES*, access : UInt32, name : HSTRING, phandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_shared_handle.call(this, pobject, psecurityattributes, access, name, phandle)
   end
-  def open_shared_handle(nthandle : LibC::HANDLE, riid : Guid, ppvobj : Void**) : HRESULT
-    @lpVtbl.value.open_shared_handle.unsafe_as(Proc(LibC::HANDLE, Guid, Void**, HRESULT)).call(nthandle, riid, ppvobj)
+  def open_shared_handle(this : IDisplayDeviceInterop*, nthandle : LibC::HANDLE, riid : Guid, ppvobj : Void**) : HRESULT
+    @lpVtbl.value.open_shared_handle.call(this, nthandle, riid, ppvobj)
   end
 end
 struct LibWin32::IDisplayPathInterop
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDisplayPathInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDisplayPathInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDisplayPathInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_source_presentation_handle(pvalue : LibC::HANDLE*) : HRESULT
-    @lpVtbl.value.create_source_presentation_handle.unsafe_as(Proc(LibC::HANDLE*, HRESULT)).call(pvalue)
+  def create_source_presentation_handle(this : IDisplayPathInterop*, pvalue : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_source_presentation_handle.call(this, pvalue)
   end
-  def get_source_id(psourceid : UInt32*) : HRESULT
-    @lpVtbl.value.get_source_id.unsafe_as(Proc(UInt32*, HRESULT)).call(psourceid)
+  def get_source_id(this : IDisplayPathInterop*, psourceid : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_id.call(this, psourceid)
   end
 end

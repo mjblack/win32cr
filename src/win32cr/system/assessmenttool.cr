@@ -52,16 +52,16 @@ lib LibWin32
 
 
   struct IProvideWinSATAssessmentInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_score : UInt64
-    get_title : UInt64
-    get_description : UInt64
+    query_interface : Proc(IProvideWinSATAssessmentInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IProvideWinSATAssessmentInfo*, UInt32)
+    release : Proc(IProvideWinSATAssessmentInfo*, UInt32)
+    get_type_info_count : Proc(IProvideWinSATAssessmentInfo*, UInt32*, HRESULT)
+    get_type_info : Proc(IProvideWinSATAssessmentInfo*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IProvideWinSATAssessmentInfo*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IProvideWinSATAssessmentInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_score : Proc(IProvideWinSATAssessmentInfo*, Float32*, HRESULT)
+    get_title : Proc(IProvideWinSATAssessmentInfo*, UInt8**, HRESULT)
+    get_description : Proc(IProvideWinSATAssessmentInfo*, UInt8**, HRESULT)
   end
 
   IProvideWinSATAssessmentInfo_GUID = "0cd1c380-52d3-4678-ac6f-e929e480be9e"
@@ -71,18 +71,18 @@ lib LibWin32
   end
 
   struct IProvideWinSATResultsInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_assessment_info : UInt64
-    get_assessment_state : UInt64
-    get_assessment_date_time : UInt64
-    get_system_rating : UInt64
-    get_rating_state_desc : UInt64
+    query_interface : Proc(IProvideWinSATResultsInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IProvideWinSATResultsInfo*, UInt32)
+    release : Proc(IProvideWinSATResultsInfo*, UInt32)
+    get_type_info_count : Proc(IProvideWinSATResultsInfo*, UInt32*, HRESULT)
+    get_type_info : Proc(IProvideWinSATResultsInfo*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IProvideWinSATResultsInfo*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IProvideWinSATResultsInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_assessment_info : Proc(IProvideWinSATResultsInfo*, WINSAT_ASSESSMENT_TYPE, IProvideWinSATAssessmentInfo*, HRESULT)
+    get_assessment_state : Proc(IProvideWinSATResultsInfo*, WINSAT_ASSESSMENT_STATE*, HRESULT)
+    get_assessment_date_time : Proc(IProvideWinSATResultsInfo*, VARIANT*, HRESULT)
+    get_system_rating : Proc(IProvideWinSATResultsInfo*, Float32*, HRESULT)
+    get_rating_state_desc : Proc(IProvideWinSATResultsInfo*, UInt8**, HRESULT)
   end
 
   IProvideWinSATResultsInfo_GUID = "f8334d5d-568e-4075-875f-9df341506640"
@@ -92,15 +92,15 @@ lib LibWin32
   end
 
   struct IQueryRecentWinSATAssessmentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_xml : UInt64
-    get_info : UInt64
+    query_interface : Proc(IQueryRecentWinSATAssessment*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IQueryRecentWinSATAssessment*, UInt32)
+    release : Proc(IQueryRecentWinSATAssessment*, UInt32)
+    get_type_info_count : Proc(IQueryRecentWinSATAssessment*, UInt32*, HRESULT)
+    get_type_info : Proc(IQueryRecentWinSATAssessment*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IQueryRecentWinSATAssessment*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IQueryRecentWinSATAssessment*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_xml : Proc(IQueryRecentWinSATAssessment*, UInt8*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    get_info : Proc(IQueryRecentWinSATAssessment*, IProvideWinSATResultsInfo*, HRESULT)
   end
 
   IQueryRecentWinSATAssessment_GUID = "f8ad5d1f-3b47-4bdc-9375-7c6b1da4eca7"
@@ -110,10 +110,10 @@ lib LibWin32
   end
 
   struct IProvideWinSATVisualsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_bitmap : UInt64
+    query_interface : Proc(IProvideWinSATVisuals*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IProvideWinSATVisuals*, UInt32)
+    release : Proc(IProvideWinSATVisuals*, UInt32)
+    get_bitmap : Proc(IProvideWinSATVisuals*, WINSAT_BITMAP_SIZE, WINSAT_ASSESSMENT_STATE, Float32, HBITMAP*, HRESULT)
   end
 
   IProvideWinSATVisuals_GUID = "a9f4ade0-871a-42a3-b813-3078d25162c9"
@@ -123,14 +123,14 @@ lib LibWin32
   end
 
   struct IQueryAllWinSATAssessmentsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_all_xml : UInt64
+    query_interface : Proc(IQueryAllWinSATAssessments*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IQueryAllWinSATAssessments*, UInt32)
+    release : Proc(IQueryAllWinSATAssessments*, UInt32)
+    get_type_info_count : Proc(IQueryAllWinSATAssessments*, UInt32*, HRESULT)
+    get_type_info : Proc(IQueryAllWinSATAssessments*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IQueryAllWinSATAssessments*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IQueryAllWinSATAssessments*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_all_xml : Proc(IQueryAllWinSATAssessments*, UInt8*, UInt8*, IXMLDOMNodeList*, HRESULT)
   end
 
   IQueryAllWinSATAssessments_GUID = "0b89ed1d-6398-4fea-87fc-567d8d19176f"
@@ -140,11 +140,11 @@ lib LibWin32
   end
 
   struct IWinSATInitiateEventsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    win_sat_complete : UInt64
-    win_sat_update : UInt64
+    query_interface : Proc(IWinSATInitiateEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWinSATInitiateEvents*, UInt32)
+    release : Proc(IWinSATInitiateEvents*, UInt32)
+    win_sat_complete : Proc(IWinSATInitiateEvents*, HRESULT, LibC::LPWSTR, HRESULT)
+    win_sat_update : Proc(IWinSATInitiateEvents*, UInt32, UInt32, LibC::LPWSTR, HRESULT)
   end
 
   IWinSATInitiateEvents_GUID = "262a1918-ba0d-41d5-92c2-fab4633ee74f"
@@ -154,12 +154,12 @@ lib LibWin32
   end
 
   struct IInitiateWinSATAssessmentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    initiate_assessment : UInt64
-    initiate_formal_assessment : UInt64
-    cancel_assessment : UInt64
+    query_interface : Proc(IInitiateWinSATAssessment*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInitiateWinSATAssessment*, UInt32)
+    release : Proc(IInitiateWinSATAssessment*, UInt32)
+    initiate_assessment : Proc(IInitiateWinSATAssessment*, LibC::LPWSTR, IWinSATInitiateEvents, LibC::HANDLE, HRESULT)
+    initiate_formal_assessment : Proc(IInitiateWinSATAssessment*, IWinSATInitiateEvents, LibC::HANDLE, HRESULT)
+    cancel_assessment : Proc(IInitiateWinSATAssessment*, HRESULT)
   end
 
   IInitiateWinSATAssessment_GUID = "d983fc50-f5bf-49d5-b5ed-cccb18aa7fc1"
@@ -169,35 +169,35 @@ lib LibWin32
   end
 
   struct IAccessibleWinSATVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_acc_parent : UInt64
-    get_acc_child_count : UInt64
-    get_acc_child : UInt64
-    get_acc_name : UInt64
-    get_acc_value : UInt64
-    get_acc_description : UInt64
-    get_acc_role : UInt64
-    get_acc_state : UInt64
-    get_acc_help : UInt64
-    get_acc_help_topic : UInt64
-    get_acc_keyboard_shortcut : UInt64
-    get_acc_focus : UInt64
-    get_acc_selection : UInt64
-    get_acc_default_action : UInt64
-    acc_select : UInt64
-    acc_location : UInt64
-    acc_navigate : UInt64
-    acc_hit_test : UInt64
-    acc_do_default_action : UInt64
-    put_acc_name : UInt64
-    put_acc_value : UInt64
-    set_accessiblity_data : UInt64
+    query_interface : Proc(IAccessibleWinSAT*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IAccessibleWinSAT*, UInt32)
+    release : Proc(IAccessibleWinSAT*, UInt32)
+    get_type_info_count : Proc(IAccessibleWinSAT*, UInt32*, HRESULT)
+    get_type_info : Proc(IAccessibleWinSAT*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IAccessibleWinSAT*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IAccessibleWinSAT*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_acc_parent : Proc(IAccessibleWinSAT*, IDispatch*, HRESULT)
+    get_acc_child_count : Proc(IAccessibleWinSAT*, Int32*, HRESULT)
+    get_acc_child : Proc(IAccessibleWinSAT*, VARIANT, IDispatch*, HRESULT)
+    get_acc_name : Proc(IAccessibleWinSAT*, VARIANT, UInt8**, HRESULT)
+    get_acc_value : Proc(IAccessibleWinSAT*, VARIANT, UInt8**, HRESULT)
+    get_acc_description : Proc(IAccessibleWinSAT*, VARIANT, UInt8**, HRESULT)
+    get_acc_role : Proc(IAccessibleWinSAT*, VARIANT, VARIANT*, HRESULT)
+    get_acc_state : Proc(IAccessibleWinSAT*, VARIANT, VARIANT*, HRESULT)
+    get_acc_help : Proc(IAccessibleWinSAT*, VARIANT, UInt8**, HRESULT)
+    get_acc_help_topic : Proc(IAccessibleWinSAT*, UInt8**, VARIANT, Int32*, HRESULT)
+    get_acc_keyboard_shortcut : Proc(IAccessibleWinSAT*, VARIANT, UInt8**, HRESULT)
+    get_acc_focus : Proc(IAccessibleWinSAT*, VARIANT*, HRESULT)
+    get_acc_selection : Proc(IAccessibleWinSAT*, VARIANT*, HRESULT)
+    get_acc_default_action : Proc(IAccessibleWinSAT*, VARIANT, UInt8**, HRESULT)
+    acc_select : Proc(IAccessibleWinSAT*, Int32, VARIANT, HRESULT)
+    acc_location : Proc(IAccessibleWinSAT*, Int32*, Int32*, Int32*, Int32*, VARIANT, HRESULT)
+    acc_navigate : Proc(IAccessibleWinSAT*, Int32, VARIANT, VARIANT*, HRESULT)
+    acc_hit_test : Proc(IAccessibleWinSAT*, Int32, Int32, VARIANT*, HRESULT)
+    acc_do_default_action : Proc(IAccessibleWinSAT*, VARIANT, HRESULT)
+    put_acc_name : Proc(IAccessibleWinSAT*, VARIANT, UInt8*, HRESULT)
+    put_acc_value : Proc(IAccessibleWinSAT*, VARIANT, UInt8*, HRESULT)
+    set_accessiblity_data : Proc(IAccessibleWinSAT*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
   IAccessibleWinSAT_GUID = "30e6018a-94a8-4ff8-a69a-71b67413f07b"
@@ -207,10 +207,10 @@ lib LibWin32
   end
 
   struct IQueryOEMWinSATCustomizationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_oem_pre_population_info : UInt64
+    query_interface : Proc(IQueryOEMWinSATCustomization*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IQueryOEMWinSATCustomization*, UInt32)
+    release : Proc(IQueryOEMWinSATCustomization*, UInt32)
+    get_oem_pre_population_info : Proc(IQueryOEMWinSATCustomization*, WINSAT_OEM_DATA_TYPE*, HRESULT)
   end
 
   IQueryOEMWinSATCustomization_GUID = "bc9a6a9f-ad4e-420e-9953-b34671e9df22"
@@ -221,281 +221,281 @@ lib LibWin32
 
 end
 struct LibWin32::IProvideWinSATAssessmentInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IProvideWinSATAssessmentInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IProvideWinSATAssessmentInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IProvideWinSATAssessmentInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IProvideWinSATAssessmentInfo*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IProvideWinSATAssessmentInfo*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IProvideWinSATAssessmentInfo*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IProvideWinSATAssessmentInfo*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_score(score : Float32*) : HRESULT
-    @lpVtbl.value.get_score.unsafe_as(Proc(Float32*, HRESULT)).call(score)
+  def get_score(this : IProvideWinSATAssessmentInfo*, score : Float32*) : HRESULT
+    @lpVtbl.value.get_score.call(this, score)
   end
-  def get_title(title : UInt8**) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(title)
+  def get_title(this : IProvideWinSATAssessmentInfo*, title : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, title)
   end
-  def get_description(description : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(description)
+  def get_description(this : IProvideWinSATAssessmentInfo*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
   end
 end
 struct LibWin32::IProvideWinSATResultsInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IProvideWinSATResultsInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IProvideWinSATResultsInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IProvideWinSATResultsInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IProvideWinSATResultsInfo*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IProvideWinSATResultsInfo*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IProvideWinSATResultsInfo*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IProvideWinSATResultsInfo*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_assessment_info(assessment : WINSAT_ASSESSMENT_TYPE, ppinfo : IProvideWinSATAssessmentInfo*) : HRESULT
-    @lpVtbl.value.get_assessment_info.unsafe_as(Proc(WINSAT_ASSESSMENT_TYPE, IProvideWinSATAssessmentInfo*, HRESULT)).call(assessment, ppinfo)
+  def get_assessment_info(this : IProvideWinSATResultsInfo*, assessment : WINSAT_ASSESSMENT_TYPE, ppinfo : IProvideWinSATAssessmentInfo*) : HRESULT
+    @lpVtbl.value.get_assessment_info.call(this, assessment, ppinfo)
   end
-  def get_assessment_state(state : WINSAT_ASSESSMENT_STATE*) : HRESULT
-    @lpVtbl.value.get_assessment_state.unsafe_as(Proc(WINSAT_ASSESSMENT_STATE*, HRESULT)).call(state)
+  def get_assessment_state(this : IProvideWinSATResultsInfo*, state : WINSAT_ASSESSMENT_STATE*) : HRESULT
+    @lpVtbl.value.get_assessment_state.call(this, state)
   end
-  def get_assessment_date_time(filetime : VARIANT*) : HRESULT
-    @lpVtbl.value.get_assessment_date_time.unsafe_as(Proc(VARIANT*, HRESULT)).call(filetime)
+  def get_assessment_date_time(this : IProvideWinSATResultsInfo*, filetime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_assessment_date_time.call(this, filetime)
   end
-  def get_system_rating(level : Float32*) : HRESULT
-    @lpVtbl.value.get_system_rating.unsafe_as(Proc(Float32*, HRESULT)).call(level)
+  def get_system_rating(this : IProvideWinSATResultsInfo*, level : Float32*) : HRESULT
+    @lpVtbl.value.get_system_rating.call(this, level)
   end
-  def get_rating_state_desc(description : UInt8**) : HRESULT
-    @lpVtbl.value.get_rating_state_desc.unsafe_as(Proc(UInt8**, HRESULT)).call(description)
+  def get_rating_state_desc(this : IProvideWinSATResultsInfo*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_rating_state_desc.call(this, description)
   end
 end
 struct LibWin32::IQueryRecentWinSATAssessment
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IQueryRecentWinSATAssessment*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IQueryRecentWinSATAssessment*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IQueryRecentWinSATAssessment*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IQueryRecentWinSATAssessment*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IQueryRecentWinSATAssessment*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IQueryRecentWinSATAssessment*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IQueryRecentWinSATAssessment*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_xml(xpath : UInt8*, namespaces : UInt8*, ppdomnodelist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_xml.unsafe_as(Proc(UInt8*, UInt8*, IXMLDOMNodeList*, HRESULT)).call(xpath, namespaces, ppdomnodelist)
+  def get_xml(this : IQueryRecentWinSATAssessment*, xpath : UInt8*, namespaces : UInt8*, ppdomnodelist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_xml.call(this, xpath, namespaces, ppdomnodelist)
   end
-  def get_info(ppwinsatassessmentinfo : IProvideWinSATResultsInfo*) : HRESULT
-    @lpVtbl.value.get_info.unsafe_as(Proc(IProvideWinSATResultsInfo*, HRESULT)).call(ppwinsatassessmentinfo)
+  def get_info(this : IQueryRecentWinSATAssessment*, ppwinsatassessmentinfo : IProvideWinSATResultsInfo*) : HRESULT
+    @lpVtbl.value.get_info.call(this, ppwinsatassessmentinfo)
   end
 end
 struct LibWin32::IProvideWinSATVisuals
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IProvideWinSATVisuals*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IProvideWinSATVisuals*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IProvideWinSATVisuals*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_bitmap(bitmapsize : WINSAT_BITMAP_SIZE, state : WINSAT_ASSESSMENT_STATE, rating : Float32, pbitmap : HBITMAP*) : HRESULT
-    @lpVtbl.value.get_bitmap.unsafe_as(Proc(WINSAT_BITMAP_SIZE, WINSAT_ASSESSMENT_STATE, Float32, HBITMAP*, HRESULT)).call(bitmapsize, state, rating, pbitmap)
+  def get_bitmap(this : IProvideWinSATVisuals*, bitmapsize : WINSAT_BITMAP_SIZE, state : WINSAT_ASSESSMENT_STATE, rating : Float32, pbitmap : HBITMAP*) : HRESULT
+    @lpVtbl.value.get_bitmap.call(this, bitmapsize, state, rating, pbitmap)
   end
 end
 struct LibWin32::IQueryAllWinSATAssessments
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IQueryAllWinSATAssessments*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IQueryAllWinSATAssessments*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IQueryAllWinSATAssessments*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IQueryAllWinSATAssessments*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IQueryAllWinSATAssessments*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IQueryAllWinSATAssessments*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IQueryAllWinSATAssessments*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_all_xml(xpath : UInt8*, namespaces : UInt8*, ppdomnodelist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_all_xml.unsafe_as(Proc(UInt8*, UInt8*, IXMLDOMNodeList*, HRESULT)).call(xpath, namespaces, ppdomnodelist)
+  def get_all_xml(this : IQueryAllWinSATAssessments*, xpath : UInt8*, namespaces : UInt8*, ppdomnodelist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_all_xml.call(this, xpath, namespaces, ppdomnodelist)
   end
 end
 struct LibWin32::IWinSATInitiateEvents
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWinSATInitiateEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWinSATInitiateEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWinSATInitiateEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def win_sat_complete(hresult : HRESULT, strdescription : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.win_sat_complete.unsafe_as(Proc(HRESULT, LibC::LPWSTR, HRESULT)).call(hresult, strdescription)
+  def win_sat_complete(this : IWinSATInitiateEvents*, hresult : HRESULT, strdescription : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.win_sat_complete.call(this, hresult, strdescription)
   end
-  def win_sat_update(ucurrenttick : UInt32, uticktotal : UInt32, strcurrentstate : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.win_sat_update.unsafe_as(Proc(UInt32, UInt32, LibC::LPWSTR, HRESULT)).call(ucurrenttick, uticktotal, strcurrentstate)
+  def win_sat_update(this : IWinSATInitiateEvents*, ucurrenttick : UInt32, uticktotal : UInt32, strcurrentstate : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.win_sat_update.call(this, ucurrenttick, uticktotal, strcurrentstate)
   end
 end
 struct LibWin32::IInitiateWinSATAssessment
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInitiateWinSATAssessment*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInitiateWinSATAssessment*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInitiateWinSATAssessment*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def initiate_assessment(cmdline : LibC::LPWSTR, pcallbacks : IWinSATInitiateEvents, callerhwnd : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.initiate_assessment.unsafe_as(Proc(LibC::LPWSTR, IWinSATInitiateEvents, LibC::HANDLE, HRESULT)).call(cmdline, pcallbacks, callerhwnd)
+  def initiate_assessment(this : IInitiateWinSATAssessment*, cmdline : LibC::LPWSTR, pcallbacks : IWinSATInitiateEvents, callerhwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.initiate_assessment.call(this, cmdline, pcallbacks, callerhwnd)
   end
-  def initiate_formal_assessment(pcallbacks : IWinSATInitiateEvents, callerhwnd : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.initiate_formal_assessment.unsafe_as(Proc(IWinSATInitiateEvents, LibC::HANDLE, HRESULT)).call(pcallbacks, callerhwnd)
+  def initiate_formal_assessment(this : IInitiateWinSATAssessment*, pcallbacks : IWinSATInitiateEvents, callerhwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.initiate_formal_assessment.call(this, pcallbacks, callerhwnd)
   end
-  def cancel_assessment : HRESULT
-    @lpVtbl.value.cancel_assessment.unsafe_as(Proc(HRESULT)).call
+  def cancel_assessment(this : IInitiateWinSATAssessment*) : HRESULT
+    @lpVtbl.value.cancel_assessment.call(this)
   end
 end
 struct LibWin32::IAccessibleWinSAT
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IAccessibleWinSAT*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IAccessibleWinSAT*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IAccessibleWinSAT*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IAccessibleWinSAT*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IAccessibleWinSAT*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IAccessibleWinSAT*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IAccessibleWinSAT*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_acc_parent(ppdispparent : IDispatch*) : HRESULT
-    @lpVtbl.value.get_acc_parent.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppdispparent)
+  def get_acc_parent(this : IAccessibleWinSAT*, ppdispparent : IDispatch*) : HRESULT
+    @lpVtbl.value.get_acc_parent.call(this, ppdispparent)
   end
-  def get_acc_child_count(pcountchildren : Int32*) : HRESULT
-    @lpVtbl.value.get_acc_child_count.unsafe_as(Proc(Int32*, HRESULT)).call(pcountchildren)
+  def get_acc_child_count(this : IAccessibleWinSAT*, pcountchildren : Int32*) : HRESULT
+    @lpVtbl.value.get_acc_child_count.call(this, pcountchildren)
   end
-  def get_acc_child(varchild : VARIANT, ppdispchild : IDispatch*) : HRESULT
-    @lpVtbl.value.get_acc_child.unsafe_as(Proc(VARIANT, IDispatch*, HRESULT)).call(varchild, ppdispchild)
+  def get_acc_child(this : IAccessibleWinSAT*, varchild : VARIANT, ppdispchild : IDispatch*) : HRESULT
+    @lpVtbl.value.get_acc_child.call(this, varchild, ppdispchild)
   end
-  def get_acc_name(varchild : VARIANT, pszname : UInt8**) : HRESULT
-    @lpVtbl.value.get_acc_name.unsafe_as(Proc(VARIANT, UInt8**, HRESULT)).call(varchild, pszname)
+  def get_acc_name(this : IAccessibleWinSAT*, varchild : VARIANT, pszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_acc_name.call(this, varchild, pszname)
   end
-  def get_acc_value(varchild : VARIANT, pszvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_acc_value.unsafe_as(Proc(VARIANT, UInt8**, HRESULT)).call(varchild, pszvalue)
+  def get_acc_value(this : IAccessibleWinSAT*, varchild : VARIANT, pszvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_acc_value.call(this, varchild, pszvalue)
   end
-  def get_acc_description(varchild : VARIANT, pszdescription : UInt8**) : HRESULT
-    @lpVtbl.value.get_acc_description.unsafe_as(Proc(VARIANT, UInt8**, HRESULT)).call(varchild, pszdescription)
+  def get_acc_description(this : IAccessibleWinSAT*, varchild : VARIANT, pszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_acc_description.call(this, varchild, pszdescription)
   end
-  def get_acc_role(varchild : VARIANT, pvarrole : VARIANT*) : HRESULT
-    @lpVtbl.value.get_acc_role.unsafe_as(Proc(VARIANT, VARIANT*, HRESULT)).call(varchild, pvarrole)
+  def get_acc_role(this : IAccessibleWinSAT*, varchild : VARIANT, pvarrole : VARIANT*) : HRESULT
+    @lpVtbl.value.get_acc_role.call(this, varchild, pvarrole)
   end
-  def get_acc_state(varchild : VARIANT, pvarstate : VARIANT*) : HRESULT
-    @lpVtbl.value.get_acc_state.unsafe_as(Proc(VARIANT, VARIANT*, HRESULT)).call(varchild, pvarstate)
+  def get_acc_state(this : IAccessibleWinSAT*, varchild : VARIANT, pvarstate : VARIANT*) : HRESULT
+    @lpVtbl.value.get_acc_state.call(this, varchild, pvarstate)
   end
-  def get_acc_help(varchild : VARIANT, pszhelp : UInt8**) : HRESULT
-    @lpVtbl.value.get_acc_help.unsafe_as(Proc(VARIANT, UInt8**, HRESULT)).call(varchild, pszhelp)
+  def get_acc_help(this : IAccessibleWinSAT*, varchild : VARIANT, pszhelp : UInt8**) : HRESULT
+    @lpVtbl.value.get_acc_help.call(this, varchild, pszhelp)
   end
-  def get_acc_help_topic(pszhelpfile : UInt8**, varchild : VARIANT, pidtopic : Int32*) : HRESULT
-    @lpVtbl.value.get_acc_help_topic.unsafe_as(Proc(UInt8**, VARIANT, Int32*, HRESULT)).call(pszhelpfile, varchild, pidtopic)
+  def get_acc_help_topic(this : IAccessibleWinSAT*, pszhelpfile : UInt8**, varchild : VARIANT, pidtopic : Int32*) : HRESULT
+    @lpVtbl.value.get_acc_help_topic.call(this, pszhelpfile, varchild, pidtopic)
   end
-  def get_acc_keyboard_shortcut(varchild : VARIANT, pszkeyboardshortcut : UInt8**) : HRESULT
-    @lpVtbl.value.get_acc_keyboard_shortcut.unsafe_as(Proc(VARIANT, UInt8**, HRESULT)).call(varchild, pszkeyboardshortcut)
+  def get_acc_keyboard_shortcut(this : IAccessibleWinSAT*, varchild : VARIANT, pszkeyboardshortcut : UInt8**) : HRESULT
+    @lpVtbl.value.get_acc_keyboard_shortcut.call(this, varchild, pszkeyboardshortcut)
   end
-  def get_acc_focus(pvarchild : VARIANT*) : HRESULT
-    @lpVtbl.value.get_acc_focus.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarchild)
+  def get_acc_focus(this : IAccessibleWinSAT*, pvarchild : VARIANT*) : HRESULT
+    @lpVtbl.value.get_acc_focus.call(this, pvarchild)
   end
-  def get_acc_selection(pvarchildren : VARIANT*) : HRESULT
-    @lpVtbl.value.get_acc_selection.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarchildren)
+  def get_acc_selection(this : IAccessibleWinSAT*, pvarchildren : VARIANT*) : HRESULT
+    @lpVtbl.value.get_acc_selection.call(this, pvarchildren)
   end
-  def get_acc_default_action(varchild : VARIANT, pszdefaultaction : UInt8**) : HRESULT
-    @lpVtbl.value.get_acc_default_action.unsafe_as(Proc(VARIANT, UInt8**, HRESULT)).call(varchild, pszdefaultaction)
+  def get_acc_default_action(this : IAccessibleWinSAT*, varchild : VARIANT, pszdefaultaction : UInt8**) : HRESULT
+    @lpVtbl.value.get_acc_default_action.call(this, varchild, pszdefaultaction)
   end
-  def acc_select(flagsselect : Int32, varchild : VARIANT) : HRESULT
-    @lpVtbl.value.acc_select.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(flagsselect, varchild)
+  def acc_select(this : IAccessibleWinSAT*, flagsselect : Int32, varchild : VARIANT) : HRESULT
+    @lpVtbl.value.acc_select.call(this, flagsselect, varchild)
   end
-  def acc_location(pxleft : Int32*, pytop : Int32*, pcxwidth : Int32*, pcyheight : Int32*, varchild : VARIANT) : HRESULT
-    @lpVtbl.value.acc_location.unsafe_as(Proc(Int32*, Int32*, Int32*, Int32*, VARIANT, HRESULT)).call(pxleft, pytop, pcxwidth, pcyheight, varchild)
+  def acc_location(this : IAccessibleWinSAT*, pxleft : Int32*, pytop : Int32*, pcxwidth : Int32*, pcyheight : Int32*, varchild : VARIANT) : HRESULT
+    @lpVtbl.value.acc_location.call(this, pxleft, pytop, pcxwidth, pcyheight, varchild)
   end
-  def acc_navigate(navdir : Int32, varstart : VARIANT, pvarendupat : VARIANT*) : HRESULT
-    @lpVtbl.value.acc_navigate.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(navdir, varstart, pvarendupat)
+  def acc_navigate(this : IAccessibleWinSAT*, navdir : Int32, varstart : VARIANT, pvarendupat : VARIANT*) : HRESULT
+    @lpVtbl.value.acc_navigate.call(this, navdir, varstart, pvarendupat)
   end
-  def acc_hit_test(xleft : Int32, ytop : Int32, pvarchild : VARIANT*) : HRESULT
-    @lpVtbl.value.acc_hit_test.unsafe_as(Proc(Int32, Int32, VARIANT*, HRESULT)).call(xleft, ytop, pvarchild)
+  def acc_hit_test(this : IAccessibleWinSAT*, xleft : Int32, ytop : Int32, pvarchild : VARIANT*) : HRESULT
+    @lpVtbl.value.acc_hit_test.call(this, xleft, ytop, pvarchild)
   end
-  def acc_do_default_action(varchild : VARIANT) : HRESULT
-    @lpVtbl.value.acc_do_default_action.unsafe_as(Proc(VARIANT, HRESULT)).call(varchild)
+  def acc_do_default_action(this : IAccessibleWinSAT*, varchild : VARIANT) : HRESULT
+    @lpVtbl.value.acc_do_default_action.call(this, varchild)
   end
-  def put_acc_name(varchild : VARIANT, szname : UInt8*) : HRESULT
-    @lpVtbl.value.put_acc_name.unsafe_as(Proc(VARIANT, UInt8*, HRESULT)).call(varchild, szname)
+  def put_acc_name(this : IAccessibleWinSAT*, varchild : VARIANT, szname : UInt8*) : HRESULT
+    @lpVtbl.value.put_acc_name.call(this, varchild, szname)
   end
-  def put_acc_value(varchild : VARIANT, szvalue : UInt8*) : HRESULT
-    @lpVtbl.value.put_acc_value.unsafe_as(Proc(VARIANT, UInt8*, HRESULT)).call(varchild, szvalue)
+  def put_acc_value(this : IAccessibleWinSAT*, varchild : VARIANT, szvalue : UInt8*) : HRESULT
+    @lpVtbl.value.put_acc_value.call(this, varchild, szvalue)
   end
-  def set_accessiblity_data(wsname : LibC::LPWSTR, wsvalue : LibC::LPWSTR, wsdesc : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_accessiblity_data.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(wsname, wsvalue, wsdesc)
+  def set_accessiblity_data(this : IAccessibleWinSAT*, wsname : LibC::LPWSTR, wsvalue : LibC::LPWSTR, wsdesc : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_accessiblity_data.call(this, wsname, wsvalue, wsdesc)
   end
 end
 struct LibWin32::IQueryOEMWinSATCustomization
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IQueryOEMWinSATCustomization*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IQueryOEMWinSATCustomization*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IQueryOEMWinSATCustomization*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_oem_pre_population_info(state : WINSAT_OEM_DATA_TYPE*) : HRESULT
-    @lpVtbl.value.get_oem_pre_population_info.unsafe_as(Proc(WINSAT_OEM_DATA_TYPE*, HRESULT)).call(state)
+  def get_oem_pre_population_info(this : IQueryOEMWinSATCustomization*, state : WINSAT_OEM_DATA_TYPE*) : HRESULT
+    @lpVtbl.value.get_oem_pre_population_info.call(this, state)
   end
 end

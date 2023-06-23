@@ -1018,18 +1018,18 @@ lib LibWin32
 
 
   struct IWMPErrorItemVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_error_code : UInt64
-    get_error_description : UInt64
-    get_error_context : UInt64
-    get_remedy : UInt64
-    get_custom_url : UInt64
+    query_interface : Proc(IWMPErrorItem*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPErrorItem*, UInt32)
+    release : Proc(IWMPErrorItem*, UInt32)
+    get_type_info_count : Proc(IWMPErrorItem*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPErrorItem*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPErrorItem*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPErrorItem*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_error_code : Proc(IWMPErrorItem*, Int32*, HRESULT)
+    get_error_description : Proc(IWMPErrorItem*, UInt8**, HRESULT)
+    get_error_context : Proc(IWMPErrorItem*, VARIANT*, HRESULT)
+    get_remedy : Proc(IWMPErrorItem*, Int32*, HRESULT)
+    get_custom_url : Proc(IWMPErrorItem*, UInt8**, HRESULT)
   end
 
   IWMPErrorItem_GUID = "3614c646-3b3b-4de7-a81e-930e3f2127b3"
@@ -1039,17 +1039,17 @@ lib LibWin32
   end
 
   struct IWMPErrorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    clear_error_queue : UInt64
-    get_error_count : UInt64
-    get_item : UInt64
-    web_help : UInt64
+    query_interface : Proc(IWMPError*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPError*, UInt32)
+    release : Proc(IWMPError*, UInt32)
+    get_type_info_count : Proc(IWMPError*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPError*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPError*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPError*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    clear_error_queue : Proc(IWMPError*, HRESULT)
+    get_error_count : Proc(IWMPError*, Int32*, HRESULT)
+    get_item : Proc(IWMPError*, Int32, IWMPErrorItem*, HRESULT)
+    web_help : Proc(IWMPError*, HRESULT)
   end
 
   IWMPError_GUID = "a12dcf7d-14ab-4c1b-a8cd-63909f06025b"
@@ -1059,31 +1059,31 @@ lib LibWin32
   end
 
   struct IWMPMediaVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_is_identical : UInt64
-    get_source_url : UInt64
-    get_name : UInt64
-    put_name : UInt64
-    get_image_source_width : UInt64
-    get_image_source_height : UInt64
-    get_marker_count : UInt64
-    get_marker_time : UInt64
-    get_marker_name : UInt64
-    get_duration : UInt64
-    get_duration_string : UInt64
-    get_attribute_count : UInt64
-    get_attribute_name : UInt64
-    get_item_info : UInt64
-    set_item_info : UInt64
-    get_item_info_by_atom : UInt64
-    is_member_of : UInt64
-    is_read_only_item : UInt64
+    query_interface : Proc(IWMPMedia*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPMedia*, UInt32)
+    release : Proc(IWMPMedia*, UInt32)
+    get_type_info_count : Proc(IWMPMedia*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPMedia*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPMedia*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPMedia*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_is_identical : Proc(IWMPMedia*, IWMPMedia, Int16*, HRESULT)
+    get_source_url : Proc(IWMPMedia*, UInt8**, HRESULT)
+    get_name : Proc(IWMPMedia*, UInt8**, HRESULT)
+    put_name : Proc(IWMPMedia*, UInt8*, HRESULT)
+    get_image_source_width : Proc(IWMPMedia*, Int32*, HRESULT)
+    get_image_source_height : Proc(IWMPMedia*, Int32*, HRESULT)
+    get_marker_count : Proc(IWMPMedia*, Int32*, HRESULT)
+    get_marker_time : Proc(IWMPMedia*, Int32, Float64*, HRESULT)
+    get_marker_name : Proc(IWMPMedia*, Int32, UInt8**, HRESULT)
+    get_duration : Proc(IWMPMedia*, Float64*, HRESULT)
+    get_duration_string : Proc(IWMPMedia*, UInt8**, HRESULT)
+    get_attribute_count : Proc(IWMPMedia*, Int32*, HRESULT)
+    get_attribute_name : Proc(IWMPMedia*, Int32, UInt8**, HRESULT)
+    get_item_info : Proc(IWMPMedia*, UInt8*, UInt8**, HRESULT)
+    set_item_info : Proc(IWMPMedia*, UInt8*, UInt8*, HRESULT)
+    get_item_info_by_atom : Proc(IWMPMedia*, Int32, UInt8**, HRESULT)
+    is_member_of : Proc(IWMPMedia*, IWMPPlaylist, Int16*, HRESULT)
+    is_read_only_item : Proc(IWMPMedia*, UInt8*, Int16*, HRESULT)
   end
 
   IWMPMedia_GUID = "94d55e95-3fac-11d3-b155-00c04f79faa6"
@@ -1093,29 +1093,29 @@ lib LibWin32
   end
 
   struct IWMPControlsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_is_available : UInt64
-    play : UInt64
-    stop : UInt64
-    pause : UInt64
-    fast_forward : UInt64
-    fast_reverse : UInt64
-    get_current_position : UInt64
-    put_current_position : UInt64
-    get_current_position_string : UInt64
-    next : UInt64
-    previous : UInt64
-    get_current_item : UInt64
-    put_current_item : UInt64
-    get_current_marker : UInt64
-    put_current_marker : UInt64
-    play_item : UInt64
+    query_interface : Proc(IWMPControls*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPControls*, UInt32)
+    release : Proc(IWMPControls*, UInt32)
+    get_type_info_count : Proc(IWMPControls*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPControls*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPControls*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPControls*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_is_available : Proc(IWMPControls*, UInt8*, Int16*, HRESULT)
+    play : Proc(IWMPControls*, HRESULT)
+    stop : Proc(IWMPControls*, HRESULT)
+    pause : Proc(IWMPControls*, HRESULT)
+    fast_forward : Proc(IWMPControls*, HRESULT)
+    fast_reverse : Proc(IWMPControls*, HRESULT)
+    get_current_position : Proc(IWMPControls*, Float64*, HRESULT)
+    put_current_position : Proc(IWMPControls*, Float64, HRESULT)
+    get_current_position_string : Proc(IWMPControls*, UInt8**, HRESULT)
+    next : Proc(IWMPControls*, HRESULT)
+    previous : Proc(IWMPControls*, HRESULT)
+    get_current_item : Proc(IWMPControls*, IWMPMedia*, HRESULT)
+    put_current_item : Proc(IWMPControls*, IWMPMedia, HRESULT)
+    get_current_marker : Proc(IWMPControls*, Int32*, HRESULT)
+    put_current_marker : Proc(IWMPControls*, Int32, HRESULT)
+    play_item : Proc(IWMPControls*, IWMPMedia, HRESULT)
   end
 
   IWMPControls_GUID = "74c09e02-f828-11d2-a74b-00a0c905f36e"
@@ -1125,36 +1125,36 @@ lib LibWin32
   end
 
   struct IWMPSettingsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_is_available : UInt64
-    get_auto_start : UInt64
-    put_auto_start : UInt64
-    get_base_url : UInt64
-    put_base_url : UInt64
-    get_default_frame : UInt64
-    put_default_frame : UInt64
-    get_invoke_ur_ls : UInt64
-    put_invoke_ur_ls : UInt64
-    get_mute : UInt64
-    put_mute : UInt64
-    get_play_count : UInt64
-    put_play_count : UInt64
-    get_rate : UInt64
-    put_rate : UInt64
-    get_balance : UInt64
-    put_balance : UInt64
-    get_volume : UInt64
-    put_volume : UInt64
-    get_mode : UInt64
-    set_mode : UInt64
-    get_enable_error_dialogs : UInt64
-    put_enable_error_dialogs : UInt64
+    query_interface : Proc(IWMPSettings*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPSettings*, UInt32)
+    release : Proc(IWMPSettings*, UInt32)
+    get_type_info_count : Proc(IWMPSettings*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPSettings*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPSettings*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPSettings*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_is_available : Proc(IWMPSettings*, UInt8*, Int16*, HRESULT)
+    get_auto_start : Proc(IWMPSettings*, Int16*, HRESULT)
+    put_auto_start : Proc(IWMPSettings*, Int16, HRESULT)
+    get_base_url : Proc(IWMPSettings*, UInt8**, HRESULT)
+    put_base_url : Proc(IWMPSettings*, UInt8*, HRESULT)
+    get_default_frame : Proc(IWMPSettings*, UInt8**, HRESULT)
+    put_default_frame : Proc(IWMPSettings*, UInt8*, HRESULT)
+    get_invoke_ur_ls : Proc(IWMPSettings*, Int16*, HRESULT)
+    put_invoke_ur_ls : Proc(IWMPSettings*, Int16, HRESULT)
+    get_mute : Proc(IWMPSettings*, Int16*, HRESULT)
+    put_mute : Proc(IWMPSettings*, Int16, HRESULT)
+    get_play_count : Proc(IWMPSettings*, Int32*, HRESULT)
+    put_play_count : Proc(IWMPSettings*, Int32, HRESULT)
+    get_rate : Proc(IWMPSettings*, Float64*, HRESULT)
+    put_rate : Proc(IWMPSettings*, Float64, HRESULT)
+    get_balance : Proc(IWMPSettings*, Int32*, HRESULT)
+    put_balance : Proc(IWMPSettings*, Int32, HRESULT)
+    get_volume : Proc(IWMPSettings*, Int32*, HRESULT)
+    put_volume : Proc(IWMPSettings*, Int32, HRESULT)
+    get_mode : Proc(IWMPSettings*, UInt8*, Int16*, HRESULT)
+    set_mode : Proc(IWMPSettings*, UInt8*, Int16, HRESULT)
+    get_enable_error_dialogs : Proc(IWMPSettings*, Int16*, HRESULT)
+    put_enable_error_dialogs : Proc(IWMPSettings*, Int16, HRESULT)
   end
 
   IWMPSettings_GUID = "9104d1ab-80c9-4fed-abf0-2e6417a6df14"
@@ -1164,21 +1164,21 @@ lib LibWin32
   end
 
   struct IWMPClosedCaptionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_sami_style : UInt64
-    put_sami_style : UInt64
-    get_sami_lang : UInt64
-    put_sami_lang : UInt64
-    get_sami_file_name : UInt64
-    put_sami_file_name : UInt64
-    get_captioning_id : UInt64
-    put_captioning_id : UInt64
+    query_interface : Proc(IWMPClosedCaption*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPClosedCaption*, UInt32)
+    release : Proc(IWMPClosedCaption*, UInt32)
+    get_type_info_count : Proc(IWMPClosedCaption*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPClosedCaption*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPClosedCaption*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPClosedCaption*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_sami_style : Proc(IWMPClosedCaption*, UInt8**, HRESULT)
+    put_sami_style : Proc(IWMPClosedCaption*, UInt8*, HRESULT)
+    get_sami_lang : Proc(IWMPClosedCaption*, UInt8**, HRESULT)
+    put_sami_lang : Proc(IWMPClosedCaption*, UInt8*, HRESULT)
+    get_sami_file_name : Proc(IWMPClosedCaption*, UInt8**, HRESULT)
+    put_sami_file_name : Proc(IWMPClosedCaption*, UInt8*, HRESULT)
+    get_captioning_id : Proc(IWMPClosedCaption*, UInt8**, HRESULT)
+    put_captioning_id : Proc(IWMPClosedCaption*, UInt8*, HRESULT)
   end
 
   IWMPClosedCaption_GUID = "4f2df574-c588-11d3-9ed0-00c04fb6e937"
@@ -1188,27 +1188,27 @@ lib LibWin32
   end
 
   struct IWMPPlaylistVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_count : UInt64
-    get_name : UInt64
-    put_name : UInt64
-    get_attribute_count : UInt64
-    get_attribute_name : UInt64
-    get_item : UInt64
-    get_item_info : UInt64
-    set_item_info : UInt64
-    get_is_identical : UInt64
-    clear : UInt64
-    insert_item : UInt64
-    append_item : UInt64
-    remove_item : UInt64
-    move_item : UInt64
+    query_interface : Proc(IWMPPlaylist*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPPlaylist*, UInt32)
+    release : Proc(IWMPPlaylist*, UInt32)
+    get_type_info_count : Proc(IWMPPlaylist*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPPlaylist*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPPlaylist*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPPlaylist*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_count : Proc(IWMPPlaylist*, Int32*, HRESULT)
+    get_name : Proc(IWMPPlaylist*, UInt8**, HRESULT)
+    put_name : Proc(IWMPPlaylist*, UInt8*, HRESULT)
+    get_attribute_count : Proc(IWMPPlaylist*, Int32*, HRESULT)
+    get_attribute_name : Proc(IWMPPlaylist*, Int32, UInt8**, HRESULT)
+    get_item : Proc(IWMPPlaylist*, Int32, IWMPMedia*, HRESULT)
+    get_item_info : Proc(IWMPPlaylist*, UInt8*, UInt8**, HRESULT)
+    set_item_info : Proc(IWMPPlaylist*, UInt8*, UInt8*, HRESULT)
+    get_is_identical : Proc(IWMPPlaylist*, IWMPPlaylist, Int16*, HRESULT)
+    clear : Proc(IWMPPlaylist*, HRESULT)
+    insert_item : Proc(IWMPPlaylist*, Int32, IWMPMedia, HRESULT)
+    append_item : Proc(IWMPPlaylist*, IWMPMedia, HRESULT)
+    remove_item : Proc(IWMPPlaylist*, IWMPMedia, HRESULT)
+    move_item : Proc(IWMPPlaylist*, Int32, Int32, HRESULT)
   end
 
   IWMPPlaylist_GUID = "d5f0f4f1-130c-11d3-b14e-00c04f79faa6"
@@ -1218,16 +1218,16 @@ lib LibWin32
   end
 
   struct IWMPCdromVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_drive_specifier : UInt64
-    get_playlist : UInt64
-    eject : UInt64
+    query_interface : Proc(IWMPCdrom*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPCdrom*, UInt32)
+    release : Proc(IWMPCdrom*, UInt32)
+    get_type_info_count : Proc(IWMPCdrom*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPCdrom*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPCdrom*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPCdrom*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_drive_specifier : Proc(IWMPCdrom*, UInt8**, HRESULT)
+    get_playlist : Proc(IWMPCdrom*, IWMPPlaylist*, HRESULT)
+    eject : Proc(IWMPCdrom*, HRESULT)
   end
 
   IWMPCdrom_GUID = "cfab6e98-8730-11d3-b388-00c04f68574b"
@@ -1237,16 +1237,16 @@ lib LibWin32
   end
 
   struct IWMPCdromCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_count : UInt64
-    item : UInt64
-    get_by_drive_specifier : UInt64
+    query_interface : Proc(IWMPCdromCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPCdromCollection*, UInt32)
+    release : Proc(IWMPCdromCollection*, UInt32)
+    get_type_info_count : Proc(IWMPCdromCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPCdromCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPCdromCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPCdromCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_count : Proc(IWMPCdromCollection*, Int32*, HRESULT)
+    item : Proc(IWMPCdromCollection*, Int32, IWMPCdrom*, HRESULT)
+    get_by_drive_specifier : Proc(IWMPCdromCollection*, UInt8*, IWMPCdrom*, HRESULT)
   end
 
   IWMPCdromCollection_GUID = "ee4c8fe2-34b2-11d3-a3bf-006097c9b344"
@@ -1256,15 +1256,15 @@ lib LibWin32
   end
 
   struct IWMPStringCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_count : UInt64
-    item : UInt64
+    query_interface : Proc(IWMPStringCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPStringCollection*, UInt32)
+    release : Proc(IWMPStringCollection*, UInt32)
+    get_type_info_count : Proc(IWMPStringCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPStringCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPStringCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPStringCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_count : Proc(IWMPStringCollection*, Int32*, HRESULT)
+    item : Proc(IWMPStringCollection*, Int32, UInt8**, HRESULT)
   end
 
   IWMPStringCollection_GUID = "4a976298-8c0d-11d3-b389-00c04f68574b"
@@ -1274,25 +1274,25 @@ lib LibWin32
   end
 
   struct IWMPMediaCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    add : UInt64
-    get_all : UInt64
-    get_by_name : UInt64
-    get_by_genre : UInt64
-    get_by_author : UInt64
-    get_by_album : UInt64
-    get_by_attribute : UInt64
-    remove : UInt64
-    get_attribute_string_collection : UInt64
-    get_media_atom : UInt64
-    set_deleted : UInt64
-    is_deleted : UInt64
+    query_interface : Proc(IWMPMediaCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPMediaCollection*, UInt32)
+    release : Proc(IWMPMediaCollection*, UInt32)
+    get_type_info_count : Proc(IWMPMediaCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPMediaCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPMediaCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPMediaCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    add : Proc(IWMPMediaCollection*, UInt8*, IWMPMedia*, HRESULT)
+    get_all : Proc(IWMPMediaCollection*, IWMPPlaylist*, HRESULT)
+    get_by_name : Proc(IWMPMediaCollection*, UInt8*, IWMPPlaylist*, HRESULT)
+    get_by_genre : Proc(IWMPMediaCollection*, UInt8*, IWMPPlaylist*, HRESULT)
+    get_by_author : Proc(IWMPMediaCollection*, UInt8*, IWMPPlaylist*, HRESULT)
+    get_by_album : Proc(IWMPMediaCollection*, UInt8*, IWMPPlaylist*, HRESULT)
+    get_by_attribute : Proc(IWMPMediaCollection*, UInt8*, UInt8*, IWMPPlaylist*, HRESULT)
+    remove : Proc(IWMPMediaCollection*, IWMPMedia, Int16, HRESULT)
+    get_attribute_string_collection : Proc(IWMPMediaCollection*, UInt8*, UInt8*, IWMPStringCollection*, HRESULT)
+    get_media_atom : Proc(IWMPMediaCollection*, UInt8*, Int32*, HRESULT)
+    set_deleted : Proc(IWMPMediaCollection*, IWMPMedia, Int16, HRESULT)
+    is_deleted : Proc(IWMPMediaCollection*, IWMPMedia, Int16*, HRESULT)
   end
 
   IWMPMediaCollection_GUID = "8363bc22-b4b4-4b19-989d-1cd765749dd1"
@@ -1302,15 +1302,15 @@ lib LibWin32
   end
 
   struct IWMPPlaylistArrayVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_count : UInt64
-    item : UInt64
+    query_interface : Proc(IWMPPlaylistArray*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPPlaylistArray*, UInt32)
+    release : Proc(IWMPPlaylistArray*, UInt32)
+    get_type_info_count : Proc(IWMPPlaylistArray*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPPlaylistArray*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPPlaylistArray*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPPlaylistArray*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_count : Proc(IWMPPlaylistArray*, Int32*, HRESULT)
+    item : Proc(IWMPPlaylistArray*, Int32, IWMPPlaylist*, HRESULT)
   end
 
   IWMPPlaylistArray_GUID = "679409c0-99f7-11d3-9fb7-00105aa620bb"
@@ -1320,20 +1320,20 @@ lib LibWin32
   end
 
   struct IWMPPlaylistCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    new_playlist : UInt64
-    get_all : UInt64
-    get_by_name : UInt64
-    remove : UInt64
-    set_deleted : UInt64
-    is_deleted : UInt64
-    import_playlist : UInt64
+    query_interface : Proc(IWMPPlaylistCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPPlaylistCollection*, UInt32)
+    release : Proc(IWMPPlaylistCollection*, UInt32)
+    get_type_info_count : Proc(IWMPPlaylistCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPPlaylistCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPPlaylistCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPPlaylistCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    new_playlist : Proc(IWMPPlaylistCollection*, UInt8*, IWMPPlaylist*, HRESULT)
+    get_all : Proc(IWMPPlaylistCollection*, IWMPPlaylistArray*, HRESULT)
+    get_by_name : Proc(IWMPPlaylistCollection*, UInt8*, IWMPPlaylistArray*, HRESULT)
+    remove : Proc(IWMPPlaylistCollection*, IWMPPlaylist, HRESULT)
+    set_deleted : Proc(IWMPPlaylistCollection*, IWMPPlaylist, Int16, HRESULT)
+    is_deleted : Proc(IWMPPlaylistCollection*, IWMPPlaylist, Int16*, HRESULT)
+    import_playlist : Proc(IWMPPlaylistCollection*, IWMPPlaylist, IWMPPlaylist*, HRESULT)
   end
 
   IWMPPlaylistCollection_GUID = "10a13217-23a7-439b-b1c0-d847c79b7774"
@@ -1343,41 +1343,41 @@ lib LibWin32
   end
 
   struct IWMPNetworkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_band_width : UInt64
-    get_recovered_packets : UInt64
-    get_source_protocol : UInt64
-    get_received_packets : UInt64
-    get_lost_packets : UInt64
-    get_reception_quality : UInt64
-    get_buffering_count : UInt64
-    get_buffering_progress : UInt64
-    get_buffering_time : UInt64
-    put_buffering_time : UInt64
-    get_frame_rate : UInt64
-    get_max_bit_rate : UInt64
-    get_bit_rate : UInt64
-    get_proxy_settings : UInt64
-    set_proxy_settings : UInt64
-    get_proxy_name : UInt64
-    set_proxy_name : UInt64
-    get_proxy_port : UInt64
-    set_proxy_port : UInt64
-    get_proxy_exception_list : UInt64
-    set_proxy_exception_list : UInt64
-    get_proxy_bypass_for_local : UInt64
-    set_proxy_bypass_for_local : UInt64
-    get_max_bandwidth : UInt64
-    put_max_bandwidth : UInt64
-    get_download_progress : UInt64
-    get_encoded_frame_rate : UInt64
-    get_frames_skipped : UInt64
+    query_interface : Proc(IWMPNetwork*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPNetwork*, UInt32)
+    release : Proc(IWMPNetwork*, UInt32)
+    get_type_info_count : Proc(IWMPNetwork*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPNetwork*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPNetwork*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPNetwork*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_band_width : Proc(IWMPNetwork*, Int32*, HRESULT)
+    get_recovered_packets : Proc(IWMPNetwork*, Int32*, HRESULT)
+    get_source_protocol : Proc(IWMPNetwork*, UInt8**, HRESULT)
+    get_received_packets : Proc(IWMPNetwork*, Int32*, HRESULT)
+    get_lost_packets : Proc(IWMPNetwork*, Int32*, HRESULT)
+    get_reception_quality : Proc(IWMPNetwork*, Int32*, HRESULT)
+    get_buffering_count : Proc(IWMPNetwork*, Int32*, HRESULT)
+    get_buffering_progress : Proc(IWMPNetwork*, Int32*, HRESULT)
+    get_buffering_time : Proc(IWMPNetwork*, Int32*, HRESULT)
+    put_buffering_time : Proc(IWMPNetwork*, Int32, HRESULT)
+    get_frame_rate : Proc(IWMPNetwork*, Int32*, HRESULT)
+    get_max_bit_rate : Proc(IWMPNetwork*, Int32*, HRESULT)
+    get_bit_rate : Proc(IWMPNetwork*, Int32*, HRESULT)
+    get_proxy_settings : Proc(IWMPNetwork*, UInt8*, Int32*, HRESULT)
+    set_proxy_settings : Proc(IWMPNetwork*, UInt8*, Int32, HRESULT)
+    get_proxy_name : Proc(IWMPNetwork*, UInt8*, UInt8**, HRESULT)
+    set_proxy_name : Proc(IWMPNetwork*, UInt8*, UInt8*, HRESULT)
+    get_proxy_port : Proc(IWMPNetwork*, UInt8*, Int32*, HRESULT)
+    set_proxy_port : Proc(IWMPNetwork*, UInt8*, Int32, HRESULT)
+    get_proxy_exception_list : Proc(IWMPNetwork*, UInt8*, UInt8**, HRESULT)
+    set_proxy_exception_list : Proc(IWMPNetwork*, UInt8*, UInt8*, HRESULT)
+    get_proxy_bypass_for_local : Proc(IWMPNetwork*, UInt8*, Int16*, HRESULT)
+    set_proxy_bypass_for_local : Proc(IWMPNetwork*, UInt8*, Int16, HRESULT)
+    get_max_bandwidth : Proc(IWMPNetwork*, Int32*, HRESULT)
+    put_max_bandwidth : Proc(IWMPNetwork*, Int32, HRESULT)
+    get_download_progress : Proc(IWMPNetwork*, Int32*, HRESULT)
+    get_encoded_frame_rate : Proc(IWMPNetwork*, Int32*, HRESULT)
+    get_frames_skipped : Proc(IWMPNetwork*, Int32*, HRESULT)
   end
 
   IWMPNetwork_GUID = "ec21b779-edef-462d-bba4-ad9dde2b29a7"
@@ -1387,34 +1387,34 @@ lib LibWin32
   end
 
   struct IWMPCoreVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    close : UInt64
-    get_url : UInt64
-    put_url : UInt64
-    get_open_state : UInt64
-    get_play_state : UInt64
-    get_controls : UInt64
-    get_settings : UInt64
-    get_current_media : UInt64
-    put_current_media : UInt64
-    get_media_collection : UInt64
-    get_playlist_collection : UInt64
-    get_version_info : UInt64
-    launch_url : UInt64
-    get_network : UInt64
-    get_current_playlist : UInt64
-    put_current_playlist : UInt64
-    get_cdrom_collection : UInt64
-    get_closed_caption : UInt64
-    get_is_online : UInt64
-    get_error : UInt64
-    get_status : UInt64
+    query_interface : Proc(IWMPCore*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPCore*, UInt32)
+    release : Proc(IWMPCore*, UInt32)
+    get_type_info_count : Proc(IWMPCore*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPCore*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPCore*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPCore*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    close : Proc(IWMPCore*, HRESULT)
+    get_url : Proc(IWMPCore*, UInt8**, HRESULT)
+    put_url : Proc(IWMPCore*, UInt8*, HRESULT)
+    get_open_state : Proc(IWMPCore*, WMPOpenState*, HRESULT)
+    get_play_state : Proc(IWMPCore*, WMPPlayState*, HRESULT)
+    get_controls : Proc(IWMPCore*, IWMPControls*, HRESULT)
+    get_settings : Proc(IWMPCore*, IWMPSettings*, HRESULT)
+    get_current_media : Proc(IWMPCore*, IWMPMedia*, HRESULT)
+    put_current_media : Proc(IWMPCore*, IWMPMedia, HRESULT)
+    get_media_collection : Proc(IWMPCore*, IWMPMediaCollection*, HRESULT)
+    get_playlist_collection : Proc(IWMPCore*, IWMPPlaylistCollection*, HRESULT)
+    get_version_info : Proc(IWMPCore*, UInt8**, HRESULT)
+    launch_url : Proc(IWMPCore*, UInt8*, HRESULT)
+    get_network : Proc(IWMPCore*, IWMPNetwork*, HRESULT)
+    get_current_playlist : Proc(IWMPCore*, IWMPPlaylist*, HRESULT)
+    put_current_playlist : Proc(IWMPCore*, IWMPPlaylist, HRESULT)
+    get_cdrom_collection : Proc(IWMPCore*, IWMPCdromCollection*, HRESULT)
+    get_closed_caption : Proc(IWMPCore*, IWMPClosedCaption*, HRESULT)
+    get_is_online : Proc(IWMPCore*, Int16*, HRESULT)
+    get_error : Proc(IWMPCore*, IWMPError*, HRESULT)
+    get_status : Proc(IWMPCore*, UInt8**, HRESULT)
   end
 
   IWMPCore_GUID = "d84cca99-cce2-11d2-9ecc-0000f8085981"
@@ -1424,42 +1424,42 @@ lib LibWin32
   end
 
   struct IWMPPlayerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    close : UInt64
-    get_url : UInt64
-    put_url : UInt64
-    get_open_state : UInt64
-    get_play_state : UInt64
-    get_controls : UInt64
-    get_settings : UInt64
-    get_current_media : UInt64
-    put_current_media : UInt64
-    get_media_collection : UInt64
-    get_playlist_collection : UInt64
-    get_version_info : UInt64
-    launch_url : UInt64
-    get_network : UInt64
-    get_current_playlist : UInt64
-    put_current_playlist : UInt64
-    get_cdrom_collection : UInt64
-    get_closed_caption : UInt64
-    get_is_online : UInt64
-    get_error : UInt64
-    get_status : UInt64
-    get_enabled : UInt64
-    put_enabled : UInt64
-    get_full_screen : UInt64
-    put_full_screen : UInt64
-    get_enable_context_menu : UInt64
-    put_enable_context_menu : UInt64
-    put_ui_mode : UInt64
-    get_ui_mode : UInt64
+    query_interface : Proc(IWMPPlayer*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPPlayer*, UInt32)
+    release : Proc(IWMPPlayer*, UInt32)
+    get_type_info_count : Proc(IWMPPlayer*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPPlayer*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPPlayer*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPPlayer*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    close : Proc(IWMPPlayer*, HRESULT)
+    get_url : Proc(IWMPPlayer*, UInt8**, HRESULT)
+    put_url : Proc(IWMPPlayer*, UInt8*, HRESULT)
+    get_open_state : Proc(IWMPPlayer*, WMPOpenState*, HRESULT)
+    get_play_state : Proc(IWMPPlayer*, WMPPlayState*, HRESULT)
+    get_controls : Proc(IWMPPlayer*, IWMPControls*, HRESULT)
+    get_settings : Proc(IWMPPlayer*, IWMPSettings*, HRESULT)
+    get_current_media : Proc(IWMPPlayer*, IWMPMedia*, HRESULT)
+    put_current_media : Proc(IWMPPlayer*, IWMPMedia, HRESULT)
+    get_media_collection : Proc(IWMPPlayer*, IWMPMediaCollection*, HRESULT)
+    get_playlist_collection : Proc(IWMPPlayer*, IWMPPlaylistCollection*, HRESULT)
+    get_version_info : Proc(IWMPPlayer*, UInt8**, HRESULT)
+    launch_url : Proc(IWMPPlayer*, UInt8*, HRESULT)
+    get_network : Proc(IWMPPlayer*, IWMPNetwork*, HRESULT)
+    get_current_playlist : Proc(IWMPPlayer*, IWMPPlaylist*, HRESULT)
+    put_current_playlist : Proc(IWMPPlayer*, IWMPPlaylist, HRESULT)
+    get_cdrom_collection : Proc(IWMPPlayer*, IWMPCdromCollection*, HRESULT)
+    get_closed_caption : Proc(IWMPPlayer*, IWMPClosedCaption*, HRESULT)
+    get_is_online : Proc(IWMPPlayer*, Int16*, HRESULT)
+    get_error : Proc(IWMPPlayer*, IWMPError*, HRESULT)
+    get_status : Proc(IWMPPlayer*, UInt8**, HRESULT)
+    get_enabled : Proc(IWMPPlayer*, Int16*, HRESULT)
+    put_enabled : Proc(IWMPPlayer*, Int16, HRESULT)
+    get_full_screen : Proc(IWMPPlayer*, Int16*, HRESULT)
+    put_full_screen : Proc(IWMPPlayer*, Int16, HRESULT)
+    get_enable_context_menu : Proc(IWMPPlayer*, Int16*, HRESULT)
+    put_enable_context_menu : Proc(IWMPPlayer*, Int16, HRESULT)
+    put_ui_mode : Proc(IWMPPlayer*, UInt8*, HRESULT)
+    get_ui_mode : Proc(IWMPPlayer*, UInt8**, HRESULT)
   end
 
   IWMPPlayer_GUID = "6bf52a4f-394a-11d3-b153-00c04f79faa6"
@@ -1469,46 +1469,46 @@ lib LibWin32
   end
 
   struct IWMPPlayer2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    close : UInt64
-    get_url : UInt64
-    put_url : UInt64
-    get_open_state : UInt64
-    get_play_state : UInt64
-    get_controls : UInt64
-    get_settings : UInt64
-    get_current_media : UInt64
-    put_current_media : UInt64
-    get_media_collection : UInt64
-    get_playlist_collection : UInt64
-    get_version_info : UInt64
-    launch_url : UInt64
-    get_network : UInt64
-    get_current_playlist : UInt64
-    put_current_playlist : UInt64
-    get_cdrom_collection : UInt64
-    get_closed_caption : UInt64
-    get_is_online : UInt64
-    get_error : UInt64
-    get_status : UInt64
-    get_enabled : UInt64
-    put_enabled : UInt64
-    get_full_screen : UInt64
-    put_full_screen : UInt64
-    get_enable_context_menu : UInt64
-    put_enable_context_menu : UInt64
-    put_ui_mode : UInt64
-    get_ui_mode : UInt64
-    get_stretch_to_fit : UInt64
-    put_stretch_to_fit : UInt64
-    get_windowless_video : UInt64
-    put_windowless_video : UInt64
+    query_interface : Proc(IWMPPlayer2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPPlayer2*, UInt32)
+    release : Proc(IWMPPlayer2*, UInt32)
+    get_type_info_count : Proc(IWMPPlayer2*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPPlayer2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPPlayer2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPPlayer2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    close : Proc(IWMPPlayer2*, HRESULT)
+    get_url : Proc(IWMPPlayer2*, UInt8**, HRESULT)
+    put_url : Proc(IWMPPlayer2*, UInt8*, HRESULT)
+    get_open_state : Proc(IWMPPlayer2*, WMPOpenState*, HRESULT)
+    get_play_state : Proc(IWMPPlayer2*, WMPPlayState*, HRESULT)
+    get_controls : Proc(IWMPPlayer2*, IWMPControls*, HRESULT)
+    get_settings : Proc(IWMPPlayer2*, IWMPSettings*, HRESULT)
+    get_current_media : Proc(IWMPPlayer2*, IWMPMedia*, HRESULT)
+    put_current_media : Proc(IWMPPlayer2*, IWMPMedia, HRESULT)
+    get_media_collection : Proc(IWMPPlayer2*, IWMPMediaCollection*, HRESULT)
+    get_playlist_collection : Proc(IWMPPlayer2*, IWMPPlaylistCollection*, HRESULT)
+    get_version_info : Proc(IWMPPlayer2*, UInt8**, HRESULT)
+    launch_url : Proc(IWMPPlayer2*, UInt8*, HRESULT)
+    get_network : Proc(IWMPPlayer2*, IWMPNetwork*, HRESULT)
+    get_current_playlist : Proc(IWMPPlayer2*, IWMPPlaylist*, HRESULT)
+    put_current_playlist : Proc(IWMPPlayer2*, IWMPPlaylist, HRESULT)
+    get_cdrom_collection : Proc(IWMPPlayer2*, IWMPCdromCollection*, HRESULT)
+    get_closed_caption : Proc(IWMPPlayer2*, IWMPClosedCaption*, HRESULT)
+    get_is_online : Proc(IWMPPlayer2*, Int16*, HRESULT)
+    get_error : Proc(IWMPPlayer2*, IWMPError*, HRESULT)
+    get_status : Proc(IWMPPlayer2*, UInt8**, HRESULT)
+    get_enabled : Proc(IWMPPlayer2*, Int16*, HRESULT)
+    put_enabled : Proc(IWMPPlayer2*, Int16, HRESULT)
+    get_full_screen : Proc(IWMPPlayer2*, Int16*, HRESULT)
+    put_full_screen : Proc(IWMPPlayer2*, Int16, HRESULT)
+    get_enable_context_menu : Proc(IWMPPlayer2*, Int16*, HRESULT)
+    put_enable_context_menu : Proc(IWMPPlayer2*, Int16, HRESULT)
+    put_ui_mode : Proc(IWMPPlayer2*, UInt8*, HRESULT)
+    get_ui_mode : Proc(IWMPPlayer2*, UInt8**, HRESULT)
+    get_stretch_to_fit : Proc(IWMPPlayer2*, Int16*, HRESULT)
+    put_stretch_to_fit : Proc(IWMPPlayer2*, Int16, HRESULT)
+    get_windowless_video : Proc(IWMPPlayer2*, Int16*, HRESULT)
+    put_windowless_video : Proc(IWMPPlayer2*, Int16, HRESULT)
   end
 
   IWMPPlayer2_GUID = "0e6b01d1-d407-4c85-bf5f-1c01f6150280"
@@ -1518,32 +1518,32 @@ lib LibWin32
   end
 
   struct IWMPMedia2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_is_identical : UInt64
-    get_source_url : UInt64
-    get_name : UInt64
-    put_name : UInt64
-    get_image_source_width : UInt64
-    get_image_source_height : UInt64
-    get_marker_count : UInt64
-    get_marker_time : UInt64
-    get_marker_name : UInt64
-    get_duration : UInt64
-    get_duration_string : UInt64
-    get_attribute_count : UInt64
-    get_attribute_name : UInt64
-    get_item_info : UInt64
-    set_item_info : UInt64
-    get_item_info_by_atom : UInt64
-    is_member_of : UInt64
-    is_read_only_item : UInt64
-    get_error : UInt64
+    query_interface : Proc(IWMPMedia2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPMedia2*, UInt32)
+    release : Proc(IWMPMedia2*, UInt32)
+    get_type_info_count : Proc(IWMPMedia2*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPMedia2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPMedia2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPMedia2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_is_identical : Proc(IWMPMedia2*, IWMPMedia, Int16*, HRESULT)
+    get_source_url : Proc(IWMPMedia2*, UInt8**, HRESULT)
+    get_name : Proc(IWMPMedia2*, UInt8**, HRESULT)
+    put_name : Proc(IWMPMedia2*, UInt8*, HRESULT)
+    get_image_source_width : Proc(IWMPMedia2*, Int32*, HRESULT)
+    get_image_source_height : Proc(IWMPMedia2*, Int32*, HRESULT)
+    get_marker_count : Proc(IWMPMedia2*, Int32*, HRESULT)
+    get_marker_time : Proc(IWMPMedia2*, Int32, Float64*, HRESULT)
+    get_marker_name : Proc(IWMPMedia2*, Int32, UInt8**, HRESULT)
+    get_duration : Proc(IWMPMedia2*, Float64*, HRESULT)
+    get_duration_string : Proc(IWMPMedia2*, UInt8**, HRESULT)
+    get_attribute_count : Proc(IWMPMedia2*, Int32*, HRESULT)
+    get_attribute_name : Proc(IWMPMedia2*, Int32, UInt8**, HRESULT)
+    get_item_info : Proc(IWMPMedia2*, UInt8*, UInt8**, HRESULT)
+    set_item_info : Proc(IWMPMedia2*, UInt8*, UInt8*, HRESULT)
+    get_item_info_by_atom : Proc(IWMPMedia2*, Int32, UInt8**, HRESULT)
+    is_member_of : Proc(IWMPMedia2*, IWMPPlaylist, Int16*, HRESULT)
+    is_read_only_item : Proc(IWMPMedia2*, UInt8*, Int16*, HRESULT)
+    get_error : Proc(IWMPMedia2*, IWMPErrorItem*, HRESULT)
   end
 
   IWMPMedia2_GUID = "ab7c88bb-143e-4ea4-acc3-e4350b2106c3"
@@ -1553,30 +1553,30 @@ lib LibWin32
   end
 
   struct IWMPControls2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_is_available : UInt64
-    play : UInt64
-    stop : UInt64
-    pause : UInt64
-    fast_forward : UInt64
-    fast_reverse : UInt64
-    get_current_position : UInt64
-    put_current_position : UInt64
-    get_current_position_string : UInt64
-    next : UInt64
-    previous : UInt64
-    get_current_item : UInt64
-    put_current_item : UInt64
-    get_current_marker : UInt64
-    put_current_marker : UInt64
-    play_item : UInt64
-    step : UInt64
+    query_interface : Proc(IWMPControls2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPControls2*, UInt32)
+    release : Proc(IWMPControls2*, UInt32)
+    get_type_info_count : Proc(IWMPControls2*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPControls2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPControls2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPControls2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_is_available : Proc(IWMPControls2*, UInt8*, Int16*, HRESULT)
+    play : Proc(IWMPControls2*, HRESULT)
+    stop : Proc(IWMPControls2*, HRESULT)
+    pause : Proc(IWMPControls2*, HRESULT)
+    fast_forward : Proc(IWMPControls2*, HRESULT)
+    fast_reverse : Proc(IWMPControls2*, HRESULT)
+    get_current_position : Proc(IWMPControls2*, Float64*, HRESULT)
+    put_current_position : Proc(IWMPControls2*, Float64, HRESULT)
+    get_current_position_string : Proc(IWMPControls2*, UInt8**, HRESULT)
+    next : Proc(IWMPControls2*, HRESULT)
+    previous : Proc(IWMPControls2*, HRESULT)
+    get_current_item : Proc(IWMPControls2*, IWMPMedia*, HRESULT)
+    put_current_item : Proc(IWMPControls2*, IWMPMedia, HRESULT)
+    get_current_marker : Proc(IWMPControls2*, Int32*, HRESULT)
+    put_current_marker : Proc(IWMPControls2*, Int32, HRESULT)
+    play_item : Proc(IWMPControls2*, IWMPMedia, HRESULT)
+    step : Proc(IWMPControls2*, Int32, HRESULT)
   end
 
   IWMPControls2_GUID = "6f030d25-0890-480f-9775-1f7e40ab5b8e"
@@ -1586,19 +1586,19 @@ lib LibWin32
   end
 
   struct IWMPDVDVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_is_available : UInt64
-    get_domain : UInt64
-    top_menu : UInt64
-    title_menu : UInt64
-    back : UInt64
-    resume : UInt64
+    query_interface : Proc(IWMPDVD*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPDVD*, UInt32)
+    release : Proc(IWMPDVD*, UInt32)
+    get_type_info_count : Proc(IWMPDVD*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPDVD*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPDVD*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPDVD*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_is_available : Proc(IWMPDVD*, UInt8*, Int16*, HRESULT)
+    get_domain : Proc(IWMPDVD*, UInt8**, HRESULT)
+    top_menu : Proc(IWMPDVD*, HRESULT)
+    title_menu : Proc(IWMPDVD*, HRESULT)
+    back : Proc(IWMPDVD*, HRESULT)
+    resume : Proc(IWMPDVD*, HRESULT)
   end
 
   IWMPDVD_GUID = "8da61686-4668-4a5c-ae5d-803193293dbe"
@@ -1608,35 +1608,35 @@ lib LibWin32
   end
 
   struct IWMPCore2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    close : UInt64
-    get_url : UInt64
-    put_url : UInt64
-    get_open_state : UInt64
-    get_play_state : UInt64
-    get_controls : UInt64
-    get_settings : UInt64
-    get_current_media : UInt64
-    put_current_media : UInt64
-    get_media_collection : UInt64
-    get_playlist_collection : UInt64
-    get_version_info : UInt64
-    launch_url : UInt64
-    get_network : UInt64
-    get_current_playlist : UInt64
-    put_current_playlist : UInt64
-    get_cdrom_collection : UInt64
-    get_closed_caption : UInt64
-    get_is_online : UInt64
-    get_error : UInt64
-    get_status : UInt64
-    get_dvd : UInt64
+    query_interface : Proc(IWMPCore2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPCore2*, UInt32)
+    release : Proc(IWMPCore2*, UInt32)
+    get_type_info_count : Proc(IWMPCore2*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPCore2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPCore2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPCore2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    close : Proc(IWMPCore2*, HRESULT)
+    get_url : Proc(IWMPCore2*, UInt8**, HRESULT)
+    put_url : Proc(IWMPCore2*, UInt8*, HRESULT)
+    get_open_state : Proc(IWMPCore2*, WMPOpenState*, HRESULT)
+    get_play_state : Proc(IWMPCore2*, WMPPlayState*, HRESULT)
+    get_controls : Proc(IWMPCore2*, IWMPControls*, HRESULT)
+    get_settings : Proc(IWMPCore2*, IWMPSettings*, HRESULT)
+    get_current_media : Proc(IWMPCore2*, IWMPMedia*, HRESULT)
+    put_current_media : Proc(IWMPCore2*, IWMPMedia, HRESULT)
+    get_media_collection : Proc(IWMPCore2*, IWMPMediaCollection*, HRESULT)
+    get_playlist_collection : Proc(IWMPCore2*, IWMPPlaylistCollection*, HRESULT)
+    get_version_info : Proc(IWMPCore2*, UInt8**, HRESULT)
+    launch_url : Proc(IWMPCore2*, UInt8*, HRESULT)
+    get_network : Proc(IWMPCore2*, IWMPNetwork*, HRESULT)
+    get_current_playlist : Proc(IWMPCore2*, IWMPPlaylist*, HRESULT)
+    put_current_playlist : Proc(IWMPCore2*, IWMPPlaylist, HRESULT)
+    get_cdrom_collection : Proc(IWMPCore2*, IWMPCdromCollection*, HRESULT)
+    get_closed_caption : Proc(IWMPCore2*, IWMPClosedCaption*, HRESULT)
+    get_is_online : Proc(IWMPCore2*, Int16*, HRESULT)
+    get_error : Proc(IWMPCore2*, IWMPError*, HRESULT)
+    get_status : Proc(IWMPCore2*, UInt8**, HRESULT)
+    get_dvd : Proc(IWMPCore2*, IWMPDVD*, HRESULT)
   end
 
   IWMPCore2_GUID = "bc17e5b7-7561-4c18-bb90-17d485775659"
@@ -1646,47 +1646,47 @@ lib LibWin32
   end
 
   struct IWMPPlayer3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    close : UInt64
-    get_url : UInt64
-    put_url : UInt64
-    get_open_state : UInt64
-    get_play_state : UInt64
-    get_controls : UInt64
-    get_settings : UInt64
-    get_current_media : UInt64
-    put_current_media : UInt64
-    get_media_collection : UInt64
-    get_playlist_collection : UInt64
-    get_version_info : UInt64
-    launch_url : UInt64
-    get_network : UInt64
-    get_current_playlist : UInt64
-    put_current_playlist : UInt64
-    get_cdrom_collection : UInt64
-    get_closed_caption : UInt64
-    get_is_online : UInt64
-    get_error : UInt64
-    get_status : UInt64
-    get_dvd : UInt64
-    get_enabled : UInt64
-    put_enabled : UInt64
-    get_full_screen : UInt64
-    put_full_screen : UInt64
-    get_enable_context_menu : UInt64
-    put_enable_context_menu : UInt64
-    put_ui_mode : UInt64
-    get_ui_mode : UInt64
-    get_stretch_to_fit : UInt64
-    put_stretch_to_fit : UInt64
-    get_windowless_video : UInt64
-    put_windowless_video : UInt64
+    query_interface : Proc(IWMPPlayer3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPPlayer3*, UInt32)
+    release : Proc(IWMPPlayer3*, UInt32)
+    get_type_info_count : Proc(IWMPPlayer3*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPPlayer3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPPlayer3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPPlayer3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    close : Proc(IWMPPlayer3*, HRESULT)
+    get_url : Proc(IWMPPlayer3*, UInt8**, HRESULT)
+    put_url : Proc(IWMPPlayer3*, UInt8*, HRESULT)
+    get_open_state : Proc(IWMPPlayer3*, WMPOpenState*, HRESULT)
+    get_play_state : Proc(IWMPPlayer3*, WMPPlayState*, HRESULT)
+    get_controls : Proc(IWMPPlayer3*, IWMPControls*, HRESULT)
+    get_settings : Proc(IWMPPlayer3*, IWMPSettings*, HRESULT)
+    get_current_media : Proc(IWMPPlayer3*, IWMPMedia*, HRESULT)
+    put_current_media : Proc(IWMPPlayer3*, IWMPMedia, HRESULT)
+    get_media_collection : Proc(IWMPPlayer3*, IWMPMediaCollection*, HRESULT)
+    get_playlist_collection : Proc(IWMPPlayer3*, IWMPPlaylistCollection*, HRESULT)
+    get_version_info : Proc(IWMPPlayer3*, UInt8**, HRESULT)
+    launch_url : Proc(IWMPPlayer3*, UInt8*, HRESULT)
+    get_network : Proc(IWMPPlayer3*, IWMPNetwork*, HRESULT)
+    get_current_playlist : Proc(IWMPPlayer3*, IWMPPlaylist*, HRESULT)
+    put_current_playlist : Proc(IWMPPlayer3*, IWMPPlaylist, HRESULT)
+    get_cdrom_collection : Proc(IWMPPlayer3*, IWMPCdromCollection*, HRESULT)
+    get_closed_caption : Proc(IWMPPlayer3*, IWMPClosedCaption*, HRESULT)
+    get_is_online : Proc(IWMPPlayer3*, Int16*, HRESULT)
+    get_error : Proc(IWMPPlayer3*, IWMPError*, HRESULT)
+    get_status : Proc(IWMPPlayer3*, UInt8**, HRESULT)
+    get_dvd : Proc(IWMPPlayer3*, IWMPDVD*, HRESULT)
+    get_enabled : Proc(IWMPPlayer3*, Int16*, HRESULT)
+    put_enabled : Proc(IWMPPlayer3*, Int16, HRESULT)
+    get_full_screen : Proc(IWMPPlayer3*, Int16*, HRESULT)
+    put_full_screen : Proc(IWMPPlayer3*, Int16, HRESULT)
+    get_enable_context_menu : Proc(IWMPPlayer3*, Int16*, HRESULT)
+    put_enable_context_menu : Proc(IWMPPlayer3*, Int16, HRESULT)
+    put_ui_mode : Proc(IWMPPlayer3*, UInt8*, HRESULT)
+    get_ui_mode : Proc(IWMPPlayer3*, UInt8**, HRESULT)
+    get_stretch_to_fit : Proc(IWMPPlayer3*, Int16*, HRESULT)
+    put_stretch_to_fit : Proc(IWMPPlayer3*, Int16, HRESULT)
+    get_windowless_video : Proc(IWMPPlayer3*, Int16*, HRESULT)
+    put_windowless_video : Proc(IWMPPlayer3*, Int16, HRESULT)
   end
 
   IWMPPlayer3_GUID = "54062b68-052a-4c25-a39f-8b63346511d4"
@@ -1696,19 +1696,19 @@ lib LibWin32
   end
 
   struct IWMPErrorItem2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_error_code : UInt64
-    get_error_description : UInt64
-    get_error_context : UInt64
-    get_remedy : UInt64
-    get_custom_url : UInt64
-    get_condition : UInt64
+    query_interface : Proc(IWMPErrorItem2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPErrorItem2*, UInt32)
+    release : Proc(IWMPErrorItem2*, UInt32)
+    get_type_info_count : Proc(IWMPErrorItem2*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPErrorItem2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPErrorItem2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPErrorItem2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_error_code : Proc(IWMPErrorItem2*, Int32*, HRESULT)
+    get_error_description : Proc(IWMPErrorItem2*, UInt8**, HRESULT)
+    get_error_context : Proc(IWMPErrorItem2*, VARIANT*, HRESULT)
+    get_remedy : Proc(IWMPErrorItem2*, Int32*, HRESULT)
+    get_custom_url : Proc(IWMPErrorItem2*, UInt8**, HRESULT)
+    get_condition : Proc(IWMPErrorItem2*, Int32*, HRESULT)
   end
 
   IWMPErrorItem2_GUID = "f75ccec0-c67c-475c-931e-8719870bee7d"
@@ -1718,13 +1718,13 @@ lib LibWin32
   end
 
   struct IWMPRemoteMediaServicesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_service_type : UInt64
-    get_application_name : UInt64
-    get_scriptable_object : UInt64
-    get_custom_ui_mode : UInt64
+    query_interface : Proc(IWMPRemoteMediaServices*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPRemoteMediaServices*, UInt32)
+    release : Proc(IWMPRemoteMediaServices*, UInt32)
+    get_service_type : Proc(IWMPRemoteMediaServices*, UInt8**, HRESULT)
+    get_application_name : Proc(IWMPRemoteMediaServices*, UInt8**, HRESULT)
+    get_scriptable_object : Proc(IWMPRemoteMediaServices*, UInt8**, IDispatch*, HRESULT)
+    get_custom_ui_mode : Proc(IWMPRemoteMediaServices*, UInt8**, HRESULT)
   end
 
   IWMPRemoteMediaServices_GUID = "cbb92747-741f-44fe-ab5b-f1a48f3b2a59"
@@ -1734,10 +1734,10 @@ lib LibWin32
   end
 
   struct IWMPSkinManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_visual_style : UInt64
+    query_interface : Proc(IWMPSkinManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPSkinManager*, UInt32)
+    release : Proc(IWMPSkinManager*, UInt32)
+    set_visual_style : Proc(IWMPSkinManager*, UInt8*, HRESULT)
   end
 
   IWMPSkinManager_GUID = "076f2fa6-ed30-448b-8cc5-3f3ef3529c7a"
@@ -1747,17 +1747,17 @@ lib LibWin32
   end
 
   struct IWMPMetadataPictureVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_mime_type : UInt64
-    get_picture_type : UInt64
-    get_description : UInt64
-    get_url : UInt64
+    query_interface : Proc(IWMPMetadataPicture*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPMetadataPicture*, UInt32)
+    release : Proc(IWMPMetadataPicture*, UInt32)
+    get_type_info_count : Proc(IWMPMetadataPicture*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPMetadataPicture*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPMetadataPicture*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPMetadataPicture*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_mime_type : Proc(IWMPMetadataPicture*, UInt8**, HRESULT)
+    get_picture_type : Proc(IWMPMetadataPicture*, UInt8**, HRESULT)
+    get_description : Proc(IWMPMetadataPicture*, UInt8**, HRESULT)
+    get_url : Proc(IWMPMetadataPicture*, UInt8**, HRESULT)
   end
 
   IWMPMetadataPicture_GUID = "5c29bbe0-f87d-4c45-aa28-a70f0230ffa9"
@@ -1767,15 +1767,15 @@ lib LibWin32
   end
 
   struct IWMPMetadataTextVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_description : UInt64
-    get_text : UInt64
+    query_interface : Proc(IWMPMetadataText*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPMetadataText*, UInt32)
+    release : Proc(IWMPMetadataText*, UInt32)
+    get_type_info_count : Proc(IWMPMetadataText*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPMetadataText*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPMetadataText*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPMetadataText*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_description : Proc(IWMPMetadataText*, UInt8**, HRESULT)
+    get_text : Proc(IWMPMetadataText*, UInt8**, HRESULT)
   end
 
   IWMPMetadataText_GUID = "769a72db-13d2-45e2-9c48-53ca9d5b7450"
@@ -1785,34 +1785,34 @@ lib LibWin32
   end
 
   struct IWMPMedia3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_is_identical : UInt64
-    get_source_url : UInt64
-    get_name : UInt64
-    put_name : UInt64
-    get_image_source_width : UInt64
-    get_image_source_height : UInt64
-    get_marker_count : UInt64
-    get_marker_time : UInt64
-    get_marker_name : UInt64
-    get_duration : UInt64
-    get_duration_string : UInt64
-    get_attribute_count : UInt64
-    get_attribute_name : UInt64
-    get_item_info : UInt64
-    set_item_info : UInt64
-    get_item_info_by_atom : UInt64
-    is_member_of : UInt64
-    is_read_only_item : UInt64
-    get_error : UInt64
-    get_attribute_count_by_type : UInt64
-    get_item_info_by_type : UInt64
+    query_interface : Proc(IWMPMedia3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPMedia3*, UInt32)
+    release : Proc(IWMPMedia3*, UInt32)
+    get_type_info_count : Proc(IWMPMedia3*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPMedia3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPMedia3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPMedia3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_is_identical : Proc(IWMPMedia3*, IWMPMedia, Int16*, HRESULT)
+    get_source_url : Proc(IWMPMedia3*, UInt8**, HRESULT)
+    get_name : Proc(IWMPMedia3*, UInt8**, HRESULT)
+    put_name : Proc(IWMPMedia3*, UInt8*, HRESULT)
+    get_image_source_width : Proc(IWMPMedia3*, Int32*, HRESULT)
+    get_image_source_height : Proc(IWMPMedia3*, Int32*, HRESULT)
+    get_marker_count : Proc(IWMPMedia3*, Int32*, HRESULT)
+    get_marker_time : Proc(IWMPMedia3*, Int32, Float64*, HRESULT)
+    get_marker_name : Proc(IWMPMedia3*, Int32, UInt8**, HRESULT)
+    get_duration : Proc(IWMPMedia3*, Float64*, HRESULT)
+    get_duration_string : Proc(IWMPMedia3*, UInt8**, HRESULT)
+    get_attribute_count : Proc(IWMPMedia3*, Int32*, HRESULT)
+    get_attribute_name : Proc(IWMPMedia3*, Int32, UInt8**, HRESULT)
+    get_item_info : Proc(IWMPMedia3*, UInt8*, UInt8**, HRESULT)
+    set_item_info : Proc(IWMPMedia3*, UInt8*, UInt8*, HRESULT)
+    get_item_info_by_atom : Proc(IWMPMedia3*, Int32, UInt8**, HRESULT)
+    is_member_of : Proc(IWMPMedia3*, IWMPPlaylist, Int16*, HRESULT)
+    is_read_only_item : Proc(IWMPMedia3*, UInt8*, Int16*, HRESULT)
+    get_error : Proc(IWMPMedia3*, IWMPErrorItem*, HRESULT)
+    get_attribute_count_by_type : Proc(IWMPMedia3*, UInt8*, UInt8*, Int32*, HRESULT)
+    get_item_info_by_type : Proc(IWMPMedia3*, UInt8*, UInt8*, Int32, VARIANT*, HRESULT)
   end
 
   IWMPMedia3_GUID = "f118efc7-f03a-4fb4-99c9-1c02a5c1065b"
@@ -1822,39 +1822,39 @@ lib LibWin32
   end
 
   struct IWMPSettings2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_is_available : UInt64
-    get_auto_start : UInt64
-    put_auto_start : UInt64
-    get_base_url : UInt64
-    put_base_url : UInt64
-    get_default_frame : UInt64
-    put_default_frame : UInt64
-    get_invoke_ur_ls : UInt64
-    put_invoke_ur_ls : UInt64
-    get_mute : UInt64
-    put_mute : UInt64
-    get_play_count : UInt64
-    put_play_count : UInt64
-    get_rate : UInt64
-    put_rate : UInt64
-    get_balance : UInt64
-    put_balance : UInt64
-    get_volume : UInt64
-    put_volume : UInt64
-    get_mode : UInt64
-    set_mode : UInt64
-    get_enable_error_dialogs : UInt64
-    put_enable_error_dialogs : UInt64
-    get_default_audio_language : UInt64
-    get_media_access_rights : UInt64
-    request_media_access_rights : UInt64
+    query_interface : Proc(IWMPSettings2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPSettings2*, UInt32)
+    release : Proc(IWMPSettings2*, UInt32)
+    get_type_info_count : Proc(IWMPSettings2*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPSettings2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPSettings2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPSettings2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_is_available : Proc(IWMPSettings2*, UInt8*, Int16*, HRESULT)
+    get_auto_start : Proc(IWMPSettings2*, Int16*, HRESULT)
+    put_auto_start : Proc(IWMPSettings2*, Int16, HRESULT)
+    get_base_url : Proc(IWMPSettings2*, UInt8**, HRESULT)
+    put_base_url : Proc(IWMPSettings2*, UInt8*, HRESULT)
+    get_default_frame : Proc(IWMPSettings2*, UInt8**, HRESULT)
+    put_default_frame : Proc(IWMPSettings2*, UInt8*, HRESULT)
+    get_invoke_ur_ls : Proc(IWMPSettings2*, Int16*, HRESULT)
+    put_invoke_ur_ls : Proc(IWMPSettings2*, Int16, HRESULT)
+    get_mute : Proc(IWMPSettings2*, Int16*, HRESULT)
+    put_mute : Proc(IWMPSettings2*, Int16, HRESULT)
+    get_play_count : Proc(IWMPSettings2*, Int32*, HRESULT)
+    put_play_count : Proc(IWMPSettings2*, Int32, HRESULT)
+    get_rate : Proc(IWMPSettings2*, Float64*, HRESULT)
+    put_rate : Proc(IWMPSettings2*, Float64, HRESULT)
+    get_balance : Proc(IWMPSettings2*, Int32*, HRESULT)
+    put_balance : Proc(IWMPSettings2*, Int32, HRESULT)
+    get_volume : Proc(IWMPSettings2*, Int32*, HRESULT)
+    put_volume : Proc(IWMPSettings2*, Int32, HRESULT)
+    get_mode : Proc(IWMPSettings2*, UInt8*, Int16*, HRESULT)
+    set_mode : Proc(IWMPSettings2*, UInt8*, Int16, HRESULT)
+    get_enable_error_dialogs : Proc(IWMPSettings2*, Int16*, HRESULT)
+    put_enable_error_dialogs : Proc(IWMPSettings2*, Int16, HRESULT)
+    get_default_audio_language : Proc(IWMPSettings2*, Int32*, HRESULT)
+    get_media_access_rights : Proc(IWMPSettings2*, UInt8**, HRESULT)
+    request_media_access_rights : Proc(IWMPSettings2*, UInt8*, Int16*, HRESULT)
   end
 
   IWMPSettings2_GUID = "fda937a4-eece-4da5-a0b6-39bf89ade2c2"
@@ -1864,40 +1864,40 @@ lib LibWin32
   end
 
   struct IWMPControls3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_is_available : UInt64
-    play : UInt64
-    stop : UInt64
-    pause : UInt64
-    fast_forward : UInt64
-    fast_reverse : UInt64
-    get_current_position : UInt64
-    put_current_position : UInt64
-    get_current_position_string : UInt64
-    next : UInt64
-    previous : UInt64
-    get_current_item : UInt64
-    put_current_item : UInt64
-    get_current_marker : UInt64
-    put_current_marker : UInt64
-    play_item : UInt64
-    step : UInt64
-    get_audio_language_count : UInt64
-    get_audio_language_id : UInt64
-    get_audio_language_description : UInt64
-    get_current_audio_language : UInt64
-    put_current_audio_language : UInt64
-    get_current_audio_language_index : UInt64
-    put_current_audio_language_index : UInt64
-    get_language_name : UInt64
-    get_current_position_timecode : UInt64
-    put_current_position_timecode : UInt64
+    query_interface : Proc(IWMPControls3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPControls3*, UInt32)
+    release : Proc(IWMPControls3*, UInt32)
+    get_type_info_count : Proc(IWMPControls3*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPControls3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPControls3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPControls3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_is_available : Proc(IWMPControls3*, UInt8*, Int16*, HRESULT)
+    play : Proc(IWMPControls3*, HRESULT)
+    stop : Proc(IWMPControls3*, HRESULT)
+    pause : Proc(IWMPControls3*, HRESULT)
+    fast_forward : Proc(IWMPControls3*, HRESULT)
+    fast_reverse : Proc(IWMPControls3*, HRESULT)
+    get_current_position : Proc(IWMPControls3*, Float64*, HRESULT)
+    put_current_position : Proc(IWMPControls3*, Float64, HRESULT)
+    get_current_position_string : Proc(IWMPControls3*, UInt8**, HRESULT)
+    next : Proc(IWMPControls3*, HRESULT)
+    previous : Proc(IWMPControls3*, HRESULT)
+    get_current_item : Proc(IWMPControls3*, IWMPMedia*, HRESULT)
+    put_current_item : Proc(IWMPControls3*, IWMPMedia, HRESULT)
+    get_current_marker : Proc(IWMPControls3*, Int32*, HRESULT)
+    put_current_marker : Proc(IWMPControls3*, Int32, HRESULT)
+    play_item : Proc(IWMPControls3*, IWMPMedia, HRESULT)
+    step : Proc(IWMPControls3*, Int32, HRESULT)
+    get_audio_language_count : Proc(IWMPControls3*, Int32*, HRESULT)
+    get_audio_language_id : Proc(IWMPControls3*, Int32, Int32*, HRESULT)
+    get_audio_language_description : Proc(IWMPControls3*, Int32, UInt8**, HRESULT)
+    get_current_audio_language : Proc(IWMPControls3*, Int32*, HRESULT)
+    put_current_audio_language : Proc(IWMPControls3*, Int32, HRESULT)
+    get_current_audio_language_index : Proc(IWMPControls3*, Int32*, HRESULT)
+    put_current_audio_language_index : Proc(IWMPControls3*, Int32, HRESULT)
+    get_language_name : Proc(IWMPControls3*, Int32, UInt8**, HRESULT)
+    get_current_position_timecode : Proc(IWMPControls3*, UInt8**, HRESULT)
+    put_current_position_timecode : Proc(IWMPControls3*, UInt8*, HRESULT)
   end
 
   IWMPControls3_GUID = "a1d1110e-d545-476a-9a78-ac3e4cb1e6bd"
@@ -1907,26 +1907,26 @@ lib LibWin32
   end
 
   struct IWMPClosedCaption2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_sami_style : UInt64
-    put_sami_style : UInt64
-    get_sami_lang : UInt64
-    put_sami_lang : UInt64
-    get_sami_file_name : UInt64
-    put_sami_file_name : UInt64
-    get_captioning_id : UInt64
-    put_captioning_id : UInt64
-    get_sami_lang_count : UInt64
-    get_sami_lang_name : UInt64
-    get_sami_lang_id : UInt64
-    get_sami_style_count : UInt64
-    get_sami_style_name : UInt64
+    query_interface : Proc(IWMPClosedCaption2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPClosedCaption2*, UInt32)
+    release : Proc(IWMPClosedCaption2*, UInt32)
+    get_type_info_count : Proc(IWMPClosedCaption2*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPClosedCaption2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPClosedCaption2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPClosedCaption2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_sami_style : Proc(IWMPClosedCaption2*, UInt8**, HRESULT)
+    put_sami_style : Proc(IWMPClosedCaption2*, UInt8*, HRESULT)
+    get_sami_lang : Proc(IWMPClosedCaption2*, UInt8**, HRESULT)
+    put_sami_lang : Proc(IWMPClosedCaption2*, UInt8*, HRESULT)
+    get_sami_file_name : Proc(IWMPClosedCaption2*, UInt8**, HRESULT)
+    put_sami_file_name : Proc(IWMPClosedCaption2*, UInt8*, HRESULT)
+    get_captioning_id : Proc(IWMPClosedCaption2*, UInt8**, HRESULT)
+    put_captioning_id : Proc(IWMPClosedCaption2*, UInt8*, HRESULT)
+    get_sami_lang_count : Proc(IWMPClosedCaption2*, Int32*, HRESULT)
+    get_sami_lang_name : Proc(IWMPClosedCaption2*, Int32, UInt8**, HRESULT)
+    get_sami_lang_id : Proc(IWMPClosedCaption2*, Int32, Int32*, HRESULT)
+    get_sami_style_count : Proc(IWMPClosedCaption2*, Int32*, HRESULT)
+    get_sami_style_name : Proc(IWMPClosedCaption2*, Int32, UInt8**, HRESULT)
   end
 
   IWMPClosedCaption2_GUID = "350ba78b-6bc8-4113-a5f5-312056934eb6"
@@ -1936,17 +1936,17 @@ lib LibWin32
   end
 
   struct IWMPPlayerApplicationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    switch_to_player_application : UInt64
-    switch_to_control : UInt64
-    get_player_docked : UInt64
-    get_has_display : UInt64
+    query_interface : Proc(IWMPPlayerApplication*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPPlayerApplication*, UInt32)
+    release : Proc(IWMPPlayerApplication*, UInt32)
+    get_type_info_count : Proc(IWMPPlayerApplication*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPPlayerApplication*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPPlayerApplication*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPPlayerApplication*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    switch_to_player_application : Proc(IWMPPlayerApplication*, HRESULT)
+    switch_to_control : Proc(IWMPPlayerApplication*, HRESULT)
+    get_player_docked : Proc(IWMPPlayerApplication*, Int16*, HRESULT)
+    get_has_display : Proc(IWMPPlayerApplication*, Int16*, HRESULT)
   end
 
   IWMPPlayerApplication_GUID = "40897764-ceab-47be-ad4a-8e28537f9bbf"
@@ -1956,37 +1956,37 @@ lib LibWin32
   end
 
   struct IWMPCore3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    close : UInt64
-    get_url : UInt64
-    put_url : UInt64
-    get_open_state : UInt64
-    get_play_state : UInt64
-    get_controls : UInt64
-    get_settings : UInt64
-    get_current_media : UInt64
-    put_current_media : UInt64
-    get_media_collection : UInt64
-    get_playlist_collection : UInt64
-    get_version_info : UInt64
-    launch_url : UInt64
-    get_network : UInt64
-    get_current_playlist : UInt64
-    put_current_playlist : UInt64
-    get_cdrom_collection : UInt64
-    get_closed_caption : UInt64
-    get_is_online : UInt64
-    get_error : UInt64
-    get_status : UInt64
-    get_dvd : UInt64
-    new_playlist : UInt64
-    new_media : UInt64
+    query_interface : Proc(IWMPCore3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPCore3*, UInt32)
+    release : Proc(IWMPCore3*, UInt32)
+    get_type_info_count : Proc(IWMPCore3*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPCore3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPCore3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPCore3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    close : Proc(IWMPCore3*, HRESULT)
+    get_url : Proc(IWMPCore3*, UInt8**, HRESULT)
+    put_url : Proc(IWMPCore3*, UInt8*, HRESULT)
+    get_open_state : Proc(IWMPCore3*, WMPOpenState*, HRESULT)
+    get_play_state : Proc(IWMPCore3*, WMPPlayState*, HRESULT)
+    get_controls : Proc(IWMPCore3*, IWMPControls*, HRESULT)
+    get_settings : Proc(IWMPCore3*, IWMPSettings*, HRESULT)
+    get_current_media : Proc(IWMPCore3*, IWMPMedia*, HRESULT)
+    put_current_media : Proc(IWMPCore3*, IWMPMedia, HRESULT)
+    get_media_collection : Proc(IWMPCore3*, IWMPMediaCollection*, HRESULT)
+    get_playlist_collection : Proc(IWMPCore3*, IWMPPlaylistCollection*, HRESULT)
+    get_version_info : Proc(IWMPCore3*, UInt8**, HRESULT)
+    launch_url : Proc(IWMPCore3*, UInt8*, HRESULT)
+    get_network : Proc(IWMPCore3*, IWMPNetwork*, HRESULT)
+    get_current_playlist : Proc(IWMPCore3*, IWMPPlaylist*, HRESULT)
+    put_current_playlist : Proc(IWMPCore3*, IWMPPlaylist, HRESULT)
+    get_cdrom_collection : Proc(IWMPCore3*, IWMPCdromCollection*, HRESULT)
+    get_closed_caption : Proc(IWMPCore3*, IWMPClosedCaption*, HRESULT)
+    get_is_online : Proc(IWMPCore3*, Int16*, HRESULT)
+    get_error : Proc(IWMPCore3*, IWMPError*, HRESULT)
+    get_status : Proc(IWMPCore3*, UInt8**, HRESULT)
+    get_dvd : Proc(IWMPCore3*, IWMPDVD*, HRESULT)
+    new_playlist : Proc(IWMPCore3*, UInt8*, UInt8*, IWMPPlaylist*, HRESULT)
+    new_media : Proc(IWMPCore3*, UInt8*, IWMPMedia*, HRESULT)
   end
 
   IWMPCore3_GUID = "7587c667-628f-499f-88e7-6a6f4e888464"
@@ -1996,52 +1996,52 @@ lib LibWin32
   end
 
   struct IWMPPlayer4VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    close : UInt64
-    get_url : UInt64
-    put_url : UInt64
-    get_open_state : UInt64
-    get_play_state : UInt64
-    get_controls : UInt64
-    get_settings : UInt64
-    get_current_media : UInt64
-    put_current_media : UInt64
-    get_media_collection : UInt64
-    get_playlist_collection : UInt64
-    get_version_info : UInt64
-    launch_url : UInt64
-    get_network : UInt64
-    get_current_playlist : UInt64
-    put_current_playlist : UInt64
-    get_cdrom_collection : UInt64
-    get_closed_caption : UInt64
-    get_is_online : UInt64
-    get_error : UInt64
-    get_status : UInt64
-    get_dvd : UInt64
-    new_playlist : UInt64
-    new_media : UInt64
-    get_enabled : UInt64
-    put_enabled : UInt64
-    get_full_screen : UInt64
-    put_full_screen : UInt64
-    get_enable_context_menu : UInt64
-    put_enable_context_menu : UInt64
-    put_ui_mode : UInt64
-    get_ui_mode : UInt64
-    get_stretch_to_fit : UInt64
-    put_stretch_to_fit : UInt64
-    get_windowless_video : UInt64
-    put_windowless_video : UInt64
-    get_is_remote : UInt64
-    get_player_application : UInt64
-    open_player : UInt64
+    query_interface : Proc(IWMPPlayer4*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPPlayer4*, UInt32)
+    release : Proc(IWMPPlayer4*, UInt32)
+    get_type_info_count : Proc(IWMPPlayer4*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPPlayer4*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPPlayer4*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPPlayer4*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    close : Proc(IWMPPlayer4*, HRESULT)
+    get_url : Proc(IWMPPlayer4*, UInt8**, HRESULT)
+    put_url : Proc(IWMPPlayer4*, UInt8*, HRESULT)
+    get_open_state : Proc(IWMPPlayer4*, WMPOpenState*, HRESULT)
+    get_play_state : Proc(IWMPPlayer4*, WMPPlayState*, HRESULT)
+    get_controls : Proc(IWMPPlayer4*, IWMPControls*, HRESULT)
+    get_settings : Proc(IWMPPlayer4*, IWMPSettings*, HRESULT)
+    get_current_media : Proc(IWMPPlayer4*, IWMPMedia*, HRESULT)
+    put_current_media : Proc(IWMPPlayer4*, IWMPMedia, HRESULT)
+    get_media_collection : Proc(IWMPPlayer4*, IWMPMediaCollection*, HRESULT)
+    get_playlist_collection : Proc(IWMPPlayer4*, IWMPPlaylistCollection*, HRESULT)
+    get_version_info : Proc(IWMPPlayer4*, UInt8**, HRESULT)
+    launch_url : Proc(IWMPPlayer4*, UInt8*, HRESULT)
+    get_network : Proc(IWMPPlayer4*, IWMPNetwork*, HRESULT)
+    get_current_playlist : Proc(IWMPPlayer4*, IWMPPlaylist*, HRESULT)
+    put_current_playlist : Proc(IWMPPlayer4*, IWMPPlaylist, HRESULT)
+    get_cdrom_collection : Proc(IWMPPlayer4*, IWMPCdromCollection*, HRESULT)
+    get_closed_caption : Proc(IWMPPlayer4*, IWMPClosedCaption*, HRESULT)
+    get_is_online : Proc(IWMPPlayer4*, Int16*, HRESULT)
+    get_error : Proc(IWMPPlayer4*, IWMPError*, HRESULT)
+    get_status : Proc(IWMPPlayer4*, UInt8**, HRESULT)
+    get_dvd : Proc(IWMPPlayer4*, IWMPDVD*, HRESULT)
+    new_playlist : Proc(IWMPPlayer4*, UInt8*, UInt8*, IWMPPlaylist*, HRESULT)
+    new_media : Proc(IWMPPlayer4*, UInt8*, IWMPMedia*, HRESULT)
+    get_enabled : Proc(IWMPPlayer4*, Int16*, HRESULT)
+    put_enabled : Proc(IWMPPlayer4*, Int16, HRESULT)
+    get_full_screen : Proc(IWMPPlayer4*, Int16*, HRESULT)
+    put_full_screen : Proc(IWMPPlayer4*, Int16, HRESULT)
+    get_enable_context_menu : Proc(IWMPPlayer4*, Int16*, HRESULT)
+    put_enable_context_menu : Proc(IWMPPlayer4*, Int16, HRESULT)
+    put_ui_mode : Proc(IWMPPlayer4*, UInt8*, HRESULT)
+    get_ui_mode : Proc(IWMPPlayer4*, UInt8**, HRESULT)
+    get_stretch_to_fit : Proc(IWMPPlayer4*, Int16*, HRESULT)
+    put_stretch_to_fit : Proc(IWMPPlayer4*, Int16, HRESULT)
+    get_windowless_video : Proc(IWMPPlayer4*, Int16*, HRESULT)
+    put_windowless_video : Proc(IWMPPlayer4*, Int16, HRESULT)
+    get_is_remote : Proc(IWMPPlayer4*, Int16*, HRESULT)
+    get_player_application : Proc(IWMPPlayer4*, IWMPPlayerApplication*, HRESULT)
+    open_player : Proc(IWMPPlayer4*, UInt8*, HRESULT)
   end
 
   IWMPPlayer4_GUID = "6c497d62-8919-413c-82db-e935fb3ec584"
@@ -2051,12 +2051,12 @@ lib LibWin32
   end
 
   struct IWMPPlayerServicesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    activate_ui_plugin : UInt64
-    set_task_pane : UInt64
-    set_task_pane_url : UInt64
+    query_interface : Proc(IWMPPlayerServices*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPPlayerServices*, UInt32)
+    release : Proc(IWMPPlayerServices*, UInt32)
+    activate_ui_plugin : Proc(IWMPPlayerServices*, UInt8*, HRESULT)
+    set_task_pane : Proc(IWMPPlayerServices*, UInt8*, HRESULT)
+    set_task_pane_url : Proc(IWMPPlayerServices*, UInt8*, UInt8*, UInt8*, HRESULT)
   end
 
   IWMPPlayerServices_GUID = "1d01fbdb-ade2-4c8d-9842-c190b95c3306"
@@ -2066,25 +2066,25 @@ lib LibWin32
   end
 
   struct IWMPSyncDeviceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_friendly_name : UInt64
-    put_friendly_name : UInt64
-    get_device_name : UInt64
-    get_device_id : UInt64
-    get_partnership_index : UInt64
-    get_connected : UInt64
-    get_status : UInt64
-    get_sync_state : UInt64
-    get_progress : UInt64
-    get_item_info : UInt64
-    create_partnership : UInt64
-    delete_partnership : UInt64
-    start : UInt64
-    stop : UInt64
-    show_settings : UInt64
-    is_identical : UInt64
+    query_interface : Proc(IWMPSyncDevice*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPSyncDevice*, UInt32)
+    release : Proc(IWMPSyncDevice*, UInt32)
+    get_friendly_name : Proc(IWMPSyncDevice*, UInt8**, HRESULT)
+    put_friendly_name : Proc(IWMPSyncDevice*, UInt8*, HRESULT)
+    get_device_name : Proc(IWMPSyncDevice*, UInt8**, HRESULT)
+    get_device_id : Proc(IWMPSyncDevice*, UInt8**, HRESULT)
+    get_partnership_index : Proc(IWMPSyncDevice*, Int32*, HRESULT)
+    get_connected : Proc(IWMPSyncDevice*, Int16*, HRESULT)
+    get_status : Proc(IWMPSyncDevice*, WMPDeviceStatus*, HRESULT)
+    get_sync_state : Proc(IWMPSyncDevice*, WMPSyncState*, HRESULT)
+    get_progress : Proc(IWMPSyncDevice*, Int32*, HRESULT)
+    get_item_info : Proc(IWMPSyncDevice*, UInt8*, UInt8**, HRESULT)
+    create_partnership : Proc(IWMPSyncDevice*, Int16, HRESULT)
+    delete_partnership : Proc(IWMPSyncDevice*, HRESULT)
+    start : Proc(IWMPSyncDevice*, HRESULT)
+    stop : Proc(IWMPSyncDevice*, HRESULT)
+    show_settings : Proc(IWMPSyncDevice*, HRESULT)
+    is_identical : Proc(IWMPSyncDevice*, IWMPSyncDevice, Int16*, HRESULT)
   end
 
   IWMPSyncDevice_GUID = "82a2986c-0293-4fd0-b279-b21b86c058be"
@@ -2094,11 +2094,11 @@ lib LibWin32
   end
 
   struct IWMPSyncServicesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device_count : UInt64
-    get_device : UInt64
+    query_interface : Proc(IWMPSyncServices*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPSyncServices*, UInt32)
+    release : Proc(IWMPSyncServices*, UInt32)
+    get_device_count : Proc(IWMPSyncServices*, Int32*, HRESULT)
+    get_device : Proc(IWMPSyncServices*, Int32, IWMPSyncDevice*, HRESULT)
   end
 
   IWMPSyncServices_GUID = "8b5050ff-e0a4-4808-b3a8-893a9e1ed894"
@@ -2108,13 +2108,13 @@ lib LibWin32
   end
 
   struct IWMPPlayerServices2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    activate_ui_plugin : UInt64
-    set_task_pane : UInt64
-    set_task_pane_url : UInt64
-    set_background_processing_priority : UInt64
+    query_interface : Proc(IWMPPlayerServices2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPPlayerServices2*, UInt32)
+    release : Proc(IWMPPlayerServices2*, UInt32)
+    activate_ui_plugin : Proc(IWMPPlayerServices2*, UInt8*, HRESULT)
+    set_task_pane : Proc(IWMPPlayerServices2*, UInt8*, HRESULT)
+    set_task_pane_url : Proc(IWMPPlayerServices2*, UInt8*, UInt8*, UInt8*, HRESULT)
+    set_background_processing_priority : Proc(IWMPPlayerServices2*, UInt8*, HRESULT)
   end
 
   IWMPPlayerServices2_GUID = "1bb1592f-f040-418a-9f71-17c7512b4d70"
@@ -2124,13 +2124,13 @@ lib LibWin32
   end
 
   struct IWMPCdromRipVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_rip_state : UInt64
-    get_rip_progress : UInt64
-    start_rip : UInt64
-    stop_rip : UInt64
+    query_interface : Proc(IWMPCdromRip*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPCdromRip*, UInt32)
+    release : Proc(IWMPCdromRip*, UInt32)
+    get_rip_state : Proc(IWMPCdromRip*, WMPRipState*, HRESULT)
+    get_rip_progress : Proc(IWMPCdromRip*, Int32*, HRESULT)
+    start_rip : Proc(IWMPCdromRip*, HRESULT)
+    stop_rip : Proc(IWMPCdromRip*, HRESULT)
   end
 
   IWMPCdromRip_GUID = "56e2294f-69ed-4629-a869-aea72c0dcc2c"
@@ -2140,23 +2140,23 @@ lib LibWin32
   end
 
   struct IWMPCdromBurnVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    is_available : UInt64
-    get_item_info : UInt64
-    get_label : UInt64
-    put_label : UInt64
-    get_burn_format : UInt64
-    put_burn_format : UInt64
-    get_burn_playlist : UInt64
-    put_burn_playlist : UInt64
-    refresh_status : UInt64
-    get_burn_state : UInt64
-    get_burn_progress : UInt64
-    start_burn : UInt64
-    stop_burn : UInt64
-    erase : UInt64
+    query_interface : Proc(IWMPCdromBurn*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPCdromBurn*, UInt32)
+    release : Proc(IWMPCdromBurn*, UInt32)
+    is_available : Proc(IWMPCdromBurn*, UInt8*, Int16*, HRESULT)
+    get_item_info : Proc(IWMPCdromBurn*, UInt8*, UInt8**, HRESULT)
+    get_label : Proc(IWMPCdromBurn*, UInt8**, HRESULT)
+    put_label : Proc(IWMPCdromBurn*, UInt8*, HRESULT)
+    get_burn_format : Proc(IWMPCdromBurn*, WMPBurnFormat*, HRESULT)
+    put_burn_format : Proc(IWMPCdromBurn*, WMPBurnFormat, HRESULT)
+    get_burn_playlist : Proc(IWMPCdromBurn*, IWMPPlaylist*, HRESULT)
+    put_burn_playlist : Proc(IWMPCdromBurn*, IWMPPlaylist, HRESULT)
+    refresh_status : Proc(IWMPCdromBurn*, HRESULT)
+    get_burn_state : Proc(IWMPCdromBurn*, WMPBurnState*, HRESULT)
+    get_burn_progress : Proc(IWMPCdromBurn*, Int32*, HRESULT)
+    start_burn : Proc(IWMPCdromBurn*, HRESULT)
+    stop_burn : Proc(IWMPCdromBurn*, HRESULT)
+    erase : Proc(IWMPCdromBurn*, HRESULT)
   end
 
   IWMPCdromBurn_GUID = "bd94dbeb-417f-4928-aa06-087d56ed9b59"
@@ -2166,15 +2166,15 @@ lib LibWin32
   end
 
   struct IWMPQueryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    add_condition : UInt64
-    begin_next_group : UInt64
+    query_interface : Proc(IWMPQuery*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPQuery*, UInt32)
+    release : Proc(IWMPQuery*, UInt32)
+    get_type_info_count : Proc(IWMPQuery*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPQuery*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPQuery*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPQuery*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    add_condition : Proc(IWMPQuery*, UInt8*, UInt8*, UInt8*, HRESULT)
+    begin_next_group : Proc(IWMPQuery*, HRESULT)
   end
 
   IWMPQuery_GUID = "a00918f3-a6b0-4bfb-9189-fd834c7bc5a5"
@@ -2184,29 +2184,29 @@ lib LibWin32
   end
 
   struct IWMPMediaCollection2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    add : UInt64
-    get_all : UInt64
-    get_by_name : UInt64
-    get_by_genre : UInt64
-    get_by_author : UInt64
-    get_by_album : UInt64
-    get_by_attribute : UInt64
-    remove : UInt64
-    get_attribute_string_collection : UInt64
-    get_media_atom : UInt64
-    set_deleted : UInt64
-    is_deleted : UInt64
-    create_query : UInt64
-    get_playlist_by_query : UInt64
-    get_string_collection_by_query : UInt64
-    get_by_attribute_and_media_type : UInt64
+    query_interface : Proc(IWMPMediaCollection2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPMediaCollection2*, UInt32)
+    release : Proc(IWMPMediaCollection2*, UInt32)
+    get_type_info_count : Proc(IWMPMediaCollection2*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPMediaCollection2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPMediaCollection2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPMediaCollection2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    add : Proc(IWMPMediaCollection2*, UInt8*, IWMPMedia*, HRESULT)
+    get_all : Proc(IWMPMediaCollection2*, IWMPPlaylist*, HRESULT)
+    get_by_name : Proc(IWMPMediaCollection2*, UInt8*, IWMPPlaylist*, HRESULT)
+    get_by_genre : Proc(IWMPMediaCollection2*, UInt8*, IWMPPlaylist*, HRESULT)
+    get_by_author : Proc(IWMPMediaCollection2*, UInt8*, IWMPPlaylist*, HRESULT)
+    get_by_album : Proc(IWMPMediaCollection2*, UInt8*, IWMPPlaylist*, HRESULT)
+    get_by_attribute : Proc(IWMPMediaCollection2*, UInt8*, UInt8*, IWMPPlaylist*, HRESULT)
+    remove : Proc(IWMPMediaCollection2*, IWMPMedia, Int16, HRESULT)
+    get_attribute_string_collection : Proc(IWMPMediaCollection2*, UInt8*, UInt8*, IWMPStringCollection*, HRESULT)
+    get_media_atom : Proc(IWMPMediaCollection2*, UInt8*, Int32*, HRESULT)
+    set_deleted : Proc(IWMPMediaCollection2*, IWMPMedia, Int16, HRESULT)
+    is_deleted : Proc(IWMPMediaCollection2*, IWMPMedia, Int16*, HRESULT)
+    create_query : Proc(IWMPMediaCollection2*, IWMPQuery*, HRESULT)
+    get_playlist_by_query : Proc(IWMPMediaCollection2*, IWMPQuery, UInt8*, UInt8*, Int16, IWMPPlaylist*, HRESULT)
+    get_string_collection_by_query : Proc(IWMPMediaCollection2*, UInt8*, IWMPQuery, UInt8*, UInt8*, Int16, IWMPStringCollection*, HRESULT)
+    get_by_attribute_and_media_type : Proc(IWMPMediaCollection2*, UInt8*, UInt8*, UInt8*, IWMPPlaylist*, HRESULT)
   end
 
   IWMPMediaCollection2_GUID = "8ba957f5-fd8c-4791-b82d-f840401ee474"
@@ -2216,19 +2216,19 @@ lib LibWin32
   end
 
   struct IWMPStringCollection2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_count : UInt64
-    item : UInt64
-    is_identical : UInt64
-    get_item_info : UInt64
-    get_attribute_count_by_type : UInt64
-    get_item_info_by_type : UInt64
+    query_interface : Proc(IWMPStringCollection2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPStringCollection2*, UInt32)
+    release : Proc(IWMPStringCollection2*, UInt32)
+    get_type_info_count : Proc(IWMPStringCollection2*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPStringCollection2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPStringCollection2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPStringCollection2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_count : Proc(IWMPStringCollection2*, Int32*, HRESULT)
+    item : Proc(IWMPStringCollection2*, Int32, UInt8**, HRESULT)
+    is_identical : Proc(IWMPStringCollection2*, IWMPStringCollection2, Int16*, HRESULT)
+    get_item_info : Proc(IWMPStringCollection2*, Int32, UInt8*, UInt8**, HRESULT)
+    get_attribute_count_by_type : Proc(IWMPStringCollection2*, Int32, UInt8*, UInt8*, Int32*, HRESULT)
+    get_item_info_by_type : Proc(IWMPStringCollection2*, Int32, UInt8*, UInt8*, Int32, VARIANT*, HRESULT)
   end
 
   IWMPStringCollection2_GUID = "46ad648d-53f1-4a74-92e2-2a1b68d63fd4"
@@ -2238,13 +2238,13 @@ lib LibWin32
   end
 
   struct IWMPLibraryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_name : UInt64
-    get_type : UInt64
-    get_media_collection : UInt64
-    is_identical : UInt64
+    query_interface : Proc(IWMPLibrary*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPLibrary*, UInt32)
+    release : Proc(IWMPLibrary*, UInt32)
+    get_name : Proc(IWMPLibrary*, UInt8**, HRESULT)
+    get_type : Proc(IWMPLibrary*, WMPLibraryType*, HRESULT)
+    get_media_collection : Proc(IWMPLibrary*, IWMPMediaCollection*, HRESULT)
+    is_identical : Proc(IWMPLibrary*, IWMPLibrary, Int16*, HRESULT)
   end
 
   IWMPLibrary_GUID = "3df47861-7df1-4c1f-a81b-4c26f0f7a7c6"
@@ -2254,11 +2254,11 @@ lib LibWin32
   end
 
   struct IWMPLibraryServicesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_count_by_type : UInt64
-    get_library_by_type : UInt64
+    query_interface : Proc(IWMPLibraryServices*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPLibraryServices*, UInt32)
+    release : Proc(IWMPLibraryServices*, UInt32)
+    get_count_by_type : Proc(IWMPLibraryServices*, WMPLibraryType, Int32*, HRESULT)
+    get_library_by_type : Proc(IWMPLibraryServices*, WMPLibraryType, Int32, IWMPLibrary*, HRESULT)
   end
 
   IWMPLibraryServices_GUID = "39c2f8d5-1cf2-4d5e-ae09-d73492cf9eaa"
@@ -2268,12 +2268,12 @@ lib LibWin32
   end
 
   struct IWMPLibrarySharingServicesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    is_library_shared : UInt64
-    is_library_sharing_enabled : UInt64
-    show_library_sharing : UInt64
+    query_interface : Proc(IWMPLibrarySharingServices*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPLibrarySharingServices*, UInt32)
+    release : Proc(IWMPLibrarySharingServices*, UInt32)
+    is_library_shared : Proc(IWMPLibrarySharingServices*, Int16*, HRESULT)
+    is_library_sharing_enabled : Proc(IWMPLibrarySharingServices*, Int16*, HRESULT)
+    show_library_sharing : Proc(IWMPLibrarySharingServices*, HRESULT)
   end
 
   IWMPLibrarySharingServices_GUID = "82cba86b-9f04-474b-a365-d6dd1466e541"
@@ -2283,20 +2283,20 @@ lib LibWin32
   end
 
   struct IWMPFolderMonitorServicesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_count : UInt64
-    item : UInt64
-    add : UInt64
-    remove : UInt64
-    get_scan_state : UInt64
-    get_current_folder : UInt64
-    get_scanned_files_count : UInt64
-    get_added_files_count : UInt64
-    get_update_progress : UInt64
-    start_scan : UInt64
-    stop_scan : UInt64
+    query_interface : Proc(IWMPFolderMonitorServices*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPFolderMonitorServices*, UInt32)
+    release : Proc(IWMPFolderMonitorServices*, UInt32)
+    get_count : Proc(IWMPFolderMonitorServices*, Int32*, HRESULT)
+    item : Proc(IWMPFolderMonitorServices*, Int32, UInt8**, HRESULT)
+    add : Proc(IWMPFolderMonitorServices*, UInt8*, HRESULT)
+    remove : Proc(IWMPFolderMonitorServices*, Int32, HRESULT)
+    get_scan_state : Proc(IWMPFolderMonitorServices*, WMPFolderScanState*, HRESULT)
+    get_current_folder : Proc(IWMPFolderMonitorServices*, UInt8**, HRESULT)
+    get_scanned_files_count : Proc(IWMPFolderMonitorServices*, Int32*, HRESULT)
+    get_added_files_count : Proc(IWMPFolderMonitorServices*, Int32*, HRESULT)
+    get_update_progress : Proc(IWMPFolderMonitorServices*, Int32*, HRESULT)
+    start_scan : Proc(IWMPFolderMonitorServices*, HRESULT)
+    stop_scan : Proc(IWMPFolderMonitorServices*, HRESULT)
   end
 
   IWMPFolderMonitorServices_GUID = "788c8743-e57f-439d-a468-5bc77f2e59c6"
@@ -2306,26 +2306,26 @@ lib LibWin32
   end
 
   struct IWMPSyncDevice2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_friendly_name : UInt64
-    put_friendly_name : UInt64
-    get_device_name : UInt64
-    get_device_id : UInt64
-    get_partnership_index : UInt64
-    get_connected : UInt64
-    get_status : UInt64
-    get_sync_state : UInt64
-    get_progress : UInt64
-    get_item_info : UInt64
-    create_partnership : UInt64
-    delete_partnership : UInt64
-    start : UInt64
-    stop : UInt64
-    show_settings : UInt64
-    is_identical : UInt64
-    set_item_info : UInt64
+    query_interface : Proc(IWMPSyncDevice2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPSyncDevice2*, UInt32)
+    release : Proc(IWMPSyncDevice2*, UInt32)
+    get_friendly_name : Proc(IWMPSyncDevice2*, UInt8**, HRESULT)
+    put_friendly_name : Proc(IWMPSyncDevice2*, UInt8*, HRESULT)
+    get_device_name : Proc(IWMPSyncDevice2*, UInt8**, HRESULT)
+    get_device_id : Proc(IWMPSyncDevice2*, UInt8**, HRESULT)
+    get_partnership_index : Proc(IWMPSyncDevice2*, Int32*, HRESULT)
+    get_connected : Proc(IWMPSyncDevice2*, Int16*, HRESULT)
+    get_status : Proc(IWMPSyncDevice2*, WMPDeviceStatus*, HRESULT)
+    get_sync_state : Proc(IWMPSyncDevice2*, WMPSyncState*, HRESULT)
+    get_progress : Proc(IWMPSyncDevice2*, Int32*, HRESULT)
+    get_item_info : Proc(IWMPSyncDevice2*, UInt8*, UInt8**, HRESULT)
+    create_partnership : Proc(IWMPSyncDevice2*, Int16, HRESULT)
+    delete_partnership : Proc(IWMPSyncDevice2*, HRESULT)
+    start : Proc(IWMPSyncDevice2*, HRESULT)
+    stop : Proc(IWMPSyncDevice2*, HRESULT)
+    show_settings : Proc(IWMPSyncDevice2*, HRESULT)
+    is_identical : Proc(IWMPSyncDevice2*, IWMPSyncDevice, Int16*, HRESULT)
+    set_item_info : Proc(IWMPSyncDevice2*, UInt8*, UInt8*, HRESULT)
   end
 
   IWMPSyncDevice2_GUID = "88afb4b2-140a-44d2-91e6-4543da467cd1"
@@ -2335,28 +2335,28 @@ lib LibWin32
   end
 
   struct IWMPSyncDevice3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_friendly_name : UInt64
-    put_friendly_name : UInt64
-    get_device_name : UInt64
-    get_device_id : UInt64
-    get_partnership_index : UInt64
-    get_connected : UInt64
-    get_status : UInt64
-    get_sync_state : UInt64
-    get_progress : UInt64
-    get_item_info : UInt64
-    create_partnership : UInt64
-    delete_partnership : UInt64
-    start : UInt64
-    stop : UInt64
-    show_settings : UInt64
-    is_identical : UInt64
-    set_item_info : UInt64
-    estimate_sync_size : UInt64
-    cancel_estimation : UInt64
+    query_interface : Proc(IWMPSyncDevice3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPSyncDevice3*, UInt32)
+    release : Proc(IWMPSyncDevice3*, UInt32)
+    get_friendly_name : Proc(IWMPSyncDevice3*, UInt8**, HRESULT)
+    put_friendly_name : Proc(IWMPSyncDevice3*, UInt8*, HRESULT)
+    get_device_name : Proc(IWMPSyncDevice3*, UInt8**, HRESULT)
+    get_device_id : Proc(IWMPSyncDevice3*, UInt8**, HRESULT)
+    get_partnership_index : Proc(IWMPSyncDevice3*, Int32*, HRESULT)
+    get_connected : Proc(IWMPSyncDevice3*, Int16*, HRESULT)
+    get_status : Proc(IWMPSyncDevice3*, WMPDeviceStatus*, HRESULT)
+    get_sync_state : Proc(IWMPSyncDevice3*, WMPSyncState*, HRESULT)
+    get_progress : Proc(IWMPSyncDevice3*, Int32*, HRESULT)
+    get_item_info : Proc(IWMPSyncDevice3*, UInt8*, UInt8**, HRESULT)
+    create_partnership : Proc(IWMPSyncDevice3*, Int16, HRESULT)
+    delete_partnership : Proc(IWMPSyncDevice3*, HRESULT)
+    start : Proc(IWMPSyncDevice3*, HRESULT)
+    stop : Proc(IWMPSyncDevice3*, HRESULT)
+    show_settings : Proc(IWMPSyncDevice3*, HRESULT)
+    is_identical : Proc(IWMPSyncDevice3*, IWMPSyncDevice, Int16*, HRESULT)
+    set_item_info : Proc(IWMPSyncDevice3*, UInt8*, UInt8*, HRESULT)
+    estimate_sync_size : Proc(IWMPSyncDevice3*, IWMPPlaylist, IWMPPlaylist, HRESULT)
+    cancel_estimation : Proc(IWMPSyncDevice3*, HRESULT)
   end
 
   IWMPSyncDevice3_GUID = "b22c85f9-263c-4372-a0da-b518db9b4098"
@@ -2366,14 +2366,14 @@ lib LibWin32
   end
 
   struct IWMPLibrary2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_name : UInt64
-    get_type : UInt64
-    get_media_collection : UInt64
-    is_identical : UInt64
-    get_item_info : UInt64
+    query_interface : Proc(IWMPLibrary2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPLibrary2*, UInt32)
+    release : Proc(IWMPLibrary2*, UInt32)
+    get_name : Proc(IWMPLibrary2*, UInt8**, HRESULT)
+    get_type : Proc(IWMPLibrary2*, WMPLibraryType*, HRESULT)
+    get_media_collection : Proc(IWMPLibrary2*, IWMPMediaCollection*, HRESULT)
+    is_identical : Proc(IWMPLibrary2*, IWMPLibrary, Int16*, HRESULT)
+    get_item_info : Proc(IWMPLibrary2*, UInt8*, UInt8**, HRESULT)
   end
 
   IWMPLibrary2_GUID = "dd578a4e-79b1-426c-bf8f-3add9072500b"
@@ -2383,54 +2383,54 @@ lib LibWin32
   end
 
   struct IWMPEventsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    open_state_change : UInt64
-    play_state_change : UInt64
-    audio_language_change : UInt64
-    status_change : UInt64
-    script_command : UInt64
-    new_stream : UInt64
-    disconnect : UInt64
-    buffering : UInt64
-    error : UInt64
-    warning : UInt64
-    end_of_stream : UInt64
-    position_change : UInt64
-    marker_hit : UInt64
-    duration_unit_change : UInt64
-    cdrom_media_change : UInt64
-    playlist_change : UInt64
-    current_playlist_change : UInt64
-    current_playlist_item_available : UInt64
-    media_change : UInt64
-    current_media_item_available : UInt64
-    current_item_change : UInt64
-    media_collection_change : UInt64
-    media_collection_attribute_string_added : UInt64
-    media_collection_attribute_string_removed : UInt64
-    media_collection_attribute_string_changed : UInt64
-    playlist_collection_change : UInt64
-    playlist_collection_playlist_added : UInt64
-    playlist_collection_playlist_removed : UInt64
-    playlist_collection_playlist_set_as_deleted : UInt64
-    mode_change : UInt64
-    media_error : UInt64
-    open_playlist_switch : UInt64
-    domain_change : UInt64
-    switched_to_player_application : UInt64
-    switched_to_control : UInt64
-    player_docked_state_change : UInt64
-    player_reconnect : UInt64
-    click : UInt64
-    double_click : UInt64
-    key_down : UInt64
-    key_press : UInt64
-    key_up : UInt64
-    mouse_down : UInt64
-    mouse_move : UInt64
-    mouse_up : UInt64
+    query_interface : Proc(IWMPEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPEvents*, UInt32)
+    release : Proc(IWMPEvents*, UInt32)
+    open_state_change : Proc(IWMPEvents*, Int32, Void)
+    play_state_change : Proc(IWMPEvents*, Int32, Void)
+    audio_language_change : Proc(IWMPEvents*, Int32, Void)
+    status_change : Proc(IWMPEvents*, Void)
+    script_command : Proc(IWMPEvents*, UInt8*, UInt8*, Void)
+    new_stream : Proc(IWMPEvents*, Void)
+    disconnect : Proc(IWMPEvents*, Int32, Void)
+    buffering : Proc(IWMPEvents*, Int16, Void)
+    error : Proc(IWMPEvents*, Void)
+    warning : Proc(IWMPEvents*, Int32, Int32, UInt8*, Void)
+    end_of_stream : Proc(IWMPEvents*, Int32, Void)
+    position_change : Proc(IWMPEvents*, Float64, Float64, Void)
+    marker_hit : Proc(IWMPEvents*, Int32, Void)
+    duration_unit_change : Proc(IWMPEvents*, Int32, Void)
+    cdrom_media_change : Proc(IWMPEvents*, Int32, Void)
+    playlist_change : Proc(IWMPEvents*, IDispatch, WMPPlaylistChangeEventType, Void)
+    current_playlist_change : Proc(IWMPEvents*, WMPPlaylistChangeEventType, Void)
+    current_playlist_item_available : Proc(IWMPEvents*, UInt8*, Void)
+    media_change : Proc(IWMPEvents*, IDispatch, Void)
+    current_media_item_available : Proc(IWMPEvents*, UInt8*, Void)
+    current_item_change : Proc(IWMPEvents*, IDispatch, Void)
+    media_collection_change : Proc(IWMPEvents*, Void)
+    media_collection_attribute_string_added : Proc(IWMPEvents*, UInt8*, UInt8*, Void)
+    media_collection_attribute_string_removed : Proc(IWMPEvents*, UInt8*, UInt8*, Void)
+    media_collection_attribute_string_changed : Proc(IWMPEvents*, UInt8*, UInt8*, UInt8*, Void)
+    playlist_collection_change : Proc(IWMPEvents*, Void)
+    playlist_collection_playlist_added : Proc(IWMPEvents*, UInt8*, Void)
+    playlist_collection_playlist_removed : Proc(IWMPEvents*, UInt8*, Void)
+    playlist_collection_playlist_set_as_deleted : Proc(IWMPEvents*, UInt8*, Int16, Void)
+    mode_change : Proc(IWMPEvents*, UInt8*, Int16, Void)
+    media_error : Proc(IWMPEvents*, IDispatch, Void)
+    open_playlist_switch : Proc(IWMPEvents*, IDispatch, Void)
+    domain_change : Proc(IWMPEvents*, UInt8*, Void)
+    switched_to_player_application : Proc(IWMPEvents*, Void)
+    switched_to_control : Proc(IWMPEvents*, Void)
+    player_docked_state_change : Proc(IWMPEvents*, Void)
+    player_reconnect : Proc(IWMPEvents*, Void)
+    click : Proc(IWMPEvents*, Int16, Int16, Int32, Int32, Void)
+    double_click : Proc(IWMPEvents*, Int16, Int16, Int32, Int32, Void)
+    key_down : Proc(IWMPEvents*, Int16, Int16, Void)
+    key_press : Proc(IWMPEvents*, Int16, Void)
+    key_up : Proc(IWMPEvents*, Int16, Int16, Void)
+    mouse_down : Proc(IWMPEvents*, Int16, Int16, Int32, Int32, Void)
+    mouse_move : Proc(IWMPEvents*, Int16, Int16, Int32, Int32, Void)
+    mouse_up : Proc(IWMPEvents*, Int16, Int16, Int32, Int32, Void)
   end
 
   IWMPEvents_GUID = "19a6627b-da9e-47c1-bb23-00b5e668236a"
@@ -2440,60 +2440,60 @@ lib LibWin32
   end
 
   struct IWMPEvents2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    open_state_change : UInt64
-    play_state_change : UInt64
-    audio_language_change : UInt64
-    status_change : UInt64
-    script_command : UInt64
-    new_stream : UInt64
-    disconnect : UInt64
-    buffering : UInt64
-    error : UInt64
-    warning : UInt64
-    end_of_stream : UInt64
-    position_change : UInt64
-    marker_hit : UInt64
-    duration_unit_change : UInt64
-    cdrom_media_change : UInt64
-    playlist_change : UInt64
-    current_playlist_change : UInt64
-    current_playlist_item_available : UInt64
-    media_change : UInt64
-    current_media_item_available : UInt64
-    current_item_change : UInt64
-    media_collection_change : UInt64
-    media_collection_attribute_string_added : UInt64
-    media_collection_attribute_string_removed : UInt64
-    media_collection_attribute_string_changed : UInt64
-    playlist_collection_change : UInt64
-    playlist_collection_playlist_added : UInt64
-    playlist_collection_playlist_removed : UInt64
-    playlist_collection_playlist_set_as_deleted : UInt64
-    mode_change : UInt64
-    media_error : UInt64
-    open_playlist_switch : UInt64
-    domain_change : UInt64
-    switched_to_player_application : UInt64
-    switched_to_control : UInt64
-    player_docked_state_change : UInt64
-    player_reconnect : UInt64
-    click : UInt64
-    double_click : UInt64
-    key_down : UInt64
-    key_press : UInt64
-    key_up : UInt64
-    mouse_down : UInt64
-    mouse_move : UInt64
-    mouse_up : UInt64
-    device_connect : UInt64
-    device_disconnect : UInt64
-    device_status_change : UInt64
-    device_sync_state_change : UInt64
-    device_sync_error : UInt64
-    create_partnership_complete : UInt64
+    query_interface : Proc(IWMPEvents2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPEvents2*, UInt32)
+    release : Proc(IWMPEvents2*, UInt32)
+    open_state_change : Proc(IWMPEvents2*, Int32, Void)
+    play_state_change : Proc(IWMPEvents2*, Int32, Void)
+    audio_language_change : Proc(IWMPEvents2*, Int32, Void)
+    status_change : Proc(IWMPEvents2*, Void)
+    script_command : Proc(IWMPEvents2*, UInt8*, UInt8*, Void)
+    new_stream : Proc(IWMPEvents2*, Void)
+    disconnect : Proc(IWMPEvents2*, Int32, Void)
+    buffering : Proc(IWMPEvents2*, Int16, Void)
+    error : Proc(IWMPEvents2*, Void)
+    warning : Proc(IWMPEvents2*, Int32, Int32, UInt8*, Void)
+    end_of_stream : Proc(IWMPEvents2*, Int32, Void)
+    position_change : Proc(IWMPEvents2*, Float64, Float64, Void)
+    marker_hit : Proc(IWMPEvents2*, Int32, Void)
+    duration_unit_change : Proc(IWMPEvents2*, Int32, Void)
+    cdrom_media_change : Proc(IWMPEvents2*, Int32, Void)
+    playlist_change : Proc(IWMPEvents2*, IDispatch, WMPPlaylistChangeEventType, Void)
+    current_playlist_change : Proc(IWMPEvents2*, WMPPlaylistChangeEventType, Void)
+    current_playlist_item_available : Proc(IWMPEvents2*, UInt8*, Void)
+    media_change : Proc(IWMPEvents2*, IDispatch, Void)
+    current_media_item_available : Proc(IWMPEvents2*, UInt8*, Void)
+    current_item_change : Proc(IWMPEvents2*, IDispatch, Void)
+    media_collection_change : Proc(IWMPEvents2*, Void)
+    media_collection_attribute_string_added : Proc(IWMPEvents2*, UInt8*, UInt8*, Void)
+    media_collection_attribute_string_removed : Proc(IWMPEvents2*, UInt8*, UInt8*, Void)
+    media_collection_attribute_string_changed : Proc(IWMPEvents2*, UInt8*, UInt8*, UInt8*, Void)
+    playlist_collection_change : Proc(IWMPEvents2*, Void)
+    playlist_collection_playlist_added : Proc(IWMPEvents2*, UInt8*, Void)
+    playlist_collection_playlist_removed : Proc(IWMPEvents2*, UInt8*, Void)
+    playlist_collection_playlist_set_as_deleted : Proc(IWMPEvents2*, UInt8*, Int16, Void)
+    mode_change : Proc(IWMPEvents2*, UInt8*, Int16, Void)
+    media_error : Proc(IWMPEvents2*, IDispatch, Void)
+    open_playlist_switch : Proc(IWMPEvents2*, IDispatch, Void)
+    domain_change : Proc(IWMPEvents2*, UInt8*, Void)
+    switched_to_player_application : Proc(IWMPEvents2*, Void)
+    switched_to_control : Proc(IWMPEvents2*, Void)
+    player_docked_state_change : Proc(IWMPEvents2*, Void)
+    player_reconnect : Proc(IWMPEvents2*, Void)
+    click : Proc(IWMPEvents2*, Int16, Int16, Int32, Int32, Void)
+    double_click : Proc(IWMPEvents2*, Int16, Int16, Int32, Int32, Void)
+    key_down : Proc(IWMPEvents2*, Int16, Int16, Void)
+    key_press : Proc(IWMPEvents2*, Int16, Void)
+    key_up : Proc(IWMPEvents2*, Int16, Int16, Void)
+    mouse_down : Proc(IWMPEvents2*, Int16, Int16, Int32, Int32, Void)
+    mouse_move : Proc(IWMPEvents2*, Int16, Int16, Int32, Int32, Void)
+    mouse_up : Proc(IWMPEvents2*, Int16, Int16, Int32, Int32, Void)
+    device_connect : Proc(IWMPEvents2*, IWMPSyncDevice, Void)
+    device_disconnect : Proc(IWMPEvents2*, IWMPSyncDevice, Void)
+    device_status_change : Proc(IWMPEvents2*, IWMPSyncDevice, WMPDeviceStatus, Void)
+    device_sync_state_change : Proc(IWMPEvents2*, IWMPSyncDevice, WMPSyncState, Void)
+    device_sync_error : Proc(IWMPEvents2*, IWMPSyncDevice, IDispatch, Void)
+    create_partnership_complete : Proc(IWMPEvents2*, IWMPSyncDevice, HRESULT, Void)
   end
 
   IWMPEvents2_GUID = "1e7601fa-47ea-4107-9ea9-9004ed9684ff"
@@ -2503,71 +2503,71 @@ lib LibWin32
   end
 
   struct IWMPEvents3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    open_state_change : UInt64
-    play_state_change : UInt64
-    audio_language_change : UInt64
-    status_change : UInt64
-    script_command : UInt64
-    new_stream : UInt64
-    disconnect : UInt64
-    buffering : UInt64
-    error : UInt64
-    warning : UInt64
-    end_of_stream : UInt64
-    position_change : UInt64
-    marker_hit : UInt64
-    duration_unit_change : UInt64
-    cdrom_media_change : UInt64
-    playlist_change : UInt64
-    current_playlist_change : UInt64
-    current_playlist_item_available : UInt64
-    media_change : UInt64
-    current_media_item_available : UInt64
-    current_item_change : UInt64
-    media_collection_change : UInt64
-    media_collection_attribute_string_added : UInt64
-    media_collection_attribute_string_removed : UInt64
-    media_collection_attribute_string_changed : UInt64
-    playlist_collection_change : UInt64
-    playlist_collection_playlist_added : UInt64
-    playlist_collection_playlist_removed : UInt64
-    playlist_collection_playlist_set_as_deleted : UInt64
-    mode_change : UInt64
-    media_error : UInt64
-    open_playlist_switch : UInt64
-    domain_change : UInt64
-    switched_to_player_application : UInt64
-    switched_to_control : UInt64
-    player_docked_state_change : UInt64
-    player_reconnect : UInt64
-    click : UInt64
-    double_click : UInt64
-    key_down : UInt64
-    key_press : UInt64
-    key_up : UInt64
-    mouse_down : UInt64
-    mouse_move : UInt64
-    mouse_up : UInt64
-    device_connect : UInt64
-    device_disconnect : UInt64
-    device_status_change : UInt64
-    device_sync_state_change : UInt64
-    device_sync_error : UInt64
-    create_partnership_complete : UInt64
-    cdrom_rip_state_change : UInt64
-    cdrom_rip_media_error : UInt64
-    cdrom_burn_state_change : UInt64
-    cdrom_burn_media_error : UInt64
-    cdrom_burn_error : UInt64
-    library_connect : UInt64
-    library_disconnect : UInt64
-    folder_scan_state_change : UInt64
-    string_collection_change : UInt64
-    media_collection_media_added : UInt64
-    media_collection_media_removed : UInt64
+    query_interface : Proc(IWMPEvents3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPEvents3*, UInt32)
+    release : Proc(IWMPEvents3*, UInt32)
+    open_state_change : Proc(IWMPEvents3*, Int32, Void)
+    play_state_change : Proc(IWMPEvents3*, Int32, Void)
+    audio_language_change : Proc(IWMPEvents3*, Int32, Void)
+    status_change : Proc(IWMPEvents3*, Void)
+    script_command : Proc(IWMPEvents3*, UInt8*, UInt8*, Void)
+    new_stream : Proc(IWMPEvents3*, Void)
+    disconnect : Proc(IWMPEvents3*, Int32, Void)
+    buffering : Proc(IWMPEvents3*, Int16, Void)
+    error : Proc(IWMPEvents3*, Void)
+    warning : Proc(IWMPEvents3*, Int32, Int32, UInt8*, Void)
+    end_of_stream : Proc(IWMPEvents3*, Int32, Void)
+    position_change : Proc(IWMPEvents3*, Float64, Float64, Void)
+    marker_hit : Proc(IWMPEvents3*, Int32, Void)
+    duration_unit_change : Proc(IWMPEvents3*, Int32, Void)
+    cdrom_media_change : Proc(IWMPEvents3*, Int32, Void)
+    playlist_change : Proc(IWMPEvents3*, IDispatch, WMPPlaylistChangeEventType, Void)
+    current_playlist_change : Proc(IWMPEvents3*, WMPPlaylistChangeEventType, Void)
+    current_playlist_item_available : Proc(IWMPEvents3*, UInt8*, Void)
+    media_change : Proc(IWMPEvents3*, IDispatch, Void)
+    current_media_item_available : Proc(IWMPEvents3*, UInt8*, Void)
+    current_item_change : Proc(IWMPEvents3*, IDispatch, Void)
+    media_collection_change : Proc(IWMPEvents3*, Void)
+    media_collection_attribute_string_added : Proc(IWMPEvents3*, UInt8*, UInt8*, Void)
+    media_collection_attribute_string_removed : Proc(IWMPEvents3*, UInt8*, UInt8*, Void)
+    media_collection_attribute_string_changed : Proc(IWMPEvents3*, UInt8*, UInt8*, UInt8*, Void)
+    playlist_collection_change : Proc(IWMPEvents3*, Void)
+    playlist_collection_playlist_added : Proc(IWMPEvents3*, UInt8*, Void)
+    playlist_collection_playlist_removed : Proc(IWMPEvents3*, UInt8*, Void)
+    playlist_collection_playlist_set_as_deleted : Proc(IWMPEvents3*, UInt8*, Int16, Void)
+    mode_change : Proc(IWMPEvents3*, UInt8*, Int16, Void)
+    media_error : Proc(IWMPEvents3*, IDispatch, Void)
+    open_playlist_switch : Proc(IWMPEvents3*, IDispatch, Void)
+    domain_change : Proc(IWMPEvents3*, UInt8*, Void)
+    switched_to_player_application : Proc(IWMPEvents3*, Void)
+    switched_to_control : Proc(IWMPEvents3*, Void)
+    player_docked_state_change : Proc(IWMPEvents3*, Void)
+    player_reconnect : Proc(IWMPEvents3*, Void)
+    click : Proc(IWMPEvents3*, Int16, Int16, Int32, Int32, Void)
+    double_click : Proc(IWMPEvents3*, Int16, Int16, Int32, Int32, Void)
+    key_down : Proc(IWMPEvents3*, Int16, Int16, Void)
+    key_press : Proc(IWMPEvents3*, Int16, Void)
+    key_up : Proc(IWMPEvents3*, Int16, Int16, Void)
+    mouse_down : Proc(IWMPEvents3*, Int16, Int16, Int32, Int32, Void)
+    mouse_move : Proc(IWMPEvents3*, Int16, Int16, Int32, Int32, Void)
+    mouse_up : Proc(IWMPEvents3*, Int16, Int16, Int32, Int32, Void)
+    device_connect : Proc(IWMPEvents3*, IWMPSyncDevice, Void)
+    device_disconnect : Proc(IWMPEvents3*, IWMPSyncDevice, Void)
+    device_status_change : Proc(IWMPEvents3*, IWMPSyncDevice, WMPDeviceStatus, Void)
+    device_sync_state_change : Proc(IWMPEvents3*, IWMPSyncDevice, WMPSyncState, Void)
+    device_sync_error : Proc(IWMPEvents3*, IWMPSyncDevice, IDispatch, Void)
+    create_partnership_complete : Proc(IWMPEvents3*, IWMPSyncDevice, HRESULT, Void)
+    cdrom_rip_state_change : Proc(IWMPEvents3*, IWMPCdromRip, WMPRipState, Void)
+    cdrom_rip_media_error : Proc(IWMPEvents3*, IWMPCdromRip, IDispatch, Void)
+    cdrom_burn_state_change : Proc(IWMPEvents3*, IWMPCdromBurn, WMPBurnState, Void)
+    cdrom_burn_media_error : Proc(IWMPEvents3*, IWMPCdromBurn, IDispatch, Void)
+    cdrom_burn_error : Proc(IWMPEvents3*, IWMPCdromBurn, HRESULT, Void)
+    library_connect : Proc(IWMPEvents3*, IWMPLibrary, Void)
+    library_disconnect : Proc(IWMPEvents3*, IWMPLibrary, Void)
+    folder_scan_state_change : Proc(IWMPEvents3*, WMPFolderScanState, Void)
+    string_collection_change : Proc(IWMPEvents3*, IDispatch, WMPStringCollectionChangeEventType, Int32, Void)
+    media_collection_media_added : Proc(IWMPEvents3*, IDispatch, Void)
+    media_collection_media_removed : Proc(IWMPEvents3*, IDispatch, Void)
   end
 
   IWMPEvents3_GUID = "1f504270-a66b-4223-8e96-26a06c63d69f"
@@ -2577,72 +2577,72 @@ lib LibWin32
   end
 
   struct IWMPEvents4VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    open_state_change : UInt64
-    play_state_change : UInt64
-    audio_language_change : UInt64
-    status_change : UInt64
-    script_command : UInt64
-    new_stream : UInt64
-    disconnect : UInt64
-    buffering : UInt64
-    error : UInt64
-    warning : UInt64
-    end_of_stream : UInt64
-    position_change : UInt64
-    marker_hit : UInt64
-    duration_unit_change : UInt64
-    cdrom_media_change : UInt64
-    playlist_change : UInt64
-    current_playlist_change : UInt64
-    current_playlist_item_available : UInt64
-    media_change : UInt64
-    current_media_item_available : UInt64
-    current_item_change : UInt64
-    media_collection_change : UInt64
-    media_collection_attribute_string_added : UInt64
-    media_collection_attribute_string_removed : UInt64
-    media_collection_attribute_string_changed : UInt64
-    playlist_collection_change : UInt64
-    playlist_collection_playlist_added : UInt64
-    playlist_collection_playlist_removed : UInt64
-    playlist_collection_playlist_set_as_deleted : UInt64
-    mode_change : UInt64
-    media_error : UInt64
-    open_playlist_switch : UInt64
-    domain_change : UInt64
-    switched_to_player_application : UInt64
-    switched_to_control : UInt64
-    player_docked_state_change : UInt64
-    player_reconnect : UInt64
-    click : UInt64
-    double_click : UInt64
-    key_down : UInt64
-    key_press : UInt64
-    key_up : UInt64
-    mouse_down : UInt64
-    mouse_move : UInt64
-    mouse_up : UInt64
-    device_connect : UInt64
-    device_disconnect : UInt64
-    device_status_change : UInt64
-    device_sync_state_change : UInt64
-    device_sync_error : UInt64
-    create_partnership_complete : UInt64
-    cdrom_rip_state_change : UInt64
-    cdrom_rip_media_error : UInt64
-    cdrom_burn_state_change : UInt64
-    cdrom_burn_media_error : UInt64
-    cdrom_burn_error : UInt64
-    library_connect : UInt64
-    library_disconnect : UInt64
-    folder_scan_state_change : UInt64
-    string_collection_change : UInt64
-    media_collection_media_added : UInt64
-    media_collection_media_removed : UInt64
-    device_estimation : UInt64
+    query_interface : Proc(IWMPEvents4*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPEvents4*, UInt32)
+    release : Proc(IWMPEvents4*, UInt32)
+    open_state_change : Proc(IWMPEvents4*, Int32, Void)
+    play_state_change : Proc(IWMPEvents4*, Int32, Void)
+    audio_language_change : Proc(IWMPEvents4*, Int32, Void)
+    status_change : Proc(IWMPEvents4*, Void)
+    script_command : Proc(IWMPEvents4*, UInt8*, UInt8*, Void)
+    new_stream : Proc(IWMPEvents4*, Void)
+    disconnect : Proc(IWMPEvents4*, Int32, Void)
+    buffering : Proc(IWMPEvents4*, Int16, Void)
+    error : Proc(IWMPEvents4*, Void)
+    warning : Proc(IWMPEvents4*, Int32, Int32, UInt8*, Void)
+    end_of_stream : Proc(IWMPEvents4*, Int32, Void)
+    position_change : Proc(IWMPEvents4*, Float64, Float64, Void)
+    marker_hit : Proc(IWMPEvents4*, Int32, Void)
+    duration_unit_change : Proc(IWMPEvents4*, Int32, Void)
+    cdrom_media_change : Proc(IWMPEvents4*, Int32, Void)
+    playlist_change : Proc(IWMPEvents4*, IDispatch, WMPPlaylistChangeEventType, Void)
+    current_playlist_change : Proc(IWMPEvents4*, WMPPlaylistChangeEventType, Void)
+    current_playlist_item_available : Proc(IWMPEvents4*, UInt8*, Void)
+    media_change : Proc(IWMPEvents4*, IDispatch, Void)
+    current_media_item_available : Proc(IWMPEvents4*, UInt8*, Void)
+    current_item_change : Proc(IWMPEvents4*, IDispatch, Void)
+    media_collection_change : Proc(IWMPEvents4*, Void)
+    media_collection_attribute_string_added : Proc(IWMPEvents4*, UInt8*, UInt8*, Void)
+    media_collection_attribute_string_removed : Proc(IWMPEvents4*, UInt8*, UInt8*, Void)
+    media_collection_attribute_string_changed : Proc(IWMPEvents4*, UInt8*, UInt8*, UInt8*, Void)
+    playlist_collection_change : Proc(IWMPEvents4*, Void)
+    playlist_collection_playlist_added : Proc(IWMPEvents4*, UInt8*, Void)
+    playlist_collection_playlist_removed : Proc(IWMPEvents4*, UInt8*, Void)
+    playlist_collection_playlist_set_as_deleted : Proc(IWMPEvents4*, UInt8*, Int16, Void)
+    mode_change : Proc(IWMPEvents4*, UInt8*, Int16, Void)
+    media_error : Proc(IWMPEvents4*, IDispatch, Void)
+    open_playlist_switch : Proc(IWMPEvents4*, IDispatch, Void)
+    domain_change : Proc(IWMPEvents4*, UInt8*, Void)
+    switched_to_player_application : Proc(IWMPEvents4*, Void)
+    switched_to_control : Proc(IWMPEvents4*, Void)
+    player_docked_state_change : Proc(IWMPEvents4*, Void)
+    player_reconnect : Proc(IWMPEvents4*, Void)
+    click : Proc(IWMPEvents4*, Int16, Int16, Int32, Int32, Void)
+    double_click : Proc(IWMPEvents4*, Int16, Int16, Int32, Int32, Void)
+    key_down : Proc(IWMPEvents4*, Int16, Int16, Void)
+    key_press : Proc(IWMPEvents4*, Int16, Void)
+    key_up : Proc(IWMPEvents4*, Int16, Int16, Void)
+    mouse_down : Proc(IWMPEvents4*, Int16, Int16, Int32, Int32, Void)
+    mouse_move : Proc(IWMPEvents4*, Int16, Int16, Int32, Int32, Void)
+    mouse_up : Proc(IWMPEvents4*, Int16, Int16, Int32, Int32, Void)
+    device_connect : Proc(IWMPEvents4*, IWMPSyncDevice, Void)
+    device_disconnect : Proc(IWMPEvents4*, IWMPSyncDevice, Void)
+    device_status_change : Proc(IWMPEvents4*, IWMPSyncDevice, WMPDeviceStatus, Void)
+    device_sync_state_change : Proc(IWMPEvents4*, IWMPSyncDevice, WMPSyncState, Void)
+    device_sync_error : Proc(IWMPEvents4*, IWMPSyncDevice, IDispatch, Void)
+    create_partnership_complete : Proc(IWMPEvents4*, IWMPSyncDevice, HRESULT, Void)
+    cdrom_rip_state_change : Proc(IWMPEvents4*, IWMPCdromRip, WMPRipState, Void)
+    cdrom_rip_media_error : Proc(IWMPEvents4*, IWMPCdromRip, IDispatch, Void)
+    cdrom_burn_state_change : Proc(IWMPEvents4*, IWMPCdromBurn, WMPBurnState, Void)
+    cdrom_burn_media_error : Proc(IWMPEvents4*, IWMPCdromBurn, IDispatch, Void)
+    cdrom_burn_error : Proc(IWMPEvents4*, IWMPCdromBurn, HRESULT, Void)
+    library_connect : Proc(IWMPEvents4*, IWMPLibrary, Void)
+    library_disconnect : Proc(IWMPEvents4*, IWMPLibrary, Void)
+    folder_scan_state_change : Proc(IWMPEvents4*, WMPFolderScanState, Void)
+    string_collection_change : Proc(IWMPEvents4*, IDispatch, WMPStringCollectionChangeEventType, Int32, Void)
+    media_collection_media_added : Proc(IWMPEvents4*, IDispatch, Void)
+    media_collection_media_removed : Proc(IWMPEvents4*, IDispatch, Void)
+    device_estimation : Proc(IWMPEvents4*, IWMPSyncDevice, HRESULT, Int64, Int64, Void)
   end
 
   IWMPEvents4_GUID = "26dabcfa-306b-404d-9a6f-630a8405048d"
@@ -2652,13 +2652,13 @@ lib LibWin32
   end
 
   struct IWMPOCXEventsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
+    query_interface : Proc(IWMPOCXEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPOCXEvents*, UInt32)
+    release : Proc(IWMPOCXEvents*, UInt32)
+    get_type_info_count : Proc(IWMPOCXEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPOCXEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPOCXEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPOCXEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
   IWMPOCXEvents_GUID = "6bf52a51-394a-11d3-b153-00c04f79faa6"
@@ -2668,16 +2668,16 @@ lib LibWin32
   end
 
   struct IWMPNodeRealEstateVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_desired_size : UInt64
-    set_rects : UInt64
-    get_rects : UInt64
-    set_windowless : UInt64
-    get_windowless : UInt64
-    set_full_screen : UInt64
-    get_full_screen : UInt64
+    query_interface : Proc(IWMPNodeRealEstate*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPNodeRealEstate*, UInt32)
+    release : Proc(IWMPNodeRealEstate*, UInt32)
+    get_desired_size : Proc(IWMPNodeRealEstate*, SIZE*, HRESULT)
+    set_rects : Proc(IWMPNodeRealEstate*, RECT*, RECT*, RECT*, HRESULT)
+    get_rects : Proc(IWMPNodeRealEstate*, RECT*, RECT*, RECT*, HRESULT)
+    set_windowless : Proc(IWMPNodeRealEstate*, LibC::BOOL, HRESULT)
+    get_windowless : Proc(IWMPNodeRealEstate*, LibC::BOOL*, HRESULT)
+    set_full_screen : Proc(IWMPNodeRealEstate*, LibC::BOOL, HRESULT)
+    get_full_screen : Proc(IWMPNodeRealEstate*, LibC::BOOL*, HRESULT)
   end
 
   IWMPNodeRealEstate_GUID = "42751198-5a50-4460-bcb4-709f8bdc8e59"
@@ -2687,11 +2687,11 @@ lib LibWin32
   end
 
   struct IWMPNodeRealEstateHostVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_desired_size_change : UInt64
-    on_full_screen_transition : UInt64
+    query_interface : Proc(IWMPNodeRealEstateHost*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPNodeRealEstateHost*, UInt32)
+    release : Proc(IWMPNodeRealEstateHost*, UInt32)
+    on_desired_size_change : Proc(IWMPNodeRealEstateHost*, SIZE*, HRESULT)
+    on_full_screen_transition : Proc(IWMPNodeRealEstateHost*, LibC::BOOL, HRESULT)
   end
 
   IWMPNodeRealEstateHost_GUID = "1491087d-2c6b-44c8-b019-b3c929d2ada9"
@@ -2701,11 +2701,11 @@ lib LibWin32
   end
 
   struct IWMPNodeWindowedVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_owner_window : UInt64
-    get_owner_window : UInt64
+    query_interface : Proc(IWMPNodeWindowed*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPNodeWindowed*, UInt32)
+    release : Proc(IWMPNodeWindowed*, UInt32)
+    set_owner_window : Proc(IWMPNodeWindowed*, LibC::IntPtrT, HRESULT)
+    get_owner_window : Proc(IWMPNodeWindowed*, LibC::IntPtrT*, HRESULT)
   end
 
   IWMPNodeWindowed_GUID = "96740bfa-c56a-45d1-a3a4-762914d4ade9"
@@ -2715,10 +2715,10 @@ lib LibWin32
   end
 
   struct IWMPNodeWindowedHostVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_window_message_from_renderer : UInt64
+    query_interface : Proc(IWMPNodeWindowedHost*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPNodeWindowedHost*, UInt32)
+    release : Proc(IWMPNodeWindowedHost*, UInt32)
+    on_window_message_from_renderer : Proc(IWMPNodeWindowedHost*, UInt32, LibC::UINT_PTR, LPARAM, LRESULT*, LibC::BOOL*, HRESULT)
   end
 
   IWMPNodeWindowedHost_GUID = "a300415a-54aa-4081-adbf-3b13610d8958"
@@ -2728,10 +2728,10 @@ lib LibWin32
   end
 
   struct IWMPWindowMessageSinkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_window_message : UInt64
+    query_interface : Proc(IWMPWindowMessageSink*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPWindowMessageSink*, UInt32)
+    release : Proc(IWMPWindowMessageSink*, UInt32)
+    on_window_message : Proc(IWMPWindowMessageSink*, UInt32, LibC::UINT_PTR, LPARAM, LRESULT*, LibC::BOOL*, HRESULT)
   end
 
   IWMPWindowMessageSink_GUID = "3a0daa30-908d-4789-ba87-aed879b5c49b"
@@ -2741,11 +2741,11 @@ lib LibWin32
   end
 
   struct IWMPNodeWindowlessVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_window_message : UInt64
-    on_draw : UInt64
+    query_interface : Proc(IWMPNodeWindowless*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPNodeWindowless*, UInt32)
+    release : Proc(IWMPNodeWindowless*, UInt32)
+    on_window_message : Proc(IWMPNodeWindowless*, UInt32, LibC::UINT_PTR, LPARAM, LRESULT*, LibC::BOOL*, HRESULT)
+    on_draw : Proc(IWMPNodeWindowless*, LibC::IntPtrT, RECT*, HRESULT)
   end
 
   IWMPNodeWindowless_GUID = "9b9199ad-780c-4eda-b816-261eba5d1575"
@@ -2755,10 +2755,10 @@ lib LibWin32
   end
 
   struct IWMPNodeWindowlessHostVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    invalidate_rect : UInt64
+    query_interface : Proc(IWMPNodeWindowlessHost*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPNodeWindowlessHost*, UInt32)
+    release : Proc(IWMPNodeWindowlessHost*, UInt32)
+    invalidate_rect : Proc(IWMPNodeWindowlessHost*, RECT*, LibC::BOOL, HRESULT)
   end
 
   IWMPNodeWindowlessHost_GUID = "be7017c6-ce34-4901-8106-770381aa6e3e"
@@ -2768,10 +2768,10 @@ lib LibWin32
   end
 
   struct IWMPVideoRenderConfigVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    put_presenter_activate : UInt64
+    query_interface : Proc(IWMPVideoRenderConfig*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPVideoRenderConfig*, UInt32)
+    release : Proc(IWMPVideoRenderConfig*, UInt32)
+    put_presenter_activate : Proc(IWMPVideoRenderConfig*, IMFActivate, HRESULT)
   end
 
   IWMPVideoRenderConfig_GUID = "6d6cf803-1ec0-4c8d-b3ca-f18e27282074"
@@ -2781,11 +2781,11 @@ lib LibWin32
   end
 
   struct IWMPAudioRenderConfigVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_audio_output_device : UInt64
-    put_audio_output_device : UInt64
+    query_interface : Proc(IWMPAudioRenderConfig*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPAudioRenderConfig*, UInt32)
+    release : Proc(IWMPAudioRenderConfig*, UInt32)
+    get_audio_output_device : Proc(IWMPAudioRenderConfig*, UInt8**, HRESULT)
+    put_audio_output_device : Proc(IWMPAudioRenderConfig*, UInt8*, HRESULT)
   end
 
   IWMPAudioRenderConfig_GUID = "e79c6349-5997-4ce4-917c-22a3391ec564"
@@ -2795,11 +2795,11 @@ lib LibWin32
   end
 
   struct IWMPRenderConfigVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    put_in_proc_only : UInt64
-    get_in_proc_only : UInt64
+    query_interface : Proc(IWMPRenderConfig*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPRenderConfig*, UInt32)
+    release : Proc(IWMPRenderConfig*, UInt32)
+    put_in_proc_only : Proc(IWMPRenderConfig*, LibC::BOOL, HRESULT)
+    get_in_proc_only : Proc(IWMPRenderConfig*, LibC::BOOL*, HRESULT)
   end
 
   IWMPRenderConfig_GUID = "959506c1-0314-4ec5-9e61-8528db5e5478"
@@ -2809,11 +2809,11 @@ lib LibWin32
   end
 
   struct IWMPServicesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_stream_time : UInt64
-    get_stream_state : UInt64
+    query_interface : Proc(IWMPServices*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPServices*, UInt32)
+    release : Proc(IWMPServices*, UInt32)
+    get_stream_time : Proc(IWMPServices*, Int64*, HRESULT)
+    get_stream_state : Proc(IWMPServices*, WMPServices_StreamState*, HRESULT)
   end
 
   IWMPServices_GUID = "afb6b76b-1e20-4198-83b3-191db6e0b149"
@@ -2823,11 +2823,11 @@ lib LibWin32
   end
 
   struct IWMPMediaPluginRegistrarVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    wmp_register_player_plugin : UInt64
-    wmp_un_register_player_plugin : UInt64
+    query_interface : Proc(IWMPMediaPluginRegistrar*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPMediaPluginRegistrar*, UInt32)
+    release : Proc(IWMPMediaPluginRegistrar*, UInt32)
+    wmp_register_player_plugin : Proc(IWMPMediaPluginRegistrar*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, Guid, Guid, UInt32, Void*, HRESULT)
+    wmp_un_register_player_plugin : Proc(IWMPMediaPluginRegistrar*, Guid, Guid, HRESULT)
   end
 
   IWMPMediaPluginRegistrar_GUID = "68e27045-05bd-40b2-9720-23088c78e390"
@@ -2837,15 +2837,15 @@ lib LibWin32
   end
 
   struct IWMPPluginVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    init : UInt64
-    shutdown : UInt64
-    get_id : UInt64
-    get_caps : UInt64
-    advise_wmp_services : UInt64
-    un_advise_wmp_services : UInt64
+    query_interface : Proc(IWMPPlugin*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPPlugin*, UInt32)
+    release : Proc(IWMPPlugin*, UInt32)
+    init : Proc(IWMPPlugin*, LibC::UINT_PTR, HRESULT)
+    shutdown : Proc(IWMPPlugin*, HRESULT)
+    get_id : Proc(IWMPPlugin*, Guid*, HRESULT)
+    get_caps : Proc(IWMPPlugin*, UInt32*, HRESULT)
+    advise_wmp_services : Proc(IWMPPlugin*, IWMPServices, HRESULT)
+    un_advise_wmp_services : Proc(IWMPPlugin*, HRESULT)
   end
 
   IWMPPlugin_GUID = "f1392a70-024c-42bb-a998-73dfdfe7d5a7"
@@ -2855,11 +2855,11 @@ lib LibWin32
   end
 
   struct IWMPPluginEnableVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_enable : UInt64
-    get_enable : UInt64
+    query_interface : Proc(IWMPPluginEnable*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPPluginEnable*, UInt32)
+    release : Proc(IWMPPluginEnable*, UInt32)
+    set_enable : Proc(IWMPPluginEnable*, LibC::BOOL, HRESULT)
+    get_enable : Proc(IWMPPluginEnable*, LibC::BOOL*, HRESULT)
   end
 
   IWMPPluginEnable_GUID = "5fca444c-7ad1-479d-a4ef-40566a5309d6"
@@ -2869,12 +2869,12 @@ lib LibWin32
   end
 
   struct IWMPGraphCreationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    graph_creation_pre_render : UInt64
-    graph_creation_post_render : UInt64
-    get_graph_creation_flags : UInt64
+    query_interface : Proc(IWMPGraphCreation*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPGraphCreation*, UInt32)
+    release : Proc(IWMPGraphCreation*, UInt32)
+    graph_creation_pre_render : Proc(IWMPGraphCreation*, IUnknown, IUnknown, HRESULT)
+    graph_creation_post_render : Proc(IWMPGraphCreation*, IUnknown, HRESULT)
+    get_graph_creation_flags : Proc(IWMPGraphCreation*, UInt32*, HRESULT)
   end
 
   IWMPGraphCreation_GUID = "bfb377e5-c594-4369-a970-de896d5ece74"
@@ -2884,11 +2884,11 @@ lib LibWin32
   end
 
   struct IWMPConvertVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    convert_file : UInt64
-    get_error_url : UInt64
+    query_interface : Proc(IWMPConvert*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPConvert*, UInt32)
+    release : Proc(IWMPConvert*, UInt32)
+    convert_file : Proc(IWMPConvert*, UInt8*, UInt8*, UInt8**, HRESULT)
+    get_error_url : Proc(IWMPConvert*, UInt8**, HRESULT)
   end
 
   IWMPConvert_GUID = "d683162f-57d4-4108-8373-4a9676d1c2e9"
@@ -2898,10 +2898,10 @@ lib LibWin32
   end
 
   struct IWMPTranscodePolicyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    allow_transcode : UInt64
+    query_interface : Proc(IWMPTranscodePolicy*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPTranscodePolicy*, UInt32)
+    release : Proc(IWMPTranscodePolicy*, UInt32)
+    allow_transcode : Proc(IWMPTranscodePolicy*, Int16*, HRESULT)
   end
 
   IWMPTranscodePolicy_GUID = "b64cbac3-401c-4327-a3e8-b9feb3a8c25c"
@@ -2911,10 +2911,10 @@ lib LibWin32
   end
 
   struct IWMPUserEventSinkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    notify_user_event : UInt64
+    query_interface : Proc(IWMPUserEventSink*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPUserEventSink*, UInt32)
+    release : Proc(IWMPUserEventSink*, UInt32)
+    notify_user_event : Proc(IWMPUserEventSink*, Int32, HRESULT)
   end
 
   IWMPUserEventSink_GUID = "cfccfa72-c343-48c3-a2de-b7a4402e39f2"
@@ -2924,25 +2924,25 @@ lib LibWin32
   end
 
   struct IXFeedsManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    root_folder : UInt64
-    is_subscribed : UInt64
-    exists_feed : UInt64
-    get_feed : UInt64
-    get_feed_by_url : UInt64
-    exists_folder : UInt64
-    get_folder : UInt64
-    delete_feed : UInt64
-    delete_folder : UInt64
-    background_sync : UInt64
-    background_sync_status : UInt64
-    default_interval : UInt64
-    set_default_interval : UInt64
-    async_sync_all : UInt64
-    normalize : UInt64
-    item_count_limit : UInt64
+    query_interface : Proc(IXFeedsManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXFeedsManager*, UInt32)
+    release : Proc(IXFeedsManager*, UInt32)
+    root_folder : Proc(IXFeedsManager*, Guid*, Void**, HRESULT)
+    is_subscribed : Proc(IXFeedsManager*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
+    exists_feed : Proc(IXFeedsManager*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
+    get_feed : Proc(IXFeedsManager*, LibC::LPWSTR, Guid*, Void**, HRESULT)
+    get_feed_by_url : Proc(IXFeedsManager*, LibC::LPWSTR, Guid*, Void**, HRESULT)
+    exists_folder : Proc(IXFeedsManager*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
+    get_folder : Proc(IXFeedsManager*, LibC::LPWSTR, Guid*, Void**, HRESULT)
+    delete_feed : Proc(IXFeedsManager*, LibC::LPWSTR, HRESULT)
+    delete_folder : Proc(IXFeedsManager*, LibC::LPWSTR, HRESULT)
+    background_sync : Proc(IXFeedsManager*, FEEDS_BACKGROUNDSYNC_ACTION, HRESULT)
+    background_sync_status : Proc(IXFeedsManager*, FEEDS_BACKGROUNDSYNC_STATUS*, HRESULT)
+    default_interval : Proc(IXFeedsManager*, UInt32*, HRESULT)
+    set_default_interval : Proc(IXFeedsManager*, UInt32, HRESULT)
+    async_sync_all : Proc(IXFeedsManager*, HRESULT)
+    normalize : Proc(IXFeedsManager*, IStream, IStream*, HRESULT)
+    item_count_limit : Proc(IXFeedsManager*, UInt32*, HRESULT)
   end
 
   IXFeedsManager_GUID = "5357e238-fb12-4aca-a930-cab7832b84bf"
@@ -2952,11 +2952,11 @@ lib LibWin32
   end
 
   struct IXFeedsEnumVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    count : UInt64
-    item : UInt64
+    query_interface : Proc(IXFeedsEnum*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXFeedsEnum*, UInt32)
+    release : Proc(IXFeedsEnum*, UInt32)
+    count : Proc(IXFeedsEnum*, UInt32*, HRESULT)
+    item : Proc(IXFeedsEnum*, UInt32, Guid*, Void**, HRESULT)
   end
 
   IXFeedsEnum_GUID = "dc43a9d5-5015-4301-8c96-a47434b4d658"
@@ -2966,27 +2966,27 @@ lib LibWin32
   end
 
   struct IXFeedFolderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    feeds : UInt64
-    subfolders : UInt64
-    create_feed : UInt64
-    create_subfolder : UInt64
-    exists_feed : UInt64
-    exists_subfolder : UInt64
-    get_feed : UInt64
-    get_subfolder : UInt64
-    delete : UInt64
-    name : UInt64
-    rename : UInt64
-    path : UInt64
-    move : UInt64
-    parent : UInt64
-    is_root : UInt64
-    get_watcher : UInt64
-    total_unread_item_count : UInt64
-    total_item_count : UInt64
+    query_interface : Proc(IXFeedFolder*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXFeedFolder*, UInt32)
+    release : Proc(IXFeedFolder*, UInt32)
+    feeds : Proc(IXFeedFolder*, IXFeedsEnum*, HRESULT)
+    subfolders : Proc(IXFeedFolder*, IXFeedsEnum*, HRESULT)
+    create_feed : Proc(IXFeedFolder*, LibC::LPWSTR, LibC::LPWSTR, Guid*, Void**, HRESULT)
+    create_subfolder : Proc(IXFeedFolder*, LibC::LPWSTR, Guid*, Void**, HRESULT)
+    exists_feed : Proc(IXFeedFolder*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
+    exists_subfolder : Proc(IXFeedFolder*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
+    get_feed : Proc(IXFeedFolder*, LibC::LPWSTR, Guid*, Void**, HRESULT)
+    get_subfolder : Proc(IXFeedFolder*, LibC::LPWSTR, Guid*, Void**, HRESULT)
+    delete : Proc(IXFeedFolder*, HRESULT)
+    name : Proc(IXFeedFolder*, LibC::LPWSTR*, HRESULT)
+    rename : Proc(IXFeedFolder*, LibC::LPWSTR, HRESULT)
+    path : Proc(IXFeedFolder*, LibC::LPWSTR*, HRESULT)
+    move : Proc(IXFeedFolder*, LibC::LPWSTR, HRESULT)
+    parent : Proc(IXFeedFolder*, Guid*, Void**, HRESULT)
+    is_root : Proc(IXFeedFolder*, LibC::BOOL*, HRESULT)
+    get_watcher : Proc(IXFeedFolder*, FEEDS_EVENTS_SCOPE, FEEDS_EVENTS_MASK, Guid*, Void**, HRESULT)
+    total_unread_item_count : Proc(IXFeedFolder*, UInt32*, HRESULT)
+    total_item_count : Proc(IXFeedFolder*, UInt32*, HRESULT)
   end
 
   IXFeedFolder_GUID = "4c963678-3a51-4b88-8531-98b90b6508f2"
@@ -2996,25 +2996,25 @@ lib LibWin32
   end
 
   struct IXFeedFolderEventsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    error : UInt64
-    folder_added : UInt64
-    folder_deleted : UInt64
-    folder_renamed : UInt64
-    folder_moved_from : UInt64
-    folder_moved_to : UInt64
-    folder_item_count_changed : UInt64
-    feed_added : UInt64
-    feed_deleted : UInt64
-    feed_renamed : UInt64
-    feed_url_changed : UInt64
-    feed_moved_from : UInt64
-    feed_moved_to : UInt64
-    feed_downloading : UInt64
-    feed_download_completed : UInt64
-    feed_item_count_changed : UInt64
+    query_interface : Proc(IXFeedFolderEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXFeedFolderEvents*, UInt32)
+    release : Proc(IXFeedFolderEvents*, UInt32)
+    error : Proc(IXFeedFolderEvents*, HRESULT)
+    folder_added : Proc(IXFeedFolderEvents*, LibC::LPWSTR, HRESULT)
+    folder_deleted : Proc(IXFeedFolderEvents*, LibC::LPWSTR, HRESULT)
+    folder_renamed : Proc(IXFeedFolderEvents*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    folder_moved_from : Proc(IXFeedFolderEvents*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    folder_moved_to : Proc(IXFeedFolderEvents*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    folder_item_count_changed : Proc(IXFeedFolderEvents*, LibC::LPWSTR, Int32, HRESULT)
+    feed_added : Proc(IXFeedFolderEvents*, LibC::LPWSTR, HRESULT)
+    feed_deleted : Proc(IXFeedFolderEvents*, LibC::LPWSTR, HRESULT)
+    feed_renamed : Proc(IXFeedFolderEvents*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    feed_url_changed : Proc(IXFeedFolderEvents*, LibC::LPWSTR, HRESULT)
+    feed_moved_from : Proc(IXFeedFolderEvents*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    feed_moved_to : Proc(IXFeedFolderEvents*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    feed_downloading : Proc(IXFeedFolderEvents*, LibC::LPWSTR, HRESULT)
+    feed_download_completed : Proc(IXFeedFolderEvents*, LibC::LPWSTR, FEEDS_DOWNLOAD_ERROR, HRESULT)
+    feed_item_count_changed : Proc(IXFeedFolderEvents*, LibC::LPWSTR, Int32, HRESULT)
   end
 
   IXFeedFolderEvents_GUID = "7964b769-234a-4bb1-a5f4-90454c8ad07e"
@@ -3024,53 +3024,53 @@ lib LibWin32
   end
 
   struct IXFeedVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    xml : UInt64
-    name : UInt64
-    rename : UInt64
-    url : UInt64
-    set_url : UInt64
-    local_id : UInt64
-    path : UInt64
-    move : UInt64
-    parent : UInt64
-    last_write_time : UInt64
-    delete : UInt64
-    download : UInt64
-    async_download : UInt64
-    cancel_async_download : UInt64
-    sync_setting : UInt64
-    set_sync_setting : UInt64
-    interval : UInt64
-    set_interval : UInt64
-    last_download_time : UInt64
-    local_enclosure_path : UInt64
-    items : UInt64
-    get_item : UInt64
-    mark_all_items_read : UInt64
-    max_item_count : UInt64
-    set_max_item_count : UInt64
-    download_enclosures_automatically : UInt64
-    set_download_enclosures_automatically : UInt64
-    download_status : UInt64
-    last_download_error : UInt64
-    merge : UInt64
-    download_url : UInt64
-    title : UInt64
-    description : UInt64
-    link : UInt64
-    image : UInt64
-    last_build_date : UInt64
-    pub_date : UInt64
-    ttl : UInt64
-    language : UInt64
-    copyright : UInt64
-    is_list : UInt64
-    get_watcher : UInt64
-    unread_item_count : UInt64
-    item_count : UInt64
+    query_interface : Proc(IXFeed*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXFeed*, UInt32)
+    release : Proc(IXFeed*, UInt32)
+    xml : Proc(IXFeed*, UInt32, FEEDS_XML_SORT_PROPERTY, FEEDS_XML_SORT_ORDER, FEEDS_XML_FILTER_FLAGS, FEEDS_XML_INCLUDE_FLAGS, IStream*, HRESULT)
+    name : Proc(IXFeed*, LibC::LPWSTR*, HRESULT)
+    rename : Proc(IXFeed*, LibC::LPWSTR, HRESULT)
+    url : Proc(IXFeed*, LibC::LPWSTR*, HRESULT)
+    set_url : Proc(IXFeed*, LibC::LPWSTR, HRESULT)
+    local_id : Proc(IXFeed*, Guid*, HRESULT)
+    path : Proc(IXFeed*, LibC::LPWSTR*, HRESULT)
+    move : Proc(IXFeed*, LibC::LPWSTR, HRESULT)
+    parent : Proc(IXFeed*, Guid*, Void**, HRESULT)
+    last_write_time : Proc(IXFeed*, SYSTEMTIME*, HRESULT)
+    delete : Proc(IXFeed*, HRESULT)
+    download : Proc(IXFeed*, HRESULT)
+    async_download : Proc(IXFeed*, HRESULT)
+    cancel_async_download : Proc(IXFeed*, HRESULT)
+    sync_setting : Proc(IXFeed*, FEEDS_SYNC_SETTING*, HRESULT)
+    set_sync_setting : Proc(IXFeed*, FEEDS_SYNC_SETTING, HRESULT)
+    interval : Proc(IXFeed*, UInt32*, HRESULT)
+    set_interval : Proc(IXFeed*, UInt32, HRESULT)
+    last_download_time : Proc(IXFeed*, SYSTEMTIME*, HRESULT)
+    local_enclosure_path : Proc(IXFeed*, LibC::LPWSTR*, HRESULT)
+    items : Proc(IXFeed*, IXFeedsEnum*, HRESULT)
+    get_item : Proc(IXFeed*, UInt32, Guid*, Void**, HRESULT)
+    mark_all_items_read : Proc(IXFeed*, HRESULT)
+    max_item_count : Proc(IXFeed*, UInt32*, HRESULT)
+    set_max_item_count : Proc(IXFeed*, UInt32, HRESULT)
+    download_enclosures_automatically : Proc(IXFeed*, LibC::BOOL*, HRESULT)
+    set_download_enclosures_automatically : Proc(IXFeed*, LibC::BOOL, HRESULT)
+    download_status : Proc(IXFeed*, FEEDS_DOWNLOAD_STATUS*, HRESULT)
+    last_download_error : Proc(IXFeed*, FEEDS_DOWNLOAD_ERROR*, HRESULT)
+    merge : Proc(IXFeed*, IStream, LibC::LPWSTR, HRESULT)
+    download_url : Proc(IXFeed*, LibC::LPWSTR*, HRESULT)
+    title : Proc(IXFeed*, LibC::LPWSTR*, HRESULT)
+    description : Proc(IXFeed*, LibC::LPWSTR*, HRESULT)
+    link : Proc(IXFeed*, LibC::LPWSTR*, HRESULT)
+    image : Proc(IXFeed*, LibC::LPWSTR*, HRESULT)
+    last_build_date : Proc(IXFeed*, SYSTEMTIME*, HRESULT)
+    pub_date : Proc(IXFeed*, SYSTEMTIME*, HRESULT)
+    ttl : Proc(IXFeed*, UInt32*, HRESULT)
+    language : Proc(IXFeed*, LibC::LPWSTR*, HRESULT)
+    copyright : Proc(IXFeed*, LibC::LPWSTR*, HRESULT)
+    is_list : Proc(IXFeed*, LibC::BOOL*, HRESULT)
+    get_watcher : Proc(IXFeed*, FEEDS_EVENTS_SCOPE, FEEDS_EVENTS_MASK, Guid*, Void**, HRESULT)
+    unread_item_count : Proc(IXFeed*, UInt32*, HRESULT)
+    item_count : Proc(IXFeed*, UInt32*, HRESULT)
   end
 
   IXFeed_GUID = "a44179a4-e0f6-403b-af8d-d080f425a451"
@@ -3080,59 +3080,59 @@ lib LibWin32
   end
 
   struct IXFeed2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    xml : UInt64
-    name : UInt64
-    rename : UInt64
-    url : UInt64
-    set_url : UInt64
-    local_id : UInt64
-    path : UInt64
-    move : UInt64
-    parent : UInt64
-    last_write_time : UInt64
-    delete : UInt64
-    download : UInt64
-    async_download : UInt64
-    cancel_async_download : UInt64
-    sync_setting : UInt64
-    set_sync_setting : UInt64
-    interval : UInt64
-    set_interval : UInt64
-    last_download_time : UInt64
-    local_enclosure_path : UInt64
-    items : UInt64
-    get_item : UInt64
-    mark_all_items_read : UInt64
-    max_item_count : UInt64
-    set_max_item_count : UInt64
-    download_enclosures_automatically : UInt64
-    set_download_enclosures_automatically : UInt64
-    download_status : UInt64
-    last_download_error : UInt64
-    merge : UInt64
-    download_url : UInt64
-    title : UInt64
-    description : UInt64
-    link : UInt64
-    image : UInt64
-    last_build_date : UInt64
-    pub_date : UInt64
-    ttl : UInt64
-    language : UInt64
-    copyright : UInt64
-    is_list : UInt64
-    get_watcher : UInt64
-    unread_item_count : UInt64
-    item_count : UInt64
-    get_item_by_effective_id : UInt64
-    last_item_download_time : UInt64
-    username : UInt64
-    password : UInt64
-    set_credentials : UInt64
-    clear_credentials : UInt64
+    query_interface : Proc(IXFeed2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXFeed2*, UInt32)
+    release : Proc(IXFeed2*, UInt32)
+    xml : Proc(IXFeed2*, UInt32, FEEDS_XML_SORT_PROPERTY, FEEDS_XML_SORT_ORDER, FEEDS_XML_FILTER_FLAGS, FEEDS_XML_INCLUDE_FLAGS, IStream*, HRESULT)
+    name : Proc(IXFeed2*, LibC::LPWSTR*, HRESULT)
+    rename : Proc(IXFeed2*, LibC::LPWSTR, HRESULT)
+    url : Proc(IXFeed2*, LibC::LPWSTR*, HRESULT)
+    set_url : Proc(IXFeed2*, LibC::LPWSTR, HRESULT)
+    local_id : Proc(IXFeed2*, Guid*, HRESULT)
+    path : Proc(IXFeed2*, LibC::LPWSTR*, HRESULT)
+    move : Proc(IXFeed2*, LibC::LPWSTR, HRESULT)
+    parent : Proc(IXFeed2*, Guid*, Void**, HRESULT)
+    last_write_time : Proc(IXFeed2*, SYSTEMTIME*, HRESULT)
+    delete : Proc(IXFeed2*, HRESULT)
+    download : Proc(IXFeed2*, HRESULT)
+    async_download : Proc(IXFeed2*, HRESULT)
+    cancel_async_download : Proc(IXFeed2*, HRESULT)
+    sync_setting : Proc(IXFeed2*, FEEDS_SYNC_SETTING*, HRESULT)
+    set_sync_setting : Proc(IXFeed2*, FEEDS_SYNC_SETTING, HRESULT)
+    interval : Proc(IXFeed2*, UInt32*, HRESULT)
+    set_interval : Proc(IXFeed2*, UInt32, HRESULT)
+    last_download_time : Proc(IXFeed2*, SYSTEMTIME*, HRESULT)
+    local_enclosure_path : Proc(IXFeed2*, LibC::LPWSTR*, HRESULT)
+    items : Proc(IXFeed2*, IXFeedsEnum*, HRESULT)
+    get_item : Proc(IXFeed2*, UInt32, Guid*, Void**, HRESULT)
+    mark_all_items_read : Proc(IXFeed2*, HRESULT)
+    max_item_count : Proc(IXFeed2*, UInt32*, HRESULT)
+    set_max_item_count : Proc(IXFeed2*, UInt32, HRESULT)
+    download_enclosures_automatically : Proc(IXFeed2*, LibC::BOOL*, HRESULT)
+    set_download_enclosures_automatically : Proc(IXFeed2*, LibC::BOOL, HRESULT)
+    download_status : Proc(IXFeed2*, FEEDS_DOWNLOAD_STATUS*, HRESULT)
+    last_download_error : Proc(IXFeed2*, FEEDS_DOWNLOAD_ERROR*, HRESULT)
+    merge : Proc(IXFeed2*, IStream, LibC::LPWSTR, HRESULT)
+    download_url : Proc(IXFeed2*, LibC::LPWSTR*, HRESULT)
+    title : Proc(IXFeed2*, LibC::LPWSTR*, HRESULT)
+    description : Proc(IXFeed2*, LibC::LPWSTR*, HRESULT)
+    link : Proc(IXFeed2*, LibC::LPWSTR*, HRESULT)
+    image : Proc(IXFeed2*, LibC::LPWSTR*, HRESULT)
+    last_build_date : Proc(IXFeed2*, SYSTEMTIME*, HRESULT)
+    pub_date : Proc(IXFeed2*, SYSTEMTIME*, HRESULT)
+    ttl : Proc(IXFeed2*, UInt32*, HRESULT)
+    language : Proc(IXFeed2*, LibC::LPWSTR*, HRESULT)
+    copyright : Proc(IXFeed2*, LibC::LPWSTR*, HRESULT)
+    is_list : Proc(IXFeed2*, LibC::BOOL*, HRESULT)
+    get_watcher : Proc(IXFeed2*, FEEDS_EVENTS_SCOPE, FEEDS_EVENTS_MASK, Guid*, Void**, HRESULT)
+    unread_item_count : Proc(IXFeed2*, UInt32*, HRESULT)
+    item_count : Proc(IXFeed2*, UInt32*, HRESULT)
+    get_item_by_effective_id : Proc(IXFeed2*, UInt32, Guid*, Void**, HRESULT)
+    last_item_download_time : Proc(IXFeed2*, SYSTEMTIME*, HRESULT)
+    username : Proc(IXFeed2*, LibC::LPWSTR*, HRESULT)
+    password : Proc(IXFeed2*, LibC::LPWSTR*, HRESULT)
+    set_credentials : Proc(IXFeed2*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    clear_credentials : Proc(IXFeed2*, HRESULT)
   end
 
   IXFeed2_GUID = "ce528e77-3716-4eb7-956d-f5e37502e12a"
@@ -3142,17 +3142,17 @@ lib LibWin32
   end
 
   struct IXFeedEventsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    error : UInt64
-    feed_deleted : UInt64
-    feed_renamed : UInt64
-    feed_url_changed : UInt64
-    feed_moved : UInt64
-    feed_downloading : UInt64
-    feed_download_completed : UInt64
-    feed_item_count_changed : UInt64
+    query_interface : Proc(IXFeedEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXFeedEvents*, UInt32)
+    release : Proc(IXFeedEvents*, UInt32)
+    error : Proc(IXFeedEvents*, HRESULT)
+    feed_deleted : Proc(IXFeedEvents*, LibC::LPWSTR, HRESULT)
+    feed_renamed : Proc(IXFeedEvents*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    feed_url_changed : Proc(IXFeedEvents*, LibC::LPWSTR, HRESULT)
+    feed_moved : Proc(IXFeedEvents*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    feed_downloading : Proc(IXFeedEvents*, LibC::LPWSTR, HRESULT)
+    feed_download_completed : Proc(IXFeedEvents*, LibC::LPWSTR, FEEDS_DOWNLOAD_ERROR, HRESULT)
+    feed_item_count_changed : Proc(IXFeedEvents*, LibC::LPWSTR, Int32, HRESULT)
   end
 
   IXFeedEvents_GUID = "1630852e-1263-465b-98e5-fe60ffec4ac2"
@@ -3162,26 +3162,26 @@ lib LibWin32
   end
 
   struct IXFeedItemVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    xml : UInt64
-    title : UInt64
-    link : UInt64
-    guid : UInt64
-    description : UInt64
-    pub_date : UInt64
-    comments : UInt64
-    author : UInt64
-    enclosure : UInt64
-    is_read : UInt64
-    set_is_read : UInt64
-    local_id : UInt64
-    parent : UInt64
-    delete : UInt64
-    download_url : UInt64
-    last_download_time : UInt64
-    modified : UInt64
+    query_interface : Proc(IXFeedItem*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXFeedItem*, UInt32)
+    release : Proc(IXFeedItem*, UInt32)
+    xml : Proc(IXFeedItem*, FEEDS_XML_INCLUDE_FLAGS, IStream*, HRESULT)
+    title : Proc(IXFeedItem*, LibC::LPWSTR*, HRESULT)
+    link : Proc(IXFeedItem*, LibC::LPWSTR*, HRESULT)
+    guid : Proc(IXFeedItem*, LibC::LPWSTR*, HRESULT)
+    description : Proc(IXFeedItem*, LibC::LPWSTR*, HRESULT)
+    pub_date : Proc(IXFeedItem*, SYSTEMTIME*, HRESULT)
+    comments : Proc(IXFeedItem*, LibC::LPWSTR*, HRESULT)
+    author : Proc(IXFeedItem*, LibC::LPWSTR*, HRESULT)
+    enclosure : Proc(IXFeedItem*, Guid*, Void**, HRESULT)
+    is_read : Proc(IXFeedItem*, LibC::BOOL*, HRESULT)
+    set_is_read : Proc(IXFeedItem*, LibC::BOOL, HRESULT)
+    local_id : Proc(IXFeedItem*, UInt32*, HRESULT)
+    parent : Proc(IXFeedItem*, Guid*, Void**, HRESULT)
+    delete : Proc(IXFeedItem*, HRESULT)
+    download_url : Proc(IXFeedItem*, LibC::LPWSTR*, HRESULT)
+    last_download_time : Proc(IXFeedItem*, SYSTEMTIME*, HRESULT)
+    modified : Proc(IXFeedItem*, SYSTEMTIME*, HRESULT)
   end
 
   IXFeedItem_GUID = "e757b2f5-e73e-434e-a1bf-2bd7c3e60fcb"
@@ -3191,27 +3191,27 @@ lib LibWin32
   end
 
   struct IXFeedItem2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    xml : UInt64
-    title : UInt64
-    link : UInt64
-    guid : UInt64
-    description : UInt64
-    pub_date : UInt64
-    comments : UInt64
-    author : UInt64
-    enclosure : UInt64
-    is_read : UInt64
-    set_is_read : UInt64
-    local_id : UInt64
-    parent : UInt64
-    delete : UInt64
-    download_url : UInt64
-    last_download_time : UInt64
-    modified : UInt64
-    effective_id : UInt64
+    query_interface : Proc(IXFeedItem2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXFeedItem2*, UInt32)
+    release : Proc(IXFeedItem2*, UInt32)
+    xml : Proc(IXFeedItem2*, FEEDS_XML_INCLUDE_FLAGS, IStream*, HRESULT)
+    title : Proc(IXFeedItem2*, LibC::LPWSTR*, HRESULT)
+    link : Proc(IXFeedItem2*, LibC::LPWSTR*, HRESULT)
+    guid : Proc(IXFeedItem2*, LibC::LPWSTR*, HRESULT)
+    description : Proc(IXFeedItem2*, LibC::LPWSTR*, HRESULT)
+    pub_date : Proc(IXFeedItem2*, SYSTEMTIME*, HRESULT)
+    comments : Proc(IXFeedItem2*, LibC::LPWSTR*, HRESULT)
+    author : Proc(IXFeedItem2*, LibC::LPWSTR*, HRESULT)
+    enclosure : Proc(IXFeedItem2*, Guid*, Void**, HRESULT)
+    is_read : Proc(IXFeedItem2*, LibC::BOOL*, HRESULT)
+    set_is_read : Proc(IXFeedItem2*, LibC::BOOL, HRESULT)
+    local_id : Proc(IXFeedItem2*, UInt32*, HRESULT)
+    parent : Proc(IXFeedItem2*, Guid*, Void**, HRESULT)
+    delete : Proc(IXFeedItem2*, HRESULT)
+    download_url : Proc(IXFeedItem2*, LibC::LPWSTR*, HRESULT)
+    last_download_time : Proc(IXFeedItem2*, SYSTEMTIME*, HRESULT)
+    modified : Proc(IXFeedItem2*, SYSTEMTIME*, HRESULT)
+    effective_id : Proc(IXFeedItem2*, UInt32*, HRESULT)
   end
 
   IXFeedItem2_GUID = "6cda2dc7-9013-4522-9970-2a9dd9ead5a3"
@@ -3221,22 +3221,22 @@ lib LibWin32
   end
 
   struct IXFeedEnclosureVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    url : UInt64
-    type : UInt64
-    length : UInt64
-    async_download : UInt64
-    cancel_async_download : UInt64
-    download_status : UInt64
-    last_download_error : UInt64
-    local_path : UInt64
-    parent : UInt64
-    download_url : UInt64
-    download_mime_type : UInt64
-    remove_file : UInt64
-    set_file : UInt64
+    query_interface : Proc(IXFeedEnclosure*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXFeedEnclosure*, UInt32)
+    release : Proc(IXFeedEnclosure*, UInt32)
+    url : Proc(IXFeedEnclosure*, LibC::LPWSTR*, HRESULT)
+    type : Proc(IXFeedEnclosure*, LibC::LPWSTR*, HRESULT)
+    length : Proc(IXFeedEnclosure*, UInt32*, HRESULT)
+    async_download : Proc(IXFeedEnclosure*, HRESULT)
+    cancel_async_download : Proc(IXFeedEnclosure*, HRESULT)
+    download_status : Proc(IXFeedEnclosure*, FEEDS_DOWNLOAD_STATUS*, HRESULT)
+    last_download_error : Proc(IXFeedEnclosure*, FEEDS_DOWNLOAD_ERROR*, HRESULT)
+    local_path : Proc(IXFeedEnclosure*, LibC::LPWSTR*, HRESULT)
+    parent : Proc(IXFeedEnclosure*, Guid*, Void**, HRESULT)
+    download_url : Proc(IXFeedEnclosure*, LibC::LPWSTR*, HRESULT)
+    download_mime_type : Proc(IXFeedEnclosure*, LibC::LPWSTR*, HRESULT)
+    remove_file : Proc(IXFeedEnclosure*, HRESULT)
+    set_file : Proc(IXFeedEnclosure*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
   IXFeedEnclosure_GUID = "bfbfb953-644f-4792-b69c-dfaca4cbf89a"
@@ -3246,29 +3246,29 @@ lib LibWin32
   end
 
   struct IFeedsManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_root_folder : UInt64
-    is_subscribed : UInt64
-    exists_feed : UInt64
-    get_feed : UInt64
-    get_feed_by_url : UInt64
-    exists_folder : UInt64
-    get_folder : UInt64
-    delete_feed : UInt64
-    delete_folder : UInt64
-    background_sync : UInt64
-    get_background_sync_status : UInt64
-    get_default_interval : UInt64
-    put_default_interval : UInt64
-    async_sync_all : UInt64
-    normalize : UInt64
-    get_item_count_limit : UInt64
+    query_interface : Proc(IFeedsManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFeedsManager*, UInt32)
+    release : Proc(IFeedsManager*, UInt32)
+    get_type_info_count : Proc(IFeedsManager*, UInt32*, HRESULT)
+    get_type_info : Proc(IFeedsManager*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IFeedsManager*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IFeedsManager*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_root_folder : Proc(IFeedsManager*, IDispatch*, HRESULT)
+    is_subscribed : Proc(IFeedsManager*, UInt8*, Int16*, HRESULT)
+    exists_feed : Proc(IFeedsManager*, UInt8*, Int16*, HRESULT)
+    get_feed : Proc(IFeedsManager*, UInt8*, IDispatch*, HRESULT)
+    get_feed_by_url : Proc(IFeedsManager*, UInt8*, IDispatch*, HRESULT)
+    exists_folder : Proc(IFeedsManager*, UInt8*, Int16*, HRESULT)
+    get_folder : Proc(IFeedsManager*, UInt8*, IDispatch*, HRESULT)
+    delete_feed : Proc(IFeedsManager*, UInt8*, HRESULT)
+    delete_folder : Proc(IFeedsManager*, UInt8*, HRESULT)
+    background_sync : Proc(IFeedsManager*, FEEDS_BACKGROUNDSYNC_ACTION, HRESULT)
+    get_background_sync_status : Proc(IFeedsManager*, FEEDS_BACKGROUNDSYNC_STATUS*, HRESULT)
+    get_default_interval : Proc(IFeedsManager*, Int32*, HRESULT)
+    put_default_interval : Proc(IFeedsManager*, Int32, HRESULT)
+    async_sync_all : Proc(IFeedsManager*, HRESULT)
+    normalize : Proc(IFeedsManager*, UInt8*, UInt8**, HRESULT)
+    get_item_count_limit : Proc(IFeedsManager*, Int32*, HRESULT)
   end
 
   IFeedsManager_GUID = "a74029cc-1f1a-4906-88f0-810638d86591"
@@ -3278,16 +3278,16 @@ lib LibWin32
   end
 
   struct IFeedsEnumVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_count : UInt64
-    item : UInt64
-    get__new_enum : UInt64
+    query_interface : Proc(IFeedsEnum*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFeedsEnum*, UInt32)
+    release : Proc(IFeedsEnum*, UInt32)
+    get_type_info_count : Proc(IFeedsEnum*, UInt32*, HRESULT)
+    get_type_info : Proc(IFeedsEnum*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IFeedsEnum*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IFeedsEnum*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_count : Proc(IFeedsEnum*, Int32*, HRESULT)
+    item : Proc(IFeedsEnum*, Int32, IDispatch*, HRESULT)
+    get__new_enum : Proc(IFeedsEnum*, IEnumVARIANT*, HRESULT)
   end
 
   IFeedsEnum_GUID = "e3cd0028-2eed-4c60-8fae-a3225309a836"
@@ -3297,31 +3297,31 @@ lib LibWin32
   end
 
   struct IFeedFolderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_feeds : UInt64
-    get_subfolders : UInt64
-    create_feed : UInt64
-    create_subfolder : UInt64
-    exists_feed : UInt64
-    get_feed : UInt64
-    exists_subfolder : UInt64
-    get_subfolder : UInt64
-    delete : UInt64
-    get_name : UInt64
-    rename : UInt64
-    get_path : UInt64
-    move : UInt64
-    get_parent : UInt64
-    get_is_root : UInt64
-    get_total_unread_item_count : UInt64
-    get_total_item_count : UInt64
-    get_watcher : UInt64
+    query_interface : Proc(IFeedFolder*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFeedFolder*, UInt32)
+    release : Proc(IFeedFolder*, UInt32)
+    get_type_info_count : Proc(IFeedFolder*, UInt32*, HRESULT)
+    get_type_info : Proc(IFeedFolder*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IFeedFolder*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IFeedFolder*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_feeds : Proc(IFeedFolder*, IDispatch*, HRESULT)
+    get_subfolders : Proc(IFeedFolder*, IDispatch*, HRESULT)
+    create_feed : Proc(IFeedFolder*, UInt8*, UInt8*, IDispatch*, HRESULT)
+    create_subfolder : Proc(IFeedFolder*, UInt8*, IDispatch*, HRESULT)
+    exists_feed : Proc(IFeedFolder*, UInt8*, Int16*, HRESULT)
+    get_feed : Proc(IFeedFolder*, UInt8*, IDispatch*, HRESULT)
+    exists_subfolder : Proc(IFeedFolder*, UInt8*, Int16*, HRESULT)
+    get_subfolder : Proc(IFeedFolder*, UInt8*, IDispatch*, HRESULT)
+    delete : Proc(IFeedFolder*, HRESULT)
+    get_name : Proc(IFeedFolder*, UInt8**, HRESULT)
+    rename : Proc(IFeedFolder*, UInt8*, HRESULT)
+    get_path : Proc(IFeedFolder*, UInt8**, HRESULT)
+    move : Proc(IFeedFolder*, UInt8*, HRESULT)
+    get_parent : Proc(IFeedFolder*, IDispatch*, HRESULT)
+    get_is_root : Proc(IFeedFolder*, Int16*, HRESULT)
+    get_total_unread_item_count : Proc(IFeedFolder*, Int32*, HRESULT)
+    get_total_item_count : Proc(IFeedFolder*, Int32*, HRESULT)
+    get_watcher : Proc(IFeedFolder*, FEEDS_EVENTS_SCOPE, FEEDS_EVENTS_MASK, IDispatch*, HRESULT)
   end
 
   IFeedFolder_GUID = "81f04ad1-4194-4d7d-86d6-11813cec163c"
@@ -3331,29 +3331,29 @@ lib LibWin32
   end
 
   struct IFeedFolderEventsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    error : UInt64
-    folder_added : UInt64
-    folder_deleted : UInt64
-    folder_renamed : UInt64
-    folder_moved_from : UInt64
-    folder_moved_to : UInt64
-    folder_item_count_changed : UInt64
-    feed_added : UInt64
-    feed_deleted : UInt64
-    feed_renamed : UInt64
-    feed_url_changed : UInt64
-    feed_moved_from : UInt64
-    feed_moved_to : UInt64
-    feed_downloading : UInt64
-    feed_download_completed : UInt64
-    feed_item_count_changed : UInt64
+    query_interface : Proc(IFeedFolderEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFeedFolderEvents*, UInt32)
+    release : Proc(IFeedFolderEvents*, UInt32)
+    get_type_info_count : Proc(IFeedFolderEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IFeedFolderEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IFeedFolderEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IFeedFolderEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    error : Proc(IFeedFolderEvents*, HRESULT)
+    folder_added : Proc(IFeedFolderEvents*, UInt8*, HRESULT)
+    folder_deleted : Proc(IFeedFolderEvents*, UInt8*, HRESULT)
+    folder_renamed : Proc(IFeedFolderEvents*, UInt8*, UInt8*, HRESULT)
+    folder_moved_from : Proc(IFeedFolderEvents*, UInt8*, UInt8*, HRESULT)
+    folder_moved_to : Proc(IFeedFolderEvents*, UInt8*, UInt8*, HRESULT)
+    folder_item_count_changed : Proc(IFeedFolderEvents*, UInt8*, Int32, HRESULT)
+    feed_added : Proc(IFeedFolderEvents*, UInt8*, HRESULT)
+    feed_deleted : Proc(IFeedFolderEvents*, UInt8*, HRESULT)
+    feed_renamed : Proc(IFeedFolderEvents*, UInt8*, UInt8*, HRESULT)
+    feed_url_changed : Proc(IFeedFolderEvents*, UInt8*, HRESULT)
+    feed_moved_from : Proc(IFeedFolderEvents*, UInt8*, UInt8*, HRESULT)
+    feed_moved_to : Proc(IFeedFolderEvents*, UInt8*, UInt8*, HRESULT)
+    feed_downloading : Proc(IFeedFolderEvents*, UInt8*, HRESULT)
+    feed_download_completed : Proc(IFeedFolderEvents*, UInt8*, FEEDS_DOWNLOAD_ERROR, HRESULT)
+    feed_item_count_changed : Proc(IFeedFolderEvents*, UInt8*, Int32, HRESULT)
   end
 
   IFeedFolderEvents_GUID = "20a59fa6-a844-4630-9e98-175f70b4d55b"
@@ -3363,57 +3363,57 @@ lib LibWin32
   end
 
   struct IFeedVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    xml : UInt64
-    get_name : UInt64
-    rename : UInt64
-    get_url : UInt64
-    put_url : UInt64
-    get_local_id : UInt64
-    get_path : UInt64
-    move : UInt64
-    get_parent : UInt64
-    get_last_write_time : UInt64
-    delete : UInt64
-    download : UInt64
-    async_download : UInt64
-    cancel_async_download : UInt64
-    get_sync_setting : UInt64
-    put_sync_setting : UInt64
-    get_interval : UInt64
-    put_interval : UInt64
-    get_last_download_time : UInt64
-    get_local_enclosure_path : UInt64
-    get_items : UInt64
-    get_item : UInt64
-    get_title : UInt64
-    get_description : UInt64
-    get_link : UInt64
-    get_image : UInt64
-    get_last_build_date : UInt64
-    get_pub_date : UInt64
-    get_ttl : UInt64
-    get_language : UInt64
-    get_copyright : UInt64
-    get_max_item_count : UInt64
-    put_max_item_count : UInt64
-    get_download_enclosures_automatically : UInt64
-    put_download_enclosures_automatically : UInt64
-    get_download_status : UInt64
-    get_last_download_error : UInt64
-    merge : UInt64
-    get_download_url : UInt64
-    get_is_list : UInt64
-    mark_all_items_read : UInt64
-    get_watcher : UInt64
-    get_unread_item_count : UInt64
-    get_item_count : UInt64
+    query_interface : Proc(IFeed*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFeed*, UInt32)
+    release : Proc(IFeed*, UInt32)
+    get_type_info_count : Proc(IFeed*, UInt32*, HRESULT)
+    get_type_info : Proc(IFeed*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IFeed*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IFeed*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    xml : Proc(IFeed*, Int32, FEEDS_XML_SORT_PROPERTY, FEEDS_XML_SORT_ORDER, FEEDS_XML_FILTER_FLAGS, FEEDS_XML_INCLUDE_FLAGS, UInt8**, HRESULT)
+    get_name : Proc(IFeed*, UInt8**, HRESULT)
+    rename : Proc(IFeed*, UInt8*, HRESULT)
+    get_url : Proc(IFeed*, UInt8**, HRESULT)
+    put_url : Proc(IFeed*, UInt8*, HRESULT)
+    get_local_id : Proc(IFeed*, UInt8**, HRESULT)
+    get_path : Proc(IFeed*, UInt8**, HRESULT)
+    move : Proc(IFeed*, UInt8*, HRESULT)
+    get_parent : Proc(IFeed*, IDispatch*, HRESULT)
+    get_last_write_time : Proc(IFeed*, Float64*, HRESULT)
+    delete : Proc(IFeed*, HRESULT)
+    download : Proc(IFeed*, HRESULT)
+    async_download : Proc(IFeed*, HRESULT)
+    cancel_async_download : Proc(IFeed*, HRESULT)
+    get_sync_setting : Proc(IFeed*, FEEDS_SYNC_SETTING*, HRESULT)
+    put_sync_setting : Proc(IFeed*, FEEDS_SYNC_SETTING, HRESULT)
+    get_interval : Proc(IFeed*, Int32*, HRESULT)
+    put_interval : Proc(IFeed*, Int32, HRESULT)
+    get_last_download_time : Proc(IFeed*, Float64*, HRESULT)
+    get_local_enclosure_path : Proc(IFeed*, UInt8**, HRESULT)
+    get_items : Proc(IFeed*, IDispatch*, HRESULT)
+    get_item : Proc(IFeed*, Int32, IDispatch*, HRESULT)
+    get_title : Proc(IFeed*, UInt8**, HRESULT)
+    get_description : Proc(IFeed*, UInt8**, HRESULT)
+    get_link : Proc(IFeed*, UInt8**, HRESULT)
+    get_image : Proc(IFeed*, UInt8**, HRESULT)
+    get_last_build_date : Proc(IFeed*, Float64*, HRESULT)
+    get_pub_date : Proc(IFeed*, Float64*, HRESULT)
+    get_ttl : Proc(IFeed*, Int32*, HRESULT)
+    get_language : Proc(IFeed*, UInt8**, HRESULT)
+    get_copyright : Proc(IFeed*, UInt8**, HRESULT)
+    get_max_item_count : Proc(IFeed*, Int32*, HRESULT)
+    put_max_item_count : Proc(IFeed*, Int32, HRESULT)
+    get_download_enclosures_automatically : Proc(IFeed*, Int16*, HRESULT)
+    put_download_enclosures_automatically : Proc(IFeed*, Int16, HRESULT)
+    get_download_status : Proc(IFeed*, FEEDS_DOWNLOAD_STATUS*, HRESULT)
+    get_last_download_error : Proc(IFeed*, FEEDS_DOWNLOAD_ERROR*, HRESULT)
+    merge : Proc(IFeed*, UInt8*, UInt8*, HRESULT)
+    get_download_url : Proc(IFeed*, UInt8**, HRESULT)
+    get_is_list : Proc(IFeed*, Int16*, HRESULT)
+    mark_all_items_read : Proc(IFeed*, HRESULT)
+    get_watcher : Proc(IFeed*, FEEDS_EVENTS_SCOPE, FEEDS_EVENTS_MASK, IDispatch*, HRESULT)
+    get_unread_item_count : Proc(IFeed*, Int32*, HRESULT)
+    get_item_count : Proc(IFeed*, Int32*, HRESULT)
   end
 
   IFeed_GUID = "f7f915d8-2ede-42bc-98e7-a5d05063a757"
@@ -3423,63 +3423,63 @@ lib LibWin32
   end
 
   struct IFeed2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    xml : UInt64
-    get_name : UInt64
-    rename : UInt64
-    get_url : UInt64
-    put_url : UInt64
-    get_local_id : UInt64
-    get_path : UInt64
-    move : UInt64
-    get_parent : UInt64
-    get_last_write_time : UInt64
-    delete : UInt64
-    download : UInt64
-    async_download : UInt64
-    cancel_async_download : UInt64
-    get_sync_setting : UInt64
-    put_sync_setting : UInt64
-    get_interval : UInt64
-    put_interval : UInt64
-    get_last_download_time : UInt64
-    get_local_enclosure_path : UInt64
-    get_items : UInt64
-    get_item : UInt64
-    get_title : UInt64
-    get_description : UInt64
-    get_link : UInt64
-    get_image : UInt64
-    get_last_build_date : UInt64
-    get_pub_date : UInt64
-    get_ttl : UInt64
-    get_language : UInt64
-    get_copyright : UInt64
-    get_max_item_count : UInt64
-    put_max_item_count : UInt64
-    get_download_enclosures_automatically : UInt64
-    put_download_enclosures_automatically : UInt64
-    get_download_status : UInt64
-    get_last_download_error : UInt64
-    merge : UInt64
-    get_download_url : UInt64
-    get_is_list : UInt64
-    mark_all_items_read : UInt64
-    get_watcher : UInt64
-    get_unread_item_count : UInt64
-    get_item_count : UInt64
-    get_item_by_effective_id : UInt64
-    get_last_item_download_time : UInt64
-    get_username : UInt64
-    get_password : UInt64
-    set_credentials : UInt64
-    clear_credentials : UInt64
+    query_interface : Proc(IFeed2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFeed2*, UInt32)
+    release : Proc(IFeed2*, UInt32)
+    get_type_info_count : Proc(IFeed2*, UInt32*, HRESULT)
+    get_type_info : Proc(IFeed2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IFeed2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IFeed2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    xml : Proc(IFeed2*, Int32, FEEDS_XML_SORT_PROPERTY, FEEDS_XML_SORT_ORDER, FEEDS_XML_FILTER_FLAGS, FEEDS_XML_INCLUDE_FLAGS, UInt8**, HRESULT)
+    get_name : Proc(IFeed2*, UInt8**, HRESULT)
+    rename : Proc(IFeed2*, UInt8*, HRESULT)
+    get_url : Proc(IFeed2*, UInt8**, HRESULT)
+    put_url : Proc(IFeed2*, UInt8*, HRESULT)
+    get_local_id : Proc(IFeed2*, UInt8**, HRESULT)
+    get_path : Proc(IFeed2*, UInt8**, HRESULT)
+    move : Proc(IFeed2*, UInt8*, HRESULT)
+    get_parent : Proc(IFeed2*, IDispatch*, HRESULT)
+    get_last_write_time : Proc(IFeed2*, Float64*, HRESULT)
+    delete : Proc(IFeed2*, HRESULT)
+    download : Proc(IFeed2*, HRESULT)
+    async_download : Proc(IFeed2*, HRESULT)
+    cancel_async_download : Proc(IFeed2*, HRESULT)
+    get_sync_setting : Proc(IFeed2*, FEEDS_SYNC_SETTING*, HRESULT)
+    put_sync_setting : Proc(IFeed2*, FEEDS_SYNC_SETTING, HRESULT)
+    get_interval : Proc(IFeed2*, Int32*, HRESULT)
+    put_interval : Proc(IFeed2*, Int32, HRESULT)
+    get_last_download_time : Proc(IFeed2*, Float64*, HRESULT)
+    get_local_enclosure_path : Proc(IFeed2*, UInt8**, HRESULT)
+    get_items : Proc(IFeed2*, IDispatch*, HRESULT)
+    get_item : Proc(IFeed2*, Int32, IDispatch*, HRESULT)
+    get_title : Proc(IFeed2*, UInt8**, HRESULT)
+    get_description : Proc(IFeed2*, UInt8**, HRESULT)
+    get_link : Proc(IFeed2*, UInt8**, HRESULT)
+    get_image : Proc(IFeed2*, UInt8**, HRESULT)
+    get_last_build_date : Proc(IFeed2*, Float64*, HRESULT)
+    get_pub_date : Proc(IFeed2*, Float64*, HRESULT)
+    get_ttl : Proc(IFeed2*, Int32*, HRESULT)
+    get_language : Proc(IFeed2*, UInt8**, HRESULT)
+    get_copyright : Proc(IFeed2*, UInt8**, HRESULT)
+    get_max_item_count : Proc(IFeed2*, Int32*, HRESULT)
+    put_max_item_count : Proc(IFeed2*, Int32, HRESULT)
+    get_download_enclosures_automatically : Proc(IFeed2*, Int16*, HRESULT)
+    put_download_enclosures_automatically : Proc(IFeed2*, Int16, HRESULT)
+    get_download_status : Proc(IFeed2*, FEEDS_DOWNLOAD_STATUS*, HRESULT)
+    get_last_download_error : Proc(IFeed2*, FEEDS_DOWNLOAD_ERROR*, HRESULT)
+    merge : Proc(IFeed2*, UInt8*, UInt8*, HRESULT)
+    get_download_url : Proc(IFeed2*, UInt8**, HRESULT)
+    get_is_list : Proc(IFeed2*, Int16*, HRESULT)
+    mark_all_items_read : Proc(IFeed2*, HRESULT)
+    get_watcher : Proc(IFeed2*, FEEDS_EVENTS_SCOPE, FEEDS_EVENTS_MASK, IDispatch*, HRESULT)
+    get_unread_item_count : Proc(IFeed2*, Int32*, HRESULT)
+    get_item_count : Proc(IFeed2*, Int32*, HRESULT)
+    get_item_by_effective_id : Proc(IFeed2*, Int32, IDispatch*, HRESULT)
+    get_last_item_download_time : Proc(IFeed2*, Float64*, HRESULT)
+    get_username : Proc(IFeed2*, UInt8**, HRESULT)
+    get_password : Proc(IFeed2*, UInt8**, HRESULT)
+    set_credentials : Proc(IFeed2*, UInt8*, UInt8*, HRESULT)
+    clear_credentials : Proc(IFeed2*, HRESULT)
   end
 
   IFeed2_GUID = "33f2ea09-1398-4ab9-b6a4-f94b49d0a42e"
@@ -3489,21 +3489,21 @@ lib LibWin32
   end
 
   struct IFeedEventsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    error : UInt64
-    feed_deleted : UInt64
-    feed_renamed : UInt64
-    feed_url_changed : UInt64
-    feed_moved : UInt64
-    feed_downloading : UInt64
-    feed_download_completed : UInt64
-    feed_item_count_changed : UInt64
+    query_interface : Proc(IFeedEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFeedEvents*, UInt32)
+    release : Proc(IFeedEvents*, UInt32)
+    get_type_info_count : Proc(IFeedEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IFeedEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IFeedEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IFeedEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    error : Proc(IFeedEvents*, HRESULT)
+    feed_deleted : Proc(IFeedEvents*, UInt8*, HRESULT)
+    feed_renamed : Proc(IFeedEvents*, UInt8*, UInt8*, HRESULT)
+    feed_url_changed : Proc(IFeedEvents*, UInt8*, HRESULT)
+    feed_moved : Proc(IFeedEvents*, UInt8*, UInt8*, HRESULT)
+    feed_downloading : Proc(IFeedEvents*, UInt8*, HRESULT)
+    feed_download_completed : Proc(IFeedEvents*, UInt8*, FEEDS_DOWNLOAD_ERROR, HRESULT)
+    feed_item_count_changed : Proc(IFeedEvents*, UInt8*, Int32, HRESULT)
   end
 
   IFeedEvents_GUID = "abf35c99-0681-47ea-9a8c-1436a375a99e"
@@ -3513,30 +3513,30 @@ lib LibWin32
   end
 
   struct IFeedItemVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    xml : UInt64
-    get_title : UInt64
-    get_link : UInt64
-    get_guid : UInt64
-    get_description : UInt64
-    get_pub_date : UInt64
-    get_comments : UInt64
-    get_author : UInt64
-    get_enclosure : UInt64
-    get_is_read : UInt64
-    put_is_read : UInt64
-    get_local_id : UInt64
-    get_parent : UInt64
-    delete : UInt64
-    get_download_url : UInt64
-    get_last_download_time : UInt64
-    get_modified : UInt64
+    query_interface : Proc(IFeedItem*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFeedItem*, UInt32)
+    release : Proc(IFeedItem*, UInt32)
+    get_type_info_count : Proc(IFeedItem*, UInt32*, HRESULT)
+    get_type_info : Proc(IFeedItem*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IFeedItem*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IFeedItem*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    xml : Proc(IFeedItem*, FEEDS_XML_INCLUDE_FLAGS, UInt8**, HRESULT)
+    get_title : Proc(IFeedItem*, UInt8**, HRESULT)
+    get_link : Proc(IFeedItem*, UInt8**, HRESULT)
+    get_guid : Proc(IFeedItem*, UInt8**, HRESULT)
+    get_description : Proc(IFeedItem*, UInt8**, HRESULT)
+    get_pub_date : Proc(IFeedItem*, Float64*, HRESULT)
+    get_comments : Proc(IFeedItem*, UInt8**, HRESULT)
+    get_author : Proc(IFeedItem*, UInt8**, HRESULT)
+    get_enclosure : Proc(IFeedItem*, IDispatch*, HRESULT)
+    get_is_read : Proc(IFeedItem*, Int16*, HRESULT)
+    put_is_read : Proc(IFeedItem*, Int16, HRESULT)
+    get_local_id : Proc(IFeedItem*, Int32*, HRESULT)
+    get_parent : Proc(IFeedItem*, IDispatch*, HRESULT)
+    delete : Proc(IFeedItem*, HRESULT)
+    get_download_url : Proc(IFeedItem*, UInt8**, HRESULT)
+    get_last_download_time : Proc(IFeedItem*, Float64*, HRESULT)
+    get_modified : Proc(IFeedItem*, Float64*, HRESULT)
   end
 
   IFeedItem_GUID = "0a1e6cad-0a47-4da2-a13d-5baaa5c8bd4f"
@@ -3546,31 +3546,31 @@ lib LibWin32
   end
 
   struct IFeedItem2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    xml : UInt64
-    get_title : UInt64
-    get_link : UInt64
-    get_guid : UInt64
-    get_description : UInt64
-    get_pub_date : UInt64
-    get_comments : UInt64
-    get_author : UInt64
-    get_enclosure : UInt64
-    get_is_read : UInt64
-    put_is_read : UInt64
-    get_local_id : UInt64
-    get_parent : UInt64
-    delete : UInt64
-    get_download_url : UInt64
-    get_last_download_time : UInt64
-    get_modified : UInt64
-    get_effective_id : UInt64
+    query_interface : Proc(IFeedItem2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFeedItem2*, UInt32)
+    release : Proc(IFeedItem2*, UInt32)
+    get_type_info_count : Proc(IFeedItem2*, UInt32*, HRESULT)
+    get_type_info : Proc(IFeedItem2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IFeedItem2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IFeedItem2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    xml : Proc(IFeedItem2*, FEEDS_XML_INCLUDE_FLAGS, UInt8**, HRESULT)
+    get_title : Proc(IFeedItem2*, UInt8**, HRESULT)
+    get_link : Proc(IFeedItem2*, UInt8**, HRESULT)
+    get_guid : Proc(IFeedItem2*, UInt8**, HRESULT)
+    get_description : Proc(IFeedItem2*, UInt8**, HRESULT)
+    get_pub_date : Proc(IFeedItem2*, Float64*, HRESULT)
+    get_comments : Proc(IFeedItem2*, UInt8**, HRESULT)
+    get_author : Proc(IFeedItem2*, UInt8**, HRESULT)
+    get_enclosure : Proc(IFeedItem2*, IDispatch*, HRESULT)
+    get_is_read : Proc(IFeedItem2*, Int16*, HRESULT)
+    put_is_read : Proc(IFeedItem2*, Int16, HRESULT)
+    get_local_id : Proc(IFeedItem2*, Int32*, HRESULT)
+    get_parent : Proc(IFeedItem2*, IDispatch*, HRESULT)
+    delete : Proc(IFeedItem2*, HRESULT)
+    get_download_url : Proc(IFeedItem2*, UInt8**, HRESULT)
+    get_last_download_time : Proc(IFeedItem2*, Float64*, HRESULT)
+    get_modified : Proc(IFeedItem2*, Float64*, HRESULT)
+    get_effective_id : Proc(IFeedItem2*, Int32*, HRESULT)
   end
 
   IFeedItem2_GUID = "79ac9ef4-f9c1-4d2b-a50b-a7ffba4dcf37"
@@ -3580,26 +3580,26 @@ lib LibWin32
   end
 
   struct IFeedEnclosureVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_url : UInt64
-    get_type : UInt64
-    get_length : UInt64
-    async_download : UInt64
-    cancel_async_download : UInt64
-    get_download_status : UInt64
-    get_last_download_error : UInt64
-    get_local_path : UInt64
-    get_parent : UInt64
-    get_download_url : UInt64
-    get_download_mime_type : UInt64
-    remove_file : UInt64
-    set_file : UInt64
+    query_interface : Proc(IFeedEnclosure*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFeedEnclosure*, UInt32)
+    release : Proc(IFeedEnclosure*, UInt32)
+    get_type_info_count : Proc(IFeedEnclosure*, UInt32*, HRESULT)
+    get_type_info : Proc(IFeedEnclosure*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IFeedEnclosure*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IFeedEnclosure*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_url : Proc(IFeedEnclosure*, UInt8**, HRESULT)
+    get_type : Proc(IFeedEnclosure*, UInt8**, HRESULT)
+    get_length : Proc(IFeedEnclosure*, Int32*, HRESULT)
+    async_download : Proc(IFeedEnclosure*, HRESULT)
+    cancel_async_download : Proc(IFeedEnclosure*, HRESULT)
+    get_download_status : Proc(IFeedEnclosure*, FEEDS_DOWNLOAD_STATUS*, HRESULT)
+    get_last_download_error : Proc(IFeedEnclosure*, FEEDS_DOWNLOAD_ERROR*, HRESULT)
+    get_local_path : Proc(IFeedEnclosure*, UInt8**, HRESULT)
+    get_parent : Proc(IFeedEnclosure*, IDispatch*, HRESULT)
+    get_download_url : Proc(IFeedEnclosure*, UInt8**, HRESULT)
+    get_download_mime_type : Proc(IFeedEnclosure*, UInt8**, HRESULT)
+    remove_file : Proc(IFeedEnclosure*, HRESULT)
+    set_file : Proc(IFeedEnclosure*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
   end
 
   IFeedEnclosure_GUID = "361c26f7-90a4-4e67-ae09-3a36a546436a"
@@ -3609,20 +3609,20 @@ lib LibWin32
   end
 
   struct IWMPEffectsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    render : UInt64
-    media_info : UInt64
-    get_capabilities : UInt64
-    get_title : UInt64
-    get_preset_title : UInt64
-    get_preset_count : UInt64
-    set_current_preset : UInt64
-    get_current_preset : UInt64
-    display_property_page : UInt64
-    go_fullscreen : UInt64
-    render_full_screen : UInt64
+    query_interface : Proc(IWMPEffects*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPEffects*, UInt32)
+    release : Proc(IWMPEffects*, UInt32)
+    render : Proc(IWMPEffects*, TimedLevel*, HDC, RECT*, HRESULT)
+    media_info : Proc(IWMPEffects*, Int32, Int32, UInt8*, HRESULT)
+    get_capabilities : Proc(IWMPEffects*, UInt32*, HRESULT)
+    get_title : Proc(IWMPEffects*, UInt8**, HRESULT)
+    get_preset_title : Proc(IWMPEffects*, Int32, UInt8**, HRESULT)
+    get_preset_count : Proc(IWMPEffects*, Int32*, HRESULT)
+    set_current_preset : Proc(IWMPEffects*, Int32, HRESULT)
+    get_current_preset : Proc(IWMPEffects*, Int32*, HRESULT)
+    display_property_page : Proc(IWMPEffects*, LibC::HANDLE, HRESULT)
+    go_fullscreen : Proc(IWMPEffects*, LibC::BOOL, HRESULT)
+    render_full_screen : Proc(IWMPEffects*, TimedLevel*, HRESULT)
   end
 
   IWMPEffects_GUID = "d3984c13-c3cb-48e2-8be5-5168340b4f35"
@@ -3632,26 +3632,26 @@ lib LibWin32
   end
 
   struct IWMPEffects2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    render : UInt64
-    media_info : UInt64
-    get_capabilities : UInt64
-    get_title : UInt64
-    get_preset_title : UInt64
-    get_preset_count : UInt64
-    set_current_preset : UInt64
-    get_current_preset : UInt64
-    display_property_page : UInt64
-    go_fullscreen : UInt64
-    render_full_screen : UInt64
-    set_core : UInt64
-    create : UInt64
-    destroy : UInt64
-    notify_new_media : UInt64
-    on_window_message : UInt64
-    render_windowed : UInt64
+    query_interface : Proc(IWMPEffects2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPEffects2*, UInt32)
+    release : Proc(IWMPEffects2*, UInt32)
+    render : Proc(IWMPEffects2*, TimedLevel*, HDC, RECT*, HRESULT)
+    media_info : Proc(IWMPEffects2*, Int32, Int32, UInt8*, HRESULT)
+    get_capabilities : Proc(IWMPEffects2*, UInt32*, HRESULT)
+    get_title : Proc(IWMPEffects2*, UInt8**, HRESULT)
+    get_preset_title : Proc(IWMPEffects2*, Int32, UInt8**, HRESULT)
+    get_preset_count : Proc(IWMPEffects2*, Int32*, HRESULT)
+    set_current_preset : Proc(IWMPEffects2*, Int32, HRESULT)
+    get_current_preset : Proc(IWMPEffects2*, Int32*, HRESULT)
+    display_property_page : Proc(IWMPEffects2*, LibC::HANDLE, HRESULT)
+    go_fullscreen : Proc(IWMPEffects2*, LibC::BOOL, HRESULT)
+    render_full_screen : Proc(IWMPEffects2*, TimedLevel*, HRESULT)
+    set_core : Proc(IWMPEffects2*, IWMPCore, HRESULT)
+    create : Proc(IWMPEffects2*, LibC::HANDLE, HRESULT)
+    destroy : Proc(IWMPEffects2*, HRESULT)
+    notify_new_media : Proc(IWMPEffects2*, IWMPMedia, HRESULT)
+    on_window_message : Proc(IWMPEffects2*, UInt32, LibC::UINT_PTR, LPARAM, LRESULT*, HRESULT)
+    render_windowed : Proc(IWMPEffects2*, TimedLevel*, LibC::BOOL, HRESULT)
   end
 
   IWMPEffects2_GUID = "695386ec-aa3c-4618-a5e1-dd9a8b987632"
@@ -3661,16 +3661,16 @@ lib LibWin32
   end
 
   struct IWMPPluginUIVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_core : UInt64
-    create : UInt64
-    destroy : UInt64
-    display_property_page : UInt64
-    get_property : UInt64
-    set_property : UInt64
-    translate_accelerator : UInt64
+    query_interface : Proc(IWMPPluginUI*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPPluginUI*, UInt32)
+    release : Proc(IWMPPluginUI*, UInt32)
+    set_core : Proc(IWMPPluginUI*, IWMPCore, HRESULT)
+    create : Proc(IWMPPluginUI*, LibC::HANDLE, HANDLE*, HRESULT)
+    destroy : Proc(IWMPPluginUI*, HRESULT)
+    display_property_page : Proc(IWMPPluginUI*, LibC::HANDLE, HRESULT)
+    get_property : Proc(IWMPPluginUI*, LibC::LPWSTR, VARIANT*, HRESULT)
+    set_property : Proc(IWMPPluginUI*, LibC::LPWSTR, VARIANT*, HRESULT)
+    translate_accelerator : Proc(IWMPPluginUI*, MSG*, HRESULT)
   end
 
   IWMPPluginUI_GUID = "4c5e8f9f-ad3e-4bf9-9753-fcd30d6d38dd"
@@ -3680,15 +3680,15 @@ lib LibWin32
   end
 
   struct IWMPContentContainerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_id : UInt64
-    get_price : UInt64
-    get_type : UInt64
-    get_content_count : UInt64
-    get_content_price : UInt64
-    get_content_id : UInt64
+    query_interface : Proc(IWMPContentContainer*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPContentContainer*, UInt32)
+    release : Proc(IWMPContentContainer*, UInt32)
+    get_id : Proc(IWMPContentContainer*, UInt32*, HRESULT)
+    get_price : Proc(IWMPContentContainer*, UInt8**, HRESULT)
+    get_type : Proc(IWMPContentContainer*, UInt8**, HRESULT)
+    get_content_count : Proc(IWMPContentContainer*, UInt32*, HRESULT)
+    get_content_price : Proc(IWMPContentContainer*, UInt32, UInt8**, HRESULT)
+    get_content_id : Proc(IWMPContentContainer*, UInt32, UInt32*, HRESULT)
   end
 
   IWMPContentContainer_GUID = "ad7f4d9c-1a9f-4ed2-9815-ecc0b58cb616"
@@ -3698,12 +3698,12 @@ lib LibWin32
   end
 
   struct IWMPContentContainerListVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_transaction_type : UInt64
-    get_container_count : UInt64
-    get_container : UInt64
+    query_interface : Proc(IWMPContentContainerList*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPContentContainerList*, UInt32)
+    release : Proc(IWMPContentContainerList*, UInt32)
+    get_transaction_type : Proc(IWMPContentContainerList*, WMPTransactionType*, HRESULT)
+    get_container_count : Proc(IWMPContentContainerList*, UInt32*, HRESULT)
+    get_container : Proc(IWMPContentContainerList*, UInt32, IWMPContentContainer*, HRESULT)
   end
 
   IWMPContentContainerList_GUID = "a9937f78-0802-4af8-8b8d-e3f045bc8ab5"
@@ -3713,22 +3713,22 @@ lib LibWin32
   end
 
   struct IWMPContentPartnerCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    notify : UInt64
-    buy_complete : UInt64
-    download_track : UInt64
-    get_catalog_version : UInt64
-    update_device_complete : UInt64
-    change_view : UInt64
-    add_list_contents : UInt64
-    list_contents_complete : UInt64
-    send_message_complete : UInt64
-    get_content_i_ds_in_library : UInt64
-    refresh_license_complete : UInt64
-    show_popup : UInt64
-    verify_permission_complete : UInt64
+    query_interface : Proc(IWMPContentPartnerCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPContentPartnerCallback*, UInt32)
+    release : Proc(IWMPContentPartnerCallback*, UInt32)
+    notify : Proc(IWMPContentPartnerCallback*, WMPCallbackNotification, VARIANT*, HRESULT)
+    buy_complete : Proc(IWMPContentPartnerCallback*, HRESULT, UInt32, HRESULT)
+    download_track : Proc(IWMPContentPartnerCallback*, UInt32, UInt8*, UInt32, UInt8*, HRESULT, HRESULT)
+    get_catalog_version : Proc(IWMPContentPartnerCallback*, UInt32*, UInt32*, UInt32*, HRESULT)
+    update_device_complete : Proc(IWMPContentPartnerCallback*, UInt8*, HRESULT)
+    change_view : Proc(IWMPContentPartnerCallback*, UInt8*, UInt8*, UInt8*, HRESULT)
+    add_list_contents : Proc(IWMPContentPartnerCallback*, UInt32, UInt32, UInt32*, HRESULT)
+    list_contents_complete : Proc(IWMPContentPartnerCallback*, UInt32, HRESULT, HRESULT)
+    send_message_complete : Proc(IWMPContentPartnerCallback*, UInt8*, UInt8*, UInt8*, HRESULT)
+    get_content_i_ds_in_library : Proc(IWMPContentPartnerCallback*, UInt32*, UInt32**, HRESULT)
+    refresh_license_complete : Proc(IWMPContentPartnerCallback*, UInt32, UInt32, HRESULT, HRESULT)
+    show_popup : Proc(IWMPContentPartnerCallback*, Int32, UInt8*, HRESULT)
+    verify_permission_complete : Proc(IWMPContentPartnerCallback*, UInt8*, VARIANT*, HRESULT, HRESULT)
   end
 
   IWMPContentPartnerCallback_GUID = "9e8f7da2-0695-403c-b697-da10fafaa676"
@@ -3738,32 +3738,32 @@ lib LibWin32
   end
 
   struct IWMPContentPartnerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_callback : UInt64
-    notify : UInt64
-    get_item_info : UInt64
-    get_content_partner_info : UInt64
-    get_commands : UInt64
-    invoke_command : UInt64
-    can_buy_silent : UInt64
-    buy : UInt64
-    get_streaming_url : UInt64
-    download : UInt64
-    download_track_complete : UInt64
-    refresh_license : UInt64
-    get_catalog_url : UInt64
-    get_template : UInt64
-    update_device : UInt64
-    get_list_contents : UInt64
-    login : UInt64
-    authenticate : UInt64
-    logout : UInt64
-    send_message : UInt64
-    station_event : UInt64
-    compare_container_list_prices : UInt64
-    verify_permission : UInt64
+    query_interface : Proc(IWMPContentPartner*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPContentPartner*, UInt32)
+    release : Proc(IWMPContentPartner*, UInt32)
+    set_callback : Proc(IWMPContentPartner*, IWMPContentPartnerCallback, HRESULT)
+    notify : Proc(IWMPContentPartner*, WMPPartnerNotification, VARIANT*, HRESULT)
+    get_item_info : Proc(IWMPContentPartner*, UInt8*, VARIANT*, VARIANT*, HRESULT)
+    get_content_partner_info : Proc(IWMPContentPartner*, UInt8*, VARIANT*, HRESULT)
+    get_commands : Proc(IWMPContentPartner*, UInt8*, VARIANT*, UInt8*, UInt32, UInt32*, UInt32*, WMPContextMenuInfo**, HRESULT)
+    invoke_command : Proc(IWMPContentPartner*, UInt32, UInt8*, VARIANT*, UInt8*, UInt32, UInt32*, HRESULT)
+    can_buy_silent : Proc(IWMPContentPartner*, IWMPContentContainerList, UInt8**, Int16*, HRESULT)
+    buy : Proc(IWMPContentPartner*, IWMPContentContainerList, UInt32, HRESULT)
+    get_streaming_url : Proc(IWMPContentPartner*, WMPStreamingType, VARIANT*, UInt8**, HRESULT)
+    download : Proc(IWMPContentPartner*, IWMPContentContainerList, UInt32, HRESULT)
+    download_track_complete : Proc(IWMPContentPartner*, HRESULT, UInt32, UInt8*, HRESULT)
+    refresh_license : Proc(IWMPContentPartner*, UInt32, Int16, UInt8*, WMPStreamingType, UInt32, UInt8*, VARIANT*, HRESULT)
+    get_catalog_url : Proc(IWMPContentPartner*, UInt32, UInt32, UInt32, UInt32*, UInt8**, VARIANT*, HRESULT)
+    get_template : Proc(IWMPContentPartner*, WMPTaskType, UInt8*, VARIANT*, UInt8*, VARIANT*, UInt8*, UInt8*, UInt8**, WMPTemplateSize*, HRESULT)
+    update_device : Proc(IWMPContentPartner*, UInt8*, HRESULT)
+    get_list_contents : Proc(IWMPContentPartner*, UInt8*, VARIANT*, UInt8*, UInt8*, UInt32, HRESULT)
+    login : Proc(IWMPContentPartner*, BLOB, BLOB, Int16, Int16, HRESULT)
+    authenticate : Proc(IWMPContentPartner*, BLOB, BLOB, HRESULT)
+    logout : Proc(IWMPContentPartner*, HRESULT)
+    send_message : Proc(IWMPContentPartner*, UInt8*, UInt8*, HRESULT)
+    station_event : Proc(IWMPContentPartner*, UInt8*, UInt32, UInt32, UInt32, UInt8*, UInt32, HRESULT)
+    compare_container_list_prices : Proc(IWMPContentPartner*, IWMPContentContainerList, IWMPContentContainerList, Int32*, HRESULT)
+    verify_permission : Proc(IWMPContentPartner*, UInt8*, VARIANT*, HRESULT)
   end
 
   IWMPContentPartner_GUID = "55455073-41b5-4e75-87b8-f13bdb291d08"
@@ -3773,13 +3773,13 @@ lib LibWin32
   end
 
   struct IWMPSubscriptionServiceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    allow_play : UInt64
-    allow_cd_burn : UInt64
-    allow_pda_transfer : UInt64
-    start_background_processing : UInt64
+    query_interface : Proc(IWMPSubscriptionService*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPSubscriptionService*, UInt32)
+    release : Proc(IWMPSubscriptionService*, UInt32)
+    allow_play : Proc(IWMPSubscriptionService*, LibC::HANDLE, IWMPMedia, LibC::BOOL*, HRESULT)
+    allow_cd_burn : Proc(IWMPSubscriptionService*, LibC::HANDLE, IWMPPlaylist, LibC::BOOL*, HRESULT)
+    allow_pda_transfer : Proc(IWMPSubscriptionService*, LibC::HANDLE, IWMPPlaylist, LibC::BOOL*, HRESULT)
+    start_background_processing : Proc(IWMPSubscriptionService*, LibC::HANDLE, HRESULT)
   end
 
   IWMPSubscriptionService_GUID = "376055f8-2a59-4a73-9501-dca5273a7a10"
@@ -3789,10 +3789,10 @@ lib LibWin32
   end
 
   struct IWMPSubscriptionServiceCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_complete : UInt64
+    query_interface : Proc(IWMPSubscriptionServiceCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPSubscriptionServiceCallback*, UInt32)
+    release : Proc(IWMPSubscriptionServiceCallback*, UInt32)
+    on_complete : Proc(IWMPSubscriptionServiceCallback*, HRESULT, HRESULT)
   end
 
   IWMPSubscriptionServiceCallback_GUID = "dd01d127-2dc2-4c3a-876e-63312079f9b0"
@@ -3802,17 +3802,17 @@ lib LibWin32
   end
 
   struct IWMPSubscriptionService2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    allow_play : UInt64
-    allow_cd_burn : UInt64
-    allow_pda_transfer : UInt64
-    start_background_processing : UInt64
-    stop_background_processing : UInt64
-    service_event : UInt64
-    device_available : UInt64
-    prepare_for_sync : UInt64
+    query_interface : Proc(IWMPSubscriptionService2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPSubscriptionService2*, UInt32)
+    release : Proc(IWMPSubscriptionService2*, UInt32)
+    allow_play : Proc(IWMPSubscriptionService2*, LibC::HANDLE, IWMPMedia, LibC::BOOL*, HRESULT)
+    allow_cd_burn : Proc(IWMPSubscriptionService2*, LibC::HANDLE, IWMPPlaylist, LibC::BOOL*, HRESULT)
+    allow_pda_transfer : Proc(IWMPSubscriptionService2*, LibC::HANDLE, IWMPPlaylist, LibC::BOOL*, HRESULT)
+    start_background_processing : Proc(IWMPSubscriptionService2*, LibC::HANDLE, HRESULT)
+    stop_background_processing : Proc(IWMPSubscriptionService2*, HRESULT)
+    service_event : Proc(IWMPSubscriptionService2*, WMPSubscriptionServiceEvent, HRESULT)
+    device_available : Proc(IWMPSubscriptionService2*, UInt8*, IWMPSubscriptionServiceCallback, HRESULT)
+    prepare_for_sync : Proc(IWMPSubscriptionService2*, UInt8*, UInt8*, IWMPSubscriptionServiceCallback, HRESULT)
   end
 
   IWMPSubscriptionService2_GUID = "a94c120e-d600-4ec6-b05e-ec9d56d84de0"
@@ -3822,21 +3822,21 @@ lib LibWin32
   end
 
   struct IWMPDownloadItemVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_source_url : UInt64
-    get_size : UInt64
-    get_type : UInt64
-    get_progress : UInt64
-    get_download_state : UInt64
-    pause : UInt64
-    resume : UInt64
-    cancel : UInt64
+    query_interface : Proc(IWMPDownloadItem*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPDownloadItem*, UInt32)
+    release : Proc(IWMPDownloadItem*, UInt32)
+    get_type_info_count : Proc(IWMPDownloadItem*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPDownloadItem*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPDownloadItem*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPDownloadItem*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_source_url : Proc(IWMPDownloadItem*, UInt8**, HRESULT)
+    get_size : Proc(IWMPDownloadItem*, Int32*, HRESULT)
+    get_type : Proc(IWMPDownloadItem*, UInt8**, HRESULT)
+    get_progress : Proc(IWMPDownloadItem*, Int32*, HRESULT)
+    get_download_state : Proc(IWMPDownloadItem*, WMPSubscriptionDownloadState*, HRESULT)
+    pause : Proc(IWMPDownloadItem*, HRESULT)
+    resume : Proc(IWMPDownloadItem*, HRESULT)
+    cancel : Proc(IWMPDownloadItem*, HRESULT)
   end
 
   IWMPDownloadItem_GUID = "c9470e8e-3f6b-46a9-a0a9-452815c34297"
@@ -3846,22 +3846,22 @@ lib LibWin32
   end
 
   struct IWMPDownloadItem2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_source_url : UInt64
-    get_size : UInt64
-    get_type : UInt64
-    get_progress : UInt64
-    get_download_state : UInt64
-    pause : UInt64
-    resume : UInt64
-    cancel : UInt64
-    get_item_info : UInt64
+    query_interface : Proc(IWMPDownloadItem2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPDownloadItem2*, UInt32)
+    release : Proc(IWMPDownloadItem2*, UInt32)
+    get_type_info_count : Proc(IWMPDownloadItem2*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPDownloadItem2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPDownloadItem2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPDownloadItem2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_source_url : Proc(IWMPDownloadItem2*, UInt8**, HRESULT)
+    get_size : Proc(IWMPDownloadItem2*, Int32*, HRESULT)
+    get_type : Proc(IWMPDownloadItem2*, UInt8**, HRESULT)
+    get_progress : Proc(IWMPDownloadItem2*, Int32*, HRESULT)
+    get_download_state : Proc(IWMPDownloadItem2*, WMPSubscriptionDownloadState*, HRESULT)
+    pause : Proc(IWMPDownloadItem2*, HRESULT)
+    resume : Proc(IWMPDownloadItem2*, HRESULT)
+    cancel : Proc(IWMPDownloadItem2*, HRESULT)
+    get_item_info : Proc(IWMPDownloadItem2*, UInt8*, UInt8**, HRESULT)
   end
 
   IWMPDownloadItem2_GUID = "9fbb3336-6da3-479d-b8ff-67d46e20a987"
@@ -3871,19 +3871,19 @@ lib LibWin32
   end
 
   struct IWMPDownloadCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_id : UInt64
-    get_count : UInt64
-    item : UInt64
-    start_download : UInt64
-    remove_item : UInt64
-    clear : UInt64
+    query_interface : Proc(IWMPDownloadCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPDownloadCollection*, UInt32)
+    release : Proc(IWMPDownloadCollection*, UInt32)
+    get_type_info_count : Proc(IWMPDownloadCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPDownloadCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPDownloadCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPDownloadCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_id : Proc(IWMPDownloadCollection*, Int32*, HRESULT)
+    get_count : Proc(IWMPDownloadCollection*, Int32*, HRESULT)
+    item : Proc(IWMPDownloadCollection*, Int32, IWMPDownloadItem2*, HRESULT)
+    start_download : Proc(IWMPDownloadCollection*, UInt8*, UInt8*, IWMPDownloadItem2*, HRESULT)
+    remove_item : Proc(IWMPDownloadCollection*, Int32, HRESULT)
+    clear : Proc(IWMPDownloadCollection*, HRESULT)
   end
 
   IWMPDownloadCollection_GUID = "0a319c7f-85f9-436c-b88e-82fd88000e1c"
@@ -3893,15 +3893,15 @@ lib LibWin32
   end
 
   struct IWMPDownloadManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_download_collection : UInt64
-    create_download_collection : UInt64
+    query_interface : Proc(IWMPDownloadManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPDownloadManager*, UInt32)
+    release : Proc(IWMPDownloadManager*, UInt32)
+    get_type_info_count : Proc(IWMPDownloadManager*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPDownloadManager*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPDownloadManager*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPDownloadManager*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_download_collection : Proc(IWMPDownloadManager*, Int32, IWMPDownloadCollection*, HRESULT)
+    create_download_collection : Proc(IWMPDownloadManager*, IWMPDownloadCollection*, HRESULT)
   end
 
   IWMPDownloadManager_GUID = "e15e9ad1-8f20-4cc4-9ec7-1a328ca86a0d"
@@ -3912,6006 +3912,6006 @@ lib LibWin32
 
 end
 struct LibWin32::IWMPErrorItem
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPErrorItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPErrorItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPErrorItem*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPErrorItem*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPErrorItem*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPErrorItem*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPErrorItem*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_error_code(phr : Int32*) : HRESULT
-    @lpVtbl.value.get_error_code.unsafe_as(Proc(Int32*, HRESULT)).call(phr)
+  def get_error_code(this : IWMPErrorItem*, phr : Int32*) : HRESULT
+    @lpVtbl.value.get_error_code.call(this, phr)
   end
-  def get_error_description(pbstrdescription : UInt8**) : HRESULT
-    @lpVtbl.value.get_error_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  def get_error_description(this : IWMPErrorItem*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_error_description.call(this, pbstrdescription)
   end
-  def get_error_context(pvarcontext : VARIANT*) : HRESULT
-    @lpVtbl.value.get_error_context.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarcontext)
+  def get_error_context(this : IWMPErrorItem*, pvarcontext : VARIANT*) : HRESULT
+    @lpVtbl.value.get_error_context.call(this, pvarcontext)
   end
-  def get_remedy(plremedy : Int32*) : HRESULT
-    @lpVtbl.value.get_remedy.unsafe_as(Proc(Int32*, HRESULT)).call(plremedy)
+  def get_remedy(this : IWMPErrorItem*, plremedy : Int32*) : HRESULT
+    @lpVtbl.value.get_remedy.call(this, plremedy)
   end
-  def get_custom_url(pbstrcustomurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_custom_url.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcustomurl)
+  def get_custom_url(this : IWMPErrorItem*, pbstrcustomurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_custom_url.call(this, pbstrcustomurl)
   end
 end
 struct LibWin32::IWMPError
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPError*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPError*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPError*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPError*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPError*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPError*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPError*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def clear_error_queue : HRESULT
-    @lpVtbl.value.clear_error_queue.unsafe_as(Proc(HRESULT)).call
+  def clear_error_queue(this : IWMPError*) : HRESULT
+    @lpVtbl.value.clear_error_queue.call(this)
   end
-  def get_error_count(plnumerrors : Int32*) : HRESULT
-    @lpVtbl.value.get_error_count.unsafe_as(Proc(Int32*, HRESULT)).call(plnumerrors)
+  def get_error_count(this : IWMPError*, plnumerrors : Int32*) : HRESULT
+    @lpVtbl.value.get_error_count.call(this, plnumerrors)
   end
-  def get_item(dwindex : Int32, pperroritem : IWMPErrorItem*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, IWMPErrorItem*, HRESULT)).call(dwindex, pperroritem)
+  def get_item(this : IWMPError*, dwindex : Int32, pperroritem : IWMPErrorItem*) : HRESULT
+    @lpVtbl.value.get_item.call(this, dwindex, pperroritem)
   end
-  def web_help : HRESULT
-    @lpVtbl.value.web_help.unsafe_as(Proc(HRESULT)).call
+  def web_help(this : IWMPError*) : HRESULT
+    @lpVtbl.value.web_help.call(this)
   end
 end
 struct LibWin32::IWMPMedia
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPMedia*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPMedia*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPMedia*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPMedia*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPMedia*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPMedia*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPMedia*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_is_identical(piwmpmedia : IWMPMedia, pvbool : Int16*) : HRESULT
-    @lpVtbl.value.get_is_identical.unsafe_as(Proc(IWMPMedia, Int16*, HRESULT)).call(piwmpmedia, pvbool)
+  def get_is_identical(this : IWMPMedia*, piwmpmedia : IWMPMedia, pvbool : Int16*) : HRESULT
+    @lpVtbl.value.get_is_identical.call(this, piwmpmedia, pvbool)
   end
-  def get_source_url(pbstrsourceurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_source_url.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsourceurl)
+  def get_source_url(this : IWMPMedia*, pbstrsourceurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_url.call(this, pbstrsourceurl)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IWMPMedia*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def put_name(bstrname : UInt8*) : HRESULT
-    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  def put_name(this : IWMPMedia*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
   end
-  def get_image_source_width(pwidth : Int32*) : HRESULT
-    @lpVtbl.value.get_image_source_width.unsafe_as(Proc(Int32*, HRESULT)).call(pwidth)
+  def get_image_source_width(this : IWMPMedia*, pwidth : Int32*) : HRESULT
+    @lpVtbl.value.get_image_source_width.call(this, pwidth)
   end
-  def get_image_source_height(pheight : Int32*) : HRESULT
-    @lpVtbl.value.get_image_source_height.unsafe_as(Proc(Int32*, HRESULT)).call(pheight)
+  def get_image_source_height(this : IWMPMedia*, pheight : Int32*) : HRESULT
+    @lpVtbl.value.get_image_source_height.call(this, pheight)
   end
-  def get_marker_count(pmarkercount : Int32*) : HRESULT
-    @lpVtbl.value.get_marker_count.unsafe_as(Proc(Int32*, HRESULT)).call(pmarkercount)
+  def get_marker_count(this : IWMPMedia*, pmarkercount : Int32*) : HRESULT
+    @lpVtbl.value.get_marker_count.call(this, pmarkercount)
   end
-  def get_marker_time(markernum : Int32, pmarkertime : Float64*) : HRESULT
-    @lpVtbl.value.get_marker_time.unsafe_as(Proc(Int32, Float64*, HRESULT)).call(markernum, pmarkertime)
+  def get_marker_time(this : IWMPMedia*, markernum : Int32, pmarkertime : Float64*) : HRESULT
+    @lpVtbl.value.get_marker_time.call(this, markernum, pmarkertime)
   end
-  def get_marker_name(markernum : Int32, pbstrmarkername : UInt8**) : HRESULT
-    @lpVtbl.value.get_marker_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(markernum, pbstrmarkername)
+  def get_marker_name(this : IWMPMedia*, markernum : Int32, pbstrmarkername : UInt8**) : HRESULT
+    @lpVtbl.value.get_marker_name.call(this, markernum, pbstrmarkername)
   end
-  def get_duration(pduration : Float64*) : HRESULT
-    @lpVtbl.value.get_duration.unsafe_as(Proc(Float64*, HRESULT)).call(pduration)
+  def get_duration(this : IWMPMedia*, pduration : Float64*) : HRESULT
+    @lpVtbl.value.get_duration.call(this, pduration)
   end
-  def get_duration_string(pbstrduration : UInt8**) : HRESULT
-    @lpVtbl.value.get_duration_string.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrduration)
+  def get_duration_string(this : IWMPMedia*, pbstrduration : UInt8**) : HRESULT
+    @lpVtbl.value.get_duration_string.call(this, pbstrduration)
   end
-  def get_attribute_count(plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_attribute_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  def get_attribute_count(this : IWMPMedia*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_attribute_count.call(this, plcount)
   end
-  def get_attribute_name(lindex : Int32, pbstritemname : UInt8**) : HRESULT
-    @lpVtbl.value.get_attribute_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(lindex, pbstritemname)
+  def get_attribute_name(this : IWMPMedia*, lindex : Int32, pbstritemname : UInt8**) : HRESULT
+    @lpVtbl.value.get_attribute_name.call(this, lindex, pbstritemname)
   end
-  def get_item_info(bstritemname : UInt8*, pbstrval : UInt8**) : HRESULT
-    @lpVtbl.value.get_item_info.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstritemname, pbstrval)
+  def get_item_info(this : IWMPMedia*, bstritemname : UInt8*, pbstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_info.call(this, bstritemname, pbstrval)
   end
-  def set_item_info(bstritemname : UInt8*, bstrval : UInt8*) : HRESULT
-    @lpVtbl.value.set_item_info.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstritemname, bstrval)
+  def set_item_info(this : IWMPMedia*, bstritemname : UInt8*, bstrval : UInt8*) : HRESULT
+    @lpVtbl.value.set_item_info.call(this, bstritemname, bstrval)
   end
-  def get_item_info_by_atom(latom : Int32, pbstrval : UInt8**) : HRESULT
-    @lpVtbl.value.get_item_info_by_atom.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(latom, pbstrval)
+  def get_item_info_by_atom(this : IWMPMedia*, latom : Int32, pbstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_info_by_atom.call(this, latom, pbstrval)
   end
-  def is_member_of(pplaylist : IWMPPlaylist, pvarfismemberof : Int16*) : HRESULT
-    @lpVtbl.value.is_member_of.unsafe_as(Proc(IWMPPlaylist, Int16*, HRESULT)).call(pplaylist, pvarfismemberof)
+  def is_member_of(this : IWMPMedia*, pplaylist : IWMPPlaylist, pvarfismemberof : Int16*) : HRESULT
+    @lpVtbl.value.is_member_of.call(this, pplaylist, pvarfismemberof)
   end
-  def is_read_only_item(bstritemname : UInt8*, pvarfisreadonly : Int16*) : HRESULT
-    @lpVtbl.value.is_read_only_item.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(bstritemname, pvarfisreadonly)
+  def is_read_only_item(this : IWMPMedia*, bstritemname : UInt8*, pvarfisreadonly : Int16*) : HRESULT
+    @lpVtbl.value.is_read_only_item.call(this, bstritemname, pvarfisreadonly)
   end
 end
 struct LibWin32::IWMPControls
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPControls*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPControls*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPControls*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPControls*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPControls*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPControls*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPControls*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_is_available(bstritem : UInt8*, pisavailable : Int16*) : HRESULT
-    @lpVtbl.value.get_is_available.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(bstritem, pisavailable)
+  def get_is_available(this : IWMPControls*, bstritem : UInt8*, pisavailable : Int16*) : HRESULT
+    @lpVtbl.value.get_is_available.call(this, bstritem, pisavailable)
   end
-  def play : HRESULT
-    @lpVtbl.value.play.unsafe_as(Proc(HRESULT)).call
+  def play(this : IWMPControls*) : HRESULT
+    @lpVtbl.value.play.call(this)
   end
-  def stop : HRESULT
-    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  def stop(this : IWMPControls*) : HRESULT
+    @lpVtbl.value.stop.call(this)
   end
-  def pause : HRESULT
-    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  def pause(this : IWMPControls*) : HRESULT
+    @lpVtbl.value.pause.call(this)
   end
-  def fast_forward : HRESULT
-    @lpVtbl.value.fast_forward.unsafe_as(Proc(HRESULT)).call
+  def fast_forward(this : IWMPControls*) : HRESULT
+    @lpVtbl.value.fast_forward.call(this)
   end
-  def fast_reverse : HRESULT
-    @lpVtbl.value.fast_reverse.unsafe_as(Proc(HRESULT)).call
+  def fast_reverse(this : IWMPControls*) : HRESULT
+    @lpVtbl.value.fast_reverse.call(this)
   end
-  def get_current_position(pdcurrentposition : Float64*) : HRESULT
-    @lpVtbl.value.get_current_position.unsafe_as(Proc(Float64*, HRESULT)).call(pdcurrentposition)
+  def get_current_position(this : IWMPControls*, pdcurrentposition : Float64*) : HRESULT
+    @lpVtbl.value.get_current_position.call(this, pdcurrentposition)
   end
-  def put_current_position(dcurrentposition : Float64) : HRESULT
-    @lpVtbl.value.put_current_position.unsafe_as(Proc(Float64, HRESULT)).call(dcurrentposition)
+  def put_current_position(this : IWMPControls*, dcurrentposition : Float64) : HRESULT
+    @lpVtbl.value.put_current_position.call(this, dcurrentposition)
   end
-  def get_current_position_string(pbstrcurrentposition : UInt8**) : HRESULT
-    @lpVtbl.value.get_current_position_string.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcurrentposition)
+  def get_current_position_string(this : IWMPControls*, pbstrcurrentposition : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_position_string.call(this, pbstrcurrentposition)
   end
-  def next : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(HRESULT)).call
+  def next(this : IWMPControls*) : HRESULT
+    @lpVtbl.value.next.call(this)
   end
-  def previous : HRESULT
-    @lpVtbl.value.previous.unsafe_as(Proc(HRESULT)).call
+  def previous(this : IWMPControls*) : HRESULT
+    @lpVtbl.value.previous.call(this)
   end
-  def get_current_item(ppiwmpmedia : IWMPMedia*) : HRESULT
-    @lpVtbl.value.get_current_item.unsafe_as(Proc(IWMPMedia*, HRESULT)).call(ppiwmpmedia)
+  def get_current_item(this : IWMPControls*, ppiwmpmedia : IWMPMedia*) : HRESULT
+    @lpVtbl.value.get_current_item.call(this, ppiwmpmedia)
   end
-  def put_current_item(piwmpmedia : IWMPMedia) : HRESULT
-    @lpVtbl.value.put_current_item.unsafe_as(Proc(IWMPMedia, HRESULT)).call(piwmpmedia)
+  def put_current_item(this : IWMPControls*, piwmpmedia : IWMPMedia) : HRESULT
+    @lpVtbl.value.put_current_item.call(this, piwmpmedia)
   end
-  def get_current_marker(plmarker : Int32*) : HRESULT
-    @lpVtbl.value.get_current_marker.unsafe_as(Proc(Int32*, HRESULT)).call(plmarker)
+  def get_current_marker(this : IWMPControls*, plmarker : Int32*) : HRESULT
+    @lpVtbl.value.get_current_marker.call(this, plmarker)
   end
-  def put_current_marker(lmarker : Int32) : HRESULT
-    @lpVtbl.value.put_current_marker.unsafe_as(Proc(Int32, HRESULT)).call(lmarker)
+  def put_current_marker(this : IWMPControls*, lmarker : Int32) : HRESULT
+    @lpVtbl.value.put_current_marker.call(this, lmarker)
   end
-  def play_item(piwmpmedia : IWMPMedia) : HRESULT
-    @lpVtbl.value.play_item.unsafe_as(Proc(IWMPMedia, HRESULT)).call(piwmpmedia)
+  def play_item(this : IWMPControls*, piwmpmedia : IWMPMedia) : HRESULT
+    @lpVtbl.value.play_item.call(this, piwmpmedia)
   end
 end
 struct LibWin32::IWMPSettings
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPSettings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPSettings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPSettings*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPSettings*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPSettings*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPSettings*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPSettings*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_is_available(bstritem : UInt8*, pisavailable : Int16*) : HRESULT
-    @lpVtbl.value.get_is_available.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(bstritem, pisavailable)
+  def get_is_available(this : IWMPSettings*, bstritem : UInt8*, pisavailable : Int16*) : HRESULT
+    @lpVtbl.value.get_is_available.call(this, bstritem, pisavailable)
   end
-  def get_auto_start(pfautostart : Int16*) : HRESULT
-    @lpVtbl.value.get_auto_start.unsafe_as(Proc(Int16*, HRESULT)).call(pfautostart)
+  def get_auto_start(this : IWMPSettings*, pfautostart : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_start.call(this, pfautostart)
   end
-  def put_auto_start(fautostart : Int16) : HRESULT
-    @lpVtbl.value.put_auto_start.unsafe_as(Proc(Int16, HRESULT)).call(fautostart)
+  def put_auto_start(this : IWMPSettings*, fautostart : Int16) : HRESULT
+    @lpVtbl.value.put_auto_start.call(this, fautostart)
   end
-  def get_base_url(pbstrbaseurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_url.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbaseurl)
+  def get_base_url(this : IWMPSettings*, pbstrbaseurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_base_url.call(this, pbstrbaseurl)
   end
-  def put_base_url(bstrbaseurl : UInt8*) : HRESULT
-    @lpVtbl.value.put_base_url.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrbaseurl)
+  def put_base_url(this : IWMPSettings*, bstrbaseurl : UInt8*) : HRESULT
+    @lpVtbl.value.put_base_url.call(this, bstrbaseurl)
   end
-  def get_default_frame(pbstrdefaultframe : UInt8**) : HRESULT
-    @lpVtbl.value.get_default_frame.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdefaultframe)
+  def get_default_frame(this : IWMPSettings*, pbstrdefaultframe : UInt8**) : HRESULT
+    @lpVtbl.value.get_default_frame.call(this, pbstrdefaultframe)
   end
-  def put_default_frame(bstrdefaultframe : UInt8*) : HRESULT
-    @lpVtbl.value.put_default_frame.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdefaultframe)
+  def put_default_frame(this : IWMPSettings*, bstrdefaultframe : UInt8*) : HRESULT
+    @lpVtbl.value.put_default_frame.call(this, bstrdefaultframe)
   end
-  def get_invoke_ur_ls(pfinvokeurls : Int16*) : HRESULT
-    @lpVtbl.value.get_invoke_ur_ls.unsafe_as(Proc(Int16*, HRESULT)).call(pfinvokeurls)
+  def get_invoke_ur_ls(this : IWMPSettings*, pfinvokeurls : Int16*) : HRESULT
+    @lpVtbl.value.get_invoke_ur_ls.call(this, pfinvokeurls)
   end
-  def put_invoke_ur_ls(finvokeurls : Int16) : HRESULT
-    @lpVtbl.value.put_invoke_ur_ls.unsafe_as(Proc(Int16, HRESULT)).call(finvokeurls)
+  def put_invoke_ur_ls(this : IWMPSettings*, finvokeurls : Int16) : HRESULT
+    @lpVtbl.value.put_invoke_ur_ls.call(this, finvokeurls)
   end
-  def get_mute(pfmute : Int16*) : HRESULT
-    @lpVtbl.value.get_mute.unsafe_as(Proc(Int16*, HRESULT)).call(pfmute)
+  def get_mute(this : IWMPSettings*, pfmute : Int16*) : HRESULT
+    @lpVtbl.value.get_mute.call(this, pfmute)
   end
-  def put_mute(fmute : Int16) : HRESULT
-    @lpVtbl.value.put_mute.unsafe_as(Proc(Int16, HRESULT)).call(fmute)
+  def put_mute(this : IWMPSettings*, fmute : Int16) : HRESULT
+    @lpVtbl.value.put_mute.call(this, fmute)
   end
-  def get_play_count(plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_play_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  def get_play_count(this : IWMPSettings*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_play_count.call(this, plcount)
   end
-  def put_play_count(lcount : Int32) : HRESULT
-    @lpVtbl.value.put_play_count.unsafe_as(Proc(Int32, HRESULT)).call(lcount)
+  def put_play_count(this : IWMPSettings*, lcount : Int32) : HRESULT
+    @lpVtbl.value.put_play_count.call(this, lcount)
   end
-  def get_rate(pdrate : Float64*) : HRESULT
-    @lpVtbl.value.get_rate.unsafe_as(Proc(Float64*, HRESULT)).call(pdrate)
+  def get_rate(this : IWMPSettings*, pdrate : Float64*) : HRESULT
+    @lpVtbl.value.get_rate.call(this, pdrate)
   end
-  def put_rate(drate : Float64) : HRESULT
-    @lpVtbl.value.put_rate.unsafe_as(Proc(Float64, HRESULT)).call(drate)
+  def put_rate(this : IWMPSettings*, drate : Float64) : HRESULT
+    @lpVtbl.value.put_rate.call(this, drate)
   end
-  def get_balance(plbalance : Int32*) : HRESULT
-    @lpVtbl.value.get_balance.unsafe_as(Proc(Int32*, HRESULT)).call(plbalance)
+  def get_balance(this : IWMPSettings*, plbalance : Int32*) : HRESULT
+    @lpVtbl.value.get_balance.call(this, plbalance)
   end
-  def put_balance(lbalance : Int32) : HRESULT
-    @lpVtbl.value.put_balance.unsafe_as(Proc(Int32, HRESULT)).call(lbalance)
+  def put_balance(this : IWMPSettings*, lbalance : Int32) : HRESULT
+    @lpVtbl.value.put_balance.call(this, lbalance)
   end
-  def get_volume(plvolume : Int32*) : HRESULT
-    @lpVtbl.value.get_volume.unsafe_as(Proc(Int32*, HRESULT)).call(plvolume)
+  def get_volume(this : IWMPSettings*, plvolume : Int32*) : HRESULT
+    @lpVtbl.value.get_volume.call(this, plvolume)
   end
-  def put_volume(lvolume : Int32) : HRESULT
-    @lpVtbl.value.put_volume.unsafe_as(Proc(Int32, HRESULT)).call(lvolume)
+  def put_volume(this : IWMPSettings*, lvolume : Int32) : HRESULT
+    @lpVtbl.value.put_volume.call(this, lvolume)
   end
-  def get_mode(bstrmode : UInt8*, pvarfmode : Int16*) : HRESULT
-    @lpVtbl.value.get_mode.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(bstrmode, pvarfmode)
+  def get_mode(this : IWMPSettings*, bstrmode : UInt8*, pvarfmode : Int16*) : HRESULT
+    @lpVtbl.value.get_mode.call(this, bstrmode, pvarfmode)
   end
-  def set_mode(bstrmode : UInt8*, varfmode : Int16) : HRESULT
-    @lpVtbl.value.set_mode.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(bstrmode, varfmode)
+  def set_mode(this : IWMPSettings*, bstrmode : UInt8*, varfmode : Int16) : HRESULT
+    @lpVtbl.value.set_mode.call(this, bstrmode, varfmode)
   end
-  def get_enable_error_dialogs(pfenableerrordialogs : Int16*) : HRESULT
-    @lpVtbl.value.get_enable_error_dialogs.unsafe_as(Proc(Int16*, HRESULT)).call(pfenableerrordialogs)
+  def get_enable_error_dialogs(this : IWMPSettings*, pfenableerrordialogs : Int16*) : HRESULT
+    @lpVtbl.value.get_enable_error_dialogs.call(this, pfenableerrordialogs)
   end
-  def put_enable_error_dialogs(fenableerrordialogs : Int16) : HRESULT
-    @lpVtbl.value.put_enable_error_dialogs.unsafe_as(Proc(Int16, HRESULT)).call(fenableerrordialogs)
+  def put_enable_error_dialogs(this : IWMPSettings*, fenableerrordialogs : Int16) : HRESULT
+    @lpVtbl.value.put_enable_error_dialogs.call(this, fenableerrordialogs)
   end
 end
 struct LibWin32::IWMPClosedCaption
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPClosedCaption*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPClosedCaption*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPClosedCaption*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPClosedCaption*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPClosedCaption*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPClosedCaption*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPClosedCaption*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_sami_style(pbstrsamistyle : UInt8**) : HRESULT
-    @lpVtbl.value.get_sami_style.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsamistyle)
+  def get_sami_style(this : IWMPClosedCaption*, pbstrsamistyle : UInt8**) : HRESULT
+    @lpVtbl.value.get_sami_style.call(this, pbstrsamistyle)
   end
-  def put_sami_style(bstrsamistyle : UInt8*) : HRESULT
-    @lpVtbl.value.put_sami_style.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsamistyle)
+  def put_sami_style(this : IWMPClosedCaption*, bstrsamistyle : UInt8*) : HRESULT
+    @lpVtbl.value.put_sami_style.call(this, bstrsamistyle)
   end
-  def get_sami_lang(pbstrsamilang : UInt8**) : HRESULT
-    @lpVtbl.value.get_sami_lang.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsamilang)
+  def get_sami_lang(this : IWMPClosedCaption*, pbstrsamilang : UInt8**) : HRESULT
+    @lpVtbl.value.get_sami_lang.call(this, pbstrsamilang)
   end
-  def put_sami_lang(bstrsamilang : UInt8*) : HRESULT
-    @lpVtbl.value.put_sami_lang.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsamilang)
+  def put_sami_lang(this : IWMPClosedCaption*, bstrsamilang : UInt8*) : HRESULT
+    @lpVtbl.value.put_sami_lang.call(this, bstrsamilang)
   end
-  def get_sami_file_name(pbstrsamifilename : UInt8**) : HRESULT
-    @lpVtbl.value.get_sami_file_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsamifilename)
+  def get_sami_file_name(this : IWMPClosedCaption*, pbstrsamifilename : UInt8**) : HRESULT
+    @lpVtbl.value.get_sami_file_name.call(this, pbstrsamifilename)
   end
-  def put_sami_file_name(bstrsamifilename : UInt8*) : HRESULT
-    @lpVtbl.value.put_sami_file_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsamifilename)
+  def put_sami_file_name(this : IWMPClosedCaption*, bstrsamifilename : UInt8*) : HRESULT
+    @lpVtbl.value.put_sami_file_name.call(this, bstrsamifilename)
   end
-  def get_captioning_id(pbstrcaptioningid : UInt8**) : HRESULT
-    @lpVtbl.value.get_captioning_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcaptioningid)
+  def get_captioning_id(this : IWMPClosedCaption*, pbstrcaptioningid : UInt8**) : HRESULT
+    @lpVtbl.value.get_captioning_id.call(this, pbstrcaptioningid)
   end
-  def put_captioning_id(bstrcaptioningid : UInt8*) : HRESULT
-    @lpVtbl.value.put_captioning_id.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrcaptioningid)
+  def put_captioning_id(this : IWMPClosedCaption*, bstrcaptioningid : UInt8*) : HRESULT
+    @lpVtbl.value.put_captioning_id.call(this, bstrcaptioningid)
   end
 end
 struct LibWin32::IWMPPlaylist
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPPlaylist*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPPlaylist*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPPlaylist*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPPlaylist*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPPlaylist*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPPlaylist*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPPlaylist*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_count(plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  def get_count(this : IWMPPlaylist*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IWMPPlaylist*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def put_name(bstrname : UInt8*) : HRESULT
-    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  def put_name(this : IWMPPlaylist*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
   end
-  def get_attribute_count(plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_attribute_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  def get_attribute_count(this : IWMPPlaylist*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_attribute_count.call(this, plcount)
   end
-  def get_attribute_name(lindex : Int32, pbstrattributename : UInt8**) : HRESULT
-    @lpVtbl.value.get_attribute_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(lindex, pbstrattributename)
+  def get_attribute_name(this : IWMPPlaylist*, lindex : Int32, pbstrattributename : UInt8**) : HRESULT
+    @lpVtbl.value.get_attribute_name.call(this, lindex, pbstrattributename)
   end
-  def get_item(lindex : Int32, ppiwmpmedia : IWMPMedia*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, IWMPMedia*, HRESULT)).call(lindex, ppiwmpmedia)
+  def get_item(this : IWMPPlaylist*, lindex : Int32, ppiwmpmedia : IWMPMedia*) : HRESULT
+    @lpVtbl.value.get_item.call(this, lindex, ppiwmpmedia)
   end
-  def get_item_info(bstrname : UInt8*, pbstrval : UInt8**) : HRESULT
-    @lpVtbl.value.get_item_info.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstrname, pbstrval)
+  def get_item_info(this : IWMPPlaylist*, bstrname : UInt8*, pbstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_info.call(this, bstrname, pbstrval)
   end
-  def set_item_info(bstrname : UInt8*, bstrvalue : UInt8*) : HRESULT
-    @lpVtbl.value.set_item_info.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstrname, bstrvalue)
+  def set_item_info(this : IWMPPlaylist*, bstrname : UInt8*, bstrvalue : UInt8*) : HRESULT
+    @lpVtbl.value.set_item_info.call(this, bstrname, bstrvalue)
   end
-  def get_is_identical(piwmpplaylist : IWMPPlaylist, pvbool : Int16*) : HRESULT
-    @lpVtbl.value.get_is_identical.unsafe_as(Proc(IWMPPlaylist, Int16*, HRESULT)).call(piwmpplaylist, pvbool)
+  def get_is_identical(this : IWMPPlaylist*, piwmpplaylist : IWMPPlaylist, pvbool : Int16*) : HRESULT
+    @lpVtbl.value.get_is_identical.call(this, piwmpplaylist, pvbool)
   end
-  def clear : HRESULT
-    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  def clear(this : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.clear.call(this)
   end
-  def insert_item(lindex : Int32, piwmpmedia : IWMPMedia) : HRESULT
-    @lpVtbl.value.insert_item.unsafe_as(Proc(Int32, IWMPMedia, HRESULT)).call(lindex, piwmpmedia)
+  def insert_item(this : IWMPPlaylist*, lindex : Int32, piwmpmedia : IWMPMedia) : HRESULT
+    @lpVtbl.value.insert_item.call(this, lindex, piwmpmedia)
   end
-  def append_item(piwmpmedia : IWMPMedia) : HRESULT
-    @lpVtbl.value.append_item.unsafe_as(Proc(IWMPMedia, HRESULT)).call(piwmpmedia)
+  def append_item(this : IWMPPlaylist*, piwmpmedia : IWMPMedia) : HRESULT
+    @lpVtbl.value.append_item.call(this, piwmpmedia)
   end
-  def remove_item(piwmpmedia : IWMPMedia) : HRESULT
-    @lpVtbl.value.remove_item.unsafe_as(Proc(IWMPMedia, HRESULT)).call(piwmpmedia)
+  def remove_item(this : IWMPPlaylist*, piwmpmedia : IWMPMedia) : HRESULT
+    @lpVtbl.value.remove_item.call(this, piwmpmedia)
   end
-  def move_item(lindexold : Int32, lindexnew : Int32) : HRESULT
-    @lpVtbl.value.move_item.unsafe_as(Proc(Int32, Int32, HRESULT)).call(lindexold, lindexnew)
+  def move_item(this : IWMPPlaylist*, lindexold : Int32, lindexnew : Int32) : HRESULT
+    @lpVtbl.value.move_item.call(this, lindexold, lindexnew)
   end
 end
 struct LibWin32::IWMPCdrom
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPCdrom*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPCdrom*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPCdrom*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPCdrom*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPCdrom*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPCdrom*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPCdrom*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_drive_specifier(pbstrdrive : UInt8**) : HRESULT
-    @lpVtbl.value.get_drive_specifier.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdrive)
+  def get_drive_specifier(this : IWMPCdrom*, pbstrdrive : UInt8**) : HRESULT
+    @lpVtbl.value.get_drive_specifier.call(this, pbstrdrive)
   end
-  def get_playlist(ppplaylist : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_playlist.unsafe_as(Proc(IWMPPlaylist*, HRESULT)).call(ppplaylist)
+  def get_playlist(this : IWMPCdrom*, ppplaylist : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_playlist.call(this, ppplaylist)
   end
-  def eject : HRESULT
-    @lpVtbl.value.eject.unsafe_as(Proc(HRESULT)).call
+  def eject(this : IWMPCdrom*) : HRESULT
+    @lpVtbl.value.eject.call(this)
   end
 end
 struct LibWin32::IWMPCdromCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPCdromCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPCdromCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPCdromCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPCdromCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPCdromCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPCdromCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPCdromCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_count(plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  def get_count(this : IWMPCdromCollection*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
   end
-  def item(lindex : Int32, ppitem : IWMPCdrom*) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(Int32, IWMPCdrom*, HRESULT)).call(lindex, ppitem)
+  def item(this : IWMPCdromCollection*, lindex : Int32, ppitem : IWMPCdrom*) : HRESULT
+    @lpVtbl.value.item.call(this, lindex, ppitem)
   end
-  def get_by_drive_specifier(bstrdrivespecifier : UInt8*, ppcdrom : IWMPCdrom*) : HRESULT
-    @lpVtbl.value.get_by_drive_specifier.unsafe_as(Proc(UInt8*, IWMPCdrom*, HRESULT)).call(bstrdrivespecifier, ppcdrom)
+  def get_by_drive_specifier(this : IWMPCdromCollection*, bstrdrivespecifier : UInt8*, ppcdrom : IWMPCdrom*) : HRESULT
+    @lpVtbl.value.get_by_drive_specifier.call(this, bstrdrivespecifier, ppcdrom)
   end
 end
 struct LibWin32::IWMPStringCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPStringCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPStringCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPStringCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPStringCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPStringCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPStringCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPStringCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_count(plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  def get_count(this : IWMPStringCollection*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
   end
-  def item(lindex : Int32, pbstrstring : UInt8**) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(lindex, pbstrstring)
+  def item(this : IWMPStringCollection*, lindex : Int32, pbstrstring : UInt8**) : HRESULT
+    @lpVtbl.value.item.call(this, lindex, pbstrstring)
   end
 end
 struct LibWin32::IWMPMediaCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPMediaCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPMediaCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPMediaCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPMediaCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPMediaCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPMediaCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPMediaCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def add(bstrurl : UInt8*, ppitem : IWMPMedia*) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(UInt8*, IWMPMedia*, HRESULT)).call(bstrurl, ppitem)
+  def add(this : IWMPMediaCollection*, bstrurl : UInt8*, ppitem : IWMPMedia*) : HRESULT
+    @lpVtbl.value.add.call(this, bstrurl, ppitem)
   end
-  def get_all(ppmediaitems : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_all.unsafe_as(Proc(IWMPPlaylist*, HRESULT)).call(ppmediaitems)
+  def get_all(this : IWMPMediaCollection*, ppmediaitems : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_all.call(this, ppmediaitems)
   end
-  def get_by_name(bstrname : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_by_name.unsafe_as(Proc(UInt8*, IWMPPlaylist*, HRESULT)).call(bstrname, ppmediaitems)
+  def get_by_name(this : IWMPMediaCollection*, bstrname : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_by_name.call(this, bstrname, ppmediaitems)
   end
-  def get_by_genre(bstrgenre : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_by_genre.unsafe_as(Proc(UInt8*, IWMPPlaylist*, HRESULT)).call(bstrgenre, ppmediaitems)
+  def get_by_genre(this : IWMPMediaCollection*, bstrgenre : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_by_genre.call(this, bstrgenre, ppmediaitems)
   end
-  def get_by_author(bstrauthor : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_by_author.unsafe_as(Proc(UInt8*, IWMPPlaylist*, HRESULT)).call(bstrauthor, ppmediaitems)
+  def get_by_author(this : IWMPMediaCollection*, bstrauthor : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_by_author.call(this, bstrauthor, ppmediaitems)
   end
-  def get_by_album(bstralbum : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_by_album.unsafe_as(Proc(UInt8*, IWMPPlaylist*, HRESULT)).call(bstralbum, ppmediaitems)
+  def get_by_album(this : IWMPMediaCollection*, bstralbum : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_by_album.call(this, bstralbum, ppmediaitems)
   end
-  def get_by_attribute(bstrattribute : UInt8*, bstrvalue : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_by_attribute.unsafe_as(Proc(UInt8*, UInt8*, IWMPPlaylist*, HRESULT)).call(bstrattribute, bstrvalue, ppmediaitems)
+  def get_by_attribute(this : IWMPMediaCollection*, bstrattribute : UInt8*, bstrvalue : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_by_attribute.call(this, bstrattribute, bstrvalue, ppmediaitems)
   end
-  def remove(pitem : IWMPMedia, varfdeletefile : Int16) : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(IWMPMedia, Int16, HRESULT)).call(pitem, varfdeletefile)
+  def remove(this : IWMPMediaCollection*, pitem : IWMPMedia, varfdeletefile : Int16) : HRESULT
+    @lpVtbl.value.remove.call(this, pitem, varfdeletefile)
   end
-  def get_attribute_string_collection(bstrattribute : UInt8*, bstrmediatype : UInt8*, ppstringcollection : IWMPStringCollection*) : HRESULT
-    @lpVtbl.value.get_attribute_string_collection.unsafe_as(Proc(UInt8*, UInt8*, IWMPStringCollection*, HRESULT)).call(bstrattribute, bstrmediatype, ppstringcollection)
+  def get_attribute_string_collection(this : IWMPMediaCollection*, bstrattribute : UInt8*, bstrmediatype : UInt8*, ppstringcollection : IWMPStringCollection*) : HRESULT
+    @lpVtbl.value.get_attribute_string_collection.call(this, bstrattribute, bstrmediatype, ppstringcollection)
   end
-  def get_media_atom(bstritemname : UInt8*, platom : Int32*) : HRESULT
-    @lpVtbl.value.get_media_atom.unsafe_as(Proc(UInt8*, Int32*, HRESULT)).call(bstritemname, platom)
+  def get_media_atom(this : IWMPMediaCollection*, bstritemname : UInt8*, platom : Int32*) : HRESULT
+    @lpVtbl.value.get_media_atom.call(this, bstritemname, platom)
   end
-  def set_deleted(pitem : IWMPMedia, varfisdeleted : Int16) : HRESULT
-    @lpVtbl.value.set_deleted.unsafe_as(Proc(IWMPMedia, Int16, HRESULT)).call(pitem, varfisdeleted)
+  def set_deleted(this : IWMPMediaCollection*, pitem : IWMPMedia, varfisdeleted : Int16) : HRESULT
+    @lpVtbl.value.set_deleted.call(this, pitem, varfisdeleted)
   end
-  def is_deleted(pitem : IWMPMedia, pvarfisdeleted : Int16*) : HRESULT
-    @lpVtbl.value.is_deleted.unsafe_as(Proc(IWMPMedia, Int16*, HRESULT)).call(pitem, pvarfisdeleted)
+  def is_deleted(this : IWMPMediaCollection*, pitem : IWMPMedia, pvarfisdeleted : Int16*) : HRESULT
+    @lpVtbl.value.is_deleted.call(this, pitem, pvarfisdeleted)
   end
 end
 struct LibWin32::IWMPPlaylistArray
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPPlaylistArray*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPPlaylistArray*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPPlaylistArray*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPPlaylistArray*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPPlaylistArray*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPPlaylistArray*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPPlaylistArray*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_count(plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  def get_count(this : IWMPPlaylistArray*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
   end
-  def item(lindex : Int32, ppitem : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(Int32, IWMPPlaylist*, HRESULT)).call(lindex, ppitem)
+  def item(this : IWMPPlaylistArray*, lindex : Int32, ppitem : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.item.call(this, lindex, ppitem)
   end
 end
 struct LibWin32::IWMPPlaylistCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPPlaylistCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPPlaylistCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPPlaylistCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPPlaylistCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPPlaylistCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPPlaylistCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPPlaylistCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def new_playlist(bstrname : UInt8*, ppitem : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.new_playlist.unsafe_as(Proc(UInt8*, IWMPPlaylist*, HRESULT)).call(bstrname, ppitem)
+  def new_playlist(this : IWMPPlaylistCollection*, bstrname : UInt8*, ppitem : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.new_playlist.call(this, bstrname, ppitem)
   end
-  def get_all(ppplaylistarray : IWMPPlaylistArray*) : HRESULT
-    @lpVtbl.value.get_all.unsafe_as(Proc(IWMPPlaylistArray*, HRESULT)).call(ppplaylistarray)
+  def get_all(this : IWMPPlaylistCollection*, ppplaylistarray : IWMPPlaylistArray*) : HRESULT
+    @lpVtbl.value.get_all.call(this, ppplaylistarray)
   end
-  def get_by_name(bstrname : UInt8*, ppplaylistarray : IWMPPlaylistArray*) : HRESULT
-    @lpVtbl.value.get_by_name.unsafe_as(Proc(UInt8*, IWMPPlaylistArray*, HRESULT)).call(bstrname, ppplaylistarray)
+  def get_by_name(this : IWMPPlaylistCollection*, bstrname : UInt8*, ppplaylistarray : IWMPPlaylistArray*) : HRESULT
+    @lpVtbl.value.get_by_name.call(this, bstrname, ppplaylistarray)
   end
-  def remove(pitem : IWMPPlaylist) : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(IWMPPlaylist, HRESULT)).call(pitem)
+  def remove(this : IWMPPlaylistCollection*, pitem : IWMPPlaylist) : HRESULT
+    @lpVtbl.value.remove.call(this, pitem)
   end
-  def set_deleted(pitem : IWMPPlaylist, varfisdeleted : Int16) : HRESULT
-    @lpVtbl.value.set_deleted.unsafe_as(Proc(IWMPPlaylist, Int16, HRESULT)).call(pitem, varfisdeleted)
+  def set_deleted(this : IWMPPlaylistCollection*, pitem : IWMPPlaylist, varfisdeleted : Int16) : HRESULT
+    @lpVtbl.value.set_deleted.call(this, pitem, varfisdeleted)
   end
-  def is_deleted(pitem : IWMPPlaylist, pvarfisdeleted : Int16*) : HRESULT
-    @lpVtbl.value.is_deleted.unsafe_as(Proc(IWMPPlaylist, Int16*, HRESULT)).call(pitem, pvarfisdeleted)
+  def is_deleted(this : IWMPPlaylistCollection*, pitem : IWMPPlaylist, pvarfisdeleted : Int16*) : HRESULT
+    @lpVtbl.value.is_deleted.call(this, pitem, pvarfisdeleted)
   end
-  def import_playlist(pitem : IWMPPlaylist, ppimporteditem : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.import_playlist.unsafe_as(Proc(IWMPPlaylist, IWMPPlaylist*, HRESULT)).call(pitem, ppimporteditem)
+  def import_playlist(this : IWMPPlaylistCollection*, pitem : IWMPPlaylist, ppimporteditem : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.import_playlist.call(this, pitem, ppimporteditem)
   end
 end
 struct LibWin32::IWMPNetwork
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPNetwork*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPNetwork*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPNetwork*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPNetwork*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPNetwork*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPNetwork*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPNetwork*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_band_width(plbandwidth : Int32*) : HRESULT
-    @lpVtbl.value.get_band_width.unsafe_as(Proc(Int32*, HRESULT)).call(plbandwidth)
+  def get_band_width(this : IWMPNetwork*, plbandwidth : Int32*) : HRESULT
+    @lpVtbl.value.get_band_width.call(this, plbandwidth)
   end
-  def get_recovered_packets(plrecoveredpackets : Int32*) : HRESULT
-    @lpVtbl.value.get_recovered_packets.unsafe_as(Proc(Int32*, HRESULT)).call(plrecoveredpackets)
+  def get_recovered_packets(this : IWMPNetwork*, plrecoveredpackets : Int32*) : HRESULT
+    @lpVtbl.value.get_recovered_packets.call(this, plrecoveredpackets)
   end
-  def get_source_protocol(pbstrsourceprotocol : UInt8**) : HRESULT
-    @lpVtbl.value.get_source_protocol.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsourceprotocol)
+  def get_source_protocol(this : IWMPNetwork*, pbstrsourceprotocol : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_protocol.call(this, pbstrsourceprotocol)
   end
-  def get_received_packets(plreceivedpackets : Int32*) : HRESULT
-    @lpVtbl.value.get_received_packets.unsafe_as(Proc(Int32*, HRESULT)).call(plreceivedpackets)
+  def get_received_packets(this : IWMPNetwork*, plreceivedpackets : Int32*) : HRESULT
+    @lpVtbl.value.get_received_packets.call(this, plreceivedpackets)
   end
-  def get_lost_packets(pllostpackets : Int32*) : HRESULT
-    @lpVtbl.value.get_lost_packets.unsafe_as(Proc(Int32*, HRESULT)).call(pllostpackets)
+  def get_lost_packets(this : IWMPNetwork*, pllostpackets : Int32*) : HRESULT
+    @lpVtbl.value.get_lost_packets.call(this, pllostpackets)
   end
-  def get_reception_quality(plreceptionquality : Int32*) : HRESULT
-    @lpVtbl.value.get_reception_quality.unsafe_as(Proc(Int32*, HRESULT)).call(plreceptionquality)
+  def get_reception_quality(this : IWMPNetwork*, plreceptionquality : Int32*) : HRESULT
+    @lpVtbl.value.get_reception_quality.call(this, plreceptionquality)
   end
-  def get_buffering_count(plbufferingcount : Int32*) : HRESULT
-    @lpVtbl.value.get_buffering_count.unsafe_as(Proc(Int32*, HRESULT)).call(plbufferingcount)
+  def get_buffering_count(this : IWMPNetwork*, plbufferingcount : Int32*) : HRESULT
+    @lpVtbl.value.get_buffering_count.call(this, plbufferingcount)
   end
-  def get_buffering_progress(plbufferingprogress : Int32*) : HRESULT
-    @lpVtbl.value.get_buffering_progress.unsafe_as(Proc(Int32*, HRESULT)).call(plbufferingprogress)
+  def get_buffering_progress(this : IWMPNetwork*, plbufferingprogress : Int32*) : HRESULT
+    @lpVtbl.value.get_buffering_progress.call(this, plbufferingprogress)
   end
-  def get_buffering_time(plbufferingtime : Int32*) : HRESULT
-    @lpVtbl.value.get_buffering_time.unsafe_as(Proc(Int32*, HRESULT)).call(plbufferingtime)
+  def get_buffering_time(this : IWMPNetwork*, plbufferingtime : Int32*) : HRESULT
+    @lpVtbl.value.get_buffering_time.call(this, plbufferingtime)
   end
-  def put_buffering_time(lbufferingtime : Int32) : HRESULT
-    @lpVtbl.value.put_buffering_time.unsafe_as(Proc(Int32, HRESULT)).call(lbufferingtime)
+  def put_buffering_time(this : IWMPNetwork*, lbufferingtime : Int32) : HRESULT
+    @lpVtbl.value.put_buffering_time.call(this, lbufferingtime)
   end
-  def get_frame_rate(plframerate : Int32*) : HRESULT
-    @lpVtbl.value.get_frame_rate.unsafe_as(Proc(Int32*, HRESULT)).call(plframerate)
+  def get_frame_rate(this : IWMPNetwork*, plframerate : Int32*) : HRESULT
+    @lpVtbl.value.get_frame_rate.call(this, plframerate)
   end
-  def get_max_bit_rate(plbitrate : Int32*) : HRESULT
-    @lpVtbl.value.get_max_bit_rate.unsafe_as(Proc(Int32*, HRESULT)).call(plbitrate)
+  def get_max_bit_rate(this : IWMPNetwork*, plbitrate : Int32*) : HRESULT
+    @lpVtbl.value.get_max_bit_rate.call(this, plbitrate)
   end
-  def get_bit_rate(plbitrate : Int32*) : HRESULT
-    @lpVtbl.value.get_bit_rate.unsafe_as(Proc(Int32*, HRESULT)).call(plbitrate)
+  def get_bit_rate(this : IWMPNetwork*, plbitrate : Int32*) : HRESULT
+    @lpVtbl.value.get_bit_rate.call(this, plbitrate)
   end
-  def get_proxy_settings(bstrprotocol : UInt8*, plproxysetting : Int32*) : HRESULT
-    @lpVtbl.value.get_proxy_settings.unsafe_as(Proc(UInt8*, Int32*, HRESULT)).call(bstrprotocol, plproxysetting)
+  def get_proxy_settings(this : IWMPNetwork*, bstrprotocol : UInt8*, plproxysetting : Int32*) : HRESULT
+    @lpVtbl.value.get_proxy_settings.call(this, bstrprotocol, plproxysetting)
   end
-  def set_proxy_settings(bstrprotocol : UInt8*, lproxysetting : Int32) : HRESULT
-    @lpVtbl.value.set_proxy_settings.unsafe_as(Proc(UInt8*, Int32, HRESULT)).call(bstrprotocol, lproxysetting)
+  def set_proxy_settings(this : IWMPNetwork*, bstrprotocol : UInt8*, lproxysetting : Int32) : HRESULT
+    @lpVtbl.value.set_proxy_settings.call(this, bstrprotocol, lproxysetting)
   end
-  def get_proxy_name(bstrprotocol : UInt8*, pbstrproxyname : UInt8**) : HRESULT
-    @lpVtbl.value.get_proxy_name.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstrprotocol, pbstrproxyname)
+  def get_proxy_name(this : IWMPNetwork*, bstrprotocol : UInt8*, pbstrproxyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_proxy_name.call(this, bstrprotocol, pbstrproxyname)
   end
-  def set_proxy_name(bstrprotocol : UInt8*, bstrproxyname : UInt8*) : HRESULT
-    @lpVtbl.value.set_proxy_name.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstrprotocol, bstrproxyname)
+  def set_proxy_name(this : IWMPNetwork*, bstrprotocol : UInt8*, bstrproxyname : UInt8*) : HRESULT
+    @lpVtbl.value.set_proxy_name.call(this, bstrprotocol, bstrproxyname)
   end
-  def get_proxy_port(bstrprotocol : UInt8*, lproxyport : Int32*) : HRESULT
-    @lpVtbl.value.get_proxy_port.unsafe_as(Proc(UInt8*, Int32*, HRESULT)).call(bstrprotocol, lproxyport)
+  def get_proxy_port(this : IWMPNetwork*, bstrprotocol : UInt8*, lproxyport : Int32*) : HRESULT
+    @lpVtbl.value.get_proxy_port.call(this, bstrprotocol, lproxyport)
   end
-  def set_proxy_port(bstrprotocol : UInt8*, lproxyport : Int32) : HRESULT
-    @lpVtbl.value.set_proxy_port.unsafe_as(Proc(UInt8*, Int32, HRESULT)).call(bstrprotocol, lproxyport)
+  def set_proxy_port(this : IWMPNetwork*, bstrprotocol : UInt8*, lproxyport : Int32) : HRESULT
+    @lpVtbl.value.set_proxy_port.call(this, bstrprotocol, lproxyport)
   end
-  def get_proxy_exception_list(bstrprotocol : UInt8*, pbstrexceptionlist : UInt8**) : HRESULT
-    @lpVtbl.value.get_proxy_exception_list.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstrprotocol, pbstrexceptionlist)
+  def get_proxy_exception_list(this : IWMPNetwork*, bstrprotocol : UInt8*, pbstrexceptionlist : UInt8**) : HRESULT
+    @lpVtbl.value.get_proxy_exception_list.call(this, bstrprotocol, pbstrexceptionlist)
   end
-  def set_proxy_exception_list(bstrprotocol : UInt8*, pbstrexceptionlist : UInt8*) : HRESULT
-    @lpVtbl.value.set_proxy_exception_list.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstrprotocol, pbstrexceptionlist)
+  def set_proxy_exception_list(this : IWMPNetwork*, bstrprotocol : UInt8*, pbstrexceptionlist : UInt8*) : HRESULT
+    @lpVtbl.value.set_proxy_exception_list.call(this, bstrprotocol, pbstrexceptionlist)
   end
-  def get_proxy_bypass_for_local(bstrprotocol : UInt8*, pfbypassforlocal : Int16*) : HRESULT
-    @lpVtbl.value.get_proxy_bypass_for_local.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(bstrprotocol, pfbypassforlocal)
+  def get_proxy_bypass_for_local(this : IWMPNetwork*, bstrprotocol : UInt8*, pfbypassforlocal : Int16*) : HRESULT
+    @lpVtbl.value.get_proxy_bypass_for_local.call(this, bstrprotocol, pfbypassforlocal)
   end
-  def set_proxy_bypass_for_local(bstrprotocol : UInt8*, fbypassforlocal : Int16) : HRESULT
-    @lpVtbl.value.set_proxy_bypass_for_local.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(bstrprotocol, fbypassforlocal)
+  def set_proxy_bypass_for_local(this : IWMPNetwork*, bstrprotocol : UInt8*, fbypassforlocal : Int16) : HRESULT
+    @lpVtbl.value.set_proxy_bypass_for_local.call(this, bstrprotocol, fbypassforlocal)
   end
-  def get_max_bandwidth(lmaxbandwidth : Int32*) : HRESULT
-    @lpVtbl.value.get_max_bandwidth.unsafe_as(Proc(Int32*, HRESULT)).call(lmaxbandwidth)
+  def get_max_bandwidth(this : IWMPNetwork*, lmaxbandwidth : Int32*) : HRESULT
+    @lpVtbl.value.get_max_bandwidth.call(this, lmaxbandwidth)
   end
-  def put_max_bandwidth(lmaxbandwidth : Int32) : HRESULT
-    @lpVtbl.value.put_max_bandwidth.unsafe_as(Proc(Int32, HRESULT)).call(lmaxbandwidth)
+  def put_max_bandwidth(this : IWMPNetwork*, lmaxbandwidth : Int32) : HRESULT
+    @lpVtbl.value.put_max_bandwidth.call(this, lmaxbandwidth)
   end
-  def get_download_progress(pldownloadprogress : Int32*) : HRESULT
-    @lpVtbl.value.get_download_progress.unsafe_as(Proc(Int32*, HRESULT)).call(pldownloadprogress)
+  def get_download_progress(this : IWMPNetwork*, pldownloadprogress : Int32*) : HRESULT
+    @lpVtbl.value.get_download_progress.call(this, pldownloadprogress)
   end
-  def get_encoded_frame_rate(plframerate : Int32*) : HRESULT
-    @lpVtbl.value.get_encoded_frame_rate.unsafe_as(Proc(Int32*, HRESULT)).call(plframerate)
+  def get_encoded_frame_rate(this : IWMPNetwork*, plframerate : Int32*) : HRESULT
+    @lpVtbl.value.get_encoded_frame_rate.call(this, plframerate)
   end
-  def get_frames_skipped(plframes : Int32*) : HRESULT
-    @lpVtbl.value.get_frames_skipped.unsafe_as(Proc(Int32*, HRESULT)).call(plframes)
+  def get_frames_skipped(this : IWMPNetwork*, plframes : Int32*) : HRESULT
+    @lpVtbl.value.get_frames_skipped.call(this, plframes)
   end
 end
 struct LibWin32::IWMPCore
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPCore*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPCore*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPCore*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPCore*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPCore*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPCore*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPCore*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : IWMPCore*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
-  def get_url(pbstrurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_url.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrurl)
+  def get_url(this : IWMPCore*, pbstrurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, pbstrurl)
   end
-  def put_url(bstrurl : UInt8*) : HRESULT
-    @lpVtbl.value.put_url.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrurl)
+  def put_url(this : IWMPCore*, bstrurl : UInt8*) : HRESULT
+    @lpVtbl.value.put_url.call(this, bstrurl)
   end
-  def get_open_state(pwmpos : WMPOpenState*) : HRESULT
-    @lpVtbl.value.get_open_state.unsafe_as(Proc(WMPOpenState*, HRESULT)).call(pwmpos)
+  def get_open_state(this : IWMPCore*, pwmpos : WMPOpenState*) : HRESULT
+    @lpVtbl.value.get_open_state.call(this, pwmpos)
   end
-  def get_play_state(pwmpps : WMPPlayState*) : HRESULT
-    @lpVtbl.value.get_play_state.unsafe_as(Proc(WMPPlayState*, HRESULT)).call(pwmpps)
+  def get_play_state(this : IWMPCore*, pwmpps : WMPPlayState*) : HRESULT
+    @lpVtbl.value.get_play_state.call(this, pwmpps)
   end
-  def get_controls(ppcontrol : IWMPControls*) : HRESULT
-    @lpVtbl.value.get_controls.unsafe_as(Proc(IWMPControls*, HRESULT)).call(ppcontrol)
+  def get_controls(this : IWMPCore*, ppcontrol : IWMPControls*) : HRESULT
+    @lpVtbl.value.get_controls.call(this, ppcontrol)
   end
-  def get_settings(ppsettings : IWMPSettings*) : HRESULT
-    @lpVtbl.value.get_settings.unsafe_as(Proc(IWMPSettings*, HRESULT)).call(ppsettings)
+  def get_settings(this : IWMPCore*, ppsettings : IWMPSettings*) : HRESULT
+    @lpVtbl.value.get_settings.call(this, ppsettings)
   end
-  def get_current_media(ppmedia : IWMPMedia*) : HRESULT
-    @lpVtbl.value.get_current_media.unsafe_as(Proc(IWMPMedia*, HRESULT)).call(ppmedia)
+  def get_current_media(this : IWMPCore*, ppmedia : IWMPMedia*) : HRESULT
+    @lpVtbl.value.get_current_media.call(this, ppmedia)
   end
-  def put_current_media(pmedia : IWMPMedia) : HRESULT
-    @lpVtbl.value.put_current_media.unsafe_as(Proc(IWMPMedia, HRESULT)).call(pmedia)
+  def put_current_media(this : IWMPCore*, pmedia : IWMPMedia) : HRESULT
+    @lpVtbl.value.put_current_media.call(this, pmedia)
   end
-  def get_media_collection(ppmediacollection : IWMPMediaCollection*) : HRESULT
-    @lpVtbl.value.get_media_collection.unsafe_as(Proc(IWMPMediaCollection*, HRESULT)).call(ppmediacollection)
+  def get_media_collection(this : IWMPCore*, ppmediacollection : IWMPMediaCollection*) : HRESULT
+    @lpVtbl.value.get_media_collection.call(this, ppmediacollection)
   end
-  def get_playlist_collection(ppplaylistcollection : IWMPPlaylistCollection*) : HRESULT
-    @lpVtbl.value.get_playlist_collection.unsafe_as(Proc(IWMPPlaylistCollection*, HRESULT)).call(ppplaylistcollection)
+  def get_playlist_collection(this : IWMPCore*, ppplaylistcollection : IWMPPlaylistCollection*) : HRESULT
+    @lpVtbl.value.get_playlist_collection.call(this, ppplaylistcollection)
   end
-  def get_version_info(pbstrversioninfo : UInt8**) : HRESULT
-    @lpVtbl.value.get_version_info.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrversioninfo)
+  def get_version_info(this : IWMPCore*, pbstrversioninfo : UInt8**) : HRESULT
+    @lpVtbl.value.get_version_info.call(this, pbstrversioninfo)
   end
-  def launch_url(bstrurl : UInt8*) : HRESULT
-    @lpVtbl.value.launch_url.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrurl)
+  def launch_url(this : IWMPCore*, bstrurl : UInt8*) : HRESULT
+    @lpVtbl.value.launch_url.call(this, bstrurl)
   end
-  def get_network(ppqni : IWMPNetwork*) : HRESULT
-    @lpVtbl.value.get_network.unsafe_as(Proc(IWMPNetwork*, HRESULT)).call(ppqni)
+  def get_network(this : IWMPCore*, ppqni : IWMPNetwork*) : HRESULT
+    @lpVtbl.value.get_network.call(this, ppqni)
   end
-  def get_current_playlist(pppl : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_current_playlist.unsafe_as(Proc(IWMPPlaylist*, HRESULT)).call(pppl)
+  def get_current_playlist(this : IWMPCore*, pppl : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_current_playlist.call(this, pppl)
   end
-  def put_current_playlist(ppl : IWMPPlaylist) : HRESULT
-    @lpVtbl.value.put_current_playlist.unsafe_as(Proc(IWMPPlaylist, HRESULT)).call(ppl)
+  def put_current_playlist(this : IWMPCore*, ppl : IWMPPlaylist) : HRESULT
+    @lpVtbl.value.put_current_playlist.call(this, ppl)
   end
-  def get_cdrom_collection(ppcdromcollection : IWMPCdromCollection*) : HRESULT
-    @lpVtbl.value.get_cdrom_collection.unsafe_as(Proc(IWMPCdromCollection*, HRESULT)).call(ppcdromcollection)
+  def get_cdrom_collection(this : IWMPCore*, ppcdromcollection : IWMPCdromCollection*) : HRESULT
+    @lpVtbl.value.get_cdrom_collection.call(this, ppcdromcollection)
   end
-  def get_closed_caption(ppclosedcaption : IWMPClosedCaption*) : HRESULT
-    @lpVtbl.value.get_closed_caption.unsafe_as(Proc(IWMPClosedCaption*, HRESULT)).call(ppclosedcaption)
+  def get_closed_caption(this : IWMPCore*, ppclosedcaption : IWMPClosedCaption*) : HRESULT
+    @lpVtbl.value.get_closed_caption.call(this, ppclosedcaption)
   end
-  def get_is_online(pfonline : Int16*) : HRESULT
-    @lpVtbl.value.get_is_online.unsafe_as(Proc(Int16*, HRESULT)).call(pfonline)
+  def get_is_online(this : IWMPCore*, pfonline : Int16*) : HRESULT
+    @lpVtbl.value.get_is_online.call(this, pfonline)
   end
-  def get_error(pperror : IWMPError*) : HRESULT
-    @lpVtbl.value.get_error.unsafe_as(Proc(IWMPError*, HRESULT)).call(pperror)
+  def get_error(this : IWMPCore*, pperror : IWMPError*) : HRESULT
+    @lpVtbl.value.get_error.call(this, pperror)
   end
-  def get_status(pbstrstatus : UInt8**) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrstatus)
+  def get_status(this : IWMPCore*, pbstrstatus : UInt8**) : HRESULT
+    @lpVtbl.value.get_status.call(this, pbstrstatus)
   end
 end
 struct LibWin32::IWMPPlayer
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPPlayer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPPlayer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPPlayer*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPPlayer*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPPlayer*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPPlayer*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPPlayer*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : IWMPPlayer*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
-  def get_url(pbstrurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_url.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrurl)
+  def get_url(this : IWMPPlayer*, pbstrurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, pbstrurl)
   end
-  def put_url(bstrurl : UInt8*) : HRESULT
-    @lpVtbl.value.put_url.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrurl)
+  def put_url(this : IWMPPlayer*, bstrurl : UInt8*) : HRESULT
+    @lpVtbl.value.put_url.call(this, bstrurl)
   end
-  def get_open_state(pwmpos : WMPOpenState*) : HRESULT
-    @lpVtbl.value.get_open_state.unsafe_as(Proc(WMPOpenState*, HRESULT)).call(pwmpos)
+  def get_open_state(this : IWMPPlayer*, pwmpos : WMPOpenState*) : HRESULT
+    @lpVtbl.value.get_open_state.call(this, pwmpos)
   end
-  def get_play_state(pwmpps : WMPPlayState*) : HRESULT
-    @lpVtbl.value.get_play_state.unsafe_as(Proc(WMPPlayState*, HRESULT)).call(pwmpps)
+  def get_play_state(this : IWMPPlayer*, pwmpps : WMPPlayState*) : HRESULT
+    @lpVtbl.value.get_play_state.call(this, pwmpps)
   end
-  def get_controls(ppcontrol : IWMPControls*) : HRESULT
-    @lpVtbl.value.get_controls.unsafe_as(Proc(IWMPControls*, HRESULT)).call(ppcontrol)
+  def get_controls(this : IWMPPlayer*, ppcontrol : IWMPControls*) : HRESULT
+    @lpVtbl.value.get_controls.call(this, ppcontrol)
   end
-  def get_settings(ppsettings : IWMPSettings*) : HRESULT
-    @lpVtbl.value.get_settings.unsafe_as(Proc(IWMPSettings*, HRESULT)).call(ppsettings)
+  def get_settings(this : IWMPPlayer*, ppsettings : IWMPSettings*) : HRESULT
+    @lpVtbl.value.get_settings.call(this, ppsettings)
   end
-  def get_current_media(ppmedia : IWMPMedia*) : HRESULT
-    @lpVtbl.value.get_current_media.unsafe_as(Proc(IWMPMedia*, HRESULT)).call(ppmedia)
+  def get_current_media(this : IWMPPlayer*, ppmedia : IWMPMedia*) : HRESULT
+    @lpVtbl.value.get_current_media.call(this, ppmedia)
   end
-  def put_current_media(pmedia : IWMPMedia) : HRESULT
-    @lpVtbl.value.put_current_media.unsafe_as(Proc(IWMPMedia, HRESULT)).call(pmedia)
+  def put_current_media(this : IWMPPlayer*, pmedia : IWMPMedia) : HRESULT
+    @lpVtbl.value.put_current_media.call(this, pmedia)
   end
-  def get_media_collection(ppmediacollection : IWMPMediaCollection*) : HRESULT
-    @lpVtbl.value.get_media_collection.unsafe_as(Proc(IWMPMediaCollection*, HRESULT)).call(ppmediacollection)
+  def get_media_collection(this : IWMPPlayer*, ppmediacollection : IWMPMediaCollection*) : HRESULT
+    @lpVtbl.value.get_media_collection.call(this, ppmediacollection)
   end
-  def get_playlist_collection(ppplaylistcollection : IWMPPlaylistCollection*) : HRESULT
-    @lpVtbl.value.get_playlist_collection.unsafe_as(Proc(IWMPPlaylistCollection*, HRESULT)).call(ppplaylistcollection)
+  def get_playlist_collection(this : IWMPPlayer*, ppplaylistcollection : IWMPPlaylistCollection*) : HRESULT
+    @lpVtbl.value.get_playlist_collection.call(this, ppplaylistcollection)
   end
-  def get_version_info(pbstrversioninfo : UInt8**) : HRESULT
-    @lpVtbl.value.get_version_info.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrversioninfo)
+  def get_version_info(this : IWMPPlayer*, pbstrversioninfo : UInt8**) : HRESULT
+    @lpVtbl.value.get_version_info.call(this, pbstrversioninfo)
   end
-  def launch_url(bstrurl : UInt8*) : HRESULT
-    @lpVtbl.value.launch_url.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrurl)
+  def launch_url(this : IWMPPlayer*, bstrurl : UInt8*) : HRESULT
+    @lpVtbl.value.launch_url.call(this, bstrurl)
   end
-  def get_network(ppqni : IWMPNetwork*) : HRESULT
-    @lpVtbl.value.get_network.unsafe_as(Proc(IWMPNetwork*, HRESULT)).call(ppqni)
+  def get_network(this : IWMPPlayer*, ppqni : IWMPNetwork*) : HRESULT
+    @lpVtbl.value.get_network.call(this, ppqni)
   end
-  def get_current_playlist(pppl : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_current_playlist.unsafe_as(Proc(IWMPPlaylist*, HRESULT)).call(pppl)
+  def get_current_playlist(this : IWMPPlayer*, pppl : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_current_playlist.call(this, pppl)
   end
-  def put_current_playlist(ppl : IWMPPlaylist) : HRESULT
-    @lpVtbl.value.put_current_playlist.unsafe_as(Proc(IWMPPlaylist, HRESULT)).call(ppl)
+  def put_current_playlist(this : IWMPPlayer*, ppl : IWMPPlaylist) : HRESULT
+    @lpVtbl.value.put_current_playlist.call(this, ppl)
   end
-  def get_cdrom_collection(ppcdromcollection : IWMPCdromCollection*) : HRESULT
-    @lpVtbl.value.get_cdrom_collection.unsafe_as(Proc(IWMPCdromCollection*, HRESULT)).call(ppcdromcollection)
+  def get_cdrom_collection(this : IWMPPlayer*, ppcdromcollection : IWMPCdromCollection*) : HRESULT
+    @lpVtbl.value.get_cdrom_collection.call(this, ppcdromcollection)
   end
-  def get_closed_caption(ppclosedcaption : IWMPClosedCaption*) : HRESULT
-    @lpVtbl.value.get_closed_caption.unsafe_as(Proc(IWMPClosedCaption*, HRESULT)).call(ppclosedcaption)
+  def get_closed_caption(this : IWMPPlayer*, ppclosedcaption : IWMPClosedCaption*) : HRESULT
+    @lpVtbl.value.get_closed_caption.call(this, ppclosedcaption)
   end
-  def get_is_online(pfonline : Int16*) : HRESULT
-    @lpVtbl.value.get_is_online.unsafe_as(Proc(Int16*, HRESULT)).call(pfonline)
+  def get_is_online(this : IWMPPlayer*, pfonline : Int16*) : HRESULT
+    @lpVtbl.value.get_is_online.call(this, pfonline)
   end
-  def get_error(pperror : IWMPError*) : HRESULT
-    @lpVtbl.value.get_error.unsafe_as(Proc(IWMPError*, HRESULT)).call(pperror)
+  def get_error(this : IWMPPlayer*, pperror : IWMPError*) : HRESULT
+    @lpVtbl.value.get_error.call(this, pperror)
   end
-  def get_status(pbstrstatus : UInt8**) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrstatus)
+  def get_status(this : IWMPPlayer*, pbstrstatus : UInt8**) : HRESULT
+    @lpVtbl.value.get_status.call(this, pbstrstatus)
   end
-  def get_enabled(pbenabled : Int16*) : HRESULT
-    @lpVtbl.value.get_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pbenabled)
+  def get_enabled(this : IWMPPlayer*, pbenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, pbenabled)
   end
-  def put_enabled(benabled : Int16) : HRESULT
-    @lpVtbl.value.put_enabled.unsafe_as(Proc(Int16, HRESULT)).call(benabled)
+  def put_enabled(this : IWMPPlayer*, benabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, benabled)
   end
-  def get_full_screen(pbfullscreen : Int16*) : HRESULT
-    @lpVtbl.value.get_full_screen.unsafe_as(Proc(Int16*, HRESULT)).call(pbfullscreen)
+  def get_full_screen(this : IWMPPlayer*, pbfullscreen : Int16*) : HRESULT
+    @lpVtbl.value.get_full_screen.call(this, pbfullscreen)
   end
-  def put_full_screen(bfullscreen : Int16) : HRESULT
-    @lpVtbl.value.put_full_screen.unsafe_as(Proc(Int16, HRESULT)).call(bfullscreen)
+  def put_full_screen(this : IWMPPlayer*, bfullscreen : Int16) : HRESULT
+    @lpVtbl.value.put_full_screen.call(this, bfullscreen)
   end
-  def get_enable_context_menu(pbenablecontextmenu : Int16*) : HRESULT
-    @lpVtbl.value.get_enable_context_menu.unsafe_as(Proc(Int16*, HRESULT)).call(pbenablecontextmenu)
+  def get_enable_context_menu(this : IWMPPlayer*, pbenablecontextmenu : Int16*) : HRESULT
+    @lpVtbl.value.get_enable_context_menu.call(this, pbenablecontextmenu)
   end
-  def put_enable_context_menu(benablecontextmenu : Int16) : HRESULT
-    @lpVtbl.value.put_enable_context_menu.unsafe_as(Proc(Int16, HRESULT)).call(benablecontextmenu)
+  def put_enable_context_menu(this : IWMPPlayer*, benablecontextmenu : Int16) : HRESULT
+    @lpVtbl.value.put_enable_context_menu.call(this, benablecontextmenu)
   end
-  def put_ui_mode(bstrmode : UInt8*) : HRESULT
-    @lpVtbl.value.put_ui_mode.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrmode)
+  def put_ui_mode(this : IWMPPlayer*, bstrmode : UInt8*) : HRESULT
+    @lpVtbl.value.put_ui_mode.call(this, bstrmode)
   end
-  def get_ui_mode(pbstrmode : UInt8**) : HRESULT
-    @lpVtbl.value.get_ui_mode.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrmode)
+  def get_ui_mode(this : IWMPPlayer*, pbstrmode : UInt8**) : HRESULT
+    @lpVtbl.value.get_ui_mode.call(this, pbstrmode)
   end
 end
 struct LibWin32::IWMPPlayer2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPPlayer2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPPlayer2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPPlayer2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPPlayer2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPPlayer2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPPlayer2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPPlayer2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : IWMPPlayer2*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
-  def get_url(pbstrurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_url.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrurl)
+  def get_url(this : IWMPPlayer2*, pbstrurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, pbstrurl)
   end
-  def put_url(bstrurl : UInt8*) : HRESULT
-    @lpVtbl.value.put_url.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrurl)
+  def put_url(this : IWMPPlayer2*, bstrurl : UInt8*) : HRESULT
+    @lpVtbl.value.put_url.call(this, bstrurl)
   end
-  def get_open_state(pwmpos : WMPOpenState*) : HRESULT
-    @lpVtbl.value.get_open_state.unsafe_as(Proc(WMPOpenState*, HRESULT)).call(pwmpos)
+  def get_open_state(this : IWMPPlayer2*, pwmpos : WMPOpenState*) : HRESULT
+    @lpVtbl.value.get_open_state.call(this, pwmpos)
   end
-  def get_play_state(pwmpps : WMPPlayState*) : HRESULT
-    @lpVtbl.value.get_play_state.unsafe_as(Proc(WMPPlayState*, HRESULT)).call(pwmpps)
+  def get_play_state(this : IWMPPlayer2*, pwmpps : WMPPlayState*) : HRESULT
+    @lpVtbl.value.get_play_state.call(this, pwmpps)
   end
-  def get_controls(ppcontrol : IWMPControls*) : HRESULT
-    @lpVtbl.value.get_controls.unsafe_as(Proc(IWMPControls*, HRESULT)).call(ppcontrol)
+  def get_controls(this : IWMPPlayer2*, ppcontrol : IWMPControls*) : HRESULT
+    @lpVtbl.value.get_controls.call(this, ppcontrol)
   end
-  def get_settings(ppsettings : IWMPSettings*) : HRESULT
-    @lpVtbl.value.get_settings.unsafe_as(Proc(IWMPSettings*, HRESULT)).call(ppsettings)
+  def get_settings(this : IWMPPlayer2*, ppsettings : IWMPSettings*) : HRESULT
+    @lpVtbl.value.get_settings.call(this, ppsettings)
   end
-  def get_current_media(ppmedia : IWMPMedia*) : HRESULT
-    @lpVtbl.value.get_current_media.unsafe_as(Proc(IWMPMedia*, HRESULT)).call(ppmedia)
+  def get_current_media(this : IWMPPlayer2*, ppmedia : IWMPMedia*) : HRESULT
+    @lpVtbl.value.get_current_media.call(this, ppmedia)
   end
-  def put_current_media(pmedia : IWMPMedia) : HRESULT
-    @lpVtbl.value.put_current_media.unsafe_as(Proc(IWMPMedia, HRESULT)).call(pmedia)
+  def put_current_media(this : IWMPPlayer2*, pmedia : IWMPMedia) : HRESULT
+    @lpVtbl.value.put_current_media.call(this, pmedia)
   end
-  def get_media_collection(ppmediacollection : IWMPMediaCollection*) : HRESULT
-    @lpVtbl.value.get_media_collection.unsafe_as(Proc(IWMPMediaCollection*, HRESULT)).call(ppmediacollection)
+  def get_media_collection(this : IWMPPlayer2*, ppmediacollection : IWMPMediaCollection*) : HRESULT
+    @lpVtbl.value.get_media_collection.call(this, ppmediacollection)
   end
-  def get_playlist_collection(ppplaylistcollection : IWMPPlaylistCollection*) : HRESULT
-    @lpVtbl.value.get_playlist_collection.unsafe_as(Proc(IWMPPlaylistCollection*, HRESULT)).call(ppplaylistcollection)
+  def get_playlist_collection(this : IWMPPlayer2*, ppplaylistcollection : IWMPPlaylistCollection*) : HRESULT
+    @lpVtbl.value.get_playlist_collection.call(this, ppplaylistcollection)
   end
-  def get_version_info(pbstrversioninfo : UInt8**) : HRESULT
-    @lpVtbl.value.get_version_info.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrversioninfo)
+  def get_version_info(this : IWMPPlayer2*, pbstrversioninfo : UInt8**) : HRESULT
+    @lpVtbl.value.get_version_info.call(this, pbstrversioninfo)
   end
-  def launch_url(bstrurl : UInt8*) : HRESULT
-    @lpVtbl.value.launch_url.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrurl)
+  def launch_url(this : IWMPPlayer2*, bstrurl : UInt8*) : HRESULT
+    @lpVtbl.value.launch_url.call(this, bstrurl)
   end
-  def get_network(ppqni : IWMPNetwork*) : HRESULT
-    @lpVtbl.value.get_network.unsafe_as(Proc(IWMPNetwork*, HRESULT)).call(ppqni)
+  def get_network(this : IWMPPlayer2*, ppqni : IWMPNetwork*) : HRESULT
+    @lpVtbl.value.get_network.call(this, ppqni)
   end
-  def get_current_playlist(pppl : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_current_playlist.unsafe_as(Proc(IWMPPlaylist*, HRESULT)).call(pppl)
+  def get_current_playlist(this : IWMPPlayer2*, pppl : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_current_playlist.call(this, pppl)
   end
-  def put_current_playlist(ppl : IWMPPlaylist) : HRESULT
-    @lpVtbl.value.put_current_playlist.unsafe_as(Proc(IWMPPlaylist, HRESULT)).call(ppl)
+  def put_current_playlist(this : IWMPPlayer2*, ppl : IWMPPlaylist) : HRESULT
+    @lpVtbl.value.put_current_playlist.call(this, ppl)
   end
-  def get_cdrom_collection(ppcdromcollection : IWMPCdromCollection*) : HRESULT
-    @lpVtbl.value.get_cdrom_collection.unsafe_as(Proc(IWMPCdromCollection*, HRESULT)).call(ppcdromcollection)
+  def get_cdrom_collection(this : IWMPPlayer2*, ppcdromcollection : IWMPCdromCollection*) : HRESULT
+    @lpVtbl.value.get_cdrom_collection.call(this, ppcdromcollection)
   end
-  def get_closed_caption(ppclosedcaption : IWMPClosedCaption*) : HRESULT
-    @lpVtbl.value.get_closed_caption.unsafe_as(Proc(IWMPClosedCaption*, HRESULT)).call(ppclosedcaption)
+  def get_closed_caption(this : IWMPPlayer2*, ppclosedcaption : IWMPClosedCaption*) : HRESULT
+    @lpVtbl.value.get_closed_caption.call(this, ppclosedcaption)
   end
-  def get_is_online(pfonline : Int16*) : HRESULT
-    @lpVtbl.value.get_is_online.unsafe_as(Proc(Int16*, HRESULT)).call(pfonline)
+  def get_is_online(this : IWMPPlayer2*, pfonline : Int16*) : HRESULT
+    @lpVtbl.value.get_is_online.call(this, pfonline)
   end
-  def get_error(pperror : IWMPError*) : HRESULT
-    @lpVtbl.value.get_error.unsafe_as(Proc(IWMPError*, HRESULT)).call(pperror)
+  def get_error(this : IWMPPlayer2*, pperror : IWMPError*) : HRESULT
+    @lpVtbl.value.get_error.call(this, pperror)
   end
-  def get_status(pbstrstatus : UInt8**) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrstatus)
+  def get_status(this : IWMPPlayer2*, pbstrstatus : UInt8**) : HRESULT
+    @lpVtbl.value.get_status.call(this, pbstrstatus)
   end
-  def get_enabled(pbenabled : Int16*) : HRESULT
-    @lpVtbl.value.get_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pbenabled)
+  def get_enabled(this : IWMPPlayer2*, pbenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, pbenabled)
   end
-  def put_enabled(benabled : Int16) : HRESULT
-    @lpVtbl.value.put_enabled.unsafe_as(Proc(Int16, HRESULT)).call(benabled)
+  def put_enabled(this : IWMPPlayer2*, benabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, benabled)
   end
-  def get_full_screen(pbfullscreen : Int16*) : HRESULT
-    @lpVtbl.value.get_full_screen.unsafe_as(Proc(Int16*, HRESULT)).call(pbfullscreen)
+  def get_full_screen(this : IWMPPlayer2*, pbfullscreen : Int16*) : HRESULT
+    @lpVtbl.value.get_full_screen.call(this, pbfullscreen)
   end
-  def put_full_screen(bfullscreen : Int16) : HRESULT
-    @lpVtbl.value.put_full_screen.unsafe_as(Proc(Int16, HRESULT)).call(bfullscreen)
+  def put_full_screen(this : IWMPPlayer2*, bfullscreen : Int16) : HRESULT
+    @lpVtbl.value.put_full_screen.call(this, bfullscreen)
   end
-  def get_enable_context_menu(pbenablecontextmenu : Int16*) : HRESULT
-    @lpVtbl.value.get_enable_context_menu.unsafe_as(Proc(Int16*, HRESULT)).call(pbenablecontextmenu)
+  def get_enable_context_menu(this : IWMPPlayer2*, pbenablecontextmenu : Int16*) : HRESULT
+    @lpVtbl.value.get_enable_context_menu.call(this, pbenablecontextmenu)
   end
-  def put_enable_context_menu(benablecontextmenu : Int16) : HRESULT
-    @lpVtbl.value.put_enable_context_menu.unsafe_as(Proc(Int16, HRESULT)).call(benablecontextmenu)
+  def put_enable_context_menu(this : IWMPPlayer2*, benablecontextmenu : Int16) : HRESULT
+    @lpVtbl.value.put_enable_context_menu.call(this, benablecontextmenu)
   end
-  def put_ui_mode(bstrmode : UInt8*) : HRESULT
-    @lpVtbl.value.put_ui_mode.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrmode)
+  def put_ui_mode(this : IWMPPlayer2*, bstrmode : UInt8*) : HRESULT
+    @lpVtbl.value.put_ui_mode.call(this, bstrmode)
   end
-  def get_ui_mode(pbstrmode : UInt8**) : HRESULT
-    @lpVtbl.value.get_ui_mode.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrmode)
+  def get_ui_mode(this : IWMPPlayer2*, pbstrmode : UInt8**) : HRESULT
+    @lpVtbl.value.get_ui_mode.call(this, pbstrmode)
   end
-  def get_stretch_to_fit(pbenabled : Int16*) : HRESULT
-    @lpVtbl.value.get_stretch_to_fit.unsafe_as(Proc(Int16*, HRESULT)).call(pbenabled)
+  def get_stretch_to_fit(this : IWMPPlayer2*, pbenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_stretch_to_fit.call(this, pbenabled)
   end
-  def put_stretch_to_fit(benabled : Int16) : HRESULT
-    @lpVtbl.value.put_stretch_to_fit.unsafe_as(Proc(Int16, HRESULT)).call(benabled)
+  def put_stretch_to_fit(this : IWMPPlayer2*, benabled : Int16) : HRESULT
+    @lpVtbl.value.put_stretch_to_fit.call(this, benabled)
   end
-  def get_windowless_video(pbenabled : Int16*) : HRESULT
-    @lpVtbl.value.get_windowless_video.unsafe_as(Proc(Int16*, HRESULT)).call(pbenabled)
+  def get_windowless_video(this : IWMPPlayer2*, pbenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_windowless_video.call(this, pbenabled)
   end
-  def put_windowless_video(benabled : Int16) : HRESULT
-    @lpVtbl.value.put_windowless_video.unsafe_as(Proc(Int16, HRESULT)).call(benabled)
+  def put_windowless_video(this : IWMPPlayer2*, benabled : Int16) : HRESULT
+    @lpVtbl.value.put_windowless_video.call(this, benabled)
   end
 end
 struct LibWin32::IWMPMedia2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPMedia2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPMedia2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPMedia2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPMedia2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPMedia2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPMedia2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPMedia2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_is_identical(piwmpmedia : IWMPMedia, pvbool : Int16*) : HRESULT
-    @lpVtbl.value.get_is_identical.unsafe_as(Proc(IWMPMedia, Int16*, HRESULT)).call(piwmpmedia, pvbool)
+  def get_is_identical(this : IWMPMedia2*, piwmpmedia : IWMPMedia, pvbool : Int16*) : HRESULT
+    @lpVtbl.value.get_is_identical.call(this, piwmpmedia, pvbool)
   end
-  def get_source_url(pbstrsourceurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_source_url.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsourceurl)
+  def get_source_url(this : IWMPMedia2*, pbstrsourceurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_url.call(this, pbstrsourceurl)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IWMPMedia2*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def put_name(bstrname : UInt8*) : HRESULT
-    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  def put_name(this : IWMPMedia2*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
   end
-  def get_image_source_width(pwidth : Int32*) : HRESULT
-    @lpVtbl.value.get_image_source_width.unsafe_as(Proc(Int32*, HRESULT)).call(pwidth)
+  def get_image_source_width(this : IWMPMedia2*, pwidth : Int32*) : HRESULT
+    @lpVtbl.value.get_image_source_width.call(this, pwidth)
   end
-  def get_image_source_height(pheight : Int32*) : HRESULT
-    @lpVtbl.value.get_image_source_height.unsafe_as(Proc(Int32*, HRESULT)).call(pheight)
+  def get_image_source_height(this : IWMPMedia2*, pheight : Int32*) : HRESULT
+    @lpVtbl.value.get_image_source_height.call(this, pheight)
   end
-  def get_marker_count(pmarkercount : Int32*) : HRESULT
-    @lpVtbl.value.get_marker_count.unsafe_as(Proc(Int32*, HRESULT)).call(pmarkercount)
+  def get_marker_count(this : IWMPMedia2*, pmarkercount : Int32*) : HRESULT
+    @lpVtbl.value.get_marker_count.call(this, pmarkercount)
   end
-  def get_marker_time(markernum : Int32, pmarkertime : Float64*) : HRESULT
-    @lpVtbl.value.get_marker_time.unsafe_as(Proc(Int32, Float64*, HRESULT)).call(markernum, pmarkertime)
+  def get_marker_time(this : IWMPMedia2*, markernum : Int32, pmarkertime : Float64*) : HRESULT
+    @lpVtbl.value.get_marker_time.call(this, markernum, pmarkertime)
   end
-  def get_marker_name(markernum : Int32, pbstrmarkername : UInt8**) : HRESULT
-    @lpVtbl.value.get_marker_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(markernum, pbstrmarkername)
+  def get_marker_name(this : IWMPMedia2*, markernum : Int32, pbstrmarkername : UInt8**) : HRESULT
+    @lpVtbl.value.get_marker_name.call(this, markernum, pbstrmarkername)
   end
-  def get_duration(pduration : Float64*) : HRESULT
-    @lpVtbl.value.get_duration.unsafe_as(Proc(Float64*, HRESULT)).call(pduration)
+  def get_duration(this : IWMPMedia2*, pduration : Float64*) : HRESULT
+    @lpVtbl.value.get_duration.call(this, pduration)
   end
-  def get_duration_string(pbstrduration : UInt8**) : HRESULT
-    @lpVtbl.value.get_duration_string.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrduration)
+  def get_duration_string(this : IWMPMedia2*, pbstrduration : UInt8**) : HRESULT
+    @lpVtbl.value.get_duration_string.call(this, pbstrduration)
   end
-  def get_attribute_count(plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_attribute_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  def get_attribute_count(this : IWMPMedia2*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_attribute_count.call(this, plcount)
   end
-  def get_attribute_name(lindex : Int32, pbstritemname : UInt8**) : HRESULT
-    @lpVtbl.value.get_attribute_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(lindex, pbstritemname)
+  def get_attribute_name(this : IWMPMedia2*, lindex : Int32, pbstritemname : UInt8**) : HRESULT
+    @lpVtbl.value.get_attribute_name.call(this, lindex, pbstritemname)
   end
-  def get_item_info(bstritemname : UInt8*, pbstrval : UInt8**) : HRESULT
-    @lpVtbl.value.get_item_info.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstritemname, pbstrval)
+  def get_item_info(this : IWMPMedia2*, bstritemname : UInt8*, pbstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_info.call(this, bstritemname, pbstrval)
   end
-  def set_item_info(bstritemname : UInt8*, bstrval : UInt8*) : HRESULT
-    @lpVtbl.value.set_item_info.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstritemname, bstrval)
+  def set_item_info(this : IWMPMedia2*, bstritemname : UInt8*, bstrval : UInt8*) : HRESULT
+    @lpVtbl.value.set_item_info.call(this, bstritemname, bstrval)
   end
-  def get_item_info_by_atom(latom : Int32, pbstrval : UInt8**) : HRESULT
-    @lpVtbl.value.get_item_info_by_atom.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(latom, pbstrval)
+  def get_item_info_by_atom(this : IWMPMedia2*, latom : Int32, pbstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_info_by_atom.call(this, latom, pbstrval)
   end
-  def is_member_of(pplaylist : IWMPPlaylist, pvarfismemberof : Int16*) : HRESULT
-    @lpVtbl.value.is_member_of.unsafe_as(Proc(IWMPPlaylist, Int16*, HRESULT)).call(pplaylist, pvarfismemberof)
+  def is_member_of(this : IWMPMedia2*, pplaylist : IWMPPlaylist, pvarfismemberof : Int16*) : HRESULT
+    @lpVtbl.value.is_member_of.call(this, pplaylist, pvarfismemberof)
   end
-  def is_read_only_item(bstritemname : UInt8*, pvarfisreadonly : Int16*) : HRESULT
-    @lpVtbl.value.is_read_only_item.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(bstritemname, pvarfisreadonly)
+  def is_read_only_item(this : IWMPMedia2*, bstritemname : UInt8*, pvarfisreadonly : Int16*) : HRESULT
+    @lpVtbl.value.is_read_only_item.call(this, bstritemname, pvarfisreadonly)
   end
-  def get_error(ppiwmperroritem : IWMPErrorItem*) : HRESULT
-    @lpVtbl.value.get_error.unsafe_as(Proc(IWMPErrorItem*, HRESULT)).call(ppiwmperroritem)
+  def get_error(this : IWMPMedia2*, ppiwmperroritem : IWMPErrorItem*) : HRESULT
+    @lpVtbl.value.get_error.call(this, ppiwmperroritem)
   end
 end
 struct LibWin32::IWMPControls2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPControls2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPControls2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPControls2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPControls2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPControls2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPControls2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPControls2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_is_available(bstritem : UInt8*, pisavailable : Int16*) : HRESULT
-    @lpVtbl.value.get_is_available.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(bstritem, pisavailable)
+  def get_is_available(this : IWMPControls2*, bstritem : UInt8*, pisavailable : Int16*) : HRESULT
+    @lpVtbl.value.get_is_available.call(this, bstritem, pisavailable)
   end
-  def play : HRESULT
-    @lpVtbl.value.play.unsafe_as(Proc(HRESULT)).call
+  def play(this : IWMPControls2*) : HRESULT
+    @lpVtbl.value.play.call(this)
   end
-  def stop : HRESULT
-    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  def stop(this : IWMPControls2*) : HRESULT
+    @lpVtbl.value.stop.call(this)
   end
-  def pause : HRESULT
-    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  def pause(this : IWMPControls2*) : HRESULT
+    @lpVtbl.value.pause.call(this)
   end
-  def fast_forward : HRESULT
-    @lpVtbl.value.fast_forward.unsafe_as(Proc(HRESULT)).call
+  def fast_forward(this : IWMPControls2*) : HRESULT
+    @lpVtbl.value.fast_forward.call(this)
   end
-  def fast_reverse : HRESULT
-    @lpVtbl.value.fast_reverse.unsafe_as(Proc(HRESULT)).call
+  def fast_reverse(this : IWMPControls2*) : HRESULT
+    @lpVtbl.value.fast_reverse.call(this)
   end
-  def get_current_position(pdcurrentposition : Float64*) : HRESULT
-    @lpVtbl.value.get_current_position.unsafe_as(Proc(Float64*, HRESULT)).call(pdcurrentposition)
+  def get_current_position(this : IWMPControls2*, pdcurrentposition : Float64*) : HRESULT
+    @lpVtbl.value.get_current_position.call(this, pdcurrentposition)
   end
-  def put_current_position(dcurrentposition : Float64) : HRESULT
-    @lpVtbl.value.put_current_position.unsafe_as(Proc(Float64, HRESULT)).call(dcurrentposition)
+  def put_current_position(this : IWMPControls2*, dcurrentposition : Float64) : HRESULT
+    @lpVtbl.value.put_current_position.call(this, dcurrentposition)
   end
-  def get_current_position_string(pbstrcurrentposition : UInt8**) : HRESULT
-    @lpVtbl.value.get_current_position_string.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcurrentposition)
+  def get_current_position_string(this : IWMPControls2*, pbstrcurrentposition : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_position_string.call(this, pbstrcurrentposition)
   end
-  def next : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(HRESULT)).call
+  def next(this : IWMPControls2*) : HRESULT
+    @lpVtbl.value.next.call(this)
   end
-  def previous : HRESULT
-    @lpVtbl.value.previous.unsafe_as(Proc(HRESULT)).call
+  def previous(this : IWMPControls2*) : HRESULT
+    @lpVtbl.value.previous.call(this)
   end
-  def get_current_item(ppiwmpmedia : IWMPMedia*) : HRESULT
-    @lpVtbl.value.get_current_item.unsafe_as(Proc(IWMPMedia*, HRESULT)).call(ppiwmpmedia)
+  def get_current_item(this : IWMPControls2*, ppiwmpmedia : IWMPMedia*) : HRESULT
+    @lpVtbl.value.get_current_item.call(this, ppiwmpmedia)
   end
-  def put_current_item(piwmpmedia : IWMPMedia) : HRESULT
-    @lpVtbl.value.put_current_item.unsafe_as(Proc(IWMPMedia, HRESULT)).call(piwmpmedia)
+  def put_current_item(this : IWMPControls2*, piwmpmedia : IWMPMedia) : HRESULT
+    @lpVtbl.value.put_current_item.call(this, piwmpmedia)
   end
-  def get_current_marker(plmarker : Int32*) : HRESULT
-    @lpVtbl.value.get_current_marker.unsafe_as(Proc(Int32*, HRESULT)).call(plmarker)
+  def get_current_marker(this : IWMPControls2*, plmarker : Int32*) : HRESULT
+    @lpVtbl.value.get_current_marker.call(this, plmarker)
   end
-  def put_current_marker(lmarker : Int32) : HRESULT
-    @lpVtbl.value.put_current_marker.unsafe_as(Proc(Int32, HRESULT)).call(lmarker)
+  def put_current_marker(this : IWMPControls2*, lmarker : Int32) : HRESULT
+    @lpVtbl.value.put_current_marker.call(this, lmarker)
   end
-  def play_item(piwmpmedia : IWMPMedia) : HRESULT
-    @lpVtbl.value.play_item.unsafe_as(Proc(IWMPMedia, HRESULT)).call(piwmpmedia)
+  def play_item(this : IWMPControls2*, piwmpmedia : IWMPMedia) : HRESULT
+    @lpVtbl.value.play_item.call(this, piwmpmedia)
   end
-  def step(lstep : Int32) : HRESULT
-    @lpVtbl.value.step.unsafe_as(Proc(Int32, HRESULT)).call(lstep)
+  def step(this : IWMPControls2*, lstep : Int32) : HRESULT
+    @lpVtbl.value.step.call(this, lstep)
   end
 end
 struct LibWin32::IWMPDVD
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPDVD*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPDVD*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPDVD*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPDVD*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPDVD*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPDVD*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPDVD*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_is_available(bstritem : UInt8*, pisavailable : Int16*) : HRESULT
-    @lpVtbl.value.get_is_available.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(bstritem, pisavailable)
+  def get_is_available(this : IWMPDVD*, bstritem : UInt8*, pisavailable : Int16*) : HRESULT
+    @lpVtbl.value.get_is_available.call(this, bstritem, pisavailable)
   end
-  def get_domain(strdomain : UInt8**) : HRESULT
-    @lpVtbl.value.get_domain.unsafe_as(Proc(UInt8**, HRESULT)).call(strdomain)
+  def get_domain(this : IWMPDVD*, strdomain : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain.call(this, strdomain)
   end
-  def top_menu : HRESULT
-    @lpVtbl.value.top_menu.unsafe_as(Proc(HRESULT)).call
+  def top_menu(this : IWMPDVD*) : HRESULT
+    @lpVtbl.value.top_menu.call(this)
   end
-  def title_menu : HRESULT
-    @lpVtbl.value.title_menu.unsafe_as(Proc(HRESULT)).call
+  def title_menu(this : IWMPDVD*) : HRESULT
+    @lpVtbl.value.title_menu.call(this)
   end
-  def back : HRESULT
-    @lpVtbl.value.back.unsafe_as(Proc(HRESULT)).call
+  def back(this : IWMPDVD*) : HRESULT
+    @lpVtbl.value.back.call(this)
   end
-  def resume : HRESULT
-    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  def resume(this : IWMPDVD*) : HRESULT
+    @lpVtbl.value.resume.call(this)
   end
 end
 struct LibWin32::IWMPCore2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPCore2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPCore2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPCore2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPCore2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPCore2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPCore2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPCore2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : IWMPCore2*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
-  def get_url(pbstrurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_url.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrurl)
+  def get_url(this : IWMPCore2*, pbstrurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, pbstrurl)
   end
-  def put_url(bstrurl : UInt8*) : HRESULT
-    @lpVtbl.value.put_url.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrurl)
+  def put_url(this : IWMPCore2*, bstrurl : UInt8*) : HRESULT
+    @lpVtbl.value.put_url.call(this, bstrurl)
   end
-  def get_open_state(pwmpos : WMPOpenState*) : HRESULT
-    @lpVtbl.value.get_open_state.unsafe_as(Proc(WMPOpenState*, HRESULT)).call(pwmpos)
+  def get_open_state(this : IWMPCore2*, pwmpos : WMPOpenState*) : HRESULT
+    @lpVtbl.value.get_open_state.call(this, pwmpos)
   end
-  def get_play_state(pwmpps : WMPPlayState*) : HRESULT
-    @lpVtbl.value.get_play_state.unsafe_as(Proc(WMPPlayState*, HRESULT)).call(pwmpps)
+  def get_play_state(this : IWMPCore2*, pwmpps : WMPPlayState*) : HRESULT
+    @lpVtbl.value.get_play_state.call(this, pwmpps)
   end
-  def get_controls(ppcontrol : IWMPControls*) : HRESULT
-    @lpVtbl.value.get_controls.unsafe_as(Proc(IWMPControls*, HRESULT)).call(ppcontrol)
+  def get_controls(this : IWMPCore2*, ppcontrol : IWMPControls*) : HRESULT
+    @lpVtbl.value.get_controls.call(this, ppcontrol)
   end
-  def get_settings(ppsettings : IWMPSettings*) : HRESULT
-    @lpVtbl.value.get_settings.unsafe_as(Proc(IWMPSettings*, HRESULT)).call(ppsettings)
+  def get_settings(this : IWMPCore2*, ppsettings : IWMPSettings*) : HRESULT
+    @lpVtbl.value.get_settings.call(this, ppsettings)
   end
-  def get_current_media(ppmedia : IWMPMedia*) : HRESULT
-    @lpVtbl.value.get_current_media.unsafe_as(Proc(IWMPMedia*, HRESULT)).call(ppmedia)
+  def get_current_media(this : IWMPCore2*, ppmedia : IWMPMedia*) : HRESULT
+    @lpVtbl.value.get_current_media.call(this, ppmedia)
   end
-  def put_current_media(pmedia : IWMPMedia) : HRESULT
-    @lpVtbl.value.put_current_media.unsafe_as(Proc(IWMPMedia, HRESULT)).call(pmedia)
+  def put_current_media(this : IWMPCore2*, pmedia : IWMPMedia) : HRESULT
+    @lpVtbl.value.put_current_media.call(this, pmedia)
   end
-  def get_media_collection(ppmediacollection : IWMPMediaCollection*) : HRESULT
-    @lpVtbl.value.get_media_collection.unsafe_as(Proc(IWMPMediaCollection*, HRESULT)).call(ppmediacollection)
+  def get_media_collection(this : IWMPCore2*, ppmediacollection : IWMPMediaCollection*) : HRESULT
+    @lpVtbl.value.get_media_collection.call(this, ppmediacollection)
   end
-  def get_playlist_collection(ppplaylistcollection : IWMPPlaylistCollection*) : HRESULT
-    @lpVtbl.value.get_playlist_collection.unsafe_as(Proc(IWMPPlaylistCollection*, HRESULT)).call(ppplaylistcollection)
+  def get_playlist_collection(this : IWMPCore2*, ppplaylistcollection : IWMPPlaylistCollection*) : HRESULT
+    @lpVtbl.value.get_playlist_collection.call(this, ppplaylistcollection)
   end
-  def get_version_info(pbstrversioninfo : UInt8**) : HRESULT
-    @lpVtbl.value.get_version_info.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrversioninfo)
+  def get_version_info(this : IWMPCore2*, pbstrversioninfo : UInt8**) : HRESULT
+    @lpVtbl.value.get_version_info.call(this, pbstrversioninfo)
   end
-  def launch_url(bstrurl : UInt8*) : HRESULT
-    @lpVtbl.value.launch_url.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrurl)
+  def launch_url(this : IWMPCore2*, bstrurl : UInt8*) : HRESULT
+    @lpVtbl.value.launch_url.call(this, bstrurl)
   end
-  def get_network(ppqni : IWMPNetwork*) : HRESULT
-    @lpVtbl.value.get_network.unsafe_as(Proc(IWMPNetwork*, HRESULT)).call(ppqni)
+  def get_network(this : IWMPCore2*, ppqni : IWMPNetwork*) : HRESULT
+    @lpVtbl.value.get_network.call(this, ppqni)
   end
-  def get_current_playlist(pppl : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_current_playlist.unsafe_as(Proc(IWMPPlaylist*, HRESULT)).call(pppl)
+  def get_current_playlist(this : IWMPCore2*, pppl : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_current_playlist.call(this, pppl)
   end
-  def put_current_playlist(ppl : IWMPPlaylist) : HRESULT
-    @lpVtbl.value.put_current_playlist.unsafe_as(Proc(IWMPPlaylist, HRESULT)).call(ppl)
+  def put_current_playlist(this : IWMPCore2*, ppl : IWMPPlaylist) : HRESULT
+    @lpVtbl.value.put_current_playlist.call(this, ppl)
   end
-  def get_cdrom_collection(ppcdromcollection : IWMPCdromCollection*) : HRESULT
-    @lpVtbl.value.get_cdrom_collection.unsafe_as(Proc(IWMPCdromCollection*, HRESULT)).call(ppcdromcollection)
+  def get_cdrom_collection(this : IWMPCore2*, ppcdromcollection : IWMPCdromCollection*) : HRESULT
+    @lpVtbl.value.get_cdrom_collection.call(this, ppcdromcollection)
   end
-  def get_closed_caption(ppclosedcaption : IWMPClosedCaption*) : HRESULT
-    @lpVtbl.value.get_closed_caption.unsafe_as(Proc(IWMPClosedCaption*, HRESULT)).call(ppclosedcaption)
+  def get_closed_caption(this : IWMPCore2*, ppclosedcaption : IWMPClosedCaption*) : HRESULT
+    @lpVtbl.value.get_closed_caption.call(this, ppclosedcaption)
   end
-  def get_is_online(pfonline : Int16*) : HRESULT
-    @lpVtbl.value.get_is_online.unsafe_as(Proc(Int16*, HRESULT)).call(pfonline)
+  def get_is_online(this : IWMPCore2*, pfonline : Int16*) : HRESULT
+    @lpVtbl.value.get_is_online.call(this, pfonline)
   end
-  def get_error(pperror : IWMPError*) : HRESULT
-    @lpVtbl.value.get_error.unsafe_as(Proc(IWMPError*, HRESULT)).call(pperror)
+  def get_error(this : IWMPCore2*, pperror : IWMPError*) : HRESULT
+    @lpVtbl.value.get_error.call(this, pperror)
   end
-  def get_status(pbstrstatus : UInt8**) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrstatus)
+  def get_status(this : IWMPCore2*, pbstrstatus : UInt8**) : HRESULT
+    @lpVtbl.value.get_status.call(this, pbstrstatus)
   end
-  def get_dvd(ppdvd : IWMPDVD*) : HRESULT
-    @lpVtbl.value.get_dvd.unsafe_as(Proc(IWMPDVD*, HRESULT)).call(ppdvd)
+  def get_dvd(this : IWMPCore2*, ppdvd : IWMPDVD*) : HRESULT
+    @lpVtbl.value.get_dvd.call(this, ppdvd)
   end
 end
 struct LibWin32::IWMPPlayer3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPPlayer3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPPlayer3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPPlayer3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPPlayer3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPPlayer3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPPlayer3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPPlayer3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : IWMPPlayer3*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
-  def get_url(pbstrurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_url.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrurl)
+  def get_url(this : IWMPPlayer3*, pbstrurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, pbstrurl)
   end
-  def put_url(bstrurl : UInt8*) : HRESULT
-    @lpVtbl.value.put_url.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrurl)
+  def put_url(this : IWMPPlayer3*, bstrurl : UInt8*) : HRESULT
+    @lpVtbl.value.put_url.call(this, bstrurl)
   end
-  def get_open_state(pwmpos : WMPOpenState*) : HRESULT
-    @lpVtbl.value.get_open_state.unsafe_as(Proc(WMPOpenState*, HRESULT)).call(pwmpos)
+  def get_open_state(this : IWMPPlayer3*, pwmpos : WMPOpenState*) : HRESULT
+    @lpVtbl.value.get_open_state.call(this, pwmpos)
   end
-  def get_play_state(pwmpps : WMPPlayState*) : HRESULT
-    @lpVtbl.value.get_play_state.unsafe_as(Proc(WMPPlayState*, HRESULT)).call(pwmpps)
+  def get_play_state(this : IWMPPlayer3*, pwmpps : WMPPlayState*) : HRESULT
+    @lpVtbl.value.get_play_state.call(this, pwmpps)
   end
-  def get_controls(ppcontrol : IWMPControls*) : HRESULT
-    @lpVtbl.value.get_controls.unsafe_as(Proc(IWMPControls*, HRESULT)).call(ppcontrol)
+  def get_controls(this : IWMPPlayer3*, ppcontrol : IWMPControls*) : HRESULT
+    @lpVtbl.value.get_controls.call(this, ppcontrol)
   end
-  def get_settings(ppsettings : IWMPSettings*) : HRESULT
-    @lpVtbl.value.get_settings.unsafe_as(Proc(IWMPSettings*, HRESULT)).call(ppsettings)
+  def get_settings(this : IWMPPlayer3*, ppsettings : IWMPSettings*) : HRESULT
+    @lpVtbl.value.get_settings.call(this, ppsettings)
   end
-  def get_current_media(ppmedia : IWMPMedia*) : HRESULT
-    @lpVtbl.value.get_current_media.unsafe_as(Proc(IWMPMedia*, HRESULT)).call(ppmedia)
+  def get_current_media(this : IWMPPlayer3*, ppmedia : IWMPMedia*) : HRESULT
+    @lpVtbl.value.get_current_media.call(this, ppmedia)
   end
-  def put_current_media(pmedia : IWMPMedia) : HRESULT
-    @lpVtbl.value.put_current_media.unsafe_as(Proc(IWMPMedia, HRESULT)).call(pmedia)
+  def put_current_media(this : IWMPPlayer3*, pmedia : IWMPMedia) : HRESULT
+    @lpVtbl.value.put_current_media.call(this, pmedia)
   end
-  def get_media_collection(ppmediacollection : IWMPMediaCollection*) : HRESULT
-    @lpVtbl.value.get_media_collection.unsafe_as(Proc(IWMPMediaCollection*, HRESULT)).call(ppmediacollection)
+  def get_media_collection(this : IWMPPlayer3*, ppmediacollection : IWMPMediaCollection*) : HRESULT
+    @lpVtbl.value.get_media_collection.call(this, ppmediacollection)
   end
-  def get_playlist_collection(ppplaylistcollection : IWMPPlaylistCollection*) : HRESULT
-    @lpVtbl.value.get_playlist_collection.unsafe_as(Proc(IWMPPlaylistCollection*, HRESULT)).call(ppplaylistcollection)
+  def get_playlist_collection(this : IWMPPlayer3*, ppplaylistcollection : IWMPPlaylistCollection*) : HRESULT
+    @lpVtbl.value.get_playlist_collection.call(this, ppplaylistcollection)
   end
-  def get_version_info(pbstrversioninfo : UInt8**) : HRESULT
-    @lpVtbl.value.get_version_info.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrversioninfo)
+  def get_version_info(this : IWMPPlayer3*, pbstrversioninfo : UInt8**) : HRESULT
+    @lpVtbl.value.get_version_info.call(this, pbstrversioninfo)
   end
-  def launch_url(bstrurl : UInt8*) : HRESULT
-    @lpVtbl.value.launch_url.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrurl)
+  def launch_url(this : IWMPPlayer3*, bstrurl : UInt8*) : HRESULT
+    @lpVtbl.value.launch_url.call(this, bstrurl)
   end
-  def get_network(ppqni : IWMPNetwork*) : HRESULT
-    @lpVtbl.value.get_network.unsafe_as(Proc(IWMPNetwork*, HRESULT)).call(ppqni)
+  def get_network(this : IWMPPlayer3*, ppqni : IWMPNetwork*) : HRESULT
+    @lpVtbl.value.get_network.call(this, ppqni)
   end
-  def get_current_playlist(pppl : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_current_playlist.unsafe_as(Proc(IWMPPlaylist*, HRESULT)).call(pppl)
+  def get_current_playlist(this : IWMPPlayer3*, pppl : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_current_playlist.call(this, pppl)
   end
-  def put_current_playlist(ppl : IWMPPlaylist) : HRESULT
-    @lpVtbl.value.put_current_playlist.unsafe_as(Proc(IWMPPlaylist, HRESULT)).call(ppl)
+  def put_current_playlist(this : IWMPPlayer3*, ppl : IWMPPlaylist) : HRESULT
+    @lpVtbl.value.put_current_playlist.call(this, ppl)
   end
-  def get_cdrom_collection(ppcdromcollection : IWMPCdromCollection*) : HRESULT
-    @lpVtbl.value.get_cdrom_collection.unsafe_as(Proc(IWMPCdromCollection*, HRESULT)).call(ppcdromcollection)
+  def get_cdrom_collection(this : IWMPPlayer3*, ppcdromcollection : IWMPCdromCollection*) : HRESULT
+    @lpVtbl.value.get_cdrom_collection.call(this, ppcdromcollection)
   end
-  def get_closed_caption(ppclosedcaption : IWMPClosedCaption*) : HRESULT
-    @lpVtbl.value.get_closed_caption.unsafe_as(Proc(IWMPClosedCaption*, HRESULT)).call(ppclosedcaption)
+  def get_closed_caption(this : IWMPPlayer3*, ppclosedcaption : IWMPClosedCaption*) : HRESULT
+    @lpVtbl.value.get_closed_caption.call(this, ppclosedcaption)
   end
-  def get_is_online(pfonline : Int16*) : HRESULT
-    @lpVtbl.value.get_is_online.unsafe_as(Proc(Int16*, HRESULT)).call(pfonline)
+  def get_is_online(this : IWMPPlayer3*, pfonline : Int16*) : HRESULT
+    @lpVtbl.value.get_is_online.call(this, pfonline)
   end
-  def get_error(pperror : IWMPError*) : HRESULT
-    @lpVtbl.value.get_error.unsafe_as(Proc(IWMPError*, HRESULT)).call(pperror)
+  def get_error(this : IWMPPlayer3*, pperror : IWMPError*) : HRESULT
+    @lpVtbl.value.get_error.call(this, pperror)
   end
-  def get_status(pbstrstatus : UInt8**) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrstatus)
+  def get_status(this : IWMPPlayer3*, pbstrstatus : UInt8**) : HRESULT
+    @lpVtbl.value.get_status.call(this, pbstrstatus)
   end
-  def get_dvd(ppdvd : IWMPDVD*) : HRESULT
-    @lpVtbl.value.get_dvd.unsafe_as(Proc(IWMPDVD*, HRESULT)).call(ppdvd)
+  def get_dvd(this : IWMPPlayer3*, ppdvd : IWMPDVD*) : HRESULT
+    @lpVtbl.value.get_dvd.call(this, ppdvd)
   end
-  def get_enabled(pbenabled : Int16*) : HRESULT
-    @lpVtbl.value.get_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pbenabled)
+  def get_enabled(this : IWMPPlayer3*, pbenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, pbenabled)
   end
-  def put_enabled(benabled : Int16) : HRESULT
-    @lpVtbl.value.put_enabled.unsafe_as(Proc(Int16, HRESULT)).call(benabled)
+  def put_enabled(this : IWMPPlayer3*, benabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, benabled)
   end
-  def get_full_screen(pbfullscreen : Int16*) : HRESULT
-    @lpVtbl.value.get_full_screen.unsafe_as(Proc(Int16*, HRESULT)).call(pbfullscreen)
+  def get_full_screen(this : IWMPPlayer3*, pbfullscreen : Int16*) : HRESULT
+    @lpVtbl.value.get_full_screen.call(this, pbfullscreen)
   end
-  def put_full_screen(bfullscreen : Int16) : HRESULT
-    @lpVtbl.value.put_full_screen.unsafe_as(Proc(Int16, HRESULT)).call(bfullscreen)
+  def put_full_screen(this : IWMPPlayer3*, bfullscreen : Int16) : HRESULT
+    @lpVtbl.value.put_full_screen.call(this, bfullscreen)
   end
-  def get_enable_context_menu(pbenablecontextmenu : Int16*) : HRESULT
-    @lpVtbl.value.get_enable_context_menu.unsafe_as(Proc(Int16*, HRESULT)).call(pbenablecontextmenu)
+  def get_enable_context_menu(this : IWMPPlayer3*, pbenablecontextmenu : Int16*) : HRESULT
+    @lpVtbl.value.get_enable_context_menu.call(this, pbenablecontextmenu)
   end
-  def put_enable_context_menu(benablecontextmenu : Int16) : HRESULT
-    @lpVtbl.value.put_enable_context_menu.unsafe_as(Proc(Int16, HRESULT)).call(benablecontextmenu)
+  def put_enable_context_menu(this : IWMPPlayer3*, benablecontextmenu : Int16) : HRESULT
+    @lpVtbl.value.put_enable_context_menu.call(this, benablecontextmenu)
   end
-  def put_ui_mode(bstrmode : UInt8*) : HRESULT
-    @lpVtbl.value.put_ui_mode.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrmode)
+  def put_ui_mode(this : IWMPPlayer3*, bstrmode : UInt8*) : HRESULT
+    @lpVtbl.value.put_ui_mode.call(this, bstrmode)
   end
-  def get_ui_mode(pbstrmode : UInt8**) : HRESULT
-    @lpVtbl.value.get_ui_mode.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrmode)
+  def get_ui_mode(this : IWMPPlayer3*, pbstrmode : UInt8**) : HRESULT
+    @lpVtbl.value.get_ui_mode.call(this, pbstrmode)
   end
-  def get_stretch_to_fit(pbenabled : Int16*) : HRESULT
-    @lpVtbl.value.get_stretch_to_fit.unsafe_as(Proc(Int16*, HRESULT)).call(pbenabled)
+  def get_stretch_to_fit(this : IWMPPlayer3*, pbenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_stretch_to_fit.call(this, pbenabled)
   end
-  def put_stretch_to_fit(benabled : Int16) : HRESULT
-    @lpVtbl.value.put_stretch_to_fit.unsafe_as(Proc(Int16, HRESULT)).call(benabled)
+  def put_stretch_to_fit(this : IWMPPlayer3*, benabled : Int16) : HRESULT
+    @lpVtbl.value.put_stretch_to_fit.call(this, benabled)
   end
-  def get_windowless_video(pbenabled : Int16*) : HRESULT
-    @lpVtbl.value.get_windowless_video.unsafe_as(Proc(Int16*, HRESULT)).call(pbenabled)
+  def get_windowless_video(this : IWMPPlayer3*, pbenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_windowless_video.call(this, pbenabled)
   end
-  def put_windowless_video(benabled : Int16) : HRESULT
-    @lpVtbl.value.put_windowless_video.unsafe_as(Proc(Int16, HRESULT)).call(benabled)
+  def put_windowless_video(this : IWMPPlayer3*, benabled : Int16) : HRESULT
+    @lpVtbl.value.put_windowless_video.call(this, benabled)
   end
 end
 struct LibWin32::IWMPErrorItem2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPErrorItem2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPErrorItem2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPErrorItem2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPErrorItem2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPErrorItem2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPErrorItem2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPErrorItem2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_error_code(phr : Int32*) : HRESULT
-    @lpVtbl.value.get_error_code.unsafe_as(Proc(Int32*, HRESULT)).call(phr)
+  def get_error_code(this : IWMPErrorItem2*, phr : Int32*) : HRESULT
+    @lpVtbl.value.get_error_code.call(this, phr)
   end
-  def get_error_description(pbstrdescription : UInt8**) : HRESULT
-    @lpVtbl.value.get_error_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  def get_error_description(this : IWMPErrorItem2*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_error_description.call(this, pbstrdescription)
   end
-  def get_error_context(pvarcontext : VARIANT*) : HRESULT
-    @lpVtbl.value.get_error_context.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarcontext)
+  def get_error_context(this : IWMPErrorItem2*, pvarcontext : VARIANT*) : HRESULT
+    @lpVtbl.value.get_error_context.call(this, pvarcontext)
   end
-  def get_remedy(plremedy : Int32*) : HRESULT
-    @lpVtbl.value.get_remedy.unsafe_as(Proc(Int32*, HRESULT)).call(plremedy)
+  def get_remedy(this : IWMPErrorItem2*, plremedy : Int32*) : HRESULT
+    @lpVtbl.value.get_remedy.call(this, plremedy)
   end
-  def get_custom_url(pbstrcustomurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_custom_url.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcustomurl)
+  def get_custom_url(this : IWMPErrorItem2*, pbstrcustomurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_custom_url.call(this, pbstrcustomurl)
   end
-  def get_condition(plcondition : Int32*) : HRESULT
-    @lpVtbl.value.get_condition.unsafe_as(Proc(Int32*, HRESULT)).call(plcondition)
+  def get_condition(this : IWMPErrorItem2*, plcondition : Int32*) : HRESULT
+    @lpVtbl.value.get_condition.call(this, plcondition)
   end
 end
 struct LibWin32::IWMPRemoteMediaServices
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPRemoteMediaServices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPRemoteMediaServices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPRemoteMediaServices*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_service_type(pbstrtype : UInt8**) : HRESULT
-    @lpVtbl.value.get_service_type.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtype)
+  def get_service_type(this : IWMPRemoteMediaServices*, pbstrtype : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_type.call(this, pbstrtype)
   end
-  def get_application_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_application_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_application_name(this : IWMPRemoteMediaServices*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_name.call(this, pbstrname)
   end
-  def get_scriptable_object(pbstrname : UInt8**, ppdispatch : IDispatch*) : HRESULT
-    @lpVtbl.value.get_scriptable_object.unsafe_as(Proc(UInt8**, IDispatch*, HRESULT)).call(pbstrname, ppdispatch)
+  def get_scriptable_object(this : IWMPRemoteMediaServices*, pbstrname : UInt8**, ppdispatch : IDispatch*) : HRESULT
+    @lpVtbl.value.get_scriptable_object.call(this, pbstrname, ppdispatch)
   end
-  def get_custom_ui_mode(pbstrfile : UInt8**) : HRESULT
-    @lpVtbl.value.get_custom_ui_mode.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrfile)
+  def get_custom_ui_mode(this : IWMPRemoteMediaServices*, pbstrfile : UInt8**) : HRESULT
+    @lpVtbl.value.get_custom_ui_mode.call(this, pbstrfile)
   end
 end
 struct LibWin32::IWMPSkinManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPSkinManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPSkinManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPSkinManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_visual_style(bstrpath : UInt8*) : HRESULT
-    @lpVtbl.value.set_visual_style.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrpath)
+  def set_visual_style(this : IWMPSkinManager*, bstrpath : UInt8*) : HRESULT
+    @lpVtbl.value.set_visual_style.call(this, bstrpath)
   end
 end
 struct LibWin32::IWMPMetadataPicture
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPMetadataPicture*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPMetadataPicture*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPMetadataPicture*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPMetadataPicture*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPMetadataPicture*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPMetadataPicture*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPMetadataPicture*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_mime_type(pbstrmimetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_mime_type.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrmimetype)
+  def get_mime_type(this : IWMPMetadataPicture*, pbstrmimetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_mime_type.call(this, pbstrmimetype)
   end
-  def get_picture_type(pbstrpicturetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_picture_type.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrpicturetype)
+  def get_picture_type(this : IWMPMetadataPicture*, pbstrpicturetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_picture_type.call(this, pbstrpicturetype)
   end
-  def get_description(pbstrdescription : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  def get_description(this : IWMPMetadataPicture*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
   end
-  def get_url(pbstrurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_url.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrurl)
+  def get_url(this : IWMPMetadataPicture*, pbstrurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, pbstrurl)
   end
 end
 struct LibWin32::IWMPMetadataText
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPMetadataText*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPMetadataText*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPMetadataText*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPMetadataText*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPMetadataText*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPMetadataText*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPMetadataText*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_description(pbstrdescription : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  def get_description(this : IWMPMetadataText*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
   end
-  def get_text(pbstrtext : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtext)
+  def get_text(this : IWMPMetadataText*, pbstrtext : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, pbstrtext)
   end
 end
 struct LibWin32::IWMPMedia3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPMedia3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPMedia3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPMedia3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPMedia3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPMedia3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPMedia3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPMedia3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_is_identical(piwmpmedia : IWMPMedia, pvbool : Int16*) : HRESULT
-    @lpVtbl.value.get_is_identical.unsafe_as(Proc(IWMPMedia, Int16*, HRESULT)).call(piwmpmedia, pvbool)
+  def get_is_identical(this : IWMPMedia3*, piwmpmedia : IWMPMedia, pvbool : Int16*) : HRESULT
+    @lpVtbl.value.get_is_identical.call(this, piwmpmedia, pvbool)
   end
-  def get_source_url(pbstrsourceurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_source_url.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsourceurl)
+  def get_source_url(this : IWMPMedia3*, pbstrsourceurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_url.call(this, pbstrsourceurl)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IWMPMedia3*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def put_name(bstrname : UInt8*) : HRESULT
-    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  def put_name(this : IWMPMedia3*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
   end
-  def get_image_source_width(pwidth : Int32*) : HRESULT
-    @lpVtbl.value.get_image_source_width.unsafe_as(Proc(Int32*, HRESULT)).call(pwidth)
+  def get_image_source_width(this : IWMPMedia3*, pwidth : Int32*) : HRESULT
+    @lpVtbl.value.get_image_source_width.call(this, pwidth)
   end
-  def get_image_source_height(pheight : Int32*) : HRESULT
-    @lpVtbl.value.get_image_source_height.unsafe_as(Proc(Int32*, HRESULT)).call(pheight)
+  def get_image_source_height(this : IWMPMedia3*, pheight : Int32*) : HRESULT
+    @lpVtbl.value.get_image_source_height.call(this, pheight)
   end
-  def get_marker_count(pmarkercount : Int32*) : HRESULT
-    @lpVtbl.value.get_marker_count.unsafe_as(Proc(Int32*, HRESULT)).call(pmarkercount)
+  def get_marker_count(this : IWMPMedia3*, pmarkercount : Int32*) : HRESULT
+    @lpVtbl.value.get_marker_count.call(this, pmarkercount)
   end
-  def get_marker_time(markernum : Int32, pmarkertime : Float64*) : HRESULT
-    @lpVtbl.value.get_marker_time.unsafe_as(Proc(Int32, Float64*, HRESULT)).call(markernum, pmarkertime)
+  def get_marker_time(this : IWMPMedia3*, markernum : Int32, pmarkertime : Float64*) : HRESULT
+    @lpVtbl.value.get_marker_time.call(this, markernum, pmarkertime)
   end
-  def get_marker_name(markernum : Int32, pbstrmarkername : UInt8**) : HRESULT
-    @lpVtbl.value.get_marker_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(markernum, pbstrmarkername)
+  def get_marker_name(this : IWMPMedia3*, markernum : Int32, pbstrmarkername : UInt8**) : HRESULT
+    @lpVtbl.value.get_marker_name.call(this, markernum, pbstrmarkername)
   end
-  def get_duration(pduration : Float64*) : HRESULT
-    @lpVtbl.value.get_duration.unsafe_as(Proc(Float64*, HRESULT)).call(pduration)
+  def get_duration(this : IWMPMedia3*, pduration : Float64*) : HRESULT
+    @lpVtbl.value.get_duration.call(this, pduration)
   end
-  def get_duration_string(pbstrduration : UInt8**) : HRESULT
-    @lpVtbl.value.get_duration_string.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrduration)
+  def get_duration_string(this : IWMPMedia3*, pbstrduration : UInt8**) : HRESULT
+    @lpVtbl.value.get_duration_string.call(this, pbstrduration)
   end
-  def get_attribute_count(plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_attribute_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  def get_attribute_count(this : IWMPMedia3*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_attribute_count.call(this, plcount)
   end
-  def get_attribute_name(lindex : Int32, pbstritemname : UInt8**) : HRESULT
-    @lpVtbl.value.get_attribute_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(lindex, pbstritemname)
+  def get_attribute_name(this : IWMPMedia3*, lindex : Int32, pbstritemname : UInt8**) : HRESULT
+    @lpVtbl.value.get_attribute_name.call(this, lindex, pbstritemname)
   end
-  def get_item_info(bstritemname : UInt8*, pbstrval : UInt8**) : HRESULT
-    @lpVtbl.value.get_item_info.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstritemname, pbstrval)
+  def get_item_info(this : IWMPMedia3*, bstritemname : UInt8*, pbstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_info.call(this, bstritemname, pbstrval)
   end
-  def set_item_info(bstritemname : UInt8*, bstrval : UInt8*) : HRESULT
-    @lpVtbl.value.set_item_info.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstritemname, bstrval)
+  def set_item_info(this : IWMPMedia3*, bstritemname : UInt8*, bstrval : UInt8*) : HRESULT
+    @lpVtbl.value.set_item_info.call(this, bstritemname, bstrval)
   end
-  def get_item_info_by_atom(latom : Int32, pbstrval : UInt8**) : HRESULT
-    @lpVtbl.value.get_item_info_by_atom.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(latom, pbstrval)
+  def get_item_info_by_atom(this : IWMPMedia3*, latom : Int32, pbstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_info_by_atom.call(this, latom, pbstrval)
   end
-  def is_member_of(pplaylist : IWMPPlaylist, pvarfismemberof : Int16*) : HRESULT
-    @lpVtbl.value.is_member_of.unsafe_as(Proc(IWMPPlaylist, Int16*, HRESULT)).call(pplaylist, pvarfismemberof)
+  def is_member_of(this : IWMPMedia3*, pplaylist : IWMPPlaylist, pvarfismemberof : Int16*) : HRESULT
+    @lpVtbl.value.is_member_of.call(this, pplaylist, pvarfismemberof)
   end
-  def is_read_only_item(bstritemname : UInt8*, pvarfisreadonly : Int16*) : HRESULT
-    @lpVtbl.value.is_read_only_item.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(bstritemname, pvarfisreadonly)
+  def is_read_only_item(this : IWMPMedia3*, bstritemname : UInt8*, pvarfisreadonly : Int16*) : HRESULT
+    @lpVtbl.value.is_read_only_item.call(this, bstritemname, pvarfisreadonly)
   end
-  def get_error(ppiwmperroritem : IWMPErrorItem*) : HRESULT
-    @lpVtbl.value.get_error.unsafe_as(Proc(IWMPErrorItem*, HRESULT)).call(ppiwmperroritem)
+  def get_error(this : IWMPMedia3*, ppiwmperroritem : IWMPErrorItem*) : HRESULT
+    @lpVtbl.value.get_error.call(this, ppiwmperroritem)
   end
-  def get_attribute_count_by_type(bstrtype : UInt8*, bstrlanguage : UInt8*, plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_attribute_count_by_type.unsafe_as(Proc(UInt8*, UInt8*, Int32*, HRESULT)).call(bstrtype, bstrlanguage, plcount)
+  def get_attribute_count_by_type(this : IWMPMedia3*, bstrtype : UInt8*, bstrlanguage : UInt8*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_attribute_count_by_type.call(this, bstrtype, bstrlanguage, plcount)
   end
-  def get_item_info_by_type(bstrtype : UInt8*, bstrlanguage : UInt8*, lindex : Int32, pvarvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_item_info_by_type.unsafe_as(Proc(UInt8*, UInt8*, Int32, VARIANT*, HRESULT)).call(bstrtype, bstrlanguage, lindex, pvarvalue)
+  def get_item_info_by_type(this : IWMPMedia3*, bstrtype : UInt8*, bstrlanguage : UInt8*, lindex : Int32, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item_info_by_type.call(this, bstrtype, bstrlanguage, lindex, pvarvalue)
   end
 end
 struct LibWin32::IWMPSettings2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPSettings2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPSettings2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPSettings2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPSettings2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPSettings2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPSettings2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPSettings2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_is_available(bstritem : UInt8*, pisavailable : Int16*) : HRESULT
-    @lpVtbl.value.get_is_available.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(bstritem, pisavailable)
+  def get_is_available(this : IWMPSettings2*, bstritem : UInt8*, pisavailable : Int16*) : HRESULT
+    @lpVtbl.value.get_is_available.call(this, bstritem, pisavailable)
   end
-  def get_auto_start(pfautostart : Int16*) : HRESULT
-    @lpVtbl.value.get_auto_start.unsafe_as(Proc(Int16*, HRESULT)).call(pfautostart)
+  def get_auto_start(this : IWMPSettings2*, pfautostart : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_start.call(this, pfautostart)
   end
-  def put_auto_start(fautostart : Int16) : HRESULT
-    @lpVtbl.value.put_auto_start.unsafe_as(Proc(Int16, HRESULT)).call(fautostart)
+  def put_auto_start(this : IWMPSettings2*, fautostart : Int16) : HRESULT
+    @lpVtbl.value.put_auto_start.call(this, fautostart)
   end
-  def get_base_url(pbstrbaseurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_url.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbaseurl)
+  def get_base_url(this : IWMPSettings2*, pbstrbaseurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_base_url.call(this, pbstrbaseurl)
   end
-  def put_base_url(bstrbaseurl : UInt8*) : HRESULT
-    @lpVtbl.value.put_base_url.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrbaseurl)
+  def put_base_url(this : IWMPSettings2*, bstrbaseurl : UInt8*) : HRESULT
+    @lpVtbl.value.put_base_url.call(this, bstrbaseurl)
   end
-  def get_default_frame(pbstrdefaultframe : UInt8**) : HRESULT
-    @lpVtbl.value.get_default_frame.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdefaultframe)
+  def get_default_frame(this : IWMPSettings2*, pbstrdefaultframe : UInt8**) : HRESULT
+    @lpVtbl.value.get_default_frame.call(this, pbstrdefaultframe)
   end
-  def put_default_frame(bstrdefaultframe : UInt8*) : HRESULT
-    @lpVtbl.value.put_default_frame.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdefaultframe)
+  def put_default_frame(this : IWMPSettings2*, bstrdefaultframe : UInt8*) : HRESULT
+    @lpVtbl.value.put_default_frame.call(this, bstrdefaultframe)
   end
-  def get_invoke_ur_ls(pfinvokeurls : Int16*) : HRESULT
-    @lpVtbl.value.get_invoke_ur_ls.unsafe_as(Proc(Int16*, HRESULT)).call(pfinvokeurls)
+  def get_invoke_ur_ls(this : IWMPSettings2*, pfinvokeurls : Int16*) : HRESULT
+    @lpVtbl.value.get_invoke_ur_ls.call(this, pfinvokeurls)
   end
-  def put_invoke_ur_ls(finvokeurls : Int16) : HRESULT
-    @lpVtbl.value.put_invoke_ur_ls.unsafe_as(Proc(Int16, HRESULT)).call(finvokeurls)
+  def put_invoke_ur_ls(this : IWMPSettings2*, finvokeurls : Int16) : HRESULT
+    @lpVtbl.value.put_invoke_ur_ls.call(this, finvokeurls)
   end
-  def get_mute(pfmute : Int16*) : HRESULT
-    @lpVtbl.value.get_mute.unsafe_as(Proc(Int16*, HRESULT)).call(pfmute)
+  def get_mute(this : IWMPSettings2*, pfmute : Int16*) : HRESULT
+    @lpVtbl.value.get_mute.call(this, pfmute)
   end
-  def put_mute(fmute : Int16) : HRESULT
-    @lpVtbl.value.put_mute.unsafe_as(Proc(Int16, HRESULT)).call(fmute)
+  def put_mute(this : IWMPSettings2*, fmute : Int16) : HRESULT
+    @lpVtbl.value.put_mute.call(this, fmute)
   end
-  def get_play_count(plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_play_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  def get_play_count(this : IWMPSettings2*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_play_count.call(this, plcount)
   end
-  def put_play_count(lcount : Int32) : HRESULT
-    @lpVtbl.value.put_play_count.unsafe_as(Proc(Int32, HRESULT)).call(lcount)
+  def put_play_count(this : IWMPSettings2*, lcount : Int32) : HRESULT
+    @lpVtbl.value.put_play_count.call(this, lcount)
   end
-  def get_rate(pdrate : Float64*) : HRESULT
-    @lpVtbl.value.get_rate.unsafe_as(Proc(Float64*, HRESULT)).call(pdrate)
+  def get_rate(this : IWMPSettings2*, pdrate : Float64*) : HRESULT
+    @lpVtbl.value.get_rate.call(this, pdrate)
   end
-  def put_rate(drate : Float64) : HRESULT
-    @lpVtbl.value.put_rate.unsafe_as(Proc(Float64, HRESULT)).call(drate)
+  def put_rate(this : IWMPSettings2*, drate : Float64) : HRESULT
+    @lpVtbl.value.put_rate.call(this, drate)
   end
-  def get_balance(plbalance : Int32*) : HRESULT
-    @lpVtbl.value.get_balance.unsafe_as(Proc(Int32*, HRESULT)).call(plbalance)
+  def get_balance(this : IWMPSettings2*, plbalance : Int32*) : HRESULT
+    @lpVtbl.value.get_balance.call(this, plbalance)
   end
-  def put_balance(lbalance : Int32) : HRESULT
-    @lpVtbl.value.put_balance.unsafe_as(Proc(Int32, HRESULT)).call(lbalance)
+  def put_balance(this : IWMPSettings2*, lbalance : Int32) : HRESULT
+    @lpVtbl.value.put_balance.call(this, lbalance)
   end
-  def get_volume(plvolume : Int32*) : HRESULT
-    @lpVtbl.value.get_volume.unsafe_as(Proc(Int32*, HRESULT)).call(plvolume)
+  def get_volume(this : IWMPSettings2*, plvolume : Int32*) : HRESULT
+    @lpVtbl.value.get_volume.call(this, plvolume)
   end
-  def put_volume(lvolume : Int32) : HRESULT
-    @lpVtbl.value.put_volume.unsafe_as(Proc(Int32, HRESULT)).call(lvolume)
+  def put_volume(this : IWMPSettings2*, lvolume : Int32) : HRESULT
+    @lpVtbl.value.put_volume.call(this, lvolume)
   end
-  def get_mode(bstrmode : UInt8*, pvarfmode : Int16*) : HRESULT
-    @lpVtbl.value.get_mode.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(bstrmode, pvarfmode)
+  def get_mode(this : IWMPSettings2*, bstrmode : UInt8*, pvarfmode : Int16*) : HRESULT
+    @lpVtbl.value.get_mode.call(this, bstrmode, pvarfmode)
   end
-  def set_mode(bstrmode : UInt8*, varfmode : Int16) : HRESULT
-    @lpVtbl.value.set_mode.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(bstrmode, varfmode)
+  def set_mode(this : IWMPSettings2*, bstrmode : UInt8*, varfmode : Int16) : HRESULT
+    @lpVtbl.value.set_mode.call(this, bstrmode, varfmode)
   end
-  def get_enable_error_dialogs(pfenableerrordialogs : Int16*) : HRESULT
-    @lpVtbl.value.get_enable_error_dialogs.unsafe_as(Proc(Int16*, HRESULT)).call(pfenableerrordialogs)
+  def get_enable_error_dialogs(this : IWMPSettings2*, pfenableerrordialogs : Int16*) : HRESULT
+    @lpVtbl.value.get_enable_error_dialogs.call(this, pfenableerrordialogs)
   end
-  def put_enable_error_dialogs(fenableerrordialogs : Int16) : HRESULT
-    @lpVtbl.value.put_enable_error_dialogs.unsafe_as(Proc(Int16, HRESULT)).call(fenableerrordialogs)
+  def put_enable_error_dialogs(this : IWMPSettings2*, fenableerrordialogs : Int16) : HRESULT
+    @lpVtbl.value.put_enable_error_dialogs.call(this, fenableerrordialogs)
   end
-  def get_default_audio_language(pllangid : Int32*) : HRESULT
-    @lpVtbl.value.get_default_audio_language.unsafe_as(Proc(Int32*, HRESULT)).call(pllangid)
+  def get_default_audio_language(this : IWMPSettings2*, pllangid : Int32*) : HRESULT
+    @lpVtbl.value.get_default_audio_language.call(this, pllangid)
   end
-  def get_media_access_rights(pbstrrights : UInt8**) : HRESULT
-    @lpVtbl.value.get_media_access_rights.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrrights)
+  def get_media_access_rights(this : IWMPSettings2*, pbstrrights : UInt8**) : HRESULT
+    @lpVtbl.value.get_media_access_rights.call(this, pbstrrights)
   end
-  def request_media_access_rights(bstrdesiredaccess : UInt8*, pvbaccepted : Int16*) : HRESULT
-    @lpVtbl.value.request_media_access_rights.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(bstrdesiredaccess, pvbaccepted)
+  def request_media_access_rights(this : IWMPSettings2*, bstrdesiredaccess : UInt8*, pvbaccepted : Int16*) : HRESULT
+    @lpVtbl.value.request_media_access_rights.call(this, bstrdesiredaccess, pvbaccepted)
   end
 end
 struct LibWin32::IWMPControls3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPControls3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPControls3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPControls3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPControls3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPControls3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPControls3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPControls3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_is_available(bstritem : UInt8*, pisavailable : Int16*) : HRESULT
-    @lpVtbl.value.get_is_available.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(bstritem, pisavailable)
+  def get_is_available(this : IWMPControls3*, bstritem : UInt8*, pisavailable : Int16*) : HRESULT
+    @lpVtbl.value.get_is_available.call(this, bstritem, pisavailable)
   end
-  def play : HRESULT
-    @lpVtbl.value.play.unsafe_as(Proc(HRESULT)).call
+  def play(this : IWMPControls3*) : HRESULT
+    @lpVtbl.value.play.call(this)
   end
-  def stop : HRESULT
-    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  def stop(this : IWMPControls3*) : HRESULT
+    @lpVtbl.value.stop.call(this)
   end
-  def pause : HRESULT
-    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  def pause(this : IWMPControls3*) : HRESULT
+    @lpVtbl.value.pause.call(this)
   end
-  def fast_forward : HRESULT
-    @lpVtbl.value.fast_forward.unsafe_as(Proc(HRESULT)).call
+  def fast_forward(this : IWMPControls3*) : HRESULT
+    @lpVtbl.value.fast_forward.call(this)
   end
-  def fast_reverse : HRESULT
-    @lpVtbl.value.fast_reverse.unsafe_as(Proc(HRESULT)).call
+  def fast_reverse(this : IWMPControls3*) : HRESULT
+    @lpVtbl.value.fast_reverse.call(this)
   end
-  def get_current_position(pdcurrentposition : Float64*) : HRESULT
-    @lpVtbl.value.get_current_position.unsafe_as(Proc(Float64*, HRESULT)).call(pdcurrentposition)
+  def get_current_position(this : IWMPControls3*, pdcurrentposition : Float64*) : HRESULT
+    @lpVtbl.value.get_current_position.call(this, pdcurrentposition)
   end
-  def put_current_position(dcurrentposition : Float64) : HRESULT
-    @lpVtbl.value.put_current_position.unsafe_as(Proc(Float64, HRESULT)).call(dcurrentposition)
+  def put_current_position(this : IWMPControls3*, dcurrentposition : Float64) : HRESULT
+    @lpVtbl.value.put_current_position.call(this, dcurrentposition)
   end
-  def get_current_position_string(pbstrcurrentposition : UInt8**) : HRESULT
-    @lpVtbl.value.get_current_position_string.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcurrentposition)
+  def get_current_position_string(this : IWMPControls3*, pbstrcurrentposition : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_position_string.call(this, pbstrcurrentposition)
   end
-  def next : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(HRESULT)).call
+  def next(this : IWMPControls3*) : HRESULT
+    @lpVtbl.value.next.call(this)
   end
-  def previous : HRESULT
-    @lpVtbl.value.previous.unsafe_as(Proc(HRESULT)).call
+  def previous(this : IWMPControls3*) : HRESULT
+    @lpVtbl.value.previous.call(this)
   end
-  def get_current_item(ppiwmpmedia : IWMPMedia*) : HRESULT
-    @lpVtbl.value.get_current_item.unsafe_as(Proc(IWMPMedia*, HRESULT)).call(ppiwmpmedia)
+  def get_current_item(this : IWMPControls3*, ppiwmpmedia : IWMPMedia*) : HRESULT
+    @lpVtbl.value.get_current_item.call(this, ppiwmpmedia)
   end
-  def put_current_item(piwmpmedia : IWMPMedia) : HRESULT
-    @lpVtbl.value.put_current_item.unsafe_as(Proc(IWMPMedia, HRESULT)).call(piwmpmedia)
+  def put_current_item(this : IWMPControls3*, piwmpmedia : IWMPMedia) : HRESULT
+    @lpVtbl.value.put_current_item.call(this, piwmpmedia)
   end
-  def get_current_marker(plmarker : Int32*) : HRESULT
-    @lpVtbl.value.get_current_marker.unsafe_as(Proc(Int32*, HRESULT)).call(plmarker)
+  def get_current_marker(this : IWMPControls3*, plmarker : Int32*) : HRESULT
+    @lpVtbl.value.get_current_marker.call(this, plmarker)
   end
-  def put_current_marker(lmarker : Int32) : HRESULT
-    @lpVtbl.value.put_current_marker.unsafe_as(Proc(Int32, HRESULT)).call(lmarker)
+  def put_current_marker(this : IWMPControls3*, lmarker : Int32) : HRESULT
+    @lpVtbl.value.put_current_marker.call(this, lmarker)
   end
-  def play_item(piwmpmedia : IWMPMedia) : HRESULT
-    @lpVtbl.value.play_item.unsafe_as(Proc(IWMPMedia, HRESULT)).call(piwmpmedia)
+  def play_item(this : IWMPControls3*, piwmpmedia : IWMPMedia) : HRESULT
+    @lpVtbl.value.play_item.call(this, piwmpmedia)
   end
-  def step(lstep : Int32) : HRESULT
-    @lpVtbl.value.step.unsafe_as(Proc(Int32, HRESULT)).call(lstep)
+  def step(this : IWMPControls3*, lstep : Int32) : HRESULT
+    @lpVtbl.value.step.call(this, lstep)
   end
-  def get_audio_language_count(plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_audio_language_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  def get_audio_language_count(this : IWMPControls3*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_audio_language_count.call(this, plcount)
   end
-  def get_audio_language_id(lindex : Int32, pllangid : Int32*) : HRESULT
-    @lpVtbl.value.get_audio_language_id.unsafe_as(Proc(Int32, Int32*, HRESULT)).call(lindex, pllangid)
+  def get_audio_language_id(this : IWMPControls3*, lindex : Int32, pllangid : Int32*) : HRESULT
+    @lpVtbl.value.get_audio_language_id.call(this, lindex, pllangid)
   end
-  def get_audio_language_description(lindex : Int32, pbstrlangdesc : UInt8**) : HRESULT
-    @lpVtbl.value.get_audio_language_description.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(lindex, pbstrlangdesc)
+  def get_audio_language_description(this : IWMPControls3*, lindex : Int32, pbstrlangdesc : UInt8**) : HRESULT
+    @lpVtbl.value.get_audio_language_description.call(this, lindex, pbstrlangdesc)
   end
-  def get_current_audio_language(pllangid : Int32*) : HRESULT
-    @lpVtbl.value.get_current_audio_language.unsafe_as(Proc(Int32*, HRESULT)).call(pllangid)
+  def get_current_audio_language(this : IWMPControls3*, pllangid : Int32*) : HRESULT
+    @lpVtbl.value.get_current_audio_language.call(this, pllangid)
   end
-  def put_current_audio_language(llangid : Int32) : HRESULT
-    @lpVtbl.value.put_current_audio_language.unsafe_as(Proc(Int32, HRESULT)).call(llangid)
+  def put_current_audio_language(this : IWMPControls3*, llangid : Int32) : HRESULT
+    @lpVtbl.value.put_current_audio_language.call(this, llangid)
   end
-  def get_current_audio_language_index(plindex : Int32*) : HRESULT
-    @lpVtbl.value.get_current_audio_language_index.unsafe_as(Proc(Int32*, HRESULT)).call(plindex)
+  def get_current_audio_language_index(this : IWMPControls3*, plindex : Int32*) : HRESULT
+    @lpVtbl.value.get_current_audio_language_index.call(this, plindex)
   end
-  def put_current_audio_language_index(lindex : Int32) : HRESULT
-    @lpVtbl.value.put_current_audio_language_index.unsafe_as(Proc(Int32, HRESULT)).call(lindex)
+  def put_current_audio_language_index(this : IWMPControls3*, lindex : Int32) : HRESULT
+    @lpVtbl.value.put_current_audio_language_index.call(this, lindex)
   end
-  def get_language_name(llangid : Int32, pbstrlangname : UInt8**) : HRESULT
-    @lpVtbl.value.get_language_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(llangid, pbstrlangname)
+  def get_language_name(this : IWMPControls3*, llangid : Int32, pbstrlangname : UInt8**) : HRESULT
+    @lpVtbl.value.get_language_name.call(this, llangid, pbstrlangname)
   end
-  def get_current_position_timecode(bstrtimecode : UInt8**) : HRESULT
-    @lpVtbl.value.get_current_position_timecode.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrtimecode)
+  def get_current_position_timecode(this : IWMPControls3*, bstrtimecode : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_position_timecode.call(this, bstrtimecode)
   end
-  def put_current_position_timecode(bstrtimecode : UInt8*) : HRESULT
-    @lpVtbl.value.put_current_position_timecode.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrtimecode)
+  def put_current_position_timecode(this : IWMPControls3*, bstrtimecode : UInt8*) : HRESULT
+    @lpVtbl.value.put_current_position_timecode.call(this, bstrtimecode)
   end
 end
 struct LibWin32::IWMPClosedCaption2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPClosedCaption2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPClosedCaption2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPClosedCaption2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPClosedCaption2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPClosedCaption2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPClosedCaption2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPClosedCaption2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_sami_style(pbstrsamistyle : UInt8**) : HRESULT
-    @lpVtbl.value.get_sami_style.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsamistyle)
+  def get_sami_style(this : IWMPClosedCaption2*, pbstrsamistyle : UInt8**) : HRESULT
+    @lpVtbl.value.get_sami_style.call(this, pbstrsamistyle)
   end
-  def put_sami_style(bstrsamistyle : UInt8*) : HRESULT
-    @lpVtbl.value.put_sami_style.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsamistyle)
+  def put_sami_style(this : IWMPClosedCaption2*, bstrsamistyle : UInt8*) : HRESULT
+    @lpVtbl.value.put_sami_style.call(this, bstrsamistyle)
   end
-  def get_sami_lang(pbstrsamilang : UInt8**) : HRESULT
-    @lpVtbl.value.get_sami_lang.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsamilang)
+  def get_sami_lang(this : IWMPClosedCaption2*, pbstrsamilang : UInt8**) : HRESULT
+    @lpVtbl.value.get_sami_lang.call(this, pbstrsamilang)
   end
-  def put_sami_lang(bstrsamilang : UInt8*) : HRESULT
-    @lpVtbl.value.put_sami_lang.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsamilang)
+  def put_sami_lang(this : IWMPClosedCaption2*, bstrsamilang : UInt8*) : HRESULT
+    @lpVtbl.value.put_sami_lang.call(this, bstrsamilang)
   end
-  def get_sami_file_name(pbstrsamifilename : UInt8**) : HRESULT
-    @lpVtbl.value.get_sami_file_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsamifilename)
+  def get_sami_file_name(this : IWMPClosedCaption2*, pbstrsamifilename : UInt8**) : HRESULT
+    @lpVtbl.value.get_sami_file_name.call(this, pbstrsamifilename)
   end
-  def put_sami_file_name(bstrsamifilename : UInt8*) : HRESULT
-    @lpVtbl.value.put_sami_file_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsamifilename)
+  def put_sami_file_name(this : IWMPClosedCaption2*, bstrsamifilename : UInt8*) : HRESULT
+    @lpVtbl.value.put_sami_file_name.call(this, bstrsamifilename)
   end
-  def get_captioning_id(pbstrcaptioningid : UInt8**) : HRESULT
-    @lpVtbl.value.get_captioning_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcaptioningid)
+  def get_captioning_id(this : IWMPClosedCaption2*, pbstrcaptioningid : UInt8**) : HRESULT
+    @lpVtbl.value.get_captioning_id.call(this, pbstrcaptioningid)
   end
-  def put_captioning_id(bstrcaptioningid : UInt8*) : HRESULT
-    @lpVtbl.value.put_captioning_id.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrcaptioningid)
+  def put_captioning_id(this : IWMPClosedCaption2*, bstrcaptioningid : UInt8*) : HRESULT
+    @lpVtbl.value.put_captioning_id.call(this, bstrcaptioningid)
   end
-  def get_sami_lang_count(plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_sami_lang_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  def get_sami_lang_count(this : IWMPClosedCaption2*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_sami_lang_count.call(this, plcount)
   end
-  def get_sami_lang_name(nindex : Int32, pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_sami_lang_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(nindex, pbstrname)
+  def get_sami_lang_name(this : IWMPClosedCaption2*, nindex : Int32, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_sami_lang_name.call(this, nindex, pbstrname)
   end
-  def get_sami_lang_id(nindex : Int32, pllangid : Int32*) : HRESULT
-    @lpVtbl.value.get_sami_lang_id.unsafe_as(Proc(Int32, Int32*, HRESULT)).call(nindex, pllangid)
+  def get_sami_lang_id(this : IWMPClosedCaption2*, nindex : Int32, pllangid : Int32*) : HRESULT
+    @lpVtbl.value.get_sami_lang_id.call(this, nindex, pllangid)
   end
-  def get_sami_style_count(plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_sami_style_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  def get_sami_style_count(this : IWMPClosedCaption2*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_sami_style_count.call(this, plcount)
   end
-  def get_sami_style_name(nindex : Int32, pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_sami_style_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(nindex, pbstrname)
+  def get_sami_style_name(this : IWMPClosedCaption2*, nindex : Int32, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_sami_style_name.call(this, nindex, pbstrname)
   end
 end
 struct LibWin32::IWMPPlayerApplication
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPPlayerApplication*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPPlayerApplication*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPPlayerApplication*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPPlayerApplication*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPPlayerApplication*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPPlayerApplication*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPPlayerApplication*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def switch_to_player_application : HRESULT
-    @lpVtbl.value.switch_to_player_application.unsafe_as(Proc(HRESULT)).call
+  def switch_to_player_application(this : IWMPPlayerApplication*) : HRESULT
+    @lpVtbl.value.switch_to_player_application.call(this)
   end
-  def switch_to_control : HRESULT
-    @lpVtbl.value.switch_to_control.unsafe_as(Proc(HRESULT)).call
+  def switch_to_control(this : IWMPPlayerApplication*) : HRESULT
+    @lpVtbl.value.switch_to_control.call(this)
   end
-  def get_player_docked(pbplayerdocked : Int16*) : HRESULT
-    @lpVtbl.value.get_player_docked.unsafe_as(Proc(Int16*, HRESULT)).call(pbplayerdocked)
+  def get_player_docked(this : IWMPPlayerApplication*, pbplayerdocked : Int16*) : HRESULT
+    @lpVtbl.value.get_player_docked.call(this, pbplayerdocked)
   end
-  def get_has_display(pbhasdisplay : Int16*) : HRESULT
-    @lpVtbl.value.get_has_display.unsafe_as(Proc(Int16*, HRESULT)).call(pbhasdisplay)
+  def get_has_display(this : IWMPPlayerApplication*, pbhasdisplay : Int16*) : HRESULT
+    @lpVtbl.value.get_has_display.call(this, pbhasdisplay)
   end
 end
 struct LibWin32::IWMPCore3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPCore3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPCore3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPCore3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPCore3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPCore3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPCore3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPCore3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : IWMPCore3*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
-  def get_url(pbstrurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_url.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrurl)
+  def get_url(this : IWMPCore3*, pbstrurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, pbstrurl)
   end
-  def put_url(bstrurl : UInt8*) : HRESULT
-    @lpVtbl.value.put_url.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrurl)
+  def put_url(this : IWMPCore3*, bstrurl : UInt8*) : HRESULT
+    @lpVtbl.value.put_url.call(this, bstrurl)
   end
-  def get_open_state(pwmpos : WMPOpenState*) : HRESULT
-    @lpVtbl.value.get_open_state.unsafe_as(Proc(WMPOpenState*, HRESULT)).call(pwmpos)
+  def get_open_state(this : IWMPCore3*, pwmpos : WMPOpenState*) : HRESULT
+    @lpVtbl.value.get_open_state.call(this, pwmpos)
   end
-  def get_play_state(pwmpps : WMPPlayState*) : HRESULT
-    @lpVtbl.value.get_play_state.unsafe_as(Proc(WMPPlayState*, HRESULT)).call(pwmpps)
+  def get_play_state(this : IWMPCore3*, pwmpps : WMPPlayState*) : HRESULT
+    @lpVtbl.value.get_play_state.call(this, pwmpps)
   end
-  def get_controls(ppcontrol : IWMPControls*) : HRESULT
-    @lpVtbl.value.get_controls.unsafe_as(Proc(IWMPControls*, HRESULT)).call(ppcontrol)
+  def get_controls(this : IWMPCore3*, ppcontrol : IWMPControls*) : HRESULT
+    @lpVtbl.value.get_controls.call(this, ppcontrol)
   end
-  def get_settings(ppsettings : IWMPSettings*) : HRESULT
-    @lpVtbl.value.get_settings.unsafe_as(Proc(IWMPSettings*, HRESULT)).call(ppsettings)
+  def get_settings(this : IWMPCore3*, ppsettings : IWMPSettings*) : HRESULT
+    @lpVtbl.value.get_settings.call(this, ppsettings)
   end
-  def get_current_media(ppmedia : IWMPMedia*) : HRESULT
-    @lpVtbl.value.get_current_media.unsafe_as(Proc(IWMPMedia*, HRESULT)).call(ppmedia)
+  def get_current_media(this : IWMPCore3*, ppmedia : IWMPMedia*) : HRESULT
+    @lpVtbl.value.get_current_media.call(this, ppmedia)
   end
-  def put_current_media(pmedia : IWMPMedia) : HRESULT
-    @lpVtbl.value.put_current_media.unsafe_as(Proc(IWMPMedia, HRESULT)).call(pmedia)
+  def put_current_media(this : IWMPCore3*, pmedia : IWMPMedia) : HRESULT
+    @lpVtbl.value.put_current_media.call(this, pmedia)
   end
-  def get_media_collection(ppmediacollection : IWMPMediaCollection*) : HRESULT
-    @lpVtbl.value.get_media_collection.unsafe_as(Proc(IWMPMediaCollection*, HRESULT)).call(ppmediacollection)
+  def get_media_collection(this : IWMPCore3*, ppmediacollection : IWMPMediaCollection*) : HRESULT
+    @lpVtbl.value.get_media_collection.call(this, ppmediacollection)
   end
-  def get_playlist_collection(ppplaylistcollection : IWMPPlaylistCollection*) : HRESULT
-    @lpVtbl.value.get_playlist_collection.unsafe_as(Proc(IWMPPlaylistCollection*, HRESULT)).call(ppplaylistcollection)
+  def get_playlist_collection(this : IWMPCore3*, ppplaylistcollection : IWMPPlaylistCollection*) : HRESULT
+    @lpVtbl.value.get_playlist_collection.call(this, ppplaylistcollection)
   end
-  def get_version_info(pbstrversioninfo : UInt8**) : HRESULT
-    @lpVtbl.value.get_version_info.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrversioninfo)
+  def get_version_info(this : IWMPCore3*, pbstrversioninfo : UInt8**) : HRESULT
+    @lpVtbl.value.get_version_info.call(this, pbstrversioninfo)
   end
-  def launch_url(bstrurl : UInt8*) : HRESULT
-    @lpVtbl.value.launch_url.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrurl)
+  def launch_url(this : IWMPCore3*, bstrurl : UInt8*) : HRESULT
+    @lpVtbl.value.launch_url.call(this, bstrurl)
   end
-  def get_network(ppqni : IWMPNetwork*) : HRESULT
-    @lpVtbl.value.get_network.unsafe_as(Proc(IWMPNetwork*, HRESULT)).call(ppqni)
+  def get_network(this : IWMPCore3*, ppqni : IWMPNetwork*) : HRESULT
+    @lpVtbl.value.get_network.call(this, ppqni)
   end
-  def get_current_playlist(pppl : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_current_playlist.unsafe_as(Proc(IWMPPlaylist*, HRESULT)).call(pppl)
+  def get_current_playlist(this : IWMPCore3*, pppl : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_current_playlist.call(this, pppl)
   end
-  def put_current_playlist(ppl : IWMPPlaylist) : HRESULT
-    @lpVtbl.value.put_current_playlist.unsafe_as(Proc(IWMPPlaylist, HRESULT)).call(ppl)
+  def put_current_playlist(this : IWMPCore3*, ppl : IWMPPlaylist) : HRESULT
+    @lpVtbl.value.put_current_playlist.call(this, ppl)
   end
-  def get_cdrom_collection(ppcdromcollection : IWMPCdromCollection*) : HRESULT
-    @lpVtbl.value.get_cdrom_collection.unsafe_as(Proc(IWMPCdromCollection*, HRESULT)).call(ppcdromcollection)
+  def get_cdrom_collection(this : IWMPCore3*, ppcdromcollection : IWMPCdromCollection*) : HRESULT
+    @lpVtbl.value.get_cdrom_collection.call(this, ppcdromcollection)
   end
-  def get_closed_caption(ppclosedcaption : IWMPClosedCaption*) : HRESULT
-    @lpVtbl.value.get_closed_caption.unsafe_as(Proc(IWMPClosedCaption*, HRESULT)).call(ppclosedcaption)
+  def get_closed_caption(this : IWMPCore3*, ppclosedcaption : IWMPClosedCaption*) : HRESULT
+    @lpVtbl.value.get_closed_caption.call(this, ppclosedcaption)
   end
-  def get_is_online(pfonline : Int16*) : HRESULT
-    @lpVtbl.value.get_is_online.unsafe_as(Proc(Int16*, HRESULT)).call(pfonline)
+  def get_is_online(this : IWMPCore3*, pfonline : Int16*) : HRESULT
+    @lpVtbl.value.get_is_online.call(this, pfonline)
   end
-  def get_error(pperror : IWMPError*) : HRESULT
-    @lpVtbl.value.get_error.unsafe_as(Proc(IWMPError*, HRESULT)).call(pperror)
+  def get_error(this : IWMPCore3*, pperror : IWMPError*) : HRESULT
+    @lpVtbl.value.get_error.call(this, pperror)
   end
-  def get_status(pbstrstatus : UInt8**) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrstatus)
+  def get_status(this : IWMPCore3*, pbstrstatus : UInt8**) : HRESULT
+    @lpVtbl.value.get_status.call(this, pbstrstatus)
   end
-  def get_dvd(ppdvd : IWMPDVD*) : HRESULT
-    @lpVtbl.value.get_dvd.unsafe_as(Proc(IWMPDVD*, HRESULT)).call(ppdvd)
+  def get_dvd(this : IWMPCore3*, ppdvd : IWMPDVD*) : HRESULT
+    @lpVtbl.value.get_dvd.call(this, ppdvd)
   end
-  def new_playlist(bstrname : UInt8*, bstrurl : UInt8*, ppplaylist : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.new_playlist.unsafe_as(Proc(UInt8*, UInt8*, IWMPPlaylist*, HRESULT)).call(bstrname, bstrurl, ppplaylist)
+  def new_playlist(this : IWMPCore3*, bstrname : UInt8*, bstrurl : UInt8*, ppplaylist : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.new_playlist.call(this, bstrname, bstrurl, ppplaylist)
   end
-  def new_media(bstrurl : UInt8*, ppmedia : IWMPMedia*) : HRESULT
-    @lpVtbl.value.new_media.unsafe_as(Proc(UInt8*, IWMPMedia*, HRESULT)).call(bstrurl, ppmedia)
+  def new_media(this : IWMPCore3*, bstrurl : UInt8*, ppmedia : IWMPMedia*) : HRESULT
+    @lpVtbl.value.new_media.call(this, bstrurl, ppmedia)
   end
 end
 struct LibWin32::IWMPPlayer4
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPPlayer4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPPlayer4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPPlayer4*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPPlayer4*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPPlayer4*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPPlayer4*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPPlayer4*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : IWMPPlayer4*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
-  def get_url(pbstrurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_url.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrurl)
+  def get_url(this : IWMPPlayer4*, pbstrurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, pbstrurl)
   end
-  def put_url(bstrurl : UInt8*) : HRESULT
-    @lpVtbl.value.put_url.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrurl)
+  def put_url(this : IWMPPlayer4*, bstrurl : UInt8*) : HRESULT
+    @lpVtbl.value.put_url.call(this, bstrurl)
   end
-  def get_open_state(pwmpos : WMPOpenState*) : HRESULT
-    @lpVtbl.value.get_open_state.unsafe_as(Proc(WMPOpenState*, HRESULT)).call(pwmpos)
+  def get_open_state(this : IWMPPlayer4*, pwmpos : WMPOpenState*) : HRESULT
+    @lpVtbl.value.get_open_state.call(this, pwmpos)
   end
-  def get_play_state(pwmpps : WMPPlayState*) : HRESULT
-    @lpVtbl.value.get_play_state.unsafe_as(Proc(WMPPlayState*, HRESULT)).call(pwmpps)
+  def get_play_state(this : IWMPPlayer4*, pwmpps : WMPPlayState*) : HRESULT
+    @lpVtbl.value.get_play_state.call(this, pwmpps)
   end
-  def get_controls(ppcontrol : IWMPControls*) : HRESULT
-    @lpVtbl.value.get_controls.unsafe_as(Proc(IWMPControls*, HRESULT)).call(ppcontrol)
+  def get_controls(this : IWMPPlayer4*, ppcontrol : IWMPControls*) : HRESULT
+    @lpVtbl.value.get_controls.call(this, ppcontrol)
   end
-  def get_settings(ppsettings : IWMPSettings*) : HRESULT
-    @lpVtbl.value.get_settings.unsafe_as(Proc(IWMPSettings*, HRESULT)).call(ppsettings)
+  def get_settings(this : IWMPPlayer4*, ppsettings : IWMPSettings*) : HRESULT
+    @lpVtbl.value.get_settings.call(this, ppsettings)
   end
-  def get_current_media(ppmedia : IWMPMedia*) : HRESULT
-    @lpVtbl.value.get_current_media.unsafe_as(Proc(IWMPMedia*, HRESULT)).call(ppmedia)
+  def get_current_media(this : IWMPPlayer4*, ppmedia : IWMPMedia*) : HRESULT
+    @lpVtbl.value.get_current_media.call(this, ppmedia)
   end
-  def put_current_media(pmedia : IWMPMedia) : HRESULT
-    @lpVtbl.value.put_current_media.unsafe_as(Proc(IWMPMedia, HRESULT)).call(pmedia)
+  def put_current_media(this : IWMPPlayer4*, pmedia : IWMPMedia) : HRESULT
+    @lpVtbl.value.put_current_media.call(this, pmedia)
   end
-  def get_media_collection(ppmediacollection : IWMPMediaCollection*) : HRESULT
-    @lpVtbl.value.get_media_collection.unsafe_as(Proc(IWMPMediaCollection*, HRESULT)).call(ppmediacollection)
+  def get_media_collection(this : IWMPPlayer4*, ppmediacollection : IWMPMediaCollection*) : HRESULT
+    @lpVtbl.value.get_media_collection.call(this, ppmediacollection)
   end
-  def get_playlist_collection(ppplaylistcollection : IWMPPlaylistCollection*) : HRESULT
-    @lpVtbl.value.get_playlist_collection.unsafe_as(Proc(IWMPPlaylistCollection*, HRESULT)).call(ppplaylistcollection)
+  def get_playlist_collection(this : IWMPPlayer4*, ppplaylistcollection : IWMPPlaylistCollection*) : HRESULT
+    @lpVtbl.value.get_playlist_collection.call(this, ppplaylistcollection)
   end
-  def get_version_info(pbstrversioninfo : UInt8**) : HRESULT
-    @lpVtbl.value.get_version_info.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrversioninfo)
+  def get_version_info(this : IWMPPlayer4*, pbstrversioninfo : UInt8**) : HRESULT
+    @lpVtbl.value.get_version_info.call(this, pbstrversioninfo)
   end
-  def launch_url(bstrurl : UInt8*) : HRESULT
-    @lpVtbl.value.launch_url.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrurl)
+  def launch_url(this : IWMPPlayer4*, bstrurl : UInt8*) : HRESULT
+    @lpVtbl.value.launch_url.call(this, bstrurl)
   end
-  def get_network(ppqni : IWMPNetwork*) : HRESULT
-    @lpVtbl.value.get_network.unsafe_as(Proc(IWMPNetwork*, HRESULT)).call(ppqni)
+  def get_network(this : IWMPPlayer4*, ppqni : IWMPNetwork*) : HRESULT
+    @lpVtbl.value.get_network.call(this, ppqni)
   end
-  def get_current_playlist(pppl : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_current_playlist.unsafe_as(Proc(IWMPPlaylist*, HRESULT)).call(pppl)
+  def get_current_playlist(this : IWMPPlayer4*, pppl : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_current_playlist.call(this, pppl)
   end
-  def put_current_playlist(ppl : IWMPPlaylist) : HRESULT
-    @lpVtbl.value.put_current_playlist.unsafe_as(Proc(IWMPPlaylist, HRESULT)).call(ppl)
+  def put_current_playlist(this : IWMPPlayer4*, ppl : IWMPPlaylist) : HRESULT
+    @lpVtbl.value.put_current_playlist.call(this, ppl)
   end
-  def get_cdrom_collection(ppcdromcollection : IWMPCdromCollection*) : HRESULT
-    @lpVtbl.value.get_cdrom_collection.unsafe_as(Proc(IWMPCdromCollection*, HRESULT)).call(ppcdromcollection)
+  def get_cdrom_collection(this : IWMPPlayer4*, ppcdromcollection : IWMPCdromCollection*) : HRESULT
+    @lpVtbl.value.get_cdrom_collection.call(this, ppcdromcollection)
   end
-  def get_closed_caption(ppclosedcaption : IWMPClosedCaption*) : HRESULT
-    @lpVtbl.value.get_closed_caption.unsafe_as(Proc(IWMPClosedCaption*, HRESULT)).call(ppclosedcaption)
+  def get_closed_caption(this : IWMPPlayer4*, ppclosedcaption : IWMPClosedCaption*) : HRESULT
+    @lpVtbl.value.get_closed_caption.call(this, ppclosedcaption)
   end
-  def get_is_online(pfonline : Int16*) : HRESULT
-    @lpVtbl.value.get_is_online.unsafe_as(Proc(Int16*, HRESULT)).call(pfonline)
+  def get_is_online(this : IWMPPlayer4*, pfonline : Int16*) : HRESULT
+    @lpVtbl.value.get_is_online.call(this, pfonline)
   end
-  def get_error(pperror : IWMPError*) : HRESULT
-    @lpVtbl.value.get_error.unsafe_as(Proc(IWMPError*, HRESULT)).call(pperror)
+  def get_error(this : IWMPPlayer4*, pperror : IWMPError*) : HRESULT
+    @lpVtbl.value.get_error.call(this, pperror)
   end
-  def get_status(pbstrstatus : UInt8**) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrstatus)
+  def get_status(this : IWMPPlayer4*, pbstrstatus : UInt8**) : HRESULT
+    @lpVtbl.value.get_status.call(this, pbstrstatus)
   end
-  def get_dvd(ppdvd : IWMPDVD*) : HRESULT
-    @lpVtbl.value.get_dvd.unsafe_as(Proc(IWMPDVD*, HRESULT)).call(ppdvd)
+  def get_dvd(this : IWMPPlayer4*, ppdvd : IWMPDVD*) : HRESULT
+    @lpVtbl.value.get_dvd.call(this, ppdvd)
   end
-  def new_playlist(bstrname : UInt8*, bstrurl : UInt8*, ppplaylist : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.new_playlist.unsafe_as(Proc(UInt8*, UInt8*, IWMPPlaylist*, HRESULT)).call(bstrname, bstrurl, ppplaylist)
+  def new_playlist(this : IWMPPlayer4*, bstrname : UInt8*, bstrurl : UInt8*, ppplaylist : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.new_playlist.call(this, bstrname, bstrurl, ppplaylist)
   end
-  def new_media(bstrurl : UInt8*, ppmedia : IWMPMedia*) : HRESULT
-    @lpVtbl.value.new_media.unsafe_as(Proc(UInt8*, IWMPMedia*, HRESULT)).call(bstrurl, ppmedia)
+  def new_media(this : IWMPPlayer4*, bstrurl : UInt8*, ppmedia : IWMPMedia*) : HRESULT
+    @lpVtbl.value.new_media.call(this, bstrurl, ppmedia)
   end
-  def get_enabled(pbenabled : Int16*) : HRESULT
-    @lpVtbl.value.get_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pbenabled)
+  def get_enabled(this : IWMPPlayer4*, pbenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, pbenabled)
   end
-  def put_enabled(benabled : Int16) : HRESULT
-    @lpVtbl.value.put_enabled.unsafe_as(Proc(Int16, HRESULT)).call(benabled)
+  def put_enabled(this : IWMPPlayer4*, benabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, benabled)
   end
-  def get_full_screen(pbfullscreen : Int16*) : HRESULT
-    @lpVtbl.value.get_full_screen.unsafe_as(Proc(Int16*, HRESULT)).call(pbfullscreen)
+  def get_full_screen(this : IWMPPlayer4*, pbfullscreen : Int16*) : HRESULT
+    @lpVtbl.value.get_full_screen.call(this, pbfullscreen)
   end
-  def put_full_screen(bfullscreen : Int16) : HRESULT
-    @lpVtbl.value.put_full_screen.unsafe_as(Proc(Int16, HRESULT)).call(bfullscreen)
+  def put_full_screen(this : IWMPPlayer4*, bfullscreen : Int16) : HRESULT
+    @lpVtbl.value.put_full_screen.call(this, bfullscreen)
   end
-  def get_enable_context_menu(pbenablecontextmenu : Int16*) : HRESULT
-    @lpVtbl.value.get_enable_context_menu.unsafe_as(Proc(Int16*, HRESULT)).call(pbenablecontextmenu)
+  def get_enable_context_menu(this : IWMPPlayer4*, pbenablecontextmenu : Int16*) : HRESULT
+    @lpVtbl.value.get_enable_context_menu.call(this, pbenablecontextmenu)
   end
-  def put_enable_context_menu(benablecontextmenu : Int16) : HRESULT
-    @lpVtbl.value.put_enable_context_menu.unsafe_as(Proc(Int16, HRESULT)).call(benablecontextmenu)
+  def put_enable_context_menu(this : IWMPPlayer4*, benablecontextmenu : Int16) : HRESULT
+    @lpVtbl.value.put_enable_context_menu.call(this, benablecontextmenu)
   end
-  def put_ui_mode(bstrmode : UInt8*) : HRESULT
-    @lpVtbl.value.put_ui_mode.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrmode)
+  def put_ui_mode(this : IWMPPlayer4*, bstrmode : UInt8*) : HRESULT
+    @lpVtbl.value.put_ui_mode.call(this, bstrmode)
   end
-  def get_ui_mode(pbstrmode : UInt8**) : HRESULT
-    @lpVtbl.value.get_ui_mode.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrmode)
+  def get_ui_mode(this : IWMPPlayer4*, pbstrmode : UInt8**) : HRESULT
+    @lpVtbl.value.get_ui_mode.call(this, pbstrmode)
   end
-  def get_stretch_to_fit(pbenabled : Int16*) : HRESULT
-    @lpVtbl.value.get_stretch_to_fit.unsafe_as(Proc(Int16*, HRESULT)).call(pbenabled)
+  def get_stretch_to_fit(this : IWMPPlayer4*, pbenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_stretch_to_fit.call(this, pbenabled)
   end
-  def put_stretch_to_fit(benabled : Int16) : HRESULT
-    @lpVtbl.value.put_stretch_to_fit.unsafe_as(Proc(Int16, HRESULT)).call(benabled)
+  def put_stretch_to_fit(this : IWMPPlayer4*, benabled : Int16) : HRESULT
+    @lpVtbl.value.put_stretch_to_fit.call(this, benabled)
   end
-  def get_windowless_video(pbenabled : Int16*) : HRESULT
-    @lpVtbl.value.get_windowless_video.unsafe_as(Proc(Int16*, HRESULT)).call(pbenabled)
+  def get_windowless_video(this : IWMPPlayer4*, pbenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_windowless_video.call(this, pbenabled)
   end
-  def put_windowless_video(benabled : Int16) : HRESULT
-    @lpVtbl.value.put_windowless_video.unsafe_as(Proc(Int16, HRESULT)).call(benabled)
+  def put_windowless_video(this : IWMPPlayer4*, benabled : Int16) : HRESULT
+    @lpVtbl.value.put_windowless_video.call(this, benabled)
   end
-  def get_is_remote(pvarfisremote : Int16*) : HRESULT
-    @lpVtbl.value.get_is_remote.unsafe_as(Proc(Int16*, HRESULT)).call(pvarfisremote)
+  def get_is_remote(this : IWMPPlayer4*, pvarfisremote : Int16*) : HRESULT
+    @lpVtbl.value.get_is_remote.call(this, pvarfisremote)
   end
-  def get_player_application(ppiwmpplayerapplication : IWMPPlayerApplication*) : HRESULT
-    @lpVtbl.value.get_player_application.unsafe_as(Proc(IWMPPlayerApplication*, HRESULT)).call(ppiwmpplayerapplication)
+  def get_player_application(this : IWMPPlayer4*, ppiwmpplayerapplication : IWMPPlayerApplication*) : HRESULT
+    @lpVtbl.value.get_player_application.call(this, ppiwmpplayerapplication)
   end
-  def open_player(bstrurl : UInt8*) : HRESULT
-    @lpVtbl.value.open_player.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrurl)
+  def open_player(this : IWMPPlayer4*, bstrurl : UInt8*) : HRESULT
+    @lpVtbl.value.open_player.call(this, bstrurl)
   end
 end
 struct LibWin32::IWMPPlayerServices
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPPlayerServices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPPlayerServices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPPlayerServices*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def activate_ui_plugin(bstrplugin : UInt8*) : HRESULT
-    @lpVtbl.value.activate_ui_plugin.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrplugin)
+  def activate_ui_plugin(this : IWMPPlayerServices*, bstrplugin : UInt8*) : HRESULT
+    @lpVtbl.value.activate_ui_plugin.call(this, bstrplugin)
   end
-  def set_task_pane(bstrtaskpane : UInt8*) : HRESULT
-    @lpVtbl.value.set_task_pane.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrtaskpane)
+  def set_task_pane(this : IWMPPlayerServices*, bstrtaskpane : UInt8*) : HRESULT
+    @lpVtbl.value.set_task_pane.call(this, bstrtaskpane)
   end
-  def set_task_pane_url(bstrtaskpane : UInt8*, bstrurl : UInt8*, bstrfriendlyname : UInt8*) : HRESULT
-    @lpVtbl.value.set_task_pane_url.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, HRESULT)).call(bstrtaskpane, bstrurl, bstrfriendlyname)
+  def set_task_pane_url(this : IWMPPlayerServices*, bstrtaskpane : UInt8*, bstrurl : UInt8*, bstrfriendlyname : UInt8*) : HRESULT
+    @lpVtbl.value.set_task_pane_url.call(this, bstrtaskpane, bstrurl, bstrfriendlyname)
   end
 end
 struct LibWin32::IWMPSyncDevice
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPSyncDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPSyncDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPSyncDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_friendly_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_friendly_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_friendly_name(this : IWMPSyncDevice*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.call(this, pbstrname)
   end
-  def put_friendly_name(bstrname : UInt8*) : HRESULT
-    @lpVtbl.value.put_friendly_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  def put_friendly_name(this : IWMPSyncDevice*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_friendly_name.call(this, bstrname)
   end
-  def get_device_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_device_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_device_name(this : IWMPSyncDevice*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_name.call(this, pbstrname)
   end
-  def get_device_id(pbstrdeviceid : UInt8**) : HRESULT
-    @lpVtbl.value.get_device_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdeviceid)
+  def get_device_id(this : IWMPSyncDevice*, pbstrdeviceid : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_id.call(this, pbstrdeviceid)
   end
-  def get_partnership_index(plindex : Int32*) : HRESULT
-    @lpVtbl.value.get_partnership_index.unsafe_as(Proc(Int32*, HRESULT)).call(plindex)
+  def get_partnership_index(this : IWMPSyncDevice*, plindex : Int32*) : HRESULT
+    @lpVtbl.value.get_partnership_index.call(this, plindex)
   end
-  def get_connected(pvbconnected : Int16*) : HRESULT
-    @lpVtbl.value.get_connected.unsafe_as(Proc(Int16*, HRESULT)).call(pvbconnected)
+  def get_connected(this : IWMPSyncDevice*, pvbconnected : Int16*) : HRESULT
+    @lpVtbl.value.get_connected.call(this, pvbconnected)
   end
-  def get_status(pwmpds : WMPDeviceStatus*) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(WMPDeviceStatus*, HRESULT)).call(pwmpds)
+  def get_status(this : IWMPSyncDevice*, pwmpds : WMPDeviceStatus*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pwmpds)
   end
-  def get_sync_state(pwmpss : WMPSyncState*) : HRESULT
-    @lpVtbl.value.get_sync_state.unsafe_as(Proc(WMPSyncState*, HRESULT)).call(pwmpss)
+  def get_sync_state(this : IWMPSyncDevice*, pwmpss : WMPSyncState*) : HRESULT
+    @lpVtbl.value.get_sync_state.call(this, pwmpss)
   end
-  def get_progress(plprogress : Int32*) : HRESULT
-    @lpVtbl.value.get_progress.unsafe_as(Proc(Int32*, HRESULT)).call(plprogress)
+  def get_progress(this : IWMPSyncDevice*, plprogress : Int32*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, plprogress)
   end
-  def get_item_info(bstritemname : UInt8*, pbstrval : UInt8**) : HRESULT
-    @lpVtbl.value.get_item_info.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstritemname, pbstrval)
+  def get_item_info(this : IWMPSyncDevice*, bstritemname : UInt8*, pbstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_info.call(this, bstritemname, pbstrval)
   end
-  def create_partnership(vbshowui : Int16) : HRESULT
-    @lpVtbl.value.create_partnership.unsafe_as(Proc(Int16, HRESULT)).call(vbshowui)
+  def create_partnership(this : IWMPSyncDevice*, vbshowui : Int16) : HRESULT
+    @lpVtbl.value.create_partnership.call(this, vbshowui)
   end
-  def delete_partnership : HRESULT
-    @lpVtbl.value.delete_partnership.unsafe_as(Proc(HRESULT)).call
+  def delete_partnership(this : IWMPSyncDevice*) : HRESULT
+    @lpVtbl.value.delete_partnership.call(this)
   end
-  def start : HRESULT
-    @lpVtbl.value.start.unsafe_as(Proc(HRESULT)).call
+  def start(this : IWMPSyncDevice*) : HRESULT
+    @lpVtbl.value.start.call(this)
   end
-  def stop : HRESULT
-    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  def stop(this : IWMPSyncDevice*) : HRESULT
+    @lpVtbl.value.stop.call(this)
   end
-  def show_settings : HRESULT
-    @lpVtbl.value.show_settings.unsafe_as(Proc(HRESULT)).call
+  def show_settings(this : IWMPSyncDevice*) : HRESULT
+    @lpVtbl.value.show_settings.call(this)
   end
-  def is_identical(pdevice : IWMPSyncDevice, pvbool : Int16*) : HRESULT
-    @lpVtbl.value.is_identical.unsafe_as(Proc(IWMPSyncDevice, Int16*, HRESULT)).call(pdevice, pvbool)
+  def is_identical(this : IWMPSyncDevice*, pdevice : IWMPSyncDevice, pvbool : Int16*) : HRESULT
+    @lpVtbl.value.is_identical.call(this, pdevice, pvbool)
   end
 end
 struct LibWin32::IWMPSyncServices
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPSyncServices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPSyncServices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPSyncServices*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device_count(plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_device_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  def get_device_count(this : IWMPSyncServices*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_device_count.call(this, plcount)
   end
-  def get_device(lindex : Int32, ppdevice : IWMPSyncDevice*) : HRESULT
-    @lpVtbl.value.get_device.unsafe_as(Proc(Int32, IWMPSyncDevice*, HRESULT)).call(lindex, ppdevice)
+  def get_device(this : IWMPSyncServices*, lindex : Int32, ppdevice : IWMPSyncDevice*) : HRESULT
+    @lpVtbl.value.get_device.call(this, lindex, ppdevice)
   end
 end
 struct LibWin32::IWMPPlayerServices2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPPlayerServices2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPPlayerServices2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPPlayerServices2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def activate_ui_plugin(bstrplugin : UInt8*) : HRESULT
-    @lpVtbl.value.activate_ui_plugin.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrplugin)
+  def activate_ui_plugin(this : IWMPPlayerServices2*, bstrplugin : UInt8*) : HRESULT
+    @lpVtbl.value.activate_ui_plugin.call(this, bstrplugin)
   end
-  def set_task_pane(bstrtaskpane : UInt8*) : HRESULT
-    @lpVtbl.value.set_task_pane.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrtaskpane)
+  def set_task_pane(this : IWMPPlayerServices2*, bstrtaskpane : UInt8*) : HRESULT
+    @lpVtbl.value.set_task_pane.call(this, bstrtaskpane)
   end
-  def set_task_pane_url(bstrtaskpane : UInt8*, bstrurl : UInt8*, bstrfriendlyname : UInt8*) : HRESULT
-    @lpVtbl.value.set_task_pane_url.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, HRESULT)).call(bstrtaskpane, bstrurl, bstrfriendlyname)
+  def set_task_pane_url(this : IWMPPlayerServices2*, bstrtaskpane : UInt8*, bstrurl : UInt8*, bstrfriendlyname : UInt8*) : HRESULT
+    @lpVtbl.value.set_task_pane_url.call(this, bstrtaskpane, bstrurl, bstrfriendlyname)
   end
-  def set_background_processing_priority(bstrpriority : UInt8*) : HRESULT
-    @lpVtbl.value.set_background_processing_priority.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrpriority)
+  def set_background_processing_priority(this : IWMPPlayerServices2*, bstrpriority : UInt8*) : HRESULT
+    @lpVtbl.value.set_background_processing_priority.call(this, bstrpriority)
   end
 end
 struct LibWin32::IWMPCdromRip
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPCdromRip*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPCdromRip*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPCdromRip*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_rip_state(pwmprs : WMPRipState*) : HRESULT
-    @lpVtbl.value.get_rip_state.unsafe_as(Proc(WMPRipState*, HRESULT)).call(pwmprs)
+  def get_rip_state(this : IWMPCdromRip*, pwmprs : WMPRipState*) : HRESULT
+    @lpVtbl.value.get_rip_state.call(this, pwmprs)
   end
-  def get_rip_progress(plprogress : Int32*) : HRESULT
-    @lpVtbl.value.get_rip_progress.unsafe_as(Proc(Int32*, HRESULT)).call(plprogress)
+  def get_rip_progress(this : IWMPCdromRip*, plprogress : Int32*) : HRESULT
+    @lpVtbl.value.get_rip_progress.call(this, plprogress)
   end
-  def start_rip : HRESULT
-    @lpVtbl.value.start_rip.unsafe_as(Proc(HRESULT)).call
+  def start_rip(this : IWMPCdromRip*) : HRESULT
+    @lpVtbl.value.start_rip.call(this)
   end
-  def stop_rip : HRESULT
-    @lpVtbl.value.stop_rip.unsafe_as(Proc(HRESULT)).call
+  def stop_rip(this : IWMPCdromRip*) : HRESULT
+    @lpVtbl.value.stop_rip.call(this)
   end
 end
 struct LibWin32::IWMPCdromBurn
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPCdromBurn*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPCdromBurn*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPCdromBurn*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def is_available(bstritem : UInt8*, pisavailable : Int16*) : HRESULT
-    @lpVtbl.value.is_available.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(bstritem, pisavailable)
+  def is_available(this : IWMPCdromBurn*, bstritem : UInt8*, pisavailable : Int16*) : HRESULT
+    @lpVtbl.value.is_available.call(this, bstritem, pisavailable)
   end
-  def get_item_info(bstritem : UInt8*, pbstrval : UInt8**) : HRESULT
-    @lpVtbl.value.get_item_info.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstritem, pbstrval)
+  def get_item_info(this : IWMPCdromBurn*, bstritem : UInt8*, pbstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_info.call(this, bstritem, pbstrval)
   end
-  def get_label(pbstrlabel : UInt8**) : HRESULT
-    @lpVtbl.value.get_label.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrlabel)
+  def get_label(this : IWMPCdromBurn*, pbstrlabel : UInt8**) : HRESULT
+    @lpVtbl.value.get_label.call(this, pbstrlabel)
   end
-  def put_label(bstrlabel : UInt8*) : HRESULT
-    @lpVtbl.value.put_label.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrlabel)
+  def put_label(this : IWMPCdromBurn*, bstrlabel : UInt8*) : HRESULT
+    @lpVtbl.value.put_label.call(this, bstrlabel)
   end
-  def get_burn_format(pwmpbf : WMPBurnFormat*) : HRESULT
-    @lpVtbl.value.get_burn_format.unsafe_as(Proc(WMPBurnFormat*, HRESULT)).call(pwmpbf)
+  def get_burn_format(this : IWMPCdromBurn*, pwmpbf : WMPBurnFormat*) : HRESULT
+    @lpVtbl.value.get_burn_format.call(this, pwmpbf)
   end
-  def put_burn_format(wmpbf : WMPBurnFormat) : HRESULT
-    @lpVtbl.value.put_burn_format.unsafe_as(Proc(WMPBurnFormat, HRESULT)).call(wmpbf)
+  def put_burn_format(this : IWMPCdromBurn*, wmpbf : WMPBurnFormat) : HRESULT
+    @lpVtbl.value.put_burn_format.call(this, wmpbf)
   end
-  def get_burn_playlist(ppplaylist : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_burn_playlist.unsafe_as(Proc(IWMPPlaylist*, HRESULT)).call(ppplaylist)
+  def get_burn_playlist(this : IWMPCdromBurn*, ppplaylist : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_burn_playlist.call(this, ppplaylist)
   end
-  def put_burn_playlist(pplaylist : IWMPPlaylist) : HRESULT
-    @lpVtbl.value.put_burn_playlist.unsafe_as(Proc(IWMPPlaylist, HRESULT)).call(pplaylist)
+  def put_burn_playlist(this : IWMPCdromBurn*, pplaylist : IWMPPlaylist) : HRESULT
+    @lpVtbl.value.put_burn_playlist.call(this, pplaylist)
   end
-  def refresh_status : HRESULT
-    @lpVtbl.value.refresh_status.unsafe_as(Proc(HRESULT)).call
+  def refresh_status(this : IWMPCdromBurn*) : HRESULT
+    @lpVtbl.value.refresh_status.call(this)
   end
-  def get_burn_state(pwmpbs : WMPBurnState*) : HRESULT
-    @lpVtbl.value.get_burn_state.unsafe_as(Proc(WMPBurnState*, HRESULT)).call(pwmpbs)
+  def get_burn_state(this : IWMPCdromBurn*, pwmpbs : WMPBurnState*) : HRESULT
+    @lpVtbl.value.get_burn_state.call(this, pwmpbs)
   end
-  def get_burn_progress(plprogress : Int32*) : HRESULT
-    @lpVtbl.value.get_burn_progress.unsafe_as(Proc(Int32*, HRESULT)).call(plprogress)
+  def get_burn_progress(this : IWMPCdromBurn*, plprogress : Int32*) : HRESULT
+    @lpVtbl.value.get_burn_progress.call(this, plprogress)
   end
-  def start_burn : HRESULT
-    @lpVtbl.value.start_burn.unsafe_as(Proc(HRESULT)).call
+  def start_burn(this : IWMPCdromBurn*) : HRESULT
+    @lpVtbl.value.start_burn.call(this)
   end
-  def stop_burn : HRESULT
-    @lpVtbl.value.stop_burn.unsafe_as(Proc(HRESULT)).call
+  def stop_burn(this : IWMPCdromBurn*) : HRESULT
+    @lpVtbl.value.stop_burn.call(this)
   end
-  def erase : HRESULT
-    @lpVtbl.value.erase.unsafe_as(Proc(HRESULT)).call
+  def erase(this : IWMPCdromBurn*) : HRESULT
+    @lpVtbl.value.erase.call(this)
   end
 end
 struct LibWin32::IWMPQuery
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPQuery*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPQuery*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPQuery*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPQuery*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPQuery*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPQuery*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPQuery*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def add_condition(bstrattribute : UInt8*, bstroperator : UInt8*, bstrvalue : UInt8*) : HRESULT
-    @lpVtbl.value.add_condition.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, HRESULT)).call(bstrattribute, bstroperator, bstrvalue)
+  def add_condition(this : IWMPQuery*, bstrattribute : UInt8*, bstroperator : UInt8*, bstrvalue : UInt8*) : HRESULT
+    @lpVtbl.value.add_condition.call(this, bstrattribute, bstroperator, bstrvalue)
   end
-  def begin_next_group : HRESULT
-    @lpVtbl.value.begin_next_group.unsafe_as(Proc(HRESULT)).call
+  def begin_next_group(this : IWMPQuery*) : HRESULT
+    @lpVtbl.value.begin_next_group.call(this)
   end
 end
 struct LibWin32::IWMPMediaCollection2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPMediaCollection2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPMediaCollection2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPMediaCollection2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPMediaCollection2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPMediaCollection2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPMediaCollection2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPMediaCollection2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def add(bstrurl : UInt8*, ppitem : IWMPMedia*) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(UInt8*, IWMPMedia*, HRESULT)).call(bstrurl, ppitem)
+  def add(this : IWMPMediaCollection2*, bstrurl : UInt8*, ppitem : IWMPMedia*) : HRESULT
+    @lpVtbl.value.add.call(this, bstrurl, ppitem)
   end
-  def get_all(ppmediaitems : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_all.unsafe_as(Proc(IWMPPlaylist*, HRESULT)).call(ppmediaitems)
+  def get_all(this : IWMPMediaCollection2*, ppmediaitems : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_all.call(this, ppmediaitems)
   end
-  def get_by_name(bstrname : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_by_name.unsafe_as(Proc(UInt8*, IWMPPlaylist*, HRESULT)).call(bstrname, ppmediaitems)
+  def get_by_name(this : IWMPMediaCollection2*, bstrname : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_by_name.call(this, bstrname, ppmediaitems)
   end
-  def get_by_genre(bstrgenre : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_by_genre.unsafe_as(Proc(UInt8*, IWMPPlaylist*, HRESULT)).call(bstrgenre, ppmediaitems)
+  def get_by_genre(this : IWMPMediaCollection2*, bstrgenre : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_by_genre.call(this, bstrgenre, ppmediaitems)
   end
-  def get_by_author(bstrauthor : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_by_author.unsafe_as(Proc(UInt8*, IWMPPlaylist*, HRESULT)).call(bstrauthor, ppmediaitems)
+  def get_by_author(this : IWMPMediaCollection2*, bstrauthor : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_by_author.call(this, bstrauthor, ppmediaitems)
   end
-  def get_by_album(bstralbum : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_by_album.unsafe_as(Proc(UInt8*, IWMPPlaylist*, HRESULT)).call(bstralbum, ppmediaitems)
+  def get_by_album(this : IWMPMediaCollection2*, bstralbum : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_by_album.call(this, bstralbum, ppmediaitems)
   end
-  def get_by_attribute(bstrattribute : UInt8*, bstrvalue : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_by_attribute.unsafe_as(Proc(UInt8*, UInt8*, IWMPPlaylist*, HRESULT)).call(bstrattribute, bstrvalue, ppmediaitems)
+  def get_by_attribute(this : IWMPMediaCollection2*, bstrattribute : UInt8*, bstrvalue : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_by_attribute.call(this, bstrattribute, bstrvalue, ppmediaitems)
   end
-  def remove(pitem : IWMPMedia, varfdeletefile : Int16) : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(IWMPMedia, Int16, HRESULT)).call(pitem, varfdeletefile)
+  def remove(this : IWMPMediaCollection2*, pitem : IWMPMedia, varfdeletefile : Int16) : HRESULT
+    @lpVtbl.value.remove.call(this, pitem, varfdeletefile)
   end
-  def get_attribute_string_collection(bstrattribute : UInt8*, bstrmediatype : UInt8*, ppstringcollection : IWMPStringCollection*) : HRESULT
-    @lpVtbl.value.get_attribute_string_collection.unsafe_as(Proc(UInt8*, UInt8*, IWMPStringCollection*, HRESULT)).call(bstrattribute, bstrmediatype, ppstringcollection)
+  def get_attribute_string_collection(this : IWMPMediaCollection2*, bstrattribute : UInt8*, bstrmediatype : UInt8*, ppstringcollection : IWMPStringCollection*) : HRESULT
+    @lpVtbl.value.get_attribute_string_collection.call(this, bstrattribute, bstrmediatype, ppstringcollection)
   end
-  def get_media_atom(bstritemname : UInt8*, platom : Int32*) : HRESULT
-    @lpVtbl.value.get_media_atom.unsafe_as(Proc(UInt8*, Int32*, HRESULT)).call(bstritemname, platom)
+  def get_media_atom(this : IWMPMediaCollection2*, bstritemname : UInt8*, platom : Int32*) : HRESULT
+    @lpVtbl.value.get_media_atom.call(this, bstritemname, platom)
   end
-  def set_deleted(pitem : IWMPMedia, varfisdeleted : Int16) : HRESULT
-    @lpVtbl.value.set_deleted.unsafe_as(Proc(IWMPMedia, Int16, HRESULT)).call(pitem, varfisdeleted)
+  def set_deleted(this : IWMPMediaCollection2*, pitem : IWMPMedia, varfisdeleted : Int16) : HRESULT
+    @lpVtbl.value.set_deleted.call(this, pitem, varfisdeleted)
   end
-  def is_deleted(pitem : IWMPMedia, pvarfisdeleted : Int16*) : HRESULT
-    @lpVtbl.value.is_deleted.unsafe_as(Proc(IWMPMedia, Int16*, HRESULT)).call(pitem, pvarfisdeleted)
+  def is_deleted(this : IWMPMediaCollection2*, pitem : IWMPMedia, pvarfisdeleted : Int16*) : HRESULT
+    @lpVtbl.value.is_deleted.call(this, pitem, pvarfisdeleted)
   end
-  def create_query(ppquery : IWMPQuery*) : HRESULT
-    @lpVtbl.value.create_query.unsafe_as(Proc(IWMPQuery*, HRESULT)).call(ppquery)
+  def create_query(this : IWMPMediaCollection2*, ppquery : IWMPQuery*) : HRESULT
+    @lpVtbl.value.create_query.call(this, ppquery)
   end
-  def get_playlist_by_query(pquery : IWMPQuery, bstrmediatype : UInt8*, bstrsortattribute : UInt8*, fsortascending : Int16, ppplaylist : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_playlist_by_query.unsafe_as(Proc(IWMPQuery, UInt8*, UInt8*, Int16, IWMPPlaylist*, HRESULT)).call(pquery, bstrmediatype, bstrsortattribute, fsortascending, ppplaylist)
+  def get_playlist_by_query(this : IWMPMediaCollection2*, pquery : IWMPQuery, bstrmediatype : UInt8*, bstrsortattribute : UInt8*, fsortascending : Int16, ppplaylist : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_playlist_by_query.call(this, pquery, bstrmediatype, bstrsortattribute, fsortascending, ppplaylist)
   end
-  def get_string_collection_by_query(bstrattribute : UInt8*, pquery : IWMPQuery, bstrmediatype : UInt8*, bstrsortattribute : UInt8*, fsortascending : Int16, ppstringcollection : IWMPStringCollection*) : HRESULT
-    @lpVtbl.value.get_string_collection_by_query.unsafe_as(Proc(UInt8*, IWMPQuery, UInt8*, UInt8*, Int16, IWMPStringCollection*, HRESULT)).call(bstrattribute, pquery, bstrmediatype, bstrsortattribute, fsortascending, ppstringcollection)
+  def get_string_collection_by_query(this : IWMPMediaCollection2*, bstrattribute : UInt8*, pquery : IWMPQuery, bstrmediatype : UInt8*, bstrsortattribute : UInt8*, fsortascending : Int16, ppstringcollection : IWMPStringCollection*) : HRESULT
+    @lpVtbl.value.get_string_collection_by_query.call(this, bstrattribute, pquery, bstrmediatype, bstrsortattribute, fsortascending, ppstringcollection)
   end
-  def get_by_attribute_and_media_type(bstrattribute : UInt8*, bstrvalue : UInt8*, bstrmediatype : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
-    @lpVtbl.value.get_by_attribute_and_media_type.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, IWMPPlaylist*, HRESULT)).call(bstrattribute, bstrvalue, bstrmediatype, ppmediaitems)
+  def get_by_attribute_and_media_type(this : IWMPMediaCollection2*, bstrattribute : UInt8*, bstrvalue : UInt8*, bstrmediatype : UInt8*, ppmediaitems : IWMPPlaylist*) : HRESULT
+    @lpVtbl.value.get_by_attribute_and_media_type.call(this, bstrattribute, bstrvalue, bstrmediatype, ppmediaitems)
   end
 end
 struct LibWin32::IWMPStringCollection2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPStringCollection2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPStringCollection2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPStringCollection2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPStringCollection2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPStringCollection2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPStringCollection2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPStringCollection2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_count(plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  def get_count(this : IWMPStringCollection2*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
   end
-  def item(lindex : Int32, pbstrstring : UInt8**) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(lindex, pbstrstring)
+  def item(this : IWMPStringCollection2*, lindex : Int32, pbstrstring : UInt8**) : HRESULT
+    @lpVtbl.value.item.call(this, lindex, pbstrstring)
   end
-  def is_identical(piwmpstringcollection2 : IWMPStringCollection2, pvbool : Int16*) : HRESULT
-    @lpVtbl.value.is_identical.unsafe_as(Proc(IWMPStringCollection2, Int16*, HRESULT)).call(piwmpstringcollection2, pvbool)
+  def is_identical(this : IWMPStringCollection2*, piwmpstringcollection2 : IWMPStringCollection2, pvbool : Int16*) : HRESULT
+    @lpVtbl.value.is_identical.call(this, piwmpstringcollection2, pvbool)
   end
-  def get_item_info(lcollectionindex : Int32, bstritemname : UInt8*, pbstrvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_item_info.unsafe_as(Proc(Int32, UInt8*, UInt8**, HRESULT)).call(lcollectionindex, bstritemname, pbstrvalue)
+  def get_item_info(this : IWMPStringCollection2*, lcollectionindex : Int32, bstritemname : UInt8*, pbstrvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_info.call(this, lcollectionindex, bstritemname, pbstrvalue)
   end
-  def get_attribute_count_by_type(lcollectionindex : Int32, bstrtype : UInt8*, bstrlanguage : UInt8*, plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_attribute_count_by_type.unsafe_as(Proc(Int32, UInt8*, UInt8*, Int32*, HRESULT)).call(lcollectionindex, bstrtype, bstrlanguage, plcount)
+  def get_attribute_count_by_type(this : IWMPStringCollection2*, lcollectionindex : Int32, bstrtype : UInt8*, bstrlanguage : UInt8*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_attribute_count_by_type.call(this, lcollectionindex, bstrtype, bstrlanguage, plcount)
   end
-  def get_item_info_by_type(lcollectionindex : Int32, bstrtype : UInt8*, bstrlanguage : UInt8*, lattributeindex : Int32, pvarvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_item_info_by_type.unsafe_as(Proc(Int32, UInt8*, UInt8*, Int32, VARIANT*, HRESULT)).call(lcollectionindex, bstrtype, bstrlanguage, lattributeindex, pvarvalue)
+  def get_item_info_by_type(this : IWMPStringCollection2*, lcollectionindex : Int32, bstrtype : UInt8*, bstrlanguage : UInt8*, lattributeindex : Int32, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item_info_by_type.call(this, lcollectionindex, bstrtype, bstrlanguage, lattributeindex, pvarvalue)
   end
 end
 struct LibWin32::IWMPLibrary
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPLibrary*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPLibrary*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPLibrary*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IWMPLibrary*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def get_type(pwmplt : WMPLibraryType*) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(WMPLibraryType*, HRESULT)).call(pwmplt)
+  def get_type(this : IWMPLibrary*, pwmplt : WMPLibraryType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pwmplt)
   end
-  def get_media_collection(ppiwmpmediacollection : IWMPMediaCollection*) : HRESULT
-    @lpVtbl.value.get_media_collection.unsafe_as(Proc(IWMPMediaCollection*, HRESULT)).call(ppiwmpmediacollection)
+  def get_media_collection(this : IWMPLibrary*, ppiwmpmediacollection : IWMPMediaCollection*) : HRESULT
+    @lpVtbl.value.get_media_collection.call(this, ppiwmpmediacollection)
   end
-  def is_identical(piwmplibrary : IWMPLibrary, pvbool : Int16*) : HRESULT
-    @lpVtbl.value.is_identical.unsafe_as(Proc(IWMPLibrary, Int16*, HRESULT)).call(piwmplibrary, pvbool)
+  def is_identical(this : IWMPLibrary*, piwmplibrary : IWMPLibrary, pvbool : Int16*) : HRESULT
+    @lpVtbl.value.is_identical.call(this, piwmplibrary, pvbool)
   end
 end
 struct LibWin32::IWMPLibraryServices
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPLibraryServices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPLibraryServices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPLibraryServices*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_count_by_type(wmplt : WMPLibraryType, plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_count_by_type.unsafe_as(Proc(WMPLibraryType, Int32*, HRESULT)).call(wmplt, plcount)
+  def get_count_by_type(this : IWMPLibraryServices*, wmplt : WMPLibraryType, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count_by_type.call(this, wmplt, plcount)
   end
-  def get_library_by_type(wmplt : WMPLibraryType, lindex : Int32, ppiwmplibrary : IWMPLibrary*) : HRESULT
-    @lpVtbl.value.get_library_by_type.unsafe_as(Proc(WMPLibraryType, Int32, IWMPLibrary*, HRESULT)).call(wmplt, lindex, ppiwmplibrary)
+  def get_library_by_type(this : IWMPLibraryServices*, wmplt : WMPLibraryType, lindex : Int32, ppiwmplibrary : IWMPLibrary*) : HRESULT
+    @lpVtbl.value.get_library_by_type.call(this, wmplt, lindex, ppiwmplibrary)
   end
 end
 struct LibWin32::IWMPLibrarySharingServices
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPLibrarySharingServices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPLibrarySharingServices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPLibrarySharingServices*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def is_library_shared(pvbshared : Int16*) : HRESULT
-    @lpVtbl.value.is_library_shared.unsafe_as(Proc(Int16*, HRESULT)).call(pvbshared)
+  def is_library_shared(this : IWMPLibrarySharingServices*, pvbshared : Int16*) : HRESULT
+    @lpVtbl.value.is_library_shared.call(this, pvbshared)
   end
-  def is_library_sharing_enabled(pvbenabled : Int16*) : HRESULT
-    @lpVtbl.value.is_library_sharing_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pvbenabled)
+  def is_library_sharing_enabled(this : IWMPLibrarySharingServices*, pvbenabled : Int16*) : HRESULT
+    @lpVtbl.value.is_library_sharing_enabled.call(this, pvbenabled)
   end
-  def show_library_sharing : HRESULT
-    @lpVtbl.value.show_library_sharing.unsafe_as(Proc(HRESULT)).call
+  def show_library_sharing(this : IWMPLibrarySharingServices*) : HRESULT
+    @lpVtbl.value.show_library_sharing.call(this)
   end
 end
 struct LibWin32::IWMPFolderMonitorServices
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPFolderMonitorServices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPFolderMonitorServices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPFolderMonitorServices*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_count(plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  def get_count(this : IWMPFolderMonitorServices*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
   end
-  def item(lindex : Int32, pbstrfolder : UInt8**) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(lindex, pbstrfolder)
+  def item(this : IWMPFolderMonitorServices*, lindex : Int32, pbstrfolder : UInt8**) : HRESULT
+    @lpVtbl.value.item.call(this, lindex, pbstrfolder)
   end
-  def add(bstrfolder : UInt8*) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrfolder)
+  def add(this : IWMPFolderMonitorServices*, bstrfolder : UInt8*) : HRESULT
+    @lpVtbl.value.add.call(this, bstrfolder)
   end
-  def remove(lindex : Int32) : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(Int32, HRESULT)).call(lindex)
+  def remove(this : IWMPFolderMonitorServices*, lindex : Int32) : HRESULT
+    @lpVtbl.value.remove.call(this, lindex)
   end
-  def get_scan_state(pwmpfss : WMPFolderScanState*) : HRESULT
-    @lpVtbl.value.get_scan_state.unsafe_as(Proc(WMPFolderScanState*, HRESULT)).call(pwmpfss)
+  def get_scan_state(this : IWMPFolderMonitorServices*, pwmpfss : WMPFolderScanState*) : HRESULT
+    @lpVtbl.value.get_scan_state.call(this, pwmpfss)
   end
-  def get_current_folder(pbstrfolder : UInt8**) : HRESULT
-    @lpVtbl.value.get_current_folder.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrfolder)
+  def get_current_folder(this : IWMPFolderMonitorServices*, pbstrfolder : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_folder.call(this, pbstrfolder)
   end
-  def get_scanned_files_count(plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_scanned_files_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  def get_scanned_files_count(this : IWMPFolderMonitorServices*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_scanned_files_count.call(this, plcount)
   end
-  def get_added_files_count(plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_added_files_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  def get_added_files_count(this : IWMPFolderMonitorServices*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_added_files_count.call(this, plcount)
   end
-  def get_update_progress(plprogress : Int32*) : HRESULT
-    @lpVtbl.value.get_update_progress.unsafe_as(Proc(Int32*, HRESULT)).call(plprogress)
+  def get_update_progress(this : IWMPFolderMonitorServices*, plprogress : Int32*) : HRESULT
+    @lpVtbl.value.get_update_progress.call(this, plprogress)
   end
-  def start_scan : HRESULT
-    @lpVtbl.value.start_scan.unsafe_as(Proc(HRESULT)).call
+  def start_scan(this : IWMPFolderMonitorServices*) : HRESULT
+    @lpVtbl.value.start_scan.call(this)
   end
-  def stop_scan : HRESULT
-    @lpVtbl.value.stop_scan.unsafe_as(Proc(HRESULT)).call
+  def stop_scan(this : IWMPFolderMonitorServices*) : HRESULT
+    @lpVtbl.value.stop_scan.call(this)
   end
 end
 struct LibWin32::IWMPSyncDevice2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPSyncDevice2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPSyncDevice2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPSyncDevice2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_friendly_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_friendly_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_friendly_name(this : IWMPSyncDevice2*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.call(this, pbstrname)
   end
-  def put_friendly_name(bstrname : UInt8*) : HRESULT
-    @lpVtbl.value.put_friendly_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  def put_friendly_name(this : IWMPSyncDevice2*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_friendly_name.call(this, bstrname)
   end
-  def get_device_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_device_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_device_name(this : IWMPSyncDevice2*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_name.call(this, pbstrname)
   end
-  def get_device_id(pbstrdeviceid : UInt8**) : HRESULT
-    @lpVtbl.value.get_device_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdeviceid)
+  def get_device_id(this : IWMPSyncDevice2*, pbstrdeviceid : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_id.call(this, pbstrdeviceid)
   end
-  def get_partnership_index(plindex : Int32*) : HRESULT
-    @lpVtbl.value.get_partnership_index.unsafe_as(Proc(Int32*, HRESULT)).call(plindex)
+  def get_partnership_index(this : IWMPSyncDevice2*, plindex : Int32*) : HRESULT
+    @lpVtbl.value.get_partnership_index.call(this, plindex)
   end
-  def get_connected(pvbconnected : Int16*) : HRESULT
-    @lpVtbl.value.get_connected.unsafe_as(Proc(Int16*, HRESULT)).call(pvbconnected)
+  def get_connected(this : IWMPSyncDevice2*, pvbconnected : Int16*) : HRESULT
+    @lpVtbl.value.get_connected.call(this, pvbconnected)
   end
-  def get_status(pwmpds : WMPDeviceStatus*) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(WMPDeviceStatus*, HRESULT)).call(pwmpds)
+  def get_status(this : IWMPSyncDevice2*, pwmpds : WMPDeviceStatus*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pwmpds)
   end
-  def get_sync_state(pwmpss : WMPSyncState*) : HRESULT
-    @lpVtbl.value.get_sync_state.unsafe_as(Proc(WMPSyncState*, HRESULT)).call(pwmpss)
+  def get_sync_state(this : IWMPSyncDevice2*, pwmpss : WMPSyncState*) : HRESULT
+    @lpVtbl.value.get_sync_state.call(this, pwmpss)
   end
-  def get_progress(plprogress : Int32*) : HRESULT
-    @lpVtbl.value.get_progress.unsafe_as(Proc(Int32*, HRESULT)).call(plprogress)
+  def get_progress(this : IWMPSyncDevice2*, plprogress : Int32*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, plprogress)
   end
-  def get_item_info(bstritemname : UInt8*, pbstrval : UInt8**) : HRESULT
-    @lpVtbl.value.get_item_info.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstritemname, pbstrval)
+  def get_item_info(this : IWMPSyncDevice2*, bstritemname : UInt8*, pbstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_info.call(this, bstritemname, pbstrval)
   end
-  def create_partnership(vbshowui : Int16) : HRESULT
-    @lpVtbl.value.create_partnership.unsafe_as(Proc(Int16, HRESULT)).call(vbshowui)
+  def create_partnership(this : IWMPSyncDevice2*, vbshowui : Int16) : HRESULT
+    @lpVtbl.value.create_partnership.call(this, vbshowui)
   end
-  def delete_partnership : HRESULT
-    @lpVtbl.value.delete_partnership.unsafe_as(Proc(HRESULT)).call
+  def delete_partnership(this : IWMPSyncDevice2*) : HRESULT
+    @lpVtbl.value.delete_partnership.call(this)
   end
-  def start : HRESULT
-    @lpVtbl.value.start.unsafe_as(Proc(HRESULT)).call
+  def start(this : IWMPSyncDevice2*) : HRESULT
+    @lpVtbl.value.start.call(this)
   end
-  def stop : HRESULT
-    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  def stop(this : IWMPSyncDevice2*) : HRESULT
+    @lpVtbl.value.stop.call(this)
   end
-  def show_settings : HRESULT
-    @lpVtbl.value.show_settings.unsafe_as(Proc(HRESULT)).call
+  def show_settings(this : IWMPSyncDevice2*) : HRESULT
+    @lpVtbl.value.show_settings.call(this)
   end
-  def is_identical(pdevice : IWMPSyncDevice, pvbool : Int16*) : HRESULT
-    @lpVtbl.value.is_identical.unsafe_as(Proc(IWMPSyncDevice, Int16*, HRESULT)).call(pdevice, pvbool)
+  def is_identical(this : IWMPSyncDevice2*, pdevice : IWMPSyncDevice, pvbool : Int16*) : HRESULT
+    @lpVtbl.value.is_identical.call(this, pdevice, pvbool)
   end
-  def set_item_info(bstritemname : UInt8*, bstrval : UInt8*) : HRESULT
-    @lpVtbl.value.set_item_info.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstritemname, bstrval)
+  def set_item_info(this : IWMPSyncDevice2*, bstritemname : UInt8*, bstrval : UInt8*) : HRESULT
+    @lpVtbl.value.set_item_info.call(this, bstritemname, bstrval)
   end
 end
 struct LibWin32::IWMPSyncDevice3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPSyncDevice3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPSyncDevice3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPSyncDevice3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_friendly_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_friendly_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_friendly_name(this : IWMPSyncDevice3*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.call(this, pbstrname)
   end
-  def put_friendly_name(bstrname : UInt8*) : HRESULT
-    @lpVtbl.value.put_friendly_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  def put_friendly_name(this : IWMPSyncDevice3*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_friendly_name.call(this, bstrname)
   end
-  def get_device_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_device_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_device_name(this : IWMPSyncDevice3*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_name.call(this, pbstrname)
   end
-  def get_device_id(pbstrdeviceid : UInt8**) : HRESULT
-    @lpVtbl.value.get_device_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdeviceid)
+  def get_device_id(this : IWMPSyncDevice3*, pbstrdeviceid : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_id.call(this, pbstrdeviceid)
   end
-  def get_partnership_index(plindex : Int32*) : HRESULT
-    @lpVtbl.value.get_partnership_index.unsafe_as(Proc(Int32*, HRESULT)).call(plindex)
+  def get_partnership_index(this : IWMPSyncDevice3*, plindex : Int32*) : HRESULT
+    @lpVtbl.value.get_partnership_index.call(this, plindex)
   end
-  def get_connected(pvbconnected : Int16*) : HRESULT
-    @lpVtbl.value.get_connected.unsafe_as(Proc(Int16*, HRESULT)).call(pvbconnected)
+  def get_connected(this : IWMPSyncDevice3*, pvbconnected : Int16*) : HRESULT
+    @lpVtbl.value.get_connected.call(this, pvbconnected)
   end
-  def get_status(pwmpds : WMPDeviceStatus*) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(WMPDeviceStatus*, HRESULT)).call(pwmpds)
+  def get_status(this : IWMPSyncDevice3*, pwmpds : WMPDeviceStatus*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pwmpds)
   end
-  def get_sync_state(pwmpss : WMPSyncState*) : HRESULT
-    @lpVtbl.value.get_sync_state.unsafe_as(Proc(WMPSyncState*, HRESULT)).call(pwmpss)
+  def get_sync_state(this : IWMPSyncDevice3*, pwmpss : WMPSyncState*) : HRESULT
+    @lpVtbl.value.get_sync_state.call(this, pwmpss)
   end
-  def get_progress(plprogress : Int32*) : HRESULT
-    @lpVtbl.value.get_progress.unsafe_as(Proc(Int32*, HRESULT)).call(plprogress)
+  def get_progress(this : IWMPSyncDevice3*, plprogress : Int32*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, plprogress)
   end
-  def get_item_info(bstritemname : UInt8*, pbstrval : UInt8**) : HRESULT
-    @lpVtbl.value.get_item_info.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstritemname, pbstrval)
+  def get_item_info(this : IWMPSyncDevice3*, bstritemname : UInt8*, pbstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_info.call(this, bstritemname, pbstrval)
   end
-  def create_partnership(vbshowui : Int16) : HRESULT
-    @lpVtbl.value.create_partnership.unsafe_as(Proc(Int16, HRESULT)).call(vbshowui)
+  def create_partnership(this : IWMPSyncDevice3*, vbshowui : Int16) : HRESULT
+    @lpVtbl.value.create_partnership.call(this, vbshowui)
   end
-  def delete_partnership : HRESULT
-    @lpVtbl.value.delete_partnership.unsafe_as(Proc(HRESULT)).call
+  def delete_partnership(this : IWMPSyncDevice3*) : HRESULT
+    @lpVtbl.value.delete_partnership.call(this)
   end
-  def start : HRESULT
-    @lpVtbl.value.start.unsafe_as(Proc(HRESULT)).call
+  def start(this : IWMPSyncDevice3*) : HRESULT
+    @lpVtbl.value.start.call(this)
   end
-  def stop : HRESULT
-    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  def stop(this : IWMPSyncDevice3*) : HRESULT
+    @lpVtbl.value.stop.call(this)
   end
-  def show_settings : HRESULT
-    @lpVtbl.value.show_settings.unsafe_as(Proc(HRESULT)).call
+  def show_settings(this : IWMPSyncDevice3*) : HRESULT
+    @lpVtbl.value.show_settings.call(this)
   end
-  def is_identical(pdevice : IWMPSyncDevice, pvbool : Int16*) : HRESULT
-    @lpVtbl.value.is_identical.unsafe_as(Proc(IWMPSyncDevice, Int16*, HRESULT)).call(pdevice, pvbool)
+  def is_identical(this : IWMPSyncDevice3*, pdevice : IWMPSyncDevice, pvbool : Int16*) : HRESULT
+    @lpVtbl.value.is_identical.call(this, pdevice, pvbool)
   end
-  def set_item_info(bstritemname : UInt8*, bstrval : UInt8*) : HRESULT
-    @lpVtbl.value.set_item_info.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstritemname, bstrval)
+  def set_item_info(this : IWMPSyncDevice3*, bstritemname : UInt8*, bstrval : UInt8*) : HRESULT
+    @lpVtbl.value.set_item_info.call(this, bstritemname, bstrval)
   end
-  def estimate_sync_size(pnonruleplaylist : IWMPPlaylist, prulesplaylist : IWMPPlaylist) : HRESULT
-    @lpVtbl.value.estimate_sync_size.unsafe_as(Proc(IWMPPlaylist, IWMPPlaylist, HRESULT)).call(pnonruleplaylist, prulesplaylist)
+  def estimate_sync_size(this : IWMPSyncDevice3*, pnonruleplaylist : IWMPPlaylist, prulesplaylist : IWMPPlaylist) : HRESULT
+    @lpVtbl.value.estimate_sync_size.call(this, pnonruleplaylist, prulesplaylist)
   end
-  def cancel_estimation : HRESULT
-    @lpVtbl.value.cancel_estimation.unsafe_as(Proc(HRESULT)).call
+  def cancel_estimation(this : IWMPSyncDevice3*) : HRESULT
+    @lpVtbl.value.cancel_estimation.call(this)
   end
 end
 struct LibWin32::IWMPLibrary2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPLibrary2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPLibrary2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPLibrary2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IWMPLibrary2*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def get_type(pwmplt : WMPLibraryType*) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(WMPLibraryType*, HRESULT)).call(pwmplt)
+  def get_type(this : IWMPLibrary2*, pwmplt : WMPLibraryType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pwmplt)
   end
-  def get_media_collection(ppiwmpmediacollection : IWMPMediaCollection*) : HRESULT
-    @lpVtbl.value.get_media_collection.unsafe_as(Proc(IWMPMediaCollection*, HRESULT)).call(ppiwmpmediacollection)
+  def get_media_collection(this : IWMPLibrary2*, ppiwmpmediacollection : IWMPMediaCollection*) : HRESULT
+    @lpVtbl.value.get_media_collection.call(this, ppiwmpmediacollection)
   end
-  def is_identical(piwmplibrary : IWMPLibrary, pvbool : Int16*) : HRESULT
-    @lpVtbl.value.is_identical.unsafe_as(Proc(IWMPLibrary, Int16*, HRESULT)).call(piwmplibrary, pvbool)
+  def is_identical(this : IWMPLibrary2*, piwmplibrary : IWMPLibrary, pvbool : Int16*) : HRESULT
+    @lpVtbl.value.is_identical.call(this, piwmplibrary, pvbool)
   end
-  def get_item_info(bstritemname : UInt8*, pbstrval : UInt8**) : HRESULT
-    @lpVtbl.value.get_item_info.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstritemname, pbstrval)
+  def get_item_info(this : IWMPLibrary2*, bstritemname : UInt8*, pbstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_info.call(this, bstritemname, pbstrval)
   end
 end
 struct LibWin32::IWMPEvents
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def open_state_change(newstate : Int32) : Void
-    @lpVtbl.value.open_state_change.unsafe_as(Proc(Int32, Void)).call(newstate)
+  def open_state_change(this : IWMPEvents*, newstate : Int32) : Void
+    @lpVtbl.value.open_state_change.call(this, newstate)
   end
-  def play_state_change(newstate : Int32) : Void
-    @lpVtbl.value.play_state_change.unsafe_as(Proc(Int32, Void)).call(newstate)
+  def play_state_change(this : IWMPEvents*, newstate : Int32) : Void
+    @lpVtbl.value.play_state_change.call(this, newstate)
   end
-  def audio_language_change(langid : Int32) : Void
-    @lpVtbl.value.audio_language_change.unsafe_as(Proc(Int32, Void)).call(langid)
+  def audio_language_change(this : IWMPEvents*, langid : Int32) : Void
+    @lpVtbl.value.audio_language_change.call(this, langid)
   end
-  def status_change : Void
-    @lpVtbl.value.status_change.unsafe_as(Proc(Void)).call
+  def status_change(this : IWMPEvents*) : Void
+    @lpVtbl.value.status_change.call(this)
   end
-  def script_command(sctype : UInt8*, param : UInt8*) : Void
-    @lpVtbl.value.script_command.unsafe_as(Proc(UInt8*, UInt8*, Void)).call(sctype, param)
+  def script_command(this : IWMPEvents*, sctype : UInt8*, param : UInt8*) : Void
+    @lpVtbl.value.script_command.call(this, sctype, param)
   end
-  def new_stream : Void
-    @lpVtbl.value.new_stream.unsafe_as(Proc(Void)).call
+  def new_stream(this : IWMPEvents*) : Void
+    @lpVtbl.value.new_stream.call(this)
   end
-  def disconnect(result : Int32) : Void
-    @lpVtbl.value.disconnect.unsafe_as(Proc(Int32, Void)).call(result)
+  def disconnect(this : IWMPEvents*, result : Int32) : Void
+    @lpVtbl.value.disconnect.call(this, result)
   end
-  def buffering(start : Int16) : Void
-    @lpVtbl.value.buffering.unsafe_as(Proc(Int16, Void)).call(start)
+  def buffering(this : IWMPEvents*, start : Int16) : Void
+    @lpVtbl.value.buffering.call(this, start)
   end
-  def error : Void
-    @lpVtbl.value.error.unsafe_as(Proc(Void)).call
+  def error(this : IWMPEvents*) : Void
+    @lpVtbl.value.error.call(this)
   end
-  def warning(warningtype : Int32, param : Int32, description : UInt8*) : Void
-    @lpVtbl.value.warning.unsafe_as(Proc(Int32, Int32, UInt8*, Void)).call(warningtype, param, description)
+  def warning(this : IWMPEvents*, warningtype : Int32, param : Int32, description : UInt8*) : Void
+    @lpVtbl.value.warning.call(this, warningtype, param, description)
   end
-  def end_of_stream(result : Int32) : Void
-    @lpVtbl.value.end_of_stream.unsafe_as(Proc(Int32, Void)).call(result)
+  def end_of_stream(this : IWMPEvents*, result : Int32) : Void
+    @lpVtbl.value.end_of_stream.call(this, result)
   end
-  def position_change(oldposition : Float64, newposition : Float64) : Void
-    @lpVtbl.value.position_change.unsafe_as(Proc(Float64, Float64, Void)).call(oldposition, newposition)
+  def position_change(this : IWMPEvents*, oldposition : Float64, newposition : Float64) : Void
+    @lpVtbl.value.position_change.call(this, oldposition, newposition)
   end
-  def marker_hit(markernum : Int32) : Void
-    @lpVtbl.value.marker_hit.unsafe_as(Proc(Int32, Void)).call(markernum)
+  def marker_hit(this : IWMPEvents*, markernum : Int32) : Void
+    @lpVtbl.value.marker_hit.call(this, markernum)
   end
-  def duration_unit_change(newdurationunit : Int32) : Void
-    @lpVtbl.value.duration_unit_change.unsafe_as(Proc(Int32, Void)).call(newdurationunit)
+  def duration_unit_change(this : IWMPEvents*, newdurationunit : Int32) : Void
+    @lpVtbl.value.duration_unit_change.call(this, newdurationunit)
   end
-  def cdrom_media_change(cdromnum : Int32) : Void
-    @lpVtbl.value.cdrom_media_change.unsafe_as(Proc(Int32, Void)).call(cdromnum)
+  def cdrom_media_change(this : IWMPEvents*, cdromnum : Int32) : Void
+    @lpVtbl.value.cdrom_media_change.call(this, cdromnum)
   end
-  def playlist_change(playlist : IDispatch, change : WMPPlaylistChangeEventType) : Void
-    @lpVtbl.value.playlist_change.unsafe_as(Proc(IDispatch, WMPPlaylistChangeEventType, Void)).call(playlist, change)
+  def playlist_change(this : IWMPEvents*, playlist : IDispatch, change : WMPPlaylistChangeEventType) : Void
+    @lpVtbl.value.playlist_change.call(this, playlist, change)
   end
-  def current_playlist_change(change : WMPPlaylistChangeEventType) : Void
-    @lpVtbl.value.current_playlist_change.unsafe_as(Proc(WMPPlaylistChangeEventType, Void)).call(change)
+  def current_playlist_change(this : IWMPEvents*, change : WMPPlaylistChangeEventType) : Void
+    @lpVtbl.value.current_playlist_change.call(this, change)
   end
-  def current_playlist_item_available(bstritemname : UInt8*) : Void
-    @lpVtbl.value.current_playlist_item_available.unsafe_as(Proc(UInt8*, Void)).call(bstritemname)
+  def current_playlist_item_available(this : IWMPEvents*, bstritemname : UInt8*) : Void
+    @lpVtbl.value.current_playlist_item_available.call(this, bstritemname)
   end
-  def media_change(item : IDispatch) : Void
-    @lpVtbl.value.media_change.unsafe_as(Proc(IDispatch, Void)).call(item)
+  def media_change(this : IWMPEvents*, item : IDispatch) : Void
+    @lpVtbl.value.media_change.call(this, item)
   end
-  def current_media_item_available(bstritemname : UInt8*) : Void
-    @lpVtbl.value.current_media_item_available.unsafe_as(Proc(UInt8*, Void)).call(bstritemname)
+  def current_media_item_available(this : IWMPEvents*, bstritemname : UInt8*) : Void
+    @lpVtbl.value.current_media_item_available.call(this, bstritemname)
   end
-  def current_item_change(pdispmedia : IDispatch) : Void
-    @lpVtbl.value.current_item_change.unsafe_as(Proc(IDispatch, Void)).call(pdispmedia)
+  def current_item_change(this : IWMPEvents*, pdispmedia : IDispatch) : Void
+    @lpVtbl.value.current_item_change.call(this, pdispmedia)
   end
-  def media_collection_change : Void
-    @lpVtbl.value.media_collection_change.unsafe_as(Proc(Void)).call
+  def media_collection_change(this : IWMPEvents*) : Void
+    @lpVtbl.value.media_collection_change.call(this)
   end
-  def media_collection_attribute_string_added(bstrattribname : UInt8*, bstrattribval : UInt8*) : Void
-    @lpVtbl.value.media_collection_attribute_string_added.unsafe_as(Proc(UInt8*, UInt8*, Void)).call(bstrattribname, bstrattribval)
+  def media_collection_attribute_string_added(this : IWMPEvents*, bstrattribname : UInt8*, bstrattribval : UInt8*) : Void
+    @lpVtbl.value.media_collection_attribute_string_added.call(this, bstrattribname, bstrattribval)
   end
-  def media_collection_attribute_string_removed(bstrattribname : UInt8*, bstrattribval : UInt8*) : Void
-    @lpVtbl.value.media_collection_attribute_string_removed.unsafe_as(Proc(UInt8*, UInt8*, Void)).call(bstrattribname, bstrattribval)
+  def media_collection_attribute_string_removed(this : IWMPEvents*, bstrattribname : UInt8*, bstrattribval : UInt8*) : Void
+    @lpVtbl.value.media_collection_attribute_string_removed.call(this, bstrattribname, bstrattribval)
   end
-  def media_collection_attribute_string_changed(bstrattribname : UInt8*, bstroldattribval : UInt8*, bstrnewattribval : UInt8*) : Void
-    @lpVtbl.value.media_collection_attribute_string_changed.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, Void)).call(bstrattribname, bstroldattribval, bstrnewattribval)
+  def media_collection_attribute_string_changed(this : IWMPEvents*, bstrattribname : UInt8*, bstroldattribval : UInt8*, bstrnewattribval : UInt8*) : Void
+    @lpVtbl.value.media_collection_attribute_string_changed.call(this, bstrattribname, bstroldattribval, bstrnewattribval)
   end
-  def playlist_collection_change : Void
-    @lpVtbl.value.playlist_collection_change.unsafe_as(Proc(Void)).call
+  def playlist_collection_change(this : IWMPEvents*) : Void
+    @lpVtbl.value.playlist_collection_change.call(this)
   end
-  def playlist_collection_playlist_added(bstrplaylistname : UInt8*) : Void
-    @lpVtbl.value.playlist_collection_playlist_added.unsafe_as(Proc(UInt8*, Void)).call(bstrplaylistname)
+  def playlist_collection_playlist_added(this : IWMPEvents*, bstrplaylistname : UInt8*) : Void
+    @lpVtbl.value.playlist_collection_playlist_added.call(this, bstrplaylistname)
   end
-  def playlist_collection_playlist_removed(bstrplaylistname : UInt8*) : Void
-    @lpVtbl.value.playlist_collection_playlist_removed.unsafe_as(Proc(UInt8*, Void)).call(bstrplaylistname)
+  def playlist_collection_playlist_removed(this : IWMPEvents*, bstrplaylistname : UInt8*) : Void
+    @lpVtbl.value.playlist_collection_playlist_removed.call(this, bstrplaylistname)
   end
-  def playlist_collection_playlist_set_as_deleted(bstrplaylistname : UInt8*, varfisdeleted : Int16) : Void
-    @lpVtbl.value.playlist_collection_playlist_set_as_deleted.unsafe_as(Proc(UInt8*, Int16, Void)).call(bstrplaylistname, varfisdeleted)
+  def playlist_collection_playlist_set_as_deleted(this : IWMPEvents*, bstrplaylistname : UInt8*, varfisdeleted : Int16) : Void
+    @lpVtbl.value.playlist_collection_playlist_set_as_deleted.call(this, bstrplaylistname, varfisdeleted)
   end
-  def mode_change(modename : UInt8*, newvalue : Int16) : Void
-    @lpVtbl.value.mode_change.unsafe_as(Proc(UInt8*, Int16, Void)).call(modename, newvalue)
+  def mode_change(this : IWMPEvents*, modename : UInt8*, newvalue : Int16) : Void
+    @lpVtbl.value.mode_change.call(this, modename, newvalue)
   end
-  def media_error(pmediaobject : IDispatch) : Void
-    @lpVtbl.value.media_error.unsafe_as(Proc(IDispatch, Void)).call(pmediaobject)
+  def media_error(this : IWMPEvents*, pmediaobject : IDispatch) : Void
+    @lpVtbl.value.media_error.call(this, pmediaobject)
   end
-  def open_playlist_switch(pitem : IDispatch) : Void
-    @lpVtbl.value.open_playlist_switch.unsafe_as(Proc(IDispatch, Void)).call(pitem)
+  def open_playlist_switch(this : IWMPEvents*, pitem : IDispatch) : Void
+    @lpVtbl.value.open_playlist_switch.call(this, pitem)
   end
-  def domain_change(strdomain : UInt8*) : Void
-    @lpVtbl.value.domain_change.unsafe_as(Proc(UInt8*, Void)).call(strdomain)
+  def domain_change(this : IWMPEvents*, strdomain : UInt8*) : Void
+    @lpVtbl.value.domain_change.call(this, strdomain)
   end
-  def switched_to_player_application : Void
-    @lpVtbl.value.switched_to_player_application.unsafe_as(Proc(Void)).call
+  def switched_to_player_application(this : IWMPEvents*) : Void
+    @lpVtbl.value.switched_to_player_application.call(this)
   end
-  def switched_to_control : Void
-    @lpVtbl.value.switched_to_control.unsafe_as(Proc(Void)).call
+  def switched_to_control(this : IWMPEvents*) : Void
+    @lpVtbl.value.switched_to_control.call(this)
   end
-  def player_docked_state_change : Void
-    @lpVtbl.value.player_docked_state_change.unsafe_as(Proc(Void)).call
+  def player_docked_state_change(this : IWMPEvents*) : Void
+    @lpVtbl.value.player_docked_state_change.call(this)
   end
-  def player_reconnect : Void
-    @lpVtbl.value.player_reconnect.unsafe_as(Proc(Void)).call
+  def player_reconnect(this : IWMPEvents*) : Void
+    @lpVtbl.value.player_reconnect.call(this)
   end
-  def click(nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
-    @lpVtbl.value.click.unsafe_as(Proc(Int16, Int16, Int32, Int32, Void)).call(nbutton, nshiftstate, fx, fy)
+  def click(this : IWMPEvents*, nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
+    @lpVtbl.value.click.call(this, nbutton, nshiftstate, fx, fy)
   end
-  def double_click(nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
-    @lpVtbl.value.double_click.unsafe_as(Proc(Int16, Int16, Int32, Int32, Void)).call(nbutton, nshiftstate, fx, fy)
+  def double_click(this : IWMPEvents*, nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
+    @lpVtbl.value.double_click.call(this, nbutton, nshiftstate, fx, fy)
   end
-  def key_down(nkeycode : Int16, nshiftstate : Int16) : Void
-    @lpVtbl.value.key_down.unsafe_as(Proc(Int16, Int16, Void)).call(nkeycode, nshiftstate)
+  def key_down(this : IWMPEvents*, nkeycode : Int16, nshiftstate : Int16) : Void
+    @lpVtbl.value.key_down.call(this, nkeycode, nshiftstate)
   end
-  def key_press(nkeyascii : Int16) : Void
-    @lpVtbl.value.key_press.unsafe_as(Proc(Int16, Void)).call(nkeyascii)
+  def key_press(this : IWMPEvents*, nkeyascii : Int16) : Void
+    @lpVtbl.value.key_press.call(this, nkeyascii)
   end
-  def key_up(nkeycode : Int16, nshiftstate : Int16) : Void
-    @lpVtbl.value.key_up.unsafe_as(Proc(Int16, Int16, Void)).call(nkeycode, nshiftstate)
+  def key_up(this : IWMPEvents*, nkeycode : Int16, nshiftstate : Int16) : Void
+    @lpVtbl.value.key_up.call(this, nkeycode, nshiftstate)
   end
-  def mouse_down(nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
-    @lpVtbl.value.mouse_down.unsafe_as(Proc(Int16, Int16, Int32, Int32, Void)).call(nbutton, nshiftstate, fx, fy)
+  def mouse_down(this : IWMPEvents*, nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
+    @lpVtbl.value.mouse_down.call(this, nbutton, nshiftstate, fx, fy)
   end
-  def mouse_move(nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
-    @lpVtbl.value.mouse_move.unsafe_as(Proc(Int16, Int16, Int32, Int32, Void)).call(nbutton, nshiftstate, fx, fy)
+  def mouse_move(this : IWMPEvents*, nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
+    @lpVtbl.value.mouse_move.call(this, nbutton, nshiftstate, fx, fy)
   end
-  def mouse_up(nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
-    @lpVtbl.value.mouse_up.unsafe_as(Proc(Int16, Int16, Int32, Int32, Void)).call(nbutton, nshiftstate, fx, fy)
+  def mouse_up(this : IWMPEvents*, nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
+    @lpVtbl.value.mouse_up.call(this, nbutton, nshiftstate, fx, fy)
   end
 end
 struct LibWin32::IWMPEvents2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPEvents2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPEvents2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPEvents2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def open_state_change(newstate : Int32) : Void
-    @lpVtbl.value.open_state_change.unsafe_as(Proc(Int32, Void)).call(newstate)
+  def open_state_change(this : IWMPEvents2*, newstate : Int32) : Void
+    @lpVtbl.value.open_state_change.call(this, newstate)
   end
-  def play_state_change(newstate : Int32) : Void
-    @lpVtbl.value.play_state_change.unsafe_as(Proc(Int32, Void)).call(newstate)
+  def play_state_change(this : IWMPEvents2*, newstate : Int32) : Void
+    @lpVtbl.value.play_state_change.call(this, newstate)
   end
-  def audio_language_change(langid : Int32) : Void
-    @lpVtbl.value.audio_language_change.unsafe_as(Proc(Int32, Void)).call(langid)
+  def audio_language_change(this : IWMPEvents2*, langid : Int32) : Void
+    @lpVtbl.value.audio_language_change.call(this, langid)
   end
-  def status_change : Void
-    @lpVtbl.value.status_change.unsafe_as(Proc(Void)).call
+  def status_change(this : IWMPEvents2*) : Void
+    @lpVtbl.value.status_change.call(this)
   end
-  def script_command(sctype : UInt8*, param : UInt8*) : Void
-    @lpVtbl.value.script_command.unsafe_as(Proc(UInt8*, UInt8*, Void)).call(sctype, param)
+  def script_command(this : IWMPEvents2*, sctype : UInt8*, param : UInt8*) : Void
+    @lpVtbl.value.script_command.call(this, sctype, param)
   end
-  def new_stream : Void
-    @lpVtbl.value.new_stream.unsafe_as(Proc(Void)).call
+  def new_stream(this : IWMPEvents2*) : Void
+    @lpVtbl.value.new_stream.call(this)
   end
-  def disconnect(result : Int32) : Void
-    @lpVtbl.value.disconnect.unsafe_as(Proc(Int32, Void)).call(result)
+  def disconnect(this : IWMPEvents2*, result : Int32) : Void
+    @lpVtbl.value.disconnect.call(this, result)
   end
-  def buffering(start : Int16) : Void
-    @lpVtbl.value.buffering.unsafe_as(Proc(Int16, Void)).call(start)
+  def buffering(this : IWMPEvents2*, start : Int16) : Void
+    @lpVtbl.value.buffering.call(this, start)
   end
-  def error : Void
-    @lpVtbl.value.error.unsafe_as(Proc(Void)).call
+  def error(this : IWMPEvents2*) : Void
+    @lpVtbl.value.error.call(this)
   end
-  def warning(warningtype : Int32, param : Int32, description : UInt8*) : Void
-    @lpVtbl.value.warning.unsafe_as(Proc(Int32, Int32, UInt8*, Void)).call(warningtype, param, description)
+  def warning(this : IWMPEvents2*, warningtype : Int32, param : Int32, description : UInt8*) : Void
+    @lpVtbl.value.warning.call(this, warningtype, param, description)
   end
-  def end_of_stream(result : Int32) : Void
-    @lpVtbl.value.end_of_stream.unsafe_as(Proc(Int32, Void)).call(result)
+  def end_of_stream(this : IWMPEvents2*, result : Int32) : Void
+    @lpVtbl.value.end_of_stream.call(this, result)
   end
-  def position_change(oldposition : Float64, newposition : Float64) : Void
-    @lpVtbl.value.position_change.unsafe_as(Proc(Float64, Float64, Void)).call(oldposition, newposition)
+  def position_change(this : IWMPEvents2*, oldposition : Float64, newposition : Float64) : Void
+    @lpVtbl.value.position_change.call(this, oldposition, newposition)
   end
-  def marker_hit(markernum : Int32) : Void
-    @lpVtbl.value.marker_hit.unsafe_as(Proc(Int32, Void)).call(markernum)
+  def marker_hit(this : IWMPEvents2*, markernum : Int32) : Void
+    @lpVtbl.value.marker_hit.call(this, markernum)
   end
-  def duration_unit_change(newdurationunit : Int32) : Void
-    @lpVtbl.value.duration_unit_change.unsafe_as(Proc(Int32, Void)).call(newdurationunit)
+  def duration_unit_change(this : IWMPEvents2*, newdurationunit : Int32) : Void
+    @lpVtbl.value.duration_unit_change.call(this, newdurationunit)
   end
-  def cdrom_media_change(cdromnum : Int32) : Void
-    @lpVtbl.value.cdrom_media_change.unsafe_as(Proc(Int32, Void)).call(cdromnum)
+  def cdrom_media_change(this : IWMPEvents2*, cdromnum : Int32) : Void
+    @lpVtbl.value.cdrom_media_change.call(this, cdromnum)
   end
-  def playlist_change(playlist : IDispatch, change : WMPPlaylistChangeEventType) : Void
-    @lpVtbl.value.playlist_change.unsafe_as(Proc(IDispatch, WMPPlaylistChangeEventType, Void)).call(playlist, change)
+  def playlist_change(this : IWMPEvents2*, playlist : IDispatch, change : WMPPlaylistChangeEventType) : Void
+    @lpVtbl.value.playlist_change.call(this, playlist, change)
   end
-  def current_playlist_change(change : WMPPlaylistChangeEventType) : Void
-    @lpVtbl.value.current_playlist_change.unsafe_as(Proc(WMPPlaylistChangeEventType, Void)).call(change)
+  def current_playlist_change(this : IWMPEvents2*, change : WMPPlaylistChangeEventType) : Void
+    @lpVtbl.value.current_playlist_change.call(this, change)
   end
-  def current_playlist_item_available(bstritemname : UInt8*) : Void
-    @lpVtbl.value.current_playlist_item_available.unsafe_as(Proc(UInt8*, Void)).call(bstritemname)
+  def current_playlist_item_available(this : IWMPEvents2*, bstritemname : UInt8*) : Void
+    @lpVtbl.value.current_playlist_item_available.call(this, bstritemname)
   end
-  def media_change(item : IDispatch) : Void
-    @lpVtbl.value.media_change.unsafe_as(Proc(IDispatch, Void)).call(item)
+  def media_change(this : IWMPEvents2*, item : IDispatch) : Void
+    @lpVtbl.value.media_change.call(this, item)
   end
-  def current_media_item_available(bstritemname : UInt8*) : Void
-    @lpVtbl.value.current_media_item_available.unsafe_as(Proc(UInt8*, Void)).call(bstritemname)
+  def current_media_item_available(this : IWMPEvents2*, bstritemname : UInt8*) : Void
+    @lpVtbl.value.current_media_item_available.call(this, bstritemname)
   end
-  def current_item_change(pdispmedia : IDispatch) : Void
-    @lpVtbl.value.current_item_change.unsafe_as(Proc(IDispatch, Void)).call(pdispmedia)
+  def current_item_change(this : IWMPEvents2*, pdispmedia : IDispatch) : Void
+    @lpVtbl.value.current_item_change.call(this, pdispmedia)
   end
-  def media_collection_change : Void
-    @lpVtbl.value.media_collection_change.unsafe_as(Proc(Void)).call
+  def media_collection_change(this : IWMPEvents2*) : Void
+    @lpVtbl.value.media_collection_change.call(this)
   end
-  def media_collection_attribute_string_added(bstrattribname : UInt8*, bstrattribval : UInt8*) : Void
-    @lpVtbl.value.media_collection_attribute_string_added.unsafe_as(Proc(UInt8*, UInt8*, Void)).call(bstrattribname, bstrattribval)
+  def media_collection_attribute_string_added(this : IWMPEvents2*, bstrattribname : UInt8*, bstrattribval : UInt8*) : Void
+    @lpVtbl.value.media_collection_attribute_string_added.call(this, bstrattribname, bstrattribval)
   end
-  def media_collection_attribute_string_removed(bstrattribname : UInt8*, bstrattribval : UInt8*) : Void
-    @lpVtbl.value.media_collection_attribute_string_removed.unsafe_as(Proc(UInt8*, UInt8*, Void)).call(bstrattribname, bstrattribval)
+  def media_collection_attribute_string_removed(this : IWMPEvents2*, bstrattribname : UInt8*, bstrattribval : UInt8*) : Void
+    @lpVtbl.value.media_collection_attribute_string_removed.call(this, bstrattribname, bstrattribval)
   end
-  def media_collection_attribute_string_changed(bstrattribname : UInt8*, bstroldattribval : UInt8*, bstrnewattribval : UInt8*) : Void
-    @lpVtbl.value.media_collection_attribute_string_changed.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, Void)).call(bstrattribname, bstroldattribval, bstrnewattribval)
+  def media_collection_attribute_string_changed(this : IWMPEvents2*, bstrattribname : UInt8*, bstroldattribval : UInt8*, bstrnewattribval : UInt8*) : Void
+    @lpVtbl.value.media_collection_attribute_string_changed.call(this, bstrattribname, bstroldattribval, bstrnewattribval)
   end
-  def playlist_collection_change : Void
-    @lpVtbl.value.playlist_collection_change.unsafe_as(Proc(Void)).call
+  def playlist_collection_change(this : IWMPEvents2*) : Void
+    @lpVtbl.value.playlist_collection_change.call(this)
   end
-  def playlist_collection_playlist_added(bstrplaylistname : UInt8*) : Void
-    @lpVtbl.value.playlist_collection_playlist_added.unsafe_as(Proc(UInt8*, Void)).call(bstrplaylistname)
+  def playlist_collection_playlist_added(this : IWMPEvents2*, bstrplaylistname : UInt8*) : Void
+    @lpVtbl.value.playlist_collection_playlist_added.call(this, bstrplaylistname)
   end
-  def playlist_collection_playlist_removed(bstrplaylistname : UInt8*) : Void
-    @lpVtbl.value.playlist_collection_playlist_removed.unsafe_as(Proc(UInt8*, Void)).call(bstrplaylistname)
+  def playlist_collection_playlist_removed(this : IWMPEvents2*, bstrplaylistname : UInt8*) : Void
+    @lpVtbl.value.playlist_collection_playlist_removed.call(this, bstrplaylistname)
   end
-  def playlist_collection_playlist_set_as_deleted(bstrplaylistname : UInt8*, varfisdeleted : Int16) : Void
-    @lpVtbl.value.playlist_collection_playlist_set_as_deleted.unsafe_as(Proc(UInt8*, Int16, Void)).call(bstrplaylistname, varfisdeleted)
+  def playlist_collection_playlist_set_as_deleted(this : IWMPEvents2*, bstrplaylistname : UInt8*, varfisdeleted : Int16) : Void
+    @lpVtbl.value.playlist_collection_playlist_set_as_deleted.call(this, bstrplaylistname, varfisdeleted)
   end
-  def mode_change(modename : UInt8*, newvalue : Int16) : Void
-    @lpVtbl.value.mode_change.unsafe_as(Proc(UInt8*, Int16, Void)).call(modename, newvalue)
+  def mode_change(this : IWMPEvents2*, modename : UInt8*, newvalue : Int16) : Void
+    @lpVtbl.value.mode_change.call(this, modename, newvalue)
   end
-  def media_error(pmediaobject : IDispatch) : Void
-    @lpVtbl.value.media_error.unsafe_as(Proc(IDispatch, Void)).call(pmediaobject)
+  def media_error(this : IWMPEvents2*, pmediaobject : IDispatch) : Void
+    @lpVtbl.value.media_error.call(this, pmediaobject)
   end
-  def open_playlist_switch(pitem : IDispatch) : Void
-    @lpVtbl.value.open_playlist_switch.unsafe_as(Proc(IDispatch, Void)).call(pitem)
+  def open_playlist_switch(this : IWMPEvents2*, pitem : IDispatch) : Void
+    @lpVtbl.value.open_playlist_switch.call(this, pitem)
   end
-  def domain_change(strdomain : UInt8*) : Void
-    @lpVtbl.value.domain_change.unsafe_as(Proc(UInt8*, Void)).call(strdomain)
+  def domain_change(this : IWMPEvents2*, strdomain : UInt8*) : Void
+    @lpVtbl.value.domain_change.call(this, strdomain)
   end
-  def switched_to_player_application : Void
-    @lpVtbl.value.switched_to_player_application.unsafe_as(Proc(Void)).call
+  def switched_to_player_application(this : IWMPEvents2*) : Void
+    @lpVtbl.value.switched_to_player_application.call(this)
   end
-  def switched_to_control : Void
-    @lpVtbl.value.switched_to_control.unsafe_as(Proc(Void)).call
+  def switched_to_control(this : IWMPEvents2*) : Void
+    @lpVtbl.value.switched_to_control.call(this)
   end
-  def player_docked_state_change : Void
-    @lpVtbl.value.player_docked_state_change.unsafe_as(Proc(Void)).call
+  def player_docked_state_change(this : IWMPEvents2*) : Void
+    @lpVtbl.value.player_docked_state_change.call(this)
   end
-  def player_reconnect : Void
-    @lpVtbl.value.player_reconnect.unsafe_as(Proc(Void)).call
+  def player_reconnect(this : IWMPEvents2*) : Void
+    @lpVtbl.value.player_reconnect.call(this)
   end
-  def click(nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
-    @lpVtbl.value.click.unsafe_as(Proc(Int16, Int16, Int32, Int32, Void)).call(nbutton, nshiftstate, fx, fy)
+  def click(this : IWMPEvents2*, nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
+    @lpVtbl.value.click.call(this, nbutton, nshiftstate, fx, fy)
   end
-  def double_click(nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
-    @lpVtbl.value.double_click.unsafe_as(Proc(Int16, Int16, Int32, Int32, Void)).call(nbutton, nshiftstate, fx, fy)
+  def double_click(this : IWMPEvents2*, nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
+    @lpVtbl.value.double_click.call(this, nbutton, nshiftstate, fx, fy)
   end
-  def key_down(nkeycode : Int16, nshiftstate : Int16) : Void
-    @lpVtbl.value.key_down.unsafe_as(Proc(Int16, Int16, Void)).call(nkeycode, nshiftstate)
+  def key_down(this : IWMPEvents2*, nkeycode : Int16, nshiftstate : Int16) : Void
+    @lpVtbl.value.key_down.call(this, nkeycode, nshiftstate)
   end
-  def key_press(nkeyascii : Int16) : Void
-    @lpVtbl.value.key_press.unsafe_as(Proc(Int16, Void)).call(nkeyascii)
+  def key_press(this : IWMPEvents2*, nkeyascii : Int16) : Void
+    @lpVtbl.value.key_press.call(this, nkeyascii)
   end
-  def key_up(nkeycode : Int16, nshiftstate : Int16) : Void
-    @lpVtbl.value.key_up.unsafe_as(Proc(Int16, Int16, Void)).call(nkeycode, nshiftstate)
+  def key_up(this : IWMPEvents2*, nkeycode : Int16, nshiftstate : Int16) : Void
+    @lpVtbl.value.key_up.call(this, nkeycode, nshiftstate)
   end
-  def mouse_down(nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
-    @lpVtbl.value.mouse_down.unsafe_as(Proc(Int16, Int16, Int32, Int32, Void)).call(nbutton, nshiftstate, fx, fy)
+  def mouse_down(this : IWMPEvents2*, nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
+    @lpVtbl.value.mouse_down.call(this, nbutton, nshiftstate, fx, fy)
   end
-  def mouse_move(nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
-    @lpVtbl.value.mouse_move.unsafe_as(Proc(Int16, Int16, Int32, Int32, Void)).call(nbutton, nshiftstate, fx, fy)
+  def mouse_move(this : IWMPEvents2*, nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
+    @lpVtbl.value.mouse_move.call(this, nbutton, nshiftstate, fx, fy)
   end
-  def mouse_up(nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
-    @lpVtbl.value.mouse_up.unsafe_as(Proc(Int16, Int16, Int32, Int32, Void)).call(nbutton, nshiftstate, fx, fy)
+  def mouse_up(this : IWMPEvents2*, nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
+    @lpVtbl.value.mouse_up.call(this, nbutton, nshiftstate, fx, fy)
   end
-  def device_connect(pdevice : IWMPSyncDevice) : Void
-    @lpVtbl.value.device_connect.unsafe_as(Proc(IWMPSyncDevice, Void)).call(pdevice)
+  def device_connect(this : IWMPEvents2*, pdevice : IWMPSyncDevice) : Void
+    @lpVtbl.value.device_connect.call(this, pdevice)
   end
-  def device_disconnect(pdevice : IWMPSyncDevice) : Void
-    @lpVtbl.value.device_disconnect.unsafe_as(Proc(IWMPSyncDevice, Void)).call(pdevice)
+  def device_disconnect(this : IWMPEvents2*, pdevice : IWMPSyncDevice) : Void
+    @lpVtbl.value.device_disconnect.call(this, pdevice)
   end
-  def device_status_change(pdevice : IWMPSyncDevice, newstatus : WMPDeviceStatus) : Void
-    @lpVtbl.value.device_status_change.unsafe_as(Proc(IWMPSyncDevice, WMPDeviceStatus, Void)).call(pdevice, newstatus)
+  def device_status_change(this : IWMPEvents2*, pdevice : IWMPSyncDevice, newstatus : WMPDeviceStatus) : Void
+    @lpVtbl.value.device_status_change.call(this, pdevice, newstatus)
   end
-  def device_sync_state_change(pdevice : IWMPSyncDevice, newstate : WMPSyncState) : Void
-    @lpVtbl.value.device_sync_state_change.unsafe_as(Proc(IWMPSyncDevice, WMPSyncState, Void)).call(pdevice, newstate)
+  def device_sync_state_change(this : IWMPEvents2*, pdevice : IWMPSyncDevice, newstate : WMPSyncState) : Void
+    @lpVtbl.value.device_sync_state_change.call(this, pdevice, newstate)
   end
-  def device_sync_error(pdevice : IWMPSyncDevice, pmedia : IDispatch) : Void
-    @lpVtbl.value.device_sync_error.unsafe_as(Proc(IWMPSyncDevice, IDispatch, Void)).call(pdevice, pmedia)
+  def device_sync_error(this : IWMPEvents2*, pdevice : IWMPSyncDevice, pmedia : IDispatch) : Void
+    @lpVtbl.value.device_sync_error.call(this, pdevice, pmedia)
   end
-  def create_partnership_complete(pdevice : IWMPSyncDevice, hrresult : HRESULT) : Void
-    @lpVtbl.value.create_partnership_complete.unsafe_as(Proc(IWMPSyncDevice, HRESULT, Void)).call(pdevice, hrresult)
+  def create_partnership_complete(this : IWMPEvents2*, pdevice : IWMPSyncDevice, hrresult : HRESULT) : Void
+    @lpVtbl.value.create_partnership_complete.call(this, pdevice, hrresult)
   end
 end
 struct LibWin32::IWMPEvents3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPEvents3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPEvents3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPEvents3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def open_state_change(newstate : Int32) : Void
-    @lpVtbl.value.open_state_change.unsafe_as(Proc(Int32, Void)).call(newstate)
+  def open_state_change(this : IWMPEvents3*, newstate : Int32) : Void
+    @lpVtbl.value.open_state_change.call(this, newstate)
   end
-  def play_state_change(newstate : Int32) : Void
-    @lpVtbl.value.play_state_change.unsafe_as(Proc(Int32, Void)).call(newstate)
+  def play_state_change(this : IWMPEvents3*, newstate : Int32) : Void
+    @lpVtbl.value.play_state_change.call(this, newstate)
   end
-  def audio_language_change(langid : Int32) : Void
-    @lpVtbl.value.audio_language_change.unsafe_as(Proc(Int32, Void)).call(langid)
+  def audio_language_change(this : IWMPEvents3*, langid : Int32) : Void
+    @lpVtbl.value.audio_language_change.call(this, langid)
   end
-  def status_change : Void
-    @lpVtbl.value.status_change.unsafe_as(Proc(Void)).call
+  def status_change(this : IWMPEvents3*) : Void
+    @lpVtbl.value.status_change.call(this)
   end
-  def script_command(sctype : UInt8*, param : UInt8*) : Void
-    @lpVtbl.value.script_command.unsafe_as(Proc(UInt8*, UInt8*, Void)).call(sctype, param)
+  def script_command(this : IWMPEvents3*, sctype : UInt8*, param : UInt8*) : Void
+    @lpVtbl.value.script_command.call(this, sctype, param)
   end
-  def new_stream : Void
-    @lpVtbl.value.new_stream.unsafe_as(Proc(Void)).call
+  def new_stream(this : IWMPEvents3*) : Void
+    @lpVtbl.value.new_stream.call(this)
   end
-  def disconnect(result : Int32) : Void
-    @lpVtbl.value.disconnect.unsafe_as(Proc(Int32, Void)).call(result)
+  def disconnect(this : IWMPEvents3*, result : Int32) : Void
+    @lpVtbl.value.disconnect.call(this, result)
   end
-  def buffering(start : Int16) : Void
-    @lpVtbl.value.buffering.unsafe_as(Proc(Int16, Void)).call(start)
+  def buffering(this : IWMPEvents3*, start : Int16) : Void
+    @lpVtbl.value.buffering.call(this, start)
   end
-  def error : Void
-    @lpVtbl.value.error.unsafe_as(Proc(Void)).call
+  def error(this : IWMPEvents3*) : Void
+    @lpVtbl.value.error.call(this)
   end
-  def warning(warningtype : Int32, param : Int32, description : UInt8*) : Void
-    @lpVtbl.value.warning.unsafe_as(Proc(Int32, Int32, UInt8*, Void)).call(warningtype, param, description)
+  def warning(this : IWMPEvents3*, warningtype : Int32, param : Int32, description : UInt8*) : Void
+    @lpVtbl.value.warning.call(this, warningtype, param, description)
   end
-  def end_of_stream(result : Int32) : Void
-    @lpVtbl.value.end_of_stream.unsafe_as(Proc(Int32, Void)).call(result)
+  def end_of_stream(this : IWMPEvents3*, result : Int32) : Void
+    @lpVtbl.value.end_of_stream.call(this, result)
   end
-  def position_change(oldposition : Float64, newposition : Float64) : Void
-    @lpVtbl.value.position_change.unsafe_as(Proc(Float64, Float64, Void)).call(oldposition, newposition)
+  def position_change(this : IWMPEvents3*, oldposition : Float64, newposition : Float64) : Void
+    @lpVtbl.value.position_change.call(this, oldposition, newposition)
   end
-  def marker_hit(markernum : Int32) : Void
-    @lpVtbl.value.marker_hit.unsafe_as(Proc(Int32, Void)).call(markernum)
+  def marker_hit(this : IWMPEvents3*, markernum : Int32) : Void
+    @lpVtbl.value.marker_hit.call(this, markernum)
   end
-  def duration_unit_change(newdurationunit : Int32) : Void
-    @lpVtbl.value.duration_unit_change.unsafe_as(Proc(Int32, Void)).call(newdurationunit)
+  def duration_unit_change(this : IWMPEvents3*, newdurationunit : Int32) : Void
+    @lpVtbl.value.duration_unit_change.call(this, newdurationunit)
   end
-  def cdrom_media_change(cdromnum : Int32) : Void
-    @lpVtbl.value.cdrom_media_change.unsafe_as(Proc(Int32, Void)).call(cdromnum)
+  def cdrom_media_change(this : IWMPEvents3*, cdromnum : Int32) : Void
+    @lpVtbl.value.cdrom_media_change.call(this, cdromnum)
   end
-  def playlist_change(playlist : IDispatch, change : WMPPlaylistChangeEventType) : Void
-    @lpVtbl.value.playlist_change.unsafe_as(Proc(IDispatch, WMPPlaylistChangeEventType, Void)).call(playlist, change)
+  def playlist_change(this : IWMPEvents3*, playlist : IDispatch, change : WMPPlaylistChangeEventType) : Void
+    @lpVtbl.value.playlist_change.call(this, playlist, change)
   end
-  def current_playlist_change(change : WMPPlaylistChangeEventType) : Void
-    @lpVtbl.value.current_playlist_change.unsafe_as(Proc(WMPPlaylistChangeEventType, Void)).call(change)
+  def current_playlist_change(this : IWMPEvents3*, change : WMPPlaylistChangeEventType) : Void
+    @lpVtbl.value.current_playlist_change.call(this, change)
   end
-  def current_playlist_item_available(bstritemname : UInt8*) : Void
-    @lpVtbl.value.current_playlist_item_available.unsafe_as(Proc(UInt8*, Void)).call(bstritemname)
+  def current_playlist_item_available(this : IWMPEvents3*, bstritemname : UInt8*) : Void
+    @lpVtbl.value.current_playlist_item_available.call(this, bstritemname)
   end
-  def media_change(item : IDispatch) : Void
-    @lpVtbl.value.media_change.unsafe_as(Proc(IDispatch, Void)).call(item)
+  def media_change(this : IWMPEvents3*, item : IDispatch) : Void
+    @lpVtbl.value.media_change.call(this, item)
   end
-  def current_media_item_available(bstritemname : UInt8*) : Void
-    @lpVtbl.value.current_media_item_available.unsafe_as(Proc(UInt8*, Void)).call(bstritemname)
+  def current_media_item_available(this : IWMPEvents3*, bstritemname : UInt8*) : Void
+    @lpVtbl.value.current_media_item_available.call(this, bstritemname)
   end
-  def current_item_change(pdispmedia : IDispatch) : Void
-    @lpVtbl.value.current_item_change.unsafe_as(Proc(IDispatch, Void)).call(pdispmedia)
+  def current_item_change(this : IWMPEvents3*, pdispmedia : IDispatch) : Void
+    @lpVtbl.value.current_item_change.call(this, pdispmedia)
   end
-  def media_collection_change : Void
-    @lpVtbl.value.media_collection_change.unsafe_as(Proc(Void)).call
+  def media_collection_change(this : IWMPEvents3*) : Void
+    @lpVtbl.value.media_collection_change.call(this)
   end
-  def media_collection_attribute_string_added(bstrattribname : UInt8*, bstrattribval : UInt8*) : Void
-    @lpVtbl.value.media_collection_attribute_string_added.unsafe_as(Proc(UInt8*, UInt8*, Void)).call(bstrattribname, bstrattribval)
+  def media_collection_attribute_string_added(this : IWMPEvents3*, bstrattribname : UInt8*, bstrattribval : UInt8*) : Void
+    @lpVtbl.value.media_collection_attribute_string_added.call(this, bstrattribname, bstrattribval)
   end
-  def media_collection_attribute_string_removed(bstrattribname : UInt8*, bstrattribval : UInt8*) : Void
-    @lpVtbl.value.media_collection_attribute_string_removed.unsafe_as(Proc(UInt8*, UInt8*, Void)).call(bstrattribname, bstrattribval)
+  def media_collection_attribute_string_removed(this : IWMPEvents3*, bstrattribname : UInt8*, bstrattribval : UInt8*) : Void
+    @lpVtbl.value.media_collection_attribute_string_removed.call(this, bstrattribname, bstrattribval)
   end
-  def media_collection_attribute_string_changed(bstrattribname : UInt8*, bstroldattribval : UInt8*, bstrnewattribval : UInt8*) : Void
-    @lpVtbl.value.media_collection_attribute_string_changed.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, Void)).call(bstrattribname, bstroldattribval, bstrnewattribval)
+  def media_collection_attribute_string_changed(this : IWMPEvents3*, bstrattribname : UInt8*, bstroldattribval : UInt8*, bstrnewattribval : UInt8*) : Void
+    @lpVtbl.value.media_collection_attribute_string_changed.call(this, bstrattribname, bstroldattribval, bstrnewattribval)
   end
-  def playlist_collection_change : Void
-    @lpVtbl.value.playlist_collection_change.unsafe_as(Proc(Void)).call
+  def playlist_collection_change(this : IWMPEvents3*) : Void
+    @lpVtbl.value.playlist_collection_change.call(this)
   end
-  def playlist_collection_playlist_added(bstrplaylistname : UInt8*) : Void
-    @lpVtbl.value.playlist_collection_playlist_added.unsafe_as(Proc(UInt8*, Void)).call(bstrplaylistname)
+  def playlist_collection_playlist_added(this : IWMPEvents3*, bstrplaylistname : UInt8*) : Void
+    @lpVtbl.value.playlist_collection_playlist_added.call(this, bstrplaylistname)
   end
-  def playlist_collection_playlist_removed(bstrplaylistname : UInt8*) : Void
-    @lpVtbl.value.playlist_collection_playlist_removed.unsafe_as(Proc(UInt8*, Void)).call(bstrplaylistname)
+  def playlist_collection_playlist_removed(this : IWMPEvents3*, bstrplaylistname : UInt8*) : Void
+    @lpVtbl.value.playlist_collection_playlist_removed.call(this, bstrplaylistname)
   end
-  def playlist_collection_playlist_set_as_deleted(bstrplaylistname : UInt8*, varfisdeleted : Int16) : Void
-    @lpVtbl.value.playlist_collection_playlist_set_as_deleted.unsafe_as(Proc(UInt8*, Int16, Void)).call(bstrplaylistname, varfisdeleted)
+  def playlist_collection_playlist_set_as_deleted(this : IWMPEvents3*, bstrplaylistname : UInt8*, varfisdeleted : Int16) : Void
+    @lpVtbl.value.playlist_collection_playlist_set_as_deleted.call(this, bstrplaylistname, varfisdeleted)
   end
-  def mode_change(modename : UInt8*, newvalue : Int16) : Void
-    @lpVtbl.value.mode_change.unsafe_as(Proc(UInt8*, Int16, Void)).call(modename, newvalue)
+  def mode_change(this : IWMPEvents3*, modename : UInt8*, newvalue : Int16) : Void
+    @lpVtbl.value.mode_change.call(this, modename, newvalue)
   end
-  def media_error(pmediaobject : IDispatch) : Void
-    @lpVtbl.value.media_error.unsafe_as(Proc(IDispatch, Void)).call(pmediaobject)
+  def media_error(this : IWMPEvents3*, pmediaobject : IDispatch) : Void
+    @lpVtbl.value.media_error.call(this, pmediaobject)
   end
-  def open_playlist_switch(pitem : IDispatch) : Void
-    @lpVtbl.value.open_playlist_switch.unsafe_as(Proc(IDispatch, Void)).call(pitem)
+  def open_playlist_switch(this : IWMPEvents3*, pitem : IDispatch) : Void
+    @lpVtbl.value.open_playlist_switch.call(this, pitem)
   end
-  def domain_change(strdomain : UInt8*) : Void
-    @lpVtbl.value.domain_change.unsafe_as(Proc(UInt8*, Void)).call(strdomain)
+  def domain_change(this : IWMPEvents3*, strdomain : UInt8*) : Void
+    @lpVtbl.value.domain_change.call(this, strdomain)
   end
-  def switched_to_player_application : Void
-    @lpVtbl.value.switched_to_player_application.unsafe_as(Proc(Void)).call
+  def switched_to_player_application(this : IWMPEvents3*) : Void
+    @lpVtbl.value.switched_to_player_application.call(this)
   end
-  def switched_to_control : Void
-    @lpVtbl.value.switched_to_control.unsafe_as(Proc(Void)).call
+  def switched_to_control(this : IWMPEvents3*) : Void
+    @lpVtbl.value.switched_to_control.call(this)
   end
-  def player_docked_state_change : Void
-    @lpVtbl.value.player_docked_state_change.unsafe_as(Proc(Void)).call
+  def player_docked_state_change(this : IWMPEvents3*) : Void
+    @lpVtbl.value.player_docked_state_change.call(this)
   end
-  def player_reconnect : Void
-    @lpVtbl.value.player_reconnect.unsafe_as(Proc(Void)).call
+  def player_reconnect(this : IWMPEvents3*) : Void
+    @lpVtbl.value.player_reconnect.call(this)
   end
-  def click(nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
-    @lpVtbl.value.click.unsafe_as(Proc(Int16, Int16, Int32, Int32, Void)).call(nbutton, nshiftstate, fx, fy)
+  def click(this : IWMPEvents3*, nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
+    @lpVtbl.value.click.call(this, nbutton, nshiftstate, fx, fy)
   end
-  def double_click(nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
-    @lpVtbl.value.double_click.unsafe_as(Proc(Int16, Int16, Int32, Int32, Void)).call(nbutton, nshiftstate, fx, fy)
+  def double_click(this : IWMPEvents3*, nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
+    @lpVtbl.value.double_click.call(this, nbutton, nshiftstate, fx, fy)
   end
-  def key_down(nkeycode : Int16, nshiftstate : Int16) : Void
-    @lpVtbl.value.key_down.unsafe_as(Proc(Int16, Int16, Void)).call(nkeycode, nshiftstate)
+  def key_down(this : IWMPEvents3*, nkeycode : Int16, nshiftstate : Int16) : Void
+    @lpVtbl.value.key_down.call(this, nkeycode, nshiftstate)
   end
-  def key_press(nkeyascii : Int16) : Void
-    @lpVtbl.value.key_press.unsafe_as(Proc(Int16, Void)).call(nkeyascii)
+  def key_press(this : IWMPEvents3*, nkeyascii : Int16) : Void
+    @lpVtbl.value.key_press.call(this, nkeyascii)
   end
-  def key_up(nkeycode : Int16, nshiftstate : Int16) : Void
-    @lpVtbl.value.key_up.unsafe_as(Proc(Int16, Int16, Void)).call(nkeycode, nshiftstate)
+  def key_up(this : IWMPEvents3*, nkeycode : Int16, nshiftstate : Int16) : Void
+    @lpVtbl.value.key_up.call(this, nkeycode, nshiftstate)
   end
-  def mouse_down(nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
-    @lpVtbl.value.mouse_down.unsafe_as(Proc(Int16, Int16, Int32, Int32, Void)).call(nbutton, nshiftstate, fx, fy)
+  def mouse_down(this : IWMPEvents3*, nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
+    @lpVtbl.value.mouse_down.call(this, nbutton, nshiftstate, fx, fy)
   end
-  def mouse_move(nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
-    @lpVtbl.value.mouse_move.unsafe_as(Proc(Int16, Int16, Int32, Int32, Void)).call(nbutton, nshiftstate, fx, fy)
+  def mouse_move(this : IWMPEvents3*, nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
+    @lpVtbl.value.mouse_move.call(this, nbutton, nshiftstate, fx, fy)
   end
-  def mouse_up(nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
-    @lpVtbl.value.mouse_up.unsafe_as(Proc(Int16, Int16, Int32, Int32, Void)).call(nbutton, nshiftstate, fx, fy)
+  def mouse_up(this : IWMPEvents3*, nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
+    @lpVtbl.value.mouse_up.call(this, nbutton, nshiftstate, fx, fy)
   end
-  def device_connect(pdevice : IWMPSyncDevice) : Void
-    @lpVtbl.value.device_connect.unsafe_as(Proc(IWMPSyncDevice, Void)).call(pdevice)
+  def device_connect(this : IWMPEvents3*, pdevice : IWMPSyncDevice) : Void
+    @lpVtbl.value.device_connect.call(this, pdevice)
   end
-  def device_disconnect(pdevice : IWMPSyncDevice) : Void
-    @lpVtbl.value.device_disconnect.unsafe_as(Proc(IWMPSyncDevice, Void)).call(pdevice)
+  def device_disconnect(this : IWMPEvents3*, pdevice : IWMPSyncDevice) : Void
+    @lpVtbl.value.device_disconnect.call(this, pdevice)
   end
-  def device_status_change(pdevice : IWMPSyncDevice, newstatus : WMPDeviceStatus) : Void
-    @lpVtbl.value.device_status_change.unsafe_as(Proc(IWMPSyncDevice, WMPDeviceStatus, Void)).call(pdevice, newstatus)
+  def device_status_change(this : IWMPEvents3*, pdevice : IWMPSyncDevice, newstatus : WMPDeviceStatus) : Void
+    @lpVtbl.value.device_status_change.call(this, pdevice, newstatus)
   end
-  def device_sync_state_change(pdevice : IWMPSyncDevice, newstate : WMPSyncState) : Void
-    @lpVtbl.value.device_sync_state_change.unsafe_as(Proc(IWMPSyncDevice, WMPSyncState, Void)).call(pdevice, newstate)
+  def device_sync_state_change(this : IWMPEvents3*, pdevice : IWMPSyncDevice, newstate : WMPSyncState) : Void
+    @lpVtbl.value.device_sync_state_change.call(this, pdevice, newstate)
   end
-  def device_sync_error(pdevice : IWMPSyncDevice, pmedia : IDispatch) : Void
-    @lpVtbl.value.device_sync_error.unsafe_as(Proc(IWMPSyncDevice, IDispatch, Void)).call(pdevice, pmedia)
+  def device_sync_error(this : IWMPEvents3*, pdevice : IWMPSyncDevice, pmedia : IDispatch) : Void
+    @lpVtbl.value.device_sync_error.call(this, pdevice, pmedia)
   end
-  def create_partnership_complete(pdevice : IWMPSyncDevice, hrresult : HRESULT) : Void
-    @lpVtbl.value.create_partnership_complete.unsafe_as(Proc(IWMPSyncDevice, HRESULT, Void)).call(pdevice, hrresult)
+  def create_partnership_complete(this : IWMPEvents3*, pdevice : IWMPSyncDevice, hrresult : HRESULT) : Void
+    @lpVtbl.value.create_partnership_complete.call(this, pdevice, hrresult)
   end
-  def cdrom_rip_state_change(pcdromrip : IWMPCdromRip, wmprs : WMPRipState) : Void
-    @lpVtbl.value.cdrom_rip_state_change.unsafe_as(Proc(IWMPCdromRip, WMPRipState, Void)).call(pcdromrip, wmprs)
+  def cdrom_rip_state_change(this : IWMPEvents3*, pcdromrip : IWMPCdromRip, wmprs : WMPRipState) : Void
+    @lpVtbl.value.cdrom_rip_state_change.call(this, pcdromrip, wmprs)
   end
-  def cdrom_rip_media_error(pcdromrip : IWMPCdromRip, pmedia : IDispatch) : Void
-    @lpVtbl.value.cdrom_rip_media_error.unsafe_as(Proc(IWMPCdromRip, IDispatch, Void)).call(pcdromrip, pmedia)
+  def cdrom_rip_media_error(this : IWMPEvents3*, pcdromrip : IWMPCdromRip, pmedia : IDispatch) : Void
+    @lpVtbl.value.cdrom_rip_media_error.call(this, pcdromrip, pmedia)
   end
-  def cdrom_burn_state_change(pcdromburn : IWMPCdromBurn, wmpbs : WMPBurnState) : Void
-    @lpVtbl.value.cdrom_burn_state_change.unsafe_as(Proc(IWMPCdromBurn, WMPBurnState, Void)).call(pcdromburn, wmpbs)
+  def cdrom_burn_state_change(this : IWMPEvents3*, pcdromburn : IWMPCdromBurn, wmpbs : WMPBurnState) : Void
+    @lpVtbl.value.cdrom_burn_state_change.call(this, pcdromburn, wmpbs)
   end
-  def cdrom_burn_media_error(pcdromburn : IWMPCdromBurn, pmedia : IDispatch) : Void
-    @lpVtbl.value.cdrom_burn_media_error.unsafe_as(Proc(IWMPCdromBurn, IDispatch, Void)).call(pcdromburn, pmedia)
+  def cdrom_burn_media_error(this : IWMPEvents3*, pcdromburn : IWMPCdromBurn, pmedia : IDispatch) : Void
+    @lpVtbl.value.cdrom_burn_media_error.call(this, pcdromburn, pmedia)
   end
-  def cdrom_burn_error(pcdromburn : IWMPCdromBurn, hrerror : HRESULT) : Void
-    @lpVtbl.value.cdrom_burn_error.unsafe_as(Proc(IWMPCdromBurn, HRESULT, Void)).call(pcdromburn, hrerror)
+  def cdrom_burn_error(this : IWMPEvents3*, pcdromburn : IWMPCdromBurn, hrerror : HRESULT) : Void
+    @lpVtbl.value.cdrom_burn_error.call(this, pcdromburn, hrerror)
   end
-  def library_connect(plibrary : IWMPLibrary) : Void
-    @lpVtbl.value.library_connect.unsafe_as(Proc(IWMPLibrary, Void)).call(plibrary)
+  def library_connect(this : IWMPEvents3*, plibrary : IWMPLibrary) : Void
+    @lpVtbl.value.library_connect.call(this, plibrary)
   end
-  def library_disconnect(plibrary : IWMPLibrary) : Void
-    @lpVtbl.value.library_disconnect.unsafe_as(Proc(IWMPLibrary, Void)).call(plibrary)
+  def library_disconnect(this : IWMPEvents3*, plibrary : IWMPLibrary) : Void
+    @lpVtbl.value.library_disconnect.call(this, plibrary)
   end
-  def folder_scan_state_change(wmpfss : WMPFolderScanState) : Void
-    @lpVtbl.value.folder_scan_state_change.unsafe_as(Proc(WMPFolderScanState, Void)).call(wmpfss)
+  def folder_scan_state_change(this : IWMPEvents3*, wmpfss : WMPFolderScanState) : Void
+    @lpVtbl.value.folder_scan_state_change.call(this, wmpfss)
   end
-  def string_collection_change(pdispstringcollection : IDispatch, change : WMPStringCollectionChangeEventType, lcollectionindex : Int32) : Void
-    @lpVtbl.value.string_collection_change.unsafe_as(Proc(IDispatch, WMPStringCollectionChangeEventType, Int32, Void)).call(pdispstringcollection, change, lcollectionindex)
+  def string_collection_change(this : IWMPEvents3*, pdispstringcollection : IDispatch, change : WMPStringCollectionChangeEventType, lcollectionindex : Int32) : Void
+    @lpVtbl.value.string_collection_change.call(this, pdispstringcollection, change, lcollectionindex)
   end
-  def media_collection_media_added(pdispmedia : IDispatch) : Void
-    @lpVtbl.value.media_collection_media_added.unsafe_as(Proc(IDispatch, Void)).call(pdispmedia)
+  def media_collection_media_added(this : IWMPEvents3*, pdispmedia : IDispatch) : Void
+    @lpVtbl.value.media_collection_media_added.call(this, pdispmedia)
   end
-  def media_collection_media_removed(pdispmedia : IDispatch) : Void
-    @lpVtbl.value.media_collection_media_removed.unsafe_as(Proc(IDispatch, Void)).call(pdispmedia)
+  def media_collection_media_removed(this : IWMPEvents3*, pdispmedia : IDispatch) : Void
+    @lpVtbl.value.media_collection_media_removed.call(this, pdispmedia)
   end
 end
 struct LibWin32::IWMPEvents4
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPEvents4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPEvents4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPEvents4*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def open_state_change(newstate : Int32) : Void
-    @lpVtbl.value.open_state_change.unsafe_as(Proc(Int32, Void)).call(newstate)
+  def open_state_change(this : IWMPEvents4*, newstate : Int32) : Void
+    @lpVtbl.value.open_state_change.call(this, newstate)
   end
-  def play_state_change(newstate : Int32) : Void
-    @lpVtbl.value.play_state_change.unsafe_as(Proc(Int32, Void)).call(newstate)
+  def play_state_change(this : IWMPEvents4*, newstate : Int32) : Void
+    @lpVtbl.value.play_state_change.call(this, newstate)
   end
-  def audio_language_change(langid : Int32) : Void
-    @lpVtbl.value.audio_language_change.unsafe_as(Proc(Int32, Void)).call(langid)
+  def audio_language_change(this : IWMPEvents4*, langid : Int32) : Void
+    @lpVtbl.value.audio_language_change.call(this, langid)
   end
-  def status_change : Void
-    @lpVtbl.value.status_change.unsafe_as(Proc(Void)).call
+  def status_change(this : IWMPEvents4*) : Void
+    @lpVtbl.value.status_change.call(this)
   end
-  def script_command(sctype : UInt8*, param : UInt8*) : Void
-    @lpVtbl.value.script_command.unsafe_as(Proc(UInt8*, UInt8*, Void)).call(sctype, param)
+  def script_command(this : IWMPEvents4*, sctype : UInt8*, param : UInt8*) : Void
+    @lpVtbl.value.script_command.call(this, sctype, param)
   end
-  def new_stream : Void
-    @lpVtbl.value.new_stream.unsafe_as(Proc(Void)).call
+  def new_stream(this : IWMPEvents4*) : Void
+    @lpVtbl.value.new_stream.call(this)
   end
-  def disconnect(result : Int32) : Void
-    @lpVtbl.value.disconnect.unsafe_as(Proc(Int32, Void)).call(result)
+  def disconnect(this : IWMPEvents4*, result : Int32) : Void
+    @lpVtbl.value.disconnect.call(this, result)
   end
-  def buffering(start : Int16) : Void
-    @lpVtbl.value.buffering.unsafe_as(Proc(Int16, Void)).call(start)
+  def buffering(this : IWMPEvents4*, start : Int16) : Void
+    @lpVtbl.value.buffering.call(this, start)
   end
-  def error : Void
-    @lpVtbl.value.error.unsafe_as(Proc(Void)).call
+  def error(this : IWMPEvents4*) : Void
+    @lpVtbl.value.error.call(this)
   end
-  def warning(warningtype : Int32, param : Int32, description : UInt8*) : Void
-    @lpVtbl.value.warning.unsafe_as(Proc(Int32, Int32, UInt8*, Void)).call(warningtype, param, description)
+  def warning(this : IWMPEvents4*, warningtype : Int32, param : Int32, description : UInt8*) : Void
+    @lpVtbl.value.warning.call(this, warningtype, param, description)
   end
-  def end_of_stream(result : Int32) : Void
-    @lpVtbl.value.end_of_stream.unsafe_as(Proc(Int32, Void)).call(result)
+  def end_of_stream(this : IWMPEvents4*, result : Int32) : Void
+    @lpVtbl.value.end_of_stream.call(this, result)
   end
-  def position_change(oldposition : Float64, newposition : Float64) : Void
-    @lpVtbl.value.position_change.unsafe_as(Proc(Float64, Float64, Void)).call(oldposition, newposition)
+  def position_change(this : IWMPEvents4*, oldposition : Float64, newposition : Float64) : Void
+    @lpVtbl.value.position_change.call(this, oldposition, newposition)
   end
-  def marker_hit(markernum : Int32) : Void
-    @lpVtbl.value.marker_hit.unsafe_as(Proc(Int32, Void)).call(markernum)
+  def marker_hit(this : IWMPEvents4*, markernum : Int32) : Void
+    @lpVtbl.value.marker_hit.call(this, markernum)
   end
-  def duration_unit_change(newdurationunit : Int32) : Void
-    @lpVtbl.value.duration_unit_change.unsafe_as(Proc(Int32, Void)).call(newdurationunit)
+  def duration_unit_change(this : IWMPEvents4*, newdurationunit : Int32) : Void
+    @lpVtbl.value.duration_unit_change.call(this, newdurationunit)
   end
-  def cdrom_media_change(cdromnum : Int32) : Void
-    @lpVtbl.value.cdrom_media_change.unsafe_as(Proc(Int32, Void)).call(cdromnum)
+  def cdrom_media_change(this : IWMPEvents4*, cdromnum : Int32) : Void
+    @lpVtbl.value.cdrom_media_change.call(this, cdromnum)
   end
-  def playlist_change(playlist : IDispatch, change : WMPPlaylistChangeEventType) : Void
-    @lpVtbl.value.playlist_change.unsafe_as(Proc(IDispatch, WMPPlaylistChangeEventType, Void)).call(playlist, change)
+  def playlist_change(this : IWMPEvents4*, playlist : IDispatch, change : WMPPlaylistChangeEventType) : Void
+    @lpVtbl.value.playlist_change.call(this, playlist, change)
   end
-  def current_playlist_change(change : WMPPlaylistChangeEventType) : Void
-    @lpVtbl.value.current_playlist_change.unsafe_as(Proc(WMPPlaylistChangeEventType, Void)).call(change)
+  def current_playlist_change(this : IWMPEvents4*, change : WMPPlaylistChangeEventType) : Void
+    @lpVtbl.value.current_playlist_change.call(this, change)
   end
-  def current_playlist_item_available(bstritemname : UInt8*) : Void
-    @lpVtbl.value.current_playlist_item_available.unsafe_as(Proc(UInt8*, Void)).call(bstritemname)
+  def current_playlist_item_available(this : IWMPEvents4*, bstritemname : UInt8*) : Void
+    @lpVtbl.value.current_playlist_item_available.call(this, bstritemname)
   end
-  def media_change(item : IDispatch) : Void
-    @lpVtbl.value.media_change.unsafe_as(Proc(IDispatch, Void)).call(item)
+  def media_change(this : IWMPEvents4*, item : IDispatch) : Void
+    @lpVtbl.value.media_change.call(this, item)
   end
-  def current_media_item_available(bstritemname : UInt8*) : Void
-    @lpVtbl.value.current_media_item_available.unsafe_as(Proc(UInt8*, Void)).call(bstritemname)
+  def current_media_item_available(this : IWMPEvents4*, bstritemname : UInt8*) : Void
+    @lpVtbl.value.current_media_item_available.call(this, bstritemname)
   end
-  def current_item_change(pdispmedia : IDispatch) : Void
-    @lpVtbl.value.current_item_change.unsafe_as(Proc(IDispatch, Void)).call(pdispmedia)
+  def current_item_change(this : IWMPEvents4*, pdispmedia : IDispatch) : Void
+    @lpVtbl.value.current_item_change.call(this, pdispmedia)
   end
-  def media_collection_change : Void
-    @lpVtbl.value.media_collection_change.unsafe_as(Proc(Void)).call
+  def media_collection_change(this : IWMPEvents4*) : Void
+    @lpVtbl.value.media_collection_change.call(this)
   end
-  def media_collection_attribute_string_added(bstrattribname : UInt8*, bstrattribval : UInt8*) : Void
-    @lpVtbl.value.media_collection_attribute_string_added.unsafe_as(Proc(UInt8*, UInt8*, Void)).call(bstrattribname, bstrattribval)
+  def media_collection_attribute_string_added(this : IWMPEvents4*, bstrattribname : UInt8*, bstrattribval : UInt8*) : Void
+    @lpVtbl.value.media_collection_attribute_string_added.call(this, bstrattribname, bstrattribval)
   end
-  def media_collection_attribute_string_removed(bstrattribname : UInt8*, bstrattribval : UInt8*) : Void
-    @lpVtbl.value.media_collection_attribute_string_removed.unsafe_as(Proc(UInt8*, UInt8*, Void)).call(bstrattribname, bstrattribval)
+  def media_collection_attribute_string_removed(this : IWMPEvents4*, bstrattribname : UInt8*, bstrattribval : UInt8*) : Void
+    @lpVtbl.value.media_collection_attribute_string_removed.call(this, bstrattribname, bstrattribval)
   end
-  def media_collection_attribute_string_changed(bstrattribname : UInt8*, bstroldattribval : UInt8*, bstrnewattribval : UInt8*) : Void
-    @lpVtbl.value.media_collection_attribute_string_changed.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, Void)).call(bstrattribname, bstroldattribval, bstrnewattribval)
+  def media_collection_attribute_string_changed(this : IWMPEvents4*, bstrattribname : UInt8*, bstroldattribval : UInt8*, bstrnewattribval : UInt8*) : Void
+    @lpVtbl.value.media_collection_attribute_string_changed.call(this, bstrattribname, bstroldattribval, bstrnewattribval)
   end
-  def playlist_collection_change : Void
-    @lpVtbl.value.playlist_collection_change.unsafe_as(Proc(Void)).call
+  def playlist_collection_change(this : IWMPEvents4*) : Void
+    @lpVtbl.value.playlist_collection_change.call(this)
   end
-  def playlist_collection_playlist_added(bstrplaylistname : UInt8*) : Void
-    @lpVtbl.value.playlist_collection_playlist_added.unsafe_as(Proc(UInt8*, Void)).call(bstrplaylistname)
+  def playlist_collection_playlist_added(this : IWMPEvents4*, bstrplaylistname : UInt8*) : Void
+    @lpVtbl.value.playlist_collection_playlist_added.call(this, bstrplaylistname)
   end
-  def playlist_collection_playlist_removed(bstrplaylistname : UInt8*) : Void
-    @lpVtbl.value.playlist_collection_playlist_removed.unsafe_as(Proc(UInt8*, Void)).call(bstrplaylistname)
+  def playlist_collection_playlist_removed(this : IWMPEvents4*, bstrplaylistname : UInt8*) : Void
+    @lpVtbl.value.playlist_collection_playlist_removed.call(this, bstrplaylistname)
   end
-  def playlist_collection_playlist_set_as_deleted(bstrplaylistname : UInt8*, varfisdeleted : Int16) : Void
-    @lpVtbl.value.playlist_collection_playlist_set_as_deleted.unsafe_as(Proc(UInt8*, Int16, Void)).call(bstrplaylistname, varfisdeleted)
+  def playlist_collection_playlist_set_as_deleted(this : IWMPEvents4*, bstrplaylistname : UInt8*, varfisdeleted : Int16) : Void
+    @lpVtbl.value.playlist_collection_playlist_set_as_deleted.call(this, bstrplaylistname, varfisdeleted)
   end
-  def mode_change(modename : UInt8*, newvalue : Int16) : Void
-    @lpVtbl.value.mode_change.unsafe_as(Proc(UInt8*, Int16, Void)).call(modename, newvalue)
+  def mode_change(this : IWMPEvents4*, modename : UInt8*, newvalue : Int16) : Void
+    @lpVtbl.value.mode_change.call(this, modename, newvalue)
   end
-  def media_error(pmediaobject : IDispatch) : Void
-    @lpVtbl.value.media_error.unsafe_as(Proc(IDispatch, Void)).call(pmediaobject)
+  def media_error(this : IWMPEvents4*, pmediaobject : IDispatch) : Void
+    @lpVtbl.value.media_error.call(this, pmediaobject)
   end
-  def open_playlist_switch(pitem : IDispatch) : Void
-    @lpVtbl.value.open_playlist_switch.unsafe_as(Proc(IDispatch, Void)).call(pitem)
+  def open_playlist_switch(this : IWMPEvents4*, pitem : IDispatch) : Void
+    @lpVtbl.value.open_playlist_switch.call(this, pitem)
   end
-  def domain_change(strdomain : UInt8*) : Void
-    @lpVtbl.value.domain_change.unsafe_as(Proc(UInt8*, Void)).call(strdomain)
+  def domain_change(this : IWMPEvents4*, strdomain : UInt8*) : Void
+    @lpVtbl.value.domain_change.call(this, strdomain)
   end
-  def switched_to_player_application : Void
-    @lpVtbl.value.switched_to_player_application.unsafe_as(Proc(Void)).call
+  def switched_to_player_application(this : IWMPEvents4*) : Void
+    @lpVtbl.value.switched_to_player_application.call(this)
   end
-  def switched_to_control : Void
-    @lpVtbl.value.switched_to_control.unsafe_as(Proc(Void)).call
+  def switched_to_control(this : IWMPEvents4*) : Void
+    @lpVtbl.value.switched_to_control.call(this)
   end
-  def player_docked_state_change : Void
-    @lpVtbl.value.player_docked_state_change.unsafe_as(Proc(Void)).call
+  def player_docked_state_change(this : IWMPEvents4*) : Void
+    @lpVtbl.value.player_docked_state_change.call(this)
   end
-  def player_reconnect : Void
-    @lpVtbl.value.player_reconnect.unsafe_as(Proc(Void)).call
+  def player_reconnect(this : IWMPEvents4*) : Void
+    @lpVtbl.value.player_reconnect.call(this)
   end
-  def click(nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
-    @lpVtbl.value.click.unsafe_as(Proc(Int16, Int16, Int32, Int32, Void)).call(nbutton, nshiftstate, fx, fy)
+  def click(this : IWMPEvents4*, nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
+    @lpVtbl.value.click.call(this, nbutton, nshiftstate, fx, fy)
   end
-  def double_click(nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
-    @lpVtbl.value.double_click.unsafe_as(Proc(Int16, Int16, Int32, Int32, Void)).call(nbutton, nshiftstate, fx, fy)
+  def double_click(this : IWMPEvents4*, nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
+    @lpVtbl.value.double_click.call(this, nbutton, nshiftstate, fx, fy)
   end
-  def key_down(nkeycode : Int16, nshiftstate : Int16) : Void
-    @lpVtbl.value.key_down.unsafe_as(Proc(Int16, Int16, Void)).call(nkeycode, nshiftstate)
+  def key_down(this : IWMPEvents4*, nkeycode : Int16, nshiftstate : Int16) : Void
+    @lpVtbl.value.key_down.call(this, nkeycode, nshiftstate)
   end
-  def key_press(nkeyascii : Int16) : Void
-    @lpVtbl.value.key_press.unsafe_as(Proc(Int16, Void)).call(nkeyascii)
+  def key_press(this : IWMPEvents4*, nkeyascii : Int16) : Void
+    @lpVtbl.value.key_press.call(this, nkeyascii)
   end
-  def key_up(nkeycode : Int16, nshiftstate : Int16) : Void
-    @lpVtbl.value.key_up.unsafe_as(Proc(Int16, Int16, Void)).call(nkeycode, nshiftstate)
+  def key_up(this : IWMPEvents4*, nkeycode : Int16, nshiftstate : Int16) : Void
+    @lpVtbl.value.key_up.call(this, nkeycode, nshiftstate)
   end
-  def mouse_down(nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
-    @lpVtbl.value.mouse_down.unsafe_as(Proc(Int16, Int16, Int32, Int32, Void)).call(nbutton, nshiftstate, fx, fy)
+  def mouse_down(this : IWMPEvents4*, nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
+    @lpVtbl.value.mouse_down.call(this, nbutton, nshiftstate, fx, fy)
   end
-  def mouse_move(nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
-    @lpVtbl.value.mouse_move.unsafe_as(Proc(Int16, Int16, Int32, Int32, Void)).call(nbutton, nshiftstate, fx, fy)
+  def mouse_move(this : IWMPEvents4*, nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
+    @lpVtbl.value.mouse_move.call(this, nbutton, nshiftstate, fx, fy)
   end
-  def mouse_up(nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
-    @lpVtbl.value.mouse_up.unsafe_as(Proc(Int16, Int16, Int32, Int32, Void)).call(nbutton, nshiftstate, fx, fy)
+  def mouse_up(this : IWMPEvents4*, nbutton : Int16, nshiftstate : Int16, fx : Int32, fy : Int32) : Void
+    @lpVtbl.value.mouse_up.call(this, nbutton, nshiftstate, fx, fy)
   end
-  def device_connect(pdevice : IWMPSyncDevice) : Void
-    @lpVtbl.value.device_connect.unsafe_as(Proc(IWMPSyncDevice, Void)).call(pdevice)
+  def device_connect(this : IWMPEvents4*, pdevice : IWMPSyncDevice) : Void
+    @lpVtbl.value.device_connect.call(this, pdevice)
   end
-  def device_disconnect(pdevice : IWMPSyncDevice) : Void
-    @lpVtbl.value.device_disconnect.unsafe_as(Proc(IWMPSyncDevice, Void)).call(pdevice)
+  def device_disconnect(this : IWMPEvents4*, pdevice : IWMPSyncDevice) : Void
+    @lpVtbl.value.device_disconnect.call(this, pdevice)
   end
-  def device_status_change(pdevice : IWMPSyncDevice, newstatus : WMPDeviceStatus) : Void
-    @lpVtbl.value.device_status_change.unsafe_as(Proc(IWMPSyncDevice, WMPDeviceStatus, Void)).call(pdevice, newstatus)
+  def device_status_change(this : IWMPEvents4*, pdevice : IWMPSyncDevice, newstatus : WMPDeviceStatus) : Void
+    @lpVtbl.value.device_status_change.call(this, pdevice, newstatus)
   end
-  def device_sync_state_change(pdevice : IWMPSyncDevice, newstate : WMPSyncState) : Void
-    @lpVtbl.value.device_sync_state_change.unsafe_as(Proc(IWMPSyncDevice, WMPSyncState, Void)).call(pdevice, newstate)
+  def device_sync_state_change(this : IWMPEvents4*, pdevice : IWMPSyncDevice, newstate : WMPSyncState) : Void
+    @lpVtbl.value.device_sync_state_change.call(this, pdevice, newstate)
   end
-  def device_sync_error(pdevice : IWMPSyncDevice, pmedia : IDispatch) : Void
-    @lpVtbl.value.device_sync_error.unsafe_as(Proc(IWMPSyncDevice, IDispatch, Void)).call(pdevice, pmedia)
+  def device_sync_error(this : IWMPEvents4*, pdevice : IWMPSyncDevice, pmedia : IDispatch) : Void
+    @lpVtbl.value.device_sync_error.call(this, pdevice, pmedia)
   end
-  def create_partnership_complete(pdevice : IWMPSyncDevice, hrresult : HRESULT) : Void
-    @lpVtbl.value.create_partnership_complete.unsafe_as(Proc(IWMPSyncDevice, HRESULT, Void)).call(pdevice, hrresult)
+  def create_partnership_complete(this : IWMPEvents4*, pdevice : IWMPSyncDevice, hrresult : HRESULT) : Void
+    @lpVtbl.value.create_partnership_complete.call(this, pdevice, hrresult)
   end
-  def cdrom_rip_state_change(pcdromrip : IWMPCdromRip, wmprs : WMPRipState) : Void
-    @lpVtbl.value.cdrom_rip_state_change.unsafe_as(Proc(IWMPCdromRip, WMPRipState, Void)).call(pcdromrip, wmprs)
+  def cdrom_rip_state_change(this : IWMPEvents4*, pcdromrip : IWMPCdromRip, wmprs : WMPRipState) : Void
+    @lpVtbl.value.cdrom_rip_state_change.call(this, pcdromrip, wmprs)
   end
-  def cdrom_rip_media_error(pcdromrip : IWMPCdromRip, pmedia : IDispatch) : Void
-    @lpVtbl.value.cdrom_rip_media_error.unsafe_as(Proc(IWMPCdromRip, IDispatch, Void)).call(pcdromrip, pmedia)
+  def cdrom_rip_media_error(this : IWMPEvents4*, pcdromrip : IWMPCdromRip, pmedia : IDispatch) : Void
+    @lpVtbl.value.cdrom_rip_media_error.call(this, pcdromrip, pmedia)
   end
-  def cdrom_burn_state_change(pcdromburn : IWMPCdromBurn, wmpbs : WMPBurnState) : Void
-    @lpVtbl.value.cdrom_burn_state_change.unsafe_as(Proc(IWMPCdromBurn, WMPBurnState, Void)).call(pcdromburn, wmpbs)
+  def cdrom_burn_state_change(this : IWMPEvents4*, pcdromburn : IWMPCdromBurn, wmpbs : WMPBurnState) : Void
+    @lpVtbl.value.cdrom_burn_state_change.call(this, pcdromburn, wmpbs)
   end
-  def cdrom_burn_media_error(pcdromburn : IWMPCdromBurn, pmedia : IDispatch) : Void
-    @lpVtbl.value.cdrom_burn_media_error.unsafe_as(Proc(IWMPCdromBurn, IDispatch, Void)).call(pcdromburn, pmedia)
+  def cdrom_burn_media_error(this : IWMPEvents4*, pcdromburn : IWMPCdromBurn, pmedia : IDispatch) : Void
+    @lpVtbl.value.cdrom_burn_media_error.call(this, pcdromburn, pmedia)
   end
-  def cdrom_burn_error(pcdromburn : IWMPCdromBurn, hrerror : HRESULT) : Void
-    @lpVtbl.value.cdrom_burn_error.unsafe_as(Proc(IWMPCdromBurn, HRESULT, Void)).call(pcdromburn, hrerror)
+  def cdrom_burn_error(this : IWMPEvents4*, pcdromburn : IWMPCdromBurn, hrerror : HRESULT) : Void
+    @lpVtbl.value.cdrom_burn_error.call(this, pcdromburn, hrerror)
   end
-  def library_connect(plibrary : IWMPLibrary) : Void
-    @lpVtbl.value.library_connect.unsafe_as(Proc(IWMPLibrary, Void)).call(plibrary)
+  def library_connect(this : IWMPEvents4*, plibrary : IWMPLibrary) : Void
+    @lpVtbl.value.library_connect.call(this, plibrary)
   end
-  def library_disconnect(plibrary : IWMPLibrary) : Void
-    @lpVtbl.value.library_disconnect.unsafe_as(Proc(IWMPLibrary, Void)).call(plibrary)
+  def library_disconnect(this : IWMPEvents4*, plibrary : IWMPLibrary) : Void
+    @lpVtbl.value.library_disconnect.call(this, plibrary)
   end
-  def folder_scan_state_change(wmpfss : WMPFolderScanState) : Void
-    @lpVtbl.value.folder_scan_state_change.unsafe_as(Proc(WMPFolderScanState, Void)).call(wmpfss)
+  def folder_scan_state_change(this : IWMPEvents4*, wmpfss : WMPFolderScanState) : Void
+    @lpVtbl.value.folder_scan_state_change.call(this, wmpfss)
   end
-  def string_collection_change(pdispstringcollection : IDispatch, change : WMPStringCollectionChangeEventType, lcollectionindex : Int32) : Void
-    @lpVtbl.value.string_collection_change.unsafe_as(Proc(IDispatch, WMPStringCollectionChangeEventType, Int32, Void)).call(pdispstringcollection, change, lcollectionindex)
+  def string_collection_change(this : IWMPEvents4*, pdispstringcollection : IDispatch, change : WMPStringCollectionChangeEventType, lcollectionindex : Int32) : Void
+    @lpVtbl.value.string_collection_change.call(this, pdispstringcollection, change, lcollectionindex)
   end
-  def media_collection_media_added(pdispmedia : IDispatch) : Void
-    @lpVtbl.value.media_collection_media_added.unsafe_as(Proc(IDispatch, Void)).call(pdispmedia)
+  def media_collection_media_added(this : IWMPEvents4*, pdispmedia : IDispatch) : Void
+    @lpVtbl.value.media_collection_media_added.call(this, pdispmedia)
   end
-  def media_collection_media_removed(pdispmedia : IDispatch) : Void
-    @lpVtbl.value.media_collection_media_removed.unsafe_as(Proc(IDispatch, Void)).call(pdispmedia)
+  def media_collection_media_removed(this : IWMPEvents4*, pdispmedia : IDispatch) : Void
+    @lpVtbl.value.media_collection_media_removed.call(this, pdispmedia)
   end
-  def device_estimation(pdevice : IWMPSyncDevice, hrresult : HRESULT, qwestimatedusedspace : Int64, qwestimatedspace : Int64) : Void
-    @lpVtbl.value.device_estimation.unsafe_as(Proc(IWMPSyncDevice, HRESULT, Int64, Int64, Void)).call(pdevice, hrresult, qwestimatedusedspace, qwestimatedspace)
+  def device_estimation(this : IWMPEvents4*, pdevice : IWMPSyncDevice, hrresult : HRESULT, qwestimatedusedspace : Int64, qwestimatedspace : Int64) : Void
+    @lpVtbl.value.device_estimation.call(this, pdevice, hrresult, qwestimatedusedspace, qwestimatedspace)
   end
 end
 struct LibWin32::IWMPOCXEvents
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPOCXEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPOCXEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPOCXEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPOCXEvents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPOCXEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPOCXEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPOCXEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
 end
 struct LibWin32::IWMPNodeRealEstate
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPNodeRealEstate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPNodeRealEstate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPNodeRealEstate*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_desired_size(psize : SIZE*) : HRESULT
-    @lpVtbl.value.get_desired_size.unsafe_as(Proc(SIZE*, HRESULT)).call(psize)
+  def get_desired_size(this : IWMPNodeRealEstate*, psize : SIZE*) : HRESULT
+    @lpVtbl.value.get_desired_size.call(this, psize)
   end
-  def set_rects(psrc : RECT*, pdest : RECT*, pclip : RECT*) : HRESULT
-    @lpVtbl.value.set_rects.unsafe_as(Proc(RECT*, RECT*, RECT*, HRESULT)).call(psrc, pdest, pclip)
+  def set_rects(this : IWMPNodeRealEstate*, psrc : RECT*, pdest : RECT*, pclip : RECT*) : HRESULT
+    @lpVtbl.value.set_rects.call(this, psrc, pdest, pclip)
   end
-  def get_rects(psrc : RECT*, pdest : RECT*, pclip : RECT*) : HRESULT
-    @lpVtbl.value.get_rects.unsafe_as(Proc(RECT*, RECT*, RECT*, HRESULT)).call(psrc, pdest, pclip)
+  def get_rects(this : IWMPNodeRealEstate*, psrc : RECT*, pdest : RECT*, pclip : RECT*) : HRESULT
+    @lpVtbl.value.get_rects.call(this, psrc, pdest, pclip)
   end
-  def set_windowless(fwindowless : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_windowless.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fwindowless)
+  def set_windowless(this : IWMPNodeRealEstate*, fwindowless : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_windowless.call(this, fwindowless)
   end
-  def get_windowless(pfwindowless : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_windowless.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfwindowless)
+  def get_windowless(this : IWMPNodeRealEstate*, pfwindowless : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_windowless.call(this, pfwindowless)
   end
-  def set_full_screen(ffullscreen : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_full_screen.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(ffullscreen)
+  def set_full_screen(this : IWMPNodeRealEstate*, ffullscreen : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_full_screen.call(this, ffullscreen)
   end
-  def get_full_screen(pffullscreen : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_full_screen.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pffullscreen)
+  def get_full_screen(this : IWMPNodeRealEstate*, pffullscreen : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_full_screen.call(this, pffullscreen)
   end
 end
 struct LibWin32::IWMPNodeRealEstateHost
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPNodeRealEstateHost*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPNodeRealEstateHost*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPNodeRealEstateHost*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_desired_size_change(psize : SIZE*) : HRESULT
-    @lpVtbl.value.on_desired_size_change.unsafe_as(Proc(SIZE*, HRESULT)).call(psize)
+  def on_desired_size_change(this : IWMPNodeRealEstateHost*, psize : SIZE*) : HRESULT
+    @lpVtbl.value.on_desired_size_change.call(this, psize)
   end
-  def on_full_screen_transition(ffullscreen : LibC::BOOL) : HRESULT
-    @lpVtbl.value.on_full_screen_transition.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(ffullscreen)
+  def on_full_screen_transition(this : IWMPNodeRealEstateHost*, ffullscreen : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_full_screen_transition.call(this, ffullscreen)
   end
 end
 struct LibWin32::IWMPNodeWindowed
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPNodeWindowed*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPNodeWindowed*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPNodeWindowed*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_owner_window(hwnd : LibC::IntPtrT) : HRESULT
-    @lpVtbl.value.set_owner_window.unsafe_as(Proc(LibC::IntPtrT, HRESULT)).call(hwnd)
+  def set_owner_window(this : IWMPNodeWindowed*, hwnd : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.set_owner_window.call(this, hwnd)
   end
-  def get_owner_window(phwnd : LibC::IntPtrT*) : HRESULT
-    @lpVtbl.value.get_owner_window.unsafe_as(Proc(LibC::IntPtrT*, HRESULT)).call(phwnd)
+  def get_owner_window(this : IWMPNodeWindowed*, phwnd : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.get_owner_window.call(this, phwnd)
   end
 end
 struct LibWin32::IWMPNodeWindowedHost
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPNodeWindowedHost*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPNodeWindowedHost*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPNodeWindowedHost*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_window_message_from_renderer(umsg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, plret : LRESULT*, pfhandled : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.on_window_message_from_renderer.unsafe_as(Proc(UInt32, LibC::UINT_PTR, LPARAM, LRESULT*, LibC::BOOL*, HRESULT)).call(umsg, wparam, lparam, plret, pfhandled)
+  def on_window_message_from_renderer(this : IWMPNodeWindowedHost*, umsg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, plret : LRESULT*, pfhandled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_window_message_from_renderer.call(this, umsg, wparam, lparam, plret, pfhandled)
   end
 end
 struct LibWin32::IWMPWindowMessageSink
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPWindowMessageSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPWindowMessageSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPWindowMessageSink*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_window_message(umsg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, plret : LRESULT*, pfhandled : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.on_window_message.unsafe_as(Proc(UInt32, LibC::UINT_PTR, LPARAM, LRESULT*, LibC::BOOL*, HRESULT)).call(umsg, wparam, lparam, plret, pfhandled)
+  def on_window_message(this : IWMPWindowMessageSink*, umsg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, plret : LRESULT*, pfhandled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_window_message.call(this, umsg, wparam, lparam, plret, pfhandled)
   end
 end
 struct LibWin32::IWMPNodeWindowless
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPNodeWindowless*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPNodeWindowless*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPNodeWindowless*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_window_message(umsg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, plret : LRESULT*, pfhandled : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.on_window_message.unsafe_as(Proc(UInt32, LibC::UINT_PTR, LPARAM, LRESULT*, LibC::BOOL*, HRESULT)).call(umsg, wparam, lparam, plret, pfhandled)
+  def on_window_message(this : IWMPNodeWindowless*, umsg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, plret : LRESULT*, pfhandled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_window_message.call(this, umsg, wparam, lparam, plret, pfhandled)
   end
-  def on_draw(hdc : LibC::IntPtrT, prcdraw : RECT*) : HRESULT
-    @lpVtbl.value.on_draw.unsafe_as(Proc(LibC::IntPtrT, RECT*, HRESULT)).call(hdc, prcdraw)
+  def on_draw(this : IWMPNodeWindowless*, hdc : LibC::IntPtrT, prcdraw : RECT*) : HRESULT
+    @lpVtbl.value.on_draw.call(this, hdc, prcdraw)
   end
 end
 struct LibWin32::IWMPNodeWindowlessHost
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPNodeWindowlessHost*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPNodeWindowlessHost*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPNodeWindowlessHost*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def invalidate_rect(prc : RECT*, ferase : LibC::BOOL) : HRESULT
-    @lpVtbl.value.invalidate_rect.unsafe_as(Proc(RECT*, LibC::BOOL, HRESULT)).call(prc, ferase)
+  def invalidate_rect(this : IWMPNodeWindowlessHost*, prc : RECT*, ferase : LibC::BOOL) : HRESULT
+    @lpVtbl.value.invalidate_rect.call(this, prc, ferase)
   end
 end
 struct LibWin32::IWMPVideoRenderConfig
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPVideoRenderConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPVideoRenderConfig*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPVideoRenderConfig*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def put_presenter_activate(pactivate : IMFActivate) : HRESULT
-    @lpVtbl.value.put_presenter_activate.unsafe_as(Proc(IMFActivate, HRESULT)).call(pactivate)
+  def put_presenter_activate(this : IWMPVideoRenderConfig*, pactivate : IMFActivate) : HRESULT
+    @lpVtbl.value.put_presenter_activate.call(this, pactivate)
   end
 end
 struct LibWin32::IWMPAudioRenderConfig
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPAudioRenderConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPAudioRenderConfig*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPAudioRenderConfig*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_audio_output_device(pbstroutputdevice : UInt8**) : HRESULT
-    @lpVtbl.value.get_audio_output_device.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstroutputdevice)
+  def get_audio_output_device(this : IWMPAudioRenderConfig*, pbstroutputdevice : UInt8**) : HRESULT
+    @lpVtbl.value.get_audio_output_device.call(this, pbstroutputdevice)
   end
-  def put_audio_output_device(bstroutputdevice : UInt8*) : HRESULT
-    @lpVtbl.value.put_audio_output_device.unsafe_as(Proc(UInt8*, HRESULT)).call(bstroutputdevice)
+  def put_audio_output_device(this : IWMPAudioRenderConfig*, bstroutputdevice : UInt8*) : HRESULT
+    @lpVtbl.value.put_audio_output_device.call(this, bstroutputdevice)
   end
 end
 struct LibWin32::IWMPRenderConfig
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPRenderConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPRenderConfig*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPRenderConfig*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def put_in_proc_only(finproc : LibC::BOOL) : HRESULT
-    @lpVtbl.value.put_in_proc_only.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(finproc)
+  def put_in_proc_only(this : IWMPRenderConfig*, finproc : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_in_proc_only.call(this, finproc)
   end
-  def get_in_proc_only(pfinproc : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_in_proc_only.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfinproc)
+  def get_in_proc_only(this : IWMPRenderConfig*, pfinproc : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_in_proc_only.call(this, pfinproc)
   end
 end
 struct LibWin32::IWMPServices
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPServices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPServices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPServices*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_stream_time(prt : Int64*) : HRESULT
-    @lpVtbl.value.get_stream_time.unsafe_as(Proc(Int64*, HRESULT)).call(prt)
+  def get_stream_time(this : IWMPServices*, prt : Int64*) : HRESULT
+    @lpVtbl.value.get_stream_time.call(this, prt)
   end
-  def get_stream_state(pstate : WMPServices_StreamState*) : HRESULT
-    @lpVtbl.value.get_stream_state.unsafe_as(Proc(WMPServices_StreamState*, HRESULT)).call(pstate)
+  def get_stream_state(this : IWMPServices*, pstate : WMPServices_StreamState*) : HRESULT
+    @lpVtbl.value.get_stream_state.call(this, pstate)
   end
 end
 struct LibWin32::IWMPMediaPluginRegistrar
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPMediaPluginRegistrar*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPMediaPluginRegistrar*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPMediaPluginRegistrar*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def wmp_register_player_plugin(pwszfriendlyname : LibC::LPWSTR, pwszdescription : LibC::LPWSTR, pwszuninstallstring : LibC::LPWSTR, dwpriority : UInt32, guidplugintype : Guid, clsid : Guid, cmediatypes : UInt32, pmediatypes : Void*) : HRESULT
-    @lpVtbl.value.wmp_register_player_plugin.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, Guid, Guid, UInt32, Void*, HRESULT)).call(pwszfriendlyname, pwszdescription, pwszuninstallstring, dwpriority, guidplugintype, clsid, cmediatypes, pmediatypes)
+  def wmp_register_player_plugin(this : IWMPMediaPluginRegistrar*, pwszfriendlyname : LibC::LPWSTR, pwszdescription : LibC::LPWSTR, pwszuninstallstring : LibC::LPWSTR, dwpriority : UInt32, guidplugintype : Guid, clsid : Guid, cmediatypes : UInt32, pmediatypes : Void*) : HRESULT
+    @lpVtbl.value.wmp_register_player_plugin.call(this, pwszfriendlyname, pwszdescription, pwszuninstallstring, dwpriority, guidplugintype, clsid, cmediatypes, pmediatypes)
   end
-  def wmp_un_register_player_plugin(guidplugintype : Guid, clsid : Guid) : HRESULT
-    @lpVtbl.value.wmp_un_register_player_plugin.unsafe_as(Proc(Guid, Guid, HRESULT)).call(guidplugintype, clsid)
+  def wmp_un_register_player_plugin(this : IWMPMediaPluginRegistrar*, guidplugintype : Guid, clsid : Guid) : HRESULT
+    @lpVtbl.value.wmp_un_register_player_plugin.call(this, guidplugintype, clsid)
   end
 end
 struct LibWin32::IWMPPlugin
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPPlugin*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPPlugin*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPPlugin*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def init(dwplaybackcontext : LibC::UINT_PTR) : HRESULT
-    @lpVtbl.value.init.unsafe_as(Proc(LibC::UINT_PTR, HRESULT)).call(dwplaybackcontext)
+  def init(this : IWMPPlugin*, dwplaybackcontext : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.init.call(this, dwplaybackcontext)
   end
-  def shutdown : HRESULT
-    @lpVtbl.value.shutdown.unsafe_as(Proc(HRESULT)).call
+  def shutdown(this : IWMPPlugin*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
   end
-  def get_id(pguid : Guid*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(Guid*, HRESULT)).call(pguid)
+  def get_id(this : IWMPPlugin*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pguid)
   end
-  def get_caps(pdwflags : UInt32*) : HRESULT
-    @lpVtbl.value.get_caps.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwflags)
+  def get_caps(this : IWMPPlugin*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_caps.call(this, pdwflags)
   end
-  def advise_wmp_services(pwmpservices : IWMPServices) : HRESULT
-    @lpVtbl.value.advise_wmp_services.unsafe_as(Proc(IWMPServices, HRESULT)).call(pwmpservices)
+  def advise_wmp_services(this : IWMPPlugin*, pwmpservices : IWMPServices) : HRESULT
+    @lpVtbl.value.advise_wmp_services.call(this, pwmpservices)
   end
-  def un_advise_wmp_services : HRESULT
-    @lpVtbl.value.un_advise_wmp_services.unsafe_as(Proc(HRESULT)).call
+  def un_advise_wmp_services(this : IWMPPlugin*) : HRESULT
+    @lpVtbl.value.un_advise_wmp_services.call(this)
   end
 end
 struct LibWin32::IWMPPluginEnable
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPPluginEnable*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPPluginEnable*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPPluginEnable*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_enable(fenable : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_enable.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fenable)
+  def set_enable(this : IWMPPluginEnable*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_enable.call(this, fenable)
   end
-  def get_enable(pfenable : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_enable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfenable)
+  def get_enable(this : IWMPPluginEnable*, pfenable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_enable.call(this, pfenable)
   end
 end
 struct LibWin32::IWMPGraphCreation
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPGraphCreation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPGraphCreation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPGraphCreation*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def graph_creation_pre_render(pfiltergraph : IUnknown, preserved : IUnknown) : HRESULT
-    @lpVtbl.value.graph_creation_pre_render.unsafe_as(Proc(IUnknown, IUnknown, HRESULT)).call(pfiltergraph, preserved)
+  def graph_creation_pre_render(this : IWMPGraphCreation*, pfiltergraph : IUnknown, preserved : IUnknown) : HRESULT
+    @lpVtbl.value.graph_creation_pre_render.call(this, pfiltergraph, preserved)
   end
-  def graph_creation_post_render(pfiltergraph : IUnknown) : HRESULT
-    @lpVtbl.value.graph_creation_post_render.unsafe_as(Proc(IUnknown, HRESULT)).call(pfiltergraph)
+  def graph_creation_post_render(this : IWMPGraphCreation*, pfiltergraph : IUnknown) : HRESULT
+    @lpVtbl.value.graph_creation_post_render.call(this, pfiltergraph)
   end
-  def get_graph_creation_flags(pdwflags : UInt32*) : HRESULT
-    @lpVtbl.value.get_graph_creation_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwflags)
+  def get_graph_creation_flags(this : IWMPGraphCreation*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_graph_creation_flags.call(this, pdwflags)
   end
 end
 struct LibWin32::IWMPConvert
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPConvert*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPConvert*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPConvert*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def convert_file(bstrinputfile : UInt8*, bstrdestinationfolder : UInt8*, pbstroutputfile : UInt8**) : HRESULT
-    @lpVtbl.value.convert_file.unsafe_as(Proc(UInt8*, UInt8*, UInt8**, HRESULT)).call(bstrinputfile, bstrdestinationfolder, pbstroutputfile)
+  def convert_file(this : IWMPConvert*, bstrinputfile : UInt8*, bstrdestinationfolder : UInt8*, pbstroutputfile : UInt8**) : HRESULT
+    @lpVtbl.value.convert_file.call(this, bstrinputfile, bstrdestinationfolder, pbstroutputfile)
   end
-  def get_error_url(pbstrurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_error_url.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrurl)
+  def get_error_url(this : IWMPConvert*, pbstrurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_error_url.call(this, pbstrurl)
   end
 end
 struct LibWin32::IWMPTranscodePolicy
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPTranscodePolicy*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPTranscodePolicy*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPTranscodePolicy*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def allow_transcode(pvballow : Int16*) : HRESULT
-    @lpVtbl.value.allow_transcode.unsafe_as(Proc(Int16*, HRESULT)).call(pvballow)
+  def allow_transcode(this : IWMPTranscodePolicy*, pvballow : Int16*) : HRESULT
+    @lpVtbl.value.allow_transcode.call(this, pvballow)
   end
 end
 struct LibWin32::IWMPUserEventSink
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPUserEventSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPUserEventSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPUserEventSink*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def notify_user_event(eventcode : Int32) : HRESULT
-    @lpVtbl.value.notify_user_event.unsafe_as(Proc(Int32, HRESULT)).call(eventcode)
+  def notify_user_event(this : IWMPUserEventSink*, eventcode : Int32) : HRESULT
+    @lpVtbl.value.notify_user_event.call(this, eventcode)
   end
 end
 struct LibWin32::IXFeedsManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXFeedsManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXFeedsManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXFeedsManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def root_folder(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.root_folder.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def root_folder(this : IXFeedsManager*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.root_folder.call(this, riid, ppv)
   end
-  def is_subscribed(pszurl : LibC::LPWSTR, pbsubscribed : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_subscribed.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL*, HRESULT)).call(pszurl, pbsubscribed)
+  def is_subscribed(this : IXFeedsManager*, pszurl : LibC::LPWSTR, pbsubscribed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_subscribed.call(this, pszurl, pbsubscribed)
   end
-  def exists_feed(pszpath : LibC::LPWSTR, pbfeedexists : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.exists_feed.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL*, HRESULT)).call(pszpath, pbfeedexists)
+  def exists_feed(this : IXFeedsManager*, pszpath : LibC::LPWSTR, pbfeedexists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.exists_feed.call(this, pszpath, pbfeedexists)
   end
-  def get_feed(pszpath : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_feed.unsafe_as(Proc(LibC::LPWSTR, Guid*, Void**, HRESULT)).call(pszpath, riid, ppv)
+  def get_feed(this : IXFeedsManager*, pszpath : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_feed.call(this, pszpath, riid, ppv)
   end
-  def get_feed_by_url(pszurl : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_feed_by_url.unsafe_as(Proc(LibC::LPWSTR, Guid*, Void**, HRESULT)).call(pszurl, riid, ppv)
+  def get_feed_by_url(this : IXFeedsManager*, pszurl : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_feed_by_url.call(this, pszurl, riid, ppv)
   end
-  def exists_folder(pszpath : LibC::LPWSTR, pbfolderexists : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.exists_folder.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL*, HRESULT)).call(pszpath, pbfolderexists)
+  def exists_folder(this : IXFeedsManager*, pszpath : LibC::LPWSTR, pbfolderexists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.exists_folder.call(this, pszpath, pbfolderexists)
   end
-  def get_folder(pszpath : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_folder.unsafe_as(Proc(LibC::LPWSTR, Guid*, Void**, HRESULT)).call(pszpath, riid, ppv)
+  def get_folder(this : IXFeedsManager*, pszpath : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_folder.call(this, pszpath, riid, ppv)
   end
-  def delete_feed(pszpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.delete_feed.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpath)
+  def delete_feed(this : IXFeedsManager*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_feed.call(this, pszpath)
   end
-  def delete_folder(pszpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.delete_folder.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpath)
+  def delete_folder(this : IXFeedsManager*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_folder.call(this, pszpath)
   end
-  def background_sync(fbsa : FEEDS_BACKGROUNDSYNC_ACTION) : HRESULT
-    @lpVtbl.value.background_sync.unsafe_as(Proc(FEEDS_BACKGROUNDSYNC_ACTION, HRESULT)).call(fbsa)
+  def background_sync(this : IXFeedsManager*, fbsa : FEEDS_BACKGROUNDSYNC_ACTION) : HRESULT
+    @lpVtbl.value.background_sync.call(this, fbsa)
   end
-  def background_sync_status(pfbss : FEEDS_BACKGROUNDSYNC_STATUS*) : HRESULT
-    @lpVtbl.value.background_sync_status.unsafe_as(Proc(FEEDS_BACKGROUNDSYNC_STATUS*, HRESULT)).call(pfbss)
+  def background_sync_status(this : IXFeedsManager*, pfbss : FEEDS_BACKGROUNDSYNC_STATUS*) : HRESULT
+    @lpVtbl.value.background_sync_status.call(this, pfbss)
   end
-  def default_interval(puiinterval : UInt32*) : HRESULT
-    @lpVtbl.value.default_interval.unsafe_as(Proc(UInt32*, HRESULT)).call(puiinterval)
+  def default_interval(this : IXFeedsManager*, puiinterval : UInt32*) : HRESULT
+    @lpVtbl.value.default_interval.call(this, puiinterval)
   end
-  def set_default_interval(uiinterval : UInt32) : HRESULT
-    @lpVtbl.value.set_default_interval.unsafe_as(Proc(UInt32, HRESULT)).call(uiinterval)
+  def set_default_interval(this : IXFeedsManager*, uiinterval : UInt32) : HRESULT
+    @lpVtbl.value.set_default_interval.call(this, uiinterval)
   end
-  def async_sync_all : HRESULT
-    @lpVtbl.value.async_sync_all.unsafe_as(Proc(HRESULT)).call
+  def async_sync_all(this : IXFeedsManager*) : HRESULT
+    @lpVtbl.value.async_sync_all.call(this)
   end
-  def normalize(pstreamin : IStream, ppstreamout : IStream*) : HRESULT
-    @lpVtbl.value.normalize.unsafe_as(Proc(IStream, IStream*, HRESULT)).call(pstreamin, ppstreamout)
+  def normalize(this : IXFeedsManager*, pstreamin : IStream, ppstreamout : IStream*) : HRESULT
+    @lpVtbl.value.normalize.call(this, pstreamin, ppstreamout)
   end
-  def item_count_limit(puiitemcountlimit : UInt32*) : HRESULT
-    @lpVtbl.value.item_count_limit.unsafe_as(Proc(UInt32*, HRESULT)).call(puiitemcountlimit)
+  def item_count_limit(this : IXFeedsManager*, puiitemcountlimit : UInt32*) : HRESULT
+    @lpVtbl.value.item_count_limit.call(this, puiitemcountlimit)
   end
 end
 struct LibWin32::IXFeedsEnum
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXFeedsEnum*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXFeedsEnum*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXFeedsEnum*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def count(puicount : UInt32*) : HRESULT
-    @lpVtbl.value.count.unsafe_as(Proc(UInt32*, HRESULT)).call(puicount)
+  def count(this : IXFeedsEnum*, puicount : UInt32*) : HRESULT
+    @lpVtbl.value.count.call(this, puicount)
   end
-  def item(uiindex : UInt32, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(UInt32, Guid*, Void**, HRESULT)).call(uiindex, riid, ppv)
+  def item(this : IXFeedsEnum*, uiindex : UInt32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.item.call(this, uiindex, riid, ppv)
   end
 end
 struct LibWin32::IXFeedFolder
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXFeedFolder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXFeedFolder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXFeedFolder*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def feeds(ppfe : IXFeedsEnum*) : HRESULT
-    @lpVtbl.value.feeds.unsafe_as(Proc(IXFeedsEnum*, HRESULT)).call(ppfe)
+  def feeds(this : IXFeedFolder*, ppfe : IXFeedsEnum*) : HRESULT
+    @lpVtbl.value.feeds.call(this, ppfe)
   end
-  def subfolders(ppfe : IXFeedsEnum*) : HRESULT
-    @lpVtbl.value.subfolders.unsafe_as(Proc(IXFeedsEnum*, HRESULT)).call(ppfe)
+  def subfolders(this : IXFeedFolder*, ppfe : IXFeedsEnum*) : HRESULT
+    @lpVtbl.value.subfolders.call(this, ppfe)
   end
-  def create_feed(pszname : LibC::LPWSTR, pszurl : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.create_feed.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, Guid*, Void**, HRESULT)).call(pszname, pszurl, riid, ppv)
+  def create_feed(this : IXFeedFolder*, pszname : LibC::LPWSTR, pszurl : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_feed.call(this, pszname, pszurl, riid, ppv)
   end
-  def create_subfolder(pszname : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.create_subfolder.unsafe_as(Proc(LibC::LPWSTR, Guid*, Void**, HRESULT)).call(pszname, riid, ppv)
+  def create_subfolder(this : IXFeedFolder*, pszname : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_subfolder.call(this, pszname, riid, ppv)
   end
-  def exists_feed(pszname : LibC::LPWSTR, pbfeedexists : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.exists_feed.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL*, HRESULT)).call(pszname, pbfeedexists)
+  def exists_feed(this : IXFeedFolder*, pszname : LibC::LPWSTR, pbfeedexists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.exists_feed.call(this, pszname, pbfeedexists)
   end
-  def exists_subfolder(pszname : LibC::LPWSTR, pbsubfolderexists : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.exists_subfolder.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL*, HRESULT)).call(pszname, pbsubfolderexists)
+  def exists_subfolder(this : IXFeedFolder*, pszname : LibC::LPWSTR, pbsubfolderexists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.exists_subfolder.call(this, pszname, pbsubfolderexists)
   end
-  def get_feed(pszname : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_feed.unsafe_as(Proc(LibC::LPWSTR, Guid*, Void**, HRESULT)).call(pszname, riid, ppv)
+  def get_feed(this : IXFeedFolder*, pszname : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_feed.call(this, pszname, riid, ppv)
   end
-  def get_subfolder(pszname : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_subfolder.unsafe_as(Proc(LibC::LPWSTR, Guid*, Void**, HRESULT)).call(pszname, riid, ppv)
+  def get_subfolder(this : IXFeedFolder*, pszname : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_subfolder.call(this, pszname, riid, ppv)
   end
-  def delete : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  def delete(this : IXFeedFolder*) : HRESULT
+    @lpVtbl.value.delete.call(this)
   end
-  def name(ppszname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszname)
+  def name(this : IXFeedFolder*, ppszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.name.call(this, ppszname)
   end
-  def rename(pszname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.rename.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszname)
+  def rename(this : IXFeedFolder*, pszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.rename.call(this, pszname)
   end
-  def path(ppszpath : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.path.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszpath)
+  def path(this : IXFeedFolder*, ppszpath : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.path.call(this, ppszpath)
   end
-  def move(pszpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.move.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpath)
+  def move(this : IXFeedFolder*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.move.call(this, pszpath)
   end
-  def parent(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.parent.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def parent(this : IXFeedFolder*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.parent.call(this, riid, ppv)
   end
-  def is_root(pbisrootfeedfolder : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_root.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbisrootfeedfolder)
+  def is_root(this : IXFeedFolder*, pbisrootfeedfolder : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_root.call(this, pbisrootfeedfolder)
   end
-  def get_watcher(scope : FEEDS_EVENTS_SCOPE, mask : FEEDS_EVENTS_MASK, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_watcher.unsafe_as(Proc(FEEDS_EVENTS_SCOPE, FEEDS_EVENTS_MASK, Guid*, Void**, HRESULT)).call(scope, mask, riid, ppv)
+  def get_watcher(this : IXFeedFolder*, scope : FEEDS_EVENTS_SCOPE, mask : FEEDS_EVENTS_MASK, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_watcher.call(this, scope, mask, riid, ppv)
   end
-  def total_unread_item_count(puitotalunreaditemcount : UInt32*) : HRESULT
-    @lpVtbl.value.total_unread_item_count.unsafe_as(Proc(UInt32*, HRESULT)).call(puitotalunreaditemcount)
+  def total_unread_item_count(this : IXFeedFolder*, puitotalunreaditemcount : UInt32*) : HRESULT
+    @lpVtbl.value.total_unread_item_count.call(this, puitotalunreaditemcount)
   end
-  def total_item_count(puitotalitemcount : UInt32*) : HRESULT
-    @lpVtbl.value.total_item_count.unsafe_as(Proc(UInt32*, HRESULT)).call(puitotalitemcount)
+  def total_item_count(this : IXFeedFolder*, puitotalitemcount : UInt32*) : HRESULT
+    @lpVtbl.value.total_item_count.call(this, puitotalitemcount)
   end
 end
 struct LibWin32::IXFeedFolderEvents
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXFeedFolderEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXFeedFolderEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXFeedFolderEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def error : HRESULT
-    @lpVtbl.value.error.unsafe_as(Proc(HRESULT)).call
+  def error(this : IXFeedFolderEvents*) : HRESULT
+    @lpVtbl.value.error.call(this)
   end
-  def folder_added(pszpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.folder_added.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpath)
+  def folder_added(this : IXFeedFolderEvents*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.folder_added.call(this, pszpath)
   end
-  def folder_deleted(pszpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.folder_deleted.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpath)
+  def folder_deleted(this : IXFeedFolderEvents*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.folder_deleted.call(this, pszpath)
   end
-  def folder_renamed(pszpath : LibC::LPWSTR, pszoldpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.folder_renamed.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pszpath, pszoldpath)
+  def folder_renamed(this : IXFeedFolderEvents*, pszpath : LibC::LPWSTR, pszoldpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.folder_renamed.call(this, pszpath, pszoldpath)
   end
-  def folder_moved_from(pszpath : LibC::LPWSTR, pszoldpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.folder_moved_from.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pszpath, pszoldpath)
+  def folder_moved_from(this : IXFeedFolderEvents*, pszpath : LibC::LPWSTR, pszoldpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.folder_moved_from.call(this, pszpath, pszoldpath)
   end
-  def folder_moved_to(pszpath : LibC::LPWSTR, pszoldpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.folder_moved_to.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pszpath, pszoldpath)
+  def folder_moved_to(this : IXFeedFolderEvents*, pszpath : LibC::LPWSTR, pszoldpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.folder_moved_to.call(this, pszpath, pszoldpath)
   end
-  def folder_item_count_changed(pszpath : LibC::LPWSTR, feicfflags : Int32) : HRESULT
-    @lpVtbl.value.folder_item_count_changed.unsafe_as(Proc(LibC::LPWSTR, Int32, HRESULT)).call(pszpath, feicfflags)
+  def folder_item_count_changed(this : IXFeedFolderEvents*, pszpath : LibC::LPWSTR, feicfflags : Int32) : HRESULT
+    @lpVtbl.value.folder_item_count_changed.call(this, pszpath, feicfflags)
   end
-  def feed_added(pszpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.feed_added.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpath)
+  def feed_added(this : IXFeedFolderEvents*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.feed_added.call(this, pszpath)
   end
-  def feed_deleted(pszpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.feed_deleted.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpath)
+  def feed_deleted(this : IXFeedFolderEvents*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.feed_deleted.call(this, pszpath)
   end
-  def feed_renamed(pszpath : LibC::LPWSTR, pszoldpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.feed_renamed.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pszpath, pszoldpath)
+  def feed_renamed(this : IXFeedFolderEvents*, pszpath : LibC::LPWSTR, pszoldpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.feed_renamed.call(this, pszpath, pszoldpath)
   end
-  def feed_url_changed(pszpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.feed_url_changed.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpath)
+  def feed_url_changed(this : IXFeedFolderEvents*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.feed_url_changed.call(this, pszpath)
   end
-  def feed_moved_from(pszpath : LibC::LPWSTR, pszoldpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.feed_moved_from.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pszpath, pszoldpath)
+  def feed_moved_from(this : IXFeedFolderEvents*, pszpath : LibC::LPWSTR, pszoldpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.feed_moved_from.call(this, pszpath, pszoldpath)
   end
-  def feed_moved_to(pszpath : LibC::LPWSTR, pszoldpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.feed_moved_to.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pszpath, pszoldpath)
+  def feed_moved_to(this : IXFeedFolderEvents*, pszpath : LibC::LPWSTR, pszoldpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.feed_moved_to.call(this, pszpath, pszoldpath)
   end
-  def feed_downloading(pszpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.feed_downloading.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpath)
+  def feed_downloading(this : IXFeedFolderEvents*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.feed_downloading.call(this, pszpath)
   end
-  def feed_download_completed(pszpath : LibC::LPWSTR, fde : FEEDS_DOWNLOAD_ERROR) : HRESULT
-    @lpVtbl.value.feed_download_completed.unsafe_as(Proc(LibC::LPWSTR, FEEDS_DOWNLOAD_ERROR, HRESULT)).call(pszpath, fde)
+  def feed_download_completed(this : IXFeedFolderEvents*, pszpath : LibC::LPWSTR, fde : FEEDS_DOWNLOAD_ERROR) : HRESULT
+    @lpVtbl.value.feed_download_completed.call(this, pszpath, fde)
   end
-  def feed_item_count_changed(pszpath : LibC::LPWSTR, feicfflags : Int32) : HRESULT
-    @lpVtbl.value.feed_item_count_changed.unsafe_as(Proc(LibC::LPWSTR, Int32, HRESULT)).call(pszpath, feicfflags)
+  def feed_item_count_changed(this : IXFeedFolderEvents*, pszpath : LibC::LPWSTR, feicfflags : Int32) : HRESULT
+    @lpVtbl.value.feed_item_count_changed.call(this, pszpath, feicfflags)
   end
 end
 struct LibWin32::IXFeed
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXFeed*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXFeed*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXFeed*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def xml(uiitemcount : UInt32, sortproperty : FEEDS_XML_SORT_PROPERTY, sortorder : FEEDS_XML_SORT_ORDER, filterflags : FEEDS_XML_FILTER_FLAGS, includeflags : FEEDS_XML_INCLUDE_FLAGS, pps : IStream*) : HRESULT
-    @lpVtbl.value.xml.unsafe_as(Proc(UInt32, FEEDS_XML_SORT_PROPERTY, FEEDS_XML_SORT_ORDER, FEEDS_XML_FILTER_FLAGS, FEEDS_XML_INCLUDE_FLAGS, IStream*, HRESULT)).call(uiitemcount, sortproperty, sortorder, filterflags, includeflags, pps)
+  def xml(this : IXFeed*, uiitemcount : UInt32, sortproperty : FEEDS_XML_SORT_PROPERTY, sortorder : FEEDS_XML_SORT_ORDER, filterflags : FEEDS_XML_FILTER_FLAGS, includeflags : FEEDS_XML_INCLUDE_FLAGS, pps : IStream*) : HRESULT
+    @lpVtbl.value.xml.call(this, uiitemcount, sortproperty, sortorder, filterflags, includeflags, pps)
   end
-  def name(ppszname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszname)
+  def name(this : IXFeed*, ppszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.name.call(this, ppszname)
   end
-  def rename(pszname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.rename.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszname)
+  def rename(this : IXFeed*, pszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.rename.call(this, pszname)
   end
-  def url(ppszurl : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.url.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszurl)
+  def url(this : IXFeed*, ppszurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.url.call(this, ppszurl)
   end
-  def set_url(pszurl : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_url.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszurl)
+  def set_url(this : IXFeed*, pszurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_url.call(this, pszurl)
   end
-  def local_id(pguid : Guid*) : HRESULT
-    @lpVtbl.value.local_id.unsafe_as(Proc(Guid*, HRESULT)).call(pguid)
+  def local_id(this : IXFeed*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.local_id.call(this, pguid)
   end
-  def path(ppszpath : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.path.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszpath)
+  def path(this : IXFeed*, ppszpath : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.path.call(this, ppszpath)
   end
-  def move(pszpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.move.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpath)
+  def move(this : IXFeed*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.move.call(this, pszpath)
   end
-  def parent(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.parent.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def parent(this : IXFeed*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.parent.call(this, riid, ppv)
   end
-  def last_write_time(pstlastwritetime : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.last_write_time.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(pstlastwritetime)
+  def last_write_time(this : IXFeed*, pstlastwritetime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.last_write_time.call(this, pstlastwritetime)
   end
-  def delete : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  def delete(this : IXFeed*) : HRESULT
+    @lpVtbl.value.delete.call(this)
   end
-  def download : HRESULT
-    @lpVtbl.value.download.unsafe_as(Proc(HRESULT)).call
+  def download(this : IXFeed*) : HRESULT
+    @lpVtbl.value.download.call(this)
   end
-  def async_download : HRESULT
-    @lpVtbl.value.async_download.unsafe_as(Proc(HRESULT)).call
+  def async_download(this : IXFeed*) : HRESULT
+    @lpVtbl.value.async_download.call(this)
   end
-  def cancel_async_download : HRESULT
-    @lpVtbl.value.cancel_async_download.unsafe_as(Proc(HRESULT)).call
+  def cancel_async_download(this : IXFeed*) : HRESULT
+    @lpVtbl.value.cancel_async_download.call(this)
   end
-  def sync_setting(pfss : FEEDS_SYNC_SETTING*) : HRESULT
-    @lpVtbl.value.sync_setting.unsafe_as(Proc(FEEDS_SYNC_SETTING*, HRESULT)).call(pfss)
+  def sync_setting(this : IXFeed*, pfss : FEEDS_SYNC_SETTING*) : HRESULT
+    @lpVtbl.value.sync_setting.call(this, pfss)
   end
-  def set_sync_setting(fss : FEEDS_SYNC_SETTING) : HRESULT
-    @lpVtbl.value.set_sync_setting.unsafe_as(Proc(FEEDS_SYNC_SETTING, HRESULT)).call(fss)
+  def set_sync_setting(this : IXFeed*, fss : FEEDS_SYNC_SETTING) : HRESULT
+    @lpVtbl.value.set_sync_setting.call(this, fss)
   end
-  def interval(puiinterval : UInt32*) : HRESULT
-    @lpVtbl.value.interval.unsafe_as(Proc(UInt32*, HRESULT)).call(puiinterval)
+  def interval(this : IXFeed*, puiinterval : UInt32*) : HRESULT
+    @lpVtbl.value.interval.call(this, puiinterval)
   end
-  def set_interval(uiinterval : UInt32) : HRESULT
-    @lpVtbl.value.set_interval.unsafe_as(Proc(UInt32, HRESULT)).call(uiinterval)
+  def set_interval(this : IXFeed*, uiinterval : UInt32) : HRESULT
+    @lpVtbl.value.set_interval.call(this, uiinterval)
   end
-  def last_download_time(pstlastdownloadtime : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.last_download_time.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(pstlastdownloadtime)
+  def last_download_time(this : IXFeed*, pstlastdownloadtime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.last_download_time.call(this, pstlastdownloadtime)
   end
-  def local_enclosure_path(ppszpath : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.local_enclosure_path.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszpath)
+  def local_enclosure_path(this : IXFeed*, ppszpath : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.local_enclosure_path.call(this, ppszpath)
   end
-  def items(ppfe : IXFeedsEnum*) : HRESULT
-    @lpVtbl.value.items.unsafe_as(Proc(IXFeedsEnum*, HRESULT)).call(ppfe)
+  def items(this : IXFeed*, ppfe : IXFeedsEnum*) : HRESULT
+    @lpVtbl.value.items.call(this, ppfe)
   end
-  def get_item(uiid : UInt32, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(UInt32, Guid*, Void**, HRESULT)).call(uiid, riid, ppv)
+  def get_item(this : IXFeed*, uiid : UInt32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_item.call(this, uiid, riid, ppv)
   end
-  def mark_all_items_read : HRESULT
-    @lpVtbl.value.mark_all_items_read.unsafe_as(Proc(HRESULT)).call
+  def mark_all_items_read(this : IXFeed*) : HRESULT
+    @lpVtbl.value.mark_all_items_read.call(this)
   end
-  def max_item_count(puimaxitemcount : UInt32*) : HRESULT
-    @lpVtbl.value.max_item_count.unsafe_as(Proc(UInt32*, HRESULT)).call(puimaxitemcount)
+  def max_item_count(this : IXFeed*, puimaxitemcount : UInt32*) : HRESULT
+    @lpVtbl.value.max_item_count.call(this, puimaxitemcount)
   end
-  def set_max_item_count(uimaxitemcount : UInt32) : HRESULT
-    @lpVtbl.value.set_max_item_count.unsafe_as(Proc(UInt32, HRESULT)).call(uimaxitemcount)
+  def set_max_item_count(this : IXFeed*, uimaxitemcount : UInt32) : HRESULT
+    @lpVtbl.value.set_max_item_count.call(this, uimaxitemcount)
   end
-  def download_enclosures_automatically(pbdownloadenclosuresautomatically : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.download_enclosures_automatically.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbdownloadenclosuresautomatically)
+  def download_enclosures_automatically(this : IXFeed*, pbdownloadenclosuresautomatically : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.download_enclosures_automatically.call(this, pbdownloadenclosuresautomatically)
   end
-  def set_download_enclosures_automatically(bdownloadenclosuresautomatically : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_download_enclosures_automatically.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bdownloadenclosuresautomatically)
+  def set_download_enclosures_automatically(this : IXFeed*, bdownloadenclosuresautomatically : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_download_enclosures_automatically.call(this, bdownloadenclosuresautomatically)
   end
-  def download_status(pfds : FEEDS_DOWNLOAD_STATUS*) : HRESULT
-    @lpVtbl.value.download_status.unsafe_as(Proc(FEEDS_DOWNLOAD_STATUS*, HRESULT)).call(pfds)
+  def download_status(this : IXFeed*, pfds : FEEDS_DOWNLOAD_STATUS*) : HRESULT
+    @lpVtbl.value.download_status.call(this, pfds)
   end
-  def last_download_error(pfde : FEEDS_DOWNLOAD_ERROR*) : HRESULT
-    @lpVtbl.value.last_download_error.unsafe_as(Proc(FEEDS_DOWNLOAD_ERROR*, HRESULT)).call(pfde)
+  def last_download_error(this : IXFeed*, pfde : FEEDS_DOWNLOAD_ERROR*) : HRESULT
+    @lpVtbl.value.last_download_error.call(this, pfde)
   end
-  def merge(pstream : IStream, pszurl : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.merge.unsafe_as(Proc(IStream, LibC::LPWSTR, HRESULT)).call(pstream, pszurl)
+  def merge(this : IXFeed*, pstream : IStream, pszurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.merge.call(this, pstream, pszurl)
   end
-  def download_url(ppszurl : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.download_url.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszurl)
+  def download_url(this : IXFeed*, ppszurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.download_url.call(this, ppszurl)
   end
-  def title(ppsztitle : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.title.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppsztitle)
+  def title(this : IXFeed*, ppsztitle : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.title.call(this, ppsztitle)
   end
-  def description(ppszdescription : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.description.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszdescription)
+  def description(this : IXFeed*, ppszdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.description.call(this, ppszdescription)
   end
-  def link(ppszhomepage : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.link.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszhomepage)
+  def link(this : IXFeed*, ppszhomepage : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.link.call(this, ppszhomepage)
   end
-  def image(ppszimageurl : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.image.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszimageurl)
+  def image(this : IXFeed*, ppszimageurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.image.call(this, ppszimageurl)
   end
-  def last_build_date(pstlastbuilddate : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.last_build_date.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(pstlastbuilddate)
+  def last_build_date(this : IXFeed*, pstlastbuilddate : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.last_build_date.call(this, pstlastbuilddate)
   end
-  def pub_date(pstpubdate : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.pub_date.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(pstpubdate)
+  def pub_date(this : IXFeed*, pstpubdate : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.pub_date.call(this, pstpubdate)
   end
-  def ttl(puittl : UInt32*) : HRESULT
-    @lpVtbl.value.ttl.unsafe_as(Proc(UInt32*, HRESULT)).call(puittl)
+  def ttl(this : IXFeed*, puittl : UInt32*) : HRESULT
+    @lpVtbl.value.ttl.call(this, puittl)
   end
-  def language(ppszlanguage : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.language.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszlanguage)
+  def language(this : IXFeed*, ppszlanguage : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.language.call(this, ppszlanguage)
   end
-  def copyright(ppszcopyright : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.copyright.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszcopyright)
+  def copyright(this : IXFeed*, ppszcopyright : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.copyright.call(this, ppszcopyright)
   end
-  def is_list(pbislist : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_list.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbislist)
+  def is_list(this : IXFeed*, pbislist : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_list.call(this, pbislist)
   end
-  def get_watcher(scope : FEEDS_EVENTS_SCOPE, mask : FEEDS_EVENTS_MASK, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_watcher.unsafe_as(Proc(FEEDS_EVENTS_SCOPE, FEEDS_EVENTS_MASK, Guid*, Void**, HRESULT)).call(scope, mask, riid, ppv)
+  def get_watcher(this : IXFeed*, scope : FEEDS_EVENTS_SCOPE, mask : FEEDS_EVENTS_MASK, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_watcher.call(this, scope, mask, riid, ppv)
   end
-  def unread_item_count(puiunreaditemcount : UInt32*) : HRESULT
-    @lpVtbl.value.unread_item_count.unsafe_as(Proc(UInt32*, HRESULT)).call(puiunreaditemcount)
+  def unread_item_count(this : IXFeed*, puiunreaditemcount : UInt32*) : HRESULT
+    @lpVtbl.value.unread_item_count.call(this, puiunreaditemcount)
   end
-  def item_count(puiitemcount : UInt32*) : HRESULT
-    @lpVtbl.value.item_count.unsafe_as(Proc(UInt32*, HRESULT)).call(puiitemcount)
+  def item_count(this : IXFeed*, puiitemcount : UInt32*) : HRESULT
+    @lpVtbl.value.item_count.call(this, puiitemcount)
   end
 end
 struct LibWin32::IXFeed2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXFeed2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXFeed2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXFeed2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def xml(uiitemcount : UInt32, sortproperty : FEEDS_XML_SORT_PROPERTY, sortorder : FEEDS_XML_SORT_ORDER, filterflags : FEEDS_XML_FILTER_FLAGS, includeflags : FEEDS_XML_INCLUDE_FLAGS, pps : IStream*) : HRESULT
-    @lpVtbl.value.xml.unsafe_as(Proc(UInt32, FEEDS_XML_SORT_PROPERTY, FEEDS_XML_SORT_ORDER, FEEDS_XML_FILTER_FLAGS, FEEDS_XML_INCLUDE_FLAGS, IStream*, HRESULT)).call(uiitemcount, sortproperty, sortorder, filterflags, includeflags, pps)
+  def xml(this : IXFeed2*, uiitemcount : UInt32, sortproperty : FEEDS_XML_SORT_PROPERTY, sortorder : FEEDS_XML_SORT_ORDER, filterflags : FEEDS_XML_FILTER_FLAGS, includeflags : FEEDS_XML_INCLUDE_FLAGS, pps : IStream*) : HRESULT
+    @lpVtbl.value.xml.call(this, uiitemcount, sortproperty, sortorder, filterflags, includeflags, pps)
   end
-  def name(ppszname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszname)
+  def name(this : IXFeed2*, ppszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.name.call(this, ppszname)
   end
-  def rename(pszname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.rename.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszname)
+  def rename(this : IXFeed2*, pszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.rename.call(this, pszname)
   end
-  def url(ppszurl : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.url.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszurl)
+  def url(this : IXFeed2*, ppszurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.url.call(this, ppszurl)
   end
-  def set_url(pszurl : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_url.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszurl)
+  def set_url(this : IXFeed2*, pszurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_url.call(this, pszurl)
   end
-  def local_id(pguid : Guid*) : HRESULT
-    @lpVtbl.value.local_id.unsafe_as(Proc(Guid*, HRESULT)).call(pguid)
+  def local_id(this : IXFeed2*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.local_id.call(this, pguid)
   end
-  def path(ppszpath : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.path.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszpath)
+  def path(this : IXFeed2*, ppszpath : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.path.call(this, ppszpath)
   end
-  def move(pszpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.move.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpath)
+  def move(this : IXFeed2*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.move.call(this, pszpath)
   end
-  def parent(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.parent.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def parent(this : IXFeed2*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.parent.call(this, riid, ppv)
   end
-  def last_write_time(pstlastwritetime : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.last_write_time.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(pstlastwritetime)
+  def last_write_time(this : IXFeed2*, pstlastwritetime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.last_write_time.call(this, pstlastwritetime)
   end
-  def delete : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  def delete(this : IXFeed2*) : HRESULT
+    @lpVtbl.value.delete.call(this)
   end
-  def download : HRESULT
-    @lpVtbl.value.download.unsafe_as(Proc(HRESULT)).call
+  def download(this : IXFeed2*) : HRESULT
+    @lpVtbl.value.download.call(this)
   end
-  def async_download : HRESULT
-    @lpVtbl.value.async_download.unsafe_as(Proc(HRESULT)).call
+  def async_download(this : IXFeed2*) : HRESULT
+    @lpVtbl.value.async_download.call(this)
   end
-  def cancel_async_download : HRESULT
-    @lpVtbl.value.cancel_async_download.unsafe_as(Proc(HRESULT)).call
+  def cancel_async_download(this : IXFeed2*) : HRESULT
+    @lpVtbl.value.cancel_async_download.call(this)
   end
-  def sync_setting(pfss : FEEDS_SYNC_SETTING*) : HRESULT
-    @lpVtbl.value.sync_setting.unsafe_as(Proc(FEEDS_SYNC_SETTING*, HRESULT)).call(pfss)
+  def sync_setting(this : IXFeed2*, pfss : FEEDS_SYNC_SETTING*) : HRESULT
+    @lpVtbl.value.sync_setting.call(this, pfss)
   end
-  def set_sync_setting(fss : FEEDS_SYNC_SETTING) : HRESULT
-    @lpVtbl.value.set_sync_setting.unsafe_as(Proc(FEEDS_SYNC_SETTING, HRESULT)).call(fss)
+  def set_sync_setting(this : IXFeed2*, fss : FEEDS_SYNC_SETTING) : HRESULT
+    @lpVtbl.value.set_sync_setting.call(this, fss)
   end
-  def interval(puiinterval : UInt32*) : HRESULT
-    @lpVtbl.value.interval.unsafe_as(Proc(UInt32*, HRESULT)).call(puiinterval)
+  def interval(this : IXFeed2*, puiinterval : UInt32*) : HRESULT
+    @lpVtbl.value.interval.call(this, puiinterval)
   end
-  def set_interval(uiinterval : UInt32) : HRESULT
-    @lpVtbl.value.set_interval.unsafe_as(Proc(UInt32, HRESULT)).call(uiinterval)
+  def set_interval(this : IXFeed2*, uiinterval : UInt32) : HRESULT
+    @lpVtbl.value.set_interval.call(this, uiinterval)
   end
-  def last_download_time(pstlastdownloadtime : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.last_download_time.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(pstlastdownloadtime)
+  def last_download_time(this : IXFeed2*, pstlastdownloadtime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.last_download_time.call(this, pstlastdownloadtime)
   end
-  def local_enclosure_path(ppszpath : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.local_enclosure_path.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszpath)
+  def local_enclosure_path(this : IXFeed2*, ppszpath : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.local_enclosure_path.call(this, ppszpath)
   end
-  def items(ppfe : IXFeedsEnum*) : HRESULT
-    @lpVtbl.value.items.unsafe_as(Proc(IXFeedsEnum*, HRESULT)).call(ppfe)
+  def items(this : IXFeed2*, ppfe : IXFeedsEnum*) : HRESULT
+    @lpVtbl.value.items.call(this, ppfe)
   end
-  def get_item(uiid : UInt32, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(UInt32, Guid*, Void**, HRESULT)).call(uiid, riid, ppv)
+  def get_item(this : IXFeed2*, uiid : UInt32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_item.call(this, uiid, riid, ppv)
   end
-  def mark_all_items_read : HRESULT
-    @lpVtbl.value.mark_all_items_read.unsafe_as(Proc(HRESULT)).call
+  def mark_all_items_read(this : IXFeed2*) : HRESULT
+    @lpVtbl.value.mark_all_items_read.call(this)
   end
-  def max_item_count(puimaxitemcount : UInt32*) : HRESULT
-    @lpVtbl.value.max_item_count.unsafe_as(Proc(UInt32*, HRESULT)).call(puimaxitemcount)
+  def max_item_count(this : IXFeed2*, puimaxitemcount : UInt32*) : HRESULT
+    @lpVtbl.value.max_item_count.call(this, puimaxitemcount)
   end
-  def set_max_item_count(uimaxitemcount : UInt32) : HRESULT
-    @lpVtbl.value.set_max_item_count.unsafe_as(Proc(UInt32, HRESULT)).call(uimaxitemcount)
+  def set_max_item_count(this : IXFeed2*, uimaxitemcount : UInt32) : HRESULT
+    @lpVtbl.value.set_max_item_count.call(this, uimaxitemcount)
   end
-  def download_enclosures_automatically(pbdownloadenclosuresautomatically : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.download_enclosures_automatically.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbdownloadenclosuresautomatically)
+  def download_enclosures_automatically(this : IXFeed2*, pbdownloadenclosuresautomatically : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.download_enclosures_automatically.call(this, pbdownloadenclosuresautomatically)
   end
-  def set_download_enclosures_automatically(bdownloadenclosuresautomatically : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_download_enclosures_automatically.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bdownloadenclosuresautomatically)
+  def set_download_enclosures_automatically(this : IXFeed2*, bdownloadenclosuresautomatically : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_download_enclosures_automatically.call(this, bdownloadenclosuresautomatically)
   end
-  def download_status(pfds : FEEDS_DOWNLOAD_STATUS*) : HRESULT
-    @lpVtbl.value.download_status.unsafe_as(Proc(FEEDS_DOWNLOAD_STATUS*, HRESULT)).call(pfds)
+  def download_status(this : IXFeed2*, pfds : FEEDS_DOWNLOAD_STATUS*) : HRESULT
+    @lpVtbl.value.download_status.call(this, pfds)
   end
-  def last_download_error(pfde : FEEDS_DOWNLOAD_ERROR*) : HRESULT
-    @lpVtbl.value.last_download_error.unsafe_as(Proc(FEEDS_DOWNLOAD_ERROR*, HRESULT)).call(pfde)
+  def last_download_error(this : IXFeed2*, pfde : FEEDS_DOWNLOAD_ERROR*) : HRESULT
+    @lpVtbl.value.last_download_error.call(this, pfde)
   end
-  def merge(pstream : IStream, pszurl : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.merge.unsafe_as(Proc(IStream, LibC::LPWSTR, HRESULT)).call(pstream, pszurl)
+  def merge(this : IXFeed2*, pstream : IStream, pszurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.merge.call(this, pstream, pszurl)
   end
-  def download_url(ppszurl : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.download_url.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszurl)
+  def download_url(this : IXFeed2*, ppszurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.download_url.call(this, ppszurl)
   end
-  def title(ppsztitle : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.title.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppsztitle)
+  def title(this : IXFeed2*, ppsztitle : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.title.call(this, ppsztitle)
   end
-  def description(ppszdescription : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.description.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszdescription)
+  def description(this : IXFeed2*, ppszdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.description.call(this, ppszdescription)
   end
-  def link(ppszhomepage : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.link.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszhomepage)
+  def link(this : IXFeed2*, ppszhomepage : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.link.call(this, ppszhomepage)
   end
-  def image(ppszimageurl : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.image.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszimageurl)
+  def image(this : IXFeed2*, ppszimageurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.image.call(this, ppszimageurl)
   end
-  def last_build_date(pstlastbuilddate : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.last_build_date.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(pstlastbuilddate)
+  def last_build_date(this : IXFeed2*, pstlastbuilddate : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.last_build_date.call(this, pstlastbuilddate)
   end
-  def pub_date(pstpubdate : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.pub_date.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(pstpubdate)
+  def pub_date(this : IXFeed2*, pstpubdate : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.pub_date.call(this, pstpubdate)
   end
-  def ttl(puittl : UInt32*) : HRESULT
-    @lpVtbl.value.ttl.unsafe_as(Proc(UInt32*, HRESULT)).call(puittl)
+  def ttl(this : IXFeed2*, puittl : UInt32*) : HRESULT
+    @lpVtbl.value.ttl.call(this, puittl)
   end
-  def language(ppszlanguage : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.language.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszlanguage)
+  def language(this : IXFeed2*, ppszlanguage : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.language.call(this, ppszlanguage)
   end
-  def copyright(ppszcopyright : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.copyright.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszcopyright)
+  def copyright(this : IXFeed2*, ppszcopyright : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.copyright.call(this, ppszcopyright)
   end
-  def is_list(pbislist : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_list.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbislist)
+  def is_list(this : IXFeed2*, pbislist : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_list.call(this, pbislist)
   end
-  def get_watcher(scope : FEEDS_EVENTS_SCOPE, mask : FEEDS_EVENTS_MASK, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_watcher.unsafe_as(Proc(FEEDS_EVENTS_SCOPE, FEEDS_EVENTS_MASK, Guid*, Void**, HRESULT)).call(scope, mask, riid, ppv)
+  def get_watcher(this : IXFeed2*, scope : FEEDS_EVENTS_SCOPE, mask : FEEDS_EVENTS_MASK, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_watcher.call(this, scope, mask, riid, ppv)
   end
-  def unread_item_count(puiunreaditemcount : UInt32*) : HRESULT
-    @lpVtbl.value.unread_item_count.unsafe_as(Proc(UInt32*, HRESULT)).call(puiunreaditemcount)
+  def unread_item_count(this : IXFeed2*, puiunreaditemcount : UInt32*) : HRESULT
+    @lpVtbl.value.unread_item_count.call(this, puiunreaditemcount)
   end
-  def item_count(puiitemcount : UInt32*) : HRESULT
-    @lpVtbl.value.item_count.unsafe_as(Proc(UInt32*, HRESULT)).call(puiitemcount)
+  def item_count(this : IXFeed2*, puiitemcount : UInt32*) : HRESULT
+    @lpVtbl.value.item_count.call(this, puiitemcount)
   end
-  def get_item_by_effective_id(uieffectiveid : UInt32, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_item_by_effective_id.unsafe_as(Proc(UInt32, Guid*, Void**, HRESULT)).call(uieffectiveid, riid, ppv)
+  def get_item_by_effective_id(this : IXFeed2*, uieffectiveid : UInt32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_item_by_effective_id.call(this, uieffectiveid, riid, ppv)
   end
-  def last_item_download_time(pstlastitemdownloadtime : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.last_item_download_time.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(pstlastitemdownloadtime)
+  def last_item_download_time(this : IXFeed2*, pstlastitemdownloadtime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.last_item_download_time.call(this, pstlastitemdownloadtime)
   end
-  def username(ppszusername : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.username.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszusername)
+  def username(this : IXFeed2*, ppszusername : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.username.call(this, ppszusername)
   end
-  def password(ppszpassword : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.password.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszpassword)
+  def password(this : IXFeed2*, ppszpassword : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.password.call(this, ppszpassword)
   end
-  def set_credentials(pszusername : LibC::LPWSTR, pszpassword : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_credentials.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pszusername, pszpassword)
+  def set_credentials(this : IXFeed2*, pszusername : LibC::LPWSTR, pszpassword : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_credentials.call(this, pszusername, pszpassword)
   end
-  def clear_credentials : HRESULT
-    @lpVtbl.value.clear_credentials.unsafe_as(Proc(HRESULT)).call
+  def clear_credentials(this : IXFeed2*) : HRESULT
+    @lpVtbl.value.clear_credentials.call(this)
   end
 end
 struct LibWin32::IXFeedEvents
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXFeedEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXFeedEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXFeedEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def error : HRESULT
-    @lpVtbl.value.error.unsafe_as(Proc(HRESULT)).call
+  def error(this : IXFeedEvents*) : HRESULT
+    @lpVtbl.value.error.call(this)
   end
-  def feed_deleted(pszpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.feed_deleted.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpath)
+  def feed_deleted(this : IXFeedEvents*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.feed_deleted.call(this, pszpath)
   end
-  def feed_renamed(pszpath : LibC::LPWSTR, pszoldpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.feed_renamed.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pszpath, pszoldpath)
+  def feed_renamed(this : IXFeedEvents*, pszpath : LibC::LPWSTR, pszoldpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.feed_renamed.call(this, pszpath, pszoldpath)
   end
-  def feed_url_changed(pszpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.feed_url_changed.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpath)
+  def feed_url_changed(this : IXFeedEvents*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.feed_url_changed.call(this, pszpath)
   end
-  def feed_moved(pszpath : LibC::LPWSTR, pszoldpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.feed_moved.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pszpath, pszoldpath)
+  def feed_moved(this : IXFeedEvents*, pszpath : LibC::LPWSTR, pszoldpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.feed_moved.call(this, pszpath, pszoldpath)
   end
-  def feed_downloading(pszpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.feed_downloading.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpath)
+  def feed_downloading(this : IXFeedEvents*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.feed_downloading.call(this, pszpath)
   end
-  def feed_download_completed(pszpath : LibC::LPWSTR, fde : FEEDS_DOWNLOAD_ERROR) : HRESULT
-    @lpVtbl.value.feed_download_completed.unsafe_as(Proc(LibC::LPWSTR, FEEDS_DOWNLOAD_ERROR, HRESULT)).call(pszpath, fde)
+  def feed_download_completed(this : IXFeedEvents*, pszpath : LibC::LPWSTR, fde : FEEDS_DOWNLOAD_ERROR) : HRESULT
+    @lpVtbl.value.feed_download_completed.call(this, pszpath, fde)
   end
-  def feed_item_count_changed(pszpath : LibC::LPWSTR, feicfflags : Int32) : HRESULT
-    @lpVtbl.value.feed_item_count_changed.unsafe_as(Proc(LibC::LPWSTR, Int32, HRESULT)).call(pszpath, feicfflags)
+  def feed_item_count_changed(this : IXFeedEvents*, pszpath : LibC::LPWSTR, feicfflags : Int32) : HRESULT
+    @lpVtbl.value.feed_item_count_changed.call(this, pszpath, feicfflags)
   end
 end
 struct LibWin32::IXFeedItem
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXFeedItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXFeedItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXFeedItem*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def xml(fxif : FEEDS_XML_INCLUDE_FLAGS, pps : IStream*) : HRESULT
-    @lpVtbl.value.xml.unsafe_as(Proc(FEEDS_XML_INCLUDE_FLAGS, IStream*, HRESULT)).call(fxif, pps)
+  def xml(this : IXFeedItem*, fxif : FEEDS_XML_INCLUDE_FLAGS, pps : IStream*) : HRESULT
+    @lpVtbl.value.xml.call(this, fxif, pps)
   end
-  def title(ppsztitle : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.title.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppsztitle)
+  def title(this : IXFeedItem*, ppsztitle : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.title.call(this, ppsztitle)
   end
-  def link(ppszurl : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.link.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszurl)
+  def link(this : IXFeedItem*, ppszurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.link.call(this, ppszurl)
   end
-  def guid(ppszguid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.guid.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszguid)
+  def guid(this : IXFeedItem*, ppszguid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.guid.call(this, ppszguid)
   end
-  def description(ppszdescription : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.description.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszdescription)
+  def description(this : IXFeedItem*, ppszdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.description.call(this, ppszdescription)
   end
-  def pub_date(pstpubdate : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.pub_date.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(pstpubdate)
+  def pub_date(this : IXFeedItem*, pstpubdate : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.pub_date.call(this, pstpubdate)
   end
-  def comments(ppszurl : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.comments.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszurl)
+  def comments(this : IXFeedItem*, ppszurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.comments.call(this, ppszurl)
   end
-  def author(ppszauthor : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.author.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszauthor)
+  def author(this : IXFeedItem*, ppszauthor : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.author.call(this, ppszauthor)
   end
-  def enclosure(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.enclosure.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def enclosure(this : IXFeedItem*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.enclosure.call(this, riid, ppv)
   end
-  def is_read(pbisread : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_read.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbisread)
+  def is_read(this : IXFeedItem*, pbisread : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_read.call(this, pbisread)
   end
-  def set_is_read(bisread : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_is_read.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bisread)
+  def set_is_read(this : IXFeedItem*, bisread : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_read.call(this, bisread)
   end
-  def local_id(puiid : UInt32*) : HRESULT
-    @lpVtbl.value.local_id.unsafe_as(Proc(UInt32*, HRESULT)).call(puiid)
+  def local_id(this : IXFeedItem*, puiid : UInt32*) : HRESULT
+    @lpVtbl.value.local_id.call(this, puiid)
   end
-  def parent(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.parent.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def parent(this : IXFeedItem*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.parent.call(this, riid, ppv)
   end
-  def delete : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  def delete(this : IXFeedItem*) : HRESULT
+    @lpVtbl.value.delete.call(this)
   end
-  def download_url(ppszurl : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.download_url.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszurl)
+  def download_url(this : IXFeedItem*, ppszurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.download_url.call(this, ppszurl)
   end
-  def last_download_time(pstlastdownloadtime : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.last_download_time.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(pstlastdownloadtime)
+  def last_download_time(this : IXFeedItem*, pstlastdownloadtime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.last_download_time.call(this, pstlastdownloadtime)
   end
-  def modified(pstmodifiedtime : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.modified.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(pstmodifiedtime)
+  def modified(this : IXFeedItem*, pstmodifiedtime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.modified.call(this, pstmodifiedtime)
   end
 end
 struct LibWin32::IXFeedItem2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXFeedItem2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXFeedItem2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXFeedItem2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def xml(fxif : FEEDS_XML_INCLUDE_FLAGS, pps : IStream*) : HRESULT
-    @lpVtbl.value.xml.unsafe_as(Proc(FEEDS_XML_INCLUDE_FLAGS, IStream*, HRESULT)).call(fxif, pps)
+  def xml(this : IXFeedItem2*, fxif : FEEDS_XML_INCLUDE_FLAGS, pps : IStream*) : HRESULT
+    @lpVtbl.value.xml.call(this, fxif, pps)
   end
-  def title(ppsztitle : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.title.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppsztitle)
+  def title(this : IXFeedItem2*, ppsztitle : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.title.call(this, ppsztitle)
   end
-  def link(ppszurl : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.link.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszurl)
+  def link(this : IXFeedItem2*, ppszurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.link.call(this, ppszurl)
   end
-  def guid(ppszguid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.guid.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszguid)
+  def guid(this : IXFeedItem2*, ppszguid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.guid.call(this, ppszguid)
   end
-  def description(ppszdescription : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.description.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszdescription)
+  def description(this : IXFeedItem2*, ppszdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.description.call(this, ppszdescription)
   end
-  def pub_date(pstpubdate : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.pub_date.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(pstpubdate)
+  def pub_date(this : IXFeedItem2*, pstpubdate : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.pub_date.call(this, pstpubdate)
   end
-  def comments(ppszurl : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.comments.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszurl)
+  def comments(this : IXFeedItem2*, ppszurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.comments.call(this, ppszurl)
   end
-  def author(ppszauthor : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.author.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszauthor)
+  def author(this : IXFeedItem2*, ppszauthor : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.author.call(this, ppszauthor)
   end
-  def enclosure(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.enclosure.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def enclosure(this : IXFeedItem2*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.enclosure.call(this, riid, ppv)
   end
-  def is_read(pbisread : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_read.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbisread)
+  def is_read(this : IXFeedItem2*, pbisread : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_read.call(this, pbisread)
   end
-  def set_is_read(bisread : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_is_read.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bisread)
+  def set_is_read(this : IXFeedItem2*, bisread : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_read.call(this, bisread)
   end
-  def local_id(puiid : UInt32*) : HRESULT
-    @lpVtbl.value.local_id.unsafe_as(Proc(UInt32*, HRESULT)).call(puiid)
+  def local_id(this : IXFeedItem2*, puiid : UInt32*) : HRESULT
+    @lpVtbl.value.local_id.call(this, puiid)
   end
-  def parent(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.parent.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def parent(this : IXFeedItem2*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.parent.call(this, riid, ppv)
   end
-  def delete : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  def delete(this : IXFeedItem2*) : HRESULT
+    @lpVtbl.value.delete.call(this)
   end
-  def download_url(ppszurl : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.download_url.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszurl)
+  def download_url(this : IXFeedItem2*, ppszurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.download_url.call(this, ppszurl)
   end
-  def last_download_time(pstlastdownloadtime : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.last_download_time.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(pstlastdownloadtime)
+  def last_download_time(this : IXFeedItem2*, pstlastdownloadtime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.last_download_time.call(this, pstlastdownloadtime)
   end
-  def modified(pstmodifiedtime : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.modified.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(pstmodifiedtime)
+  def modified(this : IXFeedItem2*, pstmodifiedtime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.modified.call(this, pstmodifiedtime)
   end
-  def effective_id(puieffectiveid : UInt32*) : HRESULT
-    @lpVtbl.value.effective_id.unsafe_as(Proc(UInt32*, HRESULT)).call(puieffectiveid)
+  def effective_id(this : IXFeedItem2*, puieffectiveid : UInt32*) : HRESULT
+    @lpVtbl.value.effective_id.call(this, puieffectiveid)
   end
 end
 struct LibWin32::IXFeedEnclosure
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXFeedEnclosure*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXFeedEnclosure*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXFeedEnclosure*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def url(ppszurl : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.url.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszurl)
+  def url(this : IXFeedEnclosure*, ppszurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.url.call(this, ppszurl)
   end
-  def type(ppszmimetype : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.type.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszmimetype)
+  def type(this : IXFeedEnclosure*, ppszmimetype : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.type.call(this, ppszmimetype)
   end
-  def length(puilength : UInt32*) : HRESULT
-    @lpVtbl.value.length.unsafe_as(Proc(UInt32*, HRESULT)).call(puilength)
+  def length(this : IXFeedEnclosure*, puilength : UInt32*) : HRESULT
+    @lpVtbl.value.length.call(this, puilength)
   end
-  def async_download : HRESULT
-    @lpVtbl.value.async_download.unsafe_as(Proc(HRESULT)).call
+  def async_download(this : IXFeedEnclosure*) : HRESULT
+    @lpVtbl.value.async_download.call(this)
   end
-  def cancel_async_download : HRESULT
-    @lpVtbl.value.cancel_async_download.unsafe_as(Proc(HRESULT)).call
+  def cancel_async_download(this : IXFeedEnclosure*) : HRESULT
+    @lpVtbl.value.cancel_async_download.call(this)
   end
-  def download_status(pfds : FEEDS_DOWNLOAD_STATUS*) : HRESULT
-    @lpVtbl.value.download_status.unsafe_as(Proc(FEEDS_DOWNLOAD_STATUS*, HRESULT)).call(pfds)
+  def download_status(this : IXFeedEnclosure*, pfds : FEEDS_DOWNLOAD_STATUS*) : HRESULT
+    @lpVtbl.value.download_status.call(this, pfds)
   end
-  def last_download_error(pfde : FEEDS_DOWNLOAD_ERROR*) : HRESULT
-    @lpVtbl.value.last_download_error.unsafe_as(Proc(FEEDS_DOWNLOAD_ERROR*, HRESULT)).call(pfde)
+  def last_download_error(this : IXFeedEnclosure*, pfde : FEEDS_DOWNLOAD_ERROR*) : HRESULT
+    @lpVtbl.value.last_download_error.call(this, pfde)
   end
-  def local_path(ppszpath : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.local_path.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszpath)
+  def local_path(this : IXFeedEnclosure*, ppszpath : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.local_path.call(this, ppszpath)
   end
-  def parent(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.parent.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def parent(this : IXFeedEnclosure*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.parent.call(this, riid, ppv)
   end
-  def download_url(ppszurl : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.download_url.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszurl)
+  def download_url(this : IXFeedEnclosure*, ppszurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.download_url.call(this, ppszurl)
   end
-  def download_mime_type(ppszmimetype : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.download_mime_type.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszmimetype)
+  def download_mime_type(this : IXFeedEnclosure*, ppszmimetype : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.download_mime_type.call(this, ppszmimetype)
   end
-  def remove_file : HRESULT
-    @lpVtbl.value.remove_file.unsafe_as(Proc(HRESULT)).call
+  def remove_file(this : IXFeedEnclosure*) : HRESULT
+    @lpVtbl.value.remove_file.call(this)
   end
-  def set_file(pszdownloadurl : LibC::LPWSTR, pszdownloadfilepath : LibC::LPWSTR, pszdownloadmimetype : LibC::LPWSTR, pszenclosurefilename : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_file.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pszdownloadurl, pszdownloadfilepath, pszdownloadmimetype, pszenclosurefilename)
+  def set_file(this : IXFeedEnclosure*, pszdownloadurl : LibC::LPWSTR, pszdownloadfilepath : LibC::LPWSTR, pszdownloadmimetype : LibC::LPWSTR, pszenclosurefilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_file.call(this, pszdownloadurl, pszdownloadfilepath, pszdownloadmimetype, pszenclosurefilename)
   end
 end
 struct LibWin32::IFeedsManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFeedsManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFeedsManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFeedsManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IFeedsManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IFeedsManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IFeedsManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IFeedsManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_root_folder(disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_root_folder.unsafe_as(Proc(IDispatch*, HRESULT)).call(disp)
+  def get_root_folder(this : IFeedsManager*, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_root_folder.call(this, disp)
   end
-  def is_subscribed(feedurl : UInt8*, subscribed : Int16*) : HRESULT
-    @lpVtbl.value.is_subscribed.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(feedurl, subscribed)
+  def is_subscribed(this : IFeedsManager*, feedurl : UInt8*, subscribed : Int16*) : HRESULT
+    @lpVtbl.value.is_subscribed.call(this, feedurl, subscribed)
   end
-  def exists_feed(feedpath : UInt8*, exists : Int16*) : HRESULT
-    @lpVtbl.value.exists_feed.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(feedpath, exists)
+  def exists_feed(this : IFeedsManager*, feedpath : UInt8*, exists : Int16*) : HRESULT
+    @lpVtbl.value.exists_feed.call(this, feedpath, exists)
   end
-  def get_feed(feedpath : UInt8*, disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_feed.unsafe_as(Proc(UInt8*, IDispatch*, HRESULT)).call(feedpath, disp)
+  def get_feed(this : IFeedsManager*, feedpath : UInt8*, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_feed.call(this, feedpath, disp)
   end
-  def get_feed_by_url(feedurl : UInt8*, disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_feed_by_url.unsafe_as(Proc(UInt8*, IDispatch*, HRESULT)).call(feedurl, disp)
+  def get_feed_by_url(this : IFeedsManager*, feedurl : UInt8*, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_feed_by_url.call(this, feedurl, disp)
   end
-  def exists_folder(folderpath : UInt8*, exists : Int16*) : HRESULT
-    @lpVtbl.value.exists_folder.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(folderpath, exists)
+  def exists_folder(this : IFeedsManager*, folderpath : UInt8*, exists : Int16*) : HRESULT
+    @lpVtbl.value.exists_folder.call(this, folderpath, exists)
   end
-  def get_folder(folderpath : UInt8*, disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_folder.unsafe_as(Proc(UInt8*, IDispatch*, HRESULT)).call(folderpath, disp)
+  def get_folder(this : IFeedsManager*, folderpath : UInt8*, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_folder.call(this, folderpath, disp)
   end
-  def delete_feed(feedpath : UInt8*) : HRESULT
-    @lpVtbl.value.delete_feed.unsafe_as(Proc(UInt8*, HRESULT)).call(feedpath)
+  def delete_feed(this : IFeedsManager*, feedpath : UInt8*) : HRESULT
+    @lpVtbl.value.delete_feed.call(this, feedpath)
   end
-  def delete_folder(folderpath : UInt8*) : HRESULT
-    @lpVtbl.value.delete_folder.unsafe_as(Proc(UInt8*, HRESULT)).call(folderpath)
+  def delete_folder(this : IFeedsManager*, folderpath : UInt8*) : HRESULT
+    @lpVtbl.value.delete_folder.call(this, folderpath)
   end
-  def background_sync(action : FEEDS_BACKGROUNDSYNC_ACTION) : HRESULT
-    @lpVtbl.value.background_sync.unsafe_as(Proc(FEEDS_BACKGROUNDSYNC_ACTION, HRESULT)).call(action)
+  def background_sync(this : IFeedsManager*, action : FEEDS_BACKGROUNDSYNC_ACTION) : HRESULT
+    @lpVtbl.value.background_sync.call(this, action)
   end
-  def get_background_sync_status(status : FEEDS_BACKGROUNDSYNC_STATUS*) : HRESULT
-    @lpVtbl.value.get_background_sync_status.unsafe_as(Proc(FEEDS_BACKGROUNDSYNC_STATUS*, HRESULT)).call(status)
+  def get_background_sync_status(this : IFeedsManager*, status : FEEDS_BACKGROUNDSYNC_STATUS*) : HRESULT
+    @lpVtbl.value.get_background_sync_status.call(this, status)
   end
-  def get_default_interval(minutes : Int32*) : HRESULT
-    @lpVtbl.value.get_default_interval.unsafe_as(Proc(Int32*, HRESULT)).call(minutes)
+  def get_default_interval(this : IFeedsManager*, minutes : Int32*) : HRESULT
+    @lpVtbl.value.get_default_interval.call(this, minutes)
   end
-  def put_default_interval(minutes : Int32) : HRESULT
-    @lpVtbl.value.put_default_interval.unsafe_as(Proc(Int32, HRESULT)).call(minutes)
+  def put_default_interval(this : IFeedsManager*, minutes : Int32) : HRESULT
+    @lpVtbl.value.put_default_interval.call(this, minutes)
   end
-  def async_sync_all : HRESULT
-    @lpVtbl.value.async_sync_all.unsafe_as(Proc(HRESULT)).call
+  def async_sync_all(this : IFeedsManager*) : HRESULT
+    @lpVtbl.value.async_sync_all.call(this)
   end
-  def normalize(feedxmlin : UInt8*, feedxmlout : UInt8**) : HRESULT
-    @lpVtbl.value.normalize.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(feedxmlin, feedxmlout)
+  def normalize(this : IFeedsManager*, feedxmlin : UInt8*, feedxmlout : UInt8**) : HRESULT
+    @lpVtbl.value.normalize.call(this, feedxmlin, feedxmlout)
   end
-  def get_item_count_limit(itemcountlimit : Int32*) : HRESULT
-    @lpVtbl.value.get_item_count_limit.unsafe_as(Proc(Int32*, HRESULT)).call(itemcountlimit)
+  def get_item_count_limit(this : IFeedsManager*, itemcountlimit : Int32*) : HRESULT
+    @lpVtbl.value.get_item_count_limit.call(this, itemcountlimit)
   end
 end
 struct LibWin32::IFeedsEnum
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFeedsEnum*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFeedsEnum*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFeedsEnum*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IFeedsEnum*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IFeedsEnum*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IFeedsEnum*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IFeedsEnum*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_count(count : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(count)
+  def get_count(this : IFeedsEnum*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
   end
-  def item(index : Int32, disp : IDispatch*) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(Int32, IDispatch*, HRESULT)).call(index, disp)
+  def item(this : IFeedsEnum*, index : Int32, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.item.call(this, index, disp)
   end
-  def get__new_enum(enumvar : IEnumVARIANT*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IEnumVARIANT*, HRESULT)).call(enumvar)
+  def get__new_enum(this : IFeedsEnum*, enumvar : IEnumVARIANT*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, enumvar)
   end
 end
 struct LibWin32::IFeedFolder
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFeedFolder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFeedFolder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFeedFolder*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IFeedFolder*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IFeedFolder*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IFeedFolder*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IFeedFolder*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_feeds(disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_feeds.unsafe_as(Proc(IDispatch*, HRESULT)).call(disp)
+  def get_feeds(this : IFeedFolder*, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_feeds.call(this, disp)
   end
-  def get_subfolders(disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_subfolders.unsafe_as(Proc(IDispatch*, HRESULT)).call(disp)
+  def get_subfolders(this : IFeedFolder*, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_subfolders.call(this, disp)
   end
-  def create_feed(feedname : UInt8*, feedurl : UInt8*, disp : IDispatch*) : HRESULT
-    @lpVtbl.value.create_feed.unsafe_as(Proc(UInt8*, UInt8*, IDispatch*, HRESULT)).call(feedname, feedurl, disp)
+  def create_feed(this : IFeedFolder*, feedname : UInt8*, feedurl : UInt8*, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.create_feed.call(this, feedname, feedurl, disp)
   end
-  def create_subfolder(foldername : UInt8*, disp : IDispatch*) : HRESULT
-    @lpVtbl.value.create_subfolder.unsafe_as(Proc(UInt8*, IDispatch*, HRESULT)).call(foldername, disp)
+  def create_subfolder(this : IFeedFolder*, foldername : UInt8*, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.create_subfolder.call(this, foldername, disp)
   end
-  def exists_feed(feedname : UInt8*, exists : Int16*) : HRESULT
-    @lpVtbl.value.exists_feed.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(feedname, exists)
+  def exists_feed(this : IFeedFolder*, feedname : UInt8*, exists : Int16*) : HRESULT
+    @lpVtbl.value.exists_feed.call(this, feedname, exists)
   end
-  def get_feed(feedname : UInt8*, disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_feed.unsafe_as(Proc(UInt8*, IDispatch*, HRESULT)).call(feedname, disp)
+  def get_feed(this : IFeedFolder*, feedname : UInt8*, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_feed.call(this, feedname, disp)
   end
-  def exists_subfolder(foldername : UInt8*, exists : Int16*) : HRESULT
-    @lpVtbl.value.exists_subfolder.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(foldername, exists)
+  def exists_subfolder(this : IFeedFolder*, foldername : UInt8*, exists : Int16*) : HRESULT
+    @lpVtbl.value.exists_subfolder.call(this, foldername, exists)
   end
-  def get_subfolder(foldername : UInt8*, disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_subfolder.unsafe_as(Proc(UInt8*, IDispatch*, HRESULT)).call(foldername, disp)
+  def get_subfolder(this : IFeedFolder*, foldername : UInt8*, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_subfolder.call(this, foldername, disp)
   end
-  def delete : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  def delete(this : IFeedFolder*) : HRESULT
+    @lpVtbl.value.delete.call(this)
   end
-  def get_name(foldername : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(foldername)
+  def get_name(this : IFeedFolder*, foldername : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, foldername)
   end
-  def rename(foldername : UInt8*) : HRESULT
-    @lpVtbl.value.rename.unsafe_as(Proc(UInt8*, HRESULT)).call(foldername)
+  def rename(this : IFeedFolder*, foldername : UInt8*) : HRESULT
+    @lpVtbl.value.rename.call(this, foldername)
   end
-  def get_path(folderpath : UInt8**) : HRESULT
-    @lpVtbl.value.get_path.unsafe_as(Proc(UInt8**, HRESULT)).call(folderpath)
+  def get_path(this : IFeedFolder*, folderpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.call(this, folderpath)
   end
-  def move(newparentpath : UInt8*) : HRESULT
-    @lpVtbl.value.move.unsafe_as(Proc(UInt8*, HRESULT)).call(newparentpath)
+  def move(this : IFeedFolder*, newparentpath : UInt8*) : HRESULT
+    @lpVtbl.value.move.call(this, newparentpath)
   end
-  def get_parent(disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_parent.unsafe_as(Proc(IDispatch*, HRESULT)).call(disp)
+  def get_parent(this : IFeedFolder*, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, disp)
   end
-  def get_is_root(isroot : Int16*) : HRESULT
-    @lpVtbl.value.get_is_root.unsafe_as(Proc(Int16*, HRESULT)).call(isroot)
+  def get_is_root(this : IFeedFolder*, isroot : Int16*) : HRESULT
+    @lpVtbl.value.get_is_root.call(this, isroot)
   end
-  def get_total_unread_item_count(count : Int32*) : HRESULT
-    @lpVtbl.value.get_total_unread_item_count.unsafe_as(Proc(Int32*, HRESULT)).call(count)
+  def get_total_unread_item_count(this : IFeedFolder*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_total_unread_item_count.call(this, count)
   end
-  def get_total_item_count(count : Int32*) : HRESULT
-    @lpVtbl.value.get_total_item_count.unsafe_as(Proc(Int32*, HRESULT)).call(count)
+  def get_total_item_count(this : IFeedFolder*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_total_item_count.call(this, count)
   end
-  def get_watcher(scope : FEEDS_EVENTS_SCOPE, mask : FEEDS_EVENTS_MASK, disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_watcher.unsafe_as(Proc(FEEDS_EVENTS_SCOPE, FEEDS_EVENTS_MASK, IDispatch*, HRESULT)).call(scope, mask, disp)
+  def get_watcher(this : IFeedFolder*, scope : FEEDS_EVENTS_SCOPE, mask : FEEDS_EVENTS_MASK, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_watcher.call(this, scope, mask, disp)
   end
 end
 struct LibWin32::IFeedFolderEvents
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFeedFolderEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFeedFolderEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFeedFolderEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IFeedFolderEvents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IFeedFolderEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IFeedFolderEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IFeedFolderEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def error : HRESULT
-    @lpVtbl.value.error.unsafe_as(Proc(HRESULT)).call
+  def error(this : IFeedFolderEvents*) : HRESULT
+    @lpVtbl.value.error.call(this)
   end
-  def folder_added(path : UInt8*) : HRESULT
-    @lpVtbl.value.folder_added.unsafe_as(Proc(UInt8*, HRESULT)).call(path)
+  def folder_added(this : IFeedFolderEvents*, path : UInt8*) : HRESULT
+    @lpVtbl.value.folder_added.call(this, path)
   end
-  def folder_deleted(path : UInt8*) : HRESULT
-    @lpVtbl.value.folder_deleted.unsafe_as(Proc(UInt8*, HRESULT)).call(path)
+  def folder_deleted(this : IFeedFolderEvents*, path : UInt8*) : HRESULT
+    @lpVtbl.value.folder_deleted.call(this, path)
   end
-  def folder_renamed(path : UInt8*, oldpath : UInt8*) : HRESULT
-    @lpVtbl.value.folder_renamed.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(path, oldpath)
+  def folder_renamed(this : IFeedFolderEvents*, path : UInt8*, oldpath : UInt8*) : HRESULT
+    @lpVtbl.value.folder_renamed.call(this, path, oldpath)
   end
-  def folder_moved_from(path : UInt8*, oldpath : UInt8*) : HRESULT
-    @lpVtbl.value.folder_moved_from.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(path, oldpath)
+  def folder_moved_from(this : IFeedFolderEvents*, path : UInt8*, oldpath : UInt8*) : HRESULT
+    @lpVtbl.value.folder_moved_from.call(this, path, oldpath)
   end
-  def folder_moved_to(path : UInt8*, oldpath : UInt8*) : HRESULT
-    @lpVtbl.value.folder_moved_to.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(path, oldpath)
+  def folder_moved_to(this : IFeedFolderEvents*, path : UInt8*, oldpath : UInt8*) : HRESULT
+    @lpVtbl.value.folder_moved_to.call(this, path, oldpath)
   end
-  def folder_item_count_changed(path : UInt8*, itemcounttype : Int32) : HRESULT
-    @lpVtbl.value.folder_item_count_changed.unsafe_as(Proc(UInt8*, Int32, HRESULT)).call(path, itemcounttype)
+  def folder_item_count_changed(this : IFeedFolderEvents*, path : UInt8*, itemcounttype : Int32) : HRESULT
+    @lpVtbl.value.folder_item_count_changed.call(this, path, itemcounttype)
   end
-  def feed_added(path : UInt8*) : HRESULT
-    @lpVtbl.value.feed_added.unsafe_as(Proc(UInt8*, HRESULT)).call(path)
+  def feed_added(this : IFeedFolderEvents*, path : UInt8*) : HRESULT
+    @lpVtbl.value.feed_added.call(this, path)
   end
-  def feed_deleted(path : UInt8*) : HRESULT
-    @lpVtbl.value.feed_deleted.unsafe_as(Proc(UInt8*, HRESULT)).call(path)
+  def feed_deleted(this : IFeedFolderEvents*, path : UInt8*) : HRESULT
+    @lpVtbl.value.feed_deleted.call(this, path)
   end
-  def feed_renamed(path : UInt8*, oldpath : UInt8*) : HRESULT
-    @lpVtbl.value.feed_renamed.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(path, oldpath)
+  def feed_renamed(this : IFeedFolderEvents*, path : UInt8*, oldpath : UInt8*) : HRESULT
+    @lpVtbl.value.feed_renamed.call(this, path, oldpath)
   end
-  def feed_url_changed(path : UInt8*) : HRESULT
-    @lpVtbl.value.feed_url_changed.unsafe_as(Proc(UInt8*, HRESULT)).call(path)
+  def feed_url_changed(this : IFeedFolderEvents*, path : UInt8*) : HRESULT
+    @lpVtbl.value.feed_url_changed.call(this, path)
   end
-  def feed_moved_from(path : UInt8*, oldpath : UInt8*) : HRESULT
-    @lpVtbl.value.feed_moved_from.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(path, oldpath)
+  def feed_moved_from(this : IFeedFolderEvents*, path : UInt8*, oldpath : UInt8*) : HRESULT
+    @lpVtbl.value.feed_moved_from.call(this, path, oldpath)
   end
-  def feed_moved_to(path : UInt8*, oldpath : UInt8*) : HRESULT
-    @lpVtbl.value.feed_moved_to.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(path, oldpath)
+  def feed_moved_to(this : IFeedFolderEvents*, path : UInt8*, oldpath : UInt8*) : HRESULT
+    @lpVtbl.value.feed_moved_to.call(this, path, oldpath)
   end
-  def feed_downloading(path : UInt8*) : HRESULT
-    @lpVtbl.value.feed_downloading.unsafe_as(Proc(UInt8*, HRESULT)).call(path)
+  def feed_downloading(this : IFeedFolderEvents*, path : UInt8*) : HRESULT
+    @lpVtbl.value.feed_downloading.call(this, path)
   end
-  def feed_download_completed(path : UInt8*, error : FEEDS_DOWNLOAD_ERROR) : HRESULT
-    @lpVtbl.value.feed_download_completed.unsafe_as(Proc(UInt8*, FEEDS_DOWNLOAD_ERROR, HRESULT)).call(path, error)
+  def feed_download_completed(this : IFeedFolderEvents*, path : UInt8*, error : FEEDS_DOWNLOAD_ERROR) : HRESULT
+    @lpVtbl.value.feed_download_completed.call(this, path, error)
   end
-  def feed_item_count_changed(path : UInt8*, itemcounttype : Int32) : HRESULT
-    @lpVtbl.value.feed_item_count_changed.unsafe_as(Proc(UInt8*, Int32, HRESULT)).call(path, itemcounttype)
+  def feed_item_count_changed(this : IFeedFolderEvents*, path : UInt8*, itemcounttype : Int32) : HRESULT
+    @lpVtbl.value.feed_item_count_changed.call(this, path, itemcounttype)
   end
 end
 struct LibWin32::IFeed
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFeed*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFeed*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFeed*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IFeed*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IFeed*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IFeed*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IFeed*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def xml(count : Int32, sortproperty : FEEDS_XML_SORT_PROPERTY, sortorder : FEEDS_XML_SORT_ORDER, filterflags : FEEDS_XML_FILTER_FLAGS, includeflags : FEEDS_XML_INCLUDE_FLAGS, xml : UInt8**) : HRESULT
-    @lpVtbl.value.xml.unsafe_as(Proc(Int32, FEEDS_XML_SORT_PROPERTY, FEEDS_XML_SORT_ORDER, FEEDS_XML_FILTER_FLAGS, FEEDS_XML_INCLUDE_FLAGS, UInt8**, HRESULT)).call(count, sortproperty, sortorder, filterflags, includeflags, xml)
+  def xml(this : IFeed*, count : Int32, sortproperty : FEEDS_XML_SORT_PROPERTY, sortorder : FEEDS_XML_SORT_ORDER, filterflags : FEEDS_XML_FILTER_FLAGS, includeflags : FEEDS_XML_INCLUDE_FLAGS, xml : UInt8**) : HRESULT
+    @lpVtbl.value.xml.call(this, count, sortproperty, sortorder, filterflags, includeflags, xml)
   end
-  def get_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_name(this : IFeed*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
   end
-  def rename(name : UInt8*) : HRESULT
-    @lpVtbl.value.rename.unsafe_as(Proc(UInt8*, HRESULT)).call(name)
+  def rename(this : IFeed*, name : UInt8*) : HRESULT
+    @lpVtbl.value.rename.call(this, name)
   end
-  def get_url(feedurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_url.unsafe_as(Proc(UInt8**, HRESULT)).call(feedurl)
+  def get_url(this : IFeed*, feedurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, feedurl)
   end
-  def put_url(feedurl : UInt8*) : HRESULT
-    @lpVtbl.value.put_url.unsafe_as(Proc(UInt8*, HRESULT)).call(feedurl)
+  def put_url(this : IFeed*, feedurl : UInt8*) : HRESULT
+    @lpVtbl.value.put_url.call(this, feedurl)
   end
-  def get_local_id(feedguid : UInt8**) : HRESULT
-    @lpVtbl.value.get_local_id.unsafe_as(Proc(UInt8**, HRESULT)).call(feedguid)
+  def get_local_id(this : IFeed*, feedguid : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_id.call(this, feedguid)
   end
-  def get_path(path : UInt8**) : HRESULT
-    @lpVtbl.value.get_path.unsafe_as(Proc(UInt8**, HRESULT)).call(path)
+  def get_path(this : IFeed*, path : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.call(this, path)
   end
-  def move(newparentpath : UInt8*) : HRESULT
-    @lpVtbl.value.move.unsafe_as(Proc(UInt8*, HRESULT)).call(newparentpath)
+  def move(this : IFeed*, newparentpath : UInt8*) : HRESULT
+    @lpVtbl.value.move.call(this, newparentpath)
   end
-  def get_parent(disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_parent.unsafe_as(Proc(IDispatch*, HRESULT)).call(disp)
+  def get_parent(this : IFeed*, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, disp)
   end
-  def get_last_write_time(lastwrite : Float64*) : HRESULT
-    @lpVtbl.value.get_last_write_time.unsafe_as(Proc(Float64*, HRESULT)).call(lastwrite)
+  def get_last_write_time(this : IFeed*, lastwrite : Float64*) : HRESULT
+    @lpVtbl.value.get_last_write_time.call(this, lastwrite)
   end
-  def delete : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  def delete(this : IFeed*) : HRESULT
+    @lpVtbl.value.delete.call(this)
   end
-  def download : HRESULT
-    @lpVtbl.value.download.unsafe_as(Proc(HRESULT)).call
+  def download(this : IFeed*) : HRESULT
+    @lpVtbl.value.download.call(this)
   end
-  def async_download : HRESULT
-    @lpVtbl.value.async_download.unsafe_as(Proc(HRESULT)).call
+  def async_download(this : IFeed*) : HRESULT
+    @lpVtbl.value.async_download.call(this)
   end
-  def cancel_async_download : HRESULT
-    @lpVtbl.value.cancel_async_download.unsafe_as(Proc(HRESULT)).call
+  def cancel_async_download(this : IFeed*) : HRESULT
+    @lpVtbl.value.cancel_async_download.call(this)
   end
-  def get_sync_setting(syncsetting : FEEDS_SYNC_SETTING*) : HRESULT
-    @lpVtbl.value.get_sync_setting.unsafe_as(Proc(FEEDS_SYNC_SETTING*, HRESULT)).call(syncsetting)
+  def get_sync_setting(this : IFeed*, syncsetting : FEEDS_SYNC_SETTING*) : HRESULT
+    @lpVtbl.value.get_sync_setting.call(this, syncsetting)
   end
-  def put_sync_setting(syncsetting : FEEDS_SYNC_SETTING) : HRESULT
-    @lpVtbl.value.put_sync_setting.unsafe_as(Proc(FEEDS_SYNC_SETTING, HRESULT)).call(syncsetting)
+  def put_sync_setting(this : IFeed*, syncsetting : FEEDS_SYNC_SETTING) : HRESULT
+    @lpVtbl.value.put_sync_setting.call(this, syncsetting)
   end
-  def get_interval(minutes : Int32*) : HRESULT
-    @lpVtbl.value.get_interval.unsafe_as(Proc(Int32*, HRESULT)).call(minutes)
+  def get_interval(this : IFeed*, minutes : Int32*) : HRESULT
+    @lpVtbl.value.get_interval.call(this, minutes)
   end
-  def put_interval(minutes : Int32) : HRESULT
-    @lpVtbl.value.put_interval.unsafe_as(Proc(Int32, HRESULT)).call(minutes)
+  def put_interval(this : IFeed*, minutes : Int32) : HRESULT
+    @lpVtbl.value.put_interval.call(this, minutes)
   end
-  def get_last_download_time(lastdownload : Float64*) : HRESULT
-    @lpVtbl.value.get_last_download_time.unsafe_as(Proc(Float64*, HRESULT)).call(lastdownload)
+  def get_last_download_time(this : IFeed*, lastdownload : Float64*) : HRESULT
+    @lpVtbl.value.get_last_download_time.call(this, lastdownload)
   end
-  def get_local_enclosure_path(path : UInt8**) : HRESULT
-    @lpVtbl.value.get_local_enclosure_path.unsafe_as(Proc(UInt8**, HRESULT)).call(path)
+  def get_local_enclosure_path(this : IFeed*, path : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_enclosure_path.call(this, path)
   end
-  def get_items(disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_items.unsafe_as(Proc(IDispatch*, HRESULT)).call(disp)
+  def get_items(this : IFeed*, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_items.call(this, disp)
   end
-  def get_item(itemid : Int32, disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, IDispatch*, HRESULT)).call(itemid, disp)
+  def get_item(this : IFeed*, itemid : Int32, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_item.call(this, itemid, disp)
   end
-  def get_title(title : UInt8**) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(title)
+  def get_title(this : IFeed*, title : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, title)
   end
-  def get_description(description : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(description)
+  def get_description(this : IFeed*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
   end
-  def get_link(homepage : UInt8**) : HRESULT
-    @lpVtbl.value.get_link.unsafe_as(Proc(UInt8**, HRESULT)).call(homepage)
+  def get_link(this : IFeed*, homepage : UInt8**) : HRESULT
+    @lpVtbl.value.get_link.call(this, homepage)
   end
-  def get_image(imageurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_image.unsafe_as(Proc(UInt8**, HRESULT)).call(imageurl)
+  def get_image(this : IFeed*, imageurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_image.call(this, imageurl)
   end
-  def get_last_build_date(lastbuilddate : Float64*) : HRESULT
-    @lpVtbl.value.get_last_build_date.unsafe_as(Proc(Float64*, HRESULT)).call(lastbuilddate)
+  def get_last_build_date(this : IFeed*, lastbuilddate : Float64*) : HRESULT
+    @lpVtbl.value.get_last_build_date.call(this, lastbuilddate)
   end
-  def get_pub_date(lastpopulatedate : Float64*) : HRESULT
-    @lpVtbl.value.get_pub_date.unsafe_as(Proc(Float64*, HRESULT)).call(lastpopulatedate)
+  def get_pub_date(this : IFeed*, lastpopulatedate : Float64*) : HRESULT
+    @lpVtbl.value.get_pub_date.call(this, lastpopulatedate)
   end
-  def get_ttl(ttl : Int32*) : HRESULT
-    @lpVtbl.value.get_ttl.unsafe_as(Proc(Int32*, HRESULT)).call(ttl)
+  def get_ttl(this : IFeed*, ttl : Int32*) : HRESULT
+    @lpVtbl.value.get_ttl.call(this, ttl)
   end
-  def get_language(language : UInt8**) : HRESULT
-    @lpVtbl.value.get_language.unsafe_as(Proc(UInt8**, HRESULT)).call(language)
+  def get_language(this : IFeed*, language : UInt8**) : HRESULT
+    @lpVtbl.value.get_language.call(this, language)
   end
-  def get_copyright(copyright : UInt8**) : HRESULT
-    @lpVtbl.value.get_copyright.unsafe_as(Proc(UInt8**, HRESULT)).call(copyright)
+  def get_copyright(this : IFeed*, copyright : UInt8**) : HRESULT
+    @lpVtbl.value.get_copyright.call(this, copyright)
   end
-  def get_max_item_count(count : Int32*) : HRESULT
-    @lpVtbl.value.get_max_item_count.unsafe_as(Proc(Int32*, HRESULT)).call(count)
+  def get_max_item_count(this : IFeed*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_max_item_count.call(this, count)
   end
-  def put_max_item_count(count : Int32) : HRESULT
-    @lpVtbl.value.put_max_item_count.unsafe_as(Proc(Int32, HRESULT)).call(count)
+  def put_max_item_count(this : IFeed*, count : Int32) : HRESULT
+    @lpVtbl.value.put_max_item_count.call(this, count)
   end
-  def get_download_enclosures_automatically(downloadenclosuresautomatically : Int16*) : HRESULT
-    @lpVtbl.value.get_download_enclosures_automatically.unsafe_as(Proc(Int16*, HRESULT)).call(downloadenclosuresautomatically)
+  def get_download_enclosures_automatically(this : IFeed*, downloadenclosuresautomatically : Int16*) : HRESULT
+    @lpVtbl.value.get_download_enclosures_automatically.call(this, downloadenclosuresautomatically)
   end
-  def put_download_enclosures_automatically(downloadenclosuresautomatically : Int16) : HRESULT
-    @lpVtbl.value.put_download_enclosures_automatically.unsafe_as(Proc(Int16, HRESULT)).call(downloadenclosuresautomatically)
+  def put_download_enclosures_automatically(this : IFeed*, downloadenclosuresautomatically : Int16) : HRESULT
+    @lpVtbl.value.put_download_enclosures_automatically.call(this, downloadenclosuresautomatically)
   end
-  def get_download_status(status : FEEDS_DOWNLOAD_STATUS*) : HRESULT
-    @lpVtbl.value.get_download_status.unsafe_as(Proc(FEEDS_DOWNLOAD_STATUS*, HRESULT)).call(status)
+  def get_download_status(this : IFeed*, status : FEEDS_DOWNLOAD_STATUS*) : HRESULT
+    @lpVtbl.value.get_download_status.call(this, status)
   end
-  def get_last_download_error(error : FEEDS_DOWNLOAD_ERROR*) : HRESULT
-    @lpVtbl.value.get_last_download_error.unsafe_as(Proc(FEEDS_DOWNLOAD_ERROR*, HRESULT)).call(error)
+  def get_last_download_error(this : IFeed*, error : FEEDS_DOWNLOAD_ERROR*) : HRESULT
+    @lpVtbl.value.get_last_download_error.call(this, error)
   end
-  def merge(feedxml : UInt8*, feedurl : UInt8*) : HRESULT
-    @lpVtbl.value.merge.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(feedxml, feedurl)
+  def merge(this : IFeed*, feedxml : UInt8*, feedurl : UInt8*) : HRESULT
+    @lpVtbl.value.merge.call(this, feedxml, feedurl)
   end
-  def get_download_url(feedurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_download_url.unsafe_as(Proc(UInt8**, HRESULT)).call(feedurl)
+  def get_download_url(this : IFeed*, feedurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_download_url.call(this, feedurl)
   end
-  def get_is_list(islist : Int16*) : HRESULT
-    @lpVtbl.value.get_is_list.unsafe_as(Proc(Int16*, HRESULT)).call(islist)
+  def get_is_list(this : IFeed*, islist : Int16*) : HRESULT
+    @lpVtbl.value.get_is_list.call(this, islist)
   end
-  def mark_all_items_read : HRESULT
-    @lpVtbl.value.mark_all_items_read.unsafe_as(Proc(HRESULT)).call
+  def mark_all_items_read(this : IFeed*) : HRESULT
+    @lpVtbl.value.mark_all_items_read.call(this)
   end
-  def get_watcher(scope : FEEDS_EVENTS_SCOPE, mask : FEEDS_EVENTS_MASK, disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_watcher.unsafe_as(Proc(FEEDS_EVENTS_SCOPE, FEEDS_EVENTS_MASK, IDispatch*, HRESULT)).call(scope, mask, disp)
+  def get_watcher(this : IFeed*, scope : FEEDS_EVENTS_SCOPE, mask : FEEDS_EVENTS_MASK, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_watcher.call(this, scope, mask, disp)
   end
-  def get_unread_item_count(count : Int32*) : HRESULT
-    @lpVtbl.value.get_unread_item_count.unsafe_as(Proc(Int32*, HRESULT)).call(count)
+  def get_unread_item_count(this : IFeed*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_unread_item_count.call(this, count)
   end
-  def get_item_count(count : Int32*) : HRESULT
-    @lpVtbl.value.get_item_count.unsafe_as(Proc(Int32*, HRESULT)).call(count)
+  def get_item_count(this : IFeed*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_item_count.call(this, count)
   end
 end
 struct LibWin32::IFeed2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFeed2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFeed2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFeed2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IFeed2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IFeed2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IFeed2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IFeed2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def xml(count : Int32, sortproperty : FEEDS_XML_SORT_PROPERTY, sortorder : FEEDS_XML_SORT_ORDER, filterflags : FEEDS_XML_FILTER_FLAGS, includeflags : FEEDS_XML_INCLUDE_FLAGS, xml : UInt8**) : HRESULT
-    @lpVtbl.value.xml.unsafe_as(Proc(Int32, FEEDS_XML_SORT_PROPERTY, FEEDS_XML_SORT_ORDER, FEEDS_XML_FILTER_FLAGS, FEEDS_XML_INCLUDE_FLAGS, UInt8**, HRESULT)).call(count, sortproperty, sortorder, filterflags, includeflags, xml)
+  def xml(this : IFeed2*, count : Int32, sortproperty : FEEDS_XML_SORT_PROPERTY, sortorder : FEEDS_XML_SORT_ORDER, filterflags : FEEDS_XML_FILTER_FLAGS, includeflags : FEEDS_XML_INCLUDE_FLAGS, xml : UInt8**) : HRESULT
+    @lpVtbl.value.xml.call(this, count, sortproperty, sortorder, filterflags, includeflags, xml)
   end
-  def get_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_name(this : IFeed2*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
   end
-  def rename(name : UInt8*) : HRESULT
-    @lpVtbl.value.rename.unsafe_as(Proc(UInt8*, HRESULT)).call(name)
+  def rename(this : IFeed2*, name : UInt8*) : HRESULT
+    @lpVtbl.value.rename.call(this, name)
   end
-  def get_url(feedurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_url.unsafe_as(Proc(UInt8**, HRESULT)).call(feedurl)
+  def get_url(this : IFeed2*, feedurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, feedurl)
   end
-  def put_url(feedurl : UInt8*) : HRESULT
-    @lpVtbl.value.put_url.unsafe_as(Proc(UInt8*, HRESULT)).call(feedurl)
+  def put_url(this : IFeed2*, feedurl : UInt8*) : HRESULT
+    @lpVtbl.value.put_url.call(this, feedurl)
   end
-  def get_local_id(feedguid : UInt8**) : HRESULT
-    @lpVtbl.value.get_local_id.unsafe_as(Proc(UInt8**, HRESULT)).call(feedguid)
+  def get_local_id(this : IFeed2*, feedguid : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_id.call(this, feedguid)
   end
-  def get_path(path : UInt8**) : HRESULT
-    @lpVtbl.value.get_path.unsafe_as(Proc(UInt8**, HRESULT)).call(path)
+  def get_path(this : IFeed2*, path : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.call(this, path)
   end
-  def move(newparentpath : UInt8*) : HRESULT
-    @lpVtbl.value.move.unsafe_as(Proc(UInt8*, HRESULT)).call(newparentpath)
+  def move(this : IFeed2*, newparentpath : UInt8*) : HRESULT
+    @lpVtbl.value.move.call(this, newparentpath)
   end
-  def get_parent(disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_parent.unsafe_as(Proc(IDispatch*, HRESULT)).call(disp)
+  def get_parent(this : IFeed2*, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, disp)
   end
-  def get_last_write_time(lastwrite : Float64*) : HRESULT
-    @lpVtbl.value.get_last_write_time.unsafe_as(Proc(Float64*, HRESULT)).call(lastwrite)
+  def get_last_write_time(this : IFeed2*, lastwrite : Float64*) : HRESULT
+    @lpVtbl.value.get_last_write_time.call(this, lastwrite)
   end
-  def delete : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  def delete(this : IFeed2*) : HRESULT
+    @lpVtbl.value.delete.call(this)
   end
-  def download : HRESULT
-    @lpVtbl.value.download.unsafe_as(Proc(HRESULT)).call
+  def download(this : IFeed2*) : HRESULT
+    @lpVtbl.value.download.call(this)
   end
-  def async_download : HRESULT
-    @lpVtbl.value.async_download.unsafe_as(Proc(HRESULT)).call
+  def async_download(this : IFeed2*) : HRESULT
+    @lpVtbl.value.async_download.call(this)
   end
-  def cancel_async_download : HRESULT
-    @lpVtbl.value.cancel_async_download.unsafe_as(Proc(HRESULT)).call
+  def cancel_async_download(this : IFeed2*) : HRESULT
+    @lpVtbl.value.cancel_async_download.call(this)
   end
-  def get_sync_setting(syncsetting : FEEDS_SYNC_SETTING*) : HRESULT
-    @lpVtbl.value.get_sync_setting.unsafe_as(Proc(FEEDS_SYNC_SETTING*, HRESULT)).call(syncsetting)
+  def get_sync_setting(this : IFeed2*, syncsetting : FEEDS_SYNC_SETTING*) : HRESULT
+    @lpVtbl.value.get_sync_setting.call(this, syncsetting)
   end
-  def put_sync_setting(syncsetting : FEEDS_SYNC_SETTING) : HRESULT
-    @lpVtbl.value.put_sync_setting.unsafe_as(Proc(FEEDS_SYNC_SETTING, HRESULT)).call(syncsetting)
+  def put_sync_setting(this : IFeed2*, syncsetting : FEEDS_SYNC_SETTING) : HRESULT
+    @lpVtbl.value.put_sync_setting.call(this, syncsetting)
   end
-  def get_interval(minutes : Int32*) : HRESULT
-    @lpVtbl.value.get_interval.unsafe_as(Proc(Int32*, HRESULT)).call(minutes)
+  def get_interval(this : IFeed2*, minutes : Int32*) : HRESULT
+    @lpVtbl.value.get_interval.call(this, minutes)
   end
-  def put_interval(minutes : Int32) : HRESULT
-    @lpVtbl.value.put_interval.unsafe_as(Proc(Int32, HRESULT)).call(minutes)
+  def put_interval(this : IFeed2*, minutes : Int32) : HRESULT
+    @lpVtbl.value.put_interval.call(this, minutes)
   end
-  def get_last_download_time(lastdownload : Float64*) : HRESULT
-    @lpVtbl.value.get_last_download_time.unsafe_as(Proc(Float64*, HRESULT)).call(lastdownload)
+  def get_last_download_time(this : IFeed2*, lastdownload : Float64*) : HRESULT
+    @lpVtbl.value.get_last_download_time.call(this, lastdownload)
   end
-  def get_local_enclosure_path(path : UInt8**) : HRESULT
-    @lpVtbl.value.get_local_enclosure_path.unsafe_as(Proc(UInt8**, HRESULT)).call(path)
+  def get_local_enclosure_path(this : IFeed2*, path : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_enclosure_path.call(this, path)
   end
-  def get_items(disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_items.unsafe_as(Proc(IDispatch*, HRESULT)).call(disp)
+  def get_items(this : IFeed2*, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_items.call(this, disp)
   end
-  def get_item(itemid : Int32, disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, IDispatch*, HRESULT)).call(itemid, disp)
+  def get_item(this : IFeed2*, itemid : Int32, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_item.call(this, itemid, disp)
   end
-  def get_title(title : UInt8**) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(title)
+  def get_title(this : IFeed2*, title : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, title)
   end
-  def get_description(description : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(description)
+  def get_description(this : IFeed2*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
   end
-  def get_link(homepage : UInt8**) : HRESULT
-    @lpVtbl.value.get_link.unsafe_as(Proc(UInt8**, HRESULT)).call(homepage)
+  def get_link(this : IFeed2*, homepage : UInt8**) : HRESULT
+    @lpVtbl.value.get_link.call(this, homepage)
   end
-  def get_image(imageurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_image.unsafe_as(Proc(UInt8**, HRESULT)).call(imageurl)
+  def get_image(this : IFeed2*, imageurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_image.call(this, imageurl)
   end
-  def get_last_build_date(lastbuilddate : Float64*) : HRESULT
-    @lpVtbl.value.get_last_build_date.unsafe_as(Proc(Float64*, HRESULT)).call(lastbuilddate)
+  def get_last_build_date(this : IFeed2*, lastbuilddate : Float64*) : HRESULT
+    @lpVtbl.value.get_last_build_date.call(this, lastbuilddate)
   end
-  def get_pub_date(lastpopulatedate : Float64*) : HRESULT
-    @lpVtbl.value.get_pub_date.unsafe_as(Proc(Float64*, HRESULT)).call(lastpopulatedate)
+  def get_pub_date(this : IFeed2*, lastpopulatedate : Float64*) : HRESULT
+    @lpVtbl.value.get_pub_date.call(this, lastpopulatedate)
   end
-  def get_ttl(ttl : Int32*) : HRESULT
-    @lpVtbl.value.get_ttl.unsafe_as(Proc(Int32*, HRESULT)).call(ttl)
+  def get_ttl(this : IFeed2*, ttl : Int32*) : HRESULT
+    @lpVtbl.value.get_ttl.call(this, ttl)
   end
-  def get_language(language : UInt8**) : HRESULT
-    @lpVtbl.value.get_language.unsafe_as(Proc(UInt8**, HRESULT)).call(language)
+  def get_language(this : IFeed2*, language : UInt8**) : HRESULT
+    @lpVtbl.value.get_language.call(this, language)
   end
-  def get_copyright(copyright : UInt8**) : HRESULT
-    @lpVtbl.value.get_copyright.unsafe_as(Proc(UInt8**, HRESULT)).call(copyright)
+  def get_copyright(this : IFeed2*, copyright : UInt8**) : HRESULT
+    @lpVtbl.value.get_copyright.call(this, copyright)
   end
-  def get_max_item_count(count : Int32*) : HRESULT
-    @lpVtbl.value.get_max_item_count.unsafe_as(Proc(Int32*, HRESULT)).call(count)
+  def get_max_item_count(this : IFeed2*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_max_item_count.call(this, count)
   end
-  def put_max_item_count(count : Int32) : HRESULT
-    @lpVtbl.value.put_max_item_count.unsafe_as(Proc(Int32, HRESULT)).call(count)
+  def put_max_item_count(this : IFeed2*, count : Int32) : HRESULT
+    @lpVtbl.value.put_max_item_count.call(this, count)
   end
-  def get_download_enclosures_automatically(downloadenclosuresautomatically : Int16*) : HRESULT
-    @lpVtbl.value.get_download_enclosures_automatically.unsafe_as(Proc(Int16*, HRESULT)).call(downloadenclosuresautomatically)
+  def get_download_enclosures_automatically(this : IFeed2*, downloadenclosuresautomatically : Int16*) : HRESULT
+    @lpVtbl.value.get_download_enclosures_automatically.call(this, downloadenclosuresautomatically)
   end
-  def put_download_enclosures_automatically(downloadenclosuresautomatically : Int16) : HRESULT
-    @lpVtbl.value.put_download_enclosures_automatically.unsafe_as(Proc(Int16, HRESULT)).call(downloadenclosuresautomatically)
+  def put_download_enclosures_automatically(this : IFeed2*, downloadenclosuresautomatically : Int16) : HRESULT
+    @lpVtbl.value.put_download_enclosures_automatically.call(this, downloadenclosuresautomatically)
   end
-  def get_download_status(status : FEEDS_DOWNLOAD_STATUS*) : HRESULT
-    @lpVtbl.value.get_download_status.unsafe_as(Proc(FEEDS_DOWNLOAD_STATUS*, HRESULT)).call(status)
+  def get_download_status(this : IFeed2*, status : FEEDS_DOWNLOAD_STATUS*) : HRESULT
+    @lpVtbl.value.get_download_status.call(this, status)
   end
-  def get_last_download_error(error : FEEDS_DOWNLOAD_ERROR*) : HRESULT
-    @lpVtbl.value.get_last_download_error.unsafe_as(Proc(FEEDS_DOWNLOAD_ERROR*, HRESULT)).call(error)
+  def get_last_download_error(this : IFeed2*, error : FEEDS_DOWNLOAD_ERROR*) : HRESULT
+    @lpVtbl.value.get_last_download_error.call(this, error)
   end
-  def merge(feedxml : UInt8*, feedurl : UInt8*) : HRESULT
-    @lpVtbl.value.merge.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(feedxml, feedurl)
+  def merge(this : IFeed2*, feedxml : UInt8*, feedurl : UInt8*) : HRESULT
+    @lpVtbl.value.merge.call(this, feedxml, feedurl)
   end
-  def get_download_url(feedurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_download_url.unsafe_as(Proc(UInt8**, HRESULT)).call(feedurl)
+  def get_download_url(this : IFeed2*, feedurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_download_url.call(this, feedurl)
   end
-  def get_is_list(islist : Int16*) : HRESULT
-    @lpVtbl.value.get_is_list.unsafe_as(Proc(Int16*, HRESULT)).call(islist)
+  def get_is_list(this : IFeed2*, islist : Int16*) : HRESULT
+    @lpVtbl.value.get_is_list.call(this, islist)
   end
-  def mark_all_items_read : HRESULT
-    @lpVtbl.value.mark_all_items_read.unsafe_as(Proc(HRESULT)).call
+  def mark_all_items_read(this : IFeed2*) : HRESULT
+    @lpVtbl.value.mark_all_items_read.call(this)
   end
-  def get_watcher(scope : FEEDS_EVENTS_SCOPE, mask : FEEDS_EVENTS_MASK, disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_watcher.unsafe_as(Proc(FEEDS_EVENTS_SCOPE, FEEDS_EVENTS_MASK, IDispatch*, HRESULT)).call(scope, mask, disp)
+  def get_watcher(this : IFeed2*, scope : FEEDS_EVENTS_SCOPE, mask : FEEDS_EVENTS_MASK, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_watcher.call(this, scope, mask, disp)
   end
-  def get_unread_item_count(count : Int32*) : HRESULT
-    @lpVtbl.value.get_unread_item_count.unsafe_as(Proc(Int32*, HRESULT)).call(count)
+  def get_unread_item_count(this : IFeed2*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_unread_item_count.call(this, count)
   end
-  def get_item_count(count : Int32*) : HRESULT
-    @lpVtbl.value.get_item_count.unsafe_as(Proc(Int32*, HRESULT)).call(count)
+  def get_item_count(this : IFeed2*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_item_count.call(this, count)
   end
-  def get_item_by_effective_id(itemeffectiveid : Int32, disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_item_by_effective_id.unsafe_as(Proc(Int32, IDispatch*, HRESULT)).call(itemeffectiveid, disp)
+  def get_item_by_effective_id(this : IFeed2*, itemeffectiveid : Int32, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_item_by_effective_id.call(this, itemeffectiveid, disp)
   end
-  def get_last_item_download_time(lastitemdownloadtime : Float64*) : HRESULT
-    @lpVtbl.value.get_last_item_download_time.unsafe_as(Proc(Float64*, HRESULT)).call(lastitemdownloadtime)
+  def get_last_item_download_time(this : IFeed2*, lastitemdownloadtime : Float64*) : HRESULT
+    @lpVtbl.value.get_last_item_download_time.call(this, lastitemdownloadtime)
   end
-  def get_username(username : UInt8**) : HRESULT
-    @lpVtbl.value.get_username.unsafe_as(Proc(UInt8**, HRESULT)).call(username)
+  def get_username(this : IFeed2*, username : UInt8**) : HRESULT
+    @lpVtbl.value.get_username.call(this, username)
   end
-  def get_password(password : UInt8**) : HRESULT
-    @lpVtbl.value.get_password.unsafe_as(Proc(UInt8**, HRESULT)).call(password)
+  def get_password(this : IFeed2*, password : UInt8**) : HRESULT
+    @lpVtbl.value.get_password.call(this, password)
   end
-  def set_credentials(username : UInt8*, password : UInt8*) : HRESULT
-    @lpVtbl.value.set_credentials.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(username, password)
+  def set_credentials(this : IFeed2*, username : UInt8*, password : UInt8*) : HRESULT
+    @lpVtbl.value.set_credentials.call(this, username, password)
   end
-  def clear_credentials : HRESULT
-    @lpVtbl.value.clear_credentials.unsafe_as(Proc(HRESULT)).call
+  def clear_credentials(this : IFeed2*) : HRESULT
+    @lpVtbl.value.clear_credentials.call(this)
   end
 end
 struct LibWin32::IFeedEvents
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFeedEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFeedEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFeedEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IFeedEvents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IFeedEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IFeedEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IFeedEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def error : HRESULT
-    @lpVtbl.value.error.unsafe_as(Proc(HRESULT)).call
+  def error(this : IFeedEvents*) : HRESULT
+    @lpVtbl.value.error.call(this)
   end
-  def feed_deleted(path : UInt8*) : HRESULT
-    @lpVtbl.value.feed_deleted.unsafe_as(Proc(UInt8*, HRESULT)).call(path)
+  def feed_deleted(this : IFeedEvents*, path : UInt8*) : HRESULT
+    @lpVtbl.value.feed_deleted.call(this, path)
   end
-  def feed_renamed(path : UInt8*, oldpath : UInt8*) : HRESULT
-    @lpVtbl.value.feed_renamed.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(path, oldpath)
+  def feed_renamed(this : IFeedEvents*, path : UInt8*, oldpath : UInt8*) : HRESULT
+    @lpVtbl.value.feed_renamed.call(this, path, oldpath)
   end
-  def feed_url_changed(path : UInt8*) : HRESULT
-    @lpVtbl.value.feed_url_changed.unsafe_as(Proc(UInt8*, HRESULT)).call(path)
+  def feed_url_changed(this : IFeedEvents*, path : UInt8*) : HRESULT
+    @lpVtbl.value.feed_url_changed.call(this, path)
   end
-  def feed_moved(path : UInt8*, oldpath : UInt8*) : HRESULT
-    @lpVtbl.value.feed_moved.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(path, oldpath)
+  def feed_moved(this : IFeedEvents*, path : UInt8*, oldpath : UInt8*) : HRESULT
+    @lpVtbl.value.feed_moved.call(this, path, oldpath)
   end
-  def feed_downloading(path : UInt8*) : HRESULT
-    @lpVtbl.value.feed_downloading.unsafe_as(Proc(UInt8*, HRESULT)).call(path)
+  def feed_downloading(this : IFeedEvents*, path : UInt8*) : HRESULT
+    @lpVtbl.value.feed_downloading.call(this, path)
   end
-  def feed_download_completed(path : UInt8*, error : FEEDS_DOWNLOAD_ERROR) : HRESULT
-    @lpVtbl.value.feed_download_completed.unsafe_as(Proc(UInt8*, FEEDS_DOWNLOAD_ERROR, HRESULT)).call(path, error)
+  def feed_download_completed(this : IFeedEvents*, path : UInt8*, error : FEEDS_DOWNLOAD_ERROR) : HRESULT
+    @lpVtbl.value.feed_download_completed.call(this, path, error)
   end
-  def feed_item_count_changed(path : UInt8*, itemcounttype : Int32) : HRESULT
-    @lpVtbl.value.feed_item_count_changed.unsafe_as(Proc(UInt8*, Int32, HRESULT)).call(path, itemcounttype)
+  def feed_item_count_changed(this : IFeedEvents*, path : UInt8*, itemcounttype : Int32) : HRESULT
+    @lpVtbl.value.feed_item_count_changed.call(this, path, itemcounttype)
   end
 end
 struct LibWin32::IFeedItem
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFeedItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFeedItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFeedItem*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IFeedItem*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IFeedItem*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IFeedItem*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IFeedItem*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def xml(includeflags : FEEDS_XML_INCLUDE_FLAGS, xml : UInt8**) : HRESULT
-    @lpVtbl.value.xml.unsafe_as(Proc(FEEDS_XML_INCLUDE_FLAGS, UInt8**, HRESULT)).call(includeflags, xml)
+  def xml(this : IFeedItem*, includeflags : FEEDS_XML_INCLUDE_FLAGS, xml : UInt8**) : HRESULT
+    @lpVtbl.value.xml.call(this, includeflags, xml)
   end
-  def get_title(title : UInt8**) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(title)
+  def get_title(this : IFeedItem*, title : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, title)
   end
-  def get_link(linkurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_link.unsafe_as(Proc(UInt8**, HRESULT)).call(linkurl)
+  def get_link(this : IFeedItem*, linkurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_link.call(this, linkurl)
   end
-  def get_guid(itemguid : UInt8**) : HRESULT
-    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(itemguid)
+  def get_guid(this : IFeedItem*, itemguid : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.call(this, itemguid)
   end
-  def get_description(description : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(description)
+  def get_description(this : IFeedItem*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
   end
-  def get_pub_date(pubdate : Float64*) : HRESULT
-    @lpVtbl.value.get_pub_date.unsafe_as(Proc(Float64*, HRESULT)).call(pubdate)
+  def get_pub_date(this : IFeedItem*, pubdate : Float64*) : HRESULT
+    @lpVtbl.value.get_pub_date.call(this, pubdate)
   end
-  def get_comments(comments : UInt8**) : HRESULT
-    @lpVtbl.value.get_comments.unsafe_as(Proc(UInt8**, HRESULT)).call(comments)
+  def get_comments(this : IFeedItem*, comments : UInt8**) : HRESULT
+    @lpVtbl.value.get_comments.call(this, comments)
   end
-  def get_author(author : UInt8**) : HRESULT
-    @lpVtbl.value.get_author.unsafe_as(Proc(UInt8**, HRESULT)).call(author)
+  def get_author(this : IFeedItem*, author : UInt8**) : HRESULT
+    @lpVtbl.value.get_author.call(this, author)
   end
-  def get_enclosure(disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_enclosure.unsafe_as(Proc(IDispatch*, HRESULT)).call(disp)
+  def get_enclosure(this : IFeedItem*, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_enclosure.call(this, disp)
   end
-  def get_is_read(isread : Int16*) : HRESULT
-    @lpVtbl.value.get_is_read.unsafe_as(Proc(Int16*, HRESULT)).call(isread)
+  def get_is_read(this : IFeedItem*, isread : Int16*) : HRESULT
+    @lpVtbl.value.get_is_read.call(this, isread)
   end
-  def put_is_read(isread : Int16) : HRESULT
-    @lpVtbl.value.put_is_read.unsafe_as(Proc(Int16, HRESULT)).call(isread)
+  def put_is_read(this : IFeedItem*, isread : Int16) : HRESULT
+    @lpVtbl.value.put_is_read.call(this, isread)
   end
-  def get_local_id(itemid : Int32*) : HRESULT
-    @lpVtbl.value.get_local_id.unsafe_as(Proc(Int32*, HRESULT)).call(itemid)
+  def get_local_id(this : IFeedItem*, itemid : Int32*) : HRESULT
+    @lpVtbl.value.get_local_id.call(this, itemid)
   end
-  def get_parent(disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_parent.unsafe_as(Proc(IDispatch*, HRESULT)).call(disp)
+  def get_parent(this : IFeedItem*, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, disp)
   end
-  def delete : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  def delete(this : IFeedItem*) : HRESULT
+    @lpVtbl.value.delete.call(this)
   end
-  def get_download_url(itemurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_download_url.unsafe_as(Proc(UInt8**, HRESULT)).call(itemurl)
+  def get_download_url(this : IFeedItem*, itemurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_download_url.call(this, itemurl)
   end
-  def get_last_download_time(lastdownload : Float64*) : HRESULT
-    @lpVtbl.value.get_last_download_time.unsafe_as(Proc(Float64*, HRESULT)).call(lastdownload)
+  def get_last_download_time(this : IFeedItem*, lastdownload : Float64*) : HRESULT
+    @lpVtbl.value.get_last_download_time.call(this, lastdownload)
   end
-  def get_modified(modified : Float64*) : HRESULT
-    @lpVtbl.value.get_modified.unsafe_as(Proc(Float64*, HRESULT)).call(modified)
+  def get_modified(this : IFeedItem*, modified : Float64*) : HRESULT
+    @lpVtbl.value.get_modified.call(this, modified)
   end
 end
 struct LibWin32::IFeedItem2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFeedItem2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFeedItem2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFeedItem2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IFeedItem2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IFeedItem2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IFeedItem2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IFeedItem2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def xml(includeflags : FEEDS_XML_INCLUDE_FLAGS, xml : UInt8**) : HRESULT
-    @lpVtbl.value.xml.unsafe_as(Proc(FEEDS_XML_INCLUDE_FLAGS, UInt8**, HRESULT)).call(includeflags, xml)
+  def xml(this : IFeedItem2*, includeflags : FEEDS_XML_INCLUDE_FLAGS, xml : UInt8**) : HRESULT
+    @lpVtbl.value.xml.call(this, includeflags, xml)
   end
-  def get_title(title : UInt8**) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(title)
+  def get_title(this : IFeedItem2*, title : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, title)
   end
-  def get_link(linkurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_link.unsafe_as(Proc(UInt8**, HRESULT)).call(linkurl)
+  def get_link(this : IFeedItem2*, linkurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_link.call(this, linkurl)
   end
-  def get_guid(itemguid : UInt8**) : HRESULT
-    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(itemguid)
+  def get_guid(this : IFeedItem2*, itemguid : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.call(this, itemguid)
   end
-  def get_description(description : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(description)
+  def get_description(this : IFeedItem2*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
   end
-  def get_pub_date(pubdate : Float64*) : HRESULT
-    @lpVtbl.value.get_pub_date.unsafe_as(Proc(Float64*, HRESULT)).call(pubdate)
+  def get_pub_date(this : IFeedItem2*, pubdate : Float64*) : HRESULT
+    @lpVtbl.value.get_pub_date.call(this, pubdate)
   end
-  def get_comments(comments : UInt8**) : HRESULT
-    @lpVtbl.value.get_comments.unsafe_as(Proc(UInt8**, HRESULT)).call(comments)
+  def get_comments(this : IFeedItem2*, comments : UInt8**) : HRESULT
+    @lpVtbl.value.get_comments.call(this, comments)
   end
-  def get_author(author : UInt8**) : HRESULT
-    @lpVtbl.value.get_author.unsafe_as(Proc(UInt8**, HRESULT)).call(author)
+  def get_author(this : IFeedItem2*, author : UInt8**) : HRESULT
+    @lpVtbl.value.get_author.call(this, author)
   end
-  def get_enclosure(disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_enclosure.unsafe_as(Proc(IDispatch*, HRESULT)).call(disp)
+  def get_enclosure(this : IFeedItem2*, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_enclosure.call(this, disp)
   end
-  def get_is_read(isread : Int16*) : HRESULT
-    @lpVtbl.value.get_is_read.unsafe_as(Proc(Int16*, HRESULT)).call(isread)
+  def get_is_read(this : IFeedItem2*, isread : Int16*) : HRESULT
+    @lpVtbl.value.get_is_read.call(this, isread)
   end
-  def put_is_read(isread : Int16) : HRESULT
-    @lpVtbl.value.put_is_read.unsafe_as(Proc(Int16, HRESULT)).call(isread)
+  def put_is_read(this : IFeedItem2*, isread : Int16) : HRESULT
+    @lpVtbl.value.put_is_read.call(this, isread)
   end
-  def get_local_id(itemid : Int32*) : HRESULT
-    @lpVtbl.value.get_local_id.unsafe_as(Proc(Int32*, HRESULT)).call(itemid)
+  def get_local_id(this : IFeedItem2*, itemid : Int32*) : HRESULT
+    @lpVtbl.value.get_local_id.call(this, itemid)
   end
-  def get_parent(disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_parent.unsafe_as(Proc(IDispatch*, HRESULT)).call(disp)
+  def get_parent(this : IFeedItem2*, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, disp)
   end
-  def delete : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  def delete(this : IFeedItem2*) : HRESULT
+    @lpVtbl.value.delete.call(this)
   end
-  def get_download_url(itemurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_download_url.unsafe_as(Proc(UInt8**, HRESULT)).call(itemurl)
+  def get_download_url(this : IFeedItem2*, itemurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_download_url.call(this, itemurl)
   end
-  def get_last_download_time(lastdownload : Float64*) : HRESULT
-    @lpVtbl.value.get_last_download_time.unsafe_as(Proc(Float64*, HRESULT)).call(lastdownload)
+  def get_last_download_time(this : IFeedItem2*, lastdownload : Float64*) : HRESULT
+    @lpVtbl.value.get_last_download_time.call(this, lastdownload)
   end
-  def get_modified(modified : Float64*) : HRESULT
-    @lpVtbl.value.get_modified.unsafe_as(Proc(Float64*, HRESULT)).call(modified)
+  def get_modified(this : IFeedItem2*, modified : Float64*) : HRESULT
+    @lpVtbl.value.get_modified.call(this, modified)
   end
-  def get_effective_id(effectiveid : Int32*) : HRESULT
-    @lpVtbl.value.get_effective_id.unsafe_as(Proc(Int32*, HRESULT)).call(effectiveid)
+  def get_effective_id(this : IFeedItem2*, effectiveid : Int32*) : HRESULT
+    @lpVtbl.value.get_effective_id.call(this, effectiveid)
   end
 end
 struct LibWin32::IFeedEnclosure
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFeedEnclosure*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFeedEnclosure*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFeedEnclosure*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IFeedEnclosure*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IFeedEnclosure*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IFeedEnclosure*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IFeedEnclosure*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_url(enclosureurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_url.unsafe_as(Proc(UInt8**, HRESULT)).call(enclosureurl)
+  def get_url(this : IFeedEnclosure*, enclosureurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, enclosureurl)
   end
-  def get_type(mimetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(UInt8**, HRESULT)).call(mimetype)
+  def get_type(this : IFeedEnclosure*, mimetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_type.call(this, mimetype)
   end
-  def get_length(length : Int32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(length)
+  def get_length(this : IFeedEnclosure*, length : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, length)
   end
-  def async_download : HRESULT
-    @lpVtbl.value.async_download.unsafe_as(Proc(HRESULT)).call
+  def async_download(this : IFeedEnclosure*) : HRESULT
+    @lpVtbl.value.async_download.call(this)
   end
-  def cancel_async_download : HRESULT
-    @lpVtbl.value.cancel_async_download.unsafe_as(Proc(HRESULT)).call
+  def cancel_async_download(this : IFeedEnclosure*) : HRESULT
+    @lpVtbl.value.cancel_async_download.call(this)
   end
-  def get_download_status(status : FEEDS_DOWNLOAD_STATUS*) : HRESULT
-    @lpVtbl.value.get_download_status.unsafe_as(Proc(FEEDS_DOWNLOAD_STATUS*, HRESULT)).call(status)
+  def get_download_status(this : IFeedEnclosure*, status : FEEDS_DOWNLOAD_STATUS*) : HRESULT
+    @lpVtbl.value.get_download_status.call(this, status)
   end
-  def get_last_download_error(error : FEEDS_DOWNLOAD_ERROR*) : HRESULT
-    @lpVtbl.value.get_last_download_error.unsafe_as(Proc(FEEDS_DOWNLOAD_ERROR*, HRESULT)).call(error)
+  def get_last_download_error(this : IFeedEnclosure*, error : FEEDS_DOWNLOAD_ERROR*) : HRESULT
+    @lpVtbl.value.get_last_download_error.call(this, error)
   end
-  def get_local_path(localpath : UInt8**) : HRESULT
-    @lpVtbl.value.get_local_path.unsafe_as(Proc(UInt8**, HRESULT)).call(localpath)
+  def get_local_path(this : IFeedEnclosure*, localpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_path.call(this, localpath)
   end
-  def get_parent(disp : IDispatch*) : HRESULT
-    @lpVtbl.value.get_parent.unsafe_as(Proc(IDispatch*, HRESULT)).call(disp)
+  def get_parent(this : IFeedEnclosure*, disp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, disp)
   end
-  def get_download_url(enclosureurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_download_url.unsafe_as(Proc(UInt8**, HRESULT)).call(enclosureurl)
+  def get_download_url(this : IFeedEnclosure*, enclosureurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_download_url.call(this, enclosureurl)
   end
-  def get_download_mime_type(mimetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_download_mime_type.unsafe_as(Proc(UInt8**, HRESULT)).call(mimetype)
+  def get_download_mime_type(this : IFeedEnclosure*, mimetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_download_mime_type.call(this, mimetype)
   end
-  def remove_file : HRESULT
-    @lpVtbl.value.remove_file.unsafe_as(Proc(HRESULT)).call
+  def remove_file(this : IFeedEnclosure*) : HRESULT
+    @lpVtbl.value.remove_file.call(this)
   end
-  def set_file(downloadurl : UInt8*, downloadfilepath : UInt8*, downloadmimetype : UInt8*, enclosurefilename : UInt8*) : HRESULT
-    @lpVtbl.value.set_file.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)).call(downloadurl, downloadfilepath, downloadmimetype, enclosurefilename)
+  def set_file(this : IFeedEnclosure*, downloadurl : UInt8*, downloadfilepath : UInt8*, downloadmimetype : UInt8*, enclosurefilename : UInt8*) : HRESULT
+    @lpVtbl.value.set_file.call(this, downloadurl, downloadfilepath, downloadmimetype, enclosurefilename)
   end
 end
 struct LibWin32::IWMPEffects
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPEffects*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPEffects*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPEffects*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def render(plevels : TimedLevel*, hdc : HDC, prc : RECT*) : HRESULT
-    @lpVtbl.value.render.unsafe_as(Proc(TimedLevel*, HDC, RECT*, HRESULT)).call(plevels, hdc, prc)
+  def render(this : IWMPEffects*, plevels : TimedLevel*, hdc : HDC, prc : RECT*) : HRESULT
+    @lpVtbl.value.render.call(this, plevels, hdc, prc)
   end
-  def media_info(lchannelcount : Int32, lsamplerate : Int32, bstrtitle : UInt8*) : HRESULT
-    @lpVtbl.value.media_info.unsafe_as(Proc(Int32, Int32, UInt8*, HRESULT)).call(lchannelcount, lsamplerate, bstrtitle)
+  def media_info(this : IWMPEffects*, lchannelcount : Int32, lsamplerate : Int32, bstrtitle : UInt8*) : HRESULT
+    @lpVtbl.value.media_info.call(this, lchannelcount, lsamplerate, bstrtitle)
   end
-  def get_capabilities(pdwcapabilities : UInt32*) : HRESULT
-    @lpVtbl.value.get_capabilities.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcapabilities)
+  def get_capabilities(this : IWMPEffects*, pdwcapabilities : UInt32*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, pdwcapabilities)
   end
-  def get_title(bstrtitle : UInt8**) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrtitle)
+  def get_title(this : IWMPEffects*, bstrtitle : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, bstrtitle)
   end
-  def get_preset_title(npreset : Int32, bstrpresettitle : UInt8**) : HRESULT
-    @lpVtbl.value.get_preset_title.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(npreset, bstrpresettitle)
+  def get_preset_title(this : IWMPEffects*, npreset : Int32, bstrpresettitle : UInt8**) : HRESULT
+    @lpVtbl.value.get_preset_title.call(this, npreset, bstrpresettitle)
   end
-  def get_preset_count(pnpresetcount : Int32*) : HRESULT
-    @lpVtbl.value.get_preset_count.unsafe_as(Proc(Int32*, HRESULT)).call(pnpresetcount)
+  def get_preset_count(this : IWMPEffects*, pnpresetcount : Int32*) : HRESULT
+    @lpVtbl.value.get_preset_count.call(this, pnpresetcount)
   end
-  def set_current_preset(npreset : Int32) : HRESULT
-    @lpVtbl.value.set_current_preset.unsafe_as(Proc(Int32, HRESULT)).call(npreset)
+  def set_current_preset(this : IWMPEffects*, npreset : Int32) : HRESULT
+    @lpVtbl.value.set_current_preset.call(this, npreset)
   end
-  def get_current_preset(pnpreset : Int32*) : HRESULT
-    @lpVtbl.value.get_current_preset.unsafe_as(Proc(Int32*, HRESULT)).call(pnpreset)
+  def get_current_preset(this : IWMPEffects*, pnpreset : Int32*) : HRESULT
+    @lpVtbl.value.get_current_preset.call(this, pnpreset)
   end
-  def display_property_page(hwndowner : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.display_property_page.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hwndowner)
+  def display_property_page(this : IWMPEffects*, hwndowner : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.display_property_page.call(this, hwndowner)
   end
-  def go_fullscreen(ffullscreen : LibC::BOOL) : HRESULT
-    @lpVtbl.value.go_fullscreen.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(ffullscreen)
+  def go_fullscreen(this : IWMPEffects*, ffullscreen : LibC::BOOL) : HRESULT
+    @lpVtbl.value.go_fullscreen.call(this, ffullscreen)
   end
-  def render_full_screen(plevels : TimedLevel*) : HRESULT
-    @lpVtbl.value.render_full_screen.unsafe_as(Proc(TimedLevel*, HRESULT)).call(plevels)
+  def render_full_screen(this : IWMPEffects*, plevels : TimedLevel*) : HRESULT
+    @lpVtbl.value.render_full_screen.call(this, plevels)
   end
 end
 struct LibWin32::IWMPEffects2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPEffects2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPEffects2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPEffects2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def render(plevels : TimedLevel*, hdc : HDC, prc : RECT*) : HRESULT
-    @lpVtbl.value.render.unsafe_as(Proc(TimedLevel*, HDC, RECT*, HRESULT)).call(plevels, hdc, prc)
+  def render(this : IWMPEffects2*, plevels : TimedLevel*, hdc : HDC, prc : RECT*) : HRESULT
+    @lpVtbl.value.render.call(this, plevels, hdc, prc)
   end
-  def media_info(lchannelcount : Int32, lsamplerate : Int32, bstrtitle : UInt8*) : HRESULT
-    @lpVtbl.value.media_info.unsafe_as(Proc(Int32, Int32, UInt8*, HRESULT)).call(lchannelcount, lsamplerate, bstrtitle)
+  def media_info(this : IWMPEffects2*, lchannelcount : Int32, lsamplerate : Int32, bstrtitle : UInt8*) : HRESULT
+    @lpVtbl.value.media_info.call(this, lchannelcount, lsamplerate, bstrtitle)
   end
-  def get_capabilities(pdwcapabilities : UInt32*) : HRESULT
-    @lpVtbl.value.get_capabilities.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcapabilities)
+  def get_capabilities(this : IWMPEffects2*, pdwcapabilities : UInt32*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, pdwcapabilities)
   end
-  def get_title(bstrtitle : UInt8**) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrtitle)
+  def get_title(this : IWMPEffects2*, bstrtitle : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, bstrtitle)
   end
-  def get_preset_title(npreset : Int32, bstrpresettitle : UInt8**) : HRESULT
-    @lpVtbl.value.get_preset_title.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(npreset, bstrpresettitle)
+  def get_preset_title(this : IWMPEffects2*, npreset : Int32, bstrpresettitle : UInt8**) : HRESULT
+    @lpVtbl.value.get_preset_title.call(this, npreset, bstrpresettitle)
   end
-  def get_preset_count(pnpresetcount : Int32*) : HRESULT
-    @lpVtbl.value.get_preset_count.unsafe_as(Proc(Int32*, HRESULT)).call(pnpresetcount)
+  def get_preset_count(this : IWMPEffects2*, pnpresetcount : Int32*) : HRESULT
+    @lpVtbl.value.get_preset_count.call(this, pnpresetcount)
   end
-  def set_current_preset(npreset : Int32) : HRESULT
-    @lpVtbl.value.set_current_preset.unsafe_as(Proc(Int32, HRESULT)).call(npreset)
+  def set_current_preset(this : IWMPEffects2*, npreset : Int32) : HRESULT
+    @lpVtbl.value.set_current_preset.call(this, npreset)
   end
-  def get_current_preset(pnpreset : Int32*) : HRESULT
-    @lpVtbl.value.get_current_preset.unsafe_as(Proc(Int32*, HRESULT)).call(pnpreset)
+  def get_current_preset(this : IWMPEffects2*, pnpreset : Int32*) : HRESULT
+    @lpVtbl.value.get_current_preset.call(this, pnpreset)
   end
-  def display_property_page(hwndowner : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.display_property_page.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hwndowner)
+  def display_property_page(this : IWMPEffects2*, hwndowner : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.display_property_page.call(this, hwndowner)
   end
-  def go_fullscreen(ffullscreen : LibC::BOOL) : HRESULT
-    @lpVtbl.value.go_fullscreen.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(ffullscreen)
+  def go_fullscreen(this : IWMPEffects2*, ffullscreen : LibC::BOOL) : HRESULT
+    @lpVtbl.value.go_fullscreen.call(this, ffullscreen)
   end
-  def render_full_screen(plevels : TimedLevel*) : HRESULT
-    @lpVtbl.value.render_full_screen.unsafe_as(Proc(TimedLevel*, HRESULT)).call(plevels)
+  def render_full_screen(this : IWMPEffects2*, plevels : TimedLevel*) : HRESULT
+    @lpVtbl.value.render_full_screen.call(this, plevels)
   end
-  def set_core(pplayer : IWMPCore) : HRESULT
-    @lpVtbl.value.set_core.unsafe_as(Proc(IWMPCore, HRESULT)).call(pplayer)
+  def set_core(this : IWMPEffects2*, pplayer : IWMPCore) : HRESULT
+    @lpVtbl.value.set_core.call(this, pplayer)
   end
-  def create(hwndparent : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.create.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hwndparent)
+  def create(this : IWMPEffects2*, hwndparent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.create.call(this, hwndparent)
   end
-  def destroy : HRESULT
-    @lpVtbl.value.destroy.unsafe_as(Proc(HRESULT)).call
+  def destroy(this : IWMPEffects2*) : HRESULT
+    @lpVtbl.value.destroy.call(this)
   end
-  def notify_new_media(pmedia : IWMPMedia) : HRESULT
-    @lpVtbl.value.notify_new_media.unsafe_as(Proc(IWMPMedia, HRESULT)).call(pmedia)
+  def notify_new_media(this : IWMPEffects2*, pmedia : IWMPMedia) : HRESULT
+    @lpVtbl.value.notify_new_media.call(this, pmedia)
   end
-  def on_window_message(msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, plresultparam : LRESULT*) : HRESULT
-    @lpVtbl.value.on_window_message.unsafe_as(Proc(UInt32, LibC::UINT_PTR, LPARAM, LRESULT*, HRESULT)).call(msg, wparam, lparam, plresultparam)
+  def on_window_message(this : IWMPEffects2*, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, plresultparam : LRESULT*) : HRESULT
+    @lpVtbl.value.on_window_message.call(this, msg, wparam, lparam, plresultparam)
   end
-  def render_windowed(pdata : TimedLevel*, frequiredrender : LibC::BOOL) : HRESULT
-    @lpVtbl.value.render_windowed.unsafe_as(Proc(TimedLevel*, LibC::BOOL, HRESULT)).call(pdata, frequiredrender)
+  def render_windowed(this : IWMPEffects2*, pdata : TimedLevel*, frequiredrender : LibC::BOOL) : HRESULT
+    @lpVtbl.value.render_windowed.call(this, pdata, frequiredrender)
   end
 end
 struct LibWin32::IWMPPluginUI
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPPluginUI*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPPluginUI*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPPluginUI*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_core(pcore : IWMPCore) : HRESULT
-    @lpVtbl.value.set_core.unsafe_as(Proc(IWMPCore, HRESULT)).call(pcore)
+  def set_core(this : IWMPPluginUI*, pcore : IWMPCore) : HRESULT
+    @lpVtbl.value.set_core.call(this, pcore)
   end
-  def create(hwndparent : LibC::HANDLE, phwndwindow : HANDLE*) : HRESULT
-    @lpVtbl.value.create.unsafe_as(Proc(LibC::HANDLE, HANDLE*, HRESULT)).call(hwndparent, phwndwindow)
+  def create(this : IWMPPluginUI*, hwndparent : LibC::HANDLE, phwndwindow : HANDLE*) : HRESULT
+    @lpVtbl.value.create.call(this, hwndparent, phwndwindow)
   end
-  def destroy : HRESULT
-    @lpVtbl.value.destroy.unsafe_as(Proc(HRESULT)).call
+  def destroy(this : IWMPPluginUI*) : HRESULT
+    @lpVtbl.value.destroy.call(this)
   end
-  def display_property_page(hwndparent : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.display_property_page.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hwndparent)
+  def display_property_page(this : IWMPPluginUI*, hwndparent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.display_property_page.call(this, hwndparent)
   end
-  def get_property(pwszname : LibC::LPWSTR, pvarproperty : VARIANT*) : HRESULT
-    @lpVtbl.value.get_property.unsafe_as(Proc(LibC::LPWSTR, VARIANT*, HRESULT)).call(pwszname, pvarproperty)
+  def get_property(this : IWMPPluginUI*, pwszname : LibC::LPWSTR, pvarproperty : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, pwszname, pvarproperty)
   end
-  def set_property(pwszname : LibC::LPWSTR, pvarproperty : VARIANT*) : HRESULT
-    @lpVtbl.value.set_property.unsafe_as(Proc(LibC::LPWSTR, VARIANT*, HRESULT)).call(pwszname, pvarproperty)
+  def set_property(this : IWMPPluginUI*, pwszname : LibC::LPWSTR, pvarproperty : VARIANT*) : HRESULT
+    @lpVtbl.value.set_property.call(this, pwszname, pvarproperty)
   end
-  def translate_accelerator(lpmsg : MSG*) : HRESULT
-    @lpVtbl.value.translate_accelerator.unsafe_as(Proc(MSG*, HRESULT)).call(lpmsg)
+  def translate_accelerator(this : IWMPPluginUI*, lpmsg : MSG*) : HRESULT
+    @lpVtbl.value.translate_accelerator.call(this, lpmsg)
   end
 end
 struct LibWin32::IWMPContentContainer
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPContentContainer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPContentContainer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPContentContainer*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_id(pcontentid : UInt32*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(UInt32*, HRESULT)).call(pcontentid)
+  def get_id(this : IWMPContentContainer*, pcontentid : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pcontentid)
   end
-  def get_price(pbstrprice : UInt8**) : HRESULT
-    @lpVtbl.value.get_price.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprice)
+  def get_price(this : IWMPContentContainer*, pbstrprice : UInt8**) : HRESULT
+    @lpVtbl.value.get_price.call(this, pbstrprice)
   end
-  def get_type(pbstrtype : UInt8**) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtype)
+  def get_type(this : IWMPContentContainer*, pbstrtype : UInt8**) : HRESULT
+    @lpVtbl.value.get_type.call(this, pbstrtype)
   end
-  def get_content_count(pccontent : UInt32*) : HRESULT
-    @lpVtbl.value.get_content_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pccontent)
+  def get_content_count(this : IWMPContentContainer*, pccontent : UInt32*) : HRESULT
+    @lpVtbl.value.get_content_count.call(this, pccontent)
   end
-  def get_content_price(idxcontent : UInt32, pbstrprice : UInt8**) : HRESULT
-    @lpVtbl.value.get_content_price.unsafe_as(Proc(UInt32, UInt8**, HRESULT)).call(idxcontent, pbstrprice)
+  def get_content_price(this : IWMPContentContainer*, idxcontent : UInt32, pbstrprice : UInt8**) : HRESULT
+    @lpVtbl.value.get_content_price.call(this, idxcontent, pbstrprice)
   end
-  def get_content_id(idxcontent : UInt32, pcontentid : UInt32*) : HRESULT
-    @lpVtbl.value.get_content_id.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(idxcontent, pcontentid)
+  def get_content_id(this : IWMPContentContainer*, idxcontent : UInt32, pcontentid : UInt32*) : HRESULT
+    @lpVtbl.value.get_content_id.call(this, idxcontent, pcontentid)
   end
 end
 struct LibWin32::IWMPContentContainerList
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPContentContainerList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPContentContainerList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPContentContainerList*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_transaction_type(pwmptt : WMPTransactionType*) : HRESULT
-    @lpVtbl.value.get_transaction_type.unsafe_as(Proc(WMPTransactionType*, HRESULT)).call(pwmptt)
+  def get_transaction_type(this : IWMPContentContainerList*, pwmptt : WMPTransactionType*) : HRESULT
+    @lpVtbl.value.get_transaction_type.call(this, pwmptt)
   end
-  def get_container_count(pccontainer : UInt32*) : HRESULT
-    @lpVtbl.value.get_container_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pccontainer)
+  def get_container_count(this : IWMPContentContainerList*, pccontainer : UInt32*) : HRESULT
+    @lpVtbl.value.get_container_count.call(this, pccontainer)
   end
-  def get_container(idxcontainer : UInt32, ppcontent : IWMPContentContainer*) : HRESULT
-    @lpVtbl.value.get_container.unsafe_as(Proc(UInt32, IWMPContentContainer*, HRESULT)).call(idxcontainer, ppcontent)
+  def get_container(this : IWMPContentContainerList*, idxcontainer : UInt32, ppcontent : IWMPContentContainer*) : HRESULT
+    @lpVtbl.value.get_container.call(this, idxcontainer, ppcontent)
   end
 end
 struct LibWin32::IWMPContentPartnerCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPContentPartnerCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPContentPartnerCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPContentPartnerCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def notify(type : WMPCallbackNotification, pcontext : VARIANT*) : HRESULT
-    @lpVtbl.value.notify.unsafe_as(Proc(WMPCallbackNotification, VARIANT*, HRESULT)).call(type, pcontext)
+  def notify(this : IWMPContentPartnerCallback*, type : WMPCallbackNotification, pcontext : VARIANT*) : HRESULT
+    @lpVtbl.value.notify.call(this, type, pcontext)
   end
-  def buy_complete(hrresult : HRESULT, dwbuycookie : UInt32) : HRESULT
-    @lpVtbl.value.buy_complete.unsafe_as(Proc(HRESULT, UInt32, HRESULT)).call(hrresult, dwbuycookie)
+  def buy_complete(this : IWMPContentPartnerCallback*, hrresult : HRESULT, dwbuycookie : UInt32) : HRESULT
+    @lpVtbl.value.buy_complete.call(this, hrresult, dwbuycookie)
   end
-  def download_track(cookie : UInt32, bstrtrackurl : UInt8*, dwservicetrackid : UInt32, bstrdownloadparams : UInt8*, hrdownload : HRESULT) : HRESULT
-    @lpVtbl.value.download_track.unsafe_as(Proc(UInt32, UInt8*, UInt32, UInt8*, HRESULT, HRESULT)).call(cookie, bstrtrackurl, dwservicetrackid, bstrdownloadparams, hrdownload)
+  def download_track(this : IWMPContentPartnerCallback*, cookie : UInt32, bstrtrackurl : UInt8*, dwservicetrackid : UInt32, bstrdownloadparams : UInt8*, hrdownload : HRESULT) : HRESULT
+    @lpVtbl.value.download_track.call(this, cookie, bstrtrackurl, dwservicetrackid, bstrdownloadparams, hrdownload)
   end
-  def get_catalog_version(pdwversion : UInt32*, pdwschemaversion : UInt32*, plcid : UInt32*) : HRESULT
-    @lpVtbl.value.get_catalog_version.unsafe_as(Proc(UInt32*, UInt32*, UInt32*, HRESULT)).call(pdwversion, pdwschemaversion, plcid)
+  def get_catalog_version(this : IWMPContentPartnerCallback*, pdwversion : UInt32*, pdwschemaversion : UInt32*, plcid : UInt32*) : HRESULT
+    @lpVtbl.value.get_catalog_version.call(this, pdwversion, pdwschemaversion, plcid)
   end
-  def update_device_complete(bstrdevicename : UInt8*) : HRESULT
-    @lpVtbl.value.update_device_complete.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdevicename)
+  def update_device_complete(this : IWMPContentPartnerCallback*, bstrdevicename : UInt8*) : HRESULT
+    @lpVtbl.value.update_device_complete.call(this, bstrdevicename)
   end
-  def change_view(bstrtype : UInt8*, bstrid : UInt8*, bstrfilter : UInt8*) : HRESULT
-    @lpVtbl.value.change_view.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, HRESULT)).call(bstrtype, bstrid, bstrfilter)
+  def change_view(this : IWMPContentPartnerCallback*, bstrtype : UInt8*, bstrid : UInt8*, bstrfilter : UInt8*) : HRESULT
+    @lpVtbl.value.change_view.call(this, bstrtype, bstrid, bstrfilter)
   end
-  def add_list_contents(dwlistcookie : UInt32, citems : UInt32, prgitems : UInt32*) : HRESULT
-    @lpVtbl.value.add_list_contents.unsafe_as(Proc(UInt32, UInt32, UInt32*, HRESULT)).call(dwlistcookie, citems, prgitems)
+  def add_list_contents(this : IWMPContentPartnerCallback*, dwlistcookie : UInt32, citems : UInt32, prgitems : UInt32*) : HRESULT
+    @lpVtbl.value.add_list_contents.call(this, dwlistcookie, citems, prgitems)
   end
-  def list_contents_complete(dwlistcookie : UInt32, hrsuccess : HRESULT) : HRESULT
-    @lpVtbl.value.list_contents_complete.unsafe_as(Proc(UInt32, HRESULT, HRESULT)).call(dwlistcookie, hrsuccess)
+  def list_contents_complete(this : IWMPContentPartnerCallback*, dwlistcookie : UInt32, hrsuccess : HRESULT) : HRESULT
+    @lpVtbl.value.list_contents_complete.call(this, dwlistcookie, hrsuccess)
   end
-  def send_message_complete(bstrmsg : UInt8*, bstrparam : UInt8*, bstrresult : UInt8*) : HRESULT
-    @lpVtbl.value.send_message_complete.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, HRESULT)).call(bstrmsg, bstrparam, bstrresult)
+  def send_message_complete(this : IWMPContentPartnerCallback*, bstrmsg : UInt8*, bstrparam : UInt8*, bstrresult : UInt8*) : HRESULT
+    @lpVtbl.value.send_message_complete.call(this, bstrmsg, bstrparam, bstrresult)
   end
-  def get_content_i_ds_in_library(pccontentids : UInt32*, pprgids : UInt32**) : HRESULT
-    @lpVtbl.value.get_content_i_ds_in_library.unsafe_as(Proc(UInt32*, UInt32**, HRESULT)).call(pccontentids, pprgids)
+  def get_content_i_ds_in_library(this : IWMPContentPartnerCallback*, pccontentids : UInt32*, pprgids : UInt32**) : HRESULT
+    @lpVtbl.value.get_content_i_ds_in_library.call(this, pccontentids, pprgids)
   end
-  def refresh_license_complete(dwcookie : UInt32, contentid : UInt32, hrrefresh : HRESULT) : HRESULT
-    @lpVtbl.value.refresh_license_complete.unsafe_as(Proc(UInt32, UInt32, HRESULT, HRESULT)).call(dwcookie, contentid, hrrefresh)
+  def refresh_license_complete(this : IWMPContentPartnerCallback*, dwcookie : UInt32, contentid : UInt32, hrrefresh : HRESULT) : HRESULT
+    @lpVtbl.value.refresh_license_complete.call(this, dwcookie, contentid, hrrefresh)
   end
-  def show_popup(lindex : Int32, bstrparameters : UInt8*) : HRESULT
-    @lpVtbl.value.show_popup.unsafe_as(Proc(Int32, UInt8*, HRESULT)).call(lindex, bstrparameters)
+  def show_popup(this : IWMPContentPartnerCallback*, lindex : Int32, bstrparameters : UInt8*) : HRESULT
+    @lpVtbl.value.show_popup.call(this, lindex, bstrparameters)
   end
-  def verify_permission_complete(bstrpermission : UInt8*, pcontext : VARIANT*, hrpermission : HRESULT) : HRESULT
-    @lpVtbl.value.verify_permission_complete.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT, HRESULT)).call(bstrpermission, pcontext, hrpermission)
+  def verify_permission_complete(this : IWMPContentPartnerCallback*, bstrpermission : UInt8*, pcontext : VARIANT*, hrpermission : HRESULT) : HRESULT
+    @lpVtbl.value.verify_permission_complete.call(this, bstrpermission, pcontext, hrpermission)
   end
 end
 struct LibWin32::IWMPContentPartner
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPContentPartner*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPContentPartner*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPContentPartner*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_callback(pcallback : IWMPContentPartnerCallback) : HRESULT
-    @lpVtbl.value.set_callback.unsafe_as(Proc(IWMPContentPartnerCallback, HRESULT)).call(pcallback)
+  def set_callback(this : IWMPContentPartner*, pcallback : IWMPContentPartnerCallback) : HRESULT
+    @lpVtbl.value.set_callback.call(this, pcallback)
   end
-  def notify(type : WMPPartnerNotification, pcontext : VARIANT*) : HRESULT
-    @lpVtbl.value.notify.unsafe_as(Proc(WMPPartnerNotification, VARIANT*, HRESULT)).call(type, pcontext)
+  def notify(this : IWMPContentPartner*, type : WMPPartnerNotification, pcontext : VARIANT*) : HRESULT
+    @lpVtbl.value.notify.call(this, type, pcontext)
   end
-  def get_item_info(bstrinfoname : UInt8*, pcontext : VARIANT*, pdata : VARIANT*) : HRESULT
-    @lpVtbl.value.get_item_info.unsafe_as(Proc(UInt8*, VARIANT*, VARIANT*, HRESULT)).call(bstrinfoname, pcontext, pdata)
+  def get_item_info(this : IWMPContentPartner*, bstrinfoname : UInt8*, pcontext : VARIANT*, pdata : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item_info.call(this, bstrinfoname, pcontext, pdata)
   end
-  def get_content_partner_info(bstrinfoname : UInt8*, pdata : VARIANT*) : HRESULT
-    @lpVtbl.value.get_content_partner_info.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrinfoname, pdata)
+  def get_content_partner_info(this : IWMPContentPartner*, bstrinfoname : UInt8*, pdata : VARIANT*) : HRESULT
+    @lpVtbl.value.get_content_partner_info.call(this, bstrinfoname, pdata)
   end
-  def get_commands(location : UInt8*, plocationcontext : VARIANT*, itemlocation : UInt8*, citemids : UInt32, prgitemids : UInt32*, pcitemids : UInt32*, pprgitems : WMPContextMenuInfo**) : HRESULT
-    @lpVtbl.value.get_commands.unsafe_as(Proc(UInt8*, VARIANT*, UInt8*, UInt32, UInt32*, UInt32*, WMPContextMenuInfo**, HRESULT)).call(location, plocationcontext, itemlocation, citemids, prgitemids, pcitemids, pprgitems)
+  def get_commands(this : IWMPContentPartner*, location : UInt8*, plocationcontext : VARIANT*, itemlocation : UInt8*, citemids : UInt32, prgitemids : UInt32*, pcitemids : UInt32*, pprgitems : WMPContextMenuInfo**) : HRESULT
+    @lpVtbl.value.get_commands.call(this, location, plocationcontext, itemlocation, citemids, prgitemids, pcitemids, pprgitems)
   end
-  def invoke_command(dwcommandid : UInt32, location : UInt8*, plocationcontext : VARIANT*, itemlocation : UInt8*, citemids : UInt32, rgitemids : UInt32*) : HRESULT
-    @lpVtbl.value.invoke_command.unsafe_as(Proc(UInt32, UInt8*, VARIANT*, UInt8*, UInt32, UInt32*, HRESULT)).call(dwcommandid, location, plocationcontext, itemlocation, citemids, rgitemids)
+  def invoke_command(this : IWMPContentPartner*, dwcommandid : UInt32, location : UInt8*, plocationcontext : VARIANT*, itemlocation : UInt8*, citemids : UInt32, rgitemids : UInt32*) : HRESULT
+    @lpVtbl.value.invoke_command.call(this, dwcommandid, location, plocationcontext, itemlocation, citemids, rgitemids)
   end
-  def can_buy_silent(pinfo : IWMPContentContainerList, pbstrtotalprice : UInt8**, psilentok : Int16*) : HRESULT
-    @lpVtbl.value.can_buy_silent.unsafe_as(Proc(IWMPContentContainerList, UInt8**, Int16*, HRESULT)).call(pinfo, pbstrtotalprice, psilentok)
+  def can_buy_silent(this : IWMPContentPartner*, pinfo : IWMPContentContainerList, pbstrtotalprice : UInt8**, psilentok : Int16*) : HRESULT
+    @lpVtbl.value.can_buy_silent.call(this, pinfo, pbstrtotalprice, psilentok)
   end
-  def buy(pinfo : IWMPContentContainerList, cookie : UInt32) : HRESULT
-    @lpVtbl.value.buy.unsafe_as(Proc(IWMPContentContainerList, UInt32, HRESULT)).call(pinfo, cookie)
+  def buy(this : IWMPContentPartner*, pinfo : IWMPContentContainerList, cookie : UInt32) : HRESULT
+    @lpVtbl.value.buy.call(this, pinfo, cookie)
   end
-  def get_streaming_url(st : WMPStreamingType, pstreamcontext : VARIANT*, pbstrurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_streaming_url.unsafe_as(Proc(WMPStreamingType, VARIANT*, UInt8**, HRESULT)).call(st, pstreamcontext, pbstrurl)
+  def get_streaming_url(this : IWMPContentPartner*, st : WMPStreamingType, pstreamcontext : VARIANT*, pbstrurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_streaming_url.call(this, st, pstreamcontext, pbstrurl)
   end
-  def download(pinfo : IWMPContentContainerList, cookie : UInt32) : HRESULT
-    @lpVtbl.value.download.unsafe_as(Proc(IWMPContentContainerList, UInt32, HRESULT)).call(pinfo, cookie)
+  def download(this : IWMPContentPartner*, pinfo : IWMPContentContainerList, cookie : UInt32) : HRESULT
+    @lpVtbl.value.download.call(this, pinfo, cookie)
   end
-  def download_track_complete(hrresult : HRESULT, contentid : UInt32, downloadtrackparam : UInt8*) : HRESULT
-    @lpVtbl.value.download_track_complete.unsafe_as(Proc(HRESULT, UInt32, UInt8*, HRESULT)).call(hrresult, contentid, downloadtrackparam)
+  def download_track_complete(this : IWMPContentPartner*, hrresult : HRESULT, contentid : UInt32, downloadtrackparam : UInt8*) : HRESULT
+    @lpVtbl.value.download_track_complete.call(this, hrresult, contentid, downloadtrackparam)
   end
-  def refresh_license(dwcookie : UInt32, flocal : Int16, bstrurl : UInt8*, type : WMPStreamingType, contentid : UInt32, bstrrefreshreason : UInt8*, preasoncontext : VARIANT*) : HRESULT
-    @lpVtbl.value.refresh_license.unsafe_as(Proc(UInt32, Int16, UInt8*, WMPStreamingType, UInt32, UInt8*, VARIANT*, HRESULT)).call(dwcookie, flocal, bstrurl, type, contentid, bstrrefreshreason, preasoncontext)
+  def refresh_license(this : IWMPContentPartner*, dwcookie : UInt32, flocal : Int16, bstrurl : UInt8*, type : WMPStreamingType, contentid : UInt32, bstrrefreshreason : UInt8*, preasoncontext : VARIANT*) : HRESULT
+    @lpVtbl.value.refresh_license.call(this, dwcookie, flocal, bstrurl, type, contentid, bstrrefreshreason, preasoncontext)
   end
-  def get_catalog_url(dwcatalogversion : UInt32, dwcatalogschemaversion : UInt32, cataloglcid : UInt32, pdwnewcatalogversion : UInt32*, pbstrcatalogurl : UInt8**, pexpirationdate : VARIANT*) : HRESULT
-    @lpVtbl.value.get_catalog_url.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32*, UInt8**, VARIANT*, HRESULT)).call(dwcatalogversion, dwcatalogschemaversion, cataloglcid, pdwnewcatalogversion, pbstrcatalogurl, pexpirationdate)
+  def get_catalog_url(this : IWMPContentPartner*, dwcatalogversion : UInt32, dwcatalogschemaversion : UInt32, cataloglcid : UInt32, pdwnewcatalogversion : UInt32*, pbstrcatalogurl : UInt8**, pexpirationdate : VARIANT*) : HRESULT
+    @lpVtbl.value.get_catalog_url.call(this, dwcatalogversion, dwcatalogschemaversion, cataloglcid, pdwnewcatalogversion, pbstrcatalogurl, pexpirationdate)
   end
-  def get_template(task : WMPTaskType, location : UInt8*, pcontext : VARIANT*, clicklocation : UInt8*, pclickcontext : VARIANT*, bstrfilter : UInt8*, bstrviewparams : UInt8*, pbstrtemplateurl : UInt8**, ptemplatesize : WMPTemplateSize*) : HRESULT
-    @lpVtbl.value.get_template.unsafe_as(Proc(WMPTaskType, UInt8*, VARIANT*, UInt8*, VARIANT*, UInt8*, UInt8*, UInt8**, WMPTemplateSize*, HRESULT)).call(task, location, pcontext, clicklocation, pclickcontext, bstrfilter, bstrviewparams, pbstrtemplateurl, ptemplatesize)
+  def get_template(this : IWMPContentPartner*, task : WMPTaskType, location : UInt8*, pcontext : VARIANT*, clicklocation : UInt8*, pclickcontext : VARIANT*, bstrfilter : UInt8*, bstrviewparams : UInt8*, pbstrtemplateurl : UInt8**, ptemplatesize : WMPTemplateSize*) : HRESULT
+    @lpVtbl.value.get_template.call(this, task, location, pcontext, clicklocation, pclickcontext, bstrfilter, bstrviewparams, pbstrtemplateurl, ptemplatesize)
   end
-  def update_device(bstrdevicename : UInt8*) : HRESULT
-    @lpVtbl.value.update_device.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdevicename)
+  def update_device(this : IWMPContentPartner*, bstrdevicename : UInt8*) : HRESULT
+    @lpVtbl.value.update_device.call(this, bstrdevicename)
   end
-  def get_list_contents(location : UInt8*, pcontext : VARIANT*, bstrlisttype : UInt8*, bstrparams : UInt8*, dwlistcookie : UInt32) : HRESULT
-    @lpVtbl.value.get_list_contents.unsafe_as(Proc(UInt8*, VARIANT*, UInt8*, UInt8*, UInt32, HRESULT)).call(location, pcontext, bstrlisttype, bstrparams, dwlistcookie)
+  def get_list_contents(this : IWMPContentPartner*, location : UInt8*, pcontext : VARIANT*, bstrlisttype : UInt8*, bstrparams : UInt8*, dwlistcookie : UInt32) : HRESULT
+    @lpVtbl.value.get_list_contents.call(this, location, pcontext, bstrlisttype, bstrparams, dwlistcookie)
   end
-  def login(userinfo : BLOB, pwdinfo : BLOB, fusedcachedcreds : Int16, foktocache : Int16) : HRESULT
-    @lpVtbl.value.login.unsafe_as(Proc(BLOB, BLOB, Int16, Int16, HRESULT)).call(userinfo, pwdinfo, fusedcachedcreds, foktocache)
+  def login(this : IWMPContentPartner*, userinfo : BLOB, pwdinfo : BLOB, fusedcachedcreds : Int16, foktocache : Int16) : HRESULT
+    @lpVtbl.value.login.call(this, userinfo, pwdinfo, fusedcachedcreds, foktocache)
   end
-  def authenticate(userinfo : BLOB, pwdinfo : BLOB) : HRESULT
-    @lpVtbl.value.authenticate.unsafe_as(Proc(BLOB, BLOB, HRESULT)).call(userinfo, pwdinfo)
+  def authenticate(this : IWMPContentPartner*, userinfo : BLOB, pwdinfo : BLOB) : HRESULT
+    @lpVtbl.value.authenticate.call(this, userinfo, pwdinfo)
   end
-  def logout : HRESULT
-    @lpVtbl.value.logout.unsafe_as(Proc(HRESULT)).call
+  def logout(this : IWMPContentPartner*) : HRESULT
+    @lpVtbl.value.logout.call(this)
   end
-  def send_message(bstrmsg : UInt8*, bstrparam : UInt8*) : HRESULT
-    @lpVtbl.value.send_message.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstrmsg, bstrparam)
+  def send_message(this : IWMPContentPartner*, bstrmsg : UInt8*, bstrparam : UInt8*) : HRESULT
+    @lpVtbl.value.send_message.call(this, bstrmsg, bstrparam)
   end
-  def station_event(bstrstationeventtype : UInt8*, stationid : UInt32, playlistindex : UInt32, trackid : UInt32, trackdata : UInt8*, dwsecondsplayed : UInt32) : HRESULT
-    @lpVtbl.value.station_event.unsafe_as(Proc(UInt8*, UInt32, UInt32, UInt32, UInt8*, UInt32, HRESULT)).call(bstrstationeventtype, stationid, playlistindex, trackid, trackdata, dwsecondsplayed)
+  def station_event(this : IWMPContentPartner*, bstrstationeventtype : UInt8*, stationid : UInt32, playlistindex : UInt32, trackid : UInt32, trackdata : UInt8*, dwsecondsplayed : UInt32) : HRESULT
+    @lpVtbl.value.station_event.call(this, bstrstationeventtype, stationid, playlistindex, trackid, trackdata, dwsecondsplayed)
   end
-  def compare_container_list_prices(plistbase : IWMPContentContainerList, plistcompare : IWMPContentContainerList, presult : Int32*) : HRESULT
-    @lpVtbl.value.compare_container_list_prices.unsafe_as(Proc(IWMPContentContainerList, IWMPContentContainerList, Int32*, HRESULT)).call(plistbase, plistcompare, presult)
+  def compare_container_list_prices(this : IWMPContentPartner*, plistbase : IWMPContentContainerList, plistcompare : IWMPContentContainerList, presult : Int32*) : HRESULT
+    @lpVtbl.value.compare_container_list_prices.call(this, plistbase, plistcompare, presult)
   end
-  def verify_permission(bstrpermission : UInt8*, pcontext : VARIANT*) : HRESULT
-    @lpVtbl.value.verify_permission.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrpermission, pcontext)
+  def verify_permission(this : IWMPContentPartner*, bstrpermission : UInt8*, pcontext : VARIANT*) : HRESULT
+    @lpVtbl.value.verify_permission.call(this, bstrpermission, pcontext)
   end
 end
 struct LibWin32::IWMPSubscriptionService
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPSubscriptionService*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPSubscriptionService*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPSubscriptionService*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def allow_play(hwnd : LibC::HANDLE, pmedia : IWMPMedia, pfallowplay : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.allow_play.unsafe_as(Proc(LibC::HANDLE, IWMPMedia, LibC::BOOL*, HRESULT)).call(hwnd, pmedia, pfallowplay)
+  def allow_play(this : IWMPSubscriptionService*, hwnd : LibC::HANDLE, pmedia : IWMPMedia, pfallowplay : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.allow_play.call(this, hwnd, pmedia, pfallowplay)
   end
-  def allow_cd_burn(hwnd : LibC::HANDLE, pplaylist : IWMPPlaylist, pfallowburn : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.allow_cd_burn.unsafe_as(Proc(LibC::HANDLE, IWMPPlaylist, LibC::BOOL*, HRESULT)).call(hwnd, pplaylist, pfallowburn)
+  def allow_cd_burn(this : IWMPSubscriptionService*, hwnd : LibC::HANDLE, pplaylist : IWMPPlaylist, pfallowburn : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.allow_cd_burn.call(this, hwnd, pplaylist, pfallowburn)
   end
-  def allow_pda_transfer(hwnd : LibC::HANDLE, pplaylist : IWMPPlaylist, pfallowtransfer : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.allow_pda_transfer.unsafe_as(Proc(LibC::HANDLE, IWMPPlaylist, LibC::BOOL*, HRESULT)).call(hwnd, pplaylist, pfallowtransfer)
+  def allow_pda_transfer(this : IWMPSubscriptionService*, hwnd : LibC::HANDLE, pplaylist : IWMPPlaylist, pfallowtransfer : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.allow_pda_transfer.call(this, hwnd, pplaylist, pfallowtransfer)
   end
-  def start_background_processing(hwnd : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.start_background_processing.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hwnd)
+  def start_background_processing(this : IWMPSubscriptionService*, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.start_background_processing.call(this, hwnd)
   end
 end
 struct LibWin32::IWMPSubscriptionServiceCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPSubscriptionServiceCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPSubscriptionServiceCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPSubscriptionServiceCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_complete(hrresult : HRESULT) : HRESULT
-    @lpVtbl.value.on_complete.unsafe_as(Proc(HRESULT, HRESULT)).call(hrresult)
+  def on_complete(this : IWMPSubscriptionServiceCallback*, hrresult : HRESULT) : HRESULT
+    @lpVtbl.value.on_complete.call(this, hrresult)
   end
 end
 struct LibWin32::IWMPSubscriptionService2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPSubscriptionService2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPSubscriptionService2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPSubscriptionService2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def allow_play(hwnd : LibC::HANDLE, pmedia : IWMPMedia, pfallowplay : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.allow_play.unsafe_as(Proc(LibC::HANDLE, IWMPMedia, LibC::BOOL*, HRESULT)).call(hwnd, pmedia, pfallowplay)
+  def allow_play(this : IWMPSubscriptionService2*, hwnd : LibC::HANDLE, pmedia : IWMPMedia, pfallowplay : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.allow_play.call(this, hwnd, pmedia, pfallowplay)
   end
-  def allow_cd_burn(hwnd : LibC::HANDLE, pplaylist : IWMPPlaylist, pfallowburn : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.allow_cd_burn.unsafe_as(Proc(LibC::HANDLE, IWMPPlaylist, LibC::BOOL*, HRESULT)).call(hwnd, pplaylist, pfallowburn)
+  def allow_cd_burn(this : IWMPSubscriptionService2*, hwnd : LibC::HANDLE, pplaylist : IWMPPlaylist, pfallowburn : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.allow_cd_burn.call(this, hwnd, pplaylist, pfallowburn)
   end
-  def allow_pda_transfer(hwnd : LibC::HANDLE, pplaylist : IWMPPlaylist, pfallowtransfer : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.allow_pda_transfer.unsafe_as(Proc(LibC::HANDLE, IWMPPlaylist, LibC::BOOL*, HRESULT)).call(hwnd, pplaylist, pfallowtransfer)
+  def allow_pda_transfer(this : IWMPSubscriptionService2*, hwnd : LibC::HANDLE, pplaylist : IWMPPlaylist, pfallowtransfer : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.allow_pda_transfer.call(this, hwnd, pplaylist, pfallowtransfer)
   end
-  def start_background_processing(hwnd : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.start_background_processing.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hwnd)
+  def start_background_processing(this : IWMPSubscriptionService2*, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.start_background_processing.call(this, hwnd)
   end
-  def stop_background_processing : HRESULT
-    @lpVtbl.value.stop_background_processing.unsafe_as(Proc(HRESULT)).call
+  def stop_background_processing(this : IWMPSubscriptionService2*) : HRESULT
+    @lpVtbl.value.stop_background_processing.call(this)
   end
-  def service_event(event : WMPSubscriptionServiceEvent) : HRESULT
-    @lpVtbl.value.service_event.unsafe_as(Proc(WMPSubscriptionServiceEvent, HRESULT)).call(event)
+  def service_event(this : IWMPSubscriptionService2*, event : WMPSubscriptionServiceEvent) : HRESULT
+    @lpVtbl.value.service_event.call(this, event)
   end
-  def device_available(bstrdevicename : UInt8*, pcb : IWMPSubscriptionServiceCallback) : HRESULT
-    @lpVtbl.value.device_available.unsafe_as(Proc(UInt8*, IWMPSubscriptionServiceCallback, HRESULT)).call(bstrdevicename, pcb)
+  def device_available(this : IWMPSubscriptionService2*, bstrdevicename : UInt8*, pcb : IWMPSubscriptionServiceCallback) : HRESULT
+    @lpVtbl.value.device_available.call(this, bstrdevicename, pcb)
   end
-  def prepare_for_sync(bstrfilename : UInt8*, bstrdevicename : UInt8*, pcb : IWMPSubscriptionServiceCallback) : HRESULT
-    @lpVtbl.value.prepare_for_sync.unsafe_as(Proc(UInt8*, UInt8*, IWMPSubscriptionServiceCallback, HRESULT)).call(bstrfilename, bstrdevicename, pcb)
+  def prepare_for_sync(this : IWMPSubscriptionService2*, bstrfilename : UInt8*, bstrdevicename : UInt8*, pcb : IWMPSubscriptionServiceCallback) : HRESULT
+    @lpVtbl.value.prepare_for_sync.call(this, bstrfilename, bstrdevicename, pcb)
   end
 end
 struct LibWin32::IWMPDownloadItem
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPDownloadItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPDownloadItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPDownloadItem*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPDownloadItem*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPDownloadItem*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPDownloadItem*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPDownloadItem*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_source_url(pbstrurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_source_url.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrurl)
+  def get_source_url(this : IWMPDownloadItem*, pbstrurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_url.call(this, pbstrurl)
   end
-  def get_size(plsize : Int32*) : HRESULT
-    @lpVtbl.value.get_size.unsafe_as(Proc(Int32*, HRESULT)).call(plsize)
+  def get_size(this : IWMPDownloadItem*, plsize : Int32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, plsize)
   end
-  def get_type(pbstrtype : UInt8**) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtype)
+  def get_type(this : IWMPDownloadItem*, pbstrtype : UInt8**) : HRESULT
+    @lpVtbl.value.get_type.call(this, pbstrtype)
   end
-  def get_progress(plprogress : Int32*) : HRESULT
-    @lpVtbl.value.get_progress.unsafe_as(Proc(Int32*, HRESULT)).call(plprogress)
+  def get_progress(this : IWMPDownloadItem*, plprogress : Int32*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, plprogress)
   end
-  def get_download_state(pwmpsdls : WMPSubscriptionDownloadState*) : HRESULT
-    @lpVtbl.value.get_download_state.unsafe_as(Proc(WMPSubscriptionDownloadState*, HRESULT)).call(pwmpsdls)
+  def get_download_state(this : IWMPDownloadItem*, pwmpsdls : WMPSubscriptionDownloadState*) : HRESULT
+    @lpVtbl.value.get_download_state.call(this, pwmpsdls)
   end
-  def pause : HRESULT
-    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  def pause(this : IWMPDownloadItem*) : HRESULT
+    @lpVtbl.value.pause.call(this)
   end
-  def resume : HRESULT
-    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  def resume(this : IWMPDownloadItem*) : HRESULT
+    @lpVtbl.value.resume.call(this)
   end
-  def cancel : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  def cancel(this : IWMPDownloadItem*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
   end
 end
 struct LibWin32::IWMPDownloadItem2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPDownloadItem2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPDownloadItem2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPDownloadItem2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPDownloadItem2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPDownloadItem2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPDownloadItem2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPDownloadItem2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_source_url(pbstrurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_source_url.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrurl)
+  def get_source_url(this : IWMPDownloadItem2*, pbstrurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_url.call(this, pbstrurl)
   end
-  def get_size(plsize : Int32*) : HRESULT
-    @lpVtbl.value.get_size.unsafe_as(Proc(Int32*, HRESULT)).call(plsize)
+  def get_size(this : IWMPDownloadItem2*, plsize : Int32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, plsize)
   end
-  def get_type(pbstrtype : UInt8**) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtype)
+  def get_type(this : IWMPDownloadItem2*, pbstrtype : UInt8**) : HRESULT
+    @lpVtbl.value.get_type.call(this, pbstrtype)
   end
-  def get_progress(plprogress : Int32*) : HRESULT
-    @lpVtbl.value.get_progress.unsafe_as(Proc(Int32*, HRESULT)).call(plprogress)
+  def get_progress(this : IWMPDownloadItem2*, plprogress : Int32*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, plprogress)
   end
-  def get_download_state(pwmpsdls : WMPSubscriptionDownloadState*) : HRESULT
-    @lpVtbl.value.get_download_state.unsafe_as(Proc(WMPSubscriptionDownloadState*, HRESULT)).call(pwmpsdls)
+  def get_download_state(this : IWMPDownloadItem2*, pwmpsdls : WMPSubscriptionDownloadState*) : HRESULT
+    @lpVtbl.value.get_download_state.call(this, pwmpsdls)
   end
-  def pause : HRESULT
-    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  def pause(this : IWMPDownloadItem2*) : HRESULT
+    @lpVtbl.value.pause.call(this)
   end
-  def resume : HRESULT
-    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  def resume(this : IWMPDownloadItem2*) : HRESULT
+    @lpVtbl.value.resume.call(this)
   end
-  def cancel : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  def cancel(this : IWMPDownloadItem2*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
   end
-  def get_item_info(bstritemname : UInt8*, pbstrval : UInt8**) : HRESULT
-    @lpVtbl.value.get_item_info.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstritemname, pbstrval)
+  def get_item_info(this : IWMPDownloadItem2*, bstritemname : UInt8*, pbstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_info.call(this, bstritemname, pbstrval)
   end
 end
 struct LibWin32::IWMPDownloadCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPDownloadCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPDownloadCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPDownloadCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPDownloadCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPDownloadCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPDownloadCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPDownloadCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_id(plid : Int32*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(Int32*, HRESULT)).call(plid)
+  def get_id(this : IWMPDownloadCollection*, plid : Int32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, plid)
   end
-  def get_count(plcount : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  def get_count(this : IWMPDownloadCollection*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
   end
-  def item(litem : Int32, ppdownload : IWMPDownloadItem2*) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(Int32, IWMPDownloadItem2*, HRESULT)).call(litem, ppdownload)
+  def item(this : IWMPDownloadCollection*, litem : Int32, ppdownload : IWMPDownloadItem2*) : HRESULT
+    @lpVtbl.value.item.call(this, litem, ppdownload)
   end
-  def start_download(bstrsourceurl : UInt8*, bstrtype : UInt8*, ppdownload : IWMPDownloadItem2*) : HRESULT
-    @lpVtbl.value.start_download.unsafe_as(Proc(UInt8*, UInt8*, IWMPDownloadItem2*, HRESULT)).call(bstrsourceurl, bstrtype, ppdownload)
+  def start_download(this : IWMPDownloadCollection*, bstrsourceurl : UInt8*, bstrtype : UInt8*, ppdownload : IWMPDownloadItem2*) : HRESULT
+    @lpVtbl.value.start_download.call(this, bstrsourceurl, bstrtype, ppdownload)
   end
-  def remove_item(litem : Int32) : HRESULT
-    @lpVtbl.value.remove_item.unsafe_as(Proc(Int32, HRESULT)).call(litem)
+  def remove_item(this : IWMPDownloadCollection*, litem : Int32) : HRESULT
+    @lpVtbl.value.remove_item.call(this, litem)
   end
-  def clear : HRESULT
-    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  def clear(this : IWMPDownloadCollection*) : HRESULT
+    @lpVtbl.value.clear.call(this)
   end
 end
 struct LibWin32::IWMPDownloadManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMPDownloadManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMPDownloadManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMPDownloadManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMPDownloadManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMPDownloadManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMPDownloadManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMPDownloadManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_download_collection(lcollectionid : Int32, ppcollection : IWMPDownloadCollection*) : HRESULT
-    @lpVtbl.value.get_download_collection.unsafe_as(Proc(Int32, IWMPDownloadCollection*, HRESULT)).call(lcollectionid, ppcollection)
+  def get_download_collection(this : IWMPDownloadManager*, lcollectionid : Int32, ppcollection : IWMPDownloadCollection*) : HRESULT
+    @lpVtbl.value.get_download_collection.call(this, lcollectionid, ppcollection)
   end
-  def create_download_collection(ppcollection : IWMPDownloadCollection*) : HRESULT
-    @lpVtbl.value.create_download_collection.unsafe_as(Proc(IWMPDownloadCollection*, HRESULT)).call(ppcollection)
+  def create_download_collection(this : IWMPDownloadManager*, ppcollection : IWMPDownloadCollection*) : HRESULT
+    @lpVtbl.value.create_download_collection.call(this, ppcollection)
   end
 end

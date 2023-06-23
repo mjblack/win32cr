@@ -54,10 +54,10 @@ lib LibWin32
 
 
   struct IWaaSAssessorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_os_update_assessment : UInt64
+    query_interface : Proc(IWaaSAssessor*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWaaSAssessor*, UInt32)
+    release : Proc(IWaaSAssessor*, UInt32)
+    get_os_update_assessment : Proc(IWaaSAssessor*, OSUpdateAssessment*, HRESULT)
   end
 
   IWaaSAssessor_GUID = "2347bbef-1a3b-45a4-902d-3e09c269b45e"
@@ -68,16 +68,16 @@ lib LibWin32
 
 end
 struct LibWin32::IWaaSAssessor
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWaaSAssessor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWaaSAssessor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWaaSAssessor*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_os_update_assessment(result : OSUpdateAssessment*) : HRESULT
-    @lpVtbl.value.get_os_update_assessment.unsafe_as(Proc(OSUpdateAssessment*, HRESULT)).call(result)
+  def get_os_update_assessment(this : IWaaSAssessor*, result : OSUpdateAssessment*) : HRESULT
+    @lpVtbl.value.get_os_update_assessment.call(this, result)
   end
 end

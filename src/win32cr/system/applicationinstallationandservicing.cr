@@ -1657,16 +1657,16 @@ lib LibWin32
 
 
   struct IValidateVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    open_database : UInt64
-    open_cub : UInt64
-    close_database : UInt64
-    close_cub : UInt64
-    set_display : UInt64
-    set_status : UInt64
-    validate : UInt64
+    query_interface : Proc(IValidate*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IValidate*, UInt32)
+    release : Proc(IValidate*, UInt32)
+    open_database : Proc(IValidate*, LibC::LPWSTR, HRESULT)
+    open_cub : Proc(IValidate*, LibC::LPWSTR, HRESULT)
+    close_database : Proc(IValidate*, HRESULT)
+    close_cub : Proc(IValidate*, HRESULT)
+    set_display : Proc(IValidate*, LPDISPLAYVAL, Void*, HRESULT)
+    set_status : Proc(IValidate*, LPEVALCOMCALLBACK, Void*, HRESULT)
+    validate : Proc(IValidate*, LibC::LPWSTR, HRESULT)
   end
 
   IValidate_GUID = "e482e5c6-e31e-4143-a2e6-dbc3d8e4b8d3"
@@ -1676,13 +1676,13 @@ lib LibWin32
   end
 
   struct IEnumMsmStringVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    next : UInt64
-    skip : UInt64
-    reset : UInt64
-    clone : UInt64
+    query_interface : Proc(IEnumMsmString*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEnumMsmString*, UInt32)
+    release : Proc(IEnumMsmString*, UInt32)
+    next : Proc(IEnumMsmString*, UInt32, UInt8**, UInt32*, HRESULT)
+    skip : Proc(IEnumMsmString*, UInt32, HRESULT)
+    reset : Proc(IEnumMsmString*, HRESULT)
+    clone : Proc(IEnumMsmString*, IEnumMsmString*, HRESULT)
   end
 
   IEnumMsmString_GUID = "0adda826-2c26-11d2-ad65-00a0c9af11a6"
@@ -1692,16 +1692,16 @@ lib LibWin32
   end
 
   struct IMsmStringsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_item : UInt64
-    get_count : UInt64
-    get__new_enum : UInt64
+    query_interface : Proc(IMsmStrings*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMsmStrings*, UInt32)
+    release : Proc(IMsmStrings*, UInt32)
+    get_type_info_count : Proc(IMsmStrings*, UInt32*, HRESULT)
+    get_type_info : Proc(IMsmStrings*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMsmStrings*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMsmStrings*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_item : Proc(IMsmStrings*, Int32, UInt8**, HRESULT)
+    get_count : Proc(IMsmStrings*, Int32*, HRESULT)
+    get__new_enum : Proc(IMsmStrings*, IUnknown*, HRESULT)
   end
 
   IMsmStrings_GUID = "0adda827-2c26-11d2-ad65-00a0c9af11a6"
@@ -1711,20 +1711,20 @@ lib LibWin32
   end
 
   struct IMsmErrorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_type : UInt64
-    get_path : UInt64
-    get_language : UInt64
-    get_database_table : UInt64
-    get_database_keys : UInt64
-    get_module_table : UInt64
-    get_module_keys : UInt64
+    query_interface : Proc(IMsmError*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMsmError*, UInt32)
+    release : Proc(IMsmError*, UInt32)
+    get_type_info_count : Proc(IMsmError*, UInt32*, HRESULT)
+    get_type_info : Proc(IMsmError*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMsmError*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMsmError*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_type : Proc(IMsmError*, Msmerrortype*, HRESULT)
+    get_path : Proc(IMsmError*, UInt8**, HRESULT)
+    get_language : Proc(IMsmError*, Int16*, HRESULT)
+    get_database_table : Proc(IMsmError*, UInt8**, HRESULT)
+    get_database_keys : Proc(IMsmError*, IMsmStrings*, HRESULT)
+    get_module_table : Proc(IMsmError*, UInt8**, HRESULT)
+    get_module_keys : Proc(IMsmError*, IMsmStrings*, HRESULT)
   end
 
   IMsmError_GUID = "0adda828-2c26-11d2-ad65-00a0c9af11a6"
@@ -1734,13 +1734,13 @@ lib LibWin32
   end
 
   struct IEnumMsmErrorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    next : UInt64
-    skip : UInt64
-    reset : UInt64
-    clone : UInt64
+    query_interface : Proc(IEnumMsmError*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEnumMsmError*, UInt32)
+    release : Proc(IEnumMsmError*, UInt32)
+    next : Proc(IEnumMsmError*, UInt32, IMsmError*, UInt32*, HRESULT)
+    skip : Proc(IEnumMsmError*, UInt32, HRESULT)
+    reset : Proc(IEnumMsmError*, HRESULT)
+    clone : Proc(IEnumMsmError*, IEnumMsmError*, HRESULT)
   end
 
   IEnumMsmError_GUID = "0adda829-2c26-11d2-ad65-00a0c9af11a6"
@@ -1750,16 +1750,16 @@ lib LibWin32
   end
 
   struct IMsmErrorsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_item : UInt64
-    get_count : UInt64
-    get__new_enum : UInt64
+    query_interface : Proc(IMsmErrors*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMsmErrors*, UInt32)
+    release : Proc(IMsmErrors*, UInt32)
+    get_type_info_count : Proc(IMsmErrors*, UInt32*, HRESULT)
+    get_type_info : Proc(IMsmErrors*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMsmErrors*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMsmErrors*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_item : Proc(IMsmErrors*, Int32, IMsmError*, HRESULT)
+    get_count : Proc(IMsmErrors*, Int32*, HRESULT)
+    get__new_enum : Proc(IMsmErrors*, IUnknown*, HRESULT)
   end
 
   IMsmErrors_GUID = "0adda82a-2c26-11d2-ad65-00a0c9af11a6"
@@ -1769,16 +1769,16 @@ lib LibWin32
   end
 
   struct IMsmDependencyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_module : UInt64
-    get_language : UInt64
-    get_version : UInt64
+    query_interface : Proc(IMsmDependency*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMsmDependency*, UInt32)
+    release : Proc(IMsmDependency*, UInt32)
+    get_type_info_count : Proc(IMsmDependency*, UInt32*, HRESULT)
+    get_type_info : Proc(IMsmDependency*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMsmDependency*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMsmDependency*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_module : Proc(IMsmDependency*, UInt8**, HRESULT)
+    get_language : Proc(IMsmDependency*, Int16*, HRESULT)
+    get_version : Proc(IMsmDependency*, UInt8**, HRESULT)
   end
 
   IMsmDependency_GUID = "0adda82b-2c26-11d2-ad65-00a0c9af11a6"
@@ -1788,13 +1788,13 @@ lib LibWin32
   end
 
   struct IEnumMsmDependencyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    next : UInt64
-    skip : UInt64
-    reset : UInt64
-    clone : UInt64
+    query_interface : Proc(IEnumMsmDependency*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEnumMsmDependency*, UInt32)
+    release : Proc(IEnumMsmDependency*, UInt32)
+    next : Proc(IEnumMsmDependency*, UInt32, IMsmDependency*, UInt32*, HRESULT)
+    skip : Proc(IEnumMsmDependency*, UInt32, HRESULT)
+    reset : Proc(IEnumMsmDependency*, HRESULT)
+    clone : Proc(IEnumMsmDependency*, IEnumMsmDependency*, HRESULT)
   end
 
   IEnumMsmDependency_GUID = "0adda82c-2c26-11d2-ad65-00a0c9af11a6"
@@ -1804,16 +1804,16 @@ lib LibWin32
   end
 
   struct IMsmDependenciesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_item : UInt64
-    get_count : UInt64
-    get__new_enum : UInt64
+    query_interface : Proc(IMsmDependencies*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMsmDependencies*, UInt32)
+    release : Proc(IMsmDependencies*, UInt32)
+    get_type_info_count : Proc(IMsmDependencies*, UInt32*, HRESULT)
+    get_type_info : Proc(IMsmDependencies*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMsmDependencies*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMsmDependencies*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_item : Proc(IMsmDependencies*, Int32, IMsmDependency*, HRESULT)
+    get_count : Proc(IMsmDependencies*, Int32*, HRESULT)
+    get__new_enum : Proc(IMsmDependencies*, IUnknown*, HRESULT)
   end
 
   IMsmDependencies_GUID = "0adda82d-2c26-11d2-ad65-00a0c9af11a6"
@@ -1823,26 +1823,26 @@ lib LibWin32
   end
 
   struct IMsmMergeVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    open_database : UInt64
-    open_module : UInt64
-    close_database : UInt64
-    close_module : UInt64
-    open_log : UInt64
-    close_log : UInt64
-    log : UInt64
-    get_errors : UInt64
-    get_dependencies : UInt64
-    merge : UInt64
-    connect : UInt64
-    extract_cab : UInt64
-    extract_files : UInt64
+    query_interface : Proc(IMsmMerge*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMsmMerge*, UInt32)
+    release : Proc(IMsmMerge*, UInt32)
+    get_type_info_count : Proc(IMsmMerge*, UInt32*, HRESULT)
+    get_type_info : Proc(IMsmMerge*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMsmMerge*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMsmMerge*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    open_database : Proc(IMsmMerge*, UInt8*, HRESULT)
+    open_module : Proc(IMsmMerge*, UInt8*, Int16, HRESULT)
+    close_database : Proc(IMsmMerge*, Int16, HRESULT)
+    close_module : Proc(IMsmMerge*, HRESULT)
+    open_log : Proc(IMsmMerge*, UInt8*, HRESULT)
+    close_log : Proc(IMsmMerge*, HRESULT)
+    log : Proc(IMsmMerge*, UInt8*, HRESULT)
+    get_errors : Proc(IMsmMerge*, IMsmErrors*, HRESULT)
+    get_dependencies : Proc(IMsmMerge*, IMsmDependencies*, HRESULT)
+    merge : Proc(IMsmMerge*, UInt8*, UInt8*, HRESULT)
+    connect : Proc(IMsmMerge*, UInt8*, HRESULT)
+    extract_cab : Proc(IMsmMerge*, UInt8*, HRESULT)
+    extract_files : Proc(IMsmMerge*, UInt8*, HRESULT)
   end
 
   IMsmMerge_GUID = "0adda82e-2c26-11d2-ad65-00a0c9af11a6"
@@ -1852,14 +1852,14 @@ lib LibWin32
   end
 
   struct IMsmGetFilesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_module_files : UInt64
+    query_interface : Proc(IMsmGetFiles*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMsmGetFiles*, UInt32)
+    release : Proc(IMsmGetFiles*, UInt32)
+    get_type_info_count : Proc(IMsmGetFiles*, UInt32*, HRESULT)
+    get_type_info : Proc(IMsmGetFiles*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMsmGetFiles*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMsmGetFiles*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_module_files : Proc(IMsmGetFiles*, IMsmStrings*, HRESULT)
   end
 
   IMsmGetFiles_GUID = "7041ae26-2d78-11d2-888a-00a0c981b015"
@@ -1869,18 +1869,18 @@ lib LibWin32
   end
 
   struct IAssemblyNameVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_property : UInt64
-    get_property : UInt64
-    finalize : UInt64
-    get_display_name : UInt64
-    reserved : UInt64
-    get_name : UInt64
-    get_version : UInt64
-    is_equal : UInt64
-    clone : UInt64
+    query_interface : Proc(IAssemblyName*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IAssemblyName*, UInt32)
+    release : Proc(IAssemblyName*, UInt32)
+    set_property : Proc(IAssemblyName*, UInt32, Void*, UInt32, HRESULT)
+    get_property : Proc(IAssemblyName*, UInt32, Void*, UInt32*, HRESULT)
+    finalize : Proc(IAssemblyName*, HRESULT)
+    get_display_name : Proc(IAssemblyName*, Char*, UInt32*, UInt32, HRESULT)
+    reserved : Proc(IAssemblyName*, Guid*, IUnknown, IUnknown, LibC::LPWSTR, Int64, Void*, UInt32, Void**, HRESULT)
+    get_name : Proc(IAssemblyName*, UInt32*, Char*, HRESULT)
+    get_version : Proc(IAssemblyName*, UInt32*, UInt32*, HRESULT)
+    is_equal : Proc(IAssemblyName*, IAssemblyName, UInt32, HRESULT)
+    clone : Proc(IAssemblyName*, IAssemblyName*, HRESULT)
   end
 
   IAssemblyName_GUID = "cd193bc0-b4bc-11d2-9833-00c04fc31d2e"
@@ -1890,12 +1890,12 @@ lib LibWin32
   end
 
   struct IAssemblyCacheItemVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_stream : UInt64
-    commit : UInt64
-    abort_item : UInt64
+    query_interface : Proc(IAssemblyCacheItem*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IAssemblyCacheItem*, UInt32)
+    release : Proc(IAssemblyCacheItem*, UInt32)
+    create_stream : Proc(IAssemblyCacheItem*, UInt32, LibC::LPWSTR, UInt32, UInt32, IStream*, ULARGE_INTEGER*, HRESULT)
+    commit : Proc(IAssemblyCacheItem*, UInt32, UInt32*, HRESULT)
+    abort_item : Proc(IAssemblyCacheItem*, HRESULT)
   end
 
   IAssemblyCacheItem_GUID = "9e3aaeb4-d1cd-11d2-bab9-00c04f8eceae"
@@ -1905,14 +1905,14 @@ lib LibWin32
   end
 
   struct IAssemblyCacheVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    uninstall_assembly : UInt64
-    query_assembly_info : UInt64
-    create_assembly_cache_item : UInt64
-    reserved : UInt64
-    install_assembly : UInt64
+    query_interface : Proc(IAssemblyCache*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IAssemblyCache*, UInt32)
+    release : Proc(IAssemblyCache*, UInt32)
+    uninstall_assembly : Proc(IAssemblyCache*, UInt32, LibC::LPWSTR, FUSION_INSTALL_REFERENCE*, IASSEMBLYCACHE_UNINSTALL_DISPOSITION*, HRESULT)
+    query_assembly_info : Proc(IAssemblyCache*, QUERYASMINFO_FLAGS, LibC::LPWSTR, ASSEMBLY_INFO*, HRESULT)
+    create_assembly_cache_item : Proc(IAssemblyCache*, UInt32, Void*, IAssemblyCacheItem*, LibC::LPWSTR, HRESULT)
+    reserved : Proc(IAssemblyCache*, IUnknown*, HRESULT)
+    install_assembly : Proc(IAssemblyCache*, UInt32, LibC::LPWSTR, FUSION_INSTALL_REFERENCE*, HRESULT)
   end
 
   IAssemblyCache_GUID = "e707dcde-d1cd-11d2-bab9-00c04f8eceae"
@@ -1922,64 +1922,64 @@ lib LibWin32
   end
 
   struct IPMApplicationInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_product_id : UInt64
-    get_instance_id : UInt64
-    get_offer_id : UInt64
-    get_default_task : UInt64
-    get_app_title : UInt64
-    get_icon_path : UInt64
-    get_notification_state : UInt64
-    get_app_install_type : UInt64
-    get_state : UInt64
-    get_is_revoked : UInt64
-    get_update_available : UInt64
-    get_install_date : UInt64
-    get_is_uninstallable : UInt64
-    get_is_themable : UInt64
-    get_is_trial : UInt64
-    get_install_path : UInt64
-    get_data_root : UInt64
-    get_genre : UInt64
-    get_publisher : UInt64
-    get_author : UInt64
-    get_description : UInt64
-    get_version : UInt64
-    get_invocation_info : UInt64
-    get_app_plat_major_version : UInt64
-    get_app_plat_minor_version : UInt64
-    get_publisher_id : UInt64
-    get_is_multi_core : UInt64
-    get_sid : UInt64
-    get_app_plat_major_version_light_up : UInt64
-    get_app_plat_minor_version_light_up : UInt64
-    set_update_available : UInt64
-    set_notification_state : UInt64
-    set_icon_path : UInt64
-    set_uninstallable_state : UInt64
-    get_is_pinable_on_kid_zone : UInt64
-    get_is_originally_pre_installed : UInt64
-    get_is_install_on_sd : UInt64
-    get_is_optout_on_sd : UInt64
-    get_is_optout_backup_restore : UInt64
-    set_enterprise_disabled : UInt64
-    set_enterprise_uninstallable : UInt64
-    get_enterprise_disabled : UInt64
-    get_enterprise_uninstallable : UInt64
-    get_is_visible_on_app_list : UInt64
-    get_is_inbox_app : UInt64
-    get_storage_id : UInt64
-    get_start_app_blob : UInt64
-    get_is_movable : UInt64
-    get_deployment_app_enumeration_hub_filter : UInt64
-    get_modified_date : UInt64
-    get_is_originally_restored : UInt64
-    get_should_defer_mdil_bind : UInt64
-    get_is_fully_pre_install : UInt64
-    set_is_mdil_maintenance_needed : UInt64
-    set_title : UInt64
+    query_interface : Proc(IPMApplicationInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMApplicationInfo*, UInt32)
+    release : Proc(IPMApplicationInfo*, UInt32)
+    get_product_id : Proc(IPMApplicationInfo*, Guid*, HRESULT)
+    get_instance_id : Proc(IPMApplicationInfo*, Guid*, HRESULT)
+    get_offer_id : Proc(IPMApplicationInfo*, Guid*, HRESULT)
+    get_default_task : Proc(IPMApplicationInfo*, UInt8**, HRESULT)
+    get_app_title : Proc(IPMApplicationInfo*, UInt8**, HRESULT)
+    get_icon_path : Proc(IPMApplicationInfo*, UInt8**, HRESULT)
+    get_notification_state : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
+    get_app_install_type : Proc(IPMApplicationInfo*, PM_APPLICATION_INSTALL_TYPE*, HRESULT)
+    get_state : Proc(IPMApplicationInfo*, PM_APPLICATION_STATE*, HRESULT)
+    get_is_revoked : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
+    get_update_available : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
+    get_install_date : Proc(IPMApplicationInfo*, FILETIME*, HRESULT)
+    get_is_uninstallable : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
+    get_is_themable : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
+    get_is_trial : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
+    get_install_path : Proc(IPMApplicationInfo*, UInt8**, HRESULT)
+    get_data_root : Proc(IPMApplicationInfo*, UInt8**, HRESULT)
+    get_genre : Proc(IPMApplicationInfo*, PM_APP_GENRE*, HRESULT)
+    get_publisher : Proc(IPMApplicationInfo*, UInt8**, HRESULT)
+    get_author : Proc(IPMApplicationInfo*, UInt8**, HRESULT)
+    get_description : Proc(IPMApplicationInfo*, UInt8**, HRESULT)
+    get_version : Proc(IPMApplicationInfo*, UInt8**, HRESULT)
+    get_invocation_info : Proc(IPMApplicationInfo*, UInt8**, UInt8**, HRESULT)
+    get_app_plat_major_version : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
+    get_app_plat_minor_version : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
+    get_publisher_id : Proc(IPMApplicationInfo*, Guid*, HRESULT)
+    get_is_multi_core : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
+    get_sid : Proc(IPMApplicationInfo*, UInt8**, HRESULT)
+    get_app_plat_major_version_light_up : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
+    get_app_plat_minor_version_light_up : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
+    set_update_available : Proc(IPMApplicationInfo*, LibC::BOOL, HRESULT)
+    set_notification_state : Proc(IPMApplicationInfo*, LibC::BOOL, HRESULT)
+    set_icon_path : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
+    set_uninstallable_state : Proc(IPMApplicationInfo*, LibC::BOOL, HRESULT)
+    get_is_pinable_on_kid_zone : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
+    get_is_originally_pre_installed : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
+    get_is_install_on_sd : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
+    get_is_optout_on_sd : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
+    get_is_optout_backup_restore : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
+    set_enterprise_disabled : Proc(IPMApplicationInfo*, LibC::BOOL, HRESULT)
+    set_enterprise_uninstallable : Proc(IPMApplicationInfo*, LibC::BOOL, HRESULT)
+    get_enterprise_disabled : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
+    get_enterprise_uninstallable : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
+    get_is_visible_on_app_list : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
+    get_is_inbox_app : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
+    get_storage_id : Proc(IPMApplicationInfo*, Guid*, HRESULT)
+    get_start_app_blob : Proc(IPMApplicationInfo*, PM_STARTAPPBLOB*, HRESULT)
+    get_is_movable : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
+    get_deployment_app_enumeration_hub_filter : Proc(IPMApplicationInfo*, PM_TILE_HUBTYPE*, HRESULT)
+    get_modified_date : Proc(IPMApplicationInfo*, FILETIME*, HRESULT)
+    get_is_originally_restored : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
+    get_should_defer_mdil_bind : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
+    get_is_fully_pre_install : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
+    set_is_mdil_maintenance_needed : Proc(IPMApplicationInfo*, LibC::BOOL, HRESULT)
+    set_title : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
   end
 
   IPMApplicationInfo_GUID = "50afb58a-438c-4088-9789-f8c4899829c7"
@@ -1989,12 +1989,12 @@ lib LibWin32
   end
 
   struct IPMTilePropertyInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_property_id : UInt64
-    get_property_value : UInt64
-    set_property : UInt64
+    query_interface : Proc(IPMTilePropertyInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMTilePropertyInfo*, UInt32)
+    release : Proc(IPMTilePropertyInfo*, UInt32)
+    get_property_id : Proc(IPMTilePropertyInfo*, UInt32*, HRESULT)
+    get_property_value : Proc(IPMTilePropertyInfo*, UInt8**, HRESULT)
+    set_property : Proc(IPMTilePropertyInfo*, UInt8*, HRESULT)
   end
 
   IPMTilePropertyInfo_GUID = "6c2b8017-1efa-42a7-86c0-6d4b640bf528"
@@ -2004,10 +2004,10 @@ lib LibWin32
   end
 
   struct IPMTilePropertyEnumeratorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_next : UInt64
+    query_interface : Proc(IPMTilePropertyEnumerator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMTilePropertyEnumerator*, UInt32)
+    release : Proc(IPMTilePropertyEnumerator*, UInt32)
+    get_next : Proc(IPMTilePropertyEnumerator*, IPMTilePropertyInfo*, HRESULT)
   end
 
   IPMTilePropertyEnumerator_GUID = "cc4cd629-9047-4250-aac8-930e47812421"
@@ -2017,33 +2017,33 @@ lib LibWin32
   end
 
   struct IPMTileInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_product_id : UInt64
-    get_tile_id : UInt64
-    get_template_type : UInt64
-    get_hub_pinned_state : UInt64
-    get_hub_position : UInt64
-    get_is_notified : UInt64
-    get_is_default : UInt64
-    get_task_id : UInt64
-    get_tile_type : UInt64
-    get_is_themable : UInt64
-    get_property_by_id : UInt64
-    get_invocation_info : UInt64
-    get_property_enum : UInt64
-    get_hub_tile_size : UInt64
-    set_hub_position : UInt64
-    set_notified_state : UInt64
-    set_hub_pinned_state : UInt64
-    set_hub_tile_size : UInt64
-    set_invocation_info : UInt64
-    get_start_tile_blob : UInt64
-    get_is_restoring : UInt64
-    get_is_auto_restore_disabled : UInt64
-    set_is_restoring : UInt64
-    set_is_auto_restore_disabled : UInt64
+    query_interface : Proc(IPMTileInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMTileInfo*, UInt32)
+    release : Proc(IPMTileInfo*, UInt32)
+    get_product_id : Proc(IPMTileInfo*, Guid*, HRESULT)
+    get_tile_id : Proc(IPMTileInfo*, UInt8**, HRESULT)
+    get_template_type : Proc(IPMTileInfo*, TILE_TEMPLATE_TYPE*, HRESULT)
+    get_hub_pinned_state : Proc(IPMTileInfo*, PM_TILE_HUBTYPE, LibC::BOOL*, HRESULT)
+    get_hub_position : Proc(IPMTileInfo*, PM_TILE_HUBTYPE, UInt32*, HRESULT)
+    get_is_notified : Proc(IPMTileInfo*, LibC::BOOL*, HRESULT)
+    get_is_default : Proc(IPMTileInfo*, LibC::BOOL*, HRESULT)
+    get_task_id : Proc(IPMTileInfo*, UInt8**, HRESULT)
+    get_tile_type : Proc(IPMTileInfo*, PM_STARTTILE_TYPE*, HRESULT)
+    get_is_themable : Proc(IPMTileInfo*, LibC::BOOL*, HRESULT)
+    get_property_by_id : Proc(IPMTileInfo*, UInt32, IPMTilePropertyInfo*, HRESULT)
+    get_invocation_info : Proc(IPMTileInfo*, UInt8**, UInt8**, HRESULT)
+    get_property_enum : Proc(IPMTileInfo*, IPMTilePropertyEnumerator*, HRESULT)
+    get_hub_tile_size : Proc(IPMTileInfo*, PM_TILE_HUBTYPE, PM_TILE_SIZE*, HRESULT)
+    set_hub_position : Proc(IPMTileInfo*, PM_TILE_HUBTYPE, UInt32, HRESULT)
+    set_notified_state : Proc(IPMTileInfo*, LibC::BOOL, HRESULT)
+    set_hub_pinned_state : Proc(IPMTileInfo*, PM_TILE_HUBTYPE, LibC::BOOL, HRESULT)
+    set_hub_tile_size : Proc(IPMTileInfo*, PM_TILE_HUBTYPE, PM_TILE_SIZE, HRESULT)
+    set_invocation_info : Proc(IPMTileInfo*, UInt8*, UInt8*, HRESULT)
+    get_start_tile_blob : Proc(IPMTileInfo*, PM_STARTTILEBLOB*, HRESULT)
+    get_is_restoring : Proc(IPMTileInfo*, LibC::BOOL*, HRESULT)
+    get_is_auto_restore_disabled : Proc(IPMTileInfo*, LibC::BOOL*, HRESULT)
+    set_is_restoring : Proc(IPMTileInfo*, LibC::BOOL, HRESULT)
+    set_is_auto_restore_disabled : Proc(IPMTileInfo*, LibC::BOOL, HRESULT)
   end
 
   IPMTileInfo_GUID = "d1604833-2b08-4001-82cd-183ad734f752"
@@ -2053,10 +2053,10 @@ lib LibWin32
   end
 
   struct IPMTileInfoEnumeratorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_next : UInt64
+    query_interface : Proc(IPMTileInfoEnumerator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMTileInfoEnumerator*, UInt32)
+    release : Proc(IPMTileInfoEnumerator*, UInt32)
+    get_next : Proc(IPMTileInfoEnumerator*, IPMTileInfo*, HRESULT)
   end
 
   IPMTileInfoEnumerator_GUID = "ded83065-e462-4b2c-acb5-e39cea61c874"
@@ -2066,10 +2066,10 @@ lib LibWin32
   end
 
   struct IPMApplicationInfoEnumeratorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_next : UInt64
+    query_interface : Proc(IPMApplicationInfoEnumerator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMApplicationInfoEnumerator*, UInt32)
+    release : Proc(IPMApplicationInfoEnumerator*, UInt32)
+    get_next : Proc(IPMApplicationInfoEnumerator*, IPMApplicationInfo*, HRESULT)
   end
 
   IPMApplicationInfoEnumerator_GUID = "0ec42a96-4d46-4dc6-a3d9-a7acaac0f5fa"
@@ -2079,33 +2079,33 @@ lib LibWin32
   end
 
   struct IPMLiveTileJobInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_product_id : UInt64
-    get_tile_id : UInt64
-    get_next_schedule : UInt64
-    set_next_schedule : UInt64
-    get_start_schedule : UInt64
-    set_start_schedule : UInt64
-    get_interval_duration : UInt64
-    set_interval_duration : UInt64
-    get_run_forever : UInt64
-    set_run_forever : UInt64
-    get_max_run_count : UInt64
-    set_max_run_count : UInt64
-    get_run_count : UInt64
-    set_run_count : UInt64
-    get_recurrence_type : UInt64
-    set_recurrence_type : UInt64
-    get_tile_xml : UInt64
-    set_tile_xml : UInt64
-    get_url_xml : UInt64
-    set_url_xml : UInt64
-    get_attempt_count : UInt64
-    set_attempt_count : UInt64
-    get_download_state : UInt64
-    set_download_state : UInt64
+    query_interface : Proc(IPMLiveTileJobInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMLiveTileJobInfo*, UInt32)
+    release : Proc(IPMLiveTileJobInfo*, UInt32)
+    get_product_id : Proc(IPMLiveTileJobInfo*, Guid*, HRESULT)
+    get_tile_id : Proc(IPMLiveTileJobInfo*, UInt8**, HRESULT)
+    get_next_schedule : Proc(IPMLiveTileJobInfo*, FILETIME*, HRESULT)
+    set_next_schedule : Proc(IPMLiveTileJobInfo*, FILETIME, HRESULT)
+    get_start_schedule : Proc(IPMLiveTileJobInfo*, FILETIME*, HRESULT)
+    set_start_schedule : Proc(IPMLiveTileJobInfo*, FILETIME, HRESULT)
+    get_interval_duration : Proc(IPMLiveTileJobInfo*, UInt32*, HRESULT)
+    set_interval_duration : Proc(IPMLiveTileJobInfo*, UInt32, HRESULT)
+    get_run_forever : Proc(IPMLiveTileJobInfo*, LibC::BOOL*, HRESULT)
+    set_run_forever : Proc(IPMLiveTileJobInfo*, LibC::BOOL, HRESULT)
+    get_max_run_count : Proc(IPMLiveTileJobInfo*, UInt32*, HRESULT)
+    set_max_run_count : Proc(IPMLiveTileJobInfo*, UInt32, HRESULT)
+    get_run_count : Proc(IPMLiveTileJobInfo*, UInt32*, HRESULT)
+    set_run_count : Proc(IPMLiveTileJobInfo*, UInt32, HRESULT)
+    get_recurrence_type : Proc(IPMLiveTileJobInfo*, UInt32*, HRESULT)
+    set_recurrence_type : Proc(IPMLiveTileJobInfo*, UInt32, HRESULT)
+    get_tile_xml : Proc(IPMLiveTileJobInfo*, UInt8**, UInt32*, HRESULT)
+    set_tile_xml : Proc(IPMLiveTileJobInfo*, UInt8*, UInt32, HRESULT)
+    get_url_xml : Proc(IPMLiveTileJobInfo*, UInt8**, UInt32*, HRESULT)
+    set_url_xml : Proc(IPMLiveTileJobInfo*, UInt8*, UInt32, HRESULT)
+    get_attempt_count : Proc(IPMLiveTileJobInfo*, UInt32*, HRESULT)
+    set_attempt_count : Proc(IPMLiveTileJobInfo*, UInt32, HRESULT)
+    get_download_state : Proc(IPMLiveTileJobInfo*, UInt32*, HRESULT)
+    set_download_state : Proc(IPMLiveTileJobInfo*, UInt32, HRESULT)
   end
 
   IPMLiveTileJobInfo_GUID = "6009a81f-4710-4697-b5f6-2208f6057b8e"
@@ -2115,10 +2115,10 @@ lib LibWin32
   end
 
   struct IPMLiveTileJobInfoEnumeratorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_next : UInt64
+    query_interface : Proc(IPMLiveTileJobInfoEnumerator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMLiveTileJobInfoEnumerator*, UInt32)
+    release : Proc(IPMLiveTileJobInfoEnumerator*, UInt32)
+    get_next : Proc(IPMLiveTileJobInfoEnumerator*, IPMLiveTileJobInfo*, HRESULT)
   end
 
   IPMLiveTileJobInfoEnumerator_GUID = "bc042582-9415-4f36-9f99-06f104c07c03"
@@ -2128,44 +2128,44 @@ lib LibWin32
   end
 
   struct IPMDeploymentManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    report_download_begin : UInt64
-    report_download_progress : UInt64
-    report_download_complete : UInt64
-    begin_install : UInt64
-    begin_update : UInt64
-    begin_deploy_package : UInt64
-    begin_update_deployed_package_legacy : UInt64
-    begin_uninstall : UInt64
-    begin_enterprise_app_install : UInt64
-    begin_enterprise_app_update : UInt64
-    begin_update_license : UInt64
-    get_license_challenge : UInt64
-    get_license_challenge_by_product_id : UInt64
-    get_license_challenge_by_product_id2 : UInt64
-    revoke_license : UInt64
-    rebind_mdil_binaries : UInt64
-    rebind_all_mdil_binaries : UInt64
-    regenerate_xbf : UInt64
-    generate_xbf_for_current_locale : UInt64
-    begin_provision : UInt64
-    begin_deprovision : UInt64
-    reindex_sqlce_databases : UInt64
-    set_applications_need_maintenance : UInt64
-    update_chamber_profile : UInt64
-    enterprise_policy_is_application_allowed : UInt64
-    begin_update_deployed_package : UInt64
-    report_restore_cancelled : UInt64
-    resolve_resource_string : UInt64
-    update_capabilities_for_modern_apps : UInt64
-    report_download_status_update : UInt64
-    begin_uninstall_with_options : UInt64
-    bind_deferred_mdil_binaries : UInt64
-    generate_xaml_lightup_xbf_for_current_locale : UInt64
-    add_license_for_appx : UInt64
-    fix_junctions_for_apps_on_sd_card : UInt64
+    query_interface : Proc(IPMDeploymentManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMDeploymentManager*, UInt32)
+    release : Proc(IPMDeploymentManager*, UInt32)
+    report_download_begin : Proc(IPMDeploymentManager*, Guid, HRESULT)
+    report_download_progress : Proc(IPMDeploymentManager*, Guid, UInt16, HRESULT)
+    report_download_complete : Proc(IPMDeploymentManager*, Guid, HRESULT, HRESULT)
+    begin_install : Proc(IPMDeploymentManager*, PM_INSTALLINFO*, HRESULT)
+    begin_update : Proc(IPMDeploymentManager*, PM_UPDATEINFO*, HRESULT)
+    begin_deploy_package : Proc(IPMDeploymentManager*, PM_INSTALLINFO*, HRESULT)
+    begin_update_deployed_package_legacy : Proc(IPMDeploymentManager*, PM_UPDATEINFO_LEGACY*, HRESULT)
+    begin_uninstall : Proc(IPMDeploymentManager*, Guid, HRESULT)
+    begin_enterprise_app_install : Proc(IPMDeploymentManager*, PM_INSTALLINFO*, HRESULT)
+    begin_enterprise_app_update : Proc(IPMDeploymentManager*, PM_UPDATEINFO*, HRESULT)
+    begin_update_license : Proc(IPMDeploymentManager*, Guid, Guid, UInt8*, UInt32, HRESULT)
+    get_license_challenge : Proc(IPMDeploymentManager*, UInt8*, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, HRESULT)
+    get_license_challenge_by_product_id : Proc(IPMDeploymentManager*, Guid, UInt8**, UInt32*, HRESULT)
+    get_license_challenge_by_product_id2 : Proc(IPMDeploymentManager*, Guid, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, HRESULT)
+    revoke_license : Proc(IPMDeploymentManager*, Guid, HRESULT)
+    rebind_mdil_binaries : Proc(IPMDeploymentManager*, Guid, SAFEARRAY*, HRESULT)
+    rebind_all_mdil_binaries : Proc(IPMDeploymentManager*, Guid, Guid, HRESULT)
+    regenerate_xbf : Proc(IPMDeploymentManager*, Guid, SAFEARRAY*, HRESULT)
+    generate_xbf_for_current_locale : Proc(IPMDeploymentManager*, Guid, HRESULT)
+    begin_provision : Proc(IPMDeploymentManager*, Guid, UInt8*, HRESULT)
+    begin_deprovision : Proc(IPMDeploymentManager*, Guid, HRESULT)
+    reindex_sqlce_databases : Proc(IPMDeploymentManager*, Guid, HRESULT)
+    set_applications_need_maintenance : Proc(IPMDeploymentManager*, UInt32, UInt32*, HRESULT)
+    update_chamber_profile : Proc(IPMDeploymentManager*, Guid, HRESULT)
+    enterprise_policy_is_application_allowed : Proc(IPMDeploymentManager*, Guid, LibC::LPWSTR, LibC::BOOL*, HRESULT)
+    begin_update_deployed_package : Proc(IPMDeploymentManager*, PM_UPDATEINFO*, HRESULT)
+    report_restore_cancelled : Proc(IPMDeploymentManager*, Guid, HRESULT)
+    resolve_resource_string : Proc(IPMDeploymentManager*, LibC::LPWSTR, UInt8**, HRESULT)
+    update_capabilities_for_modern_apps : Proc(IPMDeploymentManager*, HRESULT)
+    report_download_status_update : Proc(IPMDeploymentManager*, Guid, HRESULT)
+    begin_uninstall_with_options : Proc(IPMDeploymentManager*, Guid, UInt32, HRESULT)
+    bind_deferred_mdil_binaries : Proc(IPMDeploymentManager*, HRESULT)
+    generate_xaml_lightup_xbf_for_current_locale : Proc(IPMDeploymentManager*, UInt8*, HRESULT)
+    add_license_for_appx : Proc(IPMDeploymentManager*, Guid, UInt8*, UInt32, UInt8*, UInt32, HRESULT)
+    fix_junctions_for_apps_on_sd_card : Proc(IPMDeploymentManager*, HRESULT)
   end
 
   IPMDeploymentManager_GUID = "35f785fa-1979-4a8b-bc8f-fd70eb0d1544"
@@ -2175,27 +2175,27 @@ lib LibWin32
   end
 
   struct IPMEnumerationManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_all_applications : UInt64
-    get_all_tiles : UInt64
-    get_all_tasks : UInt64
-    get_all_extensions : UInt64
-    get_all_background_service_agents : UInt64
-    get_all_background_workers : UInt64
-    get_application_info : UInt64
-    get_tile_info : UInt64
-    get_task_info : UInt64
-    get_task_info_ex : UInt64
-    get_background_service_agent_info : UInt64
-    get_all_live_tile_jobs : UInt64
-    get_live_tile_job : UInt64
-    get_application_info_external : UInt64
-    get_file_handler_generic_logo : UInt64
-    get_application_info_from_access_claims : UInt64
-    get_start_tile_enumerator_blob : UInt64
-    get_start_app_enumerator_blob : UInt64
+    query_interface : Proc(IPMEnumerationManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMEnumerationManager*, UInt32)
+    release : Proc(IPMEnumerationManager*, UInt32)
+    get_all_applications : Proc(IPMEnumerationManager*, IPMApplicationInfoEnumerator*, PM_ENUM_FILTER, HRESULT)
+    get_all_tiles : Proc(IPMEnumerationManager*, IPMTileInfoEnumerator*, PM_ENUM_FILTER, HRESULT)
+    get_all_tasks : Proc(IPMEnumerationManager*, IPMTaskInfoEnumerator*, PM_ENUM_FILTER, HRESULT)
+    get_all_extensions : Proc(IPMEnumerationManager*, IPMExtensionInfoEnumerator*, PM_ENUM_FILTER, HRESULT)
+    get_all_background_service_agents : Proc(IPMEnumerationManager*, IPMBackgroundServiceAgentInfoEnumerator*, PM_ENUM_FILTER, HRESULT)
+    get_all_background_workers : Proc(IPMEnumerationManager*, IPMBackgroundWorkerInfoEnumerator*, PM_ENUM_FILTER, HRESULT)
+    get_application_info : Proc(IPMEnumerationManager*, Guid, IPMApplicationInfo*, HRESULT)
+    get_tile_info : Proc(IPMEnumerationManager*, Guid, UInt8*, IPMTileInfo*, HRESULT)
+    get_task_info : Proc(IPMEnumerationManager*, Guid, UInt8*, IPMTaskInfo*, HRESULT)
+    get_task_info_ex : Proc(IPMEnumerationManager*, Guid, LibC::LPWSTR, IPMTaskInfo*, HRESULT)
+    get_background_service_agent_info : Proc(IPMEnumerationManager*, UInt32, IPMBackgroundServiceAgentInfo*, HRESULT)
+    get_all_live_tile_jobs : Proc(IPMEnumerationManager*, IPMLiveTileJobInfoEnumerator*, HRESULT)
+    get_live_tile_job : Proc(IPMEnumerationManager*, Guid, UInt8*, PM_LIVETILE_RECURRENCE_TYPE, IPMLiveTileJobInfo*, HRESULT)
+    get_application_info_external : Proc(IPMEnumerationManager*, Guid, IPMApplicationInfo*, HRESULT)
+    get_file_handler_generic_logo : Proc(IPMEnumerationManager*, UInt8*, PM_LOGO_SIZE, UInt8**, HRESULT)
+    get_application_info_from_access_claims : Proc(IPMEnumerationManager*, UInt8*, UInt8*, IPMApplicationInfo*, HRESULT)
+    get_start_tile_enumerator_blob : Proc(IPMEnumerationManager*, PM_ENUM_FILTER, UInt32*, PM_STARTTILEBLOB**, HRESULT)
+    get_start_app_enumerator_blob : Proc(IPMEnumerationManager*, PM_ENUM_FILTER, UInt32*, PM_STARTAPPBLOB**, HRESULT)
   end
 
   IPMEnumerationManager_GUID = "698d57c2-292d-4cf3-b73c-d95a6922ed9a"
@@ -2205,30 +2205,30 @@ lib LibWin32
   end
 
   struct IPMTaskInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_product_id : UInt64
-    get_task_id : UInt64
-    get_navigation_page : UInt64
-    get_task_transition : UInt64
-    get_runtime_type : UInt64
-    get_activation_policy : UInt64
-    get_task_type : UInt64
-    get_invocation_info : UInt64
-    get_image_path : UInt64
-    get_image_params : UInt64
-    get_install_root_folder : UInt64
-    get_data_root_folder : UInt64
-    get_is_single_instance_host : UInt64
-    get_is_interop_enabled : UInt64
-    get_application_state : UInt64
-    get_install_type : UInt64
-    get_version : UInt64
-    get_bits_per_pixel : UInt64
-    get_suppresses_dehydration : UInt64
-    get_background_execution_abilities : UInt64
-    get_is_opted_for_extended_mem : UInt64
+    query_interface : Proc(IPMTaskInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMTaskInfo*, UInt32)
+    release : Proc(IPMTaskInfo*, UInt32)
+    get_product_id : Proc(IPMTaskInfo*, Guid*, HRESULT)
+    get_task_id : Proc(IPMTaskInfo*, UInt8**, HRESULT)
+    get_navigation_page : Proc(IPMTaskInfo*, UInt8**, HRESULT)
+    get_task_transition : Proc(IPMTaskInfo*, PM_TASK_TRANSITION*, HRESULT)
+    get_runtime_type : Proc(IPMTaskInfo*, PACKMAN_RUNTIME*, HRESULT)
+    get_activation_policy : Proc(IPMTaskInfo*, PM_ACTIVATION_POLICY*, HRESULT)
+    get_task_type : Proc(IPMTaskInfo*, PM_TASK_TYPE*, HRESULT)
+    get_invocation_info : Proc(IPMTaskInfo*, UInt8**, UInt8**, HRESULT)
+    get_image_path : Proc(IPMTaskInfo*, UInt8**, HRESULT)
+    get_image_params : Proc(IPMTaskInfo*, UInt8**, HRESULT)
+    get_install_root_folder : Proc(IPMTaskInfo*, UInt8**, HRESULT)
+    get_data_root_folder : Proc(IPMTaskInfo*, UInt8**, HRESULT)
+    get_is_single_instance_host : Proc(IPMTaskInfo*, LibC::BOOL*, HRESULT)
+    get_is_interop_enabled : Proc(IPMTaskInfo*, LibC::BOOL*, HRESULT)
+    get_application_state : Proc(IPMTaskInfo*, PM_APPLICATION_STATE*, HRESULT)
+    get_install_type : Proc(IPMTaskInfo*, PM_APPLICATION_INSTALL_TYPE*, HRESULT)
+    get_version : Proc(IPMTaskInfo*, UInt8*, UInt8*, HRESULT)
+    get_bits_per_pixel : Proc(IPMTaskInfo*, UInt16*, HRESULT)
+    get_suppresses_dehydration : Proc(IPMTaskInfo*, LibC::BOOL*, HRESULT)
+    get_background_execution_abilities : Proc(IPMTaskInfo*, UInt8**, HRESULT)
+    get_is_opted_for_extended_mem : Proc(IPMTaskInfo*, LibC::BOOL*, HRESULT)
   end
 
   IPMTaskInfo_GUID = "bf1d8c33-1bf5-4ee0-b549-6b9dd3834942"
@@ -2238,10 +2238,10 @@ lib LibWin32
   end
 
   struct IPMTaskInfoEnumeratorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_next : UInt64
+    query_interface : Proc(IPMTaskInfoEnumerator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMTaskInfoEnumerator*, UInt32)
+    release : Proc(IPMTaskInfoEnumerator*, UInt32)
+    get_next : Proc(IPMTaskInfoEnumerator*, IPMTaskInfo*, HRESULT)
   end
 
   IPMTaskInfoEnumerator_GUID = "0630b0f8-0bbc-4821-be74-c7995166ed2a"
@@ -2251,15 +2251,15 @@ lib LibWin32
   end
 
   struct IPMExtensionInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_supplier_pid : UInt64
-    get_supplier_task_id : UInt64
-    get_title : UInt64
-    get_icon_path : UInt64
-    get_extra_file : UInt64
-    get_invocation_info : UInt64
+    query_interface : Proc(IPMExtensionInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMExtensionInfo*, UInt32)
+    release : Proc(IPMExtensionInfo*, UInt32)
+    get_supplier_pid : Proc(IPMExtensionInfo*, Guid*, HRESULT)
+    get_supplier_task_id : Proc(IPMExtensionInfo*, UInt8**, HRESULT)
+    get_title : Proc(IPMExtensionInfo*, UInt8**, HRESULT)
+    get_icon_path : Proc(IPMExtensionInfo*, UInt8**, HRESULT)
+    get_extra_file : Proc(IPMExtensionInfo*, UInt8**, HRESULT)
+    get_invocation_info : Proc(IPMExtensionInfo*, UInt8**, UInt8**, HRESULT)
   end
 
   IPMExtensionInfo_GUID = "49acde79-9788-4d0a-8aa0-1746afdb9e9d"
@@ -2269,16 +2269,16 @@ lib LibWin32
   end
 
   struct IPMExtensionFileExtensionInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_name : UInt64
-    get_display_name : UInt64
-    get_logo : UInt64
-    get_content_type : UInt64
-    get_file_type : UInt64
-    get_invocation_info : UInt64
-    get_all_file_types : UInt64
+    query_interface : Proc(IPMExtensionFileExtensionInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMExtensionFileExtensionInfo*, UInt32)
+    release : Proc(IPMExtensionFileExtensionInfo*, UInt32)
+    get_name : Proc(IPMExtensionFileExtensionInfo*, UInt8**, HRESULT)
+    get_display_name : Proc(IPMExtensionFileExtensionInfo*, UInt8**, HRESULT)
+    get_logo : Proc(IPMExtensionFileExtensionInfo*, PM_LOGO_SIZE, UInt8**, HRESULT)
+    get_content_type : Proc(IPMExtensionFileExtensionInfo*, UInt8*, UInt8**, HRESULT)
+    get_file_type : Proc(IPMExtensionFileExtensionInfo*, UInt8*, UInt8**, HRESULT)
+    get_invocation_info : Proc(IPMExtensionFileExtensionInfo*, UInt8**, UInt8**, HRESULT)
+    get_all_file_types : Proc(IPMExtensionFileExtensionInfo*, UInt32*, UInt8***, HRESULT)
   end
 
   IPMExtensionFileExtensionInfo_GUID = "6b87cb6c-0b88-4989-a4ec-033714f710d4"
@@ -2288,11 +2288,11 @@ lib LibWin32
   end
 
   struct IPMExtensionProtocolInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_protocol : UInt64
-    get_invocation_info : UInt64
+    query_interface : Proc(IPMExtensionProtocolInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMExtensionProtocolInfo*, UInt32)
+    release : Proc(IPMExtensionProtocolInfo*, UInt32)
+    get_protocol : Proc(IPMExtensionProtocolInfo*, UInt8**, HRESULT)
+    get_invocation_info : Proc(IPMExtensionProtocolInfo*, UInt8**, UInt8**, HRESULT)
   end
 
   IPMExtensionProtocolInfo_GUID = "1e3fa036-51eb-4453-baff-b8d8e4b46c8e"
@@ -2302,12 +2302,12 @@ lib LibWin32
   end
 
   struct IPMExtensionShareTargetInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_all_file_types : UInt64
-    get_all_data_formats : UInt64
-    get_supports_all_file_types : UInt64
+    query_interface : Proc(IPMExtensionShareTargetInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMExtensionShareTargetInfo*, UInt32)
+    release : Proc(IPMExtensionShareTargetInfo*, UInt32)
+    get_all_file_types : Proc(IPMExtensionShareTargetInfo*, UInt32*, UInt8***, HRESULT)
+    get_all_data_formats : Proc(IPMExtensionShareTargetInfo*, UInt32*, UInt8***, HRESULT)
+    get_supports_all_file_types : Proc(IPMExtensionShareTargetInfo*, LibC::BOOL*, HRESULT)
   end
 
   IPMExtensionShareTargetInfo_GUID = "5471f48b-c65c-4656-8c70-242e31195fea"
@@ -2317,10 +2317,10 @@ lib LibWin32
   end
 
   struct IPMExtensionContractInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_invocation_info : UInt64
+    query_interface : Proc(IPMExtensionContractInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMExtensionContractInfo*, UInt32)
+    release : Proc(IPMExtensionContractInfo*, UInt32)
+    get_invocation_info : Proc(IPMExtensionContractInfo*, UInt8**, UInt8**, HRESULT)
   end
 
   IPMExtensionContractInfo_GUID = "e5666373-7ba1-467c-b819-b175db1c295b"
@@ -2330,11 +2330,11 @@ lib LibWin32
   end
 
   struct IPMExtensionFileOpenPickerInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_all_file_types : UInt64
-    get_supports_all_file_types : UInt64
+    query_interface : Proc(IPMExtensionFileOpenPickerInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMExtensionFileOpenPickerInfo*, UInt32)
+    release : Proc(IPMExtensionFileOpenPickerInfo*, UInt32)
+    get_all_file_types : Proc(IPMExtensionFileOpenPickerInfo*, UInt32*, UInt8***, HRESULT)
+    get_supports_all_file_types : Proc(IPMExtensionFileOpenPickerInfo*, LibC::BOOL*, HRESULT)
   end
 
   IPMExtensionFileOpenPickerInfo_GUID = "6dc91d25-9606-420c-9a78-e034a3418345"
@@ -2344,11 +2344,11 @@ lib LibWin32
   end
 
   struct IPMExtensionFileSavePickerInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_all_file_types : UInt64
-    get_supports_all_file_types : UInt64
+    query_interface : Proc(IPMExtensionFileSavePickerInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMExtensionFileSavePickerInfo*, UInt32)
+    release : Proc(IPMExtensionFileSavePickerInfo*, UInt32)
+    get_all_file_types : Proc(IPMExtensionFileSavePickerInfo*, UInt32*, UInt8***, HRESULT)
+    get_supports_all_file_types : Proc(IPMExtensionFileSavePickerInfo*, LibC::BOOL*, HRESULT)
   end
 
   IPMExtensionFileSavePickerInfo_GUID = "38005cba-f81a-493e-a0f8-922c8680da43"
@@ -2358,10 +2358,10 @@ lib LibWin32
   end
 
   struct IPMExtensionCachedFileUpdaterInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_supports_updates : UInt64
+    query_interface : Proc(IPMExtensionCachedFileUpdaterInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMExtensionCachedFileUpdaterInfo*, UInt32)
+    release : Proc(IPMExtensionCachedFileUpdaterInfo*, UInt32)
+    get_supports_updates : Proc(IPMExtensionCachedFileUpdaterInfo*, LibC::BOOL*, HRESULT)
   end
 
   IPMExtensionCachedFileUpdaterInfo_GUID = "e2d77509-4e58-4ba9-af7e-b642e370e1b0"
@@ -2371,10 +2371,10 @@ lib LibWin32
   end
 
   struct IPMExtensionInfoEnumeratorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_next : UInt64
+    query_interface : Proc(IPMExtensionInfoEnumerator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMExtensionInfoEnumerator*, UInt32)
+    release : Proc(IPMExtensionInfoEnumerator*, UInt32)
+    get_next : Proc(IPMExtensionInfoEnumerator*, IPMExtensionInfo*, HRESULT)
   end
 
   IPMExtensionInfoEnumerator_GUID = "403b9e82-1171-4573-8e6f-6f33f39b83dd"
@@ -2384,23 +2384,23 @@ lib LibWin32
   end
 
   struct IPMBackgroundServiceAgentInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_product_id : UInt64
-    get_task_id : UInt64
-    get_bsaid : UInt64
-    get_bg_specifier : UInt64
-    get_bg_name : UInt64
-    get_bg_source : UInt64
-    get_bg_type : UInt64
-    get_is_periodic : UInt64
-    get_is_scheduled : UInt64
-    get_is_schedule_allowed : UInt64
-    get_description : UInt64
-    get_is_launch_on_boot : UInt64
-    set_is_scheduled : UInt64
-    set_is_schedule_allowed : UInt64
+    query_interface : Proc(IPMBackgroundServiceAgentInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMBackgroundServiceAgentInfo*, UInt32)
+    release : Proc(IPMBackgroundServiceAgentInfo*, UInt32)
+    get_product_id : Proc(IPMBackgroundServiceAgentInfo*, Guid*, HRESULT)
+    get_task_id : Proc(IPMBackgroundServiceAgentInfo*, UInt8**, HRESULT)
+    get_bsaid : Proc(IPMBackgroundServiceAgentInfo*, UInt32*, HRESULT)
+    get_bg_specifier : Proc(IPMBackgroundServiceAgentInfo*, UInt8**, HRESULT)
+    get_bg_name : Proc(IPMBackgroundServiceAgentInfo*, UInt8**, HRESULT)
+    get_bg_source : Proc(IPMBackgroundServiceAgentInfo*, UInt8**, HRESULT)
+    get_bg_type : Proc(IPMBackgroundServiceAgentInfo*, UInt8**, HRESULT)
+    get_is_periodic : Proc(IPMBackgroundServiceAgentInfo*, LibC::BOOL*, HRESULT)
+    get_is_scheduled : Proc(IPMBackgroundServiceAgentInfo*, LibC::BOOL*, HRESULT)
+    get_is_schedule_allowed : Proc(IPMBackgroundServiceAgentInfo*, LibC::BOOL*, HRESULT)
+    get_description : Proc(IPMBackgroundServiceAgentInfo*, UInt8**, HRESULT)
+    get_is_launch_on_boot : Proc(IPMBackgroundServiceAgentInfo*, LibC::BOOL*, HRESULT)
+    set_is_scheduled : Proc(IPMBackgroundServiceAgentInfo*, LibC::BOOL, HRESULT)
+    set_is_schedule_allowed : Proc(IPMBackgroundServiceAgentInfo*, LibC::BOOL, HRESULT)
   end
 
   IPMBackgroundServiceAgentInfo_GUID = "3a8b46da-928c-4879-998c-09dc96f3d490"
@@ -2410,15 +2410,15 @@ lib LibWin32
   end
 
   struct IPMBackgroundWorkerInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_product_id : UInt64
-    get_task_id : UInt64
-    get_bg_name : UInt64
-    get_max_startup_latency : UInt64
-    get_expected_runtime : UInt64
-    get_is_boot_worker : UInt64
+    query_interface : Proc(IPMBackgroundWorkerInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMBackgroundWorkerInfo*, UInt32)
+    release : Proc(IPMBackgroundWorkerInfo*, UInt32)
+    get_product_id : Proc(IPMBackgroundWorkerInfo*, Guid*, HRESULT)
+    get_task_id : Proc(IPMBackgroundWorkerInfo*, UInt8**, HRESULT)
+    get_bg_name : Proc(IPMBackgroundWorkerInfo*, UInt8**, HRESULT)
+    get_max_startup_latency : Proc(IPMBackgroundWorkerInfo*, UInt32*, HRESULT)
+    get_expected_runtime : Proc(IPMBackgroundWorkerInfo*, UInt32*, HRESULT)
+    get_is_boot_worker : Proc(IPMBackgroundWorkerInfo*, LibC::BOOL*, HRESULT)
   end
 
   IPMBackgroundWorkerInfo_GUID = "7dd4531b-d3bf-4b6b-94f3-69c098b1497d"
@@ -2428,10 +2428,10 @@ lib LibWin32
   end
 
   struct IPMBackgroundServiceAgentInfoEnumeratorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_next : UInt64
+    query_interface : Proc(IPMBackgroundServiceAgentInfoEnumerator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMBackgroundServiceAgentInfoEnumerator*, UInt32)
+    release : Proc(IPMBackgroundServiceAgentInfoEnumerator*, UInt32)
+    get_next : Proc(IPMBackgroundServiceAgentInfoEnumerator*, IPMBackgroundServiceAgentInfo*, HRESULT)
   end
 
   IPMBackgroundServiceAgentInfoEnumerator_GUID = "18eb2072-ab56-43b3-872c-beafb7a6b391"
@@ -2441,10 +2441,10 @@ lib LibWin32
   end
 
   struct IPMBackgroundWorkerInfoEnumeratorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_next : UInt64
+    query_interface : Proc(IPMBackgroundWorkerInfoEnumerator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPMBackgroundWorkerInfoEnumerator*, UInt32)
+    release : Proc(IPMBackgroundWorkerInfoEnumerator*, UInt32)
+    get_next : Proc(IPMBackgroundWorkerInfoEnumerator*, IPMBackgroundWorkerInfo*, HRESULT)
   end
 
   IPMBackgroundWorkerInfoEnumerator_GUID = "87f479f8-90d8-4ec7-92b9-72787e2f636b"
@@ -3421,1418 +3421,1418 @@ lib LibWin32
   fun QueryActCtxSettingsW(dwflags : UInt32, hactctx : LibC::HANDLE, settingsnamespace : LibC::LPWSTR, settingname : LibC::LPWSTR, pvbuffer : LibC::LPWSTR, dwbuffer : LibC::UINT_PTR, pdwwrittenorrequired : LibC::UINT_PTR*) : LibC::BOOL
 end
 struct LibWin32::IValidate
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IValidate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IValidate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IValidate*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def open_database(szdatabase : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.open_database.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(szdatabase)
+  def open_database(this : IValidate*, szdatabase : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.open_database.call(this, szdatabase)
   end
-  def open_cub(szcubfile : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.open_cub.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(szcubfile)
+  def open_cub(this : IValidate*, szcubfile : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.open_cub.call(this, szcubfile)
   end
-  def close_database : HRESULT
-    @lpVtbl.value.close_database.unsafe_as(Proc(HRESULT)).call
+  def close_database(this : IValidate*) : HRESULT
+    @lpVtbl.value.close_database.call(this)
   end
-  def close_cub : HRESULT
-    @lpVtbl.value.close_cub.unsafe_as(Proc(HRESULT)).call
+  def close_cub(this : IValidate*) : HRESULT
+    @lpVtbl.value.close_cub.call(this)
   end
-  def set_display(pdisplayfunction : LPDISPLAYVAL, pcontext : Void*) : HRESULT
-    @lpVtbl.value.set_display.unsafe_as(Proc(LPDISPLAYVAL, Void*, HRESULT)).call(pdisplayfunction, pcontext)
+  def set_display(this : IValidate*, pdisplayfunction : LPDISPLAYVAL, pcontext : Void*) : HRESULT
+    @lpVtbl.value.set_display.call(this, pdisplayfunction, pcontext)
   end
-  def set_status(pstatusfunction : LPEVALCOMCALLBACK, pcontext : Void*) : HRESULT
-    @lpVtbl.value.set_status.unsafe_as(Proc(LPEVALCOMCALLBACK, Void*, HRESULT)).call(pstatusfunction, pcontext)
+  def set_status(this : IValidate*, pstatusfunction : LPEVALCOMCALLBACK, pcontext : Void*) : HRESULT
+    @lpVtbl.value.set_status.call(this, pstatusfunction, pcontext)
   end
-  def validate(wzices : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.validate.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wzices)
+  def validate(this : IValidate*, wzices : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.validate.call(this, wzices)
   end
 end
 struct LibWin32::IEnumMsmString
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IEnumMsmString*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IEnumMsmString*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IEnumMsmString*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def next(cfetch : UInt32, rgbstrstrings : UInt8**, pcfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(UInt32, UInt8**, UInt32*, HRESULT)).call(cfetch, rgbstrstrings, pcfetched)
+  def next(this : IEnumMsmString*, cfetch : UInt32, rgbstrstrings : UInt8**, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, cfetch, rgbstrstrings, pcfetched)
   end
-  def skip(cskip : UInt32) : HRESULT
-    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(cskip)
+  def skip(this : IEnumMsmString*, cskip : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, cskip)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IEnumMsmString*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def clone(pemsmstrings : IEnumMsmString*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IEnumMsmString*, HRESULT)).call(pemsmstrings)
+  def clone(this : IEnumMsmString*, pemsmstrings : IEnumMsmString*) : HRESULT
+    @lpVtbl.value.clone.call(this, pemsmstrings)
   end
 end
 struct LibWin32::IMsmStrings
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMsmStrings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMsmStrings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMsmStrings*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMsmStrings*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMsmStrings*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMsmStrings*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMsmStrings*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(item : Int32, return : UInt8**) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(item, return)
+  def get_item(this : IMsmStrings*, item : Int32, return : UInt8**) : HRESULT
+    @lpVtbl.value.get_item.call(this, item, return)
   end
-  def get_count(count : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(count)
+  def get_count(this : IMsmStrings*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
   end
-  def get__new_enum(newenum : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(newenum)
+  def get__new_enum(this : IMsmStrings*, newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, newenum)
   end
 end
 struct LibWin32::IMsmError
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMsmError*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMsmError*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMsmError*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMsmError*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMsmError*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMsmError*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMsmError*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_type(errortype : Msmerrortype*) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(Msmerrortype*, HRESULT)).call(errortype)
+  def get_type(this : IMsmError*, errortype : Msmerrortype*) : HRESULT
+    @lpVtbl.value.get_type.call(this, errortype)
   end
-  def get_path(errorpath : UInt8**) : HRESULT
-    @lpVtbl.value.get_path.unsafe_as(Proc(UInt8**, HRESULT)).call(errorpath)
+  def get_path(this : IMsmError*, errorpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.call(this, errorpath)
   end
-  def get_language(errorlanguage : Int16*) : HRESULT
-    @lpVtbl.value.get_language.unsafe_as(Proc(Int16*, HRESULT)).call(errorlanguage)
+  def get_language(this : IMsmError*, errorlanguage : Int16*) : HRESULT
+    @lpVtbl.value.get_language.call(this, errorlanguage)
   end
-  def get_database_table(errortable : UInt8**) : HRESULT
-    @lpVtbl.value.get_database_table.unsafe_as(Proc(UInt8**, HRESULT)).call(errortable)
+  def get_database_table(this : IMsmError*, errortable : UInt8**) : HRESULT
+    @lpVtbl.value.get_database_table.call(this, errortable)
   end
-  def get_database_keys(errorkeys : IMsmStrings*) : HRESULT
-    @lpVtbl.value.get_database_keys.unsafe_as(Proc(IMsmStrings*, HRESULT)).call(errorkeys)
+  def get_database_keys(this : IMsmError*, errorkeys : IMsmStrings*) : HRESULT
+    @lpVtbl.value.get_database_keys.call(this, errorkeys)
   end
-  def get_module_table(errortable : UInt8**) : HRESULT
-    @lpVtbl.value.get_module_table.unsafe_as(Proc(UInt8**, HRESULT)).call(errortable)
+  def get_module_table(this : IMsmError*, errortable : UInt8**) : HRESULT
+    @lpVtbl.value.get_module_table.call(this, errortable)
   end
-  def get_module_keys(errorkeys : IMsmStrings*) : HRESULT
-    @lpVtbl.value.get_module_keys.unsafe_as(Proc(IMsmStrings*, HRESULT)).call(errorkeys)
+  def get_module_keys(this : IMsmError*, errorkeys : IMsmStrings*) : HRESULT
+    @lpVtbl.value.get_module_keys.call(this, errorkeys)
   end
 end
 struct LibWin32::IEnumMsmError
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IEnumMsmError*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IEnumMsmError*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IEnumMsmError*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def next(cfetch : UInt32, rgmsmerrors : IMsmError*, pcfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(UInt32, IMsmError*, UInt32*, HRESULT)).call(cfetch, rgmsmerrors, pcfetched)
+  def next(this : IEnumMsmError*, cfetch : UInt32, rgmsmerrors : IMsmError*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, cfetch, rgmsmerrors, pcfetched)
   end
-  def skip(cskip : UInt32) : HRESULT
-    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(cskip)
+  def skip(this : IEnumMsmError*, cskip : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, cskip)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IEnumMsmError*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def clone(pemsmerrors : IEnumMsmError*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IEnumMsmError*, HRESULT)).call(pemsmerrors)
+  def clone(this : IEnumMsmError*, pemsmerrors : IEnumMsmError*) : HRESULT
+    @lpVtbl.value.clone.call(this, pemsmerrors)
   end
 end
 struct LibWin32::IMsmErrors
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMsmErrors*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMsmErrors*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMsmErrors*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMsmErrors*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMsmErrors*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMsmErrors*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMsmErrors*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(item : Int32, return : IMsmError*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, IMsmError*, HRESULT)).call(item, return)
+  def get_item(this : IMsmErrors*, item : Int32, return : IMsmError*) : HRESULT
+    @lpVtbl.value.get_item.call(this, item, return)
   end
-  def get_count(count : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(count)
+  def get_count(this : IMsmErrors*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
   end
-  def get__new_enum(newenum : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(newenum)
+  def get__new_enum(this : IMsmErrors*, newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, newenum)
   end
 end
 struct LibWin32::IMsmDependency
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMsmDependency*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMsmDependency*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMsmDependency*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMsmDependency*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMsmDependency*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMsmDependency*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMsmDependency*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_module(module_ : UInt8**) : HRESULT
-    @lpVtbl.value.get_module.unsafe_as(Proc(UInt8**, HRESULT)).call(module_)
+  def get_module(this : IMsmDependency*, module_ : UInt8**) : HRESULT
+    @lpVtbl.value.get_module.call(this, module_)
   end
-  def get_language(language : Int16*) : HRESULT
-    @lpVtbl.value.get_language.unsafe_as(Proc(Int16*, HRESULT)).call(language)
+  def get_language(this : IMsmDependency*, language : Int16*) : HRESULT
+    @lpVtbl.value.get_language.call(this, language)
   end
-  def get_version(version : UInt8**) : HRESULT
-    @lpVtbl.value.get_version.unsafe_as(Proc(UInt8**, HRESULT)).call(version)
+  def get_version(this : IMsmDependency*, version : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.call(this, version)
   end
 end
 struct LibWin32::IEnumMsmDependency
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IEnumMsmDependency*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IEnumMsmDependency*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IEnumMsmDependency*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def next(cfetch : UInt32, rgmsmdependencies : IMsmDependency*, pcfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(UInt32, IMsmDependency*, UInt32*, HRESULT)).call(cfetch, rgmsmdependencies, pcfetched)
+  def next(this : IEnumMsmDependency*, cfetch : UInt32, rgmsmdependencies : IMsmDependency*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, cfetch, rgmsmdependencies, pcfetched)
   end
-  def skip(cskip : UInt32) : HRESULT
-    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(cskip)
+  def skip(this : IEnumMsmDependency*, cskip : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, cskip)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IEnumMsmDependency*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def clone(pemsmdependencies : IEnumMsmDependency*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IEnumMsmDependency*, HRESULT)).call(pemsmdependencies)
+  def clone(this : IEnumMsmDependency*, pemsmdependencies : IEnumMsmDependency*) : HRESULT
+    @lpVtbl.value.clone.call(this, pemsmdependencies)
   end
 end
 struct LibWin32::IMsmDependencies
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMsmDependencies*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMsmDependencies*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMsmDependencies*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMsmDependencies*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMsmDependencies*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMsmDependencies*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMsmDependencies*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(item : Int32, return : IMsmDependency*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, IMsmDependency*, HRESULT)).call(item, return)
+  def get_item(this : IMsmDependencies*, item : Int32, return : IMsmDependency*) : HRESULT
+    @lpVtbl.value.get_item.call(this, item, return)
   end
-  def get_count(count : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(count)
+  def get_count(this : IMsmDependencies*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
   end
-  def get__new_enum(newenum : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(newenum)
+  def get__new_enum(this : IMsmDependencies*, newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, newenum)
   end
 end
 struct LibWin32::IMsmMerge
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMsmMerge*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMsmMerge*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMsmMerge*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMsmMerge*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMsmMerge*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMsmMerge*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMsmMerge*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def open_database(path : UInt8*) : HRESULT
-    @lpVtbl.value.open_database.unsafe_as(Proc(UInt8*, HRESULT)).call(path)
+  def open_database(this : IMsmMerge*, path : UInt8*) : HRESULT
+    @lpVtbl.value.open_database.call(this, path)
   end
-  def open_module(path : UInt8*, language : Int16) : HRESULT
-    @lpVtbl.value.open_module.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(path, language)
+  def open_module(this : IMsmMerge*, path : UInt8*, language : Int16) : HRESULT
+    @lpVtbl.value.open_module.call(this, path, language)
   end
-  def close_database(commit : Int16) : HRESULT
-    @lpVtbl.value.close_database.unsafe_as(Proc(Int16, HRESULT)).call(commit)
+  def close_database(this : IMsmMerge*, commit : Int16) : HRESULT
+    @lpVtbl.value.close_database.call(this, commit)
   end
-  def close_module : HRESULT
-    @lpVtbl.value.close_module.unsafe_as(Proc(HRESULT)).call
+  def close_module(this : IMsmMerge*) : HRESULT
+    @lpVtbl.value.close_module.call(this)
   end
-  def open_log(path : UInt8*) : HRESULT
-    @lpVtbl.value.open_log.unsafe_as(Proc(UInt8*, HRESULT)).call(path)
+  def open_log(this : IMsmMerge*, path : UInt8*) : HRESULT
+    @lpVtbl.value.open_log.call(this, path)
   end
-  def close_log : HRESULT
-    @lpVtbl.value.close_log.unsafe_as(Proc(HRESULT)).call
+  def close_log(this : IMsmMerge*) : HRESULT
+    @lpVtbl.value.close_log.call(this)
   end
-  def log(message : UInt8*) : HRESULT
-    @lpVtbl.value.log.unsafe_as(Proc(UInt8*, HRESULT)).call(message)
+  def log(this : IMsmMerge*, message : UInt8*) : HRESULT
+    @lpVtbl.value.log.call(this, message)
   end
-  def get_errors(errors : IMsmErrors*) : HRESULT
-    @lpVtbl.value.get_errors.unsafe_as(Proc(IMsmErrors*, HRESULT)).call(errors)
+  def get_errors(this : IMsmMerge*, errors : IMsmErrors*) : HRESULT
+    @lpVtbl.value.get_errors.call(this, errors)
   end
-  def get_dependencies(dependencies : IMsmDependencies*) : HRESULT
-    @lpVtbl.value.get_dependencies.unsafe_as(Proc(IMsmDependencies*, HRESULT)).call(dependencies)
+  def get_dependencies(this : IMsmMerge*, dependencies : IMsmDependencies*) : HRESULT
+    @lpVtbl.value.get_dependencies.call(this, dependencies)
   end
-  def merge(feature : UInt8*, redirectdir : UInt8*) : HRESULT
-    @lpVtbl.value.merge.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(feature, redirectdir)
+  def merge(this : IMsmMerge*, feature : UInt8*, redirectdir : UInt8*) : HRESULT
+    @lpVtbl.value.merge.call(this, feature, redirectdir)
   end
-  def connect(feature : UInt8*) : HRESULT
-    @lpVtbl.value.connect.unsafe_as(Proc(UInt8*, HRESULT)).call(feature)
+  def connect(this : IMsmMerge*, feature : UInt8*) : HRESULT
+    @lpVtbl.value.connect.call(this, feature)
   end
-  def extract_cab(filename : UInt8*) : HRESULT
-    @lpVtbl.value.extract_cab.unsafe_as(Proc(UInt8*, HRESULT)).call(filename)
+  def extract_cab(this : IMsmMerge*, filename : UInt8*) : HRESULT
+    @lpVtbl.value.extract_cab.call(this, filename)
   end
-  def extract_files(path : UInt8*) : HRESULT
-    @lpVtbl.value.extract_files.unsafe_as(Proc(UInt8*, HRESULT)).call(path)
+  def extract_files(this : IMsmMerge*, path : UInt8*) : HRESULT
+    @lpVtbl.value.extract_files.call(this, path)
   end
 end
 struct LibWin32::IMsmGetFiles
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMsmGetFiles*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMsmGetFiles*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMsmGetFiles*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMsmGetFiles*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMsmGetFiles*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMsmGetFiles*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMsmGetFiles*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_module_files(files : IMsmStrings*) : HRESULT
-    @lpVtbl.value.get_module_files.unsafe_as(Proc(IMsmStrings*, HRESULT)).call(files)
+  def get_module_files(this : IMsmGetFiles*, files : IMsmStrings*) : HRESULT
+    @lpVtbl.value.get_module_files.call(this, files)
   end
 end
 struct LibWin32::IAssemblyName
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IAssemblyName*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IAssemblyName*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IAssemblyName*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_property(propertyid : UInt32, pvproperty : Void*, cbproperty : UInt32) : HRESULT
-    @lpVtbl.value.set_property.unsafe_as(Proc(UInt32, Void*, UInt32, HRESULT)).call(propertyid, pvproperty, cbproperty)
+  def set_property(this : IAssemblyName*, propertyid : UInt32, pvproperty : Void*, cbproperty : UInt32) : HRESULT
+    @lpVtbl.value.set_property.call(this, propertyid, pvproperty, cbproperty)
   end
-  def get_property(propertyid : UInt32, pvproperty : Void*, pcbproperty : UInt32*) : HRESULT
-    @lpVtbl.value.get_property.unsafe_as(Proc(UInt32, Void*, UInt32*, HRESULT)).call(propertyid, pvproperty, pcbproperty)
+  def get_property(this : IAssemblyName*, propertyid : UInt32, pvproperty : Void*, pcbproperty : UInt32*) : HRESULT
+    @lpVtbl.value.get_property.call(this, propertyid, pvproperty, pcbproperty)
   end
-  def finalize : HRESULT
-    @lpVtbl.value.finalize.unsafe_as(Proc(HRESULT)).call
+  def finalize(this : IAssemblyName*) : HRESULT
+    @lpVtbl.value.finalize.call(this)
   end
-  def get_display_name(szdisplayname : Char*, pccdisplayname : UInt32*, dwdisplayflags : UInt32) : HRESULT
-    @lpVtbl.value.get_display_name.unsafe_as(Proc(Char*, UInt32*, UInt32, HRESULT)).call(szdisplayname, pccdisplayname, dwdisplayflags)
+  def get_display_name(this : IAssemblyName*, szdisplayname : Char*, pccdisplayname : UInt32*, dwdisplayflags : UInt32) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, szdisplayname, pccdisplayname, dwdisplayflags)
   end
-  def reserved(refiid : Guid*, punkreserved1 : IUnknown, punkreserved2 : IUnknown, szreserved : LibC::LPWSTR, llreserved : Int64, pvreserved : Void*, cbreserved : UInt32, ppreserved : Void**) : HRESULT
-    @lpVtbl.value.reserved.unsafe_as(Proc(Guid*, IUnknown, IUnknown, LibC::LPWSTR, Int64, Void*, UInt32, Void**, HRESULT)).call(refiid, punkreserved1, punkreserved2, szreserved, llreserved, pvreserved, cbreserved, ppreserved)
+  def reserved(this : IAssemblyName*, refiid : Guid*, punkreserved1 : IUnknown, punkreserved2 : IUnknown, szreserved : LibC::LPWSTR, llreserved : Int64, pvreserved : Void*, cbreserved : UInt32, ppreserved : Void**) : HRESULT
+    @lpVtbl.value.reserved.call(this, refiid, punkreserved1, punkreserved2, szreserved, llreserved, pvreserved, cbreserved, ppreserved)
   end
-  def get_name(lpcwbuffer : UInt32*, pwzname : Char*) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt32*, Char*, HRESULT)).call(lpcwbuffer, pwzname)
+  def get_name(this : IAssemblyName*, lpcwbuffer : UInt32*, pwzname : Char*) : HRESULT
+    @lpVtbl.value.get_name.call(this, lpcwbuffer, pwzname)
   end
-  def get_version(pdwversionhi : UInt32*, pdwversionlow : UInt32*) : HRESULT
-    @lpVtbl.value.get_version.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwversionhi, pdwversionlow)
+  def get_version(this : IAssemblyName*, pdwversionhi : UInt32*, pdwversionlow : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.call(this, pdwversionhi, pdwversionlow)
   end
-  def is_equal(pname : IAssemblyName, dwcmpflags : UInt32) : HRESULT
-    @lpVtbl.value.is_equal.unsafe_as(Proc(IAssemblyName, UInt32, HRESULT)).call(pname, dwcmpflags)
+  def is_equal(this : IAssemblyName*, pname : IAssemblyName, dwcmpflags : UInt32) : HRESULT
+    @lpVtbl.value.is_equal.call(this, pname, dwcmpflags)
   end
-  def clone(pname : IAssemblyName*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IAssemblyName*, HRESULT)).call(pname)
+  def clone(this : IAssemblyName*, pname : IAssemblyName*) : HRESULT
+    @lpVtbl.value.clone.call(this, pname)
   end
 end
 struct LibWin32::IAssemblyCacheItem
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IAssemblyCacheItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IAssemblyCacheItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IAssemblyCacheItem*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_stream(dwflags : UInt32, pszstreamname : LibC::LPWSTR, dwformat : UInt32, dwformatflags : UInt32, ppistream : IStream*, pulimaxsize : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.create_stream.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, UInt32, IStream*, ULARGE_INTEGER*, HRESULT)).call(dwflags, pszstreamname, dwformat, dwformatflags, ppistream, pulimaxsize)
+  def create_stream(this : IAssemblyCacheItem*, dwflags : UInt32, pszstreamname : LibC::LPWSTR, dwformat : UInt32, dwformatflags : UInt32, ppistream : IStream*, pulimaxsize : ULARGE_INTEGER*) : HRESULT
+    @lpVtbl.value.create_stream.call(this, dwflags, pszstreamname, dwformat, dwformatflags, ppistream, pulimaxsize)
   end
-  def commit(dwflags : UInt32, puldisposition : UInt32*) : HRESULT
-    @lpVtbl.value.commit.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(dwflags, puldisposition)
+  def commit(this : IAssemblyCacheItem*, dwflags : UInt32, puldisposition : UInt32*) : HRESULT
+    @lpVtbl.value.commit.call(this, dwflags, puldisposition)
   end
-  def abort_item : HRESULT
-    @lpVtbl.value.abort_item.unsafe_as(Proc(HRESULT)).call
+  def abort_item(this : IAssemblyCacheItem*) : HRESULT
+    @lpVtbl.value.abort_item.call(this)
   end
 end
 struct LibWin32::IAssemblyCache
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IAssemblyCache*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IAssemblyCache*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IAssemblyCache*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def uninstall_assembly(dwflags : UInt32, pszassemblyname : LibC::LPWSTR, prefdata : FUSION_INSTALL_REFERENCE*, puldisposition : IASSEMBLYCACHE_UNINSTALL_DISPOSITION*) : HRESULT
-    @lpVtbl.value.uninstall_assembly.unsafe_as(Proc(UInt32, LibC::LPWSTR, FUSION_INSTALL_REFERENCE*, IASSEMBLYCACHE_UNINSTALL_DISPOSITION*, HRESULT)).call(dwflags, pszassemblyname, prefdata, puldisposition)
+  def uninstall_assembly(this : IAssemblyCache*, dwflags : UInt32, pszassemblyname : LibC::LPWSTR, prefdata : FUSION_INSTALL_REFERENCE*, puldisposition : IASSEMBLYCACHE_UNINSTALL_DISPOSITION*) : HRESULT
+    @lpVtbl.value.uninstall_assembly.call(this, dwflags, pszassemblyname, prefdata, puldisposition)
   end
-  def query_assembly_info(dwflags : QUERYASMINFO_FLAGS, pszassemblyname : LibC::LPWSTR, pasminfo : ASSEMBLY_INFO*) : HRESULT
-    @lpVtbl.value.query_assembly_info.unsafe_as(Proc(QUERYASMINFO_FLAGS, LibC::LPWSTR, ASSEMBLY_INFO*, HRESULT)).call(dwflags, pszassemblyname, pasminfo)
+  def query_assembly_info(this : IAssemblyCache*, dwflags : QUERYASMINFO_FLAGS, pszassemblyname : LibC::LPWSTR, pasminfo : ASSEMBLY_INFO*) : HRESULT
+    @lpVtbl.value.query_assembly_info.call(this, dwflags, pszassemblyname, pasminfo)
   end
-  def create_assembly_cache_item(dwflags : UInt32, pvreserved : Void*, ppasmitem : IAssemblyCacheItem*, pszassemblyname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.create_assembly_cache_item.unsafe_as(Proc(UInt32, Void*, IAssemblyCacheItem*, LibC::LPWSTR, HRESULT)).call(dwflags, pvreserved, ppasmitem, pszassemblyname)
+  def create_assembly_cache_item(this : IAssemblyCache*, dwflags : UInt32, pvreserved : Void*, ppasmitem : IAssemblyCacheItem*, pszassemblyname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.create_assembly_cache_item.call(this, dwflags, pvreserved, ppasmitem, pszassemblyname)
   end
-  def reserved(ppunk : IUnknown*) : HRESULT
-    @lpVtbl.value.reserved.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  def reserved(this : IAssemblyCache*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.reserved.call(this, ppunk)
   end
-  def install_assembly(dwflags : UInt32, pszmanifestfilepath : LibC::LPWSTR, prefdata : FUSION_INSTALL_REFERENCE*) : HRESULT
-    @lpVtbl.value.install_assembly.unsafe_as(Proc(UInt32, LibC::LPWSTR, FUSION_INSTALL_REFERENCE*, HRESULT)).call(dwflags, pszmanifestfilepath, prefdata)
+  def install_assembly(this : IAssemblyCache*, dwflags : UInt32, pszmanifestfilepath : LibC::LPWSTR, prefdata : FUSION_INSTALL_REFERENCE*) : HRESULT
+    @lpVtbl.value.install_assembly.call(this, dwflags, pszmanifestfilepath, prefdata)
   end
 end
 struct LibWin32::IPMApplicationInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMApplicationInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMApplicationInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMApplicationInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_product_id(pproductid : Guid*) : HRESULT
-    @lpVtbl.value.get_product_id.unsafe_as(Proc(Guid*, HRESULT)).call(pproductid)
+  def get_product_id(this : IPMApplicationInfo*, pproductid : Guid*) : HRESULT
+    @lpVtbl.value.get_product_id.call(this, pproductid)
   end
-  def get_instance_id(pinstanceid : Guid*) : HRESULT
-    @lpVtbl.value.get_instance_id.unsafe_as(Proc(Guid*, HRESULT)).call(pinstanceid)
+  def get_instance_id(this : IPMApplicationInfo*, pinstanceid : Guid*) : HRESULT
+    @lpVtbl.value.get_instance_id.call(this, pinstanceid)
   end
-  def get_offer_id(pofferid : Guid*) : HRESULT
-    @lpVtbl.value.get_offer_id.unsafe_as(Proc(Guid*, HRESULT)).call(pofferid)
+  def get_offer_id(this : IPMApplicationInfo*, pofferid : Guid*) : HRESULT
+    @lpVtbl.value.get_offer_id.call(this, pofferid)
   end
-  def get_default_task(pdefaulttask : UInt8**) : HRESULT
-    @lpVtbl.value.get_default_task.unsafe_as(Proc(UInt8**, HRESULT)).call(pdefaulttask)
+  def get_default_task(this : IPMApplicationInfo*, pdefaulttask : UInt8**) : HRESULT
+    @lpVtbl.value.get_default_task.call(this, pdefaulttask)
   end
-  def get_app_title(papptitle : UInt8**) : HRESULT
-    @lpVtbl.value.get_app_title.unsafe_as(Proc(UInt8**, HRESULT)).call(papptitle)
+  def get_app_title(this : IPMApplicationInfo*, papptitle : UInt8**) : HRESULT
+    @lpVtbl.value.get_app_title.call(this, papptitle)
   end
-  def get_icon_path(pappiconpath : UInt8**) : HRESULT
-    @lpVtbl.value.get_icon_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pappiconpath)
+  def get_icon_path(this : IPMApplicationInfo*, pappiconpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_icon_path.call(this, pappiconpath)
   end
-  def get_notification_state(pisnotified : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_notification_state.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisnotified)
+  def get_notification_state(this : IPMApplicationInfo*, pisnotified : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_notification_state.call(this, pisnotified)
   end
-  def get_app_install_type(pappinstalltype : PM_APPLICATION_INSTALL_TYPE*) : HRESULT
-    @lpVtbl.value.get_app_install_type.unsafe_as(Proc(PM_APPLICATION_INSTALL_TYPE*, HRESULT)).call(pappinstalltype)
+  def get_app_install_type(this : IPMApplicationInfo*, pappinstalltype : PM_APPLICATION_INSTALL_TYPE*) : HRESULT
+    @lpVtbl.value.get_app_install_type.call(this, pappinstalltype)
   end
-  def get_state(pstate : PM_APPLICATION_STATE*) : HRESULT
-    @lpVtbl.value.get_state.unsafe_as(Proc(PM_APPLICATION_STATE*, HRESULT)).call(pstate)
+  def get_state(this : IPMApplicationInfo*, pstate : PM_APPLICATION_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, pstate)
   end
-  def get_is_revoked(pisrevoked : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_revoked.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisrevoked)
+  def get_is_revoked(this : IPMApplicationInfo*, pisrevoked : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_revoked.call(this, pisrevoked)
   end
-  def get_update_available(pisupdateavailable : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_update_available.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisupdateavailable)
+  def get_update_available(this : IPMApplicationInfo*, pisupdateavailable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_update_available.call(this, pisupdateavailable)
   end
-  def get_install_date(pinstalldate : FILETIME*) : HRESULT
-    @lpVtbl.value.get_install_date.unsafe_as(Proc(FILETIME*, HRESULT)).call(pinstalldate)
+  def get_install_date(this : IPMApplicationInfo*, pinstalldate : FILETIME*) : HRESULT
+    @lpVtbl.value.get_install_date.call(this, pinstalldate)
   end
-  def get_is_uninstallable(pisuninstallable : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_uninstallable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisuninstallable)
+  def get_is_uninstallable(this : IPMApplicationInfo*, pisuninstallable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, pisuninstallable)
   end
-  def get_is_themable(pisthemable : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_themable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisthemable)
+  def get_is_themable(this : IPMApplicationInfo*, pisthemable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_themable.call(this, pisthemable)
   end
-  def get_is_trial(pistrial : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_trial.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pistrial)
+  def get_is_trial(this : IPMApplicationInfo*, pistrial : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_trial.call(this, pistrial)
   end
-  def get_install_path(pinstallpath : UInt8**) : HRESULT
-    @lpVtbl.value.get_install_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pinstallpath)
+  def get_install_path(this : IPMApplicationInfo*, pinstallpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_install_path.call(this, pinstallpath)
   end
-  def get_data_root(pdataroot : UInt8**) : HRESULT
-    @lpVtbl.value.get_data_root.unsafe_as(Proc(UInt8**, HRESULT)).call(pdataroot)
+  def get_data_root(this : IPMApplicationInfo*, pdataroot : UInt8**) : HRESULT
+    @lpVtbl.value.get_data_root.call(this, pdataroot)
   end
-  def get_genre(pgenre : PM_APP_GENRE*) : HRESULT
-    @lpVtbl.value.get_genre.unsafe_as(Proc(PM_APP_GENRE*, HRESULT)).call(pgenre)
+  def get_genre(this : IPMApplicationInfo*, pgenre : PM_APP_GENRE*) : HRESULT
+    @lpVtbl.value.get_genre.call(this, pgenre)
   end
-  def get_publisher(ppublisher : UInt8**) : HRESULT
-    @lpVtbl.value.get_publisher.unsafe_as(Proc(UInt8**, HRESULT)).call(ppublisher)
+  def get_publisher(this : IPMApplicationInfo*, ppublisher : UInt8**) : HRESULT
+    @lpVtbl.value.get_publisher.call(this, ppublisher)
   end
-  def get_author(pauthor : UInt8**) : HRESULT
-    @lpVtbl.value.get_author.unsafe_as(Proc(UInt8**, HRESULT)).call(pauthor)
+  def get_author(this : IPMApplicationInfo*, pauthor : UInt8**) : HRESULT
+    @lpVtbl.value.get_author.call(this, pauthor)
   end
-  def get_description(pdescription : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pdescription)
+  def get_description(this : IPMApplicationInfo*, pdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pdescription)
   end
-  def get_version(pversion : UInt8**) : HRESULT
-    @lpVtbl.value.get_version.unsafe_as(Proc(UInt8**, HRESULT)).call(pversion)
+  def get_version(this : IPMApplicationInfo*, pversion : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.call(this, pversion)
   end
-  def get_invocation_info(pimageurn : UInt8**, pparameters : UInt8**) : HRESULT
-    @lpVtbl.value.get_invocation_info.unsafe_as(Proc(UInt8**, UInt8**, HRESULT)).call(pimageurn, pparameters)
+  def get_invocation_info(this : IPMApplicationInfo*, pimageurn : UInt8**, pparameters : UInt8**) : HRESULT
+    @lpVtbl.value.get_invocation_info.call(this, pimageurn, pparameters)
   end
-  def get_app_plat_major_version(pmajorver : UInt8*) : HRESULT
-    @lpVtbl.value.get_app_plat_major_version.unsafe_as(Proc(UInt8*, HRESULT)).call(pmajorver)
+  def get_app_plat_major_version(this : IPMApplicationInfo*, pmajorver : UInt8*) : HRESULT
+    @lpVtbl.value.get_app_plat_major_version.call(this, pmajorver)
   end
-  def get_app_plat_minor_version(pminorver : UInt8*) : HRESULT
-    @lpVtbl.value.get_app_plat_minor_version.unsafe_as(Proc(UInt8*, HRESULT)).call(pminorver)
+  def get_app_plat_minor_version(this : IPMApplicationInfo*, pminorver : UInt8*) : HRESULT
+    @lpVtbl.value.get_app_plat_minor_version.call(this, pminorver)
   end
-  def get_publisher_id(ppublisherid : Guid*) : HRESULT
-    @lpVtbl.value.get_publisher_id.unsafe_as(Proc(Guid*, HRESULT)).call(ppublisherid)
+  def get_publisher_id(this : IPMApplicationInfo*, ppublisherid : Guid*) : HRESULT
+    @lpVtbl.value.get_publisher_id.call(this, ppublisherid)
   end
-  def get_is_multi_core(pismulticore : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_multi_core.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pismulticore)
+  def get_is_multi_core(this : IPMApplicationInfo*, pismulticore : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_multi_core.call(this, pismulticore)
   end
-  def get_sid(psid : UInt8**) : HRESULT
-    @lpVtbl.value.get_sid.unsafe_as(Proc(UInt8**, HRESULT)).call(psid)
+  def get_sid(this : IPMApplicationInfo*, psid : UInt8**) : HRESULT
+    @lpVtbl.value.get_sid.call(this, psid)
   end
-  def get_app_plat_major_version_light_up(pmajorver : UInt8*) : HRESULT
-    @lpVtbl.value.get_app_plat_major_version_light_up.unsafe_as(Proc(UInt8*, HRESULT)).call(pmajorver)
+  def get_app_plat_major_version_light_up(this : IPMApplicationInfo*, pmajorver : UInt8*) : HRESULT
+    @lpVtbl.value.get_app_plat_major_version_light_up.call(this, pmajorver)
   end
-  def get_app_plat_minor_version_light_up(pminorver : UInt8*) : HRESULT
-    @lpVtbl.value.get_app_plat_minor_version_light_up.unsafe_as(Proc(UInt8*, HRESULT)).call(pminorver)
+  def get_app_plat_minor_version_light_up(this : IPMApplicationInfo*, pminorver : UInt8*) : HRESULT
+    @lpVtbl.value.get_app_plat_minor_version_light_up.call(this, pminorver)
   end
-  def set_update_available(isupdateavailable : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_update_available.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(isupdateavailable)
+  def set_update_available(this : IPMApplicationInfo*, isupdateavailable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_update_available.call(this, isupdateavailable)
   end
-  def set_notification_state(isnotified : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_notification_state.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(isnotified)
+  def set_notification_state(this : IPMApplicationInfo*, isnotified : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_notification_state.call(this, isnotified)
   end
-  def set_icon_path(appiconpath : UInt8*) : HRESULT
-    @lpVtbl.value.set_icon_path.unsafe_as(Proc(UInt8*, HRESULT)).call(appiconpath)
+  def set_icon_path(this : IPMApplicationInfo*, appiconpath : UInt8*) : HRESULT
+    @lpVtbl.value.set_icon_path.call(this, appiconpath)
   end
-  def set_uninstallable_state(isuninstallable : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_uninstallable_state.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(isuninstallable)
+  def set_uninstallable_state(this : IPMApplicationInfo*, isuninstallable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_uninstallable_state.call(this, isuninstallable)
   end
-  def get_is_pinable_on_kid_zone(pispinable : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_pinable_on_kid_zone.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pispinable)
+  def get_is_pinable_on_kid_zone(this : IPMApplicationInfo*, pispinable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_pinable_on_kid_zone.call(this, pispinable)
   end
-  def get_is_originally_pre_installed(pispreinstalled : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_originally_pre_installed.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pispreinstalled)
+  def get_is_originally_pre_installed(this : IPMApplicationInfo*, pispreinstalled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_originally_pre_installed.call(this, pispreinstalled)
   end
-  def get_is_install_on_sd(pisinstallonsd : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_install_on_sd.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisinstallonsd)
+  def get_is_install_on_sd(this : IPMApplicationInfo*, pisinstallonsd : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_install_on_sd.call(this, pisinstallonsd)
   end
-  def get_is_optout_on_sd(pisoptoutonsd : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_optout_on_sd.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisoptoutonsd)
+  def get_is_optout_on_sd(this : IPMApplicationInfo*, pisoptoutonsd : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_optout_on_sd.call(this, pisoptoutonsd)
   end
-  def get_is_optout_backup_restore(pisoptoutbackuprestore : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_optout_backup_restore.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisoptoutbackuprestore)
+  def get_is_optout_backup_restore(this : IPMApplicationInfo*, pisoptoutbackuprestore : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_optout_backup_restore.call(this, pisoptoutbackuprestore)
   end
-  def set_enterprise_disabled(isdisabled : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_enterprise_disabled.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(isdisabled)
+  def set_enterprise_disabled(this : IPMApplicationInfo*, isdisabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_enterprise_disabled.call(this, isdisabled)
   end
-  def set_enterprise_uninstallable(isuninstallable : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_enterprise_uninstallable.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(isuninstallable)
+  def set_enterprise_uninstallable(this : IPMApplicationInfo*, isuninstallable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_enterprise_uninstallable.call(this, isuninstallable)
   end
-  def get_enterprise_disabled(isdisabled : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_enterprise_disabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(isdisabled)
+  def get_enterprise_disabled(this : IPMApplicationInfo*, isdisabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_enterprise_disabled.call(this, isdisabled)
   end
-  def get_enterprise_uninstallable(isuninstallable : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_enterprise_uninstallable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(isuninstallable)
+  def get_enterprise_uninstallable(this : IPMApplicationInfo*, isuninstallable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_enterprise_uninstallable.call(this, isuninstallable)
   end
-  def get_is_visible_on_app_list(pisvisible : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_visible_on_app_list.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisvisible)
+  def get_is_visible_on_app_list(this : IPMApplicationInfo*, pisvisible : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_visible_on_app_list.call(this, pisvisible)
   end
-  def get_is_inbox_app(pisinboxapp : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_inbox_app.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisinboxapp)
+  def get_is_inbox_app(this : IPMApplicationInfo*, pisinboxapp : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_inbox_app.call(this, pisinboxapp)
   end
-  def get_storage_id(pstorageid : Guid*) : HRESULT
-    @lpVtbl.value.get_storage_id.unsafe_as(Proc(Guid*, HRESULT)).call(pstorageid)
+  def get_storage_id(this : IPMApplicationInfo*, pstorageid : Guid*) : HRESULT
+    @lpVtbl.value.get_storage_id.call(this, pstorageid)
   end
-  def get_start_app_blob(pblob : PM_STARTAPPBLOB*) : HRESULT
-    @lpVtbl.value.get_start_app_blob.unsafe_as(Proc(PM_STARTAPPBLOB*, HRESULT)).call(pblob)
+  def get_start_app_blob(this : IPMApplicationInfo*, pblob : PM_STARTAPPBLOB*) : HRESULT
+    @lpVtbl.value.get_start_app_blob.call(this, pblob)
   end
-  def get_is_movable(pismovable : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_movable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pismovable)
+  def get_is_movable(this : IPMApplicationInfo*, pismovable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_movable.call(this, pismovable)
   end
-  def get_deployment_app_enumeration_hub_filter(hubtype : PM_TILE_HUBTYPE*) : HRESULT
-    @lpVtbl.value.get_deployment_app_enumeration_hub_filter.unsafe_as(Proc(PM_TILE_HUBTYPE*, HRESULT)).call(hubtype)
+  def get_deployment_app_enumeration_hub_filter(this : IPMApplicationInfo*, hubtype : PM_TILE_HUBTYPE*) : HRESULT
+    @lpVtbl.value.get_deployment_app_enumeration_hub_filter.call(this, hubtype)
   end
-  def get_modified_date(pmodifieddate : FILETIME*) : HRESULT
-    @lpVtbl.value.get_modified_date.unsafe_as(Proc(FILETIME*, HRESULT)).call(pmodifieddate)
+  def get_modified_date(this : IPMApplicationInfo*, pmodifieddate : FILETIME*) : HRESULT
+    @lpVtbl.value.get_modified_date.call(this, pmodifieddate)
   end
-  def get_is_originally_restored(pisrestored : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_originally_restored.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisrestored)
+  def get_is_originally_restored(this : IPMApplicationInfo*, pisrestored : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_originally_restored.call(this, pisrestored)
   end
-  def get_should_defer_mdil_bind(pfdefermdilbind : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_should_defer_mdil_bind.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfdefermdilbind)
+  def get_should_defer_mdil_bind(this : IPMApplicationInfo*, pfdefermdilbind : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_should_defer_mdil_bind.call(this, pfdefermdilbind)
   end
-  def get_is_fully_pre_install(pfisfullypreinstall : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_fully_pre_install.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfisfullypreinstall)
+  def get_is_fully_pre_install(this : IPMApplicationInfo*, pfisfullypreinstall : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_fully_pre_install.call(this, pfisfullypreinstall)
   end
-  def set_is_mdil_maintenance_needed(fismdilmaintenanceneeded : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_is_mdil_maintenance_needed.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fismdilmaintenanceneeded)
+  def set_is_mdil_maintenance_needed(this : IPMApplicationInfo*, fismdilmaintenanceneeded : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_mdil_maintenance_needed.call(this, fismdilmaintenanceneeded)
   end
-  def set_title(apptitle : UInt8*) : HRESULT
-    @lpVtbl.value.set_title.unsafe_as(Proc(UInt8*, HRESULT)).call(apptitle)
+  def set_title(this : IPMApplicationInfo*, apptitle : UInt8*) : HRESULT
+    @lpVtbl.value.set_title.call(this, apptitle)
   end
 end
 struct LibWin32::IPMTilePropertyInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMTilePropertyInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMTilePropertyInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMTilePropertyInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_property_id(ppropid : UInt32*) : HRESULT
-    @lpVtbl.value.get_property_id.unsafe_as(Proc(UInt32*, HRESULT)).call(ppropid)
+  def get_property_id(this : IPMTilePropertyInfo*, ppropid : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_id.call(this, ppropid)
   end
-  def get_property_value(ppropvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_property_value.unsafe_as(Proc(UInt8**, HRESULT)).call(ppropvalue)
+  def get_property_value(this : IPMTilePropertyInfo*, ppropvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_property_value.call(this, ppropvalue)
   end
-  def set_property(propvalue : UInt8*) : HRESULT
-    @lpVtbl.value.set_property.unsafe_as(Proc(UInt8*, HRESULT)).call(propvalue)
+  def set_property(this : IPMTilePropertyInfo*, propvalue : UInt8*) : HRESULT
+    @lpVtbl.value.set_property.call(this, propvalue)
   end
 end
 struct LibWin32::IPMTilePropertyEnumerator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMTilePropertyEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMTilePropertyEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMTilePropertyEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_next(pppropinfo : IPMTilePropertyInfo*) : HRESULT
-    @lpVtbl.value.get_next.unsafe_as(Proc(IPMTilePropertyInfo*, HRESULT)).call(pppropinfo)
+  def get_next(this : IPMTilePropertyEnumerator*, pppropinfo : IPMTilePropertyInfo*) : HRESULT
+    @lpVtbl.value.get_next.call(this, pppropinfo)
   end
 end
 struct LibWin32::IPMTileInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMTileInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMTileInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMTileInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_product_id(pproductid : Guid*) : HRESULT
-    @lpVtbl.value.get_product_id.unsafe_as(Proc(Guid*, HRESULT)).call(pproductid)
+  def get_product_id(this : IPMTileInfo*, pproductid : Guid*) : HRESULT
+    @lpVtbl.value.get_product_id.call(this, pproductid)
   end
-  def get_tile_id(ptileid : UInt8**) : HRESULT
-    @lpVtbl.value.get_tile_id.unsafe_as(Proc(UInt8**, HRESULT)).call(ptileid)
+  def get_tile_id(this : IPMTileInfo*, ptileid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tile_id.call(this, ptileid)
   end
-  def get_template_type(ptemplatetype : TILE_TEMPLATE_TYPE*) : HRESULT
-    @lpVtbl.value.get_template_type.unsafe_as(Proc(TILE_TEMPLATE_TYPE*, HRESULT)).call(ptemplatetype)
+  def get_template_type(this : IPMTileInfo*, ptemplatetype : TILE_TEMPLATE_TYPE*) : HRESULT
+    @lpVtbl.value.get_template_type.call(this, ptemplatetype)
   end
-  def get_hub_pinned_state(hubtype : PM_TILE_HUBTYPE, ppinned : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_hub_pinned_state.unsafe_as(Proc(PM_TILE_HUBTYPE, LibC::BOOL*, HRESULT)).call(hubtype, ppinned)
+  def get_hub_pinned_state(this : IPMTileInfo*, hubtype : PM_TILE_HUBTYPE, ppinned : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_hub_pinned_state.call(this, hubtype, ppinned)
   end
-  def get_hub_position(hubtype : PM_TILE_HUBTYPE, pposition : UInt32*) : HRESULT
-    @lpVtbl.value.get_hub_position.unsafe_as(Proc(PM_TILE_HUBTYPE, UInt32*, HRESULT)).call(hubtype, pposition)
+  def get_hub_position(this : IPMTileInfo*, hubtype : PM_TILE_HUBTYPE, pposition : UInt32*) : HRESULT
+    @lpVtbl.value.get_hub_position.call(this, hubtype, pposition)
   end
-  def get_is_notified(pisnotified : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_notified.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisnotified)
+  def get_is_notified(this : IPMTileInfo*, pisnotified : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_notified.call(this, pisnotified)
   end
-  def get_is_default(pisdefault : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_default.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisdefault)
+  def get_is_default(this : IPMTileInfo*, pisdefault : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_default.call(this, pisdefault)
   end
-  def get_task_id(ptaskid : UInt8**) : HRESULT
-    @lpVtbl.value.get_task_id.unsafe_as(Proc(UInt8**, HRESULT)).call(ptaskid)
+  def get_task_id(this : IPMTileInfo*, ptaskid : UInt8**) : HRESULT
+    @lpVtbl.value.get_task_id.call(this, ptaskid)
   end
-  def get_tile_type(pstarttiletype : PM_STARTTILE_TYPE*) : HRESULT
-    @lpVtbl.value.get_tile_type.unsafe_as(Proc(PM_STARTTILE_TYPE*, HRESULT)).call(pstarttiletype)
+  def get_tile_type(this : IPMTileInfo*, pstarttiletype : PM_STARTTILE_TYPE*) : HRESULT
+    @lpVtbl.value.get_tile_type.call(this, pstarttiletype)
   end
-  def get_is_themable(pisthemable : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_themable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisthemable)
+  def get_is_themable(this : IPMTileInfo*, pisthemable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_themable.call(this, pisthemable)
   end
-  def get_property_by_id(propid : UInt32, pppropinfo : IPMTilePropertyInfo*) : HRESULT
-    @lpVtbl.value.get_property_by_id.unsafe_as(Proc(UInt32, IPMTilePropertyInfo*, HRESULT)).call(propid, pppropinfo)
+  def get_property_by_id(this : IPMTileInfo*, propid : UInt32, pppropinfo : IPMTilePropertyInfo*) : HRESULT
+    @lpVtbl.value.get_property_by_id.call(this, propid, pppropinfo)
   end
-  def get_invocation_info(pimageurn : UInt8**, pparameters : UInt8**) : HRESULT
-    @lpVtbl.value.get_invocation_info.unsafe_as(Proc(UInt8**, UInt8**, HRESULT)).call(pimageurn, pparameters)
+  def get_invocation_info(this : IPMTileInfo*, pimageurn : UInt8**, pparameters : UInt8**) : HRESULT
+    @lpVtbl.value.get_invocation_info.call(this, pimageurn, pparameters)
   end
-  def get_property_enum(pptilepropenum : IPMTilePropertyEnumerator*) : HRESULT
-    @lpVtbl.value.get_property_enum.unsafe_as(Proc(IPMTilePropertyEnumerator*, HRESULT)).call(pptilepropenum)
+  def get_property_enum(this : IPMTileInfo*, pptilepropenum : IPMTilePropertyEnumerator*) : HRESULT
+    @lpVtbl.value.get_property_enum.call(this, pptilepropenum)
   end
-  def get_hub_tile_size(hubtype : PM_TILE_HUBTYPE, psize : PM_TILE_SIZE*) : HRESULT
-    @lpVtbl.value.get_hub_tile_size.unsafe_as(Proc(PM_TILE_HUBTYPE, PM_TILE_SIZE*, HRESULT)).call(hubtype, psize)
+  def get_hub_tile_size(this : IPMTileInfo*, hubtype : PM_TILE_HUBTYPE, psize : PM_TILE_SIZE*) : HRESULT
+    @lpVtbl.value.get_hub_tile_size.call(this, hubtype, psize)
   end
-  def set_hub_position(hubtype : PM_TILE_HUBTYPE, position : UInt32) : HRESULT
-    @lpVtbl.value.set_hub_position.unsafe_as(Proc(PM_TILE_HUBTYPE, UInt32, HRESULT)).call(hubtype, position)
+  def set_hub_position(this : IPMTileInfo*, hubtype : PM_TILE_HUBTYPE, position : UInt32) : HRESULT
+    @lpVtbl.value.set_hub_position.call(this, hubtype, position)
   end
-  def set_notified_state(notified : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_notified_state.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(notified)
+  def set_notified_state(this : IPMTileInfo*, notified : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_notified_state.call(this, notified)
   end
-  def set_hub_pinned_state(hubtype : PM_TILE_HUBTYPE, pinned : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_hub_pinned_state.unsafe_as(Proc(PM_TILE_HUBTYPE, LibC::BOOL, HRESULT)).call(hubtype, pinned)
+  def set_hub_pinned_state(this : IPMTileInfo*, hubtype : PM_TILE_HUBTYPE, pinned : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_hub_pinned_state.call(this, hubtype, pinned)
   end
-  def set_hub_tile_size(hubtype : PM_TILE_HUBTYPE, size : PM_TILE_SIZE) : HRESULT
-    @lpVtbl.value.set_hub_tile_size.unsafe_as(Proc(PM_TILE_HUBTYPE, PM_TILE_SIZE, HRESULT)).call(hubtype, size)
+  def set_hub_tile_size(this : IPMTileInfo*, hubtype : PM_TILE_HUBTYPE, size : PM_TILE_SIZE) : HRESULT
+    @lpVtbl.value.set_hub_tile_size.call(this, hubtype, size)
   end
-  def set_invocation_info(taskname : UInt8*, taskparameters : UInt8*) : HRESULT
-    @lpVtbl.value.set_invocation_info.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(taskname, taskparameters)
+  def set_invocation_info(this : IPMTileInfo*, taskname : UInt8*, taskparameters : UInt8*) : HRESULT
+    @lpVtbl.value.set_invocation_info.call(this, taskname, taskparameters)
   end
-  def get_start_tile_blob(pblob : PM_STARTTILEBLOB*) : HRESULT
-    @lpVtbl.value.get_start_tile_blob.unsafe_as(Proc(PM_STARTTILEBLOB*, HRESULT)).call(pblob)
+  def get_start_tile_blob(this : IPMTileInfo*, pblob : PM_STARTTILEBLOB*) : HRESULT
+    @lpVtbl.value.get_start_tile_blob.call(this, pblob)
   end
-  def get_is_restoring(pisrestoring : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_restoring.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisrestoring)
+  def get_is_restoring(this : IPMTileInfo*, pisrestoring : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_restoring.call(this, pisrestoring)
   end
-  def get_is_auto_restore_disabled(pisautorestoredisabled : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_auto_restore_disabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisautorestoredisabled)
+  def get_is_auto_restore_disabled(this : IPMTileInfo*, pisautorestoredisabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_auto_restore_disabled.call(this, pisautorestoredisabled)
   end
-  def set_is_restoring(restoring : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_is_restoring.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(restoring)
+  def set_is_restoring(this : IPMTileInfo*, restoring : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_restoring.call(this, restoring)
   end
-  def set_is_auto_restore_disabled(autorestoredisabled : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_is_auto_restore_disabled.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(autorestoredisabled)
+  def set_is_auto_restore_disabled(this : IPMTileInfo*, autorestoredisabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_auto_restore_disabled.call(this, autorestoredisabled)
   end
 end
 struct LibWin32::IPMTileInfoEnumerator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMTileInfoEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMTileInfoEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMTileInfoEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_next(pptileinfo : IPMTileInfo*) : HRESULT
-    @lpVtbl.value.get_next.unsafe_as(Proc(IPMTileInfo*, HRESULT)).call(pptileinfo)
+  def get_next(this : IPMTileInfoEnumerator*, pptileinfo : IPMTileInfo*) : HRESULT
+    @lpVtbl.value.get_next.call(this, pptileinfo)
   end
 end
 struct LibWin32::IPMApplicationInfoEnumerator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMApplicationInfoEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMApplicationInfoEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMApplicationInfoEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_next(ppappinfo : IPMApplicationInfo*) : HRESULT
-    @lpVtbl.value.get_next.unsafe_as(Proc(IPMApplicationInfo*, HRESULT)).call(ppappinfo)
+  def get_next(this : IPMApplicationInfoEnumerator*, ppappinfo : IPMApplicationInfo*) : HRESULT
+    @lpVtbl.value.get_next.call(this, ppappinfo)
   end
 end
 struct LibWin32::IPMLiveTileJobInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMLiveTileJobInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMLiveTileJobInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMLiveTileJobInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_product_id(pproductid : Guid*) : HRESULT
-    @lpVtbl.value.get_product_id.unsafe_as(Proc(Guid*, HRESULT)).call(pproductid)
+  def get_product_id(this : IPMLiveTileJobInfo*, pproductid : Guid*) : HRESULT
+    @lpVtbl.value.get_product_id.call(this, pproductid)
   end
-  def get_tile_id(ptileid : UInt8**) : HRESULT
-    @lpVtbl.value.get_tile_id.unsafe_as(Proc(UInt8**, HRESULT)).call(ptileid)
+  def get_tile_id(this : IPMLiveTileJobInfo*, ptileid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tile_id.call(this, ptileid)
   end
-  def get_next_schedule(pnextschedule : FILETIME*) : HRESULT
-    @lpVtbl.value.get_next_schedule.unsafe_as(Proc(FILETIME*, HRESULT)).call(pnextschedule)
+  def get_next_schedule(this : IPMLiveTileJobInfo*, pnextschedule : FILETIME*) : HRESULT
+    @lpVtbl.value.get_next_schedule.call(this, pnextschedule)
   end
-  def set_next_schedule(ftnextschedule : FILETIME) : HRESULT
-    @lpVtbl.value.set_next_schedule.unsafe_as(Proc(FILETIME, HRESULT)).call(ftnextschedule)
+  def set_next_schedule(this : IPMLiveTileJobInfo*, ftnextschedule : FILETIME) : HRESULT
+    @lpVtbl.value.set_next_schedule.call(this, ftnextschedule)
   end
-  def get_start_schedule(pstartschedule : FILETIME*) : HRESULT
-    @lpVtbl.value.get_start_schedule.unsafe_as(Proc(FILETIME*, HRESULT)).call(pstartschedule)
+  def get_start_schedule(this : IPMLiveTileJobInfo*, pstartschedule : FILETIME*) : HRESULT
+    @lpVtbl.value.get_start_schedule.call(this, pstartschedule)
   end
-  def set_start_schedule(ftstartschedule : FILETIME) : HRESULT
-    @lpVtbl.value.set_start_schedule.unsafe_as(Proc(FILETIME, HRESULT)).call(ftstartschedule)
+  def set_start_schedule(this : IPMLiveTileJobInfo*, ftstartschedule : FILETIME) : HRESULT
+    @lpVtbl.value.set_start_schedule.call(this, ftstartschedule)
   end
-  def get_interval_duration(pintervalduration : UInt32*) : HRESULT
-    @lpVtbl.value.get_interval_duration.unsafe_as(Proc(UInt32*, HRESULT)).call(pintervalduration)
+  def get_interval_duration(this : IPMLiveTileJobInfo*, pintervalduration : UInt32*) : HRESULT
+    @lpVtbl.value.get_interval_duration.call(this, pintervalduration)
   end
-  def set_interval_duration(ulintervalduration : UInt32) : HRESULT
-    @lpVtbl.value.set_interval_duration.unsafe_as(Proc(UInt32, HRESULT)).call(ulintervalduration)
+  def set_interval_duration(this : IPMLiveTileJobInfo*, ulintervalduration : UInt32) : HRESULT
+    @lpVtbl.value.set_interval_duration.call(this, ulintervalduration)
   end
-  def get_run_forever(isrunforever : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_run_forever.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(isrunforever)
+  def get_run_forever(this : IPMLiveTileJobInfo*, isrunforever : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_run_forever.call(this, isrunforever)
   end
-  def set_run_forever(frunforever : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_run_forever.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(frunforever)
+  def set_run_forever(this : IPMLiveTileJobInfo*, frunforever : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_run_forever.call(this, frunforever)
   end
-  def get_max_run_count(pmaxruncount : UInt32*) : HRESULT
-    @lpVtbl.value.get_max_run_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pmaxruncount)
+  def get_max_run_count(this : IPMLiveTileJobInfo*, pmaxruncount : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_run_count.call(this, pmaxruncount)
   end
-  def set_max_run_count(ulmaxruncount : UInt32) : HRESULT
-    @lpVtbl.value.set_max_run_count.unsafe_as(Proc(UInt32, HRESULT)).call(ulmaxruncount)
+  def set_max_run_count(this : IPMLiveTileJobInfo*, ulmaxruncount : UInt32) : HRESULT
+    @lpVtbl.value.set_max_run_count.call(this, ulmaxruncount)
   end
-  def get_run_count(pruncount : UInt32*) : HRESULT
-    @lpVtbl.value.get_run_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pruncount)
+  def get_run_count(this : IPMLiveTileJobInfo*, pruncount : UInt32*) : HRESULT
+    @lpVtbl.value.get_run_count.call(this, pruncount)
   end
-  def set_run_count(ulruncount : UInt32) : HRESULT
-    @lpVtbl.value.set_run_count.unsafe_as(Proc(UInt32, HRESULT)).call(ulruncount)
+  def set_run_count(this : IPMLiveTileJobInfo*, ulruncount : UInt32) : HRESULT
+    @lpVtbl.value.set_run_count.call(this, ulruncount)
   end
-  def get_recurrence_type(precurrencetype : UInt32*) : HRESULT
-    @lpVtbl.value.get_recurrence_type.unsafe_as(Proc(UInt32*, HRESULT)).call(precurrencetype)
+  def get_recurrence_type(this : IPMLiveTileJobInfo*, precurrencetype : UInt32*) : HRESULT
+    @lpVtbl.value.get_recurrence_type.call(this, precurrencetype)
   end
-  def set_recurrence_type(ulrecurrencetype : UInt32) : HRESULT
-    @lpVtbl.value.set_recurrence_type.unsafe_as(Proc(UInt32, HRESULT)).call(ulrecurrencetype)
+  def set_recurrence_type(this : IPMLiveTileJobInfo*, ulrecurrencetype : UInt32) : HRESULT
+    @lpVtbl.value.set_recurrence_type.call(this, ulrecurrencetype)
   end
-  def get_tile_xml(ptilexml : UInt8**, pcbtilexml : UInt32*) : HRESULT
-    @lpVtbl.value.get_tile_xml.unsafe_as(Proc(UInt8**, UInt32*, HRESULT)).call(ptilexml, pcbtilexml)
+  def get_tile_xml(this : IPMLiveTileJobInfo*, ptilexml : UInt8**, pcbtilexml : UInt32*) : HRESULT
+    @lpVtbl.value.get_tile_xml.call(this, ptilexml, pcbtilexml)
   end
-  def set_tile_xml(ptilexml : UInt8*, cbtilexml : UInt32) : HRESULT
-    @lpVtbl.value.set_tile_xml.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(ptilexml, cbtilexml)
+  def set_tile_xml(this : IPMLiveTileJobInfo*, ptilexml : UInt8*, cbtilexml : UInt32) : HRESULT
+    @lpVtbl.value.set_tile_xml.call(this, ptilexml, cbtilexml)
   end
-  def get_url_xml(purlxml : UInt8**, pcburlxml : UInt32*) : HRESULT
-    @lpVtbl.value.get_url_xml.unsafe_as(Proc(UInt8**, UInt32*, HRESULT)).call(purlxml, pcburlxml)
+  def get_url_xml(this : IPMLiveTileJobInfo*, purlxml : UInt8**, pcburlxml : UInt32*) : HRESULT
+    @lpVtbl.value.get_url_xml.call(this, purlxml, pcburlxml)
   end
-  def set_url_xml(purlxml : UInt8*, cburlxml : UInt32) : HRESULT
-    @lpVtbl.value.set_url_xml.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(purlxml, cburlxml)
+  def set_url_xml(this : IPMLiveTileJobInfo*, purlxml : UInt8*, cburlxml : UInt32) : HRESULT
+    @lpVtbl.value.set_url_xml.call(this, purlxml, cburlxml)
   end
-  def get_attempt_count(pattemptcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_attempt_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pattemptcount)
+  def get_attempt_count(this : IPMLiveTileJobInfo*, pattemptcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_attempt_count.call(this, pattemptcount)
   end
-  def set_attempt_count(ulattemptcount : UInt32) : HRESULT
-    @lpVtbl.value.set_attempt_count.unsafe_as(Proc(UInt32, HRESULT)).call(ulattemptcount)
+  def set_attempt_count(this : IPMLiveTileJobInfo*, ulattemptcount : UInt32) : HRESULT
+    @lpVtbl.value.set_attempt_count.call(this, ulattemptcount)
   end
-  def get_download_state(pdownloadstate : UInt32*) : HRESULT
-    @lpVtbl.value.get_download_state.unsafe_as(Proc(UInt32*, HRESULT)).call(pdownloadstate)
+  def get_download_state(this : IPMLiveTileJobInfo*, pdownloadstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_download_state.call(this, pdownloadstate)
   end
-  def set_download_state(uldownloadstate : UInt32) : HRESULT
-    @lpVtbl.value.set_download_state.unsafe_as(Proc(UInt32, HRESULT)).call(uldownloadstate)
+  def set_download_state(this : IPMLiveTileJobInfo*, uldownloadstate : UInt32) : HRESULT
+    @lpVtbl.value.set_download_state.call(this, uldownloadstate)
   end
 end
 struct LibWin32::IPMLiveTileJobInfoEnumerator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMLiveTileJobInfoEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMLiveTileJobInfoEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMLiveTileJobInfoEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_next(pplivetilejobinfo : IPMLiveTileJobInfo*) : HRESULT
-    @lpVtbl.value.get_next.unsafe_as(Proc(IPMLiveTileJobInfo*, HRESULT)).call(pplivetilejobinfo)
+  def get_next(this : IPMLiveTileJobInfoEnumerator*, pplivetilejobinfo : IPMLiveTileJobInfo*) : HRESULT
+    @lpVtbl.value.get_next.call(this, pplivetilejobinfo)
   end
 end
 struct LibWin32::IPMDeploymentManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMDeploymentManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMDeploymentManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMDeploymentManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def report_download_begin(productid : Guid) : HRESULT
-    @lpVtbl.value.report_download_begin.unsafe_as(Proc(Guid, HRESULT)).call(productid)
+  def report_download_begin(this : IPMDeploymentManager*, productid : Guid) : HRESULT
+    @lpVtbl.value.report_download_begin.call(this, productid)
   end
-  def report_download_progress(productid : Guid, usprogress : UInt16) : HRESULT
-    @lpVtbl.value.report_download_progress.unsafe_as(Proc(Guid, UInt16, HRESULT)).call(productid, usprogress)
+  def report_download_progress(this : IPMDeploymentManager*, productid : Guid, usprogress : UInt16) : HRESULT
+    @lpVtbl.value.report_download_progress.call(this, productid, usprogress)
   end
-  def report_download_complete(productid : Guid, hrresult : HRESULT) : HRESULT
-    @lpVtbl.value.report_download_complete.unsafe_as(Proc(Guid, HRESULT, HRESULT)).call(productid, hrresult)
+  def report_download_complete(this : IPMDeploymentManager*, productid : Guid, hrresult : HRESULT) : HRESULT
+    @lpVtbl.value.report_download_complete.call(this, productid, hrresult)
   end
-  def begin_install(pinstallinfo : PM_INSTALLINFO*) : HRESULT
-    @lpVtbl.value.begin_install.unsafe_as(Proc(PM_INSTALLINFO*, HRESULT)).call(pinstallinfo)
+  def begin_install(this : IPMDeploymentManager*, pinstallinfo : PM_INSTALLINFO*) : HRESULT
+    @lpVtbl.value.begin_install.call(this, pinstallinfo)
   end
-  def begin_update(pupdateinfo : PM_UPDATEINFO*) : HRESULT
-    @lpVtbl.value.begin_update.unsafe_as(Proc(PM_UPDATEINFO*, HRESULT)).call(pupdateinfo)
+  def begin_update(this : IPMDeploymentManager*, pupdateinfo : PM_UPDATEINFO*) : HRESULT
+    @lpVtbl.value.begin_update.call(this, pupdateinfo)
   end
-  def begin_deploy_package(pinstallinfo : PM_INSTALLINFO*) : HRESULT
-    @lpVtbl.value.begin_deploy_package.unsafe_as(Proc(PM_INSTALLINFO*, HRESULT)).call(pinstallinfo)
+  def begin_deploy_package(this : IPMDeploymentManager*, pinstallinfo : PM_INSTALLINFO*) : HRESULT
+    @lpVtbl.value.begin_deploy_package.call(this, pinstallinfo)
   end
-  def begin_update_deployed_package_legacy(pupdateinfo : PM_UPDATEINFO_LEGACY*) : HRESULT
-    @lpVtbl.value.begin_update_deployed_package_legacy.unsafe_as(Proc(PM_UPDATEINFO_LEGACY*, HRESULT)).call(pupdateinfo)
+  def begin_update_deployed_package_legacy(this : IPMDeploymentManager*, pupdateinfo : PM_UPDATEINFO_LEGACY*) : HRESULT
+    @lpVtbl.value.begin_update_deployed_package_legacy.call(this, pupdateinfo)
   end
-  def begin_uninstall(productid : Guid) : HRESULT
-    @lpVtbl.value.begin_uninstall.unsafe_as(Proc(Guid, HRESULT)).call(productid)
+  def begin_uninstall(this : IPMDeploymentManager*, productid : Guid) : HRESULT
+    @lpVtbl.value.begin_uninstall.call(this, productid)
   end
-  def begin_enterprise_app_install(pinstallinfo : PM_INSTALLINFO*) : HRESULT
-    @lpVtbl.value.begin_enterprise_app_install.unsafe_as(Proc(PM_INSTALLINFO*, HRESULT)).call(pinstallinfo)
+  def begin_enterprise_app_install(this : IPMDeploymentManager*, pinstallinfo : PM_INSTALLINFO*) : HRESULT
+    @lpVtbl.value.begin_enterprise_app_install.call(this, pinstallinfo)
   end
-  def begin_enterprise_app_update(pupdateinfo : PM_UPDATEINFO*) : HRESULT
-    @lpVtbl.value.begin_enterprise_app_update.unsafe_as(Proc(PM_UPDATEINFO*, HRESULT)).call(pupdateinfo)
+  def begin_enterprise_app_update(this : IPMDeploymentManager*, pupdateinfo : PM_UPDATEINFO*) : HRESULT
+    @lpVtbl.value.begin_enterprise_app_update.call(this, pupdateinfo)
   end
-  def begin_update_license(productid : Guid, offerid : Guid, pblicense : UInt8*, cblicense : UInt32) : HRESULT
-    @lpVtbl.value.begin_update_license.unsafe_as(Proc(Guid, Guid, UInt8*, UInt32, HRESULT)).call(productid, offerid, pblicense, cblicense)
+  def begin_update_license(this : IPMDeploymentManager*, productid : Guid, offerid : Guid, pblicense : UInt8*, cblicense : UInt32) : HRESULT
+    @lpVtbl.value.begin_update_license.call(this, productid, offerid, pblicense, cblicense)
   end
-  def get_license_challenge(packagepath : UInt8*, ppbchallenge : UInt8**, pcbchallenge : UInt32*, ppbkid : UInt8**, pcbkid : UInt32*, ppbdeviceid : UInt8**, pcbdeviceid : UInt32*, ppbsaltvalue : UInt8**, pcbsaltvalue : UInt32*, ppbkgvvalue : UInt8**, pcbkgvvalue : UInt32*) : HRESULT
-    @lpVtbl.value.get_license_challenge.unsafe_as(Proc(UInt8*, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, HRESULT)).call(packagepath, ppbchallenge, pcbchallenge, ppbkid, pcbkid, ppbdeviceid, pcbdeviceid, ppbsaltvalue, pcbsaltvalue, ppbkgvvalue, pcbkgvvalue)
+  def get_license_challenge(this : IPMDeploymentManager*, packagepath : UInt8*, ppbchallenge : UInt8**, pcbchallenge : UInt32*, ppbkid : UInt8**, pcbkid : UInt32*, ppbdeviceid : UInt8**, pcbdeviceid : UInt32*, ppbsaltvalue : UInt8**, pcbsaltvalue : UInt32*, ppbkgvvalue : UInt8**, pcbkgvvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_license_challenge.call(this, packagepath, ppbchallenge, pcbchallenge, ppbkid, pcbkid, ppbdeviceid, pcbdeviceid, ppbsaltvalue, pcbsaltvalue, ppbkgvvalue, pcbkgvvalue)
   end
-  def get_license_challenge_by_product_id(productid : Guid, ppbchallenge : UInt8**, pcblicense : UInt32*) : HRESULT
-    @lpVtbl.value.get_license_challenge_by_product_id.unsafe_as(Proc(Guid, UInt8**, UInt32*, HRESULT)).call(productid, ppbchallenge, pcblicense)
+  def get_license_challenge_by_product_id(this : IPMDeploymentManager*, productid : Guid, ppbchallenge : UInt8**, pcblicense : UInt32*) : HRESULT
+    @lpVtbl.value.get_license_challenge_by_product_id.call(this, productid, ppbchallenge, pcblicense)
   end
-  def get_license_challenge_by_product_id2(productid : Guid, ppbchallenge : UInt8**, pcblicense : UInt32*, ppbkid : UInt8**, pcbkid : UInt32*, ppbdeviceid : UInt8**, pcbdeviceid : UInt32*, ppbsaltvalue : UInt8**, pcbsaltvalue : UInt32*, ppbkgvvalue : UInt8**, pcbkgvvalue : UInt32*) : HRESULT
-    @lpVtbl.value.get_license_challenge_by_product_id2.unsafe_as(Proc(Guid, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, HRESULT)).call(productid, ppbchallenge, pcblicense, ppbkid, pcbkid, ppbdeviceid, pcbdeviceid, ppbsaltvalue, pcbsaltvalue, ppbkgvvalue, pcbkgvvalue)
+  def get_license_challenge_by_product_id2(this : IPMDeploymentManager*, productid : Guid, ppbchallenge : UInt8**, pcblicense : UInt32*, ppbkid : UInt8**, pcbkid : UInt32*, ppbdeviceid : UInt8**, pcbdeviceid : UInt32*, ppbsaltvalue : UInt8**, pcbsaltvalue : UInt32*, ppbkgvvalue : UInt8**, pcbkgvvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_license_challenge_by_product_id2.call(this, productid, ppbchallenge, pcblicense, ppbkid, pcbkid, ppbdeviceid, pcbdeviceid, ppbsaltvalue, pcbsaltvalue, ppbkgvvalue, pcbkgvvalue)
   end
-  def revoke_license(productid : Guid) : HRESULT
-    @lpVtbl.value.revoke_license.unsafe_as(Proc(Guid, HRESULT)).call(productid)
+  def revoke_license(this : IPMDeploymentManager*, productid : Guid) : HRESULT
+    @lpVtbl.value.revoke_license.call(this, productid)
   end
-  def rebind_mdil_binaries(productid : Guid, filenames : SAFEARRAY*) : HRESULT
-    @lpVtbl.value.rebind_mdil_binaries.unsafe_as(Proc(Guid, SAFEARRAY*, HRESULT)).call(productid, filenames)
+  def rebind_mdil_binaries(this : IPMDeploymentManager*, productid : Guid, filenames : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.rebind_mdil_binaries.call(this, productid, filenames)
   end
-  def rebind_all_mdil_binaries(productid : Guid, instanceid : Guid) : HRESULT
-    @lpVtbl.value.rebind_all_mdil_binaries.unsafe_as(Proc(Guid, Guid, HRESULT)).call(productid, instanceid)
+  def rebind_all_mdil_binaries(this : IPMDeploymentManager*, productid : Guid, instanceid : Guid) : HRESULT
+    @lpVtbl.value.rebind_all_mdil_binaries.call(this, productid, instanceid)
   end
-  def regenerate_xbf(productid : Guid, assemblypaths : SAFEARRAY*) : HRESULT
-    @lpVtbl.value.regenerate_xbf.unsafe_as(Proc(Guid, SAFEARRAY*, HRESULT)).call(productid, assemblypaths)
+  def regenerate_xbf(this : IPMDeploymentManager*, productid : Guid, assemblypaths : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.regenerate_xbf.call(this, productid, assemblypaths)
   end
-  def generate_xbf_for_current_locale(productid : Guid) : HRESULT
-    @lpVtbl.value.generate_xbf_for_current_locale.unsafe_as(Proc(Guid, HRESULT)).call(productid)
+  def generate_xbf_for_current_locale(this : IPMDeploymentManager*, productid : Guid) : HRESULT
+    @lpVtbl.value.generate_xbf_for_current_locale.call(this, productid)
   end
-  def begin_provision(productid : Guid, xmlpath : UInt8*) : HRESULT
-    @lpVtbl.value.begin_provision.unsafe_as(Proc(Guid, UInt8*, HRESULT)).call(productid, xmlpath)
+  def begin_provision(this : IPMDeploymentManager*, productid : Guid, xmlpath : UInt8*) : HRESULT
+    @lpVtbl.value.begin_provision.call(this, productid, xmlpath)
   end
-  def begin_deprovision(productid : Guid) : HRESULT
-    @lpVtbl.value.begin_deprovision.unsafe_as(Proc(Guid, HRESULT)).call(productid)
+  def begin_deprovision(this : IPMDeploymentManager*, productid : Guid) : HRESULT
+    @lpVtbl.value.begin_deprovision.call(this, productid)
   end
-  def reindex_sqlce_databases(productid : Guid) : HRESULT
-    @lpVtbl.value.reindex_sqlce_databases.unsafe_as(Proc(Guid, HRESULT)).call(productid)
+  def reindex_sqlce_databases(this : IPMDeploymentManager*, productid : Guid) : HRESULT
+    @lpVtbl.value.reindex_sqlce_databases.call(this, productid)
   end
-  def set_applications_need_maintenance(requiredmaintenanceoperations : UInt32, pcapplications : UInt32*) : HRESULT
-    @lpVtbl.value.set_applications_need_maintenance.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(requiredmaintenanceoperations, pcapplications)
+  def set_applications_need_maintenance(this : IPMDeploymentManager*, requiredmaintenanceoperations : UInt32, pcapplications : UInt32*) : HRESULT
+    @lpVtbl.value.set_applications_need_maintenance.call(this, requiredmaintenanceoperations, pcapplications)
   end
-  def update_chamber_profile(productid : Guid) : HRESULT
-    @lpVtbl.value.update_chamber_profile.unsafe_as(Proc(Guid, HRESULT)).call(productid)
+  def update_chamber_profile(this : IPMDeploymentManager*, productid : Guid) : HRESULT
+    @lpVtbl.value.update_chamber_profile.call(this, productid)
   end
-  def enterprise_policy_is_application_allowed(productid : Guid, publishername : LibC::LPWSTR, pisallowed : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.enterprise_policy_is_application_allowed.unsafe_as(Proc(Guid, LibC::LPWSTR, LibC::BOOL*, HRESULT)).call(productid, publishername, pisallowed)
+  def enterprise_policy_is_application_allowed(this : IPMDeploymentManager*, productid : Guid, publishername : LibC::LPWSTR, pisallowed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.enterprise_policy_is_application_allowed.call(this, productid, publishername, pisallowed)
   end
-  def begin_update_deployed_package(pupdateinfo : PM_UPDATEINFO*) : HRESULT
-    @lpVtbl.value.begin_update_deployed_package.unsafe_as(Proc(PM_UPDATEINFO*, HRESULT)).call(pupdateinfo)
+  def begin_update_deployed_package(this : IPMDeploymentManager*, pupdateinfo : PM_UPDATEINFO*) : HRESULT
+    @lpVtbl.value.begin_update_deployed_package.call(this, pupdateinfo)
   end
-  def report_restore_cancelled(productid : Guid) : HRESULT
-    @lpVtbl.value.report_restore_cancelled.unsafe_as(Proc(Guid, HRESULT)).call(productid)
+  def report_restore_cancelled(this : IPMDeploymentManager*, productid : Guid) : HRESULT
+    @lpVtbl.value.report_restore_cancelled.call(this, productid)
   end
-  def resolve_resource_string(resourcestring : LibC::LPWSTR, presolvedresourcestring : UInt8**) : HRESULT
-    @lpVtbl.value.resolve_resource_string.unsafe_as(Proc(LibC::LPWSTR, UInt8**, HRESULT)).call(resourcestring, presolvedresourcestring)
+  def resolve_resource_string(this : IPMDeploymentManager*, resourcestring : LibC::LPWSTR, presolvedresourcestring : UInt8**) : HRESULT
+    @lpVtbl.value.resolve_resource_string.call(this, resourcestring, presolvedresourcestring)
   end
-  def update_capabilities_for_modern_apps : HRESULT
-    @lpVtbl.value.update_capabilities_for_modern_apps.unsafe_as(Proc(HRESULT)).call
+  def update_capabilities_for_modern_apps(this : IPMDeploymentManager*) : HRESULT
+    @lpVtbl.value.update_capabilities_for_modern_apps.call(this)
   end
-  def report_download_status_update(productid : Guid) : HRESULT
-    @lpVtbl.value.report_download_status_update.unsafe_as(Proc(Guid, HRESULT)).call(productid)
+  def report_download_status_update(this : IPMDeploymentManager*, productid : Guid) : HRESULT
+    @lpVtbl.value.report_download_status_update.call(this, productid)
   end
-  def begin_uninstall_with_options(productid : Guid, removaloptions : UInt32) : HRESULT
-    @lpVtbl.value.begin_uninstall_with_options.unsafe_as(Proc(Guid, UInt32, HRESULT)).call(productid, removaloptions)
+  def begin_uninstall_with_options(this : IPMDeploymentManager*, productid : Guid, removaloptions : UInt32) : HRESULT
+    @lpVtbl.value.begin_uninstall_with_options.call(this, productid, removaloptions)
   end
-  def bind_deferred_mdil_binaries : HRESULT
-    @lpVtbl.value.bind_deferred_mdil_binaries.unsafe_as(Proc(HRESULT)).call
+  def bind_deferred_mdil_binaries(this : IPMDeploymentManager*) : HRESULT
+    @lpVtbl.value.bind_deferred_mdil_binaries.call(this)
   end
-  def generate_xaml_lightup_xbf_for_current_locale(packagefamilyname : UInt8*) : HRESULT
-    @lpVtbl.value.generate_xaml_lightup_xbf_for_current_locale.unsafe_as(Proc(UInt8*, HRESULT)).call(packagefamilyname)
+  def generate_xaml_lightup_xbf_for_current_locale(this : IPMDeploymentManager*, packagefamilyname : UInt8*) : HRESULT
+    @lpVtbl.value.generate_xaml_lightup_xbf_for_current_locale.call(this, packagefamilyname)
   end
-  def add_license_for_appx(productid : Guid, pblicense : UInt8*, cblicense : UInt32, pbplayreadyheader : UInt8*, cbplayreadyheader : UInt32) : HRESULT
-    @lpVtbl.value.add_license_for_appx.unsafe_as(Proc(Guid, UInt8*, UInt32, UInt8*, UInt32, HRESULT)).call(productid, pblicense, cblicense, pbplayreadyheader, cbplayreadyheader)
+  def add_license_for_appx(this : IPMDeploymentManager*, productid : Guid, pblicense : UInt8*, cblicense : UInt32, pbplayreadyheader : UInt8*, cbplayreadyheader : UInt32) : HRESULT
+    @lpVtbl.value.add_license_for_appx.call(this, productid, pblicense, cblicense, pbplayreadyheader, cbplayreadyheader)
   end
-  def fix_junctions_for_apps_on_sd_card : HRESULT
-    @lpVtbl.value.fix_junctions_for_apps_on_sd_card.unsafe_as(Proc(HRESULT)).call
+  def fix_junctions_for_apps_on_sd_card(this : IPMDeploymentManager*) : HRESULT
+    @lpVtbl.value.fix_junctions_for_apps_on_sd_card.call(this)
   end
 end
 struct LibWin32::IPMEnumerationManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMEnumerationManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMEnumerationManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMEnumerationManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_all_applications(ppappenum : IPMApplicationInfoEnumerator*, filter : PM_ENUM_FILTER) : HRESULT
-    @lpVtbl.value.get_all_applications.unsafe_as(Proc(IPMApplicationInfoEnumerator*, PM_ENUM_FILTER, HRESULT)).call(ppappenum, filter)
+  def get_all_applications(this : IPMEnumerationManager*, ppappenum : IPMApplicationInfoEnumerator*, filter : PM_ENUM_FILTER) : HRESULT
+    @lpVtbl.value.get_all_applications.call(this, ppappenum, filter)
   end
-  def get_all_tiles(pptileenum : IPMTileInfoEnumerator*, filter : PM_ENUM_FILTER) : HRESULT
-    @lpVtbl.value.get_all_tiles.unsafe_as(Proc(IPMTileInfoEnumerator*, PM_ENUM_FILTER, HRESULT)).call(pptileenum, filter)
+  def get_all_tiles(this : IPMEnumerationManager*, pptileenum : IPMTileInfoEnumerator*, filter : PM_ENUM_FILTER) : HRESULT
+    @lpVtbl.value.get_all_tiles.call(this, pptileenum, filter)
   end
-  def get_all_tasks(pptaskenum : IPMTaskInfoEnumerator*, filter : PM_ENUM_FILTER) : HRESULT
-    @lpVtbl.value.get_all_tasks.unsafe_as(Proc(IPMTaskInfoEnumerator*, PM_ENUM_FILTER, HRESULT)).call(pptaskenum, filter)
+  def get_all_tasks(this : IPMEnumerationManager*, pptaskenum : IPMTaskInfoEnumerator*, filter : PM_ENUM_FILTER) : HRESULT
+    @lpVtbl.value.get_all_tasks.call(this, pptaskenum, filter)
   end
-  def get_all_extensions(ppextensionenum : IPMExtensionInfoEnumerator*, filter : PM_ENUM_FILTER) : HRESULT
-    @lpVtbl.value.get_all_extensions.unsafe_as(Proc(IPMExtensionInfoEnumerator*, PM_ENUM_FILTER, HRESULT)).call(ppextensionenum, filter)
+  def get_all_extensions(this : IPMEnumerationManager*, ppextensionenum : IPMExtensionInfoEnumerator*, filter : PM_ENUM_FILTER) : HRESULT
+    @lpVtbl.value.get_all_extensions.call(this, ppextensionenum, filter)
   end
-  def get_all_background_service_agents(ppbsaenum : IPMBackgroundServiceAgentInfoEnumerator*, filter : PM_ENUM_FILTER) : HRESULT
-    @lpVtbl.value.get_all_background_service_agents.unsafe_as(Proc(IPMBackgroundServiceAgentInfoEnumerator*, PM_ENUM_FILTER, HRESULT)).call(ppbsaenum, filter)
+  def get_all_background_service_agents(this : IPMEnumerationManager*, ppbsaenum : IPMBackgroundServiceAgentInfoEnumerator*, filter : PM_ENUM_FILTER) : HRESULT
+    @lpVtbl.value.get_all_background_service_agents.call(this, ppbsaenum, filter)
   end
-  def get_all_background_workers(ppbswenum : IPMBackgroundWorkerInfoEnumerator*, filter : PM_ENUM_FILTER) : HRESULT
-    @lpVtbl.value.get_all_background_workers.unsafe_as(Proc(IPMBackgroundWorkerInfoEnumerator*, PM_ENUM_FILTER, HRESULT)).call(ppbswenum, filter)
+  def get_all_background_workers(this : IPMEnumerationManager*, ppbswenum : IPMBackgroundWorkerInfoEnumerator*, filter : PM_ENUM_FILTER) : HRESULT
+    @lpVtbl.value.get_all_background_workers.call(this, ppbswenum, filter)
   end
-  def get_application_info(productid : Guid, ppappinfo : IPMApplicationInfo*) : HRESULT
-    @lpVtbl.value.get_application_info.unsafe_as(Proc(Guid, IPMApplicationInfo*, HRESULT)).call(productid, ppappinfo)
+  def get_application_info(this : IPMEnumerationManager*, productid : Guid, ppappinfo : IPMApplicationInfo*) : HRESULT
+    @lpVtbl.value.get_application_info.call(this, productid, ppappinfo)
   end
-  def get_tile_info(productid : Guid, tileid : UInt8*, pptileinfo : IPMTileInfo*) : HRESULT
-    @lpVtbl.value.get_tile_info.unsafe_as(Proc(Guid, UInt8*, IPMTileInfo*, HRESULT)).call(productid, tileid, pptileinfo)
+  def get_tile_info(this : IPMEnumerationManager*, productid : Guid, tileid : UInt8*, pptileinfo : IPMTileInfo*) : HRESULT
+    @lpVtbl.value.get_tile_info.call(this, productid, tileid, pptileinfo)
   end
-  def get_task_info(productid : Guid, taskid : UInt8*, pptaskinfo : IPMTaskInfo*) : HRESULT
-    @lpVtbl.value.get_task_info.unsafe_as(Proc(Guid, UInt8*, IPMTaskInfo*, HRESULT)).call(productid, taskid, pptaskinfo)
+  def get_task_info(this : IPMEnumerationManager*, productid : Guid, taskid : UInt8*, pptaskinfo : IPMTaskInfo*) : HRESULT
+    @lpVtbl.value.get_task_info.call(this, productid, taskid, pptaskinfo)
   end
-  def get_task_info_ex(productid : Guid, taskid : LibC::LPWSTR, pptaskinfo : IPMTaskInfo*) : HRESULT
-    @lpVtbl.value.get_task_info_ex.unsafe_as(Proc(Guid, LibC::LPWSTR, IPMTaskInfo*, HRESULT)).call(productid, taskid, pptaskinfo)
+  def get_task_info_ex(this : IPMEnumerationManager*, productid : Guid, taskid : LibC::LPWSTR, pptaskinfo : IPMTaskInfo*) : HRESULT
+    @lpVtbl.value.get_task_info_ex.call(this, productid, taskid, pptaskinfo)
   end
-  def get_background_service_agent_info(bsaid : UInt32, pptaskinfo : IPMBackgroundServiceAgentInfo*) : HRESULT
-    @lpVtbl.value.get_background_service_agent_info.unsafe_as(Proc(UInt32, IPMBackgroundServiceAgentInfo*, HRESULT)).call(bsaid, pptaskinfo)
+  def get_background_service_agent_info(this : IPMEnumerationManager*, bsaid : UInt32, pptaskinfo : IPMBackgroundServiceAgentInfo*) : HRESULT
+    @lpVtbl.value.get_background_service_agent_info.call(this, bsaid, pptaskinfo)
   end
-  def get_all_live_tile_jobs(pplivetilejobenum : IPMLiveTileJobInfoEnumerator*) : HRESULT
-    @lpVtbl.value.get_all_live_tile_jobs.unsafe_as(Proc(IPMLiveTileJobInfoEnumerator*, HRESULT)).call(pplivetilejobenum)
+  def get_all_live_tile_jobs(this : IPMEnumerationManager*, pplivetilejobenum : IPMLiveTileJobInfoEnumerator*) : HRESULT
+    @lpVtbl.value.get_all_live_tile_jobs.call(this, pplivetilejobenum)
   end
-  def get_live_tile_job(productid : Guid, tileid : UInt8*, recurrencetype : PM_LIVETILE_RECURRENCE_TYPE, pplivetilejobinfo : IPMLiveTileJobInfo*) : HRESULT
-    @lpVtbl.value.get_live_tile_job.unsafe_as(Proc(Guid, UInt8*, PM_LIVETILE_RECURRENCE_TYPE, IPMLiveTileJobInfo*, HRESULT)).call(productid, tileid, recurrencetype, pplivetilejobinfo)
+  def get_live_tile_job(this : IPMEnumerationManager*, productid : Guid, tileid : UInt8*, recurrencetype : PM_LIVETILE_RECURRENCE_TYPE, pplivetilejobinfo : IPMLiveTileJobInfo*) : HRESULT
+    @lpVtbl.value.get_live_tile_job.call(this, productid, tileid, recurrencetype, pplivetilejobinfo)
   end
-  def get_application_info_external(productid : Guid, ppappinfo : IPMApplicationInfo*) : HRESULT
-    @lpVtbl.value.get_application_info_external.unsafe_as(Proc(Guid, IPMApplicationInfo*, HRESULT)).call(productid, ppappinfo)
+  def get_application_info_external(this : IPMEnumerationManager*, productid : Guid, ppappinfo : IPMApplicationInfo*) : HRESULT
+    @lpVtbl.value.get_application_info_external.call(this, productid, ppappinfo)
   end
-  def get_file_handler_generic_logo(filetype : UInt8*, logosize : PM_LOGO_SIZE, plogo : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_handler_generic_logo.unsafe_as(Proc(UInt8*, PM_LOGO_SIZE, UInt8**, HRESULT)).call(filetype, logosize, plogo)
+  def get_file_handler_generic_logo(this : IPMEnumerationManager*, filetype : UInt8*, logosize : PM_LOGO_SIZE, plogo : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_handler_generic_logo.call(this, filetype, logosize, plogo)
   end
-  def get_application_info_from_access_claims(sysappid0 : UInt8*, sysappid1 : UInt8*, ppappinfo : IPMApplicationInfo*) : HRESULT
-    @lpVtbl.value.get_application_info_from_access_claims.unsafe_as(Proc(UInt8*, UInt8*, IPMApplicationInfo*, HRESULT)).call(sysappid0, sysappid1, ppappinfo)
+  def get_application_info_from_access_claims(this : IPMEnumerationManager*, sysappid0 : UInt8*, sysappid1 : UInt8*, ppappinfo : IPMApplicationInfo*) : HRESULT
+    @lpVtbl.value.get_application_info_from_access_claims.call(this, sysappid0, sysappid1, ppappinfo)
   end
-  def get_start_tile_enumerator_blob(filter : PM_ENUM_FILTER, pctiles : UInt32*, pptileblobs : PM_STARTTILEBLOB**) : HRESULT
-    @lpVtbl.value.get_start_tile_enumerator_blob.unsafe_as(Proc(PM_ENUM_FILTER, UInt32*, PM_STARTTILEBLOB**, HRESULT)).call(filter, pctiles, pptileblobs)
+  def get_start_tile_enumerator_blob(this : IPMEnumerationManager*, filter : PM_ENUM_FILTER, pctiles : UInt32*, pptileblobs : PM_STARTTILEBLOB**) : HRESULT
+    @lpVtbl.value.get_start_tile_enumerator_blob.call(this, filter, pctiles, pptileblobs)
   end
-  def get_start_app_enumerator_blob(filter : PM_ENUM_FILTER, pcapps : UInt32*, ppappblobs : PM_STARTAPPBLOB**) : HRESULT
-    @lpVtbl.value.get_start_app_enumerator_blob.unsafe_as(Proc(PM_ENUM_FILTER, UInt32*, PM_STARTAPPBLOB**, HRESULT)).call(filter, pcapps, ppappblobs)
+  def get_start_app_enumerator_blob(this : IPMEnumerationManager*, filter : PM_ENUM_FILTER, pcapps : UInt32*, ppappblobs : PM_STARTAPPBLOB**) : HRESULT
+    @lpVtbl.value.get_start_app_enumerator_blob.call(this, filter, pcapps, ppappblobs)
   end
 end
 struct LibWin32::IPMTaskInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMTaskInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMTaskInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMTaskInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_product_id(pproductid : Guid*) : HRESULT
-    @lpVtbl.value.get_product_id.unsafe_as(Proc(Guid*, HRESULT)).call(pproductid)
+  def get_product_id(this : IPMTaskInfo*, pproductid : Guid*) : HRESULT
+    @lpVtbl.value.get_product_id.call(this, pproductid)
   end
-  def get_task_id(ptaskid : UInt8**) : HRESULT
-    @lpVtbl.value.get_task_id.unsafe_as(Proc(UInt8**, HRESULT)).call(ptaskid)
+  def get_task_id(this : IPMTaskInfo*, ptaskid : UInt8**) : HRESULT
+    @lpVtbl.value.get_task_id.call(this, ptaskid)
   end
-  def get_navigation_page(pnavigationpage : UInt8**) : HRESULT
-    @lpVtbl.value.get_navigation_page.unsafe_as(Proc(UInt8**, HRESULT)).call(pnavigationpage)
+  def get_navigation_page(this : IPMTaskInfo*, pnavigationpage : UInt8**) : HRESULT
+    @lpVtbl.value.get_navigation_page.call(this, pnavigationpage)
   end
-  def get_task_transition(ptasktransition : PM_TASK_TRANSITION*) : HRESULT
-    @lpVtbl.value.get_task_transition.unsafe_as(Proc(PM_TASK_TRANSITION*, HRESULT)).call(ptasktransition)
+  def get_task_transition(this : IPMTaskInfo*, ptasktransition : PM_TASK_TRANSITION*) : HRESULT
+    @lpVtbl.value.get_task_transition.call(this, ptasktransition)
   end
-  def get_runtime_type(pruntimetype : PACKMAN_RUNTIME*) : HRESULT
-    @lpVtbl.value.get_runtime_type.unsafe_as(Proc(PACKMAN_RUNTIME*, HRESULT)).call(pruntimetype)
+  def get_runtime_type(this : IPMTaskInfo*, pruntimetype : PACKMAN_RUNTIME*) : HRESULT
+    @lpVtbl.value.get_runtime_type.call(this, pruntimetype)
   end
-  def get_activation_policy(pactivationpolicy : PM_ACTIVATION_POLICY*) : HRESULT
-    @lpVtbl.value.get_activation_policy.unsafe_as(Proc(PM_ACTIVATION_POLICY*, HRESULT)).call(pactivationpolicy)
+  def get_activation_policy(this : IPMTaskInfo*, pactivationpolicy : PM_ACTIVATION_POLICY*) : HRESULT
+    @lpVtbl.value.get_activation_policy.call(this, pactivationpolicy)
   end
-  def get_task_type(ptasktype : PM_TASK_TYPE*) : HRESULT
-    @lpVtbl.value.get_task_type.unsafe_as(Proc(PM_TASK_TYPE*, HRESULT)).call(ptasktype)
+  def get_task_type(this : IPMTaskInfo*, ptasktype : PM_TASK_TYPE*) : HRESULT
+    @lpVtbl.value.get_task_type.call(this, ptasktype)
   end
-  def get_invocation_info(pimageurn : UInt8**, pparameters : UInt8**) : HRESULT
-    @lpVtbl.value.get_invocation_info.unsafe_as(Proc(UInt8**, UInt8**, HRESULT)).call(pimageurn, pparameters)
+  def get_invocation_info(this : IPMTaskInfo*, pimageurn : UInt8**, pparameters : UInt8**) : HRESULT
+    @lpVtbl.value.get_invocation_info.call(this, pimageurn, pparameters)
   end
-  def get_image_path(pimagepath : UInt8**) : HRESULT
-    @lpVtbl.value.get_image_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pimagepath)
+  def get_image_path(this : IPMTaskInfo*, pimagepath : UInt8**) : HRESULT
+    @lpVtbl.value.get_image_path.call(this, pimagepath)
   end
-  def get_image_params(pimageparams : UInt8**) : HRESULT
-    @lpVtbl.value.get_image_params.unsafe_as(Proc(UInt8**, HRESULT)).call(pimageparams)
+  def get_image_params(this : IPMTaskInfo*, pimageparams : UInt8**) : HRESULT
+    @lpVtbl.value.get_image_params.call(this, pimageparams)
   end
-  def get_install_root_folder(pinstallrootfolder : UInt8**) : HRESULT
-    @lpVtbl.value.get_install_root_folder.unsafe_as(Proc(UInt8**, HRESULT)).call(pinstallrootfolder)
+  def get_install_root_folder(this : IPMTaskInfo*, pinstallrootfolder : UInt8**) : HRESULT
+    @lpVtbl.value.get_install_root_folder.call(this, pinstallrootfolder)
   end
-  def get_data_root_folder(pdatarootfolder : UInt8**) : HRESULT
-    @lpVtbl.value.get_data_root_folder.unsafe_as(Proc(UInt8**, HRESULT)).call(pdatarootfolder)
+  def get_data_root_folder(this : IPMTaskInfo*, pdatarootfolder : UInt8**) : HRESULT
+    @lpVtbl.value.get_data_root_folder.call(this, pdatarootfolder)
   end
-  def get_is_single_instance_host(pissingleinstancehost : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_single_instance_host.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pissingleinstancehost)
+  def get_is_single_instance_host(this : IPMTaskInfo*, pissingleinstancehost : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_single_instance_host.call(this, pissingleinstancehost)
   end
-  def get_is_interop_enabled(pisinteropenabled : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_interop_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisinteropenabled)
+  def get_is_interop_enabled(this : IPMTaskInfo*, pisinteropenabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_interop_enabled.call(this, pisinteropenabled)
   end
-  def get_application_state(papplicationstate : PM_APPLICATION_STATE*) : HRESULT
-    @lpVtbl.value.get_application_state.unsafe_as(Proc(PM_APPLICATION_STATE*, HRESULT)).call(papplicationstate)
+  def get_application_state(this : IPMTaskInfo*, papplicationstate : PM_APPLICATION_STATE*) : HRESULT
+    @lpVtbl.value.get_application_state.call(this, papplicationstate)
   end
-  def get_install_type(pinstalltype : PM_APPLICATION_INSTALL_TYPE*) : HRESULT
-    @lpVtbl.value.get_install_type.unsafe_as(Proc(PM_APPLICATION_INSTALL_TYPE*, HRESULT)).call(pinstalltype)
+  def get_install_type(this : IPMTaskInfo*, pinstalltype : PM_APPLICATION_INSTALL_TYPE*) : HRESULT
+    @lpVtbl.value.get_install_type.call(this, pinstalltype)
   end
-  def get_version(ptargetmajorversion : UInt8*, ptargetminorversion : UInt8*) : HRESULT
-    @lpVtbl.value.get_version.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(ptargetmajorversion, ptargetminorversion)
+  def get_version(this : IPMTaskInfo*, ptargetmajorversion : UInt8*, ptargetminorversion : UInt8*) : HRESULT
+    @lpVtbl.value.get_version.call(this, ptargetmajorversion, ptargetminorversion)
   end
-  def get_bits_per_pixel(pbitsperpixel : UInt16*) : HRESULT
-    @lpVtbl.value.get_bits_per_pixel.unsafe_as(Proc(UInt16*, HRESULT)).call(pbitsperpixel)
+  def get_bits_per_pixel(this : IPMTaskInfo*, pbitsperpixel : UInt16*) : HRESULT
+    @lpVtbl.value.get_bits_per_pixel.call(this, pbitsperpixel)
   end
-  def get_suppresses_dehydration(psuppressesdehydration : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_suppresses_dehydration.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(psuppressesdehydration)
+  def get_suppresses_dehydration(this : IPMTaskInfo*, psuppressesdehydration : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_suppresses_dehydration.call(this, psuppressesdehydration)
   end
-  def get_background_execution_abilities(pbackgroundexecutionabilities : UInt8**) : HRESULT
-    @lpVtbl.value.get_background_execution_abilities.unsafe_as(Proc(UInt8**, HRESULT)).call(pbackgroundexecutionabilities)
+  def get_background_execution_abilities(this : IPMTaskInfo*, pbackgroundexecutionabilities : UInt8**) : HRESULT
+    @lpVtbl.value.get_background_execution_abilities.call(this, pbackgroundexecutionabilities)
   end
-  def get_is_opted_for_extended_mem(pisoptedin : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_opted_for_extended_mem.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisoptedin)
+  def get_is_opted_for_extended_mem(this : IPMTaskInfo*, pisoptedin : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_opted_for_extended_mem.call(this, pisoptedin)
   end
 end
 struct LibWin32::IPMTaskInfoEnumerator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMTaskInfoEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMTaskInfoEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMTaskInfoEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_next(pptaskinfo : IPMTaskInfo*) : HRESULT
-    @lpVtbl.value.get_next.unsafe_as(Proc(IPMTaskInfo*, HRESULT)).call(pptaskinfo)
+  def get_next(this : IPMTaskInfoEnumerator*, pptaskinfo : IPMTaskInfo*) : HRESULT
+    @lpVtbl.value.get_next.call(this, pptaskinfo)
   end
 end
 struct LibWin32::IPMExtensionInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMExtensionInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMExtensionInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMExtensionInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_supplier_pid(psupplierpid : Guid*) : HRESULT
-    @lpVtbl.value.get_supplier_pid.unsafe_as(Proc(Guid*, HRESULT)).call(psupplierpid)
+  def get_supplier_pid(this : IPMExtensionInfo*, psupplierpid : Guid*) : HRESULT
+    @lpVtbl.value.get_supplier_pid.call(this, psupplierpid)
   end
-  def get_supplier_task_id(psuppliertid : UInt8**) : HRESULT
-    @lpVtbl.value.get_supplier_task_id.unsafe_as(Proc(UInt8**, HRESULT)).call(psuppliertid)
+  def get_supplier_task_id(this : IPMExtensionInfo*, psuppliertid : UInt8**) : HRESULT
+    @lpVtbl.value.get_supplier_task_id.call(this, psuppliertid)
   end
-  def get_title(ptitle : UInt8**) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(ptitle)
+  def get_title(this : IPMExtensionInfo*, ptitle : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, ptitle)
   end
-  def get_icon_path(piconpath : UInt8**) : HRESULT
-    @lpVtbl.value.get_icon_path.unsafe_as(Proc(UInt8**, HRESULT)).call(piconpath)
+  def get_icon_path(this : IPMExtensionInfo*, piconpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_icon_path.call(this, piconpath)
   end
-  def get_extra_file(pfilepath : UInt8**) : HRESULT
-    @lpVtbl.value.get_extra_file.unsafe_as(Proc(UInt8**, HRESULT)).call(pfilepath)
+  def get_extra_file(this : IPMExtensionInfo*, pfilepath : UInt8**) : HRESULT
+    @lpVtbl.value.get_extra_file.call(this, pfilepath)
   end
-  def get_invocation_info(pimageurn : UInt8**, pparameters : UInt8**) : HRESULT
-    @lpVtbl.value.get_invocation_info.unsafe_as(Proc(UInt8**, UInt8**, HRESULT)).call(pimageurn, pparameters)
+  def get_invocation_info(this : IPMExtensionInfo*, pimageurn : UInt8**, pparameters : UInt8**) : HRESULT
+    @lpVtbl.value.get_invocation_info.call(this, pimageurn, pparameters)
   end
 end
 struct LibWin32::IPMExtensionFileExtensionInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMExtensionFileExtensionInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMExtensionFileExtensionInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMExtensionFileExtensionInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_name(pname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pname)
+  def get_name(this : IPMExtensionFileExtensionInfo*, pname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pname)
   end
-  def get_display_name(pdisplayname : UInt8**) : HRESULT
-    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pdisplayname)
+  def get_display_name(this : IPMExtensionFileExtensionInfo*, pdisplayname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pdisplayname)
   end
-  def get_logo(logosize : PM_LOGO_SIZE, plogo : UInt8**) : HRESULT
-    @lpVtbl.value.get_logo.unsafe_as(Proc(PM_LOGO_SIZE, UInt8**, HRESULT)).call(logosize, plogo)
+  def get_logo(this : IPMExtensionFileExtensionInfo*, logosize : PM_LOGO_SIZE, plogo : UInt8**) : HRESULT
+    @lpVtbl.value.get_logo.call(this, logosize, plogo)
   end
-  def get_content_type(filetype : UInt8*, pcontenttype : UInt8**) : HRESULT
-    @lpVtbl.value.get_content_type.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(filetype, pcontenttype)
+  def get_content_type(this : IPMExtensionFileExtensionInfo*, filetype : UInt8*, pcontenttype : UInt8**) : HRESULT
+    @lpVtbl.value.get_content_type.call(this, filetype, pcontenttype)
   end
-  def get_file_type(contenttype : UInt8*, pfiletype : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_type.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(contenttype, pfiletype)
+  def get_file_type(this : IPMExtensionFileExtensionInfo*, contenttype : UInt8*, pfiletype : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_type.call(this, contenttype, pfiletype)
   end
-  def get_invocation_info(pimageurn : UInt8**, pparameters : UInt8**) : HRESULT
-    @lpVtbl.value.get_invocation_info.unsafe_as(Proc(UInt8**, UInt8**, HRESULT)).call(pimageurn, pparameters)
+  def get_invocation_info(this : IPMExtensionFileExtensionInfo*, pimageurn : UInt8**, pparameters : UInt8**) : HRESULT
+    @lpVtbl.value.get_invocation_info.call(this, pimageurn, pparameters)
   end
-  def get_all_file_types(pcbtypes : UInt32*, pptypes : UInt8***) : HRESULT
-    @lpVtbl.value.get_all_file_types.unsafe_as(Proc(UInt32*, UInt8***, HRESULT)).call(pcbtypes, pptypes)
+  def get_all_file_types(this : IPMExtensionFileExtensionInfo*, pcbtypes : UInt32*, pptypes : UInt8***) : HRESULT
+    @lpVtbl.value.get_all_file_types.call(this, pcbtypes, pptypes)
   end
 end
 struct LibWin32::IPMExtensionProtocolInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMExtensionProtocolInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMExtensionProtocolInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMExtensionProtocolInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_protocol(pprotocol : UInt8**) : HRESULT
-    @lpVtbl.value.get_protocol.unsafe_as(Proc(UInt8**, HRESULT)).call(pprotocol)
+  def get_protocol(this : IPMExtensionProtocolInfo*, pprotocol : UInt8**) : HRESULT
+    @lpVtbl.value.get_protocol.call(this, pprotocol)
   end
-  def get_invocation_info(pimageurn : UInt8**, pparameters : UInt8**) : HRESULT
-    @lpVtbl.value.get_invocation_info.unsafe_as(Proc(UInt8**, UInt8**, HRESULT)).call(pimageurn, pparameters)
+  def get_invocation_info(this : IPMExtensionProtocolInfo*, pimageurn : UInt8**, pparameters : UInt8**) : HRESULT
+    @lpVtbl.value.get_invocation_info.call(this, pimageurn, pparameters)
   end
 end
 struct LibWin32::IPMExtensionShareTargetInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMExtensionShareTargetInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMExtensionShareTargetInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMExtensionShareTargetInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_all_file_types(pctypes : UInt32*, pptypes : UInt8***) : HRESULT
-    @lpVtbl.value.get_all_file_types.unsafe_as(Proc(UInt32*, UInt8***, HRESULT)).call(pctypes, pptypes)
+  def get_all_file_types(this : IPMExtensionShareTargetInfo*, pctypes : UInt32*, pptypes : UInt8***) : HRESULT
+    @lpVtbl.value.get_all_file_types.call(this, pctypes, pptypes)
   end
-  def get_all_data_formats(pcdataformats : UInt32*, ppdataformats : UInt8***) : HRESULT
-    @lpVtbl.value.get_all_data_formats.unsafe_as(Proc(UInt32*, UInt8***, HRESULT)).call(pcdataformats, ppdataformats)
+  def get_all_data_formats(this : IPMExtensionShareTargetInfo*, pcdataformats : UInt32*, ppdataformats : UInt8***) : HRESULT
+    @lpVtbl.value.get_all_data_formats.call(this, pcdataformats, ppdataformats)
   end
-  def get_supports_all_file_types(psupportsalltypes : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_supports_all_file_types.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(psupportsalltypes)
+  def get_supports_all_file_types(this : IPMExtensionShareTargetInfo*, psupportsalltypes : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_supports_all_file_types.call(this, psupportsalltypes)
   end
 end
 struct LibWin32::IPMExtensionContractInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMExtensionContractInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMExtensionContractInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMExtensionContractInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_invocation_info(paumid : UInt8**, pargs : UInt8**) : HRESULT
-    @lpVtbl.value.get_invocation_info.unsafe_as(Proc(UInt8**, UInt8**, HRESULT)).call(paumid, pargs)
+  def get_invocation_info(this : IPMExtensionContractInfo*, paumid : UInt8**, pargs : UInt8**) : HRESULT
+    @lpVtbl.value.get_invocation_info.call(this, paumid, pargs)
   end
 end
 struct LibWin32::IPMExtensionFileOpenPickerInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMExtensionFileOpenPickerInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMExtensionFileOpenPickerInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMExtensionFileOpenPickerInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_all_file_types(pctypes : UInt32*, pptypes : UInt8***) : HRESULT
-    @lpVtbl.value.get_all_file_types.unsafe_as(Proc(UInt32*, UInt8***, HRESULT)).call(pctypes, pptypes)
+  def get_all_file_types(this : IPMExtensionFileOpenPickerInfo*, pctypes : UInt32*, pptypes : UInt8***) : HRESULT
+    @lpVtbl.value.get_all_file_types.call(this, pctypes, pptypes)
   end
-  def get_supports_all_file_types(psupportsalltypes : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_supports_all_file_types.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(psupportsalltypes)
+  def get_supports_all_file_types(this : IPMExtensionFileOpenPickerInfo*, psupportsalltypes : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_supports_all_file_types.call(this, psupportsalltypes)
   end
 end
 struct LibWin32::IPMExtensionFileSavePickerInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMExtensionFileSavePickerInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMExtensionFileSavePickerInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMExtensionFileSavePickerInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_all_file_types(pctypes : UInt32*, pptypes : UInt8***) : HRESULT
-    @lpVtbl.value.get_all_file_types.unsafe_as(Proc(UInt32*, UInt8***, HRESULT)).call(pctypes, pptypes)
+  def get_all_file_types(this : IPMExtensionFileSavePickerInfo*, pctypes : UInt32*, pptypes : UInt8***) : HRESULT
+    @lpVtbl.value.get_all_file_types.call(this, pctypes, pptypes)
   end
-  def get_supports_all_file_types(psupportsalltypes : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_supports_all_file_types.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(psupportsalltypes)
+  def get_supports_all_file_types(this : IPMExtensionFileSavePickerInfo*, psupportsalltypes : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_supports_all_file_types.call(this, psupportsalltypes)
   end
 end
 struct LibWin32::IPMExtensionCachedFileUpdaterInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMExtensionCachedFileUpdaterInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMExtensionCachedFileUpdaterInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMExtensionCachedFileUpdaterInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_supports_updates(psupportsupdates : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_supports_updates.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(psupportsupdates)
+  def get_supports_updates(this : IPMExtensionCachedFileUpdaterInfo*, psupportsupdates : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_supports_updates.call(this, psupportsupdates)
   end
 end
 struct LibWin32::IPMExtensionInfoEnumerator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMExtensionInfoEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMExtensionInfoEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMExtensionInfoEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_next(ppextensioninfo : IPMExtensionInfo*) : HRESULT
-    @lpVtbl.value.get_next.unsafe_as(Proc(IPMExtensionInfo*, HRESULT)).call(ppextensioninfo)
+  def get_next(this : IPMExtensionInfoEnumerator*, ppextensioninfo : IPMExtensionInfo*) : HRESULT
+    @lpVtbl.value.get_next.call(this, ppextensioninfo)
   end
 end
 struct LibWin32::IPMBackgroundServiceAgentInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMBackgroundServiceAgentInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMBackgroundServiceAgentInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMBackgroundServiceAgentInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_product_id(pproductid : Guid*) : HRESULT
-    @lpVtbl.value.get_product_id.unsafe_as(Proc(Guid*, HRESULT)).call(pproductid)
+  def get_product_id(this : IPMBackgroundServiceAgentInfo*, pproductid : Guid*) : HRESULT
+    @lpVtbl.value.get_product_id.call(this, pproductid)
   end
-  def get_task_id(ptaskid : UInt8**) : HRESULT
-    @lpVtbl.value.get_task_id.unsafe_as(Proc(UInt8**, HRESULT)).call(ptaskid)
+  def get_task_id(this : IPMBackgroundServiceAgentInfo*, ptaskid : UInt8**) : HRESULT
+    @lpVtbl.value.get_task_id.call(this, ptaskid)
   end
-  def get_bsaid(pbsaid : UInt32*) : HRESULT
-    @lpVtbl.value.get_bsaid.unsafe_as(Proc(UInt32*, HRESULT)).call(pbsaid)
+  def get_bsaid(this : IPMBackgroundServiceAgentInfo*, pbsaid : UInt32*) : HRESULT
+    @lpVtbl.value.get_bsaid.call(this, pbsaid)
   end
-  def get_bg_specifier(pbgspecifier : UInt8**) : HRESULT
-    @lpVtbl.value.get_bg_specifier.unsafe_as(Proc(UInt8**, HRESULT)).call(pbgspecifier)
+  def get_bg_specifier(this : IPMBackgroundServiceAgentInfo*, pbgspecifier : UInt8**) : HRESULT
+    @lpVtbl.value.get_bg_specifier.call(this, pbgspecifier)
   end
-  def get_bg_name(pbgname : UInt8**) : HRESULT
-    @lpVtbl.value.get_bg_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbgname)
+  def get_bg_name(this : IPMBackgroundServiceAgentInfo*, pbgname : UInt8**) : HRESULT
+    @lpVtbl.value.get_bg_name.call(this, pbgname)
   end
-  def get_bg_source(pbgsource : UInt8**) : HRESULT
-    @lpVtbl.value.get_bg_source.unsafe_as(Proc(UInt8**, HRESULT)).call(pbgsource)
+  def get_bg_source(this : IPMBackgroundServiceAgentInfo*, pbgsource : UInt8**) : HRESULT
+    @lpVtbl.value.get_bg_source.call(this, pbgsource)
   end
-  def get_bg_type(pbgtype : UInt8**) : HRESULT
-    @lpVtbl.value.get_bg_type.unsafe_as(Proc(UInt8**, HRESULT)).call(pbgtype)
+  def get_bg_type(this : IPMBackgroundServiceAgentInfo*, pbgtype : UInt8**) : HRESULT
+    @lpVtbl.value.get_bg_type.call(this, pbgtype)
   end
-  def get_is_periodic(pisperiodic : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_periodic.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisperiodic)
+  def get_is_periodic(this : IPMBackgroundServiceAgentInfo*, pisperiodic : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_periodic.call(this, pisperiodic)
   end
-  def get_is_scheduled(pisscheduled : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_scheduled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisscheduled)
+  def get_is_scheduled(this : IPMBackgroundServiceAgentInfo*, pisscheduled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_scheduled.call(this, pisscheduled)
   end
-  def get_is_schedule_allowed(pisscheduleallowed : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_schedule_allowed.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisscheduleallowed)
+  def get_is_schedule_allowed(this : IPMBackgroundServiceAgentInfo*, pisscheduleallowed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_schedule_allowed.call(this, pisscheduleallowed)
   end
-  def get_description(pdescription : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pdescription)
+  def get_description(this : IPMBackgroundServiceAgentInfo*, pdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pdescription)
   end
-  def get_is_launch_on_boot(plaunchonboot : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_launch_on_boot.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(plaunchonboot)
+  def get_is_launch_on_boot(this : IPMBackgroundServiceAgentInfo*, plaunchonboot : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_launch_on_boot.call(this, plaunchonboot)
   end
-  def set_is_scheduled(isscheduled : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_is_scheduled.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(isscheduled)
+  def set_is_scheduled(this : IPMBackgroundServiceAgentInfo*, isscheduled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_scheduled.call(this, isscheduled)
   end
-  def set_is_schedule_allowed(isscheduleallowed : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_is_schedule_allowed.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(isscheduleallowed)
+  def set_is_schedule_allowed(this : IPMBackgroundServiceAgentInfo*, isscheduleallowed : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_schedule_allowed.call(this, isscheduleallowed)
   end
 end
 struct LibWin32::IPMBackgroundWorkerInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMBackgroundWorkerInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMBackgroundWorkerInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMBackgroundWorkerInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_product_id(pproductid : Guid*) : HRESULT
-    @lpVtbl.value.get_product_id.unsafe_as(Proc(Guid*, HRESULT)).call(pproductid)
+  def get_product_id(this : IPMBackgroundWorkerInfo*, pproductid : Guid*) : HRESULT
+    @lpVtbl.value.get_product_id.call(this, pproductid)
   end
-  def get_task_id(ptaskid : UInt8**) : HRESULT
-    @lpVtbl.value.get_task_id.unsafe_as(Proc(UInt8**, HRESULT)).call(ptaskid)
+  def get_task_id(this : IPMBackgroundWorkerInfo*, ptaskid : UInt8**) : HRESULT
+    @lpVtbl.value.get_task_id.call(this, ptaskid)
   end
-  def get_bg_name(pbgname : UInt8**) : HRESULT
-    @lpVtbl.value.get_bg_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbgname)
+  def get_bg_name(this : IPMBackgroundWorkerInfo*, pbgname : UInt8**) : HRESULT
+    @lpVtbl.value.get_bg_name.call(this, pbgname)
   end
-  def get_max_startup_latency(pmaxstartuplatency : UInt32*) : HRESULT
-    @lpVtbl.value.get_max_startup_latency.unsafe_as(Proc(UInt32*, HRESULT)).call(pmaxstartuplatency)
+  def get_max_startup_latency(this : IPMBackgroundWorkerInfo*, pmaxstartuplatency : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_startup_latency.call(this, pmaxstartuplatency)
   end
-  def get_expected_runtime(pexpectedruntime : UInt32*) : HRESULT
-    @lpVtbl.value.get_expected_runtime.unsafe_as(Proc(UInt32*, HRESULT)).call(pexpectedruntime)
+  def get_expected_runtime(this : IPMBackgroundWorkerInfo*, pexpectedruntime : UInt32*) : HRESULT
+    @lpVtbl.value.get_expected_runtime.call(this, pexpectedruntime)
   end
-  def get_is_boot_worker(pisbootworker : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_boot_worker.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisbootworker)
+  def get_is_boot_worker(this : IPMBackgroundWorkerInfo*, pisbootworker : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_boot_worker.call(this, pisbootworker)
   end
 end
 struct LibWin32::IPMBackgroundServiceAgentInfoEnumerator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMBackgroundServiceAgentInfoEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMBackgroundServiceAgentInfoEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMBackgroundServiceAgentInfoEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_next(ppbsainfo : IPMBackgroundServiceAgentInfo*) : HRESULT
-    @lpVtbl.value.get_next.unsafe_as(Proc(IPMBackgroundServiceAgentInfo*, HRESULT)).call(ppbsainfo)
+  def get_next(this : IPMBackgroundServiceAgentInfoEnumerator*, ppbsainfo : IPMBackgroundServiceAgentInfo*) : HRESULT
+    @lpVtbl.value.get_next.call(this, ppbsainfo)
   end
 end
 struct LibWin32::IPMBackgroundWorkerInfoEnumerator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPMBackgroundWorkerInfoEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPMBackgroundWorkerInfoEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPMBackgroundWorkerInfoEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_next(ppbwinfo : IPMBackgroundWorkerInfo*) : HRESULT
-    @lpVtbl.value.get_next.unsafe_as(Proc(IPMBackgroundWorkerInfo*, HRESULT)).call(ppbwinfo)
+  def get_next(this : IPMBackgroundWorkerInfoEnumerator*, ppbwinfo : IPMBackgroundWorkerInfo*) : HRESULT
+    @lpVtbl.value.get_next.call(this, ppbwinfo)
   end
 end

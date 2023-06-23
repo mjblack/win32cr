@@ -3730,18 +3730,18 @@ lib LibWin32
 
 
   struct IPrintCoreHelperVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_option : UInt64
-    set_options : UInt64
-    enum_constrained_options : UInt64
-    why_constrained : UInt64
-    enum_features : UInt64
-    enum_options : UInt64
-    get_font_substitution : UInt64
-    set_font_substitution : UInt64
-    create_instance_of_msxml_object : UInt64
+    query_interface : Proc(IPrintCoreHelper*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintCoreHelper*, UInt32)
+    release : Proc(IPrintCoreHelper*, UInt32)
+    get_option : Proc(IPrintCoreHelper*, DEVMODEA*, UInt32, PSTR, PSTR*, HRESULT)
+    set_options : Proc(IPrintCoreHelper*, DEVMODEA*, UInt32, LibC::BOOL, PRINT_FEATURE_OPTION*, UInt32, UInt32*, UInt32*, HRESULT)
+    enum_constrained_options : Proc(IPrintCoreHelper*, DEVMODEA*, UInt32, PSTR, PSTR***, UInt32*, HRESULT)
+    why_constrained : Proc(IPrintCoreHelper*, DEVMODEA*, UInt32, PSTR, PSTR, PRINT_FEATURE_OPTION**, UInt32*, HRESULT)
+    enum_features : Proc(IPrintCoreHelper*, PSTR***, UInt32*, HRESULT)
+    enum_options : Proc(IPrintCoreHelper*, PSTR, PSTR***, UInt32*, HRESULT)
+    get_font_substitution : Proc(IPrintCoreHelper*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
+    set_font_substitution : Proc(IPrintCoreHelper*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    create_instance_of_msxml_object : Proc(IPrintCoreHelper*, Guid*, IUnknown, UInt32, Guid*, Void**, HRESULT)
   end
 
   IPrintCoreHelper_GUID = "a89ec53e-3905-49c6-9c1a-c0a88117fdb6"
@@ -3751,20 +3751,20 @@ lib LibWin32
   end
 
   struct IPrintCoreHelperUniVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_option : UInt64
-    set_options : UInt64
-    enum_constrained_options : UInt64
-    why_constrained : UInt64
-    enum_features : UInt64
-    enum_options : UInt64
-    get_font_substitution : UInt64
-    set_font_substitution : UInt64
-    create_instance_of_msxml_object : UInt64
-    create_gdl_snapshot : UInt64
-    create_default_gdl_snapshot : UInt64
+    query_interface : Proc(IPrintCoreHelperUni*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintCoreHelperUni*, UInt32)
+    release : Proc(IPrintCoreHelperUni*, UInt32)
+    get_option : Proc(IPrintCoreHelperUni*, DEVMODEA*, UInt32, PSTR, PSTR*, HRESULT)
+    set_options : Proc(IPrintCoreHelperUni*, DEVMODEA*, UInt32, LibC::BOOL, PRINT_FEATURE_OPTION*, UInt32, UInt32*, UInt32*, HRESULT)
+    enum_constrained_options : Proc(IPrintCoreHelperUni*, DEVMODEA*, UInt32, PSTR, PSTR***, UInt32*, HRESULT)
+    why_constrained : Proc(IPrintCoreHelperUni*, DEVMODEA*, UInt32, PSTR, PSTR, PRINT_FEATURE_OPTION**, UInt32*, HRESULT)
+    enum_features : Proc(IPrintCoreHelperUni*, PSTR***, UInt32*, HRESULT)
+    enum_options : Proc(IPrintCoreHelperUni*, PSTR, PSTR***, UInt32*, HRESULT)
+    get_font_substitution : Proc(IPrintCoreHelperUni*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
+    set_font_substitution : Proc(IPrintCoreHelperUni*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    create_instance_of_msxml_object : Proc(IPrintCoreHelperUni*, Guid*, IUnknown, UInt32, Guid*, Void**, HRESULT)
+    create_gdl_snapshot : Proc(IPrintCoreHelperUni*, DEVMODEA*, UInt32, UInt32, IStream*, HRESULT)
+    create_default_gdl_snapshot : Proc(IPrintCoreHelperUni*, UInt32, IStream*, HRESULT)
   end
 
   IPrintCoreHelperUni_GUID = "7e8e51d6-e5ee-4426-817b-958b9444eb79"
@@ -3774,21 +3774,21 @@ lib LibWin32
   end
 
   struct IPrintCoreHelperUni2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_option : UInt64
-    set_options : UInt64
-    enum_constrained_options : UInt64
-    why_constrained : UInt64
-    enum_features : UInt64
-    enum_options : UInt64
-    get_font_substitution : UInt64
-    set_font_substitution : UInt64
-    create_instance_of_msxml_object : UInt64
-    create_gdl_snapshot : UInt64
-    create_default_gdl_snapshot : UInt64
-    get_named_command : UInt64
+    query_interface : Proc(IPrintCoreHelperUni2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintCoreHelperUni2*, UInt32)
+    release : Proc(IPrintCoreHelperUni2*, UInt32)
+    get_option : Proc(IPrintCoreHelperUni2*, DEVMODEA*, UInt32, PSTR, PSTR*, HRESULT)
+    set_options : Proc(IPrintCoreHelperUni2*, DEVMODEA*, UInt32, LibC::BOOL, PRINT_FEATURE_OPTION*, UInt32, UInt32*, UInt32*, HRESULT)
+    enum_constrained_options : Proc(IPrintCoreHelperUni2*, DEVMODEA*, UInt32, PSTR, PSTR***, UInt32*, HRESULT)
+    why_constrained : Proc(IPrintCoreHelperUni2*, DEVMODEA*, UInt32, PSTR, PSTR, PRINT_FEATURE_OPTION**, UInt32*, HRESULT)
+    enum_features : Proc(IPrintCoreHelperUni2*, PSTR***, UInt32*, HRESULT)
+    enum_options : Proc(IPrintCoreHelperUni2*, PSTR, PSTR***, UInt32*, HRESULT)
+    get_font_substitution : Proc(IPrintCoreHelperUni2*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
+    set_font_substitution : Proc(IPrintCoreHelperUni2*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    create_instance_of_msxml_object : Proc(IPrintCoreHelperUni2*, Guid*, IUnknown, UInt32, Guid*, Void**, HRESULT)
+    create_gdl_snapshot : Proc(IPrintCoreHelperUni2*, DEVMODEA*, UInt32, UInt32, IStream*, HRESULT)
+    create_default_gdl_snapshot : Proc(IPrintCoreHelperUni2*, UInt32, IStream*, HRESULT)
+    get_named_command : Proc(IPrintCoreHelperUni2*, DEVMODEA*, UInt32, LibC::LPWSTR, UInt8**, UInt32*, HRESULT)
   end
 
   IPrintCoreHelperUni2_GUID = "6c8afdfc-ead0-4d2d-8071-9bf0175a6c3a"
@@ -3798,21 +3798,21 @@ lib LibWin32
   end
 
   struct IPrintCoreHelperPSVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_option : UInt64
-    set_options : UInt64
-    enum_constrained_options : UInt64
-    why_constrained : UInt64
-    enum_features : UInt64
-    enum_options : UInt64
-    get_font_substitution : UInt64
-    set_font_substitution : UInt64
-    create_instance_of_msxml_object : UInt64
-    get_global_attribute : UInt64
-    get_feature_attribute : UInt64
-    get_option_attribute : UInt64
+    query_interface : Proc(IPrintCoreHelperPS*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintCoreHelperPS*, UInt32)
+    release : Proc(IPrintCoreHelperPS*, UInt32)
+    get_option : Proc(IPrintCoreHelperPS*, DEVMODEA*, UInt32, PSTR, PSTR*, HRESULT)
+    set_options : Proc(IPrintCoreHelperPS*, DEVMODEA*, UInt32, LibC::BOOL, PRINT_FEATURE_OPTION*, UInt32, UInt32*, UInt32*, HRESULT)
+    enum_constrained_options : Proc(IPrintCoreHelperPS*, DEVMODEA*, UInt32, PSTR, PSTR***, UInt32*, HRESULT)
+    why_constrained : Proc(IPrintCoreHelperPS*, DEVMODEA*, UInt32, PSTR, PSTR, PRINT_FEATURE_OPTION**, UInt32*, HRESULT)
+    enum_features : Proc(IPrintCoreHelperPS*, PSTR***, UInt32*, HRESULT)
+    enum_options : Proc(IPrintCoreHelperPS*, PSTR, PSTR***, UInt32*, HRESULT)
+    get_font_substitution : Proc(IPrintCoreHelperPS*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
+    set_font_substitution : Proc(IPrintCoreHelperPS*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    create_instance_of_msxml_object : Proc(IPrintCoreHelperPS*, Guid*, IUnknown, UInt32, Guid*, Void**, HRESULT)
+    get_global_attribute : Proc(IPrintCoreHelperPS*, PSTR, UInt32*, UInt8**, UInt32*, HRESULT)
+    get_feature_attribute : Proc(IPrintCoreHelperPS*, PSTR, PSTR, UInt32*, UInt8**, UInt32*, HRESULT)
+    get_option_attribute : Proc(IPrintCoreHelperPS*, PSTR, PSTR, PSTR, UInt32*, UInt8**, UInt32*, HRESULT)
   end
 
   IPrintCoreHelperPS_GUID = "c2c14f6f-95d3-4d63-96cf-6bd9e6c907c2"
@@ -3822,11 +3822,11 @@ lib LibWin32
   end
 
   struct IPrintOemCommonVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_info : UInt64
-    dev_mode : UInt64
+    query_interface : Proc(IPrintOemCommon*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintOemCommon*, UInt32)
+    release : Proc(IPrintOemCommon*, UInt32)
+    get_info : Proc(IPrintOemCommon*, UInt32, Void*, UInt32, UInt32*, HRESULT)
+    dev_mode : Proc(IPrintOemCommon*, UInt32, OEMDMPARAM*, HRESULT)
   end
 
   IPrintOemCommon_GUID = "7f42285e-91d5-11d1-8820-00c04fb961ec"
@@ -3836,23 +3836,23 @@ lib LibWin32
   end
 
   struct IPrintOemUIVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_info : UInt64
-    dev_mode : UInt64
-    publish_driver_interface : UInt64
-    common_ui_prop : UInt64
-    document_property_sheets : UInt64
-    device_property_sheets : UInt64
-    dev_query_print_ex : UInt64
-    device_capabilities_a : UInt64
-    upgrade_printer : UInt64
-    printer_event : UInt64
-    driver_event : UInt64
-    query_color_profile : UInt64
-    font_installer_dlg_proc : UInt64
-    update_external_fonts : UInt64
+    query_interface : Proc(IPrintOemUI*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintOemUI*, UInt32)
+    release : Proc(IPrintOemUI*, UInt32)
+    get_info : Proc(IPrintOemUI*, UInt32, Void*, UInt32, UInt32*, HRESULT)
+    dev_mode : Proc(IPrintOemUI*, UInt32, OEMDMPARAM*, HRESULT)
+    publish_driver_interface : Proc(IPrintOemUI*, IUnknown, HRESULT)
+    common_ui_prop : Proc(IPrintOemUI*, UInt32, OEMCUIPPARAM*, HRESULT)
+    document_property_sheets : Proc(IPrintOemUI*, PROPSHEETUI_INFO*, LPARAM, HRESULT)
+    device_property_sheets : Proc(IPrintOemUI*, PROPSHEETUI_INFO*, LPARAM, HRESULT)
+    dev_query_print_ex : Proc(IPrintOemUI*, OEMUIOBJ*, DEVQUERYPRINT_INFO*, DEVMODEA*, Void*, HRESULT)
+    device_capabilities_a : Proc(IPrintOemUI*, OEMUIOBJ*, LibC::HANDLE, LibC::LPWSTR, UInt16, Void*, DEVMODEA*, Void*, UInt32, UInt32*, HRESULT)
+    upgrade_printer : Proc(IPrintOemUI*, UInt32, UInt8*, HRESULT)
+    printer_event : Proc(IPrintOemUI*, LibC::LPWSTR, Int32, UInt32, LPARAM, HRESULT)
+    driver_event : Proc(IPrintOemUI*, UInt32, UInt32, UInt8*, LPARAM, HRESULT)
+    query_color_profile : Proc(IPrintOemUI*, LibC::HANDLE, OEMUIOBJ*, DEVMODEA*, Void*, UInt32, Void*, UInt32*, UInt32*, HRESULT)
+    font_installer_dlg_proc : Proc(IPrintOemUI*, LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)
+    update_external_fonts : Proc(IPrintOemUI*, LibC::HANDLE, LibC::HANDLE, LibC::LPWSTR, HRESULT)
   end
 
   IPrintOemUI_GUID = "c6a7a9d0-774c-11d1-947f-00a0c90640b8"
@@ -3862,26 +3862,26 @@ lib LibWin32
   end
 
   struct IPrintOemUI2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_info : UInt64
-    dev_mode : UInt64
-    publish_driver_interface : UInt64
-    common_ui_prop : UInt64
-    document_property_sheets : UInt64
-    device_property_sheets : UInt64
-    dev_query_print_ex : UInt64
-    device_capabilities_a : UInt64
-    upgrade_printer : UInt64
-    printer_event : UInt64
-    driver_event : UInt64
-    query_color_profile : UInt64
-    font_installer_dlg_proc : UInt64
-    update_external_fonts : UInt64
-    query_job_attributes : UInt64
-    hide_standard_ui : UInt64
-    document_event : UInt64
+    query_interface : Proc(IPrintOemUI2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintOemUI2*, UInt32)
+    release : Proc(IPrintOemUI2*, UInt32)
+    get_info : Proc(IPrintOemUI2*, UInt32, Void*, UInt32, UInt32*, HRESULT)
+    dev_mode : Proc(IPrintOemUI2*, UInt32, OEMDMPARAM*, HRESULT)
+    publish_driver_interface : Proc(IPrintOemUI2*, IUnknown, HRESULT)
+    common_ui_prop : Proc(IPrintOemUI2*, UInt32, OEMCUIPPARAM*, HRESULT)
+    document_property_sheets : Proc(IPrintOemUI2*, PROPSHEETUI_INFO*, LPARAM, HRESULT)
+    device_property_sheets : Proc(IPrintOemUI2*, PROPSHEETUI_INFO*, LPARAM, HRESULT)
+    dev_query_print_ex : Proc(IPrintOemUI2*, OEMUIOBJ*, DEVQUERYPRINT_INFO*, DEVMODEA*, Void*, HRESULT)
+    device_capabilities_a : Proc(IPrintOemUI2*, OEMUIOBJ*, LibC::HANDLE, LibC::LPWSTR, UInt16, Void*, DEVMODEA*, Void*, UInt32, UInt32*, HRESULT)
+    upgrade_printer : Proc(IPrintOemUI2*, UInt32, UInt8*, HRESULT)
+    printer_event : Proc(IPrintOemUI2*, LibC::LPWSTR, Int32, UInt32, LPARAM, HRESULT)
+    driver_event : Proc(IPrintOemUI2*, UInt32, UInt32, UInt8*, LPARAM, HRESULT)
+    query_color_profile : Proc(IPrintOemUI2*, LibC::HANDLE, OEMUIOBJ*, DEVMODEA*, Void*, UInt32, Void*, UInt32*, UInt32*, HRESULT)
+    font_installer_dlg_proc : Proc(IPrintOemUI2*, LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)
+    update_external_fonts : Proc(IPrintOemUI2*, LibC::HANDLE, LibC::HANDLE, LibC::LPWSTR, HRESULT)
+    query_job_attributes : Proc(IPrintOemUI2*, LibC::HANDLE, DEVMODEA*, UInt32, UInt8*, HRESULT)
+    hide_standard_ui : Proc(IPrintOemUI2*, UInt32, HRESULT)
+    document_event : Proc(IPrintOemUI2*, LibC::HANDLE, HDC, Int32, UInt32, Void*, UInt32, Void*, Int32*, HRESULT)
   end
 
   IPrintOemUI2_GUID = "292515f9-b54b-489b-9275-bab56821395e"
@@ -3891,12 +3891,12 @@ lib LibWin32
   end
 
   struct IPrintOemUIMXDCVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    adjust_imageable_area : UInt64
-    adjust_image_compression : UInt64
-    adjust_dpi : UInt64
+    query_interface : Proc(IPrintOemUIMXDC*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintOemUIMXDC*, UInt32)
+    release : Proc(IPrintOemUIMXDC*, UInt32)
+    adjust_imageable_area : Proc(IPrintOemUIMXDC*, LibC::HANDLE, UInt32, DEVMODEA*, UInt32, Void*, RECTL*, HRESULT)
+    adjust_image_compression : Proc(IPrintOemUIMXDC*, LibC::HANDLE, UInt32, DEVMODEA*, UInt32, Void*, Int32*, HRESULT)
+    adjust_dpi : Proc(IPrintOemUIMXDC*, LibC::HANDLE, UInt32, DEVMODEA*, UInt32, Void*, Int32*, HRESULT)
   end
 
   IPrintOemUIMXDC_GUID = "7349d725-e2c1-4dca-afb5-c13e91bc9306"
@@ -3906,12 +3906,12 @@ lib LibWin32
   end
 
   struct IPrintOemDriverUIVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    drv_get_driver_setting : UInt64
-    drv_upgrade_registry_setting : UInt64
-    drv_update_ui_setting : UInt64
+    query_interface : Proc(IPrintOemDriverUI*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintOemDriverUI*, UInt32)
+    release : Proc(IPrintOemDriverUI*, UInt32)
+    drv_get_driver_setting : Proc(IPrintOemDriverUI*, Void*, PSTR, Void*, UInt32, UInt32*, UInt32*, HRESULT)
+    drv_upgrade_registry_setting : Proc(IPrintOemDriverUI*, LibC::HANDLE, PSTR, PSTR, HRESULT)
+    drv_update_ui_setting : Proc(IPrintOemDriverUI*, Void*, Void*, UInt32, UInt32, HRESULT)
   end
 
   IPrintOemDriverUI_GUID = "92b05d50-78bc-11d1-9480-00a0c90640b8"
@@ -3921,22 +3921,22 @@ lib LibWin32
   end
 
   struct IPrintCoreUI2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    drv_get_driver_setting : UInt64
-    drv_upgrade_registry_setting : UInt64
-    drv_update_ui_setting : UInt64
-    get_options : UInt64
-    set_options : UInt64
-    enum_constrained_options : UInt64
-    why_constrained : UInt64
-    get_global_attribute : UInt64
-    get_feature_attribute : UInt64
-    get_option_attribute : UInt64
-    enum_features : UInt64
-    enum_options : UInt64
-    query_simulation_support : UInt64
+    query_interface : Proc(IPrintCoreUI2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintCoreUI2*, UInt32)
+    release : Proc(IPrintCoreUI2*, UInt32)
+    drv_get_driver_setting : Proc(IPrintCoreUI2*, Void*, PSTR, Void*, UInt32, UInt32*, UInt32*, HRESULT)
+    drv_upgrade_registry_setting : Proc(IPrintCoreUI2*, LibC::HANDLE, PSTR, PSTR, HRESULT)
+    drv_update_ui_setting : Proc(IPrintCoreUI2*, Void*, Void*, UInt32, UInt32, HRESULT)
+    get_options : Proc(IPrintCoreUI2*, OEMUIOBJ*, UInt32, Int8*, UInt32, PSTR, UInt32, UInt32*, HRESULT)
+    set_options : Proc(IPrintCoreUI2*, OEMUIOBJ*, UInt32, Int8*, UInt32, UInt32*, HRESULT)
+    enum_constrained_options : Proc(IPrintCoreUI2*, OEMUIOBJ*, UInt32, PSTR, PSTR, UInt32, UInt32*, HRESULT)
+    why_constrained : Proc(IPrintCoreUI2*, OEMUIOBJ*, UInt32, PSTR, PSTR, PSTR, UInt32, UInt32*, HRESULT)
+    get_global_attribute : Proc(IPrintCoreUI2*, OEMUIOBJ*, UInt32, PSTR, UInt32*, UInt8*, UInt32, UInt32*, HRESULT)
+    get_feature_attribute : Proc(IPrintCoreUI2*, OEMUIOBJ*, UInt32, PSTR, PSTR, UInt32*, UInt8*, UInt32, UInt32*, HRESULT)
+    get_option_attribute : Proc(IPrintCoreUI2*, OEMUIOBJ*, UInt32, PSTR, PSTR, PSTR, UInt32*, UInt8*, UInt32, UInt32*, HRESULT)
+    enum_features : Proc(IPrintCoreUI2*, OEMUIOBJ*, UInt32, PSTR, UInt32, UInt32*, HRESULT)
+    enum_options : Proc(IPrintCoreUI2*, OEMUIOBJ*, UInt32, PSTR, PSTR, UInt32, UInt32*, HRESULT)
+    query_simulation_support : Proc(IPrintCoreUI2*, LibC::HANDLE, UInt32, UInt8*, UInt32, UInt32*, HRESULT)
   end
 
   IPrintCoreUI2_GUID = "085ccfca-3adf-4c9e-b491-d851a6edc997"
@@ -3946,16 +3946,16 @@ lib LibWin32
   end
 
   struct IPrintTicketProviderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_supported_versions : UInt64
-    bind_printer : UInt64
-    query_device_namespace : UInt64
-    convert_print_ticket_to_dev_mode : UInt64
-    convert_dev_mode_to_print_ticket : UInt64
-    get_print_capabilities : UInt64
-    validate_print_ticket : UInt64
+    query_interface : Proc(IPrintTicketProvider*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintTicketProvider*, UInt32)
+    release : Proc(IPrintTicketProvider*, UInt32)
+    get_supported_versions : Proc(IPrintTicketProvider*, LibC::HANDLE, Int32**, Int32*, HRESULT)
+    bind_printer : Proc(IPrintTicketProvider*, LibC::HANDLE, Int32, SHIMOPTS*, UInt32*, Int32*, UInt8***, HRESULT)
+    query_device_namespace : Proc(IPrintTicketProvider*, UInt8**, HRESULT)
+    convert_print_ticket_to_dev_mode : Proc(IPrintTicketProvider*, IXMLDOMDocument2, UInt32, DEVMODEA*, UInt32*, DEVMODEA**, HRESULT)
+    convert_dev_mode_to_print_ticket : Proc(IPrintTicketProvider*, UInt32, DEVMODEA*, IXMLDOMDocument2, HRESULT)
+    get_print_capabilities : Proc(IPrintTicketProvider*, IXMLDOMDocument2, IXMLDOMDocument2*, HRESULT)
+    validate_print_ticket : Proc(IPrintTicketProvider*, IXMLDOMDocument2, HRESULT)
   end
 
   IPrintTicketProvider_GUID = "bb5116db-0a23-4c3a-a6b6-89e5558dfb5d"
@@ -3965,18 +3965,18 @@ lib LibWin32
   end
 
   struct IPrintTicketProvider2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_supported_versions : UInt64
-    bind_printer : UInt64
-    query_device_namespace : UInt64
-    convert_print_ticket_to_dev_mode : UInt64
-    convert_dev_mode_to_print_ticket : UInt64
-    get_print_capabilities : UInt64
-    validate_print_ticket : UInt64
-    get_print_device_capabilities : UInt64
-    get_print_device_resources : UInt64
+    query_interface : Proc(IPrintTicketProvider2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintTicketProvider2*, UInt32)
+    release : Proc(IPrintTicketProvider2*, UInt32)
+    get_supported_versions : Proc(IPrintTicketProvider2*, LibC::HANDLE, Int32**, Int32*, HRESULT)
+    bind_printer : Proc(IPrintTicketProvider2*, LibC::HANDLE, Int32, SHIMOPTS*, UInt32*, Int32*, UInt8***, HRESULT)
+    query_device_namespace : Proc(IPrintTicketProvider2*, UInt8**, HRESULT)
+    convert_print_ticket_to_dev_mode : Proc(IPrintTicketProvider2*, IXMLDOMDocument2, UInt32, DEVMODEA*, UInt32*, DEVMODEA**, HRESULT)
+    convert_dev_mode_to_print_ticket : Proc(IPrintTicketProvider2*, UInt32, DEVMODEA*, IXMLDOMDocument2, HRESULT)
+    get_print_capabilities : Proc(IPrintTicketProvider2*, IXMLDOMDocument2, IXMLDOMDocument2*, HRESULT)
+    validate_print_ticket : Proc(IPrintTicketProvider2*, IXMLDOMDocument2, HRESULT)
+    get_print_device_capabilities : Proc(IPrintTicketProvider2*, IXMLDOMDocument2, IXMLDOMDocument2*, HRESULT)
+    get_print_device_resources : Proc(IPrintTicketProvider2*, LibC::LPWSTR, IXMLDOMDocument2, IXMLDOMDocument2*, HRESULT)
   end
 
   IPrintTicketProvider2_GUID = "b8a70ab2-3dfc-4fec-a074-511b13c651cb"
@@ -3986,16 +3986,16 @@ lib LibWin32
   end
 
   struct IPrintSchemaElementVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_xml_node : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
+    query_interface : Proc(IPrintSchemaElement*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintSchemaElement*, UInt32)
+    release : Proc(IPrintSchemaElement*, UInt32)
+    get_type_info_count : Proc(IPrintSchemaElement*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrintSchemaElement*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrintSchemaElement*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrintSchemaElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_xml_node : Proc(IPrintSchemaElement*, IUnknown*, HRESULT)
+    get_name : Proc(IPrintSchemaElement*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaElement*, UInt8**, HRESULT)
   end
 
   IPrintSchemaElement_GUID = "724c1646-e64b-4bbf-8eb4-d45e4fd580da"
@@ -4005,17 +4005,17 @@ lib LibWin32
   end
 
   struct IPrintSchemaDisplayableElementVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_xml_node : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_display_name : UInt64
+    query_interface : Proc(IPrintSchemaDisplayableElement*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintSchemaDisplayableElement*, UInt32)
+    release : Proc(IPrintSchemaDisplayableElement*, UInt32)
+    get_type_info_count : Proc(IPrintSchemaDisplayableElement*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrintSchemaDisplayableElement*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrintSchemaDisplayableElement*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrintSchemaDisplayableElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_xml_node : Proc(IPrintSchemaDisplayableElement*, IUnknown*, HRESULT)
+    get_name : Proc(IPrintSchemaDisplayableElement*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaDisplayableElement*, UInt8**, HRESULT)
+    get_display_name : Proc(IPrintSchemaDisplayableElement*, UInt8**, HRESULT)
   end
 
   IPrintSchemaDisplayableElement_GUID = "af45af49-d6aa-407d-bf87-3912236e9d94"
@@ -4025,20 +4025,20 @@ lib LibWin32
   end
 
   struct IPrintSchemaOptionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_xml_node : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_display_name : UInt64
-    get_selected : UInt64
-    get_constrained : UInt64
-    get_property_value : UInt64
+    query_interface : Proc(IPrintSchemaOption*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintSchemaOption*, UInt32)
+    release : Proc(IPrintSchemaOption*, UInt32)
+    get_type_info_count : Proc(IPrintSchemaOption*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrintSchemaOption*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrintSchemaOption*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrintSchemaOption*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_xml_node : Proc(IPrintSchemaOption*, IUnknown*, HRESULT)
+    get_name : Proc(IPrintSchemaOption*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaOption*, UInt8**, HRESULT)
+    get_display_name : Proc(IPrintSchemaOption*, UInt8**, HRESULT)
+    get_selected : Proc(IPrintSchemaOption*, LibC::BOOL*, HRESULT)
+    get_constrained : Proc(IPrintSchemaOption*, PrintSchemaConstrainedSetting*, HRESULT)
+    get_property_value : Proc(IPrintSchemaOption*, UInt8*, UInt8*, IUnknown*, HRESULT)
   end
 
   IPrintSchemaOption_GUID = "66bb2f51-5844-4997-8d70-4b7cc221cf92"
@@ -4048,22 +4048,22 @@ lib LibWin32
   end
 
   struct IPrintSchemaPageMediaSizeOptionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_xml_node : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_display_name : UInt64
-    get_selected : UInt64
-    get_constrained : UInt64
-    get_property_value : UInt64
-    get_width_in_microns : UInt64
-    get_height_in_microns : UInt64
+    query_interface : Proc(IPrintSchemaPageMediaSizeOption*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintSchemaPageMediaSizeOption*, UInt32)
+    release : Proc(IPrintSchemaPageMediaSizeOption*, UInt32)
+    get_type_info_count : Proc(IPrintSchemaPageMediaSizeOption*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrintSchemaPageMediaSizeOption*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrintSchemaPageMediaSizeOption*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrintSchemaPageMediaSizeOption*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_xml_node : Proc(IPrintSchemaPageMediaSizeOption*, IUnknown*, HRESULT)
+    get_name : Proc(IPrintSchemaPageMediaSizeOption*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaPageMediaSizeOption*, UInt8**, HRESULT)
+    get_display_name : Proc(IPrintSchemaPageMediaSizeOption*, UInt8**, HRESULT)
+    get_selected : Proc(IPrintSchemaPageMediaSizeOption*, LibC::BOOL*, HRESULT)
+    get_constrained : Proc(IPrintSchemaPageMediaSizeOption*, PrintSchemaConstrainedSetting*, HRESULT)
+    get_property_value : Proc(IPrintSchemaPageMediaSizeOption*, UInt8*, UInt8*, IUnknown*, HRESULT)
+    get_width_in_microns : Proc(IPrintSchemaPageMediaSizeOption*, UInt32*, HRESULT)
+    get_height_in_microns : Proc(IPrintSchemaPageMediaSizeOption*, UInt32*, HRESULT)
   end
 
   IPrintSchemaPageMediaSizeOption_GUID = "68746729-f493-4830-a10f-69028774605d"
@@ -4073,21 +4073,21 @@ lib LibWin32
   end
 
   struct IPrintSchemaNUpOptionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_xml_node : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_display_name : UInt64
-    get_selected : UInt64
-    get_constrained : UInt64
-    get_property_value : UInt64
-    get_pages_per_sheet : UInt64
+    query_interface : Proc(IPrintSchemaNUpOption*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintSchemaNUpOption*, UInt32)
+    release : Proc(IPrintSchemaNUpOption*, UInt32)
+    get_type_info_count : Proc(IPrintSchemaNUpOption*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrintSchemaNUpOption*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrintSchemaNUpOption*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrintSchemaNUpOption*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_xml_node : Proc(IPrintSchemaNUpOption*, IUnknown*, HRESULT)
+    get_name : Proc(IPrintSchemaNUpOption*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaNUpOption*, UInt8**, HRESULT)
+    get_display_name : Proc(IPrintSchemaNUpOption*, UInt8**, HRESULT)
+    get_selected : Proc(IPrintSchemaNUpOption*, LibC::BOOL*, HRESULT)
+    get_constrained : Proc(IPrintSchemaNUpOption*, PrintSchemaConstrainedSetting*, HRESULT)
+    get_property_value : Proc(IPrintSchemaNUpOption*, UInt8*, UInt8*, IUnknown*, HRESULT)
+    get_pages_per_sheet : Proc(IPrintSchemaNUpOption*, UInt32*, HRESULT)
   end
 
   IPrintSchemaNUpOption_GUID = "1f6342f2-d848-42e3-8995-c10a9ef9a3ba"
@@ -4097,16 +4097,16 @@ lib LibWin32
   end
 
   struct IPrintSchemaOptionCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_count : UInt64
-    get_at : UInt64
-    get__new_enum : UInt64
+    query_interface : Proc(IPrintSchemaOptionCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintSchemaOptionCollection*, UInt32)
+    release : Proc(IPrintSchemaOptionCollection*, UInt32)
+    get_type_info_count : Proc(IPrintSchemaOptionCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrintSchemaOptionCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrintSchemaOptionCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrintSchemaOptionCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_count : Proc(IPrintSchemaOptionCollection*, UInt32*, HRESULT)
+    get_at : Proc(IPrintSchemaOptionCollection*, UInt32, IPrintSchemaOption*, HRESULT)
+    get__new_enum : Proc(IPrintSchemaOptionCollection*, IUnknown*, HRESULT)
   end
 
   IPrintSchemaOptionCollection_GUID = "baecb0bd-a946-4771-bc30-e8b24f8d45c1"
@@ -4116,22 +4116,22 @@ lib LibWin32
   end
 
   struct IPrintSchemaFeatureVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_xml_node : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_display_name : UInt64
-    get_selected_option : UInt64
-    put_selected_option : UInt64
-    get_selection_type : UInt64
-    get_option : UInt64
-    get_display_ui : UInt64
+    query_interface : Proc(IPrintSchemaFeature*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintSchemaFeature*, UInt32)
+    release : Proc(IPrintSchemaFeature*, UInt32)
+    get_type_info_count : Proc(IPrintSchemaFeature*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrintSchemaFeature*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrintSchemaFeature*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrintSchemaFeature*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_xml_node : Proc(IPrintSchemaFeature*, IUnknown*, HRESULT)
+    get_name : Proc(IPrintSchemaFeature*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaFeature*, UInt8**, HRESULT)
+    get_display_name : Proc(IPrintSchemaFeature*, UInt8**, HRESULT)
+    get_selected_option : Proc(IPrintSchemaFeature*, IPrintSchemaOption*, HRESULT)
+    put_selected_option : Proc(IPrintSchemaFeature*, IPrintSchemaOption, HRESULT)
+    get_selection_type : Proc(IPrintSchemaFeature*, PrintSchemaSelectionType*, HRESULT)
+    get_option : Proc(IPrintSchemaFeature*, UInt8*, UInt8*, IPrintSchemaOption*, HRESULT)
+    get_display_ui : Proc(IPrintSchemaFeature*, LibC::BOOL*, HRESULT)
   end
 
   IPrintSchemaFeature_GUID = "ef189461-5d62-4626-8e57-ff83583c4826"
@@ -4141,22 +4141,22 @@ lib LibWin32
   end
 
   struct IPrintSchemaPageImageableSizeVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_xml_node : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_imageable_size_width_in_microns : UInt64
-    get_imageable_size_height_in_microns : UInt64
-    get_origin_width_in_microns : UInt64
-    get_origin_height_in_microns : UInt64
-    get_extent_width_in_microns : UInt64
-    get_extent_height_in_microns : UInt64
+    query_interface : Proc(IPrintSchemaPageImageableSize*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintSchemaPageImageableSize*, UInt32)
+    release : Proc(IPrintSchemaPageImageableSize*, UInt32)
+    get_type_info_count : Proc(IPrintSchemaPageImageableSize*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrintSchemaPageImageableSize*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrintSchemaPageImageableSize*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrintSchemaPageImageableSize*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_xml_node : Proc(IPrintSchemaPageImageableSize*, IUnknown*, HRESULT)
+    get_name : Proc(IPrintSchemaPageImageableSize*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaPageImageableSize*, UInt8**, HRESULT)
+    get_imageable_size_width_in_microns : Proc(IPrintSchemaPageImageableSize*, UInt32*, HRESULT)
+    get_imageable_size_height_in_microns : Proc(IPrintSchemaPageImageableSize*, UInt32*, HRESULT)
+    get_origin_width_in_microns : Proc(IPrintSchemaPageImageableSize*, UInt32*, HRESULT)
+    get_origin_height_in_microns : Proc(IPrintSchemaPageImageableSize*, UInt32*, HRESULT)
+    get_extent_width_in_microns : Proc(IPrintSchemaPageImageableSize*, UInt32*, HRESULT)
+    get_extent_height_in_microns : Proc(IPrintSchemaPageImageableSize*, UInt32*, HRESULT)
   end
 
   IPrintSchemaPageImageableSize_GUID = "7c85bf5e-dc7c-4f61-839b-4107e1c9b68e"
@@ -4166,22 +4166,22 @@ lib LibWin32
   end
 
   struct IPrintSchemaParameterDefinitionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_xml_node : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_display_name : UInt64
-    get_user_input_required : UInt64
-    get_unit_type : UInt64
-    get_data_type : UInt64
-    get_range_min : UInt64
-    get_range_max : UInt64
+    query_interface : Proc(IPrintSchemaParameterDefinition*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintSchemaParameterDefinition*, UInt32)
+    release : Proc(IPrintSchemaParameterDefinition*, UInt32)
+    get_type_info_count : Proc(IPrintSchemaParameterDefinition*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrintSchemaParameterDefinition*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrintSchemaParameterDefinition*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrintSchemaParameterDefinition*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_xml_node : Proc(IPrintSchemaParameterDefinition*, IUnknown*, HRESULT)
+    get_name : Proc(IPrintSchemaParameterDefinition*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaParameterDefinition*, UInt8**, HRESULT)
+    get_display_name : Proc(IPrintSchemaParameterDefinition*, UInt8**, HRESULT)
+    get_user_input_required : Proc(IPrintSchemaParameterDefinition*, LibC::BOOL*, HRESULT)
+    get_unit_type : Proc(IPrintSchemaParameterDefinition*, UInt8**, HRESULT)
+    get_data_type : Proc(IPrintSchemaParameterDefinition*, PrintSchemaParameterDataType*, HRESULT)
+    get_range_min : Proc(IPrintSchemaParameterDefinition*, Int32*, HRESULT)
+    get_range_max : Proc(IPrintSchemaParameterDefinition*, Int32*, HRESULT)
   end
 
   IPrintSchemaParameterDefinition_GUID = "b5ade81e-0e61-4fe1-81c6-c333e4ffe0f1"
@@ -4191,18 +4191,18 @@ lib LibWin32
   end
 
   struct IPrintSchemaParameterInitializerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_xml_node : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_value : UInt64
-    put_value : UInt64
+    query_interface : Proc(IPrintSchemaParameterInitializer*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintSchemaParameterInitializer*, UInt32)
+    release : Proc(IPrintSchemaParameterInitializer*, UInt32)
+    get_type_info_count : Proc(IPrintSchemaParameterInitializer*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrintSchemaParameterInitializer*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrintSchemaParameterInitializer*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrintSchemaParameterInitializer*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_xml_node : Proc(IPrintSchemaParameterInitializer*, IUnknown*, HRESULT)
+    get_name : Proc(IPrintSchemaParameterInitializer*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaParameterInitializer*, UInt8**, HRESULT)
+    get_value : Proc(IPrintSchemaParameterInitializer*, VARIANT*, HRESULT)
+    put_value : Proc(IPrintSchemaParameterInitializer*, VARIANT*, HRESULT)
   end
 
   IPrintSchemaParameterInitializer_GUID = "52027082-0b74-4648-9564-828cc6cb656c"
@@ -4212,23 +4212,23 @@ lib LibWin32
   end
 
   struct IPrintSchemaCapabilitiesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_xml_node : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_feature_by_key_name : UInt64
-    get_feature : UInt64
-    get_page_imageable_size : UInt64
-    get_job_copies_all_documents_min_value : UInt64
-    get_job_copies_all_documents_max_value : UInt64
-    get_selected_option_in_print_ticket : UInt64
-    get_options : UInt64
+    query_interface : Proc(IPrintSchemaCapabilities*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintSchemaCapabilities*, UInt32)
+    release : Proc(IPrintSchemaCapabilities*, UInt32)
+    get_type_info_count : Proc(IPrintSchemaCapabilities*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrintSchemaCapabilities*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrintSchemaCapabilities*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrintSchemaCapabilities*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_xml_node : Proc(IPrintSchemaCapabilities*, IUnknown*, HRESULT)
+    get_name : Proc(IPrintSchemaCapabilities*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaCapabilities*, UInt8**, HRESULT)
+    get_feature_by_key_name : Proc(IPrintSchemaCapabilities*, UInt8*, IPrintSchemaFeature*, HRESULT)
+    get_feature : Proc(IPrintSchemaCapabilities*, UInt8*, UInt8*, IPrintSchemaFeature*, HRESULT)
+    get_page_imageable_size : Proc(IPrintSchemaCapabilities*, IPrintSchemaPageImageableSize*, HRESULT)
+    get_job_copies_all_documents_min_value : Proc(IPrintSchemaCapabilities*, UInt32*, HRESULT)
+    get_job_copies_all_documents_max_value : Proc(IPrintSchemaCapabilities*, UInt32*, HRESULT)
+    get_selected_option_in_print_ticket : Proc(IPrintSchemaCapabilities*, IPrintSchemaFeature, IPrintSchemaOption*, HRESULT)
+    get_options : Proc(IPrintSchemaCapabilities*, IPrintSchemaFeature, IPrintSchemaOptionCollection*, HRESULT)
   end
 
   IPrintSchemaCapabilities_GUID = "5a577640-501d-4927-bcd0-5ef57a7ed175"
@@ -4238,24 +4238,24 @@ lib LibWin32
   end
 
   struct IPrintSchemaCapabilities2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_xml_node : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_feature_by_key_name : UInt64
-    get_feature : UInt64
-    get_page_imageable_size : UInt64
-    get_job_copies_all_documents_min_value : UInt64
-    get_job_copies_all_documents_max_value : UInt64
-    get_selected_option_in_print_ticket : UInt64
-    get_options : UInt64
-    get_parameter_definition : UInt64
+    query_interface : Proc(IPrintSchemaCapabilities2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintSchemaCapabilities2*, UInt32)
+    release : Proc(IPrintSchemaCapabilities2*, UInt32)
+    get_type_info_count : Proc(IPrintSchemaCapabilities2*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrintSchemaCapabilities2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrintSchemaCapabilities2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrintSchemaCapabilities2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_xml_node : Proc(IPrintSchemaCapabilities2*, IUnknown*, HRESULT)
+    get_name : Proc(IPrintSchemaCapabilities2*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaCapabilities2*, UInt8**, HRESULT)
+    get_feature_by_key_name : Proc(IPrintSchemaCapabilities2*, UInt8*, IPrintSchemaFeature*, HRESULT)
+    get_feature : Proc(IPrintSchemaCapabilities2*, UInt8*, UInt8*, IPrintSchemaFeature*, HRESULT)
+    get_page_imageable_size : Proc(IPrintSchemaCapabilities2*, IPrintSchemaPageImageableSize*, HRESULT)
+    get_job_copies_all_documents_min_value : Proc(IPrintSchemaCapabilities2*, UInt32*, HRESULT)
+    get_job_copies_all_documents_max_value : Proc(IPrintSchemaCapabilities2*, UInt32*, HRESULT)
+    get_selected_option_in_print_ticket : Proc(IPrintSchemaCapabilities2*, IPrintSchemaFeature, IPrintSchemaOption*, HRESULT)
+    get_options : Proc(IPrintSchemaCapabilities2*, IPrintSchemaFeature, IPrintSchemaOptionCollection*, HRESULT)
+    get_parameter_definition : Proc(IPrintSchemaCapabilities2*, UInt8*, UInt8*, IPrintSchemaParameterDefinition*, HRESULT)
   end
 
   IPrintSchemaCapabilities2_GUID = "b58845f4-9970-4d87-a636-169fb82ed642"
@@ -4265,15 +4265,15 @@ lib LibWin32
   end
 
   struct IPrintSchemaAsyncOperationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    start : UInt64
-    cancel : UInt64
+    query_interface : Proc(IPrintSchemaAsyncOperation*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintSchemaAsyncOperation*, UInt32)
+    release : Proc(IPrintSchemaAsyncOperation*, UInt32)
+    get_type_info_count : Proc(IPrintSchemaAsyncOperation*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrintSchemaAsyncOperation*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrintSchemaAsyncOperation*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrintSchemaAsyncOperation*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    start : Proc(IPrintSchemaAsyncOperation*, HRESULT)
+    cancel : Proc(IPrintSchemaAsyncOperation*, HRESULT)
   end
 
   IPrintSchemaAsyncOperation_GUID = "143c8dcb-d37f-47f7-88e8-6b1d21f2c5f7"
@@ -4283,24 +4283,24 @@ lib LibWin32
   end
 
   struct IPrintSchemaTicketVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_xml_node : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_feature_by_key_name : UInt64
-    get_feature : UInt64
-    validate_async : UInt64
-    commit_async : UInt64
-    notify_xml_changed : UInt64
-    get_capabilities : UInt64
-    get_job_copies_all_documents : UInt64
-    put_job_copies_all_documents : UInt64
+    query_interface : Proc(IPrintSchemaTicket*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintSchemaTicket*, UInt32)
+    release : Proc(IPrintSchemaTicket*, UInt32)
+    get_type_info_count : Proc(IPrintSchemaTicket*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrintSchemaTicket*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrintSchemaTicket*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrintSchemaTicket*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_xml_node : Proc(IPrintSchemaTicket*, IUnknown*, HRESULT)
+    get_name : Proc(IPrintSchemaTicket*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaTicket*, UInt8**, HRESULT)
+    get_feature_by_key_name : Proc(IPrintSchemaTicket*, UInt8*, IPrintSchemaFeature*, HRESULT)
+    get_feature : Proc(IPrintSchemaTicket*, UInt8*, UInt8*, IPrintSchemaFeature*, HRESULT)
+    validate_async : Proc(IPrintSchemaTicket*, IPrintSchemaAsyncOperation*, HRESULT)
+    commit_async : Proc(IPrintSchemaTicket*, IPrintSchemaTicket, IPrintSchemaAsyncOperation*, HRESULT)
+    notify_xml_changed : Proc(IPrintSchemaTicket*, HRESULT)
+    get_capabilities : Proc(IPrintSchemaTicket*, IPrintSchemaCapabilities*, HRESULT)
+    get_job_copies_all_documents : Proc(IPrintSchemaTicket*, UInt32*, HRESULT)
+    put_job_copies_all_documents : Proc(IPrintSchemaTicket*, UInt32, HRESULT)
   end
 
   IPrintSchemaTicket_GUID = "e480b861-4708-4e6d-a5b4-a2b4eeb9baa4"
@@ -4310,25 +4310,25 @@ lib LibWin32
   end
 
   struct IPrintSchemaTicket2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_xml_node : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_feature_by_key_name : UInt64
-    get_feature : UInt64
-    validate_async : UInt64
-    commit_async : UInt64
-    notify_xml_changed : UInt64
-    get_capabilities : UInt64
-    get_job_copies_all_documents : UInt64
-    put_job_copies_all_documents : UInt64
-    get_parameter_initializer : UInt64
+    query_interface : Proc(IPrintSchemaTicket2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintSchemaTicket2*, UInt32)
+    release : Proc(IPrintSchemaTicket2*, UInt32)
+    get_type_info_count : Proc(IPrintSchemaTicket2*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrintSchemaTicket2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrintSchemaTicket2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrintSchemaTicket2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_xml_node : Proc(IPrintSchemaTicket2*, IUnknown*, HRESULT)
+    get_name : Proc(IPrintSchemaTicket2*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaTicket2*, UInt8**, HRESULT)
+    get_feature_by_key_name : Proc(IPrintSchemaTicket2*, UInt8*, IPrintSchemaFeature*, HRESULT)
+    get_feature : Proc(IPrintSchemaTicket2*, UInt8*, UInt8*, IPrintSchemaFeature*, HRESULT)
+    validate_async : Proc(IPrintSchemaTicket2*, IPrintSchemaAsyncOperation*, HRESULT)
+    commit_async : Proc(IPrintSchemaTicket2*, IPrintSchemaTicket, IPrintSchemaAsyncOperation*, HRESULT)
+    notify_xml_changed : Proc(IPrintSchemaTicket2*, HRESULT)
+    get_capabilities : Proc(IPrintSchemaTicket2*, IPrintSchemaCapabilities*, HRESULT)
+    get_job_copies_all_documents : Proc(IPrintSchemaTicket2*, UInt32*, HRESULT)
+    put_job_copies_all_documents : Proc(IPrintSchemaTicket2*, UInt32, HRESULT)
+    get_parameter_initializer : Proc(IPrintSchemaTicket2*, UInt8*, UInt8*, IPrintSchemaParameterInitializer*, HRESULT)
   end
 
   IPrintSchemaTicket2_GUID = "2ec1f844-766a-47a1-91f4-2eeb6190f80c"
@@ -4338,14 +4338,14 @@ lib LibWin32
   end
 
   struct IPrintSchemaAsyncOperationEventVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    completed : UInt64
+    query_interface : Proc(IPrintSchemaAsyncOperationEvent*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintSchemaAsyncOperationEvent*, UInt32)
+    release : Proc(IPrintSchemaAsyncOperationEvent*, UInt32)
+    get_type_info_count : Proc(IPrintSchemaAsyncOperationEvent*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrintSchemaAsyncOperationEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrintSchemaAsyncOperationEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrintSchemaAsyncOperationEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    completed : Proc(IPrintSchemaAsyncOperationEvent*, IPrintSchemaTicket, HRESULT, HRESULT)
   end
 
   IPrintSchemaAsyncOperationEvent_GUID = "23adbb16-0133-4906-b29a-1dce1d026379"
@@ -4355,15 +4355,15 @@ lib LibWin32
   end
 
   struct IPrinterScriptableSequentialStreamVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    read : UInt64
-    write : UInt64
+    query_interface : Proc(IPrinterScriptableSequentialStream*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrinterScriptableSequentialStream*, UInt32)
+    release : Proc(IPrinterScriptableSequentialStream*, UInt32)
+    get_type_info_count : Proc(IPrinterScriptableSequentialStream*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrinterScriptableSequentialStream*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrinterScriptableSequentialStream*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrinterScriptableSequentialStream*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    read : Proc(IPrinterScriptableSequentialStream*, Int32, IDispatch*, HRESULT)
+    write : Proc(IPrinterScriptableSequentialStream*, IDispatch, Int32*, HRESULT)
   end
 
   IPrinterScriptableSequentialStream_GUID = "2072838a-316f-467a-a949-27f68c44a854"
@@ -4373,18 +4373,18 @@ lib LibWin32
   end
 
   struct IPrinterScriptableStreamVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    read : UInt64
-    write : UInt64
-    commit : UInt64
-    seek : UInt64
-    set_size : UInt64
+    query_interface : Proc(IPrinterScriptableStream*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrinterScriptableStream*, UInt32)
+    release : Proc(IPrinterScriptableStream*, UInt32)
+    get_type_info_count : Proc(IPrinterScriptableStream*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrinterScriptableStream*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrinterScriptableStream*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrinterScriptableStream*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    read : Proc(IPrinterScriptableStream*, Int32, IDispatch*, HRESULT)
+    write : Proc(IPrinterScriptableStream*, IDispatch, Int32*, HRESULT)
+    commit : Proc(IPrinterScriptableStream*, HRESULT)
+    seek : Proc(IPrinterScriptableStream*, Int32, STREAM_SEEK, Int32*, HRESULT)
+    set_size : Proc(IPrinterScriptableStream*, Int32, HRESULT)
   end
 
   IPrinterScriptableStream_GUID = "7edf9a92-4750-41a5-a17f-879a6f4f7dcb"
@@ -4394,23 +4394,23 @@ lib LibWin32
   end
 
   struct IPrinterPropertyBagVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_bool : UInt64
-    set_bool : UInt64
-    get_int32 : UInt64
-    set_int32 : UInt64
-    get_string : UInt64
-    set_string : UInt64
-    get_bytes : UInt64
-    set_bytes : UInt64
-    get_read_stream : UInt64
-    get_write_stream : UInt64
+    query_interface : Proc(IPrinterPropertyBag*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrinterPropertyBag*, UInt32)
+    release : Proc(IPrinterPropertyBag*, UInt32)
+    get_type_info_count : Proc(IPrinterPropertyBag*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrinterPropertyBag*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrinterPropertyBag*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrinterPropertyBag*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_bool : Proc(IPrinterPropertyBag*, UInt8*, LibC::BOOL*, HRESULT)
+    set_bool : Proc(IPrinterPropertyBag*, UInt8*, LibC::BOOL, HRESULT)
+    get_int32 : Proc(IPrinterPropertyBag*, UInt8*, Int32*, HRESULT)
+    set_int32 : Proc(IPrinterPropertyBag*, UInt8*, Int32, HRESULT)
+    get_string : Proc(IPrinterPropertyBag*, UInt8*, UInt8**, HRESULT)
+    set_string : Proc(IPrinterPropertyBag*, UInt8*, UInt8*, HRESULT)
+    get_bytes : Proc(IPrinterPropertyBag*, UInt8*, UInt32*, UInt8**, HRESULT)
+    set_bytes : Proc(IPrinterPropertyBag*, UInt8*, UInt32, UInt8*, HRESULT)
+    get_read_stream : Proc(IPrinterPropertyBag*, UInt8*, IStream*, HRESULT)
+    get_write_stream : Proc(IPrinterPropertyBag*, UInt8*, IStream*, HRESULT)
   end
 
   IPrinterPropertyBag_GUID = "fea77364-df95-4a23-a905-019b79a8e481"
@@ -4420,23 +4420,23 @@ lib LibWin32
   end
 
   struct IPrinterScriptablePropertyBagVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_bool : UInt64
-    set_bool : UInt64
-    get_int32 : UInt64
-    set_int32 : UInt64
-    get_string : UInt64
-    set_string : UInt64
-    get_bytes : UInt64
-    set_bytes : UInt64
-    get_read_stream : UInt64
-    get_write_stream : UInt64
+    query_interface : Proc(IPrinterScriptablePropertyBag*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrinterScriptablePropertyBag*, UInt32)
+    release : Proc(IPrinterScriptablePropertyBag*, UInt32)
+    get_type_info_count : Proc(IPrinterScriptablePropertyBag*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrinterScriptablePropertyBag*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrinterScriptablePropertyBag*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrinterScriptablePropertyBag*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_bool : Proc(IPrinterScriptablePropertyBag*, UInt8*, LibC::BOOL*, HRESULT)
+    set_bool : Proc(IPrinterScriptablePropertyBag*, UInt8*, LibC::BOOL, HRESULT)
+    get_int32 : Proc(IPrinterScriptablePropertyBag*, UInt8*, Int32*, HRESULT)
+    set_int32 : Proc(IPrinterScriptablePropertyBag*, UInt8*, Int32, HRESULT)
+    get_string : Proc(IPrinterScriptablePropertyBag*, UInt8*, UInt8**, HRESULT)
+    set_string : Proc(IPrinterScriptablePropertyBag*, UInt8*, UInt8*, HRESULT)
+    get_bytes : Proc(IPrinterScriptablePropertyBag*, UInt8*, IDispatch*, HRESULT)
+    set_bytes : Proc(IPrinterScriptablePropertyBag*, UInt8*, IDispatch, HRESULT)
+    get_read_stream : Proc(IPrinterScriptablePropertyBag*, UInt8*, IPrinterScriptableStream*, HRESULT)
+    get_write_stream : Proc(IPrinterScriptablePropertyBag*, UInt8*, IPrinterScriptableStream*, HRESULT)
   end
 
   IPrinterScriptablePropertyBag_GUID = "91c7765f-ed57-49ad-8b01-dc24816a5294"
@@ -4446,24 +4446,24 @@ lib LibWin32
   end
 
   struct IPrinterScriptablePropertyBag2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_bool : UInt64
-    set_bool : UInt64
-    get_int32 : UInt64
-    set_int32 : UInt64
-    get_string : UInt64
-    set_string : UInt64
-    get_bytes : UInt64
-    set_bytes : UInt64
-    get_read_stream : UInt64
-    get_write_stream : UInt64
-    get_read_stream_as_xml : UInt64
+    query_interface : Proc(IPrinterScriptablePropertyBag2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrinterScriptablePropertyBag2*, UInt32)
+    release : Proc(IPrinterScriptablePropertyBag2*, UInt32)
+    get_type_info_count : Proc(IPrinterScriptablePropertyBag2*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrinterScriptablePropertyBag2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrinterScriptablePropertyBag2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrinterScriptablePropertyBag2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_bool : Proc(IPrinterScriptablePropertyBag2*, UInt8*, LibC::BOOL*, HRESULT)
+    set_bool : Proc(IPrinterScriptablePropertyBag2*, UInt8*, LibC::BOOL, HRESULT)
+    get_int32 : Proc(IPrinterScriptablePropertyBag2*, UInt8*, Int32*, HRESULT)
+    set_int32 : Proc(IPrinterScriptablePropertyBag2*, UInt8*, Int32, HRESULT)
+    get_string : Proc(IPrinterScriptablePropertyBag2*, UInt8*, UInt8**, HRESULT)
+    set_string : Proc(IPrinterScriptablePropertyBag2*, UInt8*, UInt8*, HRESULT)
+    get_bytes : Proc(IPrinterScriptablePropertyBag2*, UInt8*, IDispatch*, HRESULT)
+    set_bytes : Proc(IPrinterScriptablePropertyBag2*, UInt8*, IDispatch, HRESULT)
+    get_read_stream : Proc(IPrinterScriptablePropertyBag2*, UInt8*, IPrinterScriptableStream*, HRESULT)
+    get_write_stream : Proc(IPrinterScriptablePropertyBag2*, UInt8*, IPrinterScriptableStream*, HRESULT)
+    get_read_stream_as_xml : Proc(IPrinterScriptablePropertyBag2*, UInt8*, IUnknown*, HRESULT)
   end
 
   IPrinterScriptablePropertyBag2_GUID = "2a1c53c4-8638-4b3e-b518-2773c94556a3"
@@ -4473,17 +4473,17 @@ lib LibWin32
   end
 
   struct IPrinterQueueVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_handle : UInt64
-    get_name : UInt64
-    send_bidi_query : UInt64
-    get_properties : UInt64
+    query_interface : Proc(IPrinterQueue*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrinterQueue*, UInt32)
+    release : Proc(IPrinterQueue*, UInt32)
+    get_type_info_count : Proc(IPrinterQueue*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrinterQueue*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrinterQueue*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrinterQueue*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_handle : Proc(IPrinterQueue*, LibC::HANDLE*, HRESULT)
+    get_name : Proc(IPrinterQueue*, UInt8**, HRESULT)
+    send_bidi_query : Proc(IPrinterQueue*, UInt8*, HRESULT)
+    get_properties : Proc(IPrinterQueue*, IPrinterPropertyBag*, HRESULT)
   end
 
   IPrinterQueue_GUID = "3580a828-07fe-4b94-ac1a-757d9d2d3056"
@@ -4493,16 +4493,16 @@ lib LibWin32
   end
 
   struct IPrintJobVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_name : UInt64
-    get_id : UInt64
-    get_printed_pages : UInt64
-    get_total_pages : UInt64
-    get_status : UInt64
-    get_submission_time : UInt64
-    request_cancel : UInt64
+    query_interface : Proc(IPrintJob*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintJob*, UInt32)
+    release : Proc(IPrintJob*, UInt32)
+    get_name : Proc(IPrintJob*, UInt8**, HRESULT)
+    get_id : Proc(IPrintJob*, UInt32*, HRESULT)
+    get_printed_pages : Proc(IPrintJob*, UInt32*, HRESULT)
+    get_total_pages : Proc(IPrintJob*, UInt32*, HRESULT)
+    get_status : Proc(IPrintJob*, PrintJobStatus*, HRESULT)
+    get_submission_time : Proc(IPrintJob*, Float64*, HRESULT)
+    request_cancel : Proc(IPrintJob*, HRESULT)
   end
 
   IPrintJob_GUID = "b771dab8-1282-41b7-858c-f206e4d20577"
@@ -4512,16 +4512,16 @@ lib LibWin32
   end
 
   struct IPrintJobCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_count : UInt64
-    get_at : UInt64
-    get__new_enum : UInt64
+    query_interface : Proc(IPrintJobCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintJobCollection*, UInt32)
+    release : Proc(IPrintJobCollection*, UInt32)
+    get_type_info_count : Proc(IPrintJobCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrintJobCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrintJobCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrintJobCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_count : Proc(IPrintJobCollection*, UInt32*, HRESULT)
+    get_at : Proc(IPrintJobCollection*, UInt32, IPrintJob*, HRESULT)
+    get__new_enum : Proc(IPrintJobCollection*, IUnknown*, HRESULT)
   end
 
   IPrintJobCollection_GUID = "72b82a24-a598-4e87-895f-cdb23a49e9dc"
@@ -4531,14 +4531,14 @@ lib LibWin32
   end
 
   struct IPrinterQueueViewEventVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    on_changed : UInt64
+    query_interface : Proc(IPrinterQueueViewEvent*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrinterQueueViewEvent*, UInt32)
+    release : Proc(IPrinterQueueViewEvent*, UInt32)
+    get_type_info_count : Proc(IPrinterQueueViewEvent*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrinterQueueViewEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrinterQueueViewEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrinterQueueViewEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    on_changed : Proc(IPrinterQueueViewEvent*, IPrintJobCollection, UInt32, UInt32, UInt32, HRESULT)
   end
 
   IPrinterQueueViewEvent_GUID = "c5b6042b-fd21-404a-a0ef-e2fbb52b9080"
@@ -4548,14 +4548,14 @@ lib LibWin32
   end
 
   struct IPrinterQueueViewVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    set_view_range : UInt64
+    query_interface : Proc(IPrinterQueueView*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrinterQueueView*, UInt32)
+    release : Proc(IPrinterQueueView*, UInt32)
+    get_type_info_count : Proc(IPrinterQueueView*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrinterQueueView*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrinterQueueView*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrinterQueueView*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    set_view_range : Proc(IPrinterQueueView*, UInt32, UInt32, HRESULT)
   end
 
   IPrinterQueueView_GUID = "476e2969-3b2b-4b3f-8277-cff6056042aa"
@@ -4565,14 +4565,14 @@ lib LibWin32
   end
 
   struct IPrinterQueueEventVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    on_bidi_response_received : UInt64
+    query_interface : Proc(IPrinterQueueEvent*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrinterQueueEvent*, UInt32)
+    release : Proc(IPrinterQueueEvent*, UInt32)
+    get_type_info_count : Proc(IPrinterQueueEvent*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrinterQueueEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrinterQueueEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrinterQueueEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    on_bidi_response_received : Proc(IPrinterQueueEvent*, UInt8*, HRESULT, HRESULT)
   end
 
   IPrinterQueueEvent_GUID = "214685f6-7b78-4681-87e0-495f739273d1"
@@ -4582,10 +4582,10 @@ lib LibWin32
   end
 
   struct IPrinterBidiSetRequestCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    completed : UInt64
+    query_interface : Proc(IPrinterBidiSetRequestCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrinterBidiSetRequestCallback*, UInt32)
+    release : Proc(IPrinterBidiSetRequestCallback*, UInt32)
+    completed : Proc(IPrinterBidiSetRequestCallback*, UInt8*, HRESULT, HRESULT)
   end
 
   IPrinterBidiSetRequestCallback_GUID = "c52d32dd-f2b4-4052-8502-ec4305ecb71f"
@@ -4595,10 +4595,10 @@ lib LibWin32
   end
 
   struct IPrinterExtensionAsyncOperationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    cancel : UInt64
+    query_interface : Proc(IPrinterExtensionAsyncOperation*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrinterExtensionAsyncOperation*, UInt32)
+    release : Proc(IPrinterExtensionAsyncOperation*, UInt32)
+    cancel : Proc(IPrinterExtensionAsyncOperation*, HRESULT)
   end
 
   IPrinterExtensionAsyncOperation_GUID = "108d6a23-6a4b-4552-9448-68b427186acd"
@@ -4608,19 +4608,19 @@ lib LibWin32
   end
 
   struct IPrinterQueue2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_handle : UInt64
-    get_name : UInt64
-    send_bidi_query : UInt64
-    get_properties : UInt64
-    send_bidi_set_request_async : UInt64
-    get_printer_queue_view : UInt64
+    query_interface : Proc(IPrinterQueue2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrinterQueue2*, UInt32)
+    release : Proc(IPrinterQueue2*, UInt32)
+    get_type_info_count : Proc(IPrinterQueue2*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrinterQueue2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrinterQueue2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrinterQueue2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_handle : Proc(IPrinterQueue2*, LibC::HANDLE*, HRESULT)
+    get_name : Proc(IPrinterQueue2*, UInt8**, HRESULT)
+    send_bidi_query : Proc(IPrinterQueue2*, UInt8*, HRESULT)
+    get_properties : Proc(IPrinterQueue2*, IPrinterPropertyBag*, HRESULT)
+    send_bidi_set_request_async : Proc(IPrinterQueue2*, UInt8*, IPrinterBidiSetRequestCallback, IPrinterExtensionAsyncOperation*, HRESULT)
+    get_printer_queue_view : Proc(IPrinterQueue2*, UInt32, UInt32, IPrinterQueueView*, HRESULT)
   end
 
   IPrinterQueue2_GUID = "8cd444e8-c9bb-49b3-8e38-e03209416131"
@@ -4630,17 +4630,17 @@ lib LibWin32
   end
 
   struct IPrinterExtensionContextVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_printer_queue : UInt64
-    get_print_schema_ticket : UInt64
-    get_driver_properties : UInt64
-    get_user_properties : UInt64
+    query_interface : Proc(IPrinterExtensionContext*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrinterExtensionContext*, UInt32)
+    release : Proc(IPrinterExtensionContext*, UInt32)
+    get_type_info_count : Proc(IPrinterExtensionContext*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrinterExtensionContext*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrinterExtensionContext*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrinterExtensionContext*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_printer_queue : Proc(IPrinterExtensionContext*, IPrinterQueue*, HRESULT)
+    get_print_schema_ticket : Proc(IPrinterExtensionContext*, IPrintSchemaTicket*, HRESULT)
+    get_driver_properties : Proc(IPrinterExtensionContext*, IPrinterPropertyBag*, HRESULT)
+    get_user_properties : Proc(IPrinterExtensionContext*, IPrinterPropertyBag*, HRESULT)
   end
 
   IPrinterExtensionContext_GUID = "39843bf2-c4d2-41fd-b4b2-aedbee5e1900"
@@ -4650,15 +4650,15 @@ lib LibWin32
   end
 
   struct IPrinterExtensionRequestVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    cancel : UInt64
-    complete : UInt64
+    query_interface : Proc(IPrinterExtensionRequest*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrinterExtensionRequest*, UInt32)
+    release : Proc(IPrinterExtensionRequest*, UInt32)
+    get_type_info_count : Proc(IPrinterExtensionRequest*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrinterExtensionRequest*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrinterExtensionRequest*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrinterExtensionRequest*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    cancel : Proc(IPrinterExtensionRequest*, HRESULT, UInt8*, HRESULT)
+    complete : Proc(IPrinterExtensionRequest*, HRESULT)
   end
 
   IPrinterExtensionRequest_GUID = "39843bf3-c4d2-41fd-b4b2-aedbee5e1900"
@@ -4668,24 +4668,24 @@ lib LibWin32
   end
 
   struct IPrinterExtensionEventArgsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_printer_queue : UInt64
-    get_print_schema_ticket : UInt64
-    get_driver_properties : UInt64
-    get_user_properties : UInt64
-    get_bidi_notification : UInt64
-    get_reason_id : UInt64
-    get_request : UInt64
-    get_source_application : UInt64
-    get_detailed_reason_id : UInt64
-    get_window_modal : UInt64
-    get_window_parent : UInt64
+    query_interface : Proc(IPrinterExtensionEventArgs*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrinterExtensionEventArgs*, UInt32)
+    release : Proc(IPrinterExtensionEventArgs*, UInt32)
+    get_type_info_count : Proc(IPrinterExtensionEventArgs*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrinterExtensionEventArgs*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrinterExtensionEventArgs*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrinterExtensionEventArgs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_printer_queue : Proc(IPrinterExtensionEventArgs*, IPrinterQueue*, HRESULT)
+    get_print_schema_ticket : Proc(IPrinterExtensionEventArgs*, IPrintSchemaTicket*, HRESULT)
+    get_driver_properties : Proc(IPrinterExtensionEventArgs*, IPrinterPropertyBag*, HRESULT)
+    get_user_properties : Proc(IPrinterExtensionEventArgs*, IPrinterPropertyBag*, HRESULT)
+    get_bidi_notification : Proc(IPrinterExtensionEventArgs*, UInt8**, HRESULT)
+    get_reason_id : Proc(IPrinterExtensionEventArgs*, Guid*, HRESULT)
+    get_request : Proc(IPrinterExtensionEventArgs*, IPrinterExtensionRequest*, HRESULT)
+    get_source_application : Proc(IPrinterExtensionEventArgs*, UInt8**, HRESULT)
+    get_detailed_reason_id : Proc(IPrinterExtensionEventArgs*, Guid*, HRESULT)
+    get_window_modal : Proc(IPrinterExtensionEventArgs*, LibC::BOOL*, HRESULT)
+    get_window_parent : Proc(IPrinterExtensionEventArgs*, LibC::HANDLE*, HRESULT)
   end
 
   IPrinterExtensionEventArgs_GUID = "39843bf4-c4d2-41fd-b4b2-aedbee5e1900"
@@ -4695,16 +4695,16 @@ lib LibWin32
   end
 
   struct IPrinterExtensionContextCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_count : UInt64
-    get_at : UInt64
-    get__new_enum : UInt64
+    query_interface : Proc(IPrinterExtensionContextCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrinterExtensionContextCollection*, UInt32)
+    release : Proc(IPrinterExtensionContextCollection*, UInt32)
+    get_type_info_count : Proc(IPrinterExtensionContextCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrinterExtensionContextCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrinterExtensionContextCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrinterExtensionContextCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_count : Proc(IPrinterExtensionContextCollection*, UInt32*, HRESULT)
+    get_at : Proc(IPrinterExtensionContextCollection*, UInt32, IPrinterExtensionContext*, HRESULT)
+    get__new_enum : Proc(IPrinterExtensionContextCollection*, IUnknown*, HRESULT)
   end
 
   IPrinterExtensionContextCollection_GUID = "fb476970-9bab-4861-811e-3e98b0c5addf"
@@ -4714,15 +4714,15 @@ lib LibWin32
   end
 
   struct IPrinterExtensionEventVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    on_driver_event : UInt64
-    on_printer_queues_enumerated : UInt64
+    query_interface : Proc(IPrinterExtensionEvent*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrinterExtensionEvent*, UInt32)
+    release : Proc(IPrinterExtensionEvent*, UInt32)
+    get_type_info_count : Proc(IPrinterExtensionEvent*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrinterExtensionEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrinterExtensionEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrinterExtensionEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    on_driver_event : Proc(IPrinterExtensionEvent*, IPrinterExtensionEventArgs, HRESULT)
+    on_printer_queues_enumerated : Proc(IPrinterExtensionEvent*, IPrinterExtensionContextCollection, HRESULT)
   end
 
   IPrinterExtensionEvent_GUID = "c093cb63-5ef5-4585-af8e-4d5637487b57"
@@ -4732,11 +4732,11 @@ lib LibWin32
   end
 
   struct IPrinterExtensionManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    enable_events : UInt64
-    disable_events : UInt64
+    query_interface : Proc(IPrinterExtensionManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrinterExtensionManager*, UInt32)
+    release : Proc(IPrinterExtensionManager*, UInt32)
+    enable_events : Proc(IPrinterExtensionManager*, Guid, HRESULT)
+    disable_events : Proc(IPrinterExtensionManager*, HRESULT)
   end
 
   IPrinterExtensionManager_GUID = "93c6eb8c-b001-4355-9629-8e8a1b3f8e77"
@@ -4746,16 +4746,16 @@ lib LibWin32
   end
 
   struct IPrinterScriptContextVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_driver_properties : UInt64
-    get_queue_properties : UInt64
-    get_user_properties : UInt64
+    query_interface : Proc(IPrinterScriptContext*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrinterScriptContext*, UInt32)
+    release : Proc(IPrinterScriptContext*, UInt32)
+    get_type_info_count : Proc(IPrinterScriptContext*, UInt32*, HRESULT)
+    get_type_info : Proc(IPrinterScriptContext*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPrinterScriptContext*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPrinterScriptContext*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_driver_properties : Proc(IPrinterScriptContext*, IPrinterScriptablePropertyBag*, HRESULT)
+    get_queue_properties : Proc(IPrinterScriptContext*, IPrinterScriptablePropertyBag*, HRESULT)
+    get_user_properties : Proc(IPrinterScriptContext*, IPrinterScriptablePropertyBag*, HRESULT)
   end
 
   IPrinterScriptContext_GUID = "066acbca-8881-49c9-bb98-fae16b4889e1"
@@ -4765,11 +4765,11 @@ lib LibWin32
   end
 
   struct IPrintAsyncNotifyDataObjectVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    acquire_data : UInt64
-    release_data : UInt64
+    query_interface : Proc(IPrintAsyncNotifyDataObject*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintAsyncNotifyDataObject*, UInt32)
+    release : Proc(IPrintAsyncNotifyDataObject*, UInt32)
+    acquire_data : Proc(IPrintAsyncNotifyDataObject*, UInt8**, UInt32*, Guid**, HRESULT)
+    release_data : Proc(IPrintAsyncNotifyDataObject*, HRESULT)
   end
 
   IPrintAsyncNotifyDataObject_GUID = "77cf513e-5d49-4789-9f30-d0822b335c0d"
@@ -4779,11 +4779,11 @@ lib LibWin32
   end
 
   struct IPrintAsyncNotifyChannelVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    send_notification : UInt64
-    close_channel : UInt64
+    query_interface : Proc(IPrintAsyncNotifyChannel*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintAsyncNotifyChannel*, UInt32)
+    release : Proc(IPrintAsyncNotifyChannel*, UInt32)
+    send_notification : Proc(IPrintAsyncNotifyChannel*, IPrintAsyncNotifyDataObject, HRESULT)
+    close_channel : Proc(IPrintAsyncNotifyChannel*, IPrintAsyncNotifyDataObject, HRESULT)
   end
 
   IPrintAsyncNotifyChannel_GUID = "4a5031b1-1f3f-4db0-a462-4530ed8b0451"
@@ -4793,11 +4793,11 @@ lib LibWin32
   end
 
   struct IPrintAsyncNotifyCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_event_notify : UInt64
-    channel_closed : UInt64
+    query_interface : Proc(IPrintAsyncNotifyCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintAsyncNotifyCallback*, UInt32)
+    release : Proc(IPrintAsyncNotifyCallback*, UInt32)
+    on_event_notify : Proc(IPrintAsyncNotifyCallback*, IPrintAsyncNotifyChannel, IPrintAsyncNotifyDataObject, HRESULT)
+    channel_closed : Proc(IPrintAsyncNotifyCallback*, IPrintAsyncNotifyChannel, IPrintAsyncNotifyDataObject, HRESULT)
   end
 
   IPrintAsyncNotifyCallback_GUID = "7def34c1-9d92-4c99-b3b3-db94a9d4191b"
@@ -4807,11 +4807,11 @@ lib LibWin32
   end
 
   struct IPrintAsyncNotifyRegistrationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    register_for_notifications : UInt64
-    unregister_for_notifications : UInt64
+    query_interface : Proc(IPrintAsyncNotifyRegistration*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintAsyncNotifyRegistration*, UInt32)
+    release : Proc(IPrintAsyncNotifyRegistration*, UInt32)
+    register_for_notifications : Proc(IPrintAsyncNotifyRegistration*, HRESULT)
+    unregister_for_notifications : Proc(IPrintAsyncNotifyRegistration*, HRESULT)
   end
 
   IPrintAsyncNotifyRegistration_GUID = "0f6f27b6-6f86-4591-9203-64c3bfadedfe"
@@ -4821,11 +4821,11 @@ lib LibWin32
   end
 
   struct IPrintAsyncNotifyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_print_async_notify_channel : UInt64
-    create_print_async_notify_registration : UInt64
+    query_interface : Proc(IPrintAsyncNotify*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintAsyncNotify*, UInt32)
+    release : Proc(IPrintAsyncNotify*, UInt32)
+    create_print_async_notify_channel : Proc(IPrintAsyncNotify*, UInt32, Guid*, PrintAsyncNotifyUserFilter, PrintAsyncNotifyConversationStyle, IPrintAsyncNotifyCallback, IPrintAsyncNotifyChannel*, HRESULT)
+    create_print_async_notify_registration : Proc(IPrintAsyncNotify*, Guid*, PrintAsyncNotifyUserFilter, PrintAsyncNotifyConversationStyle, IPrintAsyncNotifyCallback, IPrintAsyncNotifyRegistration*, HRESULT)
   end
 
   IPrintAsyncNotify_GUID = "532818f7-921b-4fb2-bff8-2f4fd52ebebf"
@@ -4835,11 +4835,11 @@ lib LibWin32
   end
 
   struct IPrintAsyncCookieVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    finish_async_call : UInt64
-    cancel_async_call : UInt64
+    query_interface : Proc(IPrintAsyncCookie*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintAsyncCookie*, UInt32)
+    release : Proc(IPrintAsyncCookie*, UInt32)
+    finish_async_call : Proc(IPrintAsyncCookie*, HRESULT, HRESULT)
+    cancel_async_call : Proc(IPrintAsyncCookie*, HRESULT, HRESULT)
   end
 
   struct IPrintAsyncCookie
@@ -4847,12 +4847,12 @@ lib LibWin32
   end
 
   struct IPrintAsyncNewChannelCookieVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    finish_async_call : UInt64
-    cancel_async_call : UInt64
-    finish_async_call_with_data : UInt64
+    query_interface : Proc(IPrintAsyncNewChannelCookie*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintAsyncNewChannelCookie*, UInt32)
+    release : Proc(IPrintAsyncNewChannelCookie*, UInt32)
+    finish_async_call : Proc(IPrintAsyncNewChannelCookie*, HRESULT, HRESULT)
+    cancel_async_call : Proc(IPrintAsyncNewChannelCookie*, HRESULT, HRESULT)
+    finish_async_call_with_data : Proc(IPrintAsyncNewChannelCookie*, IPrintAsyncNotifyChannel*, UInt32, HRESULT)
   end
 
   struct IPrintAsyncNewChannelCookie
@@ -4860,12 +4860,12 @@ lib LibWin32
   end
 
   struct IAsyncGetSendNotificationCookieVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    finish_async_call : UInt64
-    cancel_async_call : UInt64
-    finish_async_call_with_data : UInt64
+    query_interface : Proc(IAsyncGetSendNotificationCookie*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IAsyncGetSendNotificationCookie*, UInt32)
+    release : Proc(IAsyncGetSendNotificationCookie*, UInt32)
+    finish_async_call : Proc(IAsyncGetSendNotificationCookie*, HRESULT, HRESULT)
+    cancel_async_call : Proc(IAsyncGetSendNotificationCookie*, HRESULT, HRESULT)
+    finish_async_call_with_data : Proc(IAsyncGetSendNotificationCookie*, IPrintAsyncNotifyDataObject, LibC::BOOL, HRESULT)
   end
 
   struct IAsyncGetSendNotificationCookie
@@ -4873,12 +4873,12 @@ lib LibWin32
   end
 
   struct IAsyncGetSrvReferralCookieVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    finish_async_call : UInt64
-    cancel_async_call : UInt64
-    finish_async_call_with_data : UInt64
+    query_interface : Proc(IAsyncGetSrvReferralCookie*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IAsyncGetSrvReferralCookie*, UInt32)
+    release : Proc(IAsyncGetSrvReferralCookie*, UInt32)
+    finish_async_call : Proc(IAsyncGetSrvReferralCookie*, HRESULT, HRESULT)
+    cancel_async_call : Proc(IAsyncGetSrvReferralCookie*, HRESULT, HRESULT)
+    finish_async_call_with_data : Proc(IAsyncGetSrvReferralCookie*, LibC::LPWSTR, HRESULT)
   end
 
   struct IAsyncGetSrvReferralCookie
@@ -4886,12 +4886,12 @@ lib LibWin32
   end
 
   struct IPrintBidiAsyncNotifyRegistrationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    register_for_notifications : UInt64
-    unregister_for_notifications : UInt64
-    async_get_new_channel : UInt64
+    query_interface : Proc(IPrintBidiAsyncNotifyRegistration*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintBidiAsyncNotifyRegistration*, UInt32)
+    release : Proc(IPrintBidiAsyncNotifyRegistration*, UInt32)
+    register_for_notifications : Proc(IPrintBidiAsyncNotifyRegistration*, HRESULT)
+    unregister_for_notifications : Proc(IPrintBidiAsyncNotifyRegistration*, HRESULT)
+    async_get_new_channel : Proc(IPrintBidiAsyncNotifyRegistration*, IPrintAsyncNewChannelCookie, HRESULT)
   end
 
   struct IPrintBidiAsyncNotifyRegistration
@@ -4899,12 +4899,12 @@ lib LibWin32
   end
 
   struct IPrintUnidiAsyncNotifyRegistrationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    register_for_notifications : UInt64
-    unregister_for_notifications : UInt64
-    async_get_notification : UInt64
+    query_interface : Proc(IPrintUnidiAsyncNotifyRegistration*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintUnidiAsyncNotifyRegistration*, UInt32)
+    release : Proc(IPrintUnidiAsyncNotifyRegistration*, UInt32)
+    register_for_notifications : Proc(IPrintUnidiAsyncNotifyRegistration*, HRESULT)
+    unregister_for_notifications : Proc(IPrintUnidiAsyncNotifyRegistration*, HRESULT)
+    async_get_notification : Proc(IPrintUnidiAsyncNotifyRegistration*, IAsyncGetSendNotificationCookie, HRESULT)
   end
 
   struct IPrintUnidiAsyncNotifyRegistration
@@ -4912,12 +4912,12 @@ lib LibWin32
   end
 
   struct IPrintAsyncNotifyServerReferralVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_server_referral : UInt64
-    async_get_server_referral : UInt64
-    set_server_referral : UInt64
+    query_interface : Proc(IPrintAsyncNotifyServerReferral*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintAsyncNotifyServerReferral*, UInt32)
+    release : Proc(IPrintAsyncNotifyServerReferral*, UInt32)
+    get_server_referral : Proc(IPrintAsyncNotifyServerReferral*, LibC::LPWSTR*, HRESULT)
+    async_get_server_referral : Proc(IPrintAsyncNotifyServerReferral*, IAsyncGetSrvReferralCookie, HRESULT)
+    set_server_referral : Proc(IPrintAsyncNotifyServerReferral*, LibC::LPWSTR, HRESULT)
   end
 
   struct IPrintAsyncNotifyServerReferral
@@ -4925,16 +4925,16 @@ lib LibWin32
   end
 
   struct IBidiAsyncNotifyChannelVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    send_notification : UInt64
-    close_channel : UInt64
-    create_notification_channel : UInt64
-    get_print_name : UInt64
-    get_channel_notification_type : UInt64
-    async_get_notification_send_response : UInt64
-    async_close_channel : UInt64
+    query_interface : Proc(IBidiAsyncNotifyChannel*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IBidiAsyncNotifyChannel*, UInt32)
+    release : Proc(IBidiAsyncNotifyChannel*, UInt32)
+    send_notification : Proc(IBidiAsyncNotifyChannel*, IPrintAsyncNotifyDataObject, HRESULT)
+    close_channel : Proc(IBidiAsyncNotifyChannel*, IPrintAsyncNotifyDataObject, HRESULT)
+    create_notification_channel : Proc(IBidiAsyncNotifyChannel*, HRESULT)
+    get_print_name : Proc(IBidiAsyncNotifyChannel*, IPrintAsyncNotifyDataObject*, HRESULT)
+    get_channel_notification_type : Proc(IBidiAsyncNotifyChannel*, IPrintAsyncNotifyDataObject*, HRESULT)
+    async_get_notification_send_response : Proc(IBidiAsyncNotifyChannel*, IPrintAsyncNotifyDataObject, IAsyncGetSendNotificationCookie, HRESULT)
+    async_close_channel : Proc(IBidiAsyncNotifyChannel*, IPrintAsyncNotifyDataObject, IPrintAsyncCookie, HRESULT)
   end
 
   IBidiAsyncNotifyChannel_GUID = "532818f7-921b-4fb2-bff8-2f4fd52ebebf"
@@ -4944,10 +4944,10 @@ lib LibWin32
   end
 
   struct IXpsRasterizerNotificationCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    continue : UInt64
+    query_interface : Proc(IXpsRasterizerNotificationCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXpsRasterizerNotificationCallback*, UInt32)
+    release : Proc(IXpsRasterizerNotificationCallback*, UInt32)
+    continue : Proc(IXpsRasterizerNotificationCallback*, HRESULT)
   end
 
   IXpsRasterizerNotificationCallback_GUID = "9ab8fd0d-cb94-49c2-9cb0-97ec1d5469d2"
@@ -4957,11 +4957,11 @@ lib LibWin32
   end
 
   struct IXpsRasterizerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    rasterize_rect : UInt64
-    set_minimal_line_width : UInt64
+    query_interface : Proc(IXpsRasterizer*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXpsRasterizer*, UInt32)
+    release : Proc(IXpsRasterizer*, UInt32)
+    rasterize_rect : Proc(IXpsRasterizer*, Int32, Int32, Int32, Int32, IXpsRasterizerNotificationCallback, IWICBitmap*, HRESULT)
+    set_minimal_line_width : Proc(IXpsRasterizer*, Int32, HRESULT)
   end
 
   IXpsRasterizer_GUID = "7567cfc8-c156-47a8-9dac-11a2ae5bdd6b"
@@ -4971,10 +4971,10 @@ lib LibWin32
   end
 
   struct IXpsRasterizationFactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_rasterizer : UInt64
+    query_interface : Proc(IXpsRasterizationFactory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXpsRasterizationFactory*, UInt32)
+    release : Proc(IXpsRasterizationFactory*, UInt32)
+    create_rasterizer : Proc(IXpsRasterizationFactory*, IXpsOMPage, Float32, XPSRAS_RENDERING_MODE, XPSRAS_RENDERING_MODE, IXpsRasterizer*, HRESULT)
   end
 
   IXpsRasterizationFactory_GUID = "e094808a-24c6-482b-a3a7-c21ac9b55f17"
@@ -4984,10 +4984,10 @@ lib LibWin32
   end
 
   struct IXpsRasterizationFactory1VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_rasterizer : UInt64
+    query_interface : Proc(IXpsRasterizationFactory1*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXpsRasterizationFactory1*, UInt32)
+    release : Proc(IXpsRasterizationFactory1*, UInt32)
+    create_rasterizer : Proc(IXpsRasterizationFactory1*, IXpsOMPage, Float32, XPSRAS_RENDERING_MODE, XPSRAS_RENDERING_MODE, XPSRAS_PIXEL_FORMAT, IXpsRasterizer*, HRESULT)
   end
 
   IXpsRasterizationFactory1_GUID = "2d6e5f77-6414-4a1e-a8e0-d4194ce6a26f"
@@ -4997,10 +4997,10 @@ lib LibWin32
   end
 
   struct IXpsRasterizationFactory2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_rasterizer : UInt64
+    query_interface : Proc(IXpsRasterizationFactory2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXpsRasterizationFactory2*, UInt32)
+    release : Proc(IXpsRasterizationFactory2*, UInt32)
+    create_rasterizer : Proc(IXpsRasterizationFactory2*, IXpsOMPage, Float32, Float32, XPSRAS_RENDERING_MODE, XPSRAS_RENDERING_MODE, XPSRAS_PIXEL_FORMAT, XPSRAS_BACKGROUND_COLOR, IXpsRasterizer*, HRESULT)
   end
 
   IXpsRasterizationFactory2_GUID = "9c16ce3e-10f5-41fd-9ddc-6826669c2ff6"
@@ -5010,12 +5010,12 @@ lib LibWin32
   end
 
   struct IPrintPreviewDxgiPackageTargetVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_job_page_count : UInt64
-    draw_page : UInt64
-    invalidate_preview : UInt64
+    query_interface : Proc(IPrintPreviewDxgiPackageTarget*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrintPreviewDxgiPackageTarget*, UInt32)
+    release : Proc(IPrintPreviewDxgiPackageTarget*, UInt32)
+    set_job_page_count : Proc(IPrintPreviewDxgiPackageTarget*, PageCountType, UInt32, HRESULT)
+    draw_page : Proc(IPrintPreviewDxgiPackageTarget*, UInt32, IDXGISurface, Float32, Float32, HRESULT)
+    invalidate_preview : Proc(IPrintPreviewDxgiPackageTarget*, HRESULT)
   end
 
   IPrintPreviewDxgiPackageTarget_GUID = "1a6dd0ad-1e2a-4e99-a5ba-91f17818290e"
@@ -5668,2229 +5668,2229 @@ lib LibWin32
   fun RemovePrintDeviceObject(hdeviceobject : LibC::HANDLE) : HRESULT
 end
 struct LibWin32::IPrintCoreHelper
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintCoreHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintCoreHelper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintCoreHelper*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_option(pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturerequested : PSTR, ppszoption : PSTR*) : HRESULT
-    @lpVtbl.value.get_option.unsafe_as(Proc(DEVMODEA*, UInt32, PSTR, PSTR*, HRESULT)).call(pdevmode, cbsize, pszfeaturerequested, ppszoption)
+  def get_option(this : IPrintCoreHelper*, pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturerequested : PSTR, ppszoption : PSTR*) : HRESULT
+    @lpVtbl.value.get_option.call(this, pdevmode, cbsize, pszfeaturerequested, ppszoption)
   end
-  def set_options(pdevmode : DEVMODEA*, cbsize : UInt32, bresolveconflicts : LibC::BOOL, pfopairs : PRINT_FEATURE_OPTION*, cpairs : UInt32, pcpairswritten : UInt32*, pdwresult : UInt32*) : HRESULT
-    @lpVtbl.value.set_options.unsafe_as(Proc(DEVMODEA*, UInt32, LibC::BOOL, PRINT_FEATURE_OPTION*, UInt32, UInt32*, UInt32*, HRESULT)).call(pdevmode, cbsize, bresolveconflicts, pfopairs, cpairs, pcpairswritten, pdwresult)
+  def set_options(this : IPrintCoreHelper*, pdevmode : DEVMODEA*, cbsize : UInt32, bresolveconflicts : LibC::BOOL, pfopairs : PRINT_FEATURE_OPTION*, cpairs : UInt32, pcpairswritten : UInt32*, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.set_options.call(this, pdevmode, cbsize, bresolveconflicts, pfopairs, cpairs, pcpairswritten, pdwresult)
   end
-  def enum_constrained_options(pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturekeyword : PSTR, pconstrainedoptionlist : PSTR***, pdwnumoptions : UInt32*) : HRESULT
-    @lpVtbl.value.enum_constrained_options.unsafe_as(Proc(DEVMODEA*, UInt32, PSTR, PSTR***, UInt32*, HRESULT)).call(pdevmode, cbsize, pszfeaturekeyword, pconstrainedoptionlist, pdwnumoptions)
+  def enum_constrained_options(this : IPrintCoreHelper*, pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturekeyword : PSTR, pconstrainedoptionlist : PSTR***, pdwnumoptions : UInt32*) : HRESULT
+    @lpVtbl.value.enum_constrained_options.call(this, pdevmode, cbsize, pszfeaturekeyword, pconstrainedoptionlist, pdwnumoptions)
   end
-  def why_constrained(pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturekeyword : PSTR, pszoptionkeyword : PSTR, ppfoconstraints : PRINT_FEATURE_OPTION**, pdwnumoptions : UInt32*) : HRESULT
-    @lpVtbl.value.why_constrained.unsafe_as(Proc(DEVMODEA*, UInt32, PSTR, PSTR, PRINT_FEATURE_OPTION**, UInt32*, HRESULT)).call(pdevmode, cbsize, pszfeaturekeyword, pszoptionkeyword, ppfoconstraints, pdwnumoptions)
+  def why_constrained(this : IPrintCoreHelper*, pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturekeyword : PSTR, pszoptionkeyword : PSTR, ppfoconstraints : PRINT_FEATURE_OPTION**, pdwnumoptions : UInt32*) : HRESULT
+    @lpVtbl.value.why_constrained.call(this, pdevmode, cbsize, pszfeaturekeyword, pszoptionkeyword, ppfoconstraints, pdwnumoptions)
   end
-  def enum_features(pfeaturelist : PSTR***, pdwnumfeatures : UInt32*) : HRESULT
-    @lpVtbl.value.enum_features.unsafe_as(Proc(PSTR***, UInt32*, HRESULT)).call(pfeaturelist, pdwnumfeatures)
+  def enum_features(this : IPrintCoreHelper*, pfeaturelist : PSTR***, pdwnumfeatures : UInt32*) : HRESULT
+    @lpVtbl.value.enum_features.call(this, pfeaturelist, pdwnumfeatures)
   end
-  def enum_options(pszfeaturekeyword : PSTR, poptionlist : PSTR***, pdwnumoptions : UInt32*) : HRESULT
-    @lpVtbl.value.enum_options.unsafe_as(Proc(PSTR, PSTR***, UInt32*, HRESULT)).call(pszfeaturekeyword, poptionlist, pdwnumoptions)
+  def enum_options(this : IPrintCoreHelper*, pszfeaturekeyword : PSTR, poptionlist : PSTR***, pdwnumoptions : UInt32*) : HRESULT
+    @lpVtbl.value.enum_options.call(this, pszfeaturekeyword, poptionlist, pdwnumoptions)
   end
-  def get_font_substitution(psztruetypefontname : LibC::LPWSTR, ppszdevfontname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_font_substitution.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR*, HRESULT)).call(psztruetypefontname, ppszdevfontname)
+  def get_font_substitution(this : IPrintCoreHelper*, psztruetypefontname : LibC::LPWSTR, ppszdevfontname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_font_substitution.call(this, psztruetypefontname, ppszdevfontname)
   end
-  def set_font_substitution(psztruetypefontname : LibC::LPWSTR, pszdevfontname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_font_substitution.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(psztruetypefontname, pszdevfontname)
+  def set_font_substitution(this : IPrintCoreHelper*, psztruetypefontname : LibC::LPWSTR, pszdevfontname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_font_substitution.call(this, psztruetypefontname, pszdevfontname)
   end
-  def create_instance_of_msxml_object(rclsid : Guid*, punkouter : IUnknown, dwclscontext : UInt32, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.create_instance_of_msxml_object.unsafe_as(Proc(Guid*, IUnknown, UInt32, Guid*, Void**, HRESULT)).call(rclsid, punkouter, dwclscontext, riid, ppv)
+  def create_instance_of_msxml_object(this : IPrintCoreHelper*, rclsid : Guid*, punkouter : IUnknown, dwclscontext : UInt32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_instance_of_msxml_object.call(this, rclsid, punkouter, dwclscontext, riid, ppv)
   end
 end
 struct LibWin32::IPrintCoreHelperUni
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintCoreHelperUni*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintCoreHelperUni*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintCoreHelperUni*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_option(pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturerequested : PSTR, ppszoption : PSTR*) : HRESULT
-    @lpVtbl.value.get_option.unsafe_as(Proc(DEVMODEA*, UInt32, PSTR, PSTR*, HRESULT)).call(pdevmode, cbsize, pszfeaturerequested, ppszoption)
+  def get_option(this : IPrintCoreHelperUni*, pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturerequested : PSTR, ppszoption : PSTR*) : HRESULT
+    @lpVtbl.value.get_option.call(this, pdevmode, cbsize, pszfeaturerequested, ppszoption)
   end
-  def set_options(pdevmode : DEVMODEA*, cbsize : UInt32, bresolveconflicts : LibC::BOOL, pfopairs : PRINT_FEATURE_OPTION*, cpairs : UInt32, pcpairswritten : UInt32*, pdwresult : UInt32*) : HRESULT
-    @lpVtbl.value.set_options.unsafe_as(Proc(DEVMODEA*, UInt32, LibC::BOOL, PRINT_FEATURE_OPTION*, UInt32, UInt32*, UInt32*, HRESULT)).call(pdevmode, cbsize, bresolveconflicts, pfopairs, cpairs, pcpairswritten, pdwresult)
+  def set_options(this : IPrintCoreHelperUni*, pdevmode : DEVMODEA*, cbsize : UInt32, bresolveconflicts : LibC::BOOL, pfopairs : PRINT_FEATURE_OPTION*, cpairs : UInt32, pcpairswritten : UInt32*, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.set_options.call(this, pdevmode, cbsize, bresolveconflicts, pfopairs, cpairs, pcpairswritten, pdwresult)
   end
-  def enum_constrained_options(pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturekeyword : PSTR, pconstrainedoptionlist : PSTR***, pdwnumoptions : UInt32*) : HRESULT
-    @lpVtbl.value.enum_constrained_options.unsafe_as(Proc(DEVMODEA*, UInt32, PSTR, PSTR***, UInt32*, HRESULT)).call(pdevmode, cbsize, pszfeaturekeyword, pconstrainedoptionlist, pdwnumoptions)
+  def enum_constrained_options(this : IPrintCoreHelperUni*, pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturekeyword : PSTR, pconstrainedoptionlist : PSTR***, pdwnumoptions : UInt32*) : HRESULT
+    @lpVtbl.value.enum_constrained_options.call(this, pdevmode, cbsize, pszfeaturekeyword, pconstrainedoptionlist, pdwnumoptions)
   end
-  def why_constrained(pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturekeyword : PSTR, pszoptionkeyword : PSTR, ppfoconstraints : PRINT_FEATURE_OPTION**, pdwnumoptions : UInt32*) : HRESULT
-    @lpVtbl.value.why_constrained.unsafe_as(Proc(DEVMODEA*, UInt32, PSTR, PSTR, PRINT_FEATURE_OPTION**, UInt32*, HRESULT)).call(pdevmode, cbsize, pszfeaturekeyword, pszoptionkeyword, ppfoconstraints, pdwnumoptions)
+  def why_constrained(this : IPrintCoreHelperUni*, pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturekeyword : PSTR, pszoptionkeyword : PSTR, ppfoconstraints : PRINT_FEATURE_OPTION**, pdwnumoptions : UInt32*) : HRESULT
+    @lpVtbl.value.why_constrained.call(this, pdevmode, cbsize, pszfeaturekeyword, pszoptionkeyword, ppfoconstraints, pdwnumoptions)
   end
-  def enum_features(pfeaturelist : PSTR***, pdwnumfeatures : UInt32*) : HRESULT
-    @lpVtbl.value.enum_features.unsafe_as(Proc(PSTR***, UInt32*, HRESULT)).call(pfeaturelist, pdwnumfeatures)
+  def enum_features(this : IPrintCoreHelperUni*, pfeaturelist : PSTR***, pdwnumfeatures : UInt32*) : HRESULT
+    @lpVtbl.value.enum_features.call(this, pfeaturelist, pdwnumfeatures)
   end
-  def enum_options(pszfeaturekeyword : PSTR, poptionlist : PSTR***, pdwnumoptions : UInt32*) : HRESULT
-    @lpVtbl.value.enum_options.unsafe_as(Proc(PSTR, PSTR***, UInt32*, HRESULT)).call(pszfeaturekeyword, poptionlist, pdwnumoptions)
+  def enum_options(this : IPrintCoreHelperUni*, pszfeaturekeyword : PSTR, poptionlist : PSTR***, pdwnumoptions : UInt32*) : HRESULT
+    @lpVtbl.value.enum_options.call(this, pszfeaturekeyword, poptionlist, pdwnumoptions)
   end
-  def get_font_substitution(psztruetypefontname : LibC::LPWSTR, ppszdevfontname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_font_substitution.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR*, HRESULT)).call(psztruetypefontname, ppszdevfontname)
+  def get_font_substitution(this : IPrintCoreHelperUni*, psztruetypefontname : LibC::LPWSTR, ppszdevfontname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_font_substitution.call(this, psztruetypefontname, ppszdevfontname)
   end
-  def set_font_substitution(psztruetypefontname : LibC::LPWSTR, pszdevfontname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_font_substitution.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(psztruetypefontname, pszdevfontname)
+  def set_font_substitution(this : IPrintCoreHelperUni*, psztruetypefontname : LibC::LPWSTR, pszdevfontname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_font_substitution.call(this, psztruetypefontname, pszdevfontname)
   end
-  def create_instance_of_msxml_object(rclsid : Guid*, punkouter : IUnknown, dwclscontext : UInt32, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.create_instance_of_msxml_object.unsafe_as(Proc(Guid*, IUnknown, UInt32, Guid*, Void**, HRESULT)).call(rclsid, punkouter, dwclscontext, riid, ppv)
+  def create_instance_of_msxml_object(this : IPrintCoreHelperUni*, rclsid : Guid*, punkouter : IUnknown, dwclscontext : UInt32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_instance_of_msxml_object.call(this, rclsid, punkouter, dwclscontext, riid, ppv)
   end
-  def create_gdl_snapshot(pdevmode : DEVMODEA*, cbsize : UInt32, dwflags : UInt32, ppsnapshotstream : IStream*) : HRESULT
-    @lpVtbl.value.create_gdl_snapshot.unsafe_as(Proc(DEVMODEA*, UInt32, UInt32, IStream*, HRESULT)).call(pdevmode, cbsize, dwflags, ppsnapshotstream)
+  def create_gdl_snapshot(this : IPrintCoreHelperUni*, pdevmode : DEVMODEA*, cbsize : UInt32, dwflags : UInt32, ppsnapshotstream : IStream*) : HRESULT
+    @lpVtbl.value.create_gdl_snapshot.call(this, pdevmode, cbsize, dwflags, ppsnapshotstream)
   end
-  def create_default_gdl_snapshot(dwflags : UInt32, ppsnapshotstream : IStream*) : HRESULT
-    @lpVtbl.value.create_default_gdl_snapshot.unsafe_as(Proc(UInt32, IStream*, HRESULT)).call(dwflags, ppsnapshotstream)
+  def create_default_gdl_snapshot(this : IPrintCoreHelperUni*, dwflags : UInt32, ppsnapshotstream : IStream*) : HRESULT
+    @lpVtbl.value.create_default_gdl_snapshot.call(this, dwflags, ppsnapshotstream)
   end
 end
 struct LibWin32::IPrintCoreHelperUni2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintCoreHelperUni2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintCoreHelperUni2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintCoreHelperUni2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_option(pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturerequested : PSTR, ppszoption : PSTR*) : HRESULT
-    @lpVtbl.value.get_option.unsafe_as(Proc(DEVMODEA*, UInt32, PSTR, PSTR*, HRESULT)).call(pdevmode, cbsize, pszfeaturerequested, ppszoption)
+  def get_option(this : IPrintCoreHelperUni2*, pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturerequested : PSTR, ppszoption : PSTR*) : HRESULT
+    @lpVtbl.value.get_option.call(this, pdevmode, cbsize, pszfeaturerequested, ppszoption)
   end
-  def set_options(pdevmode : DEVMODEA*, cbsize : UInt32, bresolveconflicts : LibC::BOOL, pfopairs : PRINT_FEATURE_OPTION*, cpairs : UInt32, pcpairswritten : UInt32*, pdwresult : UInt32*) : HRESULT
-    @lpVtbl.value.set_options.unsafe_as(Proc(DEVMODEA*, UInt32, LibC::BOOL, PRINT_FEATURE_OPTION*, UInt32, UInt32*, UInt32*, HRESULT)).call(pdevmode, cbsize, bresolveconflicts, pfopairs, cpairs, pcpairswritten, pdwresult)
+  def set_options(this : IPrintCoreHelperUni2*, pdevmode : DEVMODEA*, cbsize : UInt32, bresolveconflicts : LibC::BOOL, pfopairs : PRINT_FEATURE_OPTION*, cpairs : UInt32, pcpairswritten : UInt32*, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.set_options.call(this, pdevmode, cbsize, bresolveconflicts, pfopairs, cpairs, pcpairswritten, pdwresult)
   end
-  def enum_constrained_options(pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturekeyword : PSTR, pconstrainedoptionlist : PSTR***, pdwnumoptions : UInt32*) : HRESULT
-    @lpVtbl.value.enum_constrained_options.unsafe_as(Proc(DEVMODEA*, UInt32, PSTR, PSTR***, UInt32*, HRESULT)).call(pdevmode, cbsize, pszfeaturekeyword, pconstrainedoptionlist, pdwnumoptions)
+  def enum_constrained_options(this : IPrintCoreHelperUni2*, pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturekeyword : PSTR, pconstrainedoptionlist : PSTR***, pdwnumoptions : UInt32*) : HRESULT
+    @lpVtbl.value.enum_constrained_options.call(this, pdevmode, cbsize, pszfeaturekeyword, pconstrainedoptionlist, pdwnumoptions)
   end
-  def why_constrained(pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturekeyword : PSTR, pszoptionkeyword : PSTR, ppfoconstraints : PRINT_FEATURE_OPTION**, pdwnumoptions : UInt32*) : HRESULT
-    @lpVtbl.value.why_constrained.unsafe_as(Proc(DEVMODEA*, UInt32, PSTR, PSTR, PRINT_FEATURE_OPTION**, UInt32*, HRESULT)).call(pdevmode, cbsize, pszfeaturekeyword, pszoptionkeyword, ppfoconstraints, pdwnumoptions)
+  def why_constrained(this : IPrintCoreHelperUni2*, pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturekeyword : PSTR, pszoptionkeyword : PSTR, ppfoconstraints : PRINT_FEATURE_OPTION**, pdwnumoptions : UInt32*) : HRESULT
+    @lpVtbl.value.why_constrained.call(this, pdevmode, cbsize, pszfeaturekeyword, pszoptionkeyword, ppfoconstraints, pdwnumoptions)
   end
-  def enum_features(pfeaturelist : PSTR***, pdwnumfeatures : UInt32*) : HRESULT
-    @lpVtbl.value.enum_features.unsafe_as(Proc(PSTR***, UInt32*, HRESULT)).call(pfeaturelist, pdwnumfeatures)
+  def enum_features(this : IPrintCoreHelperUni2*, pfeaturelist : PSTR***, pdwnumfeatures : UInt32*) : HRESULT
+    @lpVtbl.value.enum_features.call(this, pfeaturelist, pdwnumfeatures)
   end
-  def enum_options(pszfeaturekeyword : PSTR, poptionlist : PSTR***, pdwnumoptions : UInt32*) : HRESULT
-    @lpVtbl.value.enum_options.unsafe_as(Proc(PSTR, PSTR***, UInt32*, HRESULT)).call(pszfeaturekeyword, poptionlist, pdwnumoptions)
+  def enum_options(this : IPrintCoreHelperUni2*, pszfeaturekeyword : PSTR, poptionlist : PSTR***, pdwnumoptions : UInt32*) : HRESULT
+    @lpVtbl.value.enum_options.call(this, pszfeaturekeyword, poptionlist, pdwnumoptions)
   end
-  def get_font_substitution(psztruetypefontname : LibC::LPWSTR, ppszdevfontname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_font_substitution.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR*, HRESULT)).call(psztruetypefontname, ppszdevfontname)
+  def get_font_substitution(this : IPrintCoreHelperUni2*, psztruetypefontname : LibC::LPWSTR, ppszdevfontname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_font_substitution.call(this, psztruetypefontname, ppszdevfontname)
   end
-  def set_font_substitution(psztruetypefontname : LibC::LPWSTR, pszdevfontname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_font_substitution.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(psztruetypefontname, pszdevfontname)
+  def set_font_substitution(this : IPrintCoreHelperUni2*, psztruetypefontname : LibC::LPWSTR, pszdevfontname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_font_substitution.call(this, psztruetypefontname, pszdevfontname)
   end
-  def create_instance_of_msxml_object(rclsid : Guid*, punkouter : IUnknown, dwclscontext : UInt32, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.create_instance_of_msxml_object.unsafe_as(Proc(Guid*, IUnknown, UInt32, Guid*, Void**, HRESULT)).call(rclsid, punkouter, dwclscontext, riid, ppv)
+  def create_instance_of_msxml_object(this : IPrintCoreHelperUni2*, rclsid : Guid*, punkouter : IUnknown, dwclscontext : UInt32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_instance_of_msxml_object.call(this, rclsid, punkouter, dwclscontext, riid, ppv)
   end
-  def create_gdl_snapshot(pdevmode : DEVMODEA*, cbsize : UInt32, dwflags : UInt32, ppsnapshotstream : IStream*) : HRESULT
-    @lpVtbl.value.create_gdl_snapshot.unsafe_as(Proc(DEVMODEA*, UInt32, UInt32, IStream*, HRESULT)).call(pdevmode, cbsize, dwflags, ppsnapshotstream)
+  def create_gdl_snapshot(this : IPrintCoreHelperUni2*, pdevmode : DEVMODEA*, cbsize : UInt32, dwflags : UInt32, ppsnapshotstream : IStream*) : HRESULT
+    @lpVtbl.value.create_gdl_snapshot.call(this, pdevmode, cbsize, dwflags, ppsnapshotstream)
   end
-  def create_default_gdl_snapshot(dwflags : UInt32, ppsnapshotstream : IStream*) : HRESULT
-    @lpVtbl.value.create_default_gdl_snapshot.unsafe_as(Proc(UInt32, IStream*, HRESULT)).call(dwflags, ppsnapshotstream)
+  def create_default_gdl_snapshot(this : IPrintCoreHelperUni2*, dwflags : UInt32, ppsnapshotstream : IStream*) : HRESULT
+    @lpVtbl.value.create_default_gdl_snapshot.call(this, dwflags, ppsnapshotstream)
   end
-  def get_named_command(pdevmode : DEVMODEA*, cbsize : UInt32, pszcommandname : LibC::LPWSTR, ppcommandbytes : UInt8**, pcbcommandsize : UInt32*) : HRESULT
-    @lpVtbl.value.get_named_command.unsafe_as(Proc(DEVMODEA*, UInt32, LibC::LPWSTR, UInt8**, UInt32*, HRESULT)).call(pdevmode, cbsize, pszcommandname, ppcommandbytes, pcbcommandsize)
+  def get_named_command(this : IPrintCoreHelperUni2*, pdevmode : DEVMODEA*, cbsize : UInt32, pszcommandname : LibC::LPWSTR, ppcommandbytes : UInt8**, pcbcommandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_named_command.call(this, pdevmode, cbsize, pszcommandname, ppcommandbytes, pcbcommandsize)
   end
 end
 struct LibWin32::IPrintCoreHelperPS
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintCoreHelperPS*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintCoreHelperPS*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintCoreHelperPS*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_option(pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturerequested : PSTR, ppszoption : PSTR*) : HRESULT
-    @lpVtbl.value.get_option.unsafe_as(Proc(DEVMODEA*, UInt32, PSTR, PSTR*, HRESULT)).call(pdevmode, cbsize, pszfeaturerequested, ppszoption)
+  def get_option(this : IPrintCoreHelperPS*, pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturerequested : PSTR, ppszoption : PSTR*) : HRESULT
+    @lpVtbl.value.get_option.call(this, pdevmode, cbsize, pszfeaturerequested, ppszoption)
   end
-  def set_options(pdevmode : DEVMODEA*, cbsize : UInt32, bresolveconflicts : LibC::BOOL, pfopairs : PRINT_FEATURE_OPTION*, cpairs : UInt32, pcpairswritten : UInt32*, pdwresult : UInt32*) : HRESULT
-    @lpVtbl.value.set_options.unsafe_as(Proc(DEVMODEA*, UInt32, LibC::BOOL, PRINT_FEATURE_OPTION*, UInt32, UInt32*, UInt32*, HRESULT)).call(pdevmode, cbsize, bresolveconflicts, pfopairs, cpairs, pcpairswritten, pdwresult)
+  def set_options(this : IPrintCoreHelperPS*, pdevmode : DEVMODEA*, cbsize : UInt32, bresolveconflicts : LibC::BOOL, pfopairs : PRINT_FEATURE_OPTION*, cpairs : UInt32, pcpairswritten : UInt32*, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.set_options.call(this, pdevmode, cbsize, bresolveconflicts, pfopairs, cpairs, pcpairswritten, pdwresult)
   end
-  def enum_constrained_options(pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturekeyword : PSTR, pconstrainedoptionlist : PSTR***, pdwnumoptions : UInt32*) : HRESULT
-    @lpVtbl.value.enum_constrained_options.unsafe_as(Proc(DEVMODEA*, UInt32, PSTR, PSTR***, UInt32*, HRESULT)).call(pdevmode, cbsize, pszfeaturekeyword, pconstrainedoptionlist, pdwnumoptions)
+  def enum_constrained_options(this : IPrintCoreHelperPS*, pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturekeyword : PSTR, pconstrainedoptionlist : PSTR***, pdwnumoptions : UInt32*) : HRESULT
+    @lpVtbl.value.enum_constrained_options.call(this, pdevmode, cbsize, pszfeaturekeyword, pconstrainedoptionlist, pdwnumoptions)
   end
-  def why_constrained(pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturekeyword : PSTR, pszoptionkeyword : PSTR, ppfoconstraints : PRINT_FEATURE_OPTION**, pdwnumoptions : UInt32*) : HRESULT
-    @lpVtbl.value.why_constrained.unsafe_as(Proc(DEVMODEA*, UInt32, PSTR, PSTR, PRINT_FEATURE_OPTION**, UInt32*, HRESULT)).call(pdevmode, cbsize, pszfeaturekeyword, pszoptionkeyword, ppfoconstraints, pdwnumoptions)
+  def why_constrained(this : IPrintCoreHelperPS*, pdevmode : DEVMODEA*, cbsize : UInt32, pszfeaturekeyword : PSTR, pszoptionkeyword : PSTR, ppfoconstraints : PRINT_FEATURE_OPTION**, pdwnumoptions : UInt32*) : HRESULT
+    @lpVtbl.value.why_constrained.call(this, pdevmode, cbsize, pszfeaturekeyword, pszoptionkeyword, ppfoconstraints, pdwnumoptions)
   end
-  def enum_features(pfeaturelist : PSTR***, pdwnumfeatures : UInt32*) : HRESULT
-    @lpVtbl.value.enum_features.unsafe_as(Proc(PSTR***, UInt32*, HRESULT)).call(pfeaturelist, pdwnumfeatures)
+  def enum_features(this : IPrintCoreHelperPS*, pfeaturelist : PSTR***, pdwnumfeatures : UInt32*) : HRESULT
+    @lpVtbl.value.enum_features.call(this, pfeaturelist, pdwnumfeatures)
   end
-  def enum_options(pszfeaturekeyword : PSTR, poptionlist : PSTR***, pdwnumoptions : UInt32*) : HRESULT
-    @lpVtbl.value.enum_options.unsafe_as(Proc(PSTR, PSTR***, UInt32*, HRESULT)).call(pszfeaturekeyword, poptionlist, pdwnumoptions)
+  def enum_options(this : IPrintCoreHelperPS*, pszfeaturekeyword : PSTR, poptionlist : PSTR***, pdwnumoptions : UInt32*) : HRESULT
+    @lpVtbl.value.enum_options.call(this, pszfeaturekeyword, poptionlist, pdwnumoptions)
   end
-  def get_font_substitution(psztruetypefontname : LibC::LPWSTR, ppszdevfontname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_font_substitution.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR*, HRESULT)).call(psztruetypefontname, ppszdevfontname)
+  def get_font_substitution(this : IPrintCoreHelperPS*, psztruetypefontname : LibC::LPWSTR, ppszdevfontname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_font_substitution.call(this, psztruetypefontname, ppszdevfontname)
   end
-  def set_font_substitution(psztruetypefontname : LibC::LPWSTR, pszdevfontname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_font_substitution.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(psztruetypefontname, pszdevfontname)
+  def set_font_substitution(this : IPrintCoreHelperPS*, psztruetypefontname : LibC::LPWSTR, pszdevfontname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_font_substitution.call(this, psztruetypefontname, pszdevfontname)
   end
-  def create_instance_of_msxml_object(rclsid : Guid*, punkouter : IUnknown, dwclscontext : UInt32, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.create_instance_of_msxml_object.unsafe_as(Proc(Guid*, IUnknown, UInt32, Guid*, Void**, HRESULT)).call(rclsid, punkouter, dwclscontext, riid, ppv)
+  def create_instance_of_msxml_object(this : IPrintCoreHelperPS*, rclsid : Guid*, punkouter : IUnknown, dwclscontext : UInt32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_instance_of_msxml_object.call(this, rclsid, punkouter, dwclscontext, riid, ppv)
   end
-  def get_global_attribute(pszattribute : PSTR, pdwdatatype : UInt32*, ppbdata : UInt8**, pcbsize : UInt32*) : HRESULT
-    @lpVtbl.value.get_global_attribute.unsafe_as(Proc(PSTR, UInt32*, UInt8**, UInt32*, HRESULT)).call(pszattribute, pdwdatatype, ppbdata, pcbsize)
+  def get_global_attribute(this : IPrintCoreHelperPS*, pszattribute : PSTR, pdwdatatype : UInt32*, ppbdata : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_global_attribute.call(this, pszattribute, pdwdatatype, ppbdata, pcbsize)
   end
-  def get_feature_attribute(pszfeaturekeyword : PSTR, pszattribute : PSTR, pdwdatatype : UInt32*, ppbdata : UInt8**, pcbsize : UInt32*) : HRESULT
-    @lpVtbl.value.get_feature_attribute.unsafe_as(Proc(PSTR, PSTR, UInt32*, UInt8**, UInt32*, HRESULT)).call(pszfeaturekeyword, pszattribute, pdwdatatype, ppbdata, pcbsize)
+  def get_feature_attribute(this : IPrintCoreHelperPS*, pszfeaturekeyword : PSTR, pszattribute : PSTR, pdwdatatype : UInt32*, ppbdata : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_feature_attribute.call(this, pszfeaturekeyword, pszattribute, pdwdatatype, ppbdata, pcbsize)
   end
-  def get_option_attribute(pszfeaturekeyword : PSTR, pszoptionkeyword : PSTR, pszattribute : PSTR, pdwdatatype : UInt32*, ppbdata : UInt8**, pcbsize : UInt32*) : HRESULT
-    @lpVtbl.value.get_option_attribute.unsafe_as(Proc(PSTR, PSTR, PSTR, UInt32*, UInt8**, UInt32*, HRESULT)).call(pszfeaturekeyword, pszoptionkeyword, pszattribute, pdwdatatype, ppbdata, pcbsize)
+  def get_option_attribute(this : IPrintCoreHelperPS*, pszfeaturekeyword : PSTR, pszoptionkeyword : PSTR, pszattribute : PSTR, pdwdatatype : UInt32*, ppbdata : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_option_attribute.call(this, pszfeaturekeyword, pszoptionkeyword, pszattribute, pdwdatatype, ppbdata, pcbsize)
   end
 end
 struct LibWin32::IPrintOemCommon
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintOemCommon*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintOemCommon*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintOemCommon*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_info(dwmode : UInt32, pbuffer : Void*, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
-    @lpVtbl.value.get_info.unsafe_as(Proc(UInt32, Void*, UInt32, UInt32*, HRESULT)).call(dwmode, pbuffer, cbsize, pcbneeded)
+  def get_info(this : IPrintOemCommon*, dwmode : UInt32, pbuffer : Void*, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
+    @lpVtbl.value.get_info.call(this, dwmode, pbuffer, cbsize, pcbneeded)
   end
-  def dev_mode(dwmode : UInt32, poemdmparam : OEMDMPARAM*) : HRESULT
-    @lpVtbl.value.dev_mode.unsafe_as(Proc(UInt32, OEMDMPARAM*, HRESULT)).call(dwmode, poemdmparam)
+  def dev_mode(this : IPrintOemCommon*, dwmode : UInt32, poemdmparam : OEMDMPARAM*) : HRESULT
+    @lpVtbl.value.dev_mode.call(this, dwmode, poemdmparam)
   end
 end
 struct LibWin32::IPrintOemUI
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintOemUI*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintOemUI*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintOemUI*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_info(dwmode : UInt32, pbuffer : Void*, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
-    @lpVtbl.value.get_info.unsafe_as(Proc(UInt32, Void*, UInt32, UInt32*, HRESULT)).call(dwmode, pbuffer, cbsize, pcbneeded)
+  def get_info(this : IPrintOemUI*, dwmode : UInt32, pbuffer : Void*, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
+    @lpVtbl.value.get_info.call(this, dwmode, pbuffer, cbsize, pcbneeded)
   end
-  def dev_mode(dwmode : UInt32, poemdmparam : OEMDMPARAM*) : HRESULT
-    @lpVtbl.value.dev_mode.unsafe_as(Proc(UInt32, OEMDMPARAM*, HRESULT)).call(dwmode, poemdmparam)
+  def dev_mode(this : IPrintOemUI*, dwmode : UInt32, poemdmparam : OEMDMPARAM*) : HRESULT
+    @lpVtbl.value.dev_mode.call(this, dwmode, poemdmparam)
   end
-  def publish_driver_interface(piunknown : IUnknown) : HRESULT
-    @lpVtbl.value.publish_driver_interface.unsafe_as(Proc(IUnknown, HRESULT)).call(piunknown)
+  def publish_driver_interface(this : IPrintOemUI*, piunknown : IUnknown) : HRESULT
+    @lpVtbl.value.publish_driver_interface.call(this, piunknown)
   end
-  def common_ui_prop(dwmode : UInt32, poemcuipparam : OEMCUIPPARAM*) : HRESULT
-    @lpVtbl.value.common_ui_prop.unsafe_as(Proc(UInt32, OEMCUIPPARAM*, HRESULT)).call(dwmode, poemcuipparam)
+  def common_ui_prop(this : IPrintOemUI*, dwmode : UInt32, poemcuipparam : OEMCUIPPARAM*) : HRESULT
+    @lpVtbl.value.common_ui_prop.call(this, dwmode, poemcuipparam)
   end
-  def document_property_sheets(ppsuiinfo : PROPSHEETUI_INFO*, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.document_property_sheets.unsafe_as(Proc(PROPSHEETUI_INFO*, LPARAM, HRESULT)).call(ppsuiinfo, lparam)
+  def document_property_sheets(this : IPrintOemUI*, ppsuiinfo : PROPSHEETUI_INFO*, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.document_property_sheets.call(this, ppsuiinfo, lparam)
   end
-  def device_property_sheets(ppsuiinfo : PROPSHEETUI_INFO*, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.device_property_sheets.unsafe_as(Proc(PROPSHEETUI_INFO*, LPARAM, HRESULT)).call(ppsuiinfo, lparam)
+  def device_property_sheets(this : IPrintOemUI*, ppsuiinfo : PROPSHEETUI_INFO*, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.device_property_sheets.call(this, ppsuiinfo, lparam)
   end
-  def dev_query_print_ex(poemuiobj : OEMUIOBJ*, pdqpinfo : DEVQUERYPRINT_INFO*, ppublicdm : DEVMODEA*, poemdm : Void*) : HRESULT
-    @lpVtbl.value.dev_query_print_ex.unsafe_as(Proc(OEMUIOBJ*, DEVQUERYPRINT_INFO*, DEVMODEA*, Void*, HRESULT)).call(poemuiobj, pdqpinfo, ppublicdm, poemdm)
+  def dev_query_print_ex(this : IPrintOemUI*, poemuiobj : OEMUIOBJ*, pdqpinfo : DEVQUERYPRINT_INFO*, ppublicdm : DEVMODEA*, poemdm : Void*) : HRESULT
+    @lpVtbl.value.dev_query_print_ex.call(this, poemuiobj, pdqpinfo, ppublicdm, poemdm)
   end
-  def device_capabilities_a(poemuiobj : OEMUIOBJ*, hprinter : LibC::HANDLE, pdevicename : LibC::LPWSTR, wcapability : UInt16, poutput : Void*, ppublicdm : DEVMODEA*, poemdm : Void*, dwold : UInt32, dwresult : UInt32*) : HRESULT
-    @lpVtbl.value.device_capabilities_a.unsafe_as(Proc(OEMUIOBJ*, LibC::HANDLE, LibC::LPWSTR, UInt16, Void*, DEVMODEA*, Void*, UInt32, UInt32*, HRESULT)).call(poemuiobj, hprinter, pdevicename, wcapability, poutput, ppublicdm, poemdm, dwold, dwresult)
+  def device_capabilities_a(this : IPrintOemUI*, poemuiobj : OEMUIOBJ*, hprinter : LibC::HANDLE, pdevicename : LibC::LPWSTR, wcapability : UInt16, poutput : Void*, ppublicdm : DEVMODEA*, poemdm : Void*, dwold : UInt32, dwresult : UInt32*) : HRESULT
+    @lpVtbl.value.device_capabilities_a.call(this, poemuiobj, hprinter, pdevicename, wcapability, poutput, ppublicdm, poemdm, dwold, dwresult)
   end
-  def upgrade_printer(dwlevel : UInt32, pdriverupgradeinfo : UInt8*) : HRESULT
-    @lpVtbl.value.upgrade_printer.unsafe_as(Proc(UInt32, UInt8*, HRESULT)).call(dwlevel, pdriverupgradeinfo)
+  def upgrade_printer(this : IPrintOemUI*, dwlevel : UInt32, pdriverupgradeinfo : UInt8*) : HRESULT
+    @lpVtbl.value.upgrade_printer.call(this, dwlevel, pdriverupgradeinfo)
   end
-  def printer_event(pprintername : LibC::LPWSTR, idriverevent : Int32, dwflags : UInt32, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.printer_event.unsafe_as(Proc(LibC::LPWSTR, Int32, UInt32, LPARAM, HRESULT)).call(pprintername, idriverevent, dwflags, lparam)
+  def printer_event(this : IPrintOemUI*, pprintername : LibC::LPWSTR, idriverevent : Int32, dwflags : UInt32, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.printer_event.call(this, pprintername, idriverevent, dwflags, lparam)
   end
-  def driver_event(dwdriverevent : UInt32, dwlevel : UInt32, pdriverinfo : UInt8*, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.driver_event.unsafe_as(Proc(UInt32, UInt32, UInt8*, LPARAM, HRESULT)).call(dwdriverevent, dwlevel, pdriverinfo, lparam)
+  def driver_event(this : IPrintOemUI*, dwdriverevent : UInt32, dwlevel : UInt32, pdriverinfo : UInt8*, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.driver_event.call(this, dwdriverevent, dwlevel, pdriverinfo, lparam)
   end
-  def query_color_profile(hprinter : LibC::HANDLE, poemuiobj : OEMUIOBJ*, ppublicdm : DEVMODEA*, poemdm : Void*, ulquerymode : UInt32, pvprofiledata : Void*, pcbprofiledata : UInt32*, pflprofiledata : UInt32*) : HRESULT
-    @lpVtbl.value.query_color_profile.unsafe_as(Proc(LibC::HANDLE, OEMUIOBJ*, DEVMODEA*, Void*, UInt32, Void*, UInt32*, UInt32*, HRESULT)).call(hprinter, poemuiobj, ppublicdm, poemdm, ulquerymode, pvprofiledata, pcbprofiledata, pflprofiledata)
+  def query_color_profile(this : IPrintOemUI*, hprinter : LibC::HANDLE, poemuiobj : OEMUIOBJ*, ppublicdm : DEVMODEA*, poemdm : Void*, ulquerymode : UInt32, pvprofiledata : Void*, pcbprofiledata : UInt32*, pflprofiledata : UInt32*) : HRESULT
+    @lpVtbl.value.query_color_profile.call(this, hprinter, poemuiobj, ppublicdm, poemdm, ulquerymode, pvprofiledata, pcbprofiledata, pflprofiledata)
   end
-  def font_installer_dlg_proc(hwnd : LibC::HANDLE, usmsg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.font_installer_dlg_proc.unsafe_as(Proc(LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)).call(hwnd, usmsg, wparam, lparam)
+  def font_installer_dlg_proc(this : IPrintOemUI*, hwnd : LibC::HANDLE, usmsg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.font_installer_dlg_proc.call(this, hwnd, usmsg, wparam, lparam)
   end
-  def update_external_fonts(hprinter : LibC::HANDLE, hheap : LibC::HANDLE, pwstrcartridges : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.update_external_fonts.unsafe_as(Proc(LibC::HANDLE, LibC::HANDLE, LibC::LPWSTR, HRESULT)).call(hprinter, hheap, pwstrcartridges)
+  def update_external_fonts(this : IPrintOemUI*, hprinter : LibC::HANDLE, hheap : LibC::HANDLE, pwstrcartridges : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.update_external_fonts.call(this, hprinter, hheap, pwstrcartridges)
   end
 end
 struct LibWin32::IPrintOemUI2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintOemUI2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintOemUI2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintOemUI2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_info(dwmode : UInt32, pbuffer : Void*, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
-    @lpVtbl.value.get_info.unsafe_as(Proc(UInt32, Void*, UInt32, UInt32*, HRESULT)).call(dwmode, pbuffer, cbsize, pcbneeded)
+  def get_info(this : IPrintOemUI2*, dwmode : UInt32, pbuffer : Void*, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
+    @lpVtbl.value.get_info.call(this, dwmode, pbuffer, cbsize, pcbneeded)
   end
-  def dev_mode(dwmode : UInt32, poemdmparam : OEMDMPARAM*) : HRESULT
-    @lpVtbl.value.dev_mode.unsafe_as(Proc(UInt32, OEMDMPARAM*, HRESULT)).call(dwmode, poemdmparam)
+  def dev_mode(this : IPrintOemUI2*, dwmode : UInt32, poemdmparam : OEMDMPARAM*) : HRESULT
+    @lpVtbl.value.dev_mode.call(this, dwmode, poemdmparam)
   end
-  def publish_driver_interface(piunknown : IUnknown) : HRESULT
-    @lpVtbl.value.publish_driver_interface.unsafe_as(Proc(IUnknown, HRESULT)).call(piunknown)
+  def publish_driver_interface(this : IPrintOemUI2*, piunknown : IUnknown) : HRESULT
+    @lpVtbl.value.publish_driver_interface.call(this, piunknown)
   end
-  def common_ui_prop(dwmode : UInt32, poemcuipparam : OEMCUIPPARAM*) : HRESULT
-    @lpVtbl.value.common_ui_prop.unsafe_as(Proc(UInt32, OEMCUIPPARAM*, HRESULT)).call(dwmode, poemcuipparam)
+  def common_ui_prop(this : IPrintOemUI2*, dwmode : UInt32, poemcuipparam : OEMCUIPPARAM*) : HRESULT
+    @lpVtbl.value.common_ui_prop.call(this, dwmode, poemcuipparam)
   end
-  def document_property_sheets(ppsuiinfo : PROPSHEETUI_INFO*, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.document_property_sheets.unsafe_as(Proc(PROPSHEETUI_INFO*, LPARAM, HRESULT)).call(ppsuiinfo, lparam)
+  def document_property_sheets(this : IPrintOemUI2*, ppsuiinfo : PROPSHEETUI_INFO*, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.document_property_sheets.call(this, ppsuiinfo, lparam)
   end
-  def device_property_sheets(ppsuiinfo : PROPSHEETUI_INFO*, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.device_property_sheets.unsafe_as(Proc(PROPSHEETUI_INFO*, LPARAM, HRESULT)).call(ppsuiinfo, lparam)
+  def device_property_sheets(this : IPrintOemUI2*, ppsuiinfo : PROPSHEETUI_INFO*, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.device_property_sheets.call(this, ppsuiinfo, lparam)
   end
-  def dev_query_print_ex(poemuiobj : OEMUIOBJ*, pdqpinfo : DEVQUERYPRINT_INFO*, ppublicdm : DEVMODEA*, poemdm : Void*) : HRESULT
-    @lpVtbl.value.dev_query_print_ex.unsafe_as(Proc(OEMUIOBJ*, DEVQUERYPRINT_INFO*, DEVMODEA*, Void*, HRESULT)).call(poemuiobj, pdqpinfo, ppublicdm, poemdm)
+  def dev_query_print_ex(this : IPrintOemUI2*, poemuiobj : OEMUIOBJ*, pdqpinfo : DEVQUERYPRINT_INFO*, ppublicdm : DEVMODEA*, poemdm : Void*) : HRESULT
+    @lpVtbl.value.dev_query_print_ex.call(this, poemuiobj, pdqpinfo, ppublicdm, poemdm)
   end
-  def device_capabilities_a(poemuiobj : OEMUIOBJ*, hprinter : LibC::HANDLE, pdevicename : LibC::LPWSTR, wcapability : UInt16, poutput : Void*, ppublicdm : DEVMODEA*, poemdm : Void*, dwold : UInt32, dwresult : UInt32*) : HRESULT
-    @lpVtbl.value.device_capabilities_a.unsafe_as(Proc(OEMUIOBJ*, LibC::HANDLE, LibC::LPWSTR, UInt16, Void*, DEVMODEA*, Void*, UInt32, UInt32*, HRESULT)).call(poemuiobj, hprinter, pdevicename, wcapability, poutput, ppublicdm, poemdm, dwold, dwresult)
+  def device_capabilities_a(this : IPrintOemUI2*, poemuiobj : OEMUIOBJ*, hprinter : LibC::HANDLE, pdevicename : LibC::LPWSTR, wcapability : UInt16, poutput : Void*, ppublicdm : DEVMODEA*, poemdm : Void*, dwold : UInt32, dwresult : UInt32*) : HRESULT
+    @lpVtbl.value.device_capabilities_a.call(this, poemuiobj, hprinter, pdevicename, wcapability, poutput, ppublicdm, poemdm, dwold, dwresult)
   end
-  def upgrade_printer(dwlevel : UInt32, pdriverupgradeinfo : UInt8*) : HRESULT
-    @lpVtbl.value.upgrade_printer.unsafe_as(Proc(UInt32, UInt8*, HRESULT)).call(dwlevel, pdriverupgradeinfo)
+  def upgrade_printer(this : IPrintOemUI2*, dwlevel : UInt32, pdriverupgradeinfo : UInt8*) : HRESULT
+    @lpVtbl.value.upgrade_printer.call(this, dwlevel, pdriverupgradeinfo)
   end
-  def printer_event(pprintername : LibC::LPWSTR, idriverevent : Int32, dwflags : UInt32, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.printer_event.unsafe_as(Proc(LibC::LPWSTR, Int32, UInt32, LPARAM, HRESULT)).call(pprintername, idriverevent, dwflags, lparam)
+  def printer_event(this : IPrintOemUI2*, pprintername : LibC::LPWSTR, idriverevent : Int32, dwflags : UInt32, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.printer_event.call(this, pprintername, idriverevent, dwflags, lparam)
   end
-  def driver_event(dwdriverevent : UInt32, dwlevel : UInt32, pdriverinfo : UInt8*, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.driver_event.unsafe_as(Proc(UInt32, UInt32, UInt8*, LPARAM, HRESULT)).call(dwdriverevent, dwlevel, pdriverinfo, lparam)
+  def driver_event(this : IPrintOemUI2*, dwdriverevent : UInt32, dwlevel : UInt32, pdriverinfo : UInt8*, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.driver_event.call(this, dwdriverevent, dwlevel, pdriverinfo, lparam)
   end
-  def query_color_profile(hprinter : LibC::HANDLE, poemuiobj : OEMUIOBJ*, ppublicdm : DEVMODEA*, poemdm : Void*, ulquerymode : UInt32, pvprofiledata : Void*, pcbprofiledata : UInt32*, pflprofiledata : UInt32*) : HRESULT
-    @lpVtbl.value.query_color_profile.unsafe_as(Proc(LibC::HANDLE, OEMUIOBJ*, DEVMODEA*, Void*, UInt32, Void*, UInt32*, UInt32*, HRESULT)).call(hprinter, poemuiobj, ppublicdm, poemdm, ulquerymode, pvprofiledata, pcbprofiledata, pflprofiledata)
+  def query_color_profile(this : IPrintOemUI2*, hprinter : LibC::HANDLE, poemuiobj : OEMUIOBJ*, ppublicdm : DEVMODEA*, poemdm : Void*, ulquerymode : UInt32, pvprofiledata : Void*, pcbprofiledata : UInt32*, pflprofiledata : UInt32*) : HRESULT
+    @lpVtbl.value.query_color_profile.call(this, hprinter, poemuiobj, ppublicdm, poemdm, ulquerymode, pvprofiledata, pcbprofiledata, pflprofiledata)
   end
-  def font_installer_dlg_proc(hwnd : LibC::HANDLE, usmsg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.font_installer_dlg_proc.unsafe_as(Proc(LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)).call(hwnd, usmsg, wparam, lparam)
+  def font_installer_dlg_proc(this : IPrintOemUI2*, hwnd : LibC::HANDLE, usmsg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.font_installer_dlg_proc.call(this, hwnd, usmsg, wparam, lparam)
   end
-  def update_external_fonts(hprinter : LibC::HANDLE, hheap : LibC::HANDLE, pwstrcartridges : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.update_external_fonts.unsafe_as(Proc(LibC::HANDLE, LibC::HANDLE, LibC::LPWSTR, HRESULT)).call(hprinter, hheap, pwstrcartridges)
+  def update_external_fonts(this : IPrintOemUI2*, hprinter : LibC::HANDLE, hheap : LibC::HANDLE, pwstrcartridges : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.update_external_fonts.call(this, hprinter, hheap, pwstrcartridges)
   end
-  def query_job_attributes(hprinter : LibC::HANDLE, pdevmode : DEVMODEA*, dwlevel : UInt32, lpattributeinfo : UInt8*) : HRESULT
-    @lpVtbl.value.query_job_attributes.unsafe_as(Proc(LibC::HANDLE, DEVMODEA*, UInt32, UInt8*, HRESULT)).call(hprinter, pdevmode, dwlevel, lpattributeinfo)
+  def query_job_attributes(this : IPrintOemUI2*, hprinter : LibC::HANDLE, pdevmode : DEVMODEA*, dwlevel : UInt32, lpattributeinfo : UInt8*) : HRESULT
+    @lpVtbl.value.query_job_attributes.call(this, hprinter, pdevmode, dwlevel, lpattributeinfo)
   end
-  def hide_standard_ui(dwmode : UInt32) : HRESULT
-    @lpVtbl.value.hide_standard_ui.unsafe_as(Proc(UInt32, HRESULT)).call(dwmode)
+  def hide_standard_ui(this : IPrintOemUI2*, dwmode : UInt32) : HRESULT
+    @lpVtbl.value.hide_standard_ui.call(this, dwmode)
   end
-  def document_event(hprinter : LibC::HANDLE, hdc : HDC, iesc : Int32, cbin : UInt32, pvin : Void*, cbout : UInt32, pvout : Void*, piresult : Int32*) : HRESULT
-    @lpVtbl.value.document_event.unsafe_as(Proc(LibC::HANDLE, HDC, Int32, UInt32, Void*, UInt32, Void*, Int32*, HRESULT)).call(hprinter, hdc, iesc, cbin, pvin, cbout, pvout, piresult)
+  def document_event(this : IPrintOemUI2*, hprinter : LibC::HANDLE, hdc : HDC, iesc : Int32, cbin : UInt32, pvin : Void*, cbout : UInt32, pvout : Void*, piresult : Int32*) : HRESULT
+    @lpVtbl.value.document_event.call(this, hprinter, hdc, iesc, cbin, pvin, cbout, pvout, piresult)
   end
 end
 struct LibWin32::IPrintOemUIMXDC
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintOemUIMXDC*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintOemUIMXDC*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintOemUIMXDC*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def adjust_imageable_area(hprinter : LibC::HANDLE, cbdevmode : UInt32, pdevmode : DEVMODEA*, cboemdm : UInt32, poemdm : Void*, prclimageablearea : RECTL*) : HRESULT
-    @lpVtbl.value.adjust_imageable_area.unsafe_as(Proc(LibC::HANDLE, UInt32, DEVMODEA*, UInt32, Void*, RECTL*, HRESULT)).call(hprinter, cbdevmode, pdevmode, cboemdm, poemdm, prclimageablearea)
+  def adjust_imageable_area(this : IPrintOemUIMXDC*, hprinter : LibC::HANDLE, cbdevmode : UInt32, pdevmode : DEVMODEA*, cboemdm : UInt32, poemdm : Void*, prclimageablearea : RECTL*) : HRESULT
+    @lpVtbl.value.adjust_imageable_area.call(this, hprinter, cbdevmode, pdevmode, cboemdm, poemdm, prclimageablearea)
   end
-  def adjust_image_compression(hprinter : LibC::HANDLE, cbdevmode : UInt32, pdevmode : DEVMODEA*, cboemdm : UInt32, poemdm : Void*, pcompressionmode : Int32*) : HRESULT
-    @lpVtbl.value.adjust_image_compression.unsafe_as(Proc(LibC::HANDLE, UInt32, DEVMODEA*, UInt32, Void*, Int32*, HRESULT)).call(hprinter, cbdevmode, pdevmode, cboemdm, poemdm, pcompressionmode)
+  def adjust_image_compression(this : IPrintOemUIMXDC*, hprinter : LibC::HANDLE, cbdevmode : UInt32, pdevmode : DEVMODEA*, cboemdm : UInt32, poemdm : Void*, pcompressionmode : Int32*) : HRESULT
+    @lpVtbl.value.adjust_image_compression.call(this, hprinter, cbdevmode, pdevmode, cboemdm, poemdm, pcompressionmode)
   end
-  def adjust_dpi(hprinter : LibC::HANDLE, cbdevmode : UInt32, pdevmode : DEVMODEA*, cboemdm : UInt32, poemdm : Void*, pdpi : Int32*) : HRESULT
-    @lpVtbl.value.adjust_dpi.unsafe_as(Proc(LibC::HANDLE, UInt32, DEVMODEA*, UInt32, Void*, Int32*, HRESULT)).call(hprinter, cbdevmode, pdevmode, cboemdm, poemdm, pdpi)
+  def adjust_dpi(this : IPrintOemUIMXDC*, hprinter : LibC::HANDLE, cbdevmode : UInt32, pdevmode : DEVMODEA*, cboemdm : UInt32, poemdm : Void*, pdpi : Int32*) : HRESULT
+    @lpVtbl.value.adjust_dpi.call(this, hprinter, cbdevmode, pdevmode, cboemdm, poemdm, pdpi)
   end
 end
 struct LibWin32::IPrintOemDriverUI
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintOemDriverUI*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintOemDriverUI*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintOemDriverUI*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def drv_get_driver_setting(pci : Void*, feature : PSTR, poutput : Void*, cbsize : UInt32, pcbneeded : UInt32*, pdwoptionsreturned : UInt32*) : HRESULT
-    @lpVtbl.value.drv_get_driver_setting.unsafe_as(Proc(Void*, PSTR, Void*, UInt32, UInt32*, UInt32*, HRESULT)).call(pci, feature, poutput, cbsize, pcbneeded, pdwoptionsreturned)
+  def drv_get_driver_setting(this : IPrintOemDriverUI*, pci : Void*, feature : PSTR, poutput : Void*, cbsize : UInt32, pcbneeded : UInt32*, pdwoptionsreturned : UInt32*) : HRESULT
+    @lpVtbl.value.drv_get_driver_setting.call(this, pci, feature, poutput, cbsize, pcbneeded, pdwoptionsreturned)
   end
-  def drv_upgrade_registry_setting(hprinter : LibC::HANDLE, pfeature : PSTR, poption : PSTR) : HRESULT
-    @lpVtbl.value.drv_upgrade_registry_setting.unsafe_as(Proc(LibC::HANDLE, PSTR, PSTR, HRESULT)).call(hprinter, pfeature, poption)
+  def drv_upgrade_registry_setting(this : IPrintOemDriverUI*, hprinter : LibC::HANDLE, pfeature : PSTR, poption : PSTR) : HRESULT
+    @lpVtbl.value.drv_upgrade_registry_setting.call(this, hprinter, pfeature, poption)
   end
-  def drv_update_ui_setting(pci : Void*, poptitem : Void*, dwpreviousselection : UInt32, dwmode : UInt32) : HRESULT
-    @lpVtbl.value.drv_update_ui_setting.unsafe_as(Proc(Void*, Void*, UInt32, UInt32, HRESULT)).call(pci, poptitem, dwpreviousselection, dwmode)
+  def drv_update_ui_setting(this : IPrintOemDriverUI*, pci : Void*, poptitem : Void*, dwpreviousselection : UInt32, dwmode : UInt32) : HRESULT
+    @lpVtbl.value.drv_update_ui_setting.call(this, pci, poptitem, dwpreviousselection, dwmode)
   end
 end
 struct LibWin32::IPrintCoreUI2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintCoreUI2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintCoreUI2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintCoreUI2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def drv_get_driver_setting(pci : Void*, feature : PSTR, poutput : Void*, cbsize : UInt32, pcbneeded : UInt32*, pdwoptionsreturned : UInt32*) : HRESULT
-    @lpVtbl.value.drv_get_driver_setting.unsafe_as(Proc(Void*, PSTR, Void*, UInt32, UInt32*, UInt32*, HRESULT)).call(pci, feature, poutput, cbsize, pcbneeded, pdwoptionsreturned)
+  def drv_get_driver_setting(this : IPrintCoreUI2*, pci : Void*, feature : PSTR, poutput : Void*, cbsize : UInt32, pcbneeded : UInt32*, pdwoptionsreturned : UInt32*) : HRESULT
+    @lpVtbl.value.drv_get_driver_setting.call(this, pci, feature, poutput, cbsize, pcbneeded, pdwoptionsreturned)
   end
-  def drv_upgrade_registry_setting(hprinter : LibC::HANDLE, pfeature : PSTR, poption : PSTR) : HRESULT
-    @lpVtbl.value.drv_upgrade_registry_setting.unsafe_as(Proc(LibC::HANDLE, PSTR, PSTR, HRESULT)).call(hprinter, pfeature, poption)
+  def drv_upgrade_registry_setting(this : IPrintCoreUI2*, hprinter : LibC::HANDLE, pfeature : PSTR, poption : PSTR) : HRESULT
+    @lpVtbl.value.drv_upgrade_registry_setting.call(this, hprinter, pfeature, poption)
   end
-  def drv_update_ui_setting(pci : Void*, poptitem : Void*, dwpreviousselection : UInt32, dwmode : UInt32) : HRESULT
-    @lpVtbl.value.drv_update_ui_setting.unsafe_as(Proc(Void*, Void*, UInt32, UInt32, HRESULT)).call(pci, poptitem, dwpreviousselection, dwmode)
+  def drv_update_ui_setting(this : IPrintCoreUI2*, pci : Void*, poptitem : Void*, dwpreviousselection : UInt32, dwmode : UInt32) : HRESULT
+    @lpVtbl.value.drv_update_ui_setting.call(this, pci, poptitem, dwpreviousselection, dwmode)
   end
-  def get_options(poemuiobj : OEMUIOBJ*, dwflags : UInt32, pmszfeaturesrequested : Int8*, cbin : UInt32, pmszfeatureoptionbuf : PSTR, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
-    @lpVtbl.value.get_options.unsafe_as(Proc(OEMUIOBJ*, UInt32, Int8*, UInt32, PSTR, UInt32, UInt32*, HRESULT)).call(poemuiobj, dwflags, pmszfeaturesrequested, cbin, pmszfeatureoptionbuf, cbsize, pcbneeded)
+  def get_options(this : IPrintCoreUI2*, poemuiobj : OEMUIOBJ*, dwflags : UInt32, pmszfeaturesrequested : Int8*, cbin : UInt32, pmszfeatureoptionbuf : PSTR, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
+    @lpVtbl.value.get_options.call(this, poemuiobj, dwflags, pmszfeaturesrequested, cbin, pmszfeatureoptionbuf, cbsize, pcbneeded)
   end
-  def set_options(poemuiobj : OEMUIOBJ*, dwflags : UInt32, pmszfeatureoptionbuf : Int8*, cbin : UInt32, pdwresult : UInt32*) : HRESULT
-    @lpVtbl.value.set_options.unsafe_as(Proc(OEMUIOBJ*, UInt32, Int8*, UInt32, UInt32*, HRESULT)).call(poemuiobj, dwflags, pmszfeatureoptionbuf, cbin, pdwresult)
+  def set_options(this : IPrintCoreUI2*, poemuiobj : OEMUIOBJ*, dwflags : UInt32, pmszfeatureoptionbuf : Int8*, cbin : UInt32, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.set_options.call(this, poemuiobj, dwflags, pmszfeatureoptionbuf, cbin, pdwresult)
   end
-  def enum_constrained_options(poemuiobj : OEMUIOBJ*, dwflags : UInt32, pszfeaturekeyword : PSTR, pmszconstrainedoptionlist : PSTR, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
-    @lpVtbl.value.enum_constrained_options.unsafe_as(Proc(OEMUIOBJ*, UInt32, PSTR, PSTR, UInt32, UInt32*, HRESULT)).call(poemuiobj, dwflags, pszfeaturekeyword, pmszconstrainedoptionlist, cbsize, pcbneeded)
+  def enum_constrained_options(this : IPrintCoreUI2*, poemuiobj : OEMUIOBJ*, dwflags : UInt32, pszfeaturekeyword : PSTR, pmszconstrainedoptionlist : PSTR, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
+    @lpVtbl.value.enum_constrained_options.call(this, poemuiobj, dwflags, pszfeaturekeyword, pmszconstrainedoptionlist, cbsize, pcbneeded)
   end
-  def why_constrained(poemuiobj : OEMUIOBJ*, dwflags : UInt32, pszfeaturekeyword : PSTR, pszoptionkeyword : PSTR, pmszreasonlist : PSTR, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
-    @lpVtbl.value.why_constrained.unsafe_as(Proc(OEMUIOBJ*, UInt32, PSTR, PSTR, PSTR, UInt32, UInt32*, HRESULT)).call(poemuiobj, dwflags, pszfeaturekeyword, pszoptionkeyword, pmszreasonlist, cbsize, pcbneeded)
+  def why_constrained(this : IPrintCoreUI2*, poemuiobj : OEMUIOBJ*, dwflags : UInt32, pszfeaturekeyword : PSTR, pszoptionkeyword : PSTR, pmszreasonlist : PSTR, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
+    @lpVtbl.value.why_constrained.call(this, poemuiobj, dwflags, pszfeaturekeyword, pszoptionkeyword, pmszreasonlist, cbsize, pcbneeded)
   end
-  def get_global_attribute(poemuiobj : OEMUIOBJ*, dwflags : UInt32, pszattribute : PSTR, pdwdatatype : UInt32*, pbdata : UInt8*, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
-    @lpVtbl.value.get_global_attribute.unsafe_as(Proc(OEMUIOBJ*, UInt32, PSTR, UInt32*, UInt8*, UInt32, UInt32*, HRESULT)).call(poemuiobj, dwflags, pszattribute, pdwdatatype, pbdata, cbsize, pcbneeded)
+  def get_global_attribute(this : IPrintCoreUI2*, poemuiobj : OEMUIOBJ*, dwflags : UInt32, pszattribute : PSTR, pdwdatatype : UInt32*, pbdata : UInt8*, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
+    @lpVtbl.value.get_global_attribute.call(this, poemuiobj, dwflags, pszattribute, pdwdatatype, pbdata, cbsize, pcbneeded)
   end
-  def get_feature_attribute(poemuiobj : OEMUIOBJ*, dwflags : UInt32, pszfeaturekeyword : PSTR, pszattribute : PSTR, pdwdatatype : UInt32*, pbdata : UInt8*, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
-    @lpVtbl.value.get_feature_attribute.unsafe_as(Proc(OEMUIOBJ*, UInt32, PSTR, PSTR, UInt32*, UInt8*, UInt32, UInt32*, HRESULT)).call(poemuiobj, dwflags, pszfeaturekeyword, pszattribute, pdwdatatype, pbdata, cbsize, pcbneeded)
+  def get_feature_attribute(this : IPrintCoreUI2*, poemuiobj : OEMUIOBJ*, dwflags : UInt32, pszfeaturekeyword : PSTR, pszattribute : PSTR, pdwdatatype : UInt32*, pbdata : UInt8*, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
+    @lpVtbl.value.get_feature_attribute.call(this, poemuiobj, dwflags, pszfeaturekeyword, pszattribute, pdwdatatype, pbdata, cbsize, pcbneeded)
   end
-  def get_option_attribute(poemuiobj : OEMUIOBJ*, dwflags : UInt32, pszfeaturekeyword : PSTR, pszoptionkeyword : PSTR, pszattribute : PSTR, pdwdatatype : UInt32*, pbdata : UInt8*, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
-    @lpVtbl.value.get_option_attribute.unsafe_as(Proc(OEMUIOBJ*, UInt32, PSTR, PSTR, PSTR, UInt32*, UInt8*, UInt32, UInt32*, HRESULT)).call(poemuiobj, dwflags, pszfeaturekeyword, pszoptionkeyword, pszattribute, pdwdatatype, pbdata, cbsize, pcbneeded)
+  def get_option_attribute(this : IPrintCoreUI2*, poemuiobj : OEMUIOBJ*, dwflags : UInt32, pszfeaturekeyword : PSTR, pszoptionkeyword : PSTR, pszattribute : PSTR, pdwdatatype : UInt32*, pbdata : UInt8*, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
+    @lpVtbl.value.get_option_attribute.call(this, poemuiobj, dwflags, pszfeaturekeyword, pszoptionkeyword, pszattribute, pdwdatatype, pbdata, cbsize, pcbneeded)
   end
-  def enum_features(poemuiobj : OEMUIOBJ*, dwflags : UInt32, pmszfeaturelist : PSTR, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
-    @lpVtbl.value.enum_features.unsafe_as(Proc(OEMUIOBJ*, UInt32, PSTR, UInt32, UInt32*, HRESULT)).call(poemuiobj, dwflags, pmszfeaturelist, cbsize, pcbneeded)
+  def enum_features(this : IPrintCoreUI2*, poemuiobj : OEMUIOBJ*, dwflags : UInt32, pmszfeaturelist : PSTR, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
+    @lpVtbl.value.enum_features.call(this, poemuiobj, dwflags, pmszfeaturelist, cbsize, pcbneeded)
   end
-  def enum_options(poemuiobj : OEMUIOBJ*, dwflags : UInt32, pszfeaturekeyword : PSTR, pmszoptionlist : PSTR, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
-    @lpVtbl.value.enum_options.unsafe_as(Proc(OEMUIOBJ*, UInt32, PSTR, PSTR, UInt32, UInt32*, HRESULT)).call(poemuiobj, dwflags, pszfeaturekeyword, pmszoptionlist, cbsize, pcbneeded)
+  def enum_options(this : IPrintCoreUI2*, poemuiobj : OEMUIOBJ*, dwflags : UInt32, pszfeaturekeyword : PSTR, pmszoptionlist : PSTR, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
+    @lpVtbl.value.enum_options.call(this, poemuiobj, dwflags, pszfeaturekeyword, pmszoptionlist, cbsize, pcbneeded)
   end
-  def query_simulation_support(hprinter : LibC::HANDLE, dwlevel : UInt32, pcaps : UInt8*, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
-    @lpVtbl.value.query_simulation_support.unsafe_as(Proc(LibC::HANDLE, UInt32, UInt8*, UInt32, UInt32*, HRESULT)).call(hprinter, dwlevel, pcaps, cbsize, pcbneeded)
+  def query_simulation_support(this : IPrintCoreUI2*, hprinter : LibC::HANDLE, dwlevel : UInt32, pcaps : UInt8*, cbsize : UInt32, pcbneeded : UInt32*) : HRESULT
+    @lpVtbl.value.query_simulation_support.call(this, hprinter, dwlevel, pcaps, cbsize, pcbneeded)
   end
 end
 struct LibWin32::IPrintTicketProvider
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintTicketProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintTicketProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintTicketProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_supported_versions(hprinter : LibC::HANDLE, ppversions : Int32**, cversions : Int32*) : HRESULT
-    @lpVtbl.value.get_supported_versions.unsafe_as(Proc(LibC::HANDLE, Int32**, Int32*, HRESULT)).call(hprinter, ppversions, cversions)
+  def get_supported_versions(this : IPrintTicketProvider*, hprinter : LibC::HANDLE, ppversions : Int32**, cversions : Int32*) : HRESULT
+    @lpVtbl.value.get_supported_versions.call(this, hprinter, ppversions, cversions)
   end
-  def bind_printer(hprinter : LibC::HANDLE, version : Int32, poptions : SHIMOPTS*, pdevmodeflags : UInt32*, cnamespaces : Int32*, ppnamespaces : UInt8***) : HRESULT
-    @lpVtbl.value.bind_printer.unsafe_as(Proc(LibC::HANDLE, Int32, SHIMOPTS*, UInt32*, Int32*, UInt8***, HRESULT)).call(hprinter, version, poptions, pdevmodeflags, cnamespaces, ppnamespaces)
+  def bind_printer(this : IPrintTicketProvider*, hprinter : LibC::HANDLE, version : Int32, poptions : SHIMOPTS*, pdevmodeflags : UInt32*, cnamespaces : Int32*, ppnamespaces : UInt8***) : HRESULT
+    @lpVtbl.value.bind_printer.call(this, hprinter, version, poptions, pdevmodeflags, cnamespaces, ppnamespaces)
   end
-  def query_device_namespace(pdefaultnamespace : UInt8**) : HRESULT
-    @lpVtbl.value.query_device_namespace.unsafe_as(Proc(UInt8**, HRESULT)).call(pdefaultnamespace)
+  def query_device_namespace(this : IPrintTicketProvider*, pdefaultnamespace : UInt8**) : HRESULT
+    @lpVtbl.value.query_device_namespace.call(this, pdefaultnamespace)
   end
-  def convert_print_ticket_to_dev_mode(pprintticket : IXMLDOMDocument2, cbdevmodein : UInt32, pdevmodein : DEVMODEA*, pcbdevmodeout : UInt32*, ppdevmodeout : DEVMODEA**) : HRESULT
-    @lpVtbl.value.convert_print_ticket_to_dev_mode.unsafe_as(Proc(IXMLDOMDocument2, UInt32, DEVMODEA*, UInt32*, DEVMODEA**, HRESULT)).call(pprintticket, cbdevmodein, pdevmodein, pcbdevmodeout, ppdevmodeout)
+  def convert_print_ticket_to_dev_mode(this : IPrintTicketProvider*, pprintticket : IXMLDOMDocument2, cbdevmodein : UInt32, pdevmodein : DEVMODEA*, pcbdevmodeout : UInt32*, ppdevmodeout : DEVMODEA**) : HRESULT
+    @lpVtbl.value.convert_print_ticket_to_dev_mode.call(this, pprintticket, cbdevmodein, pdevmodein, pcbdevmodeout, ppdevmodeout)
   end
-  def convert_dev_mode_to_print_ticket(cbdevmode : UInt32, pdevmode : DEVMODEA*, pprintticket : IXMLDOMDocument2) : HRESULT
-    @lpVtbl.value.convert_dev_mode_to_print_ticket.unsafe_as(Proc(UInt32, DEVMODEA*, IXMLDOMDocument2, HRESULT)).call(cbdevmode, pdevmode, pprintticket)
+  def convert_dev_mode_to_print_ticket(this : IPrintTicketProvider*, cbdevmode : UInt32, pdevmode : DEVMODEA*, pprintticket : IXMLDOMDocument2) : HRESULT
+    @lpVtbl.value.convert_dev_mode_to_print_ticket.call(this, cbdevmode, pdevmode, pprintticket)
   end
-  def get_print_capabilities(pprintticket : IXMLDOMDocument2, ppcapabilities : IXMLDOMDocument2*) : HRESULT
-    @lpVtbl.value.get_print_capabilities.unsafe_as(Proc(IXMLDOMDocument2, IXMLDOMDocument2*, HRESULT)).call(pprintticket, ppcapabilities)
+  def get_print_capabilities(this : IPrintTicketProvider*, pprintticket : IXMLDOMDocument2, ppcapabilities : IXMLDOMDocument2*) : HRESULT
+    @lpVtbl.value.get_print_capabilities.call(this, pprintticket, ppcapabilities)
   end
-  def validate_print_ticket(pbaseticket : IXMLDOMDocument2) : HRESULT
-    @lpVtbl.value.validate_print_ticket.unsafe_as(Proc(IXMLDOMDocument2, HRESULT)).call(pbaseticket)
+  def validate_print_ticket(this : IPrintTicketProvider*, pbaseticket : IXMLDOMDocument2) : HRESULT
+    @lpVtbl.value.validate_print_ticket.call(this, pbaseticket)
   end
 end
 struct LibWin32::IPrintTicketProvider2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintTicketProvider2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintTicketProvider2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintTicketProvider2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_supported_versions(hprinter : LibC::HANDLE, ppversions : Int32**, cversions : Int32*) : HRESULT
-    @lpVtbl.value.get_supported_versions.unsafe_as(Proc(LibC::HANDLE, Int32**, Int32*, HRESULT)).call(hprinter, ppversions, cversions)
+  def get_supported_versions(this : IPrintTicketProvider2*, hprinter : LibC::HANDLE, ppversions : Int32**, cversions : Int32*) : HRESULT
+    @lpVtbl.value.get_supported_versions.call(this, hprinter, ppversions, cversions)
   end
-  def bind_printer(hprinter : LibC::HANDLE, version : Int32, poptions : SHIMOPTS*, pdevmodeflags : UInt32*, cnamespaces : Int32*, ppnamespaces : UInt8***) : HRESULT
-    @lpVtbl.value.bind_printer.unsafe_as(Proc(LibC::HANDLE, Int32, SHIMOPTS*, UInt32*, Int32*, UInt8***, HRESULT)).call(hprinter, version, poptions, pdevmodeflags, cnamespaces, ppnamespaces)
+  def bind_printer(this : IPrintTicketProvider2*, hprinter : LibC::HANDLE, version : Int32, poptions : SHIMOPTS*, pdevmodeflags : UInt32*, cnamespaces : Int32*, ppnamespaces : UInt8***) : HRESULT
+    @lpVtbl.value.bind_printer.call(this, hprinter, version, poptions, pdevmodeflags, cnamespaces, ppnamespaces)
   end
-  def query_device_namespace(pdefaultnamespace : UInt8**) : HRESULT
-    @lpVtbl.value.query_device_namespace.unsafe_as(Proc(UInt8**, HRESULT)).call(pdefaultnamespace)
+  def query_device_namespace(this : IPrintTicketProvider2*, pdefaultnamespace : UInt8**) : HRESULT
+    @lpVtbl.value.query_device_namespace.call(this, pdefaultnamespace)
   end
-  def convert_print_ticket_to_dev_mode(pprintticket : IXMLDOMDocument2, cbdevmodein : UInt32, pdevmodein : DEVMODEA*, pcbdevmodeout : UInt32*, ppdevmodeout : DEVMODEA**) : HRESULT
-    @lpVtbl.value.convert_print_ticket_to_dev_mode.unsafe_as(Proc(IXMLDOMDocument2, UInt32, DEVMODEA*, UInt32*, DEVMODEA**, HRESULT)).call(pprintticket, cbdevmodein, pdevmodein, pcbdevmodeout, ppdevmodeout)
+  def convert_print_ticket_to_dev_mode(this : IPrintTicketProvider2*, pprintticket : IXMLDOMDocument2, cbdevmodein : UInt32, pdevmodein : DEVMODEA*, pcbdevmodeout : UInt32*, ppdevmodeout : DEVMODEA**) : HRESULT
+    @lpVtbl.value.convert_print_ticket_to_dev_mode.call(this, pprintticket, cbdevmodein, pdevmodein, pcbdevmodeout, ppdevmodeout)
   end
-  def convert_dev_mode_to_print_ticket(cbdevmode : UInt32, pdevmode : DEVMODEA*, pprintticket : IXMLDOMDocument2) : HRESULT
-    @lpVtbl.value.convert_dev_mode_to_print_ticket.unsafe_as(Proc(UInt32, DEVMODEA*, IXMLDOMDocument2, HRESULT)).call(cbdevmode, pdevmode, pprintticket)
+  def convert_dev_mode_to_print_ticket(this : IPrintTicketProvider2*, cbdevmode : UInt32, pdevmode : DEVMODEA*, pprintticket : IXMLDOMDocument2) : HRESULT
+    @lpVtbl.value.convert_dev_mode_to_print_ticket.call(this, cbdevmode, pdevmode, pprintticket)
   end
-  def get_print_capabilities(pprintticket : IXMLDOMDocument2, ppcapabilities : IXMLDOMDocument2*) : HRESULT
-    @lpVtbl.value.get_print_capabilities.unsafe_as(Proc(IXMLDOMDocument2, IXMLDOMDocument2*, HRESULT)).call(pprintticket, ppcapabilities)
+  def get_print_capabilities(this : IPrintTicketProvider2*, pprintticket : IXMLDOMDocument2, ppcapabilities : IXMLDOMDocument2*) : HRESULT
+    @lpVtbl.value.get_print_capabilities.call(this, pprintticket, ppcapabilities)
   end
-  def validate_print_ticket(pbaseticket : IXMLDOMDocument2) : HRESULT
-    @lpVtbl.value.validate_print_ticket.unsafe_as(Proc(IXMLDOMDocument2, HRESULT)).call(pbaseticket)
+  def validate_print_ticket(this : IPrintTicketProvider2*, pbaseticket : IXMLDOMDocument2) : HRESULT
+    @lpVtbl.value.validate_print_ticket.call(this, pbaseticket)
   end
-  def get_print_device_capabilities(pprintticket : IXMLDOMDocument2, ppdevicecapabilities : IXMLDOMDocument2*) : HRESULT
-    @lpVtbl.value.get_print_device_capabilities.unsafe_as(Proc(IXMLDOMDocument2, IXMLDOMDocument2*, HRESULT)).call(pprintticket, ppdevicecapabilities)
+  def get_print_device_capabilities(this : IPrintTicketProvider2*, pprintticket : IXMLDOMDocument2, ppdevicecapabilities : IXMLDOMDocument2*) : HRESULT
+    @lpVtbl.value.get_print_device_capabilities.call(this, pprintticket, ppdevicecapabilities)
   end
-  def get_print_device_resources(pszlocalename : LibC::LPWSTR, pprintticket : IXMLDOMDocument2, ppdeviceresources : IXMLDOMDocument2*) : HRESULT
-    @lpVtbl.value.get_print_device_resources.unsafe_as(Proc(LibC::LPWSTR, IXMLDOMDocument2, IXMLDOMDocument2*, HRESULT)).call(pszlocalename, pprintticket, ppdeviceresources)
+  def get_print_device_resources(this : IPrintTicketProvider2*, pszlocalename : LibC::LPWSTR, pprintticket : IXMLDOMDocument2, ppdeviceresources : IXMLDOMDocument2*) : HRESULT
+    @lpVtbl.value.get_print_device_resources.call(this, pszlocalename, pprintticket, ppdeviceresources)
   end
 end
 struct LibWin32::IPrintSchemaElement
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintSchemaElement*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintSchemaElement*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintSchemaElement*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrintSchemaElement*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrintSchemaElement*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrintSchemaElement*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrintSchemaElement*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_xml_node(ppxmlnode : IUnknown*) : HRESULT
-    @lpVtbl.value.get_xml_node.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppxmlnode)
+  def get_xml_node(this : IPrintSchemaElement*, ppxmlnode : IUnknown*) : HRESULT
+    @lpVtbl.value.get_xml_node.call(this, ppxmlnode)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IPrintSchemaElement*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def get_namespace_uri(pbstrnamespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrnamespaceuri)
+  def get_namespace_uri(this : IPrintSchemaElement*, pbstrnamespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, pbstrnamespaceuri)
   end
 end
 struct LibWin32::IPrintSchemaDisplayableElement
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintSchemaDisplayableElement*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintSchemaDisplayableElement*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintSchemaDisplayableElement*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrintSchemaDisplayableElement*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrintSchemaDisplayableElement*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrintSchemaDisplayableElement*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrintSchemaDisplayableElement*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_xml_node(ppxmlnode : IUnknown*) : HRESULT
-    @lpVtbl.value.get_xml_node.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppxmlnode)
+  def get_xml_node(this : IPrintSchemaDisplayableElement*, ppxmlnode : IUnknown*) : HRESULT
+    @lpVtbl.value.get_xml_node.call(this, ppxmlnode)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IPrintSchemaDisplayableElement*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def get_namespace_uri(pbstrnamespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrnamespaceuri)
+  def get_namespace_uri(this : IPrintSchemaDisplayableElement*, pbstrnamespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, pbstrnamespaceuri)
   end
-  def get_display_name(pbstrdisplayname : UInt8**) : HRESULT
-    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdisplayname)
+  def get_display_name(this : IPrintSchemaDisplayableElement*, pbstrdisplayname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrdisplayname)
   end
 end
 struct LibWin32::IPrintSchemaOption
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintSchemaOption*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintSchemaOption*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintSchemaOption*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrintSchemaOption*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrintSchemaOption*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrintSchemaOption*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrintSchemaOption*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_xml_node(ppxmlnode : IUnknown*) : HRESULT
-    @lpVtbl.value.get_xml_node.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppxmlnode)
+  def get_xml_node(this : IPrintSchemaOption*, ppxmlnode : IUnknown*) : HRESULT
+    @lpVtbl.value.get_xml_node.call(this, ppxmlnode)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IPrintSchemaOption*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def get_namespace_uri(pbstrnamespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrnamespaceuri)
+  def get_namespace_uri(this : IPrintSchemaOption*, pbstrnamespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, pbstrnamespaceuri)
   end
-  def get_display_name(pbstrdisplayname : UInt8**) : HRESULT
-    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdisplayname)
+  def get_display_name(this : IPrintSchemaOption*, pbstrdisplayname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrdisplayname)
   end
-  def get_selected(pbisselected : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_selected.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbisselected)
+  def get_selected(this : IPrintSchemaOption*, pbisselected : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_selected.call(this, pbisselected)
   end
-  def get_constrained(psetting : PrintSchemaConstrainedSetting*) : HRESULT
-    @lpVtbl.value.get_constrained.unsafe_as(Proc(PrintSchemaConstrainedSetting*, HRESULT)).call(psetting)
+  def get_constrained(this : IPrintSchemaOption*, psetting : PrintSchemaConstrainedSetting*) : HRESULT
+    @lpVtbl.value.get_constrained.call(this, psetting)
   end
-  def get_property_value(bstrname : UInt8*, bstrnamespaceuri : UInt8*, ppxmlvaluenode : IUnknown*) : HRESULT
-    @lpVtbl.value.get_property_value.unsafe_as(Proc(UInt8*, UInt8*, IUnknown*, HRESULT)).call(bstrname, bstrnamespaceuri, ppxmlvaluenode)
+  def get_property_value(this : IPrintSchemaOption*, bstrname : UInt8*, bstrnamespaceuri : UInt8*, ppxmlvaluenode : IUnknown*) : HRESULT
+    @lpVtbl.value.get_property_value.call(this, bstrname, bstrnamespaceuri, ppxmlvaluenode)
   end
 end
 struct LibWin32::IPrintSchemaPageMediaSizeOption
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintSchemaPageMediaSizeOption*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintSchemaPageMediaSizeOption*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintSchemaPageMediaSizeOption*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrintSchemaPageMediaSizeOption*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrintSchemaPageMediaSizeOption*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrintSchemaPageMediaSizeOption*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrintSchemaPageMediaSizeOption*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_xml_node(ppxmlnode : IUnknown*) : HRESULT
-    @lpVtbl.value.get_xml_node.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppxmlnode)
+  def get_xml_node(this : IPrintSchemaPageMediaSizeOption*, ppxmlnode : IUnknown*) : HRESULT
+    @lpVtbl.value.get_xml_node.call(this, ppxmlnode)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IPrintSchemaPageMediaSizeOption*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def get_namespace_uri(pbstrnamespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrnamespaceuri)
+  def get_namespace_uri(this : IPrintSchemaPageMediaSizeOption*, pbstrnamespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, pbstrnamespaceuri)
   end
-  def get_display_name(pbstrdisplayname : UInt8**) : HRESULT
-    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdisplayname)
+  def get_display_name(this : IPrintSchemaPageMediaSizeOption*, pbstrdisplayname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrdisplayname)
   end
-  def get_selected(pbisselected : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_selected.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbisselected)
+  def get_selected(this : IPrintSchemaPageMediaSizeOption*, pbisselected : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_selected.call(this, pbisselected)
   end
-  def get_constrained(psetting : PrintSchemaConstrainedSetting*) : HRESULT
-    @lpVtbl.value.get_constrained.unsafe_as(Proc(PrintSchemaConstrainedSetting*, HRESULT)).call(psetting)
+  def get_constrained(this : IPrintSchemaPageMediaSizeOption*, psetting : PrintSchemaConstrainedSetting*) : HRESULT
+    @lpVtbl.value.get_constrained.call(this, psetting)
   end
-  def get_property_value(bstrname : UInt8*, bstrnamespaceuri : UInt8*, ppxmlvaluenode : IUnknown*) : HRESULT
-    @lpVtbl.value.get_property_value.unsafe_as(Proc(UInt8*, UInt8*, IUnknown*, HRESULT)).call(bstrname, bstrnamespaceuri, ppxmlvaluenode)
+  def get_property_value(this : IPrintSchemaPageMediaSizeOption*, bstrname : UInt8*, bstrnamespaceuri : UInt8*, ppxmlvaluenode : IUnknown*) : HRESULT
+    @lpVtbl.value.get_property_value.call(this, bstrname, bstrnamespaceuri, ppxmlvaluenode)
   end
-  def get_width_in_microns(pulwidth : UInt32*) : HRESULT
-    @lpVtbl.value.get_width_in_microns.unsafe_as(Proc(UInt32*, HRESULT)).call(pulwidth)
+  def get_width_in_microns(this : IPrintSchemaPageMediaSizeOption*, pulwidth : UInt32*) : HRESULT
+    @lpVtbl.value.get_width_in_microns.call(this, pulwidth)
   end
-  def get_height_in_microns(pulheight : UInt32*) : HRESULT
-    @lpVtbl.value.get_height_in_microns.unsafe_as(Proc(UInt32*, HRESULT)).call(pulheight)
+  def get_height_in_microns(this : IPrintSchemaPageMediaSizeOption*, pulheight : UInt32*) : HRESULT
+    @lpVtbl.value.get_height_in_microns.call(this, pulheight)
   end
 end
 struct LibWin32::IPrintSchemaNUpOption
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintSchemaNUpOption*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintSchemaNUpOption*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintSchemaNUpOption*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrintSchemaNUpOption*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrintSchemaNUpOption*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrintSchemaNUpOption*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrintSchemaNUpOption*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_xml_node(ppxmlnode : IUnknown*) : HRESULT
-    @lpVtbl.value.get_xml_node.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppxmlnode)
+  def get_xml_node(this : IPrintSchemaNUpOption*, ppxmlnode : IUnknown*) : HRESULT
+    @lpVtbl.value.get_xml_node.call(this, ppxmlnode)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IPrintSchemaNUpOption*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def get_namespace_uri(pbstrnamespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrnamespaceuri)
+  def get_namespace_uri(this : IPrintSchemaNUpOption*, pbstrnamespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, pbstrnamespaceuri)
   end
-  def get_display_name(pbstrdisplayname : UInt8**) : HRESULT
-    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdisplayname)
+  def get_display_name(this : IPrintSchemaNUpOption*, pbstrdisplayname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrdisplayname)
   end
-  def get_selected(pbisselected : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_selected.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbisselected)
+  def get_selected(this : IPrintSchemaNUpOption*, pbisselected : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_selected.call(this, pbisselected)
   end
-  def get_constrained(psetting : PrintSchemaConstrainedSetting*) : HRESULT
-    @lpVtbl.value.get_constrained.unsafe_as(Proc(PrintSchemaConstrainedSetting*, HRESULT)).call(psetting)
+  def get_constrained(this : IPrintSchemaNUpOption*, psetting : PrintSchemaConstrainedSetting*) : HRESULT
+    @lpVtbl.value.get_constrained.call(this, psetting)
   end
-  def get_property_value(bstrname : UInt8*, bstrnamespaceuri : UInt8*, ppxmlvaluenode : IUnknown*) : HRESULT
-    @lpVtbl.value.get_property_value.unsafe_as(Proc(UInt8*, UInt8*, IUnknown*, HRESULT)).call(bstrname, bstrnamespaceuri, ppxmlvaluenode)
+  def get_property_value(this : IPrintSchemaNUpOption*, bstrname : UInt8*, bstrnamespaceuri : UInt8*, ppxmlvaluenode : IUnknown*) : HRESULT
+    @lpVtbl.value.get_property_value.call(this, bstrname, bstrnamespaceuri, ppxmlvaluenode)
   end
-  def get_pages_per_sheet(pulpagespersheet : UInt32*) : HRESULT
-    @lpVtbl.value.get_pages_per_sheet.unsafe_as(Proc(UInt32*, HRESULT)).call(pulpagespersheet)
+  def get_pages_per_sheet(this : IPrintSchemaNUpOption*, pulpagespersheet : UInt32*) : HRESULT
+    @lpVtbl.value.get_pages_per_sheet.call(this, pulpagespersheet)
   end
 end
 struct LibWin32::IPrintSchemaOptionCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintSchemaOptionCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintSchemaOptionCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintSchemaOptionCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrintSchemaOptionCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrintSchemaOptionCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrintSchemaOptionCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrintSchemaOptionCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_count(pulcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pulcount)
+  def get_count(this : IPrintSchemaOptionCollection*, pulcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pulcount)
   end
-  def get_at(ulindex : UInt32, ppoption : IPrintSchemaOption*) : HRESULT
-    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, IPrintSchemaOption*, HRESULT)).call(ulindex, ppoption)
+  def get_at(this : IPrintSchemaOptionCollection*, ulindex : UInt32, ppoption : IPrintSchemaOption*) : HRESULT
+    @lpVtbl.value.get_at.call(this, ulindex, ppoption)
   end
-  def get__new_enum(ppunk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  def get__new_enum(this : IPrintSchemaOptionCollection*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
   end
 end
 struct LibWin32::IPrintSchemaFeature
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintSchemaFeature*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintSchemaFeature*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintSchemaFeature*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrintSchemaFeature*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrintSchemaFeature*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrintSchemaFeature*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrintSchemaFeature*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_xml_node(ppxmlnode : IUnknown*) : HRESULT
-    @lpVtbl.value.get_xml_node.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppxmlnode)
+  def get_xml_node(this : IPrintSchemaFeature*, ppxmlnode : IUnknown*) : HRESULT
+    @lpVtbl.value.get_xml_node.call(this, ppxmlnode)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IPrintSchemaFeature*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def get_namespace_uri(pbstrnamespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrnamespaceuri)
+  def get_namespace_uri(this : IPrintSchemaFeature*, pbstrnamespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, pbstrnamespaceuri)
   end
-  def get_display_name(pbstrdisplayname : UInt8**) : HRESULT
-    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdisplayname)
+  def get_display_name(this : IPrintSchemaFeature*, pbstrdisplayname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrdisplayname)
   end
-  def get_selected_option(ppoption : IPrintSchemaOption*) : HRESULT
-    @lpVtbl.value.get_selected_option.unsafe_as(Proc(IPrintSchemaOption*, HRESULT)).call(ppoption)
+  def get_selected_option(this : IPrintSchemaFeature*, ppoption : IPrintSchemaOption*) : HRESULT
+    @lpVtbl.value.get_selected_option.call(this, ppoption)
   end
-  def put_selected_option(poption : IPrintSchemaOption) : HRESULT
-    @lpVtbl.value.put_selected_option.unsafe_as(Proc(IPrintSchemaOption, HRESULT)).call(poption)
+  def put_selected_option(this : IPrintSchemaFeature*, poption : IPrintSchemaOption) : HRESULT
+    @lpVtbl.value.put_selected_option.call(this, poption)
   end
-  def get_selection_type(pselectiontype : PrintSchemaSelectionType*) : HRESULT
-    @lpVtbl.value.get_selection_type.unsafe_as(Proc(PrintSchemaSelectionType*, HRESULT)).call(pselectiontype)
+  def get_selection_type(this : IPrintSchemaFeature*, pselectiontype : PrintSchemaSelectionType*) : HRESULT
+    @lpVtbl.value.get_selection_type.call(this, pselectiontype)
   end
-  def get_option(bstrname : UInt8*, bstrnamespaceuri : UInt8*, ppoption : IPrintSchemaOption*) : HRESULT
-    @lpVtbl.value.get_option.unsafe_as(Proc(UInt8*, UInt8*, IPrintSchemaOption*, HRESULT)).call(bstrname, bstrnamespaceuri, ppoption)
+  def get_option(this : IPrintSchemaFeature*, bstrname : UInt8*, bstrnamespaceuri : UInt8*, ppoption : IPrintSchemaOption*) : HRESULT
+    @lpVtbl.value.get_option.call(this, bstrname, bstrnamespaceuri, ppoption)
   end
-  def get_display_ui(pbshow : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_display_ui.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbshow)
+  def get_display_ui(this : IPrintSchemaFeature*, pbshow : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_display_ui.call(this, pbshow)
   end
 end
 struct LibWin32::IPrintSchemaPageImageableSize
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintSchemaPageImageableSize*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintSchemaPageImageableSize*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintSchemaPageImageableSize*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrintSchemaPageImageableSize*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrintSchemaPageImageableSize*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrintSchemaPageImageableSize*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrintSchemaPageImageableSize*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_xml_node(ppxmlnode : IUnknown*) : HRESULT
-    @lpVtbl.value.get_xml_node.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppxmlnode)
+  def get_xml_node(this : IPrintSchemaPageImageableSize*, ppxmlnode : IUnknown*) : HRESULT
+    @lpVtbl.value.get_xml_node.call(this, ppxmlnode)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IPrintSchemaPageImageableSize*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def get_namespace_uri(pbstrnamespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrnamespaceuri)
+  def get_namespace_uri(this : IPrintSchemaPageImageableSize*, pbstrnamespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, pbstrnamespaceuri)
   end
-  def get_imageable_size_width_in_microns(pulimageablesizewidth : UInt32*) : HRESULT
-    @lpVtbl.value.get_imageable_size_width_in_microns.unsafe_as(Proc(UInt32*, HRESULT)).call(pulimageablesizewidth)
+  def get_imageable_size_width_in_microns(this : IPrintSchemaPageImageableSize*, pulimageablesizewidth : UInt32*) : HRESULT
+    @lpVtbl.value.get_imageable_size_width_in_microns.call(this, pulimageablesizewidth)
   end
-  def get_imageable_size_height_in_microns(pulimageablesizeheight : UInt32*) : HRESULT
-    @lpVtbl.value.get_imageable_size_height_in_microns.unsafe_as(Proc(UInt32*, HRESULT)).call(pulimageablesizeheight)
+  def get_imageable_size_height_in_microns(this : IPrintSchemaPageImageableSize*, pulimageablesizeheight : UInt32*) : HRESULT
+    @lpVtbl.value.get_imageable_size_height_in_microns.call(this, pulimageablesizeheight)
   end
-  def get_origin_width_in_microns(puloriginwidth : UInt32*) : HRESULT
-    @lpVtbl.value.get_origin_width_in_microns.unsafe_as(Proc(UInt32*, HRESULT)).call(puloriginwidth)
+  def get_origin_width_in_microns(this : IPrintSchemaPageImageableSize*, puloriginwidth : UInt32*) : HRESULT
+    @lpVtbl.value.get_origin_width_in_microns.call(this, puloriginwidth)
   end
-  def get_origin_height_in_microns(puloriginheight : UInt32*) : HRESULT
-    @lpVtbl.value.get_origin_height_in_microns.unsafe_as(Proc(UInt32*, HRESULT)).call(puloriginheight)
+  def get_origin_height_in_microns(this : IPrintSchemaPageImageableSize*, puloriginheight : UInt32*) : HRESULT
+    @lpVtbl.value.get_origin_height_in_microns.call(this, puloriginheight)
   end
-  def get_extent_width_in_microns(pulextentwidth : UInt32*) : HRESULT
-    @lpVtbl.value.get_extent_width_in_microns.unsafe_as(Proc(UInt32*, HRESULT)).call(pulextentwidth)
+  def get_extent_width_in_microns(this : IPrintSchemaPageImageableSize*, pulextentwidth : UInt32*) : HRESULT
+    @lpVtbl.value.get_extent_width_in_microns.call(this, pulextentwidth)
   end
-  def get_extent_height_in_microns(pulextentheight : UInt32*) : HRESULT
-    @lpVtbl.value.get_extent_height_in_microns.unsafe_as(Proc(UInt32*, HRESULT)).call(pulextentheight)
+  def get_extent_height_in_microns(this : IPrintSchemaPageImageableSize*, pulextentheight : UInt32*) : HRESULT
+    @lpVtbl.value.get_extent_height_in_microns.call(this, pulextentheight)
   end
 end
 struct LibWin32::IPrintSchemaParameterDefinition
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintSchemaParameterDefinition*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintSchemaParameterDefinition*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintSchemaParameterDefinition*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrintSchemaParameterDefinition*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrintSchemaParameterDefinition*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrintSchemaParameterDefinition*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrintSchemaParameterDefinition*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_xml_node(ppxmlnode : IUnknown*) : HRESULT
-    @lpVtbl.value.get_xml_node.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppxmlnode)
+  def get_xml_node(this : IPrintSchemaParameterDefinition*, ppxmlnode : IUnknown*) : HRESULT
+    @lpVtbl.value.get_xml_node.call(this, ppxmlnode)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IPrintSchemaParameterDefinition*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def get_namespace_uri(pbstrnamespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrnamespaceuri)
+  def get_namespace_uri(this : IPrintSchemaParameterDefinition*, pbstrnamespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, pbstrnamespaceuri)
   end
-  def get_display_name(pbstrdisplayname : UInt8**) : HRESULT
-    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdisplayname)
+  def get_display_name(this : IPrintSchemaParameterDefinition*, pbstrdisplayname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrdisplayname)
   end
-  def get_user_input_required(pbisrequired : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_user_input_required.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbisrequired)
+  def get_user_input_required(this : IPrintSchemaParameterDefinition*, pbisrequired : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_user_input_required.call(this, pbisrequired)
   end
-  def get_unit_type(pbstrunittype : UInt8**) : HRESULT
-    @lpVtbl.value.get_unit_type.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrunittype)
+  def get_unit_type(this : IPrintSchemaParameterDefinition*, pbstrunittype : UInt8**) : HRESULT
+    @lpVtbl.value.get_unit_type.call(this, pbstrunittype)
   end
-  def get_data_type(pdatatype : PrintSchemaParameterDataType*) : HRESULT
-    @lpVtbl.value.get_data_type.unsafe_as(Proc(PrintSchemaParameterDataType*, HRESULT)).call(pdatatype)
+  def get_data_type(this : IPrintSchemaParameterDefinition*, pdatatype : PrintSchemaParameterDataType*) : HRESULT
+    @lpVtbl.value.get_data_type.call(this, pdatatype)
   end
-  def get_range_min(prangemin : Int32*) : HRESULT
-    @lpVtbl.value.get_range_min.unsafe_as(Proc(Int32*, HRESULT)).call(prangemin)
+  def get_range_min(this : IPrintSchemaParameterDefinition*, prangemin : Int32*) : HRESULT
+    @lpVtbl.value.get_range_min.call(this, prangemin)
   end
-  def get_range_max(prangemax : Int32*) : HRESULT
-    @lpVtbl.value.get_range_max.unsafe_as(Proc(Int32*, HRESULT)).call(prangemax)
+  def get_range_max(this : IPrintSchemaParameterDefinition*, prangemax : Int32*) : HRESULT
+    @lpVtbl.value.get_range_max.call(this, prangemax)
   end
 end
 struct LibWin32::IPrintSchemaParameterInitializer
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintSchemaParameterInitializer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintSchemaParameterInitializer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintSchemaParameterInitializer*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrintSchemaParameterInitializer*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrintSchemaParameterInitializer*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrintSchemaParameterInitializer*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrintSchemaParameterInitializer*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_xml_node(ppxmlnode : IUnknown*) : HRESULT
-    @lpVtbl.value.get_xml_node.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppxmlnode)
+  def get_xml_node(this : IPrintSchemaParameterInitializer*, ppxmlnode : IUnknown*) : HRESULT
+    @lpVtbl.value.get_xml_node.call(this, ppxmlnode)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IPrintSchemaParameterInitializer*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def get_namespace_uri(pbstrnamespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrnamespaceuri)
+  def get_namespace_uri(this : IPrintSchemaParameterInitializer*, pbstrnamespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, pbstrnamespaceuri)
   end
-  def get_value(pvar : VARIANT*) : HRESULT
-    @lpVtbl.value.get_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvar)
+  def get_value(this : IPrintSchemaParameterInitializer*, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, pvar)
   end
-  def put_value(pvar : VARIANT*) : HRESULT
-    @lpVtbl.value.put_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvar)
+  def put_value(this : IPrintSchemaParameterInitializer*, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.put_value.call(this, pvar)
   end
 end
 struct LibWin32::IPrintSchemaCapabilities
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintSchemaCapabilities*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintSchemaCapabilities*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintSchemaCapabilities*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrintSchemaCapabilities*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrintSchemaCapabilities*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrintSchemaCapabilities*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrintSchemaCapabilities*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_xml_node(ppxmlnode : IUnknown*) : HRESULT
-    @lpVtbl.value.get_xml_node.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppxmlnode)
+  def get_xml_node(this : IPrintSchemaCapabilities*, ppxmlnode : IUnknown*) : HRESULT
+    @lpVtbl.value.get_xml_node.call(this, ppxmlnode)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IPrintSchemaCapabilities*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def get_namespace_uri(pbstrnamespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrnamespaceuri)
+  def get_namespace_uri(this : IPrintSchemaCapabilities*, pbstrnamespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, pbstrnamespaceuri)
   end
-  def get_feature_by_key_name(bstrkeyname : UInt8*, ppfeature : IPrintSchemaFeature*) : HRESULT
-    @lpVtbl.value.get_feature_by_key_name.unsafe_as(Proc(UInt8*, IPrintSchemaFeature*, HRESULT)).call(bstrkeyname, ppfeature)
+  def get_feature_by_key_name(this : IPrintSchemaCapabilities*, bstrkeyname : UInt8*, ppfeature : IPrintSchemaFeature*) : HRESULT
+    @lpVtbl.value.get_feature_by_key_name.call(this, bstrkeyname, ppfeature)
   end
-  def get_feature(bstrname : UInt8*, bstrnamespaceuri : UInt8*, ppfeature : IPrintSchemaFeature*) : HRESULT
-    @lpVtbl.value.get_feature.unsafe_as(Proc(UInt8*, UInt8*, IPrintSchemaFeature*, HRESULT)).call(bstrname, bstrnamespaceuri, ppfeature)
+  def get_feature(this : IPrintSchemaCapabilities*, bstrname : UInt8*, bstrnamespaceuri : UInt8*, ppfeature : IPrintSchemaFeature*) : HRESULT
+    @lpVtbl.value.get_feature.call(this, bstrname, bstrnamespaceuri, ppfeature)
   end
-  def get_page_imageable_size(pppageimageablesize : IPrintSchemaPageImageableSize*) : HRESULT
-    @lpVtbl.value.get_page_imageable_size.unsafe_as(Proc(IPrintSchemaPageImageableSize*, HRESULT)).call(pppageimageablesize)
+  def get_page_imageable_size(this : IPrintSchemaCapabilities*, pppageimageablesize : IPrintSchemaPageImageableSize*) : HRESULT
+    @lpVtbl.value.get_page_imageable_size.call(this, pppageimageablesize)
   end
-  def get_job_copies_all_documents_min_value(puljobcopiesalldocumentsminvalue : UInt32*) : HRESULT
-    @lpVtbl.value.get_job_copies_all_documents_min_value.unsafe_as(Proc(UInt32*, HRESULT)).call(puljobcopiesalldocumentsminvalue)
+  def get_job_copies_all_documents_min_value(this : IPrintSchemaCapabilities*, puljobcopiesalldocumentsminvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_job_copies_all_documents_min_value.call(this, puljobcopiesalldocumentsminvalue)
   end
-  def get_job_copies_all_documents_max_value(puljobcopiesalldocumentsmaxvalue : UInt32*) : HRESULT
-    @lpVtbl.value.get_job_copies_all_documents_max_value.unsafe_as(Proc(UInt32*, HRESULT)).call(puljobcopiesalldocumentsmaxvalue)
+  def get_job_copies_all_documents_max_value(this : IPrintSchemaCapabilities*, puljobcopiesalldocumentsmaxvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_job_copies_all_documents_max_value.call(this, puljobcopiesalldocumentsmaxvalue)
   end
-  def get_selected_option_in_print_ticket(pfeature : IPrintSchemaFeature, ppoption : IPrintSchemaOption*) : HRESULT
-    @lpVtbl.value.get_selected_option_in_print_ticket.unsafe_as(Proc(IPrintSchemaFeature, IPrintSchemaOption*, HRESULT)).call(pfeature, ppoption)
+  def get_selected_option_in_print_ticket(this : IPrintSchemaCapabilities*, pfeature : IPrintSchemaFeature, ppoption : IPrintSchemaOption*) : HRESULT
+    @lpVtbl.value.get_selected_option_in_print_ticket.call(this, pfeature, ppoption)
   end
-  def get_options(pfeature : IPrintSchemaFeature, ppoptioncollection : IPrintSchemaOptionCollection*) : HRESULT
-    @lpVtbl.value.get_options.unsafe_as(Proc(IPrintSchemaFeature, IPrintSchemaOptionCollection*, HRESULT)).call(pfeature, ppoptioncollection)
+  def get_options(this : IPrintSchemaCapabilities*, pfeature : IPrintSchemaFeature, ppoptioncollection : IPrintSchemaOptionCollection*) : HRESULT
+    @lpVtbl.value.get_options.call(this, pfeature, ppoptioncollection)
   end
 end
 struct LibWin32::IPrintSchemaCapabilities2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintSchemaCapabilities2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintSchemaCapabilities2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintSchemaCapabilities2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrintSchemaCapabilities2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrintSchemaCapabilities2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrintSchemaCapabilities2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrintSchemaCapabilities2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_xml_node(ppxmlnode : IUnknown*) : HRESULT
-    @lpVtbl.value.get_xml_node.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppxmlnode)
+  def get_xml_node(this : IPrintSchemaCapabilities2*, ppxmlnode : IUnknown*) : HRESULT
+    @lpVtbl.value.get_xml_node.call(this, ppxmlnode)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IPrintSchemaCapabilities2*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def get_namespace_uri(pbstrnamespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrnamespaceuri)
+  def get_namespace_uri(this : IPrintSchemaCapabilities2*, pbstrnamespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, pbstrnamespaceuri)
   end
-  def get_feature_by_key_name(bstrkeyname : UInt8*, ppfeature : IPrintSchemaFeature*) : HRESULT
-    @lpVtbl.value.get_feature_by_key_name.unsafe_as(Proc(UInt8*, IPrintSchemaFeature*, HRESULT)).call(bstrkeyname, ppfeature)
+  def get_feature_by_key_name(this : IPrintSchemaCapabilities2*, bstrkeyname : UInt8*, ppfeature : IPrintSchemaFeature*) : HRESULT
+    @lpVtbl.value.get_feature_by_key_name.call(this, bstrkeyname, ppfeature)
   end
-  def get_feature(bstrname : UInt8*, bstrnamespaceuri : UInt8*, ppfeature : IPrintSchemaFeature*) : HRESULT
-    @lpVtbl.value.get_feature.unsafe_as(Proc(UInt8*, UInt8*, IPrintSchemaFeature*, HRESULT)).call(bstrname, bstrnamespaceuri, ppfeature)
+  def get_feature(this : IPrintSchemaCapabilities2*, bstrname : UInt8*, bstrnamespaceuri : UInt8*, ppfeature : IPrintSchemaFeature*) : HRESULT
+    @lpVtbl.value.get_feature.call(this, bstrname, bstrnamespaceuri, ppfeature)
   end
-  def get_page_imageable_size(pppageimageablesize : IPrintSchemaPageImageableSize*) : HRESULT
-    @lpVtbl.value.get_page_imageable_size.unsafe_as(Proc(IPrintSchemaPageImageableSize*, HRESULT)).call(pppageimageablesize)
+  def get_page_imageable_size(this : IPrintSchemaCapabilities2*, pppageimageablesize : IPrintSchemaPageImageableSize*) : HRESULT
+    @lpVtbl.value.get_page_imageable_size.call(this, pppageimageablesize)
   end
-  def get_job_copies_all_documents_min_value(puljobcopiesalldocumentsminvalue : UInt32*) : HRESULT
-    @lpVtbl.value.get_job_copies_all_documents_min_value.unsafe_as(Proc(UInt32*, HRESULT)).call(puljobcopiesalldocumentsminvalue)
+  def get_job_copies_all_documents_min_value(this : IPrintSchemaCapabilities2*, puljobcopiesalldocumentsminvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_job_copies_all_documents_min_value.call(this, puljobcopiesalldocumentsminvalue)
   end
-  def get_job_copies_all_documents_max_value(puljobcopiesalldocumentsmaxvalue : UInt32*) : HRESULT
-    @lpVtbl.value.get_job_copies_all_documents_max_value.unsafe_as(Proc(UInt32*, HRESULT)).call(puljobcopiesalldocumentsmaxvalue)
+  def get_job_copies_all_documents_max_value(this : IPrintSchemaCapabilities2*, puljobcopiesalldocumentsmaxvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_job_copies_all_documents_max_value.call(this, puljobcopiesalldocumentsmaxvalue)
   end
-  def get_selected_option_in_print_ticket(pfeature : IPrintSchemaFeature, ppoption : IPrintSchemaOption*) : HRESULT
-    @lpVtbl.value.get_selected_option_in_print_ticket.unsafe_as(Proc(IPrintSchemaFeature, IPrintSchemaOption*, HRESULT)).call(pfeature, ppoption)
+  def get_selected_option_in_print_ticket(this : IPrintSchemaCapabilities2*, pfeature : IPrintSchemaFeature, ppoption : IPrintSchemaOption*) : HRESULT
+    @lpVtbl.value.get_selected_option_in_print_ticket.call(this, pfeature, ppoption)
   end
-  def get_options(pfeature : IPrintSchemaFeature, ppoptioncollection : IPrintSchemaOptionCollection*) : HRESULT
-    @lpVtbl.value.get_options.unsafe_as(Proc(IPrintSchemaFeature, IPrintSchemaOptionCollection*, HRESULT)).call(pfeature, ppoptioncollection)
+  def get_options(this : IPrintSchemaCapabilities2*, pfeature : IPrintSchemaFeature, ppoptioncollection : IPrintSchemaOptionCollection*) : HRESULT
+    @lpVtbl.value.get_options.call(this, pfeature, ppoptioncollection)
   end
-  def get_parameter_definition(bstrname : UInt8*, bstrnamespaceuri : UInt8*, ppparameterdefinition : IPrintSchemaParameterDefinition*) : HRESULT
-    @lpVtbl.value.get_parameter_definition.unsafe_as(Proc(UInt8*, UInt8*, IPrintSchemaParameterDefinition*, HRESULT)).call(bstrname, bstrnamespaceuri, ppparameterdefinition)
+  def get_parameter_definition(this : IPrintSchemaCapabilities2*, bstrname : UInt8*, bstrnamespaceuri : UInt8*, ppparameterdefinition : IPrintSchemaParameterDefinition*) : HRESULT
+    @lpVtbl.value.get_parameter_definition.call(this, bstrname, bstrnamespaceuri, ppparameterdefinition)
   end
 end
 struct LibWin32::IPrintSchemaAsyncOperation
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintSchemaAsyncOperation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintSchemaAsyncOperation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintSchemaAsyncOperation*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrintSchemaAsyncOperation*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrintSchemaAsyncOperation*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrintSchemaAsyncOperation*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrintSchemaAsyncOperation*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def start : HRESULT
-    @lpVtbl.value.start.unsafe_as(Proc(HRESULT)).call
+  def start(this : IPrintSchemaAsyncOperation*) : HRESULT
+    @lpVtbl.value.start.call(this)
   end
-  def cancel : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  def cancel(this : IPrintSchemaAsyncOperation*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
   end
 end
 struct LibWin32::IPrintSchemaTicket
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintSchemaTicket*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintSchemaTicket*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintSchemaTicket*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrintSchemaTicket*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrintSchemaTicket*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrintSchemaTicket*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrintSchemaTicket*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_xml_node(ppxmlnode : IUnknown*) : HRESULT
-    @lpVtbl.value.get_xml_node.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppxmlnode)
+  def get_xml_node(this : IPrintSchemaTicket*, ppxmlnode : IUnknown*) : HRESULT
+    @lpVtbl.value.get_xml_node.call(this, ppxmlnode)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IPrintSchemaTicket*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def get_namespace_uri(pbstrnamespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrnamespaceuri)
+  def get_namespace_uri(this : IPrintSchemaTicket*, pbstrnamespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, pbstrnamespaceuri)
   end
-  def get_feature_by_key_name(bstrkeyname : UInt8*, ppfeature : IPrintSchemaFeature*) : HRESULT
-    @lpVtbl.value.get_feature_by_key_name.unsafe_as(Proc(UInt8*, IPrintSchemaFeature*, HRESULT)).call(bstrkeyname, ppfeature)
+  def get_feature_by_key_name(this : IPrintSchemaTicket*, bstrkeyname : UInt8*, ppfeature : IPrintSchemaFeature*) : HRESULT
+    @lpVtbl.value.get_feature_by_key_name.call(this, bstrkeyname, ppfeature)
   end
-  def get_feature(bstrname : UInt8*, bstrnamespaceuri : UInt8*, ppfeature : IPrintSchemaFeature*) : HRESULT
-    @lpVtbl.value.get_feature.unsafe_as(Proc(UInt8*, UInt8*, IPrintSchemaFeature*, HRESULT)).call(bstrname, bstrnamespaceuri, ppfeature)
+  def get_feature(this : IPrintSchemaTicket*, bstrname : UInt8*, bstrnamespaceuri : UInt8*, ppfeature : IPrintSchemaFeature*) : HRESULT
+    @lpVtbl.value.get_feature.call(this, bstrname, bstrnamespaceuri, ppfeature)
   end
-  def validate_async(ppasyncoperation : IPrintSchemaAsyncOperation*) : HRESULT
-    @lpVtbl.value.validate_async.unsafe_as(Proc(IPrintSchemaAsyncOperation*, HRESULT)).call(ppasyncoperation)
+  def validate_async(this : IPrintSchemaTicket*, ppasyncoperation : IPrintSchemaAsyncOperation*) : HRESULT
+    @lpVtbl.value.validate_async.call(this, ppasyncoperation)
   end
-  def commit_async(pprintticketcommit : IPrintSchemaTicket, ppasyncoperation : IPrintSchemaAsyncOperation*) : HRESULT
-    @lpVtbl.value.commit_async.unsafe_as(Proc(IPrintSchemaTicket, IPrintSchemaAsyncOperation*, HRESULT)).call(pprintticketcommit, ppasyncoperation)
+  def commit_async(this : IPrintSchemaTicket*, pprintticketcommit : IPrintSchemaTicket, ppasyncoperation : IPrintSchemaAsyncOperation*) : HRESULT
+    @lpVtbl.value.commit_async.call(this, pprintticketcommit, ppasyncoperation)
   end
-  def notify_xml_changed : HRESULT
-    @lpVtbl.value.notify_xml_changed.unsafe_as(Proc(HRESULT)).call
+  def notify_xml_changed(this : IPrintSchemaTicket*) : HRESULT
+    @lpVtbl.value.notify_xml_changed.call(this)
   end
-  def get_capabilities(ppcapabilities : IPrintSchemaCapabilities*) : HRESULT
-    @lpVtbl.value.get_capabilities.unsafe_as(Proc(IPrintSchemaCapabilities*, HRESULT)).call(ppcapabilities)
+  def get_capabilities(this : IPrintSchemaTicket*, ppcapabilities : IPrintSchemaCapabilities*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, ppcapabilities)
   end
-  def get_job_copies_all_documents(puljobcopiesalldocuments : UInt32*) : HRESULT
-    @lpVtbl.value.get_job_copies_all_documents.unsafe_as(Proc(UInt32*, HRESULT)).call(puljobcopiesalldocuments)
+  def get_job_copies_all_documents(this : IPrintSchemaTicket*, puljobcopiesalldocuments : UInt32*) : HRESULT
+    @lpVtbl.value.get_job_copies_all_documents.call(this, puljobcopiesalldocuments)
   end
-  def put_job_copies_all_documents(uljobcopiesalldocuments : UInt32) : HRESULT
-    @lpVtbl.value.put_job_copies_all_documents.unsafe_as(Proc(UInt32, HRESULT)).call(uljobcopiesalldocuments)
+  def put_job_copies_all_documents(this : IPrintSchemaTicket*, uljobcopiesalldocuments : UInt32) : HRESULT
+    @lpVtbl.value.put_job_copies_all_documents.call(this, uljobcopiesalldocuments)
   end
 end
 struct LibWin32::IPrintSchemaTicket2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintSchemaTicket2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintSchemaTicket2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintSchemaTicket2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrintSchemaTicket2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrintSchemaTicket2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrintSchemaTicket2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrintSchemaTicket2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_xml_node(ppxmlnode : IUnknown*) : HRESULT
-    @lpVtbl.value.get_xml_node.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppxmlnode)
+  def get_xml_node(this : IPrintSchemaTicket2*, ppxmlnode : IUnknown*) : HRESULT
+    @lpVtbl.value.get_xml_node.call(this, ppxmlnode)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IPrintSchemaTicket2*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def get_namespace_uri(pbstrnamespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrnamespaceuri)
+  def get_namespace_uri(this : IPrintSchemaTicket2*, pbstrnamespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, pbstrnamespaceuri)
   end
-  def get_feature_by_key_name(bstrkeyname : UInt8*, ppfeature : IPrintSchemaFeature*) : HRESULT
-    @lpVtbl.value.get_feature_by_key_name.unsafe_as(Proc(UInt8*, IPrintSchemaFeature*, HRESULT)).call(bstrkeyname, ppfeature)
+  def get_feature_by_key_name(this : IPrintSchemaTicket2*, bstrkeyname : UInt8*, ppfeature : IPrintSchemaFeature*) : HRESULT
+    @lpVtbl.value.get_feature_by_key_name.call(this, bstrkeyname, ppfeature)
   end
-  def get_feature(bstrname : UInt8*, bstrnamespaceuri : UInt8*, ppfeature : IPrintSchemaFeature*) : HRESULT
-    @lpVtbl.value.get_feature.unsafe_as(Proc(UInt8*, UInt8*, IPrintSchemaFeature*, HRESULT)).call(bstrname, bstrnamespaceuri, ppfeature)
+  def get_feature(this : IPrintSchemaTicket2*, bstrname : UInt8*, bstrnamespaceuri : UInt8*, ppfeature : IPrintSchemaFeature*) : HRESULT
+    @lpVtbl.value.get_feature.call(this, bstrname, bstrnamespaceuri, ppfeature)
   end
-  def validate_async(ppasyncoperation : IPrintSchemaAsyncOperation*) : HRESULT
-    @lpVtbl.value.validate_async.unsafe_as(Proc(IPrintSchemaAsyncOperation*, HRESULT)).call(ppasyncoperation)
+  def validate_async(this : IPrintSchemaTicket2*, ppasyncoperation : IPrintSchemaAsyncOperation*) : HRESULT
+    @lpVtbl.value.validate_async.call(this, ppasyncoperation)
   end
-  def commit_async(pprintticketcommit : IPrintSchemaTicket, ppasyncoperation : IPrintSchemaAsyncOperation*) : HRESULT
-    @lpVtbl.value.commit_async.unsafe_as(Proc(IPrintSchemaTicket, IPrintSchemaAsyncOperation*, HRESULT)).call(pprintticketcommit, ppasyncoperation)
+  def commit_async(this : IPrintSchemaTicket2*, pprintticketcommit : IPrintSchemaTicket, ppasyncoperation : IPrintSchemaAsyncOperation*) : HRESULT
+    @lpVtbl.value.commit_async.call(this, pprintticketcommit, ppasyncoperation)
   end
-  def notify_xml_changed : HRESULT
-    @lpVtbl.value.notify_xml_changed.unsafe_as(Proc(HRESULT)).call
+  def notify_xml_changed(this : IPrintSchemaTicket2*) : HRESULT
+    @lpVtbl.value.notify_xml_changed.call(this)
   end
-  def get_capabilities(ppcapabilities : IPrintSchemaCapabilities*) : HRESULT
-    @lpVtbl.value.get_capabilities.unsafe_as(Proc(IPrintSchemaCapabilities*, HRESULT)).call(ppcapabilities)
+  def get_capabilities(this : IPrintSchemaTicket2*, ppcapabilities : IPrintSchemaCapabilities*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, ppcapabilities)
   end
-  def get_job_copies_all_documents(puljobcopiesalldocuments : UInt32*) : HRESULT
-    @lpVtbl.value.get_job_copies_all_documents.unsafe_as(Proc(UInt32*, HRESULT)).call(puljobcopiesalldocuments)
+  def get_job_copies_all_documents(this : IPrintSchemaTicket2*, puljobcopiesalldocuments : UInt32*) : HRESULT
+    @lpVtbl.value.get_job_copies_all_documents.call(this, puljobcopiesalldocuments)
   end
-  def put_job_copies_all_documents(uljobcopiesalldocuments : UInt32) : HRESULT
-    @lpVtbl.value.put_job_copies_all_documents.unsafe_as(Proc(UInt32, HRESULT)).call(uljobcopiesalldocuments)
+  def put_job_copies_all_documents(this : IPrintSchemaTicket2*, uljobcopiesalldocuments : UInt32) : HRESULT
+    @lpVtbl.value.put_job_copies_all_documents.call(this, uljobcopiesalldocuments)
   end
-  def get_parameter_initializer(bstrname : UInt8*, bstrnamespaceuri : UInt8*, ppparameterinitializer : IPrintSchemaParameterInitializer*) : HRESULT
-    @lpVtbl.value.get_parameter_initializer.unsafe_as(Proc(UInt8*, UInt8*, IPrintSchemaParameterInitializer*, HRESULT)).call(bstrname, bstrnamespaceuri, ppparameterinitializer)
+  def get_parameter_initializer(this : IPrintSchemaTicket2*, bstrname : UInt8*, bstrnamespaceuri : UInt8*, ppparameterinitializer : IPrintSchemaParameterInitializer*) : HRESULT
+    @lpVtbl.value.get_parameter_initializer.call(this, bstrname, bstrnamespaceuri, ppparameterinitializer)
   end
 end
 struct LibWin32::IPrintSchemaAsyncOperationEvent
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintSchemaAsyncOperationEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintSchemaAsyncOperationEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintSchemaAsyncOperationEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrintSchemaAsyncOperationEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrintSchemaAsyncOperationEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrintSchemaAsyncOperationEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrintSchemaAsyncOperationEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def completed(pticket : IPrintSchemaTicket, hroperation : HRESULT) : HRESULT
-    @lpVtbl.value.completed.unsafe_as(Proc(IPrintSchemaTicket, HRESULT, HRESULT)).call(pticket, hroperation)
+  def completed(this : IPrintSchemaAsyncOperationEvent*, pticket : IPrintSchemaTicket, hroperation : HRESULT) : HRESULT
+    @lpVtbl.value.completed.call(this, pticket, hroperation)
   end
 end
 struct LibWin32::IPrinterScriptableSequentialStream
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrinterScriptableSequentialStream*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrinterScriptableSequentialStream*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrinterScriptableSequentialStream*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrinterScriptableSequentialStream*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrinterScriptableSequentialStream*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrinterScriptableSequentialStream*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrinterScriptableSequentialStream*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def read(cbread : Int32, pparray : IDispatch*) : HRESULT
-    @lpVtbl.value.read.unsafe_as(Proc(Int32, IDispatch*, HRESULT)).call(cbread, pparray)
+  def read(this : IPrinterScriptableSequentialStream*, cbread : Int32, pparray : IDispatch*) : HRESULT
+    @lpVtbl.value.read.call(this, cbread, pparray)
   end
-  def write(parray : IDispatch, pcbwritten : Int32*) : HRESULT
-    @lpVtbl.value.write.unsafe_as(Proc(IDispatch, Int32*, HRESULT)).call(parray, pcbwritten)
+  def write(this : IPrinterScriptableSequentialStream*, parray : IDispatch, pcbwritten : Int32*) : HRESULT
+    @lpVtbl.value.write.call(this, parray, pcbwritten)
   end
 end
 struct LibWin32::IPrinterScriptableStream
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrinterScriptableStream*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrinterScriptableStream*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrinterScriptableStream*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrinterScriptableStream*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrinterScriptableStream*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrinterScriptableStream*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrinterScriptableStream*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def read(cbread : Int32, pparray : IDispatch*) : HRESULT
-    @lpVtbl.value.read.unsafe_as(Proc(Int32, IDispatch*, HRESULT)).call(cbread, pparray)
+  def read(this : IPrinterScriptableStream*, cbread : Int32, pparray : IDispatch*) : HRESULT
+    @lpVtbl.value.read.call(this, cbread, pparray)
   end
-  def write(parray : IDispatch, pcbwritten : Int32*) : HRESULT
-    @lpVtbl.value.write.unsafe_as(Proc(IDispatch, Int32*, HRESULT)).call(parray, pcbwritten)
+  def write(this : IPrinterScriptableStream*, parray : IDispatch, pcbwritten : Int32*) : HRESULT
+    @lpVtbl.value.write.call(this, parray, pcbwritten)
   end
-  def commit : HRESULT
-    @lpVtbl.value.commit.unsafe_as(Proc(HRESULT)).call
+  def commit(this : IPrinterScriptableStream*) : HRESULT
+    @lpVtbl.value.commit.call(this)
   end
-  def seek(loffset : Int32, streamseek : STREAM_SEEK, plposition : Int32*) : HRESULT
-    @lpVtbl.value.seek.unsafe_as(Proc(Int32, STREAM_SEEK, Int32*, HRESULT)).call(loffset, streamseek, plposition)
+  def seek(this : IPrinterScriptableStream*, loffset : Int32, streamseek : STREAM_SEEK, plposition : Int32*) : HRESULT
+    @lpVtbl.value.seek.call(this, loffset, streamseek, plposition)
   end
-  def set_size(lsize : Int32) : HRESULT
-    @lpVtbl.value.set_size.unsafe_as(Proc(Int32, HRESULT)).call(lsize)
+  def set_size(this : IPrinterScriptableStream*, lsize : Int32) : HRESULT
+    @lpVtbl.value.set_size.call(this, lsize)
   end
 end
 struct LibWin32::IPrinterPropertyBag
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrinterPropertyBag*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrinterPropertyBag*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrinterPropertyBag*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrinterPropertyBag*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrinterPropertyBag*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrinterPropertyBag*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrinterPropertyBag*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_bool(bstrname : UInt8*, pbvalue : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_bool.unsafe_as(Proc(UInt8*, LibC::BOOL*, HRESULT)).call(bstrname, pbvalue)
+  def get_bool(this : IPrinterPropertyBag*, bstrname : UInt8*, pbvalue : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_bool.call(this, bstrname, pbvalue)
   end
-  def set_bool(bstrname : UInt8*, bvalue : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_bool.unsafe_as(Proc(UInt8*, LibC::BOOL, HRESULT)).call(bstrname, bvalue)
+  def set_bool(this : IPrinterPropertyBag*, bstrname : UInt8*, bvalue : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_bool.call(this, bstrname, bvalue)
   end
-  def get_int32(bstrname : UInt8*, pnvalue : Int32*) : HRESULT
-    @lpVtbl.value.get_int32.unsafe_as(Proc(UInt8*, Int32*, HRESULT)).call(bstrname, pnvalue)
+  def get_int32(this : IPrinterPropertyBag*, bstrname : UInt8*, pnvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_int32.call(this, bstrname, pnvalue)
   end
-  def set_int32(bstrname : UInt8*, nvalue : Int32) : HRESULT
-    @lpVtbl.value.set_int32.unsafe_as(Proc(UInt8*, Int32, HRESULT)).call(bstrname, nvalue)
+  def set_int32(this : IPrinterPropertyBag*, bstrname : UInt8*, nvalue : Int32) : HRESULT
+    @lpVtbl.value.set_int32.call(this, bstrname, nvalue)
   end
-  def get_string(bstrname : UInt8*, pbstrvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_string.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstrname, pbstrvalue)
+  def get_string(this : IPrinterPropertyBag*, bstrname : UInt8*, pbstrvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_string.call(this, bstrname, pbstrvalue)
   end
-  def set_string(bstrname : UInt8*, bstrvalue : UInt8*) : HRESULT
-    @lpVtbl.value.set_string.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstrname, bstrvalue)
+  def set_string(this : IPrinterPropertyBag*, bstrname : UInt8*, bstrvalue : UInt8*) : HRESULT
+    @lpVtbl.value.set_string.call(this, bstrname, bstrvalue)
   end
-  def get_bytes(bstrname : UInt8*, pcbvalue : UInt32*, ppvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_bytes.unsafe_as(Proc(UInt8*, UInt32*, UInt8**, HRESULT)).call(bstrname, pcbvalue, ppvalue)
+  def get_bytes(this : IPrinterPropertyBag*, bstrname : UInt8*, pcbvalue : UInt32*, ppvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_bytes.call(this, bstrname, pcbvalue, ppvalue)
   end
-  def set_bytes(bstrname : UInt8*, cbvalue : UInt32, pvalue : UInt8*) : HRESULT
-    @lpVtbl.value.set_bytes.unsafe_as(Proc(UInt8*, UInt32, UInt8*, HRESULT)).call(bstrname, cbvalue, pvalue)
+  def set_bytes(this : IPrinterPropertyBag*, bstrname : UInt8*, cbvalue : UInt32, pvalue : UInt8*) : HRESULT
+    @lpVtbl.value.set_bytes.call(this, bstrname, cbvalue, pvalue)
   end
-  def get_read_stream(bstrname : UInt8*, ppvalue : IStream*) : HRESULT
-    @lpVtbl.value.get_read_stream.unsafe_as(Proc(UInt8*, IStream*, HRESULT)).call(bstrname, ppvalue)
+  def get_read_stream(this : IPrinterPropertyBag*, bstrname : UInt8*, ppvalue : IStream*) : HRESULT
+    @lpVtbl.value.get_read_stream.call(this, bstrname, ppvalue)
   end
-  def get_write_stream(bstrname : UInt8*, ppvalue : IStream*) : HRESULT
-    @lpVtbl.value.get_write_stream.unsafe_as(Proc(UInt8*, IStream*, HRESULT)).call(bstrname, ppvalue)
+  def get_write_stream(this : IPrinterPropertyBag*, bstrname : UInt8*, ppvalue : IStream*) : HRESULT
+    @lpVtbl.value.get_write_stream.call(this, bstrname, ppvalue)
   end
 end
 struct LibWin32::IPrinterScriptablePropertyBag
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrinterScriptablePropertyBag*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrinterScriptablePropertyBag*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrinterScriptablePropertyBag*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrinterScriptablePropertyBag*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrinterScriptablePropertyBag*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrinterScriptablePropertyBag*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrinterScriptablePropertyBag*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_bool(bstrname : UInt8*, pbvalue : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_bool.unsafe_as(Proc(UInt8*, LibC::BOOL*, HRESULT)).call(bstrname, pbvalue)
+  def get_bool(this : IPrinterScriptablePropertyBag*, bstrname : UInt8*, pbvalue : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_bool.call(this, bstrname, pbvalue)
   end
-  def set_bool(bstrname : UInt8*, bvalue : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_bool.unsafe_as(Proc(UInt8*, LibC::BOOL, HRESULT)).call(bstrname, bvalue)
+  def set_bool(this : IPrinterScriptablePropertyBag*, bstrname : UInt8*, bvalue : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_bool.call(this, bstrname, bvalue)
   end
-  def get_int32(bstrname : UInt8*, pnvalue : Int32*) : HRESULT
-    @lpVtbl.value.get_int32.unsafe_as(Proc(UInt8*, Int32*, HRESULT)).call(bstrname, pnvalue)
+  def get_int32(this : IPrinterScriptablePropertyBag*, bstrname : UInt8*, pnvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_int32.call(this, bstrname, pnvalue)
   end
-  def set_int32(bstrname : UInt8*, nvalue : Int32) : HRESULT
-    @lpVtbl.value.set_int32.unsafe_as(Proc(UInt8*, Int32, HRESULT)).call(bstrname, nvalue)
+  def set_int32(this : IPrinterScriptablePropertyBag*, bstrname : UInt8*, nvalue : Int32) : HRESULT
+    @lpVtbl.value.set_int32.call(this, bstrname, nvalue)
   end
-  def get_string(bstrname : UInt8*, pbstrvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_string.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstrname, pbstrvalue)
+  def get_string(this : IPrinterScriptablePropertyBag*, bstrname : UInt8*, pbstrvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_string.call(this, bstrname, pbstrvalue)
   end
-  def set_string(bstrname : UInt8*, bstrvalue : UInt8*) : HRESULT
-    @lpVtbl.value.set_string.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstrname, bstrvalue)
+  def set_string(this : IPrinterScriptablePropertyBag*, bstrname : UInt8*, bstrvalue : UInt8*) : HRESULT
+    @lpVtbl.value.set_string.call(this, bstrname, bstrvalue)
   end
-  def get_bytes(bstrname : UInt8*, pparray : IDispatch*) : HRESULT
-    @lpVtbl.value.get_bytes.unsafe_as(Proc(UInt8*, IDispatch*, HRESULT)).call(bstrname, pparray)
+  def get_bytes(this : IPrinterScriptablePropertyBag*, bstrname : UInt8*, pparray : IDispatch*) : HRESULT
+    @lpVtbl.value.get_bytes.call(this, bstrname, pparray)
   end
-  def set_bytes(bstrname : UInt8*, parray : IDispatch) : HRESULT
-    @lpVtbl.value.set_bytes.unsafe_as(Proc(UInt8*, IDispatch, HRESULT)).call(bstrname, parray)
+  def set_bytes(this : IPrinterScriptablePropertyBag*, bstrname : UInt8*, parray : IDispatch) : HRESULT
+    @lpVtbl.value.set_bytes.call(this, bstrname, parray)
   end
-  def get_read_stream(bstrname : UInt8*, ppstream : IPrinterScriptableStream*) : HRESULT
-    @lpVtbl.value.get_read_stream.unsafe_as(Proc(UInt8*, IPrinterScriptableStream*, HRESULT)).call(bstrname, ppstream)
+  def get_read_stream(this : IPrinterScriptablePropertyBag*, bstrname : UInt8*, ppstream : IPrinterScriptableStream*) : HRESULT
+    @lpVtbl.value.get_read_stream.call(this, bstrname, ppstream)
   end
-  def get_write_stream(bstrname : UInt8*, ppstream : IPrinterScriptableStream*) : HRESULT
-    @lpVtbl.value.get_write_stream.unsafe_as(Proc(UInt8*, IPrinterScriptableStream*, HRESULT)).call(bstrname, ppstream)
+  def get_write_stream(this : IPrinterScriptablePropertyBag*, bstrname : UInt8*, ppstream : IPrinterScriptableStream*) : HRESULT
+    @lpVtbl.value.get_write_stream.call(this, bstrname, ppstream)
   end
 end
 struct LibWin32::IPrinterScriptablePropertyBag2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrinterScriptablePropertyBag2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrinterScriptablePropertyBag2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrinterScriptablePropertyBag2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrinterScriptablePropertyBag2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrinterScriptablePropertyBag2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrinterScriptablePropertyBag2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrinterScriptablePropertyBag2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_bool(bstrname : UInt8*, pbvalue : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_bool.unsafe_as(Proc(UInt8*, LibC::BOOL*, HRESULT)).call(bstrname, pbvalue)
+  def get_bool(this : IPrinterScriptablePropertyBag2*, bstrname : UInt8*, pbvalue : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_bool.call(this, bstrname, pbvalue)
   end
-  def set_bool(bstrname : UInt8*, bvalue : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_bool.unsafe_as(Proc(UInt8*, LibC::BOOL, HRESULT)).call(bstrname, bvalue)
+  def set_bool(this : IPrinterScriptablePropertyBag2*, bstrname : UInt8*, bvalue : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_bool.call(this, bstrname, bvalue)
   end
-  def get_int32(bstrname : UInt8*, pnvalue : Int32*) : HRESULT
-    @lpVtbl.value.get_int32.unsafe_as(Proc(UInt8*, Int32*, HRESULT)).call(bstrname, pnvalue)
+  def get_int32(this : IPrinterScriptablePropertyBag2*, bstrname : UInt8*, pnvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_int32.call(this, bstrname, pnvalue)
   end
-  def set_int32(bstrname : UInt8*, nvalue : Int32) : HRESULT
-    @lpVtbl.value.set_int32.unsafe_as(Proc(UInt8*, Int32, HRESULT)).call(bstrname, nvalue)
+  def set_int32(this : IPrinterScriptablePropertyBag2*, bstrname : UInt8*, nvalue : Int32) : HRESULT
+    @lpVtbl.value.set_int32.call(this, bstrname, nvalue)
   end
-  def get_string(bstrname : UInt8*, pbstrvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_string.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstrname, pbstrvalue)
+  def get_string(this : IPrinterScriptablePropertyBag2*, bstrname : UInt8*, pbstrvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_string.call(this, bstrname, pbstrvalue)
   end
-  def set_string(bstrname : UInt8*, bstrvalue : UInt8*) : HRESULT
-    @lpVtbl.value.set_string.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstrname, bstrvalue)
+  def set_string(this : IPrinterScriptablePropertyBag2*, bstrname : UInt8*, bstrvalue : UInt8*) : HRESULT
+    @lpVtbl.value.set_string.call(this, bstrname, bstrvalue)
   end
-  def get_bytes(bstrname : UInt8*, pparray : IDispatch*) : HRESULT
-    @lpVtbl.value.get_bytes.unsafe_as(Proc(UInt8*, IDispatch*, HRESULT)).call(bstrname, pparray)
+  def get_bytes(this : IPrinterScriptablePropertyBag2*, bstrname : UInt8*, pparray : IDispatch*) : HRESULT
+    @lpVtbl.value.get_bytes.call(this, bstrname, pparray)
   end
-  def set_bytes(bstrname : UInt8*, parray : IDispatch) : HRESULT
-    @lpVtbl.value.set_bytes.unsafe_as(Proc(UInt8*, IDispatch, HRESULT)).call(bstrname, parray)
+  def set_bytes(this : IPrinterScriptablePropertyBag2*, bstrname : UInt8*, parray : IDispatch) : HRESULT
+    @lpVtbl.value.set_bytes.call(this, bstrname, parray)
   end
-  def get_read_stream(bstrname : UInt8*, ppstream : IPrinterScriptableStream*) : HRESULT
-    @lpVtbl.value.get_read_stream.unsafe_as(Proc(UInt8*, IPrinterScriptableStream*, HRESULT)).call(bstrname, ppstream)
+  def get_read_stream(this : IPrinterScriptablePropertyBag2*, bstrname : UInt8*, ppstream : IPrinterScriptableStream*) : HRESULT
+    @lpVtbl.value.get_read_stream.call(this, bstrname, ppstream)
   end
-  def get_write_stream(bstrname : UInt8*, ppstream : IPrinterScriptableStream*) : HRESULT
-    @lpVtbl.value.get_write_stream.unsafe_as(Proc(UInt8*, IPrinterScriptableStream*, HRESULT)).call(bstrname, ppstream)
+  def get_write_stream(this : IPrinterScriptablePropertyBag2*, bstrname : UInt8*, ppstream : IPrinterScriptableStream*) : HRESULT
+    @lpVtbl.value.get_write_stream.call(this, bstrname, ppstream)
   end
-  def get_read_stream_as_xml(bstrname : UInt8*, ppxmlnode : IUnknown*) : HRESULT
-    @lpVtbl.value.get_read_stream_as_xml.unsafe_as(Proc(UInt8*, IUnknown*, HRESULT)).call(bstrname, ppxmlnode)
+  def get_read_stream_as_xml(this : IPrinterScriptablePropertyBag2*, bstrname : UInt8*, ppxmlnode : IUnknown*) : HRESULT
+    @lpVtbl.value.get_read_stream_as_xml.call(this, bstrname, ppxmlnode)
   end
 end
 struct LibWin32::IPrinterQueue
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrinterQueue*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrinterQueue*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrinterQueue*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrinterQueue*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrinterQueue*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrinterQueue*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrinterQueue*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_handle(phprinter : LibC::HANDLE*) : HRESULT
-    @lpVtbl.value.get_handle.unsafe_as(Proc(LibC::HANDLE*, HRESULT)).call(phprinter)
+  def get_handle(this : IPrinterQueue*, phprinter : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.get_handle.call(this, phprinter)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IPrinterQueue*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def send_bidi_query(bstrbidiquery : UInt8*) : HRESULT
-    @lpVtbl.value.send_bidi_query.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrbidiquery)
+  def send_bidi_query(this : IPrinterQueue*, bstrbidiquery : UInt8*) : HRESULT
+    @lpVtbl.value.send_bidi_query.call(this, bstrbidiquery)
   end
-  def get_properties(pppropertybag : IPrinterPropertyBag*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IPrinterPropertyBag*, HRESULT)).call(pppropertybag)
+  def get_properties(this : IPrinterQueue*, pppropertybag : IPrinterPropertyBag*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, pppropertybag)
   end
 end
 struct LibWin32::IPrintJob
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintJob*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintJob*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintJob*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IPrintJob*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def get_id(pulid : UInt32*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(UInt32*, HRESULT)).call(pulid)
+  def get_id(this : IPrintJob*, pulid : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pulid)
   end
-  def get_printed_pages(pulpages : UInt32*) : HRESULT
-    @lpVtbl.value.get_printed_pages.unsafe_as(Proc(UInt32*, HRESULT)).call(pulpages)
+  def get_printed_pages(this : IPrintJob*, pulpages : UInt32*) : HRESULT
+    @lpVtbl.value.get_printed_pages.call(this, pulpages)
   end
-  def get_total_pages(pulpages : UInt32*) : HRESULT
-    @lpVtbl.value.get_total_pages.unsafe_as(Proc(UInt32*, HRESULT)).call(pulpages)
+  def get_total_pages(this : IPrintJob*, pulpages : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_pages.call(this, pulpages)
   end
-  def get_status(pstatus : PrintJobStatus*) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(PrintJobStatus*, HRESULT)).call(pstatus)
+  def get_status(this : IPrintJob*, pstatus : PrintJobStatus*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pstatus)
   end
-  def get_submission_time(psubmissiontime : Float64*) : HRESULT
-    @lpVtbl.value.get_submission_time.unsafe_as(Proc(Float64*, HRESULT)).call(psubmissiontime)
+  def get_submission_time(this : IPrintJob*, psubmissiontime : Float64*) : HRESULT
+    @lpVtbl.value.get_submission_time.call(this, psubmissiontime)
   end
-  def request_cancel : HRESULT
-    @lpVtbl.value.request_cancel.unsafe_as(Proc(HRESULT)).call
+  def request_cancel(this : IPrintJob*) : HRESULT
+    @lpVtbl.value.request_cancel.call(this)
   end
 end
 struct LibWin32::IPrintJobCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintJobCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintJobCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintJobCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrintJobCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrintJobCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrintJobCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrintJobCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_count(pulcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pulcount)
+  def get_count(this : IPrintJobCollection*, pulcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pulcount)
   end
-  def get_at(ulindex : UInt32, ppjob : IPrintJob*) : HRESULT
-    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, IPrintJob*, HRESULT)).call(ulindex, ppjob)
+  def get_at(this : IPrintJobCollection*, ulindex : UInt32, ppjob : IPrintJob*) : HRESULT
+    @lpVtbl.value.get_at.call(this, ulindex, ppjob)
   end
-  def get__new_enum(ppunk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  def get__new_enum(this : IPrintJobCollection*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
   end
 end
 struct LibWin32::IPrinterQueueViewEvent
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrinterQueueViewEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrinterQueueViewEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrinterQueueViewEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrinterQueueViewEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrinterQueueViewEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrinterQueueViewEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrinterQueueViewEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def on_changed(pcollection : IPrintJobCollection, ulviewoffset : UInt32, ulviewsize : UInt32, ulcountjobsinprintqueue : UInt32) : HRESULT
-    @lpVtbl.value.on_changed.unsafe_as(Proc(IPrintJobCollection, UInt32, UInt32, UInt32, HRESULT)).call(pcollection, ulviewoffset, ulviewsize, ulcountjobsinprintqueue)
+  def on_changed(this : IPrinterQueueViewEvent*, pcollection : IPrintJobCollection, ulviewoffset : UInt32, ulviewsize : UInt32, ulcountjobsinprintqueue : UInt32) : HRESULT
+    @lpVtbl.value.on_changed.call(this, pcollection, ulviewoffset, ulviewsize, ulcountjobsinprintqueue)
   end
 end
 struct LibWin32::IPrinterQueueView
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrinterQueueView*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrinterQueueView*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrinterQueueView*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrinterQueueView*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrinterQueueView*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrinterQueueView*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrinterQueueView*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def set_view_range(ulviewoffset : UInt32, ulviewsize : UInt32) : HRESULT
-    @lpVtbl.value.set_view_range.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(ulviewoffset, ulviewsize)
+  def set_view_range(this : IPrinterQueueView*, ulviewoffset : UInt32, ulviewsize : UInt32) : HRESULT
+    @lpVtbl.value.set_view_range.call(this, ulviewoffset, ulviewsize)
   end
 end
 struct LibWin32::IPrinterQueueEvent
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrinterQueueEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrinterQueueEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrinterQueueEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrinterQueueEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrinterQueueEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrinterQueueEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrinterQueueEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def on_bidi_response_received(bstrresponse : UInt8*, hrstatus : HRESULT) : HRESULT
-    @lpVtbl.value.on_bidi_response_received.unsafe_as(Proc(UInt8*, HRESULT, HRESULT)).call(bstrresponse, hrstatus)
+  def on_bidi_response_received(this : IPrinterQueueEvent*, bstrresponse : UInt8*, hrstatus : HRESULT) : HRESULT
+    @lpVtbl.value.on_bidi_response_received.call(this, bstrresponse, hrstatus)
   end
 end
 struct LibWin32::IPrinterBidiSetRequestCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrinterBidiSetRequestCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrinterBidiSetRequestCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrinterBidiSetRequestCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def completed(bstrresponse : UInt8*, hrstatus : HRESULT) : HRESULT
-    @lpVtbl.value.completed.unsafe_as(Proc(UInt8*, HRESULT, HRESULT)).call(bstrresponse, hrstatus)
+  def completed(this : IPrinterBidiSetRequestCallback*, bstrresponse : UInt8*, hrstatus : HRESULT) : HRESULT
+    @lpVtbl.value.completed.call(this, bstrresponse, hrstatus)
   end
 end
 struct LibWin32::IPrinterExtensionAsyncOperation
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrinterExtensionAsyncOperation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrinterExtensionAsyncOperation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrinterExtensionAsyncOperation*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def cancel : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  def cancel(this : IPrinterExtensionAsyncOperation*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
   end
 end
 struct LibWin32::IPrinterQueue2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrinterQueue2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrinterQueue2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrinterQueue2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrinterQueue2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrinterQueue2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrinterQueue2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrinterQueue2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_handle(phprinter : LibC::HANDLE*) : HRESULT
-    @lpVtbl.value.get_handle.unsafe_as(Proc(LibC::HANDLE*, HRESULT)).call(phprinter)
+  def get_handle(this : IPrinterQueue2*, phprinter : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.get_handle.call(this, phprinter)
   end
-  def get_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_name(this : IPrinterQueue2*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
   end
-  def send_bidi_query(bstrbidiquery : UInt8*) : HRESULT
-    @lpVtbl.value.send_bidi_query.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrbidiquery)
+  def send_bidi_query(this : IPrinterQueue2*, bstrbidiquery : UInt8*) : HRESULT
+    @lpVtbl.value.send_bidi_query.call(this, bstrbidiquery)
   end
-  def get_properties(pppropertybag : IPrinterPropertyBag*) : HRESULT
-    @lpVtbl.value.get_properties.unsafe_as(Proc(IPrinterPropertyBag*, HRESULT)).call(pppropertybag)
+  def get_properties(this : IPrinterQueue2*, pppropertybag : IPrinterPropertyBag*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, pppropertybag)
   end
-  def send_bidi_set_request_async(bstrbidirequest : UInt8*, pcallback : IPrinterBidiSetRequestCallback, ppasyncoperation : IPrinterExtensionAsyncOperation*) : HRESULT
-    @lpVtbl.value.send_bidi_set_request_async.unsafe_as(Proc(UInt8*, IPrinterBidiSetRequestCallback, IPrinterExtensionAsyncOperation*, HRESULT)).call(bstrbidirequest, pcallback, ppasyncoperation)
+  def send_bidi_set_request_async(this : IPrinterQueue2*, bstrbidirequest : UInt8*, pcallback : IPrinterBidiSetRequestCallback, ppasyncoperation : IPrinterExtensionAsyncOperation*) : HRESULT
+    @lpVtbl.value.send_bidi_set_request_async.call(this, bstrbidirequest, pcallback, ppasyncoperation)
   end
-  def get_printer_queue_view(ulviewoffset : UInt32, ulviewsize : UInt32, ppjobview : IPrinterQueueView*) : HRESULT
-    @lpVtbl.value.get_printer_queue_view.unsafe_as(Proc(UInt32, UInt32, IPrinterQueueView*, HRESULT)).call(ulviewoffset, ulviewsize, ppjobview)
+  def get_printer_queue_view(this : IPrinterQueue2*, ulviewoffset : UInt32, ulviewsize : UInt32, ppjobview : IPrinterQueueView*) : HRESULT
+    @lpVtbl.value.get_printer_queue_view.call(this, ulviewoffset, ulviewsize, ppjobview)
   end
 end
 struct LibWin32::IPrinterExtensionContext
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrinterExtensionContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrinterExtensionContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrinterExtensionContext*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrinterExtensionContext*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrinterExtensionContext*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrinterExtensionContext*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrinterExtensionContext*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_printer_queue(ppqueue : IPrinterQueue*) : HRESULT
-    @lpVtbl.value.get_printer_queue.unsafe_as(Proc(IPrinterQueue*, HRESULT)).call(ppqueue)
+  def get_printer_queue(this : IPrinterExtensionContext*, ppqueue : IPrinterQueue*) : HRESULT
+    @lpVtbl.value.get_printer_queue.call(this, ppqueue)
   end
-  def get_print_schema_ticket(ppticket : IPrintSchemaTicket*) : HRESULT
-    @lpVtbl.value.get_print_schema_ticket.unsafe_as(Proc(IPrintSchemaTicket*, HRESULT)).call(ppticket)
+  def get_print_schema_ticket(this : IPrinterExtensionContext*, ppticket : IPrintSchemaTicket*) : HRESULT
+    @lpVtbl.value.get_print_schema_ticket.call(this, ppticket)
   end
-  def get_driver_properties(pppropertybag : IPrinterPropertyBag*) : HRESULT
-    @lpVtbl.value.get_driver_properties.unsafe_as(Proc(IPrinterPropertyBag*, HRESULT)).call(pppropertybag)
+  def get_driver_properties(this : IPrinterExtensionContext*, pppropertybag : IPrinterPropertyBag*) : HRESULT
+    @lpVtbl.value.get_driver_properties.call(this, pppropertybag)
   end
-  def get_user_properties(pppropertybag : IPrinterPropertyBag*) : HRESULT
-    @lpVtbl.value.get_user_properties.unsafe_as(Proc(IPrinterPropertyBag*, HRESULT)).call(pppropertybag)
+  def get_user_properties(this : IPrinterExtensionContext*, pppropertybag : IPrinterPropertyBag*) : HRESULT
+    @lpVtbl.value.get_user_properties.call(this, pppropertybag)
   end
 end
 struct LibWin32::IPrinterExtensionRequest
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrinterExtensionRequest*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrinterExtensionRequest*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrinterExtensionRequest*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrinterExtensionRequest*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrinterExtensionRequest*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrinterExtensionRequest*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrinterExtensionRequest*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def cancel(hrstatus : HRESULT, bstrlogmessage : UInt8*) : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT, UInt8*, HRESULT)).call(hrstatus, bstrlogmessage)
+  def cancel(this : IPrinterExtensionRequest*, hrstatus : HRESULT, bstrlogmessage : UInt8*) : HRESULT
+    @lpVtbl.value.cancel.call(this, hrstatus, bstrlogmessage)
   end
-  def complete : HRESULT
-    @lpVtbl.value.complete.unsafe_as(Proc(HRESULT)).call
+  def complete(this : IPrinterExtensionRequest*) : HRESULT
+    @lpVtbl.value.complete.call(this)
   end
 end
 struct LibWin32::IPrinterExtensionEventArgs
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrinterExtensionEventArgs*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrinterExtensionEventArgs*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrinterExtensionEventArgs*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrinterExtensionEventArgs*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrinterExtensionEventArgs*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrinterExtensionEventArgs*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrinterExtensionEventArgs*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_printer_queue(ppqueue : IPrinterQueue*) : HRESULT
-    @lpVtbl.value.get_printer_queue.unsafe_as(Proc(IPrinterQueue*, HRESULT)).call(ppqueue)
+  def get_printer_queue(this : IPrinterExtensionEventArgs*, ppqueue : IPrinterQueue*) : HRESULT
+    @lpVtbl.value.get_printer_queue.call(this, ppqueue)
   end
-  def get_print_schema_ticket(ppticket : IPrintSchemaTicket*) : HRESULT
-    @lpVtbl.value.get_print_schema_ticket.unsafe_as(Proc(IPrintSchemaTicket*, HRESULT)).call(ppticket)
+  def get_print_schema_ticket(this : IPrinterExtensionEventArgs*, ppticket : IPrintSchemaTicket*) : HRESULT
+    @lpVtbl.value.get_print_schema_ticket.call(this, ppticket)
   end
-  def get_driver_properties(pppropertybag : IPrinterPropertyBag*) : HRESULT
-    @lpVtbl.value.get_driver_properties.unsafe_as(Proc(IPrinterPropertyBag*, HRESULT)).call(pppropertybag)
+  def get_driver_properties(this : IPrinterExtensionEventArgs*, pppropertybag : IPrinterPropertyBag*) : HRESULT
+    @lpVtbl.value.get_driver_properties.call(this, pppropertybag)
   end
-  def get_user_properties(pppropertybag : IPrinterPropertyBag*) : HRESULT
-    @lpVtbl.value.get_user_properties.unsafe_as(Proc(IPrinterPropertyBag*, HRESULT)).call(pppropertybag)
+  def get_user_properties(this : IPrinterExtensionEventArgs*, pppropertybag : IPrinterPropertyBag*) : HRESULT
+    @lpVtbl.value.get_user_properties.call(this, pppropertybag)
   end
-  def get_bidi_notification(pbstrbidinotification : UInt8**) : HRESULT
-    @lpVtbl.value.get_bidi_notification.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbidinotification)
+  def get_bidi_notification(this : IPrinterExtensionEventArgs*, pbstrbidinotification : UInt8**) : HRESULT
+    @lpVtbl.value.get_bidi_notification.call(this, pbstrbidinotification)
   end
-  def get_reason_id(preasonid : Guid*) : HRESULT
-    @lpVtbl.value.get_reason_id.unsafe_as(Proc(Guid*, HRESULT)).call(preasonid)
+  def get_reason_id(this : IPrinterExtensionEventArgs*, preasonid : Guid*) : HRESULT
+    @lpVtbl.value.get_reason_id.call(this, preasonid)
   end
-  def get_request(pprequest : IPrinterExtensionRequest*) : HRESULT
-    @lpVtbl.value.get_request.unsafe_as(Proc(IPrinterExtensionRequest*, HRESULT)).call(pprequest)
+  def get_request(this : IPrinterExtensionEventArgs*, pprequest : IPrinterExtensionRequest*) : HRESULT
+    @lpVtbl.value.get_request.call(this, pprequest)
   end
-  def get_source_application(pbstrapplication : UInt8**) : HRESULT
-    @lpVtbl.value.get_source_application.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrapplication)
+  def get_source_application(this : IPrinterExtensionEventArgs*, pbstrapplication : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_application.call(this, pbstrapplication)
   end
-  def get_detailed_reason_id(pdetailedreasonid : Guid*) : HRESULT
-    @lpVtbl.value.get_detailed_reason_id.unsafe_as(Proc(Guid*, HRESULT)).call(pdetailedreasonid)
+  def get_detailed_reason_id(this : IPrinterExtensionEventArgs*, pdetailedreasonid : Guid*) : HRESULT
+    @lpVtbl.value.get_detailed_reason_id.call(this, pdetailedreasonid)
   end
-  def get_window_modal(pbmodal : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_window_modal.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbmodal)
+  def get_window_modal(this : IPrinterExtensionEventArgs*, pbmodal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_window_modal.call(this, pbmodal)
   end
-  def get_window_parent(phwndparent : LibC::HANDLE*) : HRESULT
-    @lpVtbl.value.get_window_parent.unsafe_as(Proc(LibC::HANDLE*, HRESULT)).call(phwndparent)
+  def get_window_parent(this : IPrinterExtensionEventArgs*, phwndparent : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.get_window_parent.call(this, phwndparent)
   end
 end
 struct LibWin32::IPrinterExtensionContextCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrinterExtensionContextCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrinterExtensionContextCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrinterExtensionContextCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrinterExtensionContextCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrinterExtensionContextCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrinterExtensionContextCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrinterExtensionContextCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_count(pulcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pulcount)
+  def get_count(this : IPrinterExtensionContextCollection*, pulcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pulcount)
   end
-  def get_at(ulindex : UInt32, ppcontext : IPrinterExtensionContext*) : HRESULT
-    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, IPrinterExtensionContext*, HRESULT)).call(ulindex, ppcontext)
+  def get_at(this : IPrinterExtensionContextCollection*, ulindex : UInt32, ppcontext : IPrinterExtensionContext*) : HRESULT
+    @lpVtbl.value.get_at.call(this, ulindex, ppcontext)
   end
-  def get__new_enum(ppunk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  def get__new_enum(this : IPrinterExtensionContextCollection*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
   end
 end
 struct LibWin32::IPrinterExtensionEvent
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrinterExtensionEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrinterExtensionEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrinterExtensionEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrinterExtensionEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrinterExtensionEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrinterExtensionEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrinterExtensionEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def on_driver_event(peventargs : IPrinterExtensionEventArgs) : HRESULT
-    @lpVtbl.value.on_driver_event.unsafe_as(Proc(IPrinterExtensionEventArgs, HRESULT)).call(peventargs)
+  def on_driver_event(this : IPrinterExtensionEvent*, peventargs : IPrinterExtensionEventArgs) : HRESULT
+    @lpVtbl.value.on_driver_event.call(this, peventargs)
   end
-  def on_printer_queues_enumerated(pcontextcollection : IPrinterExtensionContextCollection) : HRESULT
-    @lpVtbl.value.on_printer_queues_enumerated.unsafe_as(Proc(IPrinterExtensionContextCollection, HRESULT)).call(pcontextcollection)
+  def on_printer_queues_enumerated(this : IPrinterExtensionEvent*, pcontextcollection : IPrinterExtensionContextCollection) : HRESULT
+    @lpVtbl.value.on_printer_queues_enumerated.call(this, pcontextcollection)
   end
 end
 struct LibWin32::IPrinterExtensionManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrinterExtensionManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrinterExtensionManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrinterExtensionManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def enable_events(printerdriverid : Guid) : HRESULT
-    @lpVtbl.value.enable_events.unsafe_as(Proc(Guid, HRESULT)).call(printerdriverid)
+  def enable_events(this : IPrinterExtensionManager*, printerdriverid : Guid) : HRESULT
+    @lpVtbl.value.enable_events.call(this, printerdriverid)
   end
-  def disable_events : HRESULT
-    @lpVtbl.value.disable_events.unsafe_as(Proc(HRESULT)).call
+  def disable_events(this : IPrinterExtensionManager*) : HRESULT
+    @lpVtbl.value.disable_events.call(this)
   end
 end
 struct LibWin32::IPrinterScriptContext
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrinterScriptContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrinterScriptContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrinterScriptContext*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPrinterScriptContext*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPrinterScriptContext*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPrinterScriptContext*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPrinterScriptContext*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_driver_properties(pppropertybag : IPrinterScriptablePropertyBag*) : HRESULT
-    @lpVtbl.value.get_driver_properties.unsafe_as(Proc(IPrinterScriptablePropertyBag*, HRESULT)).call(pppropertybag)
+  def get_driver_properties(this : IPrinterScriptContext*, pppropertybag : IPrinterScriptablePropertyBag*) : HRESULT
+    @lpVtbl.value.get_driver_properties.call(this, pppropertybag)
   end
-  def get_queue_properties(pppropertybag : IPrinterScriptablePropertyBag*) : HRESULT
-    @lpVtbl.value.get_queue_properties.unsafe_as(Proc(IPrinterScriptablePropertyBag*, HRESULT)).call(pppropertybag)
+  def get_queue_properties(this : IPrinterScriptContext*, pppropertybag : IPrinterScriptablePropertyBag*) : HRESULT
+    @lpVtbl.value.get_queue_properties.call(this, pppropertybag)
   end
-  def get_user_properties(pppropertybag : IPrinterScriptablePropertyBag*) : HRESULT
-    @lpVtbl.value.get_user_properties.unsafe_as(Proc(IPrinterScriptablePropertyBag*, HRESULT)).call(pppropertybag)
+  def get_user_properties(this : IPrinterScriptContext*, pppropertybag : IPrinterScriptablePropertyBag*) : HRESULT
+    @lpVtbl.value.get_user_properties.call(this, pppropertybag)
   end
 end
 struct LibWin32::IPrintAsyncNotifyDataObject
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintAsyncNotifyDataObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintAsyncNotifyDataObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintAsyncNotifyDataObject*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def acquire_data(ppnotificationdata : UInt8**, psize : UInt32*, ppschema : Guid**) : HRESULT
-    @lpVtbl.value.acquire_data.unsafe_as(Proc(UInt8**, UInt32*, Guid**, HRESULT)).call(ppnotificationdata, psize, ppschema)
+  def acquire_data(this : IPrintAsyncNotifyDataObject*, ppnotificationdata : UInt8**, psize : UInt32*, ppschema : Guid**) : HRESULT
+    @lpVtbl.value.acquire_data.call(this, ppnotificationdata, psize, ppschema)
   end
-  def release_data : HRESULT
-    @lpVtbl.value.release_data.unsafe_as(Proc(HRESULT)).call
+  def release_data(this : IPrintAsyncNotifyDataObject*) : HRESULT
+    @lpVtbl.value.release_data.call(this)
   end
 end
 struct LibWin32::IPrintAsyncNotifyChannel
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintAsyncNotifyChannel*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintAsyncNotifyChannel*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintAsyncNotifyChannel*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def send_notification(pdata : IPrintAsyncNotifyDataObject) : HRESULT
-    @lpVtbl.value.send_notification.unsafe_as(Proc(IPrintAsyncNotifyDataObject, HRESULT)).call(pdata)
+  def send_notification(this : IPrintAsyncNotifyChannel*, pdata : IPrintAsyncNotifyDataObject) : HRESULT
+    @lpVtbl.value.send_notification.call(this, pdata)
   end
-  def close_channel(pdata : IPrintAsyncNotifyDataObject) : HRESULT
-    @lpVtbl.value.close_channel.unsafe_as(Proc(IPrintAsyncNotifyDataObject, HRESULT)).call(pdata)
+  def close_channel(this : IPrintAsyncNotifyChannel*, pdata : IPrintAsyncNotifyDataObject) : HRESULT
+    @lpVtbl.value.close_channel.call(this, pdata)
   end
 end
 struct LibWin32::IPrintAsyncNotifyCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintAsyncNotifyCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintAsyncNotifyCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintAsyncNotifyCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_event_notify(pchannel : IPrintAsyncNotifyChannel, pdata : IPrintAsyncNotifyDataObject) : HRESULT
-    @lpVtbl.value.on_event_notify.unsafe_as(Proc(IPrintAsyncNotifyChannel, IPrintAsyncNotifyDataObject, HRESULT)).call(pchannel, pdata)
+  def on_event_notify(this : IPrintAsyncNotifyCallback*, pchannel : IPrintAsyncNotifyChannel, pdata : IPrintAsyncNotifyDataObject) : HRESULT
+    @lpVtbl.value.on_event_notify.call(this, pchannel, pdata)
   end
-  def channel_closed(pchannel : IPrintAsyncNotifyChannel, pdata : IPrintAsyncNotifyDataObject) : HRESULT
-    @lpVtbl.value.channel_closed.unsafe_as(Proc(IPrintAsyncNotifyChannel, IPrintAsyncNotifyDataObject, HRESULT)).call(pchannel, pdata)
+  def channel_closed(this : IPrintAsyncNotifyCallback*, pchannel : IPrintAsyncNotifyChannel, pdata : IPrintAsyncNotifyDataObject) : HRESULT
+    @lpVtbl.value.channel_closed.call(this, pchannel, pdata)
   end
 end
 struct LibWin32::IPrintAsyncNotifyRegistration
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintAsyncNotifyRegistration*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintAsyncNotifyRegistration*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintAsyncNotifyRegistration*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def register_for_notifications : HRESULT
-    @lpVtbl.value.register_for_notifications.unsafe_as(Proc(HRESULT)).call
+  def register_for_notifications(this : IPrintAsyncNotifyRegistration*) : HRESULT
+    @lpVtbl.value.register_for_notifications.call(this)
   end
-  def unregister_for_notifications : HRESULT
-    @lpVtbl.value.unregister_for_notifications.unsafe_as(Proc(HRESULT)).call
+  def unregister_for_notifications(this : IPrintAsyncNotifyRegistration*) : HRESULT
+    @lpVtbl.value.unregister_for_notifications.call(this)
   end
 end
 struct LibWin32::IPrintAsyncNotify
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintAsyncNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintAsyncNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintAsyncNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_print_async_notify_channel(param0 : UInt32, param1 : Guid*, param2 : PrintAsyncNotifyUserFilter, param3 : PrintAsyncNotifyConversationStyle, param4 : IPrintAsyncNotifyCallback, param5 : IPrintAsyncNotifyChannel*) : HRESULT
-    @lpVtbl.value.create_print_async_notify_channel.unsafe_as(Proc(UInt32, Guid*, PrintAsyncNotifyUserFilter, PrintAsyncNotifyConversationStyle, IPrintAsyncNotifyCallback, IPrintAsyncNotifyChannel*, HRESULT)).call(param0, param1, param2, param3, param4, param5)
+  def create_print_async_notify_channel(this : IPrintAsyncNotify*, param0 : UInt32, param1 : Guid*, param2 : PrintAsyncNotifyUserFilter, param3 : PrintAsyncNotifyConversationStyle, param4 : IPrintAsyncNotifyCallback, param5 : IPrintAsyncNotifyChannel*) : HRESULT
+    @lpVtbl.value.create_print_async_notify_channel.call(this, param0, param1, param2, param3, param4, param5)
   end
-  def create_print_async_notify_registration(param0 : Guid*, param1 : PrintAsyncNotifyUserFilter, param2 : PrintAsyncNotifyConversationStyle, param3 : IPrintAsyncNotifyCallback, param4 : IPrintAsyncNotifyRegistration*) : HRESULT
-    @lpVtbl.value.create_print_async_notify_registration.unsafe_as(Proc(Guid*, PrintAsyncNotifyUserFilter, PrintAsyncNotifyConversationStyle, IPrintAsyncNotifyCallback, IPrintAsyncNotifyRegistration*, HRESULT)).call(param0, param1, param2, param3, param4)
+  def create_print_async_notify_registration(this : IPrintAsyncNotify*, param0 : Guid*, param1 : PrintAsyncNotifyUserFilter, param2 : PrintAsyncNotifyConversationStyle, param3 : IPrintAsyncNotifyCallback, param4 : IPrintAsyncNotifyRegistration*) : HRESULT
+    @lpVtbl.value.create_print_async_notify_registration.call(this, param0, param1, param2, param3, param4)
   end
 end
 struct LibWin32::IPrintAsyncCookie
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintAsyncCookie*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintAsyncCookie*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintAsyncCookie*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def finish_async_call(param0 : HRESULT) : HRESULT
-    @lpVtbl.value.finish_async_call.unsafe_as(Proc(HRESULT, HRESULT)).call(param0)
+  def finish_async_call(this : IPrintAsyncCookie*, param0 : HRESULT) : HRESULT
+    @lpVtbl.value.finish_async_call.call(this, param0)
   end
-  def cancel_async_call(param0 : HRESULT) : HRESULT
-    @lpVtbl.value.cancel_async_call.unsafe_as(Proc(HRESULT, HRESULT)).call(param0)
+  def cancel_async_call(this : IPrintAsyncCookie*, param0 : HRESULT) : HRESULT
+    @lpVtbl.value.cancel_async_call.call(this, param0)
   end
 end
 struct LibWin32::IPrintAsyncNewChannelCookie
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintAsyncNewChannelCookie*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintAsyncNewChannelCookie*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintAsyncNewChannelCookie*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def finish_async_call(param0 : HRESULT) : HRESULT
-    @lpVtbl.value.finish_async_call.unsafe_as(Proc(HRESULT, HRESULT)).call(param0)
+  def finish_async_call(this : IPrintAsyncNewChannelCookie*, param0 : HRESULT) : HRESULT
+    @lpVtbl.value.finish_async_call.call(this, param0)
   end
-  def cancel_async_call(param0 : HRESULT) : HRESULT
-    @lpVtbl.value.cancel_async_call.unsafe_as(Proc(HRESULT, HRESULT)).call(param0)
+  def cancel_async_call(this : IPrintAsyncNewChannelCookie*, param0 : HRESULT) : HRESULT
+    @lpVtbl.value.cancel_async_call.call(this, param0)
   end
-  def finish_async_call_with_data(param0 : IPrintAsyncNotifyChannel*, param1 : UInt32) : HRESULT
-    @lpVtbl.value.finish_async_call_with_data.unsafe_as(Proc(IPrintAsyncNotifyChannel*, UInt32, HRESULT)).call(param0, param1)
+  def finish_async_call_with_data(this : IPrintAsyncNewChannelCookie*, param0 : IPrintAsyncNotifyChannel*, param1 : UInt32) : HRESULT
+    @lpVtbl.value.finish_async_call_with_data.call(this, param0, param1)
   end
 end
 struct LibWin32::IAsyncGetSendNotificationCookie
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IAsyncGetSendNotificationCookie*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IAsyncGetSendNotificationCookie*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IAsyncGetSendNotificationCookie*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def finish_async_call(param0 : HRESULT) : HRESULT
-    @lpVtbl.value.finish_async_call.unsafe_as(Proc(HRESULT, HRESULT)).call(param0)
+  def finish_async_call(this : IAsyncGetSendNotificationCookie*, param0 : HRESULT) : HRESULT
+    @lpVtbl.value.finish_async_call.call(this, param0)
   end
-  def cancel_async_call(param0 : HRESULT) : HRESULT
-    @lpVtbl.value.cancel_async_call.unsafe_as(Proc(HRESULT, HRESULT)).call(param0)
+  def cancel_async_call(this : IAsyncGetSendNotificationCookie*, param0 : HRESULT) : HRESULT
+    @lpVtbl.value.cancel_async_call.call(this, param0)
   end
-  def finish_async_call_with_data(param0 : IPrintAsyncNotifyDataObject, param1 : LibC::BOOL) : HRESULT
-    @lpVtbl.value.finish_async_call_with_data.unsafe_as(Proc(IPrintAsyncNotifyDataObject, LibC::BOOL, HRESULT)).call(param0, param1)
+  def finish_async_call_with_data(this : IAsyncGetSendNotificationCookie*, param0 : IPrintAsyncNotifyDataObject, param1 : LibC::BOOL) : HRESULT
+    @lpVtbl.value.finish_async_call_with_data.call(this, param0, param1)
   end
 end
 struct LibWin32::IAsyncGetSrvReferralCookie
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IAsyncGetSrvReferralCookie*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IAsyncGetSrvReferralCookie*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IAsyncGetSrvReferralCookie*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def finish_async_call(param0 : HRESULT) : HRESULT
-    @lpVtbl.value.finish_async_call.unsafe_as(Proc(HRESULT, HRESULT)).call(param0)
+  def finish_async_call(this : IAsyncGetSrvReferralCookie*, param0 : HRESULT) : HRESULT
+    @lpVtbl.value.finish_async_call.call(this, param0)
   end
-  def cancel_async_call(param0 : HRESULT) : HRESULT
-    @lpVtbl.value.cancel_async_call.unsafe_as(Proc(HRESULT, HRESULT)).call(param0)
+  def cancel_async_call(this : IAsyncGetSrvReferralCookie*, param0 : HRESULT) : HRESULT
+    @lpVtbl.value.cancel_async_call.call(this, param0)
   end
-  def finish_async_call_with_data(param0 : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.finish_async_call_with_data.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(param0)
+  def finish_async_call_with_data(this : IAsyncGetSrvReferralCookie*, param0 : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.finish_async_call_with_data.call(this, param0)
   end
 end
 struct LibWin32::IPrintBidiAsyncNotifyRegistration
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintBidiAsyncNotifyRegistration*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintBidiAsyncNotifyRegistration*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintBidiAsyncNotifyRegistration*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def register_for_notifications : HRESULT
-    @lpVtbl.value.register_for_notifications.unsafe_as(Proc(HRESULT)).call
+  def register_for_notifications(this : IPrintBidiAsyncNotifyRegistration*) : HRESULT
+    @lpVtbl.value.register_for_notifications.call(this)
   end
-  def unregister_for_notifications : HRESULT
-    @lpVtbl.value.unregister_for_notifications.unsafe_as(Proc(HRESULT)).call
+  def unregister_for_notifications(this : IPrintBidiAsyncNotifyRegistration*) : HRESULT
+    @lpVtbl.value.unregister_for_notifications.call(this)
   end
-  def async_get_new_channel(param0 : IPrintAsyncNewChannelCookie) : HRESULT
-    @lpVtbl.value.async_get_new_channel.unsafe_as(Proc(IPrintAsyncNewChannelCookie, HRESULT)).call(param0)
+  def async_get_new_channel(this : IPrintBidiAsyncNotifyRegistration*, param0 : IPrintAsyncNewChannelCookie) : HRESULT
+    @lpVtbl.value.async_get_new_channel.call(this, param0)
   end
 end
 struct LibWin32::IPrintUnidiAsyncNotifyRegistration
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintUnidiAsyncNotifyRegistration*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintUnidiAsyncNotifyRegistration*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintUnidiAsyncNotifyRegistration*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def register_for_notifications : HRESULT
-    @lpVtbl.value.register_for_notifications.unsafe_as(Proc(HRESULT)).call
+  def register_for_notifications(this : IPrintUnidiAsyncNotifyRegistration*) : HRESULT
+    @lpVtbl.value.register_for_notifications.call(this)
   end
-  def unregister_for_notifications : HRESULT
-    @lpVtbl.value.unregister_for_notifications.unsafe_as(Proc(HRESULT)).call
+  def unregister_for_notifications(this : IPrintUnidiAsyncNotifyRegistration*) : HRESULT
+    @lpVtbl.value.unregister_for_notifications.call(this)
   end
-  def async_get_notification(param0 : IAsyncGetSendNotificationCookie) : HRESULT
-    @lpVtbl.value.async_get_notification.unsafe_as(Proc(IAsyncGetSendNotificationCookie, HRESULT)).call(param0)
+  def async_get_notification(this : IPrintUnidiAsyncNotifyRegistration*, param0 : IAsyncGetSendNotificationCookie) : HRESULT
+    @lpVtbl.value.async_get_notification.call(this, param0)
   end
 end
 struct LibWin32::IPrintAsyncNotifyServerReferral
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintAsyncNotifyServerReferral*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintAsyncNotifyServerReferral*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintAsyncNotifyServerReferral*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_server_referral(param0 : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_server_referral.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(param0)
+  def get_server_referral(this : IPrintAsyncNotifyServerReferral*, param0 : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_server_referral.call(this, param0)
   end
-  def async_get_server_referral(param0 : IAsyncGetSrvReferralCookie) : HRESULT
-    @lpVtbl.value.async_get_server_referral.unsafe_as(Proc(IAsyncGetSrvReferralCookie, HRESULT)).call(param0)
+  def async_get_server_referral(this : IPrintAsyncNotifyServerReferral*, param0 : IAsyncGetSrvReferralCookie) : HRESULT
+    @lpVtbl.value.async_get_server_referral.call(this, param0)
   end
-  def set_server_referral(prmtserverreferral : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_server_referral.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(prmtserverreferral)
+  def set_server_referral(this : IPrintAsyncNotifyServerReferral*, prmtserverreferral : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_server_referral.call(this, prmtserverreferral)
   end
 end
 struct LibWin32::IBidiAsyncNotifyChannel
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IBidiAsyncNotifyChannel*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IBidiAsyncNotifyChannel*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IBidiAsyncNotifyChannel*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def send_notification(pdata : IPrintAsyncNotifyDataObject) : HRESULT
-    @lpVtbl.value.send_notification.unsafe_as(Proc(IPrintAsyncNotifyDataObject, HRESULT)).call(pdata)
+  def send_notification(this : IBidiAsyncNotifyChannel*, pdata : IPrintAsyncNotifyDataObject) : HRESULT
+    @lpVtbl.value.send_notification.call(this, pdata)
   end
-  def close_channel(pdata : IPrintAsyncNotifyDataObject) : HRESULT
-    @lpVtbl.value.close_channel.unsafe_as(Proc(IPrintAsyncNotifyDataObject, HRESULT)).call(pdata)
+  def close_channel(this : IBidiAsyncNotifyChannel*, pdata : IPrintAsyncNotifyDataObject) : HRESULT
+    @lpVtbl.value.close_channel.call(this, pdata)
   end
-  def create_notification_channel : HRESULT
-    @lpVtbl.value.create_notification_channel.unsafe_as(Proc(HRESULT)).call
+  def create_notification_channel(this : IBidiAsyncNotifyChannel*) : HRESULT
+    @lpVtbl.value.create_notification_channel.call(this)
   end
-  def get_print_name(param0 : IPrintAsyncNotifyDataObject*) : HRESULT
-    @lpVtbl.value.get_print_name.unsafe_as(Proc(IPrintAsyncNotifyDataObject*, HRESULT)).call(param0)
+  def get_print_name(this : IBidiAsyncNotifyChannel*, param0 : IPrintAsyncNotifyDataObject*) : HRESULT
+    @lpVtbl.value.get_print_name.call(this, param0)
   end
-  def get_channel_notification_type(param0 : IPrintAsyncNotifyDataObject*) : HRESULT
-    @lpVtbl.value.get_channel_notification_type.unsafe_as(Proc(IPrintAsyncNotifyDataObject*, HRESULT)).call(param0)
+  def get_channel_notification_type(this : IBidiAsyncNotifyChannel*, param0 : IPrintAsyncNotifyDataObject*) : HRESULT
+    @lpVtbl.value.get_channel_notification_type.call(this, param0)
   end
-  def async_get_notification_send_response(param0 : IPrintAsyncNotifyDataObject, param1 : IAsyncGetSendNotificationCookie) : HRESULT
-    @lpVtbl.value.async_get_notification_send_response.unsafe_as(Proc(IPrintAsyncNotifyDataObject, IAsyncGetSendNotificationCookie, HRESULT)).call(param0, param1)
+  def async_get_notification_send_response(this : IBidiAsyncNotifyChannel*, param0 : IPrintAsyncNotifyDataObject, param1 : IAsyncGetSendNotificationCookie) : HRESULT
+    @lpVtbl.value.async_get_notification_send_response.call(this, param0, param1)
   end
-  def async_close_channel(param0 : IPrintAsyncNotifyDataObject, param1 : IPrintAsyncCookie) : HRESULT
-    @lpVtbl.value.async_close_channel.unsafe_as(Proc(IPrintAsyncNotifyDataObject, IPrintAsyncCookie, HRESULT)).call(param0, param1)
+  def async_close_channel(this : IBidiAsyncNotifyChannel*, param0 : IPrintAsyncNotifyDataObject, param1 : IPrintAsyncCookie) : HRESULT
+    @lpVtbl.value.async_close_channel.call(this, param0, param1)
   end
 end
 struct LibWin32::IXpsRasterizerNotificationCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXpsRasterizerNotificationCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXpsRasterizerNotificationCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXpsRasterizerNotificationCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def continue : HRESULT
-    @lpVtbl.value.continue.unsafe_as(Proc(HRESULT)).call
+  def continue(this : IXpsRasterizerNotificationCallback*) : HRESULT
+    @lpVtbl.value.continue.call(this)
   end
 end
 struct LibWin32::IXpsRasterizer
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXpsRasterizer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXpsRasterizer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXpsRasterizer*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def rasterize_rect(x : Int32, y : Int32, width : Int32, height : Int32, notificationcallback : IXpsRasterizerNotificationCallback, bitmap : IWICBitmap*) : HRESULT
-    @lpVtbl.value.rasterize_rect.unsafe_as(Proc(Int32, Int32, Int32, Int32, IXpsRasterizerNotificationCallback, IWICBitmap*, HRESULT)).call(x, y, width, height, notificationcallback, bitmap)
+  def rasterize_rect(this : IXpsRasterizer*, x : Int32, y : Int32, width : Int32, height : Int32, notificationcallback : IXpsRasterizerNotificationCallback, bitmap : IWICBitmap*) : HRESULT
+    @lpVtbl.value.rasterize_rect.call(this, x, y, width, height, notificationcallback, bitmap)
   end
-  def set_minimal_line_width(width : Int32) : HRESULT
-    @lpVtbl.value.set_minimal_line_width.unsafe_as(Proc(Int32, HRESULT)).call(width)
+  def set_minimal_line_width(this : IXpsRasterizer*, width : Int32) : HRESULT
+    @lpVtbl.value.set_minimal_line_width.call(this, width)
   end
 end
 struct LibWin32::IXpsRasterizationFactory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXpsRasterizationFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXpsRasterizationFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXpsRasterizationFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_rasterizer(xpspage : IXpsOMPage, dpi : Float32, nontextrenderingmode : XPSRAS_RENDERING_MODE, textrenderingmode : XPSRAS_RENDERING_MODE, ppixpsrasterizer : IXpsRasterizer*) : HRESULT
-    @lpVtbl.value.create_rasterizer.unsafe_as(Proc(IXpsOMPage, Float32, XPSRAS_RENDERING_MODE, XPSRAS_RENDERING_MODE, IXpsRasterizer*, HRESULT)).call(xpspage, dpi, nontextrenderingmode, textrenderingmode, ppixpsrasterizer)
+  def create_rasterizer(this : IXpsRasterizationFactory*, xpspage : IXpsOMPage, dpi : Float32, nontextrenderingmode : XPSRAS_RENDERING_MODE, textrenderingmode : XPSRAS_RENDERING_MODE, ppixpsrasterizer : IXpsRasterizer*) : HRESULT
+    @lpVtbl.value.create_rasterizer.call(this, xpspage, dpi, nontextrenderingmode, textrenderingmode, ppixpsrasterizer)
   end
 end
 struct LibWin32::IXpsRasterizationFactory1
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXpsRasterizationFactory1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXpsRasterizationFactory1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXpsRasterizationFactory1*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_rasterizer(xpspage : IXpsOMPage, dpi : Float32, nontextrenderingmode : XPSRAS_RENDERING_MODE, textrenderingmode : XPSRAS_RENDERING_MODE, pixelformat : XPSRAS_PIXEL_FORMAT, ppixpsrasterizer : IXpsRasterizer*) : HRESULT
-    @lpVtbl.value.create_rasterizer.unsafe_as(Proc(IXpsOMPage, Float32, XPSRAS_RENDERING_MODE, XPSRAS_RENDERING_MODE, XPSRAS_PIXEL_FORMAT, IXpsRasterizer*, HRESULT)).call(xpspage, dpi, nontextrenderingmode, textrenderingmode, pixelformat, ppixpsrasterizer)
+  def create_rasterizer(this : IXpsRasterizationFactory1*, xpspage : IXpsOMPage, dpi : Float32, nontextrenderingmode : XPSRAS_RENDERING_MODE, textrenderingmode : XPSRAS_RENDERING_MODE, pixelformat : XPSRAS_PIXEL_FORMAT, ppixpsrasterizer : IXpsRasterizer*) : HRESULT
+    @lpVtbl.value.create_rasterizer.call(this, xpspage, dpi, nontextrenderingmode, textrenderingmode, pixelformat, ppixpsrasterizer)
   end
 end
 struct LibWin32::IXpsRasterizationFactory2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXpsRasterizationFactory2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXpsRasterizationFactory2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXpsRasterizationFactory2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_rasterizer(xpspage : IXpsOMPage, dpix : Float32, dpiy : Float32, nontextrenderingmode : XPSRAS_RENDERING_MODE, textrenderingmode : XPSRAS_RENDERING_MODE, pixelformat : XPSRAS_PIXEL_FORMAT, backgroundcolor : XPSRAS_BACKGROUND_COLOR, ppixpsrasterizer : IXpsRasterizer*) : HRESULT
-    @lpVtbl.value.create_rasterizer.unsafe_as(Proc(IXpsOMPage, Float32, Float32, XPSRAS_RENDERING_MODE, XPSRAS_RENDERING_MODE, XPSRAS_PIXEL_FORMAT, XPSRAS_BACKGROUND_COLOR, IXpsRasterizer*, HRESULT)).call(xpspage, dpix, dpiy, nontextrenderingmode, textrenderingmode, pixelformat, backgroundcolor, ppixpsrasterizer)
+  def create_rasterizer(this : IXpsRasterizationFactory2*, xpspage : IXpsOMPage, dpix : Float32, dpiy : Float32, nontextrenderingmode : XPSRAS_RENDERING_MODE, textrenderingmode : XPSRAS_RENDERING_MODE, pixelformat : XPSRAS_PIXEL_FORMAT, backgroundcolor : XPSRAS_BACKGROUND_COLOR, ppixpsrasterizer : IXpsRasterizer*) : HRESULT
+    @lpVtbl.value.create_rasterizer.call(this, xpspage, dpix, dpiy, nontextrenderingmode, textrenderingmode, pixelformat, backgroundcolor, ppixpsrasterizer)
   end
 end
 struct LibWin32::IPrintPreviewDxgiPackageTarget
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrintPreviewDxgiPackageTarget*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrintPreviewDxgiPackageTarget*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrintPreviewDxgiPackageTarget*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_job_page_count(counttype : PageCountType, count : UInt32) : HRESULT
-    @lpVtbl.value.set_job_page_count.unsafe_as(Proc(PageCountType, UInt32, HRESULT)).call(counttype, count)
+  def set_job_page_count(this : IPrintPreviewDxgiPackageTarget*, counttype : PageCountType, count : UInt32) : HRESULT
+    @lpVtbl.value.set_job_page_count.call(this, counttype, count)
   end
-  def draw_page(jobpagenumber : UInt32, pageimage : IDXGISurface, dpix : Float32, dpiy : Float32) : HRESULT
-    @lpVtbl.value.draw_page.unsafe_as(Proc(UInt32, IDXGISurface, Float32, Float32, HRESULT)).call(jobpagenumber, pageimage, dpix, dpiy)
+  def draw_page(this : IPrintPreviewDxgiPackageTarget*, jobpagenumber : UInt32, pageimage : IDXGISurface, dpix : Float32, dpiy : Float32) : HRESULT
+    @lpVtbl.value.draw_page.call(this, jobpagenumber, pageimage, dpix, dpiy)
   end
-  def invalidate_preview : HRESULT
-    @lpVtbl.value.invalidate_preview.unsafe_as(Proc(HRESULT)).call
+  def invalidate_preview(this : IPrintPreviewDxgiPackageTarget*) : HRESULT
+    @lpVtbl.value.invalidate_preview.call(this)
   end
 end

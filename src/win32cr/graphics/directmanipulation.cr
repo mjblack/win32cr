@@ -150,16 +150,16 @@ lib LibWin32
 
 
   struct IDirectManipulationManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    activate : UInt64
-    deactivate : UInt64
-    register_hit_test_target : UInt64
-    process_input : UInt64
-    get_update_manager : UInt64
-    create_viewport : UInt64
-    create_content : UInt64
+    query_interface : Proc(IDirectManipulationManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectManipulationManager*, UInt32)
+    release : Proc(IDirectManipulationManager*, UInt32)
+    activate : Proc(IDirectManipulationManager*, LibC::HANDLE, HRESULT)
+    deactivate : Proc(IDirectManipulationManager*, LibC::HANDLE, HRESULT)
+    register_hit_test_target : Proc(IDirectManipulationManager*, LibC::HANDLE, LibC::HANDLE, DIRECTMANIPULATION_HITTEST_TYPE, HRESULT)
+    process_input : Proc(IDirectManipulationManager*, MSG*, LibC::BOOL*, HRESULT)
+    get_update_manager : Proc(IDirectManipulationManager*, Guid*, Void**, HRESULT)
+    create_viewport : Proc(IDirectManipulationManager*, IDirectManipulationFrameInfoProvider, LibC::HANDLE, Guid*, Void**, HRESULT)
+    create_content : Proc(IDirectManipulationManager*, IDirectManipulationFrameInfoProvider, Guid*, Guid*, Void**, HRESULT)
   end
 
   IDirectManipulationManager_GUID = "fbf5d3b4-70c7-4163-9322-5a6f660d6fbc"
@@ -169,17 +169,17 @@ lib LibWin32
   end
 
   struct IDirectManipulationManager2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    activate : UInt64
-    deactivate : UInt64
-    register_hit_test_target : UInt64
-    process_input : UInt64
-    get_update_manager : UInt64
-    create_viewport : UInt64
-    create_content : UInt64
-    create_behavior : UInt64
+    query_interface : Proc(IDirectManipulationManager2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectManipulationManager2*, UInt32)
+    release : Proc(IDirectManipulationManager2*, UInt32)
+    activate : Proc(IDirectManipulationManager2*, LibC::HANDLE, HRESULT)
+    deactivate : Proc(IDirectManipulationManager2*, LibC::HANDLE, HRESULT)
+    register_hit_test_target : Proc(IDirectManipulationManager2*, LibC::HANDLE, LibC::HANDLE, DIRECTMANIPULATION_HITTEST_TYPE, HRESULT)
+    process_input : Proc(IDirectManipulationManager2*, MSG*, LibC::BOOL*, HRESULT)
+    get_update_manager : Proc(IDirectManipulationManager2*, Guid*, Void**, HRESULT)
+    create_viewport : Proc(IDirectManipulationManager2*, IDirectManipulationFrameInfoProvider, LibC::HANDLE, Guid*, Void**, HRESULT)
+    create_content : Proc(IDirectManipulationManager2*, IDirectManipulationFrameInfoProvider, Guid*, Guid*, Void**, HRESULT)
+    create_behavior : Proc(IDirectManipulationManager2*, Guid*, Guid*, Void**, HRESULT)
   end
 
   IDirectManipulationManager2_GUID = "fa1005e9-3d16-484c-bfc9-62b61e56ec4e"
@@ -189,18 +189,18 @@ lib LibWin32
   end
 
   struct IDirectManipulationManager3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    activate : UInt64
-    deactivate : UInt64
-    register_hit_test_target : UInt64
-    process_input : UInt64
-    get_update_manager : UInt64
-    create_viewport : UInt64
-    create_content : UInt64
-    create_behavior : UInt64
-    get_service : UInt64
+    query_interface : Proc(IDirectManipulationManager3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectManipulationManager3*, UInt32)
+    release : Proc(IDirectManipulationManager3*, UInt32)
+    activate : Proc(IDirectManipulationManager3*, LibC::HANDLE, HRESULT)
+    deactivate : Proc(IDirectManipulationManager3*, LibC::HANDLE, HRESULT)
+    register_hit_test_target : Proc(IDirectManipulationManager3*, LibC::HANDLE, LibC::HANDLE, DIRECTMANIPULATION_HITTEST_TYPE, HRESULT)
+    process_input : Proc(IDirectManipulationManager3*, MSG*, LibC::BOOL*, HRESULT)
+    get_update_manager : Proc(IDirectManipulationManager3*, Guid*, Void**, HRESULT)
+    create_viewport : Proc(IDirectManipulationManager3*, IDirectManipulationFrameInfoProvider, LibC::HANDLE, Guid*, Void**, HRESULT)
+    create_content : Proc(IDirectManipulationManager3*, IDirectManipulationFrameInfoProvider, Guid*, Guid*, Void**, HRESULT)
+    create_behavior : Proc(IDirectManipulationManager3*, Guid*, Guid*, Void**, HRESULT)
+    get_service : Proc(IDirectManipulationManager3*, Guid*, Guid*, Void**, HRESULT)
   end
 
   IDirectManipulationManager3_GUID = "2cb6b33d-ffe8-488c-b750-fbdfe88dca8c"
@@ -210,37 +210,37 @@ lib LibWin32
   end
 
   struct IDirectManipulationViewportVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    enable : UInt64
-    disable : UInt64
-    set_contact : UInt64
-    release_contact : UInt64
-    release_all_contacts : UInt64
-    get_status : UInt64
-    get_tag : UInt64
-    set_tag : UInt64
-    get_viewport_rect : UInt64
-    set_viewport_rect : UInt64
-    zoom_to_rect : UInt64
-    set_viewport_transform : UInt64
-    sync_display_transform : UInt64
-    get_primary_content : UInt64
-    add_content : UInt64
-    remove_content : UInt64
-    set_viewport_options : UInt64
-    add_configuration : UInt64
-    remove_configuration : UInt64
-    activate_configuration : UInt64
-    set_manual_gesture : UInt64
-    set_chaining : UInt64
-    add_event_handler : UInt64
-    remove_event_handler : UInt64
-    set_input_mode : UInt64
-    set_update_mode : UInt64
-    stop : UInt64
-    abandon : UInt64
+    query_interface : Proc(IDirectManipulationViewport*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectManipulationViewport*, UInt32)
+    release : Proc(IDirectManipulationViewport*, UInt32)
+    enable : Proc(IDirectManipulationViewport*, HRESULT)
+    disable : Proc(IDirectManipulationViewport*, HRESULT)
+    set_contact : Proc(IDirectManipulationViewport*, UInt32, HRESULT)
+    release_contact : Proc(IDirectManipulationViewport*, UInt32, HRESULT)
+    release_all_contacts : Proc(IDirectManipulationViewport*, HRESULT)
+    get_status : Proc(IDirectManipulationViewport*, DIRECTMANIPULATION_STATUS*, HRESULT)
+    get_tag : Proc(IDirectManipulationViewport*, Guid*, Void**, UInt32*, HRESULT)
+    set_tag : Proc(IDirectManipulationViewport*, IUnknown, UInt32, HRESULT)
+    get_viewport_rect : Proc(IDirectManipulationViewport*, RECT*, HRESULT)
+    set_viewport_rect : Proc(IDirectManipulationViewport*, RECT*, HRESULT)
+    zoom_to_rect : Proc(IDirectManipulationViewport*, Float32, Float32, Float32, Float32, LibC::BOOL, HRESULT)
+    set_viewport_transform : Proc(IDirectManipulationViewport*, Float32*, UInt32, HRESULT)
+    sync_display_transform : Proc(IDirectManipulationViewport*, Float32*, UInt32, HRESULT)
+    get_primary_content : Proc(IDirectManipulationViewport*, Guid*, Void**, HRESULT)
+    add_content : Proc(IDirectManipulationViewport*, IDirectManipulationContent, HRESULT)
+    remove_content : Proc(IDirectManipulationViewport*, IDirectManipulationContent, HRESULT)
+    set_viewport_options : Proc(IDirectManipulationViewport*, DIRECTMANIPULATION_VIEWPORT_OPTIONS, HRESULT)
+    add_configuration : Proc(IDirectManipulationViewport*, DIRECTMANIPULATION_CONFIGURATION, HRESULT)
+    remove_configuration : Proc(IDirectManipulationViewport*, DIRECTMANIPULATION_CONFIGURATION, HRESULT)
+    activate_configuration : Proc(IDirectManipulationViewport*, DIRECTMANIPULATION_CONFIGURATION, HRESULT)
+    set_manual_gesture : Proc(IDirectManipulationViewport*, DIRECTMANIPULATION_GESTURE_CONFIGURATION, HRESULT)
+    set_chaining : Proc(IDirectManipulationViewport*, DIRECTMANIPULATION_MOTION_TYPES, HRESULT)
+    add_event_handler : Proc(IDirectManipulationViewport*, LibC::HANDLE, IDirectManipulationViewportEventHandler, UInt32*, HRESULT)
+    remove_event_handler : Proc(IDirectManipulationViewport*, UInt32, HRESULT)
+    set_input_mode : Proc(IDirectManipulationViewport*, DIRECTMANIPULATION_INPUT_MODE, HRESULT)
+    set_update_mode : Proc(IDirectManipulationViewport*, DIRECTMANIPULATION_INPUT_MODE, HRESULT)
+    stop : Proc(IDirectManipulationViewport*, HRESULT)
+    abandon : Proc(IDirectManipulationViewport*, HRESULT)
   end
 
   IDirectManipulationViewport_GUID = "28b85a3d-60a0-48bd-9ba1-5ce8d9ea3a6d"
@@ -250,40 +250,40 @@ lib LibWin32
   end
 
   struct IDirectManipulationViewport2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    enable : UInt64
-    disable : UInt64
-    set_contact : UInt64
-    release_contact : UInt64
-    release_all_contacts : UInt64
-    get_status : UInt64
-    get_tag : UInt64
-    set_tag : UInt64
-    get_viewport_rect : UInt64
-    set_viewport_rect : UInt64
-    zoom_to_rect : UInt64
-    set_viewport_transform : UInt64
-    sync_display_transform : UInt64
-    get_primary_content : UInt64
-    add_content : UInt64
-    remove_content : UInt64
-    set_viewport_options : UInt64
-    add_configuration : UInt64
-    remove_configuration : UInt64
-    activate_configuration : UInt64
-    set_manual_gesture : UInt64
-    set_chaining : UInt64
-    add_event_handler : UInt64
-    remove_event_handler : UInt64
-    set_input_mode : UInt64
-    set_update_mode : UInt64
-    stop : UInt64
-    abandon : UInt64
-    add_behavior : UInt64
-    remove_behavior : UInt64
-    remove_all_behaviors : UInt64
+    query_interface : Proc(IDirectManipulationViewport2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectManipulationViewport2*, UInt32)
+    release : Proc(IDirectManipulationViewport2*, UInt32)
+    enable : Proc(IDirectManipulationViewport2*, HRESULT)
+    disable : Proc(IDirectManipulationViewport2*, HRESULT)
+    set_contact : Proc(IDirectManipulationViewport2*, UInt32, HRESULT)
+    release_contact : Proc(IDirectManipulationViewport2*, UInt32, HRESULT)
+    release_all_contacts : Proc(IDirectManipulationViewport2*, HRESULT)
+    get_status : Proc(IDirectManipulationViewport2*, DIRECTMANIPULATION_STATUS*, HRESULT)
+    get_tag : Proc(IDirectManipulationViewport2*, Guid*, Void**, UInt32*, HRESULT)
+    set_tag : Proc(IDirectManipulationViewport2*, IUnknown, UInt32, HRESULT)
+    get_viewport_rect : Proc(IDirectManipulationViewport2*, RECT*, HRESULT)
+    set_viewport_rect : Proc(IDirectManipulationViewport2*, RECT*, HRESULT)
+    zoom_to_rect : Proc(IDirectManipulationViewport2*, Float32, Float32, Float32, Float32, LibC::BOOL, HRESULT)
+    set_viewport_transform : Proc(IDirectManipulationViewport2*, Float32*, UInt32, HRESULT)
+    sync_display_transform : Proc(IDirectManipulationViewport2*, Float32*, UInt32, HRESULT)
+    get_primary_content : Proc(IDirectManipulationViewport2*, Guid*, Void**, HRESULT)
+    add_content : Proc(IDirectManipulationViewport2*, IDirectManipulationContent, HRESULT)
+    remove_content : Proc(IDirectManipulationViewport2*, IDirectManipulationContent, HRESULT)
+    set_viewport_options : Proc(IDirectManipulationViewport2*, DIRECTMANIPULATION_VIEWPORT_OPTIONS, HRESULT)
+    add_configuration : Proc(IDirectManipulationViewport2*, DIRECTMANIPULATION_CONFIGURATION, HRESULT)
+    remove_configuration : Proc(IDirectManipulationViewport2*, DIRECTMANIPULATION_CONFIGURATION, HRESULT)
+    activate_configuration : Proc(IDirectManipulationViewport2*, DIRECTMANIPULATION_CONFIGURATION, HRESULT)
+    set_manual_gesture : Proc(IDirectManipulationViewport2*, DIRECTMANIPULATION_GESTURE_CONFIGURATION, HRESULT)
+    set_chaining : Proc(IDirectManipulationViewport2*, DIRECTMANIPULATION_MOTION_TYPES, HRESULT)
+    add_event_handler : Proc(IDirectManipulationViewport2*, LibC::HANDLE, IDirectManipulationViewportEventHandler, UInt32*, HRESULT)
+    remove_event_handler : Proc(IDirectManipulationViewport2*, UInt32, HRESULT)
+    set_input_mode : Proc(IDirectManipulationViewport2*, DIRECTMANIPULATION_INPUT_MODE, HRESULT)
+    set_update_mode : Proc(IDirectManipulationViewport2*, DIRECTMANIPULATION_INPUT_MODE, HRESULT)
+    stop : Proc(IDirectManipulationViewport2*, HRESULT)
+    abandon : Proc(IDirectManipulationViewport2*, HRESULT)
+    add_behavior : Proc(IDirectManipulationViewport2*, IUnknown, UInt32*, HRESULT)
+    remove_behavior : Proc(IDirectManipulationViewport2*, UInt32, HRESULT)
+    remove_all_behaviors : Proc(IDirectManipulationViewport2*, HRESULT)
   end
 
   IDirectManipulationViewport2_GUID = "923ccaac-61e1-4385-b726-017af189882a"
@@ -293,12 +293,12 @@ lib LibWin32
   end
 
   struct IDirectManipulationViewportEventHandlerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_viewport_status_changed : UInt64
-    on_viewport_updated : UInt64
-    on_content_updated : UInt64
+    query_interface : Proc(IDirectManipulationViewportEventHandler*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectManipulationViewportEventHandler*, UInt32)
+    release : Proc(IDirectManipulationViewportEventHandler*, UInt32)
+    on_viewport_status_changed : Proc(IDirectManipulationViewportEventHandler*, IDirectManipulationViewport, DIRECTMANIPULATION_STATUS, DIRECTMANIPULATION_STATUS, HRESULT)
+    on_viewport_updated : Proc(IDirectManipulationViewportEventHandler*, IDirectManipulationViewport, HRESULT)
+    on_content_updated : Proc(IDirectManipulationViewportEventHandler*, IDirectManipulationViewport, IDirectManipulationContent, HRESULT)
   end
 
   IDirectManipulationViewportEventHandler_GUID = "952121da-d69f-45f9-b0f9-f23944321a6d"
@@ -308,17 +308,17 @@ lib LibWin32
   end
 
   struct IDirectManipulationContentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_content_rect : UInt64
-    set_content_rect : UInt64
-    get_viewport : UInt64
-    get_tag : UInt64
-    set_tag : UInt64
-    get_output_transform : UInt64
-    get_content_transform : UInt64
-    sync_content_transform : UInt64
+    query_interface : Proc(IDirectManipulationContent*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectManipulationContent*, UInt32)
+    release : Proc(IDirectManipulationContent*, UInt32)
+    get_content_rect : Proc(IDirectManipulationContent*, RECT*, HRESULT)
+    set_content_rect : Proc(IDirectManipulationContent*, RECT*, HRESULT)
+    get_viewport : Proc(IDirectManipulationContent*, Guid*, Void**, HRESULT)
+    get_tag : Proc(IDirectManipulationContent*, Guid*, Void**, UInt32*, HRESULT)
+    set_tag : Proc(IDirectManipulationContent*, IUnknown, UInt32, HRESULT)
+    get_output_transform : Proc(IDirectManipulationContent*, Float32*, UInt32, HRESULT)
+    get_content_transform : Proc(IDirectManipulationContent*, Float32*, UInt32, HRESULT)
+    sync_content_transform : Proc(IDirectManipulationContent*, Float32*, UInt32, HRESULT)
   end
 
   IDirectManipulationContent_GUID = "b89962cb-3d89-442b-bb58-5098fa0f9f16"
@@ -328,18 +328,18 @@ lib LibWin32
   end
 
   struct IDirectManipulationPrimaryContentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_snap_interval : UInt64
-    set_snap_points : UInt64
-    set_snap_type : UInt64
-    set_snap_coordinate : UInt64
-    set_zoom_boundaries : UInt64
-    set_horizontal_alignment : UInt64
-    set_vertical_alignment : UInt64
-    get_inertia_end_transform : UInt64
-    get_center_point : UInt64
+    query_interface : Proc(IDirectManipulationPrimaryContent*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectManipulationPrimaryContent*, UInt32)
+    release : Proc(IDirectManipulationPrimaryContent*, UInt32)
+    set_snap_interval : Proc(IDirectManipulationPrimaryContent*, DIRECTMANIPULATION_MOTION_TYPES, Float32, Float32, HRESULT)
+    set_snap_points : Proc(IDirectManipulationPrimaryContent*, DIRECTMANIPULATION_MOTION_TYPES, Float32*, UInt32, HRESULT)
+    set_snap_type : Proc(IDirectManipulationPrimaryContent*, DIRECTMANIPULATION_MOTION_TYPES, DIRECTMANIPULATION_SNAPPOINT_TYPE, HRESULT)
+    set_snap_coordinate : Proc(IDirectManipulationPrimaryContent*, DIRECTMANIPULATION_MOTION_TYPES, DIRECTMANIPULATION_SNAPPOINT_COORDINATE, Float32, HRESULT)
+    set_zoom_boundaries : Proc(IDirectManipulationPrimaryContent*, Float32, Float32, HRESULT)
+    set_horizontal_alignment : Proc(IDirectManipulationPrimaryContent*, DIRECTMANIPULATION_HORIZONTALALIGNMENT, HRESULT)
+    set_vertical_alignment : Proc(IDirectManipulationPrimaryContent*, DIRECTMANIPULATION_VERTICALALIGNMENT, HRESULT)
+    get_inertia_end_transform : Proc(IDirectManipulationPrimaryContent*, Float32*, UInt32, HRESULT)
+    get_center_point : Proc(IDirectManipulationPrimaryContent*, Float32*, Float32*, HRESULT)
   end
 
   IDirectManipulationPrimaryContent_GUID = "c12851e4-1698-4625-b9b1-7ca3ec18630b"
@@ -349,10 +349,10 @@ lib LibWin32
   end
 
   struct IDirectManipulationDragDropEventHandlerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_drag_drop_status_change : UInt64
+    query_interface : Proc(IDirectManipulationDragDropEventHandler*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectManipulationDragDropEventHandler*, UInt32)
+    release : Proc(IDirectManipulationDragDropEventHandler*, UInt32)
+    on_drag_drop_status_change : Proc(IDirectManipulationDragDropEventHandler*, IDirectManipulationViewport2, DIRECTMANIPULATION_DRAG_DROP_STATUS, DIRECTMANIPULATION_DRAG_DROP_STATUS, HRESULT)
   end
 
   IDirectManipulationDragDropEventHandler_GUID = "1fa11b10-701b-41ae-b5f2-49e36bd595aa"
@@ -362,11 +362,11 @@ lib LibWin32
   end
 
   struct IDirectManipulationDragDropBehaviorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_configuration : UInt64
-    get_status : UInt64
+    query_interface : Proc(IDirectManipulationDragDropBehavior*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectManipulationDragDropBehavior*, UInt32)
+    release : Proc(IDirectManipulationDragDropBehavior*, UInt32)
+    set_configuration : Proc(IDirectManipulationDragDropBehavior*, DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION, HRESULT)
+    get_status : Proc(IDirectManipulationDragDropBehavior*, DIRECTMANIPULATION_DRAG_DROP_STATUS*, HRESULT)
   end
 
   IDirectManipulationDragDropBehavior_GUID = "814b5af5-c2c8-4270-a9b7-a198ce8d02fa"
@@ -376,10 +376,10 @@ lib LibWin32
   end
 
   struct IDirectManipulationInteractionEventHandlerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_interaction : UInt64
+    query_interface : Proc(IDirectManipulationInteractionEventHandler*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectManipulationInteractionEventHandler*, UInt32)
+    release : Proc(IDirectManipulationInteractionEventHandler*, UInt32)
+    on_interaction : Proc(IDirectManipulationInteractionEventHandler*, IDirectManipulationViewport2, DIRECTMANIPULATION_INTERACTION_TYPE, HRESULT)
   end
 
   IDirectManipulationInteractionEventHandler_GUID = "e43f45b8-42b4-403e-b1f2-273b8f510830"
@@ -389,10 +389,10 @@ lib LibWin32
   end
 
   struct IDirectManipulationFrameInfoProviderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_next_frame_info : UInt64
+    query_interface : Proc(IDirectManipulationFrameInfoProvider*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectManipulationFrameInfoProvider*, UInt32)
+    release : Proc(IDirectManipulationFrameInfoProvider*, UInt32)
+    get_next_frame_info : Proc(IDirectManipulationFrameInfoProvider*, UInt64*, UInt64*, UInt64*, HRESULT)
   end
 
   IDirectManipulationFrameInfoProvider_GUID = "fb759dba-6f4c-4c01-874e-19c8a05907f9"
@@ -402,13 +402,13 @@ lib LibWin32
   end
 
   struct IDirectManipulationCompositorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add_content : UInt64
-    remove_content : UInt64
-    set_update_manager : UInt64
-    flush : UInt64
+    query_interface : Proc(IDirectManipulationCompositor*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectManipulationCompositor*, UInt32)
+    release : Proc(IDirectManipulationCompositor*, UInt32)
+    add_content : Proc(IDirectManipulationCompositor*, IDirectManipulationContent, IUnknown, IUnknown, IUnknown, HRESULT)
+    remove_content : Proc(IDirectManipulationCompositor*, IDirectManipulationContent, HRESULT)
+    set_update_manager : Proc(IDirectManipulationCompositor*, IDirectManipulationUpdateManager, HRESULT)
+    flush : Proc(IDirectManipulationCompositor*, HRESULT)
   end
 
   IDirectManipulationCompositor_GUID = "537a0825-0387-4efa-b62f-71eb1f085a7e"
@@ -418,14 +418,14 @@ lib LibWin32
   end
 
   struct IDirectManipulationCompositor2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add_content : UInt64
-    remove_content : UInt64
-    set_update_manager : UInt64
-    flush : UInt64
-    add_content_with_cross_process_chaining : UInt64
+    query_interface : Proc(IDirectManipulationCompositor2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectManipulationCompositor2*, UInt32)
+    release : Proc(IDirectManipulationCompositor2*, UInt32)
+    add_content : Proc(IDirectManipulationCompositor2*, IDirectManipulationContent, IUnknown, IUnknown, IUnknown, HRESULT)
+    remove_content : Proc(IDirectManipulationCompositor2*, IDirectManipulationContent, HRESULT)
+    set_update_manager : Proc(IDirectManipulationCompositor2*, IDirectManipulationUpdateManager, HRESULT)
+    flush : Proc(IDirectManipulationCompositor2*, HRESULT)
+    add_content_with_cross_process_chaining : Proc(IDirectManipulationCompositor2*, IDirectManipulationPrimaryContent, IUnknown, IUnknown, IUnknown, HRESULT)
   end
 
   IDirectManipulationCompositor2_GUID = "d38c7822-f1cb-43cb-b4b9-ac0c767a412e"
@@ -435,10 +435,10 @@ lib LibWin32
   end
 
   struct IDirectManipulationUpdateHandlerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    update : UInt64
+    query_interface : Proc(IDirectManipulationUpdateHandler*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectManipulationUpdateHandler*, UInt32)
+    release : Proc(IDirectManipulationUpdateHandler*, UInt32)
+    update : Proc(IDirectManipulationUpdateHandler*, HRESULT)
   end
 
   IDirectManipulationUpdateHandler_GUID = "790b6337-64f8-4ff5-a269-b32bc2af27a7"
@@ -448,12 +448,12 @@ lib LibWin32
   end
 
   struct IDirectManipulationUpdateManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    register_wait_handle_callback : UInt64
-    unregister_wait_handle_callback : UInt64
-    update : UInt64
+    query_interface : Proc(IDirectManipulationUpdateManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectManipulationUpdateManager*, UInt32)
+    release : Proc(IDirectManipulationUpdateManager*, UInt32)
+    register_wait_handle_callback : Proc(IDirectManipulationUpdateManager*, LibC::HANDLE, IDirectManipulationUpdateHandler, UInt32*, HRESULT)
+    unregister_wait_handle_callback : Proc(IDirectManipulationUpdateManager*, UInt32, HRESULT)
+    update : Proc(IDirectManipulationUpdateManager*, IDirectManipulationFrameInfoProvider, HRESULT)
   end
 
   IDirectManipulationUpdateManager_GUID = "b0ae62fd-be34-46e7-9caa-d361facbb9cc"
@@ -463,10 +463,10 @@ lib LibWin32
   end
 
   struct IDirectManipulationAutoScrollBehaviorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_configuration : UInt64
+    query_interface : Proc(IDirectManipulationAutoScrollBehavior*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectManipulationAutoScrollBehavior*, UInt32)
+    release : Proc(IDirectManipulationAutoScrollBehavior*, UInt32)
+    set_configuration : Proc(IDirectManipulationAutoScrollBehavior*, DIRECTMANIPULATION_MOTION_TYPES, DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION, HRESULT)
   end
 
   IDirectManipulationAutoScrollBehavior_GUID = "6d5954d4-2003-4356-9b31-d051c9ff0af7"
@@ -476,12 +476,12 @@ lib LibWin32
   end
 
   struct IDirectManipulationDeferContactServiceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    defer_contact : UInt64
-    cancel_contact : UInt64
-    cancel_deferral : UInt64
+    query_interface : Proc(IDirectManipulationDeferContactService*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectManipulationDeferContactService*, UInt32)
+    release : Proc(IDirectManipulationDeferContactService*, UInt32)
+    defer_contact : Proc(IDirectManipulationDeferContactService*, UInt32, UInt32, HRESULT)
+    cancel_contact : Proc(IDirectManipulationDeferContactService*, UInt32, HRESULT)
+    cancel_deferral : Proc(IDirectManipulationDeferContactService*, UInt32, HRESULT)
   end
 
   IDirectManipulationDeferContactService_GUID = "652d5c71-fe60-4a98-be70-e5f21291e7f1"
@@ -492,575 +492,575 @@ lib LibWin32
 
 end
 struct LibWin32::IDirectManipulationManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectManipulationManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectManipulationManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectManipulationManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def activate(window : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.activate.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(window)
+  def activate(this : IDirectManipulationManager*, window : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.activate.call(this, window)
   end
-  def deactivate(window : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.deactivate.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(window)
+  def deactivate(this : IDirectManipulationManager*, window : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.deactivate.call(this, window)
   end
-  def register_hit_test_target(window : LibC::HANDLE, hittestwindow : LibC::HANDLE, type : DIRECTMANIPULATION_HITTEST_TYPE) : HRESULT
-    @lpVtbl.value.register_hit_test_target.unsafe_as(Proc(LibC::HANDLE, LibC::HANDLE, DIRECTMANIPULATION_HITTEST_TYPE, HRESULT)).call(window, hittestwindow, type)
+  def register_hit_test_target(this : IDirectManipulationManager*, window : LibC::HANDLE, hittestwindow : LibC::HANDLE, type : DIRECTMANIPULATION_HITTEST_TYPE) : HRESULT
+    @lpVtbl.value.register_hit_test_target.call(this, window, hittestwindow, type)
   end
-  def process_input(message : MSG*, handled : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.process_input.unsafe_as(Proc(MSG*, LibC::BOOL*, HRESULT)).call(message, handled)
+  def process_input(this : IDirectManipulationManager*, message : MSG*, handled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.process_input.call(this, message, handled)
   end
-  def get_update_manager(riid : Guid*, object : Void**) : HRESULT
-    @lpVtbl.value.get_update_manager.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, object)
+  def get_update_manager(this : IDirectManipulationManager*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.get_update_manager.call(this, riid, object)
   end
-  def create_viewport(frameinfo : IDirectManipulationFrameInfoProvider, window : LibC::HANDLE, riid : Guid*, object : Void**) : HRESULT
-    @lpVtbl.value.create_viewport.unsafe_as(Proc(IDirectManipulationFrameInfoProvider, LibC::HANDLE, Guid*, Void**, HRESULT)).call(frameinfo, window, riid, object)
+  def create_viewport(this : IDirectManipulationManager*, frameinfo : IDirectManipulationFrameInfoProvider, window : LibC::HANDLE, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.create_viewport.call(this, frameinfo, window, riid, object)
   end
-  def create_content(frameinfo : IDirectManipulationFrameInfoProvider, clsid : Guid*, riid : Guid*, object : Void**) : HRESULT
-    @lpVtbl.value.create_content.unsafe_as(Proc(IDirectManipulationFrameInfoProvider, Guid*, Guid*, Void**, HRESULT)).call(frameinfo, clsid, riid, object)
+  def create_content(this : IDirectManipulationManager*, frameinfo : IDirectManipulationFrameInfoProvider, clsid : Guid*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.create_content.call(this, frameinfo, clsid, riid, object)
   end
 end
 struct LibWin32::IDirectManipulationManager2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectManipulationManager2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectManipulationManager2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectManipulationManager2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def activate(window : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.activate.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(window)
+  def activate(this : IDirectManipulationManager2*, window : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.activate.call(this, window)
   end
-  def deactivate(window : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.deactivate.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(window)
+  def deactivate(this : IDirectManipulationManager2*, window : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.deactivate.call(this, window)
   end
-  def register_hit_test_target(window : LibC::HANDLE, hittestwindow : LibC::HANDLE, type : DIRECTMANIPULATION_HITTEST_TYPE) : HRESULT
-    @lpVtbl.value.register_hit_test_target.unsafe_as(Proc(LibC::HANDLE, LibC::HANDLE, DIRECTMANIPULATION_HITTEST_TYPE, HRESULT)).call(window, hittestwindow, type)
+  def register_hit_test_target(this : IDirectManipulationManager2*, window : LibC::HANDLE, hittestwindow : LibC::HANDLE, type : DIRECTMANIPULATION_HITTEST_TYPE) : HRESULT
+    @lpVtbl.value.register_hit_test_target.call(this, window, hittestwindow, type)
   end
-  def process_input(message : MSG*, handled : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.process_input.unsafe_as(Proc(MSG*, LibC::BOOL*, HRESULT)).call(message, handled)
+  def process_input(this : IDirectManipulationManager2*, message : MSG*, handled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.process_input.call(this, message, handled)
   end
-  def get_update_manager(riid : Guid*, object : Void**) : HRESULT
-    @lpVtbl.value.get_update_manager.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, object)
+  def get_update_manager(this : IDirectManipulationManager2*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.get_update_manager.call(this, riid, object)
   end
-  def create_viewport(frameinfo : IDirectManipulationFrameInfoProvider, window : LibC::HANDLE, riid : Guid*, object : Void**) : HRESULT
-    @lpVtbl.value.create_viewport.unsafe_as(Proc(IDirectManipulationFrameInfoProvider, LibC::HANDLE, Guid*, Void**, HRESULT)).call(frameinfo, window, riid, object)
+  def create_viewport(this : IDirectManipulationManager2*, frameinfo : IDirectManipulationFrameInfoProvider, window : LibC::HANDLE, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.create_viewport.call(this, frameinfo, window, riid, object)
   end
-  def create_content(frameinfo : IDirectManipulationFrameInfoProvider, clsid : Guid*, riid : Guid*, object : Void**) : HRESULT
-    @lpVtbl.value.create_content.unsafe_as(Proc(IDirectManipulationFrameInfoProvider, Guid*, Guid*, Void**, HRESULT)).call(frameinfo, clsid, riid, object)
+  def create_content(this : IDirectManipulationManager2*, frameinfo : IDirectManipulationFrameInfoProvider, clsid : Guid*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.create_content.call(this, frameinfo, clsid, riid, object)
   end
-  def create_behavior(clsid : Guid*, riid : Guid*, object : Void**) : HRESULT
-    @lpVtbl.value.create_behavior.unsafe_as(Proc(Guid*, Guid*, Void**, HRESULT)).call(clsid, riid, object)
+  def create_behavior(this : IDirectManipulationManager2*, clsid : Guid*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.create_behavior.call(this, clsid, riid, object)
   end
 end
 struct LibWin32::IDirectManipulationManager3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectManipulationManager3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectManipulationManager3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectManipulationManager3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def activate(window : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.activate.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(window)
+  def activate(this : IDirectManipulationManager3*, window : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.activate.call(this, window)
   end
-  def deactivate(window : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.deactivate.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(window)
+  def deactivate(this : IDirectManipulationManager3*, window : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.deactivate.call(this, window)
   end
-  def register_hit_test_target(window : LibC::HANDLE, hittestwindow : LibC::HANDLE, type : DIRECTMANIPULATION_HITTEST_TYPE) : HRESULT
-    @lpVtbl.value.register_hit_test_target.unsafe_as(Proc(LibC::HANDLE, LibC::HANDLE, DIRECTMANIPULATION_HITTEST_TYPE, HRESULT)).call(window, hittestwindow, type)
+  def register_hit_test_target(this : IDirectManipulationManager3*, window : LibC::HANDLE, hittestwindow : LibC::HANDLE, type : DIRECTMANIPULATION_HITTEST_TYPE) : HRESULT
+    @lpVtbl.value.register_hit_test_target.call(this, window, hittestwindow, type)
   end
-  def process_input(message : MSG*, handled : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.process_input.unsafe_as(Proc(MSG*, LibC::BOOL*, HRESULT)).call(message, handled)
+  def process_input(this : IDirectManipulationManager3*, message : MSG*, handled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.process_input.call(this, message, handled)
   end
-  def get_update_manager(riid : Guid*, object : Void**) : HRESULT
-    @lpVtbl.value.get_update_manager.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, object)
+  def get_update_manager(this : IDirectManipulationManager3*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.get_update_manager.call(this, riid, object)
   end
-  def create_viewport(frameinfo : IDirectManipulationFrameInfoProvider, window : LibC::HANDLE, riid : Guid*, object : Void**) : HRESULT
-    @lpVtbl.value.create_viewport.unsafe_as(Proc(IDirectManipulationFrameInfoProvider, LibC::HANDLE, Guid*, Void**, HRESULT)).call(frameinfo, window, riid, object)
+  def create_viewport(this : IDirectManipulationManager3*, frameinfo : IDirectManipulationFrameInfoProvider, window : LibC::HANDLE, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.create_viewport.call(this, frameinfo, window, riid, object)
   end
-  def create_content(frameinfo : IDirectManipulationFrameInfoProvider, clsid : Guid*, riid : Guid*, object : Void**) : HRESULT
-    @lpVtbl.value.create_content.unsafe_as(Proc(IDirectManipulationFrameInfoProvider, Guid*, Guid*, Void**, HRESULT)).call(frameinfo, clsid, riid, object)
+  def create_content(this : IDirectManipulationManager3*, frameinfo : IDirectManipulationFrameInfoProvider, clsid : Guid*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.create_content.call(this, frameinfo, clsid, riid, object)
   end
-  def create_behavior(clsid : Guid*, riid : Guid*, object : Void**) : HRESULT
-    @lpVtbl.value.create_behavior.unsafe_as(Proc(Guid*, Guid*, Void**, HRESULT)).call(clsid, riid, object)
+  def create_behavior(this : IDirectManipulationManager3*, clsid : Guid*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.create_behavior.call(this, clsid, riid, object)
   end
-  def get_service(clsid : Guid*, riid : Guid*, object : Void**) : HRESULT
-    @lpVtbl.value.get_service.unsafe_as(Proc(Guid*, Guid*, Void**, HRESULT)).call(clsid, riid, object)
+  def get_service(this : IDirectManipulationManager3*, clsid : Guid*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.get_service.call(this, clsid, riid, object)
   end
 end
 struct LibWin32::IDirectManipulationViewport
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectManipulationViewport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectManipulationViewport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectManipulationViewport*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def enable : HRESULT
-    @lpVtbl.value.enable.unsafe_as(Proc(HRESULT)).call
+  def enable(this : IDirectManipulationViewport*) : HRESULT
+    @lpVtbl.value.enable.call(this)
   end
-  def disable : HRESULT
-    @lpVtbl.value.disable.unsafe_as(Proc(HRESULT)).call
+  def disable(this : IDirectManipulationViewport*) : HRESULT
+    @lpVtbl.value.disable.call(this)
   end
-  def set_contact(pointerid : UInt32) : HRESULT
-    @lpVtbl.value.set_contact.unsafe_as(Proc(UInt32, HRESULT)).call(pointerid)
+  def set_contact(this : IDirectManipulationViewport*, pointerid : UInt32) : HRESULT
+    @lpVtbl.value.set_contact.call(this, pointerid)
   end
-  def release_contact(pointerid : UInt32) : HRESULT
-    @lpVtbl.value.release_contact.unsafe_as(Proc(UInt32, HRESULT)).call(pointerid)
+  def release_contact(this : IDirectManipulationViewport*, pointerid : UInt32) : HRESULT
+    @lpVtbl.value.release_contact.call(this, pointerid)
   end
-  def release_all_contacts : HRESULT
-    @lpVtbl.value.release_all_contacts.unsafe_as(Proc(HRESULT)).call
+  def release_all_contacts(this : IDirectManipulationViewport*) : HRESULT
+    @lpVtbl.value.release_all_contacts.call(this)
   end
-  def get_status(status : DIRECTMANIPULATION_STATUS*) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(DIRECTMANIPULATION_STATUS*, HRESULT)).call(status)
+  def get_status(this : IDirectManipulationViewport*, status : DIRECTMANIPULATION_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, status)
   end
-  def get_tag(riid : Guid*, object : Void**, id : UInt32*) : HRESULT
-    @lpVtbl.value.get_tag.unsafe_as(Proc(Guid*, Void**, UInt32*, HRESULT)).call(riid, object, id)
+  def get_tag(this : IDirectManipulationViewport*, riid : Guid*, object : Void**, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_tag.call(this, riid, object, id)
   end
-  def set_tag(object : IUnknown, id : UInt32) : HRESULT
-    @lpVtbl.value.set_tag.unsafe_as(Proc(IUnknown, UInt32, HRESULT)).call(object, id)
+  def set_tag(this : IDirectManipulationViewport*, object : IUnknown, id : UInt32) : HRESULT
+    @lpVtbl.value.set_tag.call(this, object, id)
   end
-  def get_viewport_rect(viewport : RECT*) : HRESULT
-    @lpVtbl.value.get_viewport_rect.unsafe_as(Proc(RECT*, HRESULT)).call(viewport)
+  def get_viewport_rect(this : IDirectManipulationViewport*, viewport : RECT*) : HRESULT
+    @lpVtbl.value.get_viewport_rect.call(this, viewport)
   end
-  def set_viewport_rect(viewport : RECT*) : HRESULT
-    @lpVtbl.value.set_viewport_rect.unsafe_as(Proc(RECT*, HRESULT)).call(viewport)
+  def set_viewport_rect(this : IDirectManipulationViewport*, viewport : RECT*) : HRESULT
+    @lpVtbl.value.set_viewport_rect.call(this, viewport)
   end
-  def zoom_to_rect(left : Float32, top : Float32, right : Float32, bottom : Float32, animate : LibC::BOOL) : HRESULT
-    @lpVtbl.value.zoom_to_rect.unsafe_as(Proc(Float32, Float32, Float32, Float32, LibC::BOOL, HRESULT)).call(left, top, right, bottom, animate)
+  def zoom_to_rect(this : IDirectManipulationViewport*, left : Float32, top : Float32, right : Float32, bottom : Float32, animate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.zoom_to_rect.call(this, left, top, right, bottom, animate)
   end
-  def set_viewport_transform(matrix : Float32*, pointcount : UInt32) : HRESULT
-    @lpVtbl.value.set_viewport_transform.unsafe_as(Proc(Float32*, UInt32, HRESULT)).call(matrix, pointcount)
+  def set_viewport_transform(this : IDirectManipulationViewport*, matrix : Float32*, pointcount : UInt32) : HRESULT
+    @lpVtbl.value.set_viewport_transform.call(this, matrix, pointcount)
   end
-  def sync_display_transform(matrix : Float32*, pointcount : UInt32) : HRESULT
-    @lpVtbl.value.sync_display_transform.unsafe_as(Proc(Float32*, UInt32, HRESULT)).call(matrix, pointcount)
+  def sync_display_transform(this : IDirectManipulationViewport*, matrix : Float32*, pointcount : UInt32) : HRESULT
+    @lpVtbl.value.sync_display_transform.call(this, matrix, pointcount)
   end
-  def get_primary_content(riid : Guid*, object : Void**) : HRESULT
-    @lpVtbl.value.get_primary_content.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, object)
+  def get_primary_content(this : IDirectManipulationViewport*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.get_primary_content.call(this, riid, object)
   end
-  def add_content(content : IDirectManipulationContent) : HRESULT
-    @lpVtbl.value.add_content.unsafe_as(Proc(IDirectManipulationContent, HRESULT)).call(content)
+  def add_content(this : IDirectManipulationViewport*, content : IDirectManipulationContent) : HRESULT
+    @lpVtbl.value.add_content.call(this, content)
   end
-  def remove_content(content : IDirectManipulationContent) : HRESULT
-    @lpVtbl.value.remove_content.unsafe_as(Proc(IDirectManipulationContent, HRESULT)).call(content)
+  def remove_content(this : IDirectManipulationViewport*, content : IDirectManipulationContent) : HRESULT
+    @lpVtbl.value.remove_content.call(this, content)
   end
-  def set_viewport_options(options : DIRECTMANIPULATION_VIEWPORT_OPTIONS) : HRESULT
-    @lpVtbl.value.set_viewport_options.unsafe_as(Proc(DIRECTMANIPULATION_VIEWPORT_OPTIONS, HRESULT)).call(options)
+  def set_viewport_options(this : IDirectManipulationViewport*, options : DIRECTMANIPULATION_VIEWPORT_OPTIONS) : HRESULT
+    @lpVtbl.value.set_viewport_options.call(this, options)
   end
-  def add_configuration(configuration : DIRECTMANIPULATION_CONFIGURATION) : HRESULT
-    @lpVtbl.value.add_configuration.unsafe_as(Proc(DIRECTMANIPULATION_CONFIGURATION, HRESULT)).call(configuration)
+  def add_configuration(this : IDirectManipulationViewport*, configuration : DIRECTMANIPULATION_CONFIGURATION) : HRESULT
+    @lpVtbl.value.add_configuration.call(this, configuration)
   end
-  def remove_configuration(configuration : DIRECTMANIPULATION_CONFIGURATION) : HRESULT
-    @lpVtbl.value.remove_configuration.unsafe_as(Proc(DIRECTMANIPULATION_CONFIGURATION, HRESULT)).call(configuration)
+  def remove_configuration(this : IDirectManipulationViewport*, configuration : DIRECTMANIPULATION_CONFIGURATION) : HRESULT
+    @lpVtbl.value.remove_configuration.call(this, configuration)
   end
-  def activate_configuration(configuration : DIRECTMANIPULATION_CONFIGURATION) : HRESULT
-    @lpVtbl.value.activate_configuration.unsafe_as(Proc(DIRECTMANIPULATION_CONFIGURATION, HRESULT)).call(configuration)
+  def activate_configuration(this : IDirectManipulationViewport*, configuration : DIRECTMANIPULATION_CONFIGURATION) : HRESULT
+    @lpVtbl.value.activate_configuration.call(this, configuration)
   end
-  def set_manual_gesture(configuration : DIRECTMANIPULATION_GESTURE_CONFIGURATION) : HRESULT
-    @lpVtbl.value.set_manual_gesture.unsafe_as(Proc(DIRECTMANIPULATION_GESTURE_CONFIGURATION, HRESULT)).call(configuration)
+  def set_manual_gesture(this : IDirectManipulationViewport*, configuration : DIRECTMANIPULATION_GESTURE_CONFIGURATION) : HRESULT
+    @lpVtbl.value.set_manual_gesture.call(this, configuration)
   end
-  def set_chaining(enabledtypes : DIRECTMANIPULATION_MOTION_TYPES) : HRESULT
-    @lpVtbl.value.set_chaining.unsafe_as(Proc(DIRECTMANIPULATION_MOTION_TYPES, HRESULT)).call(enabledtypes)
+  def set_chaining(this : IDirectManipulationViewport*, enabledtypes : DIRECTMANIPULATION_MOTION_TYPES) : HRESULT
+    @lpVtbl.value.set_chaining.call(this, enabledtypes)
   end
-  def add_event_handler(window : LibC::HANDLE, eventhandler : IDirectManipulationViewportEventHandler, cookie : UInt32*) : HRESULT
-    @lpVtbl.value.add_event_handler.unsafe_as(Proc(LibC::HANDLE, IDirectManipulationViewportEventHandler, UInt32*, HRESULT)).call(window, eventhandler, cookie)
+  def add_event_handler(this : IDirectManipulationViewport*, window : LibC::HANDLE, eventhandler : IDirectManipulationViewportEventHandler, cookie : UInt32*) : HRESULT
+    @lpVtbl.value.add_event_handler.call(this, window, eventhandler, cookie)
   end
-  def remove_event_handler(cookie : UInt32) : HRESULT
-    @lpVtbl.value.remove_event_handler.unsafe_as(Proc(UInt32, HRESULT)).call(cookie)
+  def remove_event_handler(this : IDirectManipulationViewport*, cookie : UInt32) : HRESULT
+    @lpVtbl.value.remove_event_handler.call(this, cookie)
   end
-  def set_input_mode(mode : DIRECTMANIPULATION_INPUT_MODE) : HRESULT
-    @lpVtbl.value.set_input_mode.unsafe_as(Proc(DIRECTMANIPULATION_INPUT_MODE, HRESULT)).call(mode)
+  def set_input_mode(this : IDirectManipulationViewport*, mode : DIRECTMANIPULATION_INPUT_MODE) : HRESULT
+    @lpVtbl.value.set_input_mode.call(this, mode)
   end
-  def set_update_mode(mode : DIRECTMANIPULATION_INPUT_MODE) : HRESULT
-    @lpVtbl.value.set_update_mode.unsafe_as(Proc(DIRECTMANIPULATION_INPUT_MODE, HRESULT)).call(mode)
+  def set_update_mode(this : IDirectManipulationViewport*, mode : DIRECTMANIPULATION_INPUT_MODE) : HRESULT
+    @lpVtbl.value.set_update_mode.call(this, mode)
   end
-  def stop : HRESULT
-    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  def stop(this : IDirectManipulationViewport*) : HRESULT
+    @lpVtbl.value.stop.call(this)
   end
-  def abandon : HRESULT
-    @lpVtbl.value.abandon.unsafe_as(Proc(HRESULT)).call
+  def abandon(this : IDirectManipulationViewport*) : HRESULT
+    @lpVtbl.value.abandon.call(this)
   end
 end
 struct LibWin32::IDirectManipulationViewport2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectManipulationViewport2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectManipulationViewport2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectManipulationViewport2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def enable : HRESULT
-    @lpVtbl.value.enable.unsafe_as(Proc(HRESULT)).call
+  def enable(this : IDirectManipulationViewport2*) : HRESULT
+    @lpVtbl.value.enable.call(this)
   end
-  def disable : HRESULT
-    @lpVtbl.value.disable.unsafe_as(Proc(HRESULT)).call
+  def disable(this : IDirectManipulationViewport2*) : HRESULT
+    @lpVtbl.value.disable.call(this)
   end
-  def set_contact(pointerid : UInt32) : HRESULT
-    @lpVtbl.value.set_contact.unsafe_as(Proc(UInt32, HRESULT)).call(pointerid)
+  def set_contact(this : IDirectManipulationViewport2*, pointerid : UInt32) : HRESULT
+    @lpVtbl.value.set_contact.call(this, pointerid)
   end
-  def release_contact(pointerid : UInt32) : HRESULT
-    @lpVtbl.value.release_contact.unsafe_as(Proc(UInt32, HRESULT)).call(pointerid)
+  def release_contact(this : IDirectManipulationViewport2*, pointerid : UInt32) : HRESULT
+    @lpVtbl.value.release_contact.call(this, pointerid)
   end
-  def release_all_contacts : HRESULT
-    @lpVtbl.value.release_all_contacts.unsafe_as(Proc(HRESULT)).call
+  def release_all_contacts(this : IDirectManipulationViewport2*) : HRESULT
+    @lpVtbl.value.release_all_contacts.call(this)
   end
-  def get_status(status : DIRECTMANIPULATION_STATUS*) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(DIRECTMANIPULATION_STATUS*, HRESULT)).call(status)
+  def get_status(this : IDirectManipulationViewport2*, status : DIRECTMANIPULATION_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, status)
   end
-  def get_tag(riid : Guid*, object : Void**, id : UInt32*) : HRESULT
-    @lpVtbl.value.get_tag.unsafe_as(Proc(Guid*, Void**, UInt32*, HRESULT)).call(riid, object, id)
+  def get_tag(this : IDirectManipulationViewport2*, riid : Guid*, object : Void**, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_tag.call(this, riid, object, id)
   end
-  def set_tag(object : IUnknown, id : UInt32) : HRESULT
-    @lpVtbl.value.set_tag.unsafe_as(Proc(IUnknown, UInt32, HRESULT)).call(object, id)
+  def set_tag(this : IDirectManipulationViewport2*, object : IUnknown, id : UInt32) : HRESULT
+    @lpVtbl.value.set_tag.call(this, object, id)
   end
-  def get_viewport_rect(viewport : RECT*) : HRESULT
-    @lpVtbl.value.get_viewport_rect.unsafe_as(Proc(RECT*, HRESULT)).call(viewport)
+  def get_viewport_rect(this : IDirectManipulationViewport2*, viewport : RECT*) : HRESULT
+    @lpVtbl.value.get_viewport_rect.call(this, viewport)
   end
-  def set_viewport_rect(viewport : RECT*) : HRESULT
-    @lpVtbl.value.set_viewport_rect.unsafe_as(Proc(RECT*, HRESULT)).call(viewport)
+  def set_viewport_rect(this : IDirectManipulationViewport2*, viewport : RECT*) : HRESULT
+    @lpVtbl.value.set_viewport_rect.call(this, viewport)
   end
-  def zoom_to_rect(left : Float32, top : Float32, right : Float32, bottom : Float32, animate : LibC::BOOL) : HRESULT
-    @lpVtbl.value.zoom_to_rect.unsafe_as(Proc(Float32, Float32, Float32, Float32, LibC::BOOL, HRESULT)).call(left, top, right, bottom, animate)
+  def zoom_to_rect(this : IDirectManipulationViewport2*, left : Float32, top : Float32, right : Float32, bottom : Float32, animate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.zoom_to_rect.call(this, left, top, right, bottom, animate)
   end
-  def set_viewport_transform(matrix : Float32*, pointcount : UInt32) : HRESULT
-    @lpVtbl.value.set_viewport_transform.unsafe_as(Proc(Float32*, UInt32, HRESULT)).call(matrix, pointcount)
+  def set_viewport_transform(this : IDirectManipulationViewport2*, matrix : Float32*, pointcount : UInt32) : HRESULT
+    @lpVtbl.value.set_viewport_transform.call(this, matrix, pointcount)
   end
-  def sync_display_transform(matrix : Float32*, pointcount : UInt32) : HRESULT
-    @lpVtbl.value.sync_display_transform.unsafe_as(Proc(Float32*, UInt32, HRESULT)).call(matrix, pointcount)
+  def sync_display_transform(this : IDirectManipulationViewport2*, matrix : Float32*, pointcount : UInt32) : HRESULT
+    @lpVtbl.value.sync_display_transform.call(this, matrix, pointcount)
   end
-  def get_primary_content(riid : Guid*, object : Void**) : HRESULT
-    @lpVtbl.value.get_primary_content.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, object)
+  def get_primary_content(this : IDirectManipulationViewport2*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.get_primary_content.call(this, riid, object)
   end
-  def add_content(content : IDirectManipulationContent) : HRESULT
-    @lpVtbl.value.add_content.unsafe_as(Proc(IDirectManipulationContent, HRESULT)).call(content)
+  def add_content(this : IDirectManipulationViewport2*, content : IDirectManipulationContent) : HRESULT
+    @lpVtbl.value.add_content.call(this, content)
   end
-  def remove_content(content : IDirectManipulationContent) : HRESULT
-    @lpVtbl.value.remove_content.unsafe_as(Proc(IDirectManipulationContent, HRESULT)).call(content)
+  def remove_content(this : IDirectManipulationViewport2*, content : IDirectManipulationContent) : HRESULT
+    @lpVtbl.value.remove_content.call(this, content)
   end
-  def set_viewport_options(options : DIRECTMANIPULATION_VIEWPORT_OPTIONS) : HRESULT
-    @lpVtbl.value.set_viewport_options.unsafe_as(Proc(DIRECTMANIPULATION_VIEWPORT_OPTIONS, HRESULT)).call(options)
+  def set_viewport_options(this : IDirectManipulationViewport2*, options : DIRECTMANIPULATION_VIEWPORT_OPTIONS) : HRESULT
+    @lpVtbl.value.set_viewport_options.call(this, options)
   end
-  def add_configuration(configuration : DIRECTMANIPULATION_CONFIGURATION) : HRESULT
-    @lpVtbl.value.add_configuration.unsafe_as(Proc(DIRECTMANIPULATION_CONFIGURATION, HRESULT)).call(configuration)
+  def add_configuration(this : IDirectManipulationViewport2*, configuration : DIRECTMANIPULATION_CONFIGURATION) : HRESULT
+    @lpVtbl.value.add_configuration.call(this, configuration)
   end
-  def remove_configuration(configuration : DIRECTMANIPULATION_CONFIGURATION) : HRESULT
-    @lpVtbl.value.remove_configuration.unsafe_as(Proc(DIRECTMANIPULATION_CONFIGURATION, HRESULT)).call(configuration)
+  def remove_configuration(this : IDirectManipulationViewport2*, configuration : DIRECTMANIPULATION_CONFIGURATION) : HRESULT
+    @lpVtbl.value.remove_configuration.call(this, configuration)
   end
-  def activate_configuration(configuration : DIRECTMANIPULATION_CONFIGURATION) : HRESULT
-    @lpVtbl.value.activate_configuration.unsafe_as(Proc(DIRECTMANIPULATION_CONFIGURATION, HRESULT)).call(configuration)
+  def activate_configuration(this : IDirectManipulationViewport2*, configuration : DIRECTMANIPULATION_CONFIGURATION) : HRESULT
+    @lpVtbl.value.activate_configuration.call(this, configuration)
   end
-  def set_manual_gesture(configuration : DIRECTMANIPULATION_GESTURE_CONFIGURATION) : HRESULT
-    @lpVtbl.value.set_manual_gesture.unsafe_as(Proc(DIRECTMANIPULATION_GESTURE_CONFIGURATION, HRESULT)).call(configuration)
+  def set_manual_gesture(this : IDirectManipulationViewport2*, configuration : DIRECTMANIPULATION_GESTURE_CONFIGURATION) : HRESULT
+    @lpVtbl.value.set_manual_gesture.call(this, configuration)
   end
-  def set_chaining(enabledtypes : DIRECTMANIPULATION_MOTION_TYPES) : HRESULT
-    @lpVtbl.value.set_chaining.unsafe_as(Proc(DIRECTMANIPULATION_MOTION_TYPES, HRESULT)).call(enabledtypes)
+  def set_chaining(this : IDirectManipulationViewport2*, enabledtypes : DIRECTMANIPULATION_MOTION_TYPES) : HRESULT
+    @lpVtbl.value.set_chaining.call(this, enabledtypes)
   end
-  def add_event_handler(window : LibC::HANDLE, eventhandler : IDirectManipulationViewportEventHandler, cookie : UInt32*) : HRESULT
-    @lpVtbl.value.add_event_handler.unsafe_as(Proc(LibC::HANDLE, IDirectManipulationViewportEventHandler, UInt32*, HRESULT)).call(window, eventhandler, cookie)
+  def add_event_handler(this : IDirectManipulationViewport2*, window : LibC::HANDLE, eventhandler : IDirectManipulationViewportEventHandler, cookie : UInt32*) : HRESULT
+    @lpVtbl.value.add_event_handler.call(this, window, eventhandler, cookie)
   end
-  def remove_event_handler(cookie : UInt32) : HRESULT
-    @lpVtbl.value.remove_event_handler.unsafe_as(Proc(UInt32, HRESULT)).call(cookie)
+  def remove_event_handler(this : IDirectManipulationViewport2*, cookie : UInt32) : HRESULT
+    @lpVtbl.value.remove_event_handler.call(this, cookie)
   end
-  def set_input_mode(mode : DIRECTMANIPULATION_INPUT_MODE) : HRESULT
-    @lpVtbl.value.set_input_mode.unsafe_as(Proc(DIRECTMANIPULATION_INPUT_MODE, HRESULT)).call(mode)
+  def set_input_mode(this : IDirectManipulationViewport2*, mode : DIRECTMANIPULATION_INPUT_MODE) : HRESULT
+    @lpVtbl.value.set_input_mode.call(this, mode)
   end
-  def set_update_mode(mode : DIRECTMANIPULATION_INPUT_MODE) : HRESULT
-    @lpVtbl.value.set_update_mode.unsafe_as(Proc(DIRECTMANIPULATION_INPUT_MODE, HRESULT)).call(mode)
+  def set_update_mode(this : IDirectManipulationViewport2*, mode : DIRECTMANIPULATION_INPUT_MODE) : HRESULT
+    @lpVtbl.value.set_update_mode.call(this, mode)
   end
-  def stop : HRESULT
-    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  def stop(this : IDirectManipulationViewport2*) : HRESULT
+    @lpVtbl.value.stop.call(this)
   end
-  def abandon : HRESULT
-    @lpVtbl.value.abandon.unsafe_as(Proc(HRESULT)).call
+  def abandon(this : IDirectManipulationViewport2*) : HRESULT
+    @lpVtbl.value.abandon.call(this)
   end
-  def add_behavior(behavior : IUnknown, cookie : UInt32*) : HRESULT
-    @lpVtbl.value.add_behavior.unsafe_as(Proc(IUnknown, UInt32*, HRESULT)).call(behavior, cookie)
+  def add_behavior(this : IDirectManipulationViewport2*, behavior : IUnknown, cookie : UInt32*) : HRESULT
+    @lpVtbl.value.add_behavior.call(this, behavior, cookie)
   end
-  def remove_behavior(cookie : UInt32) : HRESULT
-    @lpVtbl.value.remove_behavior.unsafe_as(Proc(UInt32, HRESULT)).call(cookie)
+  def remove_behavior(this : IDirectManipulationViewport2*, cookie : UInt32) : HRESULT
+    @lpVtbl.value.remove_behavior.call(this, cookie)
   end
-  def remove_all_behaviors : HRESULT
-    @lpVtbl.value.remove_all_behaviors.unsafe_as(Proc(HRESULT)).call
+  def remove_all_behaviors(this : IDirectManipulationViewport2*) : HRESULT
+    @lpVtbl.value.remove_all_behaviors.call(this)
   end
 end
 struct LibWin32::IDirectManipulationViewportEventHandler
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectManipulationViewportEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectManipulationViewportEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectManipulationViewportEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_viewport_status_changed(viewport : IDirectManipulationViewport, current : DIRECTMANIPULATION_STATUS, previous : DIRECTMANIPULATION_STATUS) : HRESULT
-    @lpVtbl.value.on_viewport_status_changed.unsafe_as(Proc(IDirectManipulationViewport, DIRECTMANIPULATION_STATUS, DIRECTMANIPULATION_STATUS, HRESULT)).call(viewport, current, previous)
+  def on_viewport_status_changed(this : IDirectManipulationViewportEventHandler*, viewport : IDirectManipulationViewport, current : DIRECTMANIPULATION_STATUS, previous : DIRECTMANIPULATION_STATUS) : HRESULT
+    @lpVtbl.value.on_viewport_status_changed.call(this, viewport, current, previous)
   end
-  def on_viewport_updated(viewport : IDirectManipulationViewport) : HRESULT
-    @lpVtbl.value.on_viewport_updated.unsafe_as(Proc(IDirectManipulationViewport, HRESULT)).call(viewport)
+  def on_viewport_updated(this : IDirectManipulationViewportEventHandler*, viewport : IDirectManipulationViewport) : HRESULT
+    @lpVtbl.value.on_viewport_updated.call(this, viewport)
   end
-  def on_content_updated(viewport : IDirectManipulationViewport, content : IDirectManipulationContent) : HRESULT
-    @lpVtbl.value.on_content_updated.unsafe_as(Proc(IDirectManipulationViewport, IDirectManipulationContent, HRESULT)).call(viewport, content)
+  def on_content_updated(this : IDirectManipulationViewportEventHandler*, viewport : IDirectManipulationViewport, content : IDirectManipulationContent) : HRESULT
+    @lpVtbl.value.on_content_updated.call(this, viewport, content)
   end
 end
 struct LibWin32::IDirectManipulationContent
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectManipulationContent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectManipulationContent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectManipulationContent*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_content_rect(contentsize : RECT*) : HRESULT
-    @lpVtbl.value.get_content_rect.unsafe_as(Proc(RECT*, HRESULT)).call(contentsize)
+  def get_content_rect(this : IDirectManipulationContent*, contentsize : RECT*) : HRESULT
+    @lpVtbl.value.get_content_rect.call(this, contentsize)
   end
-  def set_content_rect(contentsize : RECT*) : HRESULT
-    @lpVtbl.value.set_content_rect.unsafe_as(Proc(RECT*, HRESULT)).call(contentsize)
+  def set_content_rect(this : IDirectManipulationContent*, contentsize : RECT*) : HRESULT
+    @lpVtbl.value.set_content_rect.call(this, contentsize)
   end
-  def get_viewport(riid : Guid*, object : Void**) : HRESULT
-    @lpVtbl.value.get_viewport.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, object)
+  def get_viewport(this : IDirectManipulationContent*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.get_viewport.call(this, riid, object)
   end
-  def get_tag(riid : Guid*, object : Void**, id : UInt32*) : HRESULT
-    @lpVtbl.value.get_tag.unsafe_as(Proc(Guid*, Void**, UInt32*, HRESULT)).call(riid, object, id)
+  def get_tag(this : IDirectManipulationContent*, riid : Guid*, object : Void**, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_tag.call(this, riid, object, id)
   end
-  def set_tag(object : IUnknown, id : UInt32) : HRESULT
-    @lpVtbl.value.set_tag.unsafe_as(Proc(IUnknown, UInt32, HRESULT)).call(object, id)
+  def set_tag(this : IDirectManipulationContent*, object : IUnknown, id : UInt32) : HRESULT
+    @lpVtbl.value.set_tag.call(this, object, id)
   end
-  def get_output_transform(matrix : Float32*, pointcount : UInt32) : HRESULT
-    @lpVtbl.value.get_output_transform.unsafe_as(Proc(Float32*, UInt32, HRESULT)).call(matrix, pointcount)
+  def get_output_transform(this : IDirectManipulationContent*, matrix : Float32*, pointcount : UInt32) : HRESULT
+    @lpVtbl.value.get_output_transform.call(this, matrix, pointcount)
   end
-  def get_content_transform(matrix : Float32*, pointcount : UInt32) : HRESULT
-    @lpVtbl.value.get_content_transform.unsafe_as(Proc(Float32*, UInt32, HRESULT)).call(matrix, pointcount)
+  def get_content_transform(this : IDirectManipulationContent*, matrix : Float32*, pointcount : UInt32) : HRESULT
+    @lpVtbl.value.get_content_transform.call(this, matrix, pointcount)
   end
-  def sync_content_transform(matrix : Float32*, pointcount : UInt32) : HRESULT
-    @lpVtbl.value.sync_content_transform.unsafe_as(Proc(Float32*, UInt32, HRESULT)).call(matrix, pointcount)
+  def sync_content_transform(this : IDirectManipulationContent*, matrix : Float32*, pointcount : UInt32) : HRESULT
+    @lpVtbl.value.sync_content_transform.call(this, matrix, pointcount)
   end
 end
 struct LibWin32::IDirectManipulationPrimaryContent
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectManipulationPrimaryContent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectManipulationPrimaryContent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectManipulationPrimaryContent*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_snap_interval(motion : DIRECTMANIPULATION_MOTION_TYPES, interval : Float32, offset : Float32) : HRESULT
-    @lpVtbl.value.set_snap_interval.unsafe_as(Proc(DIRECTMANIPULATION_MOTION_TYPES, Float32, Float32, HRESULT)).call(motion, interval, offset)
+  def set_snap_interval(this : IDirectManipulationPrimaryContent*, motion : DIRECTMANIPULATION_MOTION_TYPES, interval : Float32, offset : Float32) : HRESULT
+    @lpVtbl.value.set_snap_interval.call(this, motion, interval, offset)
   end
-  def set_snap_points(motion : DIRECTMANIPULATION_MOTION_TYPES, points : Float32*, pointcount : UInt32) : HRESULT
-    @lpVtbl.value.set_snap_points.unsafe_as(Proc(DIRECTMANIPULATION_MOTION_TYPES, Float32*, UInt32, HRESULT)).call(motion, points, pointcount)
+  def set_snap_points(this : IDirectManipulationPrimaryContent*, motion : DIRECTMANIPULATION_MOTION_TYPES, points : Float32*, pointcount : UInt32) : HRESULT
+    @lpVtbl.value.set_snap_points.call(this, motion, points, pointcount)
   end
-  def set_snap_type(motion : DIRECTMANIPULATION_MOTION_TYPES, type : DIRECTMANIPULATION_SNAPPOINT_TYPE) : HRESULT
-    @lpVtbl.value.set_snap_type.unsafe_as(Proc(DIRECTMANIPULATION_MOTION_TYPES, DIRECTMANIPULATION_SNAPPOINT_TYPE, HRESULT)).call(motion, type)
+  def set_snap_type(this : IDirectManipulationPrimaryContent*, motion : DIRECTMANIPULATION_MOTION_TYPES, type : DIRECTMANIPULATION_SNAPPOINT_TYPE) : HRESULT
+    @lpVtbl.value.set_snap_type.call(this, motion, type)
   end
-  def set_snap_coordinate(motion : DIRECTMANIPULATION_MOTION_TYPES, coordinate : DIRECTMANIPULATION_SNAPPOINT_COORDINATE, origin : Float32) : HRESULT
-    @lpVtbl.value.set_snap_coordinate.unsafe_as(Proc(DIRECTMANIPULATION_MOTION_TYPES, DIRECTMANIPULATION_SNAPPOINT_COORDINATE, Float32, HRESULT)).call(motion, coordinate, origin)
+  def set_snap_coordinate(this : IDirectManipulationPrimaryContent*, motion : DIRECTMANIPULATION_MOTION_TYPES, coordinate : DIRECTMANIPULATION_SNAPPOINT_COORDINATE, origin : Float32) : HRESULT
+    @lpVtbl.value.set_snap_coordinate.call(this, motion, coordinate, origin)
   end
-  def set_zoom_boundaries(zoomminimum : Float32, zoommaximum : Float32) : HRESULT
-    @lpVtbl.value.set_zoom_boundaries.unsafe_as(Proc(Float32, Float32, HRESULT)).call(zoomminimum, zoommaximum)
+  def set_zoom_boundaries(this : IDirectManipulationPrimaryContent*, zoomminimum : Float32, zoommaximum : Float32) : HRESULT
+    @lpVtbl.value.set_zoom_boundaries.call(this, zoomminimum, zoommaximum)
   end
-  def set_horizontal_alignment(alignment : DIRECTMANIPULATION_HORIZONTALALIGNMENT) : HRESULT
-    @lpVtbl.value.set_horizontal_alignment.unsafe_as(Proc(DIRECTMANIPULATION_HORIZONTALALIGNMENT, HRESULT)).call(alignment)
+  def set_horizontal_alignment(this : IDirectManipulationPrimaryContent*, alignment : DIRECTMANIPULATION_HORIZONTALALIGNMENT) : HRESULT
+    @lpVtbl.value.set_horizontal_alignment.call(this, alignment)
   end
-  def set_vertical_alignment(alignment : DIRECTMANIPULATION_VERTICALALIGNMENT) : HRESULT
-    @lpVtbl.value.set_vertical_alignment.unsafe_as(Proc(DIRECTMANIPULATION_VERTICALALIGNMENT, HRESULT)).call(alignment)
+  def set_vertical_alignment(this : IDirectManipulationPrimaryContent*, alignment : DIRECTMANIPULATION_VERTICALALIGNMENT) : HRESULT
+    @lpVtbl.value.set_vertical_alignment.call(this, alignment)
   end
-  def get_inertia_end_transform(matrix : Float32*, pointcount : UInt32) : HRESULT
-    @lpVtbl.value.get_inertia_end_transform.unsafe_as(Proc(Float32*, UInt32, HRESULT)).call(matrix, pointcount)
+  def get_inertia_end_transform(this : IDirectManipulationPrimaryContent*, matrix : Float32*, pointcount : UInt32) : HRESULT
+    @lpVtbl.value.get_inertia_end_transform.call(this, matrix, pointcount)
   end
-  def get_center_point(centerx : Float32*, centery : Float32*) : HRESULT
-    @lpVtbl.value.get_center_point.unsafe_as(Proc(Float32*, Float32*, HRESULT)).call(centerx, centery)
+  def get_center_point(this : IDirectManipulationPrimaryContent*, centerx : Float32*, centery : Float32*) : HRESULT
+    @lpVtbl.value.get_center_point.call(this, centerx, centery)
   end
 end
 struct LibWin32::IDirectManipulationDragDropEventHandler
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectManipulationDragDropEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectManipulationDragDropEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectManipulationDragDropEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_drag_drop_status_change(viewport : IDirectManipulationViewport2, current : DIRECTMANIPULATION_DRAG_DROP_STATUS, previous : DIRECTMANIPULATION_DRAG_DROP_STATUS) : HRESULT
-    @lpVtbl.value.on_drag_drop_status_change.unsafe_as(Proc(IDirectManipulationViewport2, DIRECTMANIPULATION_DRAG_DROP_STATUS, DIRECTMANIPULATION_DRAG_DROP_STATUS, HRESULT)).call(viewport, current, previous)
+  def on_drag_drop_status_change(this : IDirectManipulationDragDropEventHandler*, viewport : IDirectManipulationViewport2, current : DIRECTMANIPULATION_DRAG_DROP_STATUS, previous : DIRECTMANIPULATION_DRAG_DROP_STATUS) : HRESULT
+    @lpVtbl.value.on_drag_drop_status_change.call(this, viewport, current, previous)
   end
 end
 struct LibWin32::IDirectManipulationDragDropBehavior
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectManipulationDragDropBehavior*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectManipulationDragDropBehavior*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectManipulationDragDropBehavior*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_configuration(configuration : DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION) : HRESULT
-    @lpVtbl.value.set_configuration.unsafe_as(Proc(DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION, HRESULT)).call(configuration)
+  def set_configuration(this : IDirectManipulationDragDropBehavior*, configuration : DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION) : HRESULT
+    @lpVtbl.value.set_configuration.call(this, configuration)
   end
-  def get_status(status : DIRECTMANIPULATION_DRAG_DROP_STATUS*) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(DIRECTMANIPULATION_DRAG_DROP_STATUS*, HRESULT)).call(status)
+  def get_status(this : IDirectManipulationDragDropBehavior*, status : DIRECTMANIPULATION_DRAG_DROP_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, status)
   end
 end
 struct LibWin32::IDirectManipulationInteractionEventHandler
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectManipulationInteractionEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectManipulationInteractionEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectManipulationInteractionEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_interaction(viewport : IDirectManipulationViewport2, interaction : DIRECTMANIPULATION_INTERACTION_TYPE) : HRESULT
-    @lpVtbl.value.on_interaction.unsafe_as(Proc(IDirectManipulationViewport2, DIRECTMANIPULATION_INTERACTION_TYPE, HRESULT)).call(viewport, interaction)
+  def on_interaction(this : IDirectManipulationInteractionEventHandler*, viewport : IDirectManipulationViewport2, interaction : DIRECTMANIPULATION_INTERACTION_TYPE) : HRESULT
+    @lpVtbl.value.on_interaction.call(this, viewport, interaction)
   end
 end
 struct LibWin32::IDirectManipulationFrameInfoProvider
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectManipulationFrameInfoProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectManipulationFrameInfoProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectManipulationFrameInfoProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_next_frame_info(time : UInt64*, processtime : UInt64*, compositiontime : UInt64*) : HRESULT
-    @lpVtbl.value.get_next_frame_info.unsafe_as(Proc(UInt64*, UInt64*, UInt64*, HRESULT)).call(time, processtime, compositiontime)
+  def get_next_frame_info(this : IDirectManipulationFrameInfoProvider*, time : UInt64*, processtime : UInt64*, compositiontime : UInt64*) : HRESULT
+    @lpVtbl.value.get_next_frame_info.call(this, time, processtime, compositiontime)
   end
 end
 struct LibWin32::IDirectManipulationCompositor
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectManipulationCompositor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectManipulationCompositor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectManipulationCompositor*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add_content(content : IDirectManipulationContent, device : IUnknown, parentvisual : IUnknown, childvisual : IUnknown) : HRESULT
-    @lpVtbl.value.add_content.unsafe_as(Proc(IDirectManipulationContent, IUnknown, IUnknown, IUnknown, HRESULT)).call(content, device, parentvisual, childvisual)
+  def add_content(this : IDirectManipulationCompositor*, content : IDirectManipulationContent, device : IUnknown, parentvisual : IUnknown, childvisual : IUnknown) : HRESULT
+    @lpVtbl.value.add_content.call(this, content, device, parentvisual, childvisual)
   end
-  def remove_content(content : IDirectManipulationContent) : HRESULT
-    @lpVtbl.value.remove_content.unsafe_as(Proc(IDirectManipulationContent, HRESULT)).call(content)
+  def remove_content(this : IDirectManipulationCompositor*, content : IDirectManipulationContent) : HRESULT
+    @lpVtbl.value.remove_content.call(this, content)
   end
-  def set_update_manager(updatemanager : IDirectManipulationUpdateManager) : HRESULT
-    @lpVtbl.value.set_update_manager.unsafe_as(Proc(IDirectManipulationUpdateManager, HRESULT)).call(updatemanager)
+  def set_update_manager(this : IDirectManipulationCompositor*, updatemanager : IDirectManipulationUpdateManager) : HRESULT
+    @lpVtbl.value.set_update_manager.call(this, updatemanager)
   end
-  def flush : HRESULT
-    @lpVtbl.value.flush.unsafe_as(Proc(HRESULT)).call
+  def flush(this : IDirectManipulationCompositor*) : HRESULT
+    @lpVtbl.value.flush.call(this)
   end
 end
 struct LibWin32::IDirectManipulationCompositor2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectManipulationCompositor2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectManipulationCompositor2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectManipulationCompositor2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add_content(content : IDirectManipulationContent, device : IUnknown, parentvisual : IUnknown, childvisual : IUnknown) : HRESULT
-    @lpVtbl.value.add_content.unsafe_as(Proc(IDirectManipulationContent, IUnknown, IUnknown, IUnknown, HRESULT)).call(content, device, parentvisual, childvisual)
+  def add_content(this : IDirectManipulationCompositor2*, content : IDirectManipulationContent, device : IUnknown, parentvisual : IUnknown, childvisual : IUnknown) : HRESULT
+    @lpVtbl.value.add_content.call(this, content, device, parentvisual, childvisual)
   end
-  def remove_content(content : IDirectManipulationContent) : HRESULT
-    @lpVtbl.value.remove_content.unsafe_as(Proc(IDirectManipulationContent, HRESULT)).call(content)
+  def remove_content(this : IDirectManipulationCompositor2*, content : IDirectManipulationContent) : HRESULT
+    @lpVtbl.value.remove_content.call(this, content)
   end
-  def set_update_manager(updatemanager : IDirectManipulationUpdateManager) : HRESULT
-    @lpVtbl.value.set_update_manager.unsafe_as(Proc(IDirectManipulationUpdateManager, HRESULT)).call(updatemanager)
+  def set_update_manager(this : IDirectManipulationCompositor2*, updatemanager : IDirectManipulationUpdateManager) : HRESULT
+    @lpVtbl.value.set_update_manager.call(this, updatemanager)
   end
-  def flush : HRESULT
-    @lpVtbl.value.flush.unsafe_as(Proc(HRESULT)).call
+  def flush(this : IDirectManipulationCompositor2*) : HRESULT
+    @lpVtbl.value.flush.call(this)
   end
-  def add_content_with_cross_process_chaining(content : IDirectManipulationPrimaryContent, device : IUnknown, parentvisual : IUnknown, childvisual : IUnknown) : HRESULT
-    @lpVtbl.value.add_content_with_cross_process_chaining.unsafe_as(Proc(IDirectManipulationPrimaryContent, IUnknown, IUnknown, IUnknown, HRESULT)).call(content, device, parentvisual, childvisual)
+  def add_content_with_cross_process_chaining(this : IDirectManipulationCompositor2*, content : IDirectManipulationPrimaryContent, device : IUnknown, parentvisual : IUnknown, childvisual : IUnknown) : HRESULT
+    @lpVtbl.value.add_content_with_cross_process_chaining.call(this, content, device, parentvisual, childvisual)
   end
 end
 struct LibWin32::IDirectManipulationUpdateHandler
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectManipulationUpdateHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectManipulationUpdateHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectManipulationUpdateHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def update : HRESULT
-    @lpVtbl.value.update.unsafe_as(Proc(HRESULT)).call
+  def update(this : IDirectManipulationUpdateHandler*) : HRESULT
+    @lpVtbl.value.update.call(this)
   end
 end
 struct LibWin32::IDirectManipulationUpdateManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectManipulationUpdateManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectManipulationUpdateManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectManipulationUpdateManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def register_wait_handle_callback(handle : LibC::HANDLE, eventhandler : IDirectManipulationUpdateHandler, cookie : UInt32*) : HRESULT
-    @lpVtbl.value.register_wait_handle_callback.unsafe_as(Proc(LibC::HANDLE, IDirectManipulationUpdateHandler, UInt32*, HRESULT)).call(handle, eventhandler, cookie)
+  def register_wait_handle_callback(this : IDirectManipulationUpdateManager*, handle : LibC::HANDLE, eventhandler : IDirectManipulationUpdateHandler, cookie : UInt32*) : HRESULT
+    @lpVtbl.value.register_wait_handle_callback.call(this, handle, eventhandler, cookie)
   end
-  def unregister_wait_handle_callback(cookie : UInt32) : HRESULT
-    @lpVtbl.value.unregister_wait_handle_callback.unsafe_as(Proc(UInt32, HRESULT)).call(cookie)
+  def unregister_wait_handle_callback(this : IDirectManipulationUpdateManager*, cookie : UInt32) : HRESULT
+    @lpVtbl.value.unregister_wait_handle_callback.call(this, cookie)
   end
-  def update(frameinfo : IDirectManipulationFrameInfoProvider) : HRESULT
-    @lpVtbl.value.update.unsafe_as(Proc(IDirectManipulationFrameInfoProvider, HRESULT)).call(frameinfo)
+  def update(this : IDirectManipulationUpdateManager*, frameinfo : IDirectManipulationFrameInfoProvider) : HRESULT
+    @lpVtbl.value.update.call(this, frameinfo)
   end
 end
 struct LibWin32::IDirectManipulationAutoScrollBehavior
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectManipulationAutoScrollBehavior*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectManipulationAutoScrollBehavior*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectManipulationAutoScrollBehavior*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_configuration(motiontypes : DIRECTMANIPULATION_MOTION_TYPES, scrollmotion : DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION) : HRESULT
-    @lpVtbl.value.set_configuration.unsafe_as(Proc(DIRECTMANIPULATION_MOTION_TYPES, DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION, HRESULT)).call(motiontypes, scrollmotion)
+  def set_configuration(this : IDirectManipulationAutoScrollBehavior*, motiontypes : DIRECTMANIPULATION_MOTION_TYPES, scrollmotion : DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION) : HRESULT
+    @lpVtbl.value.set_configuration.call(this, motiontypes, scrollmotion)
   end
 end
 struct LibWin32::IDirectManipulationDeferContactService
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectManipulationDeferContactService*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectManipulationDeferContactService*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectManipulationDeferContactService*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def defer_contact(pointerid : UInt32, timeout : UInt32) : HRESULT
-    @lpVtbl.value.defer_contact.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(pointerid, timeout)
+  def defer_contact(this : IDirectManipulationDeferContactService*, pointerid : UInt32, timeout : UInt32) : HRESULT
+    @lpVtbl.value.defer_contact.call(this, pointerid, timeout)
   end
-  def cancel_contact(pointerid : UInt32) : HRESULT
-    @lpVtbl.value.cancel_contact.unsafe_as(Proc(UInt32, HRESULT)).call(pointerid)
+  def cancel_contact(this : IDirectManipulationDeferContactService*, pointerid : UInt32) : HRESULT
+    @lpVtbl.value.cancel_contact.call(this, pointerid)
   end
-  def cancel_deferral(pointerid : UInt32) : HRESULT
-    @lpVtbl.value.cancel_deferral.unsafe_as(Proc(UInt32, HRESULT)).call(pointerid)
+  def cancel_deferral(this : IDirectManipulationDeferContactService*, pointerid : UInt32) : HRESULT
+    @lpVtbl.value.cancel_deferral.call(this, pointerid)
   end
 end

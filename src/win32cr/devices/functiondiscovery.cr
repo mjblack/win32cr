@@ -331,12 +331,12 @@ lib LibWin32
 
 
   struct IFunctionDiscoveryNotificationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_update : UInt64
-    on_error : UInt64
-    on_event : UInt64
+    query_interface : Proc(IFunctionDiscoveryNotification*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFunctionDiscoveryNotification*, UInt32)
+    release : Proc(IFunctionDiscoveryNotification*, UInt32)
+    on_update : Proc(IFunctionDiscoveryNotification*, QueryUpdateAction, UInt64, IFunctionInstance, HRESULT)
+    on_error : Proc(IFunctionDiscoveryNotification*, HRESULT, UInt64, LibC::LPWSTR, HRESULT)
+    on_event : Proc(IFunctionDiscoveryNotification*, UInt32, UInt64, LibC::LPWSTR, HRESULT)
   end
 
   IFunctionDiscoveryNotification_GUID = "5f6c1ba8-5330-422e-a368-572b244d3f87"
@@ -346,15 +346,15 @@ lib LibWin32
   end
 
   struct IFunctionDiscoveryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_instance_collection : UInt64
-    get_instance : UInt64
-    create_instance_collection_query : UInt64
-    create_instance_query : UInt64
-    add_instance : UInt64
-    remove_instance : UInt64
+    query_interface : Proc(IFunctionDiscovery*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFunctionDiscovery*, UInt32)
+    release : Proc(IFunctionDiscovery*, UInt32)
+    get_instance_collection : Proc(IFunctionDiscovery*, LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, IFunctionInstanceCollection*, HRESULT)
+    get_instance : Proc(IFunctionDiscovery*, LibC::LPWSTR, IFunctionInstance*, HRESULT)
+    create_instance_collection_query : Proc(IFunctionDiscovery*, LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, IFunctionDiscoveryNotification, UInt64*, IFunctionInstanceCollectionQuery*, HRESULT)
+    create_instance_query : Proc(IFunctionDiscovery*, LibC::LPWSTR, IFunctionDiscoveryNotification, UInt64*, IFunctionInstanceQuery*, HRESULT)
+    add_instance : Proc(IFunctionDiscovery*, SystemVisibilityFlags, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IFunctionInstance*, HRESULT)
+    remove_instance : Proc(IFunctionDiscovery*, SystemVisibilityFlags, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
   IFunctionDiscovery_GUID = "4df99b70-e148-4432-b004-4c9eeb535a5e"
@@ -364,14 +364,14 @@ lib LibWin32
   end
 
   struct IFunctionInstanceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    query_service : UInt64
-    get_id : UInt64
-    get_provider_instance_id : UInt64
-    open_property_store : UInt64
-    get_category : UInt64
+    query_interface : Proc(IFunctionInstance*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFunctionInstance*, UInt32)
+    release : Proc(IFunctionInstance*, UInt32)
+    query_service : Proc(IFunctionInstance*, Guid*, Guid*, Void**, HRESULT)
+    get_id : Proc(IFunctionInstance*, UInt16**, HRESULT)
+    get_provider_instance_id : Proc(IFunctionInstance*, UInt16**, HRESULT)
+    open_property_store : Proc(IFunctionInstance*, UInt32, IPropertyStore*, HRESULT)
+    get_category : Proc(IFunctionInstance*, UInt16**, UInt16**, HRESULT)
   end
 
   IFunctionInstance_GUID = "33591c10-0bed-4f02-b0ab-1530d5533ee9"
@@ -381,16 +381,16 @@ lib LibWin32
   end
 
   struct IFunctionInstanceCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_count : UInt64
-    get : UInt64
-    item : UInt64
-    add : UInt64
-    remove : UInt64
-    delete : UInt64
-    delete_all : UInt64
+    query_interface : Proc(IFunctionInstanceCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFunctionInstanceCollection*, UInt32)
+    release : Proc(IFunctionInstanceCollection*, UInt32)
+    get_count : Proc(IFunctionInstanceCollection*, UInt32*, HRESULT)
+    get : Proc(IFunctionInstanceCollection*, LibC::LPWSTR, UInt32*, IFunctionInstance*, HRESULT)
+    item : Proc(IFunctionInstanceCollection*, UInt32, IFunctionInstance*, HRESULT)
+    add : Proc(IFunctionInstanceCollection*, IFunctionInstance, HRESULT)
+    remove : Proc(IFunctionInstanceCollection*, UInt32, IFunctionInstance*, HRESULT)
+    delete : Proc(IFunctionInstanceCollection*, UInt32, HRESULT)
+    delete_all : Proc(IFunctionInstanceCollection*, HRESULT)
   end
 
   IFunctionInstanceCollection_GUID = "f0a3d895-855c-42a2-948d-2f97d450ecb1"
@@ -400,16 +400,16 @@ lib LibWin32
   end
 
   struct IPropertyStoreCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_count : UInt64
-    get : UInt64
-    item : UInt64
-    add : UInt64
-    remove : UInt64
-    delete : UInt64
-    delete_all : UInt64
+    query_interface : Proc(IPropertyStoreCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPropertyStoreCollection*, UInt32)
+    release : Proc(IPropertyStoreCollection*, UInt32)
+    get_count : Proc(IPropertyStoreCollection*, UInt32*, HRESULT)
+    get : Proc(IPropertyStoreCollection*, LibC::LPWSTR, UInt32*, IPropertyStore*, HRESULT)
+    item : Proc(IPropertyStoreCollection*, UInt32, IPropertyStore*, HRESULT)
+    add : Proc(IPropertyStoreCollection*, IPropertyStore, HRESULT)
+    remove : Proc(IPropertyStoreCollection*, UInt32, IPropertyStore*, HRESULT)
+    delete : Proc(IPropertyStoreCollection*, UInt32, HRESULT)
+    delete_all : Proc(IPropertyStoreCollection*, HRESULT)
   end
 
   IPropertyStoreCollection_GUID = "d14d9c30-12d2-42d8-bce4-c60c2bb226fa"
@@ -419,10 +419,10 @@ lib LibWin32
   end
 
   struct IFunctionInstanceQueryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    execute : UInt64
+    query_interface : Proc(IFunctionInstanceQuery*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFunctionInstanceQuery*, UInt32)
+    release : Proc(IFunctionInstanceQuery*, UInt32)
+    execute : Proc(IFunctionInstanceQuery*, IFunctionInstance*, HRESULT)
   end
 
   IFunctionInstanceQuery_GUID = "6242bc6b-90ec-4b37-bb46-e229fd84ed95"
@@ -432,12 +432,12 @@ lib LibWin32
   end
 
   struct IFunctionInstanceCollectionQueryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add_query_constraint : UInt64
-    add_property_constraint : UInt64
-    execute : UInt64
+    query_interface : Proc(IFunctionInstanceCollectionQuery*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFunctionInstanceCollectionQuery*, UInt32)
+    release : Proc(IFunctionInstanceCollectionQuery*, UInt32)
+    add_query_constraint : Proc(IFunctionInstanceCollectionQuery*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    add_property_constraint : Proc(IFunctionInstanceCollectionQuery*, PROPERTYKEY*, PROPVARIANT*, PropertyConstraint, HRESULT)
+    execute : Proc(IFunctionInstanceCollectionQuery*, IFunctionInstanceCollection*, HRESULT)
   end
 
   IFunctionInstanceCollectionQuery_GUID = "57cc6fd2-c09a-4289-bb72-25f04142058e"
@@ -447,17 +447,17 @@ lib LibWin32
   end
 
   struct IFunctionDiscoveryProviderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    initialize : UInt64
-    query : UInt64
-    end_query : UInt64
-    instance_property_store_validate_access : UInt64
-    instance_property_store_open : UInt64
-    instance_property_store_flush : UInt64
-    instance_query_service : UInt64
-    instance_released : UInt64
+    query_interface : Proc(IFunctionDiscoveryProvider*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFunctionDiscoveryProvider*, UInt32)
+    release : Proc(IFunctionDiscoveryProvider*, UInt32)
+    initialize : Proc(IFunctionDiscoveryProvider*, IFunctionDiscoveryProviderFactory, IFunctionDiscoveryNotification, UInt32, UInt32*, HRESULT)
+    query : Proc(IFunctionDiscoveryProvider*, IFunctionDiscoveryProviderQuery, IFunctionInstanceCollection*, HRESULT)
+    end_query : Proc(IFunctionDiscoveryProvider*, HRESULT)
+    instance_property_store_validate_access : Proc(IFunctionDiscoveryProvider*, IFunctionInstance, LibC::IntPtrT, UInt32, HRESULT)
+    instance_property_store_open : Proc(IFunctionDiscoveryProvider*, IFunctionInstance, LibC::IntPtrT, UInt32, IPropertyStore*, HRESULT)
+    instance_property_store_flush : Proc(IFunctionDiscoveryProvider*, IFunctionInstance, LibC::IntPtrT, HRESULT)
+    instance_query_service : Proc(IFunctionDiscoveryProvider*, IFunctionInstance, LibC::IntPtrT, Guid*, Guid*, IUnknown*, HRESULT)
+    instance_released : Proc(IFunctionDiscoveryProvider*, IFunctionInstance, LibC::IntPtrT, HRESULT)
   end
 
   IFunctionDiscoveryProvider_GUID = "dcde394f-1478-4813-a402-f6fb10657222"
@@ -467,13 +467,13 @@ lib LibWin32
   end
 
   struct IProviderPropertiesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_count : UInt64
-    get_at : UInt64
-    get_value : UInt64
-    set_value : UInt64
+    query_interface : Proc(IProviderProperties*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IProviderProperties*, UInt32)
+    release : Proc(IProviderProperties*, UInt32)
+    get_count : Proc(IProviderProperties*, IFunctionInstance, LibC::IntPtrT, UInt32*, HRESULT)
+    get_at : Proc(IProviderProperties*, IFunctionInstance, LibC::IntPtrT, UInt32, PROPERTYKEY*, HRESULT)
+    get_value : Proc(IProviderProperties*, IFunctionInstance, LibC::IntPtrT, PROPERTYKEY*, PROPVARIANT*, HRESULT)
+    set_value : Proc(IProviderProperties*, IFunctionInstance, LibC::IntPtrT, PROPERTYKEY*, PROPVARIANT*, HRESULT)
   end
 
   IProviderProperties_GUID = "cf986ea6-3b5f-4c5f-b88a-2f8b20ceef17"
@@ -483,11 +483,11 @@ lib LibWin32
   end
 
   struct IProviderPublishingVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_instance : UInt64
-    remove_instance : UInt64
+    query_interface : Proc(IProviderPublishing*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IProviderPublishing*, UInt32)
+    release : Proc(IProviderPublishing*, UInt32)
+    create_instance : Proc(IProviderPublishing*, SystemVisibilityFlags, LibC::LPWSTR, LibC::LPWSTR, IFunctionInstance*, HRESULT)
+    remove_instance : Proc(IProviderPublishing*, SystemVisibilityFlags, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
   IProviderPublishing_GUID = "cd1b9a04-206c-4a05-a0c8-1635a21a2b7c"
@@ -497,12 +497,12 @@ lib LibWin32
   end
 
   struct IFunctionDiscoveryProviderFactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_property_store : UInt64
-    create_instance : UInt64
-    create_function_instance_collection : UInt64
+    query_interface : Proc(IFunctionDiscoveryProviderFactory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFunctionDiscoveryProviderFactory*, UInt32)
+    release : Proc(IFunctionDiscoveryProviderFactory*, UInt32)
+    create_property_store : Proc(IFunctionDiscoveryProviderFactory*, IPropertyStore*, HRESULT)
+    create_instance : Proc(IFunctionDiscoveryProviderFactory*, LibC::LPWSTR, LibC::LPWSTR, LibC::IntPtrT, IPropertyStore, IFunctionDiscoveryProvider, IFunctionInstance*, HRESULT)
+    create_function_instance_collection : Proc(IFunctionDiscoveryProviderFactory*, IFunctionInstanceCollection*, HRESULT)
   end
 
   IFunctionDiscoveryProviderFactory_GUID = "86443ff0-1ad5-4e68-a45a-40c2c329de3b"
@@ -512,13 +512,13 @@ lib LibWin32
   end
 
   struct IFunctionDiscoveryProviderQueryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    is_instance_query : UInt64
-    is_subcategory_query : UInt64
-    get_query_constraints : UInt64
-    get_property_constraints : UInt64
+    query_interface : Proc(IFunctionDiscoveryProviderQuery*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFunctionDiscoveryProviderQuery*, UInt32)
+    release : Proc(IFunctionDiscoveryProviderQuery*, UInt32)
+    is_instance_query : Proc(IFunctionDiscoveryProviderQuery*, LibC::BOOL*, UInt16**, HRESULT)
+    is_subcategory_query : Proc(IFunctionDiscoveryProviderQuery*, LibC::BOOL*, UInt16**, HRESULT)
+    get_query_constraints : Proc(IFunctionDiscoveryProviderQuery*, IProviderQueryConstraintCollection*, HRESULT)
+    get_property_constraints : Proc(IFunctionDiscoveryProviderQuery*, IProviderPropertyConstraintCollection*, HRESULT)
   end
 
   IFunctionDiscoveryProviderQuery_GUID = "6876ea98-baec-46db-bc20-75a76e267a3a"
@@ -528,15 +528,15 @@ lib LibWin32
   end
 
   struct IProviderQueryConstraintCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_count : UInt64
-    get : UInt64
-    item : UInt64
-    next : UInt64
-    skip : UInt64
-    reset : UInt64
+    query_interface : Proc(IProviderQueryConstraintCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IProviderQueryConstraintCollection*, UInt32)
+    release : Proc(IProviderQueryConstraintCollection*, UInt32)
+    get_count : Proc(IProviderQueryConstraintCollection*, UInt32*, HRESULT)
+    get : Proc(IProviderQueryConstraintCollection*, LibC::LPWSTR, UInt16**, HRESULT)
+    item : Proc(IProviderQueryConstraintCollection*, UInt32, UInt16**, UInt16**, HRESULT)
+    next : Proc(IProviderQueryConstraintCollection*, UInt16**, UInt16**, HRESULT)
+    skip : Proc(IProviderQueryConstraintCollection*, HRESULT)
+    reset : Proc(IProviderQueryConstraintCollection*, HRESULT)
   end
 
   IProviderQueryConstraintCollection_GUID = "9c243e11-3261-4bcd-b922-84a873d460ae"
@@ -546,15 +546,15 @@ lib LibWin32
   end
 
   struct IProviderPropertyConstraintCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_count : UInt64
-    get : UInt64
-    item : UInt64
-    next : UInt64
-    skip : UInt64
-    reset : UInt64
+    query_interface : Proc(IProviderPropertyConstraintCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IProviderPropertyConstraintCollection*, UInt32)
+    release : Proc(IProviderPropertyConstraintCollection*, UInt32)
+    get_count : Proc(IProviderPropertyConstraintCollection*, UInt32*, HRESULT)
+    get : Proc(IProviderPropertyConstraintCollection*, PROPERTYKEY*, PROPVARIANT*, UInt32*, HRESULT)
+    item : Proc(IProviderPropertyConstraintCollection*, UInt32, PROPERTYKEY*, PROPVARIANT*, UInt32*, HRESULT)
+    next : Proc(IProviderPropertyConstraintCollection*, PROPERTYKEY*, PROPVARIANT*, UInt32*, HRESULT)
+    skip : Proc(IProviderPropertyConstraintCollection*, HRESULT)
+    reset : Proc(IProviderPropertyConstraintCollection*, HRESULT)
   end
 
   IProviderPropertyConstraintCollection_GUID = "f4fae42f-5778-4a13-8540-b5fd8c1398dd"
@@ -564,10 +564,10 @@ lib LibWin32
   end
 
   struct IFunctionDiscoveryServiceProviderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    initialize : UInt64
+    query_interface : Proc(IFunctionDiscoveryServiceProvider*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFunctionDiscoveryServiceProvider*, UInt32)
+    release : Proc(IFunctionDiscoveryServiceProvider*, UInt32)
+    initialize : Proc(IFunctionDiscoveryServiceProvider*, IFunctionInstance, Guid*, Void**, HRESULT)
   end
 
   IFunctionDiscoveryServiceProvider_GUID = "4c81ed02-1b04-43f2-a451-69966cbcd1c2"
@@ -577,12 +577,12 @@ lib LibWin32
   end
 
   struct IPNPXAssociationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    associate : UInt64
-    unassociate : UInt64
-    delete : UInt64
+    query_interface : Proc(IPNPXAssociation*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPNPXAssociation*, UInt32)
+    release : Proc(IPNPXAssociation*, UInt32)
+    associate : Proc(IPNPXAssociation*, LibC::LPWSTR, HRESULT)
+    unassociate : Proc(IPNPXAssociation*, LibC::LPWSTR, HRESULT)
+    delete : Proc(IPNPXAssociation*, LibC::LPWSTR, HRESULT)
   end
 
   IPNPXAssociation_GUID = "0bd7e521-4da6-42d5-81ba-1981b6b94075"
@@ -592,12 +592,12 @@ lib LibWin32
   end
 
   struct IPNPXDeviceAssociationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    associate : UInt64
-    unassociate : UInt64
-    delete : UInt64
+    query_interface : Proc(IPNPXDeviceAssociation*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPNPXDeviceAssociation*, UInt32)
+    release : Proc(IPNPXDeviceAssociation*, UInt32)
+    associate : Proc(IPNPXDeviceAssociation*, LibC::LPWSTR, IFunctionDiscoveryNotification, HRESULT)
+    unassociate : Proc(IPNPXDeviceAssociation*, LibC::LPWSTR, IFunctionDiscoveryNotification, HRESULT)
+    delete : Proc(IPNPXDeviceAssociation*, LibC::LPWSTR, IFunctionDiscoveryNotification, HRESULT)
   end
 
   IPNPXDeviceAssociation_GUID = "eed366d0-35b8-4fc5-8d20-7e5bd31f6ded"
@@ -608,405 +608,405 @@ lib LibWin32
 
 end
 struct LibWin32::IFunctionDiscoveryNotification
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFunctionDiscoveryNotification*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFunctionDiscoveryNotification*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFunctionDiscoveryNotification*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_update(enumqueryupdateaction : QueryUpdateAction, fdqcquerycontext : UInt64, pifunctioninstance : IFunctionInstance) : HRESULT
-    @lpVtbl.value.on_update.unsafe_as(Proc(QueryUpdateAction, UInt64, IFunctionInstance, HRESULT)).call(enumqueryupdateaction, fdqcquerycontext, pifunctioninstance)
+  def on_update(this : IFunctionDiscoveryNotification*, enumqueryupdateaction : QueryUpdateAction, fdqcquerycontext : UInt64, pifunctioninstance : IFunctionInstance) : HRESULT
+    @lpVtbl.value.on_update.call(this, enumqueryupdateaction, fdqcquerycontext, pifunctioninstance)
   end
-  def on_error(hr : HRESULT, fdqcquerycontext : UInt64, pszprovider : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.on_error.unsafe_as(Proc(HRESULT, UInt64, LibC::LPWSTR, HRESULT)).call(hr, fdqcquerycontext, pszprovider)
+  def on_error(this : IFunctionDiscoveryNotification*, hr : HRESULT, fdqcquerycontext : UInt64, pszprovider : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.on_error.call(this, hr, fdqcquerycontext, pszprovider)
   end
-  def on_event(dweventid : UInt32, fdqcquerycontext : UInt64, pszprovider : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.on_event.unsafe_as(Proc(UInt32, UInt64, LibC::LPWSTR, HRESULT)).call(dweventid, fdqcquerycontext, pszprovider)
+  def on_event(this : IFunctionDiscoveryNotification*, dweventid : UInt32, fdqcquerycontext : UInt64, pszprovider : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.on_event.call(this, dweventid, fdqcquerycontext, pszprovider)
   end
 end
 struct LibWin32::IFunctionDiscovery
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFunctionDiscovery*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFunctionDiscovery*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFunctionDiscovery*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_instance_collection(pszcategory : LibC::LPWSTR, pszsubcategory : LibC::LPWSTR, fincludeallsubcategories : LibC::BOOL, ppifunctioninstancecollection : IFunctionInstanceCollection*) : HRESULT
-    @lpVtbl.value.get_instance_collection.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, IFunctionInstanceCollection*, HRESULT)).call(pszcategory, pszsubcategory, fincludeallsubcategories, ppifunctioninstancecollection)
+  def get_instance_collection(this : IFunctionDiscovery*, pszcategory : LibC::LPWSTR, pszsubcategory : LibC::LPWSTR, fincludeallsubcategories : LibC::BOOL, ppifunctioninstancecollection : IFunctionInstanceCollection*) : HRESULT
+    @lpVtbl.value.get_instance_collection.call(this, pszcategory, pszsubcategory, fincludeallsubcategories, ppifunctioninstancecollection)
   end
-  def get_instance(pszfunctioninstanceidentity : LibC::LPWSTR, ppifunctioninstance : IFunctionInstance*) : HRESULT
-    @lpVtbl.value.get_instance.unsafe_as(Proc(LibC::LPWSTR, IFunctionInstance*, HRESULT)).call(pszfunctioninstanceidentity, ppifunctioninstance)
+  def get_instance(this : IFunctionDiscovery*, pszfunctioninstanceidentity : LibC::LPWSTR, ppifunctioninstance : IFunctionInstance*) : HRESULT
+    @lpVtbl.value.get_instance.call(this, pszfunctioninstanceidentity, ppifunctioninstance)
   end
-  def create_instance_collection_query(pszcategory : LibC::LPWSTR, pszsubcategory : LibC::LPWSTR, fincludeallsubcategories : LibC::BOOL, pifunctiondiscoverynotification : IFunctionDiscoveryNotification, pfdqcquerycontext : UInt64*, ppifunctioninstancecollectionquery : IFunctionInstanceCollectionQuery*) : HRESULT
-    @lpVtbl.value.create_instance_collection_query.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, IFunctionDiscoveryNotification, UInt64*, IFunctionInstanceCollectionQuery*, HRESULT)).call(pszcategory, pszsubcategory, fincludeallsubcategories, pifunctiondiscoverynotification, pfdqcquerycontext, ppifunctioninstancecollectionquery)
+  def create_instance_collection_query(this : IFunctionDiscovery*, pszcategory : LibC::LPWSTR, pszsubcategory : LibC::LPWSTR, fincludeallsubcategories : LibC::BOOL, pifunctiondiscoverynotification : IFunctionDiscoveryNotification, pfdqcquerycontext : UInt64*, ppifunctioninstancecollectionquery : IFunctionInstanceCollectionQuery*) : HRESULT
+    @lpVtbl.value.create_instance_collection_query.call(this, pszcategory, pszsubcategory, fincludeallsubcategories, pifunctiondiscoverynotification, pfdqcquerycontext, ppifunctioninstancecollectionquery)
   end
-  def create_instance_query(pszfunctioninstanceidentity : LibC::LPWSTR, pifunctiondiscoverynotification : IFunctionDiscoveryNotification, pfdqcquerycontext : UInt64*, ppifunctioninstancequery : IFunctionInstanceQuery*) : HRESULT
-    @lpVtbl.value.create_instance_query.unsafe_as(Proc(LibC::LPWSTR, IFunctionDiscoveryNotification, UInt64*, IFunctionInstanceQuery*, HRESULT)).call(pszfunctioninstanceidentity, pifunctiondiscoverynotification, pfdqcquerycontext, ppifunctioninstancequery)
+  def create_instance_query(this : IFunctionDiscovery*, pszfunctioninstanceidentity : LibC::LPWSTR, pifunctiondiscoverynotification : IFunctionDiscoveryNotification, pfdqcquerycontext : UInt64*, ppifunctioninstancequery : IFunctionInstanceQuery*) : HRESULT
+    @lpVtbl.value.create_instance_query.call(this, pszfunctioninstanceidentity, pifunctiondiscoverynotification, pfdqcquerycontext, ppifunctioninstancequery)
   end
-  def add_instance(enumsystemvisibility : SystemVisibilityFlags, pszcategory : LibC::LPWSTR, pszsubcategory : LibC::LPWSTR, pszcategoryidentity : LibC::LPWSTR, ppifunctioninstance : IFunctionInstance*) : HRESULT
-    @lpVtbl.value.add_instance.unsafe_as(Proc(SystemVisibilityFlags, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IFunctionInstance*, HRESULT)).call(enumsystemvisibility, pszcategory, pszsubcategory, pszcategoryidentity, ppifunctioninstance)
+  def add_instance(this : IFunctionDiscovery*, enumsystemvisibility : SystemVisibilityFlags, pszcategory : LibC::LPWSTR, pszsubcategory : LibC::LPWSTR, pszcategoryidentity : LibC::LPWSTR, ppifunctioninstance : IFunctionInstance*) : HRESULT
+    @lpVtbl.value.add_instance.call(this, enumsystemvisibility, pszcategory, pszsubcategory, pszcategoryidentity, ppifunctioninstance)
   end
-  def remove_instance(enumsystemvisibility : SystemVisibilityFlags, pszcategory : LibC::LPWSTR, pszsubcategory : LibC::LPWSTR, pszcategoryidentity : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.remove_instance.unsafe_as(Proc(SystemVisibilityFlags, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(enumsystemvisibility, pszcategory, pszsubcategory, pszcategoryidentity)
+  def remove_instance(this : IFunctionDiscovery*, enumsystemvisibility : SystemVisibilityFlags, pszcategory : LibC::LPWSTR, pszsubcategory : LibC::LPWSTR, pszcategoryidentity : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove_instance.call(this, enumsystemvisibility, pszcategory, pszsubcategory, pszcategoryidentity)
   end
 end
 struct LibWin32::IFunctionInstance
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFunctionInstance*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFunctionInstance*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFunctionInstance*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def query_service(guidservice : Guid*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_service.unsafe_as(Proc(Guid*, Guid*, Void**, HRESULT)).call(guidservice, riid, ppvobject)
+  def query_service(this : IFunctionInstance*, guidservice : Guid*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_service.call(this, guidservice, riid, ppvobject)
   end
-  def get_id(ppszcomemidentity : UInt16**) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(UInt16**, HRESULT)).call(ppszcomemidentity)
+  def get_id(this : IFunctionInstance*, ppszcomemidentity : UInt16**) : HRESULT
+    @lpVtbl.value.get_id.call(this, ppszcomemidentity)
   end
-  def get_provider_instance_id(ppszcomemproviderinstanceidentity : UInt16**) : HRESULT
-    @lpVtbl.value.get_provider_instance_id.unsafe_as(Proc(UInt16**, HRESULT)).call(ppszcomemproviderinstanceidentity)
+  def get_provider_instance_id(this : IFunctionInstance*, ppszcomemproviderinstanceidentity : UInt16**) : HRESULT
+    @lpVtbl.value.get_provider_instance_id.call(this, ppszcomemproviderinstanceidentity)
   end
-  def open_property_store(dwstgaccess : UInt32, ppipropertystore : IPropertyStore*) : HRESULT
-    @lpVtbl.value.open_property_store.unsafe_as(Proc(UInt32, IPropertyStore*, HRESULT)).call(dwstgaccess, ppipropertystore)
+  def open_property_store(this : IFunctionInstance*, dwstgaccess : UInt32, ppipropertystore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.open_property_store.call(this, dwstgaccess, ppipropertystore)
   end
-  def get_category(ppszcomemcategory : UInt16**, ppszcomemsubcategory : UInt16**) : HRESULT
-    @lpVtbl.value.get_category.unsafe_as(Proc(UInt16**, UInt16**, HRESULT)).call(ppszcomemcategory, ppszcomemsubcategory)
+  def get_category(this : IFunctionInstance*, ppszcomemcategory : UInt16**, ppszcomemsubcategory : UInt16**) : HRESULT
+    @lpVtbl.value.get_category.call(this, ppszcomemcategory, ppszcomemsubcategory)
   end
 end
 struct LibWin32::IFunctionInstanceCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFunctionInstanceCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFunctionInstanceCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFunctionInstanceCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_count(pdwcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcount)
+  def get_count(this : IFunctionInstanceCollection*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pdwcount)
   end
-  def get(pszinstanceidentity : LibC::LPWSTR, pdwindex : UInt32*, ppifunctioninstance : IFunctionInstance*) : HRESULT
-    @lpVtbl.value.get.unsafe_as(Proc(LibC::LPWSTR, UInt32*, IFunctionInstance*, HRESULT)).call(pszinstanceidentity, pdwindex, ppifunctioninstance)
+  def get(this : IFunctionInstanceCollection*, pszinstanceidentity : LibC::LPWSTR, pdwindex : UInt32*, ppifunctioninstance : IFunctionInstance*) : HRESULT
+    @lpVtbl.value.get.call(this, pszinstanceidentity, pdwindex, ppifunctioninstance)
   end
-  def item(dwindex : UInt32, ppifunctioninstance : IFunctionInstance*) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(UInt32, IFunctionInstance*, HRESULT)).call(dwindex, ppifunctioninstance)
+  def item(this : IFunctionInstanceCollection*, dwindex : UInt32, ppifunctioninstance : IFunctionInstance*) : HRESULT
+    @lpVtbl.value.item.call(this, dwindex, ppifunctioninstance)
   end
-  def add(pifunctioninstance : IFunctionInstance) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(IFunctionInstance, HRESULT)).call(pifunctioninstance)
+  def add(this : IFunctionInstanceCollection*, pifunctioninstance : IFunctionInstance) : HRESULT
+    @lpVtbl.value.add.call(this, pifunctioninstance)
   end
-  def remove(dwindex : UInt32, ppifunctioninstance : IFunctionInstance*) : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(UInt32, IFunctionInstance*, HRESULT)).call(dwindex, ppifunctioninstance)
+  def remove(this : IFunctionInstanceCollection*, dwindex : UInt32, ppifunctioninstance : IFunctionInstance*) : HRESULT
+    @lpVtbl.value.remove.call(this, dwindex, ppifunctioninstance)
   end
-  def delete(dwindex : UInt32) : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(UInt32, HRESULT)).call(dwindex)
+  def delete(this : IFunctionInstanceCollection*, dwindex : UInt32) : HRESULT
+    @lpVtbl.value.delete.call(this, dwindex)
   end
-  def delete_all : HRESULT
-    @lpVtbl.value.delete_all.unsafe_as(Proc(HRESULT)).call
+  def delete_all(this : IFunctionInstanceCollection*) : HRESULT
+    @lpVtbl.value.delete_all.call(this)
   end
 end
 struct LibWin32::IPropertyStoreCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPropertyStoreCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPropertyStoreCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPropertyStoreCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_count(pdwcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcount)
+  def get_count(this : IPropertyStoreCollection*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pdwcount)
   end
-  def get(pszinstanceidentity : LibC::LPWSTR, pdwindex : UInt32*, ppipropertystore : IPropertyStore*) : HRESULT
-    @lpVtbl.value.get.unsafe_as(Proc(LibC::LPWSTR, UInt32*, IPropertyStore*, HRESULT)).call(pszinstanceidentity, pdwindex, ppipropertystore)
+  def get(this : IPropertyStoreCollection*, pszinstanceidentity : LibC::LPWSTR, pdwindex : UInt32*, ppipropertystore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.get.call(this, pszinstanceidentity, pdwindex, ppipropertystore)
   end
-  def item(dwindex : UInt32, ppipropertystore : IPropertyStore*) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(UInt32, IPropertyStore*, HRESULT)).call(dwindex, ppipropertystore)
+  def item(this : IPropertyStoreCollection*, dwindex : UInt32, ppipropertystore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.item.call(this, dwindex, ppipropertystore)
   end
-  def add(pipropertystore : IPropertyStore) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(IPropertyStore, HRESULT)).call(pipropertystore)
+  def add(this : IPropertyStoreCollection*, pipropertystore : IPropertyStore) : HRESULT
+    @lpVtbl.value.add.call(this, pipropertystore)
   end
-  def remove(dwindex : UInt32, pipropertystore : IPropertyStore*) : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(UInt32, IPropertyStore*, HRESULT)).call(dwindex, pipropertystore)
+  def remove(this : IPropertyStoreCollection*, dwindex : UInt32, pipropertystore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.remove.call(this, dwindex, pipropertystore)
   end
-  def delete(dwindex : UInt32) : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(UInt32, HRESULT)).call(dwindex)
+  def delete(this : IPropertyStoreCollection*, dwindex : UInt32) : HRESULT
+    @lpVtbl.value.delete.call(this, dwindex)
   end
-  def delete_all : HRESULT
-    @lpVtbl.value.delete_all.unsafe_as(Proc(HRESULT)).call
+  def delete_all(this : IPropertyStoreCollection*) : HRESULT
+    @lpVtbl.value.delete_all.call(this)
   end
 end
 struct LibWin32::IFunctionInstanceQuery
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFunctionInstanceQuery*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFunctionInstanceQuery*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFunctionInstanceQuery*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def execute(ppifunctioninstance : IFunctionInstance*) : HRESULT
-    @lpVtbl.value.execute.unsafe_as(Proc(IFunctionInstance*, HRESULT)).call(ppifunctioninstance)
+  def execute(this : IFunctionInstanceQuery*, ppifunctioninstance : IFunctionInstance*) : HRESULT
+    @lpVtbl.value.execute.call(this, ppifunctioninstance)
   end
 end
 struct LibWin32::IFunctionInstanceCollectionQuery
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFunctionInstanceCollectionQuery*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFunctionInstanceCollectionQuery*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFunctionInstanceCollectionQuery*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add_query_constraint(pszconstraintname : LibC::LPWSTR, pszconstraintvalue : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.add_query_constraint.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pszconstraintname, pszconstraintvalue)
+  def add_query_constraint(this : IFunctionInstanceCollectionQuery*, pszconstraintname : LibC::LPWSTR, pszconstraintvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_query_constraint.call(this, pszconstraintname, pszconstraintvalue)
   end
-  def add_property_constraint(key : PROPERTYKEY*, pv : PROPVARIANT*, enumpropertyconstraint : PropertyConstraint) : HRESULT
-    @lpVtbl.value.add_property_constraint.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, PropertyConstraint, HRESULT)).call(key, pv, enumpropertyconstraint)
+  def add_property_constraint(this : IFunctionInstanceCollectionQuery*, key : PROPERTYKEY*, pv : PROPVARIANT*, enumpropertyconstraint : PropertyConstraint) : HRESULT
+    @lpVtbl.value.add_property_constraint.call(this, key, pv, enumpropertyconstraint)
   end
-  def execute(ppifunctioninstancecollection : IFunctionInstanceCollection*) : HRESULT
-    @lpVtbl.value.execute.unsafe_as(Proc(IFunctionInstanceCollection*, HRESULT)).call(ppifunctioninstancecollection)
+  def execute(this : IFunctionInstanceCollectionQuery*, ppifunctioninstancecollection : IFunctionInstanceCollection*) : HRESULT
+    @lpVtbl.value.execute.call(this, ppifunctioninstancecollection)
   end
 end
 struct LibWin32::IFunctionDiscoveryProvider
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFunctionDiscoveryProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFunctionDiscoveryProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFunctionDiscoveryProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def initialize(pifunctiondiscoveryproviderfactory : IFunctionDiscoveryProviderFactory, pifunctiondiscoverynotification : IFunctionDiscoveryNotification, lciduserdefault : UInt32, pdwstgaccesscapabilities : UInt32*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(IFunctionDiscoveryProviderFactory, IFunctionDiscoveryNotification, UInt32, UInt32*, HRESULT)).call(pifunctiondiscoveryproviderfactory, pifunctiondiscoverynotification, lciduserdefault, pdwstgaccesscapabilities)
+  def initialize(this : IFunctionDiscoveryProvider*, pifunctiondiscoveryproviderfactory : IFunctionDiscoveryProviderFactory, pifunctiondiscoverynotification : IFunctionDiscoveryNotification, lciduserdefault : UInt32, pdwstgaccesscapabilities : UInt32*) : HRESULT
+    @lpVtbl.value.initialize.call(this, pifunctiondiscoveryproviderfactory, pifunctiondiscoverynotification, lciduserdefault, pdwstgaccesscapabilities)
   end
-  def query(pifunctiondiscoveryproviderquery : IFunctionDiscoveryProviderQuery, ppifunctioninstancecollection : IFunctionInstanceCollection*) : HRESULT
-    @lpVtbl.value.query.unsafe_as(Proc(IFunctionDiscoveryProviderQuery, IFunctionInstanceCollection*, HRESULT)).call(pifunctiondiscoveryproviderquery, ppifunctioninstancecollection)
+  def query(this : IFunctionDiscoveryProvider*, pifunctiondiscoveryproviderquery : IFunctionDiscoveryProviderQuery, ppifunctioninstancecollection : IFunctionInstanceCollection*) : HRESULT
+    @lpVtbl.value.query.call(this, pifunctiondiscoveryproviderquery, ppifunctioninstancecollection)
   end
-  def end_query : HRESULT
-    @lpVtbl.value.end_query.unsafe_as(Proc(HRESULT)).call
+  def end_query(this : IFunctionDiscoveryProvider*) : HRESULT
+    @lpVtbl.value.end_query.call(this)
   end
-  def instance_property_store_validate_access(pifunctioninstance : IFunctionInstance, iproviderinstancecontext : LibC::IntPtrT, dwstgaccess : UInt32) : HRESULT
-    @lpVtbl.value.instance_property_store_validate_access.unsafe_as(Proc(IFunctionInstance, LibC::IntPtrT, UInt32, HRESULT)).call(pifunctioninstance, iproviderinstancecontext, dwstgaccess)
+  def instance_property_store_validate_access(this : IFunctionDiscoveryProvider*, pifunctioninstance : IFunctionInstance, iproviderinstancecontext : LibC::IntPtrT, dwstgaccess : UInt32) : HRESULT
+    @lpVtbl.value.instance_property_store_validate_access.call(this, pifunctioninstance, iproviderinstancecontext, dwstgaccess)
   end
-  def instance_property_store_open(pifunctioninstance : IFunctionInstance, iproviderinstancecontext : LibC::IntPtrT, dwstgaccess : UInt32, ppipropertystore : IPropertyStore*) : HRESULT
-    @lpVtbl.value.instance_property_store_open.unsafe_as(Proc(IFunctionInstance, LibC::IntPtrT, UInt32, IPropertyStore*, HRESULT)).call(pifunctioninstance, iproviderinstancecontext, dwstgaccess, ppipropertystore)
+  def instance_property_store_open(this : IFunctionDiscoveryProvider*, pifunctioninstance : IFunctionInstance, iproviderinstancecontext : LibC::IntPtrT, dwstgaccess : UInt32, ppipropertystore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.instance_property_store_open.call(this, pifunctioninstance, iproviderinstancecontext, dwstgaccess, ppipropertystore)
   end
-  def instance_property_store_flush(pifunctioninstance : IFunctionInstance, iproviderinstancecontext : LibC::IntPtrT) : HRESULT
-    @lpVtbl.value.instance_property_store_flush.unsafe_as(Proc(IFunctionInstance, LibC::IntPtrT, HRESULT)).call(pifunctioninstance, iproviderinstancecontext)
+  def instance_property_store_flush(this : IFunctionDiscoveryProvider*, pifunctioninstance : IFunctionInstance, iproviderinstancecontext : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.instance_property_store_flush.call(this, pifunctioninstance, iproviderinstancecontext)
   end
-  def instance_query_service(pifunctioninstance : IFunctionInstance, iproviderinstancecontext : LibC::IntPtrT, guidservice : Guid*, riid : Guid*, ppiunknown : IUnknown*) : HRESULT
-    @lpVtbl.value.instance_query_service.unsafe_as(Proc(IFunctionInstance, LibC::IntPtrT, Guid*, Guid*, IUnknown*, HRESULT)).call(pifunctioninstance, iproviderinstancecontext, guidservice, riid, ppiunknown)
+  def instance_query_service(this : IFunctionDiscoveryProvider*, pifunctioninstance : IFunctionInstance, iproviderinstancecontext : LibC::IntPtrT, guidservice : Guid*, riid : Guid*, ppiunknown : IUnknown*) : HRESULT
+    @lpVtbl.value.instance_query_service.call(this, pifunctioninstance, iproviderinstancecontext, guidservice, riid, ppiunknown)
   end
-  def instance_released(pifunctioninstance : IFunctionInstance, iproviderinstancecontext : LibC::IntPtrT) : HRESULT
-    @lpVtbl.value.instance_released.unsafe_as(Proc(IFunctionInstance, LibC::IntPtrT, HRESULT)).call(pifunctioninstance, iproviderinstancecontext)
+  def instance_released(this : IFunctionDiscoveryProvider*, pifunctioninstance : IFunctionInstance, iproviderinstancecontext : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.instance_released.call(this, pifunctioninstance, iproviderinstancecontext)
   end
 end
 struct LibWin32::IProviderProperties
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IProviderProperties*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IProviderProperties*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IProviderProperties*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_count(pifunctioninstance : IFunctionInstance, iproviderinstancecontext : LibC::IntPtrT, pdwcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(IFunctionInstance, LibC::IntPtrT, UInt32*, HRESULT)).call(pifunctioninstance, iproviderinstancecontext, pdwcount)
+  def get_count(this : IProviderProperties*, pifunctioninstance : IFunctionInstance, iproviderinstancecontext : LibC::IntPtrT, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pifunctioninstance, iproviderinstancecontext, pdwcount)
   end
-  def get_at(pifunctioninstance : IFunctionInstance, iproviderinstancecontext : LibC::IntPtrT, dwindex : UInt32, pkey : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.get_at.unsafe_as(Proc(IFunctionInstance, LibC::IntPtrT, UInt32, PROPERTYKEY*, HRESULT)).call(pifunctioninstance, iproviderinstancecontext, dwindex, pkey)
+  def get_at(this : IProviderProperties*, pifunctioninstance : IFunctionInstance, iproviderinstancecontext : LibC::IntPtrT, dwindex : UInt32, pkey : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.get_at.call(this, pifunctioninstance, iproviderinstancecontext, dwindex, pkey)
   end
-  def get_value(pifunctioninstance : IFunctionInstance, iproviderinstancecontext : LibC::IntPtrT, key : PROPERTYKEY*, ppropvar : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_value.unsafe_as(Proc(IFunctionInstance, LibC::IntPtrT, PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(pifunctioninstance, iproviderinstancecontext, key, ppropvar)
+  def get_value(this : IProviderProperties*, pifunctioninstance : IFunctionInstance, iproviderinstancecontext : LibC::IntPtrT, key : PROPERTYKEY*, ppropvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, pifunctioninstance, iproviderinstancecontext, key, ppropvar)
   end
-  def set_value(pifunctioninstance : IFunctionInstance, iproviderinstancecontext : LibC::IntPtrT, key : PROPERTYKEY*, ppropvar : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.set_value.unsafe_as(Proc(IFunctionInstance, LibC::IntPtrT, PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(pifunctioninstance, iproviderinstancecontext, key, ppropvar)
+  def set_value(this : IProviderProperties*, pifunctioninstance : IFunctionInstance, iproviderinstancecontext : LibC::IntPtrT, key : PROPERTYKEY*, ppropvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_value.call(this, pifunctioninstance, iproviderinstancecontext, key, ppropvar)
   end
 end
 struct LibWin32::IProviderPublishing
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IProviderPublishing*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IProviderPublishing*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IProviderPublishing*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_instance(enumvisibilityflags : SystemVisibilityFlags, pszsubcategory : LibC::LPWSTR, pszproviderinstanceidentity : LibC::LPWSTR, ppifunctioninstance : IFunctionInstance*) : HRESULT
-    @lpVtbl.value.create_instance.unsafe_as(Proc(SystemVisibilityFlags, LibC::LPWSTR, LibC::LPWSTR, IFunctionInstance*, HRESULT)).call(enumvisibilityflags, pszsubcategory, pszproviderinstanceidentity, ppifunctioninstance)
+  def create_instance(this : IProviderPublishing*, enumvisibilityflags : SystemVisibilityFlags, pszsubcategory : LibC::LPWSTR, pszproviderinstanceidentity : LibC::LPWSTR, ppifunctioninstance : IFunctionInstance*) : HRESULT
+    @lpVtbl.value.create_instance.call(this, enumvisibilityflags, pszsubcategory, pszproviderinstanceidentity, ppifunctioninstance)
   end
-  def remove_instance(enumvisibilityflags : SystemVisibilityFlags, pszsubcategory : LibC::LPWSTR, pszproviderinstanceidentity : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.remove_instance.unsafe_as(Proc(SystemVisibilityFlags, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(enumvisibilityflags, pszsubcategory, pszproviderinstanceidentity)
+  def remove_instance(this : IProviderPublishing*, enumvisibilityflags : SystemVisibilityFlags, pszsubcategory : LibC::LPWSTR, pszproviderinstanceidentity : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove_instance.call(this, enumvisibilityflags, pszsubcategory, pszproviderinstanceidentity)
   end
 end
 struct LibWin32::IFunctionDiscoveryProviderFactory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFunctionDiscoveryProviderFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFunctionDiscoveryProviderFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFunctionDiscoveryProviderFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_property_store(ppipropertystore : IPropertyStore*) : HRESULT
-    @lpVtbl.value.create_property_store.unsafe_as(Proc(IPropertyStore*, HRESULT)).call(ppipropertystore)
+  def create_property_store(this : IFunctionDiscoveryProviderFactory*, ppipropertystore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.create_property_store.call(this, ppipropertystore)
   end
-  def create_instance(pszsubcategory : LibC::LPWSTR, pszproviderinstanceidentity : LibC::LPWSTR, iproviderinstancecontext : LibC::IntPtrT, pipropertystore : IPropertyStore, pifunctiondiscoveryprovider : IFunctionDiscoveryProvider, ppifunctioninstance : IFunctionInstance*) : HRESULT
-    @lpVtbl.value.create_instance.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::IntPtrT, IPropertyStore, IFunctionDiscoveryProvider, IFunctionInstance*, HRESULT)).call(pszsubcategory, pszproviderinstanceidentity, iproviderinstancecontext, pipropertystore, pifunctiondiscoveryprovider, ppifunctioninstance)
+  def create_instance(this : IFunctionDiscoveryProviderFactory*, pszsubcategory : LibC::LPWSTR, pszproviderinstanceidentity : LibC::LPWSTR, iproviderinstancecontext : LibC::IntPtrT, pipropertystore : IPropertyStore, pifunctiondiscoveryprovider : IFunctionDiscoveryProvider, ppifunctioninstance : IFunctionInstance*) : HRESULT
+    @lpVtbl.value.create_instance.call(this, pszsubcategory, pszproviderinstanceidentity, iproviderinstancecontext, pipropertystore, pifunctiondiscoveryprovider, ppifunctioninstance)
   end
-  def create_function_instance_collection(ppifunctioninstancecollection : IFunctionInstanceCollection*) : HRESULT
-    @lpVtbl.value.create_function_instance_collection.unsafe_as(Proc(IFunctionInstanceCollection*, HRESULT)).call(ppifunctioninstancecollection)
+  def create_function_instance_collection(this : IFunctionDiscoveryProviderFactory*, ppifunctioninstancecollection : IFunctionInstanceCollection*) : HRESULT
+    @lpVtbl.value.create_function_instance_collection.call(this, ppifunctioninstancecollection)
   end
 end
 struct LibWin32::IFunctionDiscoveryProviderQuery
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFunctionDiscoveryProviderQuery*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFunctionDiscoveryProviderQuery*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFunctionDiscoveryProviderQuery*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def is_instance_query(pisinstancequery : LibC::BOOL*, ppszconstraintvalue : UInt16**) : HRESULT
-    @lpVtbl.value.is_instance_query.unsafe_as(Proc(LibC::BOOL*, UInt16**, HRESULT)).call(pisinstancequery, ppszconstraintvalue)
+  def is_instance_query(this : IFunctionDiscoveryProviderQuery*, pisinstancequery : LibC::BOOL*, ppszconstraintvalue : UInt16**) : HRESULT
+    @lpVtbl.value.is_instance_query.call(this, pisinstancequery, ppszconstraintvalue)
   end
-  def is_subcategory_query(pissubcategoryquery : LibC::BOOL*, ppszconstraintvalue : UInt16**) : HRESULT
-    @lpVtbl.value.is_subcategory_query.unsafe_as(Proc(LibC::BOOL*, UInt16**, HRESULT)).call(pissubcategoryquery, ppszconstraintvalue)
+  def is_subcategory_query(this : IFunctionDiscoveryProviderQuery*, pissubcategoryquery : LibC::BOOL*, ppszconstraintvalue : UInt16**) : HRESULT
+    @lpVtbl.value.is_subcategory_query.call(this, pissubcategoryquery, ppszconstraintvalue)
   end
-  def get_query_constraints(ppiproviderqueryconstraints : IProviderQueryConstraintCollection*) : HRESULT
-    @lpVtbl.value.get_query_constraints.unsafe_as(Proc(IProviderQueryConstraintCollection*, HRESULT)).call(ppiproviderqueryconstraints)
+  def get_query_constraints(this : IFunctionDiscoveryProviderQuery*, ppiproviderqueryconstraints : IProviderQueryConstraintCollection*) : HRESULT
+    @lpVtbl.value.get_query_constraints.call(this, ppiproviderqueryconstraints)
   end
-  def get_property_constraints(ppiproviderpropertyconstraints : IProviderPropertyConstraintCollection*) : HRESULT
-    @lpVtbl.value.get_property_constraints.unsafe_as(Proc(IProviderPropertyConstraintCollection*, HRESULT)).call(ppiproviderpropertyconstraints)
+  def get_property_constraints(this : IFunctionDiscoveryProviderQuery*, ppiproviderpropertyconstraints : IProviderPropertyConstraintCollection*) : HRESULT
+    @lpVtbl.value.get_property_constraints.call(this, ppiproviderpropertyconstraints)
   end
 end
 struct LibWin32::IProviderQueryConstraintCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IProviderQueryConstraintCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IProviderQueryConstraintCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IProviderQueryConstraintCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_count(pdwcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcount)
+  def get_count(this : IProviderQueryConstraintCollection*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pdwcount)
   end
-  def get(pszconstraintname : LibC::LPWSTR, ppszconstraintvalue : UInt16**) : HRESULT
-    @lpVtbl.value.get.unsafe_as(Proc(LibC::LPWSTR, UInt16**, HRESULT)).call(pszconstraintname, ppszconstraintvalue)
+  def get(this : IProviderQueryConstraintCollection*, pszconstraintname : LibC::LPWSTR, ppszconstraintvalue : UInt16**) : HRESULT
+    @lpVtbl.value.get.call(this, pszconstraintname, ppszconstraintvalue)
   end
-  def item(dwindex : UInt32, ppszconstraintname : UInt16**, ppszconstraintvalue : UInt16**) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(UInt32, UInt16**, UInt16**, HRESULT)).call(dwindex, ppszconstraintname, ppszconstraintvalue)
+  def item(this : IProviderQueryConstraintCollection*, dwindex : UInt32, ppszconstraintname : UInt16**, ppszconstraintvalue : UInt16**) : HRESULT
+    @lpVtbl.value.item.call(this, dwindex, ppszconstraintname, ppszconstraintvalue)
   end
-  def next(ppszconstraintname : UInt16**, ppszconstraintvalue : UInt16**) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(UInt16**, UInt16**, HRESULT)).call(ppszconstraintname, ppszconstraintvalue)
+  def next(this : IProviderQueryConstraintCollection*, ppszconstraintname : UInt16**, ppszconstraintvalue : UInt16**) : HRESULT
+    @lpVtbl.value.next.call(this, ppszconstraintname, ppszconstraintvalue)
   end
-  def skip : HRESULT
-    @lpVtbl.value.skip.unsafe_as(Proc(HRESULT)).call
+  def skip(this : IProviderQueryConstraintCollection*) : HRESULT
+    @lpVtbl.value.skip.call(this)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IProviderQueryConstraintCollection*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
 end
 struct LibWin32::IProviderPropertyConstraintCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IProviderPropertyConstraintCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IProviderPropertyConstraintCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IProviderPropertyConstraintCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_count(pdwcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcount)
+  def get_count(this : IProviderPropertyConstraintCollection*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pdwcount)
   end
-  def get(key : PROPERTYKEY*, ppropvar : PROPVARIANT*, pdwpropertyconstraint : UInt32*) : HRESULT
-    @lpVtbl.value.get.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, UInt32*, HRESULT)).call(key, ppropvar, pdwpropertyconstraint)
+  def get(this : IProviderPropertyConstraintCollection*, key : PROPERTYKEY*, ppropvar : PROPVARIANT*, pdwpropertyconstraint : UInt32*) : HRESULT
+    @lpVtbl.value.get.call(this, key, ppropvar, pdwpropertyconstraint)
   end
-  def item(dwindex : UInt32, pkey : PROPERTYKEY*, ppropvar : PROPVARIANT*, pdwpropertyconstraint : UInt32*) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(UInt32, PROPERTYKEY*, PROPVARIANT*, UInt32*, HRESULT)).call(dwindex, pkey, ppropvar, pdwpropertyconstraint)
+  def item(this : IProviderPropertyConstraintCollection*, dwindex : UInt32, pkey : PROPERTYKEY*, ppropvar : PROPVARIANT*, pdwpropertyconstraint : UInt32*) : HRESULT
+    @lpVtbl.value.item.call(this, dwindex, pkey, ppropvar, pdwpropertyconstraint)
   end
-  def next(pkey : PROPERTYKEY*, ppropvar : PROPVARIANT*, pdwpropertyconstraint : UInt32*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, UInt32*, HRESULT)).call(pkey, ppropvar, pdwpropertyconstraint)
+  def next(this : IProviderPropertyConstraintCollection*, pkey : PROPERTYKEY*, ppropvar : PROPVARIANT*, pdwpropertyconstraint : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, pkey, ppropvar, pdwpropertyconstraint)
   end
-  def skip : HRESULT
-    @lpVtbl.value.skip.unsafe_as(Proc(HRESULT)).call
+  def skip(this : IProviderPropertyConstraintCollection*) : HRESULT
+    @lpVtbl.value.skip.call(this)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IProviderPropertyConstraintCollection*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
 end
 struct LibWin32::IFunctionDiscoveryServiceProvider
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFunctionDiscoveryServiceProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFunctionDiscoveryServiceProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFunctionDiscoveryServiceProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def initialize(pifunctioninstance : IFunctionInstance, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(IFunctionInstance, Guid*, Void**, HRESULT)).call(pifunctioninstance, riid, ppv)
+  def initialize(this : IFunctionDiscoveryServiceProvider*, pifunctioninstance : IFunctionInstance, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.initialize.call(this, pifunctioninstance, riid, ppv)
   end
 end
 struct LibWin32::IPNPXAssociation
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPNPXAssociation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPNPXAssociation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPNPXAssociation*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def associate(pszsubcategory : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.associate.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszsubcategory)
+  def associate(this : IPNPXAssociation*, pszsubcategory : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.associate.call(this, pszsubcategory)
   end
-  def unassociate(pszsubcategory : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.unassociate.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszsubcategory)
+  def unassociate(this : IPNPXAssociation*, pszsubcategory : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.unassociate.call(this, pszsubcategory)
   end
-  def delete(pszsubcategory : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszsubcategory)
+  def delete(this : IPNPXAssociation*, pszsubcategory : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete.call(this, pszsubcategory)
   end
 end
 struct LibWin32::IPNPXDeviceAssociation
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPNPXDeviceAssociation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPNPXDeviceAssociation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPNPXDeviceAssociation*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def associate(pszsubcategory : LibC::LPWSTR, pifunctiondiscoverynotification : IFunctionDiscoveryNotification) : HRESULT
-    @lpVtbl.value.associate.unsafe_as(Proc(LibC::LPWSTR, IFunctionDiscoveryNotification, HRESULT)).call(pszsubcategory, pifunctiondiscoverynotification)
+  def associate(this : IPNPXDeviceAssociation*, pszsubcategory : LibC::LPWSTR, pifunctiondiscoverynotification : IFunctionDiscoveryNotification) : HRESULT
+    @lpVtbl.value.associate.call(this, pszsubcategory, pifunctiondiscoverynotification)
   end
-  def unassociate(pszsubcategory : LibC::LPWSTR, pifunctiondiscoverynotification : IFunctionDiscoveryNotification) : HRESULT
-    @lpVtbl.value.unassociate.unsafe_as(Proc(LibC::LPWSTR, IFunctionDiscoveryNotification, HRESULT)).call(pszsubcategory, pifunctiondiscoverynotification)
+  def unassociate(this : IPNPXDeviceAssociation*, pszsubcategory : LibC::LPWSTR, pifunctiondiscoverynotification : IFunctionDiscoveryNotification) : HRESULT
+    @lpVtbl.value.unassociate.call(this, pszsubcategory, pifunctiondiscoverynotification)
   end
-  def delete(pszsubcategory : LibC::LPWSTR, pifunctiondiscoverynotification : IFunctionDiscoveryNotification) : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(LibC::LPWSTR, IFunctionDiscoveryNotification, HRESULT)).call(pszsubcategory, pifunctiondiscoverynotification)
+  def delete(this : IPNPXDeviceAssociation*, pszsubcategory : LibC::LPWSTR, pifunctiondiscoverynotification : IFunctionDiscoveryNotification) : HRESULT
+    @lpVtbl.value.delete.call(this, pszsubcategory, pifunctiondiscoverynotification)
   end
 end

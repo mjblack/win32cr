@@ -1301,14 +1301,14 @@ lib LibWin32
 
 
   struct ICameraUIControlEventCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_startup_complete : UInt64
-    on_suspend_complete : UInt64
-    on_item_captured : UInt64
-    on_item_deleted : UInt64
-    on_closed : UInt64
+    query_interface : Proc(ICameraUIControlEventCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ICameraUIControlEventCallback*, UInt32)
+    release : Proc(ICameraUIControlEventCallback*, UInt32)
+    on_startup_complete : Proc(ICameraUIControlEventCallback*, Void)
+    on_suspend_complete : Proc(ICameraUIControlEventCallback*, Void)
+    on_item_captured : Proc(ICameraUIControlEventCallback*, LibC::LPWSTR, Void)
+    on_item_deleted : Proc(ICameraUIControlEventCallback*, LibC::LPWSTR, Void)
+    on_closed : Proc(ICameraUIControlEventCallback*, Void)
   end
 
   ICameraUIControlEventCallback_GUID = "1bfa0c2c-fbcd-4776-bda4-88bf974e74f4"
@@ -1318,17 +1318,17 @@ lib LibWin32
   end
 
   struct ICameraUIControlVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    show : UInt64
-    close : UInt64
-    suspend : UInt64
-    resume : UInt64
-    get_current_view_type : UInt64
-    get_active_item : UInt64
-    get_selected_items : UInt64
-    remove_captured_item : UInt64
+    query_interface : Proc(ICameraUIControl*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ICameraUIControl*, UInt32)
+    release : Proc(ICameraUIControl*, UInt32)
+    show : Proc(ICameraUIControl*, IUnknown, CameraUIControlMode, CameraUIControlLinearSelectionMode, CameraUIControlCaptureMode, CameraUIControlPhotoFormat, CameraUIControlVideoFormat, LibC::BOOL, ICameraUIControlEventCallback, HRESULT)
+    close : Proc(ICameraUIControl*, HRESULT)
+    suspend : Proc(ICameraUIControl*, LibC::BOOL*, HRESULT)
+    resume : Proc(ICameraUIControl*, HRESULT)
+    get_current_view_type : Proc(ICameraUIControl*, CameraUIControlViewType*, HRESULT)
+    get_active_item : Proc(ICameraUIControl*, UInt8**, HRESULT)
+    get_selected_items : Proc(ICameraUIControl*, SAFEARRAY**, HRESULT)
+    remove_captured_item : Proc(ICameraUIControl*, LibC::LPWSTR, HRESULT)
   end
 
   ICameraUIControl_GUID = "b8733adf-3d68-4b8f-bb08-e28a0bed0376"
@@ -1338,14 +1338,14 @@ lib LibWin32
   end
 
   struct IEditionUpgradeHelperVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    can_upgrade : UInt64
-    update_operating_system : UInt64
-    show_product_key_ui : UInt64
-    get_os_product_content_id : UInt64
-    get_genuine_local_status : UInt64
+    query_interface : Proc(IEditionUpgradeHelper*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEditionUpgradeHelper*, UInt32)
+    release : Proc(IEditionUpgradeHelper*, UInt32)
+    can_upgrade : Proc(IEditionUpgradeHelper*, LibC::BOOL*, HRESULT)
+    update_operating_system : Proc(IEditionUpgradeHelper*, LibC::LPWSTR, HRESULT)
+    show_product_key_ui : Proc(IEditionUpgradeHelper*, HRESULT)
+    get_os_product_content_id : Proc(IEditionUpgradeHelper*, LibC::LPWSTR*, HRESULT)
+    get_genuine_local_status : Proc(IEditionUpgradeHelper*, LibC::BOOL*, HRESULT)
   end
 
   IEditionUpgradeHelper_GUID = "d3e9e342-5deb-43b6-849e-6913b85d503a"
@@ -1355,10 +1355,10 @@ lib LibWin32
   end
 
   struct IWindowsLockModeHelperVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_s_mode : UInt64
+    query_interface : Proc(IWindowsLockModeHelper*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWindowsLockModeHelper*, UInt32)
+    release : Proc(IWindowsLockModeHelper*, UInt32)
+    get_s_mode : Proc(IWindowsLockModeHelper*, LibC::BOOL*, HRESULT)
   end
 
   IWindowsLockModeHelper_GUID = "f342d19e-cc22-4648-bb5d-03ccf75b47c5"
@@ -1368,13 +1368,13 @@ lib LibWin32
   end
 
   struct IEditionUpgradeBrokerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    initialize_parent_window : UInt64
-    update_operating_system : UInt64
-    show_product_key_ui : UInt64
-    can_upgrade : UInt64
+    query_interface : Proc(IEditionUpgradeBroker*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEditionUpgradeBroker*, UInt32)
+    release : Proc(IEditionUpgradeBroker*, UInt32)
+    initialize_parent_window : Proc(IEditionUpgradeBroker*, UInt32, HRESULT)
+    update_operating_system : Proc(IEditionUpgradeBroker*, UInt8*, HRESULT)
+    show_product_key_ui : Proc(IEditionUpgradeBroker*, HRESULT)
+    can_upgrade : Proc(IEditionUpgradeBroker*, HRESULT)
   end
 
   IEditionUpgradeBroker_GUID = "ff19cbcf-9455-4937-b872-6b7929a460af"
@@ -1384,10 +1384,10 @@ lib LibWin32
   end
 
   struct IContainerActivationHelperVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    can_activate_client_vm : UInt64
+    query_interface : Proc(IContainerActivationHelper*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IContainerActivationHelper*, UInt32)
+    release : Proc(IContainerActivationHelper*, UInt32)
+    can_activate_client_vm : Proc(IContainerActivationHelper*, Int16*, HRESULT)
   end
 
   IContainerActivationHelper_GUID = "b524f93f-80d5-4ec7-ae9e-d66e93ade1fa"
@@ -1397,10 +1397,10 @@ lib LibWin32
   end
 
   struct IClipServiceNotificationHelperVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    show_toast : UInt64
+    query_interface : Proc(IClipServiceNotificationHelper*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IClipServiceNotificationHelper*, UInt32)
+    release : Proc(IClipServiceNotificationHelper*, UInt32)
+    show_toast : Proc(IClipServiceNotificationHelper*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
   end
 
   IClipServiceNotificationHelper_GUID = "c39948f0-6142-44fd-98ca-e1681a8d68b5"
@@ -1410,10 +1410,10 @@ lib LibWin32
   end
 
   struct IDefaultBrowserSyncSettingsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    is_enabled : UInt64
+    query_interface : Proc(IDefaultBrowserSyncSettings*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDefaultBrowserSyncSettings*, UInt32)
+    release : Proc(IDefaultBrowserSyncSettings*, UInt32)
+    is_enabled : Proc(IDefaultBrowserSyncSettings*, LibC::BOOL)
   end
 
   IDefaultBrowserSyncSettings_GUID = "7a27faad-5ae6-4255-9030-c530936292e3"
@@ -1423,10 +1423,10 @@ lib LibWin32
   end
 
   struct IDeleteBrowsingHistoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    delete_browsing_history : UInt64
+    query_interface : Proc(IDeleteBrowsingHistory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDeleteBrowsingHistory*, UInt32)
+    release : Proc(IDeleteBrowsingHistory*, UInt32)
+    delete_browsing_history : Proc(IDeleteBrowsingHistory*, UInt32, HRESULT)
   end
 
   IDeleteBrowsingHistory_GUID = "cf38ed4b-2be7-4461-8b5e-9a466dc82ae3"
@@ -2118,182 +2118,182 @@ lib LibWin32
   fun WldpQueryDeviceSecurityInformation(information : WLDP_DEVICE_SECURITY_INFORMATION*, informationlength : UInt32, returnlength : UInt32*) : HRESULT
 end
 struct LibWin32::ICameraUIControlEventCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ICameraUIControlEventCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ICameraUIControlEventCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ICameraUIControlEventCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_startup_complete : Void
-    @lpVtbl.value.on_startup_complete.unsafe_as(Proc(Void)).call
+  def on_startup_complete(this : ICameraUIControlEventCallback*) : Void
+    @lpVtbl.value.on_startup_complete.call(this)
   end
-  def on_suspend_complete : Void
-    @lpVtbl.value.on_suspend_complete.unsafe_as(Proc(Void)).call
+  def on_suspend_complete(this : ICameraUIControlEventCallback*) : Void
+    @lpVtbl.value.on_suspend_complete.call(this)
   end
-  def on_item_captured(pszpath : LibC::LPWSTR) : Void
-    @lpVtbl.value.on_item_captured.unsafe_as(Proc(LibC::LPWSTR, Void)).call(pszpath)
+  def on_item_captured(this : ICameraUIControlEventCallback*, pszpath : LibC::LPWSTR) : Void
+    @lpVtbl.value.on_item_captured.call(this, pszpath)
   end
-  def on_item_deleted(pszpath : LibC::LPWSTR) : Void
-    @lpVtbl.value.on_item_deleted.unsafe_as(Proc(LibC::LPWSTR, Void)).call(pszpath)
+  def on_item_deleted(this : ICameraUIControlEventCallback*, pszpath : LibC::LPWSTR) : Void
+    @lpVtbl.value.on_item_deleted.call(this, pszpath)
   end
-  def on_closed : Void
-    @lpVtbl.value.on_closed.unsafe_as(Proc(Void)).call
+  def on_closed(this : ICameraUIControlEventCallback*) : Void
+    @lpVtbl.value.on_closed.call(this)
   end
 end
 struct LibWin32::ICameraUIControl
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ICameraUIControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ICameraUIControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ICameraUIControl*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def show(pwindow : IUnknown, mode : CameraUIControlMode, selectionmode : CameraUIControlLinearSelectionMode, capturemode : CameraUIControlCaptureMode, photoformat : CameraUIControlPhotoFormat, videoformat : CameraUIControlVideoFormat, bhasclosebutton : LibC::BOOL, peventcallback : ICameraUIControlEventCallback) : HRESULT
-    @lpVtbl.value.show.unsafe_as(Proc(IUnknown, CameraUIControlMode, CameraUIControlLinearSelectionMode, CameraUIControlCaptureMode, CameraUIControlPhotoFormat, CameraUIControlVideoFormat, LibC::BOOL, ICameraUIControlEventCallback, HRESULT)).call(pwindow, mode, selectionmode, capturemode, photoformat, videoformat, bhasclosebutton, peventcallback)
+  def show(this : ICameraUIControl*, pwindow : IUnknown, mode : CameraUIControlMode, selectionmode : CameraUIControlLinearSelectionMode, capturemode : CameraUIControlCaptureMode, photoformat : CameraUIControlPhotoFormat, videoformat : CameraUIControlVideoFormat, bhasclosebutton : LibC::BOOL, peventcallback : ICameraUIControlEventCallback) : HRESULT
+    @lpVtbl.value.show.call(this, pwindow, mode, selectionmode, capturemode, photoformat, videoformat, bhasclosebutton, peventcallback)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : ICameraUIControl*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
-  def suspend(pbdeferralrequired : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.suspend.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbdeferralrequired)
+  def suspend(this : ICameraUIControl*, pbdeferralrequired : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.suspend.call(this, pbdeferralrequired)
   end
-  def resume : HRESULT
-    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  def resume(this : ICameraUIControl*) : HRESULT
+    @lpVtbl.value.resume.call(this)
   end
-  def get_current_view_type(pviewtype : CameraUIControlViewType*) : HRESULT
-    @lpVtbl.value.get_current_view_type.unsafe_as(Proc(CameraUIControlViewType*, HRESULT)).call(pviewtype)
+  def get_current_view_type(this : ICameraUIControl*, pviewtype : CameraUIControlViewType*) : HRESULT
+    @lpVtbl.value.get_current_view_type.call(this, pviewtype)
   end
-  def get_active_item(pbstractiveitempath : UInt8**) : HRESULT
-    @lpVtbl.value.get_active_item.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstractiveitempath)
+  def get_active_item(this : ICameraUIControl*, pbstractiveitempath : UInt8**) : HRESULT
+    @lpVtbl.value.get_active_item.call(this, pbstractiveitempath)
   end
-  def get_selected_items(ppselecteditempaths : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_selected_items.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(ppselecteditempaths)
+  def get_selected_items(this : ICameraUIControl*, ppselecteditempaths : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_selected_items.call(this, ppselecteditempaths)
   end
-  def remove_captured_item(pszpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.remove_captured_item.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpath)
+  def remove_captured_item(this : ICameraUIControl*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove_captured_item.call(this, pszpath)
   end
 end
 struct LibWin32::IEditionUpgradeHelper
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IEditionUpgradeHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IEditionUpgradeHelper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IEditionUpgradeHelper*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def can_upgrade(isallowed : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.can_upgrade.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(isallowed)
+  def can_upgrade(this : IEditionUpgradeHelper*, isallowed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.can_upgrade.call(this, isallowed)
   end
-  def update_operating_system(contentid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.update_operating_system.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(contentid)
+  def update_operating_system(this : IEditionUpgradeHelper*, contentid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.update_operating_system.call(this, contentid)
   end
-  def show_product_key_ui : HRESULT
-    @lpVtbl.value.show_product_key_ui.unsafe_as(Proc(HRESULT)).call
+  def show_product_key_ui(this : IEditionUpgradeHelper*) : HRESULT
+    @lpVtbl.value.show_product_key_ui.call(this)
   end
-  def get_os_product_content_id(contentid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_os_product_content_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(contentid)
+  def get_os_product_content_id(this : IEditionUpgradeHelper*, contentid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_os_product_content_id.call(this, contentid)
   end
-  def get_genuine_local_status(isgenuine : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_genuine_local_status.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(isgenuine)
+  def get_genuine_local_status(this : IEditionUpgradeHelper*, isgenuine : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_genuine_local_status.call(this, isgenuine)
   end
 end
 struct LibWin32::IWindowsLockModeHelper
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWindowsLockModeHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWindowsLockModeHelper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWindowsLockModeHelper*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_s_mode(issmode : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_s_mode.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(issmode)
+  def get_s_mode(this : IWindowsLockModeHelper*, issmode : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_s_mode.call(this, issmode)
   end
 end
 struct LibWin32::IEditionUpgradeBroker
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IEditionUpgradeBroker*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IEditionUpgradeBroker*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IEditionUpgradeBroker*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def initialize_parent_window(parenthandle : UInt32) : HRESULT
-    @lpVtbl.value.initialize_parent_window.unsafe_as(Proc(UInt32, HRESULT)).call(parenthandle)
+  def initialize_parent_window(this : IEditionUpgradeBroker*, parenthandle : UInt32) : HRESULT
+    @lpVtbl.value.initialize_parent_window.call(this, parenthandle)
   end
-  def update_operating_system(parameter : UInt8*) : HRESULT
-    @lpVtbl.value.update_operating_system.unsafe_as(Proc(UInt8*, HRESULT)).call(parameter)
+  def update_operating_system(this : IEditionUpgradeBroker*, parameter : UInt8*) : HRESULT
+    @lpVtbl.value.update_operating_system.call(this, parameter)
   end
-  def show_product_key_ui : HRESULT
-    @lpVtbl.value.show_product_key_ui.unsafe_as(Proc(HRESULT)).call
+  def show_product_key_ui(this : IEditionUpgradeBroker*) : HRESULT
+    @lpVtbl.value.show_product_key_ui.call(this)
   end
-  def can_upgrade : HRESULT
-    @lpVtbl.value.can_upgrade.unsafe_as(Proc(HRESULT)).call
+  def can_upgrade(this : IEditionUpgradeBroker*) : HRESULT
+    @lpVtbl.value.can_upgrade.call(this)
   end
 end
 struct LibWin32::IContainerActivationHelper
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IContainerActivationHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IContainerActivationHelper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IContainerActivationHelper*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def can_activate_client_vm(isallowed : Int16*) : HRESULT
-    @lpVtbl.value.can_activate_client_vm.unsafe_as(Proc(Int16*, HRESULT)).call(isallowed)
+  def can_activate_client_vm(this : IContainerActivationHelper*, isallowed : Int16*) : HRESULT
+    @lpVtbl.value.can_activate_client_vm.call(this, isallowed)
   end
 end
 struct LibWin32::IClipServiceNotificationHelper
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IClipServiceNotificationHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IClipServiceNotificationHelper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IClipServiceNotificationHelper*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def show_toast(titletext : UInt8*, bodytext : UInt8*, packagename : UInt8*, appid : UInt8*, launchcommand : UInt8*) : HRESULT
-    @lpVtbl.value.show_toast.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)).call(titletext, bodytext, packagename, appid, launchcommand)
+  def show_toast(this : IClipServiceNotificationHelper*, titletext : UInt8*, bodytext : UInt8*, packagename : UInt8*, appid : UInt8*, launchcommand : UInt8*) : HRESULT
+    @lpVtbl.value.show_toast.call(this, titletext, bodytext, packagename, appid, launchcommand)
   end
 end
 struct LibWin32::IDefaultBrowserSyncSettings
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDefaultBrowserSyncSettings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDefaultBrowserSyncSettings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDefaultBrowserSyncSettings*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def is_enabled : LibC::BOOL
-    @lpVtbl.value.is_enabled.unsafe_as(Proc(LibC::BOOL)).call
+  def is_enabled(this : IDefaultBrowserSyncSettings*) : LibC::BOOL
+    @lpVtbl.value.is_enabled.call(this)
   end
 end
 struct LibWin32::IDeleteBrowsingHistory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDeleteBrowsingHistory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDeleteBrowsingHistory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDeleteBrowsingHistory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def delete_browsing_history(dwflags : UInt32) : HRESULT
-    @lpVtbl.value.delete_browsing_history.unsafe_as(Proc(UInt32, HRESULT)).call(dwflags)
+  def delete_browsing_history(this : IDeleteBrowsingHistory*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.delete_browsing_history.call(this, dwflags)
   end
 end

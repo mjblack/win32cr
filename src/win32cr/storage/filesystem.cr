@@ -2990,24 +2990,24 @@ lib LibWin32
 
 
   struct IDiskQuotaUserVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_id : UInt64
-    get_name : UInt64
-    get_sid_length : UInt64
-    get_sid : UInt64
-    get_quota_threshold : UInt64
-    get_quota_threshold_text : UInt64
-    get_quota_limit : UInt64
-    get_quota_limit_text : UInt64
-    get_quota_used : UInt64
-    get_quota_used_text : UInt64
-    get_quota_information : UInt64
-    set_quota_threshold : UInt64
-    set_quota_limit : UInt64
-    invalidate : UInt64
-    get_account_status : UInt64
+    query_interface : Proc(IDiskQuotaUser*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDiskQuotaUser*, UInt32)
+    release : Proc(IDiskQuotaUser*, UInt32)
+    get_id : Proc(IDiskQuotaUser*, UInt32*, HRESULT)
+    get_name : Proc(IDiskQuotaUser*, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, HRESULT)
+    get_sid_length : Proc(IDiskQuotaUser*, UInt32*, HRESULT)
+    get_sid : Proc(IDiskQuotaUser*, UInt8*, UInt32, HRESULT)
+    get_quota_threshold : Proc(IDiskQuotaUser*, Int64*, HRESULT)
+    get_quota_threshold_text : Proc(IDiskQuotaUser*, LibC::LPWSTR, UInt32, HRESULT)
+    get_quota_limit : Proc(IDiskQuotaUser*, Int64*, HRESULT)
+    get_quota_limit_text : Proc(IDiskQuotaUser*, LibC::LPWSTR, UInt32, HRESULT)
+    get_quota_used : Proc(IDiskQuotaUser*, Int64*, HRESULT)
+    get_quota_used_text : Proc(IDiskQuotaUser*, LibC::LPWSTR, UInt32, HRESULT)
+    get_quota_information : Proc(IDiskQuotaUser*, Void*, UInt32, HRESULT)
+    set_quota_threshold : Proc(IDiskQuotaUser*, Int64, LibC::BOOL, HRESULT)
+    set_quota_limit : Proc(IDiskQuotaUser*, Int64, LibC::BOOL, HRESULT)
+    invalidate : Proc(IDiskQuotaUser*, HRESULT)
+    get_account_status : Proc(IDiskQuotaUser*, UInt32*, HRESULT)
   end
 
   IDiskQuotaUser_GUID = "7988b574-ec89-11cf-9c00-00aa00a14f56"
@@ -3017,13 +3017,13 @@ lib LibWin32
   end
 
   struct IEnumDiskQuotaUsersVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    next : UInt64
-    skip : UInt64
-    reset : UInt64
-    clone : UInt64
+    query_interface : Proc(IEnumDiskQuotaUsers*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEnumDiskQuotaUsers*, UInt32)
+    release : Proc(IEnumDiskQuotaUsers*, UInt32)
+    next : Proc(IEnumDiskQuotaUsers*, UInt32, IDiskQuotaUser*, UInt32*, HRESULT)
+    skip : Proc(IEnumDiskQuotaUsers*, UInt32, HRESULT)
+    reset : Proc(IEnumDiskQuotaUsers*, HRESULT)
+    clone : Proc(IEnumDiskQuotaUsers*, IEnumDiskQuotaUsers*, HRESULT)
   end
 
   IEnumDiskQuotaUsers_GUID = "7988b577-ec89-11cf-9c00-00aa00a14f56"
@@ -3033,13 +3033,13 @@ lib LibWin32
   end
 
   struct IDiskQuotaUserBatchVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add : UInt64
-    remove : UInt64
-    remove_all : UInt64
-    flush_to_disk : UInt64
+    query_interface : Proc(IDiskQuotaUserBatch*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDiskQuotaUserBatch*, UInt32)
+    release : Proc(IDiskQuotaUserBatch*, UInt32)
+    add : Proc(IDiskQuotaUserBatch*, IDiskQuotaUser, HRESULT)
+    remove : Proc(IDiskQuotaUserBatch*, IDiskQuotaUser, HRESULT)
+    remove_all : Proc(IDiskQuotaUserBatch*, HRESULT)
+    flush_to_disk : Proc(IDiskQuotaUserBatch*, HRESULT)
   end
 
   IDiskQuotaUserBatch_GUID = "7988b576-ec89-11cf-9c00-00aa00a14f56"
@@ -3049,32 +3049,32 @@ lib LibWin32
   end
 
   struct IDiskQuotaControlVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    enum_connection_points : UInt64
-    find_connection_point : UInt64
-    initialize : UInt64
-    set_quota_state : UInt64
-    get_quota_state : UInt64
-    set_quota_log_flags : UInt64
-    get_quota_log_flags : UInt64
-    set_default_quota_threshold : UInt64
-    get_default_quota_threshold : UInt64
-    get_default_quota_threshold_text : UInt64
-    set_default_quota_limit : UInt64
-    get_default_quota_limit : UInt64
-    get_default_quota_limit_text : UInt64
-    add_user_sid : UInt64
-    add_user_name : UInt64
-    delete_user : UInt64
-    find_user_sid : UInt64
-    find_user_name : UInt64
-    create_enum_users : UInt64
-    create_user_batch : UInt64
-    invalidate_sid_name_cache : UInt64
-    give_user_name_resolution_priority : UInt64
-    shutdown_name_resolution : UInt64
+    query_interface : Proc(IDiskQuotaControl*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDiskQuotaControl*, UInt32)
+    release : Proc(IDiskQuotaControl*, UInt32)
+    enum_connection_points : Proc(IDiskQuotaControl*, IEnumConnectionPoints*, HRESULT)
+    find_connection_point : Proc(IDiskQuotaControl*, Guid*, IConnectionPoint*, HRESULT)
+    initialize : Proc(IDiskQuotaControl*, LibC::LPWSTR, LibC::BOOL, HRESULT)
+    set_quota_state : Proc(IDiskQuotaControl*, UInt32, HRESULT)
+    get_quota_state : Proc(IDiskQuotaControl*, UInt32*, HRESULT)
+    set_quota_log_flags : Proc(IDiskQuotaControl*, UInt32, HRESULT)
+    get_quota_log_flags : Proc(IDiskQuotaControl*, UInt32*, HRESULT)
+    set_default_quota_threshold : Proc(IDiskQuotaControl*, Int64, HRESULT)
+    get_default_quota_threshold : Proc(IDiskQuotaControl*, Int64*, HRESULT)
+    get_default_quota_threshold_text : Proc(IDiskQuotaControl*, LibC::LPWSTR, UInt32, HRESULT)
+    set_default_quota_limit : Proc(IDiskQuotaControl*, Int64, HRESULT)
+    get_default_quota_limit : Proc(IDiskQuotaControl*, Int64*, HRESULT)
+    get_default_quota_limit_text : Proc(IDiskQuotaControl*, LibC::LPWSTR, UInt32, HRESULT)
+    add_user_sid : Proc(IDiskQuotaControl*, PSID, DISKQUOTA_USERNAME_RESOLVE, IDiskQuotaUser*, HRESULT)
+    add_user_name : Proc(IDiskQuotaControl*, LibC::LPWSTR, DISKQUOTA_USERNAME_RESOLVE, IDiskQuotaUser*, HRESULT)
+    delete_user : Proc(IDiskQuotaControl*, IDiskQuotaUser, HRESULT)
+    find_user_sid : Proc(IDiskQuotaControl*, PSID, DISKQUOTA_USERNAME_RESOLVE, IDiskQuotaUser*, HRESULT)
+    find_user_name : Proc(IDiskQuotaControl*, LibC::LPWSTR, IDiskQuotaUser*, HRESULT)
+    create_enum_users : Proc(IDiskQuotaControl*, PSID*, UInt32, DISKQUOTA_USERNAME_RESOLVE, IEnumDiskQuotaUsers*, HRESULT)
+    create_user_batch : Proc(IDiskQuotaControl*, IDiskQuotaUserBatch*, HRESULT)
+    invalidate_sid_name_cache : Proc(IDiskQuotaControl*, HRESULT)
+    give_user_name_resolution_priority : Proc(IDiskQuotaControl*, IDiskQuotaUser, HRESULT)
+    shutdown_name_resolution : Proc(IDiskQuotaControl*, HRESULT)
   end
 
   IDiskQuotaControl_GUID = "7988b572-ec89-11cf-9c00-00aa00a14f56"
@@ -3084,10 +3084,10 @@ lib LibWin32
   end
 
   struct IDiskQuotaEventsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_user_name_changed : UInt64
+    query_interface : Proc(IDiskQuotaEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDiskQuotaEvents*, UInt32)
+    release : Proc(IDiskQuotaEvents*, UInt32)
+    on_user_name_changed : Proc(IDiskQuotaEvents*, IDiskQuotaUser, HRESULT)
   end
 
   IDiskQuotaEvents_GUID = "7988b579-ec89-11cf-9c00-00aa00a14f56"
@@ -4352,198 +4352,198 @@ lib LibWin32
   fun NtCreateFile(filehandle : LibC::HANDLE*, desiredaccess : UInt32, objectattributes : OBJECT_ATTRIBUTES*, iostatusblock : IO_STATUS_BLOCK*, allocationsize : LARGE_INTEGER*, fileattributes : UInt32, shareaccess : FILE_SHARE_MODE, createdisposition : NT_CREATE_FILE_DISPOSITION, createoptions : UInt32, eabuffer : Void*, ealength : UInt32) : NTSTATUS
 end
 struct LibWin32::IDiskQuotaUser
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDiskQuotaUser*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDiskQuotaUser*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDiskQuotaUser*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_id(pulid : UInt32*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(UInt32*, HRESULT)).call(pulid)
+  def get_id(this : IDiskQuotaUser*, pulid : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pulid)
   end
-  def get_name(pszaccountcontainer : LibC::LPWSTR, cchaccountcontainer : UInt32, pszlogonname : LibC::LPWSTR, cchlogonname : UInt32, pszdisplayname : LibC::LPWSTR, cchdisplayname : UInt32) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, HRESULT)).call(pszaccountcontainer, cchaccountcontainer, pszlogonname, cchlogonname, pszdisplayname, cchdisplayname)
+  def get_name(this : IDiskQuotaUser*, pszaccountcontainer : LibC::LPWSTR, cchaccountcontainer : UInt32, pszlogonname : LibC::LPWSTR, cchlogonname : UInt32, pszdisplayname : LibC::LPWSTR, cchdisplayname : UInt32) : HRESULT
+    @lpVtbl.value.get_name.call(this, pszaccountcontainer, cchaccountcontainer, pszlogonname, cchlogonname, pszdisplayname, cchdisplayname)
   end
-  def get_sid_length(pdwlength : UInt32*) : HRESULT
-    @lpVtbl.value.get_sid_length.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwlength)
+  def get_sid_length(this : IDiskQuotaUser*, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_sid_length.call(this, pdwlength)
   end
-  def get_sid(pbsidbuffer : UInt8*, cbsidbuffer : UInt32) : HRESULT
-    @lpVtbl.value.get_sid.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(pbsidbuffer, cbsidbuffer)
+  def get_sid(this : IDiskQuotaUser*, pbsidbuffer : UInt8*, cbsidbuffer : UInt32) : HRESULT
+    @lpVtbl.value.get_sid.call(this, pbsidbuffer, cbsidbuffer)
   end
-  def get_quota_threshold(pllthreshold : Int64*) : HRESULT
-    @lpVtbl.value.get_quota_threshold.unsafe_as(Proc(Int64*, HRESULT)).call(pllthreshold)
+  def get_quota_threshold(this : IDiskQuotaUser*, pllthreshold : Int64*) : HRESULT
+    @lpVtbl.value.get_quota_threshold.call(this, pllthreshold)
   end
-  def get_quota_threshold_text(psztext : LibC::LPWSTR, cchtext : UInt32) : HRESULT
-    @lpVtbl.value.get_quota_threshold_text.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(psztext, cchtext)
+  def get_quota_threshold_text(this : IDiskQuotaUser*, psztext : LibC::LPWSTR, cchtext : UInt32) : HRESULT
+    @lpVtbl.value.get_quota_threshold_text.call(this, psztext, cchtext)
   end
-  def get_quota_limit(plllimit : Int64*) : HRESULT
-    @lpVtbl.value.get_quota_limit.unsafe_as(Proc(Int64*, HRESULT)).call(plllimit)
+  def get_quota_limit(this : IDiskQuotaUser*, plllimit : Int64*) : HRESULT
+    @lpVtbl.value.get_quota_limit.call(this, plllimit)
   end
-  def get_quota_limit_text(psztext : LibC::LPWSTR, cchtext : UInt32) : HRESULT
-    @lpVtbl.value.get_quota_limit_text.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(psztext, cchtext)
+  def get_quota_limit_text(this : IDiskQuotaUser*, psztext : LibC::LPWSTR, cchtext : UInt32) : HRESULT
+    @lpVtbl.value.get_quota_limit_text.call(this, psztext, cchtext)
   end
-  def get_quota_used(pllused : Int64*) : HRESULT
-    @lpVtbl.value.get_quota_used.unsafe_as(Proc(Int64*, HRESULT)).call(pllused)
+  def get_quota_used(this : IDiskQuotaUser*, pllused : Int64*) : HRESULT
+    @lpVtbl.value.get_quota_used.call(this, pllused)
   end
-  def get_quota_used_text(psztext : LibC::LPWSTR, cchtext : UInt32) : HRESULT
-    @lpVtbl.value.get_quota_used_text.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(psztext, cchtext)
+  def get_quota_used_text(this : IDiskQuotaUser*, psztext : LibC::LPWSTR, cchtext : UInt32) : HRESULT
+    @lpVtbl.value.get_quota_used_text.call(this, psztext, cchtext)
   end
-  def get_quota_information(pbquotainfo : Void*, cbquotainfo : UInt32) : HRESULT
-    @lpVtbl.value.get_quota_information.unsafe_as(Proc(Void*, UInt32, HRESULT)).call(pbquotainfo, cbquotainfo)
+  def get_quota_information(this : IDiskQuotaUser*, pbquotainfo : Void*, cbquotainfo : UInt32) : HRESULT
+    @lpVtbl.value.get_quota_information.call(this, pbquotainfo, cbquotainfo)
   end
-  def set_quota_threshold(llthreshold : Int64, fwritethrough : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_quota_threshold.unsafe_as(Proc(Int64, LibC::BOOL, HRESULT)).call(llthreshold, fwritethrough)
+  def set_quota_threshold(this : IDiskQuotaUser*, llthreshold : Int64, fwritethrough : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_quota_threshold.call(this, llthreshold, fwritethrough)
   end
-  def set_quota_limit(lllimit : Int64, fwritethrough : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_quota_limit.unsafe_as(Proc(Int64, LibC::BOOL, HRESULT)).call(lllimit, fwritethrough)
+  def set_quota_limit(this : IDiskQuotaUser*, lllimit : Int64, fwritethrough : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_quota_limit.call(this, lllimit, fwritethrough)
   end
-  def invalidate : HRESULT
-    @lpVtbl.value.invalidate.unsafe_as(Proc(HRESULT)).call
+  def invalidate(this : IDiskQuotaUser*) : HRESULT
+    @lpVtbl.value.invalidate.call(this)
   end
-  def get_account_status(pdwstatus : UInt32*) : HRESULT
-    @lpVtbl.value.get_account_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  def get_account_status(this : IDiskQuotaUser*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_account_status.call(this, pdwstatus)
   end
 end
 struct LibWin32::IEnumDiskQuotaUsers
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IEnumDiskQuotaUsers*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IEnumDiskQuotaUsers*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IEnumDiskQuotaUsers*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def next(cusers : UInt32, rgusers : IDiskQuotaUser*, pcusersfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(UInt32, IDiskQuotaUser*, UInt32*, HRESULT)).call(cusers, rgusers, pcusersfetched)
+  def next(this : IEnumDiskQuotaUsers*, cusers : UInt32, rgusers : IDiskQuotaUser*, pcusersfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, cusers, rgusers, pcusersfetched)
   end
-  def skip(cusers : UInt32) : HRESULT
-    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(cusers)
+  def skip(this : IEnumDiskQuotaUsers*, cusers : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, cusers)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IEnumDiskQuotaUsers*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def clone(ppenum : IEnumDiskQuotaUsers*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IEnumDiskQuotaUsers*, HRESULT)).call(ppenum)
+  def clone(this : IEnumDiskQuotaUsers*, ppenum : IEnumDiskQuotaUsers*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
   end
 end
 struct LibWin32::IDiskQuotaUserBatch
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDiskQuotaUserBatch*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDiskQuotaUserBatch*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDiskQuotaUserBatch*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add(puser : IDiskQuotaUser) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(IDiskQuotaUser, HRESULT)).call(puser)
+  def add(this : IDiskQuotaUserBatch*, puser : IDiskQuotaUser) : HRESULT
+    @lpVtbl.value.add.call(this, puser)
   end
-  def remove(puser : IDiskQuotaUser) : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(IDiskQuotaUser, HRESULT)).call(puser)
+  def remove(this : IDiskQuotaUserBatch*, puser : IDiskQuotaUser) : HRESULT
+    @lpVtbl.value.remove.call(this, puser)
   end
-  def remove_all : HRESULT
-    @lpVtbl.value.remove_all.unsafe_as(Proc(HRESULT)).call
+  def remove_all(this : IDiskQuotaUserBatch*) : HRESULT
+    @lpVtbl.value.remove_all.call(this)
   end
-  def flush_to_disk : HRESULT
-    @lpVtbl.value.flush_to_disk.unsafe_as(Proc(HRESULT)).call
+  def flush_to_disk(this : IDiskQuotaUserBatch*) : HRESULT
+    @lpVtbl.value.flush_to_disk.call(this)
   end
 end
 struct LibWin32::IDiskQuotaControl
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDiskQuotaControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDiskQuotaControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDiskQuotaControl*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def enum_connection_points(ppenum : IEnumConnectionPoints*) : HRESULT
-    @lpVtbl.value.enum_connection_points.unsafe_as(Proc(IEnumConnectionPoints*, HRESULT)).call(ppenum)
+  def enum_connection_points(this : IDiskQuotaControl*, ppenum : IEnumConnectionPoints*) : HRESULT
+    @lpVtbl.value.enum_connection_points.call(this, ppenum)
   end
-  def find_connection_point(riid : Guid*, ppcp : IConnectionPoint*) : HRESULT
-    @lpVtbl.value.find_connection_point.unsafe_as(Proc(Guid*, IConnectionPoint*, HRESULT)).call(riid, ppcp)
+  def find_connection_point(this : IDiskQuotaControl*, riid : Guid*, ppcp : IConnectionPoint*) : HRESULT
+    @lpVtbl.value.find_connection_point.call(this, riid, ppcp)
   end
-  def initialize(pszpath : LibC::LPWSTR, breadwrite : LibC::BOOL) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL, HRESULT)).call(pszpath, breadwrite)
+  def initialize(this : IDiskQuotaControl*, pszpath : LibC::LPWSTR, breadwrite : LibC::BOOL) : HRESULT
+    @lpVtbl.value.initialize.call(this, pszpath, breadwrite)
   end
-  def set_quota_state(dwstate : UInt32) : HRESULT
-    @lpVtbl.value.set_quota_state.unsafe_as(Proc(UInt32, HRESULT)).call(dwstate)
+  def set_quota_state(this : IDiskQuotaControl*, dwstate : UInt32) : HRESULT
+    @lpVtbl.value.set_quota_state.call(this, dwstate)
   end
-  def get_quota_state(pdwstate : UInt32*) : HRESULT
-    @lpVtbl.value.get_quota_state.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstate)
+  def get_quota_state(this : IDiskQuotaControl*, pdwstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_quota_state.call(this, pdwstate)
   end
-  def set_quota_log_flags(dwflags : UInt32) : HRESULT
-    @lpVtbl.value.set_quota_log_flags.unsafe_as(Proc(UInt32, HRESULT)).call(dwflags)
+  def set_quota_log_flags(this : IDiskQuotaControl*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_quota_log_flags.call(this, dwflags)
   end
-  def get_quota_log_flags(pdwflags : UInt32*) : HRESULT
-    @lpVtbl.value.get_quota_log_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwflags)
+  def get_quota_log_flags(this : IDiskQuotaControl*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_quota_log_flags.call(this, pdwflags)
   end
-  def set_default_quota_threshold(llthreshold : Int64) : HRESULT
-    @lpVtbl.value.set_default_quota_threshold.unsafe_as(Proc(Int64, HRESULT)).call(llthreshold)
+  def set_default_quota_threshold(this : IDiskQuotaControl*, llthreshold : Int64) : HRESULT
+    @lpVtbl.value.set_default_quota_threshold.call(this, llthreshold)
   end
-  def get_default_quota_threshold(pllthreshold : Int64*) : HRESULT
-    @lpVtbl.value.get_default_quota_threshold.unsafe_as(Proc(Int64*, HRESULT)).call(pllthreshold)
+  def get_default_quota_threshold(this : IDiskQuotaControl*, pllthreshold : Int64*) : HRESULT
+    @lpVtbl.value.get_default_quota_threshold.call(this, pllthreshold)
   end
-  def get_default_quota_threshold_text(psztext : LibC::LPWSTR, cchtext : UInt32) : HRESULT
-    @lpVtbl.value.get_default_quota_threshold_text.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(psztext, cchtext)
+  def get_default_quota_threshold_text(this : IDiskQuotaControl*, psztext : LibC::LPWSTR, cchtext : UInt32) : HRESULT
+    @lpVtbl.value.get_default_quota_threshold_text.call(this, psztext, cchtext)
   end
-  def set_default_quota_limit(lllimit : Int64) : HRESULT
-    @lpVtbl.value.set_default_quota_limit.unsafe_as(Proc(Int64, HRESULT)).call(lllimit)
+  def set_default_quota_limit(this : IDiskQuotaControl*, lllimit : Int64) : HRESULT
+    @lpVtbl.value.set_default_quota_limit.call(this, lllimit)
   end
-  def get_default_quota_limit(plllimit : Int64*) : HRESULT
-    @lpVtbl.value.get_default_quota_limit.unsafe_as(Proc(Int64*, HRESULT)).call(plllimit)
+  def get_default_quota_limit(this : IDiskQuotaControl*, plllimit : Int64*) : HRESULT
+    @lpVtbl.value.get_default_quota_limit.call(this, plllimit)
   end
-  def get_default_quota_limit_text(psztext : LibC::LPWSTR, cchtext : UInt32) : HRESULT
-    @lpVtbl.value.get_default_quota_limit_text.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(psztext, cchtext)
+  def get_default_quota_limit_text(this : IDiskQuotaControl*, psztext : LibC::LPWSTR, cchtext : UInt32) : HRESULT
+    @lpVtbl.value.get_default_quota_limit_text.call(this, psztext, cchtext)
   end
-  def add_user_sid(pusersid : PSID, fnameresolution : DISKQUOTA_USERNAME_RESOLVE, ppuser : IDiskQuotaUser*) : HRESULT
-    @lpVtbl.value.add_user_sid.unsafe_as(Proc(PSID, DISKQUOTA_USERNAME_RESOLVE, IDiskQuotaUser*, HRESULT)).call(pusersid, fnameresolution, ppuser)
+  def add_user_sid(this : IDiskQuotaControl*, pusersid : PSID, fnameresolution : DISKQUOTA_USERNAME_RESOLVE, ppuser : IDiskQuotaUser*) : HRESULT
+    @lpVtbl.value.add_user_sid.call(this, pusersid, fnameresolution, ppuser)
   end
-  def add_user_name(pszlogonname : LibC::LPWSTR, fnameresolution : DISKQUOTA_USERNAME_RESOLVE, ppuser : IDiskQuotaUser*) : HRESULT
-    @lpVtbl.value.add_user_name.unsafe_as(Proc(LibC::LPWSTR, DISKQUOTA_USERNAME_RESOLVE, IDiskQuotaUser*, HRESULT)).call(pszlogonname, fnameresolution, ppuser)
+  def add_user_name(this : IDiskQuotaControl*, pszlogonname : LibC::LPWSTR, fnameresolution : DISKQUOTA_USERNAME_RESOLVE, ppuser : IDiskQuotaUser*) : HRESULT
+    @lpVtbl.value.add_user_name.call(this, pszlogonname, fnameresolution, ppuser)
   end
-  def delete_user(puser : IDiskQuotaUser) : HRESULT
-    @lpVtbl.value.delete_user.unsafe_as(Proc(IDiskQuotaUser, HRESULT)).call(puser)
+  def delete_user(this : IDiskQuotaControl*, puser : IDiskQuotaUser) : HRESULT
+    @lpVtbl.value.delete_user.call(this, puser)
   end
-  def find_user_sid(pusersid : PSID, fnameresolution : DISKQUOTA_USERNAME_RESOLVE, ppuser : IDiskQuotaUser*) : HRESULT
-    @lpVtbl.value.find_user_sid.unsafe_as(Proc(PSID, DISKQUOTA_USERNAME_RESOLVE, IDiskQuotaUser*, HRESULT)).call(pusersid, fnameresolution, ppuser)
+  def find_user_sid(this : IDiskQuotaControl*, pusersid : PSID, fnameresolution : DISKQUOTA_USERNAME_RESOLVE, ppuser : IDiskQuotaUser*) : HRESULT
+    @lpVtbl.value.find_user_sid.call(this, pusersid, fnameresolution, ppuser)
   end
-  def find_user_name(pszlogonname : LibC::LPWSTR, ppuser : IDiskQuotaUser*) : HRESULT
-    @lpVtbl.value.find_user_name.unsafe_as(Proc(LibC::LPWSTR, IDiskQuotaUser*, HRESULT)).call(pszlogonname, ppuser)
+  def find_user_name(this : IDiskQuotaControl*, pszlogonname : LibC::LPWSTR, ppuser : IDiskQuotaUser*) : HRESULT
+    @lpVtbl.value.find_user_name.call(this, pszlogonname, ppuser)
   end
-  def create_enum_users(rgpusersids : PSID*, cpsids : UInt32, fnameresolution : DISKQUOTA_USERNAME_RESOLVE, ppenum : IEnumDiskQuotaUsers*) : HRESULT
-    @lpVtbl.value.create_enum_users.unsafe_as(Proc(PSID*, UInt32, DISKQUOTA_USERNAME_RESOLVE, IEnumDiskQuotaUsers*, HRESULT)).call(rgpusersids, cpsids, fnameresolution, ppenum)
+  def create_enum_users(this : IDiskQuotaControl*, rgpusersids : PSID*, cpsids : UInt32, fnameresolution : DISKQUOTA_USERNAME_RESOLVE, ppenum : IEnumDiskQuotaUsers*) : HRESULT
+    @lpVtbl.value.create_enum_users.call(this, rgpusersids, cpsids, fnameresolution, ppenum)
   end
-  def create_user_batch(ppbatch : IDiskQuotaUserBatch*) : HRESULT
-    @lpVtbl.value.create_user_batch.unsafe_as(Proc(IDiskQuotaUserBatch*, HRESULT)).call(ppbatch)
+  def create_user_batch(this : IDiskQuotaControl*, ppbatch : IDiskQuotaUserBatch*) : HRESULT
+    @lpVtbl.value.create_user_batch.call(this, ppbatch)
   end
-  def invalidate_sid_name_cache : HRESULT
-    @lpVtbl.value.invalidate_sid_name_cache.unsafe_as(Proc(HRESULT)).call
+  def invalidate_sid_name_cache(this : IDiskQuotaControl*) : HRESULT
+    @lpVtbl.value.invalidate_sid_name_cache.call(this)
   end
-  def give_user_name_resolution_priority(puser : IDiskQuotaUser) : HRESULT
-    @lpVtbl.value.give_user_name_resolution_priority.unsafe_as(Proc(IDiskQuotaUser, HRESULT)).call(puser)
+  def give_user_name_resolution_priority(this : IDiskQuotaControl*, puser : IDiskQuotaUser) : HRESULT
+    @lpVtbl.value.give_user_name_resolution_priority.call(this, puser)
   end
-  def shutdown_name_resolution : HRESULT
-    @lpVtbl.value.shutdown_name_resolution.unsafe_as(Proc(HRESULT)).call
+  def shutdown_name_resolution(this : IDiskQuotaControl*) : HRESULT
+    @lpVtbl.value.shutdown_name_resolution.call(this)
   end
 end
 struct LibWin32::IDiskQuotaEvents
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDiskQuotaEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDiskQuotaEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDiskQuotaEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_user_name_changed(puser : IDiskQuotaUser) : HRESULT
-    @lpVtbl.value.on_user_name_changed.unsafe_as(Proc(IDiskQuotaUser, HRESULT)).call(puser)
+  def on_user_name_changed(this : IDiskQuotaEvents*, puser : IDiskQuotaUser) : HRESULT
+    @lpVtbl.value.on_user_name_changed.call(this, puser)
   end
 end

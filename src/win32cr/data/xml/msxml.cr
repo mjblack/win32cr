@@ -866,14 +866,14 @@ lib LibWin32
 
 
   struct IXMLDOMImplementationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    has_feature : UInt64
+    query_interface : Proc(IXMLDOMImplementation*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMImplementation*, UInt32)
+    release : Proc(IXMLDOMImplementation*, UInt32)
+    get_type_info_count : Proc(IXMLDOMImplementation*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMImplementation*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMImplementation*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMImplementation*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    has_feature : Proc(IXMLDOMImplementation*, UInt8*, UInt8*, Int16*, HRESULT)
   end
 
   IXMLDOMImplementation_GUID = "2933bf8f-7b36-11d2-b20e-00c04f983e60"
@@ -883,49 +883,49 @@ lib LibWin32
   end
 
   struct IXMLDOMNodeVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_node_name : UInt64
-    get_node_value : UInt64
-    put_node_value : UInt64
-    get_node_type : UInt64
-    get_parent_node : UInt64
-    get_child_nodes : UInt64
-    get_first_child : UInt64
-    get_last_child : UInt64
-    get_previous_sibling : UInt64
-    get_next_sibling : UInt64
-    get_attributes : UInt64
-    insert_before : UInt64
-    replace_child : UInt64
-    remove_child : UInt64
-    append_child : UInt64
-    has_child_nodes : UInt64
-    get_owner_document : UInt64
-    clone_node : UInt64
-    get_node_type_string : UInt64
-    get_text : UInt64
-    put_text : UInt64
-    get_specified : UInt64
-    get_definition : UInt64
-    get_node_typed_value : UInt64
-    put_node_typed_value : UInt64
-    get_data_type : UInt64
-    put_data_type : UInt64
-    get_xml : UInt64
-    transform_node : UInt64
-    select_nodes : UInt64
-    select_single_node : UInt64
-    get_parsed : UInt64
-    get_namespace_uri : UInt64
-    get_prefix : UInt64
-    get_base_name : UInt64
-    transform_node_to_object : UInt64
+    query_interface : Proc(IXMLDOMNode*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMNode*, UInt32)
+    release : Proc(IXMLDOMNode*, UInt32)
+    get_type_info_count : Proc(IXMLDOMNode*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMNode*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMNode*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMNode*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_node_name : Proc(IXMLDOMNode*, UInt8**, HRESULT)
+    get_node_value : Proc(IXMLDOMNode*, VARIANT*, HRESULT)
+    put_node_value : Proc(IXMLDOMNode*, VARIANT, HRESULT)
+    get_node_type : Proc(IXMLDOMNode*, DOMNodeType*, HRESULT)
+    get_parent_node : Proc(IXMLDOMNode*, IXMLDOMNode*, HRESULT)
+    get_child_nodes : Proc(IXMLDOMNode*, IXMLDOMNodeList*, HRESULT)
+    get_first_child : Proc(IXMLDOMNode*, IXMLDOMNode*, HRESULT)
+    get_last_child : Proc(IXMLDOMNode*, IXMLDOMNode*, HRESULT)
+    get_previous_sibling : Proc(IXMLDOMNode*, IXMLDOMNode*, HRESULT)
+    get_next_sibling : Proc(IXMLDOMNode*, IXMLDOMNode*, HRESULT)
+    get_attributes : Proc(IXMLDOMNode*, IXMLDOMNamedNodeMap*, HRESULT)
+    insert_before : Proc(IXMLDOMNode*, IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)
+    replace_child : Proc(IXMLDOMNode*, IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    remove_child : Proc(IXMLDOMNode*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    append_child : Proc(IXMLDOMNode*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    has_child_nodes : Proc(IXMLDOMNode*, Int16*, HRESULT)
+    get_owner_document : Proc(IXMLDOMNode*, IXMLDOMDocument*, HRESULT)
+    clone_node : Proc(IXMLDOMNode*, Int16, IXMLDOMNode*, HRESULT)
+    get_node_type_string : Proc(IXMLDOMNode*, UInt8**, HRESULT)
+    get_text : Proc(IXMLDOMNode*, UInt8**, HRESULT)
+    put_text : Proc(IXMLDOMNode*, UInt8*, HRESULT)
+    get_specified : Proc(IXMLDOMNode*, Int16*, HRESULT)
+    get_definition : Proc(IXMLDOMNode*, IXMLDOMNode*, HRESULT)
+    get_node_typed_value : Proc(IXMLDOMNode*, VARIANT*, HRESULT)
+    put_node_typed_value : Proc(IXMLDOMNode*, VARIANT, HRESULT)
+    get_data_type : Proc(IXMLDOMNode*, VARIANT*, HRESULT)
+    put_data_type : Proc(IXMLDOMNode*, UInt8*, HRESULT)
+    get_xml : Proc(IXMLDOMNode*, UInt8**, HRESULT)
+    transform_node : Proc(IXMLDOMNode*, IXMLDOMNode, UInt8**, HRESULT)
+    select_nodes : Proc(IXMLDOMNode*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    select_single_node : Proc(IXMLDOMNode*, UInt8*, IXMLDOMNode*, HRESULT)
+    get_parsed : Proc(IXMLDOMNode*, Int16*, HRESULT)
+    get_namespace_uri : Proc(IXMLDOMNode*, UInt8**, HRESULT)
+    get_prefix : Proc(IXMLDOMNode*, UInt8**, HRESULT)
+    get_base_name : Proc(IXMLDOMNode*, UInt8**, HRESULT)
+    transform_node_to_object : Proc(IXMLDOMNode*, IXMLDOMNode, VARIANT, HRESULT)
   end
 
   IXMLDOMNode_GUID = "2933bf80-7b36-11d2-b20e-00c04f983e60"
@@ -935,49 +935,49 @@ lib LibWin32
   end
 
   struct IXMLDOMDocumentFragmentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_node_name : UInt64
-    get_node_value : UInt64
-    put_node_value : UInt64
-    get_node_type : UInt64
-    get_parent_node : UInt64
-    get_child_nodes : UInt64
-    get_first_child : UInt64
-    get_last_child : UInt64
-    get_previous_sibling : UInt64
-    get_next_sibling : UInt64
-    get_attributes : UInt64
-    insert_before : UInt64
-    replace_child : UInt64
-    remove_child : UInt64
-    append_child : UInt64
-    has_child_nodes : UInt64
-    get_owner_document : UInt64
-    clone_node : UInt64
-    get_node_type_string : UInt64
-    get_text : UInt64
-    put_text : UInt64
-    get_specified : UInt64
-    get_definition : UInt64
-    get_node_typed_value : UInt64
-    put_node_typed_value : UInt64
-    get_data_type : UInt64
-    put_data_type : UInt64
-    get_xml : UInt64
-    transform_node : UInt64
-    select_nodes : UInt64
-    select_single_node : UInt64
-    get_parsed : UInt64
-    get_namespace_uri : UInt64
-    get_prefix : UInt64
-    get_base_name : UInt64
-    transform_node_to_object : UInt64
+    query_interface : Proc(IXMLDOMDocumentFragment*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMDocumentFragment*, UInt32)
+    release : Proc(IXMLDOMDocumentFragment*, UInt32)
+    get_type_info_count : Proc(IXMLDOMDocumentFragment*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMDocumentFragment*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMDocumentFragment*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMDocumentFragment*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_node_name : Proc(IXMLDOMDocumentFragment*, UInt8**, HRESULT)
+    get_node_value : Proc(IXMLDOMDocumentFragment*, VARIANT*, HRESULT)
+    put_node_value : Proc(IXMLDOMDocumentFragment*, VARIANT, HRESULT)
+    get_node_type : Proc(IXMLDOMDocumentFragment*, DOMNodeType*, HRESULT)
+    get_parent_node : Proc(IXMLDOMDocumentFragment*, IXMLDOMNode*, HRESULT)
+    get_child_nodes : Proc(IXMLDOMDocumentFragment*, IXMLDOMNodeList*, HRESULT)
+    get_first_child : Proc(IXMLDOMDocumentFragment*, IXMLDOMNode*, HRESULT)
+    get_last_child : Proc(IXMLDOMDocumentFragment*, IXMLDOMNode*, HRESULT)
+    get_previous_sibling : Proc(IXMLDOMDocumentFragment*, IXMLDOMNode*, HRESULT)
+    get_next_sibling : Proc(IXMLDOMDocumentFragment*, IXMLDOMNode*, HRESULT)
+    get_attributes : Proc(IXMLDOMDocumentFragment*, IXMLDOMNamedNodeMap*, HRESULT)
+    insert_before : Proc(IXMLDOMDocumentFragment*, IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)
+    replace_child : Proc(IXMLDOMDocumentFragment*, IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    remove_child : Proc(IXMLDOMDocumentFragment*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    append_child : Proc(IXMLDOMDocumentFragment*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    has_child_nodes : Proc(IXMLDOMDocumentFragment*, Int16*, HRESULT)
+    get_owner_document : Proc(IXMLDOMDocumentFragment*, IXMLDOMDocument*, HRESULT)
+    clone_node : Proc(IXMLDOMDocumentFragment*, Int16, IXMLDOMNode*, HRESULT)
+    get_node_type_string : Proc(IXMLDOMDocumentFragment*, UInt8**, HRESULT)
+    get_text : Proc(IXMLDOMDocumentFragment*, UInt8**, HRESULT)
+    put_text : Proc(IXMLDOMDocumentFragment*, UInt8*, HRESULT)
+    get_specified : Proc(IXMLDOMDocumentFragment*, Int16*, HRESULT)
+    get_definition : Proc(IXMLDOMDocumentFragment*, IXMLDOMNode*, HRESULT)
+    get_node_typed_value : Proc(IXMLDOMDocumentFragment*, VARIANT*, HRESULT)
+    put_node_typed_value : Proc(IXMLDOMDocumentFragment*, VARIANT, HRESULT)
+    get_data_type : Proc(IXMLDOMDocumentFragment*, VARIANT*, HRESULT)
+    put_data_type : Proc(IXMLDOMDocumentFragment*, UInt8*, HRESULT)
+    get_xml : Proc(IXMLDOMDocumentFragment*, UInt8**, HRESULT)
+    transform_node : Proc(IXMLDOMDocumentFragment*, IXMLDOMNode, UInt8**, HRESULT)
+    select_nodes : Proc(IXMLDOMDocumentFragment*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    select_single_node : Proc(IXMLDOMDocumentFragment*, UInt8*, IXMLDOMNode*, HRESULT)
+    get_parsed : Proc(IXMLDOMDocumentFragment*, Int16*, HRESULT)
+    get_namespace_uri : Proc(IXMLDOMDocumentFragment*, UInt8**, HRESULT)
+    get_prefix : Proc(IXMLDOMDocumentFragment*, UInt8**, HRESULT)
+    get_base_name : Proc(IXMLDOMDocumentFragment*, UInt8**, HRESULT)
+    transform_node_to_object : Proc(IXMLDOMDocumentFragment*, IXMLDOMNode, VARIANT, HRESULT)
   end
 
   IXMLDOMDocumentFragment_GUID = "3efaa413-272f-11d2-836f-0000f87a7782"
@@ -987,82 +987,82 @@ lib LibWin32
   end
 
   struct IXMLDOMDocumentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_node_name : UInt64
-    get_node_value : UInt64
-    put_node_value : UInt64
-    get_node_type : UInt64
-    get_parent_node : UInt64
-    get_child_nodes : UInt64
-    get_first_child : UInt64
-    get_last_child : UInt64
-    get_previous_sibling : UInt64
-    get_next_sibling : UInt64
-    get_attributes : UInt64
-    insert_before : UInt64
-    replace_child : UInt64
-    remove_child : UInt64
-    append_child : UInt64
-    has_child_nodes : UInt64
-    get_owner_document : UInt64
-    clone_node : UInt64
-    get_node_type_string : UInt64
-    get_text : UInt64
-    put_text : UInt64
-    get_specified : UInt64
-    get_definition : UInt64
-    get_node_typed_value : UInt64
-    put_node_typed_value : UInt64
-    get_data_type : UInt64
-    put_data_type : UInt64
-    get_xml : UInt64
-    transform_node : UInt64
-    select_nodes : UInt64
-    select_single_node : UInt64
-    get_parsed : UInt64
-    get_namespace_uri : UInt64
-    get_prefix : UInt64
-    get_base_name : UInt64
-    transform_node_to_object : UInt64
-    get_doctype : UInt64
-    get_implementation : UInt64
-    get_document_element : UInt64
-    putref_document_element : UInt64
-    create_element : UInt64
-    create_document_fragment : UInt64
-    create_text_node : UInt64
-    create_comment : UInt64
-    create_cdata_section : UInt64
-    create_processing_instruction : UInt64
-    create_attribute : UInt64
-    create_entity_reference : UInt64
-    get_elements_by_tag_name : UInt64
-    create_node : UInt64
-    node_from_id : UInt64
-    load : UInt64
-    get_ready_state : UInt64
-    get_parse_error : UInt64
-    get_url : UInt64
-    get_async : UInt64
-    put_async : UInt64
-    abort : UInt64
-    load_xml : UInt64
-    save : UInt64
-    get_validate_on_parse : UInt64
-    put_validate_on_parse : UInt64
-    get_resolve_externals : UInt64
-    put_resolve_externals : UInt64
-    get_preserve_white_space : UInt64
-    put_preserve_white_space : UInt64
-    put_onreadystatechange : UInt64
-    put_ondataavailable : UInt64
-    put_ontransformnode : UInt64
+    query_interface : Proc(IXMLDOMDocument*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMDocument*, UInt32)
+    release : Proc(IXMLDOMDocument*, UInt32)
+    get_type_info_count : Proc(IXMLDOMDocument*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMDocument*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMDocument*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMDocument*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_node_name : Proc(IXMLDOMDocument*, UInt8**, HRESULT)
+    get_node_value : Proc(IXMLDOMDocument*, VARIANT*, HRESULT)
+    put_node_value : Proc(IXMLDOMDocument*, VARIANT, HRESULT)
+    get_node_type : Proc(IXMLDOMDocument*, DOMNodeType*, HRESULT)
+    get_parent_node : Proc(IXMLDOMDocument*, IXMLDOMNode*, HRESULT)
+    get_child_nodes : Proc(IXMLDOMDocument*, IXMLDOMNodeList*, HRESULT)
+    get_first_child : Proc(IXMLDOMDocument*, IXMLDOMNode*, HRESULT)
+    get_last_child : Proc(IXMLDOMDocument*, IXMLDOMNode*, HRESULT)
+    get_previous_sibling : Proc(IXMLDOMDocument*, IXMLDOMNode*, HRESULT)
+    get_next_sibling : Proc(IXMLDOMDocument*, IXMLDOMNode*, HRESULT)
+    get_attributes : Proc(IXMLDOMDocument*, IXMLDOMNamedNodeMap*, HRESULT)
+    insert_before : Proc(IXMLDOMDocument*, IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)
+    replace_child : Proc(IXMLDOMDocument*, IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    remove_child : Proc(IXMLDOMDocument*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    append_child : Proc(IXMLDOMDocument*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    has_child_nodes : Proc(IXMLDOMDocument*, Int16*, HRESULT)
+    get_owner_document : Proc(IXMLDOMDocument*, IXMLDOMDocument*, HRESULT)
+    clone_node : Proc(IXMLDOMDocument*, Int16, IXMLDOMNode*, HRESULT)
+    get_node_type_string : Proc(IXMLDOMDocument*, UInt8**, HRESULT)
+    get_text : Proc(IXMLDOMDocument*, UInt8**, HRESULT)
+    put_text : Proc(IXMLDOMDocument*, UInt8*, HRESULT)
+    get_specified : Proc(IXMLDOMDocument*, Int16*, HRESULT)
+    get_definition : Proc(IXMLDOMDocument*, IXMLDOMNode*, HRESULT)
+    get_node_typed_value : Proc(IXMLDOMDocument*, VARIANT*, HRESULT)
+    put_node_typed_value : Proc(IXMLDOMDocument*, VARIANT, HRESULT)
+    get_data_type : Proc(IXMLDOMDocument*, VARIANT*, HRESULT)
+    put_data_type : Proc(IXMLDOMDocument*, UInt8*, HRESULT)
+    get_xml : Proc(IXMLDOMDocument*, UInt8**, HRESULT)
+    transform_node : Proc(IXMLDOMDocument*, IXMLDOMNode, UInt8**, HRESULT)
+    select_nodes : Proc(IXMLDOMDocument*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    select_single_node : Proc(IXMLDOMDocument*, UInt8*, IXMLDOMNode*, HRESULT)
+    get_parsed : Proc(IXMLDOMDocument*, Int16*, HRESULT)
+    get_namespace_uri : Proc(IXMLDOMDocument*, UInt8**, HRESULT)
+    get_prefix : Proc(IXMLDOMDocument*, UInt8**, HRESULT)
+    get_base_name : Proc(IXMLDOMDocument*, UInt8**, HRESULT)
+    transform_node_to_object : Proc(IXMLDOMDocument*, IXMLDOMNode, VARIANT, HRESULT)
+    get_doctype : Proc(IXMLDOMDocument*, IXMLDOMDocumentType*, HRESULT)
+    get_implementation : Proc(IXMLDOMDocument*, IXMLDOMImplementation*, HRESULT)
+    get_document_element : Proc(IXMLDOMDocument*, IXMLDOMElement*, HRESULT)
+    putref_document_element : Proc(IXMLDOMDocument*, IXMLDOMElement, HRESULT)
+    create_element : Proc(IXMLDOMDocument*, UInt8*, IXMLDOMElement*, HRESULT)
+    create_document_fragment : Proc(IXMLDOMDocument*, IXMLDOMDocumentFragment*, HRESULT)
+    create_text_node : Proc(IXMLDOMDocument*, UInt8*, IXMLDOMText*, HRESULT)
+    create_comment : Proc(IXMLDOMDocument*, UInt8*, IXMLDOMComment*, HRESULT)
+    create_cdata_section : Proc(IXMLDOMDocument*, UInt8*, IXMLDOMCDATASection*, HRESULT)
+    create_processing_instruction : Proc(IXMLDOMDocument*, UInt8*, UInt8*, IXMLDOMProcessingInstruction*, HRESULT)
+    create_attribute : Proc(IXMLDOMDocument*, UInt8*, IXMLDOMAttribute*, HRESULT)
+    create_entity_reference : Proc(IXMLDOMDocument*, UInt8*, IXMLDOMEntityReference*, HRESULT)
+    get_elements_by_tag_name : Proc(IXMLDOMDocument*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    create_node : Proc(IXMLDOMDocument*, VARIANT, UInt8*, UInt8*, IXMLDOMNode*, HRESULT)
+    node_from_id : Proc(IXMLDOMDocument*, UInt8*, IXMLDOMNode*, HRESULT)
+    load : Proc(IXMLDOMDocument*, VARIANT, Int16*, HRESULT)
+    get_ready_state : Proc(IXMLDOMDocument*, Int32*, HRESULT)
+    get_parse_error : Proc(IXMLDOMDocument*, IXMLDOMParseError*, HRESULT)
+    get_url : Proc(IXMLDOMDocument*, UInt8**, HRESULT)
+    get_async : Proc(IXMLDOMDocument*, Int16*, HRESULT)
+    put_async : Proc(IXMLDOMDocument*, Int16, HRESULT)
+    abort : Proc(IXMLDOMDocument*, HRESULT)
+    load_xml : Proc(IXMLDOMDocument*, UInt8*, Int16*, HRESULT)
+    save : Proc(IXMLDOMDocument*, VARIANT, HRESULT)
+    get_validate_on_parse : Proc(IXMLDOMDocument*, Int16*, HRESULT)
+    put_validate_on_parse : Proc(IXMLDOMDocument*, Int16, HRESULT)
+    get_resolve_externals : Proc(IXMLDOMDocument*, Int16*, HRESULT)
+    put_resolve_externals : Proc(IXMLDOMDocument*, Int16, HRESULT)
+    get_preserve_white_space : Proc(IXMLDOMDocument*, Int16*, HRESULT)
+    put_preserve_white_space : Proc(IXMLDOMDocument*, Int16, HRESULT)
+    put_onreadystatechange : Proc(IXMLDOMDocument*, VARIANT, HRESULT)
+    put_ondataavailable : Proc(IXMLDOMDocument*, VARIANT, HRESULT)
+    put_ontransformnode : Proc(IXMLDOMDocument*, VARIANT, HRESULT)
   end
 
   IXMLDOMDocument_GUID = "2933bf81-7b36-11d2-b20e-00c04f983e60"
@@ -1072,18 +1072,18 @@ lib LibWin32
   end
 
   struct IXMLDOMNodeListVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_item : UInt64
-    get_length : UInt64
-    next_node : UInt64
-    reset : UInt64
-    get__new_enum : UInt64
+    query_interface : Proc(IXMLDOMNodeList*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMNodeList*, UInt32)
+    release : Proc(IXMLDOMNodeList*, UInt32)
+    get_type_info_count : Proc(IXMLDOMNodeList*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMNodeList*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMNodeList*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMNodeList*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_item : Proc(IXMLDOMNodeList*, Int32, IXMLDOMNode*, HRESULT)
+    get_length : Proc(IXMLDOMNodeList*, Int32*, HRESULT)
+    next_node : Proc(IXMLDOMNodeList*, IXMLDOMNode*, HRESULT)
+    reset : Proc(IXMLDOMNodeList*, HRESULT)
+    get__new_enum : Proc(IXMLDOMNodeList*, IUnknown*, HRESULT)
   end
 
   IXMLDOMNodeList_GUID = "2933bf82-7b36-11d2-b20e-00c04f983e60"
@@ -1093,23 +1093,23 @@ lib LibWin32
   end
 
   struct IXMLDOMNamedNodeMapVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_named_item : UInt64
-    set_named_item : UInt64
-    remove_named_item : UInt64
-    get_item : UInt64
-    get_length : UInt64
-    get_qualified_item : UInt64
-    remove_qualified_item : UInt64
-    next_node : UInt64
-    reset : UInt64
-    get__new_enum : UInt64
+    query_interface : Proc(IXMLDOMNamedNodeMap*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMNamedNodeMap*, UInt32)
+    release : Proc(IXMLDOMNamedNodeMap*, UInt32)
+    get_type_info_count : Proc(IXMLDOMNamedNodeMap*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMNamedNodeMap*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMNamedNodeMap*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMNamedNodeMap*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_named_item : Proc(IXMLDOMNamedNodeMap*, UInt8*, IXMLDOMNode*, HRESULT)
+    set_named_item : Proc(IXMLDOMNamedNodeMap*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    remove_named_item : Proc(IXMLDOMNamedNodeMap*, UInt8*, IXMLDOMNode*, HRESULT)
+    get_item : Proc(IXMLDOMNamedNodeMap*, Int32, IXMLDOMNode*, HRESULT)
+    get_length : Proc(IXMLDOMNamedNodeMap*, Int32*, HRESULT)
+    get_qualified_item : Proc(IXMLDOMNamedNodeMap*, UInt8*, UInt8*, IXMLDOMNode*, HRESULT)
+    remove_qualified_item : Proc(IXMLDOMNamedNodeMap*, UInt8*, UInt8*, IXMLDOMNode*, HRESULT)
+    next_node : Proc(IXMLDOMNamedNodeMap*, IXMLDOMNode*, HRESULT)
+    reset : Proc(IXMLDOMNamedNodeMap*, HRESULT)
+    get__new_enum : Proc(IXMLDOMNamedNodeMap*, IUnknown*, HRESULT)
   end
 
   IXMLDOMNamedNodeMap_GUID = "2933bf83-7b36-11d2-b20e-00c04f983e60"
@@ -1119,57 +1119,57 @@ lib LibWin32
   end
 
   struct IXMLDOMCharacterDataVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_node_name : UInt64
-    get_node_value : UInt64
-    put_node_value : UInt64
-    get_node_type : UInt64
-    get_parent_node : UInt64
-    get_child_nodes : UInt64
-    get_first_child : UInt64
-    get_last_child : UInt64
-    get_previous_sibling : UInt64
-    get_next_sibling : UInt64
-    get_attributes : UInt64
-    insert_before : UInt64
-    replace_child : UInt64
-    remove_child : UInt64
-    append_child : UInt64
-    has_child_nodes : UInt64
-    get_owner_document : UInt64
-    clone_node : UInt64
-    get_node_type_string : UInt64
-    get_text : UInt64
-    put_text : UInt64
-    get_specified : UInt64
-    get_definition : UInt64
-    get_node_typed_value : UInt64
-    put_node_typed_value : UInt64
-    get_data_type : UInt64
-    put_data_type : UInt64
-    get_xml : UInt64
-    transform_node : UInt64
-    select_nodes : UInt64
-    select_single_node : UInt64
-    get_parsed : UInt64
-    get_namespace_uri : UInt64
-    get_prefix : UInt64
-    get_base_name : UInt64
-    transform_node_to_object : UInt64
-    get_data : UInt64
-    put_data : UInt64
-    get_length : UInt64
-    substring_data : UInt64
-    append_data : UInt64
-    insert_data : UInt64
-    delete_data : UInt64
-    replace_data : UInt64
+    query_interface : Proc(IXMLDOMCharacterData*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMCharacterData*, UInt32)
+    release : Proc(IXMLDOMCharacterData*, UInt32)
+    get_type_info_count : Proc(IXMLDOMCharacterData*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMCharacterData*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMCharacterData*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMCharacterData*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_node_name : Proc(IXMLDOMCharacterData*, UInt8**, HRESULT)
+    get_node_value : Proc(IXMLDOMCharacterData*, VARIANT*, HRESULT)
+    put_node_value : Proc(IXMLDOMCharacterData*, VARIANT, HRESULT)
+    get_node_type : Proc(IXMLDOMCharacterData*, DOMNodeType*, HRESULT)
+    get_parent_node : Proc(IXMLDOMCharacterData*, IXMLDOMNode*, HRESULT)
+    get_child_nodes : Proc(IXMLDOMCharacterData*, IXMLDOMNodeList*, HRESULT)
+    get_first_child : Proc(IXMLDOMCharacterData*, IXMLDOMNode*, HRESULT)
+    get_last_child : Proc(IXMLDOMCharacterData*, IXMLDOMNode*, HRESULT)
+    get_previous_sibling : Proc(IXMLDOMCharacterData*, IXMLDOMNode*, HRESULT)
+    get_next_sibling : Proc(IXMLDOMCharacterData*, IXMLDOMNode*, HRESULT)
+    get_attributes : Proc(IXMLDOMCharacterData*, IXMLDOMNamedNodeMap*, HRESULT)
+    insert_before : Proc(IXMLDOMCharacterData*, IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)
+    replace_child : Proc(IXMLDOMCharacterData*, IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    remove_child : Proc(IXMLDOMCharacterData*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    append_child : Proc(IXMLDOMCharacterData*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    has_child_nodes : Proc(IXMLDOMCharacterData*, Int16*, HRESULT)
+    get_owner_document : Proc(IXMLDOMCharacterData*, IXMLDOMDocument*, HRESULT)
+    clone_node : Proc(IXMLDOMCharacterData*, Int16, IXMLDOMNode*, HRESULT)
+    get_node_type_string : Proc(IXMLDOMCharacterData*, UInt8**, HRESULT)
+    get_text : Proc(IXMLDOMCharacterData*, UInt8**, HRESULT)
+    put_text : Proc(IXMLDOMCharacterData*, UInt8*, HRESULT)
+    get_specified : Proc(IXMLDOMCharacterData*, Int16*, HRESULT)
+    get_definition : Proc(IXMLDOMCharacterData*, IXMLDOMNode*, HRESULT)
+    get_node_typed_value : Proc(IXMLDOMCharacterData*, VARIANT*, HRESULT)
+    put_node_typed_value : Proc(IXMLDOMCharacterData*, VARIANT, HRESULT)
+    get_data_type : Proc(IXMLDOMCharacterData*, VARIANT*, HRESULT)
+    put_data_type : Proc(IXMLDOMCharacterData*, UInt8*, HRESULT)
+    get_xml : Proc(IXMLDOMCharacterData*, UInt8**, HRESULT)
+    transform_node : Proc(IXMLDOMCharacterData*, IXMLDOMNode, UInt8**, HRESULT)
+    select_nodes : Proc(IXMLDOMCharacterData*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    select_single_node : Proc(IXMLDOMCharacterData*, UInt8*, IXMLDOMNode*, HRESULT)
+    get_parsed : Proc(IXMLDOMCharacterData*, Int16*, HRESULT)
+    get_namespace_uri : Proc(IXMLDOMCharacterData*, UInt8**, HRESULT)
+    get_prefix : Proc(IXMLDOMCharacterData*, UInt8**, HRESULT)
+    get_base_name : Proc(IXMLDOMCharacterData*, UInt8**, HRESULT)
+    transform_node_to_object : Proc(IXMLDOMCharacterData*, IXMLDOMNode, VARIANT, HRESULT)
+    get_data : Proc(IXMLDOMCharacterData*, UInt8**, HRESULT)
+    put_data : Proc(IXMLDOMCharacterData*, UInt8*, HRESULT)
+    get_length : Proc(IXMLDOMCharacterData*, Int32*, HRESULT)
+    substring_data : Proc(IXMLDOMCharacterData*, Int32, Int32, UInt8**, HRESULT)
+    append_data : Proc(IXMLDOMCharacterData*, UInt8*, HRESULT)
+    insert_data : Proc(IXMLDOMCharacterData*, Int32, UInt8*, HRESULT)
+    delete_data : Proc(IXMLDOMCharacterData*, Int32, Int32, HRESULT)
+    replace_data : Proc(IXMLDOMCharacterData*, Int32, Int32, UInt8*, HRESULT)
   end
 
   IXMLDOMCharacterData_GUID = "2933bf84-7b36-11d2-b20e-00c04f983e60"
@@ -1179,52 +1179,52 @@ lib LibWin32
   end
 
   struct IXMLDOMAttributeVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_node_name : UInt64
-    get_node_value : UInt64
-    put_node_value : UInt64
-    get_node_type : UInt64
-    get_parent_node : UInt64
-    get_child_nodes : UInt64
-    get_first_child : UInt64
-    get_last_child : UInt64
-    get_previous_sibling : UInt64
-    get_next_sibling : UInt64
-    get_attributes : UInt64
-    insert_before : UInt64
-    replace_child : UInt64
-    remove_child : UInt64
-    append_child : UInt64
-    has_child_nodes : UInt64
-    get_owner_document : UInt64
-    clone_node : UInt64
-    get_node_type_string : UInt64
-    get_text : UInt64
-    put_text : UInt64
-    get_specified : UInt64
-    get_definition : UInt64
-    get_node_typed_value : UInt64
-    put_node_typed_value : UInt64
-    get_data_type : UInt64
-    put_data_type : UInt64
-    get_xml : UInt64
-    transform_node : UInt64
-    select_nodes : UInt64
-    select_single_node : UInt64
-    get_parsed : UInt64
-    get_namespace_uri : UInt64
-    get_prefix : UInt64
-    get_base_name : UInt64
-    transform_node_to_object : UInt64
-    get_name : UInt64
-    get_value : UInt64
-    put_value : UInt64
+    query_interface : Proc(IXMLDOMAttribute*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMAttribute*, UInt32)
+    release : Proc(IXMLDOMAttribute*, UInt32)
+    get_type_info_count : Proc(IXMLDOMAttribute*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMAttribute*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMAttribute*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMAttribute*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_node_name : Proc(IXMLDOMAttribute*, UInt8**, HRESULT)
+    get_node_value : Proc(IXMLDOMAttribute*, VARIANT*, HRESULT)
+    put_node_value : Proc(IXMLDOMAttribute*, VARIANT, HRESULT)
+    get_node_type : Proc(IXMLDOMAttribute*, DOMNodeType*, HRESULT)
+    get_parent_node : Proc(IXMLDOMAttribute*, IXMLDOMNode*, HRESULT)
+    get_child_nodes : Proc(IXMLDOMAttribute*, IXMLDOMNodeList*, HRESULT)
+    get_first_child : Proc(IXMLDOMAttribute*, IXMLDOMNode*, HRESULT)
+    get_last_child : Proc(IXMLDOMAttribute*, IXMLDOMNode*, HRESULT)
+    get_previous_sibling : Proc(IXMLDOMAttribute*, IXMLDOMNode*, HRESULT)
+    get_next_sibling : Proc(IXMLDOMAttribute*, IXMLDOMNode*, HRESULT)
+    get_attributes : Proc(IXMLDOMAttribute*, IXMLDOMNamedNodeMap*, HRESULT)
+    insert_before : Proc(IXMLDOMAttribute*, IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)
+    replace_child : Proc(IXMLDOMAttribute*, IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    remove_child : Proc(IXMLDOMAttribute*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    append_child : Proc(IXMLDOMAttribute*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    has_child_nodes : Proc(IXMLDOMAttribute*, Int16*, HRESULT)
+    get_owner_document : Proc(IXMLDOMAttribute*, IXMLDOMDocument*, HRESULT)
+    clone_node : Proc(IXMLDOMAttribute*, Int16, IXMLDOMNode*, HRESULT)
+    get_node_type_string : Proc(IXMLDOMAttribute*, UInt8**, HRESULT)
+    get_text : Proc(IXMLDOMAttribute*, UInt8**, HRESULT)
+    put_text : Proc(IXMLDOMAttribute*, UInt8*, HRESULT)
+    get_specified : Proc(IXMLDOMAttribute*, Int16*, HRESULT)
+    get_definition : Proc(IXMLDOMAttribute*, IXMLDOMNode*, HRESULT)
+    get_node_typed_value : Proc(IXMLDOMAttribute*, VARIANT*, HRESULT)
+    put_node_typed_value : Proc(IXMLDOMAttribute*, VARIANT, HRESULT)
+    get_data_type : Proc(IXMLDOMAttribute*, VARIANT*, HRESULT)
+    put_data_type : Proc(IXMLDOMAttribute*, UInt8*, HRESULT)
+    get_xml : Proc(IXMLDOMAttribute*, UInt8**, HRESULT)
+    transform_node : Proc(IXMLDOMAttribute*, IXMLDOMNode, UInt8**, HRESULT)
+    select_nodes : Proc(IXMLDOMAttribute*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    select_single_node : Proc(IXMLDOMAttribute*, UInt8*, IXMLDOMNode*, HRESULT)
+    get_parsed : Proc(IXMLDOMAttribute*, Int16*, HRESULT)
+    get_namespace_uri : Proc(IXMLDOMAttribute*, UInt8**, HRESULT)
+    get_prefix : Proc(IXMLDOMAttribute*, UInt8**, HRESULT)
+    get_base_name : Proc(IXMLDOMAttribute*, UInt8**, HRESULT)
+    transform_node_to_object : Proc(IXMLDOMAttribute*, IXMLDOMNode, VARIANT, HRESULT)
+    get_name : Proc(IXMLDOMAttribute*, UInt8**, HRESULT)
+    get_value : Proc(IXMLDOMAttribute*, VARIANT*, HRESULT)
+    put_value : Proc(IXMLDOMAttribute*, VARIANT, HRESULT)
   end
 
   IXMLDOMAttribute_GUID = "2933bf85-7b36-11d2-b20e-00c04f983e60"
@@ -1234,58 +1234,58 @@ lib LibWin32
   end
 
   struct IXMLDOMElementVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_node_name : UInt64
-    get_node_value : UInt64
-    put_node_value : UInt64
-    get_node_type : UInt64
-    get_parent_node : UInt64
-    get_child_nodes : UInt64
-    get_first_child : UInt64
-    get_last_child : UInt64
-    get_previous_sibling : UInt64
-    get_next_sibling : UInt64
-    get_attributes : UInt64
-    insert_before : UInt64
-    replace_child : UInt64
-    remove_child : UInt64
-    append_child : UInt64
-    has_child_nodes : UInt64
-    get_owner_document : UInt64
-    clone_node : UInt64
-    get_node_type_string : UInt64
-    get_text : UInt64
-    put_text : UInt64
-    get_specified : UInt64
-    get_definition : UInt64
-    get_node_typed_value : UInt64
-    put_node_typed_value : UInt64
-    get_data_type : UInt64
-    put_data_type : UInt64
-    get_xml : UInt64
-    transform_node : UInt64
-    select_nodes : UInt64
-    select_single_node : UInt64
-    get_parsed : UInt64
-    get_namespace_uri : UInt64
-    get_prefix : UInt64
-    get_base_name : UInt64
-    transform_node_to_object : UInt64
-    get_tag_name : UInt64
-    get_attribute : UInt64
-    set_attribute : UInt64
-    remove_attribute : UInt64
-    get_attribute_node : UInt64
-    set_attribute_node : UInt64
-    remove_attribute_node : UInt64
-    get_elements_by_tag_name : UInt64
-    normalize : UInt64
+    query_interface : Proc(IXMLDOMElement*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMElement*, UInt32)
+    release : Proc(IXMLDOMElement*, UInt32)
+    get_type_info_count : Proc(IXMLDOMElement*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMElement*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMElement*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_node_name : Proc(IXMLDOMElement*, UInt8**, HRESULT)
+    get_node_value : Proc(IXMLDOMElement*, VARIANT*, HRESULT)
+    put_node_value : Proc(IXMLDOMElement*, VARIANT, HRESULT)
+    get_node_type : Proc(IXMLDOMElement*, DOMNodeType*, HRESULT)
+    get_parent_node : Proc(IXMLDOMElement*, IXMLDOMNode*, HRESULT)
+    get_child_nodes : Proc(IXMLDOMElement*, IXMLDOMNodeList*, HRESULT)
+    get_first_child : Proc(IXMLDOMElement*, IXMLDOMNode*, HRESULT)
+    get_last_child : Proc(IXMLDOMElement*, IXMLDOMNode*, HRESULT)
+    get_previous_sibling : Proc(IXMLDOMElement*, IXMLDOMNode*, HRESULT)
+    get_next_sibling : Proc(IXMLDOMElement*, IXMLDOMNode*, HRESULT)
+    get_attributes : Proc(IXMLDOMElement*, IXMLDOMNamedNodeMap*, HRESULT)
+    insert_before : Proc(IXMLDOMElement*, IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)
+    replace_child : Proc(IXMLDOMElement*, IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    remove_child : Proc(IXMLDOMElement*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    append_child : Proc(IXMLDOMElement*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    has_child_nodes : Proc(IXMLDOMElement*, Int16*, HRESULT)
+    get_owner_document : Proc(IXMLDOMElement*, IXMLDOMDocument*, HRESULT)
+    clone_node : Proc(IXMLDOMElement*, Int16, IXMLDOMNode*, HRESULT)
+    get_node_type_string : Proc(IXMLDOMElement*, UInt8**, HRESULT)
+    get_text : Proc(IXMLDOMElement*, UInt8**, HRESULT)
+    put_text : Proc(IXMLDOMElement*, UInt8*, HRESULT)
+    get_specified : Proc(IXMLDOMElement*, Int16*, HRESULT)
+    get_definition : Proc(IXMLDOMElement*, IXMLDOMNode*, HRESULT)
+    get_node_typed_value : Proc(IXMLDOMElement*, VARIANT*, HRESULT)
+    put_node_typed_value : Proc(IXMLDOMElement*, VARIANT, HRESULT)
+    get_data_type : Proc(IXMLDOMElement*, VARIANT*, HRESULT)
+    put_data_type : Proc(IXMLDOMElement*, UInt8*, HRESULT)
+    get_xml : Proc(IXMLDOMElement*, UInt8**, HRESULT)
+    transform_node : Proc(IXMLDOMElement*, IXMLDOMNode, UInt8**, HRESULT)
+    select_nodes : Proc(IXMLDOMElement*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    select_single_node : Proc(IXMLDOMElement*, UInt8*, IXMLDOMNode*, HRESULT)
+    get_parsed : Proc(IXMLDOMElement*, Int16*, HRESULT)
+    get_namespace_uri : Proc(IXMLDOMElement*, UInt8**, HRESULT)
+    get_prefix : Proc(IXMLDOMElement*, UInt8**, HRESULT)
+    get_base_name : Proc(IXMLDOMElement*, UInt8**, HRESULT)
+    transform_node_to_object : Proc(IXMLDOMElement*, IXMLDOMNode, VARIANT, HRESULT)
+    get_tag_name : Proc(IXMLDOMElement*, UInt8**, HRESULT)
+    get_attribute : Proc(IXMLDOMElement*, UInt8*, VARIANT*, HRESULT)
+    set_attribute : Proc(IXMLDOMElement*, UInt8*, VARIANT, HRESULT)
+    remove_attribute : Proc(IXMLDOMElement*, UInt8*, HRESULT)
+    get_attribute_node : Proc(IXMLDOMElement*, UInt8*, IXMLDOMAttribute*, HRESULT)
+    set_attribute_node : Proc(IXMLDOMElement*, IXMLDOMAttribute, IXMLDOMAttribute*, HRESULT)
+    remove_attribute_node : Proc(IXMLDOMElement*, IXMLDOMAttribute, IXMLDOMAttribute*, HRESULT)
+    get_elements_by_tag_name : Proc(IXMLDOMElement*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    normalize : Proc(IXMLDOMElement*, HRESULT)
   end
 
   IXMLDOMElement_GUID = "2933bf86-7b36-11d2-b20e-00c04f983e60"
@@ -1295,58 +1295,58 @@ lib LibWin32
   end
 
   struct IXMLDOMTextVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_node_name : UInt64
-    get_node_value : UInt64
-    put_node_value : UInt64
-    get_node_type : UInt64
-    get_parent_node : UInt64
-    get_child_nodes : UInt64
-    get_first_child : UInt64
-    get_last_child : UInt64
-    get_previous_sibling : UInt64
-    get_next_sibling : UInt64
-    get_attributes : UInt64
-    insert_before : UInt64
-    replace_child : UInt64
-    remove_child : UInt64
-    append_child : UInt64
-    has_child_nodes : UInt64
-    get_owner_document : UInt64
-    clone_node : UInt64
-    get_node_type_string : UInt64
-    get_text : UInt64
-    put_text : UInt64
-    get_specified : UInt64
-    get_definition : UInt64
-    get_node_typed_value : UInt64
-    put_node_typed_value : UInt64
-    get_data_type : UInt64
-    put_data_type : UInt64
-    get_xml : UInt64
-    transform_node : UInt64
-    select_nodes : UInt64
-    select_single_node : UInt64
-    get_parsed : UInt64
-    get_namespace_uri : UInt64
-    get_prefix : UInt64
-    get_base_name : UInt64
-    transform_node_to_object : UInt64
-    get_data : UInt64
-    put_data : UInt64
-    get_length : UInt64
-    substring_data : UInt64
-    append_data : UInt64
-    insert_data : UInt64
-    delete_data : UInt64
-    replace_data : UInt64
-    split_text : UInt64
+    query_interface : Proc(IXMLDOMText*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMText*, UInt32)
+    release : Proc(IXMLDOMText*, UInt32)
+    get_type_info_count : Proc(IXMLDOMText*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMText*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMText*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMText*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_node_name : Proc(IXMLDOMText*, UInt8**, HRESULT)
+    get_node_value : Proc(IXMLDOMText*, VARIANT*, HRESULT)
+    put_node_value : Proc(IXMLDOMText*, VARIANT, HRESULT)
+    get_node_type : Proc(IXMLDOMText*, DOMNodeType*, HRESULT)
+    get_parent_node : Proc(IXMLDOMText*, IXMLDOMNode*, HRESULT)
+    get_child_nodes : Proc(IXMLDOMText*, IXMLDOMNodeList*, HRESULT)
+    get_first_child : Proc(IXMLDOMText*, IXMLDOMNode*, HRESULT)
+    get_last_child : Proc(IXMLDOMText*, IXMLDOMNode*, HRESULT)
+    get_previous_sibling : Proc(IXMLDOMText*, IXMLDOMNode*, HRESULT)
+    get_next_sibling : Proc(IXMLDOMText*, IXMLDOMNode*, HRESULT)
+    get_attributes : Proc(IXMLDOMText*, IXMLDOMNamedNodeMap*, HRESULT)
+    insert_before : Proc(IXMLDOMText*, IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)
+    replace_child : Proc(IXMLDOMText*, IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    remove_child : Proc(IXMLDOMText*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    append_child : Proc(IXMLDOMText*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    has_child_nodes : Proc(IXMLDOMText*, Int16*, HRESULT)
+    get_owner_document : Proc(IXMLDOMText*, IXMLDOMDocument*, HRESULT)
+    clone_node : Proc(IXMLDOMText*, Int16, IXMLDOMNode*, HRESULT)
+    get_node_type_string : Proc(IXMLDOMText*, UInt8**, HRESULT)
+    get_text : Proc(IXMLDOMText*, UInt8**, HRESULT)
+    put_text : Proc(IXMLDOMText*, UInt8*, HRESULT)
+    get_specified : Proc(IXMLDOMText*, Int16*, HRESULT)
+    get_definition : Proc(IXMLDOMText*, IXMLDOMNode*, HRESULT)
+    get_node_typed_value : Proc(IXMLDOMText*, VARIANT*, HRESULT)
+    put_node_typed_value : Proc(IXMLDOMText*, VARIANT, HRESULT)
+    get_data_type : Proc(IXMLDOMText*, VARIANT*, HRESULT)
+    put_data_type : Proc(IXMLDOMText*, UInt8*, HRESULT)
+    get_xml : Proc(IXMLDOMText*, UInt8**, HRESULT)
+    transform_node : Proc(IXMLDOMText*, IXMLDOMNode, UInt8**, HRESULT)
+    select_nodes : Proc(IXMLDOMText*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    select_single_node : Proc(IXMLDOMText*, UInt8*, IXMLDOMNode*, HRESULT)
+    get_parsed : Proc(IXMLDOMText*, Int16*, HRESULT)
+    get_namespace_uri : Proc(IXMLDOMText*, UInt8**, HRESULT)
+    get_prefix : Proc(IXMLDOMText*, UInt8**, HRESULT)
+    get_base_name : Proc(IXMLDOMText*, UInt8**, HRESULT)
+    transform_node_to_object : Proc(IXMLDOMText*, IXMLDOMNode, VARIANT, HRESULT)
+    get_data : Proc(IXMLDOMText*, UInt8**, HRESULT)
+    put_data : Proc(IXMLDOMText*, UInt8*, HRESULT)
+    get_length : Proc(IXMLDOMText*, Int32*, HRESULT)
+    substring_data : Proc(IXMLDOMText*, Int32, Int32, UInt8**, HRESULT)
+    append_data : Proc(IXMLDOMText*, UInt8*, HRESULT)
+    insert_data : Proc(IXMLDOMText*, Int32, UInt8*, HRESULT)
+    delete_data : Proc(IXMLDOMText*, Int32, Int32, HRESULT)
+    replace_data : Proc(IXMLDOMText*, Int32, Int32, UInt8*, HRESULT)
+    split_text : Proc(IXMLDOMText*, Int32, IXMLDOMText*, HRESULT)
   end
 
   IXMLDOMText_GUID = "2933bf87-7b36-11d2-b20e-00c04f983e60"
@@ -1356,57 +1356,57 @@ lib LibWin32
   end
 
   struct IXMLDOMCommentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_node_name : UInt64
-    get_node_value : UInt64
-    put_node_value : UInt64
-    get_node_type : UInt64
-    get_parent_node : UInt64
-    get_child_nodes : UInt64
-    get_first_child : UInt64
-    get_last_child : UInt64
-    get_previous_sibling : UInt64
-    get_next_sibling : UInt64
-    get_attributes : UInt64
-    insert_before : UInt64
-    replace_child : UInt64
-    remove_child : UInt64
-    append_child : UInt64
-    has_child_nodes : UInt64
-    get_owner_document : UInt64
-    clone_node : UInt64
-    get_node_type_string : UInt64
-    get_text : UInt64
-    put_text : UInt64
-    get_specified : UInt64
-    get_definition : UInt64
-    get_node_typed_value : UInt64
-    put_node_typed_value : UInt64
-    get_data_type : UInt64
-    put_data_type : UInt64
-    get_xml : UInt64
-    transform_node : UInt64
-    select_nodes : UInt64
-    select_single_node : UInt64
-    get_parsed : UInt64
-    get_namespace_uri : UInt64
-    get_prefix : UInt64
-    get_base_name : UInt64
-    transform_node_to_object : UInt64
-    get_data : UInt64
-    put_data : UInt64
-    get_length : UInt64
-    substring_data : UInt64
-    append_data : UInt64
-    insert_data : UInt64
-    delete_data : UInt64
-    replace_data : UInt64
+    query_interface : Proc(IXMLDOMComment*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMComment*, UInt32)
+    release : Proc(IXMLDOMComment*, UInt32)
+    get_type_info_count : Proc(IXMLDOMComment*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMComment*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMComment*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMComment*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_node_name : Proc(IXMLDOMComment*, UInt8**, HRESULT)
+    get_node_value : Proc(IXMLDOMComment*, VARIANT*, HRESULT)
+    put_node_value : Proc(IXMLDOMComment*, VARIANT, HRESULT)
+    get_node_type : Proc(IXMLDOMComment*, DOMNodeType*, HRESULT)
+    get_parent_node : Proc(IXMLDOMComment*, IXMLDOMNode*, HRESULT)
+    get_child_nodes : Proc(IXMLDOMComment*, IXMLDOMNodeList*, HRESULT)
+    get_first_child : Proc(IXMLDOMComment*, IXMLDOMNode*, HRESULT)
+    get_last_child : Proc(IXMLDOMComment*, IXMLDOMNode*, HRESULT)
+    get_previous_sibling : Proc(IXMLDOMComment*, IXMLDOMNode*, HRESULT)
+    get_next_sibling : Proc(IXMLDOMComment*, IXMLDOMNode*, HRESULT)
+    get_attributes : Proc(IXMLDOMComment*, IXMLDOMNamedNodeMap*, HRESULT)
+    insert_before : Proc(IXMLDOMComment*, IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)
+    replace_child : Proc(IXMLDOMComment*, IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    remove_child : Proc(IXMLDOMComment*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    append_child : Proc(IXMLDOMComment*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    has_child_nodes : Proc(IXMLDOMComment*, Int16*, HRESULT)
+    get_owner_document : Proc(IXMLDOMComment*, IXMLDOMDocument*, HRESULT)
+    clone_node : Proc(IXMLDOMComment*, Int16, IXMLDOMNode*, HRESULT)
+    get_node_type_string : Proc(IXMLDOMComment*, UInt8**, HRESULT)
+    get_text : Proc(IXMLDOMComment*, UInt8**, HRESULT)
+    put_text : Proc(IXMLDOMComment*, UInt8*, HRESULT)
+    get_specified : Proc(IXMLDOMComment*, Int16*, HRESULT)
+    get_definition : Proc(IXMLDOMComment*, IXMLDOMNode*, HRESULT)
+    get_node_typed_value : Proc(IXMLDOMComment*, VARIANT*, HRESULT)
+    put_node_typed_value : Proc(IXMLDOMComment*, VARIANT, HRESULT)
+    get_data_type : Proc(IXMLDOMComment*, VARIANT*, HRESULT)
+    put_data_type : Proc(IXMLDOMComment*, UInt8*, HRESULT)
+    get_xml : Proc(IXMLDOMComment*, UInt8**, HRESULT)
+    transform_node : Proc(IXMLDOMComment*, IXMLDOMNode, UInt8**, HRESULT)
+    select_nodes : Proc(IXMLDOMComment*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    select_single_node : Proc(IXMLDOMComment*, UInt8*, IXMLDOMNode*, HRESULT)
+    get_parsed : Proc(IXMLDOMComment*, Int16*, HRESULT)
+    get_namespace_uri : Proc(IXMLDOMComment*, UInt8**, HRESULT)
+    get_prefix : Proc(IXMLDOMComment*, UInt8**, HRESULT)
+    get_base_name : Proc(IXMLDOMComment*, UInt8**, HRESULT)
+    transform_node_to_object : Proc(IXMLDOMComment*, IXMLDOMNode, VARIANT, HRESULT)
+    get_data : Proc(IXMLDOMComment*, UInt8**, HRESULT)
+    put_data : Proc(IXMLDOMComment*, UInt8*, HRESULT)
+    get_length : Proc(IXMLDOMComment*, Int32*, HRESULT)
+    substring_data : Proc(IXMLDOMComment*, Int32, Int32, UInt8**, HRESULT)
+    append_data : Proc(IXMLDOMComment*, UInt8*, HRESULT)
+    insert_data : Proc(IXMLDOMComment*, Int32, UInt8*, HRESULT)
+    delete_data : Proc(IXMLDOMComment*, Int32, Int32, HRESULT)
+    replace_data : Proc(IXMLDOMComment*, Int32, Int32, UInt8*, HRESULT)
   end
 
   IXMLDOMComment_GUID = "2933bf88-7b36-11d2-b20e-00c04f983e60"
@@ -1416,52 +1416,52 @@ lib LibWin32
   end
 
   struct IXMLDOMProcessingInstructionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_node_name : UInt64
-    get_node_value : UInt64
-    put_node_value : UInt64
-    get_node_type : UInt64
-    get_parent_node : UInt64
-    get_child_nodes : UInt64
-    get_first_child : UInt64
-    get_last_child : UInt64
-    get_previous_sibling : UInt64
-    get_next_sibling : UInt64
-    get_attributes : UInt64
-    insert_before : UInt64
-    replace_child : UInt64
-    remove_child : UInt64
-    append_child : UInt64
-    has_child_nodes : UInt64
-    get_owner_document : UInt64
-    clone_node : UInt64
-    get_node_type_string : UInt64
-    get_text : UInt64
-    put_text : UInt64
-    get_specified : UInt64
-    get_definition : UInt64
-    get_node_typed_value : UInt64
-    put_node_typed_value : UInt64
-    get_data_type : UInt64
-    put_data_type : UInt64
-    get_xml : UInt64
-    transform_node : UInt64
-    select_nodes : UInt64
-    select_single_node : UInt64
-    get_parsed : UInt64
-    get_namespace_uri : UInt64
-    get_prefix : UInt64
-    get_base_name : UInt64
-    transform_node_to_object : UInt64
-    get_target : UInt64
-    get_data : UInt64
-    put_data : UInt64
+    query_interface : Proc(IXMLDOMProcessingInstruction*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMProcessingInstruction*, UInt32)
+    release : Proc(IXMLDOMProcessingInstruction*, UInt32)
+    get_type_info_count : Proc(IXMLDOMProcessingInstruction*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMProcessingInstruction*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMProcessingInstruction*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMProcessingInstruction*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_node_name : Proc(IXMLDOMProcessingInstruction*, UInt8**, HRESULT)
+    get_node_value : Proc(IXMLDOMProcessingInstruction*, VARIANT*, HRESULT)
+    put_node_value : Proc(IXMLDOMProcessingInstruction*, VARIANT, HRESULT)
+    get_node_type : Proc(IXMLDOMProcessingInstruction*, DOMNodeType*, HRESULT)
+    get_parent_node : Proc(IXMLDOMProcessingInstruction*, IXMLDOMNode*, HRESULT)
+    get_child_nodes : Proc(IXMLDOMProcessingInstruction*, IXMLDOMNodeList*, HRESULT)
+    get_first_child : Proc(IXMLDOMProcessingInstruction*, IXMLDOMNode*, HRESULT)
+    get_last_child : Proc(IXMLDOMProcessingInstruction*, IXMLDOMNode*, HRESULT)
+    get_previous_sibling : Proc(IXMLDOMProcessingInstruction*, IXMLDOMNode*, HRESULT)
+    get_next_sibling : Proc(IXMLDOMProcessingInstruction*, IXMLDOMNode*, HRESULT)
+    get_attributes : Proc(IXMLDOMProcessingInstruction*, IXMLDOMNamedNodeMap*, HRESULT)
+    insert_before : Proc(IXMLDOMProcessingInstruction*, IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)
+    replace_child : Proc(IXMLDOMProcessingInstruction*, IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    remove_child : Proc(IXMLDOMProcessingInstruction*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    append_child : Proc(IXMLDOMProcessingInstruction*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    has_child_nodes : Proc(IXMLDOMProcessingInstruction*, Int16*, HRESULT)
+    get_owner_document : Proc(IXMLDOMProcessingInstruction*, IXMLDOMDocument*, HRESULT)
+    clone_node : Proc(IXMLDOMProcessingInstruction*, Int16, IXMLDOMNode*, HRESULT)
+    get_node_type_string : Proc(IXMLDOMProcessingInstruction*, UInt8**, HRESULT)
+    get_text : Proc(IXMLDOMProcessingInstruction*, UInt8**, HRESULT)
+    put_text : Proc(IXMLDOMProcessingInstruction*, UInt8*, HRESULT)
+    get_specified : Proc(IXMLDOMProcessingInstruction*, Int16*, HRESULT)
+    get_definition : Proc(IXMLDOMProcessingInstruction*, IXMLDOMNode*, HRESULT)
+    get_node_typed_value : Proc(IXMLDOMProcessingInstruction*, VARIANT*, HRESULT)
+    put_node_typed_value : Proc(IXMLDOMProcessingInstruction*, VARIANT, HRESULT)
+    get_data_type : Proc(IXMLDOMProcessingInstruction*, VARIANT*, HRESULT)
+    put_data_type : Proc(IXMLDOMProcessingInstruction*, UInt8*, HRESULT)
+    get_xml : Proc(IXMLDOMProcessingInstruction*, UInt8**, HRESULT)
+    transform_node : Proc(IXMLDOMProcessingInstruction*, IXMLDOMNode, UInt8**, HRESULT)
+    select_nodes : Proc(IXMLDOMProcessingInstruction*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    select_single_node : Proc(IXMLDOMProcessingInstruction*, UInt8*, IXMLDOMNode*, HRESULT)
+    get_parsed : Proc(IXMLDOMProcessingInstruction*, Int16*, HRESULT)
+    get_namespace_uri : Proc(IXMLDOMProcessingInstruction*, UInt8**, HRESULT)
+    get_prefix : Proc(IXMLDOMProcessingInstruction*, UInt8**, HRESULT)
+    get_base_name : Proc(IXMLDOMProcessingInstruction*, UInt8**, HRESULT)
+    transform_node_to_object : Proc(IXMLDOMProcessingInstruction*, IXMLDOMNode, VARIANT, HRESULT)
+    get_target : Proc(IXMLDOMProcessingInstruction*, UInt8**, HRESULT)
+    get_data : Proc(IXMLDOMProcessingInstruction*, UInt8**, HRESULT)
+    put_data : Proc(IXMLDOMProcessingInstruction*, UInt8*, HRESULT)
   end
 
   IXMLDOMProcessingInstruction_GUID = "2933bf89-7b36-11d2-b20e-00c04f983e60"
@@ -1471,58 +1471,58 @@ lib LibWin32
   end
 
   struct IXMLDOMCDATASectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_node_name : UInt64
-    get_node_value : UInt64
-    put_node_value : UInt64
-    get_node_type : UInt64
-    get_parent_node : UInt64
-    get_child_nodes : UInt64
-    get_first_child : UInt64
-    get_last_child : UInt64
-    get_previous_sibling : UInt64
-    get_next_sibling : UInt64
-    get_attributes : UInt64
-    insert_before : UInt64
-    replace_child : UInt64
-    remove_child : UInt64
-    append_child : UInt64
-    has_child_nodes : UInt64
-    get_owner_document : UInt64
-    clone_node : UInt64
-    get_node_type_string : UInt64
-    get_text : UInt64
-    put_text : UInt64
-    get_specified : UInt64
-    get_definition : UInt64
-    get_node_typed_value : UInt64
-    put_node_typed_value : UInt64
-    get_data_type : UInt64
-    put_data_type : UInt64
-    get_xml : UInt64
-    transform_node : UInt64
-    select_nodes : UInt64
-    select_single_node : UInt64
-    get_parsed : UInt64
-    get_namespace_uri : UInt64
-    get_prefix : UInt64
-    get_base_name : UInt64
-    transform_node_to_object : UInt64
-    get_data : UInt64
-    put_data : UInt64
-    get_length : UInt64
-    substring_data : UInt64
-    append_data : UInt64
-    insert_data : UInt64
-    delete_data : UInt64
-    replace_data : UInt64
-    split_text : UInt64
+    query_interface : Proc(IXMLDOMCDATASection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMCDATASection*, UInt32)
+    release : Proc(IXMLDOMCDATASection*, UInt32)
+    get_type_info_count : Proc(IXMLDOMCDATASection*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMCDATASection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMCDATASection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMCDATASection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_node_name : Proc(IXMLDOMCDATASection*, UInt8**, HRESULT)
+    get_node_value : Proc(IXMLDOMCDATASection*, VARIANT*, HRESULT)
+    put_node_value : Proc(IXMLDOMCDATASection*, VARIANT, HRESULT)
+    get_node_type : Proc(IXMLDOMCDATASection*, DOMNodeType*, HRESULT)
+    get_parent_node : Proc(IXMLDOMCDATASection*, IXMLDOMNode*, HRESULT)
+    get_child_nodes : Proc(IXMLDOMCDATASection*, IXMLDOMNodeList*, HRESULT)
+    get_first_child : Proc(IXMLDOMCDATASection*, IXMLDOMNode*, HRESULT)
+    get_last_child : Proc(IXMLDOMCDATASection*, IXMLDOMNode*, HRESULT)
+    get_previous_sibling : Proc(IXMLDOMCDATASection*, IXMLDOMNode*, HRESULT)
+    get_next_sibling : Proc(IXMLDOMCDATASection*, IXMLDOMNode*, HRESULT)
+    get_attributes : Proc(IXMLDOMCDATASection*, IXMLDOMNamedNodeMap*, HRESULT)
+    insert_before : Proc(IXMLDOMCDATASection*, IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)
+    replace_child : Proc(IXMLDOMCDATASection*, IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    remove_child : Proc(IXMLDOMCDATASection*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    append_child : Proc(IXMLDOMCDATASection*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    has_child_nodes : Proc(IXMLDOMCDATASection*, Int16*, HRESULT)
+    get_owner_document : Proc(IXMLDOMCDATASection*, IXMLDOMDocument*, HRESULT)
+    clone_node : Proc(IXMLDOMCDATASection*, Int16, IXMLDOMNode*, HRESULT)
+    get_node_type_string : Proc(IXMLDOMCDATASection*, UInt8**, HRESULT)
+    get_text : Proc(IXMLDOMCDATASection*, UInt8**, HRESULT)
+    put_text : Proc(IXMLDOMCDATASection*, UInt8*, HRESULT)
+    get_specified : Proc(IXMLDOMCDATASection*, Int16*, HRESULT)
+    get_definition : Proc(IXMLDOMCDATASection*, IXMLDOMNode*, HRESULT)
+    get_node_typed_value : Proc(IXMLDOMCDATASection*, VARIANT*, HRESULT)
+    put_node_typed_value : Proc(IXMLDOMCDATASection*, VARIANT, HRESULT)
+    get_data_type : Proc(IXMLDOMCDATASection*, VARIANT*, HRESULT)
+    put_data_type : Proc(IXMLDOMCDATASection*, UInt8*, HRESULT)
+    get_xml : Proc(IXMLDOMCDATASection*, UInt8**, HRESULT)
+    transform_node : Proc(IXMLDOMCDATASection*, IXMLDOMNode, UInt8**, HRESULT)
+    select_nodes : Proc(IXMLDOMCDATASection*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    select_single_node : Proc(IXMLDOMCDATASection*, UInt8*, IXMLDOMNode*, HRESULT)
+    get_parsed : Proc(IXMLDOMCDATASection*, Int16*, HRESULT)
+    get_namespace_uri : Proc(IXMLDOMCDATASection*, UInt8**, HRESULT)
+    get_prefix : Proc(IXMLDOMCDATASection*, UInt8**, HRESULT)
+    get_base_name : Proc(IXMLDOMCDATASection*, UInt8**, HRESULT)
+    transform_node_to_object : Proc(IXMLDOMCDATASection*, IXMLDOMNode, VARIANT, HRESULT)
+    get_data : Proc(IXMLDOMCDATASection*, UInt8**, HRESULT)
+    put_data : Proc(IXMLDOMCDATASection*, UInt8*, HRESULT)
+    get_length : Proc(IXMLDOMCDATASection*, Int32*, HRESULT)
+    substring_data : Proc(IXMLDOMCDATASection*, Int32, Int32, UInt8**, HRESULT)
+    append_data : Proc(IXMLDOMCDATASection*, UInt8*, HRESULT)
+    insert_data : Proc(IXMLDOMCDATASection*, Int32, UInt8*, HRESULT)
+    delete_data : Proc(IXMLDOMCDATASection*, Int32, Int32, HRESULT)
+    replace_data : Proc(IXMLDOMCDATASection*, Int32, Int32, UInt8*, HRESULT)
+    split_text : Proc(IXMLDOMCDATASection*, Int32, IXMLDOMText*, HRESULT)
   end
 
   IXMLDOMCDATASection_GUID = "2933bf8a-7b36-11d2-b20e-00c04f983e60"
@@ -1532,52 +1532,52 @@ lib LibWin32
   end
 
   struct IXMLDOMDocumentTypeVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_node_name : UInt64
-    get_node_value : UInt64
-    put_node_value : UInt64
-    get_node_type : UInt64
-    get_parent_node : UInt64
-    get_child_nodes : UInt64
-    get_first_child : UInt64
-    get_last_child : UInt64
-    get_previous_sibling : UInt64
-    get_next_sibling : UInt64
-    get_attributes : UInt64
-    insert_before : UInt64
-    replace_child : UInt64
-    remove_child : UInt64
-    append_child : UInt64
-    has_child_nodes : UInt64
-    get_owner_document : UInt64
-    clone_node : UInt64
-    get_node_type_string : UInt64
-    get_text : UInt64
-    put_text : UInt64
-    get_specified : UInt64
-    get_definition : UInt64
-    get_node_typed_value : UInt64
-    put_node_typed_value : UInt64
-    get_data_type : UInt64
-    put_data_type : UInt64
-    get_xml : UInt64
-    transform_node : UInt64
-    select_nodes : UInt64
-    select_single_node : UInt64
-    get_parsed : UInt64
-    get_namespace_uri : UInt64
-    get_prefix : UInt64
-    get_base_name : UInt64
-    transform_node_to_object : UInt64
-    get_name : UInt64
-    get_entities : UInt64
-    get_notations : UInt64
+    query_interface : Proc(IXMLDOMDocumentType*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMDocumentType*, UInt32)
+    release : Proc(IXMLDOMDocumentType*, UInt32)
+    get_type_info_count : Proc(IXMLDOMDocumentType*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMDocumentType*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMDocumentType*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMDocumentType*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_node_name : Proc(IXMLDOMDocumentType*, UInt8**, HRESULT)
+    get_node_value : Proc(IXMLDOMDocumentType*, VARIANT*, HRESULT)
+    put_node_value : Proc(IXMLDOMDocumentType*, VARIANT, HRESULT)
+    get_node_type : Proc(IXMLDOMDocumentType*, DOMNodeType*, HRESULT)
+    get_parent_node : Proc(IXMLDOMDocumentType*, IXMLDOMNode*, HRESULT)
+    get_child_nodes : Proc(IXMLDOMDocumentType*, IXMLDOMNodeList*, HRESULT)
+    get_first_child : Proc(IXMLDOMDocumentType*, IXMLDOMNode*, HRESULT)
+    get_last_child : Proc(IXMLDOMDocumentType*, IXMLDOMNode*, HRESULT)
+    get_previous_sibling : Proc(IXMLDOMDocumentType*, IXMLDOMNode*, HRESULT)
+    get_next_sibling : Proc(IXMLDOMDocumentType*, IXMLDOMNode*, HRESULT)
+    get_attributes : Proc(IXMLDOMDocumentType*, IXMLDOMNamedNodeMap*, HRESULT)
+    insert_before : Proc(IXMLDOMDocumentType*, IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)
+    replace_child : Proc(IXMLDOMDocumentType*, IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    remove_child : Proc(IXMLDOMDocumentType*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    append_child : Proc(IXMLDOMDocumentType*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    has_child_nodes : Proc(IXMLDOMDocumentType*, Int16*, HRESULT)
+    get_owner_document : Proc(IXMLDOMDocumentType*, IXMLDOMDocument*, HRESULT)
+    clone_node : Proc(IXMLDOMDocumentType*, Int16, IXMLDOMNode*, HRESULT)
+    get_node_type_string : Proc(IXMLDOMDocumentType*, UInt8**, HRESULT)
+    get_text : Proc(IXMLDOMDocumentType*, UInt8**, HRESULT)
+    put_text : Proc(IXMLDOMDocumentType*, UInt8*, HRESULT)
+    get_specified : Proc(IXMLDOMDocumentType*, Int16*, HRESULT)
+    get_definition : Proc(IXMLDOMDocumentType*, IXMLDOMNode*, HRESULT)
+    get_node_typed_value : Proc(IXMLDOMDocumentType*, VARIANT*, HRESULT)
+    put_node_typed_value : Proc(IXMLDOMDocumentType*, VARIANT, HRESULT)
+    get_data_type : Proc(IXMLDOMDocumentType*, VARIANT*, HRESULT)
+    put_data_type : Proc(IXMLDOMDocumentType*, UInt8*, HRESULT)
+    get_xml : Proc(IXMLDOMDocumentType*, UInt8**, HRESULT)
+    transform_node : Proc(IXMLDOMDocumentType*, IXMLDOMNode, UInt8**, HRESULT)
+    select_nodes : Proc(IXMLDOMDocumentType*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    select_single_node : Proc(IXMLDOMDocumentType*, UInt8*, IXMLDOMNode*, HRESULT)
+    get_parsed : Proc(IXMLDOMDocumentType*, Int16*, HRESULT)
+    get_namespace_uri : Proc(IXMLDOMDocumentType*, UInt8**, HRESULT)
+    get_prefix : Proc(IXMLDOMDocumentType*, UInt8**, HRESULT)
+    get_base_name : Proc(IXMLDOMDocumentType*, UInt8**, HRESULT)
+    transform_node_to_object : Proc(IXMLDOMDocumentType*, IXMLDOMNode, VARIANT, HRESULT)
+    get_name : Proc(IXMLDOMDocumentType*, UInt8**, HRESULT)
+    get_entities : Proc(IXMLDOMDocumentType*, IXMLDOMNamedNodeMap*, HRESULT)
+    get_notations : Proc(IXMLDOMDocumentType*, IXMLDOMNamedNodeMap*, HRESULT)
   end
 
   IXMLDOMDocumentType_GUID = "2933bf8b-7b36-11d2-b20e-00c04f983e60"
@@ -1587,51 +1587,51 @@ lib LibWin32
   end
 
   struct IXMLDOMNotationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_node_name : UInt64
-    get_node_value : UInt64
-    put_node_value : UInt64
-    get_node_type : UInt64
-    get_parent_node : UInt64
-    get_child_nodes : UInt64
-    get_first_child : UInt64
-    get_last_child : UInt64
-    get_previous_sibling : UInt64
-    get_next_sibling : UInt64
-    get_attributes : UInt64
-    insert_before : UInt64
-    replace_child : UInt64
-    remove_child : UInt64
-    append_child : UInt64
-    has_child_nodes : UInt64
-    get_owner_document : UInt64
-    clone_node : UInt64
-    get_node_type_string : UInt64
-    get_text : UInt64
-    put_text : UInt64
-    get_specified : UInt64
-    get_definition : UInt64
-    get_node_typed_value : UInt64
-    put_node_typed_value : UInt64
-    get_data_type : UInt64
-    put_data_type : UInt64
-    get_xml : UInt64
-    transform_node : UInt64
-    select_nodes : UInt64
-    select_single_node : UInt64
-    get_parsed : UInt64
-    get_namespace_uri : UInt64
-    get_prefix : UInt64
-    get_base_name : UInt64
-    transform_node_to_object : UInt64
-    get_public_id : UInt64
-    get_system_id : UInt64
+    query_interface : Proc(IXMLDOMNotation*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMNotation*, UInt32)
+    release : Proc(IXMLDOMNotation*, UInt32)
+    get_type_info_count : Proc(IXMLDOMNotation*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMNotation*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMNotation*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMNotation*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_node_name : Proc(IXMLDOMNotation*, UInt8**, HRESULT)
+    get_node_value : Proc(IXMLDOMNotation*, VARIANT*, HRESULT)
+    put_node_value : Proc(IXMLDOMNotation*, VARIANT, HRESULT)
+    get_node_type : Proc(IXMLDOMNotation*, DOMNodeType*, HRESULT)
+    get_parent_node : Proc(IXMLDOMNotation*, IXMLDOMNode*, HRESULT)
+    get_child_nodes : Proc(IXMLDOMNotation*, IXMLDOMNodeList*, HRESULT)
+    get_first_child : Proc(IXMLDOMNotation*, IXMLDOMNode*, HRESULT)
+    get_last_child : Proc(IXMLDOMNotation*, IXMLDOMNode*, HRESULT)
+    get_previous_sibling : Proc(IXMLDOMNotation*, IXMLDOMNode*, HRESULT)
+    get_next_sibling : Proc(IXMLDOMNotation*, IXMLDOMNode*, HRESULT)
+    get_attributes : Proc(IXMLDOMNotation*, IXMLDOMNamedNodeMap*, HRESULT)
+    insert_before : Proc(IXMLDOMNotation*, IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)
+    replace_child : Proc(IXMLDOMNotation*, IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    remove_child : Proc(IXMLDOMNotation*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    append_child : Proc(IXMLDOMNotation*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    has_child_nodes : Proc(IXMLDOMNotation*, Int16*, HRESULT)
+    get_owner_document : Proc(IXMLDOMNotation*, IXMLDOMDocument*, HRESULT)
+    clone_node : Proc(IXMLDOMNotation*, Int16, IXMLDOMNode*, HRESULT)
+    get_node_type_string : Proc(IXMLDOMNotation*, UInt8**, HRESULT)
+    get_text : Proc(IXMLDOMNotation*, UInt8**, HRESULT)
+    put_text : Proc(IXMLDOMNotation*, UInt8*, HRESULT)
+    get_specified : Proc(IXMLDOMNotation*, Int16*, HRESULT)
+    get_definition : Proc(IXMLDOMNotation*, IXMLDOMNode*, HRESULT)
+    get_node_typed_value : Proc(IXMLDOMNotation*, VARIANT*, HRESULT)
+    put_node_typed_value : Proc(IXMLDOMNotation*, VARIANT, HRESULT)
+    get_data_type : Proc(IXMLDOMNotation*, VARIANT*, HRESULT)
+    put_data_type : Proc(IXMLDOMNotation*, UInt8*, HRESULT)
+    get_xml : Proc(IXMLDOMNotation*, UInt8**, HRESULT)
+    transform_node : Proc(IXMLDOMNotation*, IXMLDOMNode, UInt8**, HRESULT)
+    select_nodes : Proc(IXMLDOMNotation*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    select_single_node : Proc(IXMLDOMNotation*, UInt8*, IXMLDOMNode*, HRESULT)
+    get_parsed : Proc(IXMLDOMNotation*, Int16*, HRESULT)
+    get_namespace_uri : Proc(IXMLDOMNotation*, UInt8**, HRESULT)
+    get_prefix : Proc(IXMLDOMNotation*, UInt8**, HRESULT)
+    get_base_name : Proc(IXMLDOMNotation*, UInt8**, HRESULT)
+    transform_node_to_object : Proc(IXMLDOMNotation*, IXMLDOMNode, VARIANT, HRESULT)
+    get_public_id : Proc(IXMLDOMNotation*, VARIANT*, HRESULT)
+    get_system_id : Proc(IXMLDOMNotation*, VARIANT*, HRESULT)
   end
 
   IXMLDOMNotation_GUID = "2933bf8c-7b36-11d2-b20e-00c04f983e60"
@@ -1641,52 +1641,52 @@ lib LibWin32
   end
 
   struct IXMLDOMEntityVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_node_name : UInt64
-    get_node_value : UInt64
-    put_node_value : UInt64
-    get_node_type : UInt64
-    get_parent_node : UInt64
-    get_child_nodes : UInt64
-    get_first_child : UInt64
-    get_last_child : UInt64
-    get_previous_sibling : UInt64
-    get_next_sibling : UInt64
-    get_attributes : UInt64
-    insert_before : UInt64
-    replace_child : UInt64
-    remove_child : UInt64
-    append_child : UInt64
-    has_child_nodes : UInt64
-    get_owner_document : UInt64
-    clone_node : UInt64
-    get_node_type_string : UInt64
-    get_text : UInt64
-    put_text : UInt64
-    get_specified : UInt64
-    get_definition : UInt64
-    get_node_typed_value : UInt64
-    put_node_typed_value : UInt64
-    get_data_type : UInt64
-    put_data_type : UInt64
-    get_xml : UInt64
-    transform_node : UInt64
-    select_nodes : UInt64
-    select_single_node : UInt64
-    get_parsed : UInt64
-    get_namespace_uri : UInt64
-    get_prefix : UInt64
-    get_base_name : UInt64
-    transform_node_to_object : UInt64
-    get_public_id : UInt64
-    get_system_id : UInt64
-    get_notation_name : UInt64
+    query_interface : Proc(IXMLDOMEntity*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMEntity*, UInt32)
+    release : Proc(IXMLDOMEntity*, UInt32)
+    get_type_info_count : Proc(IXMLDOMEntity*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMEntity*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMEntity*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMEntity*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_node_name : Proc(IXMLDOMEntity*, UInt8**, HRESULT)
+    get_node_value : Proc(IXMLDOMEntity*, VARIANT*, HRESULT)
+    put_node_value : Proc(IXMLDOMEntity*, VARIANT, HRESULT)
+    get_node_type : Proc(IXMLDOMEntity*, DOMNodeType*, HRESULT)
+    get_parent_node : Proc(IXMLDOMEntity*, IXMLDOMNode*, HRESULT)
+    get_child_nodes : Proc(IXMLDOMEntity*, IXMLDOMNodeList*, HRESULT)
+    get_first_child : Proc(IXMLDOMEntity*, IXMLDOMNode*, HRESULT)
+    get_last_child : Proc(IXMLDOMEntity*, IXMLDOMNode*, HRESULT)
+    get_previous_sibling : Proc(IXMLDOMEntity*, IXMLDOMNode*, HRESULT)
+    get_next_sibling : Proc(IXMLDOMEntity*, IXMLDOMNode*, HRESULT)
+    get_attributes : Proc(IXMLDOMEntity*, IXMLDOMNamedNodeMap*, HRESULT)
+    insert_before : Proc(IXMLDOMEntity*, IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)
+    replace_child : Proc(IXMLDOMEntity*, IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    remove_child : Proc(IXMLDOMEntity*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    append_child : Proc(IXMLDOMEntity*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    has_child_nodes : Proc(IXMLDOMEntity*, Int16*, HRESULT)
+    get_owner_document : Proc(IXMLDOMEntity*, IXMLDOMDocument*, HRESULT)
+    clone_node : Proc(IXMLDOMEntity*, Int16, IXMLDOMNode*, HRESULT)
+    get_node_type_string : Proc(IXMLDOMEntity*, UInt8**, HRESULT)
+    get_text : Proc(IXMLDOMEntity*, UInt8**, HRESULT)
+    put_text : Proc(IXMLDOMEntity*, UInt8*, HRESULT)
+    get_specified : Proc(IXMLDOMEntity*, Int16*, HRESULT)
+    get_definition : Proc(IXMLDOMEntity*, IXMLDOMNode*, HRESULT)
+    get_node_typed_value : Proc(IXMLDOMEntity*, VARIANT*, HRESULT)
+    put_node_typed_value : Proc(IXMLDOMEntity*, VARIANT, HRESULT)
+    get_data_type : Proc(IXMLDOMEntity*, VARIANT*, HRESULT)
+    put_data_type : Proc(IXMLDOMEntity*, UInt8*, HRESULT)
+    get_xml : Proc(IXMLDOMEntity*, UInt8**, HRESULT)
+    transform_node : Proc(IXMLDOMEntity*, IXMLDOMNode, UInt8**, HRESULT)
+    select_nodes : Proc(IXMLDOMEntity*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    select_single_node : Proc(IXMLDOMEntity*, UInt8*, IXMLDOMNode*, HRESULT)
+    get_parsed : Proc(IXMLDOMEntity*, Int16*, HRESULT)
+    get_namespace_uri : Proc(IXMLDOMEntity*, UInt8**, HRESULT)
+    get_prefix : Proc(IXMLDOMEntity*, UInt8**, HRESULT)
+    get_base_name : Proc(IXMLDOMEntity*, UInt8**, HRESULT)
+    transform_node_to_object : Proc(IXMLDOMEntity*, IXMLDOMNode, VARIANT, HRESULT)
+    get_public_id : Proc(IXMLDOMEntity*, VARIANT*, HRESULT)
+    get_system_id : Proc(IXMLDOMEntity*, VARIANT*, HRESULT)
+    get_notation_name : Proc(IXMLDOMEntity*, UInt8**, HRESULT)
   end
 
   IXMLDOMEntity_GUID = "2933bf8d-7b36-11d2-b20e-00c04f983e60"
@@ -1696,49 +1696,49 @@ lib LibWin32
   end
 
   struct IXMLDOMEntityReferenceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_node_name : UInt64
-    get_node_value : UInt64
-    put_node_value : UInt64
-    get_node_type : UInt64
-    get_parent_node : UInt64
-    get_child_nodes : UInt64
-    get_first_child : UInt64
-    get_last_child : UInt64
-    get_previous_sibling : UInt64
-    get_next_sibling : UInt64
-    get_attributes : UInt64
-    insert_before : UInt64
-    replace_child : UInt64
-    remove_child : UInt64
-    append_child : UInt64
-    has_child_nodes : UInt64
-    get_owner_document : UInt64
-    clone_node : UInt64
-    get_node_type_string : UInt64
-    get_text : UInt64
-    put_text : UInt64
-    get_specified : UInt64
-    get_definition : UInt64
-    get_node_typed_value : UInt64
-    put_node_typed_value : UInt64
-    get_data_type : UInt64
-    put_data_type : UInt64
-    get_xml : UInt64
-    transform_node : UInt64
-    select_nodes : UInt64
-    select_single_node : UInt64
-    get_parsed : UInt64
-    get_namespace_uri : UInt64
-    get_prefix : UInt64
-    get_base_name : UInt64
-    transform_node_to_object : UInt64
+    query_interface : Proc(IXMLDOMEntityReference*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMEntityReference*, UInt32)
+    release : Proc(IXMLDOMEntityReference*, UInt32)
+    get_type_info_count : Proc(IXMLDOMEntityReference*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMEntityReference*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMEntityReference*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMEntityReference*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_node_name : Proc(IXMLDOMEntityReference*, UInt8**, HRESULT)
+    get_node_value : Proc(IXMLDOMEntityReference*, VARIANT*, HRESULT)
+    put_node_value : Proc(IXMLDOMEntityReference*, VARIANT, HRESULT)
+    get_node_type : Proc(IXMLDOMEntityReference*, DOMNodeType*, HRESULT)
+    get_parent_node : Proc(IXMLDOMEntityReference*, IXMLDOMNode*, HRESULT)
+    get_child_nodes : Proc(IXMLDOMEntityReference*, IXMLDOMNodeList*, HRESULT)
+    get_first_child : Proc(IXMLDOMEntityReference*, IXMLDOMNode*, HRESULT)
+    get_last_child : Proc(IXMLDOMEntityReference*, IXMLDOMNode*, HRESULT)
+    get_previous_sibling : Proc(IXMLDOMEntityReference*, IXMLDOMNode*, HRESULT)
+    get_next_sibling : Proc(IXMLDOMEntityReference*, IXMLDOMNode*, HRESULT)
+    get_attributes : Proc(IXMLDOMEntityReference*, IXMLDOMNamedNodeMap*, HRESULT)
+    insert_before : Proc(IXMLDOMEntityReference*, IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)
+    replace_child : Proc(IXMLDOMEntityReference*, IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    remove_child : Proc(IXMLDOMEntityReference*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    append_child : Proc(IXMLDOMEntityReference*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    has_child_nodes : Proc(IXMLDOMEntityReference*, Int16*, HRESULT)
+    get_owner_document : Proc(IXMLDOMEntityReference*, IXMLDOMDocument*, HRESULT)
+    clone_node : Proc(IXMLDOMEntityReference*, Int16, IXMLDOMNode*, HRESULT)
+    get_node_type_string : Proc(IXMLDOMEntityReference*, UInt8**, HRESULT)
+    get_text : Proc(IXMLDOMEntityReference*, UInt8**, HRESULT)
+    put_text : Proc(IXMLDOMEntityReference*, UInt8*, HRESULT)
+    get_specified : Proc(IXMLDOMEntityReference*, Int16*, HRESULT)
+    get_definition : Proc(IXMLDOMEntityReference*, IXMLDOMNode*, HRESULT)
+    get_node_typed_value : Proc(IXMLDOMEntityReference*, VARIANT*, HRESULT)
+    put_node_typed_value : Proc(IXMLDOMEntityReference*, VARIANT, HRESULT)
+    get_data_type : Proc(IXMLDOMEntityReference*, VARIANT*, HRESULT)
+    put_data_type : Proc(IXMLDOMEntityReference*, UInt8*, HRESULT)
+    get_xml : Proc(IXMLDOMEntityReference*, UInt8**, HRESULT)
+    transform_node : Proc(IXMLDOMEntityReference*, IXMLDOMNode, UInt8**, HRESULT)
+    select_nodes : Proc(IXMLDOMEntityReference*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    select_single_node : Proc(IXMLDOMEntityReference*, UInt8*, IXMLDOMNode*, HRESULT)
+    get_parsed : Proc(IXMLDOMEntityReference*, Int16*, HRESULT)
+    get_namespace_uri : Proc(IXMLDOMEntityReference*, UInt8**, HRESULT)
+    get_prefix : Proc(IXMLDOMEntityReference*, UInt8**, HRESULT)
+    get_base_name : Proc(IXMLDOMEntityReference*, UInt8**, HRESULT)
+    transform_node_to_object : Proc(IXMLDOMEntityReference*, IXMLDOMNode, VARIANT, HRESULT)
   end
 
   IXMLDOMEntityReference_GUID = "2933bf8e-7b36-11d2-b20e-00c04f983e60"
@@ -1748,20 +1748,20 @@ lib LibWin32
   end
 
   struct IXMLDOMParseErrorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_error_code : UInt64
-    get_url : UInt64
-    get_reason : UInt64
-    get_src_text : UInt64
-    get_line : UInt64
-    get_linepos : UInt64
-    get_filepos : UInt64
+    query_interface : Proc(IXMLDOMParseError*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMParseError*, UInt32)
+    release : Proc(IXMLDOMParseError*, UInt32)
+    get_type_info_count : Proc(IXMLDOMParseError*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMParseError*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMParseError*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMParseError*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_error_code : Proc(IXMLDOMParseError*, Int32*, HRESULT)
+    get_url : Proc(IXMLDOMParseError*, UInt8**, HRESULT)
+    get_reason : Proc(IXMLDOMParseError*, UInt8**, HRESULT)
+    get_src_text : Proc(IXMLDOMParseError*, UInt8**, HRESULT)
+    get_line : Proc(IXMLDOMParseError*, Int32*, HRESULT)
+    get_linepos : Proc(IXMLDOMParseError*, Int32*, HRESULT)
+    get_filepos : Proc(IXMLDOMParseError*, Int32*, HRESULT)
   end
 
   IXMLDOMParseError_GUID = "3efaa426-272f-11d2-836f-0000f87a7782"
@@ -1771,58 +1771,58 @@ lib LibWin32
   end
 
   struct IXTLRuntimeVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_node_name : UInt64
-    get_node_value : UInt64
-    put_node_value : UInt64
-    get_node_type : UInt64
-    get_parent_node : UInt64
-    get_child_nodes : UInt64
-    get_first_child : UInt64
-    get_last_child : UInt64
-    get_previous_sibling : UInt64
-    get_next_sibling : UInt64
-    get_attributes : UInt64
-    insert_before : UInt64
-    replace_child : UInt64
-    remove_child : UInt64
-    append_child : UInt64
-    has_child_nodes : UInt64
-    get_owner_document : UInt64
-    clone_node : UInt64
-    get_node_type_string : UInt64
-    get_text : UInt64
-    put_text : UInt64
-    get_specified : UInt64
-    get_definition : UInt64
-    get_node_typed_value : UInt64
-    put_node_typed_value : UInt64
-    get_data_type : UInt64
-    put_data_type : UInt64
-    get_xml : UInt64
-    transform_node : UInt64
-    select_nodes : UInt64
-    select_single_node : UInt64
-    get_parsed : UInt64
-    get_namespace_uri : UInt64
-    get_prefix : UInt64
-    get_base_name : UInt64
-    transform_node_to_object : UInt64
-    unique_id : UInt64
-    depth : UInt64
-    child_number : UInt64
-    ancestor_child_number : UInt64
-    absolute_child_number : UInt64
-    format_index : UInt64
-    format_number : UInt64
-    format_date : UInt64
-    format_time : UInt64
+    query_interface : Proc(IXTLRuntime*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXTLRuntime*, UInt32)
+    release : Proc(IXTLRuntime*, UInt32)
+    get_type_info_count : Proc(IXTLRuntime*, UInt32*, HRESULT)
+    get_type_info : Proc(IXTLRuntime*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXTLRuntime*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXTLRuntime*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_node_name : Proc(IXTLRuntime*, UInt8**, HRESULT)
+    get_node_value : Proc(IXTLRuntime*, VARIANT*, HRESULT)
+    put_node_value : Proc(IXTLRuntime*, VARIANT, HRESULT)
+    get_node_type : Proc(IXTLRuntime*, DOMNodeType*, HRESULT)
+    get_parent_node : Proc(IXTLRuntime*, IXMLDOMNode*, HRESULT)
+    get_child_nodes : Proc(IXTLRuntime*, IXMLDOMNodeList*, HRESULT)
+    get_first_child : Proc(IXTLRuntime*, IXMLDOMNode*, HRESULT)
+    get_last_child : Proc(IXTLRuntime*, IXMLDOMNode*, HRESULT)
+    get_previous_sibling : Proc(IXTLRuntime*, IXMLDOMNode*, HRESULT)
+    get_next_sibling : Proc(IXTLRuntime*, IXMLDOMNode*, HRESULT)
+    get_attributes : Proc(IXTLRuntime*, IXMLDOMNamedNodeMap*, HRESULT)
+    insert_before : Proc(IXTLRuntime*, IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)
+    replace_child : Proc(IXTLRuntime*, IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    remove_child : Proc(IXTLRuntime*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    append_child : Proc(IXTLRuntime*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    has_child_nodes : Proc(IXTLRuntime*, Int16*, HRESULT)
+    get_owner_document : Proc(IXTLRuntime*, IXMLDOMDocument*, HRESULT)
+    clone_node : Proc(IXTLRuntime*, Int16, IXMLDOMNode*, HRESULT)
+    get_node_type_string : Proc(IXTLRuntime*, UInt8**, HRESULT)
+    get_text : Proc(IXTLRuntime*, UInt8**, HRESULT)
+    put_text : Proc(IXTLRuntime*, UInt8*, HRESULT)
+    get_specified : Proc(IXTLRuntime*, Int16*, HRESULT)
+    get_definition : Proc(IXTLRuntime*, IXMLDOMNode*, HRESULT)
+    get_node_typed_value : Proc(IXTLRuntime*, VARIANT*, HRESULT)
+    put_node_typed_value : Proc(IXTLRuntime*, VARIANT, HRESULT)
+    get_data_type : Proc(IXTLRuntime*, VARIANT*, HRESULT)
+    put_data_type : Proc(IXTLRuntime*, UInt8*, HRESULT)
+    get_xml : Proc(IXTLRuntime*, UInt8**, HRESULT)
+    transform_node : Proc(IXTLRuntime*, IXMLDOMNode, UInt8**, HRESULT)
+    select_nodes : Proc(IXTLRuntime*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    select_single_node : Proc(IXTLRuntime*, UInt8*, IXMLDOMNode*, HRESULT)
+    get_parsed : Proc(IXTLRuntime*, Int16*, HRESULT)
+    get_namespace_uri : Proc(IXTLRuntime*, UInt8**, HRESULT)
+    get_prefix : Proc(IXTLRuntime*, UInt8**, HRESULT)
+    get_base_name : Proc(IXTLRuntime*, UInt8**, HRESULT)
+    transform_node_to_object : Proc(IXTLRuntime*, IXMLDOMNode, VARIANT, HRESULT)
+    unique_id : Proc(IXTLRuntime*, IXMLDOMNode, Int32*, HRESULT)
+    depth : Proc(IXTLRuntime*, IXMLDOMNode, Int32*, HRESULT)
+    child_number : Proc(IXTLRuntime*, IXMLDOMNode, Int32*, HRESULT)
+    ancestor_child_number : Proc(IXTLRuntime*, UInt8*, IXMLDOMNode, Int32*, HRESULT)
+    absolute_child_number : Proc(IXTLRuntime*, IXMLDOMNode, Int32*, HRESULT)
+    format_index : Proc(IXTLRuntime*, Int32, UInt8*, UInt8**, HRESULT)
+    format_number : Proc(IXTLRuntime*, Float64, UInt8*, UInt8**, HRESULT)
+    format_date : Proc(IXTLRuntime*, VARIANT, UInt8*, VARIANT, UInt8**, HRESULT)
+    format_time : Proc(IXTLRuntime*, VARIANT, UInt8*, VARIANT, UInt8**, HRESULT)
   end
 
   IXTLRuntime_GUID = "3efaa425-272f-11d2-836f-0000f87a7782"
@@ -1832,13 +1832,13 @@ lib LibWin32
   end
 
   struct XMLDOMDocumentEventsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
+    query_interface : Proc(XMLDOMDocumentEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(XMLDOMDocumentEvents*, UInt32)
+    release : Proc(XMLDOMDocumentEvents*, UInt32)
+    get_type_info_count : Proc(XMLDOMDocumentEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(XMLDOMDocumentEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(XMLDOMDocumentEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(XMLDOMDocumentEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
   XMLDOMDocumentEvents_GUID = "3efaa427-272f-11d2-836f-0000f87a7782"
@@ -1848,27 +1848,27 @@ lib LibWin32
   end
 
   struct IXMLHttpRequestVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    open : UInt64
-    set_request_header : UInt64
-    get_response_header : UInt64
-    get_all_response_headers : UInt64
-    send : UInt64
-    abort : UInt64
-    get_status : UInt64
-    get_status_text : UInt64
-    get_response_xml : UInt64
-    get_response_text : UInt64
-    get_response_body : UInt64
-    get_response_stream : UInt64
-    get_ready_state : UInt64
-    put_onreadystatechange : UInt64
+    query_interface : Proc(IXMLHttpRequest*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLHttpRequest*, UInt32)
+    release : Proc(IXMLHttpRequest*, UInt32)
+    get_type_info_count : Proc(IXMLHttpRequest*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLHttpRequest*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLHttpRequest*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLHttpRequest*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    open : Proc(IXMLHttpRequest*, UInt8*, UInt8*, VARIANT, VARIANT, VARIANT, HRESULT)
+    set_request_header : Proc(IXMLHttpRequest*, UInt8*, UInt8*, HRESULT)
+    get_response_header : Proc(IXMLHttpRequest*, UInt8*, UInt8**, HRESULT)
+    get_all_response_headers : Proc(IXMLHttpRequest*, UInt8**, HRESULT)
+    send : Proc(IXMLHttpRequest*, VARIANT, HRESULT)
+    abort : Proc(IXMLHttpRequest*, HRESULT)
+    get_status : Proc(IXMLHttpRequest*, Int32*, HRESULT)
+    get_status_text : Proc(IXMLHttpRequest*, UInt8**, HRESULT)
+    get_response_xml : Proc(IXMLHttpRequest*, IDispatch*, HRESULT)
+    get_response_text : Proc(IXMLHttpRequest*, UInt8**, HRESULT)
+    get_response_body : Proc(IXMLHttpRequest*, VARIANT*, HRESULT)
+    get_response_stream : Proc(IXMLHttpRequest*, VARIANT*, HRESULT)
+    get_ready_state : Proc(IXMLHttpRequest*, Int32*, HRESULT)
+    put_onreadystatechange : Proc(IXMLHttpRequest*, IDispatch, HRESULT)
   end
 
   IXMLHttpRequest_GUID = "ed8c108d-4349-11d2-91a4-00c04f7969e8"
@@ -1878,18 +1878,18 @@ lib LibWin32
   end
 
   struct IXMLDSOControlVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_xml_document : UInt64
-    put_xml_document : UInt64
-    get_java_dso_compatible : UInt64
-    put_java_dso_compatible : UInt64
-    get_ready_state : UInt64
+    query_interface : Proc(IXMLDSOControl*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDSOControl*, UInt32)
+    release : Proc(IXMLDSOControl*, UInt32)
+    get_type_info_count : Proc(IXMLDSOControl*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDSOControl*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDSOControl*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDSOControl*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_xml_document : Proc(IXMLDSOControl*, IXMLDOMDocument*, HRESULT)
+    put_xml_document : Proc(IXMLDSOControl*, IXMLDOMDocument, HRESULT)
+    get_java_dso_compatible : Proc(IXMLDSOControl*, LibC::BOOL*, HRESULT)
+    put_java_dso_compatible : Proc(IXMLDSOControl*, LibC::BOOL, HRESULT)
+    get_ready_state : Proc(IXMLDSOControl*, Int32*, HRESULT)
   end
 
   IXMLDSOControl_GUID = "310afa62-0575-11d2-9ca9-0060b0ec3d39"
@@ -1899,17 +1899,17 @@ lib LibWin32
   end
 
   struct IXMLElementCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    put_length : UInt64
-    get_length : UInt64
-    get__new_enum : UInt64
-    item : UInt64
+    query_interface : Proc(IXMLElementCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLElementCollection*, UInt32)
+    release : Proc(IXMLElementCollection*, UInt32)
+    get_type_info_count : Proc(IXMLElementCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLElementCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLElementCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLElementCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    put_length : Proc(IXMLElementCollection*, Int32, HRESULT)
+    get_length : Proc(IXMLElementCollection*, Int32*, HRESULT)
+    get__new_enum : Proc(IXMLElementCollection*, IUnknown*, HRESULT)
+    item : Proc(IXMLElementCollection*, VARIANT, VARIANT, IDispatch*, HRESULT)
   end
 
   IXMLElementCollection_GUID = "65725580-9b5d-11d0-9bfe-00c04fc99c8e"
@@ -1919,27 +1919,27 @@ lib LibWin32
   end
 
   struct IXMLDocumentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_root : UInt64
-    get_file_size : UInt64
-    get_file_modified_date : UInt64
-    get_file_updated_date : UInt64
-    get_url : UInt64
-    put_url : UInt64
-    get_mime_type : UInt64
-    get_ready_state : UInt64
-    get_charset : UInt64
-    put_charset : UInt64
-    get_version : UInt64
-    get_doctype : UInt64
-    get_dtd_url : UInt64
-    create_element : UInt64
+    query_interface : Proc(IXMLDocument*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDocument*, UInt32)
+    release : Proc(IXMLDocument*, UInt32)
+    get_type_info_count : Proc(IXMLDocument*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDocument*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDocument*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDocument*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_root : Proc(IXMLDocument*, IXMLElement*, HRESULT)
+    get_file_size : Proc(IXMLDocument*, UInt8**, HRESULT)
+    get_file_modified_date : Proc(IXMLDocument*, UInt8**, HRESULT)
+    get_file_updated_date : Proc(IXMLDocument*, UInt8**, HRESULT)
+    get_url : Proc(IXMLDocument*, UInt8**, HRESULT)
+    put_url : Proc(IXMLDocument*, UInt8*, HRESULT)
+    get_mime_type : Proc(IXMLDocument*, UInt8**, HRESULT)
+    get_ready_state : Proc(IXMLDocument*, Int32*, HRESULT)
+    get_charset : Proc(IXMLDocument*, UInt8**, HRESULT)
+    put_charset : Proc(IXMLDocument*, UInt8*, HRESULT)
+    get_version : Proc(IXMLDocument*, UInt8**, HRESULT)
+    get_doctype : Proc(IXMLDocument*, UInt8**, HRESULT)
+    get_dtd_url : Proc(IXMLDocument*, UInt8**, HRESULT)
+    create_element : Proc(IXMLDocument*, VARIANT, VARIANT, IXMLElement*, HRESULT)
   end
 
   IXMLDocument_GUID = "f52e2b61-18a1-11d1-b105-00805f49916b"
@@ -1949,29 +1949,29 @@ lib LibWin32
   end
 
   struct IXMLDocument2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_root : UInt64
-    get_file_size : UInt64
-    get_file_modified_date : UInt64
-    get_file_updated_date : UInt64
-    get_url : UInt64
-    put_url : UInt64
-    get_mime_type : UInt64
-    get_ready_state : UInt64
-    get_charset : UInt64
-    put_charset : UInt64
-    get_version : UInt64
-    get_doctype : UInt64
-    get_dtd_url : UInt64
-    create_element : UInt64
-    get_async : UInt64
-    put_async : UInt64
+    query_interface : Proc(IXMLDocument2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDocument2*, UInt32)
+    release : Proc(IXMLDocument2*, UInt32)
+    get_type_info_count : Proc(IXMLDocument2*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDocument2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDocument2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDocument2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_root : Proc(IXMLDocument2*, IXMLElement2*, HRESULT)
+    get_file_size : Proc(IXMLDocument2*, UInt8**, HRESULT)
+    get_file_modified_date : Proc(IXMLDocument2*, UInt8**, HRESULT)
+    get_file_updated_date : Proc(IXMLDocument2*, UInt8**, HRESULT)
+    get_url : Proc(IXMLDocument2*, UInt8**, HRESULT)
+    put_url : Proc(IXMLDocument2*, UInt8*, HRESULT)
+    get_mime_type : Proc(IXMLDocument2*, UInt8**, HRESULT)
+    get_ready_state : Proc(IXMLDocument2*, Int32*, HRESULT)
+    get_charset : Proc(IXMLDocument2*, UInt8**, HRESULT)
+    put_charset : Proc(IXMLDocument2*, UInt8*, HRESULT)
+    get_version : Proc(IXMLDocument2*, UInt8**, HRESULT)
+    get_doctype : Proc(IXMLDocument2*, UInt8**, HRESULT)
+    get_dtd_url : Proc(IXMLDocument2*, UInt8**, HRESULT)
+    create_element : Proc(IXMLDocument2*, VARIANT, VARIANT, IXMLElement2*, HRESULT)
+    get_async : Proc(IXMLDocument2*, Int16*, HRESULT)
+    put_async : Proc(IXMLDocument2*, Int16, HRESULT)
   end
 
   IXMLDocument2_GUID = "2b8de2fe-8d2d-11d1-b2fc-00c04fd915a9"
@@ -1981,25 +1981,25 @@ lib LibWin32
   end
 
   struct IXMLElementVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_tag_name : UInt64
-    put_tag_name : UInt64
-    get_parent : UInt64
-    set_attribute : UInt64
-    get_attribute : UInt64
-    remove_attribute : UInt64
-    get_children : UInt64
-    get_type : UInt64
-    get_text : UInt64
-    put_text : UInt64
-    add_child : UInt64
-    remove_child : UInt64
+    query_interface : Proc(IXMLElement*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLElement*, UInt32)
+    release : Proc(IXMLElement*, UInt32)
+    get_type_info_count : Proc(IXMLElement*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLElement*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLElement*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_tag_name : Proc(IXMLElement*, UInt8**, HRESULT)
+    put_tag_name : Proc(IXMLElement*, UInt8*, HRESULT)
+    get_parent : Proc(IXMLElement*, IXMLElement*, HRESULT)
+    set_attribute : Proc(IXMLElement*, UInt8*, VARIANT, HRESULT)
+    get_attribute : Proc(IXMLElement*, UInt8*, VARIANT*, HRESULT)
+    remove_attribute : Proc(IXMLElement*, UInt8*, HRESULT)
+    get_children : Proc(IXMLElement*, IXMLElementCollection*, HRESULT)
+    get_type : Proc(IXMLElement*, Int32*, HRESULT)
+    get_text : Proc(IXMLElement*, UInt8**, HRESULT)
+    put_text : Proc(IXMLElement*, UInt8*, HRESULT)
+    add_child : Proc(IXMLElement*, IXMLElement, Int32, Int32, HRESULT)
+    remove_child : Proc(IXMLElement*, IXMLElement, HRESULT)
   end
 
   IXMLElement_GUID = "3f7f31ac-e15f-11d0-9c25-00c04fc99c8e"
@@ -2009,26 +2009,26 @@ lib LibWin32
   end
 
   struct IXMLElement2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_tag_name : UInt64
-    put_tag_name : UInt64
-    get_parent : UInt64
-    set_attribute : UInt64
-    get_attribute : UInt64
-    remove_attribute : UInt64
-    get_children : UInt64
-    get_type : UInt64
-    get_text : UInt64
-    put_text : UInt64
-    add_child : UInt64
-    remove_child : UInt64
-    get_attributes : UInt64
+    query_interface : Proc(IXMLElement2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLElement2*, UInt32)
+    release : Proc(IXMLElement2*, UInt32)
+    get_type_info_count : Proc(IXMLElement2*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLElement2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLElement2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLElement2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_tag_name : Proc(IXMLElement2*, UInt8**, HRESULT)
+    put_tag_name : Proc(IXMLElement2*, UInt8*, HRESULT)
+    get_parent : Proc(IXMLElement2*, IXMLElement2*, HRESULT)
+    set_attribute : Proc(IXMLElement2*, UInt8*, VARIANT, HRESULT)
+    get_attribute : Proc(IXMLElement2*, UInt8*, VARIANT*, HRESULT)
+    remove_attribute : Proc(IXMLElement2*, UInt8*, HRESULT)
+    get_children : Proc(IXMLElement2*, IXMLElementCollection*, HRESULT)
+    get_type : Proc(IXMLElement2*, Int32*, HRESULT)
+    get_text : Proc(IXMLElement2*, UInt8**, HRESULT)
+    put_text : Proc(IXMLElement2*, UInt8*, HRESULT)
+    add_child : Proc(IXMLElement2*, IXMLElement2, Int32, Int32, HRESULT)
+    remove_child : Proc(IXMLElement2*, IXMLElement2, HRESULT)
+    get_attributes : Proc(IXMLElement2*, IXMLElementCollection*, HRESULT)
   end
 
   IXMLElement2_GUID = "2b8de2ff-8d2d-11d1-b2fc-00c04fd915a9"
@@ -2038,15 +2038,15 @@ lib LibWin32
   end
 
   struct IXMLAttributeVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_name : UInt64
-    get_value : UInt64
+    query_interface : Proc(IXMLAttribute*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLAttribute*, UInt32)
+    release : Proc(IXMLAttribute*, UInt32)
+    get_type_info_count : Proc(IXMLAttribute*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLAttribute*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLAttribute*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLAttribute*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_name : Proc(IXMLAttribute*, UInt8**, HRESULT)
+    get_value : Proc(IXMLAttribute*, UInt8**, HRESULT)
   end
 
   IXMLAttribute_GUID = "d4d4a0fc-3b73-11d1-b2b4-00c04fb92596"
@@ -2056,10 +2056,10 @@ lib LibWin32
   end
 
   struct IXMLErrorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_error_info : UInt64
+    query_interface : Proc(IXMLError*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLError*, UInt32)
+    release : Proc(IXMLError*, UInt32)
+    get_error_info : Proc(IXMLError*, XML_ERROR*, HRESULT)
   end
 
   IXMLError_GUID = "948c5ad3-c58d-11d0-9c0b-00c04fc99c8e"
@@ -2069,88 +2069,88 @@ lib LibWin32
   end
 
   struct IXMLDOMDocument2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_node_name : UInt64
-    get_node_value : UInt64
-    put_node_value : UInt64
-    get_node_type : UInt64
-    get_parent_node : UInt64
-    get_child_nodes : UInt64
-    get_first_child : UInt64
-    get_last_child : UInt64
-    get_previous_sibling : UInt64
-    get_next_sibling : UInt64
-    get_attributes : UInt64
-    insert_before : UInt64
-    replace_child : UInt64
-    remove_child : UInt64
-    append_child : UInt64
-    has_child_nodes : UInt64
-    get_owner_document : UInt64
-    clone_node : UInt64
-    get_node_type_string : UInt64
-    get_text : UInt64
-    put_text : UInt64
-    get_specified : UInt64
-    get_definition : UInt64
-    get_node_typed_value : UInt64
-    put_node_typed_value : UInt64
-    get_data_type : UInt64
-    put_data_type : UInt64
-    get_xml : UInt64
-    transform_node : UInt64
-    select_nodes : UInt64
-    select_single_node : UInt64
-    get_parsed : UInt64
-    get_namespace_uri : UInt64
-    get_prefix : UInt64
-    get_base_name : UInt64
-    transform_node_to_object : UInt64
-    get_doctype : UInt64
-    get_implementation : UInt64
-    get_document_element : UInt64
-    putref_document_element : UInt64
-    create_element : UInt64
-    create_document_fragment : UInt64
-    create_text_node : UInt64
-    create_comment : UInt64
-    create_cdata_section : UInt64
-    create_processing_instruction : UInt64
-    create_attribute : UInt64
-    create_entity_reference : UInt64
-    get_elements_by_tag_name : UInt64
-    create_node : UInt64
-    node_from_id : UInt64
-    load : UInt64
-    get_ready_state : UInt64
-    get_parse_error : UInt64
-    get_url : UInt64
-    get_async : UInt64
-    put_async : UInt64
-    abort : UInt64
-    load_xml : UInt64
-    save : UInt64
-    get_validate_on_parse : UInt64
-    put_validate_on_parse : UInt64
-    get_resolve_externals : UInt64
-    put_resolve_externals : UInt64
-    get_preserve_white_space : UInt64
-    put_preserve_white_space : UInt64
-    put_onreadystatechange : UInt64
-    put_ondataavailable : UInt64
-    put_ontransformnode : UInt64
-    get_namespaces : UInt64
-    get_schemas : UInt64
-    putref_schemas : UInt64
-    validate : UInt64
-    set_property : UInt64
-    get_property : UInt64
+    query_interface : Proc(IXMLDOMDocument2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMDocument2*, UInt32)
+    release : Proc(IXMLDOMDocument2*, UInt32)
+    get_type_info_count : Proc(IXMLDOMDocument2*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMDocument2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMDocument2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMDocument2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_node_name : Proc(IXMLDOMDocument2*, UInt8**, HRESULT)
+    get_node_value : Proc(IXMLDOMDocument2*, VARIANT*, HRESULT)
+    put_node_value : Proc(IXMLDOMDocument2*, VARIANT, HRESULT)
+    get_node_type : Proc(IXMLDOMDocument2*, DOMNodeType*, HRESULT)
+    get_parent_node : Proc(IXMLDOMDocument2*, IXMLDOMNode*, HRESULT)
+    get_child_nodes : Proc(IXMLDOMDocument2*, IXMLDOMNodeList*, HRESULT)
+    get_first_child : Proc(IXMLDOMDocument2*, IXMLDOMNode*, HRESULT)
+    get_last_child : Proc(IXMLDOMDocument2*, IXMLDOMNode*, HRESULT)
+    get_previous_sibling : Proc(IXMLDOMDocument2*, IXMLDOMNode*, HRESULT)
+    get_next_sibling : Proc(IXMLDOMDocument2*, IXMLDOMNode*, HRESULT)
+    get_attributes : Proc(IXMLDOMDocument2*, IXMLDOMNamedNodeMap*, HRESULT)
+    insert_before : Proc(IXMLDOMDocument2*, IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)
+    replace_child : Proc(IXMLDOMDocument2*, IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    remove_child : Proc(IXMLDOMDocument2*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    append_child : Proc(IXMLDOMDocument2*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    has_child_nodes : Proc(IXMLDOMDocument2*, Int16*, HRESULT)
+    get_owner_document : Proc(IXMLDOMDocument2*, IXMLDOMDocument*, HRESULT)
+    clone_node : Proc(IXMLDOMDocument2*, Int16, IXMLDOMNode*, HRESULT)
+    get_node_type_string : Proc(IXMLDOMDocument2*, UInt8**, HRESULT)
+    get_text : Proc(IXMLDOMDocument2*, UInt8**, HRESULT)
+    put_text : Proc(IXMLDOMDocument2*, UInt8*, HRESULT)
+    get_specified : Proc(IXMLDOMDocument2*, Int16*, HRESULT)
+    get_definition : Proc(IXMLDOMDocument2*, IXMLDOMNode*, HRESULT)
+    get_node_typed_value : Proc(IXMLDOMDocument2*, VARIANT*, HRESULT)
+    put_node_typed_value : Proc(IXMLDOMDocument2*, VARIANT, HRESULT)
+    get_data_type : Proc(IXMLDOMDocument2*, VARIANT*, HRESULT)
+    put_data_type : Proc(IXMLDOMDocument2*, UInt8*, HRESULT)
+    get_xml : Proc(IXMLDOMDocument2*, UInt8**, HRESULT)
+    transform_node : Proc(IXMLDOMDocument2*, IXMLDOMNode, UInt8**, HRESULT)
+    select_nodes : Proc(IXMLDOMDocument2*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    select_single_node : Proc(IXMLDOMDocument2*, UInt8*, IXMLDOMNode*, HRESULT)
+    get_parsed : Proc(IXMLDOMDocument2*, Int16*, HRESULT)
+    get_namespace_uri : Proc(IXMLDOMDocument2*, UInt8**, HRESULT)
+    get_prefix : Proc(IXMLDOMDocument2*, UInt8**, HRESULT)
+    get_base_name : Proc(IXMLDOMDocument2*, UInt8**, HRESULT)
+    transform_node_to_object : Proc(IXMLDOMDocument2*, IXMLDOMNode, VARIANT, HRESULT)
+    get_doctype : Proc(IXMLDOMDocument2*, IXMLDOMDocumentType*, HRESULT)
+    get_implementation : Proc(IXMLDOMDocument2*, IXMLDOMImplementation*, HRESULT)
+    get_document_element : Proc(IXMLDOMDocument2*, IXMLDOMElement*, HRESULT)
+    putref_document_element : Proc(IXMLDOMDocument2*, IXMLDOMElement, HRESULT)
+    create_element : Proc(IXMLDOMDocument2*, UInt8*, IXMLDOMElement*, HRESULT)
+    create_document_fragment : Proc(IXMLDOMDocument2*, IXMLDOMDocumentFragment*, HRESULT)
+    create_text_node : Proc(IXMLDOMDocument2*, UInt8*, IXMLDOMText*, HRESULT)
+    create_comment : Proc(IXMLDOMDocument2*, UInt8*, IXMLDOMComment*, HRESULT)
+    create_cdata_section : Proc(IXMLDOMDocument2*, UInt8*, IXMLDOMCDATASection*, HRESULT)
+    create_processing_instruction : Proc(IXMLDOMDocument2*, UInt8*, UInt8*, IXMLDOMProcessingInstruction*, HRESULT)
+    create_attribute : Proc(IXMLDOMDocument2*, UInt8*, IXMLDOMAttribute*, HRESULT)
+    create_entity_reference : Proc(IXMLDOMDocument2*, UInt8*, IXMLDOMEntityReference*, HRESULT)
+    get_elements_by_tag_name : Proc(IXMLDOMDocument2*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    create_node : Proc(IXMLDOMDocument2*, VARIANT, UInt8*, UInt8*, IXMLDOMNode*, HRESULT)
+    node_from_id : Proc(IXMLDOMDocument2*, UInt8*, IXMLDOMNode*, HRESULT)
+    load : Proc(IXMLDOMDocument2*, VARIANT, Int16*, HRESULT)
+    get_ready_state : Proc(IXMLDOMDocument2*, Int32*, HRESULT)
+    get_parse_error : Proc(IXMLDOMDocument2*, IXMLDOMParseError*, HRESULT)
+    get_url : Proc(IXMLDOMDocument2*, UInt8**, HRESULT)
+    get_async : Proc(IXMLDOMDocument2*, Int16*, HRESULT)
+    put_async : Proc(IXMLDOMDocument2*, Int16, HRESULT)
+    abort : Proc(IXMLDOMDocument2*, HRESULT)
+    load_xml : Proc(IXMLDOMDocument2*, UInt8*, Int16*, HRESULT)
+    save : Proc(IXMLDOMDocument2*, VARIANT, HRESULT)
+    get_validate_on_parse : Proc(IXMLDOMDocument2*, Int16*, HRESULT)
+    put_validate_on_parse : Proc(IXMLDOMDocument2*, Int16, HRESULT)
+    get_resolve_externals : Proc(IXMLDOMDocument2*, Int16*, HRESULT)
+    put_resolve_externals : Proc(IXMLDOMDocument2*, Int16, HRESULT)
+    get_preserve_white_space : Proc(IXMLDOMDocument2*, Int16*, HRESULT)
+    put_preserve_white_space : Proc(IXMLDOMDocument2*, Int16, HRESULT)
+    put_onreadystatechange : Proc(IXMLDOMDocument2*, VARIANT, HRESULT)
+    put_ondataavailable : Proc(IXMLDOMDocument2*, VARIANT, HRESULT)
+    put_ontransformnode : Proc(IXMLDOMDocument2*, VARIANT, HRESULT)
+    get_namespaces : Proc(IXMLDOMDocument2*, IXMLDOMSchemaCollection*, HRESULT)
+    get_schemas : Proc(IXMLDOMDocument2*, VARIANT*, HRESULT)
+    putref_schemas : Proc(IXMLDOMDocument2*, VARIANT, HRESULT)
+    validate : Proc(IXMLDOMDocument2*, IXMLDOMParseError*, HRESULT)
+    set_property : Proc(IXMLDOMDocument2*, UInt8*, VARIANT, HRESULT)
+    get_property : Proc(IXMLDOMDocument2*, UInt8*, VARIANT*, HRESULT)
   end
 
   IXMLDOMDocument2_GUID = "2933bf95-7b36-11d2-b20e-00c04f983e60"
@@ -2160,90 +2160,90 @@ lib LibWin32
   end
 
   struct IXMLDOMDocument3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_node_name : UInt64
-    get_node_value : UInt64
-    put_node_value : UInt64
-    get_node_type : UInt64
-    get_parent_node : UInt64
-    get_child_nodes : UInt64
-    get_first_child : UInt64
-    get_last_child : UInt64
-    get_previous_sibling : UInt64
-    get_next_sibling : UInt64
-    get_attributes : UInt64
-    insert_before : UInt64
-    replace_child : UInt64
-    remove_child : UInt64
-    append_child : UInt64
-    has_child_nodes : UInt64
-    get_owner_document : UInt64
-    clone_node : UInt64
-    get_node_type_string : UInt64
-    get_text : UInt64
-    put_text : UInt64
-    get_specified : UInt64
-    get_definition : UInt64
-    get_node_typed_value : UInt64
-    put_node_typed_value : UInt64
-    get_data_type : UInt64
-    put_data_type : UInt64
-    get_xml : UInt64
-    transform_node : UInt64
-    select_nodes : UInt64
-    select_single_node : UInt64
-    get_parsed : UInt64
-    get_namespace_uri : UInt64
-    get_prefix : UInt64
-    get_base_name : UInt64
-    transform_node_to_object : UInt64
-    get_doctype : UInt64
-    get_implementation : UInt64
-    get_document_element : UInt64
-    putref_document_element : UInt64
-    create_element : UInt64
-    create_document_fragment : UInt64
-    create_text_node : UInt64
-    create_comment : UInt64
-    create_cdata_section : UInt64
-    create_processing_instruction : UInt64
-    create_attribute : UInt64
-    create_entity_reference : UInt64
-    get_elements_by_tag_name : UInt64
-    create_node : UInt64
-    node_from_id : UInt64
-    load : UInt64
-    get_ready_state : UInt64
-    get_parse_error : UInt64
-    get_url : UInt64
-    get_async : UInt64
-    put_async : UInt64
-    abort : UInt64
-    load_xml : UInt64
-    save : UInt64
-    get_validate_on_parse : UInt64
-    put_validate_on_parse : UInt64
-    get_resolve_externals : UInt64
-    put_resolve_externals : UInt64
-    get_preserve_white_space : UInt64
-    put_preserve_white_space : UInt64
-    put_onreadystatechange : UInt64
-    put_ondataavailable : UInt64
-    put_ontransformnode : UInt64
-    get_namespaces : UInt64
-    get_schemas : UInt64
-    putref_schemas : UInt64
-    validate : UInt64
-    set_property : UInt64
-    get_property : UInt64
-    validate_node : UInt64
-    import_node : UInt64
+    query_interface : Proc(IXMLDOMDocument3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMDocument3*, UInt32)
+    release : Proc(IXMLDOMDocument3*, UInt32)
+    get_type_info_count : Proc(IXMLDOMDocument3*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMDocument3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMDocument3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMDocument3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_node_name : Proc(IXMLDOMDocument3*, UInt8**, HRESULT)
+    get_node_value : Proc(IXMLDOMDocument3*, VARIANT*, HRESULT)
+    put_node_value : Proc(IXMLDOMDocument3*, VARIANT, HRESULT)
+    get_node_type : Proc(IXMLDOMDocument3*, DOMNodeType*, HRESULT)
+    get_parent_node : Proc(IXMLDOMDocument3*, IXMLDOMNode*, HRESULT)
+    get_child_nodes : Proc(IXMLDOMDocument3*, IXMLDOMNodeList*, HRESULT)
+    get_first_child : Proc(IXMLDOMDocument3*, IXMLDOMNode*, HRESULT)
+    get_last_child : Proc(IXMLDOMDocument3*, IXMLDOMNode*, HRESULT)
+    get_previous_sibling : Proc(IXMLDOMDocument3*, IXMLDOMNode*, HRESULT)
+    get_next_sibling : Proc(IXMLDOMDocument3*, IXMLDOMNode*, HRESULT)
+    get_attributes : Proc(IXMLDOMDocument3*, IXMLDOMNamedNodeMap*, HRESULT)
+    insert_before : Proc(IXMLDOMDocument3*, IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)
+    replace_child : Proc(IXMLDOMDocument3*, IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    remove_child : Proc(IXMLDOMDocument3*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    append_child : Proc(IXMLDOMDocument3*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    has_child_nodes : Proc(IXMLDOMDocument3*, Int16*, HRESULT)
+    get_owner_document : Proc(IXMLDOMDocument3*, IXMLDOMDocument*, HRESULT)
+    clone_node : Proc(IXMLDOMDocument3*, Int16, IXMLDOMNode*, HRESULT)
+    get_node_type_string : Proc(IXMLDOMDocument3*, UInt8**, HRESULT)
+    get_text : Proc(IXMLDOMDocument3*, UInt8**, HRESULT)
+    put_text : Proc(IXMLDOMDocument3*, UInt8*, HRESULT)
+    get_specified : Proc(IXMLDOMDocument3*, Int16*, HRESULT)
+    get_definition : Proc(IXMLDOMDocument3*, IXMLDOMNode*, HRESULT)
+    get_node_typed_value : Proc(IXMLDOMDocument3*, VARIANT*, HRESULT)
+    put_node_typed_value : Proc(IXMLDOMDocument3*, VARIANT, HRESULT)
+    get_data_type : Proc(IXMLDOMDocument3*, VARIANT*, HRESULT)
+    put_data_type : Proc(IXMLDOMDocument3*, UInt8*, HRESULT)
+    get_xml : Proc(IXMLDOMDocument3*, UInt8**, HRESULT)
+    transform_node : Proc(IXMLDOMDocument3*, IXMLDOMNode, UInt8**, HRESULT)
+    select_nodes : Proc(IXMLDOMDocument3*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    select_single_node : Proc(IXMLDOMDocument3*, UInt8*, IXMLDOMNode*, HRESULT)
+    get_parsed : Proc(IXMLDOMDocument3*, Int16*, HRESULT)
+    get_namespace_uri : Proc(IXMLDOMDocument3*, UInt8**, HRESULT)
+    get_prefix : Proc(IXMLDOMDocument3*, UInt8**, HRESULT)
+    get_base_name : Proc(IXMLDOMDocument3*, UInt8**, HRESULT)
+    transform_node_to_object : Proc(IXMLDOMDocument3*, IXMLDOMNode, VARIANT, HRESULT)
+    get_doctype : Proc(IXMLDOMDocument3*, IXMLDOMDocumentType*, HRESULT)
+    get_implementation : Proc(IXMLDOMDocument3*, IXMLDOMImplementation*, HRESULT)
+    get_document_element : Proc(IXMLDOMDocument3*, IXMLDOMElement*, HRESULT)
+    putref_document_element : Proc(IXMLDOMDocument3*, IXMLDOMElement, HRESULT)
+    create_element : Proc(IXMLDOMDocument3*, UInt8*, IXMLDOMElement*, HRESULT)
+    create_document_fragment : Proc(IXMLDOMDocument3*, IXMLDOMDocumentFragment*, HRESULT)
+    create_text_node : Proc(IXMLDOMDocument3*, UInt8*, IXMLDOMText*, HRESULT)
+    create_comment : Proc(IXMLDOMDocument3*, UInt8*, IXMLDOMComment*, HRESULT)
+    create_cdata_section : Proc(IXMLDOMDocument3*, UInt8*, IXMLDOMCDATASection*, HRESULT)
+    create_processing_instruction : Proc(IXMLDOMDocument3*, UInt8*, UInt8*, IXMLDOMProcessingInstruction*, HRESULT)
+    create_attribute : Proc(IXMLDOMDocument3*, UInt8*, IXMLDOMAttribute*, HRESULT)
+    create_entity_reference : Proc(IXMLDOMDocument3*, UInt8*, IXMLDOMEntityReference*, HRESULT)
+    get_elements_by_tag_name : Proc(IXMLDOMDocument3*, UInt8*, IXMLDOMNodeList*, HRESULT)
+    create_node : Proc(IXMLDOMDocument3*, VARIANT, UInt8*, UInt8*, IXMLDOMNode*, HRESULT)
+    node_from_id : Proc(IXMLDOMDocument3*, UInt8*, IXMLDOMNode*, HRESULT)
+    load : Proc(IXMLDOMDocument3*, VARIANT, Int16*, HRESULT)
+    get_ready_state : Proc(IXMLDOMDocument3*, Int32*, HRESULT)
+    get_parse_error : Proc(IXMLDOMDocument3*, IXMLDOMParseError*, HRESULT)
+    get_url : Proc(IXMLDOMDocument3*, UInt8**, HRESULT)
+    get_async : Proc(IXMLDOMDocument3*, Int16*, HRESULT)
+    put_async : Proc(IXMLDOMDocument3*, Int16, HRESULT)
+    abort : Proc(IXMLDOMDocument3*, HRESULT)
+    load_xml : Proc(IXMLDOMDocument3*, UInt8*, Int16*, HRESULT)
+    save : Proc(IXMLDOMDocument3*, VARIANT, HRESULT)
+    get_validate_on_parse : Proc(IXMLDOMDocument3*, Int16*, HRESULT)
+    put_validate_on_parse : Proc(IXMLDOMDocument3*, Int16, HRESULT)
+    get_resolve_externals : Proc(IXMLDOMDocument3*, Int16*, HRESULT)
+    put_resolve_externals : Proc(IXMLDOMDocument3*, Int16, HRESULT)
+    get_preserve_white_space : Proc(IXMLDOMDocument3*, Int16*, HRESULT)
+    put_preserve_white_space : Proc(IXMLDOMDocument3*, Int16, HRESULT)
+    put_onreadystatechange : Proc(IXMLDOMDocument3*, VARIANT, HRESULT)
+    put_ondataavailable : Proc(IXMLDOMDocument3*, VARIANT, HRESULT)
+    put_ontransformnode : Proc(IXMLDOMDocument3*, VARIANT, HRESULT)
+    get_namespaces : Proc(IXMLDOMDocument3*, IXMLDOMSchemaCollection*, HRESULT)
+    get_schemas : Proc(IXMLDOMDocument3*, VARIANT*, HRESULT)
+    putref_schemas : Proc(IXMLDOMDocument3*, VARIANT, HRESULT)
+    validate : Proc(IXMLDOMDocument3*, IXMLDOMParseError*, HRESULT)
+    set_property : Proc(IXMLDOMDocument3*, UInt8*, VARIANT, HRESULT)
+    get_property : Proc(IXMLDOMDocument3*, UInt8*, VARIANT*, HRESULT)
+    validate_node : Proc(IXMLDOMDocument3*, IXMLDOMNode, IXMLDOMParseError*, HRESULT)
+    import_node : Proc(IXMLDOMDocument3*, IXMLDOMNode, Int16, IXMLDOMNode*, HRESULT)
   end
 
   IXMLDOMDocument3_GUID = "2933bf96-7b36-11d2-b20e-00c04f983e60"
@@ -2253,20 +2253,20 @@ lib LibWin32
   end
 
   struct IXMLDOMSchemaCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    add : UInt64
-    get : UInt64
-    remove : UInt64
-    get_length : UInt64
-    get_namespace_uri : UInt64
-    add_collection : UInt64
-    get__new_enum : UInt64
+    query_interface : Proc(IXMLDOMSchemaCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMSchemaCollection*, UInt32)
+    release : Proc(IXMLDOMSchemaCollection*, UInt32)
+    get_type_info_count : Proc(IXMLDOMSchemaCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMSchemaCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMSchemaCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMSchemaCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    add : Proc(IXMLDOMSchemaCollection*, UInt8*, VARIANT, HRESULT)
+    get : Proc(IXMLDOMSchemaCollection*, UInt8*, IXMLDOMNode*, HRESULT)
+    remove : Proc(IXMLDOMSchemaCollection*, UInt8*, HRESULT)
+    get_length : Proc(IXMLDOMSchemaCollection*, Int32*, HRESULT)
+    get_namespace_uri : Proc(IXMLDOMSchemaCollection*, Int32, UInt8**, HRESULT)
+    add_collection : Proc(IXMLDOMSchemaCollection*, IXMLDOMSchemaCollection, HRESULT)
+    get__new_enum : Proc(IXMLDOMSchemaCollection*, IUnknown*, HRESULT)
   end
 
   IXMLDOMSchemaCollection_GUID = "373984c8-b845-449b-91e7-45ac83036ade"
@@ -2276,29 +2276,29 @@ lib LibWin32
   end
 
   struct IXMLDOMSelectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_item : UInt64
-    get_length : UInt64
-    next_node : UInt64
-    reset : UInt64
-    get__new_enum : UInt64
-    get_expr : UInt64
-    put_expr : UInt64
-    get_context : UInt64
-    putref_context : UInt64
-    peek_node : UInt64
-    matches : UInt64
-    remove_next : UInt64
-    remove_all : UInt64
-    clone : UInt64
-    get_property : UInt64
-    set_property : UInt64
+    query_interface : Proc(IXMLDOMSelection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMSelection*, UInt32)
+    release : Proc(IXMLDOMSelection*, UInt32)
+    get_type_info_count : Proc(IXMLDOMSelection*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMSelection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMSelection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMSelection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_item : Proc(IXMLDOMSelection*, Int32, IXMLDOMNode*, HRESULT)
+    get_length : Proc(IXMLDOMSelection*, Int32*, HRESULT)
+    next_node : Proc(IXMLDOMSelection*, IXMLDOMNode*, HRESULT)
+    reset : Proc(IXMLDOMSelection*, HRESULT)
+    get__new_enum : Proc(IXMLDOMSelection*, IUnknown*, HRESULT)
+    get_expr : Proc(IXMLDOMSelection*, UInt8**, HRESULT)
+    put_expr : Proc(IXMLDOMSelection*, UInt8*, HRESULT)
+    get_context : Proc(IXMLDOMSelection*, IXMLDOMNode*, HRESULT)
+    putref_context : Proc(IXMLDOMSelection*, IXMLDOMNode, HRESULT)
+    peek_node : Proc(IXMLDOMSelection*, IXMLDOMNode*, HRESULT)
+    matches : Proc(IXMLDOMSelection*, IXMLDOMNode, IXMLDOMNode*, HRESULT)
+    remove_next : Proc(IXMLDOMSelection*, IXMLDOMNode*, HRESULT)
+    remove_all : Proc(IXMLDOMSelection*, HRESULT)
+    clone : Proc(IXMLDOMSelection*, IXMLDOMSelection*, HRESULT)
+    get_property : Proc(IXMLDOMSelection*, UInt8*, VARIANT*, HRESULT)
+    set_property : Proc(IXMLDOMSelection*, UInt8*, VARIANT, HRESULT)
   end
 
   IXMLDOMSelection_GUID = "aa634fc7-5888-44a7-a257-3a47150d3a0e"
@@ -2308,24 +2308,24 @@ lib LibWin32
   end
 
   struct IXMLDOMParseError2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_error_code : UInt64
-    get_url : UInt64
-    get_reason : UInt64
-    get_src_text : UInt64
-    get_line : UInt64
-    get_linepos : UInt64
-    get_filepos : UInt64
-    get_error_x_path : UInt64
-    get_all_errors : UInt64
-    error_parameters : UInt64
-    get_error_parameters_count : UInt64
+    query_interface : Proc(IXMLDOMParseError2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMParseError2*, UInt32)
+    release : Proc(IXMLDOMParseError2*, UInt32)
+    get_type_info_count : Proc(IXMLDOMParseError2*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMParseError2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMParseError2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMParseError2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_error_code : Proc(IXMLDOMParseError2*, Int32*, HRESULT)
+    get_url : Proc(IXMLDOMParseError2*, UInt8**, HRESULT)
+    get_reason : Proc(IXMLDOMParseError2*, UInt8**, HRESULT)
+    get_src_text : Proc(IXMLDOMParseError2*, UInt8**, HRESULT)
+    get_line : Proc(IXMLDOMParseError2*, Int32*, HRESULT)
+    get_linepos : Proc(IXMLDOMParseError2*, Int32*, HRESULT)
+    get_filepos : Proc(IXMLDOMParseError2*, Int32*, HRESULT)
+    get_error_x_path : Proc(IXMLDOMParseError2*, UInt8**, HRESULT)
+    get_all_errors : Proc(IXMLDOMParseError2*, IXMLDOMParseErrorCollection*, HRESULT)
+    error_parameters : Proc(IXMLDOMParseError2*, Int32, UInt8**, HRESULT)
+    get_error_parameters_count : Proc(IXMLDOMParseError2*, Int32*, HRESULT)
   end
 
   IXMLDOMParseError2_GUID = "3efaa428-272f-11d2-836f-0000f87a7782"
@@ -2335,18 +2335,18 @@ lib LibWin32
   end
 
   struct IXMLDOMParseErrorCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_item : UInt64
-    get_length : UInt64
-    get_next : UInt64
-    reset : UInt64
-    get__new_enum : UInt64
+    query_interface : Proc(IXMLDOMParseErrorCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMParseErrorCollection*, UInt32)
+    release : Proc(IXMLDOMParseErrorCollection*, UInt32)
+    get_type_info_count : Proc(IXMLDOMParseErrorCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMParseErrorCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMParseErrorCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMParseErrorCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_item : Proc(IXMLDOMParseErrorCollection*, Int32, IXMLDOMParseError2*, HRESULT)
+    get_length : Proc(IXMLDOMParseErrorCollection*, Int32*, HRESULT)
+    get_next : Proc(IXMLDOMParseErrorCollection*, IXMLDOMParseError2*, HRESULT)
+    reset : Proc(IXMLDOMParseErrorCollection*, HRESULT)
+    get__new_enum : Proc(IXMLDOMParseErrorCollection*, IUnknown*, HRESULT)
   end
 
   IXMLDOMParseErrorCollection_GUID = "3efaa429-272f-11d2-836f-0000f87a7782"
@@ -2356,27 +2356,27 @@ lib LibWin32
   end
 
   struct IXSLProcessorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    put_input : UInt64
-    get_input : UInt64
-    get_owner_template : UInt64
-    set_start_mode : UInt64
-    get_start_mode : UInt64
-    get_start_mode_uri : UInt64
-    put_output : UInt64
-    get_output : UInt64
-    transform : UInt64
-    reset : UInt64
-    get_ready_state : UInt64
-    add_parameter : UInt64
-    add_object : UInt64
-    get_stylesheet : UInt64
+    query_interface : Proc(IXSLProcessor*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXSLProcessor*, UInt32)
+    release : Proc(IXSLProcessor*, UInt32)
+    get_type_info_count : Proc(IXSLProcessor*, UInt32*, HRESULT)
+    get_type_info : Proc(IXSLProcessor*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXSLProcessor*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXSLProcessor*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    put_input : Proc(IXSLProcessor*, VARIANT, HRESULT)
+    get_input : Proc(IXSLProcessor*, VARIANT*, HRESULT)
+    get_owner_template : Proc(IXSLProcessor*, IXSLTemplate*, HRESULT)
+    set_start_mode : Proc(IXSLProcessor*, UInt8*, UInt8*, HRESULT)
+    get_start_mode : Proc(IXSLProcessor*, UInt8**, HRESULT)
+    get_start_mode_uri : Proc(IXSLProcessor*, UInt8**, HRESULT)
+    put_output : Proc(IXSLProcessor*, VARIANT, HRESULT)
+    get_output : Proc(IXSLProcessor*, VARIANT*, HRESULT)
+    transform : Proc(IXSLProcessor*, Int16*, HRESULT)
+    reset : Proc(IXSLProcessor*, HRESULT)
+    get_ready_state : Proc(IXSLProcessor*, Int32*, HRESULT)
+    add_parameter : Proc(IXSLProcessor*, UInt8*, VARIANT, UInt8*, HRESULT)
+    add_object : Proc(IXSLProcessor*, IDispatch, UInt8*, HRESULT)
+    get_stylesheet : Proc(IXSLProcessor*, IXMLDOMNode*, HRESULT)
   end
 
   IXSLProcessor_GUID = "2933bf92-7b36-11d2-b20e-00c04f983e60"
@@ -2386,16 +2386,16 @@ lib LibWin32
   end
 
   struct IXSLTemplateVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    putref_stylesheet : UInt64
-    get_stylesheet : UInt64
-    create_processor : UInt64
+    query_interface : Proc(IXSLTemplate*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXSLTemplate*, UInt32)
+    release : Proc(IXSLTemplate*, UInt32)
+    get_type_info_count : Proc(IXSLTemplate*, UInt32*, HRESULT)
+    get_type_info : Proc(IXSLTemplate*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXSLTemplate*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXSLTemplate*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    putref_stylesheet : Proc(IXSLTemplate*, IXMLDOMNode, HRESULT)
+    get_stylesheet : Proc(IXSLTemplate*, IXMLDOMNode*, HRESULT)
+    create_processor : Proc(IXSLTemplate*, IXSLProcessor*, HRESULT)
   end
 
   IXSLTemplate_GUID = "2933bf93-7b36-11d2-b20e-00c04f983e60"
@@ -2405,27 +2405,27 @@ lib LibWin32
   end
 
   struct IXMLHTTPRequestVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    open : UInt64
-    set_request_header : UInt64
-    get_response_header : UInt64
-    get_all_response_headers : UInt64
-    send : UInt64
-    abort : UInt64
-    get_status : UInt64
-    get_status_text : UInt64
-    get_response_xml : UInt64
-    get_response_text : UInt64
-    get_response_body : UInt64
-    get_response_stream : UInt64
-    get_ready_state : UInt64
-    put_onreadystatechange : UInt64
+    query_interface : Proc(IXMLHTTPRequest*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLHTTPRequest*, UInt32)
+    release : Proc(IXMLHTTPRequest*, UInt32)
+    get_type_info_count : Proc(IXMLHTTPRequest*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLHTTPRequest*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLHTTPRequest*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLHTTPRequest*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    open : Proc(IXMLHTTPRequest*, UInt8*, UInt8*, VARIANT, VARIANT, VARIANT, HRESULT)
+    set_request_header : Proc(IXMLHTTPRequest*, UInt8*, UInt8*, HRESULT)
+    get_response_header : Proc(IXMLHTTPRequest*, UInt8*, UInt8**, HRESULT)
+    get_all_response_headers : Proc(IXMLHTTPRequest*, UInt8**, HRESULT)
+    send : Proc(IXMLHTTPRequest*, VARIANT, HRESULT)
+    abort : Proc(IXMLHTTPRequest*, HRESULT)
+    get_status : Proc(IXMLHTTPRequest*, Int32*, HRESULT)
+    get_status_text : Proc(IXMLHTTPRequest*, UInt8**, HRESULT)
+    get_response_xml : Proc(IXMLHTTPRequest*, IDispatch*, HRESULT)
+    get_response_text : Proc(IXMLHTTPRequest*, UInt8**, HRESULT)
+    get_response_body : Proc(IXMLHTTPRequest*, VARIANT*, HRESULT)
+    get_response_stream : Proc(IXMLHTTPRequest*, VARIANT*, HRESULT)
+    get_ready_state : Proc(IXMLHTTPRequest*, Int32*, HRESULT)
+    put_onreadystatechange : Proc(IXMLHTTPRequest*, IDispatch, HRESULT)
   end
 
   IXMLHTTPRequest_GUID = "ed8c108d-4349-11d2-91a4-00c04f7969e8"
@@ -2435,31 +2435,31 @@ lib LibWin32
   end
 
   struct IServerXMLHTTPRequestVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    open : UInt64
-    set_request_header : UInt64
-    get_response_header : UInt64
-    get_all_response_headers : UInt64
-    send : UInt64
-    abort : UInt64
-    get_status : UInt64
-    get_status_text : UInt64
-    get_response_xml : UInt64
-    get_response_text : UInt64
-    get_response_body : UInt64
-    get_response_stream : UInt64
-    get_ready_state : UInt64
-    put_onreadystatechange : UInt64
-    set_timeouts : UInt64
-    wait_for_response : UInt64
-    get_option : UInt64
-    set_option : UInt64
+    query_interface : Proc(IServerXMLHTTPRequest*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IServerXMLHTTPRequest*, UInt32)
+    release : Proc(IServerXMLHTTPRequest*, UInt32)
+    get_type_info_count : Proc(IServerXMLHTTPRequest*, UInt32*, HRESULT)
+    get_type_info : Proc(IServerXMLHTTPRequest*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IServerXMLHTTPRequest*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IServerXMLHTTPRequest*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    open : Proc(IServerXMLHTTPRequest*, UInt8*, UInt8*, VARIANT, VARIANT, VARIANT, HRESULT)
+    set_request_header : Proc(IServerXMLHTTPRequest*, UInt8*, UInt8*, HRESULT)
+    get_response_header : Proc(IServerXMLHTTPRequest*, UInt8*, UInt8**, HRESULT)
+    get_all_response_headers : Proc(IServerXMLHTTPRequest*, UInt8**, HRESULT)
+    send : Proc(IServerXMLHTTPRequest*, VARIANT, HRESULT)
+    abort : Proc(IServerXMLHTTPRequest*, HRESULT)
+    get_status : Proc(IServerXMLHTTPRequest*, Int32*, HRESULT)
+    get_status_text : Proc(IServerXMLHTTPRequest*, UInt8**, HRESULT)
+    get_response_xml : Proc(IServerXMLHTTPRequest*, IDispatch*, HRESULT)
+    get_response_text : Proc(IServerXMLHTTPRequest*, UInt8**, HRESULT)
+    get_response_body : Proc(IServerXMLHTTPRequest*, VARIANT*, HRESULT)
+    get_response_stream : Proc(IServerXMLHTTPRequest*, VARIANT*, HRESULT)
+    get_ready_state : Proc(IServerXMLHTTPRequest*, Int32*, HRESULT)
+    put_onreadystatechange : Proc(IServerXMLHTTPRequest*, IDispatch, HRESULT)
+    set_timeouts : Proc(IServerXMLHTTPRequest*, Int32, Int32, Int32, Int32, HRESULT)
+    wait_for_response : Proc(IServerXMLHTTPRequest*, VARIANT, Int16*, HRESULT)
+    get_option : Proc(IServerXMLHTTPRequest*, SERVERXMLHTTP_OPTION, VARIANT*, HRESULT)
+    set_option : Proc(IServerXMLHTTPRequest*, SERVERXMLHTTP_OPTION, VARIANT, HRESULT)
   end
 
   IServerXMLHTTPRequest_GUID = "2e9196bf-13ba-4dd4-91ca-6c571f281495"
@@ -2469,33 +2469,33 @@ lib LibWin32
   end
 
   struct IServerXMLHTTPRequest2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    open : UInt64
-    set_request_header : UInt64
-    get_response_header : UInt64
-    get_all_response_headers : UInt64
-    send : UInt64
-    abort : UInt64
-    get_status : UInt64
-    get_status_text : UInt64
-    get_response_xml : UInt64
-    get_response_text : UInt64
-    get_response_body : UInt64
-    get_response_stream : UInt64
-    get_ready_state : UInt64
-    put_onreadystatechange : UInt64
-    set_timeouts : UInt64
-    wait_for_response : UInt64
-    get_option : UInt64
-    set_option : UInt64
-    set_proxy : UInt64
-    set_proxy_credentials : UInt64
+    query_interface : Proc(IServerXMLHTTPRequest2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IServerXMLHTTPRequest2*, UInt32)
+    release : Proc(IServerXMLHTTPRequest2*, UInt32)
+    get_type_info_count : Proc(IServerXMLHTTPRequest2*, UInt32*, HRESULT)
+    get_type_info : Proc(IServerXMLHTTPRequest2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IServerXMLHTTPRequest2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IServerXMLHTTPRequest2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    open : Proc(IServerXMLHTTPRequest2*, UInt8*, UInt8*, VARIANT, VARIANT, VARIANT, HRESULT)
+    set_request_header : Proc(IServerXMLHTTPRequest2*, UInt8*, UInt8*, HRESULT)
+    get_response_header : Proc(IServerXMLHTTPRequest2*, UInt8*, UInt8**, HRESULT)
+    get_all_response_headers : Proc(IServerXMLHTTPRequest2*, UInt8**, HRESULT)
+    send : Proc(IServerXMLHTTPRequest2*, VARIANT, HRESULT)
+    abort : Proc(IServerXMLHTTPRequest2*, HRESULT)
+    get_status : Proc(IServerXMLHTTPRequest2*, Int32*, HRESULT)
+    get_status_text : Proc(IServerXMLHTTPRequest2*, UInt8**, HRESULT)
+    get_response_xml : Proc(IServerXMLHTTPRequest2*, IDispatch*, HRESULT)
+    get_response_text : Proc(IServerXMLHTTPRequest2*, UInt8**, HRESULT)
+    get_response_body : Proc(IServerXMLHTTPRequest2*, VARIANT*, HRESULT)
+    get_response_stream : Proc(IServerXMLHTTPRequest2*, VARIANT*, HRESULT)
+    get_ready_state : Proc(IServerXMLHTTPRequest2*, Int32*, HRESULT)
+    put_onreadystatechange : Proc(IServerXMLHTTPRequest2*, IDispatch, HRESULT)
+    set_timeouts : Proc(IServerXMLHTTPRequest2*, Int32, Int32, Int32, Int32, HRESULT)
+    wait_for_response : Proc(IServerXMLHTTPRequest2*, VARIANT, Int16*, HRESULT)
+    get_option : Proc(IServerXMLHTTPRequest2*, SERVERXMLHTTP_OPTION, VARIANT*, HRESULT)
+    set_option : Proc(IServerXMLHTTPRequest2*, SERVERXMLHTTP_OPTION, VARIANT, HRESULT)
+    set_proxy : Proc(IServerXMLHTTPRequest2*, SXH_PROXY_SETTING, VARIANT, VARIANT, HRESULT)
+    set_proxy_credentials : Proc(IServerXMLHTTPRequest2*, UInt8*, UInt8*, HRESULT)
   end
 
   IServerXMLHTTPRequest2_GUID = "2e01311b-c322-4b0a-bd77-b90cfdc8dce7"
@@ -2505,27 +2505,27 @@ lib LibWin32
   end
 
   struct ISAXXMLReaderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_feature : UInt64
-    put_feature : UInt64
-    get_property : UInt64
-    put_property : UInt64
-    get_entity_resolver : UInt64
-    put_entity_resolver : UInt64
-    get_content_handler : UInt64
-    put_content_handler : UInt64
-    get_dtd_handler : UInt64
-    put_dtd_handler : UInt64
-    get_error_handler : UInt64
-    put_error_handler : UInt64
-    get_base_url : UInt64
-    put_base_url : UInt64
-    get_secure_base_url : UInt64
-    put_secure_base_url : UInt64
-    parse : UInt64
-    parse_url : UInt64
+    query_interface : Proc(ISAXXMLReader*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISAXXMLReader*, UInt32)
+    release : Proc(ISAXXMLReader*, UInt32)
+    get_feature : Proc(ISAXXMLReader*, LibC::LPWSTR, Int16*, HRESULT)
+    put_feature : Proc(ISAXXMLReader*, LibC::LPWSTR, Int16, HRESULT)
+    get_property : Proc(ISAXXMLReader*, LibC::LPWSTR, VARIANT*, HRESULT)
+    put_property : Proc(ISAXXMLReader*, LibC::LPWSTR, VARIANT, HRESULT)
+    get_entity_resolver : Proc(ISAXXMLReader*, ISAXEntityResolver*, HRESULT)
+    put_entity_resolver : Proc(ISAXXMLReader*, ISAXEntityResolver, HRESULT)
+    get_content_handler : Proc(ISAXXMLReader*, ISAXContentHandler*, HRESULT)
+    put_content_handler : Proc(ISAXXMLReader*, ISAXContentHandler, HRESULT)
+    get_dtd_handler : Proc(ISAXXMLReader*, ISAXDTDHandler*, HRESULT)
+    put_dtd_handler : Proc(ISAXXMLReader*, ISAXDTDHandler, HRESULT)
+    get_error_handler : Proc(ISAXXMLReader*, ISAXErrorHandler*, HRESULT)
+    put_error_handler : Proc(ISAXXMLReader*, ISAXErrorHandler, HRESULT)
+    get_base_url : Proc(ISAXXMLReader*, UInt16**, HRESULT)
+    put_base_url : Proc(ISAXXMLReader*, LibC::LPWSTR, HRESULT)
+    get_secure_base_url : Proc(ISAXXMLReader*, UInt16**, HRESULT)
+    put_secure_base_url : Proc(ISAXXMLReader*, LibC::LPWSTR, HRESULT)
+    parse : Proc(ISAXXMLReader*, VARIANT, HRESULT)
+    parse_url : Proc(ISAXXMLReader*, LibC::LPWSTR, HRESULT)
   end
 
   ISAXXMLReader_GUID = "a4f96ed0-f829-476e-81c0-cdc7bd2a0802"
@@ -2535,29 +2535,29 @@ lib LibWin32
   end
 
   struct ISAXXMLFilterVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_feature : UInt64
-    put_feature : UInt64
-    get_property : UInt64
-    put_property : UInt64
-    get_entity_resolver : UInt64
-    put_entity_resolver : UInt64
-    get_content_handler : UInt64
-    put_content_handler : UInt64
-    get_dtd_handler : UInt64
-    put_dtd_handler : UInt64
-    get_error_handler : UInt64
-    put_error_handler : UInt64
-    get_base_url : UInt64
-    put_base_url : UInt64
-    get_secure_base_url : UInt64
-    put_secure_base_url : UInt64
-    parse : UInt64
-    parse_url : UInt64
-    get_parent : UInt64
-    put_parent : UInt64
+    query_interface : Proc(ISAXXMLFilter*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISAXXMLFilter*, UInt32)
+    release : Proc(ISAXXMLFilter*, UInt32)
+    get_feature : Proc(ISAXXMLFilter*, LibC::LPWSTR, Int16*, HRESULT)
+    put_feature : Proc(ISAXXMLFilter*, LibC::LPWSTR, Int16, HRESULT)
+    get_property : Proc(ISAXXMLFilter*, LibC::LPWSTR, VARIANT*, HRESULT)
+    put_property : Proc(ISAXXMLFilter*, LibC::LPWSTR, VARIANT, HRESULT)
+    get_entity_resolver : Proc(ISAXXMLFilter*, ISAXEntityResolver*, HRESULT)
+    put_entity_resolver : Proc(ISAXXMLFilter*, ISAXEntityResolver, HRESULT)
+    get_content_handler : Proc(ISAXXMLFilter*, ISAXContentHandler*, HRESULT)
+    put_content_handler : Proc(ISAXXMLFilter*, ISAXContentHandler, HRESULT)
+    get_dtd_handler : Proc(ISAXXMLFilter*, ISAXDTDHandler*, HRESULT)
+    put_dtd_handler : Proc(ISAXXMLFilter*, ISAXDTDHandler, HRESULT)
+    get_error_handler : Proc(ISAXXMLFilter*, ISAXErrorHandler*, HRESULT)
+    put_error_handler : Proc(ISAXXMLFilter*, ISAXErrorHandler, HRESULT)
+    get_base_url : Proc(ISAXXMLFilter*, UInt16**, HRESULT)
+    put_base_url : Proc(ISAXXMLFilter*, LibC::LPWSTR, HRESULT)
+    get_secure_base_url : Proc(ISAXXMLFilter*, UInt16**, HRESULT)
+    put_secure_base_url : Proc(ISAXXMLFilter*, LibC::LPWSTR, HRESULT)
+    parse : Proc(ISAXXMLFilter*, VARIANT, HRESULT)
+    parse_url : Proc(ISAXXMLFilter*, LibC::LPWSTR, HRESULT)
+    get_parent : Proc(ISAXXMLFilter*, ISAXXMLReader*, HRESULT)
+    put_parent : Proc(ISAXXMLFilter*, ISAXXMLReader, HRESULT)
   end
 
   ISAXXMLFilter_GUID = "70409222-ca09-4475-acb8-40312fe8d145"
@@ -2567,13 +2567,13 @@ lib LibWin32
   end
 
   struct ISAXLocatorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_column_number : UInt64
-    get_line_number : UInt64
-    get_public_id : UInt64
-    get_system_id : UInt64
+    query_interface : Proc(ISAXLocator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISAXLocator*, UInt32)
+    release : Proc(ISAXLocator*, UInt32)
+    get_column_number : Proc(ISAXLocator*, Int32*, HRESULT)
+    get_line_number : Proc(ISAXLocator*, Int32*, HRESULT)
+    get_public_id : Proc(ISAXLocator*, UInt16**, HRESULT)
+    get_system_id : Proc(ISAXLocator*, UInt16**, HRESULT)
   end
 
   ISAXLocator_GUID = "9b7e472a-0de4-4640-bff3-84d38a051c31"
@@ -2583,10 +2583,10 @@ lib LibWin32
   end
 
   struct ISAXEntityResolverVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    resolve_entity : UInt64
+    query_interface : Proc(ISAXEntityResolver*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISAXEntityResolver*, UInt32)
+    release : Proc(ISAXEntityResolver*, UInt32)
+    resolve_entity : Proc(ISAXEntityResolver*, LibC::LPWSTR, LibC::LPWSTR, VARIANT*, HRESULT)
   end
 
   ISAXEntityResolver_GUID = "99bca7bd-e8c4-4d5f-a0cf-6d907901ff07"
@@ -2596,20 +2596,20 @@ lib LibWin32
   end
 
   struct ISAXContentHandlerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    put_document_locator : UInt64
-    start_document : UInt64
-    end_document : UInt64
-    start_prefix_mapping : UInt64
-    end_prefix_mapping : UInt64
-    start_element : UInt64
-    end_element : UInt64
-    characters : UInt64
-    ignorable_whitespace : UInt64
-    processing_instruction : UInt64
-    skipped_entity : UInt64
+    query_interface : Proc(ISAXContentHandler*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISAXContentHandler*, UInt32)
+    release : Proc(ISAXContentHandler*, UInt32)
+    put_document_locator : Proc(ISAXContentHandler*, ISAXLocator, HRESULT)
+    start_document : Proc(ISAXContentHandler*, HRESULT)
+    end_document : Proc(ISAXContentHandler*, HRESULT)
+    start_prefix_mapping : Proc(ISAXContentHandler*, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)
+    end_prefix_mapping : Proc(ISAXContentHandler*, LibC::LPWSTR, Int32, HRESULT)
+    start_element : Proc(ISAXContentHandler*, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, ISAXAttributes, HRESULT)
+    end_element : Proc(ISAXContentHandler*, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)
+    characters : Proc(ISAXContentHandler*, LibC::LPWSTR, Int32, HRESULT)
+    ignorable_whitespace : Proc(ISAXContentHandler*, LibC::LPWSTR, Int32, HRESULT)
+    processing_instruction : Proc(ISAXContentHandler*, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)
+    skipped_entity : Proc(ISAXContentHandler*, LibC::LPWSTR, Int32, HRESULT)
   end
 
   ISAXContentHandler_GUID = "1545cdfa-9e4e-4497-a8a4-2bf7d0112c44"
@@ -2619,11 +2619,11 @@ lib LibWin32
   end
 
   struct ISAXDTDHandlerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    notation_decl : UInt64
-    unparsed_entity_decl : UInt64
+    query_interface : Proc(ISAXDTDHandler*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISAXDTDHandler*, UInt32)
+    release : Proc(ISAXDTDHandler*, UInt32)
+    notation_decl : Proc(ISAXDTDHandler*, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)
+    unparsed_entity_decl : Proc(ISAXDTDHandler*, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)
   end
 
   ISAXDTDHandler_GUID = "e15c1baf-afb3-4d60-8c36-19a8c45defed"
@@ -2633,12 +2633,12 @@ lib LibWin32
   end
 
   struct ISAXErrorHandlerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    error : UInt64
-    fatal_error : UInt64
-    ignorable_warning : UInt64
+    query_interface : Proc(ISAXErrorHandler*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISAXErrorHandler*, UInt32)
+    release : Proc(ISAXErrorHandler*, UInt32)
+    error : Proc(ISAXErrorHandler*, ISAXLocator, LibC::LPWSTR, HRESULT, HRESULT)
+    fatal_error : Proc(ISAXErrorHandler*, ISAXLocator, LibC::LPWSTR, HRESULT, HRESULT)
+    ignorable_warning : Proc(ISAXErrorHandler*, ISAXLocator, LibC::LPWSTR, HRESULT, HRESULT)
   end
 
   ISAXErrorHandler_GUID = "a60511c4-ccf5-479e-98a3-dc8dc545b7d0"
@@ -2648,16 +2648,16 @@ lib LibWin32
   end
 
   struct ISAXLexicalHandlerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    start_dtd : UInt64
-    end_dtd : UInt64
-    start_entity : UInt64
-    end_entity : UInt64
-    start_cdata : UInt64
-    end_cdata : UInt64
-    comment : UInt64
+    query_interface : Proc(ISAXLexicalHandler*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISAXLexicalHandler*, UInt32)
+    release : Proc(ISAXLexicalHandler*, UInt32)
+    start_dtd : Proc(ISAXLexicalHandler*, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)
+    end_dtd : Proc(ISAXLexicalHandler*, HRESULT)
+    start_entity : Proc(ISAXLexicalHandler*, LibC::LPWSTR, Int32, HRESULT)
+    end_entity : Proc(ISAXLexicalHandler*, LibC::LPWSTR, Int32, HRESULT)
+    start_cdata : Proc(ISAXLexicalHandler*, HRESULT)
+    end_cdata : Proc(ISAXLexicalHandler*, HRESULT)
+    comment : Proc(ISAXLexicalHandler*, LibC::LPWSTR, Int32, HRESULT)
   end
 
   ISAXLexicalHandler_GUID = "7f85d5f5-47a8-4497-bda5-84ba04819ea6"
@@ -2667,13 +2667,13 @@ lib LibWin32
   end
 
   struct ISAXDeclHandlerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    element_decl : UInt64
-    attribute_decl : UInt64
-    internal_entity_decl : UInt64
-    external_entity_decl : UInt64
+    query_interface : Proc(ISAXDeclHandler*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISAXDeclHandler*, UInt32)
+    release : Proc(ISAXDeclHandler*, UInt32)
+    element_decl : Proc(ISAXDeclHandler*, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)
+    attribute_decl : Proc(ISAXDeclHandler*, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)
+    internal_entity_decl : Proc(ISAXDeclHandler*, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)
+    external_entity_decl : Proc(ISAXDeclHandler*, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)
   end
 
   ISAXDeclHandler_GUID = "862629ac-771a-47b2-8337-4e6843c1be90"
@@ -2683,22 +2683,22 @@ lib LibWin32
   end
 
   struct ISAXAttributesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_length : UInt64
-    get_uri : UInt64
-    get_local_name : UInt64
-    get_q_name : UInt64
-    get_name : UInt64
-    get_index_from_name : UInt64
-    get_index_from_q_name : UInt64
-    get_type : UInt64
-    get_type_from_name : UInt64
-    get_type_from_q_name : UInt64
-    get_value : UInt64
-    get_value_from_name : UInt64
-    get_value_from_q_name : UInt64
+    query_interface : Proc(ISAXAttributes*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISAXAttributes*, UInt32)
+    release : Proc(ISAXAttributes*, UInt32)
+    get_length : Proc(ISAXAttributes*, Int32*, HRESULT)
+    get_uri : Proc(ISAXAttributes*, Int32, UInt16**, Int32*, HRESULT)
+    get_local_name : Proc(ISAXAttributes*, Int32, UInt16**, Int32*, HRESULT)
+    get_q_name : Proc(ISAXAttributes*, Int32, UInt16**, Int32*, HRESULT)
+    get_name : Proc(ISAXAttributes*, Int32, UInt16**, Int32*, UInt16**, Int32*, UInt16**, Int32*, HRESULT)
+    get_index_from_name : Proc(ISAXAttributes*, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, Int32*, HRESULT)
+    get_index_from_q_name : Proc(ISAXAttributes*, LibC::LPWSTR, Int32, Int32*, HRESULT)
+    get_type : Proc(ISAXAttributes*, Int32, UInt16**, Int32*, HRESULT)
+    get_type_from_name : Proc(ISAXAttributes*, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, UInt16**, Int32*, HRESULT)
+    get_type_from_q_name : Proc(ISAXAttributes*, LibC::LPWSTR, Int32, UInt16**, Int32*, HRESULT)
+    get_value : Proc(ISAXAttributes*, Int32, UInt16**, Int32*, HRESULT)
+    get_value_from_name : Proc(ISAXAttributes*, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, UInt16**, Int32*, HRESULT)
+    get_value_from_q_name : Proc(ISAXAttributes*, LibC::LPWSTR, Int32, UInt16**, Int32*, HRESULT)
   end
 
   ISAXAttributes_GUID = "f078abe1-45d2-4832-91ea-4466ce2f25c9"
@@ -2708,31 +2708,31 @@ lib LibWin32
   end
 
   struct IVBSAXXMLReaderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_feature : UInt64
-    put_feature : UInt64
-    get_property : UInt64
-    put_property : UInt64
-    get_entity_resolver : UInt64
-    putref_entity_resolver : UInt64
-    get_content_handler : UInt64
-    putref_content_handler : UInt64
-    get_dtd_handler : UInt64
-    putref_dtd_handler : UInt64
-    get_error_handler : UInt64
-    putref_error_handler : UInt64
-    get_base_url : UInt64
-    put_base_url : UInt64
-    get_secure_base_url : UInt64
-    put_secure_base_url : UInt64
-    parse : UInt64
-    parse_url : UInt64
+    query_interface : Proc(IVBSAXXMLReader*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVBSAXXMLReader*, UInt32)
+    release : Proc(IVBSAXXMLReader*, UInt32)
+    get_type_info_count : Proc(IVBSAXXMLReader*, UInt32*, HRESULT)
+    get_type_info : Proc(IVBSAXXMLReader*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IVBSAXXMLReader*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IVBSAXXMLReader*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_feature : Proc(IVBSAXXMLReader*, UInt8*, Int16*, HRESULT)
+    put_feature : Proc(IVBSAXXMLReader*, UInt8*, Int16, HRESULT)
+    get_property : Proc(IVBSAXXMLReader*, UInt8*, VARIANT*, HRESULT)
+    put_property : Proc(IVBSAXXMLReader*, UInt8*, VARIANT, HRESULT)
+    get_entity_resolver : Proc(IVBSAXXMLReader*, IVBSAXEntityResolver*, HRESULT)
+    putref_entity_resolver : Proc(IVBSAXXMLReader*, IVBSAXEntityResolver, HRESULT)
+    get_content_handler : Proc(IVBSAXXMLReader*, IVBSAXContentHandler*, HRESULT)
+    putref_content_handler : Proc(IVBSAXXMLReader*, IVBSAXContentHandler, HRESULT)
+    get_dtd_handler : Proc(IVBSAXXMLReader*, IVBSAXDTDHandler*, HRESULT)
+    putref_dtd_handler : Proc(IVBSAXXMLReader*, IVBSAXDTDHandler, HRESULT)
+    get_error_handler : Proc(IVBSAXXMLReader*, IVBSAXErrorHandler*, HRESULT)
+    putref_error_handler : Proc(IVBSAXXMLReader*, IVBSAXErrorHandler, HRESULT)
+    get_base_url : Proc(IVBSAXXMLReader*, UInt8**, HRESULT)
+    put_base_url : Proc(IVBSAXXMLReader*, UInt8*, HRESULT)
+    get_secure_base_url : Proc(IVBSAXXMLReader*, UInt8**, HRESULT)
+    put_secure_base_url : Proc(IVBSAXXMLReader*, UInt8*, HRESULT)
+    parse : Proc(IVBSAXXMLReader*, VARIANT, HRESULT)
+    parse_url : Proc(IVBSAXXMLReader*, UInt8*, HRESULT)
   end
 
   IVBSAXXMLReader_GUID = "8c033caa-6cd6-4f73-b728-4531af74945f"
@@ -2742,15 +2742,15 @@ lib LibWin32
   end
 
   struct IVBSAXXMLFilterVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_parent : UInt64
-    putref_parent : UInt64
+    query_interface : Proc(IVBSAXXMLFilter*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVBSAXXMLFilter*, UInt32)
+    release : Proc(IVBSAXXMLFilter*, UInt32)
+    get_type_info_count : Proc(IVBSAXXMLFilter*, UInt32*, HRESULT)
+    get_type_info : Proc(IVBSAXXMLFilter*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IVBSAXXMLFilter*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IVBSAXXMLFilter*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_parent : Proc(IVBSAXXMLFilter*, IVBSAXXMLReader*, HRESULT)
+    putref_parent : Proc(IVBSAXXMLFilter*, IVBSAXXMLReader, HRESULT)
   end
 
   IVBSAXXMLFilter_GUID = "1299eb1b-5b88-433e-82de-82ca75ad4e04"
@@ -2760,17 +2760,17 @@ lib LibWin32
   end
 
   struct IVBSAXLocatorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_column_number : UInt64
-    get_line_number : UInt64
-    get_public_id : UInt64
-    get_system_id : UInt64
+    query_interface : Proc(IVBSAXLocator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVBSAXLocator*, UInt32)
+    release : Proc(IVBSAXLocator*, UInt32)
+    get_type_info_count : Proc(IVBSAXLocator*, UInt32*, HRESULT)
+    get_type_info : Proc(IVBSAXLocator*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IVBSAXLocator*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IVBSAXLocator*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_column_number : Proc(IVBSAXLocator*, Int32*, HRESULT)
+    get_line_number : Proc(IVBSAXLocator*, Int32*, HRESULT)
+    get_public_id : Proc(IVBSAXLocator*, UInt8**, HRESULT)
+    get_system_id : Proc(IVBSAXLocator*, UInt8**, HRESULT)
   end
 
   IVBSAXLocator_GUID = "796e7ac5-5aa2-4eff-acad-3faaf01a3288"
@@ -2780,14 +2780,14 @@ lib LibWin32
   end
 
   struct IVBSAXEntityResolverVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    resolve_entity : UInt64
+    query_interface : Proc(IVBSAXEntityResolver*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVBSAXEntityResolver*, UInt32)
+    release : Proc(IVBSAXEntityResolver*, UInt32)
+    get_type_info_count : Proc(IVBSAXEntityResolver*, UInt32*, HRESULT)
+    get_type_info : Proc(IVBSAXEntityResolver*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IVBSAXEntityResolver*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IVBSAXEntityResolver*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    resolve_entity : Proc(IVBSAXEntityResolver*, UInt8**, UInt8**, VARIANT*, HRESULT)
   end
 
   IVBSAXEntityResolver_GUID = "0c05d096-f45b-4aca-ad1a-aa0bc25518dc"
@@ -2797,24 +2797,24 @@ lib LibWin32
   end
 
   struct IVBSAXContentHandlerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    putref_document_locator : UInt64
-    start_document : UInt64
-    end_document : UInt64
-    start_prefix_mapping : UInt64
-    end_prefix_mapping : UInt64
-    start_element : UInt64
-    end_element : UInt64
-    characters : UInt64
-    ignorable_whitespace : UInt64
-    processing_instruction : UInt64
-    skipped_entity : UInt64
+    query_interface : Proc(IVBSAXContentHandler*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVBSAXContentHandler*, UInt32)
+    release : Proc(IVBSAXContentHandler*, UInt32)
+    get_type_info_count : Proc(IVBSAXContentHandler*, UInt32*, HRESULT)
+    get_type_info : Proc(IVBSAXContentHandler*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IVBSAXContentHandler*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IVBSAXContentHandler*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    putref_document_locator : Proc(IVBSAXContentHandler*, IVBSAXLocator, HRESULT)
+    start_document : Proc(IVBSAXContentHandler*, HRESULT)
+    end_document : Proc(IVBSAXContentHandler*, HRESULT)
+    start_prefix_mapping : Proc(IVBSAXContentHandler*, UInt8**, UInt8**, HRESULT)
+    end_prefix_mapping : Proc(IVBSAXContentHandler*, UInt8**, HRESULT)
+    start_element : Proc(IVBSAXContentHandler*, UInt8**, UInt8**, UInt8**, IVBSAXAttributes, HRESULT)
+    end_element : Proc(IVBSAXContentHandler*, UInt8**, UInt8**, UInt8**, HRESULT)
+    characters : Proc(IVBSAXContentHandler*, UInt8**, HRESULT)
+    ignorable_whitespace : Proc(IVBSAXContentHandler*, UInt8**, HRESULT)
+    processing_instruction : Proc(IVBSAXContentHandler*, UInt8**, UInt8**, HRESULT)
+    skipped_entity : Proc(IVBSAXContentHandler*, UInt8**, HRESULT)
   end
 
   IVBSAXContentHandler_GUID = "2ed7290a-4dd5-4b46-bb26-4e4155e77faa"
@@ -2824,15 +2824,15 @@ lib LibWin32
   end
 
   struct IVBSAXDTDHandlerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    notation_decl : UInt64
-    unparsed_entity_decl : UInt64
+    query_interface : Proc(IVBSAXDTDHandler*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVBSAXDTDHandler*, UInt32)
+    release : Proc(IVBSAXDTDHandler*, UInt32)
+    get_type_info_count : Proc(IVBSAXDTDHandler*, UInt32*, HRESULT)
+    get_type_info : Proc(IVBSAXDTDHandler*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IVBSAXDTDHandler*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IVBSAXDTDHandler*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    notation_decl : Proc(IVBSAXDTDHandler*, UInt8**, UInt8**, UInt8**, HRESULT)
+    unparsed_entity_decl : Proc(IVBSAXDTDHandler*, UInt8**, UInt8**, UInt8**, UInt8**, HRESULT)
   end
 
   IVBSAXDTDHandler_GUID = "24fb3297-302d-4620-ba39-3a732d850558"
@@ -2842,16 +2842,16 @@ lib LibWin32
   end
 
   struct IVBSAXErrorHandlerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    error : UInt64
-    fatal_error : UInt64
-    ignorable_warning : UInt64
+    query_interface : Proc(IVBSAXErrorHandler*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVBSAXErrorHandler*, UInt32)
+    release : Proc(IVBSAXErrorHandler*, UInt32)
+    get_type_info_count : Proc(IVBSAXErrorHandler*, UInt32*, HRESULT)
+    get_type_info : Proc(IVBSAXErrorHandler*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IVBSAXErrorHandler*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IVBSAXErrorHandler*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    error : Proc(IVBSAXErrorHandler*, IVBSAXLocator, UInt8**, Int32, HRESULT)
+    fatal_error : Proc(IVBSAXErrorHandler*, IVBSAXLocator, UInt8**, Int32, HRESULT)
+    ignorable_warning : Proc(IVBSAXErrorHandler*, IVBSAXLocator, UInt8**, Int32, HRESULT)
   end
 
   IVBSAXErrorHandler_GUID = "d963d3fe-173c-4862-9095-b92f66995f52"
@@ -2861,20 +2861,20 @@ lib LibWin32
   end
 
   struct IVBSAXLexicalHandlerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    start_dtd : UInt64
-    end_dtd : UInt64
-    start_entity : UInt64
-    end_entity : UInt64
-    start_cdata : UInt64
-    end_cdata : UInt64
-    comment : UInt64
+    query_interface : Proc(IVBSAXLexicalHandler*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVBSAXLexicalHandler*, UInt32)
+    release : Proc(IVBSAXLexicalHandler*, UInt32)
+    get_type_info_count : Proc(IVBSAXLexicalHandler*, UInt32*, HRESULT)
+    get_type_info : Proc(IVBSAXLexicalHandler*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IVBSAXLexicalHandler*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IVBSAXLexicalHandler*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    start_dtd : Proc(IVBSAXLexicalHandler*, UInt8**, UInt8**, UInt8**, HRESULT)
+    end_dtd : Proc(IVBSAXLexicalHandler*, HRESULT)
+    start_entity : Proc(IVBSAXLexicalHandler*, UInt8**, HRESULT)
+    end_entity : Proc(IVBSAXLexicalHandler*, UInt8**, HRESULT)
+    start_cdata : Proc(IVBSAXLexicalHandler*, HRESULT)
+    end_cdata : Proc(IVBSAXLexicalHandler*, HRESULT)
+    comment : Proc(IVBSAXLexicalHandler*, UInt8**, HRESULT)
   end
 
   IVBSAXLexicalHandler_GUID = "032aac35-8c0e-4d9d-979f-e3b702935576"
@@ -2884,17 +2884,17 @@ lib LibWin32
   end
 
   struct IVBSAXDeclHandlerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    element_decl : UInt64
-    attribute_decl : UInt64
-    internal_entity_decl : UInt64
-    external_entity_decl : UInt64
+    query_interface : Proc(IVBSAXDeclHandler*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVBSAXDeclHandler*, UInt32)
+    release : Proc(IVBSAXDeclHandler*, UInt32)
+    get_type_info_count : Proc(IVBSAXDeclHandler*, UInt32*, HRESULT)
+    get_type_info : Proc(IVBSAXDeclHandler*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IVBSAXDeclHandler*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IVBSAXDeclHandler*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    element_decl : Proc(IVBSAXDeclHandler*, UInt8**, UInt8**, HRESULT)
+    attribute_decl : Proc(IVBSAXDeclHandler*, UInt8**, UInt8**, UInt8**, UInt8**, UInt8**, HRESULT)
+    internal_entity_decl : Proc(IVBSAXDeclHandler*, UInt8**, UInt8**, HRESULT)
+    external_entity_decl : Proc(IVBSAXDeclHandler*, UInt8**, UInt8**, UInt8**, HRESULT)
   end
 
   IVBSAXDeclHandler_GUID = "e8917260-7579-4be1-b5dd-7afbfa6f077b"
@@ -2904,25 +2904,25 @@ lib LibWin32
   end
 
   struct IVBSAXAttributesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_length : UInt64
-    get_uri : UInt64
-    get_local_name : UInt64
-    get_q_name : UInt64
-    get_index_from_name : UInt64
-    get_index_from_q_name : UInt64
-    get_type : UInt64
-    get_type_from_name : UInt64
-    get_type_from_q_name : UInt64
-    get_value : UInt64
-    get_value_from_name : UInt64
-    get_value_from_q_name : UInt64
+    query_interface : Proc(IVBSAXAttributes*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVBSAXAttributes*, UInt32)
+    release : Proc(IVBSAXAttributes*, UInt32)
+    get_type_info_count : Proc(IVBSAXAttributes*, UInt32*, HRESULT)
+    get_type_info : Proc(IVBSAXAttributes*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IVBSAXAttributes*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IVBSAXAttributes*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_length : Proc(IVBSAXAttributes*, Int32*, HRESULT)
+    get_uri : Proc(IVBSAXAttributes*, Int32, UInt8**, HRESULT)
+    get_local_name : Proc(IVBSAXAttributes*, Int32, UInt8**, HRESULT)
+    get_q_name : Proc(IVBSAXAttributes*, Int32, UInt8**, HRESULT)
+    get_index_from_name : Proc(IVBSAXAttributes*, UInt8*, UInt8*, Int32*, HRESULT)
+    get_index_from_q_name : Proc(IVBSAXAttributes*, UInt8*, Int32*, HRESULT)
+    get_type : Proc(IVBSAXAttributes*, Int32, UInt8**, HRESULT)
+    get_type_from_name : Proc(IVBSAXAttributes*, UInt8*, UInt8*, UInt8**, HRESULT)
+    get_type_from_q_name : Proc(IVBSAXAttributes*, UInt8*, UInt8**, HRESULT)
+    get_value : Proc(IVBSAXAttributes*, Int32, UInt8**, HRESULT)
+    get_value_from_name : Proc(IVBSAXAttributes*, UInt8*, UInt8*, UInt8**, HRESULT)
+    get_value_from_q_name : Proc(IVBSAXAttributes*, UInt8*, UInt8**, HRESULT)
   end
 
   IVBSAXAttributes_GUID = "10dc0586-132b-4cac-8bb3-db00ac8b7ee0"
@@ -2932,30 +2932,30 @@ lib LibWin32
   end
 
   struct IMXWriterVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    put_output : UInt64
-    get_output : UInt64
-    put_encoding : UInt64
-    get_encoding : UInt64
-    put_byte_order_mark : UInt64
-    get_byte_order_mark : UInt64
-    put_indent : UInt64
-    get_indent : UInt64
-    put_standalone : UInt64
-    get_standalone : UInt64
-    put_omit_xml_declaration : UInt64
-    get_omit_xml_declaration : UInt64
-    put_version : UInt64
-    get_version : UInt64
-    put_disable_output_escaping : UInt64
-    get_disable_output_escaping : UInt64
-    flush : UInt64
+    query_interface : Proc(IMXWriter*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMXWriter*, UInt32)
+    release : Proc(IMXWriter*, UInt32)
+    get_type_info_count : Proc(IMXWriter*, UInt32*, HRESULT)
+    get_type_info : Proc(IMXWriter*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMXWriter*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMXWriter*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    put_output : Proc(IMXWriter*, VARIANT, HRESULT)
+    get_output : Proc(IMXWriter*, VARIANT*, HRESULT)
+    put_encoding : Proc(IMXWriter*, UInt8*, HRESULT)
+    get_encoding : Proc(IMXWriter*, UInt8**, HRESULT)
+    put_byte_order_mark : Proc(IMXWriter*, Int16, HRESULT)
+    get_byte_order_mark : Proc(IMXWriter*, Int16*, HRESULT)
+    put_indent : Proc(IMXWriter*, Int16, HRESULT)
+    get_indent : Proc(IMXWriter*, Int16*, HRESULT)
+    put_standalone : Proc(IMXWriter*, Int16, HRESULT)
+    get_standalone : Proc(IMXWriter*, Int16*, HRESULT)
+    put_omit_xml_declaration : Proc(IMXWriter*, Int16, HRESULT)
+    get_omit_xml_declaration : Proc(IMXWriter*, Int16*, HRESULT)
+    put_version : Proc(IMXWriter*, UInt8*, HRESULT)
+    get_version : Proc(IMXWriter*, UInt8**, HRESULT)
+    put_disable_output_escaping : Proc(IMXWriter*, Int16, HRESULT)
+    get_disable_output_escaping : Proc(IMXWriter*, Int16*, HRESULT)
+    flush : Proc(IMXWriter*, HRESULT)
   end
 
   IMXWriter_GUID = "4d7ff4ba-1565-4ea8-94e1-6e724a46f98d"
@@ -2965,24 +2965,24 @@ lib LibWin32
   end
 
   struct IMXAttributesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    add_attribute : UInt64
-    add_attribute_from_index : UInt64
-    clear : UInt64
-    remove_attribute : UInt64
-    set_attribute : UInt64
-    set_attributes : UInt64
-    set_local_name : UInt64
-    set_q_name : UInt64
-    set_type : UInt64
-    set_uri : UInt64
-    set_value : UInt64
+    query_interface : Proc(IMXAttributes*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMXAttributes*, UInt32)
+    release : Proc(IMXAttributes*, UInt32)
+    get_type_info_count : Proc(IMXAttributes*, UInt32*, HRESULT)
+    get_type_info : Proc(IMXAttributes*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMXAttributes*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMXAttributes*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    add_attribute : Proc(IMXAttributes*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
+    add_attribute_from_index : Proc(IMXAttributes*, VARIANT, Int32, HRESULT)
+    clear : Proc(IMXAttributes*, HRESULT)
+    remove_attribute : Proc(IMXAttributes*, Int32, HRESULT)
+    set_attribute : Proc(IMXAttributes*, Int32, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
+    set_attributes : Proc(IMXAttributes*, VARIANT, HRESULT)
+    set_local_name : Proc(IMXAttributes*, Int32, UInt8*, HRESULT)
+    set_q_name : Proc(IMXAttributes*, Int32, UInt8*, HRESULT)
+    set_type : Proc(IMXAttributes*, Int32, UInt8*, HRESULT)
+    set_uri : Proc(IMXAttributes*, Int32, UInt8*, HRESULT)
+    set_value : Proc(IMXAttributes*, Int32, UInt8*, HRESULT)
   end
 
   IMXAttributes_GUID = "f10d27cc-3ec0-415c-8ed8-77ab1c5e7262"
@@ -2992,16 +2992,16 @@ lib LibWin32
   end
 
   struct IMXReaderControlVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    abort : UInt64
-    resume : UInt64
-    suspend : UInt64
+    query_interface : Proc(IMXReaderControl*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMXReaderControl*, UInt32)
+    release : Proc(IMXReaderControl*, UInt32)
+    get_type_info_count : Proc(IMXReaderControl*, UInt32*, HRESULT)
+    get_type_info : Proc(IMXReaderControl*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMXReaderControl*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMXReaderControl*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    abort : Proc(IMXReaderControl*, HRESULT)
+    resume : Proc(IMXReaderControl*, HRESULT)
+    suspend : Proc(IMXReaderControl*, HRESULT)
   end
 
   IMXReaderControl_GUID = "808f4e35-8d5a-4fbe-8466-33a41279ed30"
@@ -3011,14 +3011,14 @@ lib LibWin32
   end
 
   struct IMXSchemaDeclHandlerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    schema_element_decl : UInt64
+    query_interface : Proc(IMXSchemaDeclHandler*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMXSchemaDeclHandler*, UInt32)
+    release : Proc(IMXSchemaDeclHandler*, UInt32)
+    get_type_info_count : Proc(IMXSchemaDeclHandler*, UInt32*, HRESULT)
+    get_type_info : Proc(IMXSchemaDeclHandler*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMXSchemaDeclHandler*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMXSchemaDeclHandler*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    schema_element_decl : Proc(IMXSchemaDeclHandler*, ISchemaElement, HRESULT)
   end
 
   IMXSchemaDeclHandler_GUID = "fa4bb38c-faf9-4cca-9302-d1dd0fe520db"
@@ -3028,16 +3028,16 @@ lib LibWin32
   end
 
   struct IMXNamespacePrefixesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_item : UInt64
-    get_length : UInt64
-    get__new_enum : UInt64
+    query_interface : Proc(IMXNamespacePrefixes*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMXNamespacePrefixes*, UInt32)
+    release : Proc(IMXNamespacePrefixes*, UInt32)
+    get_type_info_count : Proc(IMXNamespacePrefixes*, UInt32*, HRESULT)
+    get_type_info : Proc(IMXNamespacePrefixes*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMXNamespacePrefixes*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMXNamespacePrefixes*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_item : Proc(IMXNamespacePrefixes*, Int32, UInt8**, HRESULT)
+    get_length : Proc(IMXNamespacePrefixes*, Int32*, HRESULT)
+    get__new_enum : Proc(IMXNamespacePrefixes*, IUnknown*, HRESULT)
   end
 
   IMXNamespacePrefixes_GUID = "c90352f4-643c-4fbc-bb23-e996eb2d51fd"
@@ -3047,24 +3047,24 @@ lib LibWin32
   end
 
   struct IVBMXNamespaceManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    put_allow_override : UInt64
-    get_allow_override : UInt64
-    reset : UInt64
-    push_context : UInt64
-    push_node_context : UInt64
-    pop_context : UInt64
-    declare_prefix : UInt64
-    get_declared_prefixes : UInt64
-    get_prefixes : UInt64
-    get_uri : UInt64
-    get_uri_from_node : UInt64
+    query_interface : Proc(IVBMXNamespaceManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVBMXNamespaceManager*, UInt32)
+    release : Proc(IVBMXNamespaceManager*, UInt32)
+    get_type_info_count : Proc(IVBMXNamespaceManager*, UInt32*, HRESULT)
+    get_type_info : Proc(IVBMXNamespaceManager*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IVBMXNamespaceManager*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IVBMXNamespaceManager*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    put_allow_override : Proc(IVBMXNamespaceManager*, Int16, HRESULT)
+    get_allow_override : Proc(IVBMXNamespaceManager*, Int16*, HRESULT)
+    reset : Proc(IVBMXNamespaceManager*, HRESULT)
+    push_context : Proc(IVBMXNamespaceManager*, HRESULT)
+    push_node_context : Proc(IVBMXNamespaceManager*, IXMLDOMNode, Int16, HRESULT)
+    pop_context : Proc(IVBMXNamespaceManager*, HRESULT)
+    declare_prefix : Proc(IVBMXNamespaceManager*, UInt8*, UInt8*, HRESULT)
+    get_declared_prefixes : Proc(IVBMXNamespaceManager*, IMXNamespacePrefixes*, HRESULT)
+    get_prefixes : Proc(IVBMXNamespaceManager*, UInt8*, IMXNamespacePrefixes*, HRESULT)
+    get_uri : Proc(IVBMXNamespaceManager*, UInt8*, VARIANT*, HRESULT)
+    get_uri_from_node : Proc(IVBMXNamespaceManager*, UInt8*, IXMLDOMNode, VARIANT*, HRESULT)
   end
 
   IVBMXNamespaceManager_GUID = "c90352f5-643c-4fbc-bb23-e996eb2d51fd"
@@ -3074,19 +3074,19 @@ lib LibWin32
   end
 
   struct IMXNamespaceManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    put_allow_override : UInt64
-    get_allow_override : UInt64
-    reset : UInt64
-    push_context : UInt64
-    push_node_context : UInt64
-    pop_context : UInt64
-    declare_prefix : UInt64
-    get_declared_prefix : UInt64
-    get_prefix : UInt64
-    get_uri : UInt64
+    query_interface : Proc(IMXNamespaceManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMXNamespaceManager*, UInt32)
+    release : Proc(IMXNamespaceManager*, UInt32)
+    put_allow_override : Proc(IMXNamespaceManager*, Int16, HRESULT)
+    get_allow_override : Proc(IMXNamespaceManager*, Int16*, HRESULT)
+    reset : Proc(IMXNamespaceManager*, HRESULT)
+    push_context : Proc(IMXNamespaceManager*, HRESULT)
+    push_node_context : Proc(IMXNamespaceManager*, IXMLDOMNode, Int16, HRESULT)
+    pop_context : Proc(IMXNamespaceManager*, HRESULT)
+    declare_prefix : Proc(IMXNamespaceManager*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    get_declared_prefix : Proc(IMXNamespaceManager*, Int32, Char*, Int32*, HRESULT)
+    get_prefix : Proc(IMXNamespaceManager*, LibC::LPWSTR, Int32, Char*, Int32*, HRESULT)
+    get_uri : Proc(IMXNamespaceManager*, LibC::LPWSTR, IXMLDOMNode, Char*, Int32*, HRESULT)
   end
 
   IMXNamespaceManager_GUID = "c90352f6-643c-4fbc-bb23-e996eb2d51fd"
@@ -3096,25 +3096,25 @@ lib LibWin32
   end
 
   struct IMXXMLFilterVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_feature : UInt64
-    put_feature : UInt64
-    get_property : UInt64
-    put_property : UInt64
-    get_entity_resolver : UInt64
-    putref_entity_resolver : UInt64
-    get_content_handler : UInt64
-    putref_content_handler : UInt64
-    get_dtd_handler : UInt64
-    putref_dtd_handler : UInt64
-    get_error_handler : UInt64
-    putref_error_handler : UInt64
+    query_interface : Proc(IMXXMLFilter*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMXXMLFilter*, UInt32)
+    release : Proc(IMXXMLFilter*, UInt32)
+    get_type_info_count : Proc(IMXXMLFilter*, UInt32*, HRESULT)
+    get_type_info : Proc(IMXXMLFilter*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IMXXMLFilter*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IMXXMLFilter*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_feature : Proc(IMXXMLFilter*, UInt8*, Int16*, HRESULT)
+    put_feature : Proc(IMXXMLFilter*, UInt8*, Int16, HRESULT)
+    get_property : Proc(IMXXMLFilter*, UInt8*, VARIANT*, HRESULT)
+    put_property : Proc(IMXXMLFilter*, UInt8*, VARIANT, HRESULT)
+    get_entity_resolver : Proc(IMXXMLFilter*, IUnknown*, HRESULT)
+    putref_entity_resolver : Proc(IMXXMLFilter*, IUnknown, HRESULT)
+    get_content_handler : Proc(IMXXMLFilter*, IUnknown*, HRESULT)
+    putref_content_handler : Proc(IMXXMLFilter*, IUnknown, HRESULT)
+    get_dtd_handler : Proc(IMXXMLFilter*, IUnknown*, HRESULT)
+    putref_dtd_handler : Proc(IMXXMLFilter*, IUnknown, HRESULT)
+    get_error_handler : Proc(IMXXMLFilter*, IUnknown*, HRESULT)
+    putref_error_handler : Proc(IMXXMLFilter*, IUnknown, HRESULT)
   end
 
   IMXXMLFilter_GUID = "c90352f7-643c-4fbc-bb23-e996eb2d51fd"
@@ -3124,25 +3124,25 @@ lib LibWin32
   end
 
   struct IXMLDOMSchemaCollection2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    add : UInt64
-    get : UInt64
-    remove : UInt64
-    get_length : UInt64
-    get_namespace_uri : UInt64
-    add_collection : UInt64
-    get__new_enum : UInt64
-    validate : UInt64
-    put_validate_on_load : UInt64
-    get_validate_on_load : UInt64
-    get_schema : UInt64
-    get_declaration : UInt64
+    query_interface : Proc(IXMLDOMSchemaCollection2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLDOMSchemaCollection2*, UInt32)
+    release : Proc(IXMLDOMSchemaCollection2*, UInt32)
+    get_type_info_count : Proc(IXMLDOMSchemaCollection2*, UInt32*, HRESULT)
+    get_type_info : Proc(IXMLDOMSchemaCollection2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IXMLDOMSchemaCollection2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IXMLDOMSchemaCollection2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    add : Proc(IXMLDOMSchemaCollection2*, UInt8*, VARIANT, HRESULT)
+    get : Proc(IXMLDOMSchemaCollection2*, UInt8*, IXMLDOMNode*, HRESULT)
+    remove : Proc(IXMLDOMSchemaCollection2*, UInt8*, HRESULT)
+    get_length : Proc(IXMLDOMSchemaCollection2*, Int32*, HRESULT)
+    get_namespace_uri : Proc(IXMLDOMSchemaCollection2*, Int32, UInt8**, HRESULT)
+    add_collection : Proc(IXMLDOMSchemaCollection2*, IXMLDOMSchemaCollection, HRESULT)
+    get__new_enum : Proc(IXMLDOMSchemaCollection2*, IUnknown*, HRESULT)
+    validate : Proc(IXMLDOMSchemaCollection2*, HRESULT)
+    put_validate_on_load : Proc(IXMLDOMSchemaCollection2*, Int16, HRESULT)
+    get_validate_on_load : Proc(IXMLDOMSchemaCollection2*, Int16*, HRESULT)
+    get_schema : Proc(IXMLDOMSchemaCollection2*, UInt8*, ISchema*, HRESULT)
+    get_declaration : Proc(IXMLDOMSchemaCollection2*, IXMLDOMNode, ISchemaItem*, HRESULT)
   end
 
   IXMLDOMSchemaCollection2_GUID = "50ea08b0-dd1b-4664-9a50-c2f40f4bd79a"
@@ -3152,16 +3152,16 @@ lib LibWin32
   end
 
   struct ISchemaStringCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_item : UInt64
-    get_length : UInt64
-    get__new_enum : UInt64
+    query_interface : Proc(ISchemaStringCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISchemaStringCollection*, UInt32)
+    release : Proc(ISchemaStringCollection*, UInt32)
+    get_type_info_count : Proc(ISchemaStringCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(ISchemaStringCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISchemaStringCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISchemaStringCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_item : Proc(ISchemaStringCollection*, Int32, UInt8**, HRESULT)
+    get_length : Proc(ISchemaStringCollection*, Int32*, HRESULT)
+    get__new_enum : Proc(ISchemaStringCollection*, IUnknown*, HRESULT)
   end
 
   ISchemaStringCollection_GUID = "50ea08b1-dd1b-4664-9a50-c2f40f4bd79a"
@@ -3171,18 +3171,18 @@ lib LibWin32
   end
 
   struct ISchemaItemCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_item : UInt64
-    item_by_name : UInt64
-    item_by_q_name : UInt64
-    get_length : UInt64
-    get__new_enum : UInt64
+    query_interface : Proc(ISchemaItemCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISchemaItemCollection*, UInt32)
+    release : Proc(ISchemaItemCollection*, UInt32)
+    get_type_info_count : Proc(ISchemaItemCollection*, UInt32*, HRESULT)
+    get_type_info : Proc(ISchemaItemCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISchemaItemCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISchemaItemCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_item : Proc(ISchemaItemCollection*, Int32, ISchemaItem*, HRESULT)
+    item_by_name : Proc(ISchemaItemCollection*, UInt8*, ISchemaItem*, HRESULT)
+    item_by_q_name : Proc(ISchemaItemCollection*, UInt8*, UInt8*, ISchemaItem*, HRESULT)
+    get_length : Proc(ISchemaItemCollection*, Int32*, HRESULT)
+    get__new_enum : Proc(ISchemaItemCollection*, IUnknown*, HRESULT)
   end
 
   ISchemaItemCollection_GUID = "50ea08b2-dd1b-4664-9a50-c2f40f4bd79a"
@@ -3192,20 +3192,20 @@ lib LibWin32
   end
 
   struct ISchemaItemVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_schema : UInt64
-    get_id : UInt64
-    get_item_type : UInt64
-    get_unhandled_attributes : UInt64
-    write_annotation : UInt64
+    query_interface : Proc(ISchemaItem*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISchemaItem*, UInt32)
+    release : Proc(ISchemaItem*, UInt32)
+    get_type_info_count : Proc(ISchemaItem*, UInt32*, HRESULT)
+    get_type_info : Proc(ISchemaItem*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISchemaItem*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISchemaItem*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_name : Proc(ISchemaItem*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(ISchemaItem*, UInt8**, HRESULT)
+    get_schema : Proc(ISchemaItem*, ISchema*, HRESULT)
+    get_id : Proc(ISchemaItem*, UInt8**, HRESULT)
+    get_item_type : Proc(ISchemaItem*, SOMITEMTYPE*, HRESULT)
+    get_unhandled_attributes : Proc(ISchemaItem*, IVBSAXAttributes*, HRESULT)
+    write_annotation : Proc(ISchemaItem*, IUnknown, Int16*, HRESULT)
   end
 
   ISchemaItem_GUID = "50ea08b3-dd1b-4664-9a50-c2f40f4bd79a"
@@ -3215,29 +3215,29 @@ lib LibWin32
   end
 
   struct ISchemaVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_schema : UInt64
-    get_id : UInt64
-    get_item_type : UInt64
-    get_unhandled_attributes : UInt64
-    write_annotation : UInt64
-    get_target_namespace : UInt64
-    get_version : UInt64
-    get_types : UInt64
-    get_elements : UInt64
-    get_attributes : UInt64
-    get_attribute_groups : UInt64
-    get_model_groups : UInt64
-    get_notations : UInt64
-    get_schema_locations : UInt64
+    query_interface : Proc(ISchema*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISchema*, UInt32)
+    release : Proc(ISchema*, UInt32)
+    get_type_info_count : Proc(ISchema*, UInt32*, HRESULT)
+    get_type_info : Proc(ISchema*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISchema*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISchema*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_name : Proc(ISchema*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(ISchema*, UInt8**, HRESULT)
+    get_schema : Proc(ISchema*, ISchema*, HRESULT)
+    get_id : Proc(ISchema*, UInt8**, HRESULT)
+    get_item_type : Proc(ISchema*, SOMITEMTYPE*, HRESULT)
+    get_unhandled_attributes : Proc(ISchema*, IVBSAXAttributes*, HRESULT)
+    write_annotation : Proc(ISchema*, IUnknown, Int16*, HRESULT)
+    get_target_namespace : Proc(ISchema*, UInt8**, HRESULT)
+    get_version : Proc(ISchema*, UInt8**, HRESULT)
+    get_types : Proc(ISchema*, ISchemaItemCollection*, HRESULT)
+    get_elements : Proc(ISchema*, ISchemaItemCollection*, HRESULT)
+    get_attributes : Proc(ISchema*, ISchemaItemCollection*, HRESULT)
+    get_attribute_groups : Proc(ISchema*, ISchemaItemCollection*, HRESULT)
+    get_model_groups : Proc(ISchema*, ISchemaItemCollection*, HRESULT)
+    get_notations : Proc(ISchema*, ISchemaItemCollection*, HRESULT)
+    get_schema_locations : Proc(ISchema*, ISchemaStringCollection*, HRESULT)
   end
 
   ISchema_GUID = "50ea08b4-dd1b-4664-9a50-c2f40f4bd79a"
@@ -3247,22 +3247,22 @@ lib LibWin32
   end
 
   struct ISchemaParticleVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_schema : UInt64
-    get_id : UInt64
-    get_item_type : UInt64
-    get_unhandled_attributes : UInt64
-    write_annotation : UInt64
-    get_min_occurs : UInt64
-    get_max_occurs : UInt64
+    query_interface : Proc(ISchemaParticle*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISchemaParticle*, UInt32)
+    release : Proc(ISchemaParticle*, UInt32)
+    get_type_info_count : Proc(ISchemaParticle*, UInt32*, HRESULT)
+    get_type_info : Proc(ISchemaParticle*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISchemaParticle*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISchemaParticle*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_name : Proc(ISchemaParticle*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(ISchemaParticle*, UInt8**, HRESULT)
+    get_schema : Proc(ISchemaParticle*, ISchema*, HRESULT)
+    get_id : Proc(ISchemaParticle*, UInt8**, HRESULT)
+    get_item_type : Proc(ISchemaParticle*, SOMITEMTYPE*, HRESULT)
+    get_unhandled_attributes : Proc(ISchemaParticle*, IVBSAXAttributes*, HRESULT)
+    write_annotation : Proc(ISchemaParticle*, IUnknown, Int16*, HRESULT)
+    get_min_occurs : Proc(ISchemaParticle*, VARIANT*, HRESULT)
+    get_max_occurs : Proc(ISchemaParticle*, VARIANT*, HRESULT)
   end
 
   ISchemaParticle_GUID = "50ea08b5-dd1b-4664-9a50-c2f40f4bd79a"
@@ -3272,26 +3272,26 @@ lib LibWin32
   end
 
   struct ISchemaAttributeVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_schema : UInt64
-    get_id : UInt64
-    get_item_type : UInt64
-    get_unhandled_attributes : UInt64
-    write_annotation : UInt64
-    get_type : UInt64
-    get_scope : UInt64
-    get_default_value : UInt64
-    get_fixed_value : UInt64
-    get_use : UInt64
-    get_is_reference : UInt64
+    query_interface : Proc(ISchemaAttribute*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISchemaAttribute*, UInt32)
+    release : Proc(ISchemaAttribute*, UInt32)
+    get_type_info_count : Proc(ISchemaAttribute*, UInt32*, HRESULT)
+    get_type_info : Proc(ISchemaAttribute*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISchemaAttribute*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISchemaAttribute*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_name : Proc(ISchemaAttribute*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(ISchemaAttribute*, UInt8**, HRESULT)
+    get_schema : Proc(ISchemaAttribute*, ISchema*, HRESULT)
+    get_id : Proc(ISchemaAttribute*, UInt8**, HRESULT)
+    get_item_type : Proc(ISchemaAttribute*, SOMITEMTYPE*, HRESULT)
+    get_unhandled_attributes : Proc(ISchemaAttribute*, IVBSAXAttributes*, HRESULT)
+    write_annotation : Proc(ISchemaAttribute*, IUnknown, Int16*, HRESULT)
+    get_type : Proc(ISchemaAttribute*, ISchemaType*, HRESULT)
+    get_scope : Proc(ISchemaAttribute*, ISchemaComplexType*, HRESULT)
+    get_default_value : Proc(ISchemaAttribute*, UInt8**, HRESULT)
+    get_fixed_value : Proc(ISchemaAttribute*, UInt8**, HRESULT)
+    get_use : Proc(ISchemaAttribute*, SCHEMAUSE*, HRESULT)
+    get_is_reference : Proc(ISchemaAttribute*, Int16*, HRESULT)
   end
 
   ISchemaAttribute_GUID = "50ea08b6-dd1b-4664-9a50-c2f40f4bd79a"
@@ -3301,33 +3301,33 @@ lib LibWin32
   end
 
   struct ISchemaElementVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_schema : UInt64
-    get_id : UInt64
-    get_item_type : UInt64
-    get_unhandled_attributes : UInt64
-    write_annotation : UInt64
-    get_min_occurs : UInt64
-    get_max_occurs : UInt64
-    get_type : UInt64
-    get_scope : UInt64
-    get_default_value : UInt64
-    get_fixed_value : UInt64
-    get_is_nillable : UInt64
-    get_identity_constraints : UInt64
-    get_substitution_group : UInt64
-    get_substitution_group_exclusions : UInt64
-    get_disallowed_substitutions : UInt64
-    get_is_abstract : UInt64
-    get_is_reference : UInt64
+    query_interface : Proc(ISchemaElement*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISchemaElement*, UInt32)
+    release : Proc(ISchemaElement*, UInt32)
+    get_type_info_count : Proc(ISchemaElement*, UInt32*, HRESULT)
+    get_type_info : Proc(ISchemaElement*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISchemaElement*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISchemaElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_name : Proc(ISchemaElement*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(ISchemaElement*, UInt8**, HRESULT)
+    get_schema : Proc(ISchemaElement*, ISchema*, HRESULT)
+    get_id : Proc(ISchemaElement*, UInt8**, HRESULT)
+    get_item_type : Proc(ISchemaElement*, SOMITEMTYPE*, HRESULT)
+    get_unhandled_attributes : Proc(ISchemaElement*, IVBSAXAttributes*, HRESULT)
+    write_annotation : Proc(ISchemaElement*, IUnknown, Int16*, HRESULT)
+    get_min_occurs : Proc(ISchemaElement*, VARIANT*, HRESULT)
+    get_max_occurs : Proc(ISchemaElement*, VARIANT*, HRESULT)
+    get_type : Proc(ISchemaElement*, ISchemaType*, HRESULT)
+    get_scope : Proc(ISchemaElement*, ISchemaComplexType*, HRESULT)
+    get_default_value : Proc(ISchemaElement*, UInt8**, HRESULT)
+    get_fixed_value : Proc(ISchemaElement*, UInt8**, HRESULT)
+    get_is_nillable : Proc(ISchemaElement*, Int16*, HRESULT)
+    get_identity_constraints : Proc(ISchemaElement*, ISchemaItemCollection*, HRESULT)
+    get_substitution_group : Proc(ISchemaElement*, ISchemaElement*, HRESULT)
+    get_substitution_group_exclusions : Proc(ISchemaElement*, SCHEMADERIVATIONMETHOD*, HRESULT)
+    get_disallowed_substitutions : Proc(ISchemaElement*, SCHEMADERIVATIONMETHOD*, HRESULT)
+    get_is_abstract : Proc(ISchemaElement*, Int16*, HRESULT)
+    get_is_reference : Proc(ISchemaElement*, Int16*, HRESULT)
   end
 
   ISchemaElement_GUID = "50ea08b7-dd1b-4664-9a50-c2f40f4bd79a"
@@ -3337,37 +3337,37 @@ lib LibWin32
   end
 
   struct ISchemaTypeVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_schema : UInt64
-    get_id : UInt64
-    get_item_type : UInt64
-    get_unhandled_attributes : UInt64
-    write_annotation : UInt64
-    get_base_types : UInt64
-    get_final : UInt64
-    get_variety : UInt64
-    get_derived_by : UInt64
-    is_valid : UInt64
-    get_min_exclusive : UInt64
-    get_min_inclusive : UInt64
-    get_max_exclusive : UInt64
-    get_max_inclusive : UInt64
-    get_total_digits : UInt64
-    get_fraction_digits : UInt64
-    get_length : UInt64
-    get_min_length : UInt64
-    get_max_length : UInt64
-    get_enumeration : UInt64
-    get_whitespace : UInt64
-    get_patterns : UInt64
+    query_interface : Proc(ISchemaType*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISchemaType*, UInt32)
+    release : Proc(ISchemaType*, UInt32)
+    get_type_info_count : Proc(ISchemaType*, UInt32*, HRESULT)
+    get_type_info : Proc(ISchemaType*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISchemaType*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISchemaType*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_name : Proc(ISchemaType*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(ISchemaType*, UInt8**, HRESULT)
+    get_schema : Proc(ISchemaType*, ISchema*, HRESULT)
+    get_id : Proc(ISchemaType*, UInt8**, HRESULT)
+    get_item_type : Proc(ISchemaType*, SOMITEMTYPE*, HRESULT)
+    get_unhandled_attributes : Proc(ISchemaType*, IVBSAXAttributes*, HRESULT)
+    write_annotation : Proc(ISchemaType*, IUnknown, Int16*, HRESULT)
+    get_base_types : Proc(ISchemaType*, ISchemaItemCollection*, HRESULT)
+    get_final : Proc(ISchemaType*, SCHEMADERIVATIONMETHOD*, HRESULT)
+    get_variety : Proc(ISchemaType*, SCHEMATYPEVARIETY*, HRESULT)
+    get_derived_by : Proc(ISchemaType*, SCHEMADERIVATIONMETHOD*, HRESULT)
+    is_valid : Proc(ISchemaType*, UInt8*, Int16*, HRESULT)
+    get_min_exclusive : Proc(ISchemaType*, UInt8**, HRESULT)
+    get_min_inclusive : Proc(ISchemaType*, UInt8**, HRESULT)
+    get_max_exclusive : Proc(ISchemaType*, UInt8**, HRESULT)
+    get_max_inclusive : Proc(ISchemaType*, UInt8**, HRESULT)
+    get_total_digits : Proc(ISchemaType*, VARIANT*, HRESULT)
+    get_fraction_digits : Proc(ISchemaType*, VARIANT*, HRESULT)
+    get_length : Proc(ISchemaType*, VARIANT*, HRESULT)
+    get_min_length : Proc(ISchemaType*, VARIANT*, HRESULT)
+    get_max_length : Proc(ISchemaType*, VARIANT*, HRESULT)
+    get_enumeration : Proc(ISchemaType*, ISchemaStringCollection*, HRESULT)
+    get_whitespace : Proc(ISchemaType*, SCHEMAWHITESPACE*, HRESULT)
+    get_patterns : Proc(ISchemaType*, ISchemaStringCollection*, HRESULT)
   end
 
   ISchemaType_GUID = "50ea08b8-dd1b-4664-9a50-c2f40f4bd79a"
@@ -3377,43 +3377,43 @@ lib LibWin32
   end
 
   struct ISchemaComplexTypeVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_schema : UInt64
-    get_id : UInt64
-    get_item_type : UInt64
-    get_unhandled_attributes : UInt64
-    write_annotation : UInt64
-    get_base_types : UInt64
-    get_final : UInt64
-    get_variety : UInt64
-    get_derived_by : UInt64
-    is_valid : UInt64
-    get_min_exclusive : UInt64
-    get_min_inclusive : UInt64
-    get_max_exclusive : UInt64
-    get_max_inclusive : UInt64
-    get_total_digits : UInt64
-    get_fraction_digits : UInt64
-    get_length : UInt64
-    get_min_length : UInt64
-    get_max_length : UInt64
-    get_enumeration : UInt64
-    get_whitespace : UInt64
-    get_patterns : UInt64
-    get_is_abstract : UInt64
-    get_any_attribute : UInt64
-    get_attributes : UInt64
-    get_content_type : UInt64
-    get_content_model : UInt64
-    get_prohibited_substitutions : UInt64
+    query_interface : Proc(ISchemaComplexType*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISchemaComplexType*, UInt32)
+    release : Proc(ISchemaComplexType*, UInt32)
+    get_type_info_count : Proc(ISchemaComplexType*, UInt32*, HRESULT)
+    get_type_info : Proc(ISchemaComplexType*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISchemaComplexType*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISchemaComplexType*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_name : Proc(ISchemaComplexType*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(ISchemaComplexType*, UInt8**, HRESULT)
+    get_schema : Proc(ISchemaComplexType*, ISchema*, HRESULT)
+    get_id : Proc(ISchemaComplexType*, UInt8**, HRESULT)
+    get_item_type : Proc(ISchemaComplexType*, SOMITEMTYPE*, HRESULT)
+    get_unhandled_attributes : Proc(ISchemaComplexType*, IVBSAXAttributes*, HRESULT)
+    write_annotation : Proc(ISchemaComplexType*, IUnknown, Int16*, HRESULT)
+    get_base_types : Proc(ISchemaComplexType*, ISchemaItemCollection*, HRESULT)
+    get_final : Proc(ISchemaComplexType*, SCHEMADERIVATIONMETHOD*, HRESULT)
+    get_variety : Proc(ISchemaComplexType*, SCHEMATYPEVARIETY*, HRESULT)
+    get_derived_by : Proc(ISchemaComplexType*, SCHEMADERIVATIONMETHOD*, HRESULT)
+    is_valid : Proc(ISchemaComplexType*, UInt8*, Int16*, HRESULT)
+    get_min_exclusive : Proc(ISchemaComplexType*, UInt8**, HRESULT)
+    get_min_inclusive : Proc(ISchemaComplexType*, UInt8**, HRESULT)
+    get_max_exclusive : Proc(ISchemaComplexType*, UInt8**, HRESULT)
+    get_max_inclusive : Proc(ISchemaComplexType*, UInt8**, HRESULT)
+    get_total_digits : Proc(ISchemaComplexType*, VARIANT*, HRESULT)
+    get_fraction_digits : Proc(ISchemaComplexType*, VARIANT*, HRESULT)
+    get_length : Proc(ISchemaComplexType*, VARIANT*, HRESULT)
+    get_min_length : Proc(ISchemaComplexType*, VARIANT*, HRESULT)
+    get_max_length : Proc(ISchemaComplexType*, VARIANT*, HRESULT)
+    get_enumeration : Proc(ISchemaComplexType*, ISchemaStringCollection*, HRESULT)
+    get_whitespace : Proc(ISchemaComplexType*, SCHEMAWHITESPACE*, HRESULT)
+    get_patterns : Proc(ISchemaComplexType*, ISchemaStringCollection*, HRESULT)
+    get_is_abstract : Proc(ISchemaComplexType*, Int16*, HRESULT)
+    get_any_attribute : Proc(ISchemaComplexType*, ISchemaAny*, HRESULT)
+    get_attributes : Proc(ISchemaComplexType*, ISchemaItemCollection*, HRESULT)
+    get_content_type : Proc(ISchemaComplexType*, SCHEMACONTENTTYPE*, HRESULT)
+    get_content_model : Proc(ISchemaComplexType*, ISchemaModelGroup*, HRESULT)
+    get_prohibited_substitutions : Proc(ISchemaComplexType*, SCHEMADERIVATIONMETHOD*, HRESULT)
   end
 
   ISchemaComplexType_GUID = "50ea08b9-dd1b-4664-9a50-c2f40f4bd79a"
@@ -3423,22 +3423,22 @@ lib LibWin32
   end
 
   struct ISchemaAttributeGroupVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_schema : UInt64
-    get_id : UInt64
-    get_item_type : UInt64
-    get_unhandled_attributes : UInt64
-    write_annotation : UInt64
-    get_any_attribute : UInt64
-    get_attributes : UInt64
+    query_interface : Proc(ISchemaAttributeGroup*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISchemaAttributeGroup*, UInt32)
+    release : Proc(ISchemaAttributeGroup*, UInt32)
+    get_type_info_count : Proc(ISchemaAttributeGroup*, UInt32*, HRESULT)
+    get_type_info : Proc(ISchemaAttributeGroup*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISchemaAttributeGroup*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISchemaAttributeGroup*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_name : Proc(ISchemaAttributeGroup*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(ISchemaAttributeGroup*, UInt8**, HRESULT)
+    get_schema : Proc(ISchemaAttributeGroup*, ISchema*, HRESULT)
+    get_id : Proc(ISchemaAttributeGroup*, UInt8**, HRESULT)
+    get_item_type : Proc(ISchemaAttributeGroup*, SOMITEMTYPE*, HRESULT)
+    get_unhandled_attributes : Proc(ISchemaAttributeGroup*, IVBSAXAttributes*, HRESULT)
+    write_annotation : Proc(ISchemaAttributeGroup*, IUnknown, Int16*, HRESULT)
+    get_any_attribute : Proc(ISchemaAttributeGroup*, ISchemaAny*, HRESULT)
+    get_attributes : Proc(ISchemaAttributeGroup*, ISchemaItemCollection*, HRESULT)
   end
 
   ISchemaAttributeGroup_GUID = "50ea08ba-dd1b-4664-9a50-c2f40f4bd79a"
@@ -3448,23 +3448,23 @@ lib LibWin32
   end
 
   struct ISchemaModelGroupVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_schema : UInt64
-    get_id : UInt64
-    get_item_type : UInt64
-    get_unhandled_attributes : UInt64
-    write_annotation : UInt64
-    get_min_occurs : UInt64
-    get_max_occurs : UInt64
-    get_particles : UInt64
+    query_interface : Proc(ISchemaModelGroup*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISchemaModelGroup*, UInt32)
+    release : Proc(ISchemaModelGroup*, UInt32)
+    get_type_info_count : Proc(ISchemaModelGroup*, UInt32*, HRESULT)
+    get_type_info : Proc(ISchemaModelGroup*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISchemaModelGroup*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISchemaModelGroup*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_name : Proc(ISchemaModelGroup*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(ISchemaModelGroup*, UInt8**, HRESULT)
+    get_schema : Proc(ISchemaModelGroup*, ISchema*, HRESULT)
+    get_id : Proc(ISchemaModelGroup*, UInt8**, HRESULT)
+    get_item_type : Proc(ISchemaModelGroup*, SOMITEMTYPE*, HRESULT)
+    get_unhandled_attributes : Proc(ISchemaModelGroup*, IVBSAXAttributes*, HRESULT)
+    write_annotation : Proc(ISchemaModelGroup*, IUnknown, Int16*, HRESULT)
+    get_min_occurs : Proc(ISchemaModelGroup*, VARIANT*, HRESULT)
+    get_max_occurs : Proc(ISchemaModelGroup*, VARIANT*, HRESULT)
+    get_particles : Proc(ISchemaModelGroup*, ISchemaItemCollection*, HRESULT)
   end
 
   ISchemaModelGroup_GUID = "50ea08bb-dd1b-4664-9a50-c2f40f4bd79a"
@@ -3474,24 +3474,24 @@ lib LibWin32
   end
 
   struct ISchemaAnyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_schema : UInt64
-    get_id : UInt64
-    get_item_type : UInt64
-    get_unhandled_attributes : UInt64
-    write_annotation : UInt64
-    get_min_occurs : UInt64
-    get_max_occurs : UInt64
-    get_namespaces : UInt64
-    get_process_contents : UInt64
+    query_interface : Proc(ISchemaAny*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISchemaAny*, UInt32)
+    release : Proc(ISchemaAny*, UInt32)
+    get_type_info_count : Proc(ISchemaAny*, UInt32*, HRESULT)
+    get_type_info : Proc(ISchemaAny*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISchemaAny*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISchemaAny*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_name : Proc(ISchemaAny*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(ISchemaAny*, UInt8**, HRESULT)
+    get_schema : Proc(ISchemaAny*, ISchema*, HRESULT)
+    get_id : Proc(ISchemaAny*, UInt8**, HRESULT)
+    get_item_type : Proc(ISchemaAny*, SOMITEMTYPE*, HRESULT)
+    get_unhandled_attributes : Proc(ISchemaAny*, IVBSAXAttributes*, HRESULT)
+    write_annotation : Proc(ISchemaAny*, IUnknown, Int16*, HRESULT)
+    get_min_occurs : Proc(ISchemaAny*, VARIANT*, HRESULT)
+    get_max_occurs : Proc(ISchemaAny*, VARIANT*, HRESULT)
+    get_namespaces : Proc(ISchemaAny*, ISchemaStringCollection*, HRESULT)
+    get_process_contents : Proc(ISchemaAny*, SCHEMAPROCESSCONTENTS*, HRESULT)
   end
 
   ISchemaAny_GUID = "50ea08bc-dd1b-4664-9a50-c2f40f4bd79a"
@@ -3501,23 +3501,23 @@ lib LibWin32
   end
 
   struct ISchemaIdentityConstraintVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_schema : UInt64
-    get_id : UInt64
-    get_item_type : UInt64
-    get_unhandled_attributes : UInt64
-    write_annotation : UInt64
-    get_selector : UInt64
-    get_fields : UInt64
-    get_referenced_key : UInt64
+    query_interface : Proc(ISchemaIdentityConstraint*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISchemaIdentityConstraint*, UInt32)
+    release : Proc(ISchemaIdentityConstraint*, UInt32)
+    get_type_info_count : Proc(ISchemaIdentityConstraint*, UInt32*, HRESULT)
+    get_type_info : Proc(ISchemaIdentityConstraint*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISchemaIdentityConstraint*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISchemaIdentityConstraint*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_name : Proc(ISchemaIdentityConstraint*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(ISchemaIdentityConstraint*, UInt8**, HRESULT)
+    get_schema : Proc(ISchemaIdentityConstraint*, ISchema*, HRESULT)
+    get_id : Proc(ISchemaIdentityConstraint*, UInt8**, HRESULT)
+    get_item_type : Proc(ISchemaIdentityConstraint*, SOMITEMTYPE*, HRESULT)
+    get_unhandled_attributes : Proc(ISchemaIdentityConstraint*, IVBSAXAttributes*, HRESULT)
+    write_annotation : Proc(ISchemaIdentityConstraint*, IUnknown, Int16*, HRESULT)
+    get_selector : Proc(ISchemaIdentityConstraint*, UInt8**, HRESULT)
+    get_fields : Proc(ISchemaIdentityConstraint*, ISchemaStringCollection*, HRESULT)
+    get_referenced_key : Proc(ISchemaIdentityConstraint*, ISchemaIdentityConstraint*, HRESULT)
   end
 
   ISchemaIdentityConstraint_GUID = "50ea08bd-dd1b-4664-9a50-c2f40f4bd79a"
@@ -3527,22 +3527,22 @@ lib LibWin32
   end
 
   struct ISchemaNotationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_name : UInt64
-    get_namespace_uri : UInt64
-    get_schema : UInt64
-    get_id : UInt64
-    get_item_type : UInt64
-    get_unhandled_attributes : UInt64
-    write_annotation : UInt64
-    get_system_identifier : UInt64
-    get_public_identifier : UInt64
+    query_interface : Proc(ISchemaNotation*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISchemaNotation*, UInt32)
+    release : Proc(ISchemaNotation*, UInt32)
+    get_type_info_count : Proc(ISchemaNotation*, UInt32*, HRESULT)
+    get_type_info : Proc(ISchemaNotation*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISchemaNotation*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISchemaNotation*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_name : Proc(ISchemaNotation*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(ISchemaNotation*, UInt8**, HRESULT)
+    get_schema : Proc(ISchemaNotation*, ISchema*, HRESULT)
+    get_id : Proc(ISchemaNotation*, UInt8**, HRESULT)
+    get_item_type : Proc(ISchemaNotation*, SOMITEMTYPE*, HRESULT)
+    get_unhandled_attributes : Proc(ISchemaNotation*, IVBSAXAttributes*, HRESULT)
+    write_annotation : Proc(ISchemaNotation*, IUnknown, Int16*, HRESULT)
+    get_system_identifier : Proc(ISchemaNotation*, UInt8**, HRESULT)
+    get_public_identifier : Proc(ISchemaNotation*, UInt8**, HRESULT)
   end
 
   ISchemaNotation_GUID = "50ea08be-dd1b-4664-9a50-c2f40f4bd79a"
@@ -3552,14 +3552,14 @@ lib LibWin32
   end
 
   struct IXMLHTTPRequest2CallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_redirect : UInt64
-    on_headers_available : UInt64
-    on_data_available : UInt64
-    on_response_received : UInt64
-    on_error : UInt64
+    query_interface : Proc(IXMLHTTPRequest2Callback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLHTTPRequest2Callback*, UInt32)
+    release : Proc(IXMLHTTPRequest2Callback*, UInt32)
+    on_redirect : Proc(IXMLHTTPRequest2Callback*, IXMLHTTPRequest2, LibC::LPWSTR, HRESULT)
+    on_headers_available : Proc(IXMLHTTPRequest2Callback*, IXMLHTTPRequest2, UInt32, LibC::LPWSTR, HRESULT)
+    on_data_available : Proc(IXMLHTTPRequest2Callback*, IXMLHTTPRequest2, ISequentialStream, HRESULT)
+    on_response_received : Proc(IXMLHTTPRequest2Callback*, IXMLHTTPRequest2, ISequentialStream, HRESULT)
+    on_error : Proc(IXMLHTTPRequest2Callback*, IXMLHTTPRequest2, HRESULT, HRESULT)
   end
 
   IXMLHTTPRequest2Callback_GUID = "a44a9299-e321-40de-8866-341b41669162"
@@ -3569,19 +3569,19 @@ lib LibWin32
   end
 
   struct IXMLHTTPRequest2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    open : UInt64
-    send : UInt64
-    abort : UInt64
-    set_cookie : UInt64
-    set_custom_response_stream : UInt64
-    set_property : UInt64
-    set_request_header : UInt64
-    get_all_response_headers : UInt64
-    get_cookie : UInt64
-    get_response_header : UInt64
+    query_interface : Proc(IXMLHTTPRequest2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLHTTPRequest2*, UInt32)
+    release : Proc(IXMLHTTPRequest2*, UInt32)
+    open : Proc(IXMLHTTPRequest2*, LibC::LPWSTR, LibC::LPWSTR, IXMLHTTPRequest2Callback, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    send : Proc(IXMLHTTPRequest2*, ISequentialStream, UInt64, HRESULT)
+    abort : Proc(IXMLHTTPRequest2*, HRESULT)
+    set_cookie : Proc(IXMLHTTPRequest2*, XHR_COOKIE*, UInt32*, HRESULT)
+    set_custom_response_stream : Proc(IXMLHTTPRequest2*, ISequentialStream, HRESULT)
+    set_property : Proc(IXMLHTTPRequest2*, XHR_PROPERTY, UInt64, HRESULT)
+    set_request_header : Proc(IXMLHTTPRequest2*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    get_all_response_headers : Proc(IXMLHTTPRequest2*, UInt16**, HRESULT)
+    get_cookie : Proc(IXMLHTTPRequest2*, LibC::LPWSTR, LibC::LPWSTR, UInt32, UInt32*, XHR_COOKIE**, HRESULT)
+    get_response_header : Proc(IXMLHTTPRequest2*, LibC::LPWSTR, UInt16**, HRESULT)
   end
 
   IXMLHTTPRequest2_GUID = "e5d37dc0-552a-4d52-9cc0-a14d546fbd04"
@@ -3591,16 +3591,16 @@ lib LibWin32
   end
 
   struct IXMLHTTPRequest3CallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_redirect : UInt64
-    on_headers_available : UInt64
-    on_data_available : UInt64
-    on_response_received : UInt64
-    on_error : UInt64
-    on_server_certificate_received : UInt64
-    on_client_certificate_requested : UInt64
+    query_interface : Proc(IXMLHTTPRequest3Callback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLHTTPRequest3Callback*, UInt32)
+    release : Proc(IXMLHTTPRequest3Callback*, UInt32)
+    on_redirect : Proc(IXMLHTTPRequest3Callback*, IXMLHTTPRequest2, LibC::LPWSTR, HRESULT)
+    on_headers_available : Proc(IXMLHTTPRequest3Callback*, IXMLHTTPRequest2, UInt32, LibC::LPWSTR, HRESULT)
+    on_data_available : Proc(IXMLHTTPRequest3Callback*, IXMLHTTPRequest2, ISequentialStream, HRESULT)
+    on_response_received : Proc(IXMLHTTPRequest3Callback*, IXMLHTTPRequest2, ISequentialStream, HRESULT)
+    on_error : Proc(IXMLHTTPRequest3Callback*, IXMLHTTPRequest2, HRESULT, HRESULT)
+    on_server_certificate_received : Proc(IXMLHTTPRequest3Callback*, IXMLHTTPRequest3, UInt32, UInt32, XHR_CERT*, HRESULT)
+    on_client_certificate_requested : Proc(IXMLHTTPRequest3Callback*, IXMLHTTPRequest3, UInt32, UInt16**, HRESULT)
   end
 
   IXMLHTTPRequest3Callback_GUID = "b9e57830-8c6c-4a6f-9c13-47772bb047bb"
@@ -3610,20 +3610,20 @@ lib LibWin32
   end
 
   struct IXMLHTTPRequest3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    open : UInt64
-    send : UInt64
-    abort : UInt64
-    set_cookie : UInt64
-    set_custom_response_stream : UInt64
-    set_property : UInt64
-    set_request_header : UInt64
-    get_all_response_headers : UInt64
-    get_cookie : UInt64
-    get_response_header : UInt64
-    set_client_certificate : UInt64
+    query_interface : Proc(IXMLHTTPRequest3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXMLHTTPRequest3*, UInt32)
+    release : Proc(IXMLHTTPRequest3*, UInt32)
+    open : Proc(IXMLHTTPRequest3*, LibC::LPWSTR, LibC::LPWSTR, IXMLHTTPRequest2Callback, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    send : Proc(IXMLHTTPRequest3*, ISequentialStream, UInt64, HRESULT)
+    abort : Proc(IXMLHTTPRequest3*, HRESULT)
+    set_cookie : Proc(IXMLHTTPRequest3*, XHR_COOKIE*, UInt32*, HRESULT)
+    set_custom_response_stream : Proc(IXMLHTTPRequest3*, ISequentialStream, HRESULT)
+    set_property : Proc(IXMLHTTPRequest3*, XHR_PROPERTY, UInt64, HRESULT)
+    set_request_header : Proc(IXMLHTTPRequest3*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    get_all_response_headers : Proc(IXMLHTTPRequest3*, UInt16**, HRESULT)
+    get_cookie : Proc(IXMLHTTPRequest3*, LibC::LPWSTR, LibC::LPWSTR, UInt32, UInt32*, XHR_COOKIE**, HRESULT)
+    get_response_header : Proc(IXMLHTTPRequest3*, LibC::LPWSTR, UInt16**, HRESULT)
+    set_client_certificate : Proc(IXMLHTTPRequest3*, UInt32, UInt8*, LibC::LPWSTR, HRESULT)
   end
 
   IXMLHTTPRequest3_GUID = "a1c9feee-0617-4f23-9d58-8961ea43567c"
@@ -3634,6128 +3634,6128 @@ lib LibWin32
 
 end
 struct LibWin32::IXMLDOMImplementation
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMImplementation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMImplementation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMImplementation*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMImplementation*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMImplementation*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMImplementation*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMImplementation*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def has_feature(feature : UInt8*, version : UInt8*, hasfeature : Int16*) : HRESULT
-    @lpVtbl.value.has_feature.unsafe_as(Proc(UInt8*, UInt8*, Int16*, HRESULT)).call(feature, version, hasfeature)
+  def has_feature(this : IXMLDOMImplementation*, feature : UInt8*, version : UInt8*, hasfeature : Int16*) : HRESULT
+    @lpVtbl.value.has_feature.call(this, feature, version, hasfeature)
   end
 end
 struct LibWin32::IXMLDOMNode
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMNode*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMNode*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMNode*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMNode*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMNode*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMNode*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMNode*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_node_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_node_name(this : IXMLDOMNode*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_name.call(this, name)
   end
-  def get_node_value(value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  def get_node_value(this : IXMLDOMNode*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_value.call(this, value)
   end
-  def put_node_value(value : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_value.unsafe_as(Proc(VARIANT, HRESULT)).call(value)
+  def put_node_value(this : IXMLDOMNode*, value : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_value.call(this, value)
   end
-  def get_node_type(type : DOMNodeType*) : HRESULT
-    @lpVtbl.value.get_node_type.unsafe_as(Proc(DOMNodeType*, HRESULT)).call(type)
+  def get_node_type(this : IXMLDOMNode*, type : DOMNodeType*) : HRESULT
+    @lpVtbl.value.get_node_type.call(this, type)
   end
-  def get_parent_node(parent : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_parent_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(parent)
+  def get_parent_node(this : IXMLDOMNode*, parent : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_parent_node.call(this, parent)
   end
-  def get_child_nodes(childlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_child_nodes.unsafe_as(Proc(IXMLDOMNodeList*, HRESULT)).call(childlist)
+  def get_child_nodes(this : IXMLDOMNode*, childlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_child_nodes.call(this, childlist)
   end
-  def get_first_child(firstchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_first_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(firstchild)
+  def get_first_child(this : IXMLDOMNode*, firstchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_first_child.call(this, firstchild)
   end
-  def get_last_child(lastchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_last_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(lastchild)
+  def get_last_child(this : IXMLDOMNode*, lastchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_last_child.call(this, lastchild)
   end
-  def get_previous_sibling(previoussibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_previous_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(previoussibling)
+  def get_previous_sibling(this : IXMLDOMNode*, previoussibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_previous_sibling.call(this, previoussibling)
   end
-  def get_next_sibling(nextsibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_next_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(nextsibling)
+  def get_next_sibling(this : IXMLDOMNode*, nextsibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_next_sibling.call(this, nextsibling)
   end
-  def get_attributes(attributemap : IXMLDOMNamedNodeMap*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(IXMLDOMNamedNodeMap*, HRESULT)).call(attributemap)
+  def get_attributes(this : IXMLDOMNode*, attributemap : IXMLDOMNamedNodeMap*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributemap)
   end
-  def insert_before(newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.insert_before.unsafe_as(Proc(IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)).call(newchild, refchild, outnewchild)
+  def insert_before(this : IXMLDOMNode*, newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.insert_before.call(this, newchild, refchild, outnewchild)
   end
-  def replace_child(newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.replace_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, oldchild, outoldchild)
+  def replace_child(this : IXMLDOMNode*, newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.replace_child.call(this, newchild, oldchild, outoldchild)
   end
-  def remove_child(childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(childnode, oldchild)
+  def remove_child(this : IXMLDOMNode*, childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.remove_child.call(this, childnode, oldchild)
   end
-  def append_child(newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.append_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, outnewchild)
+  def append_child(this : IXMLDOMNode*, newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.append_child.call(this, newchild, outnewchild)
   end
-  def has_child_nodes(haschild : Int16*) : HRESULT
-    @lpVtbl.value.has_child_nodes.unsafe_as(Proc(Int16*, HRESULT)).call(haschild)
+  def has_child_nodes(this : IXMLDOMNode*, haschild : Int16*) : HRESULT
+    @lpVtbl.value.has_child_nodes.call(this, haschild)
   end
-  def get_owner_document(xmldomdocument : IXMLDOMDocument*) : HRESULT
-    @lpVtbl.value.get_owner_document.unsafe_as(Proc(IXMLDOMDocument*, HRESULT)).call(xmldomdocument)
+  def get_owner_document(this : IXMLDOMNode*, xmldomdocument : IXMLDOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner_document.call(this, xmldomdocument)
   end
-  def clone_node(deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.clone_node.unsafe_as(Proc(Int16, IXMLDOMNode*, HRESULT)).call(deep, cloneroot)
+  def clone_node(this : IXMLDOMNode*, deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.clone_node.call(this, deep, cloneroot)
   end
-  def get_node_type_string(nodetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_type_string.unsafe_as(Proc(UInt8**, HRESULT)).call(nodetype)
+  def get_node_type_string(this : IXMLDOMNode*, nodetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_type_string.call(this, nodetype)
   end
-  def get_text(text : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(text)
+  def get_text(this : IXMLDOMNode*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, text)
   end
-  def put_text(text : UInt8*) : HRESULT
-    @lpVtbl.value.put_text.unsafe_as(Proc(UInt8*, HRESULT)).call(text)
+  def put_text(this : IXMLDOMNode*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_text.call(this, text)
   end
-  def get_specified(isspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_specified.unsafe_as(Proc(Int16*, HRESULT)).call(isspecified)
+  def get_specified(this : IXMLDOMNode*, isspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_specified.call(this, isspecified)
   end
-  def get_definition(definitionnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_definition.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(definitionnode)
+  def get_definition(this : IXMLDOMNode*, definitionnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_definition.call(this, definitionnode)
   end
-  def get_node_typed_value(typedvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_typed_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(typedvalue)
+  def get_node_typed_value(this : IXMLDOMNode*, typedvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_typed_value.call(this, typedvalue)
   end
-  def put_node_typed_value(typedvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_typed_value.unsafe_as(Proc(VARIANT, HRESULT)).call(typedvalue)
+  def put_node_typed_value(this : IXMLDOMNode*, typedvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_typed_value.call(this, typedvalue)
   end
-  def get_data_type(datatypename : VARIANT*) : HRESULT
-    @lpVtbl.value.get_data_type.unsafe_as(Proc(VARIANT*, HRESULT)).call(datatypename)
+  def get_data_type(this : IXMLDOMNode*, datatypename : VARIANT*) : HRESULT
+    @lpVtbl.value.get_data_type.call(this, datatypename)
   end
-  def put_data_type(datatypename : UInt8*) : HRESULT
-    @lpVtbl.value.put_data_type.unsafe_as(Proc(UInt8*, HRESULT)).call(datatypename)
+  def put_data_type(this : IXMLDOMNode*, datatypename : UInt8*) : HRESULT
+    @lpVtbl.value.put_data_type.call(this, datatypename)
   end
-  def get_xml(xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(xmlstring)
+  def get_xml(this : IXMLDOMNode*, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, xmlstring)
   end
-  def transform_node(stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.transform_node.unsafe_as(Proc(IXMLDOMNode, UInt8**, HRESULT)).call(stylesheet, xmlstring)
+  def transform_node(this : IXMLDOMNode*, stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.transform_node.call(this, stylesheet, xmlstring)
   end
-  def select_nodes(querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.select_nodes.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(querystring, resultlist)
+  def select_nodes(this : IXMLDOMNode*, querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.select_nodes.call(this, querystring, resultlist)
   end
-  def select_single_node(querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.select_single_node.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(querystring, resultnode)
+  def select_single_node(this : IXMLDOMNode*, querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.select_single_node.call(this, querystring, resultnode)
   end
-  def get_parsed(isparsed : Int16*) : HRESULT
-    @lpVtbl.value.get_parsed.unsafe_as(Proc(Int16*, HRESULT)).call(isparsed)
+  def get_parsed(this : IXMLDOMNode*, isparsed : Int16*) : HRESULT
+    @lpVtbl.value.get_parsed.call(this, isparsed)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : IXMLDOMNode*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_prefix(prefixstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_prefix.unsafe_as(Proc(UInt8**, HRESULT)).call(prefixstring)
+  def get_prefix(this : IXMLDOMNode*, prefixstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_prefix.call(this, prefixstring)
   end
-  def get_base_name(namestring : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_name.unsafe_as(Proc(UInt8**, HRESULT)).call(namestring)
+  def get_base_name(this : IXMLDOMNode*, namestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_base_name.call(this, namestring)
   end
-  def transform_node_to_object(stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
-    @lpVtbl.value.transform_node_to_object.unsafe_as(Proc(IXMLDOMNode, VARIANT, HRESULT)).call(stylesheet, outputobject)
+  def transform_node_to_object(this : IXMLDOMNode*, stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
+    @lpVtbl.value.transform_node_to_object.call(this, stylesheet, outputobject)
   end
 end
 struct LibWin32::IXMLDOMDocumentFragment
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMDocumentFragment*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMDocumentFragment*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMDocumentFragment*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMDocumentFragment*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMDocumentFragment*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMDocumentFragment*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMDocumentFragment*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_node_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_node_name(this : IXMLDOMDocumentFragment*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_name.call(this, name)
   end
-  def get_node_value(value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  def get_node_value(this : IXMLDOMDocumentFragment*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_value.call(this, value)
   end
-  def put_node_value(value : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_value.unsafe_as(Proc(VARIANT, HRESULT)).call(value)
+  def put_node_value(this : IXMLDOMDocumentFragment*, value : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_value.call(this, value)
   end
-  def get_node_type(type : DOMNodeType*) : HRESULT
-    @lpVtbl.value.get_node_type.unsafe_as(Proc(DOMNodeType*, HRESULT)).call(type)
+  def get_node_type(this : IXMLDOMDocumentFragment*, type : DOMNodeType*) : HRESULT
+    @lpVtbl.value.get_node_type.call(this, type)
   end
-  def get_parent_node(parent : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_parent_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(parent)
+  def get_parent_node(this : IXMLDOMDocumentFragment*, parent : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_parent_node.call(this, parent)
   end
-  def get_child_nodes(childlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_child_nodes.unsafe_as(Proc(IXMLDOMNodeList*, HRESULT)).call(childlist)
+  def get_child_nodes(this : IXMLDOMDocumentFragment*, childlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_child_nodes.call(this, childlist)
   end
-  def get_first_child(firstchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_first_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(firstchild)
+  def get_first_child(this : IXMLDOMDocumentFragment*, firstchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_first_child.call(this, firstchild)
   end
-  def get_last_child(lastchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_last_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(lastchild)
+  def get_last_child(this : IXMLDOMDocumentFragment*, lastchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_last_child.call(this, lastchild)
   end
-  def get_previous_sibling(previoussibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_previous_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(previoussibling)
+  def get_previous_sibling(this : IXMLDOMDocumentFragment*, previoussibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_previous_sibling.call(this, previoussibling)
   end
-  def get_next_sibling(nextsibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_next_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(nextsibling)
+  def get_next_sibling(this : IXMLDOMDocumentFragment*, nextsibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_next_sibling.call(this, nextsibling)
   end
-  def get_attributes(attributemap : IXMLDOMNamedNodeMap*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(IXMLDOMNamedNodeMap*, HRESULT)).call(attributemap)
+  def get_attributes(this : IXMLDOMDocumentFragment*, attributemap : IXMLDOMNamedNodeMap*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributemap)
   end
-  def insert_before(newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.insert_before.unsafe_as(Proc(IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)).call(newchild, refchild, outnewchild)
+  def insert_before(this : IXMLDOMDocumentFragment*, newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.insert_before.call(this, newchild, refchild, outnewchild)
   end
-  def replace_child(newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.replace_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, oldchild, outoldchild)
+  def replace_child(this : IXMLDOMDocumentFragment*, newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.replace_child.call(this, newchild, oldchild, outoldchild)
   end
-  def remove_child(childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(childnode, oldchild)
+  def remove_child(this : IXMLDOMDocumentFragment*, childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.remove_child.call(this, childnode, oldchild)
   end
-  def append_child(newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.append_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, outnewchild)
+  def append_child(this : IXMLDOMDocumentFragment*, newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.append_child.call(this, newchild, outnewchild)
   end
-  def has_child_nodes(haschild : Int16*) : HRESULT
-    @lpVtbl.value.has_child_nodes.unsafe_as(Proc(Int16*, HRESULT)).call(haschild)
+  def has_child_nodes(this : IXMLDOMDocumentFragment*, haschild : Int16*) : HRESULT
+    @lpVtbl.value.has_child_nodes.call(this, haschild)
   end
-  def get_owner_document(xmldomdocument : IXMLDOMDocument*) : HRESULT
-    @lpVtbl.value.get_owner_document.unsafe_as(Proc(IXMLDOMDocument*, HRESULT)).call(xmldomdocument)
+  def get_owner_document(this : IXMLDOMDocumentFragment*, xmldomdocument : IXMLDOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner_document.call(this, xmldomdocument)
   end
-  def clone_node(deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.clone_node.unsafe_as(Proc(Int16, IXMLDOMNode*, HRESULT)).call(deep, cloneroot)
+  def clone_node(this : IXMLDOMDocumentFragment*, deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.clone_node.call(this, deep, cloneroot)
   end
-  def get_node_type_string(nodetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_type_string.unsafe_as(Proc(UInt8**, HRESULT)).call(nodetype)
+  def get_node_type_string(this : IXMLDOMDocumentFragment*, nodetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_type_string.call(this, nodetype)
   end
-  def get_text(text : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(text)
+  def get_text(this : IXMLDOMDocumentFragment*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, text)
   end
-  def put_text(text : UInt8*) : HRESULT
-    @lpVtbl.value.put_text.unsafe_as(Proc(UInt8*, HRESULT)).call(text)
+  def put_text(this : IXMLDOMDocumentFragment*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_text.call(this, text)
   end
-  def get_specified(isspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_specified.unsafe_as(Proc(Int16*, HRESULT)).call(isspecified)
+  def get_specified(this : IXMLDOMDocumentFragment*, isspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_specified.call(this, isspecified)
   end
-  def get_definition(definitionnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_definition.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(definitionnode)
+  def get_definition(this : IXMLDOMDocumentFragment*, definitionnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_definition.call(this, definitionnode)
   end
-  def get_node_typed_value(typedvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_typed_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(typedvalue)
+  def get_node_typed_value(this : IXMLDOMDocumentFragment*, typedvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_typed_value.call(this, typedvalue)
   end
-  def put_node_typed_value(typedvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_typed_value.unsafe_as(Proc(VARIANT, HRESULT)).call(typedvalue)
+  def put_node_typed_value(this : IXMLDOMDocumentFragment*, typedvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_typed_value.call(this, typedvalue)
   end
-  def get_data_type(datatypename : VARIANT*) : HRESULT
-    @lpVtbl.value.get_data_type.unsafe_as(Proc(VARIANT*, HRESULT)).call(datatypename)
+  def get_data_type(this : IXMLDOMDocumentFragment*, datatypename : VARIANT*) : HRESULT
+    @lpVtbl.value.get_data_type.call(this, datatypename)
   end
-  def put_data_type(datatypename : UInt8*) : HRESULT
-    @lpVtbl.value.put_data_type.unsafe_as(Proc(UInt8*, HRESULT)).call(datatypename)
+  def put_data_type(this : IXMLDOMDocumentFragment*, datatypename : UInt8*) : HRESULT
+    @lpVtbl.value.put_data_type.call(this, datatypename)
   end
-  def get_xml(xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(xmlstring)
+  def get_xml(this : IXMLDOMDocumentFragment*, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, xmlstring)
   end
-  def transform_node(stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.transform_node.unsafe_as(Proc(IXMLDOMNode, UInt8**, HRESULT)).call(stylesheet, xmlstring)
+  def transform_node(this : IXMLDOMDocumentFragment*, stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.transform_node.call(this, stylesheet, xmlstring)
   end
-  def select_nodes(querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.select_nodes.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(querystring, resultlist)
+  def select_nodes(this : IXMLDOMDocumentFragment*, querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.select_nodes.call(this, querystring, resultlist)
   end
-  def select_single_node(querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.select_single_node.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(querystring, resultnode)
+  def select_single_node(this : IXMLDOMDocumentFragment*, querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.select_single_node.call(this, querystring, resultnode)
   end
-  def get_parsed(isparsed : Int16*) : HRESULT
-    @lpVtbl.value.get_parsed.unsafe_as(Proc(Int16*, HRESULT)).call(isparsed)
+  def get_parsed(this : IXMLDOMDocumentFragment*, isparsed : Int16*) : HRESULT
+    @lpVtbl.value.get_parsed.call(this, isparsed)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : IXMLDOMDocumentFragment*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_prefix(prefixstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_prefix.unsafe_as(Proc(UInt8**, HRESULT)).call(prefixstring)
+  def get_prefix(this : IXMLDOMDocumentFragment*, prefixstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_prefix.call(this, prefixstring)
   end
-  def get_base_name(namestring : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_name.unsafe_as(Proc(UInt8**, HRESULT)).call(namestring)
+  def get_base_name(this : IXMLDOMDocumentFragment*, namestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_base_name.call(this, namestring)
   end
-  def transform_node_to_object(stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
-    @lpVtbl.value.transform_node_to_object.unsafe_as(Proc(IXMLDOMNode, VARIANT, HRESULT)).call(stylesheet, outputobject)
+  def transform_node_to_object(this : IXMLDOMDocumentFragment*, stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
+    @lpVtbl.value.transform_node_to_object.call(this, stylesheet, outputobject)
   end
 end
 struct LibWin32::IXMLDOMDocument
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMDocument*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMDocument*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMDocument*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMDocument*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMDocument*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMDocument*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMDocument*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_node_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_node_name(this : IXMLDOMDocument*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_name.call(this, name)
   end
-  def get_node_value(value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  def get_node_value(this : IXMLDOMDocument*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_value.call(this, value)
   end
-  def put_node_value(value : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_value.unsafe_as(Proc(VARIANT, HRESULT)).call(value)
+  def put_node_value(this : IXMLDOMDocument*, value : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_value.call(this, value)
   end
-  def get_node_type(type : DOMNodeType*) : HRESULT
-    @lpVtbl.value.get_node_type.unsafe_as(Proc(DOMNodeType*, HRESULT)).call(type)
+  def get_node_type(this : IXMLDOMDocument*, type : DOMNodeType*) : HRESULT
+    @lpVtbl.value.get_node_type.call(this, type)
   end
-  def get_parent_node(parent : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_parent_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(parent)
+  def get_parent_node(this : IXMLDOMDocument*, parent : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_parent_node.call(this, parent)
   end
-  def get_child_nodes(childlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_child_nodes.unsafe_as(Proc(IXMLDOMNodeList*, HRESULT)).call(childlist)
+  def get_child_nodes(this : IXMLDOMDocument*, childlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_child_nodes.call(this, childlist)
   end
-  def get_first_child(firstchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_first_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(firstchild)
+  def get_first_child(this : IXMLDOMDocument*, firstchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_first_child.call(this, firstchild)
   end
-  def get_last_child(lastchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_last_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(lastchild)
+  def get_last_child(this : IXMLDOMDocument*, lastchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_last_child.call(this, lastchild)
   end
-  def get_previous_sibling(previoussibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_previous_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(previoussibling)
+  def get_previous_sibling(this : IXMLDOMDocument*, previoussibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_previous_sibling.call(this, previoussibling)
   end
-  def get_next_sibling(nextsibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_next_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(nextsibling)
+  def get_next_sibling(this : IXMLDOMDocument*, nextsibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_next_sibling.call(this, nextsibling)
   end
-  def get_attributes(attributemap : IXMLDOMNamedNodeMap*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(IXMLDOMNamedNodeMap*, HRESULT)).call(attributemap)
+  def get_attributes(this : IXMLDOMDocument*, attributemap : IXMLDOMNamedNodeMap*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributemap)
   end
-  def insert_before(newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.insert_before.unsafe_as(Proc(IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)).call(newchild, refchild, outnewchild)
+  def insert_before(this : IXMLDOMDocument*, newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.insert_before.call(this, newchild, refchild, outnewchild)
   end
-  def replace_child(newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.replace_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, oldchild, outoldchild)
+  def replace_child(this : IXMLDOMDocument*, newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.replace_child.call(this, newchild, oldchild, outoldchild)
   end
-  def remove_child(childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(childnode, oldchild)
+  def remove_child(this : IXMLDOMDocument*, childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.remove_child.call(this, childnode, oldchild)
   end
-  def append_child(newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.append_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, outnewchild)
+  def append_child(this : IXMLDOMDocument*, newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.append_child.call(this, newchild, outnewchild)
   end
-  def has_child_nodes(haschild : Int16*) : HRESULT
-    @lpVtbl.value.has_child_nodes.unsafe_as(Proc(Int16*, HRESULT)).call(haschild)
+  def has_child_nodes(this : IXMLDOMDocument*, haschild : Int16*) : HRESULT
+    @lpVtbl.value.has_child_nodes.call(this, haschild)
   end
-  def get_owner_document(xmldomdocument : IXMLDOMDocument*) : HRESULT
-    @lpVtbl.value.get_owner_document.unsafe_as(Proc(IXMLDOMDocument*, HRESULT)).call(xmldomdocument)
+  def get_owner_document(this : IXMLDOMDocument*, xmldomdocument : IXMLDOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner_document.call(this, xmldomdocument)
   end
-  def clone_node(deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.clone_node.unsafe_as(Proc(Int16, IXMLDOMNode*, HRESULT)).call(deep, cloneroot)
+  def clone_node(this : IXMLDOMDocument*, deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.clone_node.call(this, deep, cloneroot)
   end
-  def get_node_type_string(nodetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_type_string.unsafe_as(Proc(UInt8**, HRESULT)).call(nodetype)
+  def get_node_type_string(this : IXMLDOMDocument*, nodetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_type_string.call(this, nodetype)
   end
-  def get_text(text : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(text)
+  def get_text(this : IXMLDOMDocument*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, text)
   end
-  def put_text(text : UInt8*) : HRESULT
-    @lpVtbl.value.put_text.unsafe_as(Proc(UInt8*, HRESULT)).call(text)
+  def put_text(this : IXMLDOMDocument*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_text.call(this, text)
   end
-  def get_specified(isspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_specified.unsafe_as(Proc(Int16*, HRESULT)).call(isspecified)
+  def get_specified(this : IXMLDOMDocument*, isspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_specified.call(this, isspecified)
   end
-  def get_definition(definitionnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_definition.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(definitionnode)
+  def get_definition(this : IXMLDOMDocument*, definitionnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_definition.call(this, definitionnode)
   end
-  def get_node_typed_value(typedvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_typed_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(typedvalue)
+  def get_node_typed_value(this : IXMLDOMDocument*, typedvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_typed_value.call(this, typedvalue)
   end
-  def put_node_typed_value(typedvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_typed_value.unsafe_as(Proc(VARIANT, HRESULT)).call(typedvalue)
+  def put_node_typed_value(this : IXMLDOMDocument*, typedvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_typed_value.call(this, typedvalue)
   end
-  def get_data_type(datatypename : VARIANT*) : HRESULT
-    @lpVtbl.value.get_data_type.unsafe_as(Proc(VARIANT*, HRESULT)).call(datatypename)
+  def get_data_type(this : IXMLDOMDocument*, datatypename : VARIANT*) : HRESULT
+    @lpVtbl.value.get_data_type.call(this, datatypename)
   end
-  def put_data_type(datatypename : UInt8*) : HRESULT
-    @lpVtbl.value.put_data_type.unsafe_as(Proc(UInt8*, HRESULT)).call(datatypename)
+  def put_data_type(this : IXMLDOMDocument*, datatypename : UInt8*) : HRESULT
+    @lpVtbl.value.put_data_type.call(this, datatypename)
   end
-  def get_xml(xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(xmlstring)
+  def get_xml(this : IXMLDOMDocument*, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, xmlstring)
   end
-  def transform_node(stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.transform_node.unsafe_as(Proc(IXMLDOMNode, UInt8**, HRESULT)).call(stylesheet, xmlstring)
+  def transform_node(this : IXMLDOMDocument*, stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.transform_node.call(this, stylesheet, xmlstring)
   end
-  def select_nodes(querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.select_nodes.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(querystring, resultlist)
+  def select_nodes(this : IXMLDOMDocument*, querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.select_nodes.call(this, querystring, resultlist)
   end
-  def select_single_node(querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.select_single_node.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(querystring, resultnode)
+  def select_single_node(this : IXMLDOMDocument*, querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.select_single_node.call(this, querystring, resultnode)
   end
-  def get_parsed(isparsed : Int16*) : HRESULT
-    @lpVtbl.value.get_parsed.unsafe_as(Proc(Int16*, HRESULT)).call(isparsed)
+  def get_parsed(this : IXMLDOMDocument*, isparsed : Int16*) : HRESULT
+    @lpVtbl.value.get_parsed.call(this, isparsed)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : IXMLDOMDocument*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_prefix(prefixstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_prefix.unsafe_as(Proc(UInt8**, HRESULT)).call(prefixstring)
+  def get_prefix(this : IXMLDOMDocument*, prefixstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_prefix.call(this, prefixstring)
   end
-  def get_base_name(namestring : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_name.unsafe_as(Proc(UInt8**, HRESULT)).call(namestring)
+  def get_base_name(this : IXMLDOMDocument*, namestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_base_name.call(this, namestring)
   end
-  def transform_node_to_object(stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
-    @lpVtbl.value.transform_node_to_object.unsafe_as(Proc(IXMLDOMNode, VARIANT, HRESULT)).call(stylesheet, outputobject)
+  def transform_node_to_object(this : IXMLDOMDocument*, stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
+    @lpVtbl.value.transform_node_to_object.call(this, stylesheet, outputobject)
   end
-  def get_doctype(documenttype : IXMLDOMDocumentType*) : HRESULT
-    @lpVtbl.value.get_doctype.unsafe_as(Proc(IXMLDOMDocumentType*, HRESULT)).call(documenttype)
+  def get_doctype(this : IXMLDOMDocument*, documenttype : IXMLDOMDocumentType*) : HRESULT
+    @lpVtbl.value.get_doctype.call(this, documenttype)
   end
-  def get_implementation(impl : IXMLDOMImplementation*) : HRESULT
-    @lpVtbl.value.get_implementation.unsafe_as(Proc(IXMLDOMImplementation*, HRESULT)).call(impl)
+  def get_implementation(this : IXMLDOMDocument*, impl : IXMLDOMImplementation*) : HRESULT
+    @lpVtbl.value.get_implementation.call(this, impl)
   end
-  def get_document_element(domelement : IXMLDOMElement*) : HRESULT
-    @lpVtbl.value.get_document_element.unsafe_as(Proc(IXMLDOMElement*, HRESULT)).call(domelement)
+  def get_document_element(this : IXMLDOMDocument*, domelement : IXMLDOMElement*) : HRESULT
+    @lpVtbl.value.get_document_element.call(this, domelement)
   end
-  def putref_document_element(domelement : IXMLDOMElement) : HRESULT
-    @lpVtbl.value.putref_document_element.unsafe_as(Proc(IXMLDOMElement, HRESULT)).call(domelement)
+  def putref_document_element(this : IXMLDOMDocument*, domelement : IXMLDOMElement) : HRESULT
+    @lpVtbl.value.putref_document_element.call(this, domelement)
   end
-  def create_element(tagname : UInt8*, element : IXMLDOMElement*) : HRESULT
-    @lpVtbl.value.create_element.unsafe_as(Proc(UInt8*, IXMLDOMElement*, HRESULT)).call(tagname, element)
+  def create_element(this : IXMLDOMDocument*, tagname : UInt8*, element : IXMLDOMElement*) : HRESULT
+    @lpVtbl.value.create_element.call(this, tagname, element)
   end
-  def create_document_fragment(docfrag : IXMLDOMDocumentFragment*) : HRESULT
-    @lpVtbl.value.create_document_fragment.unsafe_as(Proc(IXMLDOMDocumentFragment*, HRESULT)).call(docfrag)
+  def create_document_fragment(this : IXMLDOMDocument*, docfrag : IXMLDOMDocumentFragment*) : HRESULT
+    @lpVtbl.value.create_document_fragment.call(this, docfrag)
   end
-  def create_text_node(data : UInt8*, text : IXMLDOMText*) : HRESULT
-    @lpVtbl.value.create_text_node.unsafe_as(Proc(UInt8*, IXMLDOMText*, HRESULT)).call(data, text)
+  def create_text_node(this : IXMLDOMDocument*, data : UInt8*, text : IXMLDOMText*) : HRESULT
+    @lpVtbl.value.create_text_node.call(this, data, text)
   end
-  def create_comment(data : UInt8*, comment : IXMLDOMComment*) : HRESULT
-    @lpVtbl.value.create_comment.unsafe_as(Proc(UInt8*, IXMLDOMComment*, HRESULT)).call(data, comment)
+  def create_comment(this : IXMLDOMDocument*, data : UInt8*, comment : IXMLDOMComment*) : HRESULT
+    @lpVtbl.value.create_comment.call(this, data, comment)
   end
-  def create_cdata_section(data : UInt8*, cdata : IXMLDOMCDATASection*) : HRESULT
-    @lpVtbl.value.create_cdata_section.unsafe_as(Proc(UInt8*, IXMLDOMCDATASection*, HRESULT)).call(data, cdata)
+  def create_cdata_section(this : IXMLDOMDocument*, data : UInt8*, cdata : IXMLDOMCDATASection*) : HRESULT
+    @lpVtbl.value.create_cdata_section.call(this, data, cdata)
   end
-  def create_processing_instruction(target : UInt8*, data : UInt8*, pi : IXMLDOMProcessingInstruction*) : HRESULT
-    @lpVtbl.value.create_processing_instruction.unsafe_as(Proc(UInt8*, UInt8*, IXMLDOMProcessingInstruction*, HRESULT)).call(target, data, pi)
+  def create_processing_instruction(this : IXMLDOMDocument*, target : UInt8*, data : UInt8*, pi : IXMLDOMProcessingInstruction*) : HRESULT
+    @lpVtbl.value.create_processing_instruction.call(this, target, data, pi)
   end
-  def create_attribute(name : UInt8*, attribute : IXMLDOMAttribute*) : HRESULT
-    @lpVtbl.value.create_attribute.unsafe_as(Proc(UInt8*, IXMLDOMAttribute*, HRESULT)).call(name, attribute)
+  def create_attribute(this : IXMLDOMDocument*, name : UInt8*, attribute : IXMLDOMAttribute*) : HRESULT
+    @lpVtbl.value.create_attribute.call(this, name, attribute)
   end
-  def create_entity_reference(name : UInt8*, entityref : IXMLDOMEntityReference*) : HRESULT
-    @lpVtbl.value.create_entity_reference.unsafe_as(Proc(UInt8*, IXMLDOMEntityReference*, HRESULT)).call(name, entityref)
+  def create_entity_reference(this : IXMLDOMDocument*, name : UInt8*, entityref : IXMLDOMEntityReference*) : HRESULT
+    @lpVtbl.value.create_entity_reference.call(this, name, entityref)
   end
-  def get_elements_by_tag_name(tagname : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_elements_by_tag_name.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(tagname, resultlist)
+  def get_elements_by_tag_name(this : IXMLDOMDocument*, tagname : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_elements_by_tag_name.call(this, tagname, resultlist)
   end
-  def create_node(type : VARIANT, name : UInt8*, namespaceuri : UInt8*, node : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.create_node.unsafe_as(Proc(VARIANT, UInt8*, UInt8*, IXMLDOMNode*, HRESULT)).call(type, name, namespaceuri, node)
+  def create_node(this : IXMLDOMDocument*, type : VARIANT, name : UInt8*, namespaceuri : UInt8*, node : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.create_node.call(this, type, name, namespaceuri, node)
   end
-  def node_from_id(idstring : UInt8*, node : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.node_from_id.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(idstring, node)
+  def node_from_id(this : IXMLDOMDocument*, idstring : UInt8*, node : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.node_from_id.call(this, idstring, node)
   end
-  def load(xmlsource : VARIANT, issuccessful : Int16*) : HRESULT
-    @lpVtbl.value.load.unsafe_as(Proc(VARIANT, Int16*, HRESULT)).call(xmlsource, issuccessful)
+  def load(this : IXMLDOMDocument*, xmlsource : VARIANT, issuccessful : Int16*) : HRESULT
+    @lpVtbl.value.load.call(this, xmlsource, issuccessful)
   end
-  def get_ready_state(value : Int32*) : HRESULT
-    @lpVtbl.value.get_ready_state.unsafe_as(Proc(Int32*, HRESULT)).call(value)
+  def get_ready_state(this : IXMLDOMDocument*, value : Int32*) : HRESULT
+    @lpVtbl.value.get_ready_state.call(this, value)
   end
-  def get_parse_error(errorobj : IXMLDOMParseError*) : HRESULT
-    @lpVtbl.value.get_parse_error.unsafe_as(Proc(IXMLDOMParseError*, HRESULT)).call(errorobj)
+  def get_parse_error(this : IXMLDOMDocument*, errorobj : IXMLDOMParseError*) : HRESULT
+    @lpVtbl.value.get_parse_error.call(this, errorobj)
   end
-  def get_url(urlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_url.unsafe_as(Proc(UInt8**, HRESULT)).call(urlstring)
+  def get_url(this : IXMLDOMDocument*, urlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, urlstring)
   end
-  def get_async(isasync : Int16*) : HRESULT
-    @lpVtbl.value.get_async.unsafe_as(Proc(Int16*, HRESULT)).call(isasync)
+  def get_async(this : IXMLDOMDocument*, isasync : Int16*) : HRESULT
+    @lpVtbl.value.get_async.call(this, isasync)
   end
-  def put_async(isasync : Int16) : HRESULT
-    @lpVtbl.value.put_async.unsafe_as(Proc(Int16, HRESULT)).call(isasync)
+  def put_async(this : IXMLDOMDocument*, isasync : Int16) : HRESULT
+    @lpVtbl.value.put_async.call(this, isasync)
   end
-  def abort : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(HRESULT)).call
+  def abort(this : IXMLDOMDocument*) : HRESULT
+    @lpVtbl.value.abort.call(this)
   end
-  def load_xml(bstrxml : UInt8*, issuccessful : Int16*) : HRESULT
-    @lpVtbl.value.load_xml.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(bstrxml, issuccessful)
+  def load_xml(this : IXMLDOMDocument*, bstrxml : UInt8*, issuccessful : Int16*) : HRESULT
+    @lpVtbl.value.load_xml.call(this, bstrxml, issuccessful)
   end
-  def save(destination : VARIANT) : HRESULT
-    @lpVtbl.value.save.unsafe_as(Proc(VARIANT, HRESULT)).call(destination)
+  def save(this : IXMLDOMDocument*, destination : VARIANT) : HRESULT
+    @lpVtbl.value.save.call(this, destination)
   end
-  def get_validate_on_parse(isvalidating : Int16*) : HRESULT
-    @lpVtbl.value.get_validate_on_parse.unsafe_as(Proc(Int16*, HRESULT)).call(isvalidating)
+  def get_validate_on_parse(this : IXMLDOMDocument*, isvalidating : Int16*) : HRESULT
+    @lpVtbl.value.get_validate_on_parse.call(this, isvalidating)
   end
-  def put_validate_on_parse(isvalidating : Int16) : HRESULT
-    @lpVtbl.value.put_validate_on_parse.unsafe_as(Proc(Int16, HRESULT)).call(isvalidating)
+  def put_validate_on_parse(this : IXMLDOMDocument*, isvalidating : Int16) : HRESULT
+    @lpVtbl.value.put_validate_on_parse.call(this, isvalidating)
   end
-  def get_resolve_externals(isresolving : Int16*) : HRESULT
-    @lpVtbl.value.get_resolve_externals.unsafe_as(Proc(Int16*, HRESULT)).call(isresolving)
+  def get_resolve_externals(this : IXMLDOMDocument*, isresolving : Int16*) : HRESULT
+    @lpVtbl.value.get_resolve_externals.call(this, isresolving)
   end
-  def put_resolve_externals(isresolving : Int16) : HRESULT
-    @lpVtbl.value.put_resolve_externals.unsafe_as(Proc(Int16, HRESULT)).call(isresolving)
+  def put_resolve_externals(this : IXMLDOMDocument*, isresolving : Int16) : HRESULT
+    @lpVtbl.value.put_resolve_externals.call(this, isresolving)
   end
-  def get_preserve_white_space(ispreserving : Int16*) : HRESULT
-    @lpVtbl.value.get_preserve_white_space.unsafe_as(Proc(Int16*, HRESULT)).call(ispreserving)
+  def get_preserve_white_space(this : IXMLDOMDocument*, ispreserving : Int16*) : HRESULT
+    @lpVtbl.value.get_preserve_white_space.call(this, ispreserving)
   end
-  def put_preserve_white_space(ispreserving : Int16) : HRESULT
-    @lpVtbl.value.put_preserve_white_space.unsafe_as(Proc(Int16, HRESULT)).call(ispreserving)
+  def put_preserve_white_space(this : IXMLDOMDocument*, ispreserving : Int16) : HRESULT
+    @lpVtbl.value.put_preserve_white_space.call(this, ispreserving)
   end
-  def put_onreadystatechange(readystatechangesink : VARIANT) : HRESULT
-    @lpVtbl.value.put_onreadystatechange.unsafe_as(Proc(VARIANT, HRESULT)).call(readystatechangesink)
+  def put_onreadystatechange(this : IXMLDOMDocument*, readystatechangesink : VARIANT) : HRESULT
+    @lpVtbl.value.put_onreadystatechange.call(this, readystatechangesink)
   end
-  def put_ondataavailable(ondataavailablesink : VARIANT) : HRESULT
-    @lpVtbl.value.put_ondataavailable.unsafe_as(Proc(VARIANT, HRESULT)).call(ondataavailablesink)
+  def put_ondataavailable(this : IXMLDOMDocument*, ondataavailablesink : VARIANT) : HRESULT
+    @lpVtbl.value.put_ondataavailable.call(this, ondataavailablesink)
   end
-  def put_ontransformnode(ontransformnodesink : VARIANT) : HRESULT
-    @lpVtbl.value.put_ontransformnode.unsafe_as(Proc(VARIANT, HRESULT)).call(ontransformnodesink)
+  def put_ontransformnode(this : IXMLDOMDocument*, ontransformnodesink : VARIANT) : HRESULT
+    @lpVtbl.value.put_ontransformnode.call(this, ontransformnodesink)
   end
 end
 struct LibWin32::IXMLDOMNodeList
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMNodeList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMNodeList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMNodeList*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMNodeList*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMNodeList*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMNodeList*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMNodeList*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(index : Int32, listitem : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, IXMLDOMNode*, HRESULT)).call(index, listitem)
+  def get_item(this : IXMLDOMNodeList*, index : Int32, listitem : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, listitem)
   end
-  def get_length(listlength : Int32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(listlength)
+  def get_length(this : IXMLDOMNodeList*, listlength : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, listlength)
   end
-  def next_node(nextitem : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.next_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(nextitem)
+  def next_node(this : IXMLDOMNodeList*, nextitem : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.next_node.call(this, nextitem)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def get__new_enum(ppunk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  def get__new_enum(this : IXMLDOMNodeList*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
   end
 end
 struct LibWin32::IXMLDOMNamedNodeMap
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMNamedNodeMap*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMNamedNodeMap*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMNamedNodeMap*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMNamedNodeMap*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMNamedNodeMap*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMNamedNodeMap*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMNamedNodeMap*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_named_item(name : UInt8*, nameditem : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_named_item.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(name, nameditem)
+  def get_named_item(this : IXMLDOMNamedNodeMap*, name : UInt8*, nameditem : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_named_item.call(this, name, nameditem)
   end
-  def set_named_item(newitem : IXMLDOMNode, nameitem : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.set_named_item.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newitem, nameitem)
+  def set_named_item(this : IXMLDOMNamedNodeMap*, newitem : IXMLDOMNode, nameitem : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.set_named_item.call(this, newitem, nameitem)
   end
-  def remove_named_item(name : UInt8*, nameditem : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.remove_named_item.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(name, nameditem)
+  def remove_named_item(this : IXMLDOMNamedNodeMap*, name : UInt8*, nameditem : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.remove_named_item.call(this, name, nameditem)
   end
-  def get_item(index : Int32, listitem : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, IXMLDOMNode*, HRESULT)).call(index, listitem)
+  def get_item(this : IXMLDOMNamedNodeMap*, index : Int32, listitem : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, listitem)
   end
-  def get_length(listlength : Int32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(listlength)
+  def get_length(this : IXMLDOMNamedNodeMap*, listlength : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, listlength)
   end
-  def get_qualified_item(basename : UInt8*, namespaceuri : UInt8*, qualifieditem : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_qualified_item.unsafe_as(Proc(UInt8*, UInt8*, IXMLDOMNode*, HRESULT)).call(basename, namespaceuri, qualifieditem)
+  def get_qualified_item(this : IXMLDOMNamedNodeMap*, basename : UInt8*, namespaceuri : UInt8*, qualifieditem : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_qualified_item.call(this, basename, namespaceuri, qualifieditem)
   end
-  def remove_qualified_item(basename : UInt8*, namespaceuri : UInt8*, qualifieditem : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.remove_qualified_item.unsafe_as(Proc(UInt8*, UInt8*, IXMLDOMNode*, HRESULT)).call(basename, namespaceuri, qualifieditem)
+  def remove_qualified_item(this : IXMLDOMNamedNodeMap*, basename : UInt8*, namespaceuri : UInt8*, qualifieditem : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.remove_qualified_item.call(this, basename, namespaceuri, qualifieditem)
   end
-  def next_node(nextitem : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.next_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(nextitem)
+  def next_node(this : IXMLDOMNamedNodeMap*, nextitem : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.next_node.call(this, nextitem)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IXMLDOMNamedNodeMap*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def get__new_enum(ppunk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  def get__new_enum(this : IXMLDOMNamedNodeMap*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
   end
 end
 struct LibWin32::IXMLDOMCharacterData
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMCharacterData*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMCharacterData*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMCharacterData*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMCharacterData*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMCharacterData*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMCharacterData*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMCharacterData*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_node_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_node_name(this : IXMLDOMCharacterData*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_name.call(this, name)
   end
-  def get_node_value(value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  def get_node_value(this : IXMLDOMCharacterData*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_value.call(this, value)
   end
-  def put_node_value(value : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_value.unsafe_as(Proc(VARIANT, HRESULT)).call(value)
+  def put_node_value(this : IXMLDOMCharacterData*, value : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_value.call(this, value)
   end
-  def get_node_type(type : DOMNodeType*) : HRESULT
-    @lpVtbl.value.get_node_type.unsafe_as(Proc(DOMNodeType*, HRESULT)).call(type)
+  def get_node_type(this : IXMLDOMCharacterData*, type : DOMNodeType*) : HRESULT
+    @lpVtbl.value.get_node_type.call(this, type)
   end
-  def get_parent_node(parent : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_parent_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(parent)
+  def get_parent_node(this : IXMLDOMCharacterData*, parent : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_parent_node.call(this, parent)
   end
-  def get_child_nodes(childlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_child_nodes.unsafe_as(Proc(IXMLDOMNodeList*, HRESULT)).call(childlist)
+  def get_child_nodes(this : IXMLDOMCharacterData*, childlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_child_nodes.call(this, childlist)
   end
-  def get_first_child(firstchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_first_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(firstchild)
+  def get_first_child(this : IXMLDOMCharacterData*, firstchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_first_child.call(this, firstchild)
   end
-  def get_last_child(lastchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_last_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(lastchild)
+  def get_last_child(this : IXMLDOMCharacterData*, lastchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_last_child.call(this, lastchild)
   end
-  def get_previous_sibling(previoussibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_previous_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(previoussibling)
+  def get_previous_sibling(this : IXMLDOMCharacterData*, previoussibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_previous_sibling.call(this, previoussibling)
   end
-  def get_next_sibling(nextsibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_next_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(nextsibling)
+  def get_next_sibling(this : IXMLDOMCharacterData*, nextsibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_next_sibling.call(this, nextsibling)
   end
-  def get_attributes(attributemap : IXMLDOMNamedNodeMap*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(IXMLDOMNamedNodeMap*, HRESULT)).call(attributemap)
+  def get_attributes(this : IXMLDOMCharacterData*, attributemap : IXMLDOMNamedNodeMap*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributemap)
   end
-  def insert_before(newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.insert_before.unsafe_as(Proc(IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)).call(newchild, refchild, outnewchild)
+  def insert_before(this : IXMLDOMCharacterData*, newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.insert_before.call(this, newchild, refchild, outnewchild)
   end
-  def replace_child(newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.replace_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, oldchild, outoldchild)
+  def replace_child(this : IXMLDOMCharacterData*, newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.replace_child.call(this, newchild, oldchild, outoldchild)
   end
-  def remove_child(childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(childnode, oldchild)
+  def remove_child(this : IXMLDOMCharacterData*, childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.remove_child.call(this, childnode, oldchild)
   end
-  def append_child(newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.append_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, outnewchild)
+  def append_child(this : IXMLDOMCharacterData*, newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.append_child.call(this, newchild, outnewchild)
   end
-  def has_child_nodes(haschild : Int16*) : HRESULT
-    @lpVtbl.value.has_child_nodes.unsafe_as(Proc(Int16*, HRESULT)).call(haschild)
+  def has_child_nodes(this : IXMLDOMCharacterData*, haschild : Int16*) : HRESULT
+    @lpVtbl.value.has_child_nodes.call(this, haschild)
   end
-  def get_owner_document(xmldomdocument : IXMLDOMDocument*) : HRESULT
-    @lpVtbl.value.get_owner_document.unsafe_as(Proc(IXMLDOMDocument*, HRESULT)).call(xmldomdocument)
+  def get_owner_document(this : IXMLDOMCharacterData*, xmldomdocument : IXMLDOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner_document.call(this, xmldomdocument)
   end
-  def clone_node(deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.clone_node.unsafe_as(Proc(Int16, IXMLDOMNode*, HRESULT)).call(deep, cloneroot)
+  def clone_node(this : IXMLDOMCharacterData*, deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.clone_node.call(this, deep, cloneroot)
   end
-  def get_node_type_string(nodetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_type_string.unsafe_as(Proc(UInt8**, HRESULT)).call(nodetype)
+  def get_node_type_string(this : IXMLDOMCharacterData*, nodetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_type_string.call(this, nodetype)
   end
-  def get_text(text : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(text)
+  def get_text(this : IXMLDOMCharacterData*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, text)
   end
-  def put_text(text : UInt8*) : HRESULT
-    @lpVtbl.value.put_text.unsafe_as(Proc(UInt8*, HRESULT)).call(text)
+  def put_text(this : IXMLDOMCharacterData*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_text.call(this, text)
   end
-  def get_specified(isspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_specified.unsafe_as(Proc(Int16*, HRESULT)).call(isspecified)
+  def get_specified(this : IXMLDOMCharacterData*, isspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_specified.call(this, isspecified)
   end
-  def get_definition(definitionnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_definition.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(definitionnode)
+  def get_definition(this : IXMLDOMCharacterData*, definitionnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_definition.call(this, definitionnode)
   end
-  def get_node_typed_value(typedvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_typed_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(typedvalue)
+  def get_node_typed_value(this : IXMLDOMCharacterData*, typedvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_typed_value.call(this, typedvalue)
   end
-  def put_node_typed_value(typedvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_typed_value.unsafe_as(Proc(VARIANT, HRESULT)).call(typedvalue)
+  def put_node_typed_value(this : IXMLDOMCharacterData*, typedvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_typed_value.call(this, typedvalue)
   end
-  def get_data_type(datatypename : VARIANT*) : HRESULT
-    @lpVtbl.value.get_data_type.unsafe_as(Proc(VARIANT*, HRESULT)).call(datatypename)
+  def get_data_type(this : IXMLDOMCharacterData*, datatypename : VARIANT*) : HRESULT
+    @lpVtbl.value.get_data_type.call(this, datatypename)
   end
-  def put_data_type(datatypename : UInt8*) : HRESULT
-    @lpVtbl.value.put_data_type.unsafe_as(Proc(UInt8*, HRESULT)).call(datatypename)
+  def put_data_type(this : IXMLDOMCharacterData*, datatypename : UInt8*) : HRESULT
+    @lpVtbl.value.put_data_type.call(this, datatypename)
   end
-  def get_xml(xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(xmlstring)
+  def get_xml(this : IXMLDOMCharacterData*, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, xmlstring)
   end
-  def transform_node(stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.transform_node.unsafe_as(Proc(IXMLDOMNode, UInt8**, HRESULT)).call(stylesheet, xmlstring)
+  def transform_node(this : IXMLDOMCharacterData*, stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.transform_node.call(this, stylesheet, xmlstring)
   end
-  def select_nodes(querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.select_nodes.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(querystring, resultlist)
+  def select_nodes(this : IXMLDOMCharacterData*, querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.select_nodes.call(this, querystring, resultlist)
   end
-  def select_single_node(querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.select_single_node.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(querystring, resultnode)
+  def select_single_node(this : IXMLDOMCharacterData*, querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.select_single_node.call(this, querystring, resultnode)
   end
-  def get_parsed(isparsed : Int16*) : HRESULT
-    @lpVtbl.value.get_parsed.unsafe_as(Proc(Int16*, HRESULT)).call(isparsed)
+  def get_parsed(this : IXMLDOMCharacterData*, isparsed : Int16*) : HRESULT
+    @lpVtbl.value.get_parsed.call(this, isparsed)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : IXMLDOMCharacterData*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_prefix(prefixstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_prefix.unsafe_as(Proc(UInt8**, HRESULT)).call(prefixstring)
+  def get_prefix(this : IXMLDOMCharacterData*, prefixstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_prefix.call(this, prefixstring)
   end
-  def get_base_name(namestring : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_name.unsafe_as(Proc(UInt8**, HRESULT)).call(namestring)
+  def get_base_name(this : IXMLDOMCharacterData*, namestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_base_name.call(this, namestring)
   end
-  def transform_node_to_object(stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
-    @lpVtbl.value.transform_node_to_object.unsafe_as(Proc(IXMLDOMNode, VARIANT, HRESULT)).call(stylesheet, outputobject)
+  def transform_node_to_object(this : IXMLDOMCharacterData*, stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
+    @lpVtbl.value.transform_node_to_object.call(this, stylesheet, outputobject)
   end
-  def get_data(data : UInt8**) : HRESULT
-    @lpVtbl.value.get_data.unsafe_as(Proc(UInt8**, HRESULT)).call(data)
+  def get_data(this : IXMLDOMCharacterData*, data : UInt8**) : HRESULT
+    @lpVtbl.value.get_data.call(this, data)
   end
-  def put_data(data : UInt8*) : HRESULT
-    @lpVtbl.value.put_data.unsafe_as(Proc(UInt8*, HRESULT)).call(data)
+  def put_data(this : IXMLDOMCharacterData*, data : UInt8*) : HRESULT
+    @lpVtbl.value.put_data.call(this, data)
   end
-  def get_length(datalength : Int32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(datalength)
+  def get_length(this : IXMLDOMCharacterData*, datalength : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, datalength)
   end
-  def substring_data(offset : Int32, count : Int32, data : UInt8**) : HRESULT
-    @lpVtbl.value.substring_data.unsafe_as(Proc(Int32, Int32, UInt8**, HRESULT)).call(offset, count, data)
+  def substring_data(this : IXMLDOMCharacterData*, offset : Int32, count : Int32, data : UInt8**) : HRESULT
+    @lpVtbl.value.substring_data.call(this, offset, count, data)
   end
-  def append_data(data : UInt8*) : HRESULT
-    @lpVtbl.value.append_data.unsafe_as(Proc(UInt8*, HRESULT)).call(data)
+  def append_data(this : IXMLDOMCharacterData*, data : UInt8*) : HRESULT
+    @lpVtbl.value.append_data.call(this, data)
   end
-  def insert_data(offset : Int32, data : UInt8*) : HRESULT
-    @lpVtbl.value.insert_data.unsafe_as(Proc(Int32, UInt8*, HRESULT)).call(offset, data)
+  def insert_data(this : IXMLDOMCharacterData*, offset : Int32, data : UInt8*) : HRESULT
+    @lpVtbl.value.insert_data.call(this, offset, data)
   end
-  def delete_data(offset : Int32, count : Int32) : HRESULT
-    @lpVtbl.value.delete_data.unsafe_as(Proc(Int32, Int32, HRESULT)).call(offset, count)
+  def delete_data(this : IXMLDOMCharacterData*, offset : Int32, count : Int32) : HRESULT
+    @lpVtbl.value.delete_data.call(this, offset, count)
   end
-  def replace_data(offset : Int32, count : Int32, data : UInt8*) : HRESULT
-    @lpVtbl.value.replace_data.unsafe_as(Proc(Int32, Int32, UInt8*, HRESULT)).call(offset, count, data)
+  def replace_data(this : IXMLDOMCharacterData*, offset : Int32, count : Int32, data : UInt8*) : HRESULT
+    @lpVtbl.value.replace_data.call(this, offset, count, data)
   end
 end
 struct LibWin32::IXMLDOMAttribute
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMAttribute*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMAttribute*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMAttribute*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMAttribute*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMAttribute*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMAttribute*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMAttribute*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_node_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_node_name(this : IXMLDOMAttribute*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_name.call(this, name)
   end
-  def get_node_value(value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  def get_node_value(this : IXMLDOMAttribute*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_value.call(this, value)
   end
-  def put_node_value(value : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_value.unsafe_as(Proc(VARIANT, HRESULT)).call(value)
+  def put_node_value(this : IXMLDOMAttribute*, value : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_value.call(this, value)
   end
-  def get_node_type(type : DOMNodeType*) : HRESULT
-    @lpVtbl.value.get_node_type.unsafe_as(Proc(DOMNodeType*, HRESULT)).call(type)
+  def get_node_type(this : IXMLDOMAttribute*, type : DOMNodeType*) : HRESULT
+    @lpVtbl.value.get_node_type.call(this, type)
   end
-  def get_parent_node(parent : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_parent_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(parent)
+  def get_parent_node(this : IXMLDOMAttribute*, parent : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_parent_node.call(this, parent)
   end
-  def get_child_nodes(childlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_child_nodes.unsafe_as(Proc(IXMLDOMNodeList*, HRESULT)).call(childlist)
+  def get_child_nodes(this : IXMLDOMAttribute*, childlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_child_nodes.call(this, childlist)
   end
-  def get_first_child(firstchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_first_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(firstchild)
+  def get_first_child(this : IXMLDOMAttribute*, firstchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_first_child.call(this, firstchild)
   end
-  def get_last_child(lastchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_last_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(lastchild)
+  def get_last_child(this : IXMLDOMAttribute*, lastchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_last_child.call(this, lastchild)
   end
-  def get_previous_sibling(previoussibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_previous_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(previoussibling)
+  def get_previous_sibling(this : IXMLDOMAttribute*, previoussibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_previous_sibling.call(this, previoussibling)
   end
-  def get_next_sibling(nextsibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_next_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(nextsibling)
+  def get_next_sibling(this : IXMLDOMAttribute*, nextsibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_next_sibling.call(this, nextsibling)
   end
-  def get_attributes(attributemap : IXMLDOMNamedNodeMap*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(IXMLDOMNamedNodeMap*, HRESULT)).call(attributemap)
+  def get_attributes(this : IXMLDOMAttribute*, attributemap : IXMLDOMNamedNodeMap*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributemap)
   end
-  def insert_before(newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.insert_before.unsafe_as(Proc(IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)).call(newchild, refchild, outnewchild)
+  def insert_before(this : IXMLDOMAttribute*, newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.insert_before.call(this, newchild, refchild, outnewchild)
   end
-  def replace_child(newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.replace_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, oldchild, outoldchild)
+  def replace_child(this : IXMLDOMAttribute*, newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.replace_child.call(this, newchild, oldchild, outoldchild)
   end
-  def remove_child(childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(childnode, oldchild)
+  def remove_child(this : IXMLDOMAttribute*, childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.remove_child.call(this, childnode, oldchild)
   end
-  def append_child(newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.append_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, outnewchild)
+  def append_child(this : IXMLDOMAttribute*, newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.append_child.call(this, newchild, outnewchild)
   end
-  def has_child_nodes(haschild : Int16*) : HRESULT
-    @lpVtbl.value.has_child_nodes.unsafe_as(Proc(Int16*, HRESULT)).call(haschild)
+  def has_child_nodes(this : IXMLDOMAttribute*, haschild : Int16*) : HRESULT
+    @lpVtbl.value.has_child_nodes.call(this, haschild)
   end
-  def get_owner_document(xmldomdocument : IXMLDOMDocument*) : HRESULT
-    @lpVtbl.value.get_owner_document.unsafe_as(Proc(IXMLDOMDocument*, HRESULT)).call(xmldomdocument)
+  def get_owner_document(this : IXMLDOMAttribute*, xmldomdocument : IXMLDOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner_document.call(this, xmldomdocument)
   end
-  def clone_node(deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.clone_node.unsafe_as(Proc(Int16, IXMLDOMNode*, HRESULT)).call(deep, cloneroot)
+  def clone_node(this : IXMLDOMAttribute*, deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.clone_node.call(this, deep, cloneroot)
   end
-  def get_node_type_string(nodetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_type_string.unsafe_as(Proc(UInt8**, HRESULT)).call(nodetype)
+  def get_node_type_string(this : IXMLDOMAttribute*, nodetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_type_string.call(this, nodetype)
   end
-  def get_text(text : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(text)
+  def get_text(this : IXMLDOMAttribute*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, text)
   end
-  def put_text(text : UInt8*) : HRESULT
-    @lpVtbl.value.put_text.unsafe_as(Proc(UInt8*, HRESULT)).call(text)
+  def put_text(this : IXMLDOMAttribute*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_text.call(this, text)
   end
-  def get_specified(isspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_specified.unsafe_as(Proc(Int16*, HRESULT)).call(isspecified)
+  def get_specified(this : IXMLDOMAttribute*, isspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_specified.call(this, isspecified)
   end
-  def get_definition(definitionnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_definition.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(definitionnode)
+  def get_definition(this : IXMLDOMAttribute*, definitionnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_definition.call(this, definitionnode)
   end
-  def get_node_typed_value(typedvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_typed_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(typedvalue)
+  def get_node_typed_value(this : IXMLDOMAttribute*, typedvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_typed_value.call(this, typedvalue)
   end
-  def put_node_typed_value(typedvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_typed_value.unsafe_as(Proc(VARIANT, HRESULT)).call(typedvalue)
+  def put_node_typed_value(this : IXMLDOMAttribute*, typedvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_typed_value.call(this, typedvalue)
   end
-  def get_data_type(datatypename : VARIANT*) : HRESULT
-    @lpVtbl.value.get_data_type.unsafe_as(Proc(VARIANT*, HRESULT)).call(datatypename)
+  def get_data_type(this : IXMLDOMAttribute*, datatypename : VARIANT*) : HRESULT
+    @lpVtbl.value.get_data_type.call(this, datatypename)
   end
-  def put_data_type(datatypename : UInt8*) : HRESULT
-    @lpVtbl.value.put_data_type.unsafe_as(Proc(UInt8*, HRESULT)).call(datatypename)
+  def put_data_type(this : IXMLDOMAttribute*, datatypename : UInt8*) : HRESULT
+    @lpVtbl.value.put_data_type.call(this, datatypename)
   end
-  def get_xml(xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(xmlstring)
+  def get_xml(this : IXMLDOMAttribute*, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, xmlstring)
   end
-  def transform_node(stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.transform_node.unsafe_as(Proc(IXMLDOMNode, UInt8**, HRESULT)).call(stylesheet, xmlstring)
+  def transform_node(this : IXMLDOMAttribute*, stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.transform_node.call(this, stylesheet, xmlstring)
   end
-  def select_nodes(querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.select_nodes.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(querystring, resultlist)
+  def select_nodes(this : IXMLDOMAttribute*, querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.select_nodes.call(this, querystring, resultlist)
   end
-  def select_single_node(querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.select_single_node.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(querystring, resultnode)
+  def select_single_node(this : IXMLDOMAttribute*, querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.select_single_node.call(this, querystring, resultnode)
   end
-  def get_parsed(isparsed : Int16*) : HRESULT
-    @lpVtbl.value.get_parsed.unsafe_as(Proc(Int16*, HRESULT)).call(isparsed)
+  def get_parsed(this : IXMLDOMAttribute*, isparsed : Int16*) : HRESULT
+    @lpVtbl.value.get_parsed.call(this, isparsed)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : IXMLDOMAttribute*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_prefix(prefixstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_prefix.unsafe_as(Proc(UInt8**, HRESULT)).call(prefixstring)
+  def get_prefix(this : IXMLDOMAttribute*, prefixstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_prefix.call(this, prefixstring)
   end
-  def get_base_name(namestring : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_name.unsafe_as(Proc(UInt8**, HRESULT)).call(namestring)
+  def get_base_name(this : IXMLDOMAttribute*, namestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_base_name.call(this, namestring)
   end
-  def transform_node_to_object(stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
-    @lpVtbl.value.transform_node_to_object.unsafe_as(Proc(IXMLDOMNode, VARIANT, HRESULT)).call(stylesheet, outputobject)
+  def transform_node_to_object(this : IXMLDOMAttribute*, stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
+    @lpVtbl.value.transform_node_to_object.call(this, stylesheet, outputobject)
   end
-  def get_name(attributename : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(attributename)
+  def get_name(this : IXMLDOMAttribute*, attributename : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, attributename)
   end
-  def get_value(attributevalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(attributevalue)
+  def get_value(this : IXMLDOMAttribute*, attributevalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, attributevalue)
   end
-  def put_value(attributevalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_value.unsafe_as(Proc(VARIANT, HRESULT)).call(attributevalue)
+  def put_value(this : IXMLDOMAttribute*, attributevalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_value.call(this, attributevalue)
   end
 end
 struct LibWin32::IXMLDOMElement
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMElement*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMElement*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMElement*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMElement*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMElement*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMElement*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMElement*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_node_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_node_name(this : IXMLDOMElement*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_name.call(this, name)
   end
-  def get_node_value(value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  def get_node_value(this : IXMLDOMElement*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_value.call(this, value)
   end
-  def put_node_value(value : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_value.unsafe_as(Proc(VARIANT, HRESULT)).call(value)
+  def put_node_value(this : IXMLDOMElement*, value : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_value.call(this, value)
   end
-  def get_node_type(type : DOMNodeType*) : HRESULT
-    @lpVtbl.value.get_node_type.unsafe_as(Proc(DOMNodeType*, HRESULT)).call(type)
+  def get_node_type(this : IXMLDOMElement*, type : DOMNodeType*) : HRESULT
+    @lpVtbl.value.get_node_type.call(this, type)
   end
-  def get_parent_node(parent : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_parent_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(parent)
+  def get_parent_node(this : IXMLDOMElement*, parent : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_parent_node.call(this, parent)
   end
-  def get_child_nodes(childlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_child_nodes.unsafe_as(Proc(IXMLDOMNodeList*, HRESULT)).call(childlist)
+  def get_child_nodes(this : IXMLDOMElement*, childlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_child_nodes.call(this, childlist)
   end
-  def get_first_child(firstchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_first_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(firstchild)
+  def get_first_child(this : IXMLDOMElement*, firstchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_first_child.call(this, firstchild)
   end
-  def get_last_child(lastchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_last_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(lastchild)
+  def get_last_child(this : IXMLDOMElement*, lastchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_last_child.call(this, lastchild)
   end
-  def get_previous_sibling(previoussibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_previous_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(previoussibling)
+  def get_previous_sibling(this : IXMLDOMElement*, previoussibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_previous_sibling.call(this, previoussibling)
   end
-  def get_next_sibling(nextsibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_next_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(nextsibling)
+  def get_next_sibling(this : IXMLDOMElement*, nextsibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_next_sibling.call(this, nextsibling)
   end
-  def get_attributes(attributemap : IXMLDOMNamedNodeMap*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(IXMLDOMNamedNodeMap*, HRESULT)).call(attributemap)
+  def get_attributes(this : IXMLDOMElement*, attributemap : IXMLDOMNamedNodeMap*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributemap)
   end
-  def insert_before(newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.insert_before.unsafe_as(Proc(IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)).call(newchild, refchild, outnewchild)
+  def insert_before(this : IXMLDOMElement*, newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.insert_before.call(this, newchild, refchild, outnewchild)
   end
-  def replace_child(newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.replace_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, oldchild, outoldchild)
+  def replace_child(this : IXMLDOMElement*, newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.replace_child.call(this, newchild, oldchild, outoldchild)
   end
-  def remove_child(childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(childnode, oldchild)
+  def remove_child(this : IXMLDOMElement*, childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.remove_child.call(this, childnode, oldchild)
   end
-  def append_child(newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.append_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, outnewchild)
+  def append_child(this : IXMLDOMElement*, newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.append_child.call(this, newchild, outnewchild)
   end
-  def has_child_nodes(haschild : Int16*) : HRESULT
-    @lpVtbl.value.has_child_nodes.unsafe_as(Proc(Int16*, HRESULT)).call(haschild)
+  def has_child_nodes(this : IXMLDOMElement*, haschild : Int16*) : HRESULT
+    @lpVtbl.value.has_child_nodes.call(this, haschild)
   end
-  def get_owner_document(xmldomdocument : IXMLDOMDocument*) : HRESULT
-    @lpVtbl.value.get_owner_document.unsafe_as(Proc(IXMLDOMDocument*, HRESULT)).call(xmldomdocument)
+  def get_owner_document(this : IXMLDOMElement*, xmldomdocument : IXMLDOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner_document.call(this, xmldomdocument)
   end
-  def clone_node(deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.clone_node.unsafe_as(Proc(Int16, IXMLDOMNode*, HRESULT)).call(deep, cloneroot)
+  def clone_node(this : IXMLDOMElement*, deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.clone_node.call(this, deep, cloneroot)
   end
-  def get_node_type_string(nodetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_type_string.unsafe_as(Proc(UInt8**, HRESULT)).call(nodetype)
+  def get_node_type_string(this : IXMLDOMElement*, nodetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_type_string.call(this, nodetype)
   end
-  def get_text(text : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(text)
+  def get_text(this : IXMLDOMElement*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, text)
   end
-  def put_text(text : UInt8*) : HRESULT
-    @lpVtbl.value.put_text.unsafe_as(Proc(UInt8*, HRESULT)).call(text)
+  def put_text(this : IXMLDOMElement*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_text.call(this, text)
   end
-  def get_specified(isspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_specified.unsafe_as(Proc(Int16*, HRESULT)).call(isspecified)
+  def get_specified(this : IXMLDOMElement*, isspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_specified.call(this, isspecified)
   end
-  def get_definition(definitionnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_definition.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(definitionnode)
+  def get_definition(this : IXMLDOMElement*, definitionnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_definition.call(this, definitionnode)
   end
-  def get_node_typed_value(typedvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_typed_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(typedvalue)
+  def get_node_typed_value(this : IXMLDOMElement*, typedvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_typed_value.call(this, typedvalue)
   end
-  def put_node_typed_value(typedvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_typed_value.unsafe_as(Proc(VARIANT, HRESULT)).call(typedvalue)
+  def put_node_typed_value(this : IXMLDOMElement*, typedvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_typed_value.call(this, typedvalue)
   end
-  def get_data_type(datatypename : VARIANT*) : HRESULT
-    @lpVtbl.value.get_data_type.unsafe_as(Proc(VARIANT*, HRESULT)).call(datatypename)
+  def get_data_type(this : IXMLDOMElement*, datatypename : VARIANT*) : HRESULT
+    @lpVtbl.value.get_data_type.call(this, datatypename)
   end
-  def put_data_type(datatypename : UInt8*) : HRESULT
-    @lpVtbl.value.put_data_type.unsafe_as(Proc(UInt8*, HRESULT)).call(datatypename)
+  def put_data_type(this : IXMLDOMElement*, datatypename : UInt8*) : HRESULT
+    @lpVtbl.value.put_data_type.call(this, datatypename)
   end
-  def get_xml(xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(xmlstring)
+  def get_xml(this : IXMLDOMElement*, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, xmlstring)
   end
-  def transform_node(stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.transform_node.unsafe_as(Proc(IXMLDOMNode, UInt8**, HRESULT)).call(stylesheet, xmlstring)
+  def transform_node(this : IXMLDOMElement*, stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.transform_node.call(this, stylesheet, xmlstring)
   end
-  def select_nodes(querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.select_nodes.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(querystring, resultlist)
+  def select_nodes(this : IXMLDOMElement*, querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.select_nodes.call(this, querystring, resultlist)
   end
-  def select_single_node(querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.select_single_node.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(querystring, resultnode)
+  def select_single_node(this : IXMLDOMElement*, querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.select_single_node.call(this, querystring, resultnode)
   end
-  def get_parsed(isparsed : Int16*) : HRESULT
-    @lpVtbl.value.get_parsed.unsafe_as(Proc(Int16*, HRESULT)).call(isparsed)
+  def get_parsed(this : IXMLDOMElement*, isparsed : Int16*) : HRESULT
+    @lpVtbl.value.get_parsed.call(this, isparsed)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : IXMLDOMElement*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_prefix(prefixstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_prefix.unsafe_as(Proc(UInt8**, HRESULT)).call(prefixstring)
+  def get_prefix(this : IXMLDOMElement*, prefixstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_prefix.call(this, prefixstring)
   end
-  def get_base_name(namestring : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_name.unsafe_as(Proc(UInt8**, HRESULT)).call(namestring)
+  def get_base_name(this : IXMLDOMElement*, namestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_base_name.call(this, namestring)
   end
-  def transform_node_to_object(stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
-    @lpVtbl.value.transform_node_to_object.unsafe_as(Proc(IXMLDOMNode, VARIANT, HRESULT)).call(stylesheet, outputobject)
+  def transform_node_to_object(this : IXMLDOMElement*, stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
+    @lpVtbl.value.transform_node_to_object.call(this, stylesheet, outputobject)
   end
-  def get_tag_name(tagname : UInt8**) : HRESULT
-    @lpVtbl.value.get_tag_name.unsafe_as(Proc(UInt8**, HRESULT)).call(tagname)
+  def get_tag_name(this : IXMLDOMElement*, tagname : UInt8**) : HRESULT
+    @lpVtbl.value.get_tag_name.call(this, tagname)
   end
-  def get_attribute(name : UInt8*, value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_attribute.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(name, value)
+  def get_attribute(this : IXMLDOMElement*, name : UInt8*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_attribute.call(this, name, value)
   end
-  def set_attribute(name : UInt8*, value : VARIANT) : HRESULT
-    @lpVtbl.value.set_attribute.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(name, value)
+  def set_attribute(this : IXMLDOMElement*, name : UInt8*, value : VARIANT) : HRESULT
+    @lpVtbl.value.set_attribute.call(this, name, value)
   end
-  def remove_attribute(name : UInt8*) : HRESULT
-    @lpVtbl.value.remove_attribute.unsafe_as(Proc(UInt8*, HRESULT)).call(name)
+  def remove_attribute(this : IXMLDOMElement*, name : UInt8*) : HRESULT
+    @lpVtbl.value.remove_attribute.call(this, name)
   end
-  def get_attribute_node(name : UInt8*, attributenode : IXMLDOMAttribute*) : HRESULT
-    @lpVtbl.value.get_attribute_node.unsafe_as(Proc(UInt8*, IXMLDOMAttribute*, HRESULT)).call(name, attributenode)
+  def get_attribute_node(this : IXMLDOMElement*, name : UInt8*, attributenode : IXMLDOMAttribute*) : HRESULT
+    @lpVtbl.value.get_attribute_node.call(this, name, attributenode)
   end
-  def set_attribute_node(domattribute : IXMLDOMAttribute, attributenode : IXMLDOMAttribute*) : HRESULT
-    @lpVtbl.value.set_attribute_node.unsafe_as(Proc(IXMLDOMAttribute, IXMLDOMAttribute*, HRESULT)).call(domattribute, attributenode)
+  def set_attribute_node(this : IXMLDOMElement*, domattribute : IXMLDOMAttribute, attributenode : IXMLDOMAttribute*) : HRESULT
+    @lpVtbl.value.set_attribute_node.call(this, domattribute, attributenode)
   end
-  def remove_attribute_node(domattribute : IXMLDOMAttribute, attributenode : IXMLDOMAttribute*) : HRESULT
-    @lpVtbl.value.remove_attribute_node.unsafe_as(Proc(IXMLDOMAttribute, IXMLDOMAttribute*, HRESULT)).call(domattribute, attributenode)
+  def remove_attribute_node(this : IXMLDOMElement*, domattribute : IXMLDOMAttribute, attributenode : IXMLDOMAttribute*) : HRESULT
+    @lpVtbl.value.remove_attribute_node.call(this, domattribute, attributenode)
   end
-  def get_elements_by_tag_name(tagname : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_elements_by_tag_name.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(tagname, resultlist)
+  def get_elements_by_tag_name(this : IXMLDOMElement*, tagname : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_elements_by_tag_name.call(this, tagname, resultlist)
   end
-  def normalize : HRESULT
-    @lpVtbl.value.normalize.unsafe_as(Proc(HRESULT)).call
+  def normalize(this : IXMLDOMElement*) : HRESULT
+    @lpVtbl.value.normalize.call(this)
   end
 end
 struct LibWin32::IXMLDOMText
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMText*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMText*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMText*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMText*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMText*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMText*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMText*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_node_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_node_name(this : IXMLDOMText*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_name.call(this, name)
   end
-  def get_node_value(value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  def get_node_value(this : IXMLDOMText*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_value.call(this, value)
   end
-  def put_node_value(value : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_value.unsafe_as(Proc(VARIANT, HRESULT)).call(value)
+  def put_node_value(this : IXMLDOMText*, value : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_value.call(this, value)
   end
-  def get_node_type(type : DOMNodeType*) : HRESULT
-    @lpVtbl.value.get_node_type.unsafe_as(Proc(DOMNodeType*, HRESULT)).call(type)
+  def get_node_type(this : IXMLDOMText*, type : DOMNodeType*) : HRESULT
+    @lpVtbl.value.get_node_type.call(this, type)
   end
-  def get_parent_node(parent : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_parent_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(parent)
+  def get_parent_node(this : IXMLDOMText*, parent : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_parent_node.call(this, parent)
   end
-  def get_child_nodes(childlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_child_nodes.unsafe_as(Proc(IXMLDOMNodeList*, HRESULT)).call(childlist)
+  def get_child_nodes(this : IXMLDOMText*, childlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_child_nodes.call(this, childlist)
   end
-  def get_first_child(firstchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_first_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(firstchild)
+  def get_first_child(this : IXMLDOMText*, firstchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_first_child.call(this, firstchild)
   end
-  def get_last_child(lastchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_last_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(lastchild)
+  def get_last_child(this : IXMLDOMText*, lastchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_last_child.call(this, lastchild)
   end
-  def get_previous_sibling(previoussibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_previous_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(previoussibling)
+  def get_previous_sibling(this : IXMLDOMText*, previoussibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_previous_sibling.call(this, previoussibling)
   end
-  def get_next_sibling(nextsibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_next_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(nextsibling)
+  def get_next_sibling(this : IXMLDOMText*, nextsibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_next_sibling.call(this, nextsibling)
   end
-  def get_attributes(attributemap : IXMLDOMNamedNodeMap*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(IXMLDOMNamedNodeMap*, HRESULT)).call(attributemap)
+  def get_attributes(this : IXMLDOMText*, attributemap : IXMLDOMNamedNodeMap*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributemap)
   end
-  def insert_before(newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.insert_before.unsafe_as(Proc(IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)).call(newchild, refchild, outnewchild)
+  def insert_before(this : IXMLDOMText*, newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.insert_before.call(this, newchild, refchild, outnewchild)
   end
-  def replace_child(newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.replace_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, oldchild, outoldchild)
+  def replace_child(this : IXMLDOMText*, newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.replace_child.call(this, newchild, oldchild, outoldchild)
   end
-  def remove_child(childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(childnode, oldchild)
+  def remove_child(this : IXMLDOMText*, childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.remove_child.call(this, childnode, oldchild)
   end
-  def append_child(newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.append_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, outnewchild)
+  def append_child(this : IXMLDOMText*, newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.append_child.call(this, newchild, outnewchild)
   end
-  def has_child_nodes(haschild : Int16*) : HRESULT
-    @lpVtbl.value.has_child_nodes.unsafe_as(Proc(Int16*, HRESULT)).call(haschild)
+  def has_child_nodes(this : IXMLDOMText*, haschild : Int16*) : HRESULT
+    @lpVtbl.value.has_child_nodes.call(this, haschild)
   end
-  def get_owner_document(xmldomdocument : IXMLDOMDocument*) : HRESULT
-    @lpVtbl.value.get_owner_document.unsafe_as(Proc(IXMLDOMDocument*, HRESULT)).call(xmldomdocument)
+  def get_owner_document(this : IXMLDOMText*, xmldomdocument : IXMLDOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner_document.call(this, xmldomdocument)
   end
-  def clone_node(deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.clone_node.unsafe_as(Proc(Int16, IXMLDOMNode*, HRESULT)).call(deep, cloneroot)
+  def clone_node(this : IXMLDOMText*, deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.clone_node.call(this, deep, cloneroot)
   end
-  def get_node_type_string(nodetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_type_string.unsafe_as(Proc(UInt8**, HRESULT)).call(nodetype)
+  def get_node_type_string(this : IXMLDOMText*, nodetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_type_string.call(this, nodetype)
   end
-  def get_text(text : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(text)
+  def get_text(this : IXMLDOMText*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, text)
   end
-  def put_text(text : UInt8*) : HRESULT
-    @lpVtbl.value.put_text.unsafe_as(Proc(UInt8*, HRESULT)).call(text)
+  def put_text(this : IXMLDOMText*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_text.call(this, text)
   end
-  def get_specified(isspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_specified.unsafe_as(Proc(Int16*, HRESULT)).call(isspecified)
+  def get_specified(this : IXMLDOMText*, isspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_specified.call(this, isspecified)
   end
-  def get_definition(definitionnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_definition.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(definitionnode)
+  def get_definition(this : IXMLDOMText*, definitionnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_definition.call(this, definitionnode)
   end
-  def get_node_typed_value(typedvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_typed_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(typedvalue)
+  def get_node_typed_value(this : IXMLDOMText*, typedvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_typed_value.call(this, typedvalue)
   end
-  def put_node_typed_value(typedvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_typed_value.unsafe_as(Proc(VARIANT, HRESULT)).call(typedvalue)
+  def put_node_typed_value(this : IXMLDOMText*, typedvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_typed_value.call(this, typedvalue)
   end
-  def get_data_type(datatypename : VARIANT*) : HRESULT
-    @lpVtbl.value.get_data_type.unsafe_as(Proc(VARIANT*, HRESULT)).call(datatypename)
+  def get_data_type(this : IXMLDOMText*, datatypename : VARIANT*) : HRESULT
+    @lpVtbl.value.get_data_type.call(this, datatypename)
   end
-  def put_data_type(datatypename : UInt8*) : HRESULT
-    @lpVtbl.value.put_data_type.unsafe_as(Proc(UInt8*, HRESULT)).call(datatypename)
+  def put_data_type(this : IXMLDOMText*, datatypename : UInt8*) : HRESULT
+    @lpVtbl.value.put_data_type.call(this, datatypename)
   end
-  def get_xml(xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(xmlstring)
+  def get_xml(this : IXMLDOMText*, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, xmlstring)
   end
-  def transform_node(stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.transform_node.unsafe_as(Proc(IXMLDOMNode, UInt8**, HRESULT)).call(stylesheet, xmlstring)
+  def transform_node(this : IXMLDOMText*, stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.transform_node.call(this, stylesheet, xmlstring)
   end
-  def select_nodes(querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.select_nodes.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(querystring, resultlist)
+  def select_nodes(this : IXMLDOMText*, querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.select_nodes.call(this, querystring, resultlist)
   end
-  def select_single_node(querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.select_single_node.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(querystring, resultnode)
+  def select_single_node(this : IXMLDOMText*, querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.select_single_node.call(this, querystring, resultnode)
   end
-  def get_parsed(isparsed : Int16*) : HRESULT
-    @lpVtbl.value.get_parsed.unsafe_as(Proc(Int16*, HRESULT)).call(isparsed)
+  def get_parsed(this : IXMLDOMText*, isparsed : Int16*) : HRESULT
+    @lpVtbl.value.get_parsed.call(this, isparsed)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : IXMLDOMText*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_prefix(prefixstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_prefix.unsafe_as(Proc(UInt8**, HRESULT)).call(prefixstring)
+  def get_prefix(this : IXMLDOMText*, prefixstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_prefix.call(this, prefixstring)
   end
-  def get_base_name(namestring : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_name.unsafe_as(Proc(UInt8**, HRESULT)).call(namestring)
+  def get_base_name(this : IXMLDOMText*, namestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_base_name.call(this, namestring)
   end
-  def transform_node_to_object(stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
-    @lpVtbl.value.transform_node_to_object.unsafe_as(Proc(IXMLDOMNode, VARIANT, HRESULT)).call(stylesheet, outputobject)
+  def transform_node_to_object(this : IXMLDOMText*, stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
+    @lpVtbl.value.transform_node_to_object.call(this, stylesheet, outputobject)
   end
-  def get_data(data : UInt8**) : HRESULT
-    @lpVtbl.value.get_data.unsafe_as(Proc(UInt8**, HRESULT)).call(data)
+  def get_data(this : IXMLDOMText*, data : UInt8**) : HRESULT
+    @lpVtbl.value.get_data.call(this, data)
   end
-  def put_data(data : UInt8*) : HRESULT
-    @lpVtbl.value.put_data.unsafe_as(Proc(UInt8*, HRESULT)).call(data)
+  def put_data(this : IXMLDOMText*, data : UInt8*) : HRESULT
+    @lpVtbl.value.put_data.call(this, data)
   end
-  def get_length(datalength : Int32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(datalength)
+  def get_length(this : IXMLDOMText*, datalength : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, datalength)
   end
-  def substring_data(offset : Int32, count : Int32, data : UInt8**) : HRESULT
-    @lpVtbl.value.substring_data.unsafe_as(Proc(Int32, Int32, UInt8**, HRESULT)).call(offset, count, data)
+  def substring_data(this : IXMLDOMText*, offset : Int32, count : Int32, data : UInt8**) : HRESULT
+    @lpVtbl.value.substring_data.call(this, offset, count, data)
   end
-  def append_data(data : UInt8*) : HRESULT
-    @lpVtbl.value.append_data.unsafe_as(Proc(UInt8*, HRESULT)).call(data)
+  def append_data(this : IXMLDOMText*, data : UInt8*) : HRESULT
+    @lpVtbl.value.append_data.call(this, data)
   end
-  def insert_data(offset : Int32, data : UInt8*) : HRESULT
-    @lpVtbl.value.insert_data.unsafe_as(Proc(Int32, UInt8*, HRESULT)).call(offset, data)
+  def insert_data(this : IXMLDOMText*, offset : Int32, data : UInt8*) : HRESULT
+    @lpVtbl.value.insert_data.call(this, offset, data)
   end
-  def delete_data(offset : Int32, count : Int32) : HRESULT
-    @lpVtbl.value.delete_data.unsafe_as(Proc(Int32, Int32, HRESULT)).call(offset, count)
+  def delete_data(this : IXMLDOMText*, offset : Int32, count : Int32) : HRESULT
+    @lpVtbl.value.delete_data.call(this, offset, count)
   end
-  def replace_data(offset : Int32, count : Int32, data : UInt8*) : HRESULT
-    @lpVtbl.value.replace_data.unsafe_as(Proc(Int32, Int32, UInt8*, HRESULT)).call(offset, count, data)
+  def replace_data(this : IXMLDOMText*, offset : Int32, count : Int32, data : UInt8*) : HRESULT
+    @lpVtbl.value.replace_data.call(this, offset, count, data)
   end
-  def split_text(offset : Int32, righthandtextnode : IXMLDOMText*) : HRESULT
-    @lpVtbl.value.split_text.unsafe_as(Proc(Int32, IXMLDOMText*, HRESULT)).call(offset, righthandtextnode)
+  def split_text(this : IXMLDOMText*, offset : Int32, righthandtextnode : IXMLDOMText*) : HRESULT
+    @lpVtbl.value.split_text.call(this, offset, righthandtextnode)
   end
 end
 struct LibWin32::IXMLDOMComment
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMComment*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMComment*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMComment*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMComment*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMComment*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMComment*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMComment*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_node_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_node_name(this : IXMLDOMComment*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_name.call(this, name)
   end
-  def get_node_value(value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  def get_node_value(this : IXMLDOMComment*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_value.call(this, value)
   end
-  def put_node_value(value : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_value.unsafe_as(Proc(VARIANT, HRESULT)).call(value)
+  def put_node_value(this : IXMLDOMComment*, value : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_value.call(this, value)
   end
-  def get_node_type(type : DOMNodeType*) : HRESULT
-    @lpVtbl.value.get_node_type.unsafe_as(Proc(DOMNodeType*, HRESULT)).call(type)
+  def get_node_type(this : IXMLDOMComment*, type : DOMNodeType*) : HRESULT
+    @lpVtbl.value.get_node_type.call(this, type)
   end
-  def get_parent_node(parent : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_parent_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(parent)
+  def get_parent_node(this : IXMLDOMComment*, parent : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_parent_node.call(this, parent)
   end
-  def get_child_nodes(childlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_child_nodes.unsafe_as(Proc(IXMLDOMNodeList*, HRESULT)).call(childlist)
+  def get_child_nodes(this : IXMLDOMComment*, childlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_child_nodes.call(this, childlist)
   end
-  def get_first_child(firstchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_first_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(firstchild)
+  def get_first_child(this : IXMLDOMComment*, firstchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_first_child.call(this, firstchild)
   end
-  def get_last_child(lastchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_last_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(lastchild)
+  def get_last_child(this : IXMLDOMComment*, lastchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_last_child.call(this, lastchild)
   end
-  def get_previous_sibling(previoussibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_previous_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(previoussibling)
+  def get_previous_sibling(this : IXMLDOMComment*, previoussibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_previous_sibling.call(this, previoussibling)
   end
-  def get_next_sibling(nextsibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_next_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(nextsibling)
+  def get_next_sibling(this : IXMLDOMComment*, nextsibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_next_sibling.call(this, nextsibling)
   end
-  def get_attributes(attributemap : IXMLDOMNamedNodeMap*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(IXMLDOMNamedNodeMap*, HRESULT)).call(attributemap)
+  def get_attributes(this : IXMLDOMComment*, attributemap : IXMLDOMNamedNodeMap*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributemap)
   end
-  def insert_before(newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.insert_before.unsafe_as(Proc(IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)).call(newchild, refchild, outnewchild)
+  def insert_before(this : IXMLDOMComment*, newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.insert_before.call(this, newchild, refchild, outnewchild)
   end
-  def replace_child(newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.replace_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, oldchild, outoldchild)
+  def replace_child(this : IXMLDOMComment*, newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.replace_child.call(this, newchild, oldchild, outoldchild)
   end
-  def remove_child(childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(childnode, oldchild)
+  def remove_child(this : IXMLDOMComment*, childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.remove_child.call(this, childnode, oldchild)
   end
-  def append_child(newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.append_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, outnewchild)
+  def append_child(this : IXMLDOMComment*, newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.append_child.call(this, newchild, outnewchild)
   end
-  def has_child_nodes(haschild : Int16*) : HRESULT
-    @lpVtbl.value.has_child_nodes.unsafe_as(Proc(Int16*, HRESULT)).call(haschild)
+  def has_child_nodes(this : IXMLDOMComment*, haschild : Int16*) : HRESULT
+    @lpVtbl.value.has_child_nodes.call(this, haschild)
   end
-  def get_owner_document(xmldomdocument : IXMLDOMDocument*) : HRESULT
-    @lpVtbl.value.get_owner_document.unsafe_as(Proc(IXMLDOMDocument*, HRESULT)).call(xmldomdocument)
+  def get_owner_document(this : IXMLDOMComment*, xmldomdocument : IXMLDOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner_document.call(this, xmldomdocument)
   end
-  def clone_node(deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.clone_node.unsafe_as(Proc(Int16, IXMLDOMNode*, HRESULT)).call(deep, cloneroot)
+  def clone_node(this : IXMLDOMComment*, deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.clone_node.call(this, deep, cloneroot)
   end
-  def get_node_type_string(nodetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_type_string.unsafe_as(Proc(UInt8**, HRESULT)).call(nodetype)
+  def get_node_type_string(this : IXMLDOMComment*, nodetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_type_string.call(this, nodetype)
   end
-  def get_text(text : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(text)
+  def get_text(this : IXMLDOMComment*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, text)
   end
-  def put_text(text : UInt8*) : HRESULT
-    @lpVtbl.value.put_text.unsafe_as(Proc(UInt8*, HRESULT)).call(text)
+  def put_text(this : IXMLDOMComment*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_text.call(this, text)
   end
-  def get_specified(isspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_specified.unsafe_as(Proc(Int16*, HRESULT)).call(isspecified)
+  def get_specified(this : IXMLDOMComment*, isspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_specified.call(this, isspecified)
   end
-  def get_definition(definitionnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_definition.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(definitionnode)
+  def get_definition(this : IXMLDOMComment*, definitionnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_definition.call(this, definitionnode)
   end
-  def get_node_typed_value(typedvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_typed_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(typedvalue)
+  def get_node_typed_value(this : IXMLDOMComment*, typedvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_typed_value.call(this, typedvalue)
   end
-  def put_node_typed_value(typedvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_typed_value.unsafe_as(Proc(VARIANT, HRESULT)).call(typedvalue)
+  def put_node_typed_value(this : IXMLDOMComment*, typedvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_typed_value.call(this, typedvalue)
   end
-  def get_data_type(datatypename : VARIANT*) : HRESULT
-    @lpVtbl.value.get_data_type.unsafe_as(Proc(VARIANT*, HRESULT)).call(datatypename)
+  def get_data_type(this : IXMLDOMComment*, datatypename : VARIANT*) : HRESULT
+    @lpVtbl.value.get_data_type.call(this, datatypename)
   end
-  def put_data_type(datatypename : UInt8*) : HRESULT
-    @lpVtbl.value.put_data_type.unsafe_as(Proc(UInt8*, HRESULT)).call(datatypename)
+  def put_data_type(this : IXMLDOMComment*, datatypename : UInt8*) : HRESULT
+    @lpVtbl.value.put_data_type.call(this, datatypename)
   end
-  def get_xml(xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(xmlstring)
+  def get_xml(this : IXMLDOMComment*, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, xmlstring)
   end
-  def transform_node(stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.transform_node.unsafe_as(Proc(IXMLDOMNode, UInt8**, HRESULT)).call(stylesheet, xmlstring)
+  def transform_node(this : IXMLDOMComment*, stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.transform_node.call(this, stylesheet, xmlstring)
   end
-  def select_nodes(querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.select_nodes.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(querystring, resultlist)
+  def select_nodes(this : IXMLDOMComment*, querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.select_nodes.call(this, querystring, resultlist)
   end
-  def select_single_node(querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.select_single_node.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(querystring, resultnode)
+  def select_single_node(this : IXMLDOMComment*, querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.select_single_node.call(this, querystring, resultnode)
   end
-  def get_parsed(isparsed : Int16*) : HRESULT
-    @lpVtbl.value.get_parsed.unsafe_as(Proc(Int16*, HRESULT)).call(isparsed)
+  def get_parsed(this : IXMLDOMComment*, isparsed : Int16*) : HRESULT
+    @lpVtbl.value.get_parsed.call(this, isparsed)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : IXMLDOMComment*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_prefix(prefixstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_prefix.unsafe_as(Proc(UInt8**, HRESULT)).call(prefixstring)
+  def get_prefix(this : IXMLDOMComment*, prefixstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_prefix.call(this, prefixstring)
   end
-  def get_base_name(namestring : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_name.unsafe_as(Proc(UInt8**, HRESULT)).call(namestring)
+  def get_base_name(this : IXMLDOMComment*, namestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_base_name.call(this, namestring)
   end
-  def transform_node_to_object(stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
-    @lpVtbl.value.transform_node_to_object.unsafe_as(Proc(IXMLDOMNode, VARIANT, HRESULT)).call(stylesheet, outputobject)
+  def transform_node_to_object(this : IXMLDOMComment*, stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
+    @lpVtbl.value.transform_node_to_object.call(this, stylesheet, outputobject)
   end
-  def get_data(data : UInt8**) : HRESULT
-    @lpVtbl.value.get_data.unsafe_as(Proc(UInt8**, HRESULT)).call(data)
+  def get_data(this : IXMLDOMComment*, data : UInt8**) : HRESULT
+    @lpVtbl.value.get_data.call(this, data)
   end
-  def put_data(data : UInt8*) : HRESULT
-    @lpVtbl.value.put_data.unsafe_as(Proc(UInt8*, HRESULT)).call(data)
+  def put_data(this : IXMLDOMComment*, data : UInt8*) : HRESULT
+    @lpVtbl.value.put_data.call(this, data)
   end
-  def get_length(datalength : Int32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(datalength)
+  def get_length(this : IXMLDOMComment*, datalength : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, datalength)
   end
-  def substring_data(offset : Int32, count : Int32, data : UInt8**) : HRESULT
-    @lpVtbl.value.substring_data.unsafe_as(Proc(Int32, Int32, UInt8**, HRESULT)).call(offset, count, data)
+  def substring_data(this : IXMLDOMComment*, offset : Int32, count : Int32, data : UInt8**) : HRESULT
+    @lpVtbl.value.substring_data.call(this, offset, count, data)
   end
-  def append_data(data : UInt8*) : HRESULT
-    @lpVtbl.value.append_data.unsafe_as(Proc(UInt8*, HRESULT)).call(data)
+  def append_data(this : IXMLDOMComment*, data : UInt8*) : HRESULT
+    @lpVtbl.value.append_data.call(this, data)
   end
-  def insert_data(offset : Int32, data : UInt8*) : HRESULT
-    @lpVtbl.value.insert_data.unsafe_as(Proc(Int32, UInt8*, HRESULT)).call(offset, data)
+  def insert_data(this : IXMLDOMComment*, offset : Int32, data : UInt8*) : HRESULT
+    @lpVtbl.value.insert_data.call(this, offset, data)
   end
-  def delete_data(offset : Int32, count : Int32) : HRESULT
-    @lpVtbl.value.delete_data.unsafe_as(Proc(Int32, Int32, HRESULT)).call(offset, count)
+  def delete_data(this : IXMLDOMComment*, offset : Int32, count : Int32) : HRESULT
+    @lpVtbl.value.delete_data.call(this, offset, count)
   end
-  def replace_data(offset : Int32, count : Int32, data : UInt8*) : HRESULT
-    @lpVtbl.value.replace_data.unsafe_as(Proc(Int32, Int32, UInt8*, HRESULT)).call(offset, count, data)
+  def replace_data(this : IXMLDOMComment*, offset : Int32, count : Int32, data : UInt8*) : HRESULT
+    @lpVtbl.value.replace_data.call(this, offset, count, data)
   end
 end
 struct LibWin32::IXMLDOMProcessingInstruction
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMProcessingInstruction*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMProcessingInstruction*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMProcessingInstruction*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMProcessingInstruction*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMProcessingInstruction*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMProcessingInstruction*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMProcessingInstruction*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_node_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_node_name(this : IXMLDOMProcessingInstruction*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_name.call(this, name)
   end
-  def get_node_value(value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  def get_node_value(this : IXMLDOMProcessingInstruction*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_value.call(this, value)
   end
-  def put_node_value(value : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_value.unsafe_as(Proc(VARIANT, HRESULT)).call(value)
+  def put_node_value(this : IXMLDOMProcessingInstruction*, value : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_value.call(this, value)
   end
-  def get_node_type(type : DOMNodeType*) : HRESULT
-    @lpVtbl.value.get_node_type.unsafe_as(Proc(DOMNodeType*, HRESULT)).call(type)
+  def get_node_type(this : IXMLDOMProcessingInstruction*, type : DOMNodeType*) : HRESULT
+    @lpVtbl.value.get_node_type.call(this, type)
   end
-  def get_parent_node(parent : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_parent_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(parent)
+  def get_parent_node(this : IXMLDOMProcessingInstruction*, parent : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_parent_node.call(this, parent)
   end
-  def get_child_nodes(childlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_child_nodes.unsafe_as(Proc(IXMLDOMNodeList*, HRESULT)).call(childlist)
+  def get_child_nodes(this : IXMLDOMProcessingInstruction*, childlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_child_nodes.call(this, childlist)
   end
-  def get_first_child(firstchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_first_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(firstchild)
+  def get_first_child(this : IXMLDOMProcessingInstruction*, firstchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_first_child.call(this, firstchild)
   end
-  def get_last_child(lastchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_last_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(lastchild)
+  def get_last_child(this : IXMLDOMProcessingInstruction*, lastchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_last_child.call(this, lastchild)
   end
-  def get_previous_sibling(previoussibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_previous_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(previoussibling)
+  def get_previous_sibling(this : IXMLDOMProcessingInstruction*, previoussibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_previous_sibling.call(this, previoussibling)
   end
-  def get_next_sibling(nextsibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_next_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(nextsibling)
+  def get_next_sibling(this : IXMLDOMProcessingInstruction*, nextsibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_next_sibling.call(this, nextsibling)
   end
-  def get_attributes(attributemap : IXMLDOMNamedNodeMap*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(IXMLDOMNamedNodeMap*, HRESULT)).call(attributemap)
+  def get_attributes(this : IXMLDOMProcessingInstruction*, attributemap : IXMLDOMNamedNodeMap*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributemap)
   end
-  def insert_before(newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.insert_before.unsafe_as(Proc(IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)).call(newchild, refchild, outnewchild)
+  def insert_before(this : IXMLDOMProcessingInstruction*, newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.insert_before.call(this, newchild, refchild, outnewchild)
   end
-  def replace_child(newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.replace_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, oldchild, outoldchild)
+  def replace_child(this : IXMLDOMProcessingInstruction*, newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.replace_child.call(this, newchild, oldchild, outoldchild)
   end
-  def remove_child(childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(childnode, oldchild)
+  def remove_child(this : IXMLDOMProcessingInstruction*, childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.remove_child.call(this, childnode, oldchild)
   end
-  def append_child(newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.append_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, outnewchild)
+  def append_child(this : IXMLDOMProcessingInstruction*, newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.append_child.call(this, newchild, outnewchild)
   end
-  def has_child_nodes(haschild : Int16*) : HRESULT
-    @lpVtbl.value.has_child_nodes.unsafe_as(Proc(Int16*, HRESULT)).call(haschild)
+  def has_child_nodes(this : IXMLDOMProcessingInstruction*, haschild : Int16*) : HRESULT
+    @lpVtbl.value.has_child_nodes.call(this, haschild)
   end
-  def get_owner_document(xmldomdocument : IXMLDOMDocument*) : HRESULT
-    @lpVtbl.value.get_owner_document.unsafe_as(Proc(IXMLDOMDocument*, HRESULT)).call(xmldomdocument)
+  def get_owner_document(this : IXMLDOMProcessingInstruction*, xmldomdocument : IXMLDOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner_document.call(this, xmldomdocument)
   end
-  def clone_node(deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.clone_node.unsafe_as(Proc(Int16, IXMLDOMNode*, HRESULT)).call(deep, cloneroot)
+  def clone_node(this : IXMLDOMProcessingInstruction*, deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.clone_node.call(this, deep, cloneroot)
   end
-  def get_node_type_string(nodetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_type_string.unsafe_as(Proc(UInt8**, HRESULT)).call(nodetype)
+  def get_node_type_string(this : IXMLDOMProcessingInstruction*, nodetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_type_string.call(this, nodetype)
   end
-  def get_text(text : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(text)
+  def get_text(this : IXMLDOMProcessingInstruction*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, text)
   end
-  def put_text(text : UInt8*) : HRESULT
-    @lpVtbl.value.put_text.unsafe_as(Proc(UInt8*, HRESULT)).call(text)
+  def put_text(this : IXMLDOMProcessingInstruction*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_text.call(this, text)
   end
-  def get_specified(isspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_specified.unsafe_as(Proc(Int16*, HRESULT)).call(isspecified)
+  def get_specified(this : IXMLDOMProcessingInstruction*, isspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_specified.call(this, isspecified)
   end
-  def get_definition(definitionnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_definition.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(definitionnode)
+  def get_definition(this : IXMLDOMProcessingInstruction*, definitionnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_definition.call(this, definitionnode)
   end
-  def get_node_typed_value(typedvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_typed_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(typedvalue)
+  def get_node_typed_value(this : IXMLDOMProcessingInstruction*, typedvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_typed_value.call(this, typedvalue)
   end
-  def put_node_typed_value(typedvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_typed_value.unsafe_as(Proc(VARIANT, HRESULT)).call(typedvalue)
+  def put_node_typed_value(this : IXMLDOMProcessingInstruction*, typedvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_typed_value.call(this, typedvalue)
   end
-  def get_data_type(datatypename : VARIANT*) : HRESULT
-    @lpVtbl.value.get_data_type.unsafe_as(Proc(VARIANT*, HRESULT)).call(datatypename)
+  def get_data_type(this : IXMLDOMProcessingInstruction*, datatypename : VARIANT*) : HRESULT
+    @lpVtbl.value.get_data_type.call(this, datatypename)
   end
-  def put_data_type(datatypename : UInt8*) : HRESULT
-    @lpVtbl.value.put_data_type.unsafe_as(Proc(UInt8*, HRESULT)).call(datatypename)
+  def put_data_type(this : IXMLDOMProcessingInstruction*, datatypename : UInt8*) : HRESULT
+    @lpVtbl.value.put_data_type.call(this, datatypename)
   end
-  def get_xml(xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(xmlstring)
+  def get_xml(this : IXMLDOMProcessingInstruction*, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, xmlstring)
   end
-  def transform_node(stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.transform_node.unsafe_as(Proc(IXMLDOMNode, UInt8**, HRESULT)).call(stylesheet, xmlstring)
+  def transform_node(this : IXMLDOMProcessingInstruction*, stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.transform_node.call(this, stylesheet, xmlstring)
   end
-  def select_nodes(querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.select_nodes.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(querystring, resultlist)
+  def select_nodes(this : IXMLDOMProcessingInstruction*, querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.select_nodes.call(this, querystring, resultlist)
   end
-  def select_single_node(querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.select_single_node.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(querystring, resultnode)
+  def select_single_node(this : IXMLDOMProcessingInstruction*, querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.select_single_node.call(this, querystring, resultnode)
   end
-  def get_parsed(isparsed : Int16*) : HRESULT
-    @lpVtbl.value.get_parsed.unsafe_as(Proc(Int16*, HRESULT)).call(isparsed)
+  def get_parsed(this : IXMLDOMProcessingInstruction*, isparsed : Int16*) : HRESULT
+    @lpVtbl.value.get_parsed.call(this, isparsed)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : IXMLDOMProcessingInstruction*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_prefix(prefixstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_prefix.unsafe_as(Proc(UInt8**, HRESULT)).call(prefixstring)
+  def get_prefix(this : IXMLDOMProcessingInstruction*, prefixstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_prefix.call(this, prefixstring)
   end
-  def get_base_name(namestring : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_name.unsafe_as(Proc(UInt8**, HRESULT)).call(namestring)
+  def get_base_name(this : IXMLDOMProcessingInstruction*, namestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_base_name.call(this, namestring)
   end
-  def transform_node_to_object(stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
-    @lpVtbl.value.transform_node_to_object.unsafe_as(Proc(IXMLDOMNode, VARIANT, HRESULT)).call(stylesheet, outputobject)
+  def transform_node_to_object(this : IXMLDOMProcessingInstruction*, stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
+    @lpVtbl.value.transform_node_to_object.call(this, stylesheet, outputobject)
   end
-  def get_target(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_target.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_target(this : IXMLDOMProcessingInstruction*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_target.call(this, name)
   end
-  def get_data(value : UInt8**) : HRESULT
-    @lpVtbl.value.get_data.unsafe_as(Proc(UInt8**, HRESULT)).call(value)
+  def get_data(this : IXMLDOMProcessingInstruction*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_data.call(this, value)
   end
-  def put_data(value : UInt8*) : HRESULT
-    @lpVtbl.value.put_data.unsafe_as(Proc(UInt8*, HRESULT)).call(value)
+  def put_data(this : IXMLDOMProcessingInstruction*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_data.call(this, value)
   end
 end
 struct LibWin32::IXMLDOMCDATASection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMCDATASection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMCDATASection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMCDATASection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMCDATASection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMCDATASection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMCDATASection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMCDATASection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_node_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_node_name(this : IXMLDOMCDATASection*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_name.call(this, name)
   end
-  def get_node_value(value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  def get_node_value(this : IXMLDOMCDATASection*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_value.call(this, value)
   end
-  def put_node_value(value : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_value.unsafe_as(Proc(VARIANT, HRESULT)).call(value)
+  def put_node_value(this : IXMLDOMCDATASection*, value : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_value.call(this, value)
   end
-  def get_node_type(type : DOMNodeType*) : HRESULT
-    @lpVtbl.value.get_node_type.unsafe_as(Proc(DOMNodeType*, HRESULT)).call(type)
+  def get_node_type(this : IXMLDOMCDATASection*, type : DOMNodeType*) : HRESULT
+    @lpVtbl.value.get_node_type.call(this, type)
   end
-  def get_parent_node(parent : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_parent_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(parent)
+  def get_parent_node(this : IXMLDOMCDATASection*, parent : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_parent_node.call(this, parent)
   end
-  def get_child_nodes(childlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_child_nodes.unsafe_as(Proc(IXMLDOMNodeList*, HRESULT)).call(childlist)
+  def get_child_nodes(this : IXMLDOMCDATASection*, childlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_child_nodes.call(this, childlist)
   end
-  def get_first_child(firstchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_first_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(firstchild)
+  def get_first_child(this : IXMLDOMCDATASection*, firstchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_first_child.call(this, firstchild)
   end
-  def get_last_child(lastchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_last_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(lastchild)
+  def get_last_child(this : IXMLDOMCDATASection*, lastchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_last_child.call(this, lastchild)
   end
-  def get_previous_sibling(previoussibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_previous_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(previoussibling)
+  def get_previous_sibling(this : IXMLDOMCDATASection*, previoussibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_previous_sibling.call(this, previoussibling)
   end
-  def get_next_sibling(nextsibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_next_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(nextsibling)
+  def get_next_sibling(this : IXMLDOMCDATASection*, nextsibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_next_sibling.call(this, nextsibling)
   end
-  def get_attributes(attributemap : IXMLDOMNamedNodeMap*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(IXMLDOMNamedNodeMap*, HRESULT)).call(attributemap)
+  def get_attributes(this : IXMLDOMCDATASection*, attributemap : IXMLDOMNamedNodeMap*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributemap)
   end
-  def insert_before(newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.insert_before.unsafe_as(Proc(IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)).call(newchild, refchild, outnewchild)
+  def insert_before(this : IXMLDOMCDATASection*, newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.insert_before.call(this, newchild, refchild, outnewchild)
   end
-  def replace_child(newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.replace_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, oldchild, outoldchild)
+  def replace_child(this : IXMLDOMCDATASection*, newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.replace_child.call(this, newchild, oldchild, outoldchild)
   end
-  def remove_child(childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(childnode, oldchild)
+  def remove_child(this : IXMLDOMCDATASection*, childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.remove_child.call(this, childnode, oldchild)
   end
-  def append_child(newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.append_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, outnewchild)
+  def append_child(this : IXMLDOMCDATASection*, newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.append_child.call(this, newchild, outnewchild)
   end
-  def has_child_nodes(haschild : Int16*) : HRESULT
-    @lpVtbl.value.has_child_nodes.unsafe_as(Proc(Int16*, HRESULT)).call(haschild)
+  def has_child_nodes(this : IXMLDOMCDATASection*, haschild : Int16*) : HRESULT
+    @lpVtbl.value.has_child_nodes.call(this, haschild)
   end
-  def get_owner_document(xmldomdocument : IXMLDOMDocument*) : HRESULT
-    @lpVtbl.value.get_owner_document.unsafe_as(Proc(IXMLDOMDocument*, HRESULT)).call(xmldomdocument)
+  def get_owner_document(this : IXMLDOMCDATASection*, xmldomdocument : IXMLDOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner_document.call(this, xmldomdocument)
   end
-  def clone_node(deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.clone_node.unsafe_as(Proc(Int16, IXMLDOMNode*, HRESULT)).call(deep, cloneroot)
+  def clone_node(this : IXMLDOMCDATASection*, deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.clone_node.call(this, deep, cloneroot)
   end
-  def get_node_type_string(nodetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_type_string.unsafe_as(Proc(UInt8**, HRESULT)).call(nodetype)
+  def get_node_type_string(this : IXMLDOMCDATASection*, nodetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_type_string.call(this, nodetype)
   end
-  def get_text(text : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(text)
+  def get_text(this : IXMLDOMCDATASection*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, text)
   end
-  def put_text(text : UInt8*) : HRESULT
-    @lpVtbl.value.put_text.unsafe_as(Proc(UInt8*, HRESULT)).call(text)
+  def put_text(this : IXMLDOMCDATASection*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_text.call(this, text)
   end
-  def get_specified(isspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_specified.unsafe_as(Proc(Int16*, HRESULT)).call(isspecified)
+  def get_specified(this : IXMLDOMCDATASection*, isspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_specified.call(this, isspecified)
   end
-  def get_definition(definitionnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_definition.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(definitionnode)
+  def get_definition(this : IXMLDOMCDATASection*, definitionnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_definition.call(this, definitionnode)
   end
-  def get_node_typed_value(typedvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_typed_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(typedvalue)
+  def get_node_typed_value(this : IXMLDOMCDATASection*, typedvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_typed_value.call(this, typedvalue)
   end
-  def put_node_typed_value(typedvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_typed_value.unsafe_as(Proc(VARIANT, HRESULT)).call(typedvalue)
+  def put_node_typed_value(this : IXMLDOMCDATASection*, typedvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_typed_value.call(this, typedvalue)
   end
-  def get_data_type(datatypename : VARIANT*) : HRESULT
-    @lpVtbl.value.get_data_type.unsafe_as(Proc(VARIANT*, HRESULT)).call(datatypename)
+  def get_data_type(this : IXMLDOMCDATASection*, datatypename : VARIANT*) : HRESULT
+    @lpVtbl.value.get_data_type.call(this, datatypename)
   end
-  def put_data_type(datatypename : UInt8*) : HRESULT
-    @lpVtbl.value.put_data_type.unsafe_as(Proc(UInt8*, HRESULT)).call(datatypename)
+  def put_data_type(this : IXMLDOMCDATASection*, datatypename : UInt8*) : HRESULT
+    @lpVtbl.value.put_data_type.call(this, datatypename)
   end
-  def get_xml(xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(xmlstring)
+  def get_xml(this : IXMLDOMCDATASection*, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, xmlstring)
   end
-  def transform_node(stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.transform_node.unsafe_as(Proc(IXMLDOMNode, UInt8**, HRESULT)).call(stylesheet, xmlstring)
+  def transform_node(this : IXMLDOMCDATASection*, stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.transform_node.call(this, stylesheet, xmlstring)
   end
-  def select_nodes(querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.select_nodes.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(querystring, resultlist)
+  def select_nodes(this : IXMLDOMCDATASection*, querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.select_nodes.call(this, querystring, resultlist)
   end
-  def select_single_node(querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.select_single_node.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(querystring, resultnode)
+  def select_single_node(this : IXMLDOMCDATASection*, querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.select_single_node.call(this, querystring, resultnode)
   end
-  def get_parsed(isparsed : Int16*) : HRESULT
-    @lpVtbl.value.get_parsed.unsafe_as(Proc(Int16*, HRESULT)).call(isparsed)
+  def get_parsed(this : IXMLDOMCDATASection*, isparsed : Int16*) : HRESULT
+    @lpVtbl.value.get_parsed.call(this, isparsed)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : IXMLDOMCDATASection*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_prefix(prefixstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_prefix.unsafe_as(Proc(UInt8**, HRESULT)).call(prefixstring)
+  def get_prefix(this : IXMLDOMCDATASection*, prefixstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_prefix.call(this, prefixstring)
   end
-  def get_base_name(namestring : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_name.unsafe_as(Proc(UInt8**, HRESULT)).call(namestring)
+  def get_base_name(this : IXMLDOMCDATASection*, namestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_base_name.call(this, namestring)
   end
-  def transform_node_to_object(stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
-    @lpVtbl.value.transform_node_to_object.unsafe_as(Proc(IXMLDOMNode, VARIANT, HRESULT)).call(stylesheet, outputobject)
+  def transform_node_to_object(this : IXMLDOMCDATASection*, stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
+    @lpVtbl.value.transform_node_to_object.call(this, stylesheet, outputobject)
   end
-  def get_data(data : UInt8**) : HRESULT
-    @lpVtbl.value.get_data.unsafe_as(Proc(UInt8**, HRESULT)).call(data)
+  def get_data(this : IXMLDOMCDATASection*, data : UInt8**) : HRESULT
+    @lpVtbl.value.get_data.call(this, data)
   end
-  def put_data(data : UInt8*) : HRESULT
-    @lpVtbl.value.put_data.unsafe_as(Proc(UInt8*, HRESULT)).call(data)
+  def put_data(this : IXMLDOMCDATASection*, data : UInt8*) : HRESULT
+    @lpVtbl.value.put_data.call(this, data)
   end
-  def get_length(datalength : Int32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(datalength)
+  def get_length(this : IXMLDOMCDATASection*, datalength : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, datalength)
   end
-  def substring_data(offset : Int32, count : Int32, data : UInt8**) : HRESULT
-    @lpVtbl.value.substring_data.unsafe_as(Proc(Int32, Int32, UInt8**, HRESULT)).call(offset, count, data)
+  def substring_data(this : IXMLDOMCDATASection*, offset : Int32, count : Int32, data : UInt8**) : HRESULT
+    @lpVtbl.value.substring_data.call(this, offset, count, data)
   end
-  def append_data(data : UInt8*) : HRESULT
-    @lpVtbl.value.append_data.unsafe_as(Proc(UInt8*, HRESULT)).call(data)
+  def append_data(this : IXMLDOMCDATASection*, data : UInt8*) : HRESULT
+    @lpVtbl.value.append_data.call(this, data)
   end
-  def insert_data(offset : Int32, data : UInt8*) : HRESULT
-    @lpVtbl.value.insert_data.unsafe_as(Proc(Int32, UInt8*, HRESULT)).call(offset, data)
+  def insert_data(this : IXMLDOMCDATASection*, offset : Int32, data : UInt8*) : HRESULT
+    @lpVtbl.value.insert_data.call(this, offset, data)
   end
-  def delete_data(offset : Int32, count : Int32) : HRESULT
-    @lpVtbl.value.delete_data.unsafe_as(Proc(Int32, Int32, HRESULT)).call(offset, count)
+  def delete_data(this : IXMLDOMCDATASection*, offset : Int32, count : Int32) : HRESULT
+    @lpVtbl.value.delete_data.call(this, offset, count)
   end
-  def replace_data(offset : Int32, count : Int32, data : UInt8*) : HRESULT
-    @lpVtbl.value.replace_data.unsafe_as(Proc(Int32, Int32, UInt8*, HRESULT)).call(offset, count, data)
+  def replace_data(this : IXMLDOMCDATASection*, offset : Int32, count : Int32, data : UInt8*) : HRESULT
+    @lpVtbl.value.replace_data.call(this, offset, count, data)
   end
-  def split_text(offset : Int32, righthandtextnode : IXMLDOMText*) : HRESULT
-    @lpVtbl.value.split_text.unsafe_as(Proc(Int32, IXMLDOMText*, HRESULT)).call(offset, righthandtextnode)
+  def split_text(this : IXMLDOMCDATASection*, offset : Int32, righthandtextnode : IXMLDOMText*) : HRESULT
+    @lpVtbl.value.split_text.call(this, offset, righthandtextnode)
   end
 end
 struct LibWin32::IXMLDOMDocumentType
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMDocumentType*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMDocumentType*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMDocumentType*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMDocumentType*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMDocumentType*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMDocumentType*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMDocumentType*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_node_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_node_name(this : IXMLDOMDocumentType*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_name.call(this, name)
   end
-  def get_node_value(value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  def get_node_value(this : IXMLDOMDocumentType*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_value.call(this, value)
   end
-  def put_node_value(value : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_value.unsafe_as(Proc(VARIANT, HRESULT)).call(value)
+  def put_node_value(this : IXMLDOMDocumentType*, value : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_value.call(this, value)
   end
-  def get_node_type(type : DOMNodeType*) : HRESULT
-    @lpVtbl.value.get_node_type.unsafe_as(Proc(DOMNodeType*, HRESULT)).call(type)
+  def get_node_type(this : IXMLDOMDocumentType*, type : DOMNodeType*) : HRESULT
+    @lpVtbl.value.get_node_type.call(this, type)
   end
-  def get_parent_node(parent : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_parent_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(parent)
+  def get_parent_node(this : IXMLDOMDocumentType*, parent : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_parent_node.call(this, parent)
   end
-  def get_child_nodes(childlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_child_nodes.unsafe_as(Proc(IXMLDOMNodeList*, HRESULT)).call(childlist)
+  def get_child_nodes(this : IXMLDOMDocumentType*, childlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_child_nodes.call(this, childlist)
   end
-  def get_first_child(firstchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_first_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(firstchild)
+  def get_first_child(this : IXMLDOMDocumentType*, firstchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_first_child.call(this, firstchild)
   end
-  def get_last_child(lastchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_last_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(lastchild)
+  def get_last_child(this : IXMLDOMDocumentType*, lastchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_last_child.call(this, lastchild)
   end
-  def get_previous_sibling(previoussibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_previous_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(previoussibling)
+  def get_previous_sibling(this : IXMLDOMDocumentType*, previoussibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_previous_sibling.call(this, previoussibling)
   end
-  def get_next_sibling(nextsibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_next_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(nextsibling)
+  def get_next_sibling(this : IXMLDOMDocumentType*, nextsibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_next_sibling.call(this, nextsibling)
   end
-  def get_attributes(attributemap : IXMLDOMNamedNodeMap*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(IXMLDOMNamedNodeMap*, HRESULT)).call(attributemap)
+  def get_attributes(this : IXMLDOMDocumentType*, attributemap : IXMLDOMNamedNodeMap*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributemap)
   end
-  def insert_before(newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.insert_before.unsafe_as(Proc(IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)).call(newchild, refchild, outnewchild)
+  def insert_before(this : IXMLDOMDocumentType*, newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.insert_before.call(this, newchild, refchild, outnewchild)
   end
-  def replace_child(newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.replace_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, oldchild, outoldchild)
+  def replace_child(this : IXMLDOMDocumentType*, newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.replace_child.call(this, newchild, oldchild, outoldchild)
   end
-  def remove_child(childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(childnode, oldchild)
+  def remove_child(this : IXMLDOMDocumentType*, childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.remove_child.call(this, childnode, oldchild)
   end
-  def append_child(newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.append_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, outnewchild)
+  def append_child(this : IXMLDOMDocumentType*, newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.append_child.call(this, newchild, outnewchild)
   end
-  def has_child_nodes(haschild : Int16*) : HRESULT
-    @lpVtbl.value.has_child_nodes.unsafe_as(Proc(Int16*, HRESULT)).call(haschild)
+  def has_child_nodes(this : IXMLDOMDocumentType*, haschild : Int16*) : HRESULT
+    @lpVtbl.value.has_child_nodes.call(this, haschild)
   end
-  def get_owner_document(xmldomdocument : IXMLDOMDocument*) : HRESULT
-    @lpVtbl.value.get_owner_document.unsafe_as(Proc(IXMLDOMDocument*, HRESULT)).call(xmldomdocument)
+  def get_owner_document(this : IXMLDOMDocumentType*, xmldomdocument : IXMLDOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner_document.call(this, xmldomdocument)
   end
-  def clone_node(deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.clone_node.unsafe_as(Proc(Int16, IXMLDOMNode*, HRESULT)).call(deep, cloneroot)
+  def clone_node(this : IXMLDOMDocumentType*, deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.clone_node.call(this, deep, cloneroot)
   end
-  def get_node_type_string(nodetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_type_string.unsafe_as(Proc(UInt8**, HRESULT)).call(nodetype)
+  def get_node_type_string(this : IXMLDOMDocumentType*, nodetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_type_string.call(this, nodetype)
   end
-  def get_text(text : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(text)
+  def get_text(this : IXMLDOMDocumentType*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, text)
   end
-  def put_text(text : UInt8*) : HRESULT
-    @lpVtbl.value.put_text.unsafe_as(Proc(UInt8*, HRESULT)).call(text)
+  def put_text(this : IXMLDOMDocumentType*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_text.call(this, text)
   end
-  def get_specified(isspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_specified.unsafe_as(Proc(Int16*, HRESULT)).call(isspecified)
+  def get_specified(this : IXMLDOMDocumentType*, isspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_specified.call(this, isspecified)
   end
-  def get_definition(definitionnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_definition.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(definitionnode)
+  def get_definition(this : IXMLDOMDocumentType*, definitionnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_definition.call(this, definitionnode)
   end
-  def get_node_typed_value(typedvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_typed_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(typedvalue)
+  def get_node_typed_value(this : IXMLDOMDocumentType*, typedvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_typed_value.call(this, typedvalue)
   end
-  def put_node_typed_value(typedvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_typed_value.unsafe_as(Proc(VARIANT, HRESULT)).call(typedvalue)
+  def put_node_typed_value(this : IXMLDOMDocumentType*, typedvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_typed_value.call(this, typedvalue)
   end
-  def get_data_type(datatypename : VARIANT*) : HRESULT
-    @lpVtbl.value.get_data_type.unsafe_as(Proc(VARIANT*, HRESULT)).call(datatypename)
+  def get_data_type(this : IXMLDOMDocumentType*, datatypename : VARIANT*) : HRESULT
+    @lpVtbl.value.get_data_type.call(this, datatypename)
   end
-  def put_data_type(datatypename : UInt8*) : HRESULT
-    @lpVtbl.value.put_data_type.unsafe_as(Proc(UInt8*, HRESULT)).call(datatypename)
+  def put_data_type(this : IXMLDOMDocumentType*, datatypename : UInt8*) : HRESULT
+    @lpVtbl.value.put_data_type.call(this, datatypename)
   end
-  def get_xml(xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(xmlstring)
+  def get_xml(this : IXMLDOMDocumentType*, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, xmlstring)
   end
-  def transform_node(stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.transform_node.unsafe_as(Proc(IXMLDOMNode, UInt8**, HRESULT)).call(stylesheet, xmlstring)
+  def transform_node(this : IXMLDOMDocumentType*, stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.transform_node.call(this, stylesheet, xmlstring)
   end
-  def select_nodes(querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.select_nodes.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(querystring, resultlist)
+  def select_nodes(this : IXMLDOMDocumentType*, querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.select_nodes.call(this, querystring, resultlist)
   end
-  def select_single_node(querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.select_single_node.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(querystring, resultnode)
+  def select_single_node(this : IXMLDOMDocumentType*, querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.select_single_node.call(this, querystring, resultnode)
   end
-  def get_parsed(isparsed : Int16*) : HRESULT
-    @lpVtbl.value.get_parsed.unsafe_as(Proc(Int16*, HRESULT)).call(isparsed)
+  def get_parsed(this : IXMLDOMDocumentType*, isparsed : Int16*) : HRESULT
+    @lpVtbl.value.get_parsed.call(this, isparsed)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : IXMLDOMDocumentType*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_prefix(prefixstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_prefix.unsafe_as(Proc(UInt8**, HRESULT)).call(prefixstring)
+  def get_prefix(this : IXMLDOMDocumentType*, prefixstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_prefix.call(this, prefixstring)
   end
-  def get_base_name(namestring : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_name.unsafe_as(Proc(UInt8**, HRESULT)).call(namestring)
+  def get_base_name(this : IXMLDOMDocumentType*, namestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_base_name.call(this, namestring)
   end
-  def transform_node_to_object(stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
-    @lpVtbl.value.transform_node_to_object.unsafe_as(Proc(IXMLDOMNode, VARIANT, HRESULT)).call(stylesheet, outputobject)
+  def transform_node_to_object(this : IXMLDOMDocumentType*, stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
+    @lpVtbl.value.transform_node_to_object.call(this, stylesheet, outputobject)
   end
-  def get_name(rootname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(rootname)
+  def get_name(this : IXMLDOMDocumentType*, rootname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, rootname)
   end
-  def get_entities(entitymap : IXMLDOMNamedNodeMap*) : HRESULT
-    @lpVtbl.value.get_entities.unsafe_as(Proc(IXMLDOMNamedNodeMap*, HRESULT)).call(entitymap)
+  def get_entities(this : IXMLDOMDocumentType*, entitymap : IXMLDOMNamedNodeMap*) : HRESULT
+    @lpVtbl.value.get_entities.call(this, entitymap)
   end
-  def get_notations(notationmap : IXMLDOMNamedNodeMap*) : HRESULT
-    @lpVtbl.value.get_notations.unsafe_as(Proc(IXMLDOMNamedNodeMap*, HRESULT)).call(notationmap)
+  def get_notations(this : IXMLDOMDocumentType*, notationmap : IXMLDOMNamedNodeMap*) : HRESULT
+    @lpVtbl.value.get_notations.call(this, notationmap)
   end
 end
 struct LibWin32::IXMLDOMNotation
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMNotation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMNotation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMNotation*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMNotation*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMNotation*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMNotation*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMNotation*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_node_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_node_name(this : IXMLDOMNotation*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_name.call(this, name)
   end
-  def get_node_value(value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  def get_node_value(this : IXMLDOMNotation*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_value.call(this, value)
   end
-  def put_node_value(value : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_value.unsafe_as(Proc(VARIANT, HRESULT)).call(value)
+  def put_node_value(this : IXMLDOMNotation*, value : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_value.call(this, value)
   end
-  def get_node_type(type : DOMNodeType*) : HRESULT
-    @lpVtbl.value.get_node_type.unsafe_as(Proc(DOMNodeType*, HRESULT)).call(type)
+  def get_node_type(this : IXMLDOMNotation*, type : DOMNodeType*) : HRESULT
+    @lpVtbl.value.get_node_type.call(this, type)
   end
-  def get_parent_node(parent : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_parent_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(parent)
+  def get_parent_node(this : IXMLDOMNotation*, parent : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_parent_node.call(this, parent)
   end
-  def get_child_nodes(childlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_child_nodes.unsafe_as(Proc(IXMLDOMNodeList*, HRESULT)).call(childlist)
+  def get_child_nodes(this : IXMLDOMNotation*, childlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_child_nodes.call(this, childlist)
   end
-  def get_first_child(firstchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_first_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(firstchild)
+  def get_first_child(this : IXMLDOMNotation*, firstchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_first_child.call(this, firstchild)
   end
-  def get_last_child(lastchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_last_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(lastchild)
+  def get_last_child(this : IXMLDOMNotation*, lastchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_last_child.call(this, lastchild)
   end
-  def get_previous_sibling(previoussibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_previous_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(previoussibling)
+  def get_previous_sibling(this : IXMLDOMNotation*, previoussibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_previous_sibling.call(this, previoussibling)
   end
-  def get_next_sibling(nextsibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_next_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(nextsibling)
+  def get_next_sibling(this : IXMLDOMNotation*, nextsibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_next_sibling.call(this, nextsibling)
   end
-  def get_attributes(attributemap : IXMLDOMNamedNodeMap*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(IXMLDOMNamedNodeMap*, HRESULT)).call(attributemap)
+  def get_attributes(this : IXMLDOMNotation*, attributemap : IXMLDOMNamedNodeMap*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributemap)
   end
-  def insert_before(newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.insert_before.unsafe_as(Proc(IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)).call(newchild, refchild, outnewchild)
+  def insert_before(this : IXMLDOMNotation*, newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.insert_before.call(this, newchild, refchild, outnewchild)
   end
-  def replace_child(newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.replace_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, oldchild, outoldchild)
+  def replace_child(this : IXMLDOMNotation*, newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.replace_child.call(this, newchild, oldchild, outoldchild)
   end
-  def remove_child(childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(childnode, oldchild)
+  def remove_child(this : IXMLDOMNotation*, childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.remove_child.call(this, childnode, oldchild)
   end
-  def append_child(newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.append_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, outnewchild)
+  def append_child(this : IXMLDOMNotation*, newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.append_child.call(this, newchild, outnewchild)
   end
-  def has_child_nodes(haschild : Int16*) : HRESULT
-    @lpVtbl.value.has_child_nodes.unsafe_as(Proc(Int16*, HRESULT)).call(haschild)
+  def has_child_nodes(this : IXMLDOMNotation*, haschild : Int16*) : HRESULT
+    @lpVtbl.value.has_child_nodes.call(this, haschild)
   end
-  def get_owner_document(xmldomdocument : IXMLDOMDocument*) : HRESULT
-    @lpVtbl.value.get_owner_document.unsafe_as(Proc(IXMLDOMDocument*, HRESULT)).call(xmldomdocument)
+  def get_owner_document(this : IXMLDOMNotation*, xmldomdocument : IXMLDOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner_document.call(this, xmldomdocument)
   end
-  def clone_node(deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.clone_node.unsafe_as(Proc(Int16, IXMLDOMNode*, HRESULT)).call(deep, cloneroot)
+  def clone_node(this : IXMLDOMNotation*, deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.clone_node.call(this, deep, cloneroot)
   end
-  def get_node_type_string(nodetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_type_string.unsafe_as(Proc(UInt8**, HRESULT)).call(nodetype)
+  def get_node_type_string(this : IXMLDOMNotation*, nodetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_type_string.call(this, nodetype)
   end
-  def get_text(text : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(text)
+  def get_text(this : IXMLDOMNotation*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, text)
   end
-  def put_text(text : UInt8*) : HRESULT
-    @lpVtbl.value.put_text.unsafe_as(Proc(UInt8*, HRESULT)).call(text)
+  def put_text(this : IXMLDOMNotation*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_text.call(this, text)
   end
-  def get_specified(isspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_specified.unsafe_as(Proc(Int16*, HRESULT)).call(isspecified)
+  def get_specified(this : IXMLDOMNotation*, isspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_specified.call(this, isspecified)
   end
-  def get_definition(definitionnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_definition.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(definitionnode)
+  def get_definition(this : IXMLDOMNotation*, definitionnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_definition.call(this, definitionnode)
   end
-  def get_node_typed_value(typedvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_typed_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(typedvalue)
+  def get_node_typed_value(this : IXMLDOMNotation*, typedvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_typed_value.call(this, typedvalue)
   end
-  def put_node_typed_value(typedvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_typed_value.unsafe_as(Proc(VARIANT, HRESULT)).call(typedvalue)
+  def put_node_typed_value(this : IXMLDOMNotation*, typedvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_typed_value.call(this, typedvalue)
   end
-  def get_data_type(datatypename : VARIANT*) : HRESULT
-    @lpVtbl.value.get_data_type.unsafe_as(Proc(VARIANT*, HRESULT)).call(datatypename)
+  def get_data_type(this : IXMLDOMNotation*, datatypename : VARIANT*) : HRESULT
+    @lpVtbl.value.get_data_type.call(this, datatypename)
   end
-  def put_data_type(datatypename : UInt8*) : HRESULT
-    @lpVtbl.value.put_data_type.unsafe_as(Proc(UInt8*, HRESULT)).call(datatypename)
+  def put_data_type(this : IXMLDOMNotation*, datatypename : UInt8*) : HRESULT
+    @lpVtbl.value.put_data_type.call(this, datatypename)
   end
-  def get_xml(xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(xmlstring)
+  def get_xml(this : IXMLDOMNotation*, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, xmlstring)
   end
-  def transform_node(stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.transform_node.unsafe_as(Proc(IXMLDOMNode, UInt8**, HRESULT)).call(stylesheet, xmlstring)
+  def transform_node(this : IXMLDOMNotation*, stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.transform_node.call(this, stylesheet, xmlstring)
   end
-  def select_nodes(querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.select_nodes.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(querystring, resultlist)
+  def select_nodes(this : IXMLDOMNotation*, querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.select_nodes.call(this, querystring, resultlist)
   end
-  def select_single_node(querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.select_single_node.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(querystring, resultnode)
+  def select_single_node(this : IXMLDOMNotation*, querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.select_single_node.call(this, querystring, resultnode)
   end
-  def get_parsed(isparsed : Int16*) : HRESULT
-    @lpVtbl.value.get_parsed.unsafe_as(Proc(Int16*, HRESULT)).call(isparsed)
+  def get_parsed(this : IXMLDOMNotation*, isparsed : Int16*) : HRESULT
+    @lpVtbl.value.get_parsed.call(this, isparsed)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : IXMLDOMNotation*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_prefix(prefixstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_prefix.unsafe_as(Proc(UInt8**, HRESULT)).call(prefixstring)
+  def get_prefix(this : IXMLDOMNotation*, prefixstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_prefix.call(this, prefixstring)
   end
-  def get_base_name(namestring : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_name.unsafe_as(Proc(UInt8**, HRESULT)).call(namestring)
+  def get_base_name(this : IXMLDOMNotation*, namestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_base_name.call(this, namestring)
   end
-  def transform_node_to_object(stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
-    @lpVtbl.value.transform_node_to_object.unsafe_as(Proc(IXMLDOMNode, VARIANT, HRESULT)).call(stylesheet, outputobject)
+  def transform_node_to_object(this : IXMLDOMNotation*, stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
+    @lpVtbl.value.transform_node_to_object.call(this, stylesheet, outputobject)
   end
-  def get_public_id(publicid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_public_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(publicid)
+  def get_public_id(this : IXMLDOMNotation*, publicid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_public_id.call(this, publicid)
   end
-  def get_system_id(systemid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_system_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(systemid)
+  def get_system_id(this : IXMLDOMNotation*, systemid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_system_id.call(this, systemid)
   end
 end
 struct LibWin32::IXMLDOMEntity
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMEntity*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMEntity*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMEntity*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMEntity*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMEntity*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMEntity*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMEntity*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_node_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_node_name(this : IXMLDOMEntity*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_name.call(this, name)
   end
-  def get_node_value(value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  def get_node_value(this : IXMLDOMEntity*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_value.call(this, value)
   end
-  def put_node_value(value : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_value.unsafe_as(Proc(VARIANT, HRESULT)).call(value)
+  def put_node_value(this : IXMLDOMEntity*, value : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_value.call(this, value)
   end
-  def get_node_type(type : DOMNodeType*) : HRESULT
-    @lpVtbl.value.get_node_type.unsafe_as(Proc(DOMNodeType*, HRESULT)).call(type)
+  def get_node_type(this : IXMLDOMEntity*, type : DOMNodeType*) : HRESULT
+    @lpVtbl.value.get_node_type.call(this, type)
   end
-  def get_parent_node(parent : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_parent_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(parent)
+  def get_parent_node(this : IXMLDOMEntity*, parent : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_parent_node.call(this, parent)
   end
-  def get_child_nodes(childlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_child_nodes.unsafe_as(Proc(IXMLDOMNodeList*, HRESULT)).call(childlist)
+  def get_child_nodes(this : IXMLDOMEntity*, childlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_child_nodes.call(this, childlist)
   end
-  def get_first_child(firstchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_first_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(firstchild)
+  def get_first_child(this : IXMLDOMEntity*, firstchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_first_child.call(this, firstchild)
   end
-  def get_last_child(lastchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_last_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(lastchild)
+  def get_last_child(this : IXMLDOMEntity*, lastchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_last_child.call(this, lastchild)
   end
-  def get_previous_sibling(previoussibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_previous_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(previoussibling)
+  def get_previous_sibling(this : IXMLDOMEntity*, previoussibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_previous_sibling.call(this, previoussibling)
   end
-  def get_next_sibling(nextsibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_next_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(nextsibling)
+  def get_next_sibling(this : IXMLDOMEntity*, nextsibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_next_sibling.call(this, nextsibling)
   end
-  def get_attributes(attributemap : IXMLDOMNamedNodeMap*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(IXMLDOMNamedNodeMap*, HRESULT)).call(attributemap)
+  def get_attributes(this : IXMLDOMEntity*, attributemap : IXMLDOMNamedNodeMap*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributemap)
   end
-  def insert_before(newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.insert_before.unsafe_as(Proc(IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)).call(newchild, refchild, outnewchild)
+  def insert_before(this : IXMLDOMEntity*, newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.insert_before.call(this, newchild, refchild, outnewchild)
   end
-  def replace_child(newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.replace_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, oldchild, outoldchild)
+  def replace_child(this : IXMLDOMEntity*, newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.replace_child.call(this, newchild, oldchild, outoldchild)
   end
-  def remove_child(childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(childnode, oldchild)
+  def remove_child(this : IXMLDOMEntity*, childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.remove_child.call(this, childnode, oldchild)
   end
-  def append_child(newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.append_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, outnewchild)
+  def append_child(this : IXMLDOMEntity*, newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.append_child.call(this, newchild, outnewchild)
   end
-  def has_child_nodes(haschild : Int16*) : HRESULT
-    @lpVtbl.value.has_child_nodes.unsafe_as(Proc(Int16*, HRESULT)).call(haschild)
+  def has_child_nodes(this : IXMLDOMEntity*, haschild : Int16*) : HRESULT
+    @lpVtbl.value.has_child_nodes.call(this, haschild)
   end
-  def get_owner_document(xmldomdocument : IXMLDOMDocument*) : HRESULT
-    @lpVtbl.value.get_owner_document.unsafe_as(Proc(IXMLDOMDocument*, HRESULT)).call(xmldomdocument)
+  def get_owner_document(this : IXMLDOMEntity*, xmldomdocument : IXMLDOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner_document.call(this, xmldomdocument)
   end
-  def clone_node(deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.clone_node.unsafe_as(Proc(Int16, IXMLDOMNode*, HRESULT)).call(deep, cloneroot)
+  def clone_node(this : IXMLDOMEntity*, deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.clone_node.call(this, deep, cloneroot)
   end
-  def get_node_type_string(nodetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_type_string.unsafe_as(Proc(UInt8**, HRESULT)).call(nodetype)
+  def get_node_type_string(this : IXMLDOMEntity*, nodetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_type_string.call(this, nodetype)
   end
-  def get_text(text : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(text)
+  def get_text(this : IXMLDOMEntity*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, text)
   end
-  def put_text(text : UInt8*) : HRESULT
-    @lpVtbl.value.put_text.unsafe_as(Proc(UInt8*, HRESULT)).call(text)
+  def put_text(this : IXMLDOMEntity*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_text.call(this, text)
   end
-  def get_specified(isspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_specified.unsafe_as(Proc(Int16*, HRESULT)).call(isspecified)
+  def get_specified(this : IXMLDOMEntity*, isspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_specified.call(this, isspecified)
   end
-  def get_definition(definitionnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_definition.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(definitionnode)
+  def get_definition(this : IXMLDOMEntity*, definitionnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_definition.call(this, definitionnode)
   end
-  def get_node_typed_value(typedvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_typed_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(typedvalue)
+  def get_node_typed_value(this : IXMLDOMEntity*, typedvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_typed_value.call(this, typedvalue)
   end
-  def put_node_typed_value(typedvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_typed_value.unsafe_as(Proc(VARIANT, HRESULT)).call(typedvalue)
+  def put_node_typed_value(this : IXMLDOMEntity*, typedvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_typed_value.call(this, typedvalue)
   end
-  def get_data_type(datatypename : VARIANT*) : HRESULT
-    @lpVtbl.value.get_data_type.unsafe_as(Proc(VARIANT*, HRESULT)).call(datatypename)
+  def get_data_type(this : IXMLDOMEntity*, datatypename : VARIANT*) : HRESULT
+    @lpVtbl.value.get_data_type.call(this, datatypename)
   end
-  def put_data_type(datatypename : UInt8*) : HRESULT
-    @lpVtbl.value.put_data_type.unsafe_as(Proc(UInt8*, HRESULT)).call(datatypename)
+  def put_data_type(this : IXMLDOMEntity*, datatypename : UInt8*) : HRESULT
+    @lpVtbl.value.put_data_type.call(this, datatypename)
   end
-  def get_xml(xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(xmlstring)
+  def get_xml(this : IXMLDOMEntity*, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, xmlstring)
   end
-  def transform_node(stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.transform_node.unsafe_as(Proc(IXMLDOMNode, UInt8**, HRESULT)).call(stylesheet, xmlstring)
+  def transform_node(this : IXMLDOMEntity*, stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.transform_node.call(this, stylesheet, xmlstring)
   end
-  def select_nodes(querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.select_nodes.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(querystring, resultlist)
+  def select_nodes(this : IXMLDOMEntity*, querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.select_nodes.call(this, querystring, resultlist)
   end
-  def select_single_node(querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.select_single_node.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(querystring, resultnode)
+  def select_single_node(this : IXMLDOMEntity*, querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.select_single_node.call(this, querystring, resultnode)
   end
-  def get_parsed(isparsed : Int16*) : HRESULT
-    @lpVtbl.value.get_parsed.unsafe_as(Proc(Int16*, HRESULT)).call(isparsed)
+  def get_parsed(this : IXMLDOMEntity*, isparsed : Int16*) : HRESULT
+    @lpVtbl.value.get_parsed.call(this, isparsed)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : IXMLDOMEntity*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_prefix(prefixstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_prefix.unsafe_as(Proc(UInt8**, HRESULT)).call(prefixstring)
+  def get_prefix(this : IXMLDOMEntity*, prefixstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_prefix.call(this, prefixstring)
   end
-  def get_base_name(namestring : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_name.unsafe_as(Proc(UInt8**, HRESULT)).call(namestring)
+  def get_base_name(this : IXMLDOMEntity*, namestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_base_name.call(this, namestring)
   end
-  def transform_node_to_object(stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
-    @lpVtbl.value.transform_node_to_object.unsafe_as(Proc(IXMLDOMNode, VARIANT, HRESULT)).call(stylesheet, outputobject)
+  def transform_node_to_object(this : IXMLDOMEntity*, stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
+    @lpVtbl.value.transform_node_to_object.call(this, stylesheet, outputobject)
   end
-  def get_public_id(publicid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_public_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(publicid)
+  def get_public_id(this : IXMLDOMEntity*, publicid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_public_id.call(this, publicid)
   end
-  def get_system_id(systemid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_system_id.unsafe_as(Proc(VARIANT*, HRESULT)).call(systemid)
+  def get_system_id(this : IXMLDOMEntity*, systemid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_system_id.call(this, systemid)
   end
-  def get_notation_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_notation_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_notation_name(this : IXMLDOMEntity*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_notation_name.call(this, name)
   end
 end
 struct LibWin32::IXMLDOMEntityReference
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMEntityReference*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMEntityReference*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMEntityReference*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMEntityReference*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMEntityReference*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMEntityReference*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMEntityReference*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_node_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_node_name(this : IXMLDOMEntityReference*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_name.call(this, name)
   end
-  def get_node_value(value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  def get_node_value(this : IXMLDOMEntityReference*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_value.call(this, value)
   end
-  def put_node_value(value : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_value.unsafe_as(Proc(VARIANT, HRESULT)).call(value)
+  def put_node_value(this : IXMLDOMEntityReference*, value : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_value.call(this, value)
   end
-  def get_node_type(type : DOMNodeType*) : HRESULT
-    @lpVtbl.value.get_node_type.unsafe_as(Proc(DOMNodeType*, HRESULT)).call(type)
+  def get_node_type(this : IXMLDOMEntityReference*, type : DOMNodeType*) : HRESULT
+    @lpVtbl.value.get_node_type.call(this, type)
   end
-  def get_parent_node(parent : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_parent_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(parent)
+  def get_parent_node(this : IXMLDOMEntityReference*, parent : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_parent_node.call(this, parent)
   end
-  def get_child_nodes(childlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_child_nodes.unsafe_as(Proc(IXMLDOMNodeList*, HRESULT)).call(childlist)
+  def get_child_nodes(this : IXMLDOMEntityReference*, childlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_child_nodes.call(this, childlist)
   end
-  def get_first_child(firstchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_first_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(firstchild)
+  def get_first_child(this : IXMLDOMEntityReference*, firstchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_first_child.call(this, firstchild)
   end
-  def get_last_child(lastchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_last_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(lastchild)
+  def get_last_child(this : IXMLDOMEntityReference*, lastchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_last_child.call(this, lastchild)
   end
-  def get_previous_sibling(previoussibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_previous_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(previoussibling)
+  def get_previous_sibling(this : IXMLDOMEntityReference*, previoussibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_previous_sibling.call(this, previoussibling)
   end
-  def get_next_sibling(nextsibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_next_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(nextsibling)
+  def get_next_sibling(this : IXMLDOMEntityReference*, nextsibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_next_sibling.call(this, nextsibling)
   end
-  def get_attributes(attributemap : IXMLDOMNamedNodeMap*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(IXMLDOMNamedNodeMap*, HRESULT)).call(attributemap)
+  def get_attributes(this : IXMLDOMEntityReference*, attributemap : IXMLDOMNamedNodeMap*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributemap)
   end
-  def insert_before(newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.insert_before.unsafe_as(Proc(IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)).call(newchild, refchild, outnewchild)
+  def insert_before(this : IXMLDOMEntityReference*, newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.insert_before.call(this, newchild, refchild, outnewchild)
   end
-  def replace_child(newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.replace_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, oldchild, outoldchild)
+  def replace_child(this : IXMLDOMEntityReference*, newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.replace_child.call(this, newchild, oldchild, outoldchild)
   end
-  def remove_child(childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(childnode, oldchild)
+  def remove_child(this : IXMLDOMEntityReference*, childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.remove_child.call(this, childnode, oldchild)
   end
-  def append_child(newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.append_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, outnewchild)
+  def append_child(this : IXMLDOMEntityReference*, newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.append_child.call(this, newchild, outnewchild)
   end
-  def has_child_nodes(haschild : Int16*) : HRESULT
-    @lpVtbl.value.has_child_nodes.unsafe_as(Proc(Int16*, HRESULT)).call(haschild)
+  def has_child_nodes(this : IXMLDOMEntityReference*, haschild : Int16*) : HRESULT
+    @lpVtbl.value.has_child_nodes.call(this, haschild)
   end
-  def get_owner_document(xmldomdocument : IXMLDOMDocument*) : HRESULT
-    @lpVtbl.value.get_owner_document.unsafe_as(Proc(IXMLDOMDocument*, HRESULT)).call(xmldomdocument)
+  def get_owner_document(this : IXMLDOMEntityReference*, xmldomdocument : IXMLDOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner_document.call(this, xmldomdocument)
   end
-  def clone_node(deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.clone_node.unsafe_as(Proc(Int16, IXMLDOMNode*, HRESULT)).call(deep, cloneroot)
+  def clone_node(this : IXMLDOMEntityReference*, deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.clone_node.call(this, deep, cloneroot)
   end
-  def get_node_type_string(nodetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_type_string.unsafe_as(Proc(UInt8**, HRESULT)).call(nodetype)
+  def get_node_type_string(this : IXMLDOMEntityReference*, nodetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_type_string.call(this, nodetype)
   end
-  def get_text(text : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(text)
+  def get_text(this : IXMLDOMEntityReference*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, text)
   end
-  def put_text(text : UInt8*) : HRESULT
-    @lpVtbl.value.put_text.unsafe_as(Proc(UInt8*, HRESULT)).call(text)
+  def put_text(this : IXMLDOMEntityReference*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_text.call(this, text)
   end
-  def get_specified(isspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_specified.unsafe_as(Proc(Int16*, HRESULT)).call(isspecified)
+  def get_specified(this : IXMLDOMEntityReference*, isspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_specified.call(this, isspecified)
   end
-  def get_definition(definitionnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_definition.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(definitionnode)
+  def get_definition(this : IXMLDOMEntityReference*, definitionnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_definition.call(this, definitionnode)
   end
-  def get_node_typed_value(typedvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_typed_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(typedvalue)
+  def get_node_typed_value(this : IXMLDOMEntityReference*, typedvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_typed_value.call(this, typedvalue)
   end
-  def put_node_typed_value(typedvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_typed_value.unsafe_as(Proc(VARIANT, HRESULT)).call(typedvalue)
+  def put_node_typed_value(this : IXMLDOMEntityReference*, typedvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_typed_value.call(this, typedvalue)
   end
-  def get_data_type(datatypename : VARIANT*) : HRESULT
-    @lpVtbl.value.get_data_type.unsafe_as(Proc(VARIANT*, HRESULT)).call(datatypename)
+  def get_data_type(this : IXMLDOMEntityReference*, datatypename : VARIANT*) : HRESULT
+    @lpVtbl.value.get_data_type.call(this, datatypename)
   end
-  def put_data_type(datatypename : UInt8*) : HRESULT
-    @lpVtbl.value.put_data_type.unsafe_as(Proc(UInt8*, HRESULT)).call(datatypename)
+  def put_data_type(this : IXMLDOMEntityReference*, datatypename : UInt8*) : HRESULT
+    @lpVtbl.value.put_data_type.call(this, datatypename)
   end
-  def get_xml(xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(xmlstring)
+  def get_xml(this : IXMLDOMEntityReference*, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, xmlstring)
   end
-  def transform_node(stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.transform_node.unsafe_as(Proc(IXMLDOMNode, UInt8**, HRESULT)).call(stylesheet, xmlstring)
+  def transform_node(this : IXMLDOMEntityReference*, stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.transform_node.call(this, stylesheet, xmlstring)
   end
-  def select_nodes(querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.select_nodes.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(querystring, resultlist)
+  def select_nodes(this : IXMLDOMEntityReference*, querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.select_nodes.call(this, querystring, resultlist)
   end
-  def select_single_node(querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.select_single_node.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(querystring, resultnode)
+  def select_single_node(this : IXMLDOMEntityReference*, querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.select_single_node.call(this, querystring, resultnode)
   end
-  def get_parsed(isparsed : Int16*) : HRESULT
-    @lpVtbl.value.get_parsed.unsafe_as(Proc(Int16*, HRESULT)).call(isparsed)
+  def get_parsed(this : IXMLDOMEntityReference*, isparsed : Int16*) : HRESULT
+    @lpVtbl.value.get_parsed.call(this, isparsed)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : IXMLDOMEntityReference*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_prefix(prefixstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_prefix.unsafe_as(Proc(UInt8**, HRESULT)).call(prefixstring)
+  def get_prefix(this : IXMLDOMEntityReference*, prefixstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_prefix.call(this, prefixstring)
   end
-  def get_base_name(namestring : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_name.unsafe_as(Proc(UInt8**, HRESULT)).call(namestring)
+  def get_base_name(this : IXMLDOMEntityReference*, namestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_base_name.call(this, namestring)
   end
-  def transform_node_to_object(stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
-    @lpVtbl.value.transform_node_to_object.unsafe_as(Proc(IXMLDOMNode, VARIANT, HRESULT)).call(stylesheet, outputobject)
+  def transform_node_to_object(this : IXMLDOMEntityReference*, stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
+    @lpVtbl.value.transform_node_to_object.call(this, stylesheet, outputobject)
   end
 end
 struct LibWin32::IXMLDOMParseError
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMParseError*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMParseError*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMParseError*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMParseError*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMParseError*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMParseError*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMParseError*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_error_code(errorcode : Int32*) : HRESULT
-    @lpVtbl.value.get_error_code.unsafe_as(Proc(Int32*, HRESULT)).call(errorcode)
+  def get_error_code(this : IXMLDOMParseError*, errorcode : Int32*) : HRESULT
+    @lpVtbl.value.get_error_code.call(this, errorcode)
   end
-  def get_url(urlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_url.unsafe_as(Proc(UInt8**, HRESULT)).call(urlstring)
+  def get_url(this : IXMLDOMParseError*, urlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, urlstring)
   end
-  def get_reason(reasonstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_reason.unsafe_as(Proc(UInt8**, HRESULT)).call(reasonstring)
+  def get_reason(this : IXMLDOMParseError*, reasonstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_reason.call(this, reasonstring)
   end
-  def get_src_text(sourcestring : UInt8**) : HRESULT
-    @lpVtbl.value.get_src_text.unsafe_as(Proc(UInt8**, HRESULT)).call(sourcestring)
+  def get_src_text(this : IXMLDOMParseError*, sourcestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_src_text.call(this, sourcestring)
   end
-  def get_line(linenumber : Int32*) : HRESULT
-    @lpVtbl.value.get_line.unsafe_as(Proc(Int32*, HRESULT)).call(linenumber)
+  def get_line(this : IXMLDOMParseError*, linenumber : Int32*) : HRESULT
+    @lpVtbl.value.get_line.call(this, linenumber)
   end
-  def get_linepos(lineposition : Int32*) : HRESULT
-    @lpVtbl.value.get_linepos.unsafe_as(Proc(Int32*, HRESULT)).call(lineposition)
+  def get_linepos(this : IXMLDOMParseError*, lineposition : Int32*) : HRESULT
+    @lpVtbl.value.get_linepos.call(this, lineposition)
   end
-  def get_filepos(fileposition : Int32*) : HRESULT
-    @lpVtbl.value.get_filepos.unsafe_as(Proc(Int32*, HRESULT)).call(fileposition)
+  def get_filepos(this : IXMLDOMParseError*, fileposition : Int32*) : HRESULT
+    @lpVtbl.value.get_filepos.call(this, fileposition)
   end
 end
 struct LibWin32::IXTLRuntime
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXTLRuntime*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXTLRuntime*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXTLRuntime*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXTLRuntime*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXTLRuntime*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXTLRuntime*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXTLRuntime*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_node_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_node_name(this : IXTLRuntime*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_name.call(this, name)
   end
-  def get_node_value(value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  def get_node_value(this : IXTLRuntime*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_value.call(this, value)
   end
-  def put_node_value(value : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_value.unsafe_as(Proc(VARIANT, HRESULT)).call(value)
+  def put_node_value(this : IXTLRuntime*, value : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_value.call(this, value)
   end
-  def get_node_type(type : DOMNodeType*) : HRESULT
-    @lpVtbl.value.get_node_type.unsafe_as(Proc(DOMNodeType*, HRESULT)).call(type)
+  def get_node_type(this : IXTLRuntime*, type : DOMNodeType*) : HRESULT
+    @lpVtbl.value.get_node_type.call(this, type)
   end
-  def get_parent_node(parent : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_parent_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(parent)
+  def get_parent_node(this : IXTLRuntime*, parent : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_parent_node.call(this, parent)
   end
-  def get_child_nodes(childlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_child_nodes.unsafe_as(Proc(IXMLDOMNodeList*, HRESULT)).call(childlist)
+  def get_child_nodes(this : IXTLRuntime*, childlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_child_nodes.call(this, childlist)
   end
-  def get_first_child(firstchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_first_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(firstchild)
+  def get_first_child(this : IXTLRuntime*, firstchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_first_child.call(this, firstchild)
   end
-  def get_last_child(lastchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_last_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(lastchild)
+  def get_last_child(this : IXTLRuntime*, lastchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_last_child.call(this, lastchild)
   end
-  def get_previous_sibling(previoussibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_previous_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(previoussibling)
+  def get_previous_sibling(this : IXTLRuntime*, previoussibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_previous_sibling.call(this, previoussibling)
   end
-  def get_next_sibling(nextsibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_next_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(nextsibling)
+  def get_next_sibling(this : IXTLRuntime*, nextsibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_next_sibling.call(this, nextsibling)
   end
-  def get_attributes(attributemap : IXMLDOMNamedNodeMap*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(IXMLDOMNamedNodeMap*, HRESULT)).call(attributemap)
+  def get_attributes(this : IXTLRuntime*, attributemap : IXMLDOMNamedNodeMap*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributemap)
   end
-  def insert_before(newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.insert_before.unsafe_as(Proc(IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)).call(newchild, refchild, outnewchild)
+  def insert_before(this : IXTLRuntime*, newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.insert_before.call(this, newchild, refchild, outnewchild)
   end
-  def replace_child(newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.replace_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, oldchild, outoldchild)
+  def replace_child(this : IXTLRuntime*, newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.replace_child.call(this, newchild, oldchild, outoldchild)
   end
-  def remove_child(childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(childnode, oldchild)
+  def remove_child(this : IXTLRuntime*, childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.remove_child.call(this, childnode, oldchild)
   end
-  def append_child(newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.append_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, outnewchild)
+  def append_child(this : IXTLRuntime*, newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.append_child.call(this, newchild, outnewchild)
   end
-  def has_child_nodes(haschild : Int16*) : HRESULT
-    @lpVtbl.value.has_child_nodes.unsafe_as(Proc(Int16*, HRESULT)).call(haschild)
+  def has_child_nodes(this : IXTLRuntime*, haschild : Int16*) : HRESULT
+    @lpVtbl.value.has_child_nodes.call(this, haschild)
   end
-  def get_owner_document(xmldomdocument : IXMLDOMDocument*) : HRESULT
-    @lpVtbl.value.get_owner_document.unsafe_as(Proc(IXMLDOMDocument*, HRESULT)).call(xmldomdocument)
+  def get_owner_document(this : IXTLRuntime*, xmldomdocument : IXMLDOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner_document.call(this, xmldomdocument)
   end
-  def clone_node(deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.clone_node.unsafe_as(Proc(Int16, IXMLDOMNode*, HRESULT)).call(deep, cloneroot)
+  def clone_node(this : IXTLRuntime*, deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.clone_node.call(this, deep, cloneroot)
   end
-  def get_node_type_string(nodetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_type_string.unsafe_as(Proc(UInt8**, HRESULT)).call(nodetype)
+  def get_node_type_string(this : IXTLRuntime*, nodetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_type_string.call(this, nodetype)
   end
-  def get_text(text : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(text)
+  def get_text(this : IXTLRuntime*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, text)
   end
-  def put_text(text : UInt8*) : HRESULT
-    @lpVtbl.value.put_text.unsafe_as(Proc(UInt8*, HRESULT)).call(text)
+  def put_text(this : IXTLRuntime*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_text.call(this, text)
   end
-  def get_specified(isspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_specified.unsafe_as(Proc(Int16*, HRESULT)).call(isspecified)
+  def get_specified(this : IXTLRuntime*, isspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_specified.call(this, isspecified)
   end
-  def get_definition(definitionnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_definition.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(definitionnode)
+  def get_definition(this : IXTLRuntime*, definitionnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_definition.call(this, definitionnode)
   end
-  def get_node_typed_value(typedvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_typed_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(typedvalue)
+  def get_node_typed_value(this : IXTLRuntime*, typedvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_typed_value.call(this, typedvalue)
   end
-  def put_node_typed_value(typedvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_typed_value.unsafe_as(Proc(VARIANT, HRESULT)).call(typedvalue)
+  def put_node_typed_value(this : IXTLRuntime*, typedvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_typed_value.call(this, typedvalue)
   end
-  def get_data_type(datatypename : VARIANT*) : HRESULT
-    @lpVtbl.value.get_data_type.unsafe_as(Proc(VARIANT*, HRESULT)).call(datatypename)
+  def get_data_type(this : IXTLRuntime*, datatypename : VARIANT*) : HRESULT
+    @lpVtbl.value.get_data_type.call(this, datatypename)
   end
-  def put_data_type(datatypename : UInt8*) : HRESULT
-    @lpVtbl.value.put_data_type.unsafe_as(Proc(UInt8*, HRESULT)).call(datatypename)
+  def put_data_type(this : IXTLRuntime*, datatypename : UInt8*) : HRESULT
+    @lpVtbl.value.put_data_type.call(this, datatypename)
   end
-  def get_xml(xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(xmlstring)
+  def get_xml(this : IXTLRuntime*, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, xmlstring)
   end
-  def transform_node(stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.transform_node.unsafe_as(Proc(IXMLDOMNode, UInt8**, HRESULT)).call(stylesheet, xmlstring)
+  def transform_node(this : IXTLRuntime*, stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.transform_node.call(this, stylesheet, xmlstring)
   end
-  def select_nodes(querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.select_nodes.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(querystring, resultlist)
+  def select_nodes(this : IXTLRuntime*, querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.select_nodes.call(this, querystring, resultlist)
   end
-  def select_single_node(querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.select_single_node.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(querystring, resultnode)
+  def select_single_node(this : IXTLRuntime*, querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.select_single_node.call(this, querystring, resultnode)
   end
-  def get_parsed(isparsed : Int16*) : HRESULT
-    @lpVtbl.value.get_parsed.unsafe_as(Proc(Int16*, HRESULT)).call(isparsed)
+  def get_parsed(this : IXTLRuntime*, isparsed : Int16*) : HRESULT
+    @lpVtbl.value.get_parsed.call(this, isparsed)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : IXTLRuntime*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_prefix(prefixstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_prefix.unsafe_as(Proc(UInt8**, HRESULT)).call(prefixstring)
+  def get_prefix(this : IXTLRuntime*, prefixstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_prefix.call(this, prefixstring)
   end
-  def get_base_name(namestring : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_name.unsafe_as(Proc(UInt8**, HRESULT)).call(namestring)
+  def get_base_name(this : IXTLRuntime*, namestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_base_name.call(this, namestring)
   end
-  def transform_node_to_object(stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
-    @lpVtbl.value.transform_node_to_object.unsafe_as(Proc(IXMLDOMNode, VARIANT, HRESULT)).call(stylesheet, outputobject)
+  def transform_node_to_object(this : IXTLRuntime*, stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
+    @lpVtbl.value.transform_node_to_object.call(this, stylesheet, outputobject)
   end
-  def unique_id(pnode : IXMLDOMNode, pid : Int32*) : HRESULT
-    @lpVtbl.value.unique_id.unsafe_as(Proc(IXMLDOMNode, Int32*, HRESULT)).call(pnode, pid)
+  def unique_id(this : IXTLRuntime*, pnode : IXMLDOMNode, pid : Int32*) : HRESULT
+    @lpVtbl.value.unique_id.call(this, pnode, pid)
   end
-  def depth(pnode : IXMLDOMNode, pdepth : Int32*) : HRESULT
-    @lpVtbl.value.depth.unsafe_as(Proc(IXMLDOMNode, Int32*, HRESULT)).call(pnode, pdepth)
+  def depth(this : IXTLRuntime*, pnode : IXMLDOMNode, pdepth : Int32*) : HRESULT
+    @lpVtbl.value.depth.call(this, pnode, pdepth)
   end
-  def child_number(pnode : IXMLDOMNode, pnumber : Int32*) : HRESULT
-    @lpVtbl.value.child_number.unsafe_as(Proc(IXMLDOMNode, Int32*, HRESULT)).call(pnode, pnumber)
+  def child_number(this : IXTLRuntime*, pnode : IXMLDOMNode, pnumber : Int32*) : HRESULT
+    @lpVtbl.value.child_number.call(this, pnode, pnumber)
   end
-  def ancestor_child_number(bstrnodename : UInt8*, pnode : IXMLDOMNode, pnumber : Int32*) : HRESULT
-    @lpVtbl.value.ancestor_child_number.unsafe_as(Proc(UInt8*, IXMLDOMNode, Int32*, HRESULT)).call(bstrnodename, pnode, pnumber)
+  def ancestor_child_number(this : IXTLRuntime*, bstrnodename : UInt8*, pnode : IXMLDOMNode, pnumber : Int32*) : HRESULT
+    @lpVtbl.value.ancestor_child_number.call(this, bstrnodename, pnode, pnumber)
   end
-  def absolute_child_number(pnode : IXMLDOMNode, pnumber : Int32*) : HRESULT
-    @lpVtbl.value.absolute_child_number.unsafe_as(Proc(IXMLDOMNode, Int32*, HRESULT)).call(pnode, pnumber)
+  def absolute_child_number(this : IXTLRuntime*, pnode : IXMLDOMNode, pnumber : Int32*) : HRESULT
+    @lpVtbl.value.absolute_child_number.call(this, pnode, pnumber)
   end
-  def format_index(lindex : Int32, bstrformat : UInt8*, pbstrformattedstring : UInt8**) : HRESULT
-    @lpVtbl.value.format_index.unsafe_as(Proc(Int32, UInt8*, UInt8**, HRESULT)).call(lindex, bstrformat, pbstrformattedstring)
+  def format_index(this : IXTLRuntime*, lindex : Int32, bstrformat : UInt8*, pbstrformattedstring : UInt8**) : HRESULT
+    @lpVtbl.value.format_index.call(this, lindex, bstrformat, pbstrformattedstring)
   end
-  def format_number(dblnumber : Float64, bstrformat : UInt8*, pbstrformattedstring : UInt8**) : HRESULT
-    @lpVtbl.value.format_number.unsafe_as(Proc(Float64, UInt8*, UInt8**, HRESULT)).call(dblnumber, bstrformat, pbstrformattedstring)
+  def format_number(this : IXTLRuntime*, dblnumber : Float64, bstrformat : UInt8*, pbstrformattedstring : UInt8**) : HRESULT
+    @lpVtbl.value.format_number.call(this, dblnumber, bstrformat, pbstrformattedstring)
   end
-  def format_date(vardate : VARIANT, bstrformat : UInt8*, vardestlocale : VARIANT, pbstrformattedstring : UInt8**) : HRESULT
-    @lpVtbl.value.format_date.unsafe_as(Proc(VARIANT, UInt8*, VARIANT, UInt8**, HRESULT)).call(vardate, bstrformat, vardestlocale, pbstrformattedstring)
+  def format_date(this : IXTLRuntime*, vardate : VARIANT, bstrformat : UInt8*, vardestlocale : VARIANT, pbstrformattedstring : UInt8**) : HRESULT
+    @lpVtbl.value.format_date.call(this, vardate, bstrformat, vardestlocale, pbstrformattedstring)
   end
-  def format_time(vartime : VARIANT, bstrformat : UInt8*, vardestlocale : VARIANT, pbstrformattedstring : UInt8**) : HRESULT
-    @lpVtbl.value.format_time.unsafe_as(Proc(VARIANT, UInt8*, VARIANT, UInt8**, HRESULT)).call(vartime, bstrformat, vardestlocale, pbstrformattedstring)
+  def format_time(this : IXTLRuntime*, vartime : VARIANT, bstrformat : UInt8*, vardestlocale : VARIANT, pbstrformattedstring : UInt8**) : HRESULT
+    @lpVtbl.value.format_time.call(this, vartime, bstrformat, vardestlocale, pbstrformattedstring)
   end
 end
 struct LibWin32::XMLDOMDocumentEvents
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : XMLDOMDocumentEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : XMLDOMDocumentEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : XMLDOMDocumentEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : XMLDOMDocumentEvents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : XMLDOMDocumentEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : XMLDOMDocumentEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : XMLDOMDocumentEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
 end
 struct LibWin32::IXMLHttpRequest
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLHttpRequest*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLHttpRequest*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLHttpRequest*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLHttpRequest*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLHttpRequest*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLHttpRequest*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLHttpRequest*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def open(bstrmethod : UInt8*, bstrurl : UInt8*, varasync : VARIANT, bstruser : VARIANT, bstrpassword : VARIANT) : HRESULT
-    @lpVtbl.value.open.unsafe_as(Proc(UInt8*, UInt8*, VARIANT, VARIANT, VARIANT, HRESULT)).call(bstrmethod, bstrurl, varasync, bstruser, bstrpassword)
+  def open(this : IXMLHttpRequest*, bstrmethod : UInt8*, bstrurl : UInt8*, varasync : VARIANT, bstruser : VARIANT, bstrpassword : VARIANT) : HRESULT
+    @lpVtbl.value.open.call(this, bstrmethod, bstrurl, varasync, bstruser, bstrpassword)
   end
-  def set_request_header(bstrheader : UInt8*, bstrvalue : UInt8*) : HRESULT
-    @lpVtbl.value.set_request_header.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstrheader, bstrvalue)
+  def set_request_header(this : IXMLHttpRequest*, bstrheader : UInt8*, bstrvalue : UInt8*) : HRESULT
+    @lpVtbl.value.set_request_header.call(this, bstrheader, bstrvalue)
   end
-  def get_response_header(bstrheader : UInt8*, pbstrvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_response_header.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstrheader, pbstrvalue)
+  def get_response_header(this : IXMLHttpRequest*, bstrheader : UInt8*, pbstrvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_response_header.call(this, bstrheader, pbstrvalue)
   end
-  def get_all_response_headers(pbstrheaders : UInt8**) : HRESULT
-    @lpVtbl.value.get_all_response_headers.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrheaders)
+  def get_all_response_headers(this : IXMLHttpRequest*, pbstrheaders : UInt8**) : HRESULT
+    @lpVtbl.value.get_all_response_headers.call(this, pbstrheaders)
   end
-  def send(varbody : VARIANT) : HRESULT
-    @lpVtbl.value.send.unsafe_as(Proc(VARIANT, HRESULT)).call(varbody)
+  def send(this : IXMLHttpRequest*, varbody : VARIANT) : HRESULT
+    @lpVtbl.value.send.call(this, varbody)
   end
-  def abort : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(HRESULT)).call
+  def abort(this : IXMLHttpRequest*) : HRESULT
+    @lpVtbl.value.abort.call(this)
   end
-  def get_status(plstatus : Int32*) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(Int32*, HRESULT)).call(plstatus)
+  def get_status(this : IXMLHttpRequest*, plstatus : Int32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, plstatus)
   end
-  def get_status_text(pbstrstatus : UInt8**) : HRESULT
-    @lpVtbl.value.get_status_text.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrstatus)
+  def get_status_text(this : IXMLHttpRequest*, pbstrstatus : UInt8**) : HRESULT
+    @lpVtbl.value.get_status_text.call(this, pbstrstatus)
   end
-  def get_response_xml(ppbody : IDispatch*) : HRESULT
-    @lpVtbl.value.get_response_xml.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppbody)
+  def get_response_xml(this : IXMLHttpRequest*, ppbody : IDispatch*) : HRESULT
+    @lpVtbl.value.get_response_xml.call(this, ppbody)
   end
-  def get_response_text(pbstrbody : UInt8**) : HRESULT
-    @lpVtbl.value.get_response_text.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbody)
+  def get_response_text(this : IXMLHttpRequest*, pbstrbody : UInt8**) : HRESULT
+    @lpVtbl.value.get_response_text.call(this, pbstrbody)
   end
-  def get_response_body(pvarbody : VARIANT*) : HRESULT
-    @lpVtbl.value.get_response_body.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarbody)
+  def get_response_body(this : IXMLHttpRequest*, pvarbody : VARIANT*) : HRESULT
+    @lpVtbl.value.get_response_body.call(this, pvarbody)
   end
-  def get_response_stream(pvarbody : VARIANT*) : HRESULT
-    @lpVtbl.value.get_response_stream.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarbody)
+  def get_response_stream(this : IXMLHttpRequest*, pvarbody : VARIANT*) : HRESULT
+    @lpVtbl.value.get_response_stream.call(this, pvarbody)
   end
-  def get_ready_state(plstate : Int32*) : HRESULT
-    @lpVtbl.value.get_ready_state.unsafe_as(Proc(Int32*, HRESULT)).call(plstate)
+  def get_ready_state(this : IXMLHttpRequest*, plstate : Int32*) : HRESULT
+    @lpVtbl.value.get_ready_state.call(this, plstate)
   end
-  def put_onreadystatechange(preadystatesink : IDispatch) : HRESULT
-    @lpVtbl.value.put_onreadystatechange.unsafe_as(Proc(IDispatch, HRESULT)).call(preadystatesink)
+  def put_onreadystatechange(this : IXMLHttpRequest*, preadystatesink : IDispatch) : HRESULT
+    @lpVtbl.value.put_onreadystatechange.call(this, preadystatesink)
   end
 end
 struct LibWin32::IXMLDSOControl
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDSOControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDSOControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDSOControl*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDSOControl*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDSOControl*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDSOControl*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDSOControl*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_xml_document(ppdoc : IXMLDOMDocument*) : HRESULT
-    @lpVtbl.value.get_xml_document.unsafe_as(Proc(IXMLDOMDocument*, HRESULT)).call(ppdoc)
+  def get_xml_document(this : IXMLDSOControl*, ppdoc : IXMLDOMDocument*) : HRESULT
+    @lpVtbl.value.get_xml_document.call(this, ppdoc)
   end
-  def put_xml_document(ppdoc : IXMLDOMDocument) : HRESULT
-    @lpVtbl.value.put_xml_document.unsafe_as(Proc(IXMLDOMDocument, HRESULT)).call(ppdoc)
+  def put_xml_document(this : IXMLDSOControl*, ppdoc : IXMLDOMDocument) : HRESULT
+    @lpVtbl.value.put_xml_document.call(this, ppdoc)
   end
-  def get_java_dso_compatible(fjavadsocompatible : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_java_dso_compatible.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(fjavadsocompatible)
+  def get_java_dso_compatible(this : IXMLDSOControl*, fjavadsocompatible : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_java_dso_compatible.call(this, fjavadsocompatible)
   end
-  def put_java_dso_compatible(fjavadsocompatible : LibC::BOOL) : HRESULT
-    @lpVtbl.value.put_java_dso_compatible.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fjavadsocompatible)
+  def put_java_dso_compatible(this : IXMLDSOControl*, fjavadsocompatible : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_java_dso_compatible.call(this, fjavadsocompatible)
   end
-  def get_ready_state(state : Int32*) : HRESULT
-    @lpVtbl.value.get_ready_state.unsafe_as(Proc(Int32*, HRESULT)).call(state)
+  def get_ready_state(this : IXMLDSOControl*, state : Int32*) : HRESULT
+    @lpVtbl.value.get_ready_state.call(this, state)
   end
 end
 struct LibWin32::IXMLElementCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLElementCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLElementCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLElementCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLElementCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLElementCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLElementCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLElementCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def put_length(v : Int32) : HRESULT
-    @lpVtbl.value.put_length.unsafe_as(Proc(Int32, HRESULT)).call(v)
+  def put_length(this : IXMLElementCollection*, v : Int32) : HRESULT
+    @lpVtbl.value.put_length.call(this, v)
   end
-  def get_length(p : Int32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(p)
+  def get_length(this : IXMLElementCollection*, p : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, p)
   end
-  def get__new_enum(ppunk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  def get__new_enum(this : IXMLElementCollection*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
   end
-  def item(var1 : VARIANT, var2 : VARIANT, ppdisp : IDispatch*) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(VARIANT, VARIANT, IDispatch*, HRESULT)).call(var1, var2, ppdisp)
+  def item(this : IXMLElementCollection*, var1 : VARIANT, var2 : VARIANT, ppdisp : IDispatch*) : HRESULT
+    @lpVtbl.value.item.call(this, var1, var2, ppdisp)
   end
 end
 struct LibWin32::IXMLDocument
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDocument*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDocument*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDocument*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDocument*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDocument*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDocument*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDocument*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_root(p : IXMLElement*) : HRESULT
-    @lpVtbl.value.get_root.unsafe_as(Proc(IXMLElement*, HRESULT)).call(p)
+  def get_root(this : IXMLDocument*, p : IXMLElement*) : HRESULT
+    @lpVtbl.value.get_root.call(this, p)
   end
-  def get_file_size(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_size.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_file_size(this : IXMLDocument*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_size.call(this, p)
   end
-  def get_file_modified_date(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_modified_date.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_file_modified_date(this : IXMLDocument*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_modified_date.call(this, p)
   end
-  def get_file_updated_date(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_updated_date.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_file_updated_date(this : IXMLDocument*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_updated_date.call(this, p)
   end
-  def get_url(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_url.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_url(this : IXMLDocument*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, p)
   end
-  def put_url(p : UInt8*) : HRESULT
-    @lpVtbl.value.put_url.unsafe_as(Proc(UInt8*, HRESULT)).call(p)
+  def put_url(this : IXMLDocument*, p : UInt8*) : HRESULT
+    @lpVtbl.value.put_url.call(this, p)
   end
-  def get_mime_type(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_mime_type.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_mime_type(this : IXMLDocument*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_mime_type.call(this, p)
   end
-  def get_ready_state(pl : Int32*) : HRESULT
-    @lpVtbl.value.get_ready_state.unsafe_as(Proc(Int32*, HRESULT)).call(pl)
+  def get_ready_state(this : IXMLDocument*, pl : Int32*) : HRESULT
+    @lpVtbl.value.get_ready_state.call(this, pl)
   end
-  def get_charset(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_charset.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_charset(this : IXMLDocument*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_charset.call(this, p)
   end
-  def put_charset(p : UInt8*) : HRESULT
-    @lpVtbl.value.put_charset.unsafe_as(Proc(UInt8*, HRESULT)).call(p)
+  def put_charset(this : IXMLDocument*, p : UInt8*) : HRESULT
+    @lpVtbl.value.put_charset.call(this, p)
   end
-  def get_version(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_version.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_version(this : IXMLDocument*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.call(this, p)
   end
-  def get_doctype(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_doctype.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_doctype(this : IXMLDocument*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_doctype.call(this, p)
   end
-  def get_dtd_url(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_dtd_url.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_dtd_url(this : IXMLDocument*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_dtd_url.call(this, p)
   end
-  def create_element(vtype : VARIANT, var1 : VARIANT, ppelem : IXMLElement*) : HRESULT
-    @lpVtbl.value.create_element.unsafe_as(Proc(VARIANT, VARIANT, IXMLElement*, HRESULT)).call(vtype, var1, ppelem)
+  def create_element(this : IXMLDocument*, vtype : VARIANT, var1 : VARIANT, ppelem : IXMLElement*) : HRESULT
+    @lpVtbl.value.create_element.call(this, vtype, var1, ppelem)
   end
 end
 struct LibWin32::IXMLDocument2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDocument2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDocument2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDocument2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDocument2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDocument2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDocument2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDocument2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_root(p : IXMLElement2*) : HRESULT
-    @lpVtbl.value.get_root.unsafe_as(Proc(IXMLElement2*, HRESULT)).call(p)
+  def get_root(this : IXMLDocument2*, p : IXMLElement2*) : HRESULT
+    @lpVtbl.value.get_root.call(this, p)
   end
-  def get_file_size(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_size.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_file_size(this : IXMLDocument2*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_size.call(this, p)
   end
-  def get_file_modified_date(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_modified_date.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_file_modified_date(this : IXMLDocument2*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_modified_date.call(this, p)
   end
-  def get_file_updated_date(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_updated_date.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_file_updated_date(this : IXMLDocument2*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_updated_date.call(this, p)
   end
-  def get_url(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_url.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_url(this : IXMLDocument2*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, p)
   end
-  def put_url(p : UInt8*) : HRESULT
-    @lpVtbl.value.put_url.unsafe_as(Proc(UInt8*, HRESULT)).call(p)
+  def put_url(this : IXMLDocument2*, p : UInt8*) : HRESULT
+    @lpVtbl.value.put_url.call(this, p)
   end
-  def get_mime_type(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_mime_type.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_mime_type(this : IXMLDocument2*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_mime_type.call(this, p)
   end
-  def get_ready_state(pl : Int32*) : HRESULT
-    @lpVtbl.value.get_ready_state.unsafe_as(Proc(Int32*, HRESULT)).call(pl)
+  def get_ready_state(this : IXMLDocument2*, pl : Int32*) : HRESULT
+    @lpVtbl.value.get_ready_state.call(this, pl)
   end
-  def get_charset(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_charset.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_charset(this : IXMLDocument2*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_charset.call(this, p)
   end
-  def put_charset(p : UInt8*) : HRESULT
-    @lpVtbl.value.put_charset.unsafe_as(Proc(UInt8*, HRESULT)).call(p)
+  def put_charset(this : IXMLDocument2*, p : UInt8*) : HRESULT
+    @lpVtbl.value.put_charset.call(this, p)
   end
-  def get_version(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_version.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_version(this : IXMLDocument2*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.call(this, p)
   end
-  def get_doctype(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_doctype.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_doctype(this : IXMLDocument2*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_doctype.call(this, p)
   end
-  def get_dtd_url(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_dtd_url.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_dtd_url(this : IXMLDocument2*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_dtd_url.call(this, p)
   end
-  def create_element(vtype : VARIANT, var1 : VARIANT, ppelem : IXMLElement2*) : HRESULT
-    @lpVtbl.value.create_element.unsafe_as(Proc(VARIANT, VARIANT, IXMLElement2*, HRESULT)).call(vtype, var1, ppelem)
+  def create_element(this : IXMLDocument2*, vtype : VARIANT, var1 : VARIANT, ppelem : IXMLElement2*) : HRESULT
+    @lpVtbl.value.create_element.call(this, vtype, var1, ppelem)
   end
-  def get_async(pf : Int16*) : HRESULT
-    @lpVtbl.value.get_async.unsafe_as(Proc(Int16*, HRESULT)).call(pf)
+  def get_async(this : IXMLDocument2*, pf : Int16*) : HRESULT
+    @lpVtbl.value.get_async.call(this, pf)
   end
-  def put_async(f : Int16) : HRESULT
-    @lpVtbl.value.put_async.unsafe_as(Proc(Int16, HRESULT)).call(f)
+  def put_async(this : IXMLDocument2*, f : Int16) : HRESULT
+    @lpVtbl.value.put_async.call(this, f)
   end
 end
 struct LibWin32::IXMLElement
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLElement*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLElement*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLElement*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLElement*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLElement*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLElement*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLElement*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_tag_name(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_tag_name.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_tag_name(this : IXMLElement*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_tag_name.call(this, p)
   end
-  def put_tag_name(p : UInt8*) : HRESULT
-    @lpVtbl.value.put_tag_name.unsafe_as(Proc(UInt8*, HRESULT)).call(p)
+  def put_tag_name(this : IXMLElement*, p : UInt8*) : HRESULT
+    @lpVtbl.value.put_tag_name.call(this, p)
   end
-  def get_parent(ppparent : IXMLElement*) : HRESULT
-    @lpVtbl.value.get_parent.unsafe_as(Proc(IXMLElement*, HRESULT)).call(ppparent)
+  def get_parent(this : IXMLElement*, ppparent : IXMLElement*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, ppparent)
   end
-  def set_attribute(strpropertyname : UInt8*, propertyvalue : VARIANT) : HRESULT
-    @lpVtbl.value.set_attribute.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(strpropertyname, propertyvalue)
+  def set_attribute(this : IXMLElement*, strpropertyname : UInt8*, propertyvalue : VARIANT) : HRESULT
+    @lpVtbl.value.set_attribute.call(this, strpropertyname, propertyvalue)
   end
-  def get_attribute(strpropertyname : UInt8*, propertyvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_attribute.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(strpropertyname, propertyvalue)
+  def get_attribute(this : IXMLElement*, strpropertyname : UInt8*, propertyvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_attribute.call(this, strpropertyname, propertyvalue)
   end
-  def remove_attribute(strpropertyname : UInt8*) : HRESULT
-    @lpVtbl.value.remove_attribute.unsafe_as(Proc(UInt8*, HRESULT)).call(strpropertyname)
+  def remove_attribute(this : IXMLElement*, strpropertyname : UInt8*) : HRESULT
+    @lpVtbl.value.remove_attribute.call(this, strpropertyname)
   end
-  def get_children(pp : IXMLElementCollection*) : HRESULT
-    @lpVtbl.value.get_children.unsafe_as(Proc(IXMLElementCollection*, HRESULT)).call(pp)
+  def get_children(this : IXMLElement*, pp : IXMLElementCollection*) : HRESULT
+    @lpVtbl.value.get_children.call(this, pp)
   end
-  def get_type(pltype : Int32*) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(Int32*, HRESULT)).call(pltype)
+  def get_type(this : IXMLElement*, pltype : Int32*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pltype)
   end
-  def get_text(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_text(this : IXMLElement*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, p)
   end
-  def put_text(p : UInt8*) : HRESULT
-    @lpVtbl.value.put_text.unsafe_as(Proc(UInt8*, HRESULT)).call(p)
+  def put_text(this : IXMLElement*, p : UInt8*) : HRESULT
+    @lpVtbl.value.put_text.call(this, p)
   end
-  def add_child(pchildelem : IXMLElement, lindex : Int32, lreserved : Int32) : HRESULT
-    @lpVtbl.value.add_child.unsafe_as(Proc(IXMLElement, Int32, Int32, HRESULT)).call(pchildelem, lindex, lreserved)
+  def add_child(this : IXMLElement*, pchildelem : IXMLElement, lindex : Int32, lreserved : Int32) : HRESULT
+    @lpVtbl.value.add_child.call(this, pchildelem, lindex, lreserved)
   end
-  def remove_child(pchildelem : IXMLElement) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(IXMLElement, HRESULT)).call(pchildelem)
+  def remove_child(this : IXMLElement*, pchildelem : IXMLElement) : HRESULT
+    @lpVtbl.value.remove_child.call(this, pchildelem)
   end
 end
 struct LibWin32::IXMLElement2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLElement2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLElement2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLElement2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLElement2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLElement2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLElement2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLElement2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_tag_name(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_tag_name.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_tag_name(this : IXMLElement2*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_tag_name.call(this, p)
   end
-  def put_tag_name(p : UInt8*) : HRESULT
-    @lpVtbl.value.put_tag_name.unsafe_as(Proc(UInt8*, HRESULT)).call(p)
+  def put_tag_name(this : IXMLElement2*, p : UInt8*) : HRESULT
+    @lpVtbl.value.put_tag_name.call(this, p)
   end
-  def get_parent(ppparent : IXMLElement2*) : HRESULT
-    @lpVtbl.value.get_parent.unsafe_as(Proc(IXMLElement2*, HRESULT)).call(ppparent)
+  def get_parent(this : IXMLElement2*, ppparent : IXMLElement2*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, ppparent)
   end
-  def set_attribute(strpropertyname : UInt8*, propertyvalue : VARIANT) : HRESULT
-    @lpVtbl.value.set_attribute.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(strpropertyname, propertyvalue)
+  def set_attribute(this : IXMLElement2*, strpropertyname : UInt8*, propertyvalue : VARIANT) : HRESULT
+    @lpVtbl.value.set_attribute.call(this, strpropertyname, propertyvalue)
   end
-  def get_attribute(strpropertyname : UInt8*, propertyvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_attribute.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(strpropertyname, propertyvalue)
+  def get_attribute(this : IXMLElement2*, strpropertyname : UInt8*, propertyvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_attribute.call(this, strpropertyname, propertyvalue)
   end
-  def remove_attribute(strpropertyname : UInt8*) : HRESULT
-    @lpVtbl.value.remove_attribute.unsafe_as(Proc(UInt8*, HRESULT)).call(strpropertyname)
+  def remove_attribute(this : IXMLElement2*, strpropertyname : UInt8*) : HRESULT
+    @lpVtbl.value.remove_attribute.call(this, strpropertyname)
   end
-  def get_children(pp : IXMLElementCollection*) : HRESULT
-    @lpVtbl.value.get_children.unsafe_as(Proc(IXMLElementCollection*, HRESULT)).call(pp)
+  def get_children(this : IXMLElement2*, pp : IXMLElementCollection*) : HRESULT
+    @lpVtbl.value.get_children.call(this, pp)
   end
-  def get_type(pltype : Int32*) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(Int32*, HRESULT)).call(pltype)
+  def get_type(this : IXMLElement2*, pltype : Int32*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pltype)
   end
-  def get_text(p : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(p)
+  def get_text(this : IXMLElement2*, p : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, p)
   end
-  def put_text(p : UInt8*) : HRESULT
-    @lpVtbl.value.put_text.unsafe_as(Proc(UInt8*, HRESULT)).call(p)
+  def put_text(this : IXMLElement2*, p : UInt8*) : HRESULT
+    @lpVtbl.value.put_text.call(this, p)
   end
-  def add_child(pchildelem : IXMLElement2, lindex : Int32, lreserved : Int32) : HRESULT
-    @lpVtbl.value.add_child.unsafe_as(Proc(IXMLElement2, Int32, Int32, HRESULT)).call(pchildelem, lindex, lreserved)
+  def add_child(this : IXMLElement2*, pchildelem : IXMLElement2, lindex : Int32, lreserved : Int32) : HRESULT
+    @lpVtbl.value.add_child.call(this, pchildelem, lindex, lreserved)
   end
-  def remove_child(pchildelem : IXMLElement2) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(IXMLElement2, HRESULT)).call(pchildelem)
+  def remove_child(this : IXMLElement2*, pchildelem : IXMLElement2) : HRESULT
+    @lpVtbl.value.remove_child.call(this, pchildelem)
   end
-  def get_attributes(pp : IXMLElementCollection*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(IXMLElementCollection*, HRESULT)).call(pp)
+  def get_attributes(this : IXMLElement2*, pp : IXMLElementCollection*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, pp)
   end
 end
 struct LibWin32::IXMLAttribute
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLAttribute*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLAttribute*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLAttribute*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLAttribute*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLAttribute*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLAttribute*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLAttribute*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_name(n : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(n)
+  def get_name(this : IXMLAttribute*, n : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, n)
   end
-  def get_value(v : UInt8**) : HRESULT
-    @lpVtbl.value.get_value.unsafe_as(Proc(UInt8**, HRESULT)).call(v)
+  def get_value(this : IXMLAttribute*, v : UInt8**) : HRESULT
+    @lpVtbl.value.get_value.call(this, v)
   end
 end
 struct LibWin32::IXMLError
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLError*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLError*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLError*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_error_info(perrorreturn : XML_ERROR*) : HRESULT
-    @lpVtbl.value.get_error_info.unsafe_as(Proc(XML_ERROR*, HRESULT)).call(perrorreturn)
+  def get_error_info(this : IXMLError*, perrorreturn : XML_ERROR*) : HRESULT
+    @lpVtbl.value.get_error_info.call(this, perrorreturn)
   end
 end
 struct LibWin32::IXMLDOMDocument2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMDocument2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMDocument2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMDocument2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMDocument2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMDocument2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMDocument2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMDocument2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_node_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_node_name(this : IXMLDOMDocument2*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_name.call(this, name)
   end
-  def get_node_value(value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  def get_node_value(this : IXMLDOMDocument2*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_value.call(this, value)
   end
-  def put_node_value(value : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_value.unsafe_as(Proc(VARIANT, HRESULT)).call(value)
+  def put_node_value(this : IXMLDOMDocument2*, value : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_value.call(this, value)
   end
-  def get_node_type(type : DOMNodeType*) : HRESULT
-    @lpVtbl.value.get_node_type.unsafe_as(Proc(DOMNodeType*, HRESULT)).call(type)
+  def get_node_type(this : IXMLDOMDocument2*, type : DOMNodeType*) : HRESULT
+    @lpVtbl.value.get_node_type.call(this, type)
   end
-  def get_parent_node(parent : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_parent_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(parent)
+  def get_parent_node(this : IXMLDOMDocument2*, parent : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_parent_node.call(this, parent)
   end
-  def get_child_nodes(childlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_child_nodes.unsafe_as(Proc(IXMLDOMNodeList*, HRESULT)).call(childlist)
+  def get_child_nodes(this : IXMLDOMDocument2*, childlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_child_nodes.call(this, childlist)
   end
-  def get_first_child(firstchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_first_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(firstchild)
+  def get_first_child(this : IXMLDOMDocument2*, firstchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_first_child.call(this, firstchild)
   end
-  def get_last_child(lastchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_last_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(lastchild)
+  def get_last_child(this : IXMLDOMDocument2*, lastchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_last_child.call(this, lastchild)
   end
-  def get_previous_sibling(previoussibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_previous_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(previoussibling)
+  def get_previous_sibling(this : IXMLDOMDocument2*, previoussibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_previous_sibling.call(this, previoussibling)
   end
-  def get_next_sibling(nextsibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_next_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(nextsibling)
+  def get_next_sibling(this : IXMLDOMDocument2*, nextsibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_next_sibling.call(this, nextsibling)
   end
-  def get_attributes(attributemap : IXMLDOMNamedNodeMap*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(IXMLDOMNamedNodeMap*, HRESULT)).call(attributemap)
+  def get_attributes(this : IXMLDOMDocument2*, attributemap : IXMLDOMNamedNodeMap*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributemap)
   end
-  def insert_before(newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.insert_before.unsafe_as(Proc(IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)).call(newchild, refchild, outnewchild)
+  def insert_before(this : IXMLDOMDocument2*, newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.insert_before.call(this, newchild, refchild, outnewchild)
   end
-  def replace_child(newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.replace_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, oldchild, outoldchild)
+  def replace_child(this : IXMLDOMDocument2*, newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.replace_child.call(this, newchild, oldchild, outoldchild)
   end
-  def remove_child(childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(childnode, oldchild)
+  def remove_child(this : IXMLDOMDocument2*, childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.remove_child.call(this, childnode, oldchild)
   end
-  def append_child(newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.append_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, outnewchild)
+  def append_child(this : IXMLDOMDocument2*, newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.append_child.call(this, newchild, outnewchild)
   end
-  def has_child_nodes(haschild : Int16*) : HRESULT
-    @lpVtbl.value.has_child_nodes.unsafe_as(Proc(Int16*, HRESULT)).call(haschild)
+  def has_child_nodes(this : IXMLDOMDocument2*, haschild : Int16*) : HRESULT
+    @lpVtbl.value.has_child_nodes.call(this, haschild)
   end
-  def get_owner_document(xmldomdocument : IXMLDOMDocument*) : HRESULT
-    @lpVtbl.value.get_owner_document.unsafe_as(Proc(IXMLDOMDocument*, HRESULT)).call(xmldomdocument)
+  def get_owner_document(this : IXMLDOMDocument2*, xmldomdocument : IXMLDOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner_document.call(this, xmldomdocument)
   end
-  def clone_node(deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.clone_node.unsafe_as(Proc(Int16, IXMLDOMNode*, HRESULT)).call(deep, cloneroot)
+  def clone_node(this : IXMLDOMDocument2*, deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.clone_node.call(this, deep, cloneroot)
   end
-  def get_node_type_string(nodetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_type_string.unsafe_as(Proc(UInt8**, HRESULT)).call(nodetype)
+  def get_node_type_string(this : IXMLDOMDocument2*, nodetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_type_string.call(this, nodetype)
   end
-  def get_text(text : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(text)
+  def get_text(this : IXMLDOMDocument2*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, text)
   end
-  def put_text(text : UInt8*) : HRESULT
-    @lpVtbl.value.put_text.unsafe_as(Proc(UInt8*, HRESULT)).call(text)
+  def put_text(this : IXMLDOMDocument2*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_text.call(this, text)
   end
-  def get_specified(isspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_specified.unsafe_as(Proc(Int16*, HRESULT)).call(isspecified)
+  def get_specified(this : IXMLDOMDocument2*, isspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_specified.call(this, isspecified)
   end
-  def get_definition(definitionnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_definition.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(definitionnode)
+  def get_definition(this : IXMLDOMDocument2*, definitionnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_definition.call(this, definitionnode)
   end
-  def get_node_typed_value(typedvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_typed_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(typedvalue)
+  def get_node_typed_value(this : IXMLDOMDocument2*, typedvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_typed_value.call(this, typedvalue)
   end
-  def put_node_typed_value(typedvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_typed_value.unsafe_as(Proc(VARIANT, HRESULT)).call(typedvalue)
+  def put_node_typed_value(this : IXMLDOMDocument2*, typedvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_typed_value.call(this, typedvalue)
   end
-  def get_data_type(datatypename : VARIANT*) : HRESULT
-    @lpVtbl.value.get_data_type.unsafe_as(Proc(VARIANT*, HRESULT)).call(datatypename)
+  def get_data_type(this : IXMLDOMDocument2*, datatypename : VARIANT*) : HRESULT
+    @lpVtbl.value.get_data_type.call(this, datatypename)
   end
-  def put_data_type(datatypename : UInt8*) : HRESULT
-    @lpVtbl.value.put_data_type.unsafe_as(Proc(UInt8*, HRESULT)).call(datatypename)
+  def put_data_type(this : IXMLDOMDocument2*, datatypename : UInt8*) : HRESULT
+    @lpVtbl.value.put_data_type.call(this, datatypename)
   end
-  def get_xml(xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(xmlstring)
+  def get_xml(this : IXMLDOMDocument2*, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, xmlstring)
   end
-  def transform_node(stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.transform_node.unsafe_as(Proc(IXMLDOMNode, UInt8**, HRESULT)).call(stylesheet, xmlstring)
+  def transform_node(this : IXMLDOMDocument2*, stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.transform_node.call(this, stylesheet, xmlstring)
   end
-  def select_nodes(querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.select_nodes.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(querystring, resultlist)
+  def select_nodes(this : IXMLDOMDocument2*, querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.select_nodes.call(this, querystring, resultlist)
   end
-  def select_single_node(querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.select_single_node.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(querystring, resultnode)
+  def select_single_node(this : IXMLDOMDocument2*, querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.select_single_node.call(this, querystring, resultnode)
   end
-  def get_parsed(isparsed : Int16*) : HRESULT
-    @lpVtbl.value.get_parsed.unsafe_as(Proc(Int16*, HRESULT)).call(isparsed)
+  def get_parsed(this : IXMLDOMDocument2*, isparsed : Int16*) : HRESULT
+    @lpVtbl.value.get_parsed.call(this, isparsed)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : IXMLDOMDocument2*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_prefix(prefixstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_prefix.unsafe_as(Proc(UInt8**, HRESULT)).call(prefixstring)
+  def get_prefix(this : IXMLDOMDocument2*, prefixstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_prefix.call(this, prefixstring)
   end
-  def get_base_name(namestring : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_name.unsafe_as(Proc(UInt8**, HRESULT)).call(namestring)
+  def get_base_name(this : IXMLDOMDocument2*, namestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_base_name.call(this, namestring)
   end
-  def transform_node_to_object(stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
-    @lpVtbl.value.transform_node_to_object.unsafe_as(Proc(IXMLDOMNode, VARIANT, HRESULT)).call(stylesheet, outputobject)
+  def transform_node_to_object(this : IXMLDOMDocument2*, stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
+    @lpVtbl.value.transform_node_to_object.call(this, stylesheet, outputobject)
   end
-  def get_doctype(documenttype : IXMLDOMDocumentType*) : HRESULT
-    @lpVtbl.value.get_doctype.unsafe_as(Proc(IXMLDOMDocumentType*, HRESULT)).call(documenttype)
+  def get_doctype(this : IXMLDOMDocument2*, documenttype : IXMLDOMDocumentType*) : HRESULT
+    @lpVtbl.value.get_doctype.call(this, documenttype)
   end
-  def get_implementation(impl : IXMLDOMImplementation*) : HRESULT
-    @lpVtbl.value.get_implementation.unsafe_as(Proc(IXMLDOMImplementation*, HRESULT)).call(impl)
+  def get_implementation(this : IXMLDOMDocument2*, impl : IXMLDOMImplementation*) : HRESULT
+    @lpVtbl.value.get_implementation.call(this, impl)
   end
-  def get_document_element(domelement : IXMLDOMElement*) : HRESULT
-    @lpVtbl.value.get_document_element.unsafe_as(Proc(IXMLDOMElement*, HRESULT)).call(domelement)
+  def get_document_element(this : IXMLDOMDocument2*, domelement : IXMLDOMElement*) : HRESULT
+    @lpVtbl.value.get_document_element.call(this, domelement)
   end
-  def putref_document_element(domelement : IXMLDOMElement) : HRESULT
-    @lpVtbl.value.putref_document_element.unsafe_as(Proc(IXMLDOMElement, HRESULT)).call(domelement)
+  def putref_document_element(this : IXMLDOMDocument2*, domelement : IXMLDOMElement) : HRESULT
+    @lpVtbl.value.putref_document_element.call(this, domelement)
   end
-  def create_element(tagname : UInt8*, element : IXMLDOMElement*) : HRESULT
-    @lpVtbl.value.create_element.unsafe_as(Proc(UInt8*, IXMLDOMElement*, HRESULT)).call(tagname, element)
+  def create_element(this : IXMLDOMDocument2*, tagname : UInt8*, element : IXMLDOMElement*) : HRESULT
+    @lpVtbl.value.create_element.call(this, tagname, element)
   end
-  def create_document_fragment(docfrag : IXMLDOMDocumentFragment*) : HRESULT
-    @lpVtbl.value.create_document_fragment.unsafe_as(Proc(IXMLDOMDocumentFragment*, HRESULT)).call(docfrag)
+  def create_document_fragment(this : IXMLDOMDocument2*, docfrag : IXMLDOMDocumentFragment*) : HRESULT
+    @lpVtbl.value.create_document_fragment.call(this, docfrag)
   end
-  def create_text_node(data : UInt8*, text : IXMLDOMText*) : HRESULT
-    @lpVtbl.value.create_text_node.unsafe_as(Proc(UInt8*, IXMLDOMText*, HRESULT)).call(data, text)
+  def create_text_node(this : IXMLDOMDocument2*, data : UInt8*, text : IXMLDOMText*) : HRESULT
+    @lpVtbl.value.create_text_node.call(this, data, text)
   end
-  def create_comment(data : UInt8*, comment : IXMLDOMComment*) : HRESULT
-    @lpVtbl.value.create_comment.unsafe_as(Proc(UInt8*, IXMLDOMComment*, HRESULT)).call(data, comment)
+  def create_comment(this : IXMLDOMDocument2*, data : UInt8*, comment : IXMLDOMComment*) : HRESULT
+    @lpVtbl.value.create_comment.call(this, data, comment)
   end
-  def create_cdata_section(data : UInt8*, cdata : IXMLDOMCDATASection*) : HRESULT
-    @lpVtbl.value.create_cdata_section.unsafe_as(Proc(UInt8*, IXMLDOMCDATASection*, HRESULT)).call(data, cdata)
+  def create_cdata_section(this : IXMLDOMDocument2*, data : UInt8*, cdata : IXMLDOMCDATASection*) : HRESULT
+    @lpVtbl.value.create_cdata_section.call(this, data, cdata)
   end
-  def create_processing_instruction(target : UInt8*, data : UInt8*, pi : IXMLDOMProcessingInstruction*) : HRESULT
-    @lpVtbl.value.create_processing_instruction.unsafe_as(Proc(UInt8*, UInt8*, IXMLDOMProcessingInstruction*, HRESULT)).call(target, data, pi)
+  def create_processing_instruction(this : IXMLDOMDocument2*, target : UInt8*, data : UInt8*, pi : IXMLDOMProcessingInstruction*) : HRESULT
+    @lpVtbl.value.create_processing_instruction.call(this, target, data, pi)
   end
-  def create_attribute(name : UInt8*, attribute : IXMLDOMAttribute*) : HRESULT
-    @lpVtbl.value.create_attribute.unsafe_as(Proc(UInt8*, IXMLDOMAttribute*, HRESULT)).call(name, attribute)
+  def create_attribute(this : IXMLDOMDocument2*, name : UInt8*, attribute : IXMLDOMAttribute*) : HRESULT
+    @lpVtbl.value.create_attribute.call(this, name, attribute)
   end
-  def create_entity_reference(name : UInt8*, entityref : IXMLDOMEntityReference*) : HRESULT
-    @lpVtbl.value.create_entity_reference.unsafe_as(Proc(UInt8*, IXMLDOMEntityReference*, HRESULT)).call(name, entityref)
+  def create_entity_reference(this : IXMLDOMDocument2*, name : UInt8*, entityref : IXMLDOMEntityReference*) : HRESULT
+    @lpVtbl.value.create_entity_reference.call(this, name, entityref)
   end
-  def get_elements_by_tag_name(tagname : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_elements_by_tag_name.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(tagname, resultlist)
+  def get_elements_by_tag_name(this : IXMLDOMDocument2*, tagname : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_elements_by_tag_name.call(this, tagname, resultlist)
   end
-  def create_node(type : VARIANT, name : UInt8*, namespaceuri : UInt8*, node : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.create_node.unsafe_as(Proc(VARIANT, UInt8*, UInt8*, IXMLDOMNode*, HRESULT)).call(type, name, namespaceuri, node)
+  def create_node(this : IXMLDOMDocument2*, type : VARIANT, name : UInt8*, namespaceuri : UInt8*, node : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.create_node.call(this, type, name, namespaceuri, node)
   end
-  def node_from_id(idstring : UInt8*, node : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.node_from_id.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(idstring, node)
+  def node_from_id(this : IXMLDOMDocument2*, idstring : UInt8*, node : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.node_from_id.call(this, idstring, node)
   end
-  def load(xmlsource : VARIANT, issuccessful : Int16*) : HRESULT
-    @lpVtbl.value.load.unsafe_as(Proc(VARIANT, Int16*, HRESULT)).call(xmlsource, issuccessful)
+  def load(this : IXMLDOMDocument2*, xmlsource : VARIANT, issuccessful : Int16*) : HRESULT
+    @lpVtbl.value.load.call(this, xmlsource, issuccessful)
   end
-  def get_ready_state(value : Int32*) : HRESULT
-    @lpVtbl.value.get_ready_state.unsafe_as(Proc(Int32*, HRESULT)).call(value)
+  def get_ready_state(this : IXMLDOMDocument2*, value : Int32*) : HRESULT
+    @lpVtbl.value.get_ready_state.call(this, value)
   end
-  def get_parse_error(errorobj : IXMLDOMParseError*) : HRESULT
-    @lpVtbl.value.get_parse_error.unsafe_as(Proc(IXMLDOMParseError*, HRESULT)).call(errorobj)
+  def get_parse_error(this : IXMLDOMDocument2*, errorobj : IXMLDOMParseError*) : HRESULT
+    @lpVtbl.value.get_parse_error.call(this, errorobj)
   end
-  def get_url(urlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_url.unsafe_as(Proc(UInt8**, HRESULT)).call(urlstring)
+  def get_url(this : IXMLDOMDocument2*, urlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, urlstring)
   end
-  def get_async(isasync : Int16*) : HRESULT
-    @lpVtbl.value.get_async.unsafe_as(Proc(Int16*, HRESULT)).call(isasync)
+  def get_async(this : IXMLDOMDocument2*, isasync : Int16*) : HRESULT
+    @lpVtbl.value.get_async.call(this, isasync)
   end
-  def put_async(isasync : Int16) : HRESULT
-    @lpVtbl.value.put_async.unsafe_as(Proc(Int16, HRESULT)).call(isasync)
+  def put_async(this : IXMLDOMDocument2*, isasync : Int16) : HRESULT
+    @lpVtbl.value.put_async.call(this, isasync)
   end
-  def abort : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(HRESULT)).call
+  def abort(this : IXMLDOMDocument2*) : HRESULT
+    @lpVtbl.value.abort.call(this)
   end
-  def load_xml(bstrxml : UInt8*, issuccessful : Int16*) : HRESULT
-    @lpVtbl.value.load_xml.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(bstrxml, issuccessful)
+  def load_xml(this : IXMLDOMDocument2*, bstrxml : UInt8*, issuccessful : Int16*) : HRESULT
+    @lpVtbl.value.load_xml.call(this, bstrxml, issuccessful)
   end
-  def save(destination : VARIANT) : HRESULT
-    @lpVtbl.value.save.unsafe_as(Proc(VARIANT, HRESULT)).call(destination)
+  def save(this : IXMLDOMDocument2*, destination : VARIANT) : HRESULT
+    @lpVtbl.value.save.call(this, destination)
   end
-  def get_validate_on_parse(isvalidating : Int16*) : HRESULT
-    @lpVtbl.value.get_validate_on_parse.unsafe_as(Proc(Int16*, HRESULT)).call(isvalidating)
+  def get_validate_on_parse(this : IXMLDOMDocument2*, isvalidating : Int16*) : HRESULT
+    @lpVtbl.value.get_validate_on_parse.call(this, isvalidating)
   end
-  def put_validate_on_parse(isvalidating : Int16) : HRESULT
-    @lpVtbl.value.put_validate_on_parse.unsafe_as(Proc(Int16, HRESULT)).call(isvalidating)
+  def put_validate_on_parse(this : IXMLDOMDocument2*, isvalidating : Int16) : HRESULT
+    @lpVtbl.value.put_validate_on_parse.call(this, isvalidating)
   end
-  def get_resolve_externals(isresolving : Int16*) : HRESULT
-    @lpVtbl.value.get_resolve_externals.unsafe_as(Proc(Int16*, HRESULT)).call(isresolving)
+  def get_resolve_externals(this : IXMLDOMDocument2*, isresolving : Int16*) : HRESULT
+    @lpVtbl.value.get_resolve_externals.call(this, isresolving)
   end
-  def put_resolve_externals(isresolving : Int16) : HRESULT
-    @lpVtbl.value.put_resolve_externals.unsafe_as(Proc(Int16, HRESULT)).call(isresolving)
+  def put_resolve_externals(this : IXMLDOMDocument2*, isresolving : Int16) : HRESULT
+    @lpVtbl.value.put_resolve_externals.call(this, isresolving)
   end
-  def get_preserve_white_space(ispreserving : Int16*) : HRESULT
-    @lpVtbl.value.get_preserve_white_space.unsafe_as(Proc(Int16*, HRESULT)).call(ispreserving)
+  def get_preserve_white_space(this : IXMLDOMDocument2*, ispreserving : Int16*) : HRESULT
+    @lpVtbl.value.get_preserve_white_space.call(this, ispreserving)
   end
-  def put_preserve_white_space(ispreserving : Int16) : HRESULT
-    @lpVtbl.value.put_preserve_white_space.unsafe_as(Proc(Int16, HRESULT)).call(ispreserving)
+  def put_preserve_white_space(this : IXMLDOMDocument2*, ispreserving : Int16) : HRESULT
+    @lpVtbl.value.put_preserve_white_space.call(this, ispreserving)
   end
-  def put_onreadystatechange(readystatechangesink : VARIANT) : HRESULT
-    @lpVtbl.value.put_onreadystatechange.unsafe_as(Proc(VARIANT, HRESULT)).call(readystatechangesink)
+  def put_onreadystatechange(this : IXMLDOMDocument2*, readystatechangesink : VARIANT) : HRESULT
+    @lpVtbl.value.put_onreadystatechange.call(this, readystatechangesink)
   end
-  def put_ondataavailable(ondataavailablesink : VARIANT) : HRESULT
-    @lpVtbl.value.put_ondataavailable.unsafe_as(Proc(VARIANT, HRESULT)).call(ondataavailablesink)
+  def put_ondataavailable(this : IXMLDOMDocument2*, ondataavailablesink : VARIANT) : HRESULT
+    @lpVtbl.value.put_ondataavailable.call(this, ondataavailablesink)
   end
-  def put_ontransformnode(ontransformnodesink : VARIANT) : HRESULT
-    @lpVtbl.value.put_ontransformnode.unsafe_as(Proc(VARIANT, HRESULT)).call(ontransformnodesink)
+  def put_ontransformnode(this : IXMLDOMDocument2*, ontransformnodesink : VARIANT) : HRESULT
+    @lpVtbl.value.put_ontransformnode.call(this, ontransformnodesink)
   end
-  def get_namespaces(namespacecollection : IXMLDOMSchemaCollection*) : HRESULT
-    @lpVtbl.value.get_namespaces.unsafe_as(Proc(IXMLDOMSchemaCollection*, HRESULT)).call(namespacecollection)
+  def get_namespaces(this : IXMLDOMDocument2*, namespacecollection : IXMLDOMSchemaCollection*) : HRESULT
+    @lpVtbl.value.get_namespaces.call(this, namespacecollection)
   end
-  def get_schemas(othercollection : VARIANT*) : HRESULT
-    @lpVtbl.value.get_schemas.unsafe_as(Proc(VARIANT*, HRESULT)).call(othercollection)
+  def get_schemas(this : IXMLDOMDocument2*, othercollection : VARIANT*) : HRESULT
+    @lpVtbl.value.get_schemas.call(this, othercollection)
   end
-  def putref_schemas(othercollection : VARIANT) : HRESULT
-    @lpVtbl.value.putref_schemas.unsafe_as(Proc(VARIANT, HRESULT)).call(othercollection)
+  def putref_schemas(this : IXMLDOMDocument2*, othercollection : VARIANT) : HRESULT
+    @lpVtbl.value.putref_schemas.call(this, othercollection)
   end
-  def validate(errorobj : IXMLDOMParseError*) : HRESULT
-    @lpVtbl.value.validate.unsafe_as(Proc(IXMLDOMParseError*, HRESULT)).call(errorobj)
+  def validate(this : IXMLDOMDocument2*, errorobj : IXMLDOMParseError*) : HRESULT
+    @lpVtbl.value.validate.call(this, errorobj)
   end
-  def set_property(name : UInt8*, value : VARIANT) : HRESULT
-    @lpVtbl.value.set_property.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(name, value)
+  def set_property(this : IXMLDOMDocument2*, name : UInt8*, value : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.call(this, name, value)
   end
-  def get_property(name : UInt8*, value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_property.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(name, value)
+  def get_property(this : IXMLDOMDocument2*, name : UInt8*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, name, value)
   end
 end
 struct LibWin32::IXMLDOMDocument3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMDocument3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMDocument3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMDocument3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMDocument3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMDocument3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMDocument3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMDocument3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_node_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_node_name(this : IXMLDOMDocument3*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_name.call(this, name)
   end
-  def get_node_value(value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  def get_node_value(this : IXMLDOMDocument3*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_value.call(this, value)
   end
-  def put_node_value(value : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_value.unsafe_as(Proc(VARIANT, HRESULT)).call(value)
+  def put_node_value(this : IXMLDOMDocument3*, value : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_value.call(this, value)
   end
-  def get_node_type(type : DOMNodeType*) : HRESULT
-    @lpVtbl.value.get_node_type.unsafe_as(Proc(DOMNodeType*, HRESULT)).call(type)
+  def get_node_type(this : IXMLDOMDocument3*, type : DOMNodeType*) : HRESULT
+    @lpVtbl.value.get_node_type.call(this, type)
   end
-  def get_parent_node(parent : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_parent_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(parent)
+  def get_parent_node(this : IXMLDOMDocument3*, parent : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_parent_node.call(this, parent)
   end
-  def get_child_nodes(childlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_child_nodes.unsafe_as(Proc(IXMLDOMNodeList*, HRESULT)).call(childlist)
+  def get_child_nodes(this : IXMLDOMDocument3*, childlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_child_nodes.call(this, childlist)
   end
-  def get_first_child(firstchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_first_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(firstchild)
+  def get_first_child(this : IXMLDOMDocument3*, firstchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_first_child.call(this, firstchild)
   end
-  def get_last_child(lastchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_last_child.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(lastchild)
+  def get_last_child(this : IXMLDOMDocument3*, lastchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_last_child.call(this, lastchild)
   end
-  def get_previous_sibling(previoussibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_previous_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(previoussibling)
+  def get_previous_sibling(this : IXMLDOMDocument3*, previoussibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_previous_sibling.call(this, previoussibling)
   end
-  def get_next_sibling(nextsibling : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_next_sibling.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(nextsibling)
+  def get_next_sibling(this : IXMLDOMDocument3*, nextsibling : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_next_sibling.call(this, nextsibling)
   end
-  def get_attributes(attributemap : IXMLDOMNamedNodeMap*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(IXMLDOMNamedNodeMap*, HRESULT)).call(attributemap)
+  def get_attributes(this : IXMLDOMDocument3*, attributemap : IXMLDOMNamedNodeMap*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributemap)
   end
-  def insert_before(newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.insert_before.unsafe_as(Proc(IXMLDOMNode, VARIANT, IXMLDOMNode*, HRESULT)).call(newchild, refchild, outnewchild)
+  def insert_before(this : IXMLDOMDocument3*, newchild : IXMLDOMNode, refchild : VARIANT, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.insert_before.call(this, newchild, refchild, outnewchild)
   end
-  def replace_child(newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.replace_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, oldchild, outoldchild)
+  def replace_child(this : IXMLDOMDocument3*, newchild : IXMLDOMNode, oldchild : IXMLDOMNode, outoldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.replace_child.call(this, newchild, oldchild, outoldchild)
   end
-  def remove_child(childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(childnode, oldchild)
+  def remove_child(this : IXMLDOMDocument3*, childnode : IXMLDOMNode, oldchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.remove_child.call(this, childnode, oldchild)
   end
-  def append_child(newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.append_child.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(newchild, outnewchild)
+  def append_child(this : IXMLDOMDocument3*, newchild : IXMLDOMNode, outnewchild : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.append_child.call(this, newchild, outnewchild)
   end
-  def has_child_nodes(haschild : Int16*) : HRESULT
-    @lpVtbl.value.has_child_nodes.unsafe_as(Proc(Int16*, HRESULT)).call(haschild)
+  def has_child_nodes(this : IXMLDOMDocument3*, haschild : Int16*) : HRESULT
+    @lpVtbl.value.has_child_nodes.call(this, haschild)
   end
-  def get_owner_document(xmldomdocument : IXMLDOMDocument*) : HRESULT
-    @lpVtbl.value.get_owner_document.unsafe_as(Proc(IXMLDOMDocument*, HRESULT)).call(xmldomdocument)
+  def get_owner_document(this : IXMLDOMDocument3*, xmldomdocument : IXMLDOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner_document.call(this, xmldomdocument)
   end
-  def clone_node(deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.clone_node.unsafe_as(Proc(Int16, IXMLDOMNode*, HRESULT)).call(deep, cloneroot)
+  def clone_node(this : IXMLDOMDocument3*, deep : Int16, cloneroot : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.clone_node.call(this, deep, cloneroot)
   end
-  def get_node_type_string(nodetype : UInt8**) : HRESULT
-    @lpVtbl.value.get_node_type_string.unsafe_as(Proc(UInt8**, HRESULT)).call(nodetype)
+  def get_node_type_string(this : IXMLDOMDocument3*, nodetype : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_type_string.call(this, nodetype)
   end
-  def get_text(text : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(text)
+  def get_text(this : IXMLDOMDocument3*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, text)
   end
-  def put_text(text : UInt8*) : HRESULT
-    @lpVtbl.value.put_text.unsafe_as(Proc(UInt8*, HRESULT)).call(text)
+  def put_text(this : IXMLDOMDocument3*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_text.call(this, text)
   end
-  def get_specified(isspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_specified.unsafe_as(Proc(Int16*, HRESULT)).call(isspecified)
+  def get_specified(this : IXMLDOMDocument3*, isspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_specified.call(this, isspecified)
   end
-  def get_definition(definitionnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_definition.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(definitionnode)
+  def get_definition(this : IXMLDOMDocument3*, definitionnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_definition.call(this, definitionnode)
   end
-  def get_node_typed_value(typedvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_node_typed_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(typedvalue)
+  def get_node_typed_value(this : IXMLDOMDocument3*, typedvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_node_typed_value.call(this, typedvalue)
   end
-  def put_node_typed_value(typedvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_node_typed_value.unsafe_as(Proc(VARIANT, HRESULT)).call(typedvalue)
+  def put_node_typed_value(this : IXMLDOMDocument3*, typedvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_node_typed_value.call(this, typedvalue)
   end
-  def get_data_type(datatypename : VARIANT*) : HRESULT
-    @lpVtbl.value.get_data_type.unsafe_as(Proc(VARIANT*, HRESULT)).call(datatypename)
+  def get_data_type(this : IXMLDOMDocument3*, datatypename : VARIANT*) : HRESULT
+    @lpVtbl.value.get_data_type.call(this, datatypename)
   end
-  def put_data_type(datatypename : UInt8*) : HRESULT
-    @lpVtbl.value.put_data_type.unsafe_as(Proc(UInt8*, HRESULT)).call(datatypename)
+  def put_data_type(this : IXMLDOMDocument3*, datatypename : UInt8*) : HRESULT
+    @lpVtbl.value.put_data_type.call(this, datatypename)
   end
-  def get_xml(xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(xmlstring)
+  def get_xml(this : IXMLDOMDocument3*, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, xmlstring)
   end
-  def transform_node(stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
-    @lpVtbl.value.transform_node.unsafe_as(Proc(IXMLDOMNode, UInt8**, HRESULT)).call(stylesheet, xmlstring)
+  def transform_node(this : IXMLDOMDocument3*, stylesheet : IXMLDOMNode, xmlstring : UInt8**) : HRESULT
+    @lpVtbl.value.transform_node.call(this, stylesheet, xmlstring)
   end
-  def select_nodes(querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.select_nodes.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(querystring, resultlist)
+  def select_nodes(this : IXMLDOMDocument3*, querystring : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.select_nodes.call(this, querystring, resultlist)
   end
-  def select_single_node(querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.select_single_node.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(querystring, resultnode)
+  def select_single_node(this : IXMLDOMDocument3*, querystring : UInt8*, resultnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.select_single_node.call(this, querystring, resultnode)
   end
-  def get_parsed(isparsed : Int16*) : HRESULT
-    @lpVtbl.value.get_parsed.unsafe_as(Proc(Int16*, HRESULT)).call(isparsed)
+  def get_parsed(this : IXMLDOMDocument3*, isparsed : Int16*) : HRESULT
+    @lpVtbl.value.get_parsed.call(this, isparsed)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : IXMLDOMDocument3*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_prefix(prefixstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_prefix.unsafe_as(Proc(UInt8**, HRESULT)).call(prefixstring)
+  def get_prefix(this : IXMLDOMDocument3*, prefixstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_prefix.call(this, prefixstring)
   end
-  def get_base_name(namestring : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_name.unsafe_as(Proc(UInt8**, HRESULT)).call(namestring)
+  def get_base_name(this : IXMLDOMDocument3*, namestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_base_name.call(this, namestring)
   end
-  def transform_node_to_object(stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
-    @lpVtbl.value.transform_node_to_object.unsafe_as(Proc(IXMLDOMNode, VARIANT, HRESULT)).call(stylesheet, outputobject)
+  def transform_node_to_object(this : IXMLDOMDocument3*, stylesheet : IXMLDOMNode, outputobject : VARIANT) : HRESULT
+    @lpVtbl.value.transform_node_to_object.call(this, stylesheet, outputobject)
   end
-  def get_doctype(documenttype : IXMLDOMDocumentType*) : HRESULT
-    @lpVtbl.value.get_doctype.unsafe_as(Proc(IXMLDOMDocumentType*, HRESULT)).call(documenttype)
+  def get_doctype(this : IXMLDOMDocument3*, documenttype : IXMLDOMDocumentType*) : HRESULT
+    @lpVtbl.value.get_doctype.call(this, documenttype)
   end
-  def get_implementation(impl : IXMLDOMImplementation*) : HRESULT
-    @lpVtbl.value.get_implementation.unsafe_as(Proc(IXMLDOMImplementation*, HRESULT)).call(impl)
+  def get_implementation(this : IXMLDOMDocument3*, impl : IXMLDOMImplementation*) : HRESULT
+    @lpVtbl.value.get_implementation.call(this, impl)
   end
-  def get_document_element(domelement : IXMLDOMElement*) : HRESULT
-    @lpVtbl.value.get_document_element.unsafe_as(Proc(IXMLDOMElement*, HRESULT)).call(domelement)
+  def get_document_element(this : IXMLDOMDocument3*, domelement : IXMLDOMElement*) : HRESULT
+    @lpVtbl.value.get_document_element.call(this, domelement)
   end
-  def putref_document_element(domelement : IXMLDOMElement) : HRESULT
-    @lpVtbl.value.putref_document_element.unsafe_as(Proc(IXMLDOMElement, HRESULT)).call(domelement)
+  def putref_document_element(this : IXMLDOMDocument3*, domelement : IXMLDOMElement) : HRESULT
+    @lpVtbl.value.putref_document_element.call(this, domelement)
   end
-  def create_element(tagname : UInt8*, element : IXMLDOMElement*) : HRESULT
-    @lpVtbl.value.create_element.unsafe_as(Proc(UInt8*, IXMLDOMElement*, HRESULT)).call(tagname, element)
+  def create_element(this : IXMLDOMDocument3*, tagname : UInt8*, element : IXMLDOMElement*) : HRESULT
+    @lpVtbl.value.create_element.call(this, tagname, element)
   end
-  def create_document_fragment(docfrag : IXMLDOMDocumentFragment*) : HRESULT
-    @lpVtbl.value.create_document_fragment.unsafe_as(Proc(IXMLDOMDocumentFragment*, HRESULT)).call(docfrag)
+  def create_document_fragment(this : IXMLDOMDocument3*, docfrag : IXMLDOMDocumentFragment*) : HRESULT
+    @lpVtbl.value.create_document_fragment.call(this, docfrag)
   end
-  def create_text_node(data : UInt8*, text : IXMLDOMText*) : HRESULT
-    @lpVtbl.value.create_text_node.unsafe_as(Proc(UInt8*, IXMLDOMText*, HRESULT)).call(data, text)
+  def create_text_node(this : IXMLDOMDocument3*, data : UInt8*, text : IXMLDOMText*) : HRESULT
+    @lpVtbl.value.create_text_node.call(this, data, text)
   end
-  def create_comment(data : UInt8*, comment : IXMLDOMComment*) : HRESULT
-    @lpVtbl.value.create_comment.unsafe_as(Proc(UInt8*, IXMLDOMComment*, HRESULT)).call(data, comment)
+  def create_comment(this : IXMLDOMDocument3*, data : UInt8*, comment : IXMLDOMComment*) : HRESULT
+    @lpVtbl.value.create_comment.call(this, data, comment)
   end
-  def create_cdata_section(data : UInt8*, cdata : IXMLDOMCDATASection*) : HRESULT
-    @lpVtbl.value.create_cdata_section.unsafe_as(Proc(UInt8*, IXMLDOMCDATASection*, HRESULT)).call(data, cdata)
+  def create_cdata_section(this : IXMLDOMDocument3*, data : UInt8*, cdata : IXMLDOMCDATASection*) : HRESULT
+    @lpVtbl.value.create_cdata_section.call(this, data, cdata)
   end
-  def create_processing_instruction(target : UInt8*, data : UInt8*, pi : IXMLDOMProcessingInstruction*) : HRESULT
-    @lpVtbl.value.create_processing_instruction.unsafe_as(Proc(UInt8*, UInt8*, IXMLDOMProcessingInstruction*, HRESULT)).call(target, data, pi)
+  def create_processing_instruction(this : IXMLDOMDocument3*, target : UInt8*, data : UInt8*, pi : IXMLDOMProcessingInstruction*) : HRESULT
+    @lpVtbl.value.create_processing_instruction.call(this, target, data, pi)
   end
-  def create_attribute(name : UInt8*, attribute : IXMLDOMAttribute*) : HRESULT
-    @lpVtbl.value.create_attribute.unsafe_as(Proc(UInt8*, IXMLDOMAttribute*, HRESULT)).call(name, attribute)
+  def create_attribute(this : IXMLDOMDocument3*, name : UInt8*, attribute : IXMLDOMAttribute*) : HRESULT
+    @lpVtbl.value.create_attribute.call(this, name, attribute)
   end
-  def create_entity_reference(name : UInt8*, entityref : IXMLDOMEntityReference*) : HRESULT
-    @lpVtbl.value.create_entity_reference.unsafe_as(Proc(UInt8*, IXMLDOMEntityReference*, HRESULT)).call(name, entityref)
+  def create_entity_reference(this : IXMLDOMDocument3*, name : UInt8*, entityref : IXMLDOMEntityReference*) : HRESULT
+    @lpVtbl.value.create_entity_reference.call(this, name, entityref)
   end
-  def get_elements_by_tag_name(tagname : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
-    @lpVtbl.value.get_elements_by_tag_name.unsafe_as(Proc(UInt8*, IXMLDOMNodeList*, HRESULT)).call(tagname, resultlist)
+  def get_elements_by_tag_name(this : IXMLDOMDocument3*, tagname : UInt8*, resultlist : IXMLDOMNodeList*) : HRESULT
+    @lpVtbl.value.get_elements_by_tag_name.call(this, tagname, resultlist)
   end
-  def create_node(type : VARIANT, name : UInt8*, namespaceuri : UInt8*, node : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.create_node.unsafe_as(Proc(VARIANT, UInt8*, UInt8*, IXMLDOMNode*, HRESULT)).call(type, name, namespaceuri, node)
+  def create_node(this : IXMLDOMDocument3*, type : VARIANT, name : UInt8*, namespaceuri : UInt8*, node : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.create_node.call(this, type, name, namespaceuri, node)
   end
-  def node_from_id(idstring : UInt8*, node : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.node_from_id.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(idstring, node)
+  def node_from_id(this : IXMLDOMDocument3*, idstring : UInt8*, node : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.node_from_id.call(this, idstring, node)
   end
-  def load(xmlsource : VARIANT, issuccessful : Int16*) : HRESULT
-    @lpVtbl.value.load.unsafe_as(Proc(VARIANT, Int16*, HRESULT)).call(xmlsource, issuccessful)
+  def load(this : IXMLDOMDocument3*, xmlsource : VARIANT, issuccessful : Int16*) : HRESULT
+    @lpVtbl.value.load.call(this, xmlsource, issuccessful)
   end
-  def get_ready_state(value : Int32*) : HRESULT
-    @lpVtbl.value.get_ready_state.unsafe_as(Proc(Int32*, HRESULT)).call(value)
+  def get_ready_state(this : IXMLDOMDocument3*, value : Int32*) : HRESULT
+    @lpVtbl.value.get_ready_state.call(this, value)
   end
-  def get_parse_error(errorobj : IXMLDOMParseError*) : HRESULT
-    @lpVtbl.value.get_parse_error.unsafe_as(Proc(IXMLDOMParseError*, HRESULT)).call(errorobj)
+  def get_parse_error(this : IXMLDOMDocument3*, errorobj : IXMLDOMParseError*) : HRESULT
+    @lpVtbl.value.get_parse_error.call(this, errorobj)
   end
-  def get_url(urlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_url.unsafe_as(Proc(UInt8**, HRESULT)).call(urlstring)
+  def get_url(this : IXMLDOMDocument3*, urlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, urlstring)
   end
-  def get_async(isasync : Int16*) : HRESULT
-    @lpVtbl.value.get_async.unsafe_as(Proc(Int16*, HRESULT)).call(isasync)
+  def get_async(this : IXMLDOMDocument3*, isasync : Int16*) : HRESULT
+    @lpVtbl.value.get_async.call(this, isasync)
   end
-  def put_async(isasync : Int16) : HRESULT
-    @lpVtbl.value.put_async.unsafe_as(Proc(Int16, HRESULT)).call(isasync)
+  def put_async(this : IXMLDOMDocument3*, isasync : Int16) : HRESULT
+    @lpVtbl.value.put_async.call(this, isasync)
   end
-  def abort : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(HRESULT)).call
+  def abort(this : IXMLDOMDocument3*) : HRESULT
+    @lpVtbl.value.abort.call(this)
   end
-  def load_xml(bstrxml : UInt8*, issuccessful : Int16*) : HRESULT
-    @lpVtbl.value.load_xml.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(bstrxml, issuccessful)
+  def load_xml(this : IXMLDOMDocument3*, bstrxml : UInt8*, issuccessful : Int16*) : HRESULT
+    @lpVtbl.value.load_xml.call(this, bstrxml, issuccessful)
   end
-  def save(destination : VARIANT) : HRESULT
-    @lpVtbl.value.save.unsafe_as(Proc(VARIANT, HRESULT)).call(destination)
+  def save(this : IXMLDOMDocument3*, destination : VARIANT) : HRESULT
+    @lpVtbl.value.save.call(this, destination)
   end
-  def get_validate_on_parse(isvalidating : Int16*) : HRESULT
-    @lpVtbl.value.get_validate_on_parse.unsafe_as(Proc(Int16*, HRESULT)).call(isvalidating)
+  def get_validate_on_parse(this : IXMLDOMDocument3*, isvalidating : Int16*) : HRESULT
+    @lpVtbl.value.get_validate_on_parse.call(this, isvalidating)
   end
-  def put_validate_on_parse(isvalidating : Int16) : HRESULT
-    @lpVtbl.value.put_validate_on_parse.unsafe_as(Proc(Int16, HRESULT)).call(isvalidating)
+  def put_validate_on_parse(this : IXMLDOMDocument3*, isvalidating : Int16) : HRESULT
+    @lpVtbl.value.put_validate_on_parse.call(this, isvalidating)
   end
-  def get_resolve_externals(isresolving : Int16*) : HRESULT
-    @lpVtbl.value.get_resolve_externals.unsafe_as(Proc(Int16*, HRESULT)).call(isresolving)
+  def get_resolve_externals(this : IXMLDOMDocument3*, isresolving : Int16*) : HRESULT
+    @lpVtbl.value.get_resolve_externals.call(this, isresolving)
   end
-  def put_resolve_externals(isresolving : Int16) : HRESULT
-    @lpVtbl.value.put_resolve_externals.unsafe_as(Proc(Int16, HRESULT)).call(isresolving)
+  def put_resolve_externals(this : IXMLDOMDocument3*, isresolving : Int16) : HRESULT
+    @lpVtbl.value.put_resolve_externals.call(this, isresolving)
   end
-  def get_preserve_white_space(ispreserving : Int16*) : HRESULT
-    @lpVtbl.value.get_preserve_white_space.unsafe_as(Proc(Int16*, HRESULT)).call(ispreserving)
+  def get_preserve_white_space(this : IXMLDOMDocument3*, ispreserving : Int16*) : HRESULT
+    @lpVtbl.value.get_preserve_white_space.call(this, ispreserving)
   end
-  def put_preserve_white_space(ispreserving : Int16) : HRESULT
-    @lpVtbl.value.put_preserve_white_space.unsafe_as(Proc(Int16, HRESULT)).call(ispreserving)
+  def put_preserve_white_space(this : IXMLDOMDocument3*, ispreserving : Int16) : HRESULT
+    @lpVtbl.value.put_preserve_white_space.call(this, ispreserving)
   end
-  def put_onreadystatechange(readystatechangesink : VARIANT) : HRESULT
-    @lpVtbl.value.put_onreadystatechange.unsafe_as(Proc(VARIANT, HRESULT)).call(readystatechangesink)
+  def put_onreadystatechange(this : IXMLDOMDocument3*, readystatechangesink : VARIANT) : HRESULT
+    @lpVtbl.value.put_onreadystatechange.call(this, readystatechangesink)
   end
-  def put_ondataavailable(ondataavailablesink : VARIANT) : HRESULT
-    @lpVtbl.value.put_ondataavailable.unsafe_as(Proc(VARIANT, HRESULT)).call(ondataavailablesink)
+  def put_ondataavailable(this : IXMLDOMDocument3*, ondataavailablesink : VARIANT) : HRESULT
+    @lpVtbl.value.put_ondataavailable.call(this, ondataavailablesink)
   end
-  def put_ontransformnode(ontransformnodesink : VARIANT) : HRESULT
-    @lpVtbl.value.put_ontransformnode.unsafe_as(Proc(VARIANT, HRESULT)).call(ontransformnodesink)
+  def put_ontransformnode(this : IXMLDOMDocument3*, ontransformnodesink : VARIANT) : HRESULT
+    @lpVtbl.value.put_ontransformnode.call(this, ontransformnodesink)
   end
-  def get_namespaces(namespacecollection : IXMLDOMSchemaCollection*) : HRESULT
-    @lpVtbl.value.get_namespaces.unsafe_as(Proc(IXMLDOMSchemaCollection*, HRESULT)).call(namespacecollection)
+  def get_namespaces(this : IXMLDOMDocument3*, namespacecollection : IXMLDOMSchemaCollection*) : HRESULT
+    @lpVtbl.value.get_namespaces.call(this, namespacecollection)
   end
-  def get_schemas(othercollection : VARIANT*) : HRESULT
-    @lpVtbl.value.get_schemas.unsafe_as(Proc(VARIANT*, HRESULT)).call(othercollection)
+  def get_schemas(this : IXMLDOMDocument3*, othercollection : VARIANT*) : HRESULT
+    @lpVtbl.value.get_schemas.call(this, othercollection)
   end
-  def putref_schemas(othercollection : VARIANT) : HRESULT
-    @lpVtbl.value.putref_schemas.unsafe_as(Proc(VARIANT, HRESULT)).call(othercollection)
+  def putref_schemas(this : IXMLDOMDocument3*, othercollection : VARIANT) : HRESULT
+    @lpVtbl.value.putref_schemas.call(this, othercollection)
   end
-  def validate(errorobj : IXMLDOMParseError*) : HRESULT
-    @lpVtbl.value.validate.unsafe_as(Proc(IXMLDOMParseError*, HRESULT)).call(errorobj)
+  def validate(this : IXMLDOMDocument3*, errorobj : IXMLDOMParseError*) : HRESULT
+    @lpVtbl.value.validate.call(this, errorobj)
   end
-  def set_property(name : UInt8*, value : VARIANT) : HRESULT
-    @lpVtbl.value.set_property.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(name, value)
+  def set_property(this : IXMLDOMDocument3*, name : UInt8*, value : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.call(this, name, value)
   end
-  def get_property(name : UInt8*, value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_property.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(name, value)
+  def get_property(this : IXMLDOMDocument3*, name : UInt8*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, name, value)
   end
-  def validate_node(node : IXMLDOMNode, errorobj : IXMLDOMParseError*) : HRESULT
-    @lpVtbl.value.validate_node.unsafe_as(Proc(IXMLDOMNode, IXMLDOMParseError*, HRESULT)).call(node, errorobj)
+  def validate_node(this : IXMLDOMDocument3*, node : IXMLDOMNode, errorobj : IXMLDOMParseError*) : HRESULT
+    @lpVtbl.value.validate_node.call(this, node, errorobj)
   end
-  def import_node(node : IXMLDOMNode, deep : Int16, clone : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.import_node.unsafe_as(Proc(IXMLDOMNode, Int16, IXMLDOMNode*, HRESULT)).call(node, deep, clone)
+  def import_node(this : IXMLDOMDocument3*, node : IXMLDOMNode, deep : Int16, clone : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.import_node.call(this, node, deep, clone)
   end
 end
 struct LibWin32::IXMLDOMSchemaCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMSchemaCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMSchemaCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMSchemaCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMSchemaCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMSchemaCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMSchemaCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMSchemaCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def add(namespaceuri : UInt8*, var : VARIANT) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(namespaceuri, var)
+  def add(this : IXMLDOMSchemaCollection*, namespaceuri : UInt8*, var : VARIANT) : HRESULT
+    @lpVtbl.value.add.call(this, namespaceuri, var)
   end
-  def get(namespaceuri : UInt8*, schemanode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(namespaceuri, schemanode)
+  def get(this : IXMLDOMSchemaCollection*, namespaceuri : UInt8*, schemanode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get.call(this, namespaceuri, schemanode)
   end
-  def remove(namespaceuri : UInt8*) : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(UInt8*, HRESULT)).call(namespaceuri)
+  def remove(this : IXMLDOMSchemaCollection*, namespaceuri : UInt8*) : HRESULT
+    @lpVtbl.value.remove.call(this, namespaceuri)
   end
-  def get_length(length : Int32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(length)
+  def get_length(this : IXMLDOMSchemaCollection*, length : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, length)
   end
-  def get_namespace_uri(index : Int32, length : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(index, length)
+  def get_namespace_uri(this : IXMLDOMSchemaCollection*, index : Int32, length : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, index, length)
   end
-  def add_collection(othercollection : IXMLDOMSchemaCollection) : HRESULT
-    @lpVtbl.value.add_collection.unsafe_as(Proc(IXMLDOMSchemaCollection, HRESULT)).call(othercollection)
+  def add_collection(this : IXMLDOMSchemaCollection*, othercollection : IXMLDOMSchemaCollection) : HRESULT
+    @lpVtbl.value.add_collection.call(this, othercollection)
   end
-  def get__new_enum(ppunk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  def get__new_enum(this : IXMLDOMSchemaCollection*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
   end
 end
 struct LibWin32::IXMLDOMSelection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMSelection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMSelection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMSelection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMSelection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMSelection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMSelection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMSelection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(index : Int32, listitem : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, IXMLDOMNode*, HRESULT)).call(index, listitem)
+  def get_item(this : IXMLDOMSelection*, index : Int32, listitem : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, listitem)
   end
-  def get_length(listlength : Int32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(listlength)
+  def get_length(this : IXMLDOMSelection*, listlength : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, listlength)
   end
-  def next_node(nextitem : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.next_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(nextitem)
+  def next_node(this : IXMLDOMSelection*, nextitem : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.next_node.call(this, nextitem)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IXMLDOMSelection*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def get__new_enum(ppunk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  def get__new_enum(this : IXMLDOMSelection*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
   end
-  def get_expr(expression : UInt8**) : HRESULT
-    @lpVtbl.value.get_expr.unsafe_as(Proc(UInt8**, HRESULT)).call(expression)
+  def get_expr(this : IXMLDOMSelection*, expression : UInt8**) : HRESULT
+    @lpVtbl.value.get_expr.call(this, expression)
   end
-  def put_expr(expression : UInt8*) : HRESULT
-    @lpVtbl.value.put_expr.unsafe_as(Proc(UInt8*, HRESULT)).call(expression)
+  def put_expr(this : IXMLDOMSelection*, expression : UInt8*) : HRESULT
+    @lpVtbl.value.put_expr.call(this, expression)
   end
-  def get_context(ppnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_context.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(ppnode)
+  def get_context(this : IXMLDOMSelection*, ppnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_context.call(this, ppnode)
   end
-  def putref_context(pnode : IXMLDOMNode) : HRESULT
-    @lpVtbl.value.putref_context.unsafe_as(Proc(IXMLDOMNode, HRESULT)).call(pnode)
+  def putref_context(this : IXMLDOMSelection*, pnode : IXMLDOMNode) : HRESULT
+    @lpVtbl.value.putref_context.call(this, pnode)
   end
-  def peek_node(ppnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.peek_node.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(ppnode)
+  def peek_node(this : IXMLDOMSelection*, ppnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.peek_node.call(this, ppnode)
   end
-  def matches(pnode : IXMLDOMNode, ppnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.matches.unsafe_as(Proc(IXMLDOMNode, IXMLDOMNode*, HRESULT)).call(pnode, ppnode)
+  def matches(this : IXMLDOMSelection*, pnode : IXMLDOMNode, ppnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.matches.call(this, pnode, ppnode)
   end
-  def remove_next(ppnode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.remove_next.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(ppnode)
+  def remove_next(this : IXMLDOMSelection*, ppnode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.remove_next.call(this, ppnode)
   end
-  def remove_all : HRESULT
-    @lpVtbl.value.remove_all.unsafe_as(Proc(HRESULT)).call
+  def remove_all(this : IXMLDOMSelection*) : HRESULT
+    @lpVtbl.value.remove_all.call(this)
   end
-  def clone(ppnode : IXMLDOMSelection*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IXMLDOMSelection*, HRESULT)).call(ppnode)
+  def clone(this : IXMLDOMSelection*, ppnode : IXMLDOMSelection*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppnode)
   end
-  def get_property(name : UInt8*, value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_property.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(name, value)
+  def get_property(this : IXMLDOMSelection*, name : UInt8*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, name, value)
   end
-  def set_property(name : UInt8*, value : VARIANT) : HRESULT
-    @lpVtbl.value.set_property.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(name, value)
+  def set_property(this : IXMLDOMSelection*, name : UInt8*, value : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.call(this, name, value)
   end
 end
 struct LibWin32::IXMLDOMParseError2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMParseError2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMParseError2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMParseError2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMParseError2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMParseError2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMParseError2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMParseError2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_error_code(errorcode : Int32*) : HRESULT
-    @lpVtbl.value.get_error_code.unsafe_as(Proc(Int32*, HRESULT)).call(errorcode)
+  def get_error_code(this : IXMLDOMParseError2*, errorcode : Int32*) : HRESULT
+    @lpVtbl.value.get_error_code.call(this, errorcode)
   end
-  def get_url(urlstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_url.unsafe_as(Proc(UInt8**, HRESULT)).call(urlstring)
+  def get_url(this : IXMLDOMParseError2*, urlstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, urlstring)
   end
-  def get_reason(reasonstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_reason.unsafe_as(Proc(UInt8**, HRESULT)).call(reasonstring)
+  def get_reason(this : IXMLDOMParseError2*, reasonstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_reason.call(this, reasonstring)
   end
-  def get_src_text(sourcestring : UInt8**) : HRESULT
-    @lpVtbl.value.get_src_text.unsafe_as(Proc(UInt8**, HRESULT)).call(sourcestring)
+  def get_src_text(this : IXMLDOMParseError2*, sourcestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_src_text.call(this, sourcestring)
   end
-  def get_line(linenumber : Int32*) : HRESULT
-    @lpVtbl.value.get_line.unsafe_as(Proc(Int32*, HRESULT)).call(linenumber)
+  def get_line(this : IXMLDOMParseError2*, linenumber : Int32*) : HRESULT
+    @lpVtbl.value.get_line.call(this, linenumber)
   end
-  def get_linepos(lineposition : Int32*) : HRESULT
-    @lpVtbl.value.get_linepos.unsafe_as(Proc(Int32*, HRESULT)).call(lineposition)
+  def get_linepos(this : IXMLDOMParseError2*, lineposition : Int32*) : HRESULT
+    @lpVtbl.value.get_linepos.call(this, lineposition)
   end
-  def get_filepos(fileposition : Int32*) : HRESULT
-    @lpVtbl.value.get_filepos.unsafe_as(Proc(Int32*, HRESULT)).call(fileposition)
+  def get_filepos(this : IXMLDOMParseError2*, fileposition : Int32*) : HRESULT
+    @lpVtbl.value.get_filepos.call(this, fileposition)
   end
-  def get_error_x_path(xpathexpr : UInt8**) : HRESULT
-    @lpVtbl.value.get_error_x_path.unsafe_as(Proc(UInt8**, HRESULT)).call(xpathexpr)
+  def get_error_x_path(this : IXMLDOMParseError2*, xpathexpr : UInt8**) : HRESULT
+    @lpVtbl.value.get_error_x_path.call(this, xpathexpr)
   end
-  def get_all_errors(allerrors : IXMLDOMParseErrorCollection*) : HRESULT
-    @lpVtbl.value.get_all_errors.unsafe_as(Proc(IXMLDOMParseErrorCollection*, HRESULT)).call(allerrors)
+  def get_all_errors(this : IXMLDOMParseError2*, allerrors : IXMLDOMParseErrorCollection*) : HRESULT
+    @lpVtbl.value.get_all_errors.call(this, allerrors)
   end
-  def error_parameters(index : Int32, param1 : UInt8**) : HRESULT
-    @lpVtbl.value.error_parameters.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(index, param1)
+  def error_parameters(this : IXMLDOMParseError2*, index : Int32, param1 : UInt8**) : HRESULT
+    @lpVtbl.value.error_parameters.call(this, index, param1)
   end
-  def get_error_parameters_count(count : Int32*) : HRESULT
-    @lpVtbl.value.get_error_parameters_count.unsafe_as(Proc(Int32*, HRESULT)).call(count)
+  def get_error_parameters_count(this : IXMLDOMParseError2*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_error_parameters_count.call(this, count)
   end
 end
 struct LibWin32::IXMLDOMParseErrorCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMParseErrorCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMParseErrorCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMParseErrorCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMParseErrorCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMParseErrorCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMParseErrorCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMParseErrorCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(index : Int32, error : IXMLDOMParseError2*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, IXMLDOMParseError2*, HRESULT)).call(index, error)
+  def get_item(this : IXMLDOMParseErrorCollection*, index : Int32, error : IXMLDOMParseError2*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, error)
   end
-  def get_length(length : Int32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(length)
+  def get_length(this : IXMLDOMParseErrorCollection*, length : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, length)
   end
-  def get_next(error : IXMLDOMParseError2*) : HRESULT
-    @lpVtbl.value.get_next.unsafe_as(Proc(IXMLDOMParseError2*, HRESULT)).call(error)
+  def get_next(this : IXMLDOMParseErrorCollection*, error : IXMLDOMParseError2*) : HRESULT
+    @lpVtbl.value.get_next.call(this, error)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IXMLDOMParseErrorCollection*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def get__new_enum(ppunk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  def get__new_enum(this : IXMLDOMParseErrorCollection*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
   end
 end
 struct LibWin32::IXSLProcessor
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXSLProcessor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXSLProcessor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXSLProcessor*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXSLProcessor*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXSLProcessor*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXSLProcessor*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXSLProcessor*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def put_input(var : VARIANT) : HRESULT
-    @lpVtbl.value.put_input.unsafe_as(Proc(VARIANT, HRESULT)).call(var)
+  def put_input(this : IXSLProcessor*, var : VARIANT) : HRESULT
+    @lpVtbl.value.put_input.call(this, var)
   end
-  def get_input(pvar : VARIANT*) : HRESULT
-    @lpVtbl.value.get_input.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvar)
+  def get_input(this : IXSLProcessor*, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.get_input.call(this, pvar)
   end
-  def get_owner_template(pptemplate : IXSLTemplate*) : HRESULT
-    @lpVtbl.value.get_owner_template.unsafe_as(Proc(IXSLTemplate*, HRESULT)).call(pptemplate)
+  def get_owner_template(this : IXSLProcessor*, pptemplate : IXSLTemplate*) : HRESULT
+    @lpVtbl.value.get_owner_template.call(this, pptemplate)
   end
-  def set_start_mode(mode : UInt8*, namespaceuri : UInt8*) : HRESULT
-    @lpVtbl.value.set_start_mode.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(mode, namespaceuri)
+  def set_start_mode(this : IXSLProcessor*, mode : UInt8*, namespaceuri : UInt8*) : HRESULT
+    @lpVtbl.value.set_start_mode.call(this, mode, namespaceuri)
   end
-  def get_start_mode(mode : UInt8**) : HRESULT
-    @lpVtbl.value.get_start_mode.unsafe_as(Proc(UInt8**, HRESULT)).call(mode)
+  def get_start_mode(this : IXSLProcessor*, mode : UInt8**) : HRESULT
+    @lpVtbl.value.get_start_mode.call(this, mode)
   end
-  def get_start_mode_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_start_mode_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_start_mode_uri(this : IXSLProcessor*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_start_mode_uri.call(this, namespaceuri)
   end
-  def put_output(output : VARIANT) : HRESULT
-    @lpVtbl.value.put_output.unsafe_as(Proc(VARIANT, HRESULT)).call(output)
+  def put_output(this : IXSLProcessor*, output : VARIANT) : HRESULT
+    @lpVtbl.value.put_output.call(this, output)
   end
-  def get_output(poutput : VARIANT*) : HRESULT
-    @lpVtbl.value.get_output.unsafe_as(Proc(VARIANT*, HRESULT)).call(poutput)
+  def get_output(this : IXSLProcessor*, poutput : VARIANT*) : HRESULT
+    @lpVtbl.value.get_output.call(this, poutput)
   end
-  def transform(pdone : Int16*) : HRESULT
-    @lpVtbl.value.transform.unsafe_as(Proc(Int16*, HRESULT)).call(pdone)
+  def transform(this : IXSLProcessor*, pdone : Int16*) : HRESULT
+    @lpVtbl.value.transform.call(this, pdone)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IXSLProcessor*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def get_ready_state(preadystate : Int32*) : HRESULT
-    @lpVtbl.value.get_ready_state.unsafe_as(Proc(Int32*, HRESULT)).call(preadystate)
+  def get_ready_state(this : IXSLProcessor*, preadystate : Int32*) : HRESULT
+    @lpVtbl.value.get_ready_state.call(this, preadystate)
   end
-  def add_parameter(basename : UInt8*, parameter : VARIANT, namespaceuri : UInt8*) : HRESULT
-    @lpVtbl.value.add_parameter.unsafe_as(Proc(UInt8*, VARIANT, UInt8*, HRESULT)).call(basename, parameter, namespaceuri)
+  def add_parameter(this : IXSLProcessor*, basename : UInt8*, parameter : VARIANT, namespaceuri : UInt8*) : HRESULT
+    @lpVtbl.value.add_parameter.call(this, basename, parameter, namespaceuri)
   end
-  def add_object(obj : IDispatch, namespaceuri : UInt8*) : HRESULT
-    @lpVtbl.value.add_object.unsafe_as(Proc(IDispatch, UInt8*, HRESULT)).call(obj, namespaceuri)
+  def add_object(this : IXSLProcessor*, obj : IDispatch, namespaceuri : UInt8*) : HRESULT
+    @lpVtbl.value.add_object.call(this, obj, namespaceuri)
   end
-  def get_stylesheet(stylesheet : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_stylesheet.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(stylesheet)
+  def get_stylesheet(this : IXSLProcessor*, stylesheet : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_stylesheet.call(this, stylesheet)
   end
 end
 struct LibWin32::IXSLTemplate
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXSLTemplate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXSLTemplate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXSLTemplate*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXSLTemplate*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXSLTemplate*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXSLTemplate*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXSLTemplate*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def putref_stylesheet(stylesheet : IXMLDOMNode) : HRESULT
-    @lpVtbl.value.putref_stylesheet.unsafe_as(Proc(IXMLDOMNode, HRESULT)).call(stylesheet)
+  def putref_stylesheet(this : IXSLTemplate*, stylesheet : IXMLDOMNode) : HRESULT
+    @lpVtbl.value.putref_stylesheet.call(this, stylesheet)
   end
-  def get_stylesheet(stylesheet : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get_stylesheet.unsafe_as(Proc(IXMLDOMNode*, HRESULT)).call(stylesheet)
+  def get_stylesheet(this : IXSLTemplate*, stylesheet : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get_stylesheet.call(this, stylesheet)
   end
-  def create_processor(ppprocessor : IXSLProcessor*) : HRESULT
-    @lpVtbl.value.create_processor.unsafe_as(Proc(IXSLProcessor*, HRESULT)).call(ppprocessor)
+  def create_processor(this : IXSLTemplate*, ppprocessor : IXSLProcessor*) : HRESULT
+    @lpVtbl.value.create_processor.call(this, ppprocessor)
   end
 end
 struct LibWin32::IXMLHTTPRequest
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLHTTPRequest*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLHTTPRequest*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLHTTPRequest*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLHTTPRequest*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLHTTPRequest*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLHTTPRequest*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLHTTPRequest*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def open(bstrmethod : UInt8*, bstrurl : UInt8*, varasync : VARIANT, bstruser : VARIANT, bstrpassword : VARIANT) : HRESULT
-    @lpVtbl.value.open.unsafe_as(Proc(UInt8*, UInt8*, VARIANT, VARIANT, VARIANT, HRESULT)).call(bstrmethod, bstrurl, varasync, bstruser, bstrpassword)
+  def open(this : IXMLHTTPRequest*, bstrmethod : UInt8*, bstrurl : UInt8*, varasync : VARIANT, bstruser : VARIANT, bstrpassword : VARIANT) : HRESULT
+    @lpVtbl.value.open.call(this, bstrmethod, bstrurl, varasync, bstruser, bstrpassword)
   end
-  def set_request_header(bstrheader : UInt8*, bstrvalue : UInt8*) : HRESULT
-    @lpVtbl.value.set_request_header.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstrheader, bstrvalue)
+  def set_request_header(this : IXMLHTTPRequest*, bstrheader : UInt8*, bstrvalue : UInt8*) : HRESULT
+    @lpVtbl.value.set_request_header.call(this, bstrheader, bstrvalue)
   end
-  def get_response_header(bstrheader : UInt8*, pbstrvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_response_header.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstrheader, pbstrvalue)
+  def get_response_header(this : IXMLHTTPRequest*, bstrheader : UInt8*, pbstrvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_response_header.call(this, bstrheader, pbstrvalue)
   end
-  def get_all_response_headers(pbstrheaders : UInt8**) : HRESULT
-    @lpVtbl.value.get_all_response_headers.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrheaders)
+  def get_all_response_headers(this : IXMLHTTPRequest*, pbstrheaders : UInt8**) : HRESULT
+    @lpVtbl.value.get_all_response_headers.call(this, pbstrheaders)
   end
-  def send(varbody : VARIANT) : HRESULT
-    @lpVtbl.value.send.unsafe_as(Proc(VARIANT, HRESULT)).call(varbody)
+  def send(this : IXMLHTTPRequest*, varbody : VARIANT) : HRESULT
+    @lpVtbl.value.send.call(this, varbody)
   end
-  def abort : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(HRESULT)).call
+  def abort(this : IXMLHTTPRequest*) : HRESULT
+    @lpVtbl.value.abort.call(this)
   end
-  def get_status(plstatus : Int32*) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(Int32*, HRESULT)).call(plstatus)
+  def get_status(this : IXMLHTTPRequest*, plstatus : Int32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, plstatus)
   end
-  def get_status_text(pbstrstatus : UInt8**) : HRESULT
-    @lpVtbl.value.get_status_text.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrstatus)
+  def get_status_text(this : IXMLHTTPRequest*, pbstrstatus : UInt8**) : HRESULT
+    @lpVtbl.value.get_status_text.call(this, pbstrstatus)
   end
-  def get_response_xml(ppbody : IDispatch*) : HRESULT
-    @lpVtbl.value.get_response_xml.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppbody)
+  def get_response_xml(this : IXMLHTTPRequest*, ppbody : IDispatch*) : HRESULT
+    @lpVtbl.value.get_response_xml.call(this, ppbody)
   end
-  def get_response_text(pbstrbody : UInt8**) : HRESULT
-    @lpVtbl.value.get_response_text.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbody)
+  def get_response_text(this : IXMLHTTPRequest*, pbstrbody : UInt8**) : HRESULT
+    @lpVtbl.value.get_response_text.call(this, pbstrbody)
   end
-  def get_response_body(pvarbody : VARIANT*) : HRESULT
-    @lpVtbl.value.get_response_body.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarbody)
+  def get_response_body(this : IXMLHTTPRequest*, pvarbody : VARIANT*) : HRESULT
+    @lpVtbl.value.get_response_body.call(this, pvarbody)
   end
-  def get_response_stream(pvarbody : VARIANT*) : HRESULT
-    @lpVtbl.value.get_response_stream.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarbody)
+  def get_response_stream(this : IXMLHTTPRequest*, pvarbody : VARIANT*) : HRESULT
+    @lpVtbl.value.get_response_stream.call(this, pvarbody)
   end
-  def get_ready_state(plstate : Int32*) : HRESULT
-    @lpVtbl.value.get_ready_state.unsafe_as(Proc(Int32*, HRESULT)).call(plstate)
+  def get_ready_state(this : IXMLHTTPRequest*, plstate : Int32*) : HRESULT
+    @lpVtbl.value.get_ready_state.call(this, plstate)
   end
-  def put_onreadystatechange(preadystatesink : IDispatch) : HRESULT
-    @lpVtbl.value.put_onreadystatechange.unsafe_as(Proc(IDispatch, HRESULT)).call(preadystatesink)
+  def put_onreadystatechange(this : IXMLHTTPRequest*, preadystatesink : IDispatch) : HRESULT
+    @lpVtbl.value.put_onreadystatechange.call(this, preadystatesink)
   end
 end
 struct LibWin32::IServerXMLHTTPRequest
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IServerXMLHTTPRequest*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IServerXMLHTTPRequest*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IServerXMLHTTPRequest*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IServerXMLHTTPRequest*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IServerXMLHTTPRequest*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IServerXMLHTTPRequest*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IServerXMLHTTPRequest*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def open(bstrmethod : UInt8*, bstrurl : UInt8*, varasync : VARIANT, bstruser : VARIANT, bstrpassword : VARIANT) : HRESULT
-    @lpVtbl.value.open.unsafe_as(Proc(UInt8*, UInt8*, VARIANT, VARIANT, VARIANT, HRESULT)).call(bstrmethod, bstrurl, varasync, bstruser, bstrpassword)
+  def open(this : IServerXMLHTTPRequest*, bstrmethod : UInt8*, bstrurl : UInt8*, varasync : VARIANT, bstruser : VARIANT, bstrpassword : VARIANT) : HRESULT
+    @lpVtbl.value.open.call(this, bstrmethod, bstrurl, varasync, bstruser, bstrpassword)
   end
-  def set_request_header(bstrheader : UInt8*, bstrvalue : UInt8*) : HRESULT
-    @lpVtbl.value.set_request_header.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstrheader, bstrvalue)
+  def set_request_header(this : IServerXMLHTTPRequest*, bstrheader : UInt8*, bstrvalue : UInt8*) : HRESULT
+    @lpVtbl.value.set_request_header.call(this, bstrheader, bstrvalue)
   end
-  def get_response_header(bstrheader : UInt8*, pbstrvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_response_header.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstrheader, pbstrvalue)
+  def get_response_header(this : IServerXMLHTTPRequest*, bstrheader : UInt8*, pbstrvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_response_header.call(this, bstrheader, pbstrvalue)
   end
-  def get_all_response_headers(pbstrheaders : UInt8**) : HRESULT
-    @lpVtbl.value.get_all_response_headers.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrheaders)
+  def get_all_response_headers(this : IServerXMLHTTPRequest*, pbstrheaders : UInt8**) : HRESULT
+    @lpVtbl.value.get_all_response_headers.call(this, pbstrheaders)
   end
-  def send(varbody : VARIANT) : HRESULT
-    @lpVtbl.value.send.unsafe_as(Proc(VARIANT, HRESULT)).call(varbody)
+  def send(this : IServerXMLHTTPRequest*, varbody : VARIANT) : HRESULT
+    @lpVtbl.value.send.call(this, varbody)
   end
-  def abort : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(HRESULT)).call
+  def abort(this : IServerXMLHTTPRequest*) : HRESULT
+    @lpVtbl.value.abort.call(this)
   end
-  def get_status(plstatus : Int32*) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(Int32*, HRESULT)).call(plstatus)
+  def get_status(this : IServerXMLHTTPRequest*, plstatus : Int32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, plstatus)
   end
-  def get_status_text(pbstrstatus : UInt8**) : HRESULT
-    @lpVtbl.value.get_status_text.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrstatus)
+  def get_status_text(this : IServerXMLHTTPRequest*, pbstrstatus : UInt8**) : HRESULT
+    @lpVtbl.value.get_status_text.call(this, pbstrstatus)
   end
-  def get_response_xml(ppbody : IDispatch*) : HRESULT
-    @lpVtbl.value.get_response_xml.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppbody)
+  def get_response_xml(this : IServerXMLHTTPRequest*, ppbody : IDispatch*) : HRESULT
+    @lpVtbl.value.get_response_xml.call(this, ppbody)
   end
-  def get_response_text(pbstrbody : UInt8**) : HRESULT
-    @lpVtbl.value.get_response_text.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbody)
+  def get_response_text(this : IServerXMLHTTPRequest*, pbstrbody : UInt8**) : HRESULT
+    @lpVtbl.value.get_response_text.call(this, pbstrbody)
   end
-  def get_response_body(pvarbody : VARIANT*) : HRESULT
-    @lpVtbl.value.get_response_body.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarbody)
+  def get_response_body(this : IServerXMLHTTPRequest*, pvarbody : VARIANT*) : HRESULT
+    @lpVtbl.value.get_response_body.call(this, pvarbody)
   end
-  def get_response_stream(pvarbody : VARIANT*) : HRESULT
-    @lpVtbl.value.get_response_stream.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarbody)
+  def get_response_stream(this : IServerXMLHTTPRequest*, pvarbody : VARIANT*) : HRESULT
+    @lpVtbl.value.get_response_stream.call(this, pvarbody)
   end
-  def get_ready_state(plstate : Int32*) : HRESULT
-    @lpVtbl.value.get_ready_state.unsafe_as(Proc(Int32*, HRESULT)).call(plstate)
+  def get_ready_state(this : IServerXMLHTTPRequest*, plstate : Int32*) : HRESULT
+    @lpVtbl.value.get_ready_state.call(this, plstate)
   end
-  def put_onreadystatechange(preadystatesink : IDispatch) : HRESULT
-    @lpVtbl.value.put_onreadystatechange.unsafe_as(Proc(IDispatch, HRESULT)).call(preadystatesink)
+  def put_onreadystatechange(this : IServerXMLHTTPRequest*, preadystatesink : IDispatch) : HRESULT
+    @lpVtbl.value.put_onreadystatechange.call(this, preadystatesink)
   end
-  def set_timeouts(resolvetimeout : Int32, connecttimeout : Int32, sendtimeout : Int32, receivetimeout : Int32) : HRESULT
-    @lpVtbl.value.set_timeouts.unsafe_as(Proc(Int32, Int32, Int32, Int32, HRESULT)).call(resolvetimeout, connecttimeout, sendtimeout, receivetimeout)
+  def set_timeouts(this : IServerXMLHTTPRequest*, resolvetimeout : Int32, connecttimeout : Int32, sendtimeout : Int32, receivetimeout : Int32) : HRESULT
+    @lpVtbl.value.set_timeouts.call(this, resolvetimeout, connecttimeout, sendtimeout, receivetimeout)
   end
-  def wait_for_response(timeoutinseconds : VARIANT, issuccessful : Int16*) : HRESULT
-    @lpVtbl.value.wait_for_response.unsafe_as(Proc(VARIANT, Int16*, HRESULT)).call(timeoutinseconds, issuccessful)
+  def wait_for_response(this : IServerXMLHTTPRequest*, timeoutinseconds : VARIANT, issuccessful : Int16*) : HRESULT
+    @lpVtbl.value.wait_for_response.call(this, timeoutinseconds, issuccessful)
   end
-  def get_option(option : SERVERXMLHTTP_OPTION, value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_option.unsafe_as(Proc(SERVERXMLHTTP_OPTION, VARIANT*, HRESULT)).call(option, value)
+  def get_option(this : IServerXMLHTTPRequest*, option : SERVERXMLHTTP_OPTION, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_option.call(this, option, value)
   end
-  def set_option(option : SERVERXMLHTTP_OPTION, value : VARIANT) : HRESULT
-    @lpVtbl.value.set_option.unsafe_as(Proc(SERVERXMLHTTP_OPTION, VARIANT, HRESULT)).call(option, value)
+  def set_option(this : IServerXMLHTTPRequest*, option : SERVERXMLHTTP_OPTION, value : VARIANT) : HRESULT
+    @lpVtbl.value.set_option.call(this, option, value)
   end
 end
 struct LibWin32::IServerXMLHTTPRequest2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IServerXMLHTTPRequest2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IServerXMLHTTPRequest2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IServerXMLHTTPRequest2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IServerXMLHTTPRequest2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IServerXMLHTTPRequest2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IServerXMLHTTPRequest2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IServerXMLHTTPRequest2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def open(bstrmethod : UInt8*, bstrurl : UInt8*, varasync : VARIANT, bstruser : VARIANT, bstrpassword : VARIANT) : HRESULT
-    @lpVtbl.value.open.unsafe_as(Proc(UInt8*, UInt8*, VARIANT, VARIANT, VARIANT, HRESULT)).call(bstrmethod, bstrurl, varasync, bstruser, bstrpassword)
+  def open(this : IServerXMLHTTPRequest2*, bstrmethod : UInt8*, bstrurl : UInt8*, varasync : VARIANT, bstruser : VARIANT, bstrpassword : VARIANT) : HRESULT
+    @lpVtbl.value.open.call(this, bstrmethod, bstrurl, varasync, bstruser, bstrpassword)
   end
-  def set_request_header(bstrheader : UInt8*, bstrvalue : UInt8*) : HRESULT
-    @lpVtbl.value.set_request_header.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstrheader, bstrvalue)
+  def set_request_header(this : IServerXMLHTTPRequest2*, bstrheader : UInt8*, bstrvalue : UInt8*) : HRESULT
+    @lpVtbl.value.set_request_header.call(this, bstrheader, bstrvalue)
   end
-  def get_response_header(bstrheader : UInt8*, pbstrvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_response_header.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(bstrheader, pbstrvalue)
+  def get_response_header(this : IServerXMLHTTPRequest2*, bstrheader : UInt8*, pbstrvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_response_header.call(this, bstrheader, pbstrvalue)
   end
-  def get_all_response_headers(pbstrheaders : UInt8**) : HRESULT
-    @lpVtbl.value.get_all_response_headers.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrheaders)
+  def get_all_response_headers(this : IServerXMLHTTPRequest2*, pbstrheaders : UInt8**) : HRESULT
+    @lpVtbl.value.get_all_response_headers.call(this, pbstrheaders)
   end
-  def send(varbody : VARIANT) : HRESULT
-    @lpVtbl.value.send.unsafe_as(Proc(VARIANT, HRESULT)).call(varbody)
+  def send(this : IServerXMLHTTPRequest2*, varbody : VARIANT) : HRESULT
+    @lpVtbl.value.send.call(this, varbody)
   end
-  def abort : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(HRESULT)).call
+  def abort(this : IServerXMLHTTPRequest2*) : HRESULT
+    @lpVtbl.value.abort.call(this)
   end
-  def get_status(plstatus : Int32*) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(Int32*, HRESULT)).call(plstatus)
+  def get_status(this : IServerXMLHTTPRequest2*, plstatus : Int32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, plstatus)
   end
-  def get_status_text(pbstrstatus : UInt8**) : HRESULT
-    @lpVtbl.value.get_status_text.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrstatus)
+  def get_status_text(this : IServerXMLHTTPRequest2*, pbstrstatus : UInt8**) : HRESULT
+    @lpVtbl.value.get_status_text.call(this, pbstrstatus)
   end
-  def get_response_xml(ppbody : IDispatch*) : HRESULT
-    @lpVtbl.value.get_response_xml.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppbody)
+  def get_response_xml(this : IServerXMLHTTPRequest2*, ppbody : IDispatch*) : HRESULT
+    @lpVtbl.value.get_response_xml.call(this, ppbody)
   end
-  def get_response_text(pbstrbody : UInt8**) : HRESULT
-    @lpVtbl.value.get_response_text.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbody)
+  def get_response_text(this : IServerXMLHTTPRequest2*, pbstrbody : UInt8**) : HRESULT
+    @lpVtbl.value.get_response_text.call(this, pbstrbody)
   end
-  def get_response_body(pvarbody : VARIANT*) : HRESULT
-    @lpVtbl.value.get_response_body.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarbody)
+  def get_response_body(this : IServerXMLHTTPRequest2*, pvarbody : VARIANT*) : HRESULT
+    @lpVtbl.value.get_response_body.call(this, pvarbody)
   end
-  def get_response_stream(pvarbody : VARIANT*) : HRESULT
-    @lpVtbl.value.get_response_stream.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarbody)
+  def get_response_stream(this : IServerXMLHTTPRequest2*, pvarbody : VARIANT*) : HRESULT
+    @lpVtbl.value.get_response_stream.call(this, pvarbody)
   end
-  def get_ready_state(plstate : Int32*) : HRESULT
-    @lpVtbl.value.get_ready_state.unsafe_as(Proc(Int32*, HRESULT)).call(plstate)
+  def get_ready_state(this : IServerXMLHTTPRequest2*, plstate : Int32*) : HRESULT
+    @lpVtbl.value.get_ready_state.call(this, plstate)
   end
-  def put_onreadystatechange(preadystatesink : IDispatch) : HRESULT
-    @lpVtbl.value.put_onreadystatechange.unsafe_as(Proc(IDispatch, HRESULT)).call(preadystatesink)
+  def put_onreadystatechange(this : IServerXMLHTTPRequest2*, preadystatesink : IDispatch) : HRESULT
+    @lpVtbl.value.put_onreadystatechange.call(this, preadystatesink)
   end
-  def set_timeouts(resolvetimeout : Int32, connecttimeout : Int32, sendtimeout : Int32, receivetimeout : Int32) : HRESULT
-    @lpVtbl.value.set_timeouts.unsafe_as(Proc(Int32, Int32, Int32, Int32, HRESULT)).call(resolvetimeout, connecttimeout, sendtimeout, receivetimeout)
+  def set_timeouts(this : IServerXMLHTTPRequest2*, resolvetimeout : Int32, connecttimeout : Int32, sendtimeout : Int32, receivetimeout : Int32) : HRESULT
+    @lpVtbl.value.set_timeouts.call(this, resolvetimeout, connecttimeout, sendtimeout, receivetimeout)
   end
-  def wait_for_response(timeoutinseconds : VARIANT, issuccessful : Int16*) : HRESULT
-    @lpVtbl.value.wait_for_response.unsafe_as(Proc(VARIANT, Int16*, HRESULT)).call(timeoutinseconds, issuccessful)
+  def wait_for_response(this : IServerXMLHTTPRequest2*, timeoutinseconds : VARIANT, issuccessful : Int16*) : HRESULT
+    @lpVtbl.value.wait_for_response.call(this, timeoutinseconds, issuccessful)
   end
-  def get_option(option : SERVERXMLHTTP_OPTION, value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_option.unsafe_as(Proc(SERVERXMLHTTP_OPTION, VARIANT*, HRESULT)).call(option, value)
+  def get_option(this : IServerXMLHTTPRequest2*, option : SERVERXMLHTTP_OPTION, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_option.call(this, option, value)
   end
-  def set_option(option : SERVERXMLHTTP_OPTION, value : VARIANT) : HRESULT
-    @lpVtbl.value.set_option.unsafe_as(Proc(SERVERXMLHTTP_OPTION, VARIANT, HRESULT)).call(option, value)
+  def set_option(this : IServerXMLHTTPRequest2*, option : SERVERXMLHTTP_OPTION, value : VARIANT) : HRESULT
+    @lpVtbl.value.set_option.call(this, option, value)
   end
-  def set_proxy(proxysetting : SXH_PROXY_SETTING, varproxyserver : VARIANT, varbypasslist : VARIANT) : HRESULT
-    @lpVtbl.value.set_proxy.unsafe_as(Proc(SXH_PROXY_SETTING, VARIANT, VARIANT, HRESULT)).call(proxysetting, varproxyserver, varbypasslist)
+  def set_proxy(this : IServerXMLHTTPRequest2*, proxysetting : SXH_PROXY_SETTING, varproxyserver : VARIANT, varbypasslist : VARIANT) : HRESULT
+    @lpVtbl.value.set_proxy.call(this, proxysetting, varproxyserver, varbypasslist)
   end
-  def set_proxy_credentials(bstrusername : UInt8*, bstrpassword : UInt8*) : HRESULT
-    @lpVtbl.value.set_proxy_credentials.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstrusername, bstrpassword)
+  def set_proxy_credentials(this : IServerXMLHTTPRequest2*, bstrusername : UInt8*, bstrpassword : UInt8*) : HRESULT
+    @lpVtbl.value.set_proxy_credentials.call(this, bstrusername, bstrpassword)
   end
 end
 struct LibWin32::ISAXXMLReader
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISAXXMLReader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISAXXMLReader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISAXXMLReader*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_feature(pwchname : LibC::LPWSTR, pvfvalue : Int16*) : HRESULT
-    @lpVtbl.value.get_feature.unsafe_as(Proc(LibC::LPWSTR, Int16*, HRESULT)).call(pwchname, pvfvalue)
+  def get_feature(this : ISAXXMLReader*, pwchname : LibC::LPWSTR, pvfvalue : Int16*) : HRESULT
+    @lpVtbl.value.get_feature.call(this, pwchname, pvfvalue)
   end
-  def put_feature(pwchname : LibC::LPWSTR, vfvalue : Int16) : HRESULT
-    @lpVtbl.value.put_feature.unsafe_as(Proc(LibC::LPWSTR, Int16, HRESULT)).call(pwchname, vfvalue)
+  def put_feature(this : ISAXXMLReader*, pwchname : LibC::LPWSTR, vfvalue : Int16) : HRESULT
+    @lpVtbl.value.put_feature.call(this, pwchname, vfvalue)
   end
-  def get_property(pwchname : LibC::LPWSTR, pvarvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_property.unsafe_as(Proc(LibC::LPWSTR, VARIANT*, HRESULT)).call(pwchname, pvarvalue)
+  def get_property(this : ISAXXMLReader*, pwchname : LibC::LPWSTR, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, pwchname, pvarvalue)
   end
-  def put_property(pwchname : LibC::LPWSTR, varvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_property.unsafe_as(Proc(LibC::LPWSTR, VARIANT, HRESULT)).call(pwchname, varvalue)
+  def put_property(this : ISAXXMLReader*, pwchname : LibC::LPWSTR, varvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_property.call(this, pwchname, varvalue)
   end
-  def get_entity_resolver(ppresolver : ISAXEntityResolver*) : HRESULT
-    @lpVtbl.value.get_entity_resolver.unsafe_as(Proc(ISAXEntityResolver*, HRESULT)).call(ppresolver)
+  def get_entity_resolver(this : ISAXXMLReader*, ppresolver : ISAXEntityResolver*) : HRESULT
+    @lpVtbl.value.get_entity_resolver.call(this, ppresolver)
   end
-  def put_entity_resolver(presolver : ISAXEntityResolver) : HRESULT
-    @lpVtbl.value.put_entity_resolver.unsafe_as(Proc(ISAXEntityResolver, HRESULT)).call(presolver)
+  def put_entity_resolver(this : ISAXXMLReader*, presolver : ISAXEntityResolver) : HRESULT
+    @lpVtbl.value.put_entity_resolver.call(this, presolver)
   end
-  def get_content_handler(pphandler : ISAXContentHandler*) : HRESULT
-    @lpVtbl.value.get_content_handler.unsafe_as(Proc(ISAXContentHandler*, HRESULT)).call(pphandler)
+  def get_content_handler(this : ISAXXMLReader*, pphandler : ISAXContentHandler*) : HRESULT
+    @lpVtbl.value.get_content_handler.call(this, pphandler)
   end
-  def put_content_handler(phandler : ISAXContentHandler) : HRESULT
-    @lpVtbl.value.put_content_handler.unsafe_as(Proc(ISAXContentHandler, HRESULT)).call(phandler)
+  def put_content_handler(this : ISAXXMLReader*, phandler : ISAXContentHandler) : HRESULT
+    @lpVtbl.value.put_content_handler.call(this, phandler)
   end
-  def get_dtd_handler(pphandler : ISAXDTDHandler*) : HRESULT
-    @lpVtbl.value.get_dtd_handler.unsafe_as(Proc(ISAXDTDHandler*, HRESULT)).call(pphandler)
+  def get_dtd_handler(this : ISAXXMLReader*, pphandler : ISAXDTDHandler*) : HRESULT
+    @lpVtbl.value.get_dtd_handler.call(this, pphandler)
   end
-  def put_dtd_handler(phandler : ISAXDTDHandler) : HRESULT
-    @lpVtbl.value.put_dtd_handler.unsafe_as(Proc(ISAXDTDHandler, HRESULT)).call(phandler)
+  def put_dtd_handler(this : ISAXXMLReader*, phandler : ISAXDTDHandler) : HRESULT
+    @lpVtbl.value.put_dtd_handler.call(this, phandler)
   end
-  def get_error_handler(pphandler : ISAXErrorHandler*) : HRESULT
-    @lpVtbl.value.get_error_handler.unsafe_as(Proc(ISAXErrorHandler*, HRESULT)).call(pphandler)
+  def get_error_handler(this : ISAXXMLReader*, pphandler : ISAXErrorHandler*) : HRESULT
+    @lpVtbl.value.get_error_handler.call(this, pphandler)
   end
-  def put_error_handler(phandler : ISAXErrorHandler) : HRESULT
-    @lpVtbl.value.put_error_handler.unsafe_as(Proc(ISAXErrorHandler, HRESULT)).call(phandler)
+  def put_error_handler(this : ISAXXMLReader*, phandler : ISAXErrorHandler) : HRESULT
+    @lpVtbl.value.put_error_handler.call(this, phandler)
   end
-  def get_base_url(ppwchbaseurl : UInt16**) : HRESULT
-    @lpVtbl.value.get_base_url.unsafe_as(Proc(UInt16**, HRESULT)).call(ppwchbaseurl)
+  def get_base_url(this : ISAXXMLReader*, ppwchbaseurl : UInt16**) : HRESULT
+    @lpVtbl.value.get_base_url.call(this, ppwchbaseurl)
   end
-  def put_base_url(pwchbaseurl : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.put_base_url.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwchbaseurl)
+  def put_base_url(this : ISAXXMLReader*, pwchbaseurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_base_url.call(this, pwchbaseurl)
   end
-  def get_secure_base_url(ppwchsecurebaseurl : UInt16**) : HRESULT
-    @lpVtbl.value.get_secure_base_url.unsafe_as(Proc(UInt16**, HRESULT)).call(ppwchsecurebaseurl)
+  def get_secure_base_url(this : ISAXXMLReader*, ppwchsecurebaseurl : UInt16**) : HRESULT
+    @lpVtbl.value.get_secure_base_url.call(this, ppwchsecurebaseurl)
   end
-  def put_secure_base_url(pwchsecurebaseurl : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.put_secure_base_url.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwchsecurebaseurl)
+  def put_secure_base_url(this : ISAXXMLReader*, pwchsecurebaseurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_secure_base_url.call(this, pwchsecurebaseurl)
   end
-  def parse(varinput : VARIANT) : HRESULT
-    @lpVtbl.value.parse.unsafe_as(Proc(VARIANT, HRESULT)).call(varinput)
+  def parse(this : ISAXXMLReader*, varinput : VARIANT) : HRESULT
+    @lpVtbl.value.parse.call(this, varinput)
   end
-  def parse_url(pwchurl : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.parse_url.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwchurl)
+  def parse_url(this : ISAXXMLReader*, pwchurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.parse_url.call(this, pwchurl)
   end
 end
 struct LibWin32::ISAXXMLFilter
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISAXXMLFilter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISAXXMLFilter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISAXXMLFilter*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_feature(pwchname : LibC::LPWSTR, pvfvalue : Int16*) : HRESULT
-    @lpVtbl.value.get_feature.unsafe_as(Proc(LibC::LPWSTR, Int16*, HRESULT)).call(pwchname, pvfvalue)
+  def get_feature(this : ISAXXMLFilter*, pwchname : LibC::LPWSTR, pvfvalue : Int16*) : HRESULT
+    @lpVtbl.value.get_feature.call(this, pwchname, pvfvalue)
   end
-  def put_feature(pwchname : LibC::LPWSTR, vfvalue : Int16) : HRESULT
-    @lpVtbl.value.put_feature.unsafe_as(Proc(LibC::LPWSTR, Int16, HRESULT)).call(pwchname, vfvalue)
+  def put_feature(this : ISAXXMLFilter*, pwchname : LibC::LPWSTR, vfvalue : Int16) : HRESULT
+    @lpVtbl.value.put_feature.call(this, pwchname, vfvalue)
   end
-  def get_property(pwchname : LibC::LPWSTR, pvarvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_property.unsafe_as(Proc(LibC::LPWSTR, VARIANT*, HRESULT)).call(pwchname, pvarvalue)
+  def get_property(this : ISAXXMLFilter*, pwchname : LibC::LPWSTR, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, pwchname, pvarvalue)
   end
-  def put_property(pwchname : LibC::LPWSTR, varvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_property.unsafe_as(Proc(LibC::LPWSTR, VARIANT, HRESULT)).call(pwchname, varvalue)
+  def put_property(this : ISAXXMLFilter*, pwchname : LibC::LPWSTR, varvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_property.call(this, pwchname, varvalue)
   end
-  def get_entity_resolver(ppresolver : ISAXEntityResolver*) : HRESULT
-    @lpVtbl.value.get_entity_resolver.unsafe_as(Proc(ISAXEntityResolver*, HRESULT)).call(ppresolver)
+  def get_entity_resolver(this : ISAXXMLFilter*, ppresolver : ISAXEntityResolver*) : HRESULT
+    @lpVtbl.value.get_entity_resolver.call(this, ppresolver)
   end
-  def put_entity_resolver(presolver : ISAXEntityResolver) : HRESULT
-    @lpVtbl.value.put_entity_resolver.unsafe_as(Proc(ISAXEntityResolver, HRESULT)).call(presolver)
+  def put_entity_resolver(this : ISAXXMLFilter*, presolver : ISAXEntityResolver) : HRESULT
+    @lpVtbl.value.put_entity_resolver.call(this, presolver)
   end
-  def get_content_handler(pphandler : ISAXContentHandler*) : HRESULT
-    @lpVtbl.value.get_content_handler.unsafe_as(Proc(ISAXContentHandler*, HRESULT)).call(pphandler)
+  def get_content_handler(this : ISAXXMLFilter*, pphandler : ISAXContentHandler*) : HRESULT
+    @lpVtbl.value.get_content_handler.call(this, pphandler)
   end
-  def put_content_handler(phandler : ISAXContentHandler) : HRESULT
-    @lpVtbl.value.put_content_handler.unsafe_as(Proc(ISAXContentHandler, HRESULT)).call(phandler)
+  def put_content_handler(this : ISAXXMLFilter*, phandler : ISAXContentHandler) : HRESULT
+    @lpVtbl.value.put_content_handler.call(this, phandler)
   end
-  def get_dtd_handler(pphandler : ISAXDTDHandler*) : HRESULT
-    @lpVtbl.value.get_dtd_handler.unsafe_as(Proc(ISAXDTDHandler*, HRESULT)).call(pphandler)
+  def get_dtd_handler(this : ISAXXMLFilter*, pphandler : ISAXDTDHandler*) : HRESULT
+    @lpVtbl.value.get_dtd_handler.call(this, pphandler)
   end
-  def put_dtd_handler(phandler : ISAXDTDHandler) : HRESULT
-    @lpVtbl.value.put_dtd_handler.unsafe_as(Proc(ISAXDTDHandler, HRESULT)).call(phandler)
+  def put_dtd_handler(this : ISAXXMLFilter*, phandler : ISAXDTDHandler) : HRESULT
+    @lpVtbl.value.put_dtd_handler.call(this, phandler)
   end
-  def get_error_handler(pphandler : ISAXErrorHandler*) : HRESULT
-    @lpVtbl.value.get_error_handler.unsafe_as(Proc(ISAXErrorHandler*, HRESULT)).call(pphandler)
+  def get_error_handler(this : ISAXXMLFilter*, pphandler : ISAXErrorHandler*) : HRESULT
+    @lpVtbl.value.get_error_handler.call(this, pphandler)
   end
-  def put_error_handler(phandler : ISAXErrorHandler) : HRESULT
-    @lpVtbl.value.put_error_handler.unsafe_as(Proc(ISAXErrorHandler, HRESULT)).call(phandler)
+  def put_error_handler(this : ISAXXMLFilter*, phandler : ISAXErrorHandler) : HRESULT
+    @lpVtbl.value.put_error_handler.call(this, phandler)
   end
-  def get_base_url(ppwchbaseurl : UInt16**) : HRESULT
-    @lpVtbl.value.get_base_url.unsafe_as(Proc(UInt16**, HRESULT)).call(ppwchbaseurl)
+  def get_base_url(this : ISAXXMLFilter*, ppwchbaseurl : UInt16**) : HRESULT
+    @lpVtbl.value.get_base_url.call(this, ppwchbaseurl)
   end
-  def put_base_url(pwchbaseurl : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.put_base_url.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwchbaseurl)
+  def put_base_url(this : ISAXXMLFilter*, pwchbaseurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_base_url.call(this, pwchbaseurl)
   end
-  def get_secure_base_url(ppwchsecurebaseurl : UInt16**) : HRESULT
-    @lpVtbl.value.get_secure_base_url.unsafe_as(Proc(UInt16**, HRESULT)).call(ppwchsecurebaseurl)
+  def get_secure_base_url(this : ISAXXMLFilter*, ppwchsecurebaseurl : UInt16**) : HRESULT
+    @lpVtbl.value.get_secure_base_url.call(this, ppwchsecurebaseurl)
   end
-  def put_secure_base_url(pwchsecurebaseurl : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.put_secure_base_url.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwchsecurebaseurl)
+  def put_secure_base_url(this : ISAXXMLFilter*, pwchsecurebaseurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_secure_base_url.call(this, pwchsecurebaseurl)
   end
-  def parse(varinput : VARIANT) : HRESULT
-    @lpVtbl.value.parse.unsafe_as(Proc(VARIANT, HRESULT)).call(varinput)
+  def parse(this : ISAXXMLFilter*, varinput : VARIANT) : HRESULT
+    @lpVtbl.value.parse.call(this, varinput)
   end
-  def parse_url(pwchurl : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.parse_url.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwchurl)
+  def parse_url(this : ISAXXMLFilter*, pwchurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.parse_url.call(this, pwchurl)
   end
-  def get_parent(ppreader : ISAXXMLReader*) : HRESULT
-    @lpVtbl.value.get_parent.unsafe_as(Proc(ISAXXMLReader*, HRESULT)).call(ppreader)
+  def get_parent(this : ISAXXMLFilter*, ppreader : ISAXXMLReader*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, ppreader)
   end
-  def put_parent(preader : ISAXXMLReader) : HRESULT
-    @lpVtbl.value.put_parent.unsafe_as(Proc(ISAXXMLReader, HRESULT)).call(preader)
+  def put_parent(this : ISAXXMLFilter*, preader : ISAXXMLReader) : HRESULT
+    @lpVtbl.value.put_parent.call(this, preader)
   end
 end
 struct LibWin32::ISAXLocator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISAXLocator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISAXLocator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISAXLocator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_column_number(pncolumn : Int32*) : HRESULT
-    @lpVtbl.value.get_column_number.unsafe_as(Proc(Int32*, HRESULT)).call(pncolumn)
+  def get_column_number(this : ISAXLocator*, pncolumn : Int32*) : HRESULT
+    @lpVtbl.value.get_column_number.call(this, pncolumn)
   end
-  def get_line_number(pnline : Int32*) : HRESULT
-    @lpVtbl.value.get_line_number.unsafe_as(Proc(Int32*, HRESULT)).call(pnline)
+  def get_line_number(this : ISAXLocator*, pnline : Int32*) : HRESULT
+    @lpVtbl.value.get_line_number.call(this, pnline)
   end
-  def get_public_id(ppwchpublicid : UInt16**) : HRESULT
-    @lpVtbl.value.get_public_id.unsafe_as(Proc(UInt16**, HRESULT)).call(ppwchpublicid)
+  def get_public_id(this : ISAXLocator*, ppwchpublicid : UInt16**) : HRESULT
+    @lpVtbl.value.get_public_id.call(this, ppwchpublicid)
   end
-  def get_system_id(ppwchsystemid : UInt16**) : HRESULT
-    @lpVtbl.value.get_system_id.unsafe_as(Proc(UInt16**, HRESULT)).call(ppwchsystemid)
+  def get_system_id(this : ISAXLocator*, ppwchsystemid : UInt16**) : HRESULT
+    @lpVtbl.value.get_system_id.call(this, ppwchsystemid)
   end
 end
 struct LibWin32::ISAXEntityResolver
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISAXEntityResolver*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISAXEntityResolver*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISAXEntityResolver*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def resolve_entity(pwchpublicid : LibC::LPWSTR, pwchsystemid : LibC::LPWSTR, pvarinput : VARIANT*) : HRESULT
-    @lpVtbl.value.resolve_entity.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, VARIANT*, HRESULT)).call(pwchpublicid, pwchsystemid, pvarinput)
+  def resolve_entity(this : ISAXEntityResolver*, pwchpublicid : LibC::LPWSTR, pwchsystemid : LibC::LPWSTR, pvarinput : VARIANT*) : HRESULT
+    @lpVtbl.value.resolve_entity.call(this, pwchpublicid, pwchsystemid, pvarinput)
   end
 end
 struct LibWin32::ISAXContentHandler
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISAXContentHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISAXContentHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISAXContentHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def put_document_locator(plocator : ISAXLocator) : HRESULT
-    @lpVtbl.value.put_document_locator.unsafe_as(Proc(ISAXLocator, HRESULT)).call(plocator)
+  def put_document_locator(this : ISAXContentHandler*, plocator : ISAXLocator) : HRESULT
+    @lpVtbl.value.put_document_locator.call(this, plocator)
   end
-  def start_document : HRESULT
-    @lpVtbl.value.start_document.unsafe_as(Proc(HRESULT)).call
+  def start_document(this : ISAXContentHandler*) : HRESULT
+    @lpVtbl.value.start_document.call(this)
   end
-  def end_document : HRESULT
-    @lpVtbl.value.end_document.unsafe_as(Proc(HRESULT)).call
+  def end_document(this : ISAXContentHandler*) : HRESULT
+    @lpVtbl.value.end_document.call(this)
   end
-  def start_prefix_mapping(pwchprefix : LibC::LPWSTR, cchprefix : Int32, pwchuri : LibC::LPWSTR, cchuri : Int32) : HRESULT
-    @lpVtbl.value.start_prefix_mapping.unsafe_as(Proc(LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)).call(pwchprefix, cchprefix, pwchuri, cchuri)
+  def start_prefix_mapping(this : ISAXContentHandler*, pwchprefix : LibC::LPWSTR, cchprefix : Int32, pwchuri : LibC::LPWSTR, cchuri : Int32) : HRESULT
+    @lpVtbl.value.start_prefix_mapping.call(this, pwchprefix, cchprefix, pwchuri, cchuri)
   end
-  def end_prefix_mapping(pwchprefix : LibC::LPWSTR, cchprefix : Int32) : HRESULT
-    @lpVtbl.value.end_prefix_mapping.unsafe_as(Proc(LibC::LPWSTR, Int32, HRESULT)).call(pwchprefix, cchprefix)
+  def end_prefix_mapping(this : ISAXContentHandler*, pwchprefix : LibC::LPWSTR, cchprefix : Int32) : HRESULT
+    @lpVtbl.value.end_prefix_mapping.call(this, pwchprefix, cchprefix)
   end
-  def start_element(pwchnamespaceuri : LibC::LPWSTR, cchnamespaceuri : Int32, pwchlocalname : LibC::LPWSTR, cchlocalname : Int32, pwchqname : LibC::LPWSTR, cchqname : Int32, pattributes : ISAXAttributes) : HRESULT
-    @lpVtbl.value.start_element.unsafe_as(Proc(LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, ISAXAttributes, HRESULT)).call(pwchnamespaceuri, cchnamespaceuri, pwchlocalname, cchlocalname, pwchqname, cchqname, pattributes)
+  def start_element(this : ISAXContentHandler*, pwchnamespaceuri : LibC::LPWSTR, cchnamespaceuri : Int32, pwchlocalname : LibC::LPWSTR, cchlocalname : Int32, pwchqname : LibC::LPWSTR, cchqname : Int32, pattributes : ISAXAttributes) : HRESULT
+    @lpVtbl.value.start_element.call(this, pwchnamespaceuri, cchnamespaceuri, pwchlocalname, cchlocalname, pwchqname, cchqname, pattributes)
   end
-  def end_element(pwchnamespaceuri : LibC::LPWSTR, cchnamespaceuri : Int32, pwchlocalname : LibC::LPWSTR, cchlocalname : Int32, pwchqname : LibC::LPWSTR, cchqname : Int32) : HRESULT
-    @lpVtbl.value.end_element.unsafe_as(Proc(LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)).call(pwchnamespaceuri, cchnamespaceuri, pwchlocalname, cchlocalname, pwchqname, cchqname)
+  def end_element(this : ISAXContentHandler*, pwchnamespaceuri : LibC::LPWSTR, cchnamespaceuri : Int32, pwchlocalname : LibC::LPWSTR, cchlocalname : Int32, pwchqname : LibC::LPWSTR, cchqname : Int32) : HRESULT
+    @lpVtbl.value.end_element.call(this, pwchnamespaceuri, cchnamespaceuri, pwchlocalname, cchlocalname, pwchqname, cchqname)
   end
-  def characters(pwchchars : LibC::LPWSTR, cchchars : Int32) : HRESULT
-    @lpVtbl.value.characters.unsafe_as(Proc(LibC::LPWSTR, Int32, HRESULT)).call(pwchchars, cchchars)
+  def characters(this : ISAXContentHandler*, pwchchars : LibC::LPWSTR, cchchars : Int32) : HRESULT
+    @lpVtbl.value.characters.call(this, pwchchars, cchchars)
   end
-  def ignorable_whitespace(pwchchars : LibC::LPWSTR, cchchars : Int32) : HRESULT
-    @lpVtbl.value.ignorable_whitespace.unsafe_as(Proc(LibC::LPWSTR, Int32, HRESULT)).call(pwchchars, cchchars)
+  def ignorable_whitespace(this : ISAXContentHandler*, pwchchars : LibC::LPWSTR, cchchars : Int32) : HRESULT
+    @lpVtbl.value.ignorable_whitespace.call(this, pwchchars, cchchars)
   end
-  def processing_instruction(pwchtarget : LibC::LPWSTR, cchtarget : Int32, pwchdata : LibC::LPWSTR, cchdata : Int32) : HRESULT
-    @lpVtbl.value.processing_instruction.unsafe_as(Proc(LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)).call(pwchtarget, cchtarget, pwchdata, cchdata)
+  def processing_instruction(this : ISAXContentHandler*, pwchtarget : LibC::LPWSTR, cchtarget : Int32, pwchdata : LibC::LPWSTR, cchdata : Int32) : HRESULT
+    @lpVtbl.value.processing_instruction.call(this, pwchtarget, cchtarget, pwchdata, cchdata)
   end
-  def skipped_entity(pwchname : LibC::LPWSTR, cchname : Int32) : HRESULT
-    @lpVtbl.value.skipped_entity.unsafe_as(Proc(LibC::LPWSTR, Int32, HRESULT)).call(pwchname, cchname)
+  def skipped_entity(this : ISAXContentHandler*, pwchname : LibC::LPWSTR, cchname : Int32) : HRESULT
+    @lpVtbl.value.skipped_entity.call(this, pwchname, cchname)
   end
 end
 struct LibWin32::ISAXDTDHandler
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISAXDTDHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISAXDTDHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISAXDTDHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def notation_decl(pwchname : LibC::LPWSTR, cchname : Int32, pwchpublicid : LibC::LPWSTR, cchpublicid : Int32, pwchsystemid : LibC::LPWSTR, cchsystemid : Int32) : HRESULT
-    @lpVtbl.value.notation_decl.unsafe_as(Proc(LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)).call(pwchname, cchname, pwchpublicid, cchpublicid, pwchsystemid, cchsystemid)
+  def notation_decl(this : ISAXDTDHandler*, pwchname : LibC::LPWSTR, cchname : Int32, pwchpublicid : LibC::LPWSTR, cchpublicid : Int32, pwchsystemid : LibC::LPWSTR, cchsystemid : Int32) : HRESULT
+    @lpVtbl.value.notation_decl.call(this, pwchname, cchname, pwchpublicid, cchpublicid, pwchsystemid, cchsystemid)
   end
-  def unparsed_entity_decl(pwchname : LibC::LPWSTR, cchname : Int32, pwchpublicid : LibC::LPWSTR, cchpublicid : Int32, pwchsystemid : LibC::LPWSTR, cchsystemid : Int32, pwchnotationname : LibC::LPWSTR, cchnotationname : Int32) : HRESULT
-    @lpVtbl.value.unparsed_entity_decl.unsafe_as(Proc(LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)).call(pwchname, cchname, pwchpublicid, cchpublicid, pwchsystemid, cchsystemid, pwchnotationname, cchnotationname)
+  def unparsed_entity_decl(this : ISAXDTDHandler*, pwchname : LibC::LPWSTR, cchname : Int32, pwchpublicid : LibC::LPWSTR, cchpublicid : Int32, pwchsystemid : LibC::LPWSTR, cchsystemid : Int32, pwchnotationname : LibC::LPWSTR, cchnotationname : Int32) : HRESULT
+    @lpVtbl.value.unparsed_entity_decl.call(this, pwchname, cchname, pwchpublicid, cchpublicid, pwchsystemid, cchsystemid, pwchnotationname, cchnotationname)
   end
 end
 struct LibWin32::ISAXErrorHandler
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISAXErrorHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISAXErrorHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISAXErrorHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def error(plocator : ISAXLocator, pwcherrormessage : LibC::LPWSTR, hrerrorcode : HRESULT) : HRESULT
-    @lpVtbl.value.error.unsafe_as(Proc(ISAXLocator, LibC::LPWSTR, HRESULT, HRESULT)).call(plocator, pwcherrormessage, hrerrorcode)
+  def error(this : ISAXErrorHandler*, plocator : ISAXLocator, pwcherrormessage : LibC::LPWSTR, hrerrorcode : HRESULT) : HRESULT
+    @lpVtbl.value.error.call(this, plocator, pwcherrormessage, hrerrorcode)
   end
-  def fatal_error(plocator : ISAXLocator, pwcherrormessage : LibC::LPWSTR, hrerrorcode : HRESULT) : HRESULT
-    @lpVtbl.value.fatal_error.unsafe_as(Proc(ISAXLocator, LibC::LPWSTR, HRESULT, HRESULT)).call(plocator, pwcherrormessage, hrerrorcode)
+  def fatal_error(this : ISAXErrorHandler*, plocator : ISAXLocator, pwcherrormessage : LibC::LPWSTR, hrerrorcode : HRESULT) : HRESULT
+    @lpVtbl.value.fatal_error.call(this, plocator, pwcherrormessage, hrerrorcode)
   end
-  def ignorable_warning(plocator : ISAXLocator, pwcherrormessage : LibC::LPWSTR, hrerrorcode : HRESULT) : HRESULT
-    @lpVtbl.value.ignorable_warning.unsafe_as(Proc(ISAXLocator, LibC::LPWSTR, HRESULT, HRESULT)).call(plocator, pwcherrormessage, hrerrorcode)
+  def ignorable_warning(this : ISAXErrorHandler*, plocator : ISAXLocator, pwcherrormessage : LibC::LPWSTR, hrerrorcode : HRESULT) : HRESULT
+    @lpVtbl.value.ignorable_warning.call(this, plocator, pwcherrormessage, hrerrorcode)
   end
 end
 struct LibWin32::ISAXLexicalHandler
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISAXLexicalHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISAXLexicalHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISAXLexicalHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def start_dtd(pwchname : LibC::LPWSTR, cchname : Int32, pwchpublicid : LibC::LPWSTR, cchpublicid : Int32, pwchsystemid : LibC::LPWSTR, cchsystemid : Int32) : HRESULT
-    @lpVtbl.value.start_dtd.unsafe_as(Proc(LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)).call(pwchname, cchname, pwchpublicid, cchpublicid, pwchsystemid, cchsystemid)
+  def start_dtd(this : ISAXLexicalHandler*, pwchname : LibC::LPWSTR, cchname : Int32, pwchpublicid : LibC::LPWSTR, cchpublicid : Int32, pwchsystemid : LibC::LPWSTR, cchsystemid : Int32) : HRESULT
+    @lpVtbl.value.start_dtd.call(this, pwchname, cchname, pwchpublicid, cchpublicid, pwchsystemid, cchsystemid)
   end
-  def end_dtd : HRESULT
-    @lpVtbl.value.end_dtd.unsafe_as(Proc(HRESULT)).call
+  def end_dtd(this : ISAXLexicalHandler*) : HRESULT
+    @lpVtbl.value.end_dtd.call(this)
   end
-  def start_entity(pwchname : LibC::LPWSTR, cchname : Int32) : HRESULT
-    @lpVtbl.value.start_entity.unsafe_as(Proc(LibC::LPWSTR, Int32, HRESULT)).call(pwchname, cchname)
+  def start_entity(this : ISAXLexicalHandler*, pwchname : LibC::LPWSTR, cchname : Int32) : HRESULT
+    @lpVtbl.value.start_entity.call(this, pwchname, cchname)
   end
-  def end_entity(pwchname : LibC::LPWSTR, cchname : Int32) : HRESULT
-    @lpVtbl.value.end_entity.unsafe_as(Proc(LibC::LPWSTR, Int32, HRESULT)).call(pwchname, cchname)
+  def end_entity(this : ISAXLexicalHandler*, pwchname : LibC::LPWSTR, cchname : Int32) : HRESULT
+    @lpVtbl.value.end_entity.call(this, pwchname, cchname)
   end
-  def start_cdata : HRESULT
-    @lpVtbl.value.start_cdata.unsafe_as(Proc(HRESULT)).call
+  def start_cdata(this : ISAXLexicalHandler*) : HRESULT
+    @lpVtbl.value.start_cdata.call(this)
   end
-  def end_cdata : HRESULT
-    @lpVtbl.value.end_cdata.unsafe_as(Proc(HRESULT)).call
+  def end_cdata(this : ISAXLexicalHandler*) : HRESULT
+    @lpVtbl.value.end_cdata.call(this)
   end
-  def comment(pwchchars : LibC::LPWSTR, cchchars : Int32) : HRESULT
-    @lpVtbl.value.comment.unsafe_as(Proc(LibC::LPWSTR, Int32, HRESULT)).call(pwchchars, cchchars)
+  def comment(this : ISAXLexicalHandler*, pwchchars : LibC::LPWSTR, cchchars : Int32) : HRESULT
+    @lpVtbl.value.comment.call(this, pwchchars, cchchars)
   end
 end
 struct LibWin32::ISAXDeclHandler
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISAXDeclHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISAXDeclHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISAXDeclHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def element_decl(pwchname : LibC::LPWSTR, cchname : Int32, pwchmodel : LibC::LPWSTR, cchmodel : Int32) : HRESULT
-    @lpVtbl.value.element_decl.unsafe_as(Proc(LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)).call(pwchname, cchname, pwchmodel, cchmodel)
+  def element_decl(this : ISAXDeclHandler*, pwchname : LibC::LPWSTR, cchname : Int32, pwchmodel : LibC::LPWSTR, cchmodel : Int32) : HRESULT
+    @lpVtbl.value.element_decl.call(this, pwchname, cchname, pwchmodel, cchmodel)
   end
-  def attribute_decl(pwchelementname : LibC::LPWSTR, cchelementname : Int32, pwchattributename : LibC::LPWSTR, cchattributename : Int32, pwchtype : LibC::LPWSTR, cchtype : Int32, pwchvaluedefault : LibC::LPWSTR, cchvaluedefault : Int32, pwchvalue : LibC::LPWSTR, cchvalue : Int32) : HRESULT
-    @lpVtbl.value.attribute_decl.unsafe_as(Proc(LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)).call(pwchelementname, cchelementname, pwchattributename, cchattributename, pwchtype, cchtype, pwchvaluedefault, cchvaluedefault, pwchvalue, cchvalue)
+  def attribute_decl(this : ISAXDeclHandler*, pwchelementname : LibC::LPWSTR, cchelementname : Int32, pwchattributename : LibC::LPWSTR, cchattributename : Int32, pwchtype : LibC::LPWSTR, cchtype : Int32, pwchvaluedefault : LibC::LPWSTR, cchvaluedefault : Int32, pwchvalue : LibC::LPWSTR, cchvalue : Int32) : HRESULT
+    @lpVtbl.value.attribute_decl.call(this, pwchelementname, cchelementname, pwchattributename, cchattributename, pwchtype, cchtype, pwchvaluedefault, cchvaluedefault, pwchvalue, cchvalue)
   end
-  def internal_entity_decl(pwchname : LibC::LPWSTR, cchname : Int32, pwchvalue : LibC::LPWSTR, cchvalue : Int32) : HRESULT
-    @lpVtbl.value.internal_entity_decl.unsafe_as(Proc(LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)).call(pwchname, cchname, pwchvalue, cchvalue)
+  def internal_entity_decl(this : ISAXDeclHandler*, pwchname : LibC::LPWSTR, cchname : Int32, pwchvalue : LibC::LPWSTR, cchvalue : Int32) : HRESULT
+    @lpVtbl.value.internal_entity_decl.call(this, pwchname, cchname, pwchvalue, cchvalue)
   end
-  def external_entity_decl(pwchname : LibC::LPWSTR, cchname : Int32, pwchpublicid : LibC::LPWSTR, cchpublicid : Int32, pwchsystemid : LibC::LPWSTR, cchsystemid : Int32) : HRESULT
-    @lpVtbl.value.external_entity_decl.unsafe_as(Proc(LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)).call(pwchname, cchname, pwchpublicid, cchpublicid, pwchsystemid, cchsystemid)
+  def external_entity_decl(this : ISAXDeclHandler*, pwchname : LibC::LPWSTR, cchname : Int32, pwchpublicid : LibC::LPWSTR, cchpublicid : Int32, pwchsystemid : LibC::LPWSTR, cchsystemid : Int32) : HRESULT
+    @lpVtbl.value.external_entity_decl.call(this, pwchname, cchname, pwchpublicid, cchpublicid, pwchsystemid, cchsystemid)
   end
 end
 struct LibWin32::ISAXAttributes
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISAXAttributes*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISAXAttributes*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISAXAttributes*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_length(pnlength : Int32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(pnlength)
+  def get_length(this : ISAXAttributes*, pnlength : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, pnlength)
   end
-  def get_uri(nindex : Int32, ppwchuri : UInt16**, pcchuri : Int32*) : HRESULT
-    @lpVtbl.value.get_uri.unsafe_as(Proc(Int32, UInt16**, Int32*, HRESULT)).call(nindex, ppwchuri, pcchuri)
+  def get_uri(this : ISAXAttributes*, nindex : Int32, ppwchuri : UInt16**, pcchuri : Int32*) : HRESULT
+    @lpVtbl.value.get_uri.call(this, nindex, ppwchuri, pcchuri)
   end
-  def get_local_name(nindex : Int32, ppwchlocalname : UInt16**, pcchlocalname : Int32*) : HRESULT
-    @lpVtbl.value.get_local_name.unsafe_as(Proc(Int32, UInt16**, Int32*, HRESULT)).call(nindex, ppwchlocalname, pcchlocalname)
+  def get_local_name(this : ISAXAttributes*, nindex : Int32, ppwchlocalname : UInt16**, pcchlocalname : Int32*) : HRESULT
+    @lpVtbl.value.get_local_name.call(this, nindex, ppwchlocalname, pcchlocalname)
   end
-  def get_q_name(nindex : Int32, ppwchqname : UInt16**, pcchqname : Int32*) : HRESULT
-    @lpVtbl.value.get_q_name.unsafe_as(Proc(Int32, UInt16**, Int32*, HRESULT)).call(nindex, ppwchqname, pcchqname)
+  def get_q_name(this : ISAXAttributes*, nindex : Int32, ppwchqname : UInt16**, pcchqname : Int32*) : HRESULT
+    @lpVtbl.value.get_q_name.call(this, nindex, ppwchqname, pcchqname)
   end
-  def get_name(nindex : Int32, ppwchuri : UInt16**, pcchuri : Int32*, ppwchlocalname : UInt16**, pcchlocalname : Int32*, ppwchqname : UInt16**, pcchqname : Int32*) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(Int32, UInt16**, Int32*, UInt16**, Int32*, UInt16**, Int32*, HRESULT)).call(nindex, ppwchuri, pcchuri, ppwchlocalname, pcchlocalname, ppwchqname, pcchqname)
+  def get_name(this : ISAXAttributes*, nindex : Int32, ppwchuri : UInt16**, pcchuri : Int32*, ppwchlocalname : UInt16**, pcchlocalname : Int32*, ppwchqname : UInt16**, pcchqname : Int32*) : HRESULT
+    @lpVtbl.value.get_name.call(this, nindex, ppwchuri, pcchuri, ppwchlocalname, pcchlocalname, ppwchqname, pcchqname)
   end
-  def get_index_from_name(pwchuri : LibC::LPWSTR, cchuri : Int32, pwchlocalname : LibC::LPWSTR, cchlocalname : Int32, pnindex : Int32*) : HRESULT
-    @lpVtbl.value.get_index_from_name.unsafe_as(Proc(LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, Int32*, HRESULT)).call(pwchuri, cchuri, pwchlocalname, cchlocalname, pnindex)
+  def get_index_from_name(this : ISAXAttributes*, pwchuri : LibC::LPWSTR, cchuri : Int32, pwchlocalname : LibC::LPWSTR, cchlocalname : Int32, pnindex : Int32*) : HRESULT
+    @lpVtbl.value.get_index_from_name.call(this, pwchuri, cchuri, pwchlocalname, cchlocalname, pnindex)
   end
-  def get_index_from_q_name(pwchqname : LibC::LPWSTR, cchqname : Int32, pnindex : Int32*) : HRESULT
-    @lpVtbl.value.get_index_from_q_name.unsafe_as(Proc(LibC::LPWSTR, Int32, Int32*, HRESULT)).call(pwchqname, cchqname, pnindex)
+  def get_index_from_q_name(this : ISAXAttributes*, pwchqname : LibC::LPWSTR, cchqname : Int32, pnindex : Int32*) : HRESULT
+    @lpVtbl.value.get_index_from_q_name.call(this, pwchqname, cchqname, pnindex)
   end
-  def get_type(nindex : Int32, ppwchtype : UInt16**, pcchtype : Int32*) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(Int32, UInt16**, Int32*, HRESULT)).call(nindex, ppwchtype, pcchtype)
+  def get_type(this : ISAXAttributes*, nindex : Int32, ppwchtype : UInt16**, pcchtype : Int32*) : HRESULT
+    @lpVtbl.value.get_type.call(this, nindex, ppwchtype, pcchtype)
   end
-  def get_type_from_name(pwchuri : LibC::LPWSTR, cchuri : Int32, pwchlocalname : LibC::LPWSTR, cchlocalname : Int32, ppwchtype : UInt16**, pcchtype : Int32*) : HRESULT
-    @lpVtbl.value.get_type_from_name.unsafe_as(Proc(LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, UInt16**, Int32*, HRESULT)).call(pwchuri, cchuri, pwchlocalname, cchlocalname, ppwchtype, pcchtype)
+  def get_type_from_name(this : ISAXAttributes*, pwchuri : LibC::LPWSTR, cchuri : Int32, pwchlocalname : LibC::LPWSTR, cchlocalname : Int32, ppwchtype : UInt16**, pcchtype : Int32*) : HRESULT
+    @lpVtbl.value.get_type_from_name.call(this, pwchuri, cchuri, pwchlocalname, cchlocalname, ppwchtype, pcchtype)
   end
-  def get_type_from_q_name(pwchqname : LibC::LPWSTR, cchqname : Int32, ppwchtype : UInt16**, pcchtype : Int32*) : HRESULT
-    @lpVtbl.value.get_type_from_q_name.unsafe_as(Proc(LibC::LPWSTR, Int32, UInt16**, Int32*, HRESULT)).call(pwchqname, cchqname, ppwchtype, pcchtype)
+  def get_type_from_q_name(this : ISAXAttributes*, pwchqname : LibC::LPWSTR, cchqname : Int32, ppwchtype : UInt16**, pcchtype : Int32*) : HRESULT
+    @lpVtbl.value.get_type_from_q_name.call(this, pwchqname, cchqname, ppwchtype, pcchtype)
   end
-  def get_value(nindex : Int32, ppwchvalue : UInt16**, pcchvalue : Int32*) : HRESULT
-    @lpVtbl.value.get_value.unsafe_as(Proc(Int32, UInt16**, Int32*, HRESULT)).call(nindex, ppwchvalue, pcchvalue)
+  def get_value(this : ISAXAttributes*, nindex : Int32, ppwchvalue : UInt16**, pcchvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_value.call(this, nindex, ppwchvalue, pcchvalue)
   end
-  def get_value_from_name(pwchuri : LibC::LPWSTR, cchuri : Int32, pwchlocalname : LibC::LPWSTR, cchlocalname : Int32, ppwchvalue : UInt16**, pcchvalue : Int32*) : HRESULT
-    @lpVtbl.value.get_value_from_name.unsafe_as(Proc(LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, UInt16**, Int32*, HRESULT)).call(pwchuri, cchuri, pwchlocalname, cchlocalname, ppwchvalue, pcchvalue)
+  def get_value_from_name(this : ISAXAttributes*, pwchuri : LibC::LPWSTR, cchuri : Int32, pwchlocalname : LibC::LPWSTR, cchlocalname : Int32, ppwchvalue : UInt16**, pcchvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_value_from_name.call(this, pwchuri, cchuri, pwchlocalname, cchlocalname, ppwchvalue, pcchvalue)
   end
-  def get_value_from_q_name(pwchqname : LibC::LPWSTR, cchqname : Int32, ppwchvalue : UInt16**, pcchvalue : Int32*) : HRESULT
-    @lpVtbl.value.get_value_from_q_name.unsafe_as(Proc(LibC::LPWSTR, Int32, UInt16**, Int32*, HRESULT)).call(pwchqname, cchqname, ppwchvalue, pcchvalue)
+  def get_value_from_q_name(this : ISAXAttributes*, pwchqname : LibC::LPWSTR, cchqname : Int32, ppwchvalue : UInt16**, pcchvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_value_from_q_name.call(this, pwchqname, cchqname, ppwchvalue, pcchvalue)
   end
 end
 struct LibWin32::IVBSAXXMLReader
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVBSAXXMLReader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVBSAXXMLReader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVBSAXXMLReader*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IVBSAXXMLReader*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IVBSAXXMLReader*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IVBSAXXMLReader*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IVBSAXXMLReader*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_feature(strname : UInt8*, fvalue : Int16*) : HRESULT
-    @lpVtbl.value.get_feature.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(strname, fvalue)
+  def get_feature(this : IVBSAXXMLReader*, strname : UInt8*, fvalue : Int16*) : HRESULT
+    @lpVtbl.value.get_feature.call(this, strname, fvalue)
   end
-  def put_feature(strname : UInt8*, fvalue : Int16) : HRESULT
-    @lpVtbl.value.put_feature.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(strname, fvalue)
+  def put_feature(this : IVBSAXXMLReader*, strname : UInt8*, fvalue : Int16) : HRESULT
+    @lpVtbl.value.put_feature.call(this, strname, fvalue)
   end
-  def get_property(strname : UInt8*, varvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_property.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(strname, varvalue)
+  def get_property(this : IVBSAXXMLReader*, strname : UInt8*, varvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, strname, varvalue)
   end
-  def put_property(strname : UInt8*, varvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_property.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(strname, varvalue)
+  def put_property(this : IVBSAXXMLReader*, strname : UInt8*, varvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_property.call(this, strname, varvalue)
   end
-  def get_entity_resolver(oresolver : IVBSAXEntityResolver*) : HRESULT
-    @lpVtbl.value.get_entity_resolver.unsafe_as(Proc(IVBSAXEntityResolver*, HRESULT)).call(oresolver)
+  def get_entity_resolver(this : IVBSAXXMLReader*, oresolver : IVBSAXEntityResolver*) : HRESULT
+    @lpVtbl.value.get_entity_resolver.call(this, oresolver)
   end
-  def putref_entity_resolver(oresolver : IVBSAXEntityResolver) : HRESULT
-    @lpVtbl.value.putref_entity_resolver.unsafe_as(Proc(IVBSAXEntityResolver, HRESULT)).call(oresolver)
+  def putref_entity_resolver(this : IVBSAXXMLReader*, oresolver : IVBSAXEntityResolver) : HRESULT
+    @lpVtbl.value.putref_entity_resolver.call(this, oresolver)
   end
-  def get_content_handler(ohandler : IVBSAXContentHandler*) : HRESULT
-    @lpVtbl.value.get_content_handler.unsafe_as(Proc(IVBSAXContentHandler*, HRESULT)).call(ohandler)
+  def get_content_handler(this : IVBSAXXMLReader*, ohandler : IVBSAXContentHandler*) : HRESULT
+    @lpVtbl.value.get_content_handler.call(this, ohandler)
   end
-  def putref_content_handler(ohandler : IVBSAXContentHandler) : HRESULT
-    @lpVtbl.value.putref_content_handler.unsafe_as(Proc(IVBSAXContentHandler, HRESULT)).call(ohandler)
+  def putref_content_handler(this : IVBSAXXMLReader*, ohandler : IVBSAXContentHandler) : HRESULT
+    @lpVtbl.value.putref_content_handler.call(this, ohandler)
   end
-  def get_dtd_handler(ohandler : IVBSAXDTDHandler*) : HRESULT
-    @lpVtbl.value.get_dtd_handler.unsafe_as(Proc(IVBSAXDTDHandler*, HRESULT)).call(ohandler)
+  def get_dtd_handler(this : IVBSAXXMLReader*, ohandler : IVBSAXDTDHandler*) : HRESULT
+    @lpVtbl.value.get_dtd_handler.call(this, ohandler)
   end
-  def putref_dtd_handler(ohandler : IVBSAXDTDHandler) : HRESULT
-    @lpVtbl.value.putref_dtd_handler.unsafe_as(Proc(IVBSAXDTDHandler, HRESULT)).call(ohandler)
+  def putref_dtd_handler(this : IVBSAXXMLReader*, ohandler : IVBSAXDTDHandler) : HRESULT
+    @lpVtbl.value.putref_dtd_handler.call(this, ohandler)
   end
-  def get_error_handler(ohandler : IVBSAXErrorHandler*) : HRESULT
-    @lpVtbl.value.get_error_handler.unsafe_as(Proc(IVBSAXErrorHandler*, HRESULT)).call(ohandler)
+  def get_error_handler(this : IVBSAXXMLReader*, ohandler : IVBSAXErrorHandler*) : HRESULT
+    @lpVtbl.value.get_error_handler.call(this, ohandler)
   end
-  def putref_error_handler(ohandler : IVBSAXErrorHandler) : HRESULT
-    @lpVtbl.value.putref_error_handler.unsafe_as(Proc(IVBSAXErrorHandler, HRESULT)).call(ohandler)
+  def putref_error_handler(this : IVBSAXXMLReader*, ohandler : IVBSAXErrorHandler) : HRESULT
+    @lpVtbl.value.putref_error_handler.call(this, ohandler)
   end
-  def get_base_url(strbaseurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_url.unsafe_as(Proc(UInt8**, HRESULT)).call(strbaseurl)
+  def get_base_url(this : IVBSAXXMLReader*, strbaseurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_base_url.call(this, strbaseurl)
   end
-  def put_base_url(strbaseurl : UInt8*) : HRESULT
-    @lpVtbl.value.put_base_url.unsafe_as(Proc(UInt8*, HRESULT)).call(strbaseurl)
+  def put_base_url(this : IVBSAXXMLReader*, strbaseurl : UInt8*) : HRESULT
+    @lpVtbl.value.put_base_url.call(this, strbaseurl)
   end
-  def get_secure_base_url(strsecurebaseurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_secure_base_url.unsafe_as(Proc(UInt8**, HRESULT)).call(strsecurebaseurl)
+  def get_secure_base_url(this : IVBSAXXMLReader*, strsecurebaseurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_secure_base_url.call(this, strsecurebaseurl)
   end
-  def put_secure_base_url(strsecurebaseurl : UInt8*) : HRESULT
-    @lpVtbl.value.put_secure_base_url.unsafe_as(Proc(UInt8*, HRESULT)).call(strsecurebaseurl)
+  def put_secure_base_url(this : IVBSAXXMLReader*, strsecurebaseurl : UInt8*) : HRESULT
+    @lpVtbl.value.put_secure_base_url.call(this, strsecurebaseurl)
   end
-  def parse(varinput : VARIANT) : HRESULT
-    @lpVtbl.value.parse.unsafe_as(Proc(VARIANT, HRESULT)).call(varinput)
+  def parse(this : IVBSAXXMLReader*, varinput : VARIANT) : HRESULT
+    @lpVtbl.value.parse.call(this, varinput)
   end
-  def parse_url(strurl : UInt8*) : HRESULT
-    @lpVtbl.value.parse_url.unsafe_as(Proc(UInt8*, HRESULT)).call(strurl)
+  def parse_url(this : IVBSAXXMLReader*, strurl : UInt8*) : HRESULT
+    @lpVtbl.value.parse_url.call(this, strurl)
   end
 end
 struct LibWin32::IVBSAXXMLFilter
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVBSAXXMLFilter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVBSAXXMLFilter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVBSAXXMLFilter*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IVBSAXXMLFilter*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IVBSAXXMLFilter*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IVBSAXXMLFilter*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IVBSAXXMLFilter*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_parent(oreader : IVBSAXXMLReader*) : HRESULT
-    @lpVtbl.value.get_parent.unsafe_as(Proc(IVBSAXXMLReader*, HRESULT)).call(oreader)
+  def get_parent(this : IVBSAXXMLFilter*, oreader : IVBSAXXMLReader*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, oreader)
   end
-  def putref_parent(oreader : IVBSAXXMLReader) : HRESULT
-    @lpVtbl.value.putref_parent.unsafe_as(Proc(IVBSAXXMLReader, HRESULT)).call(oreader)
+  def putref_parent(this : IVBSAXXMLFilter*, oreader : IVBSAXXMLReader) : HRESULT
+    @lpVtbl.value.putref_parent.call(this, oreader)
   end
 end
 struct LibWin32::IVBSAXLocator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVBSAXLocator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVBSAXLocator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVBSAXLocator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IVBSAXLocator*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IVBSAXLocator*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IVBSAXLocator*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IVBSAXLocator*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_column_number(ncolumn : Int32*) : HRESULT
-    @lpVtbl.value.get_column_number.unsafe_as(Proc(Int32*, HRESULT)).call(ncolumn)
+  def get_column_number(this : IVBSAXLocator*, ncolumn : Int32*) : HRESULT
+    @lpVtbl.value.get_column_number.call(this, ncolumn)
   end
-  def get_line_number(nline : Int32*) : HRESULT
-    @lpVtbl.value.get_line_number.unsafe_as(Proc(Int32*, HRESULT)).call(nline)
+  def get_line_number(this : IVBSAXLocator*, nline : Int32*) : HRESULT
+    @lpVtbl.value.get_line_number.call(this, nline)
   end
-  def get_public_id(strpublicid : UInt8**) : HRESULT
-    @lpVtbl.value.get_public_id.unsafe_as(Proc(UInt8**, HRESULT)).call(strpublicid)
+  def get_public_id(this : IVBSAXLocator*, strpublicid : UInt8**) : HRESULT
+    @lpVtbl.value.get_public_id.call(this, strpublicid)
   end
-  def get_system_id(strsystemid : UInt8**) : HRESULT
-    @lpVtbl.value.get_system_id.unsafe_as(Proc(UInt8**, HRESULT)).call(strsystemid)
+  def get_system_id(this : IVBSAXLocator*, strsystemid : UInt8**) : HRESULT
+    @lpVtbl.value.get_system_id.call(this, strsystemid)
   end
 end
 struct LibWin32::IVBSAXEntityResolver
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVBSAXEntityResolver*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVBSAXEntityResolver*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVBSAXEntityResolver*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IVBSAXEntityResolver*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IVBSAXEntityResolver*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IVBSAXEntityResolver*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IVBSAXEntityResolver*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def resolve_entity(strpublicid : UInt8**, strsystemid : UInt8**, varinput : VARIANT*) : HRESULT
-    @lpVtbl.value.resolve_entity.unsafe_as(Proc(UInt8**, UInt8**, VARIANT*, HRESULT)).call(strpublicid, strsystemid, varinput)
+  def resolve_entity(this : IVBSAXEntityResolver*, strpublicid : UInt8**, strsystemid : UInt8**, varinput : VARIANT*) : HRESULT
+    @lpVtbl.value.resolve_entity.call(this, strpublicid, strsystemid, varinput)
   end
 end
 struct LibWin32::IVBSAXContentHandler
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVBSAXContentHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVBSAXContentHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVBSAXContentHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IVBSAXContentHandler*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IVBSAXContentHandler*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IVBSAXContentHandler*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IVBSAXContentHandler*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def putref_document_locator(olocator : IVBSAXLocator) : HRESULT
-    @lpVtbl.value.putref_document_locator.unsafe_as(Proc(IVBSAXLocator, HRESULT)).call(olocator)
+  def putref_document_locator(this : IVBSAXContentHandler*, olocator : IVBSAXLocator) : HRESULT
+    @lpVtbl.value.putref_document_locator.call(this, olocator)
   end
-  def start_document : HRESULT
-    @lpVtbl.value.start_document.unsafe_as(Proc(HRESULT)).call
+  def start_document(this : IVBSAXContentHandler*) : HRESULT
+    @lpVtbl.value.start_document.call(this)
   end
-  def end_document : HRESULT
-    @lpVtbl.value.end_document.unsafe_as(Proc(HRESULT)).call
+  def end_document(this : IVBSAXContentHandler*) : HRESULT
+    @lpVtbl.value.end_document.call(this)
   end
-  def start_prefix_mapping(strprefix : UInt8**, struri : UInt8**) : HRESULT
-    @lpVtbl.value.start_prefix_mapping.unsafe_as(Proc(UInt8**, UInt8**, HRESULT)).call(strprefix, struri)
+  def start_prefix_mapping(this : IVBSAXContentHandler*, strprefix : UInt8**, struri : UInt8**) : HRESULT
+    @lpVtbl.value.start_prefix_mapping.call(this, strprefix, struri)
   end
-  def end_prefix_mapping(strprefix : UInt8**) : HRESULT
-    @lpVtbl.value.end_prefix_mapping.unsafe_as(Proc(UInt8**, HRESULT)).call(strprefix)
+  def end_prefix_mapping(this : IVBSAXContentHandler*, strprefix : UInt8**) : HRESULT
+    @lpVtbl.value.end_prefix_mapping.call(this, strprefix)
   end
-  def start_element(strnamespaceuri : UInt8**, strlocalname : UInt8**, strqname : UInt8**, oattributes : IVBSAXAttributes) : HRESULT
-    @lpVtbl.value.start_element.unsafe_as(Proc(UInt8**, UInt8**, UInt8**, IVBSAXAttributes, HRESULT)).call(strnamespaceuri, strlocalname, strqname, oattributes)
+  def start_element(this : IVBSAXContentHandler*, strnamespaceuri : UInt8**, strlocalname : UInt8**, strqname : UInt8**, oattributes : IVBSAXAttributes) : HRESULT
+    @lpVtbl.value.start_element.call(this, strnamespaceuri, strlocalname, strqname, oattributes)
   end
-  def end_element(strnamespaceuri : UInt8**, strlocalname : UInt8**, strqname : UInt8**) : HRESULT
-    @lpVtbl.value.end_element.unsafe_as(Proc(UInt8**, UInt8**, UInt8**, HRESULT)).call(strnamespaceuri, strlocalname, strqname)
+  def end_element(this : IVBSAXContentHandler*, strnamespaceuri : UInt8**, strlocalname : UInt8**, strqname : UInt8**) : HRESULT
+    @lpVtbl.value.end_element.call(this, strnamespaceuri, strlocalname, strqname)
   end
-  def characters(strchars : UInt8**) : HRESULT
-    @lpVtbl.value.characters.unsafe_as(Proc(UInt8**, HRESULT)).call(strchars)
+  def characters(this : IVBSAXContentHandler*, strchars : UInt8**) : HRESULT
+    @lpVtbl.value.characters.call(this, strchars)
   end
-  def ignorable_whitespace(strchars : UInt8**) : HRESULT
-    @lpVtbl.value.ignorable_whitespace.unsafe_as(Proc(UInt8**, HRESULT)).call(strchars)
+  def ignorable_whitespace(this : IVBSAXContentHandler*, strchars : UInt8**) : HRESULT
+    @lpVtbl.value.ignorable_whitespace.call(this, strchars)
   end
-  def processing_instruction(strtarget : UInt8**, strdata : UInt8**) : HRESULT
-    @lpVtbl.value.processing_instruction.unsafe_as(Proc(UInt8**, UInt8**, HRESULT)).call(strtarget, strdata)
+  def processing_instruction(this : IVBSAXContentHandler*, strtarget : UInt8**, strdata : UInt8**) : HRESULT
+    @lpVtbl.value.processing_instruction.call(this, strtarget, strdata)
   end
-  def skipped_entity(strname : UInt8**) : HRESULT
-    @lpVtbl.value.skipped_entity.unsafe_as(Proc(UInt8**, HRESULT)).call(strname)
+  def skipped_entity(this : IVBSAXContentHandler*, strname : UInt8**) : HRESULT
+    @lpVtbl.value.skipped_entity.call(this, strname)
   end
 end
 struct LibWin32::IVBSAXDTDHandler
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVBSAXDTDHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVBSAXDTDHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVBSAXDTDHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IVBSAXDTDHandler*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IVBSAXDTDHandler*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IVBSAXDTDHandler*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IVBSAXDTDHandler*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def notation_decl(strname : UInt8**, strpublicid : UInt8**, strsystemid : UInt8**) : HRESULT
-    @lpVtbl.value.notation_decl.unsafe_as(Proc(UInt8**, UInt8**, UInt8**, HRESULT)).call(strname, strpublicid, strsystemid)
+  def notation_decl(this : IVBSAXDTDHandler*, strname : UInt8**, strpublicid : UInt8**, strsystemid : UInt8**) : HRESULT
+    @lpVtbl.value.notation_decl.call(this, strname, strpublicid, strsystemid)
   end
-  def unparsed_entity_decl(strname : UInt8**, strpublicid : UInt8**, strsystemid : UInt8**, strnotationname : UInt8**) : HRESULT
-    @lpVtbl.value.unparsed_entity_decl.unsafe_as(Proc(UInt8**, UInt8**, UInt8**, UInt8**, HRESULT)).call(strname, strpublicid, strsystemid, strnotationname)
+  def unparsed_entity_decl(this : IVBSAXDTDHandler*, strname : UInt8**, strpublicid : UInt8**, strsystemid : UInt8**, strnotationname : UInt8**) : HRESULT
+    @lpVtbl.value.unparsed_entity_decl.call(this, strname, strpublicid, strsystemid, strnotationname)
   end
 end
 struct LibWin32::IVBSAXErrorHandler
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVBSAXErrorHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVBSAXErrorHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVBSAXErrorHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IVBSAXErrorHandler*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IVBSAXErrorHandler*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IVBSAXErrorHandler*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IVBSAXErrorHandler*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def error(olocator : IVBSAXLocator, strerrormessage : UInt8**, nerrorcode : Int32) : HRESULT
-    @lpVtbl.value.error.unsafe_as(Proc(IVBSAXLocator, UInt8**, Int32, HRESULT)).call(olocator, strerrormessage, nerrorcode)
+  def error(this : IVBSAXErrorHandler*, olocator : IVBSAXLocator, strerrormessage : UInt8**, nerrorcode : Int32) : HRESULT
+    @lpVtbl.value.error.call(this, olocator, strerrormessage, nerrorcode)
   end
-  def fatal_error(olocator : IVBSAXLocator, strerrormessage : UInt8**, nerrorcode : Int32) : HRESULT
-    @lpVtbl.value.fatal_error.unsafe_as(Proc(IVBSAXLocator, UInt8**, Int32, HRESULT)).call(olocator, strerrormessage, nerrorcode)
+  def fatal_error(this : IVBSAXErrorHandler*, olocator : IVBSAXLocator, strerrormessage : UInt8**, nerrorcode : Int32) : HRESULT
+    @lpVtbl.value.fatal_error.call(this, olocator, strerrormessage, nerrorcode)
   end
-  def ignorable_warning(olocator : IVBSAXLocator, strerrormessage : UInt8**, nerrorcode : Int32) : HRESULT
-    @lpVtbl.value.ignorable_warning.unsafe_as(Proc(IVBSAXLocator, UInt8**, Int32, HRESULT)).call(olocator, strerrormessage, nerrorcode)
+  def ignorable_warning(this : IVBSAXErrorHandler*, olocator : IVBSAXLocator, strerrormessage : UInt8**, nerrorcode : Int32) : HRESULT
+    @lpVtbl.value.ignorable_warning.call(this, olocator, strerrormessage, nerrorcode)
   end
 end
 struct LibWin32::IVBSAXLexicalHandler
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVBSAXLexicalHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVBSAXLexicalHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVBSAXLexicalHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IVBSAXLexicalHandler*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IVBSAXLexicalHandler*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IVBSAXLexicalHandler*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IVBSAXLexicalHandler*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def start_dtd(strname : UInt8**, strpublicid : UInt8**, strsystemid : UInt8**) : HRESULT
-    @lpVtbl.value.start_dtd.unsafe_as(Proc(UInt8**, UInt8**, UInt8**, HRESULT)).call(strname, strpublicid, strsystemid)
+  def start_dtd(this : IVBSAXLexicalHandler*, strname : UInt8**, strpublicid : UInt8**, strsystemid : UInt8**) : HRESULT
+    @lpVtbl.value.start_dtd.call(this, strname, strpublicid, strsystemid)
   end
-  def end_dtd : HRESULT
-    @lpVtbl.value.end_dtd.unsafe_as(Proc(HRESULT)).call
+  def end_dtd(this : IVBSAXLexicalHandler*) : HRESULT
+    @lpVtbl.value.end_dtd.call(this)
   end
-  def start_entity(strname : UInt8**) : HRESULT
-    @lpVtbl.value.start_entity.unsafe_as(Proc(UInt8**, HRESULT)).call(strname)
+  def start_entity(this : IVBSAXLexicalHandler*, strname : UInt8**) : HRESULT
+    @lpVtbl.value.start_entity.call(this, strname)
   end
-  def end_entity(strname : UInt8**) : HRESULT
-    @lpVtbl.value.end_entity.unsafe_as(Proc(UInt8**, HRESULT)).call(strname)
+  def end_entity(this : IVBSAXLexicalHandler*, strname : UInt8**) : HRESULT
+    @lpVtbl.value.end_entity.call(this, strname)
   end
-  def start_cdata : HRESULT
-    @lpVtbl.value.start_cdata.unsafe_as(Proc(HRESULT)).call
+  def start_cdata(this : IVBSAXLexicalHandler*) : HRESULT
+    @lpVtbl.value.start_cdata.call(this)
   end
-  def end_cdata : HRESULT
-    @lpVtbl.value.end_cdata.unsafe_as(Proc(HRESULT)).call
+  def end_cdata(this : IVBSAXLexicalHandler*) : HRESULT
+    @lpVtbl.value.end_cdata.call(this)
   end
-  def comment(strchars : UInt8**) : HRESULT
-    @lpVtbl.value.comment.unsafe_as(Proc(UInt8**, HRESULT)).call(strchars)
+  def comment(this : IVBSAXLexicalHandler*, strchars : UInt8**) : HRESULT
+    @lpVtbl.value.comment.call(this, strchars)
   end
 end
 struct LibWin32::IVBSAXDeclHandler
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVBSAXDeclHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVBSAXDeclHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVBSAXDeclHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IVBSAXDeclHandler*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IVBSAXDeclHandler*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IVBSAXDeclHandler*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IVBSAXDeclHandler*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def element_decl(strname : UInt8**, strmodel : UInt8**) : HRESULT
-    @lpVtbl.value.element_decl.unsafe_as(Proc(UInt8**, UInt8**, HRESULT)).call(strname, strmodel)
+  def element_decl(this : IVBSAXDeclHandler*, strname : UInt8**, strmodel : UInt8**) : HRESULT
+    @lpVtbl.value.element_decl.call(this, strname, strmodel)
   end
-  def attribute_decl(strelementname : UInt8**, strattributename : UInt8**, strtype : UInt8**, strvaluedefault : UInt8**, strvalue : UInt8**) : HRESULT
-    @lpVtbl.value.attribute_decl.unsafe_as(Proc(UInt8**, UInt8**, UInt8**, UInt8**, UInt8**, HRESULT)).call(strelementname, strattributename, strtype, strvaluedefault, strvalue)
+  def attribute_decl(this : IVBSAXDeclHandler*, strelementname : UInt8**, strattributename : UInt8**, strtype : UInt8**, strvaluedefault : UInt8**, strvalue : UInt8**) : HRESULT
+    @lpVtbl.value.attribute_decl.call(this, strelementname, strattributename, strtype, strvaluedefault, strvalue)
   end
-  def internal_entity_decl(strname : UInt8**, strvalue : UInt8**) : HRESULT
-    @lpVtbl.value.internal_entity_decl.unsafe_as(Proc(UInt8**, UInt8**, HRESULT)).call(strname, strvalue)
+  def internal_entity_decl(this : IVBSAXDeclHandler*, strname : UInt8**, strvalue : UInt8**) : HRESULT
+    @lpVtbl.value.internal_entity_decl.call(this, strname, strvalue)
   end
-  def external_entity_decl(strname : UInt8**, strpublicid : UInt8**, strsystemid : UInt8**) : HRESULT
-    @lpVtbl.value.external_entity_decl.unsafe_as(Proc(UInt8**, UInt8**, UInt8**, HRESULT)).call(strname, strpublicid, strsystemid)
+  def external_entity_decl(this : IVBSAXDeclHandler*, strname : UInt8**, strpublicid : UInt8**, strsystemid : UInt8**) : HRESULT
+    @lpVtbl.value.external_entity_decl.call(this, strname, strpublicid, strsystemid)
   end
 end
 struct LibWin32::IVBSAXAttributes
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVBSAXAttributes*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVBSAXAttributes*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVBSAXAttributes*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IVBSAXAttributes*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IVBSAXAttributes*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IVBSAXAttributes*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IVBSAXAttributes*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_length(nlength : Int32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(nlength)
+  def get_length(this : IVBSAXAttributes*, nlength : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, nlength)
   end
-  def get_uri(nindex : Int32, struri : UInt8**) : HRESULT
-    @lpVtbl.value.get_uri.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(nindex, struri)
+  def get_uri(this : IVBSAXAttributes*, nindex : Int32, struri : UInt8**) : HRESULT
+    @lpVtbl.value.get_uri.call(this, nindex, struri)
   end
-  def get_local_name(nindex : Int32, strlocalname : UInt8**) : HRESULT
-    @lpVtbl.value.get_local_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(nindex, strlocalname)
+  def get_local_name(this : IVBSAXAttributes*, nindex : Int32, strlocalname : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_name.call(this, nindex, strlocalname)
   end
-  def get_q_name(nindex : Int32, strqname : UInt8**) : HRESULT
-    @lpVtbl.value.get_q_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(nindex, strqname)
+  def get_q_name(this : IVBSAXAttributes*, nindex : Int32, strqname : UInt8**) : HRESULT
+    @lpVtbl.value.get_q_name.call(this, nindex, strqname)
   end
-  def get_index_from_name(struri : UInt8*, strlocalname : UInt8*, nindex : Int32*) : HRESULT
-    @lpVtbl.value.get_index_from_name.unsafe_as(Proc(UInt8*, UInt8*, Int32*, HRESULT)).call(struri, strlocalname, nindex)
+  def get_index_from_name(this : IVBSAXAttributes*, struri : UInt8*, strlocalname : UInt8*, nindex : Int32*) : HRESULT
+    @lpVtbl.value.get_index_from_name.call(this, struri, strlocalname, nindex)
   end
-  def get_index_from_q_name(strqname : UInt8*, nindex : Int32*) : HRESULT
-    @lpVtbl.value.get_index_from_q_name.unsafe_as(Proc(UInt8*, Int32*, HRESULT)).call(strqname, nindex)
+  def get_index_from_q_name(this : IVBSAXAttributes*, strqname : UInt8*, nindex : Int32*) : HRESULT
+    @lpVtbl.value.get_index_from_q_name.call(this, strqname, nindex)
   end
-  def get_type(nindex : Int32, strtype : UInt8**) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(nindex, strtype)
+  def get_type(this : IVBSAXAttributes*, nindex : Int32, strtype : UInt8**) : HRESULT
+    @lpVtbl.value.get_type.call(this, nindex, strtype)
   end
-  def get_type_from_name(struri : UInt8*, strlocalname : UInt8*, strtype : UInt8**) : HRESULT
-    @lpVtbl.value.get_type_from_name.unsafe_as(Proc(UInt8*, UInt8*, UInt8**, HRESULT)).call(struri, strlocalname, strtype)
+  def get_type_from_name(this : IVBSAXAttributes*, struri : UInt8*, strlocalname : UInt8*, strtype : UInt8**) : HRESULT
+    @lpVtbl.value.get_type_from_name.call(this, struri, strlocalname, strtype)
   end
-  def get_type_from_q_name(strqname : UInt8*, strtype : UInt8**) : HRESULT
-    @lpVtbl.value.get_type_from_q_name.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(strqname, strtype)
+  def get_type_from_q_name(this : IVBSAXAttributes*, strqname : UInt8*, strtype : UInt8**) : HRESULT
+    @lpVtbl.value.get_type_from_q_name.call(this, strqname, strtype)
   end
-  def get_value(nindex : Int32, strvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_value.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(nindex, strvalue)
+  def get_value(this : IVBSAXAttributes*, nindex : Int32, strvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_value.call(this, nindex, strvalue)
   end
-  def get_value_from_name(struri : UInt8*, strlocalname : UInt8*, strvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_value_from_name.unsafe_as(Proc(UInt8*, UInt8*, UInt8**, HRESULT)).call(struri, strlocalname, strvalue)
+  def get_value_from_name(this : IVBSAXAttributes*, struri : UInt8*, strlocalname : UInt8*, strvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_value_from_name.call(this, struri, strlocalname, strvalue)
   end
-  def get_value_from_q_name(strqname : UInt8*, strvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_value_from_q_name.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(strqname, strvalue)
+  def get_value_from_q_name(this : IVBSAXAttributes*, strqname : UInt8*, strvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_value_from_q_name.call(this, strqname, strvalue)
   end
 end
 struct LibWin32::IMXWriter
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMXWriter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMXWriter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMXWriter*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMXWriter*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMXWriter*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMXWriter*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMXWriter*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def put_output(vardestination : VARIANT) : HRESULT
-    @lpVtbl.value.put_output.unsafe_as(Proc(VARIANT, HRESULT)).call(vardestination)
+  def put_output(this : IMXWriter*, vardestination : VARIANT) : HRESULT
+    @lpVtbl.value.put_output.call(this, vardestination)
   end
-  def get_output(vardestination : VARIANT*) : HRESULT
-    @lpVtbl.value.get_output.unsafe_as(Proc(VARIANT*, HRESULT)).call(vardestination)
+  def get_output(this : IMXWriter*, vardestination : VARIANT*) : HRESULT
+    @lpVtbl.value.get_output.call(this, vardestination)
   end
-  def put_encoding(strencoding : UInt8*) : HRESULT
-    @lpVtbl.value.put_encoding.unsafe_as(Proc(UInt8*, HRESULT)).call(strencoding)
+  def put_encoding(this : IMXWriter*, strencoding : UInt8*) : HRESULT
+    @lpVtbl.value.put_encoding.call(this, strencoding)
   end
-  def get_encoding(strencoding : UInt8**) : HRESULT
-    @lpVtbl.value.get_encoding.unsafe_as(Proc(UInt8**, HRESULT)).call(strencoding)
+  def get_encoding(this : IMXWriter*, strencoding : UInt8**) : HRESULT
+    @lpVtbl.value.get_encoding.call(this, strencoding)
   end
-  def put_byte_order_mark(fwritebyteordermark : Int16) : HRESULT
-    @lpVtbl.value.put_byte_order_mark.unsafe_as(Proc(Int16, HRESULT)).call(fwritebyteordermark)
+  def put_byte_order_mark(this : IMXWriter*, fwritebyteordermark : Int16) : HRESULT
+    @lpVtbl.value.put_byte_order_mark.call(this, fwritebyteordermark)
   end
-  def get_byte_order_mark(fwritebyteordermark : Int16*) : HRESULT
-    @lpVtbl.value.get_byte_order_mark.unsafe_as(Proc(Int16*, HRESULT)).call(fwritebyteordermark)
+  def get_byte_order_mark(this : IMXWriter*, fwritebyteordermark : Int16*) : HRESULT
+    @lpVtbl.value.get_byte_order_mark.call(this, fwritebyteordermark)
   end
-  def put_indent(findentmode : Int16) : HRESULT
-    @lpVtbl.value.put_indent.unsafe_as(Proc(Int16, HRESULT)).call(findentmode)
+  def put_indent(this : IMXWriter*, findentmode : Int16) : HRESULT
+    @lpVtbl.value.put_indent.call(this, findentmode)
   end
-  def get_indent(findentmode : Int16*) : HRESULT
-    @lpVtbl.value.get_indent.unsafe_as(Proc(Int16*, HRESULT)).call(findentmode)
+  def get_indent(this : IMXWriter*, findentmode : Int16*) : HRESULT
+    @lpVtbl.value.get_indent.call(this, findentmode)
   end
-  def put_standalone(fvalue : Int16) : HRESULT
-    @lpVtbl.value.put_standalone.unsafe_as(Proc(Int16, HRESULT)).call(fvalue)
+  def put_standalone(this : IMXWriter*, fvalue : Int16) : HRESULT
+    @lpVtbl.value.put_standalone.call(this, fvalue)
   end
-  def get_standalone(fvalue : Int16*) : HRESULT
-    @lpVtbl.value.get_standalone.unsafe_as(Proc(Int16*, HRESULT)).call(fvalue)
+  def get_standalone(this : IMXWriter*, fvalue : Int16*) : HRESULT
+    @lpVtbl.value.get_standalone.call(this, fvalue)
   end
-  def put_omit_xml_declaration(fvalue : Int16) : HRESULT
-    @lpVtbl.value.put_omit_xml_declaration.unsafe_as(Proc(Int16, HRESULT)).call(fvalue)
+  def put_omit_xml_declaration(this : IMXWriter*, fvalue : Int16) : HRESULT
+    @lpVtbl.value.put_omit_xml_declaration.call(this, fvalue)
   end
-  def get_omit_xml_declaration(fvalue : Int16*) : HRESULT
-    @lpVtbl.value.get_omit_xml_declaration.unsafe_as(Proc(Int16*, HRESULT)).call(fvalue)
+  def get_omit_xml_declaration(this : IMXWriter*, fvalue : Int16*) : HRESULT
+    @lpVtbl.value.get_omit_xml_declaration.call(this, fvalue)
   end
-  def put_version(strversion : UInt8*) : HRESULT
-    @lpVtbl.value.put_version.unsafe_as(Proc(UInt8*, HRESULT)).call(strversion)
+  def put_version(this : IMXWriter*, strversion : UInt8*) : HRESULT
+    @lpVtbl.value.put_version.call(this, strversion)
   end
-  def get_version(strversion : UInt8**) : HRESULT
-    @lpVtbl.value.get_version.unsafe_as(Proc(UInt8**, HRESULT)).call(strversion)
+  def get_version(this : IMXWriter*, strversion : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.call(this, strversion)
   end
-  def put_disable_output_escaping(fvalue : Int16) : HRESULT
-    @lpVtbl.value.put_disable_output_escaping.unsafe_as(Proc(Int16, HRESULT)).call(fvalue)
+  def put_disable_output_escaping(this : IMXWriter*, fvalue : Int16) : HRESULT
+    @lpVtbl.value.put_disable_output_escaping.call(this, fvalue)
   end
-  def get_disable_output_escaping(fvalue : Int16*) : HRESULT
-    @lpVtbl.value.get_disable_output_escaping.unsafe_as(Proc(Int16*, HRESULT)).call(fvalue)
+  def get_disable_output_escaping(this : IMXWriter*, fvalue : Int16*) : HRESULT
+    @lpVtbl.value.get_disable_output_escaping.call(this, fvalue)
   end
-  def flush : HRESULT
-    @lpVtbl.value.flush.unsafe_as(Proc(HRESULT)).call
+  def flush(this : IMXWriter*) : HRESULT
+    @lpVtbl.value.flush.call(this)
   end
 end
 struct LibWin32::IMXAttributes
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMXAttributes*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMXAttributes*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMXAttributes*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMXAttributes*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMXAttributes*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMXAttributes*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMXAttributes*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def add_attribute(struri : UInt8*, strlocalname : UInt8*, strqname : UInt8*, strtype : UInt8*, strvalue : UInt8*) : HRESULT
-    @lpVtbl.value.add_attribute.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)).call(struri, strlocalname, strqname, strtype, strvalue)
+  def add_attribute(this : IMXAttributes*, struri : UInt8*, strlocalname : UInt8*, strqname : UInt8*, strtype : UInt8*, strvalue : UInt8*) : HRESULT
+    @lpVtbl.value.add_attribute.call(this, struri, strlocalname, strqname, strtype, strvalue)
   end
-  def add_attribute_from_index(varatts : VARIANT, nindex : Int32) : HRESULT
-    @lpVtbl.value.add_attribute_from_index.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(varatts, nindex)
+  def add_attribute_from_index(this : IMXAttributes*, varatts : VARIANT, nindex : Int32) : HRESULT
+    @lpVtbl.value.add_attribute_from_index.call(this, varatts, nindex)
   end
-  def clear : HRESULT
-    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  def clear(this : IMXAttributes*) : HRESULT
+    @lpVtbl.value.clear.call(this)
   end
-  def remove_attribute(nindex : Int32) : HRESULT
-    @lpVtbl.value.remove_attribute.unsafe_as(Proc(Int32, HRESULT)).call(nindex)
+  def remove_attribute(this : IMXAttributes*, nindex : Int32) : HRESULT
+    @lpVtbl.value.remove_attribute.call(this, nindex)
   end
-  def set_attribute(nindex : Int32, struri : UInt8*, strlocalname : UInt8*, strqname : UInt8*, strtype : UInt8*, strvalue : UInt8*) : HRESULT
-    @lpVtbl.value.set_attribute.unsafe_as(Proc(Int32, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)).call(nindex, struri, strlocalname, strqname, strtype, strvalue)
+  def set_attribute(this : IMXAttributes*, nindex : Int32, struri : UInt8*, strlocalname : UInt8*, strqname : UInt8*, strtype : UInt8*, strvalue : UInt8*) : HRESULT
+    @lpVtbl.value.set_attribute.call(this, nindex, struri, strlocalname, strqname, strtype, strvalue)
   end
-  def set_attributes(varatts : VARIANT) : HRESULT
-    @lpVtbl.value.set_attributes.unsafe_as(Proc(VARIANT, HRESULT)).call(varatts)
+  def set_attributes(this : IMXAttributes*, varatts : VARIANT) : HRESULT
+    @lpVtbl.value.set_attributes.call(this, varatts)
   end
-  def set_local_name(nindex : Int32, strlocalname : UInt8*) : HRESULT
-    @lpVtbl.value.set_local_name.unsafe_as(Proc(Int32, UInt8*, HRESULT)).call(nindex, strlocalname)
+  def set_local_name(this : IMXAttributes*, nindex : Int32, strlocalname : UInt8*) : HRESULT
+    @lpVtbl.value.set_local_name.call(this, nindex, strlocalname)
   end
-  def set_q_name(nindex : Int32, strqname : UInt8*) : HRESULT
-    @lpVtbl.value.set_q_name.unsafe_as(Proc(Int32, UInt8*, HRESULT)).call(nindex, strqname)
+  def set_q_name(this : IMXAttributes*, nindex : Int32, strqname : UInt8*) : HRESULT
+    @lpVtbl.value.set_q_name.call(this, nindex, strqname)
   end
-  def set_type(nindex : Int32, strtype : UInt8*) : HRESULT
-    @lpVtbl.value.set_type.unsafe_as(Proc(Int32, UInt8*, HRESULT)).call(nindex, strtype)
+  def set_type(this : IMXAttributes*, nindex : Int32, strtype : UInt8*) : HRESULT
+    @lpVtbl.value.set_type.call(this, nindex, strtype)
   end
-  def set_uri(nindex : Int32, struri : UInt8*) : HRESULT
-    @lpVtbl.value.set_uri.unsafe_as(Proc(Int32, UInt8*, HRESULT)).call(nindex, struri)
+  def set_uri(this : IMXAttributes*, nindex : Int32, struri : UInt8*) : HRESULT
+    @lpVtbl.value.set_uri.call(this, nindex, struri)
   end
-  def set_value(nindex : Int32, strvalue : UInt8*) : HRESULT
-    @lpVtbl.value.set_value.unsafe_as(Proc(Int32, UInt8*, HRESULT)).call(nindex, strvalue)
+  def set_value(this : IMXAttributes*, nindex : Int32, strvalue : UInt8*) : HRESULT
+    @lpVtbl.value.set_value.call(this, nindex, strvalue)
   end
 end
 struct LibWin32::IMXReaderControl
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMXReaderControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMXReaderControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMXReaderControl*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMXReaderControl*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMXReaderControl*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMXReaderControl*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMXReaderControl*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def abort : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(HRESULT)).call
+  def abort(this : IMXReaderControl*) : HRESULT
+    @lpVtbl.value.abort.call(this)
   end
-  def resume : HRESULT
-    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  def resume(this : IMXReaderControl*) : HRESULT
+    @lpVtbl.value.resume.call(this)
   end
-  def suspend : HRESULT
-    @lpVtbl.value.suspend.unsafe_as(Proc(HRESULT)).call
+  def suspend(this : IMXReaderControl*) : HRESULT
+    @lpVtbl.value.suspend.call(this)
   end
 end
 struct LibWin32::IMXSchemaDeclHandler
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMXSchemaDeclHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMXSchemaDeclHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMXSchemaDeclHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMXSchemaDeclHandler*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMXSchemaDeclHandler*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMXSchemaDeclHandler*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMXSchemaDeclHandler*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def schema_element_decl(oschemaelement : ISchemaElement) : HRESULT
-    @lpVtbl.value.schema_element_decl.unsafe_as(Proc(ISchemaElement, HRESULT)).call(oschemaelement)
+  def schema_element_decl(this : IMXSchemaDeclHandler*, oschemaelement : ISchemaElement) : HRESULT
+    @lpVtbl.value.schema_element_decl.call(this, oschemaelement)
   end
 end
 struct LibWin32::IMXNamespacePrefixes
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMXNamespacePrefixes*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMXNamespacePrefixes*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMXNamespacePrefixes*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMXNamespacePrefixes*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMXNamespacePrefixes*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMXNamespacePrefixes*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMXNamespacePrefixes*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(index : Int32, prefix : UInt8**) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(index, prefix)
+  def get_item(this : IMXNamespacePrefixes*, index : Int32, prefix : UInt8**) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, prefix)
   end
-  def get_length(length : Int32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(length)
+  def get_length(this : IMXNamespacePrefixes*, length : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, length)
   end
-  def get__new_enum(ppunk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  def get__new_enum(this : IMXNamespacePrefixes*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
   end
 end
 struct LibWin32::IVBMXNamespaceManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVBMXNamespaceManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVBMXNamespaceManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVBMXNamespaceManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IVBMXNamespaceManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IVBMXNamespaceManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IVBMXNamespaceManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IVBMXNamespaceManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def put_allow_override(foverride : Int16) : HRESULT
-    @lpVtbl.value.put_allow_override.unsafe_as(Proc(Int16, HRESULT)).call(foverride)
+  def put_allow_override(this : IVBMXNamespaceManager*, foverride : Int16) : HRESULT
+    @lpVtbl.value.put_allow_override.call(this, foverride)
   end
-  def get_allow_override(foverride : Int16*) : HRESULT
-    @lpVtbl.value.get_allow_override.unsafe_as(Proc(Int16*, HRESULT)).call(foverride)
+  def get_allow_override(this : IVBMXNamespaceManager*, foverride : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_override.call(this, foverride)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IVBMXNamespaceManager*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def push_context : HRESULT
-    @lpVtbl.value.push_context.unsafe_as(Proc(HRESULT)).call
+  def push_context(this : IVBMXNamespaceManager*) : HRESULT
+    @lpVtbl.value.push_context.call(this)
   end
-  def push_node_context(contextnode : IXMLDOMNode, fdeep : Int16) : HRESULT
-    @lpVtbl.value.push_node_context.unsafe_as(Proc(IXMLDOMNode, Int16, HRESULT)).call(contextnode, fdeep)
+  def push_node_context(this : IVBMXNamespaceManager*, contextnode : IXMLDOMNode, fdeep : Int16) : HRESULT
+    @lpVtbl.value.push_node_context.call(this, contextnode, fdeep)
   end
-  def pop_context : HRESULT
-    @lpVtbl.value.pop_context.unsafe_as(Proc(HRESULT)).call
+  def pop_context(this : IVBMXNamespaceManager*) : HRESULT
+    @lpVtbl.value.pop_context.call(this)
   end
-  def declare_prefix(prefix : UInt8*, namespaceuri : UInt8*) : HRESULT
-    @lpVtbl.value.declare_prefix.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(prefix, namespaceuri)
+  def declare_prefix(this : IVBMXNamespaceManager*, prefix : UInt8*, namespaceuri : UInt8*) : HRESULT
+    @lpVtbl.value.declare_prefix.call(this, prefix, namespaceuri)
   end
-  def get_declared_prefixes(prefixes : IMXNamespacePrefixes*) : HRESULT
-    @lpVtbl.value.get_declared_prefixes.unsafe_as(Proc(IMXNamespacePrefixes*, HRESULT)).call(prefixes)
+  def get_declared_prefixes(this : IVBMXNamespaceManager*, prefixes : IMXNamespacePrefixes*) : HRESULT
+    @lpVtbl.value.get_declared_prefixes.call(this, prefixes)
   end
-  def get_prefixes(namespaceuri : UInt8*, prefixes : IMXNamespacePrefixes*) : HRESULT
-    @lpVtbl.value.get_prefixes.unsafe_as(Proc(UInt8*, IMXNamespacePrefixes*, HRESULT)).call(namespaceuri, prefixes)
+  def get_prefixes(this : IVBMXNamespaceManager*, namespaceuri : UInt8*, prefixes : IMXNamespacePrefixes*) : HRESULT
+    @lpVtbl.value.get_prefixes.call(this, namespaceuri, prefixes)
   end
-  def get_uri(prefix : UInt8*, uri : VARIANT*) : HRESULT
-    @lpVtbl.value.get_uri.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(prefix, uri)
+  def get_uri(this : IVBMXNamespaceManager*, prefix : UInt8*, uri : VARIANT*) : HRESULT
+    @lpVtbl.value.get_uri.call(this, prefix, uri)
   end
-  def get_uri_from_node(strprefix : UInt8*, contextnode : IXMLDOMNode, uri : VARIANT*) : HRESULT
-    @lpVtbl.value.get_uri_from_node.unsafe_as(Proc(UInt8*, IXMLDOMNode, VARIANT*, HRESULT)).call(strprefix, contextnode, uri)
+  def get_uri_from_node(this : IVBMXNamespaceManager*, strprefix : UInt8*, contextnode : IXMLDOMNode, uri : VARIANT*) : HRESULT
+    @lpVtbl.value.get_uri_from_node.call(this, strprefix, contextnode, uri)
   end
 end
 struct LibWin32::IMXNamespaceManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMXNamespaceManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMXNamespaceManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMXNamespaceManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def put_allow_override(foverride : Int16) : HRESULT
-    @lpVtbl.value.put_allow_override.unsafe_as(Proc(Int16, HRESULT)).call(foverride)
+  def put_allow_override(this : IMXNamespaceManager*, foverride : Int16) : HRESULT
+    @lpVtbl.value.put_allow_override.call(this, foverride)
   end
-  def get_allow_override(foverride : Int16*) : HRESULT
-    @lpVtbl.value.get_allow_override.unsafe_as(Proc(Int16*, HRESULT)).call(foverride)
+  def get_allow_override(this : IMXNamespaceManager*, foverride : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_override.call(this, foverride)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IMXNamespaceManager*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def push_context : HRESULT
-    @lpVtbl.value.push_context.unsafe_as(Proc(HRESULT)).call
+  def push_context(this : IMXNamespaceManager*) : HRESULT
+    @lpVtbl.value.push_context.call(this)
   end
-  def push_node_context(contextnode : IXMLDOMNode, fdeep : Int16) : HRESULT
-    @lpVtbl.value.push_node_context.unsafe_as(Proc(IXMLDOMNode, Int16, HRESULT)).call(contextnode, fdeep)
+  def push_node_context(this : IMXNamespaceManager*, contextnode : IXMLDOMNode, fdeep : Int16) : HRESULT
+    @lpVtbl.value.push_node_context.call(this, contextnode, fdeep)
   end
-  def pop_context : HRESULT
-    @lpVtbl.value.pop_context.unsafe_as(Proc(HRESULT)).call
+  def pop_context(this : IMXNamespaceManager*) : HRESULT
+    @lpVtbl.value.pop_context.call(this)
   end
-  def declare_prefix(prefix : LibC::LPWSTR, namespaceuri : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.declare_prefix.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(prefix, namespaceuri)
+  def declare_prefix(this : IMXNamespaceManager*, prefix : LibC::LPWSTR, namespaceuri : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.declare_prefix.call(this, prefix, namespaceuri)
   end
-  def get_declared_prefix(nindex : Int32, pwchprefix : Char*, pcchprefix : Int32*) : HRESULT
-    @lpVtbl.value.get_declared_prefix.unsafe_as(Proc(Int32, Char*, Int32*, HRESULT)).call(nindex, pwchprefix, pcchprefix)
+  def get_declared_prefix(this : IMXNamespaceManager*, nindex : Int32, pwchprefix : Char*, pcchprefix : Int32*) : HRESULT
+    @lpVtbl.value.get_declared_prefix.call(this, nindex, pwchprefix, pcchprefix)
   end
-  def get_prefix(pwsznamespaceuri : LibC::LPWSTR, nindex : Int32, pwchprefix : Char*, pcchprefix : Int32*) : HRESULT
-    @lpVtbl.value.get_prefix.unsafe_as(Proc(LibC::LPWSTR, Int32, Char*, Int32*, HRESULT)).call(pwsznamespaceuri, nindex, pwchprefix, pcchprefix)
+  def get_prefix(this : IMXNamespaceManager*, pwsznamespaceuri : LibC::LPWSTR, nindex : Int32, pwchprefix : Char*, pcchprefix : Int32*) : HRESULT
+    @lpVtbl.value.get_prefix.call(this, pwsznamespaceuri, nindex, pwchprefix, pcchprefix)
   end
-  def get_uri(pwchprefix : LibC::LPWSTR, pcontextnode : IXMLDOMNode, pwchuri : Char*, pcchuri : Int32*) : HRESULT
-    @lpVtbl.value.get_uri.unsafe_as(Proc(LibC::LPWSTR, IXMLDOMNode, Char*, Int32*, HRESULT)).call(pwchprefix, pcontextnode, pwchuri, pcchuri)
+  def get_uri(this : IMXNamespaceManager*, pwchprefix : LibC::LPWSTR, pcontextnode : IXMLDOMNode, pwchuri : Char*, pcchuri : Int32*) : HRESULT
+    @lpVtbl.value.get_uri.call(this, pwchprefix, pcontextnode, pwchuri, pcchuri)
   end
 end
 struct LibWin32::IMXXMLFilter
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMXXMLFilter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMXXMLFilter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMXXMLFilter*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IMXXMLFilter*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IMXXMLFilter*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IMXXMLFilter*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IMXXMLFilter*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_feature(strname : UInt8*, fvalue : Int16*) : HRESULT
-    @lpVtbl.value.get_feature.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(strname, fvalue)
+  def get_feature(this : IMXXMLFilter*, strname : UInt8*, fvalue : Int16*) : HRESULT
+    @lpVtbl.value.get_feature.call(this, strname, fvalue)
   end
-  def put_feature(strname : UInt8*, fvalue : Int16) : HRESULT
-    @lpVtbl.value.put_feature.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(strname, fvalue)
+  def put_feature(this : IMXXMLFilter*, strname : UInt8*, fvalue : Int16) : HRESULT
+    @lpVtbl.value.put_feature.call(this, strname, fvalue)
   end
-  def get_property(strname : UInt8*, varvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_property.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(strname, varvalue)
+  def get_property(this : IMXXMLFilter*, strname : UInt8*, varvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, strname, varvalue)
   end
-  def put_property(strname : UInt8*, varvalue : VARIANT) : HRESULT
-    @lpVtbl.value.put_property.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(strname, varvalue)
+  def put_property(this : IMXXMLFilter*, strname : UInt8*, varvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_property.call(this, strname, varvalue)
   end
-  def get_entity_resolver(oresolver : IUnknown*) : HRESULT
-    @lpVtbl.value.get_entity_resolver.unsafe_as(Proc(IUnknown*, HRESULT)).call(oresolver)
+  def get_entity_resolver(this : IMXXMLFilter*, oresolver : IUnknown*) : HRESULT
+    @lpVtbl.value.get_entity_resolver.call(this, oresolver)
   end
-  def putref_entity_resolver(oresolver : IUnknown) : HRESULT
-    @lpVtbl.value.putref_entity_resolver.unsafe_as(Proc(IUnknown, HRESULT)).call(oresolver)
+  def putref_entity_resolver(this : IMXXMLFilter*, oresolver : IUnknown) : HRESULT
+    @lpVtbl.value.putref_entity_resolver.call(this, oresolver)
   end
-  def get_content_handler(ohandler : IUnknown*) : HRESULT
-    @lpVtbl.value.get_content_handler.unsafe_as(Proc(IUnknown*, HRESULT)).call(ohandler)
+  def get_content_handler(this : IMXXMLFilter*, ohandler : IUnknown*) : HRESULT
+    @lpVtbl.value.get_content_handler.call(this, ohandler)
   end
-  def putref_content_handler(ohandler : IUnknown) : HRESULT
-    @lpVtbl.value.putref_content_handler.unsafe_as(Proc(IUnknown, HRESULT)).call(ohandler)
+  def putref_content_handler(this : IMXXMLFilter*, ohandler : IUnknown) : HRESULT
+    @lpVtbl.value.putref_content_handler.call(this, ohandler)
   end
-  def get_dtd_handler(ohandler : IUnknown*) : HRESULT
-    @lpVtbl.value.get_dtd_handler.unsafe_as(Proc(IUnknown*, HRESULT)).call(ohandler)
+  def get_dtd_handler(this : IMXXMLFilter*, ohandler : IUnknown*) : HRESULT
+    @lpVtbl.value.get_dtd_handler.call(this, ohandler)
   end
-  def putref_dtd_handler(ohandler : IUnknown) : HRESULT
-    @lpVtbl.value.putref_dtd_handler.unsafe_as(Proc(IUnknown, HRESULT)).call(ohandler)
+  def putref_dtd_handler(this : IMXXMLFilter*, ohandler : IUnknown) : HRESULT
+    @lpVtbl.value.putref_dtd_handler.call(this, ohandler)
   end
-  def get_error_handler(ohandler : IUnknown*) : HRESULT
-    @lpVtbl.value.get_error_handler.unsafe_as(Proc(IUnknown*, HRESULT)).call(ohandler)
+  def get_error_handler(this : IMXXMLFilter*, ohandler : IUnknown*) : HRESULT
+    @lpVtbl.value.get_error_handler.call(this, ohandler)
   end
-  def putref_error_handler(ohandler : IUnknown) : HRESULT
-    @lpVtbl.value.putref_error_handler.unsafe_as(Proc(IUnknown, HRESULT)).call(ohandler)
+  def putref_error_handler(this : IMXXMLFilter*, ohandler : IUnknown) : HRESULT
+    @lpVtbl.value.putref_error_handler.call(this, ohandler)
   end
 end
 struct LibWin32::IXMLDOMSchemaCollection2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLDOMSchemaCollection2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLDOMSchemaCollection2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLDOMSchemaCollection2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IXMLDOMSchemaCollection2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IXMLDOMSchemaCollection2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IXMLDOMSchemaCollection2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IXMLDOMSchemaCollection2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def add(namespaceuri : UInt8*, var : VARIANT) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(namespaceuri, var)
+  def add(this : IXMLDOMSchemaCollection2*, namespaceuri : UInt8*, var : VARIANT) : HRESULT
+    @lpVtbl.value.add.call(this, namespaceuri, var)
   end
-  def get(namespaceuri : UInt8*, schemanode : IXMLDOMNode*) : HRESULT
-    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, IXMLDOMNode*, HRESULT)).call(namespaceuri, schemanode)
+  def get(this : IXMLDOMSchemaCollection2*, namespaceuri : UInt8*, schemanode : IXMLDOMNode*) : HRESULT
+    @lpVtbl.value.get.call(this, namespaceuri, schemanode)
   end
-  def remove(namespaceuri : UInt8*) : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(UInt8*, HRESULT)).call(namespaceuri)
+  def remove(this : IXMLDOMSchemaCollection2*, namespaceuri : UInt8*) : HRESULT
+    @lpVtbl.value.remove.call(this, namespaceuri)
   end
-  def get_length(length : Int32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(length)
+  def get_length(this : IXMLDOMSchemaCollection2*, length : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, length)
   end
-  def get_namespace_uri(index : Int32, length : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(index, length)
+  def get_namespace_uri(this : IXMLDOMSchemaCollection2*, index : Int32, length : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, index, length)
   end
-  def add_collection(othercollection : IXMLDOMSchemaCollection) : HRESULT
-    @lpVtbl.value.add_collection.unsafe_as(Proc(IXMLDOMSchemaCollection, HRESULT)).call(othercollection)
+  def add_collection(this : IXMLDOMSchemaCollection2*, othercollection : IXMLDOMSchemaCollection) : HRESULT
+    @lpVtbl.value.add_collection.call(this, othercollection)
   end
-  def get__new_enum(ppunk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  def get__new_enum(this : IXMLDOMSchemaCollection2*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
   end
-  def validate : HRESULT
-    @lpVtbl.value.validate.unsafe_as(Proc(HRESULT)).call
+  def validate(this : IXMLDOMSchemaCollection2*) : HRESULT
+    @lpVtbl.value.validate.call(this)
   end
-  def put_validate_on_load(validateonload : Int16) : HRESULT
-    @lpVtbl.value.put_validate_on_load.unsafe_as(Proc(Int16, HRESULT)).call(validateonload)
+  def put_validate_on_load(this : IXMLDOMSchemaCollection2*, validateonload : Int16) : HRESULT
+    @lpVtbl.value.put_validate_on_load.call(this, validateonload)
   end
-  def get_validate_on_load(validateonload : Int16*) : HRESULT
-    @lpVtbl.value.get_validate_on_load.unsafe_as(Proc(Int16*, HRESULT)).call(validateonload)
+  def get_validate_on_load(this : IXMLDOMSchemaCollection2*, validateonload : Int16*) : HRESULT
+    @lpVtbl.value.get_validate_on_load.call(this, validateonload)
   end
-  def get_schema(namespaceuri : UInt8*, schema : ISchema*) : HRESULT
-    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8*, ISchema*, HRESULT)).call(namespaceuri, schema)
+  def get_schema(this : IXMLDOMSchemaCollection2*, namespaceuri : UInt8*, schema : ISchema*) : HRESULT
+    @lpVtbl.value.get_schema.call(this, namespaceuri, schema)
   end
-  def get_declaration(node : IXMLDOMNode, item : ISchemaItem*) : HRESULT
-    @lpVtbl.value.get_declaration.unsafe_as(Proc(IXMLDOMNode, ISchemaItem*, HRESULT)).call(node, item)
+  def get_declaration(this : IXMLDOMSchemaCollection2*, node : IXMLDOMNode, item : ISchemaItem*) : HRESULT
+    @lpVtbl.value.get_declaration.call(this, node, item)
   end
 end
 struct LibWin32::ISchemaStringCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISchemaStringCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISchemaStringCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISchemaStringCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISchemaStringCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISchemaStringCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISchemaStringCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISchemaStringCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(index : Int32, bstr : UInt8**) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(index, bstr)
+  def get_item(this : ISchemaStringCollection*, index : Int32, bstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, bstr)
   end
-  def get_length(length : Int32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(length)
+  def get_length(this : ISchemaStringCollection*, length : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, length)
   end
-  def get__new_enum(ppunk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  def get__new_enum(this : ISchemaStringCollection*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
   end
 end
 struct LibWin32::ISchemaItemCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISchemaItemCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISchemaItemCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISchemaItemCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISchemaItemCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISchemaItemCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISchemaItemCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISchemaItemCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(index : Int32, item : ISchemaItem*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, ISchemaItem*, HRESULT)).call(index, item)
+  def get_item(this : ISchemaItemCollection*, index : Int32, item : ISchemaItem*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, item)
   end
-  def item_by_name(name : UInt8*, item : ISchemaItem*) : HRESULT
-    @lpVtbl.value.item_by_name.unsafe_as(Proc(UInt8*, ISchemaItem*, HRESULT)).call(name, item)
+  def item_by_name(this : ISchemaItemCollection*, name : UInt8*, item : ISchemaItem*) : HRESULT
+    @lpVtbl.value.item_by_name.call(this, name, item)
   end
-  def item_by_q_name(name : UInt8*, namespaceuri : UInt8*, item : ISchemaItem*) : HRESULT
-    @lpVtbl.value.item_by_q_name.unsafe_as(Proc(UInt8*, UInt8*, ISchemaItem*, HRESULT)).call(name, namespaceuri, item)
+  def item_by_q_name(this : ISchemaItemCollection*, name : UInt8*, namespaceuri : UInt8*, item : ISchemaItem*) : HRESULT
+    @lpVtbl.value.item_by_q_name.call(this, name, namespaceuri, item)
   end
-  def get_length(length : Int32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(length)
+  def get_length(this : ISchemaItemCollection*, length : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, length)
   end
-  def get__new_enum(ppunk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  def get__new_enum(this : ISchemaItemCollection*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
   end
 end
 struct LibWin32::ISchemaItem
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISchemaItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISchemaItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISchemaItem*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISchemaItem*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISchemaItem*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISchemaItem*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISchemaItem*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_name(this : ISchemaItem*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : ISchemaItem*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_schema(schema : ISchema*) : HRESULT
-    @lpVtbl.value.get_schema.unsafe_as(Proc(ISchema*, HRESULT)).call(schema)
+  def get_schema(this : ISchemaItem*, schema : ISchema*) : HRESULT
+    @lpVtbl.value.get_schema.call(this, schema)
   end
-  def get_id(id : UInt8**) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(id)
+  def get_id(this : ISchemaItem*, id : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
   end
-  def get_item_type(itemtype : SOMITEMTYPE*) : HRESULT
-    @lpVtbl.value.get_item_type.unsafe_as(Proc(SOMITEMTYPE*, HRESULT)).call(itemtype)
+  def get_item_type(this : ISchemaItem*, itemtype : SOMITEMTYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, itemtype)
   end
-  def get_unhandled_attributes(attributes : IVBSAXAttributes*) : HRESULT
-    @lpVtbl.value.get_unhandled_attributes.unsafe_as(Proc(IVBSAXAttributes*, HRESULT)).call(attributes)
+  def get_unhandled_attributes(this : ISchemaItem*, attributes : IVBSAXAttributes*) : HRESULT
+    @lpVtbl.value.get_unhandled_attributes.call(this, attributes)
   end
-  def write_annotation(annotationsink : IUnknown, iswritten : Int16*) : HRESULT
-    @lpVtbl.value.write_annotation.unsafe_as(Proc(IUnknown, Int16*, HRESULT)).call(annotationsink, iswritten)
+  def write_annotation(this : ISchemaItem*, annotationsink : IUnknown, iswritten : Int16*) : HRESULT
+    @lpVtbl.value.write_annotation.call(this, annotationsink, iswritten)
   end
 end
 struct LibWin32::ISchema
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISchema*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISchema*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISchema*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISchema*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISchema*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISchema*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISchema*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_name(this : ISchema*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : ISchema*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_schema(schema : ISchema*) : HRESULT
-    @lpVtbl.value.get_schema.unsafe_as(Proc(ISchema*, HRESULT)).call(schema)
+  def get_schema(this : ISchema*, schema : ISchema*) : HRESULT
+    @lpVtbl.value.get_schema.call(this, schema)
   end
-  def get_id(id : UInt8**) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(id)
+  def get_id(this : ISchema*, id : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
   end
-  def get_item_type(itemtype : SOMITEMTYPE*) : HRESULT
-    @lpVtbl.value.get_item_type.unsafe_as(Proc(SOMITEMTYPE*, HRESULT)).call(itemtype)
+  def get_item_type(this : ISchema*, itemtype : SOMITEMTYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, itemtype)
   end
-  def get_unhandled_attributes(attributes : IVBSAXAttributes*) : HRESULT
-    @lpVtbl.value.get_unhandled_attributes.unsafe_as(Proc(IVBSAXAttributes*, HRESULT)).call(attributes)
+  def get_unhandled_attributes(this : ISchema*, attributes : IVBSAXAttributes*) : HRESULT
+    @lpVtbl.value.get_unhandled_attributes.call(this, attributes)
   end
-  def write_annotation(annotationsink : IUnknown, iswritten : Int16*) : HRESULT
-    @lpVtbl.value.write_annotation.unsafe_as(Proc(IUnknown, Int16*, HRESULT)).call(annotationsink, iswritten)
+  def write_annotation(this : ISchema*, annotationsink : IUnknown, iswritten : Int16*) : HRESULT
+    @lpVtbl.value.write_annotation.call(this, annotationsink, iswritten)
   end
-  def get_target_namespace(targetnamespace : UInt8**) : HRESULT
-    @lpVtbl.value.get_target_namespace.unsafe_as(Proc(UInt8**, HRESULT)).call(targetnamespace)
+  def get_target_namespace(this : ISchema*, targetnamespace : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_namespace.call(this, targetnamespace)
   end
-  def get_version(version : UInt8**) : HRESULT
-    @lpVtbl.value.get_version.unsafe_as(Proc(UInt8**, HRESULT)).call(version)
+  def get_version(this : ISchema*, version : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.call(this, version)
   end
-  def get_types(types : ISchemaItemCollection*) : HRESULT
-    @lpVtbl.value.get_types.unsafe_as(Proc(ISchemaItemCollection*, HRESULT)).call(types)
+  def get_types(this : ISchema*, types : ISchemaItemCollection*) : HRESULT
+    @lpVtbl.value.get_types.call(this, types)
   end
-  def get_elements(elements : ISchemaItemCollection*) : HRESULT
-    @lpVtbl.value.get_elements.unsafe_as(Proc(ISchemaItemCollection*, HRESULT)).call(elements)
+  def get_elements(this : ISchema*, elements : ISchemaItemCollection*) : HRESULT
+    @lpVtbl.value.get_elements.call(this, elements)
   end
-  def get_attributes(attributes : ISchemaItemCollection*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(ISchemaItemCollection*, HRESULT)).call(attributes)
+  def get_attributes(this : ISchema*, attributes : ISchemaItemCollection*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributes)
   end
-  def get_attribute_groups(attributegroups : ISchemaItemCollection*) : HRESULT
-    @lpVtbl.value.get_attribute_groups.unsafe_as(Proc(ISchemaItemCollection*, HRESULT)).call(attributegroups)
+  def get_attribute_groups(this : ISchema*, attributegroups : ISchemaItemCollection*) : HRESULT
+    @lpVtbl.value.get_attribute_groups.call(this, attributegroups)
   end
-  def get_model_groups(modelgroups : ISchemaItemCollection*) : HRESULT
-    @lpVtbl.value.get_model_groups.unsafe_as(Proc(ISchemaItemCollection*, HRESULT)).call(modelgroups)
+  def get_model_groups(this : ISchema*, modelgroups : ISchemaItemCollection*) : HRESULT
+    @lpVtbl.value.get_model_groups.call(this, modelgroups)
   end
-  def get_notations(notations : ISchemaItemCollection*) : HRESULT
-    @lpVtbl.value.get_notations.unsafe_as(Proc(ISchemaItemCollection*, HRESULT)).call(notations)
+  def get_notations(this : ISchema*, notations : ISchemaItemCollection*) : HRESULT
+    @lpVtbl.value.get_notations.call(this, notations)
   end
-  def get_schema_locations(schemalocations : ISchemaStringCollection*) : HRESULT
-    @lpVtbl.value.get_schema_locations.unsafe_as(Proc(ISchemaStringCollection*, HRESULT)).call(schemalocations)
+  def get_schema_locations(this : ISchema*, schemalocations : ISchemaStringCollection*) : HRESULT
+    @lpVtbl.value.get_schema_locations.call(this, schemalocations)
   end
 end
 struct LibWin32::ISchemaParticle
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISchemaParticle*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISchemaParticle*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISchemaParticle*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISchemaParticle*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISchemaParticle*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISchemaParticle*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISchemaParticle*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_name(this : ISchemaParticle*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : ISchemaParticle*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_schema(schema : ISchema*) : HRESULT
-    @lpVtbl.value.get_schema.unsafe_as(Proc(ISchema*, HRESULT)).call(schema)
+  def get_schema(this : ISchemaParticle*, schema : ISchema*) : HRESULT
+    @lpVtbl.value.get_schema.call(this, schema)
   end
-  def get_id(id : UInt8**) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(id)
+  def get_id(this : ISchemaParticle*, id : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
   end
-  def get_item_type(itemtype : SOMITEMTYPE*) : HRESULT
-    @lpVtbl.value.get_item_type.unsafe_as(Proc(SOMITEMTYPE*, HRESULT)).call(itemtype)
+  def get_item_type(this : ISchemaParticle*, itemtype : SOMITEMTYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, itemtype)
   end
-  def get_unhandled_attributes(attributes : IVBSAXAttributes*) : HRESULT
-    @lpVtbl.value.get_unhandled_attributes.unsafe_as(Proc(IVBSAXAttributes*, HRESULT)).call(attributes)
+  def get_unhandled_attributes(this : ISchemaParticle*, attributes : IVBSAXAttributes*) : HRESULT
+    @lpVtbl.value.get_unhandled_attributes.call(this, attributes)
   end
-  def write_annotation(annotationsink : IUnknown, iswritten : Int16*) : HRESULT
-    @lpVtbl.value.write_annotation.unsafe_as(Proc(IUnknown, Int16*, HRESULT)).call(annotationsink, iswritten)
+  def write_annotation(this : ISchemaParticle*, annotationsink : IUnknown, iswritten : Int16*) : HRESULT
+    @lpVtbl.value.write_annotation.call(this, annotationsink, iswritten)
   end
-  def get_min_occurs(minoccurs : VARIANT*) : HRESULT
-    @lpVtbl.value.get_min_occurs.unsafe_as(Proc(VARIANT*, HRESULT)).call(minoccurs)
+  def get_min_occurs(this : ISchemaParticle*, minoccurs : VARIANT*) : HRESULT
+    @lpVtbl.value.get_min_occurs.call(this, minoccurs)
   end
-  def get_max_occurs(maxoccurs : VARIANT*) : HRESULT
-    @lpVtbl.value.get_max_occurs.unsafe_as(Proc(VARIANT*, HRESULT)).call(maxoccurs)
+  def get_max_occurs(this : ISchemaParticle*, maxoccurs : VARIANT*) : HRESULT
+    @lpVtbl.value.get_max_occurs.call(this, maxoccurs)
   end
 end
 struct LibWin32::ISchemaAttribute
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISchemaAttribute*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISchemaAttribute*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISchemaAttribute*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISchemaAttribute*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISchemaAttribute*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISchemaAttribute*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISchemaAttribute*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_name(this : ISchemaAttribute*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : ISchemaAttribute*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_schema(schema : ISchema*) : HRESULT
-    @lpVtbl.value.get_schema.unsafe_as(Proc(ISchema*, HRESULT)).call(schema)
+  def get_schema(this : ISchemaAttribute*, schema : ISchema*) : HRESULT
+    @lpVtbl.value.get_schema.call(this, schema)
   end
-  def get_id(id : UInt8**) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(id)
+  def get_id(this : ISchemaAttribute*, id : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
   end
-  def get_item_type(itemtype : SOMITEMTYPE*) : HRESULT
-    @lpVtbl.value.get_item_type.unsafe_as(Proc(SOMITEMTYPE*, HRESULT)).call(itemtype)
+  def get_item_type(this : ISchemaAttribute*, itemtype : SOMITEMTYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, itemtype)
   end
-  def get_unhandled_attributes(attributes : IVBSAXAttributes*) : HRESULT
-    @lpVtbl.value.get_unhandled_attributes.unsafe_as(Proc(IVBSAXAttributes*, HRESULT)).call(attributes)
+  def get_unhandled_attributes(this : ISchemaAttribute*, attributes : IVBSAXAttributes*) : HRESULT
+    @lpVtbl.value.get_unhandled_attributes.call(this, attributes)
   end
-  def write_annotation(annotationsink : IUnknown, iswritten : Int16*) : HRESULT
-    @lpVtbl.value.write_annotation.unsafe_as(Proc(IUnknown, Int16*, HRESULT)).call(annotationsink, iswritten)
+  def write_annotation(this : ISchemaAttribute*, annotationsink : IUnknown, iswritten : Int16*) : HRESULT
+    @lpVtbl.value.write_annotation.call(this, annotationsink, iswritten)
   end
-  def get_type(type : ISchemaType*) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(ISchemaType*, HRESULT)).call(type)
+  def get_type(this : ISchemaAttribute*, type : ISchemaType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
   end
-  def get_scope(scope : ISchemaComplexType*) : HRESULT
-    @lpVtbl.value.get_scope.unsafe_as(Proc(ISchemaComplexType*, HRESULT)).call(scope)
+  def get_scope(this : ISchemaAttribute*, scope : ISchemaComplexType*) : HRESULT
+    @lpVtbl.value.get_scope.call(this, scope)
   end
-  def get_default_value(defaultvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_default_value.unsafe_as(Proc(UInt8**, HRESULT)).call(defaultvalue)
+  def get_default_value(this : ISchemaAttribute*, defaultvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_default_value.call(this, defaultvalue)
   end
-  def get_fixed_value(fixedvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_fixed_value.unsafe_as(Proc(UInt8**, HRESULT)).call(fixedvalue)
+  def get_fixed_value(this : ISchemaAttribute*, fixedvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_fixed_value.call(this, fixedvalue)
   end
-  def get_use(use : SCHEMAUSE*) : HRESULT
-    @lpVtbl.value.get_use.unsafe_as(Proc(SCHEMAUSE*, HRESULT)).call(use)
+  def get_use(this : ISchemaAttribute*, use : SCHEMAUSE*) : HRESULT
+    @lpVtbl.value.get_use.call(this, use)
   end
-  def get_is_reference(reference : Int16*) : HRESULT
-    @lpVtbl.value.get_is_reference.unsafe_as(Proc(Int16*, HRESULT)).call(reference)
+  def get_is_reference(this : ISchemaAttribute*, reference : Int16*) : HRESULT
+    @lpVtbl.value.get_is_reference.call(this, reference)
   end
 end
 struct LibWin32::ISchemaElement
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISchemaElement*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISchemaElement*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISchemaElement*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISchemaElement*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISchemaElement*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISchemaElement*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISchemaElement*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_name(this : ISchemaElement*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : ISchemaElement*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_schema(schema : ISchema*) : HRESULT
-    @lpVtbl.value.get_schema.unsafe_as(Proc(ISchema*, HRESULT)).call(schema)
+  def get_schema(this : ISchemaElement*, schema : ISchema*) : HRESULT
+    @lpVtbl.value.get_schema.call(this, schema)
   end
-  def get_id(id : UInt8**) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(id)
+  def get_id(this : ISchemaElement*, id : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
   end
-  def get_item_type(itemtype : SOMITEMTYPE*) : HRESULT
-    @lpVtbl.value.get_item_type.unsafe_as(Proc(SOMITEMTYPE*, HRESULT)).call(itemtype)
+  def get_item_type(this : ISchemaElement*, itemtype : SOMITEMTYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, itemtype)
   end
-  def get_unhandled_attributes(attributes : IVBSAXAttributes*) : HRESULT
-    @lpVtbl.value.get_unhandled_attributes.unsafe_as(Proc(IVBSAXAttributes*, HRESULT)).call(attributes)
+  def get_unhandled_attributes(this : ISchemaElement*, attributes : IVBSAXAttributes*) : HRESULT
+    @lpVtbl.value.get_unhandled_attributes.call(this, attributes)
   end
-  def write_annotation(annotationsink : IUnknown, iswritten : Int16*) : HRESULT
-    @lpVtbl.value.write_annotation.unsafe_as(Proc(IUnknown, Int16*, HRESULT)).call(annotationsink, iswritten)
+  def write_annotation(this : ISchemaElement*, annotationsink : IUnknown, iswritten : Int16*) : HRESULT
+    @lpVtbl.value.write_annotation.call(this, annotationsink, iswritten)
   end
-  def get_min_occurs(minoccurs : VARIANT*) : HRESULT
-    @lpVtbl.value.get_min_occurs.unsafe_as(Proc(VARIANT*, HRESULT)).call(minoccurs)
+  def get_min_occurs(this : ISchemaElement*, minoccurs : VARIANT*) : HRESULT
+    @lpVtbl.value.get_min_occurs.call(this, minoccurs)
   end
-  def get_max_occurs(maxoccurs : VARIANT*) : HRESULT
-    @lpVtbl.value.get_max_occurs.unsafe_as(Proc(VARIANT*, HRESULT)).call(maxoccurs)
+  def get_max_occurs(this : ISchemaElement*, maxoccurs : VARIANT*) : HRESULT
+    @lpVtbl.value.get_max_occurs.call(this, maxoccurs)
   end
-  def get_type(type : ISchemaType*) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(ISchemaType*, HRESULT)).call(type)
+  def get_type(this : ISchemaElement*, type : ISchemaType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
   end
-  def get_scope(scope : ISchemaComplexType*) : HRESULT
-    @lpVtbl.value.get_scope.unsafe_as(Proc(ISchemaComplexType*, HRESULT)).call(scope)
+  def get_scope(this : ISchemaElement*, scope : ISchemaComplexType*) : HRESULT
+    @lpVtbl.value.get_scope.call(this, scope)
   end
-  def get_default_value(defaultvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_default_value.unsafe_as(Proc(UInt8**, HRESULT)).call(defaultvalue)
+  def get_default_value(this : ISchemaElement*, defaultvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_default_value.call(this, defaultvalue)
   end
-  def get_fixed_value(fixedvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_fixed_value.unsafe_as(Proc(UInt8**, HRESULT)).call(fixedvalue)
+  def get_fixed_value(this : ISchemaElement*, fixedvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_fixed_value.call(this, fixedvalue)
   end
-  def get_is_nillable(nillable : Int16*) : HRESULT
-    @lpVtbl.value.get_is_nillable.unsafe_as(Proc(Int16*, HRESULT)).call(nillable)
+  def get_is_nillable(this : ISchemaElement*, nillable : Int16*) : HRESULT
+    @lpVtbl.value.get_is_nillable.call(this, nillable)
   end
-  def get_identity_constraints(constraints : ISchemaItemCollection*) : HRESULT
-    @lpVtbl.value.get_identity_constraints.unsafe_as(Proc(ISchemaItemCollection*, HRESULT)).call(constraints)
+  def get_identity_constraints(this : ISchemaElement*, constraints : ISchemaItemCollection*) : HRESULT
+    @lpVtbl.value.get_identity_constraints.call(this, constraints)
   end
-  def get_substitution_group(element : ISchemaElement*) : HRESULT
-    @lpVtbl.value.get_substitution_group.unsafe_as(Proc(ISchemaElement*, HRESULT)).call(element)
+  def get_substitution_group(this : ISchemaElement*, element : ISchemaElement*) : HRESULT
+    @lpVtbl.value.get_substitution_group.call(this, element)
   end
-  def get_substitution_group_exclusions(exclusions : SCHEMADERIVATIONMETHOD*) : HRESULT
-    @lpVtbl.value.get_substitution_group_exclusions.unsafe_as(Proc(SCHEMADERIVATIONMETHOD*, HRESULT)).call(exclusions)
+  def get_substitution_group_exclusions(this : ISchemaElement*, exclusions : SCHEMADERIVATIONMETHOD*) : HRESULT
+    @lpVtbl.value.get_substitution_group_exclusions.call(this, exclusions)
   end
-  def get_disallowed_substitutions(disallowed : SCHEMADERIVATIONMETHOD*) : HRESULT
-    @lpVtbl.value.get_disallowed_substitutions.unsafe_as(Proc(SCHEMADERIVATIONMETHOD*, HRESULT)).call(disallowed)
+  def get_disallowed_substitutions(this : ISchemaElement*, disallowed : SCHEMADERIVATIONMETHOD*) : HRESULT
+    @lpVtbl.value.get_disallowed_substitutions.call(this, disallowed)
   end
-  def get_is_abstract(abstract_ : Int16*) : HRESULT
-    @lpVtbl.value.get_is_abstract.unsafe_as(Proc(Int16*, HRESULT)).call(abstract_)
+  def get_is_abstract(this : ISchemaElement*, abstract_ : Int16*) : HRESULT
+    @lpVtbl.value.get_is_abstract.call(this, abstract_)
   end
-  def get_is_reference(reference : Int16*) : HRESULT
-    @lpVtbl.value.get_is_reference.unsafe_as(Proc(Int16*, HRESULT)).call(reference)
+  def get_is_reference(this : ISchemaElement*, reference : Int16*) : HRESULT
+    @lpVtbl.value.get_is_reference.call(this, reference)
   end
 end
 struct LibWin32::ISchemaType
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISchemaType*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISchemaType*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISchemaType*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISchemaType*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISchemaType*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISchemaType*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISchemaType*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_name(this : ISchemaType*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : ISchemaType*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_schema(schema : ISchema*) : HRESULT
-    @lpVtbl.value.get_schema.unsafe_as(Proc(ISchema*, HRESULT)).call(schema)
+  def get_schema(this : ISchemaType*, schema : ISchema*) : HRESULT
+    @lpVtbl.value.get_schema.call(this, schema)
   end
-  def get_id(id : UInt8**) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(id)
+  def get_id(this : ISchemaType*, id : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
   end
-  def get_item_type(itemtype : SOMITEMTYPE*) : HRESULT
-    @lpVtbl.value.get_item_type.unsafe_as(Proc(SOMITEMTYPE*, HRESULT)).call(itemtype)
+  def get_item_type(this : ISchemaType*, itemtype : SOMITEMTYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, itemtype)
   end
-  def get_unhandled_attributes(attributes : IVBSAXAttributes*) : HRESULT
-    @lpVtbl.value.get_unhandled_attributes.unsafe_as(Proc(IVBSAXAttributes*, HRESULT)).call(attributes)
+  def get_unhandled_attributes(this : ISchemaType*, attributes : IVBSAXAttributes*) : HRESULT
+    @lpVtbl.value.get_unhandled_attributes.call(this, attributes)
   end
-  def write_annotation(annotationsink : IUnknown, iswritten : Int16*) : HRESULT
-    @lpVtbl.value.write_annotation.unsafe_as(Proc(IUnknown, Int16*, HRESULT)).call(annotationsink, iswritten)
+  def write_annotation(this : ISchemaType*, annotationsink : IUnknown, iswritten : Int16*) : HRESULT
+    @lpVtbl.value.write_annotation.call(this, annotationsink, iswritten)
   end
-  def get_base_types(basetypes : ISchemaItemCollection*) : HRESULT
-    @lpVtbl.value.get_base_types.unsafe_as(Proc(ISchemaItemCollection*, HRESULT)).call(basetypes)
+  def get_base_types(this : ISchemaType*, basetypes : ISchemaItemCollection*) : HRESULT
+    @lpVtbl.value.get_base_types.call(this, basetypes)
   end
-  def get_final(final : SCHEMADERIVATIONMETHOD*) : HRESULT
-    @lpVtbl.value.get_final.unsafe_as(Proc(SCHEMADERIVATIONMETHOD*, HRESULT)).call(final)
+  def get_final(this : ISchemaType*, final : SCHEMADERIVATIONMETHOD*) : HRESULT
+    @lpVtbl.value.get_final.call(this, final)
   end
-  def get_variety(variety : SCHEMATYPEVARIETY*) : HRESULT
-    @lpVtbl.value.get_variety.unsafe_as(Proc(SCHEMATYPEVARIETY*, HRESULT)).call(variety)
+  def get_variety(this : ISchemaType*, variety : SCHEMATYPEVARIETY*) : HRESULT
+    @lpVtbl.value.get_variety.call(this, variety)
   end
-  def get_derived_by(derivedby : SCHEMADERIVATIONMETHOD*) : HRESULT
-    @lpVtbl.value.get_derived_by.unsafe_as(Proc(SCHEMADERIVATIONMETHOD*, HRESULT)).call(derivedby)
+  def get_derived_by(this : ISchemaType*, derivedby : SCHEMADERIVATIONMETHOD*) : HRESULT
+    @lpVtbl.value.get_derived_by.call(this, derivedby)
   end
-  def is_valid(data : UInt8*, valid : Int16*) : HRESULT
-    @lpVtbl.value.is_valid.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(data, valid)
+  def is_valid(this : ISchemaType*, data : UInt8*, valid : Int16*) : HRESULT
+    @lpVtbl.value.is_valid.call(this, data, valid)
   end
-  def get_min_exclusive(minexclusive : UInt8**) : HRESULT
-    @lpVtbl.value.get_min_exclusive.unsafe_as(Proc(UInt8**, HRESULT)).call(minexclusive)
+  def get_min_exclusive(this : ISchemaType*, minexclusive : UInt8**) : HRESULT
+    @lpVtbl.value.get_min_exclusive.call(this, minexclusive)
   end
-  def get_min_inclusive(mininclusive : UInt8**) : HRESULT
-    @lpVtbl.value.get_min_inclusive.unsafe_as(Proc(UInt8**, HRESULT)).call(mininclusive)
+  def get_min_inclusive(this : ISchemaType*, mininclusive : UInt8**) : HRESULT
+    @lpVtbl.value.get_min_inclusive.call(this, mininclusive)
   end
-  def get_max_exclusive(maxexclusive : UInt8**) : HRESULT
-    @lpVtbl.value.get_max_exclusive.unsafe_as(Proc(UInt8**, HRESULT)).call(maxexclusive)
+  def get_max_exclusive(this : ISchemaType*, maxexclusive : UInt8**) : HRESULT
+    @lpVtbl.value.get_max_exclusive.call(this, maxexclusive)
   end
-  def get_max_inclusive(maxinclusive : UInt8**) : HRESULT
-    @lpVtbl.value.get_max_inclusive.unsafe_as(Proc(UInt8**, HRESULT)).call(maxinclusive)
+  def get_max_inclusive(this : ISchemaType*, maxinclusive : UInt8**) : HRESULT
+    @lpVtbl.value.get_max_inclusive.call(this, maxinclusive)
   end
-  def get_total_digits(totaldigits : VARIANT*) : HRESULT
-    @lpVtbl.value.get_total_digits.unsafe_as(Proc(VARIANT*, HRESULT)).call(totaldigits)
+  def get_total_digits(this : ISchemaType*, totaldigits : VARIANT*) : HRESULT
+    @lpVtbl.value.get_total_digits.call(this, totaldigits)
   end
-  def get_fraction_digits(fractiondigits : VARIANT*) : HRESULT
-    @lpVtbl.value.get_fraction_digits.unsafe_as(Proc(VARIANT*, HRESULT)).call(fractiondigits)
+  def get_fraction_digits(this : ISchemaType*, fractiondigits : VARIANT*) : HRESULT
+    @lpVtbl.value.get_fraction_digits.call(this, fractiondigits)
   end
-  def get_length(length : VARIANT*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(VARIANT*, HRESULT)).call(length)
+  def get_length(this : ISchemaType*, length : VARIANT*) : HRESULT
+    @lpVtbl.value.get_length.call(this, length)
   end
-  def get_min_length(minlength : VARIANT*) : HRESULT
-    @lpVtbl.value.get_min_length.unsafe_as(Proc(VARIANT*, HRESULT)).call(minlength)
+  def get_min_length(this : ISchemaType*, minlength : VARIANT*) : HRESULT
+    @lpVtbl.value.get_min_length.call(this, minlength)
   end
-  def get_max_length(maxlength : VARIANT*) : HRESULT
-    @lpVtbl.value.get_max_length.unsafe_as(Proc(VARIANT*, HRESULT)).call(maxlength)
+  def get_max_length(this : ISchemaType*, maxlength : VARIANT*) : HRESULT
+    @lpVtbl.value.get_max_length.call(this, maxlength)
   end
-  def get_enumeration(enumeration : ISchemaStringCollection*) : HRESULT
-    @lpVtbl.value.get_enumeration.unsafe_as(Proc(ISchemaStringCollection*, HRESULT)).call(enumeration)
+  def get_enumeration(this : ISchemaType*, enumeration : ISchemaStringCollection*) : HRESULT
+    @lpVtbl.value.get_enumeration.call(this, enumeration)
   end
-  def get_whitespace(whitespace : SCHEMAWHITESPACE*) : HRESULT
-    @lpVtbl.value.get_whitespace.unsafe_as(Proc(SCHEMAWHITESPACE*, HRESULT)).call(whitespace)
+  def get_whitespace(this : ISchemaType*, whitespace : SCHEMAWHITESPACE*) : HRESULT
+    @lpVtbl.value.get_whitespace.call(this, whitespace)
   end
-  def get_patterns(patterns : ISchemaStringCollection*) : HRESULT
-    @lpVtbl.value.get_patterns.unsafe_as(Proc(ISchemaStringCollection*, HRESULT)).call(patterns)
+  def get_patterns(this : ISchemaType*, patterns : ISchemaStringCollection*) : HRESULT
+    @lpVtbl.value.get_patterns.call(this, patterns)
   end
 end
 struct LibWin32::ISchemaComplexType
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISchemaComplexType*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISchemaComplexType*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISchemaComplexType*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISchemaComplexType*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISchemaComplexType*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISchemaComplexType*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISchemaComplexType*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_name(this : ISchemaComplexType*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : ISchemaComplexType*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_schema(schema : ISchema*) : HRESULT
-    @lpVtbl.value.get_schema.unsafe_as(Proc(ISchema*, HRESULT)).call(schema)
+  def get_schema(this : ISchemaComplexType*, schema : ISchema*) : HRESULT
+    @lpVtbl.value.get_schema.call(this, schema)
   end
-  def get_id(id : UInt8**) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(id)
+  def get_id(this : ISchemaComplexType*, id : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
   end
-  def get_item_type(itemtype : SOMITEMTYPE*) : HRESULT
-    @lpVtbl.value.get_item_type.unsafe_as(Proc(SOMITEMTYPE*, HRESULT)).call(itemtype)
+  def get_item_type(this : ISchemaComplexType*, itemtype : SOMITEMTYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, itemtype)
   end
-  def get_unhandled_attributes(attributes : IVBSAXAttributes*) : HRESULT
-    @lpVtbl.value.get_unhandled_attributes.unsafe_as(Proc(IVBSAXAttributes*, HRESULT)).call(attributes)
+  def get_unhandled_attributes(this : ISchemaComplexType*, attributes : IVBSAXAttributes*) : HRESULT
+    @lpVtbl.value.get_unhandled_attributes.call(this, attributes)
   end
-  def write_annotation(annotationsink : IUnknown, iswritten : Int16*) : HRESULT
-    @lpVtbl.value.write_annotation.unsafe_as(Proc(IUnknown, Int16*, HRESULT)).call(annotationsink, iswritten)
+  def write_annotation(this : ISchemaComplexType*, annotationsink : IUnknown, iswritten : Int16*) : HRESULT
+    @lpVtbl.value.write_annotation.call(this, annotationsink, iswritten)
   end
-  def get_base_types(basetypes : ISchemaItemCollection*) : HRESULT
-    @lpVtbl.value.get_base_types.unsafe_as(Proc(ISchemaItemCollection*, HRESULT)).call(basetypes)
+  def get_base_types(this : ISchemaComplexType*, basetypes : ISchemaItemCollection*) : HRESULT
+    @lpVtbl.value.get_base_types.call(this, basetypes)
   end
-  def get_final(final : SCHEMADERIVATIONMETHOD*) : HRESULT
-    @lpVtbl.value.get_final.unsafe_as(Proc(SCHEMADERIVATIONMETHOD*, HRESULT)).call(final)
+  def get_final(this : ISchemaComplexType*, final : SCHEMADERIVATIONMETHOD*) : HRESULT
+    @lpVtbl.value.get_final.call(this, final)
   end
-  def get_variety(variety : SCHEMATYPEVARIETY*) : HRESULT
-    @lpVtbl.value.get_variety.unsafe_as(Proc(SCHEMATYPEVARIETY*, HRESULT)).call(variety)
+  def get_variety(this : ISchemaComplexType*, variety : SCHEMATYPEVARIETY*) : HRESULT
+    @lpVtbl.value.get_variety.call(this, variety)
   end
-  def get_derived_by(derivedby : SCHEMADERIVATIONMETHOD*) : HRESULT
-    @lpVtbl.value.get_derived_by.unsafe_as(Proc(SCHEMADERIVATIONMETHOD*, HRESULT)).call(derivedby)
+  def get_derived_by(this : ISchemaComplexType*, derivedby : SCHEMADERIVATIONMETHOD*) : HRESULT
+    @lpVtbl.value.get_derived_by.call(this, derivedby)
   end
-  def is_valid(data : UInt8*, valid : Int16*) : HRESULT
-    @lpVtbl.value.is_valid.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(data, valid)
+  def is_valid(this : ISchemaComplexType*, data : UInt8*, valid : Int16*) : HRESULT
+    @lpVtbl.value.is_valid.call(this, data, valid)
   end
-  def get_min_exclusive(minexclusive : UInt8**) : HRESULT
-    @lpVtbl.value.get_min_exclusive.unsafe_as(Proc(UInt8**, HRESULT)).call(minexclusive)
+  def get_min_exclusive(this : ISchemaComplexType*, minexclusive : UInt8**) : HRESULT
+    @lpVtbl.value.get_min_exclusive.call(this, minexclusive)
   end
-  def get_min_inclusive(mininclusive : UInt8**) : HRESULT
-    @lpVtbl.value.get_min_inclusive.unsafe_as(Proc(UInt8**, HRESULT)).call(mininclusive)
+  def get_min_inclusive(this : ISchemaComplexType*, mininclusive : UInt8**) : HRESULT
+    @lpVtbl.value.get_min_inclusive.call(this, mininclusive)
   end
-  def get_max_exclusive(maxexclusive : UInt8**) : HRESULT
-    @lpVtbl.value.get_max_exclusive.unsafe_as(Proc(UInt8**, HRESULT)).call(maxexclusive)
+  def get_max_exclusive(this : ISchemaComplexType*, maxexclusive : UInt8**) : HRESULT
+    @lpVtbl.value.get_max_exclusive.call(this, maxexclusive)
   end
-  def get_max_inclusive(maxinclusive : UInt8**) : HRESULT
-    @lpVtbl.value.get_max_inclusive.unsafe_as(Proc(UInt8**, HRESULT)).call(maxinclusive)
+  def get_max_inclusive(this : ISchemaComplexType*, maxinclusive : UInt8**) : HRESULT
+    @lpVtbl.value.get_max_inclusive.call(this, maxinclusive)
   end
-  def get_total_digits(totaldigits : VARIANT*) : HRESULT
-    @lpVtbl.value.get_total_digits.unsafe_as(Proc(VARIANT*, HRESULT)).call(totaldigits)
+  def get_total_digits(this : ISchemaComplexType*, totaldigits : VARIANT*) : HRESULT
+    @lpVtbl.value.get_total_digits.call(this, totaldigits)
   end
-  def get_fraction_digits(fractiondigits : VARIANT*) : HRESULT
-    @lpVtbl.value.get_fraction_digits.unsafe_as(Proc(VARIANT*, HRESULT)).call(fractiondigits)
+  def get_fraction_digits(this : ISchemaComplexType*, fractiondigits : VARIANT*) : HRESULT
+    @lpVtbl.value.get_fraction_digits.call(this, fractiondigits)
   end
-  def get_length(length : VARIANT*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(VARIANT*, HRESULT)).call(length)
+  def get_length(this : ISchemaComplexType*, length : VARIANT*) : HRESULT
+    @lpVtbl.value.get_length.call(this, length)
   end
-  def get_min_length(minlength : VARIANT*) : HRESULT
-    @lpVtbl.value.get_min_length.unsafe_as(Proc(VARIANT*, HRESULT)).call(minlength)
+  def get_min_length(this : ISchemaComplexType*, minlength : VARIANT*) : HRESULT
+    @lpVtbl.value.get_min_length.call(this, minlength)
   end
-  def get_max_length(maxlength : VARIANT*) : HRESULT
-    @lpVtbl.value.get_max_length.unsafe_as(Proc(VARIANT*, HRESULT)).call(maxlength)
+  def get_max_length(this : ISchemaComplexType*, maxlength : VARIANT*) : HRESULT
+    @lpVtbl.value.get_max_length.call(this, maxlength)
   end
-  def get_enumeration(enumeration : ISchemaStringCollection*) : HRESULT
-    @lpVtbl.value.get_enumeration.unsafe_as(Proc(ISchemaStringCollection*, HRESULT)).call(enumeration)
+  def get_enumeration(this : ISchemaComplexType*, enumeration : ISchemaStringCollection*) : HRESULT
+    @lpVtbl.value.get_enumeration.call(this, enumeration)
   end
-  def get_whitespace(whitespace : SCHEMAWHITESPACE*) : HRESULT
-    @lpVtbl.value.get_whitespace.unsafe_as(Proc(SCHEMAWHITESPACE*, HRESULT)).call(whitespace)
+  def get_whitespace(this : ISchemaComplexType*, whitespace : SCHEMAWHITESPACE*) : HRESULT
+    @lpVtbl.value.get_whitespace.call(this, whitespace)
   end
-  def get_patterns(patterns : ISchemaStringCollection*) : HRESULT
-    @lpVtbl.value.get_patterns.unsafe_as(Proc(ISchemaStringCollection*, HRESULT)).call(patterns)
+  def get_patterns(this : ISchemaComplexType*, patterns : ISchemaStringCollection*) : HRESULT
+    @lpVtbl.value.get_patterns.call(this, patterns)
   end
-  def get_is_abstract(abstract_ : Int16*) : HRESULT
-    @lpVtbl.value.get_is_abstract.unsafe_as(Proc(Int16*, HRESULT)).call(abstract_)
+  def get_is_abstract(this : ISchemaComplexType*, abstract_ : Int16*) : HRESULT
+    @lpVtbl.value.get_is_abstract.call(this, abstract_)
   end
-  def get_any_attribute(anyattribute : ISchemaAny*) : HRESULT
-    @lpVtbl.value.get_any_attribute.unsafe_as(Proc(ISchemaAny*, HRESULT)).call(anyattribute)
+  def get_any_attribute(this : ISchemaComplexType*, anyattribute : ISchemaAny*) : HRESULT
+    @lpVtbl.value.get_any_attribute.call(this, anyattribute)
   end
-  def get_attributes(attributes : ISchemaItemCollection*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(ISchemaItemCollection*, HRESULT)).call(attributes)
+  def get_attributes(this : ISchemaComplexType*, attributes : ISchemaItemCollection*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributes)
   end
-  def get_content_type(contenttype : SCHEMACONTENTTYPE*) : HRESULT
-    @lpVtbl.value.get_content_type.unsafe_as(Proc(SCHEMACONTENTTYPE*, HRESULT)).call(contenttype)
+  def get_content_type(this : ISchemaComplexType*, contenttype : SCHEMACONTENTTYPE*) : HRESULT
+    @lpVtbl.value.get_content_type.call(this, contenttype)
   end
-  def get_content_model(contentmodel : ISchemaModelGroup*) : HRESULT
-    @lpVtbl.value.get_content_model.unsafe_as(Proc(ISchemaModelGroup*, HRESULT)).call(contentmodel)
+  def get_content_model(this : ISchemaComplexType*, contentmodel : ISchemaModelGroup*) : HRESULT
+    @lpVtbl.value.get_content_model.call(this, contentmodel)
   end
-  def get_prohibited_substitutions(prohibited : SCHEMADERIVATIONMETHOD*) : HRESULT
-    @lpVtbl.value.get_prohibited_substitutions.unsafe_as(Proc(SCHEMADERIVATIONMETHOD*, HRESULT)).call(prohibited)
+  def get_prohibited_substitutions(this : ISchemaComplexType*, prohibited : SCHEMADERIVATIONMETHOD*) : HRESULT
+    @lpVtbl.value.get_prohibited_substitutions.call(this, prohibited)
   end
 end
 struct LibWin32::ISchemaAttributeGroup
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISchemaAttributeGroup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISchemaAttributeGroup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISchemaAttributeGroup*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISchemaAttributeGroup*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISchemaAttributeGroup*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISchemaAttributeGroup*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISchemaAttributeGroup*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_name(this : ISchemaAttributeGroup*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : ISchemaAttributeGroup*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_schema(schema : ISchema*) : HRESULT
-    @lpVtbl.value.get_schema.unsafe_as(Proc(ISchema*, HRESULT)).call(schema)
+  def get_schema(this : ISchemaAttributeGroup*, schema : ISchema*) : HRESULT
+    @lpVtbl.value.get_schema.call(this, schema)
   end
-  def get_id(id : UInt8**) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(id)
+  def get_id(this : ISchemaAttributeGroup*, id : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
   end
-  def get_item_type(itemtype : SOMITEMTYPE*) : HRESULT
-    @lpVtbl.value.get_item_type.unsafe_as(Proc(SOMITEMTYPE*, HRESULT)).call(itemtype)
+  def get_item_type(this : ISchemaAttributeGroup*, itemtype : SOMITEMTYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, itemtype)
   end
-  def get_unhandled_attributes(attributes : IVBSAXAttributes*) : HRESULT
-    @lpVtbl.value.get_unhandled_attributes.unsafe_as(Proc(IVBSAXAttributes*, HRESULT)).call(attributes)
+  def get_unhandled_attributes(this : ISchemaAttributeGroup*, attributes : IVBSAXAttributes*) : HRESULT
+    @lpVtbl.value.get_unhandled_attributes.call(this, attributes)
   end
-  def write_annotation(annotationsink : IUnknown, iswritten : Int16*) : HRESULT
-    @lpVtbl.value.write_annotation.unsafe_as(Proc(IUnknown, Int16*, HRESULT)).call(annotationsink, iswritten)
+  def write_annotation(this : ISchemaAttributeGroup*, annotationsink : IUnknown, iswritten : Int16*) : HRESULT
+    @lpVtbl.value.write_annotation.call(this, annotationsink, iswritten)
   end
-  def get_any_attribute(anyattribute : ISchemaAny*) : HRESULT
-    @lpVtbl.value.get_any_attribute.unsafe_as(Proc(ISchemaAny*, HRESULT)).call(anyattribute)
+  def get_any_attribute(this : ISchemaAttributeGroup*, anyattribute : ISchemaAny*) : HRESULT
+    @lpVtbl.value.get_any_attribute.call(this, anyattribute)
   end
-  def get_attributes(attributes : ISchemaItemCollection*) : HRESULT
-    @lpVtbl.value.get_attributes.unsafe_as(Proc(ISchemaItemCollection*, HRESULT)).call(attributes)
+  def get_attributes(this : ISchemaAttributeGroup*, attributes : ISchemaItemCollection*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributes)
   end
 end
 struct LibWin32::ISchemaModelGroup
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISchemaModelGroup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISchemaModelGroup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISchemaModelGroup*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISchemaModelGroup*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISchemaModelGroup*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISchemaModelGroup*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISchemaModelGroup*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_name(this : ISchemaModelGroup*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : ISchemaModelGroup*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_schema(schema : ISchema*) : HRESULT
-    @lpVtbl.value.get_schema.unsafe_as(Proc(ISchema*, HRESULT)).call(schema)
+  def get_schema(this : ISchemaModelGroup*, schema : ISchema*) : HRESULT
+    @lpVtbl.value.get_schema.call(this, schema)
   end
-  def get_id(id : UInt8**) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(id)
+  def get_id(this : ISchemaModelGroup*, id : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
   end
-  def get_item_type(itemtype : SOMITEMTYPE*) : HRESULT
-    @lpVtbl.value.get_item_type.unsafe_as(Proc(SOMITEMTYPE*, HRESULT)).call(itemtype)
+  def get_item_type(this : ISchemaModelGroup*, itemtype : SOMITEMTYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, itemtype)
   end
-  def get_unhandled_attributes(attributes : IVBSAXAttributes*) : HRESULT
-    @lpVtbl.value.get_unhandled_attributes.unsafe_as(Proc(IVBSAXAttributes*, HRESULT)).call(attributes)
+  def get_unhandled_attributes(this : ISchemaModelGroup*, attributes : IVBSAXAttributes*) : HRESULT
+    @lpVtbl.value.get_unhandled_attributes.call(this, attributes)
   end
-  def write_annotation(annotationsink : IUnknown, iswritten : Int16*) : HRESULT
-    @lpVtbl.value.write_annotation.unsafe_as(Proc(IUnknown, Int16*, HRESULT)).call(annotationsink, iswritten)
+  def write_annotation(this : ISchemaModelGroup*, annotationsink : IUnknown, iswritten : Int16*) : HRESULT
+    @lpVtbl.value.write_annotation.call(this, annotationsink, iswritten)
   end
-  def get_min_occurs(minoccurs : VARIANT*) : HRESULT
-    @lpVtbl.value.get_min_occurs.unsafe_as(Proc(VARIANT*, HRESULT)).call(minoccurs)
+  def get_min_occurs(this : ISchemaModelGroup*, minoccurs : VARIANT*) : HRESULT
+    @lpVtbl.value.get_min_occurs.call(this, minoccurs)
   end
-  def get_max_occurs(maxoccurs : VARIANT*) : HRESULT
-    @lpVtbl.value.get_max_occurs.unsafe_as(Proc(VARIANT*, HRESULT)).call(maxoccurs)
+  def get_max_occurs(this : ISchemaModelGroup*, maxoccurs : VARIANT*) : HRESULT
+    @lpVtbl.value.get_max_occurs.call(this, maxoccurs)
   end
-  def get_particles(particles : ISchemaItemCollection*) : HRESULT
-    @lpVtbl.value.get_particles.unsafe_as(Proc(ISchemaItemCollection*, HRESULT)).call(particles)
+  def get_particles(this : ISchemaModelGroup*, particles : ISchemaItemCollection*) : HRESULT
+    @lpVtbl.value.get_particles.call(this, particles)
   end
 end
 struct LibWin32::ISchemaAny
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISchemaAny*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISchemaAny*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISchemaAny*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISchemaAny*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISchemaAny*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISchemaAny*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISchemaAny*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_name(this : ISchemaAny*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : ISchemaAny*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_schema(schema : ISchema*) : HRESULT
-    @lpVtbl.value.get_schema.unsafe_as(Proc(ISchema*, HRESULT)).call(schema)
+  def get_schema(this : ISchemaAny*, schema : ISchema*) : HRESULT
+    @lpVtbl.value.get_schema.call(this, schema)
   end
-  def get_id(id : UInt8**) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(id)
+  def get_id(this : ISchemaAny*, id : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
   end
-  def get_item_type(itemtype : SOMITEMTYPE*) : HRESULT
-    @lpVtbl.value.get_item_type.unsafe_as(Proc(SOMITEMTYPE*, HRESULT)).call(itemtype)
+  def get_item_type(this : ISchemaAny*, itemtype : SOMITEMTYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, itemtype)
   end
-  def get_unhandled_attributes(attributes : IVBSAXAttributes*) : HRESULT
-    @lpVtbl.value.get_unhandled_attributes.unsafe_as(Proc(IVBSAXAttributes*, HRESULT)).call(attributes)
+  def get_unhandled_attributes(this : ISchemaAny*, attributes : IVBSAXAttributes*) : HRESULT
+    @lpVtbl.value.get_unhandled_attributes.call(this, attributes)
   end
-  def write_annotation(annotationsink : IUnknown, iswritten : Int16*) : HRESULT
-    @lpVtbl.value.write_annotation.unsafe_as(Proc(IUnknown, Int16*, HRESULT)).call(annotationsink, iswritten)
+  def write_annotation(this : ISchemaAny*, annotationsink : IUnknown, iswritten : Int16*) : HRESULT
+    @lpVtbl.value.write_annotation.call(this, annotationsink, iswritten)
   end
-  def get_min_occurs(minoccurs : VARIANT*) : HRESULT
-    @lpVtbl.value.get_min_occurs.unsafe_as(Proc(VARIANT*, HRESULT)).call(minoccurs)
+  def get_min_occurs(this : ISchemaAny*, minoccurs : VARIANT*) : HRESULT
+    @lpVtbl.value.get_min_occurs.call(this, minoccurs)
   end
-  def get_max_occurs(maxoccurs : VARIANT*) : HRESULT
-    @lpVtbl.value.get_max_occurs.unsafe_as(Proc(VARIANT*, HRESULT)).call(maxoccurs)
+  def get_max_occurs(this : ISchemaAny*, maxoccurs : VARIANT*) : HRESULT
+    @lpVtbl.value.get_max_occurs.call(this, maxoccurs)
   end
-  def get_namespaces(namespaces : ISchemaStringCollection*) : HRESULT
-    @lpVtbl.value.get_namespaces.unsafe_as(Proc(ISchemaStringCollection*, HRESULT)).call(namespaces)
+  def get_namespaces(this : ISchemaAny*, namespaces : ISchemaStringCollection*) : HRESULT
+    @lpVtbl.value.get_namespaces.call(this, namespaces)
   end
-  def get_process_contents(processcontents : SCHEMAPROCESSCONTENTS*) : HRESULT
-    @lpVtbl.value.get_process_contents.unsafe_as(Proc(SCHEMAPROCESSCONTENTS*, HRESULT)).call(processcontents)
+  def get_process_contents(this : ISchemaAny*, processcontents : SCHEMAPROCESSCONTENTS*) : HRESULT
+    @lpVtbl.value.get_process_contents.call(this, processcontents)
   end
 end
 struct LibWin32::ISchemaIdentityConstraint
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISchemaIdentityConstraint*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISchemaIdentityConstraint*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISchemaIdentityConstraint*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISchemaIdentityConstraint*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISchemaIdentityConstraint*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISchemaIdentityConstraint*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISchemaIdentityConstraint*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_name(this : ISchemaIdentityConstraint*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : ISchemaIdentityConstraint*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_schema(schema : ISchema*) : HRESULT
-    @lpVtbl.value.get_schema.unsafe_as(Proc(ISchema*, HRESULT)).call(schema)
+  def get_schema(this : ISchemaIdentityConstraint*, schema : ISchema*) : HRESULT
+    @lpVtbl.value.get_schema.call(this, schema)
   end
-  def get_id(id : UInt8**) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(id)
+  def get_id(this : ISchemaIdentityConstraint*, id : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
   end
-  def get_item_type(itemtype : SOMITEMTYPE*) : HRESULT
-    @lpVtbl.value.get_item_type.unsafe_as(Proc(SOMITEMTYPE*, HRESULT)).call(itemtype)
+  def get_item_type(this : ISchemaIdentityConstraint*, itemtype : SOMITEMTYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, itemtype)
   end
-  def get_unhandled_attributes(attributes : IVBSAXAttributes*) : HRESULT
-    @lpVtbl.value.get_unhandled_attributes.unsafe_as(Proc(IVBSAXAttributes*, HRESULT)).call(attributes)
+  def get_unhandled_attributes(this : ISchemaIdentityConstraint*, attributes : IVBSAXAttributes*) : HRESULT
+    @lpVtbl.value.get_unhandled_attributes.call(this, attributes)
   end
-  def write_annotation(annotationsink : IUnknown, iswritten : Int16*) : HRESULT
-    @lpVtbl.value.write_annotation.unsafe_as(Proc(IUnknown, Int16*, HRESULT)).call(annotationsink, iswritten)
+  def write_annotation(this : ISchemaIdentityConstraint*, annotationsink : IUnknown, iswritten : Int16*) : HRESULT
+    @lpVtbl.value.write_annotation.call(this, annotationsink, iswritten)
   end
-  def get_selector(selector : UInt8**) : HRESULT
-    @lpVtbl.value.get_selector.unsafe_as(Proc(UInt8**, HRESULT)).call(selector)
+  def get_selector(this : ISchemaIdentityConstraint*, selector : UInt8**) : HRESULT
+    @lpVtbl.value.get_selector.call(this, selector)
   end
-  def get_fields(fields : ISchemaStringCollection*) : HRESULT
-    @lpVtbl.value.get_fields.unsafe_as(Proc(ISchemaStringCollection*, HRESULT)).call(fields)
+  def get_fields(this : ISchemaIdentityConstraint*, fields : ISchemaStringCollection*) : HRESULT
+    @lpVtbl.value.get_fields.call(this, fields)
   end
-  def get_referenced_key(key : ISchemaIdentityConstraint*) : HRESULT
-    @lpVtbl.value.get_referenced_key.unsafe_as(Proc(ISchemaIdentityConstraint*, HRESULT)).call(key)
+  def get_referenced_key(this : ISchemaIdentityConstraint*, key : ISchemaIdentityConstraint*) : HRESULT
+    @lpVtbl.value.get_referenced_key.call(this, key)
   end
 end
 struct LibWin32::ISchemaNotation
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISchemaNotation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISchemaNotation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISchemaNotation*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISchemaNotation*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISchemaNotation*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISchemaNotation*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISchemaNotation*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_name(this : ISchemaNotation*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
   end
-  def get_namespace_uri(namespaceuri : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(namespaceuri)
+  def get_namespace_uri(this : ISchemaNotation*, namespaceuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, namespaceuri)
   end
-  def get_schema(schema : ISchema*) : HRESULT
-    @lpVtbl.value.get_schema.unsafe_as(Proc(ISchema*, HRESULT)).call(schema)
+  def get_schema(this : ISchemaNotation*, schema : ISchema*) : HRESULT
+    @lpVtbl.value.get_schema.call(this, schema)
   end
-  def get_id(id : UInt8**) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(id)
+  def get_id(this : ISchemaNotation*, id : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
   end
-  def get_item_type(itemtype : SOMITEMTYPE*) : HRESULT
-    @lpVtbl.value.get_item_type.unsafe_as(Proc(SOMITEMTYPE*, HRESULT)).call(itemtype)
+  def get_item_type(this : ISchemaNotation*, itemtype : SOMITEMTYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, itemtype)
   end
-  def get_unhandled_attributes(attributes : IVBSAXAttributes*) : HRESULT
-    @lpVtbl.value.get_unhandled_attributes.unsafe_as(Proc(IVBSAXAttributes*, HRESULT)).call(attributes)
+  def get_unhandled_attributes(this : ISchemaNotation*, attributes : IVBSAXAttributes*) : HRESULT
+    @lpVtbl.value.get_unhandled_attributes.call(this, attributes)
   end
-  def write_annotation(annotationsink : IUnknown, iswritten : Int16*) : HRESULT
-    @lpVtbl.value.write_annotation.unsafe_as(Proc(IUnknown, Int16*, HRESULT)).call(annotationsink, iswritten)
+  def write_annotation(this : ISchemaNotation*, annotationsink : IUnknown, iswritten : Int16*) : HRESULT
+    @lpVtbl.value.write_annotation.call(this, annotationsink, iswritten)
   end
-  def get_system_identifier(uri : UInt8**) : HRESULT
-    @lpVtbl.value.get_system_identifier.unsafe_as(Proc(UInt8**, HRESULT)).call(uri)
+  def get_system_identifier(this : ISchemaNotation*, uri : UInt8**) : HRESULT
+    @lpVtbl.value.get_system_identifier.call(this, uri)
   end
-  def get_public_identifier(uri : UInt8**) : HRESULT
-    @lpVtbl.value.get_public_identifier.unsafe_as(Proc(UInt8**, HRESULT)).call(uri)
+  def get_public_identifier(this : ISchemaNotation*, uri : UInt8**) : HRESULT
+    @lpVtbl.value.get_public_identifier.call(this, uri)
   end
 end
 struct LibWin32::IXMLHTTPRequest2Callback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLHTTPRequest2Callback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLHTTPRequest2Callback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLHTTPRequest2Callback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_redirect(pxhr : IXMLHTTPRequest2, pwszredirecturl : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.on_redirect.unsafe_as(Proc(IXMLHTTPRequest2, LibC::LPWSTR, HRESULT)).call(pxhr, pwszredirecturl)
+  def on_redirect(this : IXMLHTTPRequest2Callback*, pxhr : IXMLHTTPRequest2, pwszredirecturl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.on_redirect.call(this, pxhr, pwszredirecturl)
   end
-  def on_headers_available(pxhr : IXMLHTTPRequest2, dwstatus : UInt32, pwszstatus : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.on_headers_available.unsafe_as(Proc(IXMLHTTPRequest2, UInt32, LibC::LPWSTR, HRESULT)).call(pxhr, dwstatus, pwszstatus)
+  def on_headers_available(this : IXMLHTTPRequest2Callback*, pxhr : IXMLHTTPRequest2, dwstatus : UInt32, pwszstatus : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.on_headers_available.call(this, pxhr, dwstatus, pwszstatus)
   end
-  def on_data_available(pxhr : IXMLHTTPRequest2, presponsestream : ISequentialStream) : HRESULT
-    @lpVtbl.value.on_data_available.unsafe_as(Proc(IXMLHTTPRequest2, ISequentialStream, HRESULT)).call(pxhr, presponsestream)
+  def on_data_available(this : IXMLHTTPRequest2Callback*, pxhr : IXMLHTTPRequest2, presponsestream : ISequentialStream) : HRESULT
+    @lpVtbl.value.on_data_available.call(this, pxhr, presponsestream)
   end
-  def on_response_received(pxhr : IXMLHTTPRequest2, presponsestream : ISequentialStream) : HRESULT
-    @lpVtbl.value.on_response_received.unsafe_as(Proc(IXMLHTTPRequest2, ISequentialStream, HRESULT)).call(pxhr, presponsestream)
+  def on_response_received(this : IXMLHTTPRequest2Callback*, pxhr : IXMLHTTPRequest2, presponsestream : ISequentialStream) : HRESULT
+    @lpVtbl.value.on_response_received.call(this, pxhr, presponsestream)
   end
-  def on_error(pxhr : IXMLHTTPRequest2, hrerror : HRESULT) : HRESULT
-    @lpVtbl.value.on_error.unsafe_as(Proc(IXMLHTTPRequest2, HRESULT, HRESULT)).call(pxhr, hrerror)
+  def on_error(this : IXMLHTTPRequest2Callback*, pxhr : IXMLHTTPRequest2, hrerror : HRESULT) : HRESULT
+    @lpVtbl.value.on_error.call(this, pxhr, hrerror)
   end
 end
 struct LibWin32::IXMLHTTPRequest2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLHTTPRequest2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLHTTPRequest2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLHTTPRequest2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def open(pwszmethod : LibC::LPWSTR, pwszurl : LibC::LPWSTR, pstatuscallback : IXMLHTTPRequest2Callback, pwszusername : LibC::LPWSTR, pwszpassword : LibC::LPWSTR, pwszproxyusername : LibC::LPWSTR, pwszproxypassword : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.open.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, IXMLHTTPRequest2Callback, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pwszmethod, pwszurl, pstatuscallback, pwszusername, pwszpassword, pwszproxyusername, pwszproxypassword)
+  def open(this : IXMLHTTPRequest2*, pwszmethod : LibC::LPWSTR, pwszurl : LibC::LPWSTR, pstatuscallback : IXMLHTTPRequest2Callback, pwszusername : LibC::LPWSTR, pwszpassword : LibC::LPWSTR, pwszproxyusername : LibC::LPWSTR, pwszproxypassword : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.open.call(this, pwszmethod, pwszurl, pstatuscallback, pwszusername, pwszpassword, pwszproxyusername, pwszproxypassword)
   end
-  def send(pbody : ISequentialStream, cbbody : UInt64) : HRESULT
-    @lpVtbl.value.send.unsafe_as(Proc(ISequentialStream, UInt64, HRESULT)).call(pbody, cbbody)
+  def send(this : IXMLHTTPRequest2*, pbody : ISequentialStream, cbbody : UInt64) : HRESULT
+    @lpVtbl.value.send.call(this, pbody, cbbody)
   end
-  def abort : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(HRESULT)).call
+  def abort(this : IXMLHTTPRequest2*) : HRESULT
+    @lpVtbl.value.abort.call(this)
   end
-  def set_cookie(pcookie : XHR_COOKIE*, pdwcookiestate : UInt32*) : HRESULT
-    @lpVtbl.value.set_cookie.unsafe_as(Proc(XHR_COOKIE*, UInt32*, HRESULT)).call(pcookie, pdwcookiestate)
+  def set_cookie(this : IXMLHTTPRequest2*, pcookie : XHR_COOKIE*, pdwcookiestate : UInt32*) : HRESULT
+    @lpVtbl.value.set_cookie.call(this, pcookie, pdwcookiestate)
   end
-  def set_custom_response_stream(psequentialstream : ISequentialStream) : HRESULT
-    @lpVtbl.value.set_custom_response_stream.unsafe_as(Proc(ISequentialStream, HRESULT)).call(psequentialstream)
+  def set_custom_response_stream(this : IXMLHTTPRequest2*, psequentialstream : ISequentialStream) : HRESULT
+    @lpVtbl.value.set_custom_response_stream.call(this, psequentialstream)
   end
-  def set_property(eproperty : XHR_PROPERTY, ullvalue : UInt64) : HRESULT
-    @lpVtbl.value.set_property.unsafe_as(Proc(XHR_PROPERTY, UInt64, HRESULT)).call(eproperty, ullvalue)
+  def set_property(this : IXMLHTTPRequest2*, eproperty : XHR_PROPERTY, ullvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_property.call(this, eproperty, ullvalue)
   end
-  def set_request_header(pwszheader : LibC::LPWSTR, pwszvalue : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_request_header.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pwszheader, pwszvalue)
+  def set_request_header(this : IXMLHTTPRequest2*, pwszheader : LibC::LPWSTR, pwszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_request_header.call(this, pwszheader, pwszvalue)
   end
-  def get_all_response_headers(ppwszheaders : UInt16**) : HRESULT
-    @lpVtbl.value.get_all_response_headers.unsafe_as(Proc(UInt16**, HRESULT)).call(ppwszheaders)
+  def get_all_response_headers(this : IXMLHTTPRequest2*, ppwszheaders : UInt16**) : HRESULT
+    @lpVtbl.value.get_all_response_headers.call(this, ppwszheaders)
   end
-  def get_cookie(pwszurl : LibC::LPWSTR, pwszname : LibC::LPWSTR, dwflags : UInt32, pccookies : UInt32*, ppcookies : XHR_COOKIE**) : HRESULT
-    @lpVtbl.value.get_cookie.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, UInt32*, XHR_COOKIE**, HRESULT)).call(pwszurl, pwszname, dwflags, pccookies, ppcookies)
+  def get_cookie(this : IXMLHTTPRequest2*, pwszurl : LibC::LPWSTR, pwszname : LibC::LPWSTR, dwflags : UInt32, pccookies : UInt32*, ppcookies : XHR_COOKIE**) : HRESULT
+    @lpVtbl.value.get_cookie.call(this, pwszurl, pwszname, dwflags, pccookies, ppcookies)
   end
-  def get_response_header(pwszheader : LibC::LPWSTR, ppwszvalue : UInt16**) : HRESULT
-    @lpVtbl.value.get_response_header.unsafe_as(Proc(LibC::LPWSTR, UInt16**, HRESULT)).call(pwszheader, ppwszvalue)
+  def get_response_header(this : IXMLHTTPRequest2*, pwszheader : LibC::LPWSTR, ppwszvalue : UInt16**) : HRESULT
+    @lpVtbl.value.get_response_header.call(this, pwszheader, ppwszvalue)
   end
 end
 struct LibWin32::IXMLHTTPRequest3Callback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLHTTPRequest3Callback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLHTTPRequest3Callback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLHTTPRequest3Callback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_redirect(pxhr : IXMLHTTPRequest2, pwszredirecturl : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.on_redirect.unsafe_as(Proc(IXMLHTTPRequest2, LibC::LPWSTR, HRESULT)).call(pxhr, pwszredirecturl)
+  def on_redirect(this : IXMLHTTPRequest3Callback*, pxhr : IXMLHTTPRequest2, pwszredirecturl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.on_redirect.call(this, pxhr, pwszredirecturl)
   end
-  def on_headers_available(pxhr : IXMLHTTPRequest2, dwstatus : UInt32, pwszstatus : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.on_headers_available.unsafe_as(Proc(IXMLHTTPRequest2, UInt32, LibC::LPWSTR, HRESULT)).call(pxhr, dwstatus, pwszstatus)
+  def on_headers_available(this : IXMLHTTPRequest3Callback*, pxhr : IXMLHTTPRequest2, dwstatus : UInt32, pwszstatus : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.on_headers_available.call(this, pxhr, dwstatus, pwszstatus)
   end
-  def on_data_available(pxhr : IXMLHTTPRequest2, presponsestream : ISequentialStream) : HRESULT
-    @lpVtbl.value.on_data_available.unsafe_as(Proc(IXMLHTTPRequest2, ISequentialStream, HRESULT)).call(pxhr, presponsestream)
+  def on_data_available(this : IXMLHTTPRequest3Callback*, pxhr : IXMLHTTPRequest2, presponsestream : ISequentialStream) : HRESULT
+    @lpVtbl.value.on_data_available.call(this, pxhr, presponsestream)
   end
-  def on_response_received(pxhr : IXMLHTTPRequest2, presponsestream : ISequentialStream) : HRESULT
-    @lpVtbl.value.on_response_received.unsafe_as(Proc(IXMLHTTPRequest2, ISequentialStream, HRESULT)).call(pxhr, presponsestream)
+  def on_response_received(this : IXMLHTTPRequest3Callback*, pxhr : IXMLHTTPRequest2, presponsestream : ISequentialStream) : HRESULT
+    @lpVtbl.value.on_response_received.call(this, pxhr, presponsestream)
   end
-  def on_error(pxhr : IXMLHTTPRequest2, hrerror : HRESULT) : HRESULT
-    @lpVtbl.value.on_error.unsafe_as(Proc(IXMLHTTPRequest2, HRESULT, HRESULT)).call(pxhr, hrerror)
+  def on_error(this : IXMLHTTPRequest3Callback*, pxhr : IXMLHTTPRequest2, hrerror : HRESULT) : HRESULT
+    @lpVtbl.value.on_error.call(this, pxhr, hrerror)
   end
-  def on_server_certificate_received(pxhr : IXMLHTTPRequest3, dwcertificateerrors : UInt32, cservercertificatechain : UInt32, rgservercertificatechain : XHR_CERT*) : HRESULT
-    @lpVtbl.value.on_server_certificate_received.unsafe_as(Proc(IXMLHTTPRequest3, UInt32, UInt32, XHR_CERT*, HRESULT)).call(pxhr, dwcertificateerrors, cservercertificatechain, rgservercertificatechain)
+  def on_server_certificate_received(this : IXMLHTTPRequest3Callback*, pxhr : IXMLHTTPRequest3, dwcertificateerrors : UInt32, cservercertificatechain : UInt32, rgservercertificatechain : XHR_CERT*) : HRESULT
+    @lpVtbl.value.on_server_certificate_received.call(this, pxhr, dwcertificateerrors, cservercertificatechain, rgservercertificatechain)
   end
-  def on_client_certificate_requested(pxhr : IXMLHTTPRequest3, cissuerlist : UInt32, rgpwszissuerlist : UInt16**) : HRESULT
-    @lpVtbl.value.on_client_certificate_requested.unsafe_as(Proc(IXMLHTTPRequest3, UInt32, UInt16**, HRESULT)).call(pxhr, cissuerlist, rgpwszissuerlist)
+  def on_client_certificate_requested(this : IXMLHTTPRequest3Callback*, pxhr : IXMLHTTPRequest3, cissuerlist : UInt32, rgpwszissuerlist : UInt16**) : HRESULT
+    @lpVtbl.value.on_client_certificate_requested.call(this, pxhr, cissuerlist, rgpwszissuerlist)
   end
 end
 struct LibWin32::IXMLHTTPRequest3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXMLHTTPRequest3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXMLHTTPRequest3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXMLHTTPRequest3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def open(pwszmethod : LibC::LPWSTR, pwszurl : LibC::LPWSTR, pstatuscallback : IXMLHTTPRequest2Callback, pwszusername : LibC::LPWSTR, pwszpassword : LibC::LPWSTR, pwszproxyusername : LibC::LPWSTR, pwszproxypassword : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.open.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, IXMLHTTPRequest2Callback, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pwszmethod, pwszurl, pstatuscallback, pwszusername, pwszpassword, pwszproxyusername, pwszproxypassword)
+  def open(this : IXMLHTTPRequest3*, pwszmethod : LibC::LPWSTR, pwszurl : LibC::LPWSTR, pstatuscallback : IXMLHTTPRequest2Callback, pwszusername : LibC::LPWSTR, pwszpassword : LibC::LPWSTR, pwszproxyusername : LibC::LPWSTR, pwszproxypassword : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.open.call(this, pwszmethod, pwszurl, pstatuscallback, pwszusername, pwszpassword, pwszproxyusername, pwszproxypassword)
   end
-  def send(pbody : ISequentialStream, cbbody : UInt64) : HRESULT
-    @lpVtbl.value.send.unsafe_as(Proc(ISequentialStream, UInt64, HRESULT)).call(pbody, cbbody)
+  def send(this : IXMLHTTPRequest3*, pbody : ISequentialStream, cbbody : UInt64) : HRESULT
+    @lpVtbl.value.send.call(this, pbody, cbbody)
   end
-  def abort : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(HRESULT)).call
+  def abort(this : IXMLHTTPRequest3*) : HRESULT
+    @lpVtbl.value.abort.call(this)
   end
-  def set_cookie(pcookie : XHR_COOKIE*, pdwcookiestate : UInt32*) : HRESULT
-    @lpVtbl.value.set_cookie.unsafe_as(Proc(XHR_COOKIE*, UInt32*, HRESULT)).call(pcookie, pdwcookiestate)
+  def set_cookie(this : IXMLHTTPRequest3*, pcookie : XHR_COOKIE*, pdwcookiestate : UInt32*) : HRESULT
+    @lpVtbl.value.set_cookie.call(this, pcookie, pdwcookiestate)
   end
-  def set_custom_response_stream(psequentialstream : ISequentialStream) : HRESULT
-    @lpVtbl.value.set_custom_response_stream.unsafe_as(Proc(ISequentialStream, HRESULT)).call(psequentialstream)
+  def set_custom_response_stream(this : IXMLHTTPRequest3*, psequentialstream : ISequentialStream) : HRESULT
+    @lpVtbl.value.set_custom_response_stream.call(this, psequentialstream)
   end
-  def set_property(eproperty : XHR_PROPERTY, ullvalue : UInt64) : HRESULT
-    @lpVtbl.value.set_property.unsafe_as(Proc(XHR_PROPERTY, UInt64, HRESULT)).call(eproperty, ullvalue)
+  def set_property(this : IXMLHTTPRequest3*, eproperty : XHR_PROPERTY, ullvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_property.call(this, eproperty, ullvalue)
   end
-  def set_request_header(pwszheader : LibC::LPWSTR, pwszvalue : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_request_header.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pwszheader, pwszvalue)
+  def set_request_header(this : IXMLHTTPRequest3*, pwszheader : LibC::LPWSTR, pwszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_request_header.call(this, pwszheader, pwszvalue)
   end
-  def get_all_response_headers(ppwszheaders : UInt16**) : HRESULT
-    @lpVtbl.value.get_all_response_headers.unsafe_as(Proc(UInt16**, HRESULT)).call(ppwszheaders)
+  def get_all_response_headers(this : IXMLHTTPRequest3*, ppwszheaders : UInt16**) : HRESULT
+    @lpVtbl.value.get_all_response_headers.call(this, ppwszheaders)
   end
-  def get_cookie(pwszurl : LibC::LPWSTR, pwszname : LibC::LPWSTR, dwflags : UInt32, pccookies : UInt32*, ppcookies : XHR_COOKIE**) : HRESULT
-    @lpVtbl.value.get_cookie.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, UInt32*, XHR_COOKIE**, HRESULT)).call(pwszurl, pwszname, dwflags, pccookies, ppcookies)
+  def get_cookie(this : IXMLHTTPRequest3*, pwszurl : LibC::LPWSTR, pwszname : LibC::LPWSTR, dwflags : UInt32, pccookies : UInt32*, ppcookies : XHR_COOKIE**) : HRESULT
+    @lpVtbl.value.get_cookie.call(this, pwszurl, pwszname, dwflags, pccookies, ppcookies)
   end
-  def get_response_header(pwszheader : LibC::LPWSTR, ppwszvalue : UInt16**) : HRESULT
-    @lpVtbl.value.get_response_header.unsafe_as(Proc(LibC::LPWSTR, UInt16**, HRESULT)).call(pwszheader, ppwszvalue)
+  def get_response_header(this : IXMLHTTPRequest3*, pwszheader : LibC::LPWSTR, ppwszvalue : UInt16**) : HRESULT
+    @lpVtbl.value.get_response_header.call(this, pwszheader, ppwszvalue)
   end
-  def set_client_certificate(cbclientcertificatehash : UInt32, pbclientcertificatehash : UInt8*, pwszpin : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_client_certificate.unsafe_as(Proc(UInt32, UInt8*, LibC::LPWSTR, HRESULT)).call(cbclientcertificatehash, pbclientcertificatehash, pwszpin)
+  def set_client_certificate(this : IXMLHTTPRequest3*, cbclientcertificatehash : UInt32, pbclientcertificatehash : UInt8*, pwszpin : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_client_certificate.call(this, cbclientcertificatehash, pbclientcertificatehash, pwszpin)
   end
 end

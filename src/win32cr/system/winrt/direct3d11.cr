@@ -18,10 +18,10 @@ require "../../system/winrt.cr"
 lib LibWin32
 
   struct IDirect3DDxgiInterfaceAccessVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_interface : UInt64
+    query_interface : Proc(IDirect3DDxgiInterfaceAccess*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirect3DDxgiInterfaceAccess*, UInt32)
+    release : Proc(IDirect3DDxgiInterfaceAccess*, UInt32)
+    get_interface : Proc(IDirect3DDxgiInterfaceAccess*, Guid*, Void**, HRESULT)
   end
 
   IDirect3DDxgiInterfaceAccess_GUID = "a9b3d012-3df2-4ee3-b8d1-8695f457d3c1"
@@ -38,16 +38,16 @@ lib LibWin32
   fun CreateDirect3D11SurfaceFromDXGISurface(dgxisurface : IDXGISurface, graphicssurface : IInspectable*) : HRESULT
 end
 struct LibWin32::IDirect3DDxgiInterfaceAccess
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirect3DDxgiInterfaceAccess*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirect3DDxgiInterfaceAccess*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirect3DDxgiInterfaceAccess*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_interface(iid : Guid*, p : Void**) : HRESULT
-    @lpVtbl.value.get_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(iid, p)
+  def get_interface(this : IDirect3DDxgiInterfaceAccess*, iid : Guid*, p : Void**) : HRESULT
+    @lpVtbl.value.get_interface.call(this, iid, p)
   end
 end

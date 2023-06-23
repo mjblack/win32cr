@@ -4490,10 +4490,10 @@ lib LibWin32
 
 
   struct ICcgDomainAuthCredentialsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_password_credentials : UInt64
+    query_interface : Proc(ICcgDomainAuthCredentials*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ICcgDomainAuthCredentials*, UInt32)
+    release : Proc(ICcgDomainAuthCredentials*, UInt32)
+    get_password_credentials : Proc(ICcgDomainAuthCredentials*, LibC::LPWSTR, LibC::LPWSTR*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
   end
 
   ICcgDomainAuthCredentials_GUID = "6ecda518-2010-4437-8bc3-46e752b7b172"
@@ -5137,16 +5137,16 @@ lib LibWin32
   fun SLQueryLicenseValueFromApp(valuename : LibC::LPWSTR, valuetype : UInt32*, databuffer : Void*, datasize : UInt32, resultdatasize : UInt32*) : HRESULT
 end
 struct LibWin32::ICcgDomainAuthCredentials
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ICcgDomainAuthCredentials*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ICcgDomainAuthCredentials*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ICcgDomainAuthCredentials*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_password_credentials(plugininput : LibC::LPWSTR, domainname : LibC::LPWSTR*, username : LibC::LPWSTR*, password : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_password_credentials.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)).call(plugininput, domainname, username, password)
+  def get_password_credentials(this : ICcgDomainAuthCredentials*, plugininput : LibC::LPWSTR, domainname : LibC::LPWSTR*, username : LibC::LPWSTR*, password : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_password_credentials.call(this, plugininput, domainname, username, password)
   end
 end

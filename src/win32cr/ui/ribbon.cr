@@ -155,10 +155,10 @@ lib LibWin32
 
 
   struct IUISimplePropertySetVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_value : UInt64
+    query_interface : Proc(IUISimplePropertySet*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUISimplePropertySet*, UInt32)
+    release : Proc(IUISimplePropertySet*, UInt32)
+    get_value : Proc(IUISimplePropertySet*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
   end
 
   IUISimplePropertySet_GUID = "c205bb48-5b1c-4219-a106-15bd0a5f24e2"
@@ -168,12 +168,12 @@ lib LibWin32
   end
 
   struct IUIRibbonVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_height : UInt64
-    load_settings_from_stream : UInt64
-    save_settings_to_stream : UInt64
+    query_interface : Proc(IUIRibbon*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUIRibbon*, UInt32)
+    release : Proc(IUIRibbon*, UInt32)
+    get_height : Proc(IUIRibbon*, UInt32*, HRESULT)
+    load_settings_from_stream : Proc(IUIRibbon*, IStream, HRESULT)
+    save_settings_to_stream : Proc(IUIRibbon*, IStream, HRESULT)
   end
 
   IUIRibbon_GUID = "803982ab-370a-4f7e-a9e7-8784036a6e26"
@@ -183,18 +183,18 @@ lib LibWin32
   end
 
   struct IUIFrameworkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    initialize : UInt64
-    destroy : UInt64
-    load_ui : UInt64
-    get_view : UInt64
-    get_ui_command_property : UInt64
-    set_ui_command_property : UInt64
-    invalidate_ui_command : UInt64
-    flush_pending_invalidations : UInt64
-    set_modes : UInt64
+    query_interface : Proc(IUIFramework*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUIFramework*, UInt32)
+    release : Proc(IUIFramework*, UInt32)
+    initialize : Proc(IUIFramework*, LibC::HANDLE, IUIApplication, HRESULT)
+    destroy : Proc(IUIFramework*, HRESULT)
+    load_ui : Proc(IUIFramework*, HINSTANCE, LibC::LPWSTR, HRESULT)
+    get_view : Proc(IUIFramework*, UInt32, Guid*, Void**, HRESULT)
+    get_ui_command_property : Proc(IUIFramework*, UInt32, PROPERTYKEY*, PROPVARIANT*, HRESULT)
+    set_ui_command_property : Proc(IUIFramework*, UInt32, PROPERTYKEY*, PROPVARIANT*, HRESULT)
+    invalidate_ui_command : Proc(IUIFramework*, UInt32, UI_INVALIDATIONS, PROPERTYKEY*, HRESULT)
+    flush_pending_invalidations : Proc(IUIFramework*, HRESULT)
+    set_modes : Proc(IUIFramework*, Int32, HRESULT)
   end
 
   IUIFramework_GUID = "f4f0385d-6872-43a8-ad09-4c339cb3f5c5"
@@ -204,10 +204,10 @@ lib LibWin32
   end
 
   struct IUIEventLoggerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_ui_event : UInt64
+    query_interface : Proc(IUIEventLogger*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUIEventLogger*, UInt32)
+    release : Proc(IUIEventLogger*, UInt32)
+    on_ui_event : Proc(IUIEventLogger*, UI_EVENTPARAMS*, Void)
   end
 
   IUIEventLogger_GUID = "ec3e1034-dbf4-41a1-95d5-03e0f1026e05"
@@ -217,10 +217,10 @@ lib LibWin32
   end
 
   struct IUIEventingManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_event_logger : UInt64
+    query_interface : Proc(IUIEventingManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUIEventingManager*, UInt32)
+    release : Proc(IUIEventingManager*, UInt32)
+    set_event_logger : Proc(IUIEventingManager*, IUIEventLogger, HRESULT)
   end
 
   IUIEventingManager_GUID = "3be6ea7f-9a9b-4198-9368-9b0f923bd534"
@@ -230,10 +230,10 @@ lib LibWin32
   end
 
   struct IUIContextualUIVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    show_at_location : UInt64
+    query_interface : Proc(IUIContextualUI*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUIContextualUI*, UInt32)
+    release : Proc(IUIContextualUI*, UInt32)
+    show_at_location : Proc(IUIContextualUI*, Int32, Int32, HRESULT)
   end
 
   IUIContextualUI_GUID = "eea11f37-7c46-437c-8e55-b52122b29293"
@@ -243,16 +243,16 @@ lib LibWin32
   end
 
   struct IUICollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_count : UInt64
-    get_item : UInt64
-    add : UInt64
-    insert : UInt64
-    remove_at : UInt64
-    replace : UInt64
-    clear : UInt64
+    query_interface : Proc(IUICollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUICollection*, UInt32)
+    release : Proc(IUICollection*, UInt32)
+    get_count : Proc(IUICollection*, UInt32*, HRESULT)
+    get_item : Proc(IUICollection*, UInt32, IUnknown*, HRESULT)
+    add : Proc(IUICollection*, IUnknown, HRESULT)
+    insert : Proc(IUICollection*, UInt32, IUnknown, HRESULT)
+    remove_at : Proc(IUICollection*, UInt32, HRESULT)
+    replace : Proc(IUICollection*, UInt32, IUnknown, HRESULT)
+    clear : Proc(IUICollection*, HRESULT)
   end
 
   IUICollection_GUID = "df4f45bf-6f9d-4dd7-9d68-d8f9cd18c4db"
@@ -262,10 +262,10 @@ lib LibWin32
   end
 
   struct IUICollectionChangedEventVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_changed : UInt64
+    query_interface : Proc(IUICollectionChangedEvent*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUICollectionChangedEvent*, UInt32)
+    release : Proc(IUICollectionChangedEvent*, UInt32)
+    on_changed : Proc(IUICollectionChangedEvent*, UI_COLLECTIONCHANGE, UInt32, IUnknown, UInt32, IUnknown, HRESULT)
   end
 
   IUICollectionChangedEvent_GUID = "6502ae91-a14d-44b5-bbd0-62aacc581d52"
@@ -275,11 +275,11 @@ lib LibWin32
   end
 
   struct IUICommandHandlerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    execute : UInt64
-    update_property : UInt64
+    query_interface : Proc(IUICommandHandler*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUICommandHandler*, UInt32)
+    release : Proc(IUICommandHandler*, UInt32)
+    execute : Proc(IUICommandHandler*, UInt32, UI_EXECUTIONVERB, PROPERTYKEY*, PROPVARIANT*, IUISimplePropertySet, HRESULT)
+    update_property : Proc(IUICommandHandler*, UInt32, PROPERTYKEY*, PROPVARIANT*, PROPVARIANT*, HRESULT)
   end
 
   IUICommandHandler_GUID = "75ae0a2d-dc03-4c9f-8883-069660d0beb6"
@@ -289,12 +289,12 @@ lib LibWin32
   end
 
   struct IUIApplicationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_view_changed : UInt64
-    on_create_ui_command : UInt64
-    on_destroy_ui_command : UInt64
+    query_interface : Proc(IUIApplication*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUIApplication*, UInt32)
+    release : Proc(IUIApplication*, UInt32)
+    on_view_changed : Proc(IUIApplication*, UInt32, UI_VIEWTYPE, IUnknown, UI_VIEWVERB, Int32, HRESULT)
+    on_create_ui_command : Proc(IUIApplication*, UInt32, UI_COMMANDTYPE, IUICommandHandler*, HRESULT)
+    on_destroy_ui_command : Proc(IUIApplication*, UInt32, UI_COMMANDTYPE, IUICommandHandler, HRESULT)
   end
 
   IUIApplication_GUID = "d428903c-729a-491d-910d-682a08ff2522"
@@ -304,10 +304,10 @@ lib LibWin32
   end
 
   struct IUIImageVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_bitmap : UInt64
+    query_interface : Proc(IUIImage*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUIImage*, UInt32)
+    release : Proc(IUIImage*, UInt32)
+    get_bitmap : Proc(IUIImage*, HBITMAP*, HRESULT)
   end
 
   IUIImage_GUID = "23c8c838-4de6-436b-ab01-5554bb7c30dd"
@@ -317,10 +317,10 @@ lib LibWin32
   end
 
   struct IUIImageFromBitmapVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_image : UInt64
+    query_interface : Proc(IUIImageFromBitmap*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUIImageFromBitmap*, UInt32)
+    release : Proc(IUIImageFromBitmap*, UInt32)
+    create_image : Proc(IUIImageFromBitmap*, HBITMAP, UI_OWNERSHIP, IUIImage*, HRESULT)
   end
 
   IUIImageFromBitmap_GUID = "18aba7f3-4c1c-4ba2-bf6c-f5c3326fa816"
@@ -331,227 +331,227 @@ lib LibWin32
 
 end
 struct LibWin32::IUISimplePropertySet
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUISimplePropertySet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUISimplePropertySet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUISimplePropertySet*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_value(key : PROPERTYKEY*, value : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_value.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(key, value)
+  def get_value(this : IUISimplePropertySet*, key : PROPERTYKEY*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, key, value)
   end
 end
 struct LibWin32::IUIRibbon
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUIRibbon*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUIRibbon*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUIRibbon*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_height(cy : UInt32*) : HRESULT
-    @lpVtbl.value.get_height.unsafe_as(Proc(UInt32*, HRESULT)).call(cy)
+  def get_height(this : IUIRibbon*, cy : UInt32*) : HRESULT
+    @lpVtbl.value.get_height.call(this, cy)
   end
-  def load_settings_from_stream(pstream : IStream) : HRESULT
-    @lpVtbl.value.load_settings_from_stream.unsafe_as(Proc(IStream, HRESULT)).call(pstream)
+  def load_settings_from_stream(this : IUIRibbon*, pstream : IStream) : HRESULT
+    @lpVtbl.value.load_settings_from_stream.call(this, pstream)
   end
-  def save_settings_to_stream(pstream : IStream) : HRESULT
-    @lpVtbl.value.save_settings_to_stream.unsafe_as(Proc(IStream, HRESULT)).call(pstream)
+  def save_settings_to_stream(this : IUIRibbon*, pstream : IStream) : HRESULT
+    @lpVtbl.value.save_settings_to_stream.call(this, pstream)
   end
 end
 struct LibWin32::IUIFramework
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUIFramework*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUIFramework*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUIFramework*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def initialize(framewnd : LibC::HANDLE, application : IUIApplication) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(LibC::HANDLE, IUIApplication, HRESULT)).call(framewnd, application)
+  def initialize(this : IUIFramework*, framewnd : LibC::HANDLE, application : IUIApplication) : HRESULT
+    @lpVtbl.value.initialize.call(this, framewnd, application)
   end
-  def destroy : HRESULT
-    @lpVtbl.value.destroy.unsafe_as(Proc(HRESULT)).call
+  def destroy(this : IUIFramework*) : HRESULT
+    @lpVtbl.value.destroy.call(this)
   end
-  def load_ui(instance : HINSTANCE, resourcename : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.load_ui.unsafe_as(Proc(HINSTANCE, LibC::LPWSTR, HRESULT)).call(instance, resourcename)
+  def load_ui(this : IUIFramework*, instance : HINSTANCE, resourcename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.load_ui.call(this, instance, resourcename)
   end
-  def get_view(viewid : UInt32, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_view.unsafe_as(Proc(UInt32, Guid*, Void**, HRESULT)).call(viewid, riid, ppv)
+  def get_view(this : IUIFramework*, viewid : UInt32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_view.call(this, viewid, riid, ppv)
   end
-  def get_ui_command_property(commandid : UInt32, key : PROPERTYKEY*, value : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_ui_command_property.unsafe_as(Proc(UInt32, PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(commandid, key, value)
+  def get_ui_command_property(this : IUIFramework*, commandid : UInt32, key : PROPERTYKEY*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_ui_command_property.call(this, commandid, key, value)
   end
-  def set_ui_command_property(commandid : UInt32, key : PROPERTYKEY*, value : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.set_ui_command_property.unsafe_as(Proc(UInt32, PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(commandid, key, value)
+  def set_ui_command_property(this : IUIFramework*, commandid : UInt32, key : PROPERTYKEY*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_ui_command_property.call(this, commandid, key, value)
   end
-  def invalidate_ui_command(commandid : UInt32, flags : UI_INVALIDATIONS, key : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.invalidate_ui_command.unsafe_as(Proc(UInt32, UI_INVALIDATIONS, PROPERTYKEY*, HRESULT)).call(commandid, flags, key)
+  def invalidate_ui_command(this : IUIFramework*, commandid : UInt32, flags : UI_INVALIDATIONS, key : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.invalidate_ui_command.call(this, commandid, flags, key)
   end
-  def flush_pending_invalidations : HRESULT
-    @lpVtbl.value.flush_pending_invalidations.unsafe_as(Proc(HRESULT)).call
+  def flush_pending_invalidations(this : IUIFramework*) : HRESULT
+    @lpVtbl.value.flush_pending_invalidations.call(this)
   end
-  def set_modes(imodes : Int32) : HRESULT
-    @lpVtbl.value.set_modes.unsafe_as(Proc(Int32, HRESULT)).call(imodes)
+  def set_modes(this : IUIFramework*, imodes : Int32) : HRESULT
+    @lpVtbl.value.set_modes.call(this, imodes)
   end
 end
 struct LibWin32::IUIEventLogger
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUIEventLogger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUIEventLogger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUIEventLogger*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_ui_event(peventparams : UI_EVENTPARAMS*) : Void
-    @lpVtbl.value.on_ui_event.unsafe_as(Proc(UI_EVENTPARAMS*, Void)).call(peventparams)
+  def on_ui_event(this : IUIEventLogger*, peventparams : UI_EVENTPARAMS*) : Void
+    @lpVtbl.value.on_ui_event.call(this, peventparams)
   end
 end
 struct LibWin32::IUIEventingManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUIEventingManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUIEventingManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUIEventingManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_event_logger(eventlogger : IUIEventLogger) : HRESULT
-    @lpVtbl.value.set_event_logger.unsafe_as(Proc(IUIEventLogger, HRESULT)).call(eventlogger)
+  def set_event_logger(this : IUIEventingManager*, eventlogger : IUIEventLogger) : HRESULT
+    @lpVtbl.value.set_event_logger.call(this, eventlogger)
   end
 end
 struct LibWin32::IUIContextualUI
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUIContextualUI*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUIContextualUI*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUIContextualUI*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def show_at_location(x : Int32, y : Int32) : HRESULT
-    @lpVtbl.value.show_at_location.unsafe_as(Proc(Int32, Int32, HRESULT)).call(x, y)
+  def show_at_location(this : IUIContextualUI*, x : Int32, y : Int32) : HRESULT
+    @lpVtbl.value.show_at_location.call(this, x, y)
   end
 end
 struct LibWin32::IUICollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUICollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUICollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUICollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_count(count : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  def get_count(this : IUICollection*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
   end
-  def get_item(index : UInt32, item : IUnknown*) : HRESULT
-    @lpVtbl.value.get_item.unsafe_as(Proc(UInt32, IUnknown*, HRESULT)).call(index, item)
+  def get_item(this : IUICollection*, index : UInt32, item : IUnknown*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, item)
   end
-  def add(item : IUnknown) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(IUnknown, HRESULT)).call(item)
+  def add(this : IUICollection*, item : IUnknown) : HRESULT
+    @lpVtbl.value.add.call(this, item)
   end
-  def insert(index : UInt32, item : IUnknown) : HRESULT
-    @lpVtbl.value.insert.unsafe_as(Proc(UInt32, IUnknown, HRESULT)).call(index, item)
+  def insert(this : IUICollection*, index : UInt32, item : IUnknown) : HRESULT
+    @lpVtbl.value.insert.call(this, index, item)
   end
-  def remove_at(index : UInt32) : HRESULT
-    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(index)
+  def remove_at(this : IUICollection*, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
   end
-  def replace(indexreplaced : UInt32, itemreplacewith : IUnknown) : HRESULT
-    @lpVtbl.value.replace.unsafe_as(Proc(UInt32, IUnknown, HRESULT)).call(indexreplaced, itemreplacewith)
+  def replace(this : IUICollection*, indexreplaced : UInt32, itemreplacewith : IUnknown) : HRESULT
+    @lpVtbl.value.replace.call(this, indexreplaced, itemreplacewith)
   end
-  def clear : HRESULT
-    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  def clear(this : IUICollection*) : HRESULT
+    @lpVtbl.value.clear.call(this)
   end
 end
 struct LibWin32::IUICollectionChangedEvent
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUICollectionChangedEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUICollectionChangedEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUICollectionChangedEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_changed(action : UI_COLLECTIONCHANGE, oldindex : UInt32, olditem : IUnknown, newindex : UInt32, newitem : IUnknown) : HRESULT
-    @lpVtbl.value.on_changed.unsafe_as(Proc(UI_COLLECTIONCHANGE, UInt32, IUnknown, UInt32, IUnknown, HRESULT)).call(action, oldindex, olditem, newindex, newitem)
+  def on_changed(this : IUICollectionChangedEvent*, action : UI_COLLECTIONCHANGE, oldindex : UInt32, olditem : IUnknown, newindex : UInt32, newitem : IUnknown) : HRESULT
+    @lpVtbl.value.on_changed.call(this, action, oldindex, olditem, newindex, newitem)
   end
 end
 struct LibWin32::IUICommandHandler
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUICommandHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUICommandHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUICommandHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def execute(commandid : UInt32, verb : UI_EXECUTIONVERB, key : PROPERTYKEY*, currentvalue : PROPVARIANT*, commandexecutionproperties : IUISimplePropertySet) : HRESULT
-    @lpVtbl.value.execute.unsafe_as(Proc(UInt32, UI_EXECUTIONVERB, PROPERTYKEY*, PROPVARIANT*, IUISimplePropertySet, HRESULT)).call(commandid, verb, key, currentvalue, commandexecutionproperties)
+  def execute(this : IUICommandHandler*, commandid : UInt32, verb : UI_EXECUTIONVERB, key : PROPERTYKEY*, currentvalue : PROPVARIANT*, commandexecutionproperties : IUISimplePropertySet) : HRESULT
+    @lpVtbl.value.execute.call(this, commandid, verb, key, currentvalue, commandexecutionproperties)
   end
-  def update_property(commandid : UInt32, key : PROPERTYKEY*, currentvalue : PROPVARIANT*, newvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.update_property.unsafe_as(Proc(UInt32, PROPERTYKEY*, PROPVARIANT*, PROPVARIANT*, HRESULT)).call(commandid, key, currentvalue, newvalue)
+  def update_property(this : IUICommandHandler*, commandid : UInt32, key : PROPERTYKEY*, currentvalue : PROPVARIANT*, newvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.update_property.call(this, commandid, key, currentvalue, newvalue)
   end
 end
 struct LibWin32::IUIApplication
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUIApplication*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUIApplication*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUIApplication*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_view_changed(viewid : UInt32, typeid : UI_VIEWTYPE, view : IUnknown, verb : UI_VIEWVERB, ureasoncode : Int32) : HRESULT
-    @lpVtbl.value.on_view_changed.unsafe_as(Proc(UInt32, UI_VIEWTYPE, IUnknown, UI_VIEWVERB, Int32, HRESULT)).call(viewid, typeid, view, verb, ureasoncode)
+  def on_view_changed(this : IUIApplication*, viewid : UInt32, typeid : UI_VIEWTYPE, view : IUnknown, verb : UI_VIEWVERB, ureasoncode : Int32) : HRESULT
+    @lpVtbl.value.on_view_changed.call(this, viewid, typeid, view, verb, ureasoncode)
   end
-  def on_create_ui_command(commandid : UInt32, typeid : UI_COMMANDTYPE, commandhandler : IUICommandHandler*) : HRESULT
-    @lpVtbl.value.on_create_ui_command.unsafe_as(Proc(UInt32, UI_COMMANDTYPE, IUICommandHandler*, HRESULT)).call(commandid, typeid, commandhandler)
+  def on_create_ui_command(this : IUIApplication*, commandid : UInt32, typeid : UI_COMMANDTYPE, commandhandler : IUICommandHandler*) : HRESULT
+    @lpVtbl.value.on_create_ui_command.call(this, commandid, typeid, commandhandler)
   end
-  def on_destroy_ui_command(commandid : UInt32, typeid : UI_COMMANDTYPE, commandhandler : IUICommandHandler) : HRESULT
-    @lpVtbl.value.on_destroy_ui_command.unsafe_as(Proc(UInt32, UI_COMMANDTYPE, IUICommandHandler, HRESULT)).call(commandid, typeid, commandhandler)
+  def on_destroy_ui_command(this : IUIApplication*, commandid : UInt32, typeid : UI_COMMANDTYPE, commandhandler : IUICommandHandler) : HRESULT
+    @lpVtbl.value.on_destroy_ui_command.call(this, commandid, typeid, commandhandler)
   end
 end
 struct LibWin32::IUIImage
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUIImage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUIImage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUIImage*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_bitmap(bitmap : HBITMAP*) : HRESULT
-    @lpVtbl.value.get_bitmap.unsafe_as(Proc(HBITMAP*, HRESULT)).call(bitmap)
+  def get_bitmap(this : IUIImage*, bitmap : HBITMAP*) : HRESULT
+    @lpVtbl.value.get_bitmap.call(this, bitmap)
   end
 end
 struct LibWin32::IUIImageFromBitmap
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUIImageFromBitmap*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUIImageFromBitmap*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUIImageFromBitmap*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_image(bitmap : HBITMAP, options : UI_OWNERSHIP, image : IUIImage*) : HRESULT
-    @lpVtbl.value.create_image.unsafe_as(Proc(HBITMAP, UI_OWNERSHIP, IUIImage*, HRESULT)).call(bitmap, options, image)
+  def create_image(this : IUIImageFromBitmap*, bitmap : HBITMAP, options : UI_OWNERSHIP, image : IUIImage*) : HRESULT
+    @lpVtbl.value.create_image.call(this, bitmap, options, image)
   end
 end

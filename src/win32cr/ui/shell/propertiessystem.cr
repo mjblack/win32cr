@@ -343,10 +343,10 @@ lib LibWin32
 
 
   struct IInitializeWithFileVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    initialize : UInt64
+    query_interface : Proc(IInitializeWithFile*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInitializeWithFile*, UInt32)
+    release : Proc(IInitializeWithFile*, UInt32)
+    initialize : Proc(IInitializeWithFile*, LibC::LPWSTR, UInt32, HRESULT)
   end
 
   IInitializeWithFile_GUID = "b7d14566-0509-4cce-a71f-0a554233bd9b"
@@ -356,10 +356,10 @@ lib LibWin32
   end
 
   struct IInitializeWithStreamVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    initialize : UInt64
+    query_interface : Proc(IInitializeWithStream*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInitializeWithStream*, UInt32)
+    release : Proc(IInitializeWithStream*, UInt32)
+    initialize : Proc(IInitializeWithStream*, IStream, UInt32, HRESULT)
   end
 
   IInitializeWithStream_GUID = "b824b49d-22ac-4161-ac8a-9916e8fa3f7f"
@@ -369,14 +369,14 @@ lib LibWin32
   end
 
   struct IPropertyStoreVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_count : UInt64
-    get_at : UInt64
-    get_value : UInt64
-    set_value : UInt64
-    commit : UInt64
+    query_interface : Proc(IPropertyStore*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPropertyStore*, UInt32)
+    release : Proc(IPropertyStore*, UInt32)
+    get_count : Proc(IPropertyStore*, UInt32*, HRESULT)
+    get_at : Proc(IPropertyStore*, UInt32, PROPERTYKEY*, HRESULT)
+    get_value : Proc(IPropertyStore*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
+    set_value : Proc(IPropertyStore*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
+    commit : Proc(IPropertyStore*, HRESULT)
   end
 
   IPropertyStore_GUID = "886d8eeb-8cf2-4446-8d02-cdba1dbdcf99"
@@ -386,13 +386,13 @@ lib LibWin32
   end
 
   struct INamedPropertyStoreVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_named_value : UInt64
-    set_named_value : UInt64
-    get_name_count : UInt64
-    get_name_at : UInt64
+    query_interface : Proc(INamedPropertyStore*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INamedPropertyStore*, UInt32)
+    release : Proc(INamedPropertyStore*, UInt32)
+    get_named_value : Proc(INamedPropertyStore*, LibC::LPWSTR, PROPVARIANT*, HRESULT)
+    set_named_value : Proc(INamedPropertyStore*, LibC::LPWSTR, PROPVARIANT*, HRESULT)
+    get_name_count : Proc(INamedPropertyStore*, UInt32*, HRESULT)
+    get_name_at : Proc(INamedPropertyStore*, UInt32, UInt8**, HRESULT)
   end
 
   INamedPropertyStore_GUID = "71604b0f-97b0-4764-8577-2f13e98a1422"
@@ -402,11 +402,11 @@ lib LibWin32
   end
 
   struct IObjectWithPropertyKeyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_property_key : UInt64
-    get_property_key : UInt64
+    query_interface : Proc(IObjectWithPropertyKey*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IObjectWithPropertyKey*, UInt32)
+    release : Proc(IObjectWithPropertyKey*, UInt32)
+    set_property_key : Proc(IObjectWithPropertyKey*, PROPERTYKEY*, HRESULT)
+    get_property_key : Proc(IObjectWithPropertyKey*, PROPERTYKEY*, HRESULT)
   end
 
   IObjectWithPropertyKey_GUID = "fc0ca0a7-c316-4fd2-9031-3e628e6d4f23"
@@ -416,12 +416,12 @@ lib LibWin32
   end
 
   struct IPropertyChangeVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_property_key : UInt64
-    get_property_key : UInt64
-    apply_to_prop_variant : UInt64
+    query_interface : Proc(IPropertyChange*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPropertyChange*, UInt32)
+    release : Proc(IPropertyChange*, UInt32)
+    set_property_key : Proc(IPropertyChange*, PROPERTYKEY*, HRESULT)
+    get_property_key : Proc(IPropertyChange*, PROPERTYKEY*, HRESULT)
+    apply_to_prop_variant : Proc(IPropertyChange*, PROPVARIANT*, PROPVARIANT*, HRESULT)
   end
 
   IPropertyChange_GUID = "f917bc8a-1bba-4478-a245-1bde03eb9431"
@@ -431,16 +431,16 @@ lib LibWin32
   end
 
   struct IPropertyChangeArrayVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_count : UInt64
-    get_at : UInt64
-    insert_at : UInt64
-    append : UInt64
-    append_or_replace : UInt64
-    remove_at : UInt64
-    is_key_in_array : UInt64
+    query_interface : Proc(IPropertyChangeArray*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPropertyChangeArray*, UInt32)
+    release : Proc(IPropertyChangeArray*, UInt32)
+    get_count : Proc(IPropertyChangeArray*, UInt32*, HRESULT)
+    get_at : Proc(IPropertyChangeArray*, UInt32, Guid*, Void**, HRESULT)
+    insert_at : Proc(IPropertyChangeArray*, UInt32, IPropertyChange, HRESULT)
+    append : Proc(IPropertyChangeArray*, IPropertyChange, HRESULT)
+    append_or_replace : Proc(IPropertyChangeArray*, IPropertyChange, HRESULT)
+    remove_at : Proc(IPropertyChangeArray*, UInt32, HRESULT)
+    is_key_in_array : Proc(IPropertyChangeArray*, PROPERTYKEY*, HRESULT)
   end
 
   IPropertyChangeArray_GUID = "380f5cad-1b5e-42f2-805d-637fd392d31e"
@@ -450,10 +450,10 @@ lib LibWin32
   end
 
   struct IPropertyStoreCapabilitiesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    is_property_writable : UInt64
+    query_interface : Proc(IPropertyStoreCapabilities*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPropertyStoreCapabilities*, UInt32)
+    release : Proc(IPropertyStoreCapabilities*, UInt32)
+    is_property_writable : Proc(IPropertyStoreCapabilities*, PROPERTYKEY*, HRESULT)
   end
 
   IPropertyStoreCapabilities_GUID = "c8e2d566-186e-4d49-bf41-6909ead56acc"
@@ -463,18 +463,18 @@ lib LibWin32
   end
 
   struct IPropertyStoreCacheVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_count : UInt64
-    get_at : UInt64
-    get_value : UInt64
-    set_value : UInt64
-    commit : UInt64
-    get_state : UInt64
-    get_value_and_state : UInt64
-    set_state : UInt64
-    set_value_and_state : UInt64
+    query_interface : Proc(IPropertyStoreCache*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPropertyStoreCache*, UInt32)
+    release : Proc(IPropertyStoreCache*, UInt32)
+    get_count : Proc(IPropertyStoreCache*, UInt32*, HRESULT)
+    get_at : Proc(IPropertyStoreCache*, UInt32, PROPERTYKEY*, HRESULT)
+    get_value : Proc(IPropertyStoreCache*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
+    set_value : Proc(IPropertyStoreCache*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
+    commit : Proc(IPropertyStoreCache*, HRESULT)
+    get_state : Proc(IPropertyStoreCache*, PROPERTYKEY*, PSC_STATE*, HRESULT)
+    get_value_and_state : Proc(IPropertyStoreCache*, PROPERTYKEY*, PROPVARIANT*, PSC_STATE*, HRESULT)
+    set_state : Proc(IPropertyStoreCache*, PROPERTYKEY*, PSC_STATE, HRESULT)
+    set_value_and_state : Proc(IPropertyStoreCache*, PROPERTYKEY*, PROPVARIANT*, PSC_STATE, HRESULT)
   end
 
   IPropertyStoreCache_GUID = "3017056d-9a91-4e90-937d-746c72abbf4f"
@@ -484,14 +484,14 @@ lib LibWin32
   end
 
   struct IPropertyEnumTypeVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_enum_type : UInt64
-    get_value : UInt64
-    get_range_min_value : UInt64
-    get_range_set_value : UInt64
-    get_display_text : UInt64
+    query_interface : Proc(IPropertyEnumType*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPropertyEnumType*, UInt32)
+    release : Proc(IPropertyEnumType*, UInt32)
+    get_enum_type : Proc(IPropertyEnumType*, PROPENUMTYPE*, HRESULT)
+    get_value : Proc(IPropertyEnumType*, PROPVARIANT*, HRESULT)
+    get_range_min_value : Proc(IPropertyEnumType*, PROPVARIANT*, HRESULT)
+    get_range_set_value : Proc(IPropertyEnumType*, PROPVARIANT*, HRESULT)
+    get_display_text : Proc(IPropertyEnumType*, LibC::LPWSTR*, HRESULT)
   end
 
   IPropertyEnumType_GUID = "11e1fbf9-2d56-4a6b-8db3-7cd193a471f2"
@@ -501,15 +501,15 @@ lib LibWin32
   end
 
   struct IPropertyEnumType2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_enum_type : UInt64
-    get_value : UInt64
-    get_range_min_value : UInt64
-    get_range_set_value : UInt64
-    get_display_text : UInt64
-    get_image_reference : UInt64
+    query_interface : Proc(IPropertyEnumType2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPropertyEnumType2*, UInt32)
+    release : Proc(IPropertyEnumType2*, UInt32)
+    get_enum_type : Proc(IPropertyEnumType2*, PROPENUMTYPE*, HRESULT)
+    get_value : Proc(IPropertyEnumType2*, PROPVARIANT*, HRESULT)
+    get_range_min_value : Proc(IPropertyEnumType2*, PROPVARIANT*, HRESULT)
+    get_range_set_value : Proc(IPropertyEnumType2*, PROPVARIANT*, HRESULT)
+    get_display_text : Proc(IPropertyEnumType2*, LibC::LPWSTR*, HRESULT)
+    get_image_reference : Proc(IPropertyEnumType2*, LibC::LPWSTR*, HRESULT)
   end
 
   IPropertyEnumType2_GUID = "9b6e051c-5ddd-4321-9070-fe2acb55e794"
@@ -519,13 +519,13 @@ lib LibWin32
   end
 
   struct IPropertyEnumTypeListVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_count : UInt64
-    get_at : UInt64
-    get_condition_at : UInt64
-    find_matching_index : UInt64
+    query_interface : Proc(IPropertyEnumTypeList*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPropertyEnumTypeList*, UInt32)
+    release : Proc(IPropertyEnumTypeList*, UInt32)
+    get_count : Proc(IPropertyEnumTypeList*, UInt32*, HRESULT)
+    get_at : Proc(IPropertyEnumTypeList*, UInt32, Guid*, Void**, HRESULT)
+    get_condition_at : Proc(IPropertyEnumTypeList*, UInt32, Guid*, Void**, HRESULT)
+    find_matching_index : Proc(IPropertyEnumTypeList*, PROPVARIANT*, UInt32*, HRESULT)
   end
 
   IPropertyEnumTypeList_GUID = "a99400f4-3d84-4557-94ba-1242fb2cc9a6"
@@ -535,30 +535,30 @@ lib LibWin32
   end
 
   struct IPropertyDescriptionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_property_key : UInt64
-    get_canonical_name : UInt64
-    get_property_type : UInt64
-    get_display_name : UInt64
-    get_edit_invitation : UInt64
-    get_type_flags : UInt64
-    get_view_flags : UInt64
-    get_default_column_width : UInt64
-    get_display_type : UInt64
-    get_column_state : UInt64
-    get_grouping_range : UInt64
-    get_relative_description_type : UInt64
-    get_relative_description : UInt64
-    get_sort_description : UInt64
-    get_sort_description_label : UInt64
-    get_aggregation_type : UInt64
-    get_condition_type : UInt64
-    get_enum_type_list : UInt64
-    coerce_to_canonical_value : UInt64
-    format_for_display : UInt64
-    is_value_canonical : UInt64
+    query_interface : Proc(IPropertyDescription*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPropertyDescription*, UInt32)
+    release : Proc(IPropertyDescription*, UInt32)
+    get_property_key : Proc(IPropertyDescription*, PROPERTYKEY*, HRESULT)
+    get_canonical_name : Proc(IPropertyDescription*, LibC::LPWSTR*, HRESULT)
+    get_property_type : Proc(IPropertyDescription*, UInt16*, HRESULT)
+    get_display_name : Proc(IPropertyDescription*, LibC::LPWSTR*, HRESULT)
+    get_edit_invitation : Proc(IPropertyDescription*, LibC::LPWSTR*, HRESULT)
+    get_type_flags : Proc(IPropertyDescription*, PROPDESC_TYPE_FLAGS, PROPDESC_TYPE_FLAGS*, HRESULT)
+    get_view_flags : Proc(IPropertyDescription*, PROPDESC_VIEW_FLAGS*, HRESULT)
+    get_default_column_width : Proc(IPropertyDescription*, UInt32*, HRESULT)
+    get_display_type : Proc(IPropertyDescription*, PROPDESC_DISPLAYTYPE*, HRESULT)
+    get_column_state : Proc(IPropertyDescription*, UInt32*, HRESULT)
+    get_grouping_range : Proc(IPropertyDescription*, PROPDESC_GROUPING_RANGE*, HRESULT)
+    get_relative_description_type : Proc(IPropertyDescription*, PROPDESC_RELATIVEDESCRIPTION_TYPE*, HRESULT)
+    get_relative_description : Proc(IPropertyDescription*, PROPVARIANT*, PROPVARIANT*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
+    get_sort_description : Proc(IPropertyDescription*, PROPDESC_SORTDESCRIPTION*, HRESULT)
+    get_sort_description_label : Proc(IPropertyDescription*, LibC::BOOL, LibC::LPWSTR*, HRESULT)
+    get_aggregation_type : Proc(IPropertyDescription*, PROPDESC_AGGREGATION_TYPE*, HRESULT)
+    get_condition_type : Proc(IPropertyDescription*, PROPDESC_CONDITION_TYPE*, CONDITION_OPERATION*, HRESULT)
+    get_enum_type_list : Proc(IPropertyDescription*, Guid*, Void**, HRESULT)
+    coerce_to_canonical_value : Proc(IPropertyDescription*, PROPVARIANT*, HRESULT)
+    format_for_display : Proc(IPropertyDescription*, PROPVARIANT*, PROPDESC_FORMAT_FLAGS, LibC::LPWSTR*, HRESULT)
+    is_value_canonical : Proc(IPropertyDescription*, PROPVARIANT*, HRESULT)
   end
 
   IPropertyDescription_GUID = "6f79d558-3e96-4549-a1d1-7d75d2288814"
@@ -568,31 +568,31 @@ lib LibWin32
   end
 
   struct IPropertyDescription2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_property_key : UInt64
-    get_canonical_name : UInt64
-    get_property_type : UInt64
-    get_display_name : UInt64
-    get_edit_invitation : UInt64
-    get_type_flags : UInt64
-    get_view_flags : UInt64
-    get_default_column_width : UInt64
-    get_display_type : UInt64
-    get_column_state : UInt64
-    get_grouping_range : UInt64
-    get_relative_description_type : UInt64
-    get_relative_description : UInt64
-    get_sort_description : UInt64
-    get_sort_description_label : UInt64
-    get_aggregation_type : UInt64
-    get_condition_type : UInt64
-    get_enum_type_list : UInt64
-    coerce_to_canonical_value : UInt64
-    format_for_display : UInt64
-    is_value_canonical : UInt64
-    get_image_reference_for_value : UInt64
+    query_interface : Proc(IPropertyDescription2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPropertyDescription2*, UInt32)
+    release : Proc(IPropertyDescription2*, UInt32)
+    get_property_key : Proc(IPropertyDescription2*, PROPERTYKEY*, HRESULT)
+    get_canonical_name : Proc(IPropertyDescription2*, LibC::LPWSTR*, HRESULT)
+    get_property_type : Proc(IPropertyDescription2*, UInt16*, HRESULT)
+    get_display_name : Proc(IPropertyDescription2*, LibC::LPWSTR*, HRESULT)
+    get_edit_invitation : Proc(IPropertyDescription2*, LibC::LPWSTR*, HRESULT)
+    get_type_flags : Proc(IPropertyDescription2*, PROPDESC_TYPE_FLAGS, PROPDESC_TYPE_FLAGS*, HRESULT)
+    get_view_flags : Proc(IPropertyDescription2*, PROPDESC_VIEW_FLAGS*, HRESULT)
+    get_default_column_width : Proc(IPropertyDescription2*, UInt32*, HRESULT)
+    get_display_type : Proc(IPropertyDescription2*, PROPDESC_DISPLAYTYPE*, HRESULT)
+    get_column_state : Proc(IPropertyDescription2*, UInt32*, HRESULT)
+    get_grouping_range : Proc(IPropertyDescription2*, PROPDESC_GROUPING_RANGE*, HRESULT)
+    get_relative_description_type : Proc(IPropertyDescription2*, PROPDESC_RELATIVEDESCRIPTION_TYPE*, HRESULT)
+    get_relative_description : Proc(IPropertyDescription2*, PROPVARIANT*, PROPVARIANT*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
+    get_sort_description : Proc(IPropertyDescription2*, PROPDESC_SORTDESCRIPTION*, HRESULT)
+    get_sort_description_label : Proc(IPropertyDescription2*, LibC::BOOL, LibC::LPWSTR*, HRESULT)
+    get_aggregation_type : Proc(IPropertyDescription2*, PROPDESC_AGGREGATION_TYPE*, HRESULT)
+    get_condition_type : Proc(IPropertyDescription2*, PROPDESC_CONDITION_TYPE*, CONDITION_OPERATION*, HRESULT)
+    get_enum_type_list : Proc(IPropertyDescription2*, Guid*, Void**, HRESULT)
+    coerce_to_canonical_value : Proc(IPropertyDescription2*, PROPVARIANT*, HRESULT)
+    format_for_display : Proc(IPropertyDescription2*, PROPVARIANT*, PROPDESC_FORMAT_FLAGS, LibC::LPWSTR*, HRESULT)
+    is_value_canonical : Proc(IPropertyDescription2*, PROPVARIANT*, HRESULT)
+    get_image_reference_for_value : Proc(IPropertyDescription2*, PROPVARIANT*, LibC::LPWSTR*, HRESULT)
   end
 
   IPropertyDescription2_GUID = "57d2eded-5062-400e-b107-5dae79fe57a6"
@@ -602,32 +602,32 @@ lib LibWin32
   end
 
   struct IPropertyDescriptionAliasInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_property_key : UInt64
-    get_canonical_name : UInt64
-    get_property_type : UInt64
-    get_display_name : UInt64
-    get_edit_invitation : UInt64
-    get_type_flags : UInt64
-    get_view_flags : UInt64
-    get_default_column_width : UInt64
-    get_display_type : UInt64
-    get_column_state : UInt64
-    get_grouping_range : UInt64
-    get_relative_description_type : UInt64
-    get_relative_description : UInt64
-    get_sort_description : UInt64
-    get_sort_description_label : UInt64
-    get_aggregation_type : UInt64
-    get_condition_type : UInt64
-    get_enum_type_list : UInt64
-    coerce_to_canonical_value : UInt64
-    format_for_display : UInt64
-    is_value_canonical : UInt64
-    get_sort_by_alias : UInt64
-    get_additional_sort_by_aliases : UInt64
+    query_interface : Proc(IPropertyDescriptionAliasInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPropertyDescriptionAliasInfo*, UInt32)
+    release : Proc(IPropertyDescriptionAliasInfo*, UInt32)
+    get_property_key : Proc(IPropertyDescriptionAliasInfo*, PROPERTYKEY*, HRESULT)
+    get_canonical_name : Proc(IPropertyDescriptionAliasInfo*, LibC::LPWSTR*, HRESULT)
+    get_property_type : Proc(IPropertyDescriptionAliasInfo*, UInt16*, HRESULT)
+    get_display_name : Proc(IPropertyDescriptionAliasInfo*, LibC::LPWSTR*, HRESULT)
+    get_edit_invitation : Proc(IPropertyDescriptionAliasInfo*, LibC::LPWSTR*, HRESULT)
+    get_type_flags : Proc(IPropertyDescriptionAliasInfo*, PROPDESC_TYPE_FLAGS, PROPDESC_TYPE_FLAGS*, HRESULT)
+    get_view_flags : Proc(IPropertyDescriptionAliasInfo*, PROPDESC_VIEW_FLAGS*, HRESULT)
+    get_default_column_width : Proc(IPropertyDescriptionAliasInfo*, UInt32*, HRESULT)
+    get_display_type : Proc(IPropertyDescriptionAliasInfo*, PROPDESC_DISPLAYTYPE*, HRESULT)
+    get_column_state : Proc(IPropertyDescriptionAliasInfo*, UInt32*, HRESULT)
+    get_grouping_range : Proc(IPropertyDescriptionAliasInfo*, PROPDESC_GROUPING_RANGE*, HRESULT)
+    get_relative_description_type : Proc(IPropertyDescriptionAliasInfo*, PROPDESC_RELATIVEDESCRIPTION_TYPE*, HRESULT)
+    get_relative_description : Proc(IPropertyDescriptionAliasInfo*, PROPVARIANT*, PROPVARIANT*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
+    get_sort_description : Proc(IPropertyDescriptionAliasInfo*, PROPDESC_SORTDESCRIPTION*, HRESULT)
+    get_sort_description_label : Proc(IPropertyDescriptionAliasInfo*, LibC::BOOL, LibC::LPWSTR*, HRESULT)
+    get_aggregation_type : Proc(IPropertyDescriptionAliasInfo*, PROPDESC_AGGREGATION_TYPE*, HRESULT)
+    get_condition_type : Proc(IPropertyDescriptionAliasInfo*, PROPDESC_CONDITION_TYPE*, CONDITION_OPERATION*, HRESULT)
+    get_enum_type_list : Proc(IPropertyDescriptionAliasInfo*, Guid*, Void**, HRESULT)
+    coerce_to_canonical_value : Proc(IPropertyDescriptionAliasInfo*, PROPVARIANT*, HRESULT)
+    format_for_display : Proc(IPropertyDescriptionAliasInfo*, PROPVARIANT*, PROPDESC_FORMAT_FLAGS, LibC::LPWSTR*, HRESULT)
+    is_value_canonical : Proc(IPropertyDescriptionAliasInfo*, PROPVARIANT*, HRESULT)
+    get_sort_by_alias : Proc(IPropertyDescriptionAliasInfo*, Guid*, Void**, HRESULT)
+    get_additional_sort_by_aliases : Proc(IPropertyDescriptionAliasInfo*, Guid*, Void**, HRESULT)
   end
 
   IPropertyDescriptionAliasInfo_GUID = "f67104fc-2af9-46fd-b32d-243c1404f3d1"
@@ -637,34 +637,34 @@ lib LibWin32
   end
 
   struct IPropertyDescriptionSearchInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_property_key : UInt64
-    get_canonical_name : UInt64
-    get_property_type : UInt64
-    get_display_name : UInt64
-    get_edit_invitation : UInt64
-    get_type_flags : UInt64
-    get_view_flags : UInt64
-    get_default_column_width : UInt64
-    get_display_type : UInt64
-    get_column_state : UInt64
-    get_grouping_range : UInt64
-    get_relative_description_type : UInt64
-    get_relative_description : UInt64
-    get_sort_description : UInt64
-    get_sort_description_label : UInt64
-    get_aggregation_type : UInt64
-    get_condition_type : UInt64
-    get_enum_type_list : UInt64
-    coerce_to_canonical_value : UInt64
-    format_for_display : UInt64
-    is_value_canonical : UInt64
-    get_search_info_flags : UInt64
-    get_column_index_type : UInt64
-    get_projection_string : UInt64
-    get_max_size : UInt64
+    query_interface : Proc(IPropertyDescriptionSearchInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPropertyDescriptionSearchInfo*, UInt32)
+    release : Proc(IPropertyDescriptionSearchInfo*, UInt32)
+    get_property_key : Proc(IPropertyDescriptionSearchInfo*, PROPERTYKEY*, HRESULT)
+    get_canonical_name : Proc(IPropertyDescriptionSearchInfo*, LibC::LPWSTR*, HRESULT)
+    get_property_type : Proc(IPropertyDescriptionSearchInfo*, UInt16*, HRESULT)
+    get_display_name : Proc(IPropertyDescriptionSearchInfo*, LibC::LPWSTR*, HRESULT)
+    get_edit_invitation : Proc(IPropertyDescriptionSearchInfo*, LibC::LPWSTR*, HRESULT)
+    get_type_flags : Proc(IPropertyDescriptionSearchInfo*, PROPDESC_TYPE_FLAGS, PROPDESC_TYPE_FLAGS*, HRESULT)
+    get_view_flags : Proc(IPropertyDescriptionSearchInfo*, PROPDESC_VIEW_FLAGS*, HRESULT)
+    get_default_column_width : Proc(IPropertyDescriptionSearchInfo*, UInt32*, HRESULT)
+    get_display_type : Proc(IPropertyDescriptionSearchInfo*, PROPDESC_DISPLAYTYPE*, HRESULT)
+    get_column_state : Proc(IPropertyDescriptionSearchInfo*, UInt32*, HRESULT)
+    get_grouping_range : Proc(IPropertyDescriptionSearchInfo*, PROPDESC_GROUPING_RANGE*, HRESULT)
+    get_relative_description_type : Proc(IPropertyDescriptionSearchInfo*, PROPDESC_RELATIVEDESCRIPTION_TYPE*, HRESULT)
+    get_relative_description : Proc(IPropertyDescriptionSearchInfo*, PROPVARIANT*, PROPVARIANT*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
+    get_sort_description : Proc(IPropertyDescriptionSearchInfo*, PROPDESC_SORTDESCRIPTION*, HRESULT)
+    get_sort_description_label : Proc(IPropertyDescriptionSearchInfo*, LibC::BOOL, LibC::LPWSTR*, HRESULT)
+    get_aggregation_type : Proc(IPropertyDescriptionSearchInfo*, PROPDESC_AGGREGATION_TYPE*, HRESULT)
+    get_condition_type : Proc(IPropertyDescriptionSearchInfo*, PROPDESC_CONDITION_TYPE*, CONDITION_OPERATION*, HRESULT)
+    get_enum_type_list : Proc(IPropertyDescriptionSearchInfo*, Guid*, Void**, HRESULT)
+    coerce_to_canonical_value : Proc(IPropertyDescriptionSearchInfo*, PROPVARIANT*, HRESULT)
+    format_for_display : Proc(IPropertyDescriptionSearchInfo*, PROPVARIANT*, PROPDESC_FORMAT_FLAGS, LibC::LPWSTR*, HRESULT)
+    is_value_canonical : Proc(IPropertyDescriptionSearchInfo*, PROPVARIANT*, HRESULT)
+    get_search_info_flags : Proc(IPropertyDescriptionSearchInfo*, PROPDESC_SEARCHINFO_FLAGS*, HRESULT)
+    get_column_index_type : Proc(IPropertyDescriptionSearchInfo*, PROPDESC_COLUMNINDEX_TYPE*, HRESULT)
+    get_projection_string : Proc(IPropertyDescriptionSearchInfo*, LibC::LPWSTR*, HRESULT)
+    get_max_size : Proc(IPropertyDescriptionSearchInfo*, UInt32*, HRESULT)
   end
 
   IPropertyDescriptionSearchInfo_GUID = "078f91bd-29a2-440f-924e-46a291524520"
@@ -674,31 +674,31 @@ lib LibWin32
   end
 
   struct IPropertyDescriptionRelatedPropertyInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_property_key : UInt64
-    get_canonical_name : UInt64
-    get_property_type : UInt64
-    get_display_name : UInt64
-    get_edit_invitation : UInt64
-    get_type_flags : UInt64
-    get_view_flags : UInt64
-    get_default_column_width : UInt64
-    get_display_type : UInt64
-    get_column_state : UInt64
-    get_grouping_range : UInt64
-    get_relative_description_type : UInt64
-    get_relative_description : UInt64
-    get_sort_description : UInt64
-    get_sort_description_label : UInt64
-    get_aggregation_type : UInt64
-    get_condition_type : UInt64
-    get_enum_type_list : UInt64
-    coerce_to_canonical_value : UInt64
-    format_for_display : UInt64
-    is_value_canonical : UInt64
-    get_related_property : UInt64
+    query_interface : Proc(IPropertyDescriptionRelatedPropertyInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPropertyDescriptionRelatedPropertyInfo*, UInt32)
+    release : Proc(IPropertyDescriptionRelatedPropertyInfo*, UInt32)
+    get_property_key : Proc(IPropertyDescriptionRelatedPropertyInfo*, PROPERTYKEY*, HRESULT)
+    get_canonical_name : Proc(IPropertyDescriptionRelatedPropertyInfo*, LibC::LPWSTR*, HRESULT)
+    get_property_type : Proc(IPropertyDescriptionRelatedPropertyInfo*, UInt16*, HRESULT)
+    get_display_name : Proc(IPropertyDescriptionRelatedPropertyInfo*, LibC::LPWSTR*, HRESULT)
+    get_edit_invitation : Proc(IPropertyDescriptionRelatedPropertyInfo*, LibC::LPWSTR*, HRESULT)
+    get_type_flags : Proc(IPropertyDescriptionRelatedPropertyInfo*, PROPDESC_TYPE_FLAGS, PROPDESC_TYPE_FLAGS*, HRESULT)
+    get_view_flags : Proc(IPropertyDescriptionRelatedPropertyInfo*, PROPDESC_VIEW_FLAGS*, HRESULT)
+    get_default_column_width : Proc(IPropertyDescriptionRelatedPropertyInfo*, UInt32*, HRESULT)
+    get_display_type : Proc(IPropertyDescriptionRelatedPropertyInfo*, PROPDESC_DISPLAYTYPE*, HRESULT)
+    get_column_state : Proc(IPropertyDescriptionRelatedPropertyInfo*, UInt32*, HRESULT)
+    get_grouping_range : Proc(IPropertyDescriptionRelatedPropertyInfo*, PROPDESC_GROUPING_RANGE*, HRESULT)
+    get_relative_description_type : Proc(IPropertyDescriptionRelatedPropertyInfo*, PROPDESC_RELATIVEDESCRIPTION_TYPE*, HRESULT)
+    get_relative_description : Proc(IPropertyDescriptionRelatedPropertyInfo*, PROPVARIANT*, PROPVARIANT*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
+    get_sort_description : Proc(IPropertyDescriptionRelatedPropertyInfo*, PROPDESC_SORTDESCRIPTION*, HRESULT)
+    get_sort_description_label : Proc(IPropertyDescriptionRelatedPropertyInfo*, LibC::BOOL, LibC::LPWSTR*, HRESULT)
+    get_aggregation_type : Proc(IPropertyDescriptionRelatedPropertyInfo*, PROPDESC_AGGREGATION_TYPE*, HRESULT)
+    get_condition_type : Proc(IPropertyDescriptionRelatedPropertyInfo*, PROPDESC_CONDITION_TYPE*, CONDITION_OPERATION*, HRESULT)
+    get_enum_type_list : Proc(IPropertyDescriptionRelatedPropertyInfo*, Guid*, Void**, HRESULT)
+    coerce_to_canonical_value : Proc(IPropertyDescriptionRelatedPropertyInfo*, PROPVARIANT*, HRESULT)
+    format_for_display : Proc(IPropertyDescriptionRelatedPropertyInfo*, PROPVARIANT*, PROPDESC_FORMAT_FLAGS, LibC::LPWSTR*, HRESULT)
+    is_value_canonical : Proc(IPropertyDescriptionRelatedPropertyInfo*, PROPVARIANT*, HRESULT)
+    get_related_property : Proc(IPropertyDescriptionRelatedPropertyInfo*, LibC::LPWSTR, Guid*, Void**, HRESULT)
   end
 
   IPropertyDescriptionRelatedPropertyInfo_GUID = "507393f4-2a3d-4a60-b59e-d9c75716c2dd"
@@ -708,18 +708,18 @@ lib LibWin32
   end
 
   struct IPropertySystemVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_property_description : UInt64
-    get_property_description_by_name : UInt64
-    get_property_description_list_from_string : UInt64
-    enumerate_property_descriptions : UInt64
-    format_for_display : UInt64
-    format_for_display_alloc : UInt64
-    register_property_schema : UInt64
-    unregister_property_schema : UInt64
-    refresh_property_schema : UInt64
+    query_interface : Proc(IPropertySystem*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPropertySystem*, UInt32)
+    release : Proc(IPropertySystem*, UInt32)
+    get_property_description : Proc(IPropertySystem*, PROPERTYKEY*, Guid*, Void**, HRESULT)
+    get_property_description_by_name : Proc(IPropertySystem*, LibC::LPWSTR, Guid*, Void**, HRESULT)
+    get_property_description_list_from_string : Proc(IPropertySystem*, LibC::LPWSTR, Guid*, Void**, HRESULT)
+    enumerate_property_descriptions : Proc(IPropertySystem*, PROPDESC_ENUMFILTER, Guid*, Void**, HRESULT)
+    format_for_display : Proc(IPropertySystem*, PROPERTYKEY*, PROPVARIANT*, PROPDESC_FORMAT_FLAGS, Char*, UInt32, HRESULT)
+    format_for_display_alloc : Proc(IPropertySystem*, PROPERTYKEY*, PROPVARIANT*, PROPDESC_FORMAT_FLAGS, LibC::LPWSTR*, HRESULT)
+    register_property_schema : Proc(IPropertySystem*, LibC::LPWSTR, HRESULT)
+    unregister_property_schema : Proc(IPropertySystem*, LibC::LPWSTR, HRESULT)
+    refresh_property_schema : Proc(IPropertySystem*, HRESULT)
   end
 
   IPropertySystem_GUID = "ca724e8a-c3e6-442b-88a4-6fb0db8035a3"
@@ -729,11 +729,11 @@ lib LibWin32
   end
 
   struct IPropertyDescriptionListVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_count : UInt64
-    get_at : UInt64
+    query_interface : Proc(IPropertyDescriptionList*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPropertyDescriptionList*, UInt32)
+    release : Proc(IPropertyDescriptionList*, UInt32)
+    get_count : Proc(IPropertyDescriptionList*, UInt32*, HRESULT)
+    get_at : Proc(IPropertyDescriptionList*, UInt32, Guid*, Void**, HRESULT)
   end
 
   IPropertyDescriptionList_GUID = "1f9fc1d0-c39b-4b26-817f-011967d3440e"
@@ -743,11 +743,11 @@ lib LibWin32
   end
 
   struct IPropertyStoreFactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_property_store : UInt64
-    get_property_store_for_keys : UInt64
+    query_interface : Proc(IPropertyStoreFactory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPropertyStoreFactory*, UInt32)
+    release : Proc(IPropertyStoreFactory*, UInt32)
+    get_property_store : Proc(IPropertyStoreFactory*, GETPROPERTYSTOREFLAGS, IUnknown, Guid*, Void**, HRESULT)
+    get_property_store_for_keys : Proc(IPropertyStoreFactory*, PROPERTYKEY*, UInt32, GETPROPERTYSTOREFLAGS, Guid*, Void**, HRESULT)
   end
 
   IPropertyStoreFactory_GUID = "bc110b6d-57e8-4148-a9c6-91015ab2f3a5"
@@ -757,12 +757,12 @@ lib LibWin32
   end
 
   struct IDelayedPropertyStoreFactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_property_store : UInt64
-    get_property_store_for_keys : UInt64
-    get_delayed_property_store : UInt64
+    query_interface : Proc(IDelayedPropertyStoreFactory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDelayedPropertyStoreFactory*, UInt32)
+    release : Proc(IDelayedPropertyStoreFactory*, UInt32)
+    get_property_store : Proc(IDelayedPropertyStoreFactory*, GETPROPERTYSTOREFLAGS, IUnknown, Guid*, Void**, HRESULT)
+    get_property_store_for_keys : Proc(IDelayedPropertyStoreFactory*, PROPERTYKEY*, UInt32, GETPROPERTYSTOREFLAGS, Guid*, Void**, HRESULT)
+    get_delayed_property_store : Proc(IDelayedPropertyStoreFactory*, GETPROPERTYSTOREFLAGS, UInt32, Guid*, Void**, HRESULT)
   end
 
   IDelayedPropertyStoreFactory_GUID = "40d4577f-e237-4bdb-bd69-58f089431b6a"
@@ -772,12 +772,12 @@ lib LibWin32
   end
 
   struct IPersistSerializedPropStorageVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_flags : UInt64
-    set_property_storage : UInt64
-    get_property_storage : UInt64
+    query_interface : Proc(IPersistSerializedPropStorage*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPersistSerializedPropStorage*, UInt32)
+    release : Proc(IPersistSerializedPropStorage*, UInt32)
+    set_flags : Proc(IPersistSerializedPropStorage*, Int32, HRESULT)
+    set_property_storage : Proc(IPersistSerializedPropStorage*, SERIALIZEDPROPSTORAGE*, UInt32, HRESULT)
+    get_property_storage : Proc(IPersistSerializedPropStorage*, SERIALIZEDPROPSTORAGE**, UInt32*, HRESULT)
   end
 
   IPersistSerializedPropStorage_GUID = "e318ad57-0aa0-450f-aca5-6fab7103d917"
@@ -787,14 +787,14 @@ lib LibWin32
   end
 
   struct IPersistSerializedPropStorage2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_flags : UInt64
-    set_property_storage : UInt64
-    get_property_storage : UInt64
-    get_property_storage_size : UInt64
-    get_property_storage_buffer : UInt64
+    query_interface : Proc(IPersistSerializedPropStorage2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPersistSerializedPropStorage2*, UInt32)
+    release : Proc(IPersistSerializedPropStorage2*, UInt32)
+    set_flags : Proc(IPersistSerializedPropStorage2*, Int32, HRESULT)
+    set_property_storage : Proc(IPersistSerializedPropStorage2*, SERIALIZEDPROPSTORAGE*, UInt32, HRESULT)
+    get_property_storage : Proc(IPersistSerializedPropStorage2*, SERIALIZEDPROPSTORAGE**, UInt32*, HRESULT)
+    get_property_storage_size : Proc(IPersistSerializedPropStorage2*, UInt32*, HRESULT)
+    get_property_storage_buffer : Proc(IPersistSerializedPropStorage2*, SERIALIZEDPROPSTORAGE*, UInt32, UInt32*, HRESULT)
   end
 
   IPersistSerializedPropStorage2_GUID = "77effa68-4f98-4366-ba72-573b3d880571"
@@ -804,10 +804,10 @@ lib LibWin32
   end
 
   struct IPropertySystemChangeNotifyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    schema_refreshed : UInt64
+    query_interface : Proc(IPropertySystemChangeNotify*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPropertySystemChangeNotify*, UInt32)
+    release : Proc(IPropertySystemChangeNotify*, UInt32)
+    schema_refreshed : Proc(IPropertySystemChangeNotify*, HRESULT)
   end
 
   IPropertySystemChangeNotify_GUID = "fa955fd9-38be-4879-a6ce-824cf52d609f"
@@ -817,10 +817,10 @@ lib LibWin32
   end
 
   struct ICreateObjectVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_object : UInt64
+    query_interface : Proc(ICreateObject*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ICreateObject*, UInt32)
+    release : Proc(ICreateObject*, UInt32)
+    create_object : Proc(ICreateObject*, Guid*, IUnknown, Guid*, Void**, HRESULT)
   end
 
   ICreateObject_GUID = "75121952-e0d0-43e5-9380-1d80483acf72"
@@ -830,17 +830,17 @@ lib LibWin32
   end
 
   struct IPropertyUIVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    parse_property_name : UInt64
-    get_cannonical_name : UInt64
-    get_display_name : UInt64
-    get_property_description : UInt64
-    get_default_width : UInt64
-    get_flags : UInt64
-    format_for_display : UInt64
-    get_help_info : UInt64
+    query_interface : Proc(IPropertyUI*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPropertyUI*, UInt32)
+    release : Proc(IPropertyUI*, UInt32)
+    parse_property_name : Proc(IPropertyUI*, LibC::LPWSTR, Guid*, UInt32*, UInt32*, HRESULT)
+    get_cannonical_name : Proc(IPropertyUI*, Guid*, UInt32, Char*, UInt32, HRESULT)
+    get_display_name : Proc(IPropertyUI*, Guid*, UInt32, PROPERTYUI_NAME_FLAGS, Char*, UInt32, HRESULT)
+    get_property_description : Proc(IPropertyUI*, Guid*, UInt32, Char*, UInt32, HRESULT)
+    get_default_width : Proc(IPropertyUI*, Guid*, UInt32, UInt32*, HRESULT)
+    get_flags : Proc(IPropertyUI*, Guid*, UInt32, PROPERTYUI_FLAGS*, HRESULT)
+    format_for_display : Proc(IPropertyUI*, Guid*, UInt32, PROPVARIANT*, PROPERTYUI_FORMAT_FLAGS, Char*, UInt32, HRESULT)
+    get_help_info : Proc(IPropertyUI*, Guid*, UInt32, Char*, UInt32, UInt32*, HRESULT)
   end
 
   IPropertyUI_GUID = "757a7d9f-919a-4118-99d7-dbb208c8cc66"
@@ -1532,874 +1532,874 @@ lib LibWin32
   fun SHGetPropertyStoreForWindow(hwnd : LibC::HANDLE, riid : Guid*, ppv : Void**) : HRESULT
 end
 struct LibWin32::IInitializeWithFile
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInitializeWithFile*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInitializeWithFile*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInitializeWithFile*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def initialize(pszfilepath : LibC::LPWSTR, grfmode : UInt32) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(pszfilepath, grfmode)
+  def initialize(this : IInitializeWithFile*, pszfilepath : LibC::LPWSTR, grfmode : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, pszfilepath, grfmode)
   end
 end
 struct LibWin32::IInitializeWithStream
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInitializeWithStream*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInitializeWithStream*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInitializeWithStream*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def initialize(pstream : IStream, grfmode : UInt32) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(IStream, UInt32, HRESULT)).call(pstream, grfmode)
+  def initialize(this : IInitializeWithStream*, pstream : IStream, grfmode : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, pstream, grfmode)
   end
 end
 struct LibWin32::IPropertyStore
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPropertyStore*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPropertyStore*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPropertyStore*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_count(cprops : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(cprops)
+  def get_count(this : IPropertyStore*, cprops : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, cprops)
   end
-  def get_at(iprop : UInt32, pkey : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, PROPERTYKEY*, HRESULT)).call(iprop, pkey)
+  def get_at(this : IPropertyStore*, iprop : UInt32, pkey : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.get_at.call(this, iprop, pkey)
   end
-  def get_value(key : PROPERTYKEY*, pv : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_value.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(key, pv)
+  def get_value(this : IPropertyStore*, key : PROPERTYKEY*, pv : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, key, pv)
   end
-  def set_value(key : PROPERTYKEY*, propvar : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.set_value.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(key, propvar)
+  def set_value(this : IPropertyStore*, key : PROPERTYKEY*, propvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_value.call(this, key, propvar)
   end
-  def commit : HRESULT
-    @lpVtbl.value.commit.unsafe_as(Proc(HRESULT)).call
+  def commit(this : IPropertyStore*) : HRESULT
+    @lpVtbl.value.commit.call(this)
   end
 end
 struct LibWin32::INamedPropertyStore
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INamedPropertyStore*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INamedPropertyStore*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INamedPropertyStore*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_named_value(pszname : LibC::LPWSTR, ppropvar : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_named_value.unsafe_as(Proc(LibC::LPWSTR, PROPVARIANT*, HRESULT)).call(pszname, ppropvar)
+  def get_named_value(this : INamedPropertyStore*, pszname : LibC::LPWSTR, ppropvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_named_value.call(this, pszname, ppropvar)
   end
-  def set_named_value(pszname : LibC::LPWSTR, propvar : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.set_named_value.unsafe_as(Proc(LibC::LPWSTR, PROPVARIANT*, HRESULT)).call(pszname, propvar)
+  def set_named_value(this : INamedPropertyStore*, pszname : LibC::LPWSTR, propvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_named_value.call(this, pszname, propvar)
   end
-  def get_name_count(pdwcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_name_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcount)
+  def get_name_count(this : INamedPropertyStore*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_name_count.call(this, pdwcount)
   end
-  def get_name_at(iprop : UInt32, pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name_at.unsafe_as(Proc(UInt32, UInt8**, HRESULT)).call(iprop, pbstrname)
+  def get_name_at(this : INamedPropertyStore*, iprop : UInt32, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name_at.call(this, iprop, pbstrname)
   end
 end
 struct LibWin32::IObjectWithPropertyKey
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IObjectWithPropertyKey*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IObjectWithPropertyKey*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IObjectWithPropertyKey*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_property_key(key : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.set_property_key.unsafe_as(Proc(PROPERTYKEY*, HRESULT)).call(key)
+  def set_property_key(this : IObjectWithPropertyKey*, key : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.set_property_key.call(this, key)
   end
-  def get_property_key(pkey : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.get_property_key.unsafe_as(Proc(PROPERTYKEY*, HRESULT)).call(pkey)
+  def get_property_key(this : IObjectWithPropertyKey*, pkey : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.get_property_key.call(this, pkey)
   end
 end
 struct LibWin32::IPropertyChange
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPropertyChange*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPropertyChange*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPropertyChange*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_property_key(key : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.set_property_key.unsafe_as(Proc(PROPERTYKEY*, HRESULT)).call(key)
+  def set_property_key(this : IPropertyChange*, key : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.set_property_key.call(this, key)
   end
-  def get_property_key(pkey : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.get_property_key.unsafe_as(Proc(PROPERTYKEY*, HRESULT)).call(pkey)
+  def get_property_key(this : IPropertyChange*, pkey : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.get_property_key.call(this, pkey)
   end
-  def apply_to_prop_variant(propvarin : PROPVARIANT*, ppropvarout : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.apply_to_prop_variant.unsafe_as(Proc(PROPVARIANT*, PROPVARIANT*, HRESULT)).call(propvarin, ppropvarout)
+  def apply_to_prop_variant(this : IPropertyChange*, propvarin : PROPVARIANT*, ppropvarout : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.apply_to_prop_variant.call(this, propvarin, ppropvarout)
   end
 end
 struct LibWin32::IPropertyChangeArray
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPropertyChangeArray*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPropertyChangeArray*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPropertyChangeArray*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_count(pcoperations : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcoperations)
+  def get_count(this : IPropertyChangeArray*, pcoperations : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcoperations)
   end
-  def get_at(iindex : UInt32, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, Guid*, Void**, HRESULT)).call(iindex, riid, ppv)
+  def get_at(this : IPropertyChangeArray*, iindex : UInt32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_at.call(this, iindex, riid, ppv)
   end
-  def insert_at(iindex : UInt32, ppropchange : IPropertyChange) : HRESULT
-    @lpVtbl.value.insert_at.unsafe_as(Proc(UInt32, IPropertyChange, HRESULT)).call(iindex, ppropchange)
+  def insert_at(this : IPropertyChangeArray*, iindex : UInt32, ppropchange : IPropertyChange) : HRESULT
+    @lpVtbl.value.insert_at.call(this, iindex, ppropchange)
   end
-  def append(ppropchange : IPropertyChange) : HRESULT
-    @lpVtbl.value.append.unsafe_as(Proc(IPropertyChange, HRESULT)).call(ppropchange)
+  def append(this : IPropertyChangeArray*, ppropchange : IPropertyChange) : HRESULT
+    @lpVtbl.value.append.call(this, ppropchange)
   end
-  def append_or_replace(ppropchange : IPropertyChange) : HRESULT
-    @lpVtbl.value.append_or_replace.unsafe_as(Proc(IPropertyChange, HRESULT)).call(ppropchange)
+  def append_or_replace(this : IPropertyChangeArray*, ppropchange : IPropertyChange) : HRESULT
+    @lpVtbl.value.append_or_replace.call(this, ppropchange)
   end
-  def remove_at(iindex : UInt32) : HRESULT
-    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(iindex)
+  def remove_at(this : IPropertyChangeArray*, iindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, iindex)
   end
-  def is_key_in_array(key : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.is_key_in_array.unsafe_as(Proc(PROPERTYKEY*, HRESULT)).call(key)
+  def is_key_in_array(this : IPropertyChangeArray*, key : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.is_key_in_array.call(this, key)
   end
 end
 struct LibWin32::IPropertyStoreCapabilities
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPropertyStoreCapabilities*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPropertyStoreCapabilities*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPropertyStoreCapabilities*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def is_property_writable(key : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.is_property_writable.unsafe_as(Proc(PROPERTYKEY*, HRESULT)).call(key)
+  def is_property_writable(this : IPropertyStoreCapabilities*, key : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.is_property_writable.call(this, key)
   end
 end
 struct LibWin32::IPropertyStoreCache
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPropertyStoreCache*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPropertyStoreCache*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPropertyStoreCache*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_count(cprops : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(cprops)
+  def get_count(this : IPropertyStoreCache*, cprops : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, cprops)
   end
-  def get_at(iprop : UInt32, pkey : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, PROPERTYKEY*, HRESULT)).call(iprop, pkey)
+  def get_at(this : IPropertyStoreCache*, iprop : UInt32, pkey : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.get_at.call(this, iprop, pkey)
   end
-  def get_value(key : PROPERTYKEY*, pv : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_value.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(key, pv)
+  def get_value(this : IPropertyStoreCache*, key : PROPERTYKEY*, pv : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, key, pv)
   end
-  def set_value(key : PROPERTYKEY*, propvar : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.set_value.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(key, propvar)
+  def set_value(this : IPropertyStoreCache*, key : PROPERTYKEY*, propvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_value.call(this, key, propvar)
   end
-  def commit : HRESULT
-    @lpVtbl.value.commit.unsafe_as(Proc(HRESULT)).call
+  def commit(this : IPropertyStoreCache*) : HRESULT
+    @lpVtbl.value.commit.call(this)
   end
-  def get_state(key : PROPERTYKEY*, pstate : PSC_STATE*) : HRESULT
-    @lpVtbl.value.get_state.unsafe_as(Proc(PROPERTYKEY*, PSC_STATE*, HRESULT)).call(key, pstate)
+  def get_state(this : IPropertyStoreCache*, key : PROPERTYKEY*, pstate : PSC_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, key, pstate)
   end
-  def get_value_and_state(key : PROPERTYKEY*, ppropvar : PROPVARIANT*, pstate : PSC_STATE*) : HRESULT
-    @lpVtbl.value.get_value_and_state.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, PSC_STATE*, HRESULT)).call(key, ppropvar, pstate)
+  def get_value_and_state(this : IPropertyStoreCache*, key : PROPERTYKEY*, ppropvar : PROPVARIANT*, pstate : PSC_STATE*) : HRESULT
+    @lpVtbl.value.get_value_and_state.call(this, key, ppropvar, pstate)
   end
-  def set_state(key : PROPERTYKEY*, state : PSC_STATE) : HRESULT
-    @lpVtbl.value.set_state.unsafe_as(Proc(PROPERTYKEY*, PSC_STATE, HRESULT)).call(key, state)
+  def set_state(this : IPropertyStoreCache*, key : PROPERTYKEY*, state : PSC_STATE) : HRESULT
+    @lpVtbl.value.set_state.call(this, key, state)
   end
-  def set_value_and_state(key : PROPERTYKEY*, ppropvar : PROPVARIANT*, state : PSC_STATE) : HRESULT
-    @lpVtbl.value.set_value_and_state.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, PSC_STATE, HRESULT)).call(key, ppropvar, state)
+  def set_value_and_state(this : IPropertyStoreCache*, key : PROPERTYKEY*, ppropvar : PROPVARIANT*, state : PSC_STATE) : HRESULT
+    @lpVtbl.value.set_value_and_state.call(this, key, ppropvar, state)
   end
 end
 struct LibWin32::IPropertyEnumType
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPropertyEnumType*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPropertyEnumType*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPropertyEnumType*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_enum_type(penumtype : PROPENUMTYPE*) : HRESULT
-    @lpVtbl.value.get_enum_type.unsafe_as(Proc(PROPENUMTYPE*, HRESULT)).call(penumtype)
+  def get_enum_type(this : IPropertyEnumType*, penumtype : PROPENUMTYPE*) : HRESULT
+    @lpVtbl.value.get_enum_type.call(this, penumtype)
   end
-  def get_value(ppropvar : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_value.unsafe_as(Proc(PROPVARIANT*, HRESULT)).call(ppropvar)
+  def get_value(this : IPropertyEnumType*, ppropvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, ppropvar)
   end
-  def get_range_min_value(ppropvarmin : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_range_min_value.unsafe_as(Proc(PROPVARIANT*, HRESULT)).call(ppropvarmin)
+  def get_range_min_value(this : IPropertyEnumType*, ppropvarmin : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_range_min_value.call(this, ppropvarmin)
   end
-  def get_range_set_value(ppropvarset : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_range_set_value.unsafe_as(Proc(PROPVARIANT*, HRESULT)).call(ppropvarset)
+  def get_range_set_value(this : IPropertyEnumType*, ppropvarset : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_range_set_value.call(this, ppropvarset)
   end
-  def get_display_text(ppszdisplay : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_display_text.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszdisplay)
+  def get_display_text(this : IPropertyEnumType*, ppszdisplay : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_display_text.call(this, ppszdisplay)
   end
 end
 struct LibWin32::IPropertyEnumType2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPropertyEnumType2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPropertyEnumType2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPropertyEnumType2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_enum_type(penumtype : PROPENUMTYPE*) : HRESULT
-    @lpVtbl.value.get_enum_type.unsafe_as(Proc(PROPENUMTYPE*, HRESULT)).call(penumtype)
+  def get_enum_type(this : IPropertyEnumType2*, penumtype : PROPENUMTYPE*) : HRESULT
+    @lpVtbl.value.get_enum_type.call(this, penumtype)
   end
-  def get_value(ppropvar : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_value.unsafe_as(Proc(PROPVARIANT*, HRESULT)).call(ppropvar)
+  def get_value(this : IPropertyEnumType2*, ppropvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, ppropvar)
   end
-  def get_range_min_value(ppropvarmin : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_range_min_value.unsafe_as(Proc(PROPVARIANT*, HRESULT)).call(ppropvarmin)
+  def get_range_min_value(this : IPropertyEnumType2*, ppropvarmin : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_range_min_value.call(this, ppropvarmin)
   end
-  def get_range_set_value(ppropvarset : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_range_set_value.unsafe_as(Proc(PROPVARIANT*, HRESULT)).call(ppropvarset)
+  def get_range_set_value(this : IPropertyEnumType2*, ppropvarset : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_range_set_value.call(this, ppropvarset)
   end
-  def get_display_text(ppszdisplay : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_display_text.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszdisplay)
+  def get_display_text(this : IPropertyEnumType2*, ppszdisplay : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_display_text.call(this, ppszdisplay)
   end
-  def get_image_reference(ppszimageres : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_image_reference.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszimageres)
+  def get_image_reference(this : IPropertyEnumType2*, ppszimageres : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_image_reference.call(this, ppszimageres)
   end
 end
 struct LibWin32::IPropertyEnumTypeList
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPropertyEnumTypeList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPropertyEnumTypeList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPropertyEnumTypeList*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_count(pctypes : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctypes)
+  def get_count(this : IPropertyEnumTypeList*, pctypes : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pctypes)
   end
-  def get_at(itype : UInt32, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, Guid*, Void**, HRESULT)).call(itype, riid, ppv)
+  def get_at(this : IPropertyEnumTypeList*, itype : UInt32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_at.call(this, itype, riid, ppv)
   end
-  def get_condition_at(nindex : UInt32, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_condition_at.unsafe_as(Proc(UInt32, Guid*, Void**, HRESULT)).call(nindex, riid, ppv)
+  def get_condition_at(this : IPropertyEnumTypeList*, nindex : UInt32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_condition_at.call(this, nindex, riid, ppv)
   end
-  def find_matching_index(propvarcmp : PROPVARIANT*, pnindex : UInt32*) : HRESULT
-    @lpVtbl.value.find_matching_index.unsafe_as(Proc(PROPVARIANT*, UInt32*, HRESULT)).call(propvarcmp, pnindex)
+  def find_matching_index(this : IPropertyEnumTypeList*, propvarcmp : PROPVARIANT*, pnindex : UInt32*) : HRESULT
+    @lpVtbl.value.find_matching_index.call(this, propvarcmp, pnindex)
   end
 end
 struct LibWin32::IPropertyDescription
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPropertyDescription*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPropertyDescription*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPropertyDescription*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_property_key(pkey : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.get_property_key.unsafe_as(Proc(PROPERTYKEY*, HRESULT)).call(pkey)
+  def get_property_key(this : IPropertyDescription*, pkey : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.get_property_key.call(this, pkey)
   end
-  def get_canonical_name(ppszname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_canonical_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszname)
+  def get_canonical_name(this : IPropertyDescription*, ppszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_canonical_name.call(this, ppszname)
   end
-  def get_property_type(pvartype : UInt16*) : HRESULT
-    @lpVtbl.value.get_property_type.unsafe_as(Proc(UInt16*, HRESULT)).call(pvartype)
+  def get_property_type(this : IPropertyDescription*, pvartype : UInt16*) : HRESULT
+    @lpVtbl.value.get_property_type.call(this, pvartype)
   end
-  def get_display_name(ppszname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_display_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszname)
+  def get_display_name(this : IPropertyDescription*, ppszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, ppszname)
   end
-  def get_edit_invitation(ppszinvite : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_edit_invitation.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszinvite)
+  def get_edit_invitation(this : IPropertyDescription*, ppszinvite : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_edit_invitation.call(this, ppszinvite)
   end
-  def get_type_flags(mask : PROPDESC_TYPE_FLAGS, ppdtflags : PROPDESC_TYPE_FLAGS*) : HRESULT
-    @lpVtbl.value.get_type_flags.unsafe_as(Proc(PROPDESC_TYPE_FLAGS, PROPDESC_TYPE_FLAGS*, HRESULT)).call(mask, ppdtflags)
+  def get_type_flags(this : IPropertyDescription*, mask : PROPDESC_TYPE_FLAGS, ppdtflags : PROPDESC_TYPE_FLAGS*) : HRESULT
+    @lpVtbl.value.get_type_flags.call(this, mask, ppdtflags)
   end
-  def get_view_flags(ppdvflags : PROPDESC_VIEW_FLAGS*) : HRESULT
-    @lpVtbl.value.get_view_flags.unsafe_as(Proc(PROPDESC_VIEW_FLAGS*, HRESULT)).call(ppdvflags)
+  def get_view_flags(this : IPropertyDescription*, ppdvflags : PROPDESC_VIEW_FLAGS*) : HRESULT
+    @lpVtbl.value.get_view_flags.call(this, ppdvflags)
   end
-  def get_default_column_width(pcxchars : UInt32*) : HRESULT
-    @lpVtbl.value.get_default_column_width.unsafe_as(Proc(UInt32*, HRESULT)).call(pcxchars)
+  def get_default_column_width(this : IPropertyDescription*, pcxchars : UInt32*) : HRESULT
+    @lpVtbl.value.get_default_column_width.call(this, pcxchars)
   end
-  def get_display_type(pdisplaytype : PROPDESC_DISPLAYTYPE*) : HRESULT
-    @lpVtbl.value.get_display_type.unsafe_as(Proc(PROPDESC_DISPLAYTYPE*, HRESULT)).call(pdisplaytype)
+  def get_display_type(this : IPropertyDescription*, pdisplaytype : PROPDESC_DISPLAYTYPE*) : HRESULT
+    @lpVtbl.value.get_display_type.call(this, pdisplaytype)
   end
-  def get_column_state(pcsflags : UInt32*) : HRESULT
-    @lpVtbl.value.get_column_state.unsafe_as(Proc(UInt32*, HRESULT)).call(pcsflags)
+  def get_column_state(this : IPropertyDescription*, pcsflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_column_state.call(this, pcsflags)
   end
-  def get_grouping_range(pgr : PROPDESC_GROUPING_RANGE*) : HRESULT
-    @lpVtbl.value.get_grouping_range.unsafe_as(Proc(PROPDESC_GROUPING_RANGE*, HRESULT)).call(pgr)
+  def get_grouping_range(this : IPropertyDescription*, pgr : PROPDESC_GROUPING_RANGE*) : HRESULT
+    @lpVtbl.value.get_grouping_range.call(this, pgr)
   end
-  def get_relative_description_type(prdt : PROPDESC_RELATIVEDESCRIPTION_TYPE*) : HRESULT
-    @lpVtbl.value.get_relative_description_type.unsafe_as(Proc(PROPDESC_RELATIVEDESCRIPTION_TYPE*, HRESULT)).call(prdt)
+  def get_relative_description_type(this : IPropertyDescription*, prdt : PROPDESC_RELATIVEDESCRIPTION_TYPE*) : HRESULT
+    @lpVtbl.value.get_relative_description_type.call(this, prdt)
   end
-  def get_relative_description(propvar1 : PROPVARIANT*, propvar2 : PROPVARIANT*, ppszdesc1 : LibC::LPWSTR*, ppszdesc2 : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_relative_description.unsafe_as(Proc(PROPVARIANT*, PROPVARIANT*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)).call(propvar1, propvar2, ppszdesc1, ppszdesc2)
+  def get_relative_description(this : IPropertyDescription*, propvar1 : PROPVARIANT*, propvar2 : PROPVARIANT*, ppszdesc1 : LibC::LPWSTR*, ppszdesc2 : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_relative_description.call(this, propvar1, propvar2, ppszdesc1, ppszdesc2)
   end
-  def get_sort_description(psd : PROPDESC_SORTDESCRIPTION*) : HRESULT
-    @lpVtbl.value.get_sort_description.unsafe_as(Proc(PROPDESC_SORTDESCRIPTION*, HRESULT)).call(psd)
+  def get_sort_description(this : IPropertyDescription*, psd : PROPDESC_SORTDESCRIPTION*) : HRESULT
+    @lpVtbl.value.get_sort_description.call(this, psd)
   end
-  def get_sort_description_label(fdescending : LibC::BOOL, ppszdescription : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_sort_description_label.unsafe_as(Proc(LibC::BOOL, LibC::LPWSTR*, HRESULT)).call(fdescending, ppszdescription)
+  def get_sort_description_label(this : IPropertyDescription*, fdescending : LibC::BOOL, ppszdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_sort_description_label.call(this, fdescending, ppszdescription)
   end
-  def get_aggregation_type(paggtype : PROPDESC_AGGREGATION_TYPE*) : HRESULT
-    @lpVtbl.value.get_aggregation_type.unsafe_as(Proc(PROPDESC_AGGREGATION_TYPE*, HRESULT)).call(paggtype)
+  def get_aggregation_type(this : IPropertyDescription*, paggtype : PROPDESC_AGGREGATION_TYPE*) : HRESULT
+    @lpVtbl.value.get_aggregation_type.call(this, paggtype)
   end
-  def get_condition_type(pcontype : PROPDESC_CONDITION_TYPE*, popdefault : CONDITION_OPERATION*) : HRESULT
-    @lpVtbl.value.get_condition_type.unsafe_as(Proc(PROPDESC_CONDITION_TYPE*, CONDITION_OPERATION*, HRESULT)).call(pcontype, popdefault)
+  def get_condition_type(this : IPropertyDescription*, pcontype : PROPDESC_CONDITION_TYPE*, popdefault : CONDITION_OPERATION*) : HRESULT
+    @lpVtbl.value.get_condition_type.call(this, pcontype, popdefault)
   end
-  def get_enum_type_list(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_enum_type_list.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def get_enum_type_list(this : IPropertyDescription*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_enum_type_list.call(this, riid, ppv)
   end
-  def coerce_to_canonical_value(ppropvar : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.coerce_to_canonical_value.unsafe_as(Proc(PROPVARIANT*, HRESULT)).call(ppropvar)
+  def coerce_to_canonical_value(this : IPropertyDescription*, ppropvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.coerce_to_canonical_value.call(this, ppropvar)
   end
-  def format_for_display(propvar : PROPVARIANT*, pdfflags : PROPDESC_FORMAT_FLAGS, ppszdisplay : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.format_for_display.unsafe_as(Proc(PROPVARIANT*, PROPDESC_FORMAT_FLAGS, LibC::LPWSTR*, HRESULT)).call(propvar, pdfflags, ppszdisplay)
+  def format_for_display(this : IPropertyDescription*, propvar : PROPVARIANT*, pdfflags : PROPDESC_FORMAT_FLAGS, ppszdisplay : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.format_for_display.call(this, propvar, pdfflags, ppszdisplay)
   end
-  def is_value_canonical(propvar : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.is_value_canonical.unsafe_as(Proc(PROPVARIANT*, HRESULT)).call(propvar)
+  def is_value_canonical(this : IPropertyDescription*, propvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.is_value_canonical.call(this, propvar)
   end
 end
 struct LibWin32::IPropertyDescription2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPropertyDescription2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPropertyDescription2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPropertyDescription2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_property_key(pkey : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.get_property_key.unsafe_as(Proc(PROPERTYKEY*, HRESULT)).call(pkey)
+  def get_property_key(this : IPropertyDescription2*, pkey : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.get_property_key.call(this, pkey)
   end
-  def get_canonical_name(ppszname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_canonical_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszname)
+  def get_canonical_name(this : IPropertyDescription2*, ppszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_canonical_name.call(this, ppszname)
   end
-  def get_property_type(pvartype : UInt16*) : HRESULT
-    @lpVtbl.value.get_property_type.unsafe_as(Proc(UInt16*, HRESULT)).call(pvartype)
+  def get_property_type(this : IPropertyDescription2*, pvartype : UInt16*) : HRESULT
+    @lpVtbl.value.get_property_type.call(this, pvartype)
   end
-  def get_display_name(ppszname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_display_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszname)
+  def get_display_name(this : IPropertyDescription2*, ppszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, ppszname)
   end
-  def get_edit_invitation(ppszinvite : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_edit_invitation.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszinvite)
+  def get_edit_invitation(this : IPropertyDescription2*, ppszinvite : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_edit_invitation.call(this, ppszinvite)
   end
-  def get_type_flags(mask : PROPDESC_TYPE_FLAGS, ppdtflags : PROPDESC_TYPE_FLAGS*) : HRESULT
-    @lpVtbl.value.get_type_flags.unsafe_as(Proc(PROPDESC_TYPE_FLAGS, PROPDESC_TYPE_FLAGS*, HRESULT)).call(mask, ppdtflags)
+  def get_type_flags(this : IPropertyDescription2*, mask : PROPDESC_TYPE_FLAGS, ppdtflags : PROPDESC_TYPE_FLAGS*) : HRESULT
+    @lpVtbl.value.get_type_flags.call(this, mask, ppdtflags)
   end
-  def get_view_flags(ppdvflags : PROPDESC_VIEW_FLAGS*) : HRESULT
-    @lpVtbl.value.get_view_flags.unsafe_as(Proc(PROPDESC_VIEW_FLAGS*, HRESULT)).call(ppdvflags)
+  def get_view_flags(this : IPropertyDescription2*, ppdvflags : PROPDESC_VIEW_FLAGS*) : HRESULT
+    @lpVtbl.value.get_view_flags.call(this, ppdvflags)
   end
-  def get_default_column_width(pcxchars : UInt32*) : HRESULT
-    @lpVtbl.value.get_default_column_width.unsafe_as(Proc(UInt32*, HRESULT)).call(pcxchars)
+  def get_default_column_width(this : IPropertyDescription2*, pcxchars : UInt32*) : HRESULT
+    @lpVtbl.value.get_default_column_width.call(this, pcxchars)
   end
-  def get_display_type(pdisplaytype : PROPDESC_DISPLAYTYPE*) : HRESULT
-    @lpVtbl.value.get_display_type.unsafe_as(Proc(PROPDESC_DISPLAYTYPE*, HRESULT)).call(pdisplaytype)
+  def get_display_type(this : IPropertyDescription2*, pdisplaytype : PROPDESC_DISPLAYTYPE*) : HRESULT
+    @lpVtbl.value.get_display_type.call(this, pdisplaytype)
   end
-  def get_column_state(pcsflags : UInt32*) : HRESULT
-    @lpVtbl.value.get_column_state.unsafe_as(Proc(UInt32*, HRESULT)).call(pcsflags)
+  def get_column_state(this : IPropertyDescription2*, pcsflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_column_state.call(this, pcsflags)
   end
-  def get_grouping_range(pgr : PROPDESC_GROUPING_RANGE*) : HRESULT
-    @lpVtbl.value.get_grouping_range.unsafe_as(Proc(PROPDESC_GROUPING_RANGE*, HRESULT)).call(pgr)
+  def get_grouping_range(this : IPropertyDescription2*, pgr : PROPDESC_GROUPING_RANGE*) : HRESULT
+    @lpVtbl.value.get_grouping_range.call(this, pgr)
   end
-  def get_relative_description_type(prdt : PROPDESC_RELATIVEDESCRIPTION_TYPE*) : HRESULT
-    @lpVtbl.value.get_relative_description_type.unsafe_as(Proc(PROPDESC_RELATIVEDESCRIPTION_TYPE*, HRESULT)).call(prdt)
+  def get_relative_description_type(this : IPropertyDescription2*, prdt : PROPDESC_RELATIVEDESCRIPTION_TYPE*) : HRESULT
+    @lpVtbl.value.get_relative_description_type.call(this, prdt)
   end
-  def get_relative_description(propvar1 : PROPVARIANT*, propvar2 : PROPVARIANT*, ppszdesc1 : LibC::LPWSTR*, ppszdesc2 : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_relative_description.unsafe_as(Proc(PROPVARIANT*, PROPVARIANT*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)).call(propvar1, propvar2, ppszdesc1, ppszdesc2)
+  def get_relative_description(this : IPropertyDescription2*, propvar1 : PROPVARIANT*, propvar2 : PROPVARIANT*, ppszdesc1 : LibC::LPWSTR*, ppszdesc2 : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_relative_description.call(this, propvar1, propvar2, ppszdesc1, ppszdesc2)
   end
-  def get_sort_description(psd : PROPDESC_SORTDESCRIPTION*) : HRESULT
-    @lpVtbl.value.get_sort_description.unsafe_as(Proc(PROPDESC_SORTDESCRIPTION*, HRESULT)).call(psd)
+  def get_sort_description(this : IPropertyDescription2*, psd : PROPDESC_SORTDESCRIPTION*) : HRESULT
+    @lpVtbl.value.get_sort_description.call(this, psd)
   end
-  def get_sort_description_label(fdescending : LibC::BOOL, ppszdescription : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_sort_description_label.unsafe_as(Proc(LibC::BOOL, LibC::LPWSTR*, HRESULT)).call(fdescending, ppszdescription)
+  def get_sort_description_label(this : IPropertyDescription2*, fdescending : LibC::BOOL, ppszdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_sort_description_label.call(this, fdescending, ppszdescription)
   end
-  def get_aggregation_type(paggtype : PROPDESC_AGGREGATION_TYPE*) : HRESULT
-    @lpVtbl.value.get_aggregation_type.unsafe_as(Proc(PROPDESC_AGGREGATION_TYPE*, HRESULT)).call(paggtype)
+  def get_aggregation_type(this : IPropertyDescription2*, paggtype : PROPDESC_AGGREGATION_TYPE*) : HRESULT
+    @lpVtbl.value.get_aggregation_type.call(this, paggtype)
   end
-  def get_condition_type(pcontype : PROPDESC_CONDITION_TYPE*, popdefault : CONDITION_OPERATION*) : HRESULT
-    @lpVtbl.value.get_condition_type.unsafe_as(Proc(PROPDESC_CONDITION_TYPE*, CONDITION_OPERATION*, HRESULT)).call(pcontype, popdefault)
+  def get_condition_type(this : IPropertyDescription2*, pcontype : PROPDESC_CONDITION_TYPE*, popdefault : CONDITION_OPERATION*) : HRESULT
+    @lpVtbl.value.get_condition_type.call(this, pcontype, popdefault)
   end
-  def get_enum_type_list(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_enum_type_list.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def get_enum_type_list(this : IPropertyDescription2*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_enum_type_list.call(this, riid, ppv)
   end
-  def coerce_to_canonical_value(ppropvar : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.coerce_to_canonical_value.unsafe_as(Proc(PROPVARIANT*, HRESULT)).call(ppropvar)
+  def coerce_to_canonical_value(this : IPropertyDescription2*, ppropvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.coerce_to_canonical_value.call(this, ppropvar)
   end
-  def format_for_display(propvar : PROPVARIANT*, pdfflags : PROPDESC_FORMAT_FLAGS, ppszdisplay : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.format_for_display.unsafe_as(Proc(PROPVARIANT*, PROPDESC_FORMAT_FLAGS, LibC::LPWSTR*, HRESULT)).call(propvar, pdfflags, ppszdisplay)
+  def format_for_display(this : IPropertyDescription2*, propvar : PROPVARIANT*, pdfflags : PROPDESC_FORMAT_FLAGS, ppszdisplay : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.format_for_display.call(this, propvar, pdfflags, ppszdisplay)
   end
-  def is_value_canonical(propvar : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.is_value_canonical.unsafe_as(Proc(PROPVARIANT*, HRESULT)).call(propvar)
+  def is_value_canonical(this : IPropertyDescription2*, propvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.is_value_canonical.call(this, propvar)
   end
-  def get_image_reference_for_value(propvar : PROPVARIANT*, ppszimageres : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_image_reference_for_value.unsafe_as(Proc(PROPVARIANT*, LibC::LPWSTR*, HRESULT)).call(propvar, ppszimageres)
+  def get_image_reference_for_value(this : IPropertyDescription2*, propvar : PROPVARIANT*, ppszimageres : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_image_reference_for_value.call(this, propvar, ppszimageres)
   end
 end
 struct LibWin32::IPropertyDescriptionAliasInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPropertyDescriptionAliasInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPropertyDescriptionAliasInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPropertyDescriptionAliasInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_property_key(pkey : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.get_property_key.unsafe_as(Proc(PROPERTYKEY*, HRESULT)).call(pkey)
+  def get_property_key(this : IPropertyDescriptionAliasInfo*, pkey : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.get_property_key.call(this, pkey)
   end
-  def get_canonical_name(ppszname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_canonical_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszname)
+  def get_canonical_name(this : IPropertyDescriptionAliasInfo*, ppszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_canonical_name.call(this, ppszname)
   end
-  def get_property_type(pvartype : UInt16*) : HRESULT
-    @lpVtbl.value.get_property_type.unsafe_as(Proc(UInt16*, HRESULT)).call(pvartype)
+  def get_property_type(this : IPropertyDescriptionAliasInfo*, pvartype : UInt16*) : HRESULT
+    @lpVtbl.value.get_property_type.call(this, pvartype)
   end
-  def get_display_name(ppszname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_display_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszname)
+  def get_display_name(this : IPropertyDescriptionAliasInfo*, ppszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, ppszname)
   end
-  def get_edit_invitation(ppszinvite : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_edit_invitation.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszinvite)
+  def get_edit_invitation(this : IPropertyDescriptionAliasInfo*, ppszinvite : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_edit_invitation.call(this, ppszinvite)
   end
-  def get_type_flags(mask : PROPDESC_TYPE_FLAGS, ppdtflags : PROPDESC_TYPE_FLAGS*) : HRESULT
-    @lpVtbl.value.get_type_flags.unsafe_as(Proc(PROPDESC_TYPE_FLAGS, PROPDESC_TYPE_FLAGS*, HRESULT)).call(mask, ppdtflags)
+  def get_type_flags(this : IPropertyDescriptionAliasInfo*, mask : PROPDESC_TYPE_FLAGS, ppdtflags : PROPDESC_TYPE_FLAGS*) : HRESULT
+    @lpVtbl.value.get_type_flags.call(this, mask, ppdtflags)
   end
-  def get_view_flags(ppdvflags : PROPDESC_VIEW_FLAGS*) : HRESULT
-    @lpVtbl.value.get_view_flags.unsafe_as(Proc(PROPDESC_VIEW_FLAGS*, HRESULT)).call(ppdvflags)
+  def get_view_flags(this : IPropertyDescriptionAliasInfo*, ppdvflags : PROPDESC_VIEW_FLAGS*) : HRESULT
+    @lpVtbl.value.get_view_flags.call(this, ppdvflags)
   end
-  def get_default_column_width(pcxchars : UInt32*) : HRESULT
-    @lpVtbl.value.get_default_column_width.unsafe_as(Proc(UInt32*, HRESULT)).call(pcxchars)
+  def get_default_column_width(this : IPropertyDescriptionAliasInfo*, pcxchars : UInt32*) : HRESULT
+    @lpVtbl.value.get_default_column_width.call(this, pcxchars)
   end
-  def get_display_type(pdisplaytype : PROPDESC_DISPLAYTYPE*) : HRESULT
-    @lpVtbl.value.get_display_type.unsafe_as(Proc(PROPDESC_DISPLAYTYPE*, HRESULT)).call(pdisplaytype)
+  def get_display_type(this : IPropertyDescriptionAliasInfo*, pdisplaytype : PROPDESC_DISPLAYTYPE*) : HRESULT
+    @lpVtbl.value.get_display_type.call(this, pdisplaytype)
   end
-  def get_column_state(pcsflags : UInt32*) : HRESULT
-    @lpVtbl.value.get_column_state.unsafe_as(Proc(UInt32*, HRESULT)).call(pcsflags)
+  def get_column_state(this : IPropertyDescriptionAliasInfo*, pcsflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_column_state.call(this, pcsflags)
   end
-  def get_grouping_range(pgr : PROPDESC_GROUPING_RANGE*) : HRESULT
-    @lpVtbl.value.get_grouping_range.unsafe_as(Proc(PROPDESC_GROUPING_RANGE*, HRESULT)).call(pgr)
+  def get_grouping_range(this : IPropertyDescriptionAliasInfo*, pgr : PROPDESC_GROUPING_RANGE*) : HRESULT
+    @lpVtbl.value.get_grouping_range.call(this, pgr)
   end
-  def get_relative_description_type(prdt : PROPDESC_RELATIVEDESCRIPTION_TYPE*) : HRESULT
-    @lpVtbl.value.get_relative_description_type.unsafe_as(Proc(PROPDESC_RELATIVEDESCRIPTION_TYPE*, HRESULT)).call(prdt)
+  def get_relative_description_type(this : IPropertyDescriptionAliasInfo*, prdt : PROPDESC_RELATIVEDESCRIPTION_TYPE*) : HRESULT
+    @lpVtbl.value.get_relative_description_type.call(this, prdt)
   end
-  def get_relative_description(propvar1 : PROPVARIANT*, propvar2 : PROPVARIANT*, ppszdesc1 : LibC::LPWSTR*, ppszdesc2 : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_relative_description.unsafe_as(Proc(PROPVARIANT*, PROPVARIANT*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)).call(propvar1, propvar2, ppszdesc1, ppszdesc2)
+  def get_relative_description(this : IPropertyDescriptionAliasInfo*, propvar1 : PROPVARIANT*, propvar2 : PROPVARIANT*, ppszdesc1 : LibC::LPWSTR*, ppszdesc2 : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_relative_description.call(this, propvar1, propvar2, ppszdesc1, ppszdesc2)
   end
-  def get_sort_description(psd : PROPDESC_SORTDESCRIPTION*) : HRESULT
-    @lpVtbl.value.get_sort_description.unsafe_as(Proc(PROPDESC_SORTDESCRIPTION*, HRESULT)).call(psd)
+  def get_sort_description(this : IPropertyDescriptionAliasInfo*, psd : PROPDESC_SORTDESCRIPTION*) : HRESULT
+    @lpVtbl.value.get_sort_description.call(this, psd)
   end
-  def get_sort_description_label(fdescending : LibC::BOOL, ppszdescription : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_sort_description_label.unsafe_as(Proc(LibC::BOOL, LibC::LPWSTR*, HRESULT)).call(fdescending, ppszdescription)
+  def get_sort_description_label(this : IPropertyDescriptionAliasInfo*, fdescending : LibC::BOOL, ppszdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_sort_description_label.call(this, fdescending, ppszdescription)
   end
-  def get_aggregation_type(paggtype : PROPDESC_AGGREGATION_TYPE*) : HRESULT
-    @lpVtbl.value.get_aggregation_type.unsafe_as(Proc(PROPDESC_AGGREGATION_TYPE*, HRESULT)).call(paggtype)
+  def get_aggregation_type(this : IPropertyDescriptionAliasInfo*, paggtype : PROPDESC_AGGREGATION_TYPE*) : HRESULT
+    @lpVtbl.value.get_aggregation_type.call(this, paggtype)
   end
-  def get_condition_type(pcontype : PROPDESC_CONDITION_TYPE*, popdefault : CONDITION_OPERATION*) : HRESULT
-    @lpVtbl.value.get_condition_type.unsafe_as(Proc(PROPDESC_CONDITION_TYPE*, CONDITION_OPERATION*, HRESULT)).call(pcontype, popdefault)
+  def get_condition_type(this : IPropertyDescriptionAliasInfo*, pcontype : PROPDESC_CONDITION_TYPE*, popdefault : CONDITION_OPERATION*) : HRESULT
+    @lpVtbl.value.get_condition_type.call(this, pcontype, popdefault)
   end
-  def get_enum_type_list(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_enum_type_list.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def get_enum_type_list(this : IPropertyDescriptionAliasInfo*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_enum_type_list.call(this, riid, ppv)
   end
-  def coerce_to_canonical_value(ppropvar : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.coerce_to_canonical_value.unsafe_as(Proc(PROPVARIANT*, HRESULT)).call(ppropvar)
+  def coerce_to_canonical_value(this : IPropertyDescriptionAliasInfo*, ppropvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.coerce_to_canonical_value.call(this, ppropvar)
   end
-  def format_for_display(propvar : PROPVARIANT*, pdfflags : PROPDESC_FORMAT_FLAGS, ppszdisplay : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.format_for_display.unsafe_as(Proc(PROPVARIANT*, PROPDESC_FORMAT_FLAGS, LibC::LPWSTR*, HRESULT)).call(propvar, pdfflags, ppszdisplay)
+  def format_for_display(this : IPropertyDescriptionAliasInfo*, propvar : PROPVARIANT*, pdfflags : PROPDESC_FORMAT_FLAGS, ppszdisplay : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.format_for_display.call(this, propvar, pdfflags, ppszdisplay)
   end
-  def is_value_canonical(propvar : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.is_value_canonical.unsafe_as(Proc(PROPVARIANT*, HRESULT)).call(propvar)
+  def is_value_canonical(this : IPropertyDescriptionAliasInfo*, propvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.is_value_canonical.call(this, propvar)
   end
-  def get_sort_by_alias(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_sort_by_alias.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def get_sort_by_alias(this : IPropertyDescriptionAliasInfo*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_sort_by_alias.call(this, riid, ppv)
   end
-  def get_additional_sort_by_aliases(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_additional_sort_by_aliases.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def get_additional_sort_by_aliases(this : IPropertyDescriptionAliasInfo*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_additional_sort_by_aliases.call(this, riid, ppv)
   end
 end
 struct LibWin32::IPropertyDescriptionSearchInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPropertyDescriptionSearchInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPropertyDescriptionSearchInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPropertyDescriptionSearchInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_property_key(pkey : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.get_property_key.unsafe_as(Proc(PROPERTYKEY*, HRESULT)).call(pkey)
+  def get_property_key(this : IPropertyDescriptionSearchInfo*, pkey : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.get_property_key.call(this, pkey)
   end
-  def get_canonical_name(ppszname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_canonical_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszname)
+  def get_canonical_name(this : IPropertyDescriptionSearchInfo*, ppszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_canonical_name.call(this, ppszname)
   end
-  def get_property_type(pvartype : UInt16*) : HRESULT
-    @lpVtbl.value.get_property_type.unsafe_as(Proc(UInt16*, HRESULT)).call(pvartype)
+  def get_property_type(this : IPropertyDescriptionSearchInfo*, pvartype : UInt16*) : HRESULT
+    @lpVtbl.value.get_property_type.call(this, pvartype)
   end
-  def get_display_name(ppszname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_display_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszname)
+  def get_display_name(this : IPropertyDescriptionSearchInfo*, ppszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, ppszname)
   end
-  def get_edit_invitation(ppszinvite : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_edit_invitation.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszinvite)
+  def get_edit_invitation(this : IPropertyDescriptionSearchInfo*, ppszinvite : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_edit_invitation.call(this, ppszinvite)
   end
-  def get_type_flags(mask : PROPDESC_TYPE_FLAGS, ppdtflags : PROPDESC_TYPE_FLAGS*) : HRESULT
-    @lpVtbl.value.get_type_flags.unsafe_as(Proc(PROPDESC_TYPE_FLAGS, PROPDESC_TYPE_FLAGS*, HRESULT)).call(mask, ppdtflags)
+  def get_type_flags(this : IPropertyDescriptionSearchInfo*, mask : PROPDESC_TYPE_FLAGS, ppdtflags : PROPDESC_TYPE_FLAGS*) : HRESULT
+    @lpVtbl.value.get_type_flags.call(this, mask, ppdtflags)
   end
-  def get_view_flags(ppdvflags : PROPDESC_VIEW_FLAGS*) : HRESULT
-    @lpVtbl.value.get_view_flags.unsafe_as(Proc(PROPDESC_VIEW_FLAGS*, HRESULT)).call(ppdvflags)
+  def get_view_flags(this : IPropertyDescriptionSearchInfo*, ppdvflags : PROPDESC_VIEW_FLAGS*) : HRESULT
+    @lpVtbl.value.get_view_flags.call(this, ppdvflags)
   end
-  def get_default_column_width(pcxchars : UInt32*) : HRESULT
-    @lpVtbl.value.get_default_column_width.unsafe_as(Proc(UInt32*, HRESULT)).call(pcxchars)
+  def get_default_column_width(this : IPropertyDescriptionSearchInfo*, pcxchars : UInt32*) : HRESULT
+    @lpVtbl.value.get_default_column_width.call(this, pcxchars)
   end
-  def get_display_type(pdisplaytype : PROPDESC_DISPLAYTYPE*) : HRESULT
-    @lpVtbl.value.get_display_type.unsafe_as(Proc(PROPDESC_DISPLAYTYPE*, HRESULT)).call(pdisplaytype)
+  def get_display_type(this : IPropertyDescriptionSearchInfo*, pdisplaytype : PROPDESC_DISPLAYTYPE*) : HRESULT
+    @lpVtbl.value.get_display_type.call(this, pdisplaytype)
   end
-  def get_column_state(pcsflags : UInt32*) : HRESULT
-    @lpVtbl.value.get_column_state.unsafe_as(Proc(UInt32*, HRESULT)).call(pcsflags)
+  def get_column_state(this : IPropertyDescriptionSearchInfo*, pcsflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_column_state.call(this, pcsflags)
   end
-  def get_grouping_range(pgr : PROPDESC_GROUPING_RANGE*) : HRESULT
-    @lpVtbl.value.get_grouping_range.unsafe_as(Proc(PROPDESC_GROUPING_RANGE*, HRESULT)).call(pgr)
+  def get_grouping_range(this : IPropertyDescriptionSearchInfo*, pgr : PROPDESC_GROUPING_RANGE*) : HRESULT
+    @lpVtbl.value.get_grouping_range.call(this, pgr)
   end
-  def get_relative_description_type(prdt : PROPDESC_RELATIVEDESCRIPTION_TYPE*) : HRESULT
-    @lpVtbl.value.get_relative_description_type.unsafe_as(Proc(PROPDESC_RELATIVEDESCRIPTION_TYPE*, HRESULT)).call(prdt)
+  def get_relative_description_type(this : IPropertyDescriptionSearchInfo*, prdt : PROPDESC_RELATIVEDESCRIPTION_TYPE*) : HRESULT
+    @lpVtbl.value.get_relative_description_type.call(this, prdt)
   end
-  def get_relative_description(propvar1 : PROPVARIANT*, propvar2 : PROPVARIANT*, ppszdesc1 : LibC::LPWSTR*, ppszdesc2 : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_relative_description.unsafe_as(Proc(PROPVARIANT*, PROPVARIANT*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)).call(propvar1, propvar2, ppszdesc1, ppszdesc2)
+  def get_relative_description(this : IPropertyDescriptionSearchInfo*, propvar1 : PROPVARIANT*, propvar2 : PROPVARIANT*, ppszdesc1 : LibC::LPWSTR*, ppszdesc2 : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_relative_description.call(this, propvar1, propvar2, ppszdesc1, ppszdesc2)
   end
-  def get_sort_description(psd : PROPDESC_SORTDESCRIPTION*) : HRESULT
-    @lpVtbl.value.get_sort_description.unsafe_as(Proc(PROPDESC_SORTDESCRIPTION*, HRESULT)).call(psd)
+  def get_sort_description(this : IPropertyDescriptionSearchInfo*, psd : PROPDESC_SORTDESCRIPTION*) : HRESULT
+    @lpVtbl.value.get_sort_description.call(this, psd)
   end
-  def get_sort_description_label(fdescending : LibC::BOOL, ppszdescription : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_sort_description_label.unsafe_as(Proc(LibC::BOOL, LibC::LPWSTR*, HRESULT)).call(fdescending, ppszdescription)
+  def get_sort_description_label(this : IPropertyDescriptionSearchInfo*, fdescending : LibC::BOOL, ppszdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_sort_description_label.call(this, fdescending, ppszdescription)
   end
-  def get_aggregation_type(paggtype : PROPDESC_AGGREGATION_TYPE*) : HRESULT
-    @lpVtbl.value.get_aggregation_type.unsafe_as(Proc(PROPDESC_AGGREGATION_TYPE*, HRESULT)).call(paggtype)
+  def get_aggregation_type(this : IPropertyDescriptionSearchInfo*, paggtype : PROPDESC_AGGREGATION_TYPE*) : HRESULT
+    @lpVtbl.value.get_aggregation_type.call(this, paggtype)
   end
-  def get_condition_type(pcontype : PROPDESC_CONDITION_TYPE*, popdefault : CONDITION_OPERATION*) : HRESULT
-    @lpVtbl.value.get_condition_type.unsafe_as(Proc(PROPDESC_CONDITION_TYPE*, CONDITION_OPERATION*, HRESULT)).call(pcontype, popdefault)
+  def get_condition_type(this : IPropertyDescriptionSearchInfo*, pcontype : PROPDESC_CONDITION_TYPE*, popdefault : CONDITION_OPERATION*) : HRESULT
+    @lpVtbl.value.get_condition_type.call(this, pcontype, popdefault)
   end
-  def get_enum_type_list(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_enum_type_list.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def get_enum_type_list(this : IPropertyDescriptionSearchInfo*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_enum_type_list.call(this, riid, ppv)
   end
-  def coerce_to_canonical_value(ppropvar : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.coerce_to_canonical_value.unsafe_as(Proc(PROPVARIANT*, HRESULT)).call(ppropvar)
+  def coerce_to_canonical_value(this : IPropertyDescriptionSearchInfo*, ppropvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.coerce_to_canonical_value.call(this, ppropvar)
   end
-  def format_for_display(propvar : PROPVARIANT*, pdfflags : PROPDESC_FORMAT_FLAGS, ppszdisplay : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.format_for_display.unsafe_as(Proc(PROPVARIANT*, PROPDESC_FORMAT_FLAGS, LibC::LPWSTR*, HRESULT)).call(propvar, pdfflags, ppszdisplay)
+  def format_for_display(this : IPropertyDescriptionSearchInfo*, propvar : PROPVARIANT*, pdfflags : PROPDESC_FORMAT_FLAGS, ppszdisplay : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.format_for_display.call(this, propvar, pdfflags, ppszdisplay)
   end
-  def is_value_canonical(propvar : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.is_value_canonical.unsafe_as(Proc(PROPVARIANT*, HRESULT)).call(propvar)
+  def is_value_canonical(this : IPropertyDescriptionSearchInfo*, propvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.is_value_canonical.call(this, propvar)
   end
-  def get_search_info_flags(ppdsiflags : PROPDESC_SEARCHINFO_FLAGS*) : HRESULT
-    @lpVtbl.value.get_search_info_flags.unsafe_as(Proc(PROPDESC_SEARCHINFO_FLAGS*, HRESULT)).call(ppdsiflags)
+  def get_search_info_flags(this : IPropertyDescriptionSearchInfo*, ppdsiflags : PROPDESC_SEARCHINFO_FLAGS*) : HRESULT
+    @lpVtbl.value.get_search_info_flags.call(this, ppdsiflags)
   end
-  def get_column_index_type(ppdcitype : PROPDESC_COLUMNINDEX_TYPE*) : HRESULT
-    @lpVtbl.value.get_column_index_type.unsafe_as(Proc(PROPDESC_COLUMNINDEX_TYPE*, HRESULT)).call(ppdcitype)
+  def get_column_index_type(this : IPropertyDescriptionSearchInfo*, ppdcitype : PROPDESC_COLUMNINDEX_TYPE*) : HRESULT
+    @lpVtbl.value.get_column_index_type.call(this, ppdcitype)
   end
-  def get_projection_string(ppszprojection : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_projection_string.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszprojection)
+  def get_projection_string(this : IPropertyDescriptionSearchInfo*, ppszprojection : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_projection_string.call(this, ppszprojection)
   end
-  def get_max_size(pcbmaxsize : UInt32*) : HRESULT
-    @lpVtbl.value.get_max_size.unsafe_as(Proc(UInt32*, HRESULT)).call(pcbmaxsize)
+  def get_max_size(this : IPropertyDescriptionSearchInfo*, pcbmaxsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_size.call(this, pcbmaxsize)
   end
 end
 struct LibWin32::IPropertyDescriptionRelatedPropertyInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPropertyDescriptionRelatedPropertyInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPropertyDescriptionRelatedPropertyInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPropertyDescriptionRelatedPropertyInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_property_key(pkey : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.get_property_key.unsafe_as(Proc(PROPERTYKEY*, HRESULT)).call(pkey)
+  def get_property_key(this : IPropertyDescriptionRelatedPropertyInfo*, pkey : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.get_property_key.call(this, pkey)
   end
-  def get_canonical_name(ppszname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_canonical_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszname)
+  def get_canonical_name(this : IPropertyDescriptionRelatedPropertyInfo*, ppszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_canonical_name.call(this, ppszname)
   end
-  def get_property_type(pvartype : UInt16*) : HRESULT
-    @lpVtbl.value.get_property_type.unsafe_as(Proc(UInt16*, HRESULT)).call(pvartype)
+  def get_property_type(this : IPropertyDescriptionRelatedPropertyInfo*, pvartype : UInt16*) : HRESULT
+    @lpVtbl.value.get_property_type.call(this, pvartype)
   end
-  def get_display_name(ppszname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_display_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszname)
+  def get_display_name(this : IPropertyDescriptionRelatedPropertyInfo*, ppszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, ppszname)
   end
-  def get_edit_invitation(ppszinvite : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_edit_invitation.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszinvite)
+  def get_edit_invitation(this : IPropertyDescriptionRelatedPropertyInfo*, ppszinvite : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_edit_invitation.call(this, ppszinvite)
   end
-  def get_type_flags(mask : PROPDESC_TYPE_FLAGS, ppdtflags : PROPDESC_TYPE_FLAGS*) : HRESULT
-    @lpVtbl.value.get_type_flags.unsafe_as(Proc(PROPDESC_TYPE_FLAGS, PROPDESC_TYPE_FLAGS*, HRESULT)).call(mask, ppdtflags)
+  def get_type_flags(this : IPropertyDescriptionRelatedPropertyInfo*, mask : PROPDESC_TYPE_FLAGS, ppdtflags : PROPDESC_TYPE_FLAGS*) : HRESULT
+    @lpVtbl.value.get_type_flags.call(this, mask, ppdtflags)
   end
-  def get_view_flags(ppdvflags : PROPDESC_VIEW_FLAGS*) : HRESULT
-    @lpVtbl.value.get_view_flags.unsafe_as(Proc(PROPDESC_VIEW_FLAGS*, HRESULT)).call(ppdvflags)
+  def get_view_flags(this : IPropertyDescriptionRelatedPropertyInfo*, ppdvflags : PROPDESC_VIEW_FLAGS*) : HRESULT
+    @lpVtbl.value.get_view_flags.call(this, ppdvflags)
   end
-  def get_default_column_width(pcxchars : UInt32*) : HRESULT
-    @lpVtbl.value.get_default_column_width.unsafe_as(Proc(UInt32*, HRESULT)).call(pcxchars)
+  def get_default_column_width(this : IPropertyDescriptionRelatedPropertyInfo*, pcxchars : UInt32*) : HRESULT
+    @lpVtbl.value.get_default_column_width.call(this, pcxchars)
   end
-  def get_display_type(pdisplaytype : PROPDESC_DISPLAYTYPE*) : HRESULT
-    @lpVtbl.value.get_display_type.unsafe_as(Proc(PROPDESC_DISPLAYTYPE*, HRESULT)).call(pdisplaytype)
+  def get_display_type(this : IPropertyDescriptionRelatedPropertyInfo*, pdisplaytype : PROPDESC_DISPLAYTYPE*) : HRESULT
+    @lpVtbl.value.get_display_type.call(this, pdisplaytype)
   end
-  def get_column_state(pcsflags : UInt32*) : HRESULT
-    @lpVtbl.value.get_column_state.unsafe_as(Proc(UInt32*, HRESULT)).call(pcsflags)
+  def get_column_state(this : IPropertyDescriptionRelatedPropertyInfo*, pcsflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_column_state.call(this, pcsflags)
   end
-  def get_grouping_range(pgr : PROPDESC_GROUPING_RANGE*) : HRESULT
-    @lpVtbl.value.get_grouping_range.unsafe_as(Proc(PROPDESC_GROUPING_RANGE*, HRESULT)).call(pgr)
+  def get_grouping_range(this : IPropertyDescriptionRelatedPropertyInfo*, pgr : PROPDESC_GROUPING_RANGE*) : HRESULT
+    @lpVtbl.value.get_grouping_range.call(this, pgr)
   end
-  def get_relative_description_type(prdt : PROPDESC_RELATIVEDESCRIPTION_TYPE*) : HRESULT
-    @lpVtbl.value.get_relative_description_type.unsafe_as(Proc(PROPDESC_RELATIVEDESCRIPTION_TYPE*, HRESULT)).call(prdt)
+  def get_relative_description_type(this : IPropertyDescriptionRelatedPropertyInfo*, prdt : PROPDESC_RELATIVEDESCRIPTION_TYPE*) : HRESULT
+    @lpVtbl.value.get_relative_description_type.call(this, prdt)
   end
-  def get_relative_description(propvar1 : PROPVARIANT*, propvar2 : PROPVARIANT*, ppszdesc1 : LibC::LPWSTR*, ppszdesc2 : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_relative_description.unsafe_as(Proc(PROPVARIANT*, PROPVARIANT*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)).call(propvar1, propvar2, ppszdesc1, ppszdesc2)
+  def get_relative_description(this : IPropertyDescriptionRelatedPropertyInfo*, propvar1 : PROPVARIANT*, propvar2 : PROPVARIANT*, ppszdesc1 : LibC::LPWSTR*, ppszdesc2 : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_relative_description.call(this, propvar1, propvar2, ppszdesc1, ppszdesc2)
   end
-  def get_sort_description(psd : PROPDESC_SORTDESCRIPTION*) : HRESULT
-    @lpVtbl.value.get_sort_description.unsafe_as(Proc(PROPDESC_SORTDESCRIPTION*, HRESULT)).call(psd)
+  def get_sort_description(this : IPropertyDescriptionRelatedPropertyInfo*, psd : PROPDESC_SORTDESCRIPTION*) : HRESULT
+    @lpVtbl.value.get_sort_description.call(this, psd)
   end
-  def get_sort_description_label(fdescending : LibC::BOOL, ppszdescription : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_sort_description_label.unsafe_as(Proc(LibC::BOOL, LibC::LPWSTR*, HRESULT)).call(fdescending, ppszdescription)
+  def get_sort_description_label(this : IPropertyDescriptionRelatedPropertyInfo*, fdescending : LibC::BOOL, ppszdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_sort_description_label.call(this, fdescending, ppszdescription)
   end
-  def get_aggregation_type(paggtype : PROPDESC_AGGREGATION_TYPE*) : HRESULT
-    @lpVtbl.value.get_aggregation_type.unsafe_as(Proc(PROPDESC_AGGREGATION_TYPE*, HRESULT)).call(paggtype)
+  def get_aggregation_type(this : IPropertyDescriptionRelatedPropertyInfo*, paggtype : PROPDESC_AGGREGATION_TYPE*) : HRESULT
+    @lpVtbl.value.get_aggregation_type.call(this, paggtype)
   end
-  def get_condition_type(pcontype : PROPDESC_CONDITION_TYPE*, popdefault : CONDITION_OPERATION*) : HRESULT
-    @lpVtbl.value.get_condition_type.unsafe_as(Proc(PROPDESC_CONDITION_TYPE*, CONDITION_OPERATION*, HRESULT)).call(pcontype, popdefault)
+  def get_condition_type(this : IPropertyDescriptionRelatedPropertyInfo*, pcontype : PROPDESC_CONDITION_TYPE*, popdefault : CONDITION_OPERATION*) : HRESULT
+    @lpVtbl.value.get_condition_type.call(this, pcontype, popdefault)
   end
-  def get_enum_type_list(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_enum_type_list.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def get_enum_type_list(this : IPropertyDescriptionRelatedPropertyInfo*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_enum_type_list.call(this, riid, ppv)
   end
-  def coerce_to_canonical_value(ppropvar : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.coerce_to_canonical_value.unsafe_as(Proc(PROPVARIANT*, HRESULT)).call(ppropvar)
+  def coerce_to_canonical_value(this : IPropertyDescriptionRelatedPropertyInfo*, ppropvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.coerce_to_canonical_value.call(this, ppropvar)
   end
-  def format_for_display(propvar : PROPVARIANT*, pdfflags : PROPDESC_FORMAT_FLAGS, ppszdisplay : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.format_for_display.unsafe_as(Proc(PROPVARIANT*, PROPDESC_FORMAT_FLAGS, LibC::LPWSTR*, HRESULT)).call(propvar, pdfflags, ppszdisplay)
+  def format_for_display(this : IPropertyDescriptionRelatedPropertyInfo*, propvar : PROPVARIANT*, pdfflags : PROPDESC_FORMAT_FLAGS, ppszdisplay : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.format_for_display.call(this, propvar, pdfflags, ppszdisplay)
   end
-  def is_value_canonical(propvar : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.is_value_canonical.unsafe_as(Proc(PROPVARIANT*, HRESULT)).call(propvar)
+  def is_value_canonical(this : IPropertyDescriptionRelatedPropertyInfo*, propvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.is_value_canonical.call(this, propvar)
   end
-  def get_related_property(pszrelationshipname : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_related_property.unsafe_as(Proc(LibC::LPWSTR, Guid*, Void**, HRESULT)).call(pszrelationshipname, riid, ppv)
+  def get_related_property(this : IPropertyDescriptionRelatedPropertyInfo*, pszrelationshipname : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_related_property.call(this, pszrelationshipname, riid, ppv)
   end
 end
 struct LibWin32::IPropertySystem
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPropertySystem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPropertySystem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPropertySystem*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_property_description(propkey : PROPERTYKEY*, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_property_description.unsafe_as(Proc(PROPERTYKEY*, Guid*, Void**, HRESULT)).call(propkey, riid, ppv)
+  def get_property_description(this : IPropertySystem*, propkey : PROPERTYKEY*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_property_description.call(this, propkey, riid, ppv)
   end
-  def get_property_description_by_name(pszcanonicalname : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_property_description_by_name.unsafe_as(Proc(LibC::LPWSTR, Guid*, Void**, HRESULT)).call(pszcanonicalname, riid, ppv)
+  def get_property_description_by_name(this : IPropertySystem*, pszcanonicalname : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_property_description_by_name.call(this, pszcanonicalname, riid, ppv)
   end
-  def get_property_description_list_from_string(pszproplist : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_property_description_list_from_string.unsafe_as(Proc(LibC::LPWSTR, Guid*, Void**, HRESULT)).call(pszproplist, riid, ppv)
+  def get_property_description_list_from_string(this : IPropertySystem*, pszproplist : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_property_description_list_from_string.call(this, pszproplist, riid, ppv)
   end
-  def enumerate_property_descriptions(filteron : PROPDESC_ENUMFILTER, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.enumerate_property_descriptions.unsafe_as(Proc(PROPDESC_ENUMFILTER, Guid*, Void**, HRESULT)).call(filteron, riid, ppv)
+  def enumerate_property_descriptions(this : IPropertySystem*, filteron : PROPDESC_ENUMFILTER, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.enumerate_property_descriptions.call(this, filteron, riid, ppv)
   end
-  def format_for_display(key : PROPERTYKEY*, propvar : PROPVARIANT*, pdff : PROPDESC_FORMAT_FLAGS, psztext : Char*, cchtext : UInt32) : HRESULT
-    @lpVtbl.value.format_for_display.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, PROPDESC_FORMAT_FLAGS, Char*, UInt32, HRESULT)).call(key, propvar, pdff, psztext, cchtext)
+  def format_for_display(this : IPropertySystem*, key : PROPERTYKEY*, propvar : PROPVARIANT*, pdff : PROPDESC_FORMAT_FLAGS, psztext : Char*, cchtext : UInt32) : HRESULT
+    @lpVtbl.value.format_for_display.call(this, key, propvar, pdff, psztext, cchtext)
   end
-  def format_for_display_alloc(key : PROPERTYKEY*, propvar : PROPVARIANT*, pdff : PROPDESC_FORMAT_FLAGS, ppszdisplay : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.format_for_display_alloc.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, PROPDESC_FORMAT_FLAGS, LibC::LPWSTR*, HRESULT)).call(key, propvar, pdff, ppszdisplay)
+  def format_for_display_alloc(this : IPropertySystem*, key : PROPERTYKEY*, propvar : PROPVARIANT*, pdff : PROPDESC_FORMAT_FLAGS, ppszdisplay : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.format_for_display_alloc.call(this, key, propvar, pdff, ppszdisplay)
   end
-  def register_property_schema(pszpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.register_property_schema.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpath)
+  def register_property_schema(this : IPropertySystem*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.register_property_schema.call(this, pszpath)
   end
-  def unregister_property_schema(pszpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.unregister_property_schema.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpath)
+  def unregister_property_schema(this : IPropertySystem*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.unregister_property_schema.call(this, pszpath)
   end
-  def refresh_property_schema : HRESULT
-    @lpVtbl.value.refresh_property_schema.unsafe_as(Proc(HRESULT)).call
+  def refresh_property_schema(this : IPropertySystem*) : HRESULT
+    @lpVtbl.value.refresh_property_schema.call(this)
   end
 end
 struct LibWin32::IPropertyDescriptionList
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPropertyDescriptionList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPropertyDescriptionList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPropertyDescriptionList*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_count(pcelem : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcelem)
+  def get_count(this : IPropertyDescriptionList*, pcelem : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcelem)
   end
-  def get_at(ielem : UInt32, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, Guid*, Void**, HRESULT)).call(ielem, riid, ppv)
+  def get_at(this : IPropertyDescriptionList*, ielem : UInt32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_at.call(this, ielem, riid, ppv)
   end
 end
 struct LibWin32::IPropertyStoreFactory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPropertyStoreFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPropertyStoreFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPropertyStoreFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_property_store(flags : GETPROPERTYSTOREFLAGS, punkfactory : IUnknown, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_property_store.unsafe_as(Proc(GETPROPERTYSTOREFLAGS, IUnknown, Guid*, Void**, HRESULT)).call(flags, punkfactory, riid, ppv)
+  def get_property_store(this : IPropertyStoreFactory*, flags : GETPROPERTYSTOREFLAGS, punkfactory : IUnknown, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_property_store.call(this, flags, punkfactory, riid, ppv)
   end
-  def get_property_store_for_keys(rgkeys : PROPERTYKEY*, ckeys : UInt32, flags : GETPROPERTYSTOREFLAGS, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_property_store_for_keys.unsafe_as(Proc(PROPERTYKEY*, UInt32, GETPROPERTYSTOREFLAGS, Guid*, Void**, HRESULT)).call(rgkeys, ckeys, flags, riid, ppv)
+  def get_property_store_for_keys(this : IPropertyStoreFactory*, rgkeys : PROPERTYKEY*, ckeys : UInt32, flags : GETPROPERTYSTOREFLAGS, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_property_store_for_keys.call(this, rgkeys, ckeys, flags, riid, ppv)
   end
 end
 struct LibWin32::IDelayedPropertyStoreFactory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDelayedPropertyStoreFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDelayedPropertyStoreFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDelayedPropertyStoreFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_property_store(flags : GETPROPERTYSTOREFLAGS, punkfactory : IUnknown, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_property_store.unsafe_as(Proc(GETPROPERTYSTOREFLAGS, IUnknown, Guid*, Void**, HRESULT)).call(flags, punkfactory, riid, ppv)
+  def get_property_store(this : IDelayedPropertyStoreFactory*, flags : GETPROPERTYSTOREFLAGS, punkfactory : IUnknown, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_property_store.call(this, flags, punkfactory, riid, ppv)
   end
-  def get_property_store_for_keys(rgkeys : PROPERTYKEY*, ckeys : UInt32, flags : GETPROPERTYSTOREFLAGS, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_property_store_for_keys.unsafe_as(Proc(PROPERTYKEY*, UInt32, GETPROPERTYSTOREFLAGS, Guid*, Void**, HRESULT)).call(rgkeys, ckeys, flags, riid, ppv)
+  def get_property_store_for_keys(this : IDelayedPropertyStoreFactory*, rgkeys : PROPERTYKEY*, ckeys : UInt32, flags : GETPROPERTYSTOREFLAGS, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_property_store_for_keys.call(this, rgkeys, ckeys, flags, riid, ppv)
   end
-  def get_delayed_property_store(flags : GETPROPERTYSTOREFLAGS, dwstoreid : UInt32, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_delayed_property_store.unsafe_as(Proc(GETPROPERTYSTOREFLAGS, UInt32, Guid*, Void**, HRESULT)).call(flags, dwstoreid, riid, ppv)
+  def get_delayed_property_store(this : IDelayedPropertyStoreFactory*, flags : GETPROPERTYSTOREFLAGS, dwstoreid : UInt32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_delayed_property_store.call(this, flags, dwstoreid, riid, ppv)
   end
 end
 struct LibWin32::IPersistSerializedPropStorage
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPersistSerializedPropStorage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPersistSerializedPropStorage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPersistSerializedPropStorage*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_flags(flags : Int32) : HRESULT
-    @lpVtbl.value.set_flags.unsafe_as(Proc(Int32, HRESULT)).call(flags)
+  def set_flags(this : IPersistSerializedPropStorage*, flags : Int32) : HRESULT
+    @lpVtbl.value.set_flags.call(this, flags)
   end
-  def set_property_storage(psps : SERIALIZEDPROPSTORAGE*, cb : UInt32) : HRESULT
-    @lpVtbl.value.set_property_storage.unsafe_as(Proc(SERIALIZEDPROPSTORAGE*, UInt32, HRESULT)).call(psps, cb)
+  def set_property_storage(this : IPersistSerializedPropStorage*, psps : SERIALIZEDPROPSTORAGE*, cb : UInt32) : HRESULT
+    @lpVtbl.value.set_property_storage.call(this, psps, cb)
   end
-  def get_property_storage(ppsps : SERIALIZEDPROPSTORAGE**, pcb : UInt32*) : HRESULT
-    @lpVtbl.value.get_property_storage.unsafe_as(Proc(SERIALIZEDPROPSTORAGE**, UInt32*, HRESULT)).call(ppsps, pcb)
+  def get_property_storage(this : IPersistSerializedPropStorage*, ppsps : SERIALIZEDPROPSTORAGE**, pcb : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_storage.call(this, ppsps, pcb)
   end
 end
 struct LibWin32::IPersistSerializedPropStorage2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPersistSerializedPropStorage2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPersistSerializedPropStorage2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPersistSerializedPropStorage2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_flags(flags : Int32) : HRESULT
-    @lpVtbl.value.set_flags.unsafe_as(Proc(Int32, HRESULT)).call(flags)
+  def set_flags(this : IPersistSerializedPropStorage2*, flags : Int32) : HRESULT
+    @lpVtbl.value.set_flags.call(this, flags)
   end
-  def set_property_storage(psps : SERIALIZEDPROPSTORAGE*, cb : UInt32) : HRESULT
-    @lpVtbl.value.set_property_storage.unsafe_as(Proc(SERIALIZEDPROPSTORAGE*, UInt32, HRESULT)).call(psps, cb)
+  def set_property_storage(this : IPersistSerializedPropStorage2*, psps : SERIALIZEDPROPSTORAGE*, cb : UInt32) : HRESULT
+    @lpVtbl.value.set_property_storage.call(this, psps, cb)
   end
-  def get_property_storage(ppsps : SERIALIZEDPROPSTORAGE**, pcb : UInt32*) : HRESULT
-    @lpVtbl.value.get_property_storage.unsafe_as(Proc(SERIALIZEDPROPSTORAGE**, UInt32*, HRESULT)).call(ppsps, pcb)
+  def get_property_storage(this : IPersistSerializedPropStorage2*, ppsps : SERIALIZEDPROPSTORAGE**, pcb : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_storage.call(this, ppsps, pcb)
   end
-  def get_property_storage_size(pcb : UInt32*) : HRESULT
-    @lpVtbl.value.get_property_storage_size.unsafe_as(Proc(UInt32*, HRESULT)).call(pcb)
+  def get_property_storage_size(this : IPersistSerializedPropStorage2*, pcb : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_storage_size.call(this, pcb)
   end
-  def get_property_storage_buffer(psps : SERIALIZEDPROPSTORAGE*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
-    @lpVtbl.value.get_property_storage_buffer.unsafe_as(Proc(SERIALIZEDPROPSTORAGE*, UInt32, UInt32*, HRESULT)).call(psps, cb, pcbwritten)
+  def get_property_storage_buffer(this : IPersistSerializedPropStorage2*, psps : SERIALIZEDPROPSTORAGE*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_storage_buffer.call(this, psps, cb, pcbwritten)
   end
 end
 struct LibWin32::IPropertySystemChangeNotify
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPropertySystemChangeNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPropertySystemChangeNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPropertySystemChangeNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def schema_refreshed : HRESULT
-    @lpVtbl.value.schema_refreshed.unsafe_as(Proc(HRESULT)).call
+  def schema_refreshed(this : IPropertySystemChangeNotify*) : HRESULT
+    @lpVtbl.value.schema_refreshed.call(this)
   end
 end
 struct LibWin32::ICreateObject
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ICreateObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ICreateObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ICreateObject*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_object(clsid : Guid*, punkouter : IUnknown, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.create_object.unsafe_as(Proc(Guid*, IUnknown, Guid*, Void**, HRESULT)).call(clsid, punkouter, riid, ppv)
+  def create_object(this : ICreateObject*, clsid : Guid*, punkouter : IUnknown, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_object.call(this, clsid, punkouter, riid, ppv)
   end
 end
 struct LibWin32::IPropertyUI
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPropertyUI*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPropertyUI*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPropertyUI*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def parse_property_name(pszname : LibC::LPWSTR, pfmtid : Guid*, ppid : UInt32*, pcheaten : UInt32*) : HRESULT
-    @lpVtbl.value.parse_property_name.unsafe_as(Proc(LibC::LPWSTR, Guid*, UInt32*, UInt32*, HRESULT)).call(pszname, pfmtid, ppid, pcheaten)
+  def parse_property_name(this : IPropertyUI*, pszname : LibC::LPWSTR, pfmtid : Guid*, ppid : UInt32*, pcheaten : UInt32*) : HRESULT
+    @lpVtbl.value.parse_property_name.call(this, pszname, pfmtid, ppid, pcheaten)
   end
-  def get_cannonical_name(fmtid : Guid*, pid : UInt32, pwsztext : Char*, cchtext : UInt32) : HRESULT
-    @lpVtbl.value.get_cannonical_name.unsafe_as(Proc(Guid*, UInt32, Char*, UInt32, HRESULT)).call(fmtid, pid, pwsztext, cchtext)
+  def get_cannonical_name(this : IPropertyUI*, fmtid : Guid*, pid : UInt32, pwsztext : Char*, cchtext : UInt32) : HRESULT
+    @lpVtbl.value.get_cannonical_name.call(this, fmtid, pid, pwsztext, cchtext)
   end
-  def get_display_name(fmtid : Guid*, pid : UInt32, flags : PROPERTYUI_NAME_FLAGS, pwsztext : Char*, cchtext : UInt32) : HRESULT
-    @lpVtbl.value.get_display_name.unsafe_as(Proc(Guid*, UInt32, PROPERTYUI_NAME_FLAGS, Char*, UInt32, HRESULT)).call(fmtid, pid, flags, pwsztext, cchtext)
+  def get_display_name(this : IPropertyUI*, fmtid : Guid*, pid : UInt32, flags : PROPERTYUI_NAME_FLAGS, pwsztext : Char*, cchtext : UInt32) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, fmtid, pid, flags, pwsztext, cchtext)
   end
-  def get_property_description(fmtid : Guid*, pid : UInt32, pwsztext : Char*, cchtext : UInt32) : HRESULT
-    @lpVtbl.value.get_property_description.unsafe_as(Proc(Guid*, UInt32, Char*, UInt32, HRESULT)).call(fmtid, pid, pwsztext, cchtext)
+  def get_property_description(this : IPropertyUI*, fmtid : Guid*, pid : UInt32, pwsztext : Char*, cchtext : UInt32) : HRESULT
+    @lpVtbl.value.get_property_description.call(this, fmtid, pid, pwsztext, cchtext)
   end
-  def get_default_width(fmtid : Guid*, pid : UInt32, pcxchars : UInt32*) : HRESULT
-    @lpVtbl.value.get_default_width.unsafe_as(Proc(Guid*, UInt32, UInt32*, HRESULT)).call(fmtid, pid, pcxchars)
+  def get_default_width(this : IPropertyUI*, fmtid : Guid*, pid : UInt32, pcxchars : UInt32*) : HRESULT
+    @lpVtbl.value.get_default_width.call(this, fmtid, pid, pcxchars)
   end
-  def get_flags(fmtid : Guid*, pid : UInt32, pflags : PROPERTYUI_FLAGS*) : HRESULT
-    @lpVtbl.value.get_flags.unsafe_as(Proc(Guid*, UInt32, PROPERTYUI_FLAGS*, HRESULT)).call(fmtid, pid, pflags)
+  def get_flags(this : IPropertyUI*, fmtid : Guid*, pid : UInt32, pflags : PROPERTYUI_FLAGS*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, fmtid, pid, pflags)
   end
-  def format_for_display(fmtid : Guid*, pid : UInt32, ppropvar : PROPVARIANT*, puiff : PROPERTYUI_FORMAT_FLAGS, pwsztext : Char*, cchtext : UInt32) : HRESULT
-    @lpVtbl.value.format_for_display.unsafe_as(Proc(Guid*, UInt32, PROPVARIANT*, PROPERTYUI_FORMAT_FLAGS, Char*, UInt32, HRESULT)).call(fmtid, pid, ppropvar, puiff, pwsztext, cchtext)
+  def format_for_display(this : IPropertyUI*, fmtid : Guid*, pid : UInt32, ppropvar : PROPVARIANT*, puiff : PROPERTYUI_FORMAT_FLAGS, pwsztext : Char*, cchtext : UInt32) : HRESULT
+    @lpVtbl.value.format_for_display.call(this, fmtid, pid, ppropvar, puiff, pwsztext, cchtext)
   end
-  def get_help_info(fmtid : Guid*, pid : UInt32, pwszhelpfile : Char*, cch : UInt32, puhelpid : UInt32*) : HRESULT
-    @lpVtbl.value.get_help_info.unsafe_as(Proc(Guid*, UInt32, Char*, UInt32, UInt32*, HRESULT)).call(fmtid, pid, pwszhelpfile, cch, puhelpid)
+  def get_help_info(this : IPropertyUI*, fmtid : Guid*, pid : UInt32, pwszhelpfile : Char*, cch : UInt32, puhelpid : UInt32*) : HRESULT
+    @lpVtbl.value.get_help_info.call(this, fmtid, pid, pwszhelpfile, cch, puhelpid)
   end
 end
 struct LibWin32::PROPERTYKEY

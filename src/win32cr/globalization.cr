@@ -3997,13 +3997,13 @@ lib LibWin32
 
 
   struct ISpellingErrorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_start_index : UInt64
-    get_length : UInt64
-    get_corrective_action : UInt64
-    get_replacement : UInt64
+    query_interface : Proc(ISpellingError*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISpellingError*, UInt32)
+    release : Proc(ISpellingError*, UInt32)
+    get_start_index : Proc(ISpellingError*, UInt32*, HRESULT)
+    get_length : Proc(ISpellingError*, UInt32*, HRESULT)
+    get_corrective_action : Proc(ISpellingError*, CORRECTIVE_ACTION*, HRESULT)
+    get_replacement : Proc(ISpellingError*, LibC::LPWSTR*, HRESULT)
   end
 
   ISpellingError_GUID = "b7c82d61-fbe8-4b47-9b27-6c0d2e0de0a3"
@@ -4013,10 +4013,10 @@ lib LibWin32
   end
 
   struct IEnumSpellingErrorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    next : UInt64
+    query_interface : Proc(IEnumSpellingError*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEnumSpellingError*, UInt32)
+    release : Proc(IEnumSpellingError*, UInt32)
+    next : Proc(IEnumSpellingError*, ISpellingError*, HRESULT)
   end
 
   IEnumSpellingError_GUID = "803e3bd4-2828-4410-8290-418d1d73c762"
@@ -4026,13 +4026,13 @@ lib LibWin32
   end
 
   struct IOptionDescriptionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_id : UInt64
-    get_heading : UInt64
-    get_description : UInt64
-    get_labels : UInt64
+    query_interface : Proc(IOptionDescription*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IOptionDescription*, UInt32)
+    release : Proc(IOptionDescription*, UInt32)
+    get_id : Proc(IOptionDescription*, LibC::LPWSTR*, HRESULT)
+    get_heading : Proc(IOptionDescription*, LibC::LPWSTR*, HRESULT)
+    get_description : Proc(IOptionDescription*, LibC::LPWSTR*, HRESULT)
+    get_labels : Proc(IOptionDescription*, IEnumString*, HRESULT)
   end
 
   IOptionDescription_GUID = "432e5f85-35cf-4606-a801-6f70277e1d7a"
@@ -4042,10 +4042,10 @@ lib LibWin32
   end
 
   struct ISpellCheckerChangedEventHandlerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    invoke : UInt64
+    query_interface : Proc(ISpellCheckerChangedEventHandler*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISpellCheckerChangedEventHandler*, UInt32)
+    release : Proc(ISpellCheckerChangedEventHandler*, UInt32)
+    invoke : Proc(ISpellCheckerChangedEventHandler*, ISpellChecker, HRESULT)
   end
 
   ISpellCheckerChangedEventHandler_GUID = "0b83a5b0-792f-4eab-9799-acf52c5ed08a"
@@ -4055,23 +4055,23 @@ lib LibWin32
   end
 
   struct ISpellCheckerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_language_tag : UInt64
-    check : UInt64
-    suggest : UInt64
-    add : UInt64
-    ignore : UInt64
-    auto_correct : UInt64
-    get_option_value : UInt64
-    get_option_ids : UInt64
-    get_id : UInt64
-    get_localized_name : UInt64
-    add_spell_checker_changed : UInt64
-    remove_spell_checker_changed : UInt64
-    get_option_description : UInt64
-    comprehensive_check : UInt64
+    query_interface : Proc(ISpellChecker*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISpellChecker*, UInt32)
+    release : Proc(ISpellChecker*, UInt32)
+    get_language_tag : Proc(ISpellChecker*, LibC::LPWSTR*, HRESULT)
+    check : Proc(ISpellChecker*, LibC::LPWSTR, IEnumSpellingError*, HRESULT)
+    suggest : Proc(ISpellChecker*, LibC::LPWSTR, IEnumString*, HRESULT)
+    add : Proc(ISpellChecker*, LibC::LPWSTR, HRESULT)
+    ignore : Proc(ISpellChecker*, LibC::LPWSTR, HRESULT)
+    auto_correct : Proc(ISpellChecker*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    get_option_value : Proc(ISpellChecker*, LibC::LPWSTR, UInt8*, HRESULT)
+    get_option_ids : Proc(ISpellChecker*, IEnumString*, HRESULT)
+    get_id : Proc(ISpellChecker*, LibC::LPWSTR*, HRESULT)
+    get_localized_name : Proc(ISpellChecker*, LibC::LPWSTR*, HRESULT)
+    add_spell_checker_changed : Proc(ISpellChecker*, ISpellCheckerChangedEventHandler, UInt32*, HRESULT)
+    remove_spell_checker_changed : Proc(ISpellChecker*, UInt32, HRESULT)
+    get_option_description : Proc(ISpellChecker*, LibC::LPWSTR, IOptionDescription*, HRESULT)
+    comprehensive_check : Proc(ISpellChecker*, LibC::LPWSTR, IEnumSpellingError*, HRESULT)
   end
 
   ISpellChecker_GUID = "b6fd0b71-e2bc-4653-8d05-f197e412770b"
@@ -4081,24 +4081,24 @@ lib LibWin32
   end
 
   struct ISpellChecker2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_language_tag : UInt64
-    check : UInt64
-    suggest : UInt64
-    add : UInt64
-    ignore : UInt64
-    auto_correct : UInt64
-    get_option_value : UInt64
-    get_option_ids : UInt64
-    get_id : UInt64
-    get_localized_name : UInt64
-    add_spell_checker_changed : UInt64
-    remove_spell_checker_changed : UInt64
-    get_option_description : UInt64
-    comprehensive_check : UInt64
-    remove : UInt64
+    query_interface : Proc(ISpellChecker2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISpellChecker2*, UInt32)
+    release : Proc(ISpellChecker2*, UInt32)
+    get_language_tag : Proc(ISpellChecker2*, LibC::LPWSTR*, HRESULT)
+    check : Proc(ISpellChecker2*, LibC::LPWSTR, IEnumSpellingError*, HRESULT)
+    suggest : Proc(ISpellChecker2*, LibC::LPWSTR, IEnumString*, HRESULT)
+    add : Proc(ISpellChecker2*, LibC::LPWSTR, HRESULT)
+    ignore : Proc(ISpellChecker2*, LibC::LPWSTR, HRESULT)
+    auto_correct : Proc(ISpellChecker2*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    get_option_value : Proc(ISpellChecker2*, LibC::LPWSTR, UInt8*, HRESULT)
+    get_option_ids : Proc(ISpellChecker2*, IEnumString*, HRESULT)
+    get_id : Proc(ISpellChecker2*, LibC::LPWSTR*, HRESULT)
+    get_localized_name : Proc(ISpellChecker2*, LibC::LPWSTR*, HRESULT)
+    add_spell_checker_changed : Proc(ISpellChecker2*, ISpellCheckerChangedEventHandler, UInt32*, HRESULT)
+    remove_spell_checker_changed : Proc(ISpellChecker2*, UInt32, HRESULT)
+    get_option_description : Proc(ISpellChecker2*, LibC::LPWSTR, IOptionDescription*, HRESULT)
+    comprehensive_check : Proc(ISpellChecker2*, LibC::LPWSTR, IEnumSpellingError*, HRESULT)
+    remove : Proc(ISpellChecker2*, LibC::LPWSTR, HRESULT)
   end
 
   ISpellChecker2_GUID = "e7ed1c71-87f7-4378-a840-c9200dacee47"
@@ -4108,12 +4108,12 @@ lib LibWin32
   end
 
   struct ISpellCheckerFactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_supported_languages : UInt64
-    is_supported : UInt64
-    create_spell_checker : UInt64
+    query_interface : Proc(ISpellCheckerFactory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISpellCheckerFactory*, UInt32)
+    release : Proc(ISpellCheckerFactory*, UInt32)
+    get_supported_languages : Proc(ISpellCheckerFactory*, IEnumString*, HRESULT)
+    is_supported : Proc(ISpellCheckerFactory*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
+    create_spell_checker : Proc(ISpellCheckerFactory*, LibC::LPWSTR, ISpellChecker*, HRESULT)
   end
 
   ISpellCheckerFactory_GUID = "8e018a9d-2415-4677-bf08-794ea61f94bb"
@@ -4123,11 +4123,11 @@ lib LibWin32
   end
 
   struct IUserDictionariesRegistrarVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    register_user_dictionary : UInt64
-    unregister_user_dictionary : UInt64
+    query_interface : Proc(IUserDictionariesRegistrar*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUserDictionariesRegistrar*, UInt32)
+    release : Proc(IUserDictionariesRegistrar*, UInt32)
+    register_user_dictionary : Proc(IUserDictionariesRegistrar*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    unregister_user_dictionary : Proc(IUserDictionariesRegistrar*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
   IUserDictionariesRegistrar_GUID = "aa176b85-0e12-4844-8e1a-eef1da77f586"
@@ -4137,19 +4137,19 @@ lib LibWin32
   end
 
   struct ISpellCheckProviderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_language_tag : UInt64
-    check : UInt64
-    suggest : UInt64
-    get_option_value : UInt64
-    set_option_value : UInt64
-    get_option_ids : UInt64
-    get_id : UInt64
-    get_localized_name : UInt64
-    get_option_description : UInt64
-    initialize_wordlist : UInt64
+    query_interface : Proc(ISpellCheckProvider*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISpellCheckProvider*, UInt32)
+    release : Proc(ISpellCheckProvider*, UInt32)
+    get_language_tag : Proc(ISpellCheckProvider*, LibC::LPWSTR*, HRESULT)
+    check : Proc(ISpellCheckProvider*, LibC::LPWSTR, IEnumSpellingError*, HRESULT)
+    suggest : Proc(ISpellCheckProvider*, LibC::LPWSTR, IEnumString*, HRESULT)
+    get_option_value : Proc(ISpellCheckProvider*, LibC::LPWSTR, UInt8*, HRESULT)
+    set_option_value : Proc(ISpellCheckProvider*, LibC::LPWSTR, UInt8, HRESULT)
+    get_option_ids : Proc(ISpellCheckProvider*, IEnumString*, HRESULT)
+    get_id : Proc(ISpellCheckProvider*, LibC::LPWSTR*, HRESULT)
+    get_localized_name : Proc(ISpellCheckProvider*, LibC::LPWSTR*, HRESULT)
+    get_option_description : Proc(ISpellCheckProvider*, LibC::LPWSTR, IOptionDescription*, HRESULT)
+    initialize_wordlist : Proc(ISpellCheckProvider*, WORDLIST_TYPE, IEnumString, HRESULT)
   end
 
   ISpellCheckProvider_GUID = "73e976e0-8ed4-4eb1-80d7-1be0a16b0c38"
@@ -4159,10 +4159,10 @@ lib LibWin32
   end
 
   struct IComprehensiveSpellCheckProviderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    comprehensive_check : UInt64
+    query_interface : Proc(IComprehensiveSpellCheckProvider*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IComprehensiveSpellCheckProvider*, UInt32)
+    release : Proc(IComprehensiveSpellCheckProvider*, UInt32)
+    comprehensive_check : Proc(IComprehensiveSpellCheckProvider*, LibC::LPWSTR, IEnumSpellingError*, HRESULT)
   end
 
   IComprehensiveSpellCheckProvider_GUID = "0c58f8de-8e94-479e-9717-70c42c4ad2c3"
@@ -4172,12 +4172,12 @@ lib LibWin32
   end
 
   struct ISpellCheckProviderFactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_supported_languages : UInt64
-    is_supported : UInt64
-    create_spell_check_provider : UInt64
+    query_interface : Proc(ISpellCheckProviderFactory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISpellCheckProviderFactory*, UInt32)
+    release : Proc(ISpellCheckProviderFactory*, UInt32)
+    get_supported_languages : Proc(ISpellCheckProviderFactory*, IEnumString*, HRESULT)
+    is_supported : Proc(ISpellCheckProviderFactory*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
+    create_spell_check_provider : Proc(ISpellCheckProviderFactory*, LibC::LPWSTR, ISpellCheckProvider*, HRESULT)
   end
 
   ISpellCheckProviderFactory_GUID = "9f671e11-77d6-4c92-aefb-615215e3a4be"
@@ -4187,14 +4187,14 @@ lib LibWin32
   end
 
   struct IMLangStringBufWVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_status : UInt64
-    lock_buf : UInt64
-    unlock_buf : UInt64
-    insert : UInt64
-    delete : UInt64
+    query_interface : Proc(IMLangStringBufW*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLangStringBufW*, UInt32)
+    release : Proc(IMLangStringBufW*, UInt32)
+    get_status : Proc(IMLangStringBufW*, Int32*, Int32*, HRESULT)
+    lock_buf : Proc(IMLangStringBufW*, Int32, Int32, UInt16**, Int32*, HRESULT)
+    unlock_buf : Proc(IMLangStringBufW*, LibC::LPWSTR, Int32, Int32, HRESULT)
+    insert : Proc(IMLangStringBufW*, Int32, Int32, Int32*, HRESULT)
+    delete : Proc(IMLangStringBufW*, Int32, Int32, HRESULT)
   end
 
   IMLangStringBufW_GUID = "d24acd21-ba72-11d0-b188-00aa0038c969"
@@ -4204,14 +4204,14 @@ lib LibWin32
   end
 
   struct IMLangStringBufAVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_status : UInt64
-    lock_buf : UInt64
-    unlock_buf : UInt64
-    insert : UInt64
-    delete : UInt64
+    query_interface : Proc(IMLangStringBufA*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLangStringBufA*, UInt32)
+    release : Proc(IMLangStringBufA*, UInt32)
+    get_status : Proc(IMLangStringBufA*, Int32*, Int32*, HRESULT)
+    lock_buf : Proc(IMLangStringBufA*, Int32, Int32, CHAR**, Int32*, HRESULT)
+    unlock_buf : Proc(IMLangStringBufA*, PSTR, Int32, Int32, HRESULT)
+    insert : Proc(IMLangStringBufA*, Int32, Int32, Int32*, HRESULT)
+    delete : Proc(IMLangStringBufA*, Int32, Int32, HRESULT)
   end
 
   IMLangStringBufA_GUID = "d24acd23-ba72-11d0-b188-00aa0038c969"
@@ -4221,13 +4221,13 @@ lib LibWin32
   end
 
   struct IMLangStringVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    sync : UInt64
-    get_length : UInt64
-    set_ml_str : UInt64
-    get_ml_str : UInt64
+    query_interface : Proc(IMLangString*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLangString*, UInt32)
+    release : Proc(IMLangString*, UInt32)
+    sync : Proc(IMLangString*, LibC::BOOL, HRESULT)
+    get_length : Proc(IMLangString*, Int32*, HRESULT)
+    set_ml_str : Proc(IMLangString*, Int32, Int32, IUnknown, Int32, Int32, HRESULT)
+    get_ml_str : Proc(IMLangString*, Int32, Int32, IUnknown, UInt32, Guid*, IUnknown*, Int32*, Int32*, HRESULT)
   end
 
   IMLangString_GUID = "c04d65ce-b70d-11d0-b188-00aa0038c969"
@@ -4237,21 +4237,21 @@ lib LibWin32
   end
 
   struct IMLangStringWStrVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    sync : UInt64
-    get_length : UInt64
-    set_ml_str : UInt64
-    get_ml_str : UInt64
-    set_w_str : UInt64
-    set_str_buf_w : UInt64
-    get_w_str : UInt64
-    get_str_buf_w : UInt64
-    lock_w_str : UInt64
-    unlock_w_str : UInt64
-    set_locale : UInt64
-    get_locale : UInt64
+    query_interface : Proc(IMLangStringWStr*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLangStringWStr*, UInt32)
+    release : Proc(IMLangStringWStr*, UInt32)
+    sync : Proc(IMLangStringWStr*, LibC::BOOL, HRESULT)
+    get_length : Proc(IMLangStringWStr*, Int32*, HRESULT)
+    set_ml_str : Proc(IMLangStringWStr*, Int32, Int32, IUnknown, Int32, Int32, HRESULT)
+    get_ml_str : Proc(IMLangStringWStr*, Int32, Int32, IUnknown, UInt32, Guid*, IUnknown*, Int32*, Int32*, HRESULT)
+    set_w_str : Proc(IMLangStringWStr*, Int32, Int32, Char*, Int32, Int32*, Int32*, HRESULT)
+    set_str_buf_w : Proc(IMLangStringWStr*, Int32, Int32, IMLangStringBufW, Int32*, Int32*, HRESULT)
+    get_w_str : Proc(IMLangStringWStr*, Int32, Int32, Char*, Int32, Int32*, Int32*, HRESULT)
+    get_str_buf_w : Proc(IMLangStringWStr*, Int32, Int32, IMLangStringBufW*, Int32*, HRESULT)
+    lock_w_str : Proc(IMLangStringWStr*, Int32, Int32, Int32, Int32, LibC::LPWSTR*, Int32*, Int32*, HRESULT)
+    unlock_w_str : Proc(IMLangStringWStr*, Char*, Int32, Int32*, Int32*, HRESULT)
+    set_locale : Proc(IMLangStringWStr*, Int32, Int32, UInt32, HRESULT)
+    get_locale : Proc(IMLangStringWStr*, Int32, Int32, UInt32*, Int32*, Int32*, HRESULT)
   end
 
   IMLangStringWStr_GUID = "c04d65d0-b70d-11d0-b188-00aa0038c969"
@@ -4261,21 +4261,21 @@ lib LibWin32
   end
 
   struct IMLangStringAStrVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    sync : UInt64
-    get_length : UInt64
-    set_ml_str : UInt64
-    get_ml_str : UInt64
-    set_a_str : UInt64
-    set_str_buf_a : UInt64
-    get_a_str : UInt64
-    get_str_buf_a : UInt64
-    lock_a_str : UInt64
-    unlock_a_str : UInt64
-    set_locale : UInt64
-    get_locale : UInt64
+    query_interface : Proc(IMLangStringAStr*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLangStringAStr*, UInt32)
+    release : Proc(IMLangStringAStr*, UInt32)
+    sync : Proc(IMLangStringAStr*, LibC::BOOL, HRESULT)
+    get_length : Proc(IMLangStringAStr*, Int32*, HRESULT)
+    set_ml_str : Proc(IMLangStringAStr*, Int32, Int32, IUnknown, Int32, Int32, HRESULT)
+    get_ml_str : Proc(IMLangStringAStr*, Int32, Int32, IUnknown, UInt32, Guid*, IUnknown*, Int32*, Int32*, HRESULT)
+    set_a_str : Proc(IMLangStringAStr*, Int32, Int32, UInt32, UInt8*, Int32, Int32*, Int32*, HRESULT)
+    set_str_buf_a : Proc(IMLangStringAStr*, Int32, Int32, UInt32, IMLangStringBufA, Int32*, Int32*, HRESULT)
+    get_a_str : Proc(IMLangStringAStr*, Int32, Int32, UInt32, UInt32*, UInt8*, Int32, Int32*, Int32*, HRESULT)
+    get_str_buf_a : Proc(IMLangStringAStr*, Int32, Int32, UInt32*, IMLangStringBufA*, Int32*, HRESULT)
+    lock_a_str : Proc(IMLangStringAStr*, Int32, Int32, Int32, UInt32, Int32, UInt32*, PSTR*, Int32*, Int32*, HRESULT)
+    unlock_a_str : Proc(IMLangStringAStr*, UInt8*, Int32, Int32*, Int32*, HRESULT)
+    set_locale : Proc(IMLangStringAStr*, Int32, Int32, UInt32, HRESULT)
+    get_locale : Proc(IMLangStringAStr*, Int32, Int32, UInt32*, Int32*, Int32*, HRESULT)
   end
 
   IMLangStringAStr_GUID = "c04d65d2-b70d-11d0-b188-00aa0038c969"
@@ -4285,12 +4285,12 @@ lib LibWin32
   end
 
   struct IMLangLineBreakConsoleVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    break_line_ml : UInt64
-    break_line_w : UInt64
-    break_line_a : UInt64
+    query_interface : Proc(IMLangLineBreakConsole*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLangLineBreakConsole*, UInt32)
+    release : Proc(IMLangLineBreakConsole*, UInt32)
+    break_line_ml : Proc(IMLangLineBreakConsole*, IMLangString, Int32, Int32, Int32, Int32, Int32*, Int32*, HRESULT)
+    break_line_w : Proc(IMLangLineBreakConsole*, UInt32, Char*, Int32, Int32, Int32*, Int32*, HRESULT)
+    break_line_a : Proc(IMLangLineBreakConsole*, UInt32, UInt32, UInt8*, Int32, Int32, Int32*, Int32*, HRESULT)
   end
 
   IMLangLineBreakConsole_GUID = "f5be2ee1-bfd7-11d0-b188-00aa0038c969"
@@ -4300,13 +4300,13 @@ lib LibWin32
   end
 
   struct IEnumCodePageVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    clone : UInt64
-    next : UInt64
-    reset : UInt64
-    skip : UInt64
+    query_interface : Proc(IEnumCodePage*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEnumCodePage*, UInt32)
+    release : Proc(IEnumCodePage*, UInt32)
+    clone : Proc(IEnumCodePage*, IEnumCodePage*, HRESULT)
+    next : Proc(IEnumCodePage*, UInt32, MIMECPINFO*, UInt32*, HRESULT)
+    reset : Proc(IEnumCodePage*, HRESULT)
+    skip : Proc(IEnumCodePage*, UInt32, HRESULT)
   end
 
   IEnumCodePage_GUID = "275c23e3-3747-11d0-9fea-00aa003f8646"
@@ -4316,13 +4316,13 @@ lib LibWin32
   end
 
   struct IEnumRfc1766VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    clone : UInt64
-    next : UInt64
-    reset : UInt64
-    skip : UInt64
+    query_interface : Proc(IEnumRfc1766*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEnumRfc1766*, UInt32)
+    release : Proc(IEnumRfc1766*, UInt32)
+    clone : Proc(IEnumRfc1766*, IEnumRfc1766*, HRESULT)
+    next : Proc(IEnumRfc1766*, UInt32, RFC1766INFO*, UInt32*, HRESULT)
+    reset : Proc(IEnumRfc1766*, HRESULT)
+    skip : Proc(IEnumRfc1766*, UInt32, HRESULT)
   end
 
   IEnumRfc1766_GUID = "3dc39d1d-c030-11d0-b81b-00c04fc9b31f"
@@ -4332,13 +4332,13 @@ lib LibWin32
   end
 
   struct IEnumScriptVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    clone : UInt64
-    next : UInt64
-    reset : UInt64
-    skip : UInt64
+    query_interface : Proc(IEnumScript*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEnumScript*, UInt32)
+    release : Proc(IEnumScript*, UInt32)
+    clone : Proc(IEnumScript*, IEnumScript*, HRESULT)
+    next : Proc(IEnumScript*, UInt32, SCRIPTINFO*, UInt32*, HRESULT)
+    reset : Proc(IEnumScript*, HRESULT)
+    skip : Proc(IEnumScript*, UInt32, HRESULT)
   end
 
   IEnumScript_GUID = "ae5f1430-388b-11d2-8380-00c04f8f5da1"
@@ -4348,16 +4348,16 @@ lib LibWin32
   end
 
   struct IMLangConvertCharsetVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    initialize : UInt64
-    get_source_code_page : UInt64
-    get_destination_code_page : UInt64
-    get_property : UInt64
-    do_conversion : UInt64
-    do_conversion_to_unicode : UInt64
-    do_conversion_from_unicode : UInt64
+    query_interface : Proc(IMLangConvertCharset*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLangConvertCharset*, UInt32)
+    release : Proc(IMLangConvertCharset*, UInt32)
+    initialize : Proc(IMLangConvertCharset*, UInt32, UInt32, UInt32, HRESULT)
+    get_source_code_page : Proc(IMLangConvertCharset*, UInt32*, HRESULT)
+    get_destination_code_page : Proc(IMLangConvertCharset*, UInt32*, HRESULT)
+    get_property : Proc(IMLangConvertCharset*, UInt32*, HRESULT)
+    do_conversion : Proc(IMLangConvertCharset*, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)
+    do_conversion_to_unicode : Proc(IMLangConvertCharset*, PSTR, UInt32*, Char*, UInt32*, HRESULT)
+    do_conversion_from_unicode : Proc(IMLangConvertCharset*, Char*, UInt32*, PSTR, UInt32*, HRESULT)
   end
 
   IMLangConvertCharset_GUID = "d66d6f98-cdaa-11d0-b822-00c04fc9b31f"
@@ -4367,24 +4367,24 @@ lib LibWin32
   end
 
   struct IMultiLanguageVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_number_of_code_page_info : UInt64
-    get_code_page_info : UInt64
-    get_family_code_page : UInt64
-    enum_code_pages : UInt64
-    get_charset_info : UInt64
-    is_convertible : UInt64
-    convert_string : UInt64
-    convert_string_to_unicode : UInt64
-    convert_string_from_unicode : UInt64
-    convert_string_reset : UInt64
-    get_rfc1766_from_lcid : UInt64
-    get_lcid_from_rfc1766 : UInt64
-    enum_rfc1766 : UInt64
-    get_rfc1766_info : UInt64
-    create_convert_charset : UInt64
+    query_interface : Proc(IMultiLanguage*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMultiLanguage*, UInt32)
+    release : Proc(IMultiLanguage*, UInt32)
+    get_number_of_code_page_info : Proc(IMultiLanguage*, UInt32*, HRESULT)
+    get_code_page_info : Proc(IMultiLanguage*, UInt32, MIMECPINFO*, HRESULT)
+    get_family_code_page : Proc(IMultiLanguage*, UInt32, UInt32*, HRESULT)
+    enum_code_pages : Proc(IMultiLanguage*, UInt32, IEnumCodePage*, HRESULT)
+    get_charset_info : Proc(IMultiLanguage*, UInt8*, MIMECSETINFO*, HRESULT)
+    is_convertible : Proc(IMultiLanguage*, UInt32, UInt32, HRESULT)
+    convert_string : Proc(IMultiLanguage*, UInt32*, UInt32, UInt32, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)
+    convert_string_to_unicode : Proc(IMultiLanguage*, UInt32*, UInt32, PSTR, UInt32*, Char*, UInt32*, HRESULT)
+    convert_string_from_unicode : Proc(IMultiLanguage*, UInt32*, UInt32, Char*, UInt32*, PSTR, UInt32*, HRESULT)
+    convert_string_reset : Proc(IMultiLanguage*, HRESULT)
+    get_rfc1766_from_lcid : Proc(IMultiLanguage*, UInt32, UInt8**, HRESULT)
+    get_lcid_from_rfc1766 : Proc(IMultiLanguage*, UInt32*, UInt8*, HRESULT)
+    enum_rfc1766 : Proc(IMultiLanguage*, IEnumRfc1766*, HRESULT)
+    get_rfc1766_info : Proc(IMultiLanguage*, UInt32, RFC1766INFO*, HRESULT)
+    create_convert_charset : Proc(IMultiLanguage*, UInt32, UInt32, UInt32, IMLangConvertCharset*, HRESULT)
   end
 
   IMultiLanguage_GUID = "275c23e1-3747-11d0-9fea-00aa003f8646"
@@ -4394,36 +4394,36 @@ lib LibWin32
   end
 
   struct IMultiLanguage2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_number_of_code_page_info : UInt64
-    get_code_page_info : UInt64
-    get_family_code_page : UInt64
-    enum_code_pages : UInt64
-    get_charset_info : UInt64
-    is_convertible : UInt64
-    convert_string : UInt64
-    convert_string_to_unicode : UInt64
-    convert_string_from_unicode : UInt64
-    convert_string_reset : UInt64
-    get_rfc1766_from_lcid : UInt64
-    get_lcid_from_rfc1766 : UInt64
-    enum_rfc1766 : UInt64
-    get_rfc1766_info : UInt64
-    create_convert_charset : UInt64
-    convert_string_in_i_stream : UInt64
-    convert_string_to_unicode_ex : UInt64
-    convert_string_from_unicode_ex : UInt64
-    detect_codepage_in_i_stream : UInt64
-    detect_input_codepage : UInt64
-    validate_code_page : UInt64
-    get_code_page_description : UInt64
-    is_code_page_installable : UInt64
-    set_mime_db_source : UInt64
-    get_number_of_scripts : UInt64
-    enum_scripts : UInt64
-    validate_code_page_ex : UInt64
+    query_interface : Proc(IMultiLanguage2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMultiLanguage2*, UInt32)
+    release : Proc(IMultiLanguage2*, UInt32)
+    get_number_of_code_page_info : Proc(IMultiLanguage2*, UInt32*, HRESULT)
+    get_code_page_info : Proc(IMultiLanguage2*, UInt32, UInt16, MIMECPINFO*, HRESULT)
+    get_family_code_page : Proc(IMultiLanguage2*, UInt32, UInt32*, HRESULT)
+    enum_code_pages : Proc(IMultiLanguage2*, UInt32, UInt16, IEnumCodePage*, HRESULT)
+    get_charset_info : Proc(IMultiLanguage2*, UInt8*, MIMECSETINFO*, HRESULT)
+    is_convertible : Proc(IMultiLanguage2*, UInt32, UInt32, HRESULT)
+    convert_string : Proc(IMultiLanguage2*, UInt32*, UInt32, UInt32, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)
+    convert_string_to_unicode : Proc(IMultiLanguage2*, UInt32*, UInt32, PSTR, UInt32*, Char*, UInt32*, HRESULT)
+    convert_string_from_unicode : Proc(IMultiLanguage2*, UInt32*, UInt32, Char*, UInt32*, PSTR, UInt32*, HRESULT)
+    convert_string_reset : Proc(IMultiLanguage2*, HRESULT)
+    get_rfc1766_from_lcid : Proc(IMultiLanguage2*, UInt32, UInt8**, HRESULT)
+    get_lcid_from_rfc1766 : Proc(IMultiLanguage2*, UInt32*, UInt8*, HRESULT)
+    enum_rfc1766 : Proc(IMultiLanguage2*, UInt16, IEnumRfc1766*, HRESULT)
+    get_rfc1766_info : Proc(IMultiLanguage2*, UInt32, UInt16, RFC1766INFO*, HRESULT)
+    create_convert_charset : Proc(IMultiLanguage2*, UInt32, UInt32, UInt32, IMLangConvertCharset*, HRESULT)
+    convert_string_in_i_stream : Proc(IMultiLanguage2*, UInt32*, UInt32, LibC::LPWSTR, UInt32, UInt32, IStream, IStream, HRESULT)
+    convert_string_to_unicode_ex : Proc(IMultiLanguage2*, UInt32*, UInt32, PSTR, UInt32*, Char*, UInt32*, UInt32, LibC::LPWSTR, HRESULT)
+    convert_string_from_unicode_ex : Proc(IMultiLanguage2*, UInt32*, UInt32, Char*, UInt32*, PSTR, UInt32*, UInt32, LibC::LPWSTR, HRESULT)
+    detect_codepage_in_i_stream : Proc(IMultiLanguage2*, UInt32, UInt32, IStream, DetectEncodingInfo*, Int32*, HRESULT)
+    detect_input_codepage : Proc(IMultiLanguage2*, UInt32, UInt32, PSTR, Int32*, DetectEncodingInfo*, Int32*, HRESULT)
+    validate_code_page : Proc(IMultiLanguage2*, UInt32, LibC::HANDLE, HRESULT)
+    get_code_page_description : Proc(IMultiLanguage2*, UInt32, UInt32, Char*, Int32, HRESULT)
+    is_code_page_installable : Proc(IMultiLanguage2*, UInt32, HRESULT)
+    set_mime_db_source : Proc(IMultiLanguage2*, MIMECONTF, HRESULT)
+    get_number_of_scripts : Proc(IMultiLanguage2*, UInt32*, HRESULT)
+    enum_scripts : Proc(IMultiLanguage2*, UInt32, UInt16, IEnumScript*, HRESULT)
+    validate_code_page_ex : Proc(IMultiLanguage2*, UInt32, LibC::HANDLE, UInt32, HRESULT)
   end
 
   IMultiLanguage2_GUID = "dccfc164-2b38-11d2-b7ec-00c04f8f5d9a"
@@ -4433,13 +4433,13 @@ lib LibWin32
   end
 
   struct IMLangCodePagesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_char_code_pages : UInt64
-    get_str_code_pages : UInt64
-    code_page_to_code_pages : UInt64
-    code_pages_to_code_page : UInt64
+    query_interface : Proc(IMLangCodePages*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLangCodePages*, UInt32)
+    release : Proc(IMLangCodePages*, UInt32)
+    get_char_code_pages : Proc(IMLangCodePages*, Char, UInt32*, HRESULT)
+    get_str_code_pages : Proc(IMLangCodePages*, Char*, Int32, UInt32, UInt32*, Int32*, HRESULT)
+    code_page_to_code_pages : Proc(IMLangCodePages*, UInt32, UInt32*, HRESULT)
+    code_pages_to_code_page : Proc(IMLangCodePages*, UInt32, UInt32, UInt32*, HRESULT)
   end
 
   IMLangCodePages_GUID = "359f3443-bd4a-11d0-b188-00aa0038c969"
@@ -4449,17 +4449,17 @@ lib LibWin32
   end
 
   struct IMLangFontLinkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_char_code_pages : UInt64
-    get_str_code_pages : UInt64
-    code_page_to_code_pages : UInt64
-    code_pages_to_code_page : UInt64
-    get_font_code_pages : UInt64
-    map_font : UInt64
-    release_font : UInt64
-    reset_font_mapping : UInt64
+    query_interface : Proc(IMLangFontLink*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLangFontLink*, UInt32)
+    release : Proc(IMLangFontLink*, UInt32)
+    get_char_code_pages : Proc(IMLangFontLink*, Char, UInt32*, HRESULT)
+    get_str_code_pages : Proc(IMLangFontLink*, Char*, Int32, UInt32, UInt32*, Int32*, HRESULT)
+    code_page_to_code_pages : Proc(IMLangFontLink*, UInt32, UInt32*, HRESULT)
+    code_pages_to_code_page : Proc(IMLangFontLink*, UInt32, UInt32, UInt32*, HRESULT)
+    get_font_code_pages : Proc(IMLangFontLink*, HDC, HFONT, UInt32*, HRESULT)
+    map_font : Proc(IMLangFontLink*, HDC, UInt32, HFONT, HFONT*, HRESULT)
+    release_font : Proc(IMLangFontLink*, HFONT, HRESULT)
+    reset_font_mapping : Proc(IMLangFontLink*, HRESULT)
   end
 
   IMLangFontLink_GUID = "359f3441-bd4a-11d0-b188-00aa0038c969"
@@ -4469,20 +4469,20 @@ lib LibWin32
   end
 
   struct IMLangFontLink2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_char_code_pages : UInt64
-    get_str_code_pages : UInt64
-    code_page_to_code_pages : UInt64
-    code_pages_to_code_page : UInt64
-    get_font_code_pages : UInt64
-    release_font : UInt64
-    reset_font_mapping : UInt64
-    map_font : UInt64
-    get_font_unicode_ranges : UInt64
-    get_script_font_info : UInt64
-    code_page_to_script_id : UInt64
+    query_interface : Proc(IMLangFontLink2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLangFontLink2*, UInt32)
+    release : Proc(IMLangFontLink2*, UInt32)
+    get_char_code_pages : Proc(IMLangFontLink2*, Char, UInt32*, HRESULT)
+    get_str_code_pages : Proc(IMLangFontLink2*, Char*, Int32, UInt32, UInt32*, Int32*, HRESULT)
+    code_page_to_code_pages : Proc(IMLangFontLink2*, UInt32, UInt32*, HRESULT)
+    code_pages_to_code_page : Proc(IMLangFontLink2*, UInt32, UInt32, UInt32*, HRESULT)
+    get_font_code_pages : Proc(IMLangFontLink2*, HDC, HFONT, UInt32*, HRESULT)
+    release_font : Proc(IMLangFontLink2*, HFONT, HRESULT)
+    reset_font_mapping : Proc(IMLangFontLink2*, HRESULT)
+    map_font : Proc(IMLangFontLink2*, HDC, UInt32, Char, HFONT*, HRESULT)
+    get_font_unicode_ranges : Proc(IMLangFontLink2*, HDC, UInt32*, UNICODERANGE*, HRESULT)
+    get_script_font_info : Proc(IMLangFontLink2*, UInt8, UInt32, UInt32*, Tagscripfontinfo*, HRESULT)
+    code_page_to_script_id : Proc(IMLangFontLink2*, UInt32, UInt8*, HRESULT)
   end
 
   IMLangFontLink2_GUID = "dccfc162-2b38-11d2-b7ec-00c04f8f5d9a"
@@ -4492,38 +4492,38 @@ lib LibWin32
   end
 
   struct IMultiLanguage3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_number_of_code_page_info : UInt64
-    get_code_page_info : UInt64
-    get_family_code_page : UInt64
-    enum_code_pages : UInt64
-    get_charset_info : UInt64
-    is_convertible : UInt64
-    convert_string : UInt64
-    convert_string_to_unicode : UInt64
-    convert_string_from_unicode : UInt64
-    convert_string_reset : UInt64
-    get_rfc1766_from_lcid : UInt64
-    get_lcid_from_rfc1766 : UInt64
-    enum_rfc1766 : UInt64
-    get_rfc1766_info : UInt64
-    create_convert_charset : UInt64
-    convert_string_in_i_stream : UInt64
-    convert_string_to_unicode_ex : UInt64
-    convert_string_from_unicode_ex : UInt64
-    detect_codepage_in_i_stream : UInt64
-    detect_input_codepage : UInt64
-    validate_code_page : UInt64
-    get_code_page_description : UInt64
-    is_code_page_installable : UInt64
-    set_mime_db_source : UInt64
-    get_number_of_scripts : UInt64
-    enum_scripts : UInt64
-    validate_code_page_ex : UInt64
-    detect_outbound_code_page : UInt64
-    detect_outbound_code_page_in_i_stream : UInt64
+    query_interface : Proc(IMultiLanguage3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMultiLanguage3*, UInt32)
+    release : Proc(IMultiLanguage3*, UInt32)
+    get_number_of_code_page_info : Proc(IMultiLanguage3*, UInt32*, HRESULT)
+    get_code_page_info : Proc(IMultiLanguage3*, UInt32, UInt16, MIMECPINFO*, HRESULT)
+    get_family_code_page : Proc(IMultiLanguage3*, UInt32, UInt32*, HRESULT)
+    enum_code_pages : Proc(IMultiLanguage3*, UInt32, UInt16, IEnumCodePage*, HRESULT)
+    get_charset_info : Proc(IMultiLanguage3*, UInt8*, MIMECSETINFO*, HRESULT)
+    is_convertible : Proc(IMultiLanguage3*, UInt32, UInt32, HRESULT)
+    convert_string : Proc(IMultiLanguage3*, UInt32*, UInt32, UInt32, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)
+    convert_string_to_unicode : Proc(IMultiLanguage3*, UInt32*, UInt32, PSTR, UInt32*, Char*, UInt32*, HRESULT)
+    convert_string_from_unicode : Proc(IMultiLanguage3*, UInt32*, UInt32, Char*, UInt32*, PSTR, UInt32*, HRESULT)
+    convert_string_reset : Proc(IMultiLanguage3*, HRESULT)
+    get_rfc1766_from_lcid : Proc(IMultiLanguage3*, UInt32, UInt8**, HRESULT)
+    get_lcid_from_rfc1766 : Proc(IMultiLanguage3*, UInt32*, UInt8*, HRESULT)
+    enum_rfc1766 : Proc(IMultiLanguage3*, UInt16, IEnumRfc1766*, HRESULT)
+    get_rfc1766_info : Proc(IMultiLanguage3*, UInt32, UInt16, RFC1766INFO*, HRESULT)
+    create_convert_charset : Proc(IMultiLanguage3*, UInt32, UInt32, UInt32, IMLangConvertCharset*, HRESULT)
+    convert_string_in_i_stream : Proc(IMultiLanguage3*, UInt32*, UInt32, LibC::LPWSTR, UInt32, UInt32, IStream, IStream, HRESULT)
+    convert_string_to_unicode_ex : Proc(IMultiLanguage3*, UInt32*, UInt32, PSTR, UInt32*, Char*, UInt32*, UInt32, LibC::LPWSTR, HRESULT)
+    convert_string_from_unicode_ex : Proc(IMultiLanguage3*, UInt32*, UInt32, Char*, UInt32*, PSTR, UInt32*, UInt32, LibC::LPWSTR, HRESULT)
+    detect_codepage_in_i_stream : Proc(IMultiLanguage3*, UInt32, UInt32, IStream, DetectEncodingInfo*, Int32*, HRESULT)
+    detect_input_codepage : Proc(IMultiLanguage3*, UInt32, UInt32, PSTR, Int32*, DetectEncodingInfo*, Int32*, HRESULT)
+    validate_code_page : Proc(IMultiLanguage3*, UInt32, LibC::HANDLE, HRESULT)
+    get_code_page_description : Proc(IMultiLanguage3*, UInt32, UInt32, Char*, Int32, HRESULT)
+    is_code_page_installable : Proc(IMultiLanguage3*, UInt32, HRESULT)
+    set_mime_db_source : Proc(IMultiLanguage3*, MIMECONTF, HRESULT)
+    get_number_of_scripts : Proc(IMultiLanguage3*, UInt32*, HRESULT)
+    enum_scripts : Proc(IMultiLanguage3*, UInt32, UInt16, IEnumScript*, HRESULT)
+    validate_code_page_ex : Proc(IMultiLanguage3*, UInt32, LibC::HANDLE, UInt32, HRESULT)
+    detect_outbound_code_page : Proc(IMultiLanguage3*, UInt32, Char*, UInt32, UInt32*, UInt32, UInt32*, UInt32*, LibC::LPWSTR, HRESULT)
+    detect_outbound_code_page_in_i_stream : Proc(IMultiLanguage3*, UInt32, IStream, UInt32*, UInt32, UInt32*, UInt32*, LibC::LPWSTR, HRESULT)
   end
 
   IMultiLanguage3_GUID = "4e5868ab-b157-4623-9acc-6a1d9caebe04"
@@ -8176,935 +8176,935 @@ lib LibWin32
   fun IsTextUnicode(lpv : Void*, isize : Int32, lpiresult : IS_TEXT_UNICODE_RESULT*) : LibC::BOOL
 end
 struct LibWin32::ISpellingError
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISpellingError*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISpellingError*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISpellingError*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_start_index(value : UInt32*) : HRESULT
-    @lpVtbl.value.get_start_index.unsafe_as(Proc(UInt32*, HRESULT)).call(value)
+  def get_start_index(this : ISpellingError*, value : UInt32*) : HRESULT
+    @lpVtbl.value.get_start_index.call(this, value)
   end
-  def get_length(value : UInt32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(UInt32*, HRESULT)).call(value)
+  def get_length(this : ISpellingError*, value : UInt32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, value)
   end
-  def get_corrective_action(value : CORRECTIVE_ACTION*) : HRESULT
-    @lpVtbl.value.get_corrective_action.unsafe_as(Proc(CORRECTIVE_ACTION*, HRESULT)).call(value)
+  def get_corrective_action(this : ISpellingError*, value : CORRECTIVE_ACTION*) : HRESULT
+    @lpVtbl.value.get_corrective_action.call(this, value)
   end
-  def get_replacement(value : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_replacement.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(value)
+  def get_replacement(this : ISpellingError*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_replacement.call(this, value)
   end
 end
 struct LibWin32::IEnumSpellingError
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IEnumSpellingError*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IEnumSpellingError*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IEnumSpellingError*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def next(value : ISpellingError*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(ISpellingError*, HRESULT)).call(value)
+  def next(this : IEnumSpellingError*, value : ISpellingError*) : HRESULT
+    @lpVtbl.value.next.call(this, value)
   end
 end
 struct LibWin32::IOptionDescription
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IOptionDescription*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IOptionDescription*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IOptionDescription*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_id(value : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(value)
+  def get_id(this : IOptionDescription*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_id.call(this, value)
   end
-  def get_heading(value : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_heading.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(value)
+  def get_heading(this : IOptionDescription*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_heading.call(this, value)
   end
-  def get_description(value : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(value)
+  def get_description(this : IOptionDescription*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_description.call(this, value)
   end
-  def get_labels(value : IEnumString*) : HRESULT
-    @lpVtbl.value.get_labels.unsafe_as(Proc(IEnumString*, HRESULT)).call(value)
+  def get_labels(this : IOptionDescription*, value : IEnumString*) : HRESULT
+    @lpVtbl.value.get_labels.call(this, value)
   end
 end
 struct LibWin32::ISpellCheckerChangedEventHandler
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISpellCheckerChangedEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISpellCheckerChangedEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISpellCheckerChangedEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def invoke(sender : ISpellChecker) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(ISpellChecker, HRESULT)).call(sender)
+  def invoke(this : ISpellCheckerChangedEventHandler*, sender : ISpellChecker) : HRESULT
+    @lpVtbl.value.invoke.call(this, sender)
   end
 end
 struct LibWin32::ISpellChecker
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISpellChecker*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISpellChecker*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISpellChecker*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_language_tag(value : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_language_tag.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(value)
+  def get_language_tag(this : ISpellChecker*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language_tag.call(this, value)
   end
-  def check(text : LibC::LPWSTR, value : IEnumSpellingError*) : HRESULT
-    @lpVtbl.value.check.unsafe_as(Proc(LibC::LPWSTR, IEnumSpellingError*, HRESULT)).call(text, value)
+  def check(this : ISpellChecker*, text : LibC::LPWSTR, value : IEnumSpellingError*) : HRESULT
+    @lpVtbl.value.check.call(this, text, value)
   end
-  def suggest(word : LibC::LPWSTR, value : IEnumString*) : HRESULT
-    @lpVtbl.value.suggest.unsafe_as(Proc(LibC::LPWSTR, IEnumString*, HRESULT)).call(word, value)
+  def suggest(this : ISpellChecker*, word : LibC::LPWSTR, value : IEnumString*) : HRESULT
+    @lpVtbl.value.suggest.call(this, word, value)
   end
-  def add(word : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(word)
+  def add(this : ISpellChecker*, word : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add.call(this, word)
   end
-  def ignore(word : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.ignore.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(word)
+  def ignore(this : ISpellChecker*, word : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.ignore.call(this, word)
   end
-  def auto_correct(from : LibC::LPWSTR, to : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.auto_correct.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(from, to)
+  def auto_correct(this : ISpellChecker*, from : LibC::LPWSTR, to : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.auto_correct.call(this, from, to)
   end
-  def get_option_value(optionid : LibC::LPWSTR, value : UInt8*) : HRESULT
-    @lpVtbl.value.get_option_value.unsafe_as(Proc(LibC::LPWSTR, UInt8*, HRESULT)).call(optionid, value)
+  def get_option_value(this : ISpellChecker*, optionid : LibC::LPWSTR, value : UInt8*) : HRESULT
+    @lpVtbl.value.get_option_value.call(this, optionid, value)
   end
-  def get_option_ids(value : IEnumString*) : HRESULT
-    @lpVtbl.value.get_option_ids.unsafe_as(Proc(IEnumString*, HRESULT)).call(value)
+  def get_option_ids(this : ISpellChecker*, value : IEnumString*) : HRESULT
+    @lpVtbl.value.get_option_ids.call(this, value)
   end
-  def get_id(value : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(value)
+  def get_id(this : ISpellChecker*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_id.call(this, value)
   end
-  def get_localized_name(value : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_localized_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(value)
+  def get_localized_name(this : ISpellChecker*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_localized_name.call(this, value)
   end
-  def add_spell_checker_changed(handler : ISpellCheckerChangedEventHandler, eventcookie : UInt32*) : HRESULT
-    @lpVtbl.value.add_spell_checker_changed.unsafe_as(Proc(ISpellCheckerChangedEventHandler, UInt32*, HRESULT)).call(handler, eventcookie)
+  def add_spell_checker_changed(this : ISpellChecker*, handler : ISpellCheckerChangedEventHandler, eventcookie : UInt32*) : HRESULT
+    @lpVtbl.value.add_spell_checker_changed.call(this, handler, eventcookie)
   end
-  def remove_spell_checker_changed(eventcookie : UInt32) : HRESULT
-    @lpVtbl.value.remove_spell_checker_changed.unsafe_as(Proc(UInt32, HRESULT)).call(eventcookie)
+  def remove_spell_checker_changed(this : ISpellChecker*, eventcookie : UInt32) : HRESULT
+    @lpVtbl.value.remove_spell_checker_changed.call(this, eventcookie)
   end
-  def get_option_description(optionid : LibC::LPWSTR, value : IOptionDescription*) : HRESULT
-    @lpVtbl.value.get_option_description.unsafe_as(Proc(LibC::LPWSTR, IOptionDescription*, HRESULT)).call(optionid, value)
+  def get_option_description(this : ISpellChecker*, optionid : LibC::LPWSTR, value : IOptionDescription*) : HRESULT
+    @lpVtbl.value.get_option_description.call(this, optionid, value)
   end
-  def comprehensive_check(text : LibC::LPWSTR, value : IEnumSpellingError*) : HRESULT
-    @lpVtbl.value.comprehensive_check.unsafe_as(Proc(LibC::LPWSTR, IEnumSpellingError*, HRESULT)).call(text, value)
+  def comprehensive_check(this : ISpellChecker*, text : LibC::LPWSTR, value : IEnumSpellingError*) : HRESULT
+    @lpVtbl.value.comprehensive_check.call(this, text, value)
   end
 end
 struct LibWin32::ISpellChecker2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISpellChecker2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISpellChecker2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISpellChecker2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_language_tag(value : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_language_tag.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(value)
+  def get_language_tag(this : ISpellChecker2*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language_tag.call(this, value)
   end
-  def check(text : LibC::LPWSTR, value : IEnumSpellingError*) : HRESULT
-    @lpVtbl.value.check.unsafe_as(Proc(LibC::LPWSTR, IEnumSpellingError*, HRESULT)).call(text, value)
+  def check(this : ISpellChecker2*, text : LibC::LPWSTR, value : IEnumSpellingError*) : HRESULT
+    @lpVtbl.value.check.call(this, text, value)
   end
-  def suggest(word : LibC::LPWSTR, value : IEnumString*) : HRESULT
-    @lpVtbl.value.suggest.unsafe_as(Proc(LibC::LPWSTR, IEnumString*, HRESULT)).call(word, value)
+  def suggest(this : ISpellChecker2*, word : LibC::LPWSTR, value : IEnumString*) : HRESULT
+    @lpVtbl.value.suggest.call(this, word, value)
   end
-  def add(word : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(word)
+  def add(this : ISpellChecker2*, word : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add.call(this, word)
   end
-  def ignore(word : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.ignore.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(word)
+  def ignore(this : ISpellChecker2*, word : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.ignore.call(this, word)
   end
-  def auto_correct(from : LibC::LPWSTR, to : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.auto_correct.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(from, to)
+  def auto_correct(this : ISpellChecker2*, from : LibC::LPWSTR, to : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.auto_correct.call(this, from, to)
   end
-  def get_option_value(optionid : LibC::LPWSTR, value : UInt8*) : HRESULT
-    @lpVtbl.value.get_option_value.unsafe_as(Proc(LibC::LPWSTR, UInt8*, HRESULT)).call(optionid, value)
+  def get_option_value(this : ISpellChecker2*, optionid : LibC::LPWSTR, value : UInt8*) : HRESULT
+    @lpVtbl.value.get_option_value.call(this, optionid, value)
   end
-  def get_option_ids(value : IEnumString*) : HRESULT
-    @lpVtbl.value.get_option_ids.unsafe_as(Proc(IEnumString*, HRESULT)).call(value)
+  def get_option_ids(this : ISpellChecker2*, value : IEnumString*) : HRESULT
+    @lpVtbl.value.get_option_ids.call(this, value)
   end
-  def get_id(value : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(value)
+  def get_id(this : ISpellChecker2*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_id.call(this, value)
   end
-  def get_localized_name(value : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_localized_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(value)
+  def get_localized_name(this : ISpellChecker2*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_localized_name.call(this, value)
   end
-  def add_spell_checker_changed(handler : ISpellCheckerChangedEventHandler, eventcookie : UInt32*) : HRESULT
-    @lpVtbl.value.add_spell_checker_changed.unsafe_as(Proc(ISpellCheckerChangedEventHandler, UInt32*, HRESULT)).call(handler, eventcookie)
+  def add_spell_checker_changed(this : ISpellChecker2*, handler : ISpellCheckerChangedEventHandler, eventcookie : UInt32*) : HRESULT
+    @lpVtbl.value.add_spell_checker_changed.call(this, handler, eventcookie)
   end
-  def remove_spell_checker_changed(eventcookie : UInt32) : HRESULT
-    @lpVtbl.value.remove_spell_checker_changed.unsafe_as(Proc(UInt32, HRESULT)).call(eventcookie)
+  def remove_spell_checker_changed(this : ISpellChecker2*, eventcookie : UInt32) : HRESULT
+    @lpVtbl.value.remove_spell_checker_changed.call(this, eventcookie)
   end
-  def get_option_description(optionid : LibC::LPWSTR, value : IOptionDescription*) : HRESULT
-    @lpVtbl.value.get_option_description.unsafe_as(Proc(LibC::LPWSTR, IOptionDescription*, HRESULT)).call(optionid, value)
+  def get_option_description(this : ISpellChecker2*, optionid : LibC::LPWSTR, value : IOptionDescription*) : HRESULT
+    @lpVtbl.value.get_option_description.call(this, optionid, value)
   end
-  def comprehensive_check(text : LibC::LPWSTR, value : IEnumSpellingError*) : HRESULT
-    @lpVtbl.value.comprehensive_check.unsafe_as(Proc(LibC::LPWSTR, IEnumSpellingError*, HRESULT)).call(text, value)
+  def comprehensive_check(this : ISpellChecker2*, text : LibC::LPWSTR, value : IEnumSpellingError*) : HRESULT
+    @lpVtbl.value.comprehensive_check.call(this, text, value)
   end
-  def remove(word : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(word)
+  def remove(this : ISpellChecker2*, word : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove.call(this, word)
   end
 end
 struct LibWin32::ISpellCheckerFactory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISpellCheckerFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISpellCheckerFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISpellCheckerFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_supported_languages(value : IEnumString*) : HRESULT
-    @lpVtbl.value.get_supported_languages.unsafe_as(Proc(IEnumString*, HRESULT)).call(value)
+  def get_supported_languages(this : ISpellCheckerFactory*, value : IEnumString*) : HRESULT
+    @lpVtbl.value.get_supported_languages.call(this, value)
   end
-  def is_supported(languagetag : LibC::LPWSTR, value : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_supported.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL*, HRESULT)).call(languagetag, value)
+  def is_supported(this : ISpellCheckerFactory*, languagetag : LibC::LPWSTR, value : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_supported.call(this, languagetag, value)
   end
-  def create_spell_checker(languagetag : LibC::LPWSTR, value : ISpellChecker*) : HRESULT
-    @lpVtbl.value.create_spell_checker.unsafe_as(Proc(LibC::LPWSTR, ISpellChecker*, HRESULT)).call(languagetag, value)
+  def create_spell_checker(this : ISpellCheckerFactory*, languagetag : LibC::LPWSTR, value : ISpellChecker*) : HRESULT
+    @lpVtbl.value.create_spell_checker.call(this, languagetag, value)
   end
 end
 struct LibWin32::IUserDictionariesRegistrar
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUserDictionariesRegistrar*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUserDictionariesRegistrar*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUserDictionariesRegistrar*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def register_user_dictionary(dictionarypath : LibC::LPWSTR, languagetag : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.register_user_dictionary.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(dictionarypath, languagetag)
+  def register_user_dictionary(this : IUserDictionariesRegistrar*, dictionarypath : LibC::LPWSTR, languagetag : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.register_user_dictionary.call(this, dictionarypath, languagetag)
   end
-  def unregister_user_dictionary(dictionarypath : LibC::LPWSTR, languagetag : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.unregister_user_dictionary.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(dictionarypath, languagetag)
+  def unregister_user_dictionary(this : IUserDictionariesRegistrar*, dictionarypath : LibC::LPWSTR, languagetag : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.unregister_user_dictionary.call(this, dictionarypath, languagetag)
   end
 end
 struct LibWin32::ISpellCheckProvider
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISpellCheckProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISpellCheckProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISpellCheckProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_language_tag(value : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_language_tag.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(value)
+  def get_language_tag(this : ISpellCheckProvider*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language_tag.call(this, value)
   end
-  def check(text : LibC::LPWSTR, value : IEnumSpellingError*) : HRESULT
-    @lpVtbl.value.check.unsafe_as(Proc(LibC::LPWSTR, IEnumSpellingError*, HRESULT)).call(text, value)
+  def check(this : ISpellCheckProvider*, text : LibC::LPWSTR, value : IEnumSpellingError*) : HRESULT
+    @lpVtbl.value.check.call(this, text, value)
   end
-  def suggest(word : LibC::LPWSTR, value : IEnumString*) : HRESULT
-    @lpVtbl.value.suggest.unsafe_as(Proc(LibC::LPWSTR, IEnumString*, HRESULT)).call(word, value)
+  def suggest(this : ISpellCheckProvider*, word : LibC::LPWSTR, value : IEnumString*) : HRESULT
+    @lpVtbl.value.suggest.call(this, word, value)
   end
-  def get_option_value(optionid : LibC::LPWSTR, value : UInt8*) : HRESULT
-    @lpVtbl.value.get_option_value.unsafe_as(Proc(LibC::LPWSTR, UInt8*, HRESULT)).call(optionid, value)
+  def get_option_value(this : ISpellCheckProvider*, optionid : LibC::LPWSTR, value : UInt8*) : HRESULT
+    @lpVtbl.value.get_option_value.call(this, optionid, value)
   end
-  def set_option_value(optionid : LibC::LPWSTR, value : UInt8) : HRESULT
-    @lpVtbl.value.set_option_value.unsafe_as(Proc(LibC::LPWSTR, UInt8, HRESULT)).call(optionid, value)
+  def set_option_value(this : ISpellCheckProvider*, optionid : LibC::LPWSTR, value : UInt8) : HRESULT
+    @lpVtbl.value.set_option_value.call(this, optionid, value)
   end
-  def get_option_ids(value : IEnumString*) : HRESULT
-    @lpVtbl.value.get_option_ids.unsafe_as(Proc(IEnumString*, HRESULT)).call(value)
+  def get_option_ids(this : ISpellCheckProvider*, value : IEnumString*) : HRESULT
+    @lpVtbl.value.get_option_ids.call(this, value)
   end
-  def get_id(value : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(value)
+  def get_id(this : ISpellCheckProvider*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_id.call(this, value)
   end
-  def get_localized_name(value : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_localized_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(value)
+  def get_localized_name(this : ISpellCheckProvider*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_localized_name.call(this, value)
   end
-  def get_option_description(optionid : LibC::LPWSTR, value : IOptionDescription*) : HRESULT
-    @lpVtbl.value.get_option_description.unsafe_as(Proc(LibC::LPWSTR, IOptionDescription*, HRESULT)).call(optionid, value)
+  def get_option_description(this : ISpellCheckProvider*, optionid : LibC::LPWSTR, value : IOptionDescription*) : HRESULT
+    @lpVtbl.value.get_option_description.call(this, optionid, value)
   end
-  def initialize_wordlist(wordlisttype : WORDLIST_TYPE, words : IEnumString) : HRESULT
-    @lpVtbl.value.initialize_wordlist.unsafe_as(Proc(WORDLIST_TYPE, IEnumString, HRESULT)).call(wordlisttype, words)
+  def initialize_wordlist(this : ISpellCheckProvider*, wordlisttype : WORDLIST_TYPE, words : IEnumString) : HRESULT
+    @lpVtbl.value.initialize_wordlist.call(this, wordlisttype, words)
   end
 end
 struct LibWin32::IComprehensiveSpellCheckProvider
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IComprehensiveSpellCheckProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IComprehensiveSpellCheckProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IComprehensiveSpellCheckProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def comprehensive_check(text : LibC::LPWSTR, value : IEnumSpellingError*) : HRESULT
-    @lpVtbl.value.comprehensive_check.unsafe_as(Proc(LibC::LPWSTR, IEnumSpellingError*, HRESULT)).call(text, value)
+  def comprehensive_check(this : IComprehensiveSpellCheckProvider*, text : LibC::LPWSTR, value : IEnumSpellingError*) : HRESULT
+    @lpVtbl.value.comprehensive_check.call(this, text, value)
   end
 end
 struct LibWin32::ISpellCheckProviderFactory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISpellCheckProviderFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISpellCheckProviderFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISpellCheckProviderFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_supported_languages(value : IEnumString*) : HRESULT
-    @lpVtbl.value.get_supported_languages.unsafe_as(Proc(IEnumString*, HRESULT)).call(value)
+  def get_supported_languages(this : ISpellCheckProviderFactory*, value : IEnumString*) : HRESULT
+    @lpVtbl.value.get_supported_languages.call(this, value)
   end
-  def is_supported(languagetag : LibC::LPWSTR, value : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_supported.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL*, HRESULT)).call(languagetag, value)
+  def is_supported(this : ISpellCheckProviderFactory*, languagetag : LibC::LPWSTR, value : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_supported.call(this, languagetag, value)
   end
-  def create_spell_check_provider(languagetag : LibC::LPWSTR, value : ISpellCheckProvider*) : HRESULT
-    @lpVtbl.value.create_spell_check_provider.unsafe_as(Proc(LibC::LPWSTR, ISpellCheckProvider*, HRESULT)).call(languagetag, value)
+  def create_spell_check_provider(this : ISpellCheckProviderFactory*, languagetag : LibC::LPWSTR, value : ISpellCheckProvider*) : HRESULT
+    @lpVtbl.value.create_spell_check_provider.call(this, languagetag, value)
   end
 end
 struct LibWin32::IMLangStringBufW
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLangStringBufW*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLangStringBufW*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLangStringBufW*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_status(plflags : Int32*, pcchbuf : Int32*) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(Int32*, Int32*, HRESULT)).call(plflags, pcchbuf)
+  def get_status(this : IMLangStringBufW*, plflags : Int32*, pcchbuf : Int32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, plflags, pcchbuf)
   end
-  def lock_buf(cchoffset : Int32, cchmaxlock : Int32, ppszbuf : UInt16**, pcchbuf : Int32*) : HRESULT
-    @lpVtbl.value.lock_buf.unsafe_as(Proc(Int32, Int32, UInt16**, Int32*, HRESULT)).call(cchoffset, cchmaxlock, ppszbuf, pcchbuf)
+  def lock_buf(this : IMLangStringBufW*, cchoffset : Int32, cchmaxlock : Int32, ppszbuf : UInt16**, pcchbuf : Int32*) : HRESULT
+    @lpVtbl.value.lock_buf.call(this, cchoffset, cchmaxlock, ppszbuf, pcchbuf)
   end
-  def unlock_buf(pszbuf : LibC::LPWSTR, cchoffset : Int32, cchwrite : Int32) : HRESULT
-    @lpVtbl.value.unlock_buf.unsafe_as(Proc(LibC::LPWSTR, Int32, Int32, HRESULT)).call(pszbuf, cchoffset, cchwrite)
+  def unlock_buf(this : IMLangStringBufW*, pszbuf : LibC::LPWSTR, cchoffset : Int32, cchwrite : Int32) : HRESULT
+    @lpVtbl.value.unlock_buf.call(this, pszbuf, cchoffset, cchwrite)
   end
-  def insert(cchoffset : Int32, cchmaxinsert : Int32, pcchactual : Int32*) : HRESULT
-    @lpVtbl.value.insert.unsafe_as(Proc(Int32, Int32, Int32*, HRESULT)).call(cchoffset, cchmaxinsert, pcchactual)
+  def insert(this : IMLangStringBufW*, cchoffset : Int32, cchmaxinsert : Int32, pcchactual : Int32*) : HRESULT
+    @lpVtbl.value.insert.call(this, cchoffset, cchmaxinsert, pcchactual)
   end
-  def delete(cchoffset : Int32, cchdelete : Int32) : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(Int32, Int32, HRESULT)).call(cchoffset, cchdelete)
+  def delete(this : IMLangStringBufW*, cchoffset : Int32, cchdelete : Int32) : HRESULT
+    @lpVtbl.value.delete.call(this, cchoffset, cchdelete)
   end
 end
 struct LibWin32::IMLangStringBufA
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLangStringBufA*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLangStringBufA*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLangStringBufA*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_status(plflags : Int32*, pcchbuf : Int32*) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(Int32*, Int32*, HRESULT)).call(plflags, pcchbuf)
+  def get_status(this : IMLangStringBufA*, plflags : Int32*, pcchbuf : Int32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, plflags, pcchbuf)
   end
-  def lock_buf(cchoffset : Int32, cchmaxlock : Int32, ppszbuf : CHAR**, pcchbuf : Int32*) : HRESULT
-    @lpVtbl.value.lock_buf.unsafe_as(Proc(Int32, Int32, CHAR**, Int32*, HRESULT)).call(cchoffset, cchmaxlock, ppszbuf, pcchbuf)
+  def lock_buf(this : IMLangStringBufA*, cchoffset : Int32, cchmaxlock : Int32, ppszbuf : CHAR**, pcchbuf : Int32*) : HRESULT
+    @lpVtbl.value.lock_buf.call(this, cchoffset, cchmaxlock, ppszbuf, pcchbuf)
   end
-  def unlock_buf(pszbuf : PSTR, cchoffset : Int32, cchwrite : Int32) : HRESULT
-    @lpVtbl.value.unlock_buf.unsafe_as(Proc(PSTR, Int32, Int32, HRESULT)).call(pszbuf, cchoffset, cchwrite)
+  def unlock_buf(this : IMLangStringBufA*, pszbuf : PSTR, cchoffset : Int32, cchwrite : Int32) : HRESULT
+    @lpVtbl.value.unlock_buf.call(this, pszbuf, cchoffset, cchwrite)
   end
-  def insert(cchoffset : Int32, cchmaxinsert : Int32, pcchactual : Int32*) : HRESULT
-    @lpVtbl.value.insert.unsafe_as(Proc(Int32, Int32, Int32*, HRESULT)).call(cchoffset, cchmaxinsert, pcchactual)
+  def insert(this : IMLangStringBufA*, cchoffset : Int32, cchmaxinsert : Int32, pcchactual : Int32*) : HRESULT
+    @lpVtbl.value.insert.call(this, cchoffset, cchmaxinsert, pcchactual)
   end
-  def delete(cchoffset : Int32, cchdelete : Int32) : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(Int32, Int32, HRESULT)).call(cchoffset, cchdelete)
+  def delete(this : IMLangStringBufA*, cchoffset : Int32, cchdelete : Int32) : HRESULT
+    @lpVtbl.value.delete.call(this, cchoffset, cchdelete)
   end
 end
 struct LibWin32::IMLangString
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLangString*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLangString*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLangString*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def sync(fnoaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.sync.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fnoaccess)
+  def sync(this : IMLangString*, fnoaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.sync.call(this, fnoaccess)
   end
-  def get_length(pllen : Int32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(pllen)
+  def get_length(this : IMLangString*, pllen : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, pllen)
   end
-  def set_ml_str(ldestpos : Int32, ldestlen : Int32, psrcmlstr : IUnknown, lsrcpos : Int32, lsrclen : Int32) : HRESULT
-    @lpVtbl.value.set_ml_str.unsafe_as(Proc(Int32, Int32, IUnknown, Int32, Int32, HRESULT)).call(ldestpos, ldestlen, psrcmlstr, lsrcpos, lsrclen)
+  def set_ml_str(this : IMLangString*, ldestpos : Int32, ldestlen : Int32, psrcmlstr : IUnknown, lsrcpos : Int32, lsrclen : Int32) : HRESULT
+    @lpVtbl.value.set_ml_str.call(this, ldestpos, ldestlen, psrcmlstr, lsrcpos, lsrclen)
   end
-  def get_ml_str(lsrcpos : Int32, lsrclen : Int32, punkouter : IUnknown, dwclscontext : UInt32, piid : Guid*, ppdestmlstr : IUnknown*, pldestpos : Int32*, pldestlen : Int32*) : HRESULT
-    @lpVtbl.value.get_ml_str.unsafe_as(Proc(Int32, Int32, IUnknown, UInt32, Guid*, IUnknown*, Int32*, Int32*, HRESULT)).call(lsrcpos, lsrclen, punkouter, dwclscontext, piid, ppdestmlstr, pldestpos, pldestlen)
+  def get_ml_str(this : IMLangString*, lsrcpos : Int32, lsrclen : Int32, punkouter : IUnknown, dwclscontext : UInt32, piid : Guid*, ppdestmlstr : IUnknown*, pldestpos : Int32*, pldestlen : Int32*) : HRESULT
+    @lpVtbl.value.get_ml_str.call(this, lsrcpos, lsrclen, punkouter, dwclscontext, piid, ppdestmlstr, pldestpos, pldestlen)
   end
 end
 struct LibWin32::IMLangStringWStr
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLangStringWStr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLangStringWStr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLangStringWStr*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def sync(fnoaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.sync.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fnoaccess)
+  def sync(this : IMLangStringWStr*, fnoaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.sync.call(this, fnoaccess)
   end
-  def get_length(pllen : Int32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(pllen)
+  def get_length(this : IMLangStringWStr*, pllen : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, pllen)
   end
-  def set_ml_str(ldestpos : Int32, ldestlen : Int32, psrcmlstr : IUnknown, lsrcpos : Int32, lsrclen : Int32) : HRESULT
-    @lpVtbl.value.set_ml_str.unsafe_as(Proc(Int32, Int32, IUnknown, Int32, Int32, HRESULT)).call(ldestpos, ldestlen, psrcmlstr, lsrcpos, lsrclen)
+  def set_ml_str(this : IMLangStringWStr*, ldestpos : Int32, ldestlen : Int32, psrcmlstr : IUnknown, lsrcpos : Int32, lsrclen : Int32) : HRESULT
+    @lpVtbl.value.set_ml_str.call(this, ldestpos, ldestlen, psrcmlstr, lsrcpos, lsrclen)
   end
-  def get_ml_str(lsrcpos : Int32, lsrclen : Int32, punkouter : IUnknown, dwclscontext : UInt32, piid : Guid*, ppdestmlstr : IUnknown*, pldestpos : Int32*, pldestlen : Int32*) : HRESULT
-    @lpVtbl.value.get_ml_str.unsafe_as(Proc(Int32, Int32, IUnknown, UInt32, Guid*, IUnknown*, Int32*, Int32*, HRESULT)).call(lsrcpos, lsrclen, punkouter, dwclscontext, piid, ppdestmlstr, pldestpos, pldestlen)
+  def get_ml_str(this : IMLangStringWStr*, lsrcpos : Int32, lsrclen : Int32, punkouter : IUnknown, dwclscontext : UInt32, piid : Guid*, ppdestmlstr : IUnknown*, pldestpos : Int32*, pldestlen : Int32*) : HRESULT
+    @lpVtbl.value.get_ml_str.call(this, lsrcpos, lsrclen, punkouter, dwclscontext, piid, ppdestmlstr, pldestpos, pldestlen)
   end
-  def set_w_str(ldestpos : Int32, ldestlen : Int32, pszsrc : Char*, cchsrc : Int32, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
-    @lpVtbl.value.set_w_str.unsafe_as(Proc(Int32, Int32, Char*, Int32, Int32*, Int32*, HRESULT)).call(ldestpos, ldestlen, pszsrc, cchsrc, pcchactual, plactuallen)
+  def set_w_str(this : IMLangStringWStr*, ldestpos : Int32, ldestlen : Int32, pszsrc : Char*, cchsrc : Int32, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
+    @lpVtbl.value.set_w_str.call(this, ldestpos, ldestlen, pszsrc, cchsrc, pcchactual, plactuallen)
   end
-  def set_str_buf_w(ldestpos : Int32, ldestlen : Int32, psrcbuf : IMLangStringBufW, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
-    @lpVtbl.value.set_str_buf_w.unsafe_as(Proc(Int32, Int32, IMLangStringBufW, Int32*, Int32*, HRESULT)).call(ldestpos, ldestlen, psrcbuf, pcchactual, plactuallen)
+  def set_str_buf_w(this : IMLangStringWStr*, ldestpos : Int32, ldestlen : Int32, psrcbuf : IMLangStringBufW, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
+    @lpVtbl.value.set_str_buf_w.call(this, ldestpos, ldestlen, psrcbuf, pcchactual, plactuallen)
   end
-  def get_w_str(lsrcpos : Int32, lsrclen : Int32, pszdest : Char*, cchdest : Int32, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
-    @lpVtbl.value.get_w_str.unsafe_as(Proc(Int32, Int32, Char*, Int32, Int32*, Int32*, HRESULT)).call(lsrcpos, lsrclen, pszdest, cchdest, pcchactual, plactuallen)
+  def get_w_str(this : IMLangStringWStr*, lsrcpos : Int32, lsrclen : Int32, pszdest : Char*, cchdest : Int32, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
+    @lpVtbl.value.get_w_str.call(this, lsrcpos, lsrclen, pszdest, cchdest, pcchactual, plactuallen)
   end
-  def get_str_buf_w(lsrcpos : Int32, lsrcmaxlen : Int32, ppdestbuf : IMLangStringBufW*, pldestlen : Int32*) : HRESULT
-    @lpVtbl.value.get_str_buf_w.unsafe_as(Proc(Int32, Int32, IMLangStringBufW*, Int32*, HRESULT)).call(lsrcpos, lsrcmaxlen, ppdestbuf, pldestlen)
+  def get_str_buf_w(this : IMLangStringWStr*, lsrcpos : Int32, lsrcmaxlen : Int32, ppdestbuf : IMLangStringBufW*, pldestlen : Int32*) : HRESULT
+    @lpVtbl.value.get_str_buf_w.call(this, lsrcpos, lsrcmaxlen, ppdestbuf, pldestlen)
   end
-  def lock_w_str(lsrcpos : Int32, lsrclen : Int32, lflags : Int32, cchrequest : Int32, ppszdest : LibC::LPWSTR*, pcchdest : Int32*, pldestlen : Int32*) : HRESULT
-    @lpVtbl.value.lock_w_str.unsafe_as(Proc(Int32, Int32, Int32, Int32, LibC::LPWSTR*, Int32*, Int32*, HRESULT)).call(lsrcpos, lsrclen, lflags, cchrequest, ppszdest, pcchdest, pldestlen)
+  def lock_w_str(this : IMLangStringWStr*, lsrcpos : Int32, lsrclen : Int32, lflags : Int32, cchrequest : Int32, ppszdest : LibC::LPWSTR*, pcchdest : Int32*, pldestlen : Int32*) : HRESULT
+    @lpVtbl.value.lock_w_str.call(this, lsrcpos, lsrclen, lflags, cchrequest, ppszdest, pcchdest, pldestlen)
   end
-  def unlock_w_str(pszsrc : Char*, cchsrc : Int32, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
-    @lpVtbl.value.unlock_w_str.unsafe_as(Proc(Char*, Int32, Int32*, Int32*, HRESULT)).call(pszsrc, cchsrc, pcchactual, plactuallen)
+  def unlock_w_str(this : IMLangStringWStr*, pszsrc : Char*, cchsrc : Int32, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
+    @lpVtbl.value.unlock_w_str.call(this, pszsrc, cchsrc, pcchactual, plactuallen)
   end
-  def set_locale(ldestpos : Int32, ldestlen : Int32, locale : UInt32) : HRESULT
-    @lpVtbl.value.set_locale.unsafe_as(Proc(Int32, Int32, UInt32, HRESULT)).call(ldestpos, ldestlen, locale)
+  def set_locale(this : IMLangStringWStr*, ldestpos : Int32, ldestlen : Int32, locale : UInt32) : HRESULT
+    @lpVtbl.value.set_locale.call(this, ldestpos, ldestlen, locale)
   end
-  def get_locale(lsrcpos : Int32, lsrcmaxlen : Int32, plocale : UInt32*, pllocalepos : Int32*, pllocalelen : Int32*) : HRESULT
-    @lpVtbl.value.get_locale.unsafe_as(Proc(Int32, Int32, UInt32*, Int32*, Int32*, HRESULT)).call(lsrcpos, lsrcmaxlen, plocale, pllocalepos, pllocalelen)
+  def get_locale(this : IMLangStringWStr*, lsrcpos : Int32, lsrcmaxlen : Int32, plocale : UInt32*, pllocalepos : Int32*, pllocalelen : Int32*) : HRESULT
+    @lpVtbl.value.get_locale.call(this, lsrcpos, lsrcmaxlen, plocale, pllocalepos, pllocalelen)
   end
 end
 struct LibWin32::IMLangStringAStr
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLangStringAStr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLangStringAStr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLangStringAStr*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def sync(fnoaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.sync.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fnoaccess)
+  def sync(this : IMLangStringAStr*, fnoaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.sync.call(this, fnoaccess)
   end
-  def get_length(pllen : Int32*) : HRESULT
-    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(pllen)
+  def get_length(this : IMLangStringAStr*, pllen : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, pllen)
   end
-  def set_ml_str(ldestpos : Int32, ldestlen : Int32, psrcmlstr : IUnknown, lsrcpos : Int32, lsrclen : Int32) : HRESULT
-    @lpVtbl.value.set_ml_str.unsafe_as(Proc(Int32, Int32, IUnknown, Int32, Int32, HRESULT)).call(ldestpos, ldestlen, psrcmlstr, lsrcpos, lsrclen)
+  def set_ml_str(this : IMLangStringAStr*, ldestpos : Int32, ldestlen : Int32, psrcmlstr : IUnknown, lsrcpos : Int32, lsrclen : Int32) : HRESULT
+    @lpVtbl.value.set_ml_str.call(this, ldestpos, ldestlen, psrcmlstr, lsrcpos, lsrclen)
   end
-  def get_ml_str(lsrcpos : Int32, lsrclen : Int32, punkouter : IUnknown, dwclscontext : UInt32, piid : Guid*, ppdestmlstr : IUnknown*, pldestpos : Int32*, pldestlen : Int32*) : HRESULT
-    @lpVtbl.value.get_ml_str.unsafe_as(Proc(Int32, Int32, IUnknown, UInt32, Guid*, IUnknown*, Int32*, Int32*, HRESULT)).call(lsrcpos, lsrclen, punkouter, dwclscontext, piid, ppdestmlstr, pldestpos, pldestlen)
+  def get_ml_str(this : IMLangStringAStr*, lsrcpos : Int32, lsrclen : Int32, punkouter : IUnknown, dwclscontext : UInt32, piid : Guid*, ppdestmlstr : IUnknown*, pldestpos : Int32*, pldestlen : Int32*) : HRESULT
+    @lpVtbl.value.get_ml_str.call(this, lsrcpos, lsrclen, punkouter, dwclscontext, piid, ppdestmlstr, pldestpos, pldestlen)
   end
-  def set_a_str(ldestpos : Int32, ldestlen : Int32, ucodepage : UInt32, pszsrc : UInt8*, cchsrc : Int32, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
-    @lpVtbl.value.set_a_str.unsafe_as(Proc(Int32, Int32, UInt32, UInt8*, Int32, Int32*, Int32*, HRESULT)).call(ldestpos, ldestlen, ucodepage, pszsrc, cchsrc, pcchactual, plactuallen)
+  def set_a_str(this : IMLangStringAStr*, ldestpos : Int32, ldestlen : Int32, ucodepage : UInt32, pszsrc : UInt8*, cchsrc : Int32, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
+    @lpVtbl.value.set_a_str.call(this, ldestpos, ldestlen, ucodepage, pszsrc, cchsrc, pcchactual, plactuallen)
   end
-  def set_str_buf_a(ldestpos : Int32, ldestlen : Int32, ucodepage : UInt32, psrcbuf : IMLangStringBufA, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
-    @lpVtbl.value.set_str_buf_a.unsafe_as(Proc(Int32, Int32, UInt32, IMLangStringBufA, Int32*, Int32*, HRESULT)).call(ldestpos, ldestlen, ucodepage, psrcbuf, pcchactual, plactuallen)
+  def set_str_buf_a(this : IMLangStringAStr*, ldestpos : Int32, ldestlen : Int32, ucodepage : UInt32, psrcbuf : IMLangStringBufA, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
+    @lpVtbl.value.set_str_buf_a.call(this, ldestpos, ldestlen, ucodepage, psrcbuf, pcchactual, plactuallen)
   end
-  def get_a_str(lsrcpos : Int32, lsrclen : Int32, ucodepagein : UInt32, pucodepageout : UInt32*, pszdest : UInt8*, cchdest : Int32, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
-    @lpVtbl.value.get_a_str.unsafe_as(Proc(Int32, Int32, UInt32, UInt32*, UInt8*, Int32, Int32*, Int32*, HRESULT)).call(lsrcpos, lsrclen, ucodepagein, pucodepageout, pszdest, cchdest, pcchactual, plactuallen)
+  def get_a_str(this : IMLangStringAStr*, lsrcpos : Int32, lsrclen : Int32, ucodepagein : UInt32, pucodepageout : UInt32*, pszdest : UInt8*, cchdest : Int32, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
+    @lpVtbl.value.get_a_str.call(this, lsrcpos, lsrclen, ucodepagein, pucodepageout, pszdest, cchdest, pcchactual, plactuallen)
   end
-  def get_str_buf_a(lsrcpos : Int32, lsrcmaxlen : Int32, pudestcodepage : UInt32*, ppdestbuf : IMLangStringBufA*, pldestlen : Int32*) : HRESULT
-    @lpVtbl.value.get_str_buf_a.unsafe_as(Proc(Int32, Int32, UInt32*, IMLangStringBufA*, Int32*, HRESULT)).call(lsrcpos, lsrcmaxlen, pudestcodepage, ppdestbuf, pldestlen)
+  def get_str_buf_a(this : IMLangStringAStr*, lsrcpos : Int32, lsrcmaxlen : Int32, pudestcodepage : UInt32*, ppdestbuf : IMLangStringBufA*, pldestlen : Int32*) : HRESULT
+    @lpVtbl.value.get_str_buf_a.call(this, lsrcpos, lsrcmaxlen, pudestcodepage, ppdestbuf, pldestlen)
   end
-  def lock_a_str(lsrcpos : Int32, lsrclen : Int32, lflags : Int32, ucodepagein : UInt32, cchrequest : Int32, pucodepageout : UInt32*, ppszdest : PSTR*, pcchdest : Int32*, pldestlen : Int32*) : HRESULT
-    @lpVtbl.value.lock_a_str.unsafe_as(Proc(Int32, Int32, Int32, UInt32, Int32, UInt32*, PSTR*, Int32*, Int32*, HRESULT)).call(lsrcpos, lsrclen, lflags, ucodepagein, cchrequest, pucodepageout, ppszdest, pcchdest, pldestlen)
+  def lock_a_str(this : IMLangStringAStr*, lsrcpos : Int32, lsrclen : Int32, lflags : Int32, ucodepagein : UInt32, cchrequest : Int32, pucodepageout : UInt32*, ppszdest : PSTR*, pcchdest : Int32*, pldestlen : Int32*) : HRESULT
+    @lpVtbl.value.lock_a_str.call(this, lsrcpos, lsrclen, lflags, ucodepagein, cchrequest, pucodepageout, ppszdest, pcchdest, pldestlen)
   end
-  def unlock_a_str(pszsrc : UInt8*, cchsrc : Int32, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
-    @lpVtbl.value.unlock_a_str.unsafe_as(Proc(UInt8*, Int32, Int32*, Int32*, HRESULT)).call(pszsrc, cchsrc, pcchactual, plactuallen)
+  def unlock_a_str(this : IMLangStringAStr*, pszsrc : UInt8*, cchsrc : Int32, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
+    @lpVtbl.value.unlock_a_str.call(this, pszsrc, cchsrc, pcchactual, plactuallen)
   end
-  def set_locale(ldestpos : Int32, ldestlen : Int32, locale : UInt32) : HRESULT
-    @lpVtbl.value.set_locale.unsafe_as(Proc(Int32, Int32, UInt32, HRESULT)).call(ldestpos, ldestlen, locale)
+  def set_locale(this : IMLangStringAStr*, ldestpos : Int32, ldestlen : Int32, locale : UInt32) : HRESULT
+    @lpVtbl.value.set_locale.call(this, ldestpos, ldestlen, locale)
   end
-  def get_locale(lsrcpos : Int32, lsrcmaxlen : Int32, plocale : UInt32*, pllocalepos : Int32*, pllocalelen : Int32*) : HRESULT
-    @lpVtbl.value.get_locale.unsafe_as(Proc(Int32, Int32, UInt32*, Int32*, Int32*, HRESULT)).call(lsrcpos, lsrcmaxlen, plocale, pllocalepos, pllocalelen)
+  def get_locale(this : IMLangStringAStr*, lsrcpos : Int32, lsrcmaxlen : Int32, plocale : UInt32*, pllocalepos : Int32*, pllocalelen : Int32*) : HRESULT
+    @lpVtbl.value.get_locale.call(this, lsrcpos, lsrcmaxlen, plocale, pllocalepos, pllocalelen)
   end
 end
 struct LibWin32::IMLangLineBreakConsole
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLangLineBreakConsole*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLangLineBreakConsole*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLangLineBreakConsole*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def break_line_ml(psrcmlstr : IMLangString, lsrcpos : Int32, lsrclen : Int32, cmincolumns : Int32, cmaxcolumns : Int32, pllinelen : Int32*, plskiplen : Int32*) : HRESULT
-    @lpVtbl.value.break_line_ml.unsafe_as(Proc(IMLangString, Int32, Int32, Int32, Int32, Int32*, Int32*, HRESULT)).call(psrcmlstr, lsrcpos, lsrclen, cmincolumns, cmaxcolumns, pllinelen, plskiplen)
+  def break_line_ml(this : IMLangLineBreakConsole*, psrcmlstr : IMLangString, lsrcpos : Int32, lsrclen : Int32, cmincolumns : Int32, cmaxcolumns : Int32, pllinelen : Int32*, plskiplen : Int32*) : HRESULT
+    @lpVtbl.value.break_line_ml.call(this, psrcmlstr, lsrcpos, lsrclen, cmincolumns, cmaxcolumns, pllinelen, plskiplen)
   end
-  def break_line_w(locale : UInt32, pszsrc : Char*, cchsrc : Int32, cmaxcolumns : Int32, pcchline : Int32*, pcchskip : Int32*) : HRESULT
-    @lpVtbl.value.break_line_w.unsafe_as(Proc(UInt32, Char*, Int32, Int32, Int32*, Int32*, HRESULT)).call(locale, pszsrc, cchsrc, cmaxcolumns, pcchline, pcchskip)
+  def break_line_w(this : IMLangLineBreakConsole*, locale : UInt32, pszsrc : Char*, cchsrc : Int32, cmaxcolumns : Int32, pcchline : Int32*, pcchskip : Int32*) : HRESULT
+    @lpVtbl.value.break_line_w.call(this, locale, pszsrc, cchsrc, cmaxcolumns, pcchline, pcchskip)
   end
-  def break_line_a(locale : UInt32, ucodepage : UInt32, pszsrc : UInt8*, cchsrc : Int32, cmaxcolumns : Int32, pcchline : Int32*, pcchskip : Int32*) : HRESULT
-    @lpVtbl.value.break_line_a.unsafe_as(Proc(UInt32, UInt32, UInt8*, Int32, Int32, Int32*, Int32*, HRESULT)).call(locale, ucodepage, pszsrc, cchsrc, cmaxcolumns, pcchline, pcchskip)
+  def break_line_a(this : IMLangLineBreakConsole*, locale : UInt32, ucodepage : UInt32, pszsrc : UInt8*, cchsrc : Int32, cmaxcolumns : Int32, pcchline : Int32*, pcchskip : Int32*) : HRESULT
+    @lpVtbl.value.break_line_a.call(this, locale, ucodepage, pszsrc, cchsrc, cmaxcolumns, pcchline, pcchskip)
   end
 end
 struct LibWin32::IEnumCodePage
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IEnumCodePage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IEnumCodePage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IEnumCodePage*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def clone(ppenum : IEnumCodePage*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IEnumCodePage*, HRESULT)).call(ppenum)
+  def clone(this : IEnumCodePage*, ppenum : IEnumCodePage*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
   end
-  def next(celt : UInt32, rgelt : MIMECPINFO*, pceltfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(UInt32, MIMECPINFO*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  def next(this : IEnumCodePage*, celt : UInt32, rgelt : MIMECPINFO*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IEnumCodePage*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def skip(celt : UInt32) : HRESULT
-    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  def skip(this : IEnumCodePage*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
   end
 end
 struct LibWin32::IEnumRfc1766
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IEnumRfc1766*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IEnumRfc1766*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IEnumRfc1766*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def clone(ppenum : IEnumRfc1766*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IEnumRfc1766*, HRESULT)).call(ppenum)
+  def clone(this : IEnumRfc1766*, ppenum : IEnumRfc1766*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
   end
-  def next(celt : UInt32, rgelt : RFC1766INFO*, pceltfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(UInt32, RFC1766INFO*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  def next(this : IEnumRfc1766*, celt : UInt32, rgelt : RFC1766INFO*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IEnumRfc1766*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def skip(celt : UInt32) : HRESULT
-    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  def skip(this : IEnumRfc1766*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
   end
 end
 struct LibWin32::IEnumScript
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IEnumScript*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IEnumScript*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IEnumScript*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def clone(ppenum : IEnumScript*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IEnumScript*, HRESULT)).call(ppenum)
+  def clone(this : IEnumScript*, ppenum : IEnumScript*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
   end
-  def next(celt : UInt32, rgelt : SCRIPTINFO*, pceltfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(UInt32, SCRIPTINFO*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  def next(this : IEnumScript*, celt : UInt32, rgelt : SCRIPTINFO*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IEnumScript*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def skip(celt : UInt32) : HRESULT
-    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  def skip(this : IEnumScript*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
   end
 end
 struct LibWin32::IMLangConvertCharset
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLangConvertCharset*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLangConvertCharset*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLangConvertCharset*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def initialize(uisrccodepage : UInt32, uidstcodepage : UInt32, dwproperty : UInt32) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(uisrccodepage, uidstcodepage, dwproperty)
+  def initialize(this : IMLangConvertCharset*, uisrccodepage : UInt32, uidstcodepage : UInt32, dwproperty : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, uisrccodepage, uidstcodepage, dwproperty)
   end
-  def get_source_code_page(puisrccodepage : UInt32*) : HRESULT
-    @lpVtbl.value.get_source_code_page.unsafe_as(Proc(UInt32*, HRESULT)).call(puisrccodepage)
+  def get_source_code_page(this : IMLangConvertCharset*, puisrccodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_code_page.call(this, puisrccodepage)
   end
-  def get_destination_code_page(puidstcodepage : UInt32*) : HRESULT
-    @lpVtbl.value.get_destination_code_page.unsafe_as(Proc(UInt32*, HRESULT)).call(puidstcodepage)
+  def get_destination_code_page(this : IMLangConvertCharset*, puidstcodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_destination_code_page.call(this, puidstcodepage)
   end
-  def get_property(pdwproperty : UInt32*) : HRESULT
-    @lpVtbl.value.get_property.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwproperty)
+  def get_property(this : IMLangConvertCharset*, pdwproperty : UInt32*) : HRESULT
+    @lpVtbl.value.get_property.call(this, pdwproperty)
   end
-  def do_conversion(psrcstr : UInt8*, pcsrcsize : UInt32*, pdststr : UInt8*, pcdstsize : UInt32*) : HRESULT
-    @lpVtbl.value.do_conversion.unsafe_as(Proc(UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)).call(psrcstr, pcsrcsize, pdststr, pcdstsize)
+  def do_conversion(this : IMLangConvertCharset*, psrcstr : UInt8*, pcsrcsize : UInt32*, pdststr : UInt8*, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.do_conversion.call(this, psrcstr, pcsrcsize, pdststr, pcdstsize)
   end
-  def do_conversion_to_unicode(psrcstr : PSTR, pcsrcsize : UInt32*, pdststr : Char*, pcdstsize : UInt32*) : HRESULT
-    @lpVtbl.value.do_conversion_to_unicode.unsafe_as(Proc(PSTR, UInt32*, Char*, UInt32*, HRESULT)).call(psrcstr, pcsrcsize, pdststr, pcdstsize)
+  def do_conversion_to_unicode(this : IMLangConvertCharset*, psrcstr : PSTR, pcsrcsize : UInt32*, pdststr : Char*, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.do_conversion_to_unicode.call(this, psrcstr, pcsrcsize, pdststr, pcdstsize)
   end
-  def do_conversion_from_unicode(psrcstr : Char*, pcsrcsize : UInt32*, pdststr : PSTR, pcdstsize : UInt32*) : HRESULT
-    @lpVtbl.value.do_conversion_from_unicode.unsafe_as(Proc(Char*, UInt32*, PSTR, UInt32*, HRESULT)).call(psrcstr, pcsrcsize, pdststr, pcdstsize)
+  def do_conversion_from_unicode(this : IMLangConvertCharset*, psrcstr : Char*, pcsrcsize : UInt32*, pdststr : PSTR, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.do_conversion_from_unicode.call(this, psrcstr, pcsrcsize, pdststr, pcdstsize)
   end
 end
 struct LibWin32::IMultiLanguage
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMultiLanguage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMultiLanguage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMultiLanguage*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_number_of_code_page_info(pccodepage : UInt32*) : HRESULT
-    @lpVtbl.value.get_number_of_code_page_info.unsafe_as(Proc(UInt32*, HRESULT)).call(pccodepage)
+  def get_number_of_code_page_info(this : IMultiLanguage*, pccodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_of_code_page_info.call(this, pccodepage)
   end
-  def get_code_page_info(uicodepage : UInt32, pcodepageinfo : MIMECPINFO*) : HRESULT
-    @lpVtbl.value.get_code_page_info.unsafe_as(Proc(UInt32, MIMECPINFO*, HRESULT)).call(uicodepage, pcodepageinfo)
+  def get_code_page_info(this : IMultiLanguage*, uicodepage : UInt32, pcodepageinfo : MIMECPINFO*) : HRESULT
+    @lpVtbl.value.get_code_page_info.call(this, uicodepage, pcodepageinfo)
   end
-  def get_family_code_page(uicodepage : UInt32, puifamilycodepage : UInt32*) : HRESULT
-    @lpVtbl.value.get_family_code_page.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(uicodepage, puifamilycodepage)
+  def get_family_code_page(this : IMultiLanguage*, uicodepage : UInt32, puifamilycodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_family_code_page.call(this, uicodepage, puifamilycodepage)
   end
-  def enum_code_pages(grfflags : UInt32, ppenumcodepage : IEnumCodePage*) : HRESULT
-    @lpVtbl.value.enum_code_pages.unsafe_as(Proc(UInt32, IEnumCodePage*, HRESULT)).call(grfflags, ppenumcodepage)
+  def enum_code_pages(this : IMultiLanguage*, grfflags : UInt32, ppenumcodepage : IEnumCodePage*) : HRESULT
+    @lpVtbl.value.enum_code_pages.call(this, grfflags, ppenumcodepage)
   end
-  def get_charset_info(charset : UInt8*, pcharsetinfo : MIMECSETINFO*) : HRESULT
-    @lpVtbl.value.get_charset_info.unsafe_as(Proc(UInt8*, MIMECSETINFO*, HRESULT)).call(charset, pcharsetinfo)
+  def get_charset_info(this : IMultiLanguage*, charset : UInt8*, pcharsetinfo : MIMECSETINFO*) : HRESULT
+    @lpVtbl.value.get_charset_info.call(this, charset, pcharsetinfo)
   end
-  def is_convertible(dwsrcencoding : UInt32, dwdstencoding : UInt32) : HRESULT
-    @lpVtbl.value.is_convertible.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(dwsrcencoding, dwdstencoding)
+  def is_convertible(this : IMultiLanguage*, dwsrcencoding : UInt32, dwdstencoding : UInt32) : HRESULT
+    @lpVtbl.value.is_convertible.call(this, dwsrcencoding, dwdstencoding)
   end
-  def convert_string(pdwmode : UInt32*, dwsrcencoding : UInt32, dwdstencoding : UInt32, psrcstr : UInt8*, pcsrcsize : UInt32*, pdststr : UInt8*, pcdstsize : UInt32*) : HRESULT
-    @lpVtbl.value.convert_string.unsafe_as(Proc(UInt32*, UInt32, UInt32, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)).call(pdwmode, dwsrcencoding, dwdstencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  def convert_string(this : IMultiLanguage*, pdwmode : UInt32*, dwsrcencoding : UInt32, dwdstencoding : UInt32, psrcstr : UInt8*, pcsrcsize : UInt32*, pdststr : UInt8*, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.convert_string.call(this, pdwmode, dwsrcencoding, dwdstencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
   end
-  def convert_string_to_unicode(pdwmode : UInt32*, dwencoding : UInt32, psrcstr : PSTR, pcsrcsize : UInt32*, pdststr : Char*, pcdstsize : UInt32*) : HRESULT
-    @lpVtbl.value.convert_string_to_unicode.unsafe_as(Proc(UInt32*, UInt32, PSTR, UInt32*, Char*, UInt32*, HRESULT)).call(pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  def convert_string_to_unicode(this : IMultiLanguage*, pdwmode : UInt32*, dwencoding : UInt32, psrcstr : PSTR, pcsrcsize : UInt32*, pdststr : Char*, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.convert_string_to_unicode.call(this, pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
   end
-  def convert_string_from_unicode(pdwmode : UInt32*, dwencoding : UInt32, psrcstr : Char*, pcsrcsize : UInt32*, pdststr : PSTR, pcdstsize : UInt32*) : HRESULT
-    @lpVtbl.value.convert_string_from_unicode.unsafe_as(Proc(UInt32*, UInt32, Char*, UInt32*, PSTR, UInt32*, HRESULT)).call(pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  def convert_string_from_unicode(this : IMultiLanguage*, pdwmode : UInt32*, dwencoding : UInt32, psrcstr : Char*, pcsrcsize : UInt32*, pdststr : PSTR, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.convert_string_from_unicode.call(this, pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
   end
-  def convert_string_reset : HRESULT
-    @lpVtbl.value.convert_string_reset.unsafe_as(Proc(HRESULT)).call
+  def convert_string_reset(this : IMultiLanguage*) : HRESULT
+    @lpVtbl.value.convert_string_reset.call(this)
   end
-  def get_rfc1766_from_lcid(locale : UInt32, pbstrrfc1766 : UInt8**) : HRESULT
-    @lpVtbl.value.get_rfc1766_from_lcid.unsafe_as(Proc(UInt32, UInt8**, HRESULT)).call(locale, pbstrrfc1766)
+  def get_rfc1766_from_lcid(this : IMultiLanguage*, locale : UInt32, pbstrrfc1766 : UInt8**) : HRESULT
+    @lpVtbl.value.get_rfc1766_from_lcid.call(this, locale, pbstrrfc1766)
   end
-  def get_lcid_from_rfc1766(plocale : UInt32*, bstrrfc1766 : UInt8*) : HRESULT
-    @lpVtbl.value.get_lcid_from_rfc1766.unsafe_as(Proc(UInt32*, UInt8*, HRESULT)).call(plocale, bstrrfc1766)
+  def get_lcid_from_rfc1766(this : IMultiLanguage*, plocale : UInt32*, bstrrfc1766 : UInt8*) : HRESULT
+    @lpVtbl.value.get_lcid_from_rfc1766.call(this, plocale, bstrrfc1766)
   end
-  def enum_rfc1766(ppenumrfc1766 : IEnumRfc1766*) : HRESULT
-    @lpVtbl.value.enum_rfc1766.unsafe_as(Proc(IEnumRfc1766*, HRESULT)).call(ppenumrfc1766)
+  def enum_rfc1766(this : IMultiLanguage*, ppenumrfc1766 : IEnumRfc1766*) : HRESULT
+    @lpVtbl.value.enum_rfc1766.call(this, ppenumrfc1766)
   end
-  def get_rfc1766_info(locale : UInt32, prfc1766info : RFC1766INFO*) : HRESULT
-    @lpVtbl.value.get_rfc1766_info.unsafe_as(Proc(UInt32, RFC1766INFO*, HRESULT)).call(locale, prfc1766info)
+  def get_rfc1766_info(this : IMultiLanguage*, locale : UInt32, prfc1766info : RFC1766INFO*) : HRESULT
+    @lpVtbl.value.get_rfc1766_info.call(this, locale, prfc1766info)
   end
-  def create_convert_charset(uisrccodepage : UInt32, uidstcodepage : UInt32, dwproperty : UInt32, ppmlangconvertcharset : IMLangConvertCharset*) : HRESULT
-    @lpVtbl.value.create_convert_charset.unsafe_as(Proc(UInt32, UInt32, UInt32, IMLangConvertCharset*, HRESULT)).call(uisrccodepage, uidstcodepage, dwproperty, ppmlangconvertcharset)
+  def create_convert_charset(this : IMultiLanguage*, uisrccodepage : UInt32, uidstcodepage : UInt32, dwproperty : UInt32, ppmlangconvertcharset : IMLangConvertCharset*) : HRESULT
+    @lpVtbl.value.create_convert_charset.call(this, uisrccodepage, uidstcodepage, dwproperty, ppmlangconvertcharset)
   end
 end
 struct LibWin32::IMultiLanguage2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMultiLanguage2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMultiLanguage2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMultiLanguage2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_number_of_code_page_info(pccodepage : UInt32*) : HRESULT
-    @lpVtbl.value.get_number_of_code_page_info.unsafe_as(Proc(UInt32*, HRESULT)).call(pccodepage)
+  def get_number_of_code_page_info(this : IMultiLanguage2*, pccodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_of_code_page_info.call(this, pccodepage)
   end
-  def get_code_page_info(uicodepage : UInt32, langid : UInt16, pcodepageinfo : MIMECPINFO*) : HRESULT
-    @lpVtbl.value.get_code_page_info.unsafe_as(Proc(UInt32, UInt16, MIMECPINFO*, HRESULT)).call(uicodepage, langid, pcodepageinfo)
+  def get_code_page_info(this : IMultiLanguage2*, uicodepage : UInt32, langid : UInt16, pcodepageinfo : MIMECPINFO*) : HRESULT
+    @lpVtbl.value.get_code_page_info.call(this, uicodepage, langid, pcodepageinfo)
   end
-  def get_family_code_page(uicodepage : UInt32, puifamilycodepage : UInt32*) : HRESULT
-    @lpVtbl.value.get_family_code_page.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(uicodepage, puifamilycodepage)
+  def get_family_code_page(this : IMultiLanguage2*, uicodepage : UInt32, puifamilycodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_family_code_page.call(this, uicodepage, puifamilycodepage)
   end
-  def enum_code_pages(grfflags : UInt32, langid : UInt16, ppenumcodepage : IEnumCodePage*) : HRESULT
-    @lpVtbl.value.enum_code_pages.unsafe_as(Proc(UInt32, UInt16, IEnumCodePage*, HRESULT)).call(grfflags, langid, ppenumcodepage)
+  def enum_code_pages(this : IMultiLanguage2*, grfflags : UInt32, langid : UInt16, ppenumcodepage : IEnumCodePage*) : HRESULT
+    @lpVtbl.value.enum_code_pages.call(this, grfflags, langid, ppenumcodepage)
   end
-  def get_charset_info(charset : UInt8*, pcharsetinfo : MIMECSETINFO*) : HRESULT
-    @lpVtbl.value.get_charset_info.unsafe_as(Proc(UInt8*, MIMECSETINFO*, HRESULT)).call(charset, pcharsetinfo)
+  def get_charset_info(this : IMultiLanguage2*, charset : UInt8*, pcharsetinfo : MIMECSETINFO*) : HRESULT
+    @lpVtbl.value.get_charset_info.call(this, charset, pcharsetinfo)
   end
-  def is_convertible(dwsrcencoding : UInt32, dwdstencoding : UInt32) : HRESULT
-    @lpVtbl.value.is_convertible.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(dwsrcencoding, dwdstencoding)
+  def is_convertible(this : IMultiLanguage2*, dwsrcencoding : UInt32, dwdstencoding : UInt32) : HRESULT
+    @lpVtbl.value.is_convertible.call(this, dwsrcencoding, dwdstencoding)
   end
-  def convert_string(pdwmode : UInt32*, dwsrcencoding : UInt32, dwdstencoding : UInt32, psrcstr : UInt8*, pcsrcsize : UInt32*, pdststr : UInt8*, pcdstsize : UInt32*) : HRESULT
-    @lpVtbl.value.convert_string.unsafe_as(Proc(UInt32*, UInt32, UInt32, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)).call(pdwmode, dwsrcencoding, dwdstencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  def convert_string(this : IMultiLanguage2*, pdwmode : UInt32*, dwsrcencoding : UInt32, dwdstencoding : UInt32, psrcstr : UInt8*, pcsrcsize : UInt32*, pdststr : UInt8*, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.convert_string.call(this, pdwmode, dwsrcencoding, dwdstencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
   end
-  def convert_string_to_unicode(pdwmode : UInt32*, dwencoding : UInt32, psrcstr : PSTR, pcsrcsize : UInt32*, pdststr : Char*, pcdstsize : UInt32*) : HRESULT
-    @lpVtbl.value.convert_string_to_unicode.unsafe_as(Proc(UInt32*, UInt32, PSTR, UInt32*, Char*, UInt32*, HRESULT)).call(pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  def convert_string_to_unicode(this : IMultiLanguage2*, pdwmode : UInt32*, dwencoding : UInt32, psrcstr : PSTR, pcsrcsize : UInt32*, pdststr : Char*, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.convert_string_to_unicode.call(this, pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
   end
-  def convert_string_from_unicode(pdwmode : UInt32*, dwencoding : UInt32, psrcstr : Char*, pcsrcsize : UInt32*, pdststr : PSTR, pcdstsize : UInt32*) : HRESULT
-    @lpVtbl.value.convert_string_from_unicode.unsafe_as(Proc(UInt32*, UInt32, Char*, UInt32*, PSTR, UInt32*, HRESULT)).call(pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  def convert_string_from_unicode(this : IMultiLanguage2*, pdwmode : UInt32*, dwencoding : UInt32, psrcstr : Char*, pcsrcsize : UInt32*, pdststr : PSTR, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.convert_string_from_unicode.call(this, pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
   end
-  def convert_string_reset : HRESULT
-    @lpVtbl.value.convert_string_reset.unsafe_as(Proc(HRESULT)).call
+  def convert_string_reset(this : IMultiLanguage2*) : HRESULT
+    @lpVtbl.value.convert_string_reset.call(this)
   end
-  def get_rfc1766_from_lcid(locale : UInt32, pbstrrfc1766 : UInt8**) : HRESULT
-    @lpVtbl.value.get_rfc1766_from_lcid.unsafe_as(Proc(UInt32, UInt8**, HRESULT)).call(locale, pbstrrfc1766)
+  def get_rfc1766_from_lcid(this : IMultiLanguage2*, locale : UInt32, pbstrrfc1766 : UInt8**) : HRESULT
+    @lpVtbl.value.get_rfc1766_from_lcid.call(this, locale, pbstrrfc1766)
   end
-  def get_lcid_from_rfc1766(plocale : UInt32*, bstrrfc1766 : UInt8*) : HRESULT
-    @lpVtbl.value.get_lcid_from_rfc1766.unsafe_as(Proc(UInt32*, UInt8*, HRESULT)).call(plocale, bstrrfc1766)
+  def get_lcid_from_rfc1766(this : IMultiLanguage2*, plocale : UInt32*, bstrrfc1766 : UInt8*) : HRESULT
+    @lpVtbl.value.get_lcid_from_rfc1766.call(this, plocale, bstrrfc1766)
   end
-  def enum_rfc1766(langid : UInt16, ppenumrfc1766 : IEnumRfc1766*) : HRESULT
-    @lpVtbl.value.enum_rfc1766.unsafe_as(Proc(UInt16, IEnumRfc1766*, HRESULT)).call(langid, ppenumrfc1766)
+  def enum_rfc1766(this : IMultiLanguage2*, langid : UInt16, ppenumrfc1766 : IEnumRfc1766*) : HRESULT
+    @lpVtbl.value.enum_rfc1766.call(this, langid, ppenumrfc1766)
   end
-  def get_rfc1766_info(locale : UInt32, langid : UInt16, prfc1766info : RFC1766INFO*) : HRESULT
-    @lpVtbl.value.get_rfc1766_info.unsafe_as(Proc(UInt32, UInt16, RFC1766INFO*, HRESULT)).call(locale, langid, prfc1766info)
+  def get_rfc1766_info(this : IMultiLanguage2*, locale : UInt32, langid : UInt16, prfc1766info : RFC1766INFO*) : HRESULT
+    @lpVtbl.value.get_rfc1766_info.call(this, locale, langid, prfc1766info)
   end
-  def create_convert_charset(uisrccodepage : UInt32, uidstcodepage : UInt32, dwproperty : UInt32, ppmlangconvertcharset : IMLangConvertCharset*) : HRESULT
-    @lpVtbl.value.create_convert_charset.unsafe_as(Proc(UInt32, UInt32, UInt32, IMLangConvertCharset*, HRESULT)).call(uisrccodepage, uidstcodepage, dwproperty, ppmlangconvertcharset)
+  def create_convert_charset(this : IMultiLanguage2*, uisrccodepage : UInt32, uidstcodepage : UInt32, dwproperty : UInt32, ppmlangconvertcharset : IMLangConvertCharset*) : HRESULT
+    @lpVtbl.value.create_convert_charset.call(this, uisrccodepage, uidstcodepage, dwproperty, ppmlangconvertcharset)
   end
-  def convert_string_in_i_stream(pdwmode : UInt32*, dwflag : UInt32, lpfallback : LibC::LPWSTR, dwsrcencoding : UInt32, dwdstencoding : UInt32, pstmin : IStream, pstmout : IStream) : HRESULT
-    @lpVtbl.value.convert_string_in_i_stream.unsafe_as(Proc(UInt32*, UInt32, LibC::LPWSTR, UInt32, UInt32, IStream, IStream, HRESULT)).call(pdwmode, dwflag, lpfallback, dwsrcencoding, dwdstencoding, pstmin, pstmout)
+  def convert_string_in_i_stream(this : IMultiLanguage2*, pdwmode : UInt32*, dwflag : UInt32, lpfallback : LibC::LPWSTR, dwsrcencoding : UInt32, dwdstencoding : UInt32, pstmin : IStream, pstmout : IStream) : HRESULT
+    @lpVtbl.value.convert_string_in_i_stream.call(this, pdwmode, dwflag, lpfallback, dwsrcencoding, dwdstencoding, pstmin, pstmout)
   end
-  def convert_string_to_unicode_ex(pdwmode : UInt32*, dwencoding : UInt32, psrcstr : PSTR, pcsrcsize : UInt32*, pdststr : Char*, pcdstsize : UInt32*, dwflag : UInt32, lpfallback : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.convert_string_to_unicode_ex.unsafe_as(Proc(UInt32*, UInt32, PSTR, UInt32*, Char*, UInt32*, UInt32, LibC::LPWSTR, HRESULT)).call(pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize, dwflag, lpfallback)
+  def convert_string_to_unicode_ex(this : IMultiLanguage2*, pdwmode : UInt32*, dwencoding : UInt32, psrcstr : PSTR, pcsrcsize : UInt32*, pdststr : Char*, pcdstsize : UInt32*, dwflag : UInt32, lpfallback : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.convert_string_to_unicode_ex.call(this, pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize, dwflag, lpfallback)
   end
-  def convert_string_from_unicode_ex(pdwmode : UInt32*, dwencoding : UInt32, psrcstr : Char*, pcsrcsize : UInt32*, pdststr : PSTR, pcdstsize : UInt32*, dwflag : UInt32, lpfallback : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.convert_string_from_unicode_ex.unsafe_as(Proc(UInt32*, UInt32, Char*, UInt32*, PSTR, UInt32*, UInt32, LibC::LPWSTR, HRESULT)).call(pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize, dwflag, lpfallback)
+  def convert_string_from_unicode_ex(this : IMultiLanguage2*, pdwmode : UInt32*, dwencoding : UInt32, psrcstr : Char*, pcsrcsize : UInt32*, pdststr : PSTR, pcdstsize : UInt32*, dwflag : UInt32, lpfallback : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.convert_string_from_unicode_ex.call(this, pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize, dwflag, lpfallback)
   end
-  def detect_codepage_in_i_stream(dwflag : UInt32, dwprefwincodepage : UInt32, pstmin : IStream, lpencoding : DetectEncodingInfo*, pnscores : Int32*) : HRESULT
-    @lpVtbl.value.detect_codepage_in_i_stream.unsafe_as(Proc(UInt32, UInt32, IStream, DetectEncodingInfo*, Int32*, HRESULT)).call(dwflag, dwprefwincodepage, pstmin, lpencoding, pnscores)
+  def detect_codepage_in_i_stream(this : IMultiLanguage2*, dwflag : UInt32, dwprefwincodepage : UInt32, pstmin : IStream, lpencoding : DetectEncodingInfo*, pnscores : Int32*) : HRESULT
+    @lpVtbl.value.detect_codepage_in_i_stream.call(this, dwflag, dwprefwincodepage, pstmin, lpencoding, pnscores)
   end
-  def detect_input_codepage(dwflag : UInt32, dwprefwincodepage : UInt32, psrcstr : PSTR, pcsrcsize : Int32*, lpencoding : DetectEncodingInfo*, pnscores : Int32*) : HRESULT
-    @lpVtbl.value.detect_input_codepage.unsafe_as(Proc(UInt32, UInt32, PSTR, Int32*, DetectEncodingInfo*, Int32*, HRESULT)).call(dwflag, dwprefwincodepage, psrcstr, pcsrcsize, lpencoding, pnscores)
+  def detect_input_codepage(this : IMultiLanguage2*, dwflag : UInt32, dwprefwincodepage : UInt32, psrcstr : PSTR, pcsrcsize : Int32*, lpencoding : DetectEncodingInfo*, pnscores : Int32*) : HRESULT
+    @lpVtbl.value.detect_input_codepage.call(this, dwflag, dwprefwincodepage, psrcstr, pcsrcsize, lpencoding, pnscores)
   end
-  def validate_code_page(uicodepage : UInt32, hwnd : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.validate_code_page.unsafe_as(Proc(UInt32, LibC::HANDLE, HRESULT)).call(uicodepage, hwnd)
+  def validate_code_page(this : IMultiLanguage2*, uicodepage : UInt32, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.validate_code_page.call(this, uicodepage, hwnd)
   end
-  def get_code_page_description(uicodepage : UInt32, lcid : UInt32, lpwidecharstr : Char*, cchwidechar : Int32) : HRESULT
-    @lpVtbl.value.get_code_page_description.unsafe_as(Proc(UInt32, UInt32, Char*, Int32, HRESULT)).call(uicodepage, lcid, lpwidecharstr, cchwidechar)
+  def get_code_page_description(this : IMultiLanguage2*, uicodepage : UInt32, lcid : UInt32, lpwidecharstr : Char*, cchwidechar : Int32) : HRESULT
+    @lpVtbl.value.get_code_page_description.call(this, uicodepage, lcid, lpwidecharstr, cchwidechar)
   end
-  def is_code_page_installable(uicodepage : UInt32) : HRESULT
-    @lpVtbl.value.is_code_page_installable.unsafe_as(Proc(UInt32, HRESULT)).call(uicodepage)
+  def is_code_page_installable(this : IMultiLanguage2*, uicodepage : UInt32) : HRESULT
+    @lpVtbl.value.is_code_page_installable.call(this, uicodepage)
   end
-  def set_mime_db_source(dwsource : MIMECONTF) : HRESULT
-    @lpVtbl.value.set_mime_db_source.unsafe_as(Proc(MIMECONTF, HRESULT)).call(dwsource)
+  def set_mime_db_source(this : IMultiLanguage2*, dwsource : MIMECONTF) : HRESULT
+    @lpVtbl.value.set_mime_db_source.call(this, dwsource)
   end
-  def get_number_of_scripts(pnscripts : UInt32*) : HRESULT
-    @lpVtbl.value.get_number_of_scripts.unsafe_as(Proc(UInt32*, HRESULT)).call(pnscripts)
+  def get_number_of_scripts(this : IMultiLanguage2*, pnscripts : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_of_scripts.call(this, pnscripts)
   end
-  def enum_scripts(dwflags : UInt32, langid : UInt16, ppenumscript : IEnumScript*) : HRESULT
-    @lpVtbl.value.enum_scripts.unsafe_as(Proc(UInt32, UInt16, IEnumScript*, HRESULT)).call(dwflags, langid, ppenumscript)
+  def enum_scripts(this : IMultiLanguage2*, dwflags : UInt32, langid : UInt16, ppenumscript : IEnumScript*) : HRESULT
+    @lpVtbl.value.enum_scripts.call(this, dwflags, langid, ppenumscript)
   end
-  def validate_code_page_ex(uicodepage : UInt32, hwnd : LibC::HANDLE, dwfiodcontrol : UInt32) : HRESULT
-    @lpVtbl.value.validate_code_page_ex.unsafe_as(Proc(UInt32, LibC::HANDLE, UInt32, HRESULT)).call(uicodepage, hwnd, dwfiodcontrol)
+  def validate_code_page_ex(this : IMultiLanguage2*, uicodepage : UInt32, hwnd : LibC::HANDLE, dwfiodcontrol : UInt32) : HRESULT
+    @lpVtbl.value.validate_code_page_ex.call(this, uicodepage, hwnd, dwfiodcontrol)
   end
 end
 struct LibWin32::IMLangCodePages
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLangCodePages*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLangCodePages*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLangCodePages*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_char_code_pages(chsrc : Char, pdwcodepages : UInt32*) : HRESULT
-    @lpVtbl.value.get_char_code_pages.unsafe_as(Proc(Char, UInt32*, HRESULT)).call(chsrc, pdwcodepages)
+  def get_char_code_pages(this : IMLangCodePages*, chsrc : Char, pdwcodepages : UInt32*) : HRESULT
+    @lpVtbl.value.get_char_code_pages.call(this, chsrc, pdwcodepages)
   end
-  def get_str_code_pages(pszsrc : Char*, cchsrc : Int32, dwprioritycodepages : UInt32, pdwcodepages : UInt32*, pcchcodepages : Int32*) : HRESULT
-    @lpVtbl.value.get_str_code_pages.unsafe_as(Proc(Char*, Int32, UInt32, UInt32*, Int32*, HRESULT)).call(pszsrc, cchsrc, dwprioritycodepages, pdwcodepages, pcchcodepages)
+  def get_str_code_pages(this : IMLangCodePages*, pszsrc : Char*, cchsrc : Int32, dwprioritycodepages : UInt32, pdwcodepages : UInt32*, pcchcodepages : Int32*) : HRESULT
+    @lpVtbl.value.get_str_code_pages.call(this, pszsrc, cchsrc, dwprioritycodepages, pdwcodepages, pcchcodepages)
   end
-  def code_page_to_code_pages(ucodepage : UInt32, pdwcodepages : UInt32*) : HRESULT
-    @lpVtbl.value.code_page_to_code_pages.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(ucodepage, pdwcodepages)
+  def code_page_to_code_pages(this : IMLangCodePages*, ucodepage : UInt32, pdwcodepages : UInt32*) : HRESULT
+    @lpVtbl.value.code_page_to_code_pages.call(this, ucodepage, pdwcodepages)
   end
-  def code_pages_to_code_page(dwcodepages : UInt32, udefaultcodepage : UInt32, pucodepage : UInt32*) : HRESULT
-    @lpVtbl.value.code_pages_to_code_page.unsafe_as(Proc(UInt32, UInt32, UInt32*, HRESULT)).call(dwcodepages, udefaultcodepage, pucodepage)
+  def code_pages_to_code_page(this : IMLangCodePages*, dwcodepages : UInt32, udefaultcodepage : UInt32, pucodepage : UInt32*) : HRESULT
+    @lpVtbl.value.code_pages_to_code_page.call(this, dwcodepages, udefaultcodepage, pucodepage)
   end
 end
 struct LibWin32::IMLangFontLink
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLangFontLink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLangFontLink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLangFontLink*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_char_code_pages(chsrc : Char, pdwcodepages : UInt32*) : HRESULT
-    @lpVtbl.value.get_char_code_pages.unsafe_as(Proc(Char, UInt32*, HRESULT)).call(chsrc, pdwcodepages)
+  def get_char_code_pages(this : IMLangFontLink*, chsrc : Char, pdwcodepages : UInt32*) : HRESULT
+    @lpVtbl.value.get_char_code_pages.call(this, chsrc, pdwcodepages)
   end
-  def get_str_code_pages(pszsrc : Char*, cchsrc : Int32, dwprioritycodepages : UInt32, pdwcodepages : UInt32*, pcchcodepages : Int32*) : HRESULT
-    @lpVtbl.value.get_str_code_pages.unsafe_as(Proc(Char*, Int32, UInt32, UInt32*, Int32*, HRESULT)).call(pszsrc, cchsrc, dwprioritycodepages, pdwcodepages, pcchcodepages)
+  def get_str_code_pages(this : IMLangFontLink*, pszsrc : Char*, cchsrc : Int32, dwprioritycodepages : UInt32, pdwcodepages : UInt32*, pcchcodepages : Int32*) : HRESULT
+    @lpVtbl.value.get_str_code_pages.call(this, pszsrc, cchsrc, dwprioritycodepages, pdwcodepages, pcchcodepages)
   end
-  def code_page_to_code_pages(ucodepage : UInt32, pdwcodepages : UInt32*) : HRESULT
-    @lpVtbl.value.code_page_to_code_pages.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(ucodepage, pdwcodepages)
+  def code_page_to_code_pages(this : IMLangFontLink*, ucodepage : UInt32, pdwcodepages : UInt32*) : HRESULT
+    @lpVtbl.value.code_page_to_code_pages.call(this, ucodepage, pdwcodepages)
   end
-  def code_pages_to_code_page(dwcodepages : UInt32, udefaultcodepage : UInt32, pucodepage : UInt32*) : HRESULT
-    @lpVtbl.value.code_pages_to_code_page.unsafe_as(Proc(UInt32, UInt32, UInt32*, HRESULT)).call(dwcodepages, udefaultcodepage, pucodepage)
+  def code_pages_to_code_page(this : IMLangFontLink*, dwcodepages : UInt32, udefaultcodepage : UInt32, pucodepage : UInt32*) : HRESULT
+    @lpVtbl.value.code_pages_to_code_page.call(this, dwcodepages, udefaultcodepage, pucodepage)
   end
-  def get_font_code_pages(hdc : HDC, hfont : HFONT, pdwcodepages : UInt32*) : HRESULT
-    @lpVtbl.value.get_font_code_pages.unsafe_as(Proc(HDC, HFONT, UInt32*, HRESULT)).call(hdc, hfont, pdwcodepages)
+  def get_font_code_pages(this : IMLangFontLink*, hdc : HDC, hfont : HFONT, pdwcodepages : UInt32*) : HRESULT
+    @lpVtbl.value.get_font_code_pages.call(this, hdc, hfont, pdwcodepages)
   end
-  def map_font(hdc : HDC, dwcodepages : UInt32, hsrcfont : HFONT, phdestfont : HFONT*) : HRESULT
-    @lpVtbl.value.map_font.unsafe_as(Proc(HDC, UInt32, HFONT, HFONT*, HRESULT)).call(hdc, dwcodepages, hsrcfont, phdestfont)
+  def map_font(this : IMLangFontLink*, hdc : HDC, dwcodepages : UInt32, hsrcfont : HFONT, phdestfont : HFONT*) : HRESULT
+    @lpVtbl.value.map_font.call(this, hdc, dwcodepages, hsrcfont, phdestfont)
   end
-  def release_font(hfont : HFONT) : HRESULT
-    @lpVtbl.value.release_font.unsafe_as(Proc(HFONT, HRESULT)).call(hfont)
+  def release_font(this : IMLangFontLink*, hfont : HFONT) : HRESULT
+    @lpVtbl.value.release_font.call(this, hfont)
   end
-  def reset_font_mapping : HRESULT
-    @lpVtbl.value.reset_font_mapping.unsafe_as(Proc(HRESULT)).call
+  def reset_font_mapping(this : IMLangFontLink*) : HRESULT
+    @lpVtbl.value.reset_font_mapping.call(this)
   end
 end
 struct LibWin32::IMLangFontLink2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLangFontLink2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLangFontLink2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLangFontLink2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_char_code_pages(chsrc : Char, pdwcodepages : UInt32*) : HRESULT
-    @lpVtbl.value.get_char_code_pages.unsafe_as(Proc(Char, UInt32*, HRESULT)).call(chsrc, pdwcodepages)
+  def get_char_code_pages(this : IMLangFontLink2*, chsrc : Char, pdwcodepages : UInt32*) : HRESULT
+    @lpVtbl.value.get_char_code_pages.call(this, chsrc, pdwcodepages)
   end
-  def get_str_code_pages(pszsrc : Char*, cchsrc : Int32, dwprioritycodepages : UInt32, pdwcodepages : UInt32*, pcchcodepages : Int32*) : HRESULT
-    @lpVtbl.value.get_str_code_pages.unsafe_as(Proc(Char*, Int32, UInt32, UInt32*, Int32*, HRESULT)).call(pszsrc, cchsrc, dwprioritycodepages, pdwcodepages, pcchcodepages)
+  def get_str_code_pages(this : IMLangFontLink2*, pszsrc : Char*, cchsrc : Int32, dwprioritycodepages : UInt32, pdwcodepages : UInt32*, pcchcodepages : Int32*) : HRESULT
+    @lpVtbl.value.get_str_code_pages.call(this, pszsrc, cchsrc, dwprioritycodepages, pdwcodepages, pcchcodepages)
   end
-  def code_page_to_code_pages(ucodepage : UInt32, pdwcodepages : UInt32*) : HRESULT
-    @lpVtbl.value.code_page_to_code_pages.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(ucodepage, pdwcodepages)
+  def code_page_to_code_pages(this : IMLangFontLink2*, ucodepage : UInt32, pdwcodepages : UInt32*) : HRESULT
+    @lpVtbl.value.code_page_to_code_pages.call(this, ucodepage, pdwcodepages)
   end
-  def code_pages_to_code_page(dwcodepages : UInt32, udefaultcodepage : UInt32, pucodepage : UInt32*) : HRESULT
-    @lpVtbl.value.code_pages_to_code_page.unsafe_as(Proc(UInt32, UInt32, UInt32*, HRESULT)).call(dwcodepages, udefaultcodepage, pucodepage)
+  def code_pages_to_code_page(this : IMLangFontLink2*, dwcodepages : UInt32, udefaultcodepage : UInt32, pucodepage : UInt32*) : HRESULT
+    @lpVtbl.value.code_pages_to_code_page.call(this, dwcodepages, udefaultcodepage, pucodepage)
   end
-  def get_font_code_pages(hdc : HDC, hfont : HFONT, pdwcodepages : UInt32*) : HRESULT
-    @lpVtbl.value.get_font_code_pages.unsafe_as(Proc(HDC, HFONT, UInt32*, HRESULT)).call(hdc, hfont, pdwcodepages)
+  def get_font_code_pages(this : IMLangFontLink2*, hdc : HDC, hfont : HFONT, pdwcodepages : UInt32*) : HRESULT
+    @lpVtbl.value.get_font_code_pages.call(this, hdc, hfont, pdwcodepages)
   end
-  def release_font(hfont : HFONT) : HRESULT
-    @lpVtbl.value.release_font.unsafe_as(Proc(HFONT, HRESULT)).call(hfont)
+  def release_font(this : IMLangFontLink2*, hfont : HFONT) : HRESULT
+    @lpVtbl.value.release_font.call(this, hfont)
   end
-  def reset_font_mapping : HRESULT
-    @lpVtbl.value.reset_font_mapping.unsafe_as(Proc(HRESULT)).call
+  def reset_font_mapping(this : IMLangFontLink2*) : HRESULT
+    @lpVtbl.value.reset_font_mapping.call(this)
   end
-  def map_font(hdc : HDC, dwcodepages : UInt32, chsrc : Char, pfont : HFONT*) : HRESULT
-    @lpVtbl.value.map_font.unsafe_as(Proc(HDC, UInt32, Char, HFONT*, HRESULT)).call(hdc, dwcodepages, chsrc, pfont)
+  def map_font(this : IMLangFontLink2*, hdc : HDC, dwcodepages : UInt32, chsrc : Char, pfont : HFONT*) : HRESULT
+    @lpVtbl.value.map_font.call(this, hdc, dwcodepages, chsrc, pfont)
   end
-  def get_font_unicode_ranges(hdc : HDC, puiranges : UInt32*, puranges : UNICODERANGE*) : HRESULT
-    @lpVtbl.value.get_font_unicode_ranges.unsafe_as(Proc(HDC, UInt32*, UNICODERANGE*, HRESULT)).call(hdc, puiranges, puranges)
+  def get_font_unicode_ranges(this : IMLangFontLink2*, hdc : HDC, puiranges : UInt32*, puranges : UNICODERANGE*) : HRESULT
+    @lpVtbl.value.get_font_unicode_ranges.call(this, hdc, puiranges, puranges)
   end
-  def get_script_font_info(sid : UInt8, dwflags : UInt32, puifonts : UInt32*, pscriptfont : Tagscripfontinfo*) : HRESULT
-    @lpVtbl.value.get_script_font_info.unsafe_as(Proc(UInt8, UInt32, UInt32*, Tagscripfontinfo*, HRESULT)).call(sid, dwflags, puifonts, pscriptfont)
+  def get_script_font_info(this : IMLangFontLink2*, sid : UInt8, dwflags : UInt32, puifonts : UInt32*, pscriptfont : Tagscripfontinfo*) : HRESULT
+    @lpVtbl.value.get_script_font_info.call(this, sid, dwflags, puifonts, pscriptfont)
   end
-  def code_page_to_script_id(uicodepage : UInt32, psid : UInt8*) : HRESULT
-    @lpVtbl.value.code_page_to_script_id.unsafe_as(Proc(UInt32, UInt8*, HRESULT)).call(uicodepage, psid)
+  def code_page_to_script_id(this : IMLangFontLink2*, uicodepage : UInt32, psid : UInt8*) : HRESULT
+    @lpVtbl.value.code_page_to_script_id.call(this, uicodepage, psid)
   end
 end
 struct LibWin32::IMultiLanguage3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMultiLanguage3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMultiLanguage3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMultiLanguage3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_number_of_code_page_info(pccodepage : UInt32*) : HRESULT
-    @lpVtbl.value.get_number_of_code_page_info.unsafe_as(Proc(UInt32*, HRESULT)).call(pccodepage)
+  def get_number_of_code_page_info(this : IMultiLanguage3*, pccodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_of_code_page_info.call(this, pccodepage)
   end
-  def get_code_page_info(uicodepage : UInt32, langid : UInt16, pcodepageinfo : MIMECPINFO*) : HRESULT
-    @lpVtbl.value.get_code_page_info.unsafe_as(Proc(UInt32, UInt16, MIMECPINFO*, HRESULT)).call(uicodepage, langid, pcodepageinfo)
+  def get_code_page_info(this : IMultiLanguage3*, uicodepage : UInt32, langid : UInt16, pcodepageinfo : MIMECPINFO*) : HRESULT
+    @lpVtbl.value.get_code_page_info.call(this, uicodepage, langid, pcodepageinfo)
   end
-  def get_family_code_page(uicodepage : UInt32, puifamilycodepage : UInt32*) : HRESULT
-    @lpVtbl.value.get_family_code_page.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(uicodepage, puifamilycodepage)
+  def get_family_code_page(this : IMultiLanguage3*, uicodepage : UInt32, puifamilycodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_family_code_page.call(this, uicodepage, puifamilycodepage)
   end
-  def enum_code_pages(grfflags : UInt32, langid : UInt16, ppenumcodepage : IEnumCodePage*) : HRESULT
-    @lpVtbl.value.enum_code_pages.unsafe_as(Proc(UInt32, UInt16, IEnumCodePage*, HRESULT)).call(grfflags, langid, ppenumcodepage)
+  def enum_code_pages(this : IMultiLanguage3*, grfflags : UInt32, langid : UInt16, ppenumcodepage : IEnumCodePage*) : HRESULT
+    @lpVtbl.value.enum_code_pages.call(this, grfflags, langid, ppenumcodepage)
   end
-  def get_charset_info(charset : UInt8*, pcharsetinfo : MIMECSETINFO*) : HRESULT
-    @lpVtbl.value.get_charset_info.unsafe_as(Proc(UInt8*, MIMECSETINFO*, HRESULT)).call(charset, pcharsetinfo)
+  def get_charset_info(this : IMultiLanguage3*, charset : UInt8*, pcharsetinfo : MIMECSETINFO*) : HRESULT
+    @lpVtbl.value.get_charset_info.call(this, charset, pcharsetinfo)
   end
-  def is_convertible(dwsrcencoding : UInt32, dwdstencoding : UInt32) : HRESULT
-    @lpVtbl.value.is_convertible.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(dwsrcencoding, dwdstencoding)
+  def is_convertible(this : IMultiLanguage3*, dwsrcencoding : UInt32, dwdstencoding : UInt32) : HRESULT
+    @lpVtbl.value.is_convertible.call(this, dwsrcencoding, dwdstencoding)
   end
-  def convert_string(pdwmode : UInt32*, dwsrcencoding : UInt32, dwdstencoding : UInt32, psrcstr : UInt8*, pcsrcsize : UInt32*, pdststr : UInt8*, pcdstsize : UInt32*) : HRESULT
-    @lpVtbl.value.convert_string.unsafe_as(Proc(UInt32*, UInt32, UInt32, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)).call(pdwmode, dwsrcencoding, dwdstencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  def convert_string(this : IMultiLanguage3*, pdwmode : UInt32*, dwsrcencoding : UInt32, dwdstencoding : UInt32, psrcstr : UInt8*, pcsrcsize : UInt32*, pdststr : UInt8*, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.convert_string.call(this, pdwmode, dwsrcencoding, dwdstencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
   end
-  def convert_string_to_unicode(pdwmode : UInt32*, dwencoding : UInt32, psrcstr : PSTR, pcsrcsize : UInt32*, pdststr : Char*, pcdstsize : UInt32*) : HRESULT
-    @lpVtbl.value.convert_string_to_unicode.unsafe_as(Proc(UInt32*, UInt32, PSTR, UInt32*, Char*, UInt32*, HRESULT)).call(pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  def convert_string_to_unicode(this : IMultiLanguage3*, pdwmode : UInt32*, dwencoding : UInt32, psrcstr : PSTR, pcsrcsize : UInt32*, pdststr : Char*, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.convert_string_to_unicode.call(this, pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
   end
-  def convert_string_from_unicode(pdwmode : UInt32*, dwencoding : UInt32, psrcstr : Char*, pcsrcsize : UInt32*, pdststr : PSTR, pcdstsize : UInt32*) : HRESULT
-    @lpVtbl.value.convert_string_from_unicode.unsafe_as(Proc(UInt32*, UInt32, Char*, UInt32*, PSTR, UInt32*, HRESULT)).call(pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  def convert_string_from_unicode(this : IMultiLanguage3*, pdwmode : UInt32*, dwencoding : UInt32, psrcstr : Char*, pcsrcsize : UInt32*, pdststr : PSTR, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.convert_string_from_unicode.call(this, pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
   end
-  def convert_string_reset : HRESULT
-    @lpVtbl.value.convert_string_reset.unsafe_as(Proc(HRESULT)).call
+  def convert_string_reset(this : IMultiLanguage3*) : HRESULT
+    @lpVtbl.value.convert_string_reset.call(this)
   end
-  def get_rfc1766_from_lcid(locale : UInt32, pbstrrfc1766 : UInt8**) : HRESULT
-    @lpVtbl.value.get_rfc1766_from_lcid.unsafe_as(Proc(UInt32, UInt8**, HRESULT)).call(locale, pbstrrfc1766)
+  def get_rfc1766_from_lcid(this : IMultiLanguage3*, locale : UInt32, pbstrrfc1766 : UInt8**) : HRESULT
+    @lpVtbl.value.get_rfc1766_from_lcid.call(this, locale, pbstrrfc1766)
   end
-  def get_lcid_from_rfc1766(plocale : UInt32*, bstrrfc1766 : UInt8*) : HRESULT
-    @lpVtbl.value.get_lcid_from_rfc1766.unsafe_as(Proc(UInt32*, UInt8*, HRESULT)).call(plocale, bstrrfc1766)
+  def get_lcid_from_rfc1766(this : IMultiLanguage3*, plocale : UInt32*, bstrrfc1766 : UInt8*) : HRESULT
+    @lpVtbl.value.get_lcid_from_rfc1766.call(this, plocale, bstrrfc1766)
   end
-  def enum_rfc1766(langid : UInt16, ppenumrfc1766 : IEnumRfc1766*) : HRESULT
-    @lpVtbl.value.enum_rfc1766.unsafe_as(Proc(UInt16, IEnumRfc1766*, HRESULT)).call(langid, ppenumrfc1766)
+  def enum_rfc1766(this : IMultiLanguage3*, langid : UInt16, ppenumrfc1766 : IEnumRfc1766*) : HRESULT
+    @lpVtbl.value.enum_rfc1766.call(this, langid, ppenumrfc1766)
   end
-  def get_rfc1766_info(locale : UInt32, langid : UInt16, prfc1766info : RFC1766INFO*) : HRESULT
-    @lpVtbl.value.get_rfc1766_info.unsafe_as(Proc(UInt32, UInt16, RFC1766INFO*, HRESULT)).call(locale, langid, prfc1766info)
+  def get_rfc1766_info(this : IMultiLanguage3*, locale : UInt32, langid : UInt16, prfc1766info : RFC1766INFO*) : HRESULT
+    @lpVtbl.value.get_rfc1766_info.call(this, locale, langid, prfc1766info)
   end
-  def create_convert_charset(uisrccodepage : UInt32, uidstcodepage : UInt32, dwproperty : UInt32, ppmlangconvertcharset : IMLangConvertCharset*) : HRESULT
-    @lpVtbl.value.create_convert_charset.unsafe_as(Proc(UInt32, UInt32, UInt32, IMLangConvertCharset*, HRESULT)).call(uisrccodepage, uidstcodepage, dwproperty, ppmlangconvertcharset)
+  def create_convert_charset(this : IMultiLanguage3*, uisrccodepage : UInt32, uidstcodepage : UInt32, dwproperty : UInt32, ppmlangconvertcharset : IMLangConvertCharset*) : HRESULT
+    @lpVtbl.value.create_convert_charset.call(this, uisrccodepage, uidstcodepage, dwproperty, ppmlangconvertcharset)
   end
-  def convert_string_in_i_stream(pdwmode : UInt32*, dwflag : UInt32, lpfallback : LibC::LPWSTR, dwsrcencoding : UInt32, dwdstencoding : UInt32, pstmin : IStream, pstmout : IStream) : HRESULT
-    @lpVtbl.value.convert_string_in_i_stream.unsafe_as(Proc(UInt32*, UInt32, LibC::LPWSTR, UInt32, UInt32, IStream, IStream, HRESULT)).call(pdwmode, dwflag, lpfallback, dwsrcencoding, dwdstencoding, pstmin, pstmout)
+  def convert_string_in_i_stream(this : IMultiLanguage3*, pdwmode : UInt32*, dwflag : UInt32, lpfallback : LibC::LPWSTR, dwsrcencoding : UInt32, dwdstencoding : UInt32, pstmin : IStream, pstmout : IStream) : HRESULT
+    @lpVtbl.value.convert_string_in_i_stream.call(this, pdwmode, dwflag, lpfallback, dwsrcencoding, dwdstencoding, pstmin, pstmout)
   end
-  def convert_string_to_unicode_ex(pdwmode : UInt32*, dwencoding : UInt32, psrcstr : PSTR, pcsrcsize : UInt32*, pdststr : Char*, pcdstsize : UInt32*, dwflag : UInt32, lpfallback : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.convert_string_to_unicode_ex.unsafe_as(Proc(UInt32*, UInt32, PSTR, UInt32*, Char*, UInt32*, UInt32, LibC::LPWSTR, HRESULT)).call(pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize, dwflag, lpfallback)
+  def convert_string_to_unicode_ex(this : IMultiLanguage3*, pdwmode : UInt32*, dwencoding : UInt32, psrcstr : PSTR, pcsrcsize : UInt32*, pdststr : Char*, pcdstsize : UInt32*, dwflag : UInt32, lpfallback : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.convert_string_to_unicode_ex.call(this, pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize, dwflag, lpfallback)
   end
-  def convert_string_from_unicode_ex(pdwmode : UInt32*, dwencoding : UInt32, psrcstr : Char*, pcsrcsize : UInt32*, pdststr : PSTR, pcdstsize : UInt32*, dwflag : UInt32, lpfallback : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.convert_string_from_unicode_ex.unsafe_as(Proc(UInt32*, UInt32, Char*, UInt32*, PSTR, UInt32*, UInt32, LibC::LPWSTR, HRESULT)).call(pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize, dwflag, lpfallback)
+  def convert_string_from_unicode_ex(this : IMultiLanguage3*, pdwmode : UInt32*, dwencoding : UInt32, psrcstr : Char*, pcsrcsize : UInt32*, pdststr : PSTR, pcdstsize : UInt32*, dwflag : UInt32, lpfallback : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.convert_string_from_unicode_ex.call(this, pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize, dwflag, lpfallback)
   end
-  def detect_codepage_in_i_stream(dwflag : UInt32, dwprefwincodepage : UInt32, pstmin : IStream, lpencoding : DetectEncodingInfo*, pnscores : Int32*) : HRESULT
-    @lpVtbl.value.detect_codepage_in_i_stream.unsafe_as(Proc(UInt32, UInt32, IStream, DetectEncodingInfo*, Int32*, HRESULT)).call(dwflag, dwprefwincodepage, pstmin, lpencoding, pnscores)
+  def detect_codepage_in_i_stream(this : IMultiLanguage3*, dwflag : UInt32, dwprefwincodepage : UInt32, pstmin : IStream, lpencoding : DetectEncodingInfo*, pnscores : Int32*) : HRESULT
+    @lpVtbl.value.detect_codepage_in_i_stream.call(this, dwflag, dwprefwincodepage, pstmin, lpencoding, pnscores)
   end
-  def detect_input_codepage(dwflag : UInt32, dwprefwincodepage : UInt32, psrcstr : PSTR, pcsrcsize : Int32*, lpencoding : DetectEncodingInfo*, pnscores : Int32*) : HRESULT
-    @lpVtbl.value.detect_input_codepage.unsafe_as(Proc(UInt32, UInt32, PSTR, Int32*, DetectEncodingInfo*, Int32*, HRESULT)).call(dwflag, dwprefwincodepage, psrcstr, pcsrcsize, lpencoding, pnscores)
+  def detect_input_codepage(this : IMultiLanguage3*, dwflag : UInt32, dwprefwincodepage : UInt32, psrcstr : PSTR, pcsrcsize : Int32*, lpencoding : DetectEncodingInfo*, pnscores : Int32*) : HRESULT
+    @lpVtbl.value.detect_input_codepage.call(this, dwflag, dwprefwincodepage, psrcstr, pcsrcsize, lpencoding, pnscores)
   end
-  def validate_code_page(uicodepage : UInt32, hwnd : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.validate_code_page.unsafe_as(Proc(UInt32, LibC::HANDLE, HRESULT)).call(uicodepage, hwnd)
+  def validate_code_page(this : IMultiLanguage3*, uicodepage : UInt32, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.validate_code_page.call(this, uicodepage, hwnd)
   end
-  def get_code_page_description(uicodepage : UInt32, lcid : UInt32, lpwidecharstr : Char*, cchwidechar : Int32) : HRESULT
-    @lpVtbl.value.get_code_page_description.unsafe_as(Proc(UInt32, UInt32, Char*, Int32, HRESULT)).call(uicodepage, lcid, lpwidecharstr, cchwidechar)
+  def get_code_page_description(this : IMultiLanguage3*, uicodepage : UInt32, lcid : UInt32, lpwidecharstr : Char*, cchwidechar : Int32) : HRESULT
+    @lpVtbl.value.get_code_page_description.call(this, uicodepage, lcid, lpwidecharstr, cchwidechar)
   end
-  def is_code_page_installable(uicodepage : UInt32) : HRESULT
-    @lpVtbl.value.is_code_page_installable.unsafe_as(Proc(UInt32, HRESULT)).call(uicodepage)
+  def is_code_page_installable(this : IMultiLanguage3*, uicodepage : UInt32) : HRESULT
+    @lpVtbl.value.is_code_page_installable.call(this, uicodepage)
   end
-  def set_mime_db_source(dwsource : MIMECONTF) : HRESULT
-    @lpVtbl.value.set_mime_db_source.unsafe_as(Proc(MIMECONTF, HRESULT)).call(dwsource)
+  def set_mime_db_source(this : IMultiLanguage3*, dwsource : MIMECONTF) : HRESULT
+    @lpVtbl.value.set_mime_db_source.call(this, dwsource)
   end
-  def get_number_of_scripts(pnscripts : UInt32*) : HRESULT
-    @lpVtbl.value.get_number_of_scripts.unsafe_as(Proc(UInt32*, HRESULT)).call(pnscripts)
+  def get_number_of_scripts(this : IMultiLanguage3*, pnscripts : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_of_scripts.call(this, pnscripts)
   end
-  def enum_scripts(dwflags : UInt32, langid : UInt16, ppenumscript : IEnumScript*) : HRESULT
-    @lpVtbl.value.enum_scripts.unsafe_as(Proc(UInt32, UInt16, IEnumScript*, HRESULT)).call(dwflags, langid, ppenumscript)
+  def enum_scripts(this : IMultiLanguage3*, dwflags : UInt32, langid : UInt16, ppenumscript : IEnumScript*) : HRESULT
+    @lpVtbl.value.enum_scripts.call(this, dwflags, langid, ppenumscript)
   end
-  def validate_code_page_ex(uicodepage : UInt32, hwnd : LibC::HANDLE, dwfiodcontrol : UInt32) : HRESULT
-    @lpVtbl.value.validate_code_page_ex.unsafe_as(Proc(UInt32, LibC::HANDLE, UInt32, HRESULT)).call(uicodepage, hwnd, dwfiodcontrol)
+  def validate_code_page_ex(this : IMultiLanguage3*, uicodepage : UInt32, hwnd : LibC::HANDLE, dwfiodcontrol : UInt32) : HRESULT
+    @lpVtbl.value.validate_code_page_ex.call(this, uicodepage, hwnd, dwfiodcontrol)
   end
-  def detect_outbound_code_page(dwflags : UInt32, lpwidecharstr : Char*, cchwidechar : UInt32, puipreferredcodepages : UInt32*, npreferredcodepages : UInt32, puidetectedcodepages : UInt32*, pndetectedcodepages : UInt32*, lpspecialchar : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.detect_outbound_code_page.unsafe_as(Proc(UInt32, Char*, UInt32, UInt32*, UInt32, UInt32*, UInt32*, LibC::LPWSTR, HRESULT)).call(dwflags, lpwidecharstr, cchwidechar, puipreferredcodepages, npreferredcodepages, puidetectedcodepages, pndetectedcodepages, lpspecialchar)
+  def detect_outbound_code_page(this : IMultiLanguage3*, dwflags : UInt32, lpwidecharstr : Char*, cchwidechar : UInt32, puipreferredcodepages : UInt32*, npreferredcodepages : UInt32, puidetectedcodepages : UInt32*, pndetectedcodepages : UInt32*, lpspecialchar : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.detect_outbound_code_page.call(this, dwflags, lpwidecharstr, cchwidechar, puipreferredcodepages, npreferredcodepages, puidetectedcodepages, pndetectedcodepages, lpspecialchar)
   end
-  def detect_outbound_code_page_in_i_stream(dwflags : UInt32, pstrin : IStream, puipreferredcodepages : UInt32*, npreferredcodepages : UInt32, puidetectedcodepages : UInt32*, pndetectedcodepages : UInt32*, lpspecialchar : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.detect_outbound_code_page_in_i_stream.unsafe_as(Proc(UInt32, IStream, UInt32*, UInt32, UInt32*, UInt32*, LibC::LPWSTR, HRESULT)).call(dwflags, pstrin, puipreferredcodepages, npreferredcodepages, puidetectedcodepages, pndetectedcodepages, lpspecialchar)
+  def detect_outbound_code_page_in_i_stream(this : IMultiLanguage3*, dwflags : UInt32, pstrin : IStream, puipreferredcodepages : UInt32*, npreferredcodepages : UInt32, puidetectedcodepages : UInt32*, pndetectedcodepages : UInt32*, lpspecialchar : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.detect_outbound_code_page_in_i_stream.call(this, dwflags, pstrin, puipreferredcodepages, npreferredcodepages, puidetectedcodepages, pndetectedcodepages, lpspecialchar)
   end
 end

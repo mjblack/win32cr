@@ -1731,10 +1731,10 @@ lib LibWin32
 
 
   struct IDialEventSinkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_event : UInt64
+    query_interface : Proc(IDialEventSink*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDialEventSink*, UInt32)
+    release : Proc(IDialEventSink*, UInt32)
+    on_event : Proc(IDialEventSink*, UInt32, UInt32, HRESULT)
   end
 
   IDialEventSink_GUID = "2d86f4ff-6e2d-4488-b2e9-6934afd41bea"
@@ -1744,16 +1744,16 @@ lib LibWin32
   end
 
   struct IDialEngineVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    initialize : UInt64
-    get_property : UInt64
-    set_property : UInt64
-    dial : UInt64
-    hang_up : UInt64
-    get_connected_state : UInt64
-    get_connect_handle : UInt64
+    query_interface : Proc(IDialEngine*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDialEngine*, UInt32)
+    release : Proc(IDialEngine*, UInt32)
+    initialize : Proc(IDialEngine*, LibC::LPWSTR, IDialEventSink, HRESULT)
+    get_property : Proc(IDialEngine*, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
+    set_property : Proc(IDialEngine*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    dial : Proc(IDialEngine*, HRESULT)
+    hang_up : Proc(IDialEngine*, HRESULT)
+    get_connected_state : Proc(IDialEngine*, UInt32*, HRESULT)
+    get_connect_handle : Proc(IDialEngine*, LibC::UINT_PTR*, HRESULT)
   end
 
   IDialEngine_GUID = "39fd782b-7905-40d5-9148-3c9b190423d5"
@@ -1763,11 +1763,11 @@ lib LibWin32
   end
 
   struct IDialBrandingVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    initialize : UInt64
-    get_bitmap : UInt64
+    query_interface : Proc(IDialBranding*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDialBranding*, UInt32)
+    release : Proc(IDialBranding*, UInt32)
+    initialize : Proc(IDialBranding*, LibC::LPWSTR, HRESULT)
+    get_bitmap : Proc(IDialBranding*, UInt32, HBITMAP*, HRESULT)
   end
 
   IDialBranding_GUID = "8aecafa9-4306-43cc-8c5a-765f2979cc16"
@@ -1777,10 +1777,10 @@ lib LibWin32
   end
 
   struct IProofOfPossessionCookieInfoManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_cookie_info_for_uri : UInt64
+    query_interface : Proc(IProofOfPossessionCookieInfoManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IProofOfPossessionCookieInfoManager*, UInt32)
+    release : Proc(IProofOfPossessionCookieInfoManager*, UInt32)
+    get_cookie_info_for_uri : Proc(IProofOfPossessionCookieInfoManager*, LibC::LPWSTR, UInt32*, ProofOfPossessionCookieInfo**, HRESULT)
   end
 
   IProofOfPossessionCookieInfoManager_GUID = "cdaece56-4edf-43df-b113-88e4556fa1bb"
@@ -1790,10 +1790,10 @@ lib LibWin32
   end
 
   struct IProofOfPossessionCookieInfoManager2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_cookie_info_with_uri_for_account : UInt64
+    query_interface : Proc(IProofOfPossessionCookieInfoManager2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IProofOfPossessionCookieInfoManager2*, UInt32)
+    release : Proc(IProofOfPossessionCookieInfoManager2*, UInt32)
+    get_cookie_info_with_uri_for_account : Proc(IProofOfPossessionCookieInfoManager2*, IInspectable, LibC::LPWSTR, UInt32*, ProofOfPossessionCookieInfo**, HRESULT)
   end
 
   IProofOfPossessionCookieInfoManager2_GUID = "15e41407-b42f-4ae7-9966-34a087b2d713"
@@ -2692,93 +2692,93 @@ lib LibWin32
   fun InternetConvertUrlFromWireToWideChar(pcszurl : UInt8*, cchurl : UInt32, pcwszbaseurl : LibC::LPWSTR, dwcodepagehost : UInt32, dwcodepagepath : UInt32, fencodepathextra : LibC::BOOL, dwcodepageextra : UInt32, ppwszconvertedurl : LibC::LPWSTR*) : UInt32
 end
 struct LibWin32::IDialEventSink
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDialEventSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDialEventSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDialEventSink*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_event(dwevent : UInt32, dwstatus : UInt32) : HRESULT
-    @lpVtbl.value.on_event.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(dwevent, dwstatus)
+  def on_event(this : IDialEventSink*, dwevent : UInt32, dwstatus : UInt32) : HRESULT
+    @lpVtbl.value.on_event.call(this, dwevent, dwstatus)
   end
 end
 struct LibWin32::IDialEngine
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDialEngine*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDialEngine*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDialEngine*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def initialize(pwzconnectoid : LibC::LPWSTR, pides : IDialEventSink) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(LibC::LPWSTR, IDialEventSink, HRESULT)).call(pwzconnectoid, pides)
+  def initialize(this : IDialEngine*, pwzconnectoid : LibC::LPWSTR, pides : IDialEventSink) : HRESULT
+    @lpVtbl.value.initialize.call(this, pwzconnectoid, pides)
   end
-  def get_property(pwzproperty : LibC::LPWSTR, pwzvalue : LibC::LPWSTR, dwbufsize : UInt32) : HRESULT
-    @lpVtbl.value.get_property.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(pwzproperty, pwzvalue, dwbufsize)
+  def get_property(this : IDialEngine*, pwzproperty : LibC::LPWSTR, pwzvalue : LibC::LPWSTR, dwbufsize : UInt32) : HRESULT
+    @lpVtbl.value.get_property.call(this, pwzproperty, pwzvalue, dwbufsize)
   end
-  def set_property(pwzproperty : LibC::LPWSTR, pwzvalue : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_property.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pwzproperty, pwzvalue)
+  def set_property(this : IDialEngine*, pwzproperty : LibC::LPWSTR, pwzvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_property.call(this, pwzproperty, pwzvalue)
   end
-  def dial : HRESULT
-    @lpVtbl.value.dial.unsafe_as(Proc(HRESULT)).call
+  def dial(this : IDialEngine*) : HRESULT
+    @lpVtbl.value.dial.call(this)
   end
-  def hang_up : HRESULT
-    @lpVtbl.value.hang_up.unsafe_as(Proc(HRESULT)).call
+  def hang_up(this : IDialEngine*) : HRESULT
+    @lpVtbl.value.hang_up.call(this)
   end
-  def get_connected_state(pdwstate : UInt32*) : HRESULT
-    @lpVtbl.value.get_connected_state.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstate)
+  def get_connected_state(this : IDialEngine*, pdwstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_connected_state.call(this, pdwstate)
   end
-  def get_connect_handle(pdwhandle : LibC::UINT_PTR*) : HRESULT
-    @lpVtbl.value.get_connect_handle.unsafe_as(Proc(LibC::UINT_PTR*, HRESULT)).call(pdwhandle)
+  def get_connect_handle(this : IDialEngine*, pdwhandle : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_connect_handle.call(this, pdwhandle)
   end
 end
 struct LibWin32::IDialBranding
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDialBranding*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDialBranding*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDialBranding*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def initialize(pwzconnectoid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwzconnectoid)
+  def initialize(this : IDialBranding*, pwzconnectoid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.initialize.call(this, pwzconnectoid)
   end
-  def get_bitmap(dwindex : UInt32, phbitmap : HBITMAP*) : HRESULT
-    @lpVtbl.value.get_bitmap.unsafe_as(Proc(UInt32, HBITMAP*, HRESULT)).call(dwindex, phbitmap)
+  def get_bitmap(this : IDialBranding*, dwindex : UInt32, phbitmap : HBITMAP*) : HRESULT
+    @lpVtbl.value.get_bitmap.call(this, dwindex, phbitmap)
   end
 end
 struct LibWin32::IProofOfPossessionCookieInfoManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IProofOfPossessionCookieInfoManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IProofOfPossessionCookieInfoManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IProofOfPossessionCookieInfoManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_cookie_info_for_uri(uri : LibC::LPWSTR, cookieinfocount : UInt32*, cookieinfo : ProofOfPossessionCookieInfo**) : HRESULT
-    @lpVtbl.value.get_cookie_info_for_uri.unsafe_as(Proc(LibC::LPWSTR, UInt32*, ProofOfPossessionCookieInfo**, HRESULT)).call(uri, cookieinfocount, cookieinfo)
+  def get_cookie_info_for_uri(this : IProofOfPossessionCookieInfoManager*, uri : LibC::LPWSTR, cookieinfocount : UInt32*, cookieinfo : ProofOfPossessionCookieInfo**) : HRESULT
+    @lpVtbl.value.get_cookie_info_for_uri.call(this, uri, cookieinfocount, cookieinfo)
   end
 end
 struct LibWin32::IProofOfPossessionCookieInfoManager2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IProofOfPossessionCookieInfoManager2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IProofOfPossessionCookieInfoManager2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IProofOfPossessionCookieInfoManager2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_cookie_info_with_uri_for_account(webaccount : IInspectable, uri : LibC::LPWSTR, cookieinfocount : UInt32*, cookieinfo : ProofOfPossessionCookieInfo**) : HRESULT
-    @lpVtbl.value.get_cookie_info_with_uri_for_account.unsafe_as(Proc(IInspectable, LibC::LPWSTR, UInt32*, ProofOfPossessionCookieInfo**, HRESULT)).call(webaccount, uri, cookieinfocount, cookieinfo)
+  def get_cookie_info_with_uri_for_account(this : IProofOfPossessionCookieInfoManager2*, webaccount : IInspectable, uri : LibC::LPWSTR, cookieinfocount : UInt32*, cookieinfo : ProofOfPossessionCookieInfo**) : HRESULT
+    @lpVtbl.value.get_cookie_info_with_uri_for_account.call(this, webaccount, uri, cookieinfocount, cookieinfo)
   end
 end

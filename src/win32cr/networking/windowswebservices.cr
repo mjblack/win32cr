@@ -2812,14 +2812,14 @@ lib LibWin32
 
 
   struct IContentPrefetcherTaskTriggerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_iids : UInt64
-    get_runtime_class_name : UInt64
-    get_trust_level : UInt64
-    trigger_content_prefetcher_task : UInt64
-    is_registered_for_content_prefetch : UInt64
+    query_interface : Proc(IContentPrefetcherTaskTrigger*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IContentPrefetcherTaskTrigger*, UInt32)
+    release : Proc(IContentPrefetcherTaskTrigger*, UInt32)
+    get_iids : Proc(IContentPrefetcherTaskTrigger*, UInt32*, Guid**, HRESULT)
+    get_runtime_class_name : Proc(IContentPrefetcherTaskTrigger*, HSTRING*, HRESULT)
+    get_trust_level : Proc(IContentPrefetcherTaskTrigger*, TrustLevel*, HRESULT)
+    trigger_content_prefetcher_task : Proc(IContentPrefetcherTaskTrigger*, LibC::LPWSTR, HRESULT)
+    is_registered_for_content_prefetch : Proc(IContentPrefetcherTaskTrigger*, LibC::LPWSTR, UInt8*, HRESULT)
   end
 
   IContentPrefetcherTaskTrigger_GUID = "1b35a14a-6094-4799-a60e-e474e15d4dc9"
@@ -3439,28 +3439,28 @@ lib LibWin32
   fun WebAuthNGetW3CExceptionDOMError(hr : HRESULT) : HRESULT
 end
 struct LibWin32::IContentPrefetcherTaskTrigger
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IContentPrefetcherTaskTrigger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IContentPrefetcherTaskTrigger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IContentPrefetcherTaskTrigger*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
-    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  def get_iids(this : IContentPrefetcherTaskTrigger*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
   end
-  def get_runtime_class_name(classname : HSTRING*) : HRESULT
-    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  def get_runtime_class_name(this : IContentPrefetcherTaskTrigger*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
   end
-  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
-    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  def get_trust_level(this : IContentPrefetcherTaskTrigger*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
   end
-  def trigger_content_prefetcher_task(packagefullname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.trigger_content_prefetcher_task.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(packagefullname)
+  def trigger_content_prefetcher_task(this : IContentPrefetcherTaskTrigger*, packagefullname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.trigger_content_prefetcher_task.call(this, packagefullname)
   end
-  def is_registered_for_content_prefetch(packagefullname : LibC::LPWSTR, isregistered : UInt8*) : HRESULT
-    @lpVtbl.value.is_registered_for_content_prefetch.unsafe_as(Proc(LibC::LPWSTR, UInt8*, HRESULT)).call(packagefullname, isregistered)
+  def is_registered_for_content_prefetch(this : IContentPrefetcherTaskTrigger*, packagefullname : LibC::LPWSTR, isregistered : UInt8*) : HRESULT
+    @lpVtbl.value.is_registered_for_content_prefetch.call(this, packagefullname, isregistered)
   end
 end

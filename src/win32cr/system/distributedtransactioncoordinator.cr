@@ -348,12 +348,12 @@ lib LibWin32
 
 
   struct ITransactionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    commit : UInt64
-    abort : UInt64
-    get_transaction_info : UInt64
+    query_interface : Proc(ITransaction*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransaction*, UInt32)
+    release : Proc(ITransaction*, UInt32)
+    commit : Proc(ITransaction*, LibC::BOOL, UInt32, UInt32, HRESULT)
+    abort : Proc(ITransaction*, BOID*, LibC::BOOL, LibC::BOOL, HRESULT)
+    get_transaction_info : Proc(ITransaction*, XACTTRANSINFO*, HRESULT)
   end
 
   ITransaction_GUID = "0fb15084-af41-11ce-bd2b-204c4f4f5020"
@@ -363,13 +363,13 @@ lib LibWin32
   end
 
   struct ITransactionClonerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    commit : UInt64
-    abort : UInt64
-    get_transaction_info : UInt64
-    clone_with_commit_disabled : UInt64
+    query_interface : Proc(ITransactionCloner*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionCloner*, UInt32)
+    release : Proc(ITransactionCloner*, UInt32)
+    commit : Proc(ITransactionCloner*, LibC::BOOL, UInt32, UInt32, HRESULT)
+    abort : Proc(ITransactionCloner*, BOID*, LibC::BOOL, LibC::BOOL, HRESULT)
+    get_transaction_info : Proc(ITransactionCloner*, XACTTRANSINFO*, HRESULT)
+    clone_with_commit_disabled : Proc(ITransactionCloner*, ITransaction*, HRESULT)
   end
 
   ITransactionCloner_GUID = "02656950-2152-11d0-944c-00a0c905416e"
@@ -379,14 +379,14 @@ lib LibWin32
   end
 
   struct ITransaction2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    commit : UInt64
-    abort : UInt64
-    get_transaction_info : UInt64
-    clone_with_commit_disabled : UInt64
-    get_transaction_info2 : UInt64
+    query_interface : Proc(ITransaction2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransaction2*, UInt32)
+    release : Proc(ITransaction2*, UInt32)
+    commit : Proc(ITransaction2*, LibC::BOOL, UInt32, UInt32, HRESULT)
+    abort : Proc(ITransaction2*, BOID*, LibC::BOOL, LibC::BOOL, HRESULT)
+    get_transaction_info : Proc(ITransaction2*, XACTTRANSINFO*, HRESULT)
+    clone_with_commit_disabled : Proc(ITransaction2*, ITransaction*, HRESULT)
+    get_transaction_info2 : Proc(ITransaction2*, XACTTRANSINFO*, HRESULT)
   end
 
   ITransaction2_GUID = "34021548-0065-11d3-bac1-00c04f797be2"
@@ -396,11 +396,11 @@ lib LibWin32
   end
 
   struct ITransactionDispenserVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_options_object : UInt64
-    begin_transaction : UInt64
+    query_interface : Proc(ITransactionDispenser*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionDispenser*, UInt32)
+    release : Proc(ITransactionDispenser*, UInt32)
+    get_options_object : Proc(ITransactionDispenser*, ITransactionOptions*, HRESULT)
+    begin_transaction : Proc(ITransactionDispenser*, IUnknown, Int32, UInt32, ITransactionOptions, ITransaction*, HRESULT)
   end
 
   ITransactionDispenser_GUID = "3a6ad9e1-23b9-11cf-ad60-00aa00a74ccd"
@@ -410,11 +410,11 @@ lib LibWin32
   end
 
   struct ITransactionOptionsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_options : UInt64
-    get_options : UInt64
+    query_interface : Proc(ITransactionOptions*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionOptions*, UInt32)
+    release : Proc(ITransactionOptions*, UInt32)
+    set_options : Proc(ITransactionOptions*, XACTOPT*, HRESULT)
+    get_options : Proc(ITransactionOptions*, XACTOPT*, HRESULT)
   end
 
   ITransactionOptions_GUID = "3a6ad9e0-23b9-11cf-ad60-00aa00a74ccd"
@@ -424,13 +424,13 @@ lib LibWin32
   end
 
   struct ITransactionOutcomeEventsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    committed : UInt64
-    aborted : UInt64
-    heuristic_decision : UInt64
-    indoubt : UInt64
+    query_interface : Proc(ITransactionOutcomeEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionOutcomeEvents*, UInt32)
+    release : Proc(ITransactionOutcomeEvents*, UInt32)
+    committed : Proc(ITransactionOutcomeEvents*, LibC::BOOL, BOID*, HRESULT, HRESULT)
+    aborted : Proc(ITransactionOutcomeEvents*, BOID*, LibC::BOOL, BOID*, HRESULT, HRESULT)
+    heuristic_decision : Proc(ITransactionOutcomeEvents*, UInt32, BOID*, HRESULT, HRESULT)
+    indoubt : Proc(ITransactionOutcomeEvents*, HRESULT)
   end
 
   ITransactionOutcomeEvents_GUID = "3a6ad9e2-23b9-11cf-ad60-00aa00a74ccd"
@@ -440,11 +440,11 @@ lib LibWin32
   end
 
   struct ITmNodeNameVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_node_name_size : UInt64
-    get_node_name : UInt64
+    query_interface : Proc(ITmNodeName*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITmNodeName*, UInt32)
+    release : Proc(ITmNodeName*, UInt32)
+    get_node_name_size : Proc(ITmNodeName*, UInt32*, HRESULT)
+    get_node_name : Proc(ITmNodeName*, UInt32, LibC::LPWSTR, HRESULT)
   end
 
   ITmNodeName_GUID = "30274f88-6ee4-474e-9b95-7807bc9ef8cf"
@@ -454,10 +454,10 @@ lib LibWin32
   end
 
   struct IKernelTransactionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_handle : UInt64
+    query_interface : Proc(IKernelTransaction*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IKernelTransaction*, UInt32)
+    release : Proc(IKernelTransaction*, UInt32)
+    get_handle : Proc(IKernelTransaction*, LibC::HANDLE*, HRESULT)
   end
 
   IKernelTransaction_GUID = "79427a2b-f895-40e0-be79-b57dc82ed231"
@@ -467,13 +467,13 @@ lib LibWin32
   end
 
   struct ITransactionResourceAsyncVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    prepare_request : UInt64
-    commit_request : UInt64
-    abort_request : UInt64
-    tm_down : UInt64
+    query_interface : Proc(ITransactionResourceAsync*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionResourceAsync*, UInt32)
+    release : Proc(ITransactionResourceAsync*, UInt32)
+    prepare_request : Proc(ITransactionResourceAsync*, LibC::BOOL, UInt32, LibC::BOOL, LibC::BOOL, HRESULT)
+    commit_request : Proc(ITransactionResourceAsync*, UInt32, BOID*, HRESULT)
+    abort_request : Proc(ITransactionResourceAsync*, BOID*, LibC::BOOL, BOID*, HRESULT)
+    tm_down : Proc(ITransactionResourceAsync*, HRESULT)
   end
 
   ITransactionResourceAsync_GUID = "69e971f0-23ce-11cf-ad60-00aa00a74ccd"
@@ -483,11 +483,11 @@ lib LibWin32
   end
 
   struct ITransactionLastResourceAsyncVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    delegate_commit : UInt64
-    forget_request : UInt64
+    query_interface : Proc(ITransactionLastResourceAsync*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionLastResourceAsync*, UInt32)
+    release : Proc(ITransactionLastResourceAsync*, UInt32)
+    delegate_commit : Proc(ITransactionLastResourceAsync*, UInt32, HRESULT)
+    forget_request : Proc(ITransactionLastResourceAsync*, BOID*, HRESULT)
   end
 
   ITransactionLastResourceAsync_GUID = "c82bd532-5b30-11d3-8a91-00c04f79eb6d"
@@ -497,13 +497,13 @@ lib LibWin32
   end
 
   struct ITransactionResourceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    prepare_request : UInt64
-    commit_request : UInt64
-    abort_request : UInt64
-    tm_down : UInt64
+    query_interface : Proc(ITransactionResource*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionResource*, UInt32)
+    release : Proc(ITransactionResource*, UInt32)
+    prepare_request : Proc(ITransactionResource*, LibC::BOOL, UInt32, LibC::BOOL, LibC::BOOL, HRESULT)
+    commit_request : Proc(ITransactionResource*, UInt32, BOID*, HRESULT)
+    abort_request : Proc(ITransactionResource*, BOID*, LibC::BOOL, BOID*, HRESULT)
+    tm_down : Proc(ITransactionResource*, HRESULT)
   end
 
   ITransactionResource_GUID = "ee5ff7b3-4572-11d0-9452-00a0c905416e"
@@ -513,12 +513,12 @@ lib LibWin32
   end
 
   struct ITransactionEnlistmentAsyncVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    prepare_request_done : UInt64
-    commit_request_done : UInt64
-    abort_request_done : UInt64
+    query_interface : Proc(ITransactionEnlistmentAsync*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionEnlistmentAsync*, UInt32)
+    release : Proc(ITransactionEnlistmentAsync*, UInt32)
+    prepare_request_done : Proc(ITransactionEnlistmentAsync*, HRESULT, IMoniker, BOID*, HRESULT)
+    commit_request_done : Proc(ITransactionEnlistmentAsync*, HRESULT, HRESULT)
+    abort_request_done : Proc(ITransactionEnlistmentAsync*, HRESULT, HRESULT)
   end
 
   ITransactionEnlistmentAsync_GUID = "0fb15081-af41-11ce-bd2b-204c4f4f5020"
@@ -528,10 +528,10 @@ lib LibWin32
   end
 
   struct ITransactionLastEnlistmentAsyncVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    transaction_outcome : UInt64
+    query_interface : Proc(ITransactionLastEnlistmentAsync*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionLastEnlistmentAsync*, UInt32)
+    release : Proc(ITransactionLastEnlistmentAsync*, UInt32)
+    transaction_outcome : Proc(ITransactionLastEnlistmentAsync*, XACTSTAT, BOID*, HRESULT)
   end
 
   ITransactionLastEnlistmentAsync_GUID = "c82bd533-5b30-11d3-8a91-00c04f79eb6d"
@@ -541,11 +541,11 @@ lib LibWin32
   end
 
   struct ITransactionExportFactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_remote_class_id : UInt64
-    create : UInt64
+    query_interface : Proc(ITransactionExportFactory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionExportFactory*, UInt32)
+    release : Proc(ITransactionExportFactory*, UInt32)
+    get_remote_class_id : Proc(ITransactionExportFactory*, Guid*, HRESULT)
+    create : Proc(ITransactionExportFactory*, UInt32, UInt8*, ITransactionExport*, HRESULT)
   end
 
   ITransactionExportFactory_GUID = "e1cf9b53-8745-11ce-a9ba-00aa006c3706"
@@ -555,11 +555,11 @@ lib LibWin32
   end
 
   struct ITransactionImportWhereaboutsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_whereabouts_size : UInt64
-    get_whereabouts : UInt64
+    query_interface : Proc(ITransactionImportWhereabouts*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionImportWhereabouts*, UInt32)
+    release : Proc(ITransactionImportWhereabouts*, UInt32)
+    get_whereabouts_size : Proc(ITransactionImportWhereabouts*, UInt32*, HRESULT)
+    get_whereabouts : Proc(ITransactionImportWhereabouts*, UInt32, UInt8*, UInt32*, HRESULT)
   end
 
   ITransactionImportWhereabouts_GUID = "0141fda4-8fc0-11ce-bd18-204c4f4f5020"
@@ -569,11 +569,11 @@ lib LibWin32
   end
 
   struct ITransactionExportVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    export : UInt64
-    get_transaction_cookie : UInt64
+    query_interface : Proc(ITransactionExport*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionExport*, UInt32)
+    release : Proc(ITransactionExport*, UInt32)
+    export : Proc(ITransactionExport*, IUnknown, UInt32*, HRESULT)
+    get_transaction_cookie : Proc(ITransactionExport*, IUnknown, UInt32, UInt8*, UInt32*, HRESULT)
   end
 
   ITransactionExport_GUID = "0141fda5-8fc0-11ce-bd18-204c4f4f5020"
@@ -583,10 +583,10 @@ lib LibWin32
   end
 
   struct ITransactionImportVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    import : UInt64
+    query_interface : Proc(ITransactionImport*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionImport*, UInt32)
+    release : Proc(ITransactionImport*, UInt32)
+    import : Proc(ITransactionImport*, UInt32, UInt8*, Guid*, Void**, HRESULT)
   end
 
   ITransactionImport_GUID = "e1cf9b5a-8745-11ce-a9ba-00aa006c3706"
@@ -596,11 +596,11 @@ lib LibWin32
   end
 
   struct ITipTransactionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    push : UInt64
-    get_transaction_url : UInt64
+    query_interface : Proc(ITipTransaction*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITipTransaction*, UInt32)
+    release : Proc(ITipTransaction*, UInt32)
+    push : Proc(ITipTransaction*, UInt8*, PSTR*, HRESULT)
+    get_transaction_url : Proc(ITipTransaction*, PSTR*, HRESULT)
   end
 
   ITipTransaction_GUID = "17cf72d0-bac5-11d1-b1bf-00c04fc2f3ef"
@@ -610,12 +610,12 @@ lib LibWin32
   end
 
   struct ITipHelperVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    pull : UInt64
-    pull_async : UInt64
-    get_local_tm_url : UInt64
+    query_interface : Proc(ITipHelper*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITipHelper*, UInt32)
+    release : Proc(ITipHelper*, UInt32)
+    pull : Proc(ITipHelper*, UInt8*, ITransaction*, HRESULT)
+    pull_async : Proc(ITipHelper*, UInt8*, ITipPullSink, ITransaction*, HRESULT)
+    get_local_tm_url : Proc(ITipHelper*, UInt8**, HRESULT)
   end
 
   ITipHelper_GUID = "17cf72d1-bac5-11d1-b1bf-00c04fc2f3ef"
@@ -625,10 +625,10 @@ lib LibWin32
   end
 
   struct ITipPullSinkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    pull_complete : UInt64
+    query_interface : Proc(ITipPullSink*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITipPullSink*, UInt32)
+    release : Proc(ITipPullSink*, UInt32)
+    pull_complete : Proc(ITipPullSink*, HRESULT, HRESULT)
   end
 
   ITipPullSink_GUID = "17cf72d2-bac5-11d1-b1bf-00c04fc2f3ef"
@@ -638,22 +638,22 @@ lib LibWin32
   end
 
   struct IDtcNetworkAccessConfigVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_any_network_access : UInt64
-    set_any_network_access : UInt64
-    get_network_administration_access : UInt64
-    set_network_administration_access : UInt64
-    get_network_transaction_access : UInt64
-    set_network_transaction_access : UInt64
-    get_network_client_access : UInt64
-    set_network_client_access : UInt64
-    get_network_tip_access : UInt64
-    set_network_tip_access : UInt64
-    get_xa_access : UInt64
-    set_xa_access : UInt64
-    restart_dtc_service : UInt64
+    query_interface : Proc(IDtcNetworkAccessConfig*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcNetworkAccessConfig*, UInt32)
+    release : Proc(IDtcNetworkAccessConfig*, UInt32)
+    get_any_network_access : Proc(IDtcNetworkAccessConfig*, LibC::BOOL*, HRESULT)
+    set_any_network_access : Proc(IDtcNetworkAccessConfig*, LibC::BOOL, HRESULT)
+    get_network_administration_access : Proc(IDtcNetworkAccessConfig*, LibC::BOOL*, HRESULT)
+    set_network_administration_access : Proc(IDtcNetworkAccessConfig*, LibC::BOOL, HRESULT)
+    get_network_transaction_access : Proc(IDtcNetworkAccessConfig*, LibC::BOOL*, HRESULT)
+    set_network_transaction_access : Proc(IDtcNetworkAccessConfig*, LibC::BOOL, HRESULT)
+    get_network_client_access : Proc(IDtcNetworkAccessConfig*, LibC::BOOL*, HRESULT)
+    set_network_client_access : Proc(IDtcNetworkAccessConfig*, LibC::BOOL, HRESULT)
+    get_network_tip_access : Proc(IDtcNetworkAccessConfig*, LibC::BOOL*, HRESULT)
+    set_network_tip_access : Proc(IDtcNetworkAccessConfig*, LibC::BOOL, HRESULT)
+    get_xa_access : Proc(IDtcNetworkAccessConfig*, LibC::BOOL*, HRESULT)
+    set_xa_access : Proc(IDtcNetworkAccessConfig*, LibC::BOOL, HRESULT)
+    restart_dtc_service : Proc(IDtcNetworkAccessConfig*, HRESULT)
   end
 
   IDtcNetworkAccessConfig_GUID = "9797c15d-a428-4291-87b6-0995031a678d"
@@ -663,28 +663,28 @@ lib LibWin32
   end
 
   struct IDtcNetworkAccessConfig2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_any_network_access : UInt64
-    set_any_network_access : UInt64
-    get_network_administration_access : UInt64
-    set_network_administration_access : UInt64
-    get_network_transaction_access : UInt64
-    set_network_transaction_access : UInt64
-    get_network_client_access : UInt64
-    set_network_client_access : UInt64
-    get_network_tip_access : UInt64
-    set_network_tip_access : UInt64
-    get_xa_access : UInt64
-    set_xa_access : UInt64
-    restart_dtc_service : UInt64
-    get_network_inbound_access : UInt64
-    get_network_outbound_access : UInt64
-    set_network_inbound_access : UInt64
-    set_network_outbound_access : UInt64
-    get_authentication_level : UInt64
-    set_authentication_level : UInt64
+    query_interface : Proc(IDtcNetworkAccessConfig2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcNetworkAccessConfig2*, UInt32)
+    release : Proc(IDtcNetworkAccessConfig2*, UInt32)
+    get_any_network_access : Proc(IDtcNetworkAccessConfig2*, LibC::BOOL*, HRESULT)
+    set_any_network_access : Proc(IDtcNetworkAccessConfig2*, LibC::BOOL, HRESULT)
+    get_network_administration_access : Proc(IDtcNetworkAccessConfig2*, LibC::BOOL*, HRESULT)
+    set_network_administration_access : Proc(IDtcNetworkAccessConfig2*, LibC::BOOL, HRESULT)
+    get_network_transaction_access : Proc(IDtcNetworkAccessConfig2*, LibC::BOOL*, HRESULT)
+    set_network_transaction_access : Proc(IDtcNetworkAccessConfig2*, LibC::BOOL, HRESULT)
+    get_network_client_access : Proc(IDtcNetworkAccessConfig2*, LibC::BOOL*, HRESULT)
+    set_network_client_access : Proc(IDtcNetworkAccessConfig2*, LibC::BOOL, HRESULT)
+    get_network_tip_access : Proc(IDtcNetworkAccessConfig2*, LibC::BOOL*, HRESULT)
+    set_network_tip_access : Proc(IDtcNetworkAccessConfig2*, LibC::BOOL, HRESULT)
+    get_xa_access : Proc(IDtcNetworkAccessConfig2*, LibC::BOOL*, HRESULT)
+    set_xa_access : Proc(IDtcNetworkAccessConfig2*, LibC::BOOL, HRESULT)
+    restart_dtc_service : Proc(IDtcNetworkAccessConfig2*, HRESULT)
+    get_network_inbound_access : Proc(IDtcNetworkAccessConfig2*, LibC::BOOL*, HRESULT)
+    get_network_outbound_access : Proc(IDtcNetworkAccessConfig2*, LibC::BOOL*, HRESULT)
+    set_network_inbound_access : Proc(IDtcNetworkAccessConfig2*, LibC::BOOL, HRESULT)
+    set_network_outbound_access : Proc(IDtcNetworkAccessConfig2*, LibC::BOOL, HRESULT)
+    get_authentication_level : Proc(IDtcNetworkAccessConfig2*, AUTHENTICATION_LEVEL*, HRESULT)
+    set_authentication_level : Proc(IDtcNetworkAccessConfig2*, AUTHENTICATION_LEVEL, HRESULT)
   end
 
   IDtcNetworkAccessConfig2_GUID = "a7aa013b-eb7d-4f42-b41c-b2dec09ae034"
@@ -694,30 +694,30 @@ lib LibWin32
   end
 
   struct IDtcNetworkAccessConfig3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_any_network_access : UInt64
-    set_any_network_access : UInt64
-    get_network_administration_access : UInt64
-    set_network_administration_access : UInt64
-    get_network_transaction_access : UInt64
-    set_network_transaction_access : UInt64
-    get_network_client_access : UInt64
-    set_network_client_access : UInt64
-    get_network_tip_access : UInt64
-    set_network_tip_access : UInt64
-    get_xa_access : UInt64
-    set_xa_access : UInt64
-    restart_dtc_service : UInt64
-    get_network_inbound_access : UInt64
-    get_network_outbound_access : UInt64
-    set_network_inbound_access : UInt64
-    set_network_outbound_access : UInt64
-    get_authentication_level : UInt64
-    set_authentication_level : UInt64
-    get_lu_access : UInt64
-    set_lu_access : UInt64
+    query_interface : Proc(IDtcNetworkAccessConfig3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcNetworkAccessConfig3*, UInt32)
+    release : Proc(IDtcNetworkAccessConfig3*, UInt32)
+    get_any_network_access : Proc(IDtcNetworkAccessConfig3*, LibC::BOOL*, HRESULT)
+    set_any_network_access : Proc(IDtcNetworkAccessConfig3*, LibC::BOOL, HRESULT)
+    get_network_administration_access : Proc(IDtcNetworkAccessConfig3*, LibC::BOOL*, HRESULT)
+    set_network_administration_access : Proc(IDtcNetworkAccessConfig3*, LibC::BOOL, HRESULT)
+    get_network_transaction_access : Proc(IDtcNetworkAccessConfig3*, LibC::BOOL*, HRESULT)
+    set_network_transaction_access : Proc(IDtcNetworkAccessConfig3*, LibC::BOOL, HRESULT)
+    get_network_client_access : Proc(IDtcNetworkAccessConfig3*, LibC::BOOL*, HRESULT)
+    set_network_client_access : Proc(IDtcNetworkAccessConfig3*, LibC::BOOL, HRESULT)
+    get_network_tip_access : Proc(IDtcNetworkAccessConfig3*, LibC::BOOL*, HRESULT)
+    set_network_tip_access : Proc(IDtcNetworkAccessConfig3*, LibC::BOOL, HRESULT)
+    get_xa_access : Proc(IDtcNetworkAccessConfig3*, LibC::BOOL*, HRESULT)
+    set_xa_access : Proc(IDtcNetworkAccessConfig3*, LibC::BOOL, HRESULT)
+    restart_dtc_service : Proc(IDtcNetworkAccessConfig3*, HRESULT)
+    get_network_inbound_access : Proc(IDtcNetworkAccessConfig3*, LibC::BOOL*, HRESULT)
+    get_network_outbound_access : Proc(IDtcNetworkAccessConfig3*, LibC::BOOL*, HRESULT)
+    set_network_inbound_access : Proc(IDtcNetworkAccessConfig3*, LibC::BOOL, HRESULT)
+    set_network_outbound_access : Proc(IDtcNetworkAccessConfig3*, LibC::BOOL, HRESULT)
+    get_authentication_level : Proc(IDtcNetworkAccessConfig3*, AUTHENTICATION_LEVEL*, HRESULT)
+    set_authentication_level : Proc(IDtcNetworkAccessConfig3*, AUTHENTICATION_LEVEL, HRESULT)
+    get_lu_access : Proc(IDtcNetworkAccessConfig3*, LibC::BOOL*, HRESULT)
+    set_lu_access : Proc(IDtcNetworkAccessConfig3*, LibC::BOOL, HRESULT)
   end
 
   IDtcNetworkAccessConfig3_GUID = "76e4b4f3-2ca5-466b-89d5-fd218ee75b49"
@@ -727,13 +727,13 @@ lib LibWin32
   end
 
   struct IDtcToXaMapperVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    request_new_resource_manager : UInt64
-    translate_trid_to_xid : UInt64
-    enlist_resource_manager : UInt64
-    release_resource_manager : UInt64
+    query_interface : Proc(IDtcToXaMapper*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcToXaMapper*, UInt32)
+    release : Proc(IDtcToXaMapper*, UInt32)
+    request_new_resource_manager : Proc(IDtcToXaMapper*, PSTR, PSTR, UInt32*, HRESULT)
+    translate_trid_to_xid : Proc(IDtcToXaMapper*, UInt32*, UInt32, Xid_t*, HRESULT)
+    enlist_resource_manager : Proc(IDtcToXaMapper*, UInt32, UInt32*, HRESULT)
+    release_resource_manager : Proc(IDtcToXaMapper*, UInt32, HRESULT)
   end
 
   IDtcToXaMapper_GUID = "64ffabe0-7ce9-11d0-8ce6-00c04fdc877e"
@@ -743,10 +743,10 @@ lib LibWin32
   end
 
   struct IDtcToXaHelperFactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create : UInt64
+    query_interface : Proc(IDtcToXaHelperFactory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcToXaHelperFactory*, UInt32)
+    release : Proc(IDtcToXaHelperFactory*, UInt32)
+    create : Proc(IDtcToXaHelperFactory*, PSTR, PSTR, Guid*, IDtcToXaHelper*, HRESULT)
   end
 
   IDtcToXaHelperFactory_GUID = "a9861610-304a-11d1-9813-00a0c905416e"
@@ -756,11 +756,11 @@ lib LibWin32
   end
 
   struct IDtcToXaHelperVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    close : UInt64
-    translate_trid_to_xid : UInt64
+    query_interface : Proc(IDtcToXaHelper*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcToXaHelper*, UInt32)
+    release : Proc(IDtcToXaHelper*, UInt32)
+    close : Proc(IDtcToXaHelper*, LibC::BOOL, HRESULT)
+    translate_trid_to_xid : Proc(IDtcToXaHelper*, ITransaction, Guid*, Xid_t*, HRESULT)
   end
 
   IDtcToXaHelper_GUID = "a9861611-304a-11d1-9813-00a0c905416e"
@@ -770,13 +770,13 @@ lib LibWin32
   end
 
   struct IDtcToXaHelperSinglePipeVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    xarm_create : UInt64
-    convert_trid_to_xid : UInt64
-    enlist_with_rm : UInt64
-    release_rm_cookie : UInt64
+    query_interface : Proc(IDtcToXaHelperSinglePipe*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcToXaHelperSinglePipe*, UInt32)
+    release : Proc(IDtcToXaHelperSinglePipe*, UInt32)
+    xarm_create : Proc(IDtcToXaHelperSinglePipe*, PSTR, PSTR, UInt32*, HRESULT)
+    convert_trid_to_xid : Proc(IDtcToXaHelperSinglePipe*, UInt32*, UInt32, Xid_t*, HRESULT)
+    enlist_with_rm : Proc(IDtcToXaHelperSinglePipe*, UInt32, ITransaction, ITransactionResourceAsync, ITransactionEnlistmentAsync*, HRESULT)
+    release_rm_cookie : Proc(IDtcToXaHelperSinglePipe*, UInt32, LibC::BOOL, Void)
   end
 
   IDtcToXaHelperSinglePipe_GUID = "47ed4971-53b3-11d1-bbb9-00c04fd658f6"
@@ -786,10 +786,10 @@ lib LibWin32
   end
 
   struct IXATransLookupVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    lookup : UInt64
+    query_interface : Proc(IXATransLookup*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXATransLookup*, UInt32)
+    release : Proc(IXATransLookup*, UInt32)
+    lookup : Proc(IXATransLookup*, ITransaction*, HRESULT)
   end
 
   IXATransLookup_GUID = "f3b1f131-eeda-11ce-aed4-00aa0051e2c4"
@@ -799,10 +799,10 @@ lib LibWin32
   end
 
   struct IXATransLookup2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    lookup : UInt64
+    query_interface : Proc(IXATransLookup2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXATransLookup2*, UInt32)
+    release : Proc(IXATransLookup2*, UInt32)
+    lookup : Proc(IXATransLookup2*, Xid_t*, ITransaction*, HRESULT)
   end
 
   IXATransLookup2_GUID = "bf193c85-0d1a-4290-b88f-d2cb8873d1e7"
@@ -812,10 +812,10 @@ lib LibWin32
   end
 
   struct IResourceManagerSinkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    tm_down : UInt64
+    query_interface : Proc(IResourceManagerSink*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IResourceManagerSink*, UInt32)
+    release : Proc(IResourceManagerSink*, UInt32)
+    tm_down : Proc(IResourceManagerSink*, HRESULT)
   end
 
   IResourceManagerSink_GUID = "0d563181-defb-11ce-aed1-00aa0051e2c4"
@@ -825,13 +825,13 @@ lib LibWin32
   end
 
   struct IResourceManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    enlist : UInt64
-    reenlist : UInt64
-    reenlistment_complete : UInt64
-    get_distributed_transaction_manager : UInt64
+    query_interface : Proc(IResourceManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IResourceManager*, UInt32)
+    release : Proc(IResourceManager*, UInt32)
+    enlist : Proc(IResourceManager*, ITransaction, ITransactionResourceAsync, BOID*, Int32*, ITransactionEnlistmentAsync*, HRESULT)
+    reenlist : Proc(IResourceManager*, UInt8*, UInt32, UInt32, XACTSTAT*, HRESULT)
+    reenlistment_complete : Proc(IResourceManager*, HRESULT)
+    get_distributed_transaction_manager : Proc(IResourceManager*, Guid*, Void**, HRESULT)
   end
 
   IResourceManager_GUID = "13741d21-87eb-11ce-8081-0080c758527e"
@@ -841,11 +841,11 @@ lib LibWin32
   end
 
   struct ILastResourceManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    transaction_committed : UInt64
-    recovery_done : UInt64
+    query_interface : Proc(ILastResourceManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ILastResourceManager*, UInt32)
+    release : Proc(ILastResourceManager*, UInt32)
+    transaction_committed : Proc(ILastResourceManager*, UInt8*, UInt32, HRESULT)
+    recovery_done : Proc(ILastResourceManager*, HRESULT)
   end
 
   ILastResourceManager_GUID = "4d964ad4-5b33-11d3-8a91-00c04f79eb6d"
@@ -855,15 +855,15 @@ lib LibWin32
   end
 
   struct IResourceManager2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    enlist : UInt64
-    reenlist : UInt64
-    reenlistment_complete : UInt64
-    get_distributed_transaction_manager : UInt64
-    enlist2 : UInt64
-    reenlist2 : UInt64
+    query_interface : Proc(IResourceManager2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IResourceManager2*, UInt32)
+    release : Proc(IResourceManager2*, UInt32)
+    enlist : Proc(IResourceManager2*, ITransaction, ITransactionResourceAsync, BOID*, Int32*, ITransactionEnlistmentAsync*, HRESULT)
+    reenlist : Proc(IResourceManager2*, UInt8*, UInt32, UInt32, XACTSTAT*, HRESULT)
+    reenlistment_complete : Proc(IResourceManager2*, HRESULT)
+    get_distributed_transaction_manager : Proc(IResourceManager2*, Guid*, Void**, HRESULT)
+    enlist2 : Proc(IResourceManager2*, ITransaction, ITransactionResourceAsync, BOID*, Int32*, Xid_t*, ITransactionEnlistmentAsync*, HRESULT)
+    reenlist2 : Proc(IResourceManager2*, Xid_t*, UInt32, XACTSTAT*, HRESULT)
   end
 
   IResourceManager2_GUID = "d136c69a-f749-11d1-8f47-00c04f8ee57d"
@@ -873,16 +873,16 @@ lib LibWin32
   end
 
   struct IResourceManagerRejoinableVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    enlist : UInt64
-    reenlist : UInt64
-    reenlistment_complete : UInt64
-    get_distributed_transaction_manager : UInt64
-    enlist2 : UInt64
-    reenlist2 : UInt64
-    rejoin : UInt64
+    query_interface : Proc(IResourceManagerRejoinable*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IResourceManagerRejoinable*, UInt32)
+    release : Proc(IResourceManagerRejoinable*, UInt32)
+    enlist : Proc(IResourceManagerRejoinable*, ITransaction, ITransactionResourceAsync, BOID*, Int32*, ITransactionEnlistmentAsync*, HRESULT)
+    reenlist : Proc(IResourceManagerRejoinable*, UInt8*, UInt32, UInt32, XACTSTAT*, HRESULT)
+    reenlistment_complete : Proc(IResourceManagerRejoinable*, HRESULT)
+    get_distributed_transaction_manager : Proc(IResourceManagerRejoinable*, Guid*, Void**, HRESULT)
+    enlist2 : Proc(IResourceManagerRejoinable*, ITransaction, ITransactionResourceAsync, BOID*, Int32*, Xid_t*, ITransactionEnlistmentAsync*, HRESULT)
+    reenlist2 : Proc(IResourceManagerRejoinable*, Xid_t*, UInt32, XACTSTAT*, HRESULT)
+    rejoin : Proc(IResourceManagerRejoinable*, UInt8*, UInt32, UInt32, XACTSTAT*, HRESULT)
   end
 
   IResourceManagerRejoinable_GUID = "6f6de620-b5df-4f3e-9cfa-c8aebd05172b"
@@ -892,11 +892,11 @@ lib LibWin32
   end
 
   struct IXAConfigVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    initialize : UInt64
-    terminate : UInt64
+    query_interface : Proc(IXAConfig*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXAConfig*, UInt32)
+    release : Proc(IXAConfig*, UInt32)
+    initialize : Proc(IXAConfig*, Guid, HRESULT)
+    terminate : Proc(IXAConfig*, HRESULT)
   end
 
   IXAConfig_GUID = "c8a6e3a1-9a8c-11cf-a308-00a0c905416e"
@@ -906,11 +906,11 @@ lib LibWin32
   end
 
   struct IRMHelperVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    rm_count : UInt64
-    rm_info : UInt64
+    query_interface : Proc(IRMHelper*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IRMHelper*, UInt32)
+    release : Proc(IRMHelper*, UInt32)
+    rm_count : Proc(IRMHelper*, UInt32, HRESULT)
+    rm_info : Proc(IRMHelper*, Xa_switch_t*, LibC::BOOL, PSTR, PSTR, Guid, HRESULT)
   end
 
   IRMHelper_GUID = "e793f6d1-f53d-11cf-a60d-00a0c905416e"
@@ -920,10 +920,10 @@ lib LibWin32
   end
 
   struct IXAObtainRMInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    obtain_rm_info : UInt64
+    query_interface : Proc(IXAObtainRMInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXAObtainRMInfo*, UInt32)
+    release : Proc(IXAObtainRMInfo*, UInt32)
+    obtain_rm_info : Proc(IXAObtainRMInfo*, IRMHelper, HRESULT)
   end
 
   IXAObtainRMInfo_GUID = "e793f6d2-f53d-11cf-a60d-00a0c905416e"
@@ -933,10 +933,10 @@ lib LibWin32
   end
 
   struct IResourceManagerFactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create : UInt64
+    query_interface : Proc(IResourceManagerFactory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IResourceManagerFactory*, UInt32)
+    release : Proc(IResourceManagerFactory*, UInt32)
+    create : Proc(IResourceManagerFactory*, Guid*, PSTR, IResourceManagerSink, IResourceManager*, HRESULT)
   end
 
   IResourceManagerFactory_GUID = "13741d20-87eb-11ce-8081-0080c758527e"
@@ -946,11 +946,11 @@ lib LibWin32
   end
 
   struct IResourceManagerFactory2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create : UInt64
-    create_ex : UInt64
+    query_interface : Proc(IResourceManagerFactory2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IResourceManagerFactory2*, UInt32)
+    release : Proc(IResourceManagerFactory2*, UInt32)
+    create : Proc(IResourceManagerFactory2*, Guid*, PSTR, IResourceManagerSink, IResourceManager*, HRESULT)
+    create_ex : Proc(IResourceManagerFactory2*, Guid*, PSTR, IResourceManagerSink, Guid*, Void**, HRESULT)
   end
 
   IResourceManagerFactory2_GUID = "6b369c21-fbd2-11d1-8f47-00c04f8ee57d"
@@ -960,11 +960,11 @@ lib LibWin32
   end
 
   struct IPrepareInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_prepare_info_size : UInt64
-    get_prepare_info : UInt64
+    query_interface : Proc(IPrepareInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrepareInfo*, UInt32)
+    release : Proc(IPrepareInfo*, UInt32)
+    get_prepare_info_size : Proc(IPrepareInfo*, UInt32*, HRESULT)
+    get_prepare_info : Proc(IPrepareInfo*, UInt8*, HRESULT)
   end
 
   IPrepareInfo_GUID = "80c7bfd0-87ee-11ce-8081-0080c758527e"
@@ -974,11 +974,11 @@ lib LibWin32
   end
 
   struct IPrepareInfo2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_prepare_info_size : UInt64
-    get_prepare_info : UInt64
+    query_interface : Proc(IPrepareInfo2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPrepareInfo2*, UInt32)
+    release : Proc(IPrepareInfo2*, UInt32)
+    get_prepare_info_size : Proc(IPrepareInfo2*, UInt32*, HRESULT)
+    get_prepare_info : Proc(IPrepareInfo2*, UInt32, UInt8*, HRESULT)
   end
 
   IPrepareInfo2_GUID = "5fab2547-9779-11d1-b886-00c04fb9618a"
@@ -988,10 +988,10 @@ lib LibWin32
   end
 
   struct IGetDispenserVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_dispenser : UInt64
+    query_interface : Proc(IGetDispenser*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IGetDispenser*, UInt32)
+    release : Proc(IGetDispenser*, UInt32)
+    get_dispenser : Proc(IGetDispenser*, Guid*, Void**, HRESULT)
   end
 
   IGetDispenser_GUID = "c23cc370-87ef-11ce-8081-0080c758527e"
@@ -1001,10 +1001,10 @@ lib LibWin32
   end
 
   struct ITransactionVoterBallotAsync2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    vote_request_done : UInt64
+    query_interface : Proc(ITransactionVoterBallotAsync2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionVoterBallotAsync2*, UInt32)
+    release : Proc(ITransactionVoterBallotAsync2*, UInt32)
+    vote_request_done : Proc(ITransactionVoterBallotAsync2*, HRESULT, BOID*, HRESULT)
   end
 
   ITransactionVoterBallotAsync2_GUID = "5433376c-414d-11d3-b206-00c04fc2f3ef"
@@ -1014,14 +1014,14 @@ lib LibWin32
   end
 
   struct ITransactionVoterNotifyAsync2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    committed : UInt64
-    aborted : UInt64
-    heuristic_decision : UInt64
-    indoubt : UInt64
-    vote_request : UInt64
+    query_interface : Proc(ITransactionVoterNotifyAsync2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionVoterNotifyAsync2*, UInt32)
+    release : Proc(ITransactionVoterNotifyAsync2*, UInt32)
+    committed : Proc(ITransactionVoterNotifyAsync2*, LibC::BOOL, BOID*, HRESULT, HRESULT)
+    aborted : Proc(ITransactionVoterNotifyAsync2*, BOID*, LibC::BOOL, BOID*, HRESULT, HRESULT)
+    heuristic_decision : Proc(ITransactionVoterNotifyAsync2*, UInt32, BOID*, HRESULT, HRESULT)
+    indoubt : Proc(ITransactionVoterNotifyAsync2*, HRESULT)
+    vote_request : Proc(ITransactionVoterNotifyAsync2*, HRESULT)
   end
 
   ITransactionVoterNotifyAsync2_GUID = "5433376b-414d-11d3-b206-00c04fc2f3ef"
@@ -1031,10 +1031,10 @@ lib LibWin32
   end
 
   struct ITransactionVoterFactory2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create : UInt64
+    query_interface : Proc(ITransactionVoterFactory2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionVoterFactory2*, UInt32)
+    release : Proc(ITransactionVoterFactory2*, UInt32)
+    create : Proc(ITransactionVoterFactory2*, ITransaction, ITransactionVoterNotifyAsync2, ITransactionVoterBallotAsync2*, HRESULT)
   end
 
   ITransactionVoterFactory2_GUID = "5433376a-414d-11d3-b206-00c04fc2f3ef"
@@ -1044,14 +1044,14 @@ lib LibWin32
   end
 
   struct ITransactionPhase0EnlistmentAsyncVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    enable : UInt64
-    wait_for_enlistment : UInt64
-    phase0_done : UInt64
-    unenlist : UInt64
-    get_transaction : UInt64
+    query_interface : Proc(ITransactionPhase0EnlistmentAsync*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionPhase0EnlistmentAsync*, UInt32)
+    release : Proc(ITransactionPhase0EnlistmentAsync*, UInt32)
+    enable : Proc(ITransactionPhase0EnlistmentAsync*, HRESULT)
+    wait_for_enlistment : Proc(ITransactionPhase0EnlistmentAsync*, HRESULT)
+    phase0_done : Proc(ITransactionPhase0EnlistmentAsync*, HRESULT)
+    unenlist : Proc(ITransactionPhase0EnlistmentAsync*, HRESULT)
+    get_transaction : Proc(ITransactionPhase0EnlistmentAsync*, ITransaction*, HRESULT)
   end
 
   ITransactionPhase0EnlistmentAsync_GUID = "82dc88e1-a954-11d1-8f88-00600895e7d5"
@@ -1061,11 +1061,11 @@ lib LibWin32
   end
 
   struct ITransactionPhase0NotifyAsyncVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    phase0_request : UInt64
-    enlist_completed : UInt64
+    query_interface : Proc(ITransactionPhase0NotifyAsync*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionPhase0NotifyAsync*, UInt32)
+    release : Proc(ITransactionPhase0NotifyAsync*, UInt32)
+    phase0_request : Proc(ITransactionPhase0NotifyAsync*, LibC::BOOL, HRESULT)
+    enlist_completed : Proc(ITransactionPhase0NotifyAsync*, HRESULT, HRESULT)
   end
 
   ITransactionPhase0NotifyAsync_GUID = "ef081809-0c76-11d2-87a6-00c04f990f34"
@@ -1075,10 +1075,10 @@ lib LibWin32
   end
 
   struct ITransactionPhase0FactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create : UInt64
+    query_interface : Proc(ITransactionPhase0Factory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionPhase0Factory*, UInt32)
+    release : Proc(ITransactionPhase0Factory*, UInt32)
+    create : Proc(ITransactionPhase0Factory*, ITransactionPhase0NotifyAsync, ITransactionPhase0EnlistmentAsync*, HRESULT)
   end
 
   ITransactionPhase0Factory_GUID = "82dc88e0-a954-11d1-8f88-00600895e7d5"
@@ -1088,14 +1088,14 @@ lib LibWin32
   end
 
   struct ITransactionTransmitterVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set : UInt64
-    get_propagation_token_size : UInt64
-    marshal_propagation_token : UInt64
-    unmarshal_return_token : UInt64
-    reset : UInt64
+    query_interface : Proc(ITransactionTransmitter*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionTransmitter*, UInt32)
+    release : Proc(ITransactionTransmitter*, UInt32)
+    set : Proc(ITransactionTransmitter*, ITransaction, HRESULT)
+    get_propagation_token_size : Proc(ITransactionTransmitter*, UInt32*, HRESULT)
+    marshal_propagation_token : Proc(ITransactionTransmitter*, UInt32, UInt8*, UInt32*, HRESULT)
+    unmarshal_return_token : Proc(ITransactionTransmitter*, UInt32, UInt8*, HRESULT)
+    reset : Proc(ITransactionTransmitter*, HRESULT)
   end
 
   ITransactionTransmitter_GUID = "59313e01-b36c-11cf-a539-00aa006887c3"
@@ -1105,10 +1105,10 @@ lib LibWin32
   end
 
   struct ITransactionTransmitterFactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create : UInt64
+    query_interface : Proc(ITransactionTransmitterFactory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionTransmitterFactory*, UInt32)
+    release : Proc(ITransactionTransmitterFactory*, UInt32)
+    create : Proc(ITransactionTransmitterFactory*, ITransactionTransmitter*, HRESULT)
   end
 
   ITransactionTransmitterFactory_GUID = "59313e00-b36c-11cf-a539-00aa006887c3"
@@ -1118,13 +1118,13 @@ lib LibWin32
   end
 
   struct ITransactionReceiverVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    unmarshal_propagation_token : UInt64
-    get_return_token_size : UInt64
-    marshal_return_token : UInt64
-    reset : UInt64
+    query_interface : Proc(ITransactionReceiver*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionReceiver*, UInt32)
+    release : Proc(ITransactionReceiver*, UInt32)
+    unmarshal_propagation_token : Proc(ITransactionReceiver*, UInt32, UInt8*, ITransaction*, HRESULT)
+    get_return_token_size : Proc(ITransactionReceiver*, UInt32*, HRESULT)
+    marshal_return_token : Proc(ITransactionReceiver*, UInt32, UInt8*, UInt32*, HRESULT)
+    reset : Proc(ITransactionReceiver*, HRESULT)
   end
 
   ITransactionReceiver_GUID = "59313e03-b36c-11cf-a539-00aa006887c3"
@@ -1134,10 +1134,10 @@ lib LibWin32
   end
 
   struct ITransactionReceiverFactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create : UInt64
+    query_interface : Proc(ITransactionReceiverFactory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ITransactionReceiverFactory*, UInt32)
+    release : Proc(ITransactionReceiverFactory*, UInt32)
+    create : Proc(ITransactionReceiverFactory*, ITransactionReceiver*, HRESULT)
   end
 
   ITransactionReceiverFactory_GUID = "59313e02-b36c-11cf-a539-00aa006887c3"
@@ -1147,11 +1147,11 @@ lib LibWin32
   end
 
   struct IDtcLuConfigureVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add : UInt64
-    delete : UInt64
+    query_interface : Proc(IDtcLuConfigure*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcLuConfigure*, UInt32)
+    release : Proc(IDtcLuConfigure*, UInt32)
+    add : Proc(IDtcLuConfigure*, UInt8*, UInt32, HRESULT)
+    delete : Proc(IDtcLuConfigure*, UInt8*, UInt32, HRESULT)
   end
 
   IDtcLuConfigure_GUID = "4131e760-1aea-11d0-944b-00a0c905416e"
@@ -1161,9 +1161,9 @@ lib LibWin32
   end
 
   struct IDtcLuRecoveryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
+    query_interface : Proc(IDtcLuRecovery*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcLuRecovery*, UInt32)
+    release : Proc(IDtcLuRecovery*, UInt32)
   end
 
   IDtcLuRecovery_GUID = "ac2b8ad2-d6f0-11d0-b386-00a0c9083365"
@@ -1173,10 +1173,10 @@ lib LibWin32
   end
 
   struct IDtcLuRecoveryFactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create : UInt64
+    query_interface : Proc(IDtcLuRecoveryFactory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcLuRecoveryFactory*, UInt32)
+    release : Proc(IDtcLuRecoveryFactory*, UInt32)
+    create : Proc(IDtcLuRecoveryFactory*, UInt8*, UInt32, IDtcLuRecovery*, HRESULT)
   end
 
   IDtcLuRecoveryFactory_GUID = "4131e762-1aea-11d0-944b-00a0c905416e"
@@ -1186,22 +1186,22 @@ lib LibWin32
   end
 
   struct IDtcLuRecoveryInitiatedByDtcTransWorkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_log_name_sizes : UInt64
-    get_our_xln : UInt64
-    handle_confirmation_from_our_xln : UInt64
-    handle_their_xln_response : UInt64
-    handle_error_from_our_xln : UInt64
-    check_for_compare_states : UInt64
-    get_our_trans_id_size : UInt64
-    get_our_compare_states : UInt64
-    handle_their_compare_states_response : UInt64
-    handle_error_from_our_compare_states : UInt64
-    conversation_lost : UInt64
-    get_recovery_seq_num : UInt64
-    obsolete_recovery_seq_num : UInt64
+    query_interface : Proc(IDtcLuRecoveryInitiatedByDtcTransWork*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcLuRecoveryInitiatedByDtcTransWork*, UInt32)
+    release : Proc(IDtcLuRecoveryInitiatedByDtcTransWork*, UInt32)
+    get_log_name_sizes : Proc(IDtcLuRecoveryInitiatedByDtcTransWork*, UInt32*, UInt32*, HRESULT)
+    get_our_xln : Proc(IDtcLuRecoveryInitiatedByDtcTransWork*, DtcLu_Xln*, UInt8*, UInt8*, UInt32*, HRESULT)
+    handle_confirmation_from_our_xln : Proc(IDtcLuRecoveryInitiatedByDtcTransWork*, DtcLu_Xln_Confirmation, HRESULT)
+    handle_their_xln_response : Proc(IDtcLuRecoveryInitiatedByDtcTransWork*, DtcLu_Xln, UInt8*, UInt32, UInt32, DtcLu_Xln_Confirmation*, HRESULT)
+    handle_error_from_our_xln : Proc(IDtcLuRecoveryInitiatedByDtcTransWork*, DtcLu_Xln_Error, HRESULT)
+    check_for_compare_states : Proc(IDtcLuRecoveryInitiatedByDtcTransWork*, LibC::BOOL*, HRESULT)
+    get_our_trans_id_size : Proc(IDtcLuRecoveryInitiatedByDtcTransWork*, UInt32*, HRESULT)
+    get_our_compare_states : Proc(IDtcLuRecoveryInitiatedByDtcTransWork*, UInt8*, DtcLu_CompareState*, HRESULT)
+    handle_their_compare_states_response : Proc(IDtcLuRecoveryInitiatedByDtcTransWork*, DtcLu_CompareState, DtcLu_CompareStates_Confirmation*, HRESULT)
+    handle_error_from_our_compare_states : Proc(IDtcLuRecoveryInitiatedByDtcTransWork*, DtcLu_CompareStates_Error, HRESULT)
+    conversation_lost : Proc(IDtcLuRecoveryInitiatedByDtcTransWork*, HRESULT)
+    get_recovery_seq_num : Proc(IDtcLuRecoveryInitiatedByDtcTransWork*, Int32*, HRESULT)
+    obsolete_recovery_seq_num : Proc(IDtcLuRecoveryInitiatedByDtcTransWork*, Int32, HRESULT)
   end
 
   IDtcLuRecoveryInitiatedByDtcTransWork_GUID = "4131e765-1aea-11d0-944b-00a0c905416e"
@@ -1211,10 +1211,10 @@ lib LibWin32
   end
 
   struct IDtcLuRecoveryInitiatedByDtcStatusWorkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    handle_check_lu_status : UInt64
+    query_interface : Proc(IDtcLuRecoveryInitiatedByDtcStatusWork*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcLuRecoveryInitiatedByDtcStatusWork*, UInt32)
+    release : Proc(IDtcLuRecoveryInitiatedByDtcStatusWork*, UInt32)
+    handle_check_lu_status : Proc(IDtcLuRecoveryInitiatedByDtcStatusWork*, Int32, HRESULT)
   end
 
   IDtcLuRecoveryInitiatedByDtcStatusWork_GUID = "4131e766-1aea-11d0-944b-00a0c905416e"
@@ -1224,10 +1224,10 @@ lib LibWin32
   end
 
   struct IDtcLuRecoveryInitiatedByDtcVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_work : UInt64
+    query_interface : Proc(IDtcLuRecoveryInitiatedByDtc*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcLuRecoveryInitiatedByDtc*, UInt32)
+    release : Proc(IDtcLuRecoveryInitiatedByDtc*, UInt32)
+    get_work : Proc(IDtcLuRecoveryInitiatedByDtc*, DtcLu_LocalRecovery_Work*, Void**, HRESULT)
   end
 
   IDtcLuRecoveryInitiatedByDtc_GUID = "4131e764-1aea-11d0-944b-00a0c905416e"
@@ -1237,17 +1237,17 @@ lib LibWin32
   end
 
   struct IDtcLuRecoveryInitiatedByLuWorkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    handle_their_xln : UInt64
-    get_our_log_name_size : UInt64
-    get_our_xln : UInt64
-    handle_confirmation_of_our_xln : UInt64
-    handle_their_compare_states : UInt64
-    handle_confirmation_of_our_compare_states : UInt64
-    handle_error_from_our_compare_states : UInt64
-    conversation_lost : UInt64
+    query_interface : Proc(IDtcLuRecoveryInitiatedByLuWork*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcLuRecoveryInitiatedByLuWork*, UInt32)
+    release : Proc(IDtcLuRecoveryInitiatedByLuWork*, UInt32)
+    handle_their_xln : Proc(IDtcLuRecoveryInitiatedByLuWork*, Int32, DtcLu_Xln, UInt8*, UInt32, UInt8*, UInt32, UInt32, DtcLu_Xln_Response*, HRESULT)
+    get_our_log_name_size : Proc(IDtcLuRecoveryInitiatedByLuWork*, UInt32*, HRESULT)
+    get_our_xln : Proc(IDtcLuRecoveryInitiatedByLuWork*, DtcLu_Xln*, UInt8*, UInt32*, HRESULT)
+    handle_confirmation_of_our_xln : Proc(IDtcLuRecoveryInitiatedByLuWork*, DtcLu_Xln_Confirmation, HRESULT)
+    handle_their_compare_states : Proc(IDtcLuRecoveryInitiatedByLuWork*, UInt8*, UInt32, DtcLu_CompareState, DtcLu_CompareStates_Response*, DtcLu_CompareState*, HRESULT)
+    handle_confirmation_of_our_compare_states : Proc(IDtcLuRecoveryInitiatedByLuWork*, DtcLu_CompareStates_Confirmation, HRESULT)
+    handle_error_from_our_compare_states : Proc(IDtcLuRecoveryInitiatedByLuWork*, DtcLu_CompareStates_Error, HRESULT)
+    conversation_lost : Proc(IDtcLuRecoveryInitiatedByLuWork*, HRESULT)
   end
 
   IDtcLuRecoveryInitiatedByLuWork_GUID = "ac2b8ad1-d6f0-11d0-b386-00a0c9083365"
@@ -1257,10 +1257,10 @@ lib LibWin32
   end
 
   struct IDtcLuRecoveryInitiatedByLuVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_object_to_handle_work_from_lu : UInt64
+    query_interface : Proc(IDtcLuRecoveryInitiatedByLu*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcLuRecoveryInitiatedByLu*, UInt32)
+    release : Proc(IDtcLuRecoveryInitiatedByLu*, UInt32)
+    get_object_to_handle_work_from_lu : Proc(IDtcLuRecoveryInitiatedByLu*, IDtcLuRecoveryInitiatedByLuWork*, HRESULT)
   end
 
   IDtcLuRecoveryInitiatedByLu_GUID = "4131e768-1aea-11d0-944b-00a0c905416e"
@@ -1270,15 +1270,15 @@ lib LibWin32
   end
 
   struct IDtcLuRmEnlistmentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    unplug : UInt64
-    backed_out : UInt64
-    back_out : UInt64
-    committed : UInt64
-    forget : UInt64
-    request_commit : UInt64
+    query_interface : Proc(IDtcLuRmEnlistment*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcLuRmEnlistment*, UInt32)
+    release : Proc(IDtcLuRmEnlistment*, UInt32)
+    unplug : Proc(IDtcLuRmEnlistment*, LibC::BOOL, HRESULT)
+    backed_out : Proc(IDtcLuRmEnlistment*, HRESULT)
+    back_out : Proc(IDtcLuRmEnlistment*, HRESULT)
+    committed : Proc(IDtcLuRmEnlistment*, HRESULT)
+    forget : Proc(IDtcLuRmEnlistment*, HRESULT)
+    request_commit : Proc(IDtcLuRmEnlistment*, HRESULT)
   end
 
   IDtcLuRmEnlistment_GUID = "4131e769-1aea-11d0-944b-00a0c905416e"
@@ -1288,18 +1288,18 @@ lib LibWin32
   end
 
   struct IDtcLuRmEnlistmentSinkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    ack_unplug : UInt64
-    tm_down : UInt64
-    session_lost : UInt64
-    backed_out : UInt64
-    back_out : UInt64
-    committed : UInt64
-    forget : UInt64
-    prepare : UInt64
-    request_commit : UInt64
+    query_interface : Proc(IDtcLuRmEnlistmentSink*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcLuRmEnlistmentSink*, UInt32)
+    release : Proc(IDtcLuRmEnlistmentSink*, UInt32)
+    ack_unplug : Proc(IDtcLuRmEnlistmentSink*, HRESULT)
+    tm_down : Proc(IDtcLuRmEnlistmentSink*, HRESULT)
+    session_lost : Proc(IDtcLuRmEnlistmentSink*, HRESULT)
+    backed_out : Proc(IDtcLuRmEnlistmentSink*, HRESULT)
+    back_out : Proc(IDtcLuRmEnlistmentSink*, HRESULT)
+    committed : Proc(IDtcLuRmEnlistmentSink*, HRESULT)
+    forget : Proc(IDtcLuRmEnlistmentSink*, HRESULT)
+    prepare : Proc(IDtcLuRmEnlistmentSink*, HRESULT)
+    request_commit : Proc(IDtcLuRmEnlistmentSink*, HRESULT)
   end
 
   IDtcLuRmEnlistmentSink_GUID = "4131e770-1aea-11d0-944b-00a0c905416e"
@@ -1309,10 +1309,10 @@ lib LibWin32
   end
 
   struct IDtcLuRmEnlistmentFactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create : UInt64
+    query_interface : Proc(IDtcLuRmEnlistmentFactory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcLuRmEnlistmentFactory*, UInt32)
+    release : Proc(IDtcLuRmEnlistmentFactory*, UInt32)
+    create : Proc(IDtcLuRmEnlistmentFactory*, UInt8*, UInt32, ITransaction, UInt8*, UInt32, IDtcLuRmEnlistmentSink, IDtcLuRmEnlistment*, HRESULT)
   end
 
   IDtcLuRmEnlistmentFactory_GUID = "4131e771-1aea-11d0-944b-00a0c905416e"
@@ -1322,16 +1322,16 @@ lib LibWin32
   end
 
   struct IDtcLuSubordinateDtcVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    unplug : UInt64
-    backed_out : UInt64
-    back_out : UInt64
-    committed : UInt64
-    forget : UInt64
-    prepare : UInt64
-    request_commit : UInt64
+    query_interface : Proc(IDtcLuSubordinateDtc*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcLuSubordinateDtc*, UInt32)
+    release : Proc(IDtcLuSubordinateDtc*, UInt32)
+    unplug : Proc(IDtcLuSubordinateDtc*, LibC::BOOL, HRESULT)
+    backed_out : Proc(IDtcLuSubordinateDtc*, HRESULT)
+    back_out : Proc(IDtcLuSubordinateDtc*, HRESULT)
+    committed : Proc(IDtcLuSubordinateDtc*, HRESULT)
+    forget : Proc(IDtcLuSubordinateDtc*, HRESULT)
+    prepare : Proc(IDtcLuSubordinateDtc*, HRESULT)
+    request_commit : Proc(IDtcLuSubordinateDtc*, HRESULT)
   end
 
   IDtcLuSubordinateDtc_GUID = "4131e773-1aea-11d0-944b-00a0c905416e"
@@ -1341,17 +1341,17 @@ lib LibWin32
   end
 
   struct IDtcLuSubordinateDtcSinkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    ack_unplug : UInt64
-    tm_down : UInt64
-    session_lost : UInt64
-    backed_out : UInt64
-    back_out : UInt64
-    committed : UInt64
-    forget : UInt64
-    request_commit : UInt64
+    query_interface : Proc(IDtcLuSubordinateDtcSink*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcLuSubordinateDtcSink*, UInt32)
+    release : Proc(IDtcLuSubordinateDtcSink*, UInt32)
+    ack_unplug : Proc(IDtcLuSubordinateDtcSink*, HRESULT)
+    tm_down : Proc(IDtcLuSubordinateDtcSink*, HRESULT)
+    session_lost : Proc(IDtcLuSubordinateDtcSink*, HRESULT)
+    backed_out : Proc(IDtcLuSubordinateDtcSink*, HRESULT)
+    back_out : Proc(IDtcLuSubordinateDtcSink*, HRESULT)
+    committed : Proc(IDtcLuSubordinateDtcSink*, HRESULT)
+    forget : Proc(IDtcLuSubordinateDtcSink*, HRESULT)
+    request_commit : Proc(IDtcLuSubordinateDtcSink*, HRESULT)
   end
 
   IDtcLuSubordinateDtcSink_GUID = "4131e774-1aea-11d0-944b-00a0c905416e"
@@ -1361,10 +1361,10 @@ lib LibWin32
   end
 
   struct IDtcLuSubordinateDtcFactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create : UInt64
+    query_interface : Proc(IDtcLuSubordinateDtcFactory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDtcLuSubordinateDtcFactory*, UInt32)
+    release : Proc(IDtcLuSubordinateDtcFactory*, UInt32)
+    create : Proc(IDtcLuSubordinateDtcFactory*, UInt8*, UInt32, IUnknown, Int32, UInt32, ITransactionOptions, ITransaction*, UInt8*, UInt32, IDtcLuSubordinateDtcSink, IDtcLuSubordinateDtc*, HRESULT)
   end
 
   IDtcLuSubordinateDtcFactory_GUID = "4131e775-1aea-11d0-944b-00a0c905416e"
@@ -1387,1430 +1387,1430 @@ lib LibWin32
   fun DtcGetTransactionManagerExW(i_pwszhost : LibC::LPWSTR, i_pwsztmname : LibC::LPWSTR, i_riid : Guid*, i_grfoptions : UInt32, i_pvconfigparams : Void*, o_ppvobject : Void**) : HRESULT
 end
 struct LibWin32::ITransaction
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransaction*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransaction*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransaction*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def commit(fretaining : LibC::BOOL, grftc : UInt32, grfrm : UInt32) : HRESULT
-    @lpVtbl.value.commit.unsafe_as(Proc(LibC::BOOL, UInt32, UInt32, HRESULT)).call(fretaining, grftc, grfrm)
+  def commit(this : ITransaction*, fretaining : LibC::BOOL, grftc : UInt32, grfrm : UInt32) : HRESULT
+    @lpVtbl.value.commit.call(this, fretaining, grftc, grfrm)
   end
-  def abort(pboidreason : BOID*, fretaining : LibC::BOOL, fasync : LibC::BOOL) : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(BOID*, LibC::BOOL, LibC::BOOL, HRESULT)).call(pboidreason, fretaining, fasync)
+  def abort(this : ITransaction*, pboidreason : BOID*, fretaining : LibC::BOOL, fasync : LibC::BOOL) : HRESULT
+    @lpVtbl.value.abort.call(this, pboidreason, fretaining, fasync)
   end
-  def get_transaction_info(pinfo : XACTTRANSINFO*) : HRESULT
-    @lpVtbl.value.get_transaction_info.unsafe_as(Proc(XACTTRANSINFO*, HRESULT)).call(pinfo)
+  def get_transaction_info(this : ITransaction*, pinfo : XACTTRANSINFO*) : HRESULT
+    @lpVtbl.value.get_transaction_info.call(this, pinfo)
   end
 end
 struct LibWin32::ITransactionCloner
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionCloner*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionCloner*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionCloner*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def commit(fretaining : LibC::BOOL, grftc : UInt32, grfrm : UInt32) : HRESULT
-    @lpVtbl.value.commit.unsafe_as(Proc(LibC::BOOL, UInt32, UInt32, HRESULT)).call(fretaining, grftc, grfrm)
+  def commit(this : ITransactionCloner*, fretaining : LibC::BOOL, grftc : UInt32, grfrm : UInt32) : HRESULT
+    @lpVtbl.value.commit.call(this, fretaining, grftc, grfrm)
   end
-  def abort(pboidreason : BOID*, fretaining : LibC::BOOL, fasync : LibC::BOOL) : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(BOID*, LibC::BOOL, LibC::BOOL, HRESULT)).call(pboidreason, fretaining, fasync)
+  def abort(this : ITransactionCloner*, pboidreason : BOID*, fretaining : LibC::BOOL, fasync : LibC::BOOL) : HRESULT
+    @lpVtbl.value.abort.call(this, pboidreason, fretaining, fasync)
   end
-  def get_transaction_info(pinfo : XACTTRANSINFO*) : HRESULT
-    @lpVtbl.value.get_transaction_info.unsafe_as(Proc(XACTTRANSINFO*, HRESULT)).call(pinfo)
+  def get_transaction_info(this : ITransactionCloner*, pinfo : XACTTRANSINFO*) : HRESULT
+    @lpVtbl.value.get_transaction_info.call(this, pinfo)
   end
-  def clone_with_commit_disabled(ppitransaction : ITransaction*) : HRESULT
-    @lpVtbl.value.clone_with_commit_disabled.unsafe_as(Proc(ITransaction*, HRESULT)).call(ppitransaction)
+  def clone_with_commit_disabled(this : ITransactionCloner*, ppitransaction : ITransaction*) : HRESULT
+    @lpVtbl.value.clone_with_commit_disabled.call(this, ppitransaction)
   end
 end
 struct LibWin32::ITransaction2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransaction2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransaction2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransaction2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def commit(fretaining : LibC::BOOL, grftc : UInt32, grfrm : UInt32) : HRESULT
-    @lpVtbl.value.commit.unsafe_as(Proc(LibC::BOOL, UInt32, UInt32, HRESULT)).call(fretaining, grftc, grfrm)
+  def commit(this : ITransaction2*, fretaining : LibC::BOOL, grftc : UInt32, grfrm : UInt32) : HRESULT
+    @lpVtbl.value.commit.call(this, fretaining, grftc, grfrm)
   end
-  def abort(pboidreason : BOID*, fretaining : LibC::BOOL, fasync : LibC::BOOL) : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(BOID*, LibC::BOOL, LibC::BOOL, HRESULT)).call(pboidreason, fretaining, fasync)
+  def abort(this : ITransaction2*, pboidreason : BOID*, fretaining : LibC::BOOL, fasync : LibC::BOOL) : HRESULT
+    @lpVtbl.value.abort.call(this, pboidreason, fretaining, fasync)
   end
-  def get_transaction_info(pinfo : XACTTRANSINFO*) : HRESULT
-    @lpVtbl.value.get_transaction_info.unsafe_as(Proc(XACTTRANSINFO*, HRESULT)).call(pinfo)
+  def get_transaction_info(this : ITransaction2*, pinfo : XACTTRANSINFO*) : HRESULT
+    @lpVtbl.value.get_transaction_info.call(this, pinfo)
   end
-  def clone_with_commit_disabled(ppitransaction : ITransaction*) : HRESULT
-    @lpVtbl.value.clone_with_commit_disabled.unsafe_as(Proc(ITransaction*, HRESULT)).call(ppitransaction)
+  def clone_with_commit_disabled(this : ITransaction2*, ppitransaction : ITransaction*) : HRESULT
+    @lpVtbl.value.clone_with_commit_disabled.call(this, ppitransaction)
   end
-  def get_transaction_info2(pinfo : XACTTRANSINFO*) : HRESULT
-    @lpVtbl.value.get_transaction_info2.unsafe_as(Proc(XACTTRANSINFO*, HRESULT)).call(pinfo)
+  def get_transaction_info2(this : ITransaction2*, pinfo : XACTTRANSINFO*) : HRESULT
+    @lpVtbl.value.get_transaction_info2.call(this, pinfo)
   end
 end
 struct LibWin32::ITransactionDispenser
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionDispenser*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionDispenser*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionDispenser*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_options_object(ppoptions : ITransactionOptions*) : HRESULT
-    @lpVtbl.value.get_options_object.unsafe_as(Proc(ITransactionOptions*, HRESULT)).call(ppoptions)
+  def get_options_object(this : ITransactionDispenser*, ppoptions : ITransactionOptions*) : HRESULT
+    @lpVtbl.value.get_options_object.call(this, ppoptions)
   end
-  def begin_transaction(punkouter : IUnknown, isolevel : Int32, isoflags : UInt32, poptions : ITransactionOptions, pptransaction : ITransaction*) : HRESULT
-    @lpVtbl.value.begin_transaction.unsafe_as(Proc(IUnknown, Int32, UInt32, ITransactionOptions, ITransaction*, HRESULT)).call(punkouter, isolevel, isoflags, poptions, pptransaction)
+  def begin_transaction(this : ITransactionDispenser*, punkouter : IUnknown, isolevel : Int32, isoflags : UInt32, poptions : ITransactionOptions, pptransaction : ITransaction*) : HRESULT
+    @lpVtbl.value.begin_transaction.call(this, punkouter, isolevel, isoflags, poptions, pptransaction)
   end
 end
 struct LibWin32::ITransactionOptions
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionOptions*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionOptions*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionOptions*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_options(poptions : XACTOPT*) : HRESULT
-    @lpVtbl.value.set_options.unsafe_as(Proc(XACTOPT*, HRESULT)).call(poptions)
+  def set_options(this : ITransactionOptions*, poptions : XACTOPT*) : HRESULT
+    @lpVtbl.value.set_options.call(this, poptions)
   end
-  def get_options(poptions : XACTOPT*) : HRESULT
-    @lpVtbl.value.get_options.unsafe_as(Proc(XACTOPT*, HRESULT)).call(poptions)
+  def get_options(this : ITransactionOptions*, poptions : XACTOPT*) : HRESULT
+    @lpVtbl.value.get_options.call(this, poptions)
   end
 end
 struct LibWin32::ITransactionOutcomeEvents
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionOutcomeEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionOutcomeEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionOutcomeEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def committed(fretaining : LibC::BOOL, pnewuow : BOID*, hr : HRESULT) : HRESULT
-    @lpVtbl.value.committed.unsafe_as(Proc(LibC::BOOL, BOID*, HRESULT, HRESULT)).call(fretaining, pnewuow, hr)
+  def committed(this : ITransactionOutcomeEvents*, fretaining : LibC::BOOL, pnewuow : BOID*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.committed.call(this, fretaining, pnewuow, hr)
   end
-  def aborted(pboidreason : BOID*, fretaining : LibC::BOOL, pnewuow : BOID*, hr : HRESULT) : HRESULT
-    @lpVtbl.value.aborted.unsafe_as(Proc(BOID*, LibC::BOOL, BOID*, HRESULT, HRESULT)).call(pboidreason, fretaining, pnewuow, hr)
+  def aborted(this : ITransactionOutcomeEvents*, pboidreason : BOID*, fretaining : LibC::BOOL, pnewuow : BOID*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.aborted.call(this, pboidreason, fretaining, pnewuow, hr)
   end
-  def heuristic_decision(dwdecision : UInt32, pboidreason : BOID*, hr : HRESULT) : HRESULT
-    @lpVtbl.value.heuristic_decision.unsafe_as(Proc(UInt32, BOID*, HRESULT, HRESULT)).call(dwdecision, pboidreason, hr)
+  def heuristic_decision(this : ITransactionOutcomeEvents*, dwdecision : UInt32, pboidreason : BOID*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.heuristic_decision.call(this, dwdecision, pboidreason, hr)
   end
-  def indoubt : HRESULT
-    @lpVtbl.value.indoubt.unsafe_as(Proc(HRESULT)).call
+  def indoubt(this : ITransactionOutcomeEvents*) : HRESULT
+    @lpVtbl.value.indoubt.call(this)
   end
 end
 struct LibWin32::ITmNodeName
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITmNodeName*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITmNodeName*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITmNodeName*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_node_name_size(pcbnodenamesize : UInt32*) : HRESULT
-    @lpVtbl.value.get_node_name_size.unsafe_as(Proc(UInt32*, HRESULT)).call(pcbnodenamesize)
+  def get_node_name_size(this : ITmNodeName*, pcbnodenamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_node_name_size.call(this, pcbnodenamesize)
   end
-  def get_node_name(cbnodenamebuffersize : UInt32, pnodenamebuffer : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.get_node_name.unsafe_as(Proc(UInt32, LibC::LPWSTR, HRESULT)).call(cbnodenamebuffersize, pnodenamebuffer)
+  def get_node_name(this : ITmNodeName*, cbnodenamebuffersize : UInt32, pnodenamebuffer : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.get_node_name.call(this, cbnodenamebuffersize, pnodenamebuffer)
   end
 end
 struct LibWin32::IKernelTransaction
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IKernelTransaction*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IKernelTransaction*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IKernelTransaction*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_handle(phandle : LibC::HANDLE*) : HRESULT
-    @lpVtbl.value.get_handle.unsafe_as(Proc(LibC::HANDLE*, HRESULT)).call(phandle)
+  def get_handle(this : IKernelTransaction*, phandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.get_handle.call(this, phandle)
   end
 end
 struct LibWin32::ITransactionResourceAsync
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionResourceAsync*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionResourceAsync*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionResourceAsync*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def prepare_request(fretaining : LibC::BOOL, grfrm : UInt32, fwantmoniker : LibC::BOOL, fsinglephase : LibC::BOOL) : HRESULT
-    @lpVtbl.value.prepare_request.unsafe_as(Proc(LibC::BOOL, UInt32, LibC::BOOL, LibC::BOOL, HRESULT)).call(fretaining, grfrm, fwantmoniker, fsinglephase)
+  def prepare_request(this : ITransactionResourceAsync*, fretaining : LibC::BOOL, grfrm : UInt32, fwantmoniker : LibC::BOOL, fsinglephase : LibC::BOOL) : HRESULT
+    @lpVtbl.value.prepare_request.call(this, fretaining, grfrm, fwantmoniker, fsinglephase)
   end
-  def commit_request(grfrm : UInt32, pnewuow : BOID*) : HRESULT
-    @lpVtbl.value.commit_request.unsafe_as(Proc(UInt32, BOID*, HRESULT)).call(grfrm, pnewuow)
+  def commit_request(this : ITransactionResourceAsync*, grfrm : UInt32, pnewuow : BOID*) : HRESULT
+    @lpVtbl.value.commit_request.call(this, grfrm, pnewuow)
   end
-  def abort_request(pboidreason : BOID*, fretaining : LibC::BOOL, pnewuow : BOID*) : HRESULT
-    @lpVtbl.value.abort_request.unsafe_as(Proc(BOID*, LibC::BOOL, BOID*, HRESULT)).call(pboidreason, fretaining, pnewuow)
+  def abort_request(this : ITransactionResourceAsync*, pboidreason : BOID*, fretaining : LibC::BOOL, pnewuow : BOID*) : HRESULT
+    @lpVtbl.value.abort_request.call(this, pboidreason, fretaining, pnewuow)
   end
-  def tm_down : HRESULT
-    @lpVtbl.value.tm_down.unsafe_as(Proc(HRESULT)).call
+  def tm_down(this : ITransactionResourceAsync*) : HRESULT
+    @lpVtbl.value.tm_down.call(this)
   end
 end
 struct LibWin32::ITransactionLastResourceAsync
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionLastResourceAsync*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionLastResourceAsync*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionLastResourceAsync*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def delegate_commit(grfrm : UInt32) : HRESULT
-    @lpVtbl.value.delegate_commit.unsafe_as(Proc(UInt32, HRESULT)).call(grfrm)
+  def delegate_commit(this : ITransactionLastResourceAsync*, grfrm : UInt32) : HRESULT
+    @lpVtbl.value.delegate_commit.call(this, grfrm)
   end
-  def forget_request(pnewuow : BOID*) : HRESULT
-    @lpVtbl.value.forget_request.unsafe_as(Proc(BOID*, HRESULT)).call(pnewuow)
+  def forget_request(this : ITransactionLastResourceAsync*, pnewuow : BOID*) : HRESULT
+    @lpVtbl.value.forget_request.call(this, pnewuow)
   end
 end
 struct LibWin32::ITransactionResource
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionResource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionResource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionResource*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def prepare_request(fretaining : LibC::BOOL, grfrm : UInt32, fwantmoniker : LibC::BOOL, fsinglephase : LibC::BOOL) : HRESULT
-    @lpVtbl.value.prepare_request.unsafe_as(Proc(LibC::BOOL, UInt32, LibC::BOOL, LibC::BOOL, HRESULT)).call(fretaining, grfrm, fwantmoniker, fsinglephase)
+  def prepare_request(this : ITransactionResource*, fretaining : LibC::BOOL, grfrm : UInt32, fwantmoniker : LibC::BOOL, fsinglephase : LibC::BOOL) : HRESULT
+    @lpVtbl.value.prepare_request.call(this, fretaining, grfrm, fwantmoniker, fsinglephase)
   end
-  def commit_request(grfrm : UInt32, pnewuow : BOID*) : HRESULT
-    @lpVtbl.value.commit_request.unsafe_as(Proc(UInt32, BOID*, HRESULT)).call(grfrm, pnewuow)
+  def commit_request(this : ITransactionResource*, grfrm : UInt32, pnewuow : BOID*) : HRESULT
+    @lpVtbl.value.commit_request.call(this, grfrm, pnewuow)
   end
-  def abort_request(pboidreason : BOID*, fretaining : LibC::BOOL, pnewuow : BOID*) : HRESULT
-    @lpVtbl.value.abort_request.unsafe_as(Proc(BOID*, LibC::BOOL, BOID*, HRESULT)).call(pboidreason, fretaining, pnewuow)
+  def abort_request(this : ITransactionResource*, pboidreason : BOID*, fretaining : LibC::BOOL, pnewuow : BOID*) : HRESULT
+    @lpVtbl.value.abort_request.call(this, pboidreason, fretaining, pnewuow)
   end
-  def tm_down : HRESULT
-    @lpVtbl.value.tm_down.unsafe_as(Proc(HRESULT)).call
+  def tm_down(this : ITransactionResource*) : HRESULT
+    @lpVtbl.value.tm_down.call(this)
   end
 end
 struct LibWin32::ITransactionEnlistmentAsync
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionEnlistmentAsync*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionEnlistmentAsync*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionEnlistmentAsync*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def prepare_request_done(hr : HRESULT, pmk : IMoniker, pboidreason : BOID*) : HRESULT
-    @lpVtbl.value.prepare_request_done.unsafe_as(Proc(HRESULT, IMoniker, BOID*, HRESULT)).call(hr, pmk, pboidreason)
+  def prepare_request_done(this : ITransactionEnlistmentAsync*, hr : HRESULT, pmk : IMoniker, pboidreason : BOID*) : HRESULT
+    @lpVtbl.value.prepare_request_done.call(this, hr, pmk, pboidreason)
   end
-  def commit_request_done(hr : HRESULT) : HRESULT
-    @lpVtbl.value.commit_request_done.unsafe_as(Proc(HRESULT, HRESULT)).call(hr)
+  def commit_request_done(this : ITransactionEnlistmentAsync*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.commit_request_done.call(this, hr)
   end
-  def abort_request_done(hr : HRESULT) : HRESULT
-    @lpVtbl.value.abort_request_done.unsafe_as(Proc(HRESULT, HRESULT)).call(hr)
+  def abort_request_done(this : ITransactionEnlistmentAsync*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.abort_request_done.call(this, hr)
   end
 end
 struct LibWin32::ITransactionLastEnlistmentAsync
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionLastEnlistmentAsync*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionLastEnlistmentAsync*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionLastEnlistmentAsync*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def transaction_outcome(xactstat : XACTSTAT, pboidreason : BOID*) : HRESULT
-    @lpVtbl.value.transaction_outcome.unsafe_as(Proc(XACTSTAT, BOID*, HRESULT)).call(xactstat, pboidreason)
+  def transaction_outcome(this : ITransactionLastEnlistmentAsync*, xactstat : XACTSTAT, pboidreason : BOID*) : HRESULT
+    @lpVtbl.value.transaction_outcome.call(this, xactstat, pboidreason)
   end
 end
 struct LibWin32::ITransactionExportFactory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionExportFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionExportFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionExportFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_remote_class_id(pclsid : Guid*) : HRESULT
-    @lpVtbl.value.get_remote_class_id.unsafe_as(Proc(Guid*, HRESULT)).call(pclsid)
+  def get_remote_class_id(this : ITransactionExportFactory*, pclsid : Guid*) : HRESULT
+    @lpVtbl.value.get_remote_class_id.call(this, pclsid)
   end
-  def create(cbwhereabouts : UInt32, rgbwhereabouts : UInt8*, ppexport : ITransactionExport*) : HRESULT
-    @lpVtbl.value.create.unsafe_as(Proc(UInt32, UInt8*, ITransactionExport*, HRESULT)).call(cbwhereabouts, rgbwhereabouts, ppexport)
+  def create(this : ITransactionExportFactory*, cbwhereabouts : UInt32, rgbwhereabouts : UInt8*, ppexport : ITransactionExport*) : HRESULT
+    @lpVtbl.value.create.call(this, cbwhereabouts, rgbwhereabouts, ppexport)
   end
 end
 struct LibWin32::ITransactionImportWhereabouts
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionImportWhereabouts*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionImportWhereabouts*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionImportWhereabouts*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_whereabouts_size(pcbwhereabouts : UInt32*) : HRESULT
-    @lpVtbl.value.get_whereabouts_size.unsafe_as(Proc(UInt32*, HRESULT)).call(pcbwhereabouts)
+  def get_whereabouts_size(this : ITransactionImportWhereabouts*, pcbwhereabouts : UInt32*) : HRESULT
+    @lpVtbl.value.get_whereabouts_size.call(this, pcbwhereabouts)
   end
-  def get_whereabouts(cbwhereabouts : UInt32, rgbwhereabouts : UInt8*, pcbused : UInt32*) : HRESULT
-    @lpVtbl.value.get_whereabouts.unsafe_as(Proc(UInt32, UInt8*, UInt32*, HRESULT)).call(cbwhereabouts, rgbwhereabouts, pcbused)
+  def get_whereabouts(this : ITransactionImportWhereabouts*, cbwhereabouts : UInt32, rgbwhereabouts : UInt8*, pcbused : UInt32*) : HRESULT
+    @lpVtbl.value.get_whereabouts.call(this, cbwhereabouts, rgbwhereabouts, pcbused)
   end
 end
 struct LibWin32::ITransactionExport
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionExport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionExport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionExport*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def export(punktransaction : IUnknown, pcbtransactioncookie : UInt32*) : HRESULT
-    @lpVtbl.value.export.unsafe_as(Proc(IUnknown, UInt32*, HRESULT)).call(punktransaction, pcbtransactioncookie)
+  def export(this : ITransactionExport*, punktransaction : IUnknown, pcbtransactioncookie : UInt32*) : HRESULT
+    @lpVtbl.value.export.call(this, punktransaction, pcbtransactioncookie)
   end
-  def get_transaction_cookie(punktransaction : IUnknown, cbtransactioncookie : UInt32, rgbtransactioncookie : UInt8*, pcbused : UInt32*) : HRESULT
-    @lpVtbl.value.get_transaction_cookie.unsafe_as(Proc(IUnknown, UInt32, UInt8*, UInt32*, HRESULT)).call(punktransaction, cbtransactioncookie, rgbtransactioncookie, pcbused)
+  def get_transaction_cookie(this : ITransactionExport*, punktransaction : IUnknown, cbtransactioncookie : UInt32, rgbtransactioncookie : UInt8*, pcbused : UInt32*) : HRESULT
+    @lpVtbl.value.get_transaction_cookie.call(this, punktransaction, cbtransactioncookie, rgbtransactioncookie, pcbused)
   end
 end
 struct LibWin32::ITransactionImport
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionImport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionImport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionImport*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def import(cbtransactioncookie : UInt32, rgbtransactioncookie : UInt8*, piid : Guid*, ppvtransaction : Void**) : HRESULT
-    @lpVtbl.value.import.unsafe_as(Proc(UInt32, UInt8*, Guid*, Void**, HRESULT)).call(cbtransactioncookie, rgbtransactioncookie, piid, ppvtransaction)
+  def import(this : ITransactionImport*, cbtransactioncookie : UInt32, rgbtransactioncookie : UInt8*, piid : Guid*, ppvtransaction : Void**) : HRESULT
+    @lpVtbl.value.import.call(this, cbtransactioncookie, rgbtransactioncookie, piid, ppvtransaction)
   end
 end
 struct LibWin32::ITipTransaction
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITipTransaction*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITipTransaction*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITipTransaction*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def push(i_pszremotetmurl : UInt8*, o_ppszremotetxurl : PSTR*) : HRESULT
-    @lpVtbl.value.push.unsafe_as(Proc(UInt8*, PSTR*, HRESULT)).call(i_pszremotetmurl, o_ppszremotetxurl)
+  def push(this : ITipTransaction*, i_pszremotetmurl : UInt8*, o_ppszremotetxurl : PSTR*) : HRESULT
+    @lpVtbl.value.push.call(this, i_pszremotetmurl, o_ppszremotetxurl)
   end
-  def get_transaction_url(o_ppszlocaltxurl : PSTR*) : HRESULT
-    @lpVtbl.value.get_transaction_url.unsafe_as(Proc(PSTR*, HRESULT)).call(o_ppszlocaltxurl)
+  def get_transaction_url(this : ITipTransaction*, o_ppszlocaltxurl : PSTR*) : HRESULT
+    @lpVtbl.value.get_transaction_url.call(this, o_ppszlocaltxurl)
   end
 end
 struct LibWin32::ITipHelper
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITipHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITipHelper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITipHelper*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def pull(i_psztxurl : UInt8*, o_ppitransaction : ITransaction*) : HRESULT
-    @lpVtbl.value.pull.unsafe_as(Proc(UInt8*, ITransaction*, HRESULT)).call(i_psztxurl, o_ppitransaction)
+  def pull(this : ITipHelper*, i_psztxurl : UInt8*, o_ppitransaction : ITransaction*) : HRESULT
+    @lpVtbl.value.pull.call(this, i_psztxurl, o_ppitransaction)
   end
-  def pull_async(i_psztxurl : UInt8*, i_ptippullsink : ITipPullSink, o_ppitransaction : ITransaction*) : HRESULT
-    @lpVtbl.value.pull_async.unsafe_as(Proc(UInt8*, ITipPullSink, ITransaction*, HRESULT)).call(i_psztxurl, i_ptippullsink, o_ppitransaction)
+  def pull_async(this : ITipHelper*, i_psztxurl : UInt8*, i_ptippullsink : ITipPullSink, o_ppitransaction : ITransaction*) : HRESULT
+    @lpVtbl.value.pull_async.call(this, i_psztxurl, i_ptippullsink, o_ppitransaction)
   end
-  def get_local_tm_url(o_ppszlocaltmurl : UInt8**) : HRESULT
-    @lpVtbl.value.get_local_tm_url.unsafe_as(Proc(UInt8**, HRESULT)).call(o_ppszlocaltmurl)
+  def get_local_tm_url(this : ITipHelper*, o_ppszlocaltmurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_tm_url.call(this, o_ppszlocaltmurl)
   end
 end
 struct LibWin32::ITipPullSink
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITipPullSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITipPullSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITipPullSink*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def pull_complete(i_hrpull : HRESULT) : HRESULT
-    @lpVtbl.value.pull_complete.unsafe_as(Proc(HRESULT, HRESULT)).call(i_hrpull)
+  def pull_complete(this : ITipPullSink*, i_hrpull : HRESULT) : HRESULT
+    @lpVtbl.value.pull_complete.call(this, i_hrpull)
   end
 end
 struct LibWin32::IDtcNetworkAccessConfig
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcNetworkAccessConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcNetworkAccessConfig*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcNetworkAccessConfig*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_any_network_access(pbanynetworkaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_any_network_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbanynetworkaccess)
+  def get_any_network_access(this : IDtcNetworkAccessConfig*, pbanynetworkaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_any_network_access.call(this, pbanynetworkaccess)
   end
-  def set_any_network_access(banynetworkaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_any_network_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(banynetworkaccess)
+  def set_any_network_access(this : IDtcNetworkAccessConfig*, banynetworkaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_any_network_access.call(this, banynetworkaccess)
   end
-  def get_network_administration_access(pbnetworkadministrationaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_network_administration_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbnetworkadministrationaccess)
+  def get_network_administration_access(this : IDtcNetworkAccessConfig*, pbnetworkadministrationaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_administration_access.call(this, pbnetworkadministrationaccess)
   end
-  def set_network_administration_access(bnetworkadministrationaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_network_administration_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bnetworkadministrationaccess)
+  def set_network_administration_access(this : IDtcNetworkAccessConfig*, bnetworkadministrationaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_administration_access.call(this, bnetworkadministrationaccess)
   end
-  def get_network_transaction_access(pbnetworktransactionaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_network_transaction_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbnetworktransactionaccess)
+  def get_network_transaction_access(this : IDtcNetworkAccessConfig*, pbnetworktransactionaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_transaction_access.call(this, pbnetworktransactionaccess)
   end
-  def set_network_transaction_access(bnetworktransactionaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_network_transaction_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bnetworktransactionaccess)
+  def set_network_transaction_access(this : IDtcNetworkAccessConfig*, bnetworktransactionaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_transaction_access.call(this, bnetworktransactionaccess)
   end
-  def get_network_client_access(pbnetworkclientaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_network_client_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbnetworkclientaccess)
+  def get_network_client_access(this : IDtcNetworkAccessConfig*, pbnetworkclientaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_client_access.call(this, pbnetworkclientaccess)
   end
-  def set_network_client_access(bnetworkclientaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_network_client_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bnetworkclientaccess)
+  def set_network_client_access(this : IDtcNetworkAccessConfig*, bnetworkclientaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_client_access.call(this, bnetworkclientaccess)
   end
-  def get_network_tip_access(pbnetworktipaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_network_tip_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbnetworktipaccess)
+  def get_network_tip_access(this : IDtcNetworkAccessConfig*, pbnetworktipaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_tip_access.call(this, pbnetworktipaccess)
   end
-  def set_network_tip_access(bnetworktipaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_network_tip_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bnetworktipaccess)
+  def set_network_tip_access(this : IDtcNetworkAccessConfig*, bnetworktipaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_tip_access.call(this, bnetworktipaccess)
   end
-  def get_xa_access(pbxaaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_xa_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbxaaccess)
+  def get_xa_access(this : IDtcNetworkAccessConfig*, pbxaaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_xa_access.call(this, pbxaaccess)
   end
-  def set_xa_access(bxaaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_xa_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bxaaccess)
+  def set_xa_access(this : IDtcNetworkAccessConfig*, bxaaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_xa_access.call(this, bxaaccess)
   end
-  def restart_dtc_service : HRESULT
-    @lpVtbl.value.restart_dtc_service.unsafe_as(Proc(HRESULT)).call
+  def restart_dtc_service(this : IDtcNetworkAccessConfig*) : HRESULT
+    @lpVtbl.value.restart_dtc_service.call(this)
   end
 end
 struct LibWin32::IDtcNetworkAccessConfig2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcNetworkAccessConfig2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcNetworkAccessConfig2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcNetworkAccessConfig2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_any_network_access(pbanynetworkaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_any_network_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbanynetworkaccess)
+  def get_any_network_access(this : IDtcNetworkAccessConfig2*, pbanynetworkaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_any_network_access.call(this, pbanynetworkaccess)
   end
-  def set_any_network_access(banynetworkaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_any_network_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(banynetworkaccess)
+  def set_any_network_access(this : IDtcNetworkAccessConfig2*, banynetworkaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_any_network_access.call(this, banynetworkaccess)
   end
-  def get_network_administration_access(pbnetworkadministrationaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_network_administration_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbnetworkadministrationaccess)
+  def get_network_administration_access(this : IDtcNetworkAccessConfig2*, pbnetworkadministrationaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_administration_access.call(this, pbnetworkadministrationaccess)
   end
-  def set_network_administration_access(bnetworkadministrationaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_network_administration_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bnetworkadministrationaccess)
+  def set_network_administration_access(this : IDtcNetworkAccessConfig2*, bnetworkadministrationaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_administration_access.call(this, bnetworkadministrationaccess)
   end
-  def get_network_transaction_access(pbnetworktransactionaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_network_transaction_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbnetworktransactionaccess)
+  def get_network_transaction_access(this : IDtcNetworkAccessConfig2*, pbnetworktransactionaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_transaction_access.call(this, pbnetworktransactionaccess)
   end
-  def set_network_transaction_access(bnetworktransactionaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_network_transaction_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bnetworktransactionaccess)
+  def set_network_transaction_access(this : IDtcNetworkAccessConfig2*, bnetworktransactionaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_transaction_access.call(this, bnetworktransactionaccess)
   end
-  def get_network_client_access(pbnetworkclientaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_network_client_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbnetworkclientaccess)
+  def get_network_client_access(this : IDtcNetworkAccessConfig2*, pbnetworkclientaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_client_access.call(this, pbnetworkclientaccess)
   end
-  def set_network_client_access(bnetworkclientaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_network_client_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bnetworkclientaccess)
+  def set_network_client_access(this : IDtcNetworkAccessConfig2*, bnetworkclientaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_client_access.call(this, bnetworkclientaccess)
   end
-  def get_network_tip_access(pbnetworktipaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_network_tip_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbnetworktipaccess)
+  def get_network_tip_access(this : IDtcNetworkAccessConfig2*, pbnetworktipaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_tip_access.call(this, pbnetworktipaccess)
   end
-  def set_network_tip_access(bnetworktipaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_network_tip_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bnetworktipaccess)
+  def set_network_tip_access(this : IDtcNetworkAccessConfig2*, bnetworktipaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_tip_access.call(this, bnetworktipaccess)
   end
-  def get_xa_access(pbxaaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_xa_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbxaaccess)
+  def get_xa_access(this : IDtcNetworkAccessConfig2*, pbxaaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_xa_access.call(this, pbxaaccess)
   end
-  def set_xa_access(bxaaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_xa_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bxaaccess)
+  def set_xa_access(this : IDtcNetworkAccessConfig2*, bxaaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_xa_access.call(this, bxaaccess)
   end
-  def restart_dtc_service : HRESULT
-    @lpVtbl.value.restart_dtc_service.unsafe_as(Proc(HRESULT)).call
+  def restart_dtc_service(this : IDtcNetworkAccessConfig2*) : HRESULT
+    @lpVtbl.value.restart_dtc_service.call(this)
   end
-  def get_network_inbound_access(pbinbound : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_network_inbound_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbinbound)
+  def get_network_inbound_access(this : IDtcNetworkAccessConfig2*, pbinbound : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_inbound_access.call(this, pbinbound)
   end
-  def get_network_outbound_access(pboutbound : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_network_outbound_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pboutbound)
+  def get_network_outbound_access(this : IDtcNetworkAccessConfig2*, pboutbound : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_outbound_access.call(this, pboutbound)
   end
-  def set_network_inbound_access(binbound : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_network_inbound_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(binbound)
+  def set_network_inbound_access(this : IDtcNetworkAccessConfig2*, binbound : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_inbound_access.call(this, binbound)
   end
-  def set_network_outbound_access(boutbound : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_network_outbound_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(boutbound)
+  def set_network_outbound_access(this : IDtcNetworkAccessConfig2*, boutbound : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_outbound_access.call(this, boutbound)
   end
-  def get_authentication_level(pauthlevel : AUTHENTICATION_LEVEL*) : HRESULT
-    @lpVtbl.value.get_authentication_level.unsafe_as(Proc(AUTHENTICATION_LEVEL*, HRESULT)).call(pauthlevel)
+  def get_authentication_level(this : IDtcNetworkAccessConfig2*, pauthlevel : AUTHENTICATION_LEVEL*) : HRESULT
+    @lpVtbl.value.get_authentication_level.call(this, pauthlevel)
   end
-  def set_authentication_level(authlevel : AUTHENTICATION_LEVEL) : HRESULT
-    @lpVtbl.value.set_authentication_level.unsafe_as(Proc(AUTHENTICATION_LEVEL, HRESULT)).call(authlevel)
+  def set_authentication_level(this : IDtcNetworkAccessConfig2*, authlevel : AUTHENTICATION_LEVEL) : HRESULT
+    @lpVtbl.value.set_authentication_level.call(this, authlevel)
   end
 end
 struct LibWin32::IDtcNetworkAccessConfig3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcNetworkAccessConfig3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcNetworkAccessConfig3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcNetworkAccessConfig3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_any_network_access(pbanynetworkaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_any_network_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbanynetworkaccess)
+  def get_any_network_access(this : IDtcNetworkAccessConfig3*, pbanynetworkaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_any_network_access.call(this, pbanynetworkaccess)
   end
-  def set_any_network_access(banynetworkaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_any_network_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(banynetworkaccess)
+  def set_any_network_access(this : IDtcNetworkAccessConfig3*, banynetworkaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_any_network_access.call(this, banynetworkaccess)
   end
-  def get_network_administration_access(pbnetworkadministrationaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_network_administration_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbnetworkadministrationaccess)
+  def get_network_administration_access(this : IDtcNetworkAccessConfig3*, pbnetworkadministrationaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_administration_access.call(this, pbnetworkadministrationaccess)
   end
-  def set_network_administration_access(bnetworkadministrationaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_network_administration_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bnetworkadministrationaccess)
+  def set_network_administration_access(this : IDtcNetworkAccessConfig3*, bnetworkadministrationaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_administration_access.call(this, bnetworkadministrationaccess)
   end
-  def get_network_transaction_access(pbnetworktransactionaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_network_transaction_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbnetworktransactionaccess)
+  def get_network_transaction_access(this : IDtcNetworkAccessConfig3*, pbnetworktransactionaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_transaction_access.call(this, pbnetworktransactionaccess)
   end
-  def set_network_transaction_access(bnetworktransactionaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_network_transaction_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bnetworktransactionaccess)
+  def set_network_transaction_access(this : IDtcNetworkAccessConfig3*, bnetworktransactionaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_transaction_access.call(this, bnetworktransactionaccess)
   end
-  def get_network_client_access(pbnetworkclientaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_network_client_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbnetworkclientaccess)
+  def get_network_client_access(this : IDtcNetworkAccessConfig3*, pbnetworkclientaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_client_access.call(this, pbnetworkclientaccess)
   end
-  def set_network_client_access(bnetworkclientaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_network_client_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bnetworkclientaccess)
+  def set_network_client_access(this : IDtcNetworkAccessConfig3*, bnetworkclientaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_client_access.call(this, bnetworkclientaccess)
   end
-  def get_network_tip_access(pbnetworktipaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_network_tip_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbnetworktipaccess)
+  def get_network_tip_access(this : IDtcNetworkAccessConfig3*, pbnetworktipaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_tip_access.call(this, pbnetworktipaccess)
   end
-  def set_network_tip_access(bnetworktipaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_network_tip_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bnetworktipaccess)
+  def set_network_tip_access(this : IDtcNetworkAccessConfig3*, bnetworktipaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_tip_access.call(this, bnetworktipaccess)
   end
-  def get_xa_access(pbxaaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_xa_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbxaaccess)
+  def get_xa_access(this : IDtcNetworkAccessConfig3*, pbxaaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_xa_access.call(this, pbxaaccess)
   end
-  def set_xa_access(bxaaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_xa_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bxaaccess)
+  def set_xa_access(this : IDtcNetworkAccessConfig3*, bxaaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_xa_access.call(this, bxaaccess)
   end
-  def restart_dtc_service : HRESULT
-    @lpVtbl.value.restart_dtc_service.unsafe_as(Proc(HRESULT)).call
+  def restart_dtc_service(this : IDtcNetworkAccessConfig3*) : HRESULT
+    @lpVtbl.value.restart_dtc_service.call(this)
   end
-  def get_network_inbound_access(pbinbound : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_network_inbound_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbinbound)
+  def get_network_inbound_access(this : IDtcNetworkAccessConfig3*, pbinbound : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_inbound_access.call(this, pbinbound)
   end
-  def get_network_outbound_access(pboutbound : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_network_outbound_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pboutbound)
+  def get_network_outbound_access(this : IDtcNetworkAccessConfig3*, pboutbound : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_outbound_access.call(this, pboutbound)
   end
-  def set_network_inbound_access(binbound : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_network_inbound_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(binbound)
+  def set_network_inbound_access(this : IDtcNetworkAccessConfig3*, binbound : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_inbound_access.call(this, binbound)
   end
-  def set_network_outbound_access(boutbound : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_network_outbound_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(boutbound)
+  def set_network_outbound_access(this : IDtcNetworkAccessConfig3*, boutbound : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_outbound_access.call(this, boutbound)
   end
-  def get_authentication_level(pauthlevel : AUTHENTICATION_LEVEL*) : HRESULT
-    @lpVtbl.value.get_authentication_level.unsafe_as(Proc(AUTHENTICATION_LEVEL*, HRESULT)).call(pauthlevel)
+  def get_authentication_level(this : IDtcNetworkAccessConfig3*, pauthlevel : AUTHENTICATION_LEVEL*) : HRESULT
+    @lpVtbl.value.get_authentication_level.call(this, pauthlevel)
   end
-  def set_authentication_level(authlevel : AUTHENTICATION_LEVEL) : HRESULT
-    @lpVtbl.value.set_authentication_level.unsafe_as(Proc(AUTHENTICATION_LEVEL, HRESULT)).call(authlevel)
+  def set_authentication_level(this : IDtcNetworkAccessConfig3*, authlevel : AUTHENTICATION_LEVEL) : HRESULT
+    @lpVtbl.value.set_authentication_level.call(this, authlevel)
   end
-  def get_lu_access(pbluaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_lu_access.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbluaccess)
+  def get_lu_access(this : IDtcNetworkAccessConfig3*, pbluaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_lu_access.call(this, pbluaccess)
   end
-  def set_lu_access(bluaccess : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_lu_access.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bluaccess)
+  def set_lu_access(this : IDtcNetworkAccessConfig3*, bluaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_lu_access.call(this, bluaccess)
   end
 end
 struct LibWin32::IDtcToXaMapper
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcToXaMapper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcToXaMapper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcToXaMapper*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def request_new_resource_manager(pszdsn : PSTR, pszclientdllname : PSTR, pdwrmcookie : UInt32*) : HRESULT
-    @lpVtbl.value.request_new_resource_manager.unsafe_as(Proc(PSTR, PSTR, UInt32*, HRESULT)).call(pszdsn, pszclientdllname, pdwrmcookie)
+  def request_new_resource_manager(this : IDtcToXaMapper*, pszdsn : PSTR, pszclientdllname : PSTR, pdwrmcookie : UInt32*) : HRESULT
+    @lpVtbl.value.request_new_resource_manager.call(this, pszdsn, pszclientdllname, pdwrmcookie)
   end
-  def translate_trid_to_xid(pdwitransaction : UInt32*, dwrmcookie : UInt32, pxid : Xid_t*) : HRESULT
-    @lpVtbl.value.translate_trid_to_xid.unsafe_as(Proc(UInt32*, UInt32, Xid_t*, HRESULT)).call(pdwitransaction, dwrmcookie, pxid)
+  def translate_trid_to_xid(this : IDtcToXaMapper*, pdwitransaction : UInt32*, dwrmcookie : UInt32, pxid : Xid_t*) : HRESULT
+    @lpVtbl.value.translate_trid_to_xid.call(this, pdwitransaction, dwrmcookie, pxid)
   end
-  def enlist_resource_manager(dwrmcookie : UInt32, pdwitransaction : UInt32*) : HRESULT
-    @lpVtbl.value.enlist_resource_manager.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(dwrmcookie, pdwitransaction)
+  def enlist_resource_manager(this : IDtcToXaMapper*, dwrmcookie : UInt32, pdwitransaction : UInt32*) : HRESULT
+    @lpVtbl.value.enlist_resource_manager.call(this, dwrmcookie, pdwitransaction)
   end
-  def release_resource_manager(dwrmcookie : UInt32) : HRESULT
-    @lpVtbl.value.release_resource_manager.unsafe_as(Proc(UInt32, HRESULT)).call(dwrmcookie)
+  def release_resource_manager(this : IDtcToXaMapper*, dwrmcookie : UInt32) : HRESULT
+    @lpVtbl.value.release_resource_manager.call(this, dwrmcookie)
   end
 end
 struct LibWin32::IDtcToXaHelperFactory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcToXaHelperFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcToXaHelperFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcToXaHelperFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create(pszdsn : PSTR, pszclientdllname : PSTR, pguidrm : Guid*, ppxahelper : IDtcToXaHelper*) : HRESULT
-    @lpVtbl.value.create.unsafe_as(Proc(PSTR, PSTR, Guid*, IDtcToXaHelper*, HRESULT)).call(pszdsn, pszclientdllname, pguidrm, ppxahelper)
+  def create(this : IDtcToXaHelperFactory*, pszdsn : PSTR, pszclientdllname : PSTR, pguidrm : Guid*, ppxahelper : IDtcToXaHelper*) : HRESULT
+    @lpVtbl.value.create.call(this, pszdsn, pszclientdllname, pguidrm, ppxahelper)
   end
 end
 struct LibWin32::IDtcToXaHelper
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcToXaHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcToXaHelper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcToXaHelper*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def close(i_fdorecovery : LibC::BOOL) : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(i_fdorecovery)
+  def close(this : IDtcToXaHelper*, i_fdorecovery : LibC::BOOL) : HRESULT
+    @lpVtbl.value.close.call(this, i_fdorecovery)
   end
-  def translate_trid_to_xid(pitransaction : ITransaction, pguidbqual : Guid*, pxid : Xid_t*) : HRESULT
-    @lpVtbl.value.translate_trid_to_xid.unsafe_as(Proc(ITransaction, Guid*, Xid_t*, HRESULT)).call(pitransaction, pguidbqual, pxid)
+  def translate_trid_to_xid(this : IDtcToXaHelper*, pitransaction : ITransaction, pguidbqual : Guid*, pxid : Xid_t*) : HRESULT
+    @lpVtbl.value.translate_trid_to_xid.call(this, pitransaction, pguidbqual, pxid)
   end
 end
 struct LibWin32::IDtcToXaHelperSinglePipe
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcToXaHelperSinglePipe*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcToXaHelperSinglePipe*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcToXaHelperSinglePipe*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def xarm_create(pszdsn : PSTR, pszclientdll : PSTR, pdwrmcookie : UInt32*) : HRESULT
-    @lpVtbl.value.xarm_create.unsafe_as(Proc(PSTR, PSTR, UInt32*, HRESULT)).call(pszdsn, pszclientdll, pdwrmcookie)
+  def xarm_create(this : IDtcToXaHelperSinglePipe*, pszdsn : PSTR, pszclientdll : PSTR, pdwrmcookie : UInt32*) : HRESULT
+    @lpVtbl.value.xarm_create.call(this, pszdsn, pszclientdll, pdwrmcookie)
   end
-  def convert_trid_to_xid(pdwitrans : UInt32*, dwrmcookie : UInt32, pxid : Xid_t*) : HRESULT
-    @lpVtbl.value.convert_trid_to_xid.unsafe_as(Proc(UInt32*, UInt32, Xid_t*, HRESULT)).call(pdwitrans, dwrmcookie, pxid)
+  def convert_trid_to_xid(this : IDtcToXaHelperSinglePipe*, pdwitrans : UInt32*, dwrmcookie : UInt32, pxid : Xid_t*) : HRESULT
+    @lpVtbl.value.convert_trid_to_xid.call(this, pdwitrans, dwrmcookie, pxid)
   end
-  def enlist_with_rm(dwrmcookie : UInt32, i_pitransaction : ITransaction, i_pitransres : ITransactionResourceAsync, o_ppitransenslitment : ITransactionEnlistmentAsync*) : HRESULT
-    @lpVtbl.value.enlist_with_rm.unsafe_as(Proc(UInt32, ITransaction, ITransactionResourceAsync, ITransactionEnlistmentAsync*, HRESULT)).call(dwrmcookie, i_pitransaction, i_pitransres, o_ppitransenslitment)
+  def enlist_with_rm(this : IDtcToXaHelperSinglePipe*, dwrmcookie : UInt32, i_pitransaction : ITransaction, i_pitransres : ITransactionResourceAsync, o_ppitransenslitment : ITransactionEnlistmentAsync*) : HRESULT
+    @lpVtbl.value.enlist_with_rm.call(this, dwrmcookie, i_pitransaction, i_pitransres, o_ppitransenslitment)
   end
-  def release_rm_cookie(i_dwrmcookie : UInt32, i_fnormal : LibC::BOOL) : Void
-    @lpVtbl.value.release_rm_cookie.unsafe_as(Proc(UInt32, LibC::BOOL, Void)).call(i_dwrmcookie, i_fnormal)
+  def release_rm_cookie(this : IDtcToXaHelperSinglePipe*, i_dwrmcookie : UInt32, i_fnormal : LibC::BOOL) : Void
+    @lpVtbl.value.release_rm_cookie.call(this, i_dwrmcookie, i_fnormal)
   end
 end
 struct LibWin32::IXATransLookup
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXATransLookup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXATransLookup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXATransLookup*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def lookup(pptransaction : ITransaction*) : HRESULT
-    @lpVtbl.value.lookup.unsafe_as(Proc(ITransaction*, HRESULT)).call(pptransaction)
+  def lookup(this : IXATransLookup*, pptransaction : ITransaction*) : HRESULT
+    @lpVtbl.value.lookup.call(this, pptransaction)
   end
 end
 struct LibWin32::IXATransLookup2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXATransLookup2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXATransLookup2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXATransLookup2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def lookup(pxid : Xid_t*, pptransaction : ITransaction*) : HRESULT
-    @lpVtbl.value.lookup.unsafe_as(Proc(Xid_t*, ITransaction*, HRESULT)).call(pxid, pptransaction)
+  def lookup(this : IXATransLookup2*, pxid : Xid_t*, pptransaction : ITransaction*) : HRESULT
+    @lpVtbl.value.lookup.call(this, pxid, pptransaction)
   end
 end
 struct LibWin32::IResourceManagerSink
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IResourceManagerSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IResourceManagerSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IResourceManagerSink*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def tm_down : HRESULT
-    @lpVtbl.value.tm_down.unsafe_as(Proc(HRESULT)).call
+  def tm_down(this : IResourceManagerSink*) : HRESULT
+    @lpVtbl.value.tm_down.call(this)
   end
 end
 struct LibWin32::IResourceManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IResourceManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IResourceManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IResourceManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def enlist(ptransaction : ITransaction, pres : ITransactionResourceAsync, puow : BOID*, pisolevel : Int32*, ppenlist : ITransactionEnlistmentAsync*) : HRESULT
-    @lpVtbl.value.enlist.unsafe_as(Proc(ITransaction, ITransactionResourceAsync, BOID*, Int32*, ITransactionEnlistmentAsync*, HRESULT)).call(ptransaction, pres, puow, pisolevel, ppenlist)
+  def enlist(this : IResourceManager*, ptransaction : ITransaction, pres : ITransactionResourceAsync, puow : BOID*, pisolevel : Int32*, ppenlist : ITransactionEnlistmentAsync*) : HRESULT
+    @lpVtbl.value.enlist.call(this, ptransaction, pres, puow, pisolevel, ppenlist)
   end
-  def reenlist(pprepinfo : UInt8*, cbprepinfo : UInt32, ltimeout : UInt32, pxactstat : XACTSTAT*) : HRESULT
-    @lpVtbl.value.reenlist.unsafe_as(Proc(UInt8*, UInt32, UInt32, XACTSTAT*, HRESULT)).call(pprepinfo, cbprepinfo, ltimeout, pxactstat)
+  def reenlist(this : IResourceManager*, pprepinfo : UInt8*, cbprepinfo : UInt32, ltimeout : UInt32, pxactstat : XACTSTAT*) : HRESULT
+    @lpVtbl.value.reenlist.call(this, pprepinfo, cbprepinfo, ltimeout, pxactstat)
   end
-  def reenlistment_complete : HRESULT
-    @lpVtbl.value.reenlistment_complete.unsafe_as(Proc(HRESULT)).call
+  def reenlistment_complete(this : IResourceManager*) : HRESULT
+    @lpVtbl.value.reenlistment_complete.call(this)
   end
-  def get_distributed_transaction_manager(iid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.get_distributed_transaction_manager.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(iid, ppvobject)
+  def get_distributed_transaction_manager(this : IResourceManager*, iid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.get_distributed_transaction_manager.call(this, iid, ppvobject)
   end
 end
 struct LibWin32::ILastResourceManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ILastResourceManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ILastResourceManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ILastResourceManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def transaction_committed(pprepinfo : UInt8*, cbprepinfo : UInt32) : HRESULT
-    @lpVtbl.value.transaction_committed.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(pprepinfo, cbprepinfo)
+  def transaction_committed(this : ILastResourceManager*, pprepinfo : UInt8*, cbprepinfo : UInt32) : HRESULT
+    @lpVtbl.value.transaction_committed.call(this, pprepinfo, cbprepinfo)
   end
-  def recovery_done : HRESULT
-    @lpVtbl.value.recovery_done.unsafe_as(Proc(HRESULT)).call
+  def recovery_done(this : ILastResourceManager*) : HRESULT
+    @lpVtbl.value.recovery_done.call(this)
   end
 end
 struct LibWin32::IResourceManager2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IResourceManager2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IResourceManager2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IResourceManager2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def enlist(ptransaction : ITransaction, pres : ITransactionResourceAsync, puow : BOID*, pisolevel : Int32*, ppenlist : ITransactionEnlistmentAsync*) : HRESULT
-    @lpVtbl.value.enlist.unsafe_as(Proc(ITransaction, ITransactionResourceAsync, BOID*, Int32*, ITransactionEnlistmentAsync*, HRESULT)).call(ptransaction, pres, puow, pisolevel, ppenlist)
+  def enlist(this : IResourceManager2*, ptransaction : ITransaction, pres : ITransactionResourceAsync, puow : BOID*, pisolevel : Int32*, ppenlist : ITransactionEnlistmentAsync*) : HRESULT
+    @lpVtbl.value.enlist.call(this, ptransaction, pres, puow, pisolevel, ppenlist)
   end
-  def reenlist(pprepinfo : UInt8*, cbprepinfo : UInt32, ltimeout : UInt32, pxactstat : XACTSTAT*) : HRESULT
-    @lpVtbl.value.reenlist.unsafe_as(Proc(UInt8*, UInt32, UInt32, XACTSTAT*, HRESULT)).call(pprepinfo, cbprepinfo, ltimeout, pxactstat)
+  def reenlist(this : IResourceManager2*, pprepinfo : UInt8*, cbprepinfo : UInt32, ltimeout : UInt32, pxactstat : XACTSTAT*) : HRESULT
+    @lpVtbl.value.reenlist.call(this, pprepinfo, cbprepinfo, ltimeout, pxactstat)
   end
-  def reenlistment_complete : HRESULT
-    @lpVtbl.value.reenlistment_complete.unsafe_as(Proc(HRESULT)).call
+  def reenlistment_complete(this : IResourceManager2*) : HRESULT
+    @lpVtbl.value.reenlistment_complete.call(this)
   end
-  def get_distributed_transaction_manager(iid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.get_distributed_transaction_manager.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(iid, ppvobject)
+  def get_distributed_transaction_manager(this : IResourceManager2*, iid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.get_distributed_transaction_manager.call(this, iid, ppvobject)
   end
-  def enlist2(ptransaction : ITransaction, presasync : ITransactionResourceAsync, puow : BOID*, pisolevel : Int32*, pxid : Xid_t*, ppenlist : ITransactionEnlistmentAsync*) : HRESULT
-    @lpVtbl.value.enlist2.unsafe_as(Proc(ITransaction, ITransactionResourceAsync, BOID*, Int32*, Xid_t*, ITransactionEnlistmentAsync*, HRESULT)).call(ptransaction, presasync, puow, pisolevel, pxid, ppenlist)
+  def enlist2(this : IResourceManager2*, ptransaction : ITransaction, presasync : ITransactionResourceAsync, puow : BOID*, pisolevel : Int32*, pxid : Xid_t*, ppenlist : ITransactionEnlistmentAsync*) : HRESULT
+    @lpVtbl.value.enlist2.call(this, ptransaction, presasync, puow, pisolevel, pxid, ppenlist)
   end
-  def reenlist2(pxid : Xid_t*, dwtimeout : UInt32, pxactstat : XACTSTAT*) : HRESULT
-    @lpVtbl.value.reenlist2.unsafe_as(Proc(Xid_t*, UInt32, XACTSTAT*, HRESULT)).call(pxid, dwtimeout, pxactstat)
+  def reenlist2(this : IResourceManager2*, pxid : Xid_t*, dwtimeout : UInt32, pxactstat : XACTSTAT*) : HRESULT
+    @lpVtbl.value.reenlist2.call(this, pxid, dwtimeout, pxactstat)
   end
 end
 struct LibWin32::IResourceManagerRejoinable
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IResourceManagerRejoinable*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IResourceManagerRejoinable*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IResourceManagerRejoinable*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def enlist(ptransaction : ITransaction, pres : ITransactionResourceAsync, puow : BOID*, pisolevel : Int32*, ppenlist : ITransactionEnlistmentAsync*) : HRESULT
-    @lpVtbl.value.enlist.unsafe_as(Proc(ITransaction, ITransactionResourceAsync, BOID*, Int32*, ITransactionEnlistmentAsync*, HRESULT)).call(ptransaction, pres, puow, pisolevel, ppenlist)
+  def enlist(this : IResourceManagerRejoinable*, ptransaction : ITransaction, pres : ITransactionResourceAsync, puow : BOID*, pisolevel : Int32*, ppenlist : ITransactionEnlistmentAsync*) : HRESULT
+    @lpVtbl.value.enlist.call(this, ptransaction, pres, puow, pisolevel, ppenlist)
   end
-  def reenlist(pprepinfo : UInt8*, cbprepinfo : UInt32, ltimeout : UInt32, pxactstat : XACTSTAT*) : HRESULT
-    @lpVtbl.value.reenlist.unsafe_as(Proc(UInt8*, UInt32, UInt32, XACTSTAT*, HRESULT)).call(pprepinfo, cbprepinfo, ltimeout, pxactstat)
+  def reenlist(this : IResourceManagerRejoinable*, pprepinfo : UInt8*, cbprepinfo : UInt32, ltimeout : UInt32, pxactstat : XACTSTAT*) : HRESULT
+    @lpVtbl.value.reenlist.call(this, pprepinfo, cbprepinfo, ltimeout, pxactstat)
   end
-  def reenlistment_complete : HRESULT
-    @lpVtbl.value.reenlistment_complete.unsafe_as(Proc(HRESULT)).call
+  def reenlistment_complete(this : IResourceManagerRejoinable*) : HRESULT
+    @lpVtbl.value.reenlistment_complete.call(this)
   end
-  def get_distributed_transaction_manager(iid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.get_distributed_transaction_manager.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(iid, ppvobject)
+  def get_distributed_transaction_manager(this : IResourceManagerRejoinable*, iid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.get_distributed_transaction_manager.call(this, iid, ppvobject)
   end
-  def enlist2(ptransaction : ITransaction, presasync : ITransactionResourceAsync, puow : BOID*, pisolevel : Int32*, pxid : Xid_t*, ppenlist : ITransactionEnlistmentAsync*) : HRESULT
-    @lpVtbl.value.enlist2.unsafe_as(Proc(ITransaction, ITransactionResourceAsync, BOID*, Int32*, Xid_t*, ITransactionEnlistmentAsync*, HRESULT)).call(ptransaction, presasync, puow, pisolevel, pxid, ppenlist)
+  def enlist2(this : IResourceManagerRejoinable*, ptransaction : ITransaction, presasync : ITransactionResourceAsync, puow : BOID*, pisolevel : Int32*, pxid : Xid_t*, ppenlist : ITransactionEnlistmentAsync*) : HRESULT
+    @lpVtbl.value.enlist2.call(this, ptransaction, presasync, puow, pisolevel, pxid, ppenlist)
   end
-  def reenlist2(pxid : Xid_t*, dwtimeout : UInt32, pxactstat : XACTSTAT*) : HRESULT
-    @lpVtbl.value.reenlist2.unsafe_as(Proc(Xid_t*, UInt32, XACTSTAT*, HRESULT)).call(pxid, dwtimeout, pxactstat)
+  def reenlist2(this : IResourceManagerRejoinable*, pxid : Xid_t*, dwtimeout : UInt32, pxactstat : XACTSTAT*) : HRESULT
+    @lpVtbl.value.reenlist2.call(this, pxid, dwtimeout, pxactstat)
   end
-  def rejoin(pprepinfo : UInt8*, cbprepinfo : UInt32, ltimeout : UInt32, pxactstat : XACTSTAT*) : HRESULT
-    @lpVtbl.value.rejoin.unsafe_as(Proc(UInt8*, UInt32, UInt32, XACTSTAT*, HRESULT)).call(pprepinfo, cbprepinfo, ltimeout, pxactstat)
+  def rejoin(this : IResourceManagerRejoinable*, pprepinfo : UInt8*, cbprepinfo : UInt32, ltimeout : UInt32, pxactstat : XACTSTAT*) : HRESULT
+    @lpVtbl.value.rejoin.call(this, pprepinfo, cbprepinfo, ltimeout, pxactstat)
   end
 end
 struct LibWin32::IXAConfig
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXAConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXAConfig*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXAConfig*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def initialize(clsidhelperdll : Guid) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(Guid, HRESULT)).call(clsidhelperdll)
+  def initialize(this : IXAConfig*, clsidhelperdll : Guid) : HRESULT
+    @lpVtbl.value.initialize.call(this, clsidhelperdll)
   end
-  def terminate : HRESULT
-    @lpVtbl.value.terminate.unsafe_as(Proc(HRESULT)).call
+  def terminate(this : IXAConfig*) : HRESULT
+    @lpVtbl.value.terminate.call(this)
   end
 end
 struct LibWin32::IRMHelper
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IRMHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IRMHelper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IRMHelper*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def rm_count(dwctotalnumberofrms : UInt32) : HRESULT
-    @lpVtbl.value.rm_count.unsafe_as(Proc(UInt32, HRESULT)).call(dwctotalnumberofrms)
+  def rm_count(this : IRMHelper*, dwctotalnumberofrms : UInt32) : HRESULT
+    @lpVtbl.value.rm_count.call(this, dwctotalnumberofrms)
   end
-  def rm_info(pxa_switch : Xa_switch_t*, fcdeclcallingconv : LibC::BOOL, pszopenstring : PSTR, pszclosestring : PSTR, guidrmrecovery : Guid) : HRESULT
-    @lpVtbl.value.rm_info.unsafe_as(Proc(Xa_switch_t*, LibC::BOOL, PSTR, PSTR, Guid, HRESULT)).call(pxa_switch, fcdeclcallingconv, pszopenstring, pszclosestring, guidrmrecovery)
+  def rm_info(this : IRMHelper*, pxa_switch : Xa_switch_t*, fcdeclcallingconv : LibC::BOOL, pszopenstring : PSTR, pszclosestring : PSTR, guidrmrecovery : Guid) : HRESULT
+    @lpVtbl.value.rm_info.call(this, pxa_switch, fcdeclcallingconv, pszopenstring, pszclosestring, guidrmrecovery)
   end
 end
 struct LibWin32::IXAObtainRMInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXAObtainRMInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXAObtainRMInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXAObtainRMInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def obtain_rm_info(pirmhelper : IRMHelper) : HRESULT
-    @lpVtbl.value.obtain_rm_info.unsafe_as(Proc(IRMHelper, HRESULT)).call(pirmhelper)
+  def obtain_rm_info(this : IXAObtainRMInfo*, pirmhelper : IRMHelper) : HRESULT
+    @lpVtbl.value.obtain_rm_info.call(this, pirmhelper)
   end
 end
 struct LibWin32::IResourceManagerFactory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IResourceManagerFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IResourceManagerFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IResourceManagerFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create(pguidrm : Guid*, pszrmname : PSTR, piresmgrsink : IResourceManagerSink, ppresmgr : IResourceManager*) : HRESULT
-    @lpVtbl.value.create.unsafe_as(Proc(Guid*, PSTR, IResourceManagerSink, IResourceManager*, HRESULT)).call(pguidrm, pszrmname, piresmgrsink, ppresmgr)
+  def create(this : IResourceManagerFactory*, pguidrm : Guid*, pszrmname : PSTR, piresmgrsink : IResourceManagerSink, ppresmgr : IResourceManager*) : HRESULT
+    @lpVtbl.value.create.call(this, pguidrm, pszrmname, piresmgrsink, ppresmgr)
   end
 end
 struct LibWin32::IResourceManagerFactory2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IResourceManagerFactory2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IResourceManagerFactory2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IResourceManagerFactory2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create(pguidrm : Guid*, pszrmname : PSTR, piresmgrsink : IResourceManagerSink, ppresmgr : IResourceManager*) : HRESULT
-    @lpVtbl.value.create.unsafe_as(Proc(Guid*, PSTR, IResourceManagerSink, IResourceManager*, HRESULT)).call(pguidrm, pszrmname, piresmgrsink, ppresmgr)
+  def create(this : IResourceManagerFactory2*, pguidrm : Guid*, pszrmname : PSTR, piresmgrsink : IResourceManagerSink, ppresmgr : IResourceManager*) : HRESULT
+    @lpVtbl.value.create.call(this, pguidrm, pszrmname, piresmgrsink, ppresmgr)
   end
-  def create_ex(pguidrm : Guid*, pszrmname : PSTR, piresmgrsink : IResourceManagerSink, riidrequested : Guid*, ppvresmgr : Void**) : HRESULT
-    @lpVtbl.value.create_ex.unsafe_as(Proc(Guid*, PSTR, IResourceManagerSink, Guid*, Void**, HRESULT)).call(pguidrm, pszrmname, piresmgrsink, riidrequested, ppvresmgr)
+  def create_ex(this : IResourceManagerFactory2*, pguidrm : Guid*, pszrmname : PSTR, piresmgrsink : IResourceManagerSink, riidrequested : Guid*, ppvresmgr : Void**) : HRESULT
+    @lpVtbl.value.create_ex.call(this, pguidrm, pszrmname, piresmgrsink, riidrequested, ppvresmgr)
   end
 end
 struct LibWin32::IPrepareInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrepareInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrepareInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrepareInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_prepare_info_size(pcbprepinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_prepare_info_size.unsafe_as(Proc(UInt32*, HRESULT)).call(pcbprepinfo)
+  def get_prepare_info_size(this : IPrepareInfo*, pcbprepinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_prepare_info_size.call(this, pcbprepinfo)
   end
-  def get_prepare_info(pprepinfo : UInt8*) : HRESULT
-    @lpVtbl.value.get_prepare_info.unsafe_as(Proc(UInt8*, HRESULT)).call(pprepinfo)
+  def get_prepare_info(this : IPrepareInfo*, pprepinfo : UInt8*) : HRESULT
+    @lpVtbl.value.get_prepare_info.call(this, pprepinfo)
   end
 end
 struct LibWin32::IPrepareInfo2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPrepareInfo2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPrepareInfo2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPrepareInfo2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_prepare_info_size(pcbprepinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_prepare_info_size.unsafe_as(Proc(UInt32*, HRESULT)).call(pcbprepinfo)
+  def get_prepare_info_size(this : IPrepareInfo2*, pcbprepinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_prepare_info_size.call(this, pcbprepinfo)
   end
-  def get_prepare_info(cbprepareinfo : UInt32, pprepinfo : UInt8*) : HRESULT
-    @lpVtbl.value.get_prepare_info.unsafe_as(Proc(UInt32, UInt8*, HRESULT)).call(cbprepareinfo, pprepinfo)
+  def get_prepare_info(this : IPrepareInfo2*, cbprepareinfo : UInt32, pprepinfo : UInt8*) : HRESULT
+    @lpVtbl.value.get_prepare_info.call(this, cbprepareinfo, pprepinfo)
   end
 end
 struct LibWin32::IGetDispenser
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IGetDispenser*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IGetDispenser*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IGetDispenser*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_dispenser(iid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.get_dispenser.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(iid, ppvobject)
+  def get_dispenser(this : IGetDispenser*, iid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.get_dispenser.call(this, iid, ppvobject)
   end
 end
 struct LibWin32::ITransactionVoterBallotAsync2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionVoterBallotAsync2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionVoterBallotAsync2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionVoterBallotAsync2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def vote_request_done(hr : HRESULT, pboidreason : BOID*) : HRESULT
-    @lpVtbl.value.vote_request_done.unsafe_as(Proc(HRESULT, BOID*, HRESULT)).call(hr, pboidreason)
+  def vote_request_done(this : ITransactionVoterBallotAsync2*, hr : HRESULT, pboidreason : BOID*) : HRESULT
+    @lpVtbl.value.vote_request_done.call(this, hr, pboidreason)
   end
 end
 struct LibWin32::ITransactionVoterNotifyAsync2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionVoterNotifyAsync2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionVoterNotifyAsync2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionVoterNotifyAsync2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def committed(fretaining : LibC::BOOL, pnewuow : BOID*, hr : HRESULT) : HRESULT
-    @lpVtbl.value.committed.unsafe_as(Proc(LibC::BOOL, BOID*, HRESULT, HRESULT)).call(fretaining, pnewuow, hr)
+  def committed(this : ITransactionVoterNotifyAsync2*, fretaining : LibC::BOOL, pnewuow : BOID*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.committed.call(this, fretaining, pnewuow, hr)
   end
-  def aborted(pboidreason : BOID*, fretaining : LibC::BOOL, pnewuow : BOID*, hr : HRESULT) : HRESULT
-    @lpVtbl.value.aborted.unsafe_as(Proc(BOID*, LibC::BOOL, BOID*, HRESULT, HRESULT)).call(pboidreason, fretaining, pnewuow, hr)
+  def aborted(this : ITransactionVoterNotifyAsync2*, pboidreason : BOID*, fretaining : LibC::BOOL, pnewuow : BOID*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.aborted.call(this, pboidreason, fretaining, pnewuow, hr)
   end
-  def heuristic_decision(dwdecision : UInt32, pboidreason : BOID*, hr : HRESULT) : HRESULT
-    @lpVtbl.value.heuristic_decision.unsafe_as(Proc(UInt32, BOID*, HRESULT, HRESULT)).call(dwdecision, pboidreason, hr)
+  def heuristic_decision(this : ITransactionVoterNotifyAsync2*, dwdecision : UInt32, pboidreason : BOID*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.heuristic_decision.call(this, dwdecision, pboidreason, hr)
   end
-  def indoubt : HRESULT
-    @lpVtbl.value.indoubt.unsafe_as(Proc(HRESULT)).call
+  def indoubt(this : ITransactionVoterNotifyAsync2*) : HRESULT
+    @lpVtbl.value.indoubt.call(this)
   end
-  def vote_request : HRESULT
-    @lpVtbl.value.vote_request.unsafe_as(Proc(HRESULT)).call
+  def vote_request(this : ITransactionVoterNotifyAsync2*) : HRESULT
+    @lpVtbl.value.vote_request.call(this)
   end
 end
 struct LibWin32::ITransactionVoterFactory2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionVoterFactory2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionVoterFactory2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionVoterFactory2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create(ptransaction : ITransaction, pvoternotify : ITransactionVoterNotifyAsync2, ppvoterballot : ITransactionVoterBallotAsync2*) : HRESULT
-    @lpVtbl.value.create.unsafe_as(Proc(ITransaction, ITransactionVoterNotifyAsync2, ITransactionVoterBallotAsync2*, HRESULT)).call(ptransaction, pvoternotify, ppvoterballot)
+  def create(this : ITransactionVoterFactory2*, ptransaction : ITransaction, pvoternotify : ITransactionVoterNotifyAsync2, ppvoterballot : ITransactionVoterBallotAsync2*) : HRESULT
+    @lpVtbl.value.create.call(this, ptransaction, pvoternotify, ppvoterballot)
   end
 end
 struct LibWin32::ITransactionPhase0EnlistmentAsync
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionPhase0EnlistmentAsync*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionPhase0EnlistmentAsync*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionPhase0EnlistmentAsync*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def enable : HRESULT
-    @lpVtbl.value.enable.unsafe_as(Proc(HRESULT)).call
+  def enable(this : ITransactionPhase0EnlistmentAsync*) : HRESULT
+    @lpVtbl.value.enable.call(this)
   end
-  def wait_for_enlistment : HRESULT
-    @lpVtbl.value.wait_for_enlistment.unsafe_as(Proc(HRESULT)).call
+  def wait_for_enlistment(this : ITransactionPhase0EnlistmentAsync*) : HRESULT
+    @lpVtbl.value.wait_for_enlistment.call(this)
   end
-  def phase0_done : HRESULT
-    @lpVtbl.value.phase0_done.unsafe_as(Proc(HRESULT)).call
+  def phase0_done(this : ITransactionPhase0EnlistmentAsync*) : HRESULT
+    @lpVtbl.value.phase0_done.call(this)
   end
-  def unenlist : HRESULT
-    @lpVtbl.value.unenlist.unsafe_as(Proc(HRESULT)).call
+  def unenlist(this : ITransactionPhase0EnlistmentAsync*) : HRESULT
+    @lpVtbl.value.unenlist.call(this)
   end
-  def get_transaction(ppitransaction : ITransaction*) : HRESULT
-    @lpVtbl.value.get_transaction.unsafe_as(Proc(ITransaction*, HRESULT)).call(ppitransaction)
+  def get_transaction(this : ITransactionPhase0EnlistmentAsync*, ppitransaction : ITransaction*) : HRESULT
+    @lpVtbl.value.get_transaction.call(this, ppitransaction)
   end
 end
 struct LibWin32::ITransactionPhase0NotifyAsync
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionPhase0NotifyAsync*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionPhase0NotifyAsync*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionPhase0NotifyAsync*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def phase0_request(fabortinghint : LibC::BOOL) : HRESULT
-    @lpVtbl.value.phase0_request.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fabortinghint)
+  def phase0_request(this : ITransactionPhase0NotifyAsync*, fabortinghint : LibC::BOOL) : HRESULT
+    @lpVtbl.value.phase0_request.call(this, fabortinghint)
   end
-  def enlist_completed(status : HRESULT) : HRESULT
-    @lpVtbl.value.enlist_completed.unsafe_as(Proc(HRESULT, HRESULT)).call(status)
+  def enlist_completed(this : ITransactionPhase0NotifyAsync*, status : HRESULT) : HRESULT
+    @lpVtbl.value.enlist_completed.call(this, status)
   end
 end
 struct LibWin32::ITransactionPhase0Factory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionPhase0Factory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionPhase0Factory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionPhase0Factory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create(pphase0notify : ITransactionPhase0NotifyAsync, ppphase0enlistment : ITransactionPhase0EnlistmentAsync*) : HRESULT
-    @lpVtbl.value.create.unsafe_as(Proc(ITransactionPhase0NotifyAsync, ITransactionPhase0EnlistmentAsync*, HRESULT)).call(pphase0notify, ppphase0enlistment)
+  def create(this : ITransactionPhase0Factory*, pphase0notify : ITransactionPhase0NotifyAsync, ppphase0enlistment : ITransactionPhase0EnlistmentAsync*) : HRESULT
+    @lpVtbl.value.create.call(this, pphase0notify, ppphase0enlistment)
   end
 end
 struct LibWin32::ITransactionTransmitter
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionTransmitter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionTransmitter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionTransmitter*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set(ptransaction : ITransaction) : HRESULT
-    @lpVtbl.value.set.unsafe_as(Proc(ITransaction, HRESULT)).call(ptransaction)
+  def set(this : ITransactionTransmitter*, ptransaction : ITransaction) : HRESULT
+    @lpVtbl.value.set.call(this, ptransaction)
   end
-  def get_propagation_token_size(pcbtoken : UInt32*) : HRESULT
-    @lpVtbl.value.get_propagation_token_size.unsafe_as(Proc(UInt32*, HRESULT)).call(pcbtoken)
+  def get_propagation_token_size(this : ITransactionTransmitter*, pcbtoken : UInt32*) : HRESULT
+    @lpVtbl.value.get_propagation_token_size.call(this, pcbtoken)
   end
-  def marshal_propagation_token(cbtoken : UInt32, rgbtoken : UInt8*, pcbused : UInt32*) : HRESULT
-    @lpVtbl.value.marshal_propagation_token.unsafe_as(Proc(UInt32, UInt8*, UInt32*, HRESULT)).call(cbtoken, rgbtoken, pcbused)
+  def marshal_propagation_token(this : ITransactionTransmitter*, cbtoken : UInt32, rgbtoken : UInt8*, pcbused : UInt32*) : HRESULT
+    @lpVtbl.value.marshal_propagation_token.call(this, cbtoken, rgbtoken, pcbused)
   end
-  def unmarshal_return_token(cbreturntoken : UInt32, rgbreturntoken : UInt8*) : HRESULT
-    @lpVtbl.value.unmarshal_return_token.unsafe_as(Proc(UInt32, UInt8*, HRESULT)).call(cbreturntoken, rgbreturntoken)
+  def unmarshal_return_token(this : ITransactionTransmitter*, cbreturntoken : UInt32, rgbreturntoken : UInt8*) : HRESULT
+    @lpVtbl.value.unmarshal_return_token.call(this, cbreturntoken, rgbreturntoken)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : ITransactionTransmitter*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
 end
 struct LibWin32::ITransactionTransmitterFactory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionTransmitterFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionTransmitterFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionTransmitterFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create(pptransmitter : ITransactionTransmitter*) : HRESULT
-    @lpVtbl.value.create.unsafe_as(Proc(ITransactionTransmitter*, HRESULT)).call(pptransmitter)
+  def create(this : ITransactionTransmitterFactory*, pptransmitter : ITransactionTransmitter*) : HRESULT
+    @lpVtbl.value.create.call(this, pptransmitter)
   end
 end
 struct LibWin32::ITransactionReceiver
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionReceiver*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionReceiver*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionReceiver*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def unmarshal_propagation_token(cbtoken : UInt32, rgbtoken : UInt8*, pptransaction : ITransaction*) : HRESULT
-    @lpVtbl.value.unmarshal_propagation_token.unsafe_as(Proc(UInt32, UInt8*, ITransaction*, HRESULT)).call(cbtoken, rgbtoken, pptransaction)
+  def unmarshal_propagation_token(this : ITransactionReceiver*, cbtoken : UInt32, rgbtoken : UInt8*, pptransaction : ITransaction*) : HRESULT
+    @lpVtbl.value.unmarshal_propagation_token.call(this, cbtoken, rgbtoken, pptransaction)
   end
-  def get_return_token_size(pcbreturntoken : UInt32*) : HRESULT
-    @lpVtbl.value.get_return_token_size.unsafe_as(Proc(UInt32*, HRESULT)).call(pcbreturntoken)
+  def get_return_token_size(this : ITransactionReceiver*, pcbreturntoken : UInt32*) : HRESULT
+    @lpVtbl.value.get_return_token_size.call(this, pcbreturntoken)
   end
-  def marshal_return_token(cbreturntoken : UInt32, rgbreturntoken : UInt8*, pcbused : UInt32*) : HRESULT
-    @lpVtbl.value.marshal_return_token.unsafe_as(Proc(UInt32, UInt8*, UInt32*, HRESULT)).call(cbreturntoken, rgbreturntoken, pcbused)
+  def marshal_return_token(this : ITransactionReceiver*, cbreturntoken : UInt32, rgbreturntoken : UInt8*, pcbused : UInt32*) : HRESULT
+    @lpVtbl.value.marshal_return_token.call(this, cbreturntoken, rgbreturntoken, pcbused)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : ITransactionReceiver*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
 end
 struct LibWin32::ITransactionReceiverFactory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ITransactionReceiverFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ITransactionReceiverFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ITransactionReceiverFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create(ppreceiver : ITransactionReceiver*) : HRESULT
-    @lpVtbl.value.create.unsafe_as(Proc(ITransactionReceiver*, HRESULT)).call(ppreceiver)
+  def create(this : ITransactionReceiverFactory*, ppreceiver : ITransactionReceiver*) : HRESULT
+    @lpVtbl.value.create.call(this, ppreceiver)
   end
 end
 struct LibWin32::IDtcLuConfigure
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcLuConfigure*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcLuConfigure*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcLuConfigure*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add(puclupair : UInt8*, cblupair : UInt32) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(puclupair, cblupair)
+  def add(this : IDtcLuConfigure*, puclupair : UInt8*, cblupair : UInt32) : HRESULT
+    @lpVtbl.value.add.call(this, puclupair, cblupair)
   end
-  def delete(puclupair : UInt8*, cblupair : UInt32) : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(puclupair, cblupair)
+  def delete(this : IDtcLuConfigure*, puclupair : UInt8*, cblupair : UInt32) : HRESULT
+    @lpVtbl.value.delete.call(this, puclupair, cblupair)
   end
 end
 struct LibWin32::IDtcLuRecovery
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcLuRecovery*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcLuRecovery*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcLuRecovery*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
 end
 struct LibWin32::IDtcLuRecoveryFactory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcLuRecoveryFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcLuRecoveryFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcLuRecoveryFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create(puclupair : UInt8*, cblupair : UInt32, pprecovery : IDtcLuRecovery*) : HRESULT
-    @lpVtbl.value.create.unsafe_as(Proc(UInt8*, UInt32, IDtcLuRecovery*, HRESULT)).call(puclupair, cblupair, pprecovery)
+  def create(this : IDtcLuRecoveryFactory*, puclupair : UInt8*, cblupair : UInt32, pprecovery : IDtcLuRecovery*) : HRESULT
+    @lpVtbl.value.create.call(this, puclupair, cblupair, pprecovery)
   end
 end
 struct LibWin32::IDtcLuRecoveryInitiatedByDtcTransWork
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcLuRecoveryInitiatedByDtcTransWork*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcLuRecoveryInitiatedByDtcTransWork*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcLuRecoveryInitiatedByDtcTransWork*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_log_name_sizes(pcbourlogname : UInt32*, pcbremotelogname : UInt32*) : HRESULT
-    @lpVtbl.value.get_log_name_sizes.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pcbourlogname, pcbremotelogname)
+  def get_log_name_sizes(this : IDtcLuRecoveryInitiatedByDtcTransWork*, pcbourlogname : UInt32*, pcbremotelogname : UInt32*) : HRESULT
+    @lpVtbl.value.get_log_name_sizes.call(this, pcbourlogname, pcbremotelogname)
   end
-  def get_our_xln(pxln : DtcLu_Xln*, pourlogname : UInt8*, premotelogname : UInt8*, pdwprotocol : UInt32*) : HRESULT
-    @lpVtbl.value.get_our_xln.unsafe_as(Proc(DtcLu_Xln*, UInt8*, UInt8*, UInt32*, HRESULT)).call(pxln, pourlogname, premotelogname, pdwprotocol)
+  def get_our_xln(this : IDtcLuRecoveryInitiatedByDtcTransWork*, pxln : DtcLu_Xln*, pourlogname : UInt8*, premotelogname : UInt8*, pdwprotocol : UInt32*) : HRESULT
+    @lpVtbl.value.get_our_xln.call(this, pxln, pourlogname, premotelogname, pdwprotocol)
   end
-  def handle_confirmation_from_our_xln(confirmation : DtcLu_Xln_Confirmation) : HRESULT
-    @lpVtbl.value.handle_confirmation_from_our_xln.unsafe_as(Proc(DtcLu_Xln_Confirmation, HRESULT)).call(confirmation)
+  def handle_confirmation_from_our_xln(this : IDtcLuRecoveryInitiatedByDtcTransWork*, confirmation : DtcLu_Xln_Confirmation) : HRESULT
+    @lpVtbl.value.handle_confirmation_from_our_xln.call(this, confirmation)
   end
-  def handle_their_xln_response(xln : DtcLu_Xln, premotelogname : UInt8*, cbremotelogname : UInt32, dwprotocol : UInt32, pconfirmation : DtcLu_Xln_Confirmation*) : HRESULT
-    @lpVtbl.value.handle_their_xln_response.unsafe_as(Proc(DtcLu_Xln, UInt8*, UInt32, UInt32, DtcLu_Xln_Confirmation*, HRESULT)).call(xln, premotelogname, cbremotelogname, dwprotocol, pconfirmation)
+  def handle_their_xln_response(this : IDtcLuRecoveryInitiatedByDtcTransWork*, xln : DtcLu_Xln, premotelogname : UInt8*, cbremotelogname : UInt32, dwprotocol : UInt32, pconfirmation : DtcLu_Xln_Confirmation*) : HRESULT
+    @lpVtbl.value.handle_their_xln_response.call(this, xln, premotelogname, cbremotelogname, dwprotocol, pconfirmation)
   end
-  def handle_error_from_our_xln(error : DtcLu_Xln_Error) : HRESULT
-    @lpVtbl.value.handle_error_from_our_xln.unsafe_as(Proc(DtcLu_Xln_Error, HRESULT)).call(error)
+  def handle_error_from_our_xln(this : IDtcLuRecoveryInitiatedByDtcTransWork*, error : DtcLu_Xln_Error) : HRESULT
+    @lpVtbl.value.handle_error_from_our_xln.call(this, error)
   end
-  def check_for_compare_states(fcomparestates : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.check_for_compare_states.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(fcomparestates)
+  def check_for_compare_states(this : IDtcLuRecoveryInitiatedByDtcTransWork*, fcomparestates : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_for_compare_states.call(this, fcomparestates)
   end
-  def get_our_trans_id_size(pcbourtransid : UInt32*) : HRESULT
-    @lpVtbl.value.get_our_trans_id_size.unsafe_as(Proc(UInt32*, HRESULT)).call(pcbourtransid)
+  def get_our_trans_id_size(this : IDtcLuRecoveryInitiatedByDtcTransWork*, pcbourtransid : UInt32*) : HRESULT
+    @lpVtbl.value.get_our_trans_id_size.call(this, pcbourtransid)
   end
-  def get_our_compare_states(pourtransid : UInt8*, pcomparestate : DtcLu_CompareState*) : HRESULT
-    @lpVtbl.value.get_our_compare_states.unsafe_as(Proc(UInt8*, DtcLu_CompareState*, HRESULT)).call(pourtransid, pcomparestate)
+  def get_our_compare_states(this : IDtcLuRecoveryInitiatedByDtcTransWork*, pourtransid : UInt8*, pcomparestate : DtcLu_CompareState*) : HRESULT
+    @lpVtbl.value.get_our_compare_states.call(this, pourtransid, pcomparestate)
   end
-  def handle_their_compare_states_response(comparestate : DtcLu_CompareState, pconfirmation : DtcLu_CompareStates_Confirmation*) : HRESULT
-    @lpVtbl.value.handle_their_compare_states_response.unsafe_as(Proc(DtcLu_CompareState, DtcLu_CompareStates_Confirmation*, HRESULT)).call(comparestate, pconfirmation)
+  def handle_their_compare_states_response(this : IDtcLuRecoveryInitiatedByDtcTransWork*, comparestate : DtcLu_CompareState, pconfirmation : DtcLu_CompareStates_Confirmation*) : HRESULT
+    @lpVtbl.value.handle_their_compare_states_response.call(this, comparestate, pconfirmation)
   end
-  def handle_error_from_our_compare_states(error : DtcLu_CompareStates_Error) : HRESULT
-    @lpVtbl.value.handle_error_from_our_compare_states.unsafe_as(Proc(DtcLu_CompareStates_Error, HRESULT)).call(error)
+  def handle_error_from_our_compare_states(this : IDtcLuRecoveryInitiatedByDtcTransWork*, error : DtcLu_CompareStates_Error) : HRESULT
+    @lpVtbl.value.handle_error_from_our_compare_states.call(this, error)
   end
-  def conversation_lost : HRESULT
-    @lpVtbl.value.conversation_lost.unsafe_as(Proc(HRESULT)).call
+  def conversation_lost(this : IDtcLuRecoveryInitiatedByDtcTransWork*) : HRESULT
+    @lpVtbl.value.conversation_lost.call(this)
   end
-  def get_recovery_seq_num(plrecoveryseqnum : Int32*) : HRESULT
-    @lpVtbl.value.get_recovery_seq_num.unsafe_as(Proc(Int32*, HRESULT)).call(plrecoveryseqnum)
+  def get_recovery_seq_num(this : IDtcLuRecoveryInitiatedByDtcTransWork*, plrecoveryseqnum : Int32*) : HRESULT
+    @lpVtbl.value.get_recovery_seq_num.call(this, plrecoveryseqnum)
   end
-  def obsolete_recovery_seq_num(lnewrecoveryseqnum : Int32) : HRESULT
-    @lpVtbl.value.obsolete_recovery_seq_num.unsafe_as(Proc(Int32, HRESULT)).call(lnewrecoveryseqnum)
+  def obsolete_recovery_seq_num(this : IDtcLuRecoveryInitiatedByDtcTransWork*, lnewrecoveryseqnum : Int32) : HRESULT
+    @lpVtbl.value.obsolete_recovery_seq_num.call(this, lnewrecoveryseqnum)
   end
 end
 struct LibWin32::IDtcLuRecoveryInitiatedByDtcStatusWork
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcLuRecoveryInitiatedByDtcStatusWork*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcLuRecoveryInitiatedByDtcStatusWork*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcLuRecoveryInitiatedByDtcStatusWork*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def handle_check_lu_status(lrecoveryseqnum : Int32) : HRESULT
-    @lpVtbl.value.handle_check_lu_status.unsafe_as(Proc(Int32, HRESULT)).call(lrecoveryseqnum)
+  def handle_check_lu_status(this : IDtcLuRecoveryInitiatedByDtcStatusWork*, lrecoveryseqnum : Int32) : HRESULT
+    @lpVtbl.value.handle_check_lu_status.call(this, lrecoveryseqnum)
   end
 end
 struct LibWin32::IDtcLuRecoveryInitiatedByDtc
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcLuRecoveryInitiatedByDtc*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcLuRecoveryInitiatedByDtc*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcLuRecoveryInitiatedByDtc*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_work(pwork : DtcLu_LocalRecovery_Work*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_work.unsafe_as(Proc(DtcLu_LocalRecovery_Work*, Void**, HRESULT)).call(pwork, ppv)
+  def get_work(this : IDtcLuRecoveryInitiatedByDtc*, pwork : DtcLu_LocalRecovery_Work*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_work.call(this, pwork, ppv)
   end
 end
 struct LibWin32::IDtcLuRecoveryInitiatedByLuWork
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcLuRecoveryInitiatedByLuWork*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcLuRecoveryInitiatedByLuWork*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcLuRecoveryInitiatedByLuWork*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def handle_their_xln(lrecoveryseqnum : Int32, xln : DtcLu_Xln, premotelogname : UInt8*, cbremotelogname : UInt32, pourlogname : UInt8*, cbourlogname : UInt32, dwprotocol : UInt32, presponse : DtcLu_Xln_Response*) : HRESULT
-    @lpVtbl.value.handle_their_xln.unsafe_as(Proc(Int32, DtcLu_Xln, UInt8*, UInt32, UInt8*, UInt32, UInt32, DtcLu_Xln_Response*, HRESULT)).call(lrecoveryseqnum, xln, premotelogname, cbremotelogname, pourlogname, cbourlogname, dwprotocol, presponse)
+  def handle_their_xln(this : IDtcLuRecoveryInitiatedByLuWork*, lrecoveryseqnum : Int32, xln : DtcLu_Xln, premotelogname : UInt8*, cbremotelogname : UInt32, pourlogname : UInt8*, cbourlogname : UInt32, dwprotocol : UInt32, presponse : DtcLu_Xln_Response*) : HRESULT
+    @lpVtbl.value.handle_their_xln.call(this, lrecoveryseqnum, xln, premotelogname, cbremotelogname, pourlogname, cbourlogname, dwprotocol, presponse)
   end
-  def get_our_log_name_size(pcbourlogname : UInt32*) : HRESULT
-    @lpVtbl.value.get_our_log_name_size.unsafe_as(Proc(UInt32*, HRESULT)).call(pcbourlogname)
+  def get_our_log_name_size(this : IDtcLuRecoveryInitiatedByLuWork*, pcbourlogname : UInt32*) : HRESULT
+    @lpVtbl.value.get_our_log_name_size.call(this, pcbourlogname)
   end
-  def get_our_xln(pxln : DtcLu_Xln*, pourlogname : UInt8*, pdwprotocol : UInt32*) : HRESULT
-    @lpVtbl.value.get_our_xln.unsafe_as(Proc(DtcLu_Xln*, UInt8*, UInt32*, HRESULT)).call(pxln, pourlogname, pdwprotocol)
+  def get_our_xln(this : IDtcLuRecoveryInitiatedByLuWork*, pxln : DtcLu_Xln*, pourlogname : UInt8*, pdwprotocol : UInt32*) : HRESULT
+    @lpVtbl.value.get_our_xln.call(this, pxln, pourlogname, pdwprotocol)
   end
-  def handle_confirmation_of_our_xln(confirmation : DtcLu_Xln_Confirmation) : HRESULT
-    @lpVtbl.value.handle_confirmation_of_our_xln.unsafe_as(Proc(DtcLu_Xln_Confirmation, HRESULT)).call(confirmation)
+  def handle_confirmation_of_our_xln(this : IDtcLuRecoveryInitiatedByLuWork*, confirmation : DtcLu_Xln_Confirmation) : HRESULT
+    @lpVtbl.value.handle_confirmation_of_our_xln.call(this, confirmation)
   end
-  def handle_their_compare_states(premotetransid : UInt8*, cbremotetransid : UInt32, comparestate : DtcLu_CompareState, presponse : DtcLu_CompareStates_Response*, pcomparestate : DtcLu_CompareState*) : HRESULT
-    @lpVtbl.value.handle_their_compare_states.unsafe_as(Proc(UInt8*, UInt32, DtcLu_CompareState, DtcLu_CompareStates_Response*, DtcLu_CompareState*, HRESULT)).call(premotetransid, cbremotetransid, comparestate, presponse, pcomparestate)
+  def handle_their_compare_states(this : IDtcLuRecoveryInitiatedByLuWork*, premotetransid : UInt8*, cbremotetransid : UInt32, comparestate : DtcLu_CompareState, presponse : DtcLu_CompareStates_Response*, pcomparestate : DtcLu_CompareState*) : HRESULT
+    @lpVtbl.value.handle_their_compare_states.call(this, premotetransid, cbremotetransid, comparestate, presponse, pcomparestate)
   end
-  def handle_confirmation_of_our_compare_states(confirmation : DtcLu_CompareStates_Confirmation) : HRESULT
-    @lpVtbl.value.handle_confirmation_of_our_compare_states.unsafe_as(Proc(DtcLu_CompareStates_Confirmation, HRESULT)).call(confirmation)
+  def handle_confirmation_of_our_compare_states(this : IDtcLuRecoveryInitiatedByLuWork*, confirmation : DtcLu_CompareStates_Confirmation) : HRESULT
+    @lpVtbl.value.handle_confirmation_of_our_compare_states.call(this, confirmation)
   end
-  def handle_error_from_our_compare_states(error : DtcLu_CompareStates_Error) : HRESULT
-    @lpVtbl.value.handle_error_from_our_compare_states.unsafe_as(Proc(DtcLu_CompareStates_Error, HRESULT)).call(error)
+  def handle_error_from_our_compare_states(this : IDtcLuRecoveryInitiatedByLuWork*, error : DtcLu_CompareStates_Error) : HRESULT
+    @lpVtbl.value.handle_error_from_our_compare_states.call(this, error)
   end
-  def conversation_lost : HRESULT
-    @lpVtbl.value.conversation_lost.unsafe_as(Proc(HRESULT)).call
+  def conversation_lost(this : IDtcLuRecoveryInitiatedByLuWork*) : HRESULT
+    @lpVtbl.value.conversation_lost.call(this)
   end
 end
 struct LibWin32::IDtcLuRecoveryInitiatedByLu
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcLuRecoveryInitiatedByLu*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcLuRecoveryInitiatedByLu*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcLuRecoveryInitiatedByLu*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_object_to_handle_work_from_lu(ppwork : IDtcLuRecoveryInitiatedByLuWork*) : HRESULT
-    @lpVtbl.value.get_object_to_handle_work_from_lu.unsafe_as(Proc(IDtcLuRecoveryInitiatedByLuWork*, HRESULT)).call(ppwork)
+  def get_object_to_handle_work_from_lu(this : IDtcLuRecoveryInitiatedByLu*, ppwork : IDtcLuRecoveryInitiatedByLuWork*) : HRESULT
+    @lpVtbl.value.get_object_to_handle_work_from_lu.call(this, ppwork)
   end
 end
 struct LibWin32::IDtcLuRmEnlistment
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcLuRmEnlistment*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcLuRmEnlistment*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcLuRmEnlistment*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def unplug(fconversationlost : LibC::BOOL) : HRESULT
-    @lpVtbl.value.unplug.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fconversationlost)
+  def unplug(this : IDtcLuRmEnlistment*, fconversationlost : LibC::BOOL) : HRESULT
+    @lpVtbl.value.unplug.call(this, fconversationlost)
   end
-  def backed_out : HRESULT
-    @lpVtbl.value.backed_out.unsafe_as(Proc(HRESULT)).call
+  def backed_out(this : IDtcLuRmEnlistment*) : HRESULT
+    @lpVtbl.value.backed_out.call(this)
   end
-  def back_out : HRESULT
-    @lpVtbl.value.back_out.unsafe_as(Proc(HRESULT)).call
+  def back_out(this : IDtcLuRmEnlistment*) : HRESULT
+    @lpVtbl.value.back_out.call(this)
   end
-  def committed : HRESULT
-    @lpVtbl.value.committed.unsafe_as(Proc(HRESULT)).call
+  def committed(this : IDtcLuRmEnlistment*) : HRESULT
+    @lpVtbl.value.committed.call(this)
   end
-  def forget : HRESULT
-    @lpVtbl.value.forget.unsafe_as(Proc(HRESULT)).call
+  def forget(this : IDtcLuRmEnlistment*) : HRESULT
+    @lpVtbl.value.forget.call(this)
   end
-  def request_commit : HRESULT
-    @lpVtbl.value.request_commit.unsafe_as(Proc(HRESULT)).call
+  def request_commit(this : IDtcLuRmEnlistment*) : HRESULT
+    @lpVtbl.value.request_commit.call(this)
   end
 end
 struct LibWin32::IDtcLuRmEnlistmentSink
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcLuRmEnlistmentSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcLuRmEnlistmentSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcLuRmEnlistmentSink*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def ack_unplug : HRESULT
-    @lpVtbl.value.ack_unplug.unsafe_as(Proc(HRESULT)).call
+  def ack_unplug(this : IDtcLuRmEnlistmentSink*) : HRESULT
+    @lpVtbl.value.ack_unplug.call(this)
   end
-  def tm_down : HRESULT
-    @lpVtbl.value.tm_down.unsafe_as(Proc(HRESULT)).call
+  def tm_down(this : IDtcLuRmEnlistmentSink*) : HRESULT
+    @lpVtbl.value.tm_down.call(this)
   end
-  def session_lost : HRESULT
-    @lpVtbl.value.session_lost.unsafe_as(Proc(HRESULT)).call
+  def session_lost(this : IDtcLuRmEnlistmentSink*) : HRESULT
+    @lpVtbl.value.session_lost.call(this)
   end
-  def backed_out : HRESULT
-    @lpVtbl.value.backed_out.unsafe_as(Proc(HRESULT)).call
+  def backed_out(this : IDtcLuRmEnlistmentSink*) : HRESULT
+    @lpVtbl.value.backed_out.call(this)
   end
-  def back_out : HRESULT
-    @lpVtbl.value.back_out.unsafe_as(Proc(HRESULT)).call
+  def back_out(this : IDtcLuRmEnlistmentSink*) : HRESULT
+    @lpVtbl.value.back_out.call(this)
   end
-  def committed : HRESULT
-    @lpVtbl.value.committed.unsafe_as(Proc(HRESULT)).call
+  def committed(this : IDtcLuRmEnlistmentSink*) : HRESULT
+    @lpVtbl.value.committed.call(this)
   end
-  def forget : HRESULT
-    @lpVtbl.value.forget.unsafe_as(Proc(HRESULT)).call
+  def forget(this : IDtcLuRmEnlistmentSink*) : HRESULT
+    @lpVtbl.value.forget.call(this)
   end
-  def prepare : HRESULT
-    @lpVtbl.value.prepare.unsafe_as(Proc(HRESULT)).call
+  def prepare(this : IDtcLuRmEnlistmentSink*) : HRESULT
+    @lpVtbl.value.prepare.call(this)
   end
-  def request_commit : HRESULT
-    @lpVtbl.value.request_commit.unsafe_as(Proc(HRESULT)).call
+  def request_commit(this : IDtcLuRmEnlistmentSink*) : HRESULT
+    @lpVtbl.value.request_commit.call(this)
   end
 end
 struct LibWin32::IDtcLuRmEnlistmentFactory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcLuRmEnlistmentFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcLuRmEnlistmentFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcLuRmEnlistmentFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create(puclupair : UInt8*, cblupair : UInt32, pitransaction : ITransaction, ptransid : UInt8*, cbtransid : UInt32, prmenlistmentsink : IDtcLuRmEnlistmentSink, pprmenlistment : IDtcLuRmEnlistment*) : HRESULT
-    @lpVtbl.value.create.unsafe_as(Proc(UInt8*, UInt32, ITransaction, UInt8*, UInt32, IDtcLuRmEnlistmentSink, IDtcLuRmEnlistment*, HRESULT)).call(puclupair, cblupair, pitransaction, ptransid, cbtransid, prmenlistmentsink, pprmenlistment)
+  def create(this : IDtcLuRmEnlistmentFactory*, puclupair : UInt8*, cblupair : UInt32, pitransaction : ITransaction, ptransid : UInt8*, cbtransid : UInt32, prmenlistmentsink : IDtcLuRmEnlistmentSink, pprmenlistment : IDtcLuRmEnlistment*) : HRESULT
+    @lpVtbl.value.create.call(this, puclupair, cblupair, pitransaction, ptransid, cbtransid, prmenlistmentsink, pprmenlistment)
   end
 end
 struct LibWin32::IDtcLuSubordinateDtc
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcLuSubordinateDtc*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcLuSubordinateDtc*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcLuSubordinateDtc*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def unplug(fconversationlost : LibC::BOOL) : HRESULT
-    @lpVtbl.value.unplug.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fconversationlost)
+  def unplug(this : IDtcLuSubordinateDtc*, fconversationlost : LibC::BOOL) : HRESULT
+    @lpVtbl.value.unplug.call(this, fconversationlost)
   end
-  def backed_out : HRESULT
-    @lpVtbl.value.backed_out.unsafe_as(Proc(HRESULT)).call
+  def backed_out(this : IDtcLuSubordinateDtc*) : HRESULT
+    @lpVtbl.value.backed_out.call(this)
   end
-  def back_out : HRESULT
-    @lpVtbl.value.back_out.unsafe_as(Proc(HRESULT)).call
+  def back_out(this : IDtcLuSubordinateDtc*) : HRESULT
+    @lpVtbl.value.back_out.call(this)
   end
-  def committed : HRESULT
-    @lpVtbl.value.committed.unsafe_as(Proc(HRESULT)).call
+  def committed(this : IDtcLuSubordinateDtc*) : HRESULT
+    @lpVtbl.value.committed.call(this)
   end
-  def forget : HRESULT
-    @lpVtbl.value.forget.unsafe_as(Proc(HRESULT)).call
+  def forget(this : IDtcLuSubordinateDtc*) : HRESULT
+    @lpVtbl.value.forget.call(this)
   end
-  def prepare : HRESULT
-    @lpVtbl.value.prepare.unsafe_as(Proc(HRESULT)).call
+  def prepare(this : IDtcLuSubordinateDtc*) : HRESULT
+    @lpVtbl.value.prepare.call(this)
   end
-  def request_commit : HRESULT
-    @lpVtbl.value.request_commit.unsafe_as(Proc(HRESULT)).call
+  def request_commit(this : IDtcLuSubordinateDtc*) : HRESULT
+    @lpVtbl.value.request_commit.call(this)
   end
 end
 struct LibWin32::IDtcLuSubordinateDtcSink
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcLuSubordinateDtcSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcLuSubordinateDtcSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcLuSubordinateDtcSink*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def ack_unplug : HRESULT
-    @lpVtbl.value.ack_unplug.unsafe_as(Proc(HRESULT)).call
+  def ack_unplug(this : IDtcLuSubordinateDtcSink*) : HRESULT
+    @lpVtbl.value.ack_unplug.call(this)
   end
-  def tm_down : HRESULT
-    @lpVtbl.value.tm_down.unsafe_as(Proc(HRESULT)).call
+  def tm_down(this : IDtcLuSubordinateDtcSink*) : HRESULT
+    @lpVtbl.value.tm_down.call(this)
   end
-  def session_lost : HRESULT
-    @lpVtbl.value.session_lost.unsafe_as(Proc(HRESULT)).call
+  def session_lost(this : IDtcLuSubordinateDtcSink*) : HRESULT
+    @lpVtbl.value.session_lost.call(this)
   end
-  def backed_out : HRESULT
-    @lpVtbl.value.backed_out.unsafe_as(Proc(HRESULT)).call
+  def backed_out(this : IDtcLuSubordinateDtcSink*) : HRESULT
+    @lpVtbl.value.backed_out.call(this)
   end
-  def back_out : HRESULT
-    @lpVtbl.value.back_out.unsafe_as(Proc(HRESULT)).call
+  def back_out(this : IDtcLuSubordinateDtcSink*) : HRESULT
+    @lpVtbl.value.back_out.call(this)
   end
-  def committed : HRESULT
-    @lpVtbl.value.committed.unsafe_as(Proc(HRESULT)).call
+  def committed(this : IDtcLuSubordinateDtcSink*) : HRESULT
+    @lpVtbl.value.committed.call(this)
   end
-  def forget : HRESULT
-    @lpVtbl.value.forget.unsafe_as(Proc(HRESULT)).call
+  def forget(this : IDtcLuSubordinateDtcSink*) : HRESULT
+    @lpVtbl.value.forget.call(this)
   end
-  def request_commit : HRESULT
-    @lpVtbl.value.request_commit.unsafe_as(Proc(HRESULT)).call
+  def request_commit(this : IDtcLuSubordinateDtcSink*) : HRESULT
+    @lpVtbl.value.request_commit.call(this)
   end
 end
 struct LibWin32::IDtcLuSubordinateDtcFactory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDtcLuSubordinateDtcFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDtcLuSubordinateDtcFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDtcLuSubordinateDtcFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create(puclupair : UInt8*, cblupair : UInt32, punktransactionouter : IUnknown, isolevel : Int32, isoflags : UInt32, poptions : ITransactionOptions, pptransaction : ITransaction*, ptransid : UInt8*, cbtransid : UInt32, psubordinatedtcsink : IDtcLuSubordinateDtcSink, ppsubordinatedtc : IDtcLuSubordinateDtc*) : HRESULT
-    @lpVtbl.value.create.unsafe_as(Proc(UInt8*, UInt32, IUnknown, Int32, UInt32, ITransactionOptions, ITransaction*, UInt8*, UInt32, IDtcLuSubordinateDtcSink, IDtcLuSubordinateDtc*, HRESULT)).call(puclupair, cblupair, punktransactionouter, isolevel, isoflags, poptions, pptransaction, ptransid, cbtransid, psubordinatedtcsink, ppsubordinatedtc)
+  def create(this : IDtcLuSubordinateDtcFactory*, puclupair : UInt8*, cblupair : UInt32, punktransactionouter : IUnknown, isolevel : Int32, isoflags : UInt32, poptions : ITransactionOptions, pptransaction : ITransaction*, ptransid : UInt8*, cbtransid : UInt32, psubordinatedtcsink : IDtcLuSubordinateDtcSink, ppsubordinatedtc : IDtcLuSubordinateDtc*) : HRESULT
+    @lpVtbl.value.create.call(this, puclupair, cblupair, punktransactionouter, isolevel, isoflags, poptions, pptransaction, ptransid, cbtransid, psubordinatedtcsink, ppsubordinatedtc)
   end
 end

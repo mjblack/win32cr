@@ -1857,13 +1857,13 @@ lib LibWin32
 
 
   struct ID3D10DeviceChildVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
+    query_interface : Proc(ID3D10DeviceChild*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10DeviceChild*, UInt32)
+    release : Proc(ID3D10DeviceChild*, UInt32)
+    get_device : Proc(ID3D10DeviceChild*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10DeviceChild*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10DeviceChild*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10DeviceChild*, Guid*, IUnknown, HRESULT)
   end
 
   ID3D10DeviceChild_GUID = "9b7e4c00-342c-4106-a19f-4f2704f689f0"
@@ -1873,14 +1873,14 @@ lib LibWin32
   end
 
   struct ID3D10DepthStencilStateVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    get_desc : UInt64
+    query_interface : Proc(ID3D10DepthStencilState*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10DepthStencilState*, UInt32)
+    release : Proc(ID3D10DepthStencilState*, UInt32)
+    get_device : Proc(ID3D10DepthStencilState*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10DepthStencilState*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10DepthStencilState*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10DepthStencilState*, Guid*, IUnknown, HRESULT)
+    get_desc : Proc(ID3D10DepthStencilState*, D3D10_DEPTH_STENCIL_DESC*, Void)
   end
 
   ID3D10DepthStencilState_GUID = "2b4b1cc8-a4ad-41f8-8322-ca86fc3ec675"
@@ -1890,14 +1890,14 @@ lib LibWin32
   end
 
   struct ID3D10BlendStateVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    get_desc : UInt64
+    query_interface : Proc(ID3D10BlendState*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10BlendState*, UInt32)
+    release : Proc(ID3D10BlendState*, UInt32)
+    get_device : Proc(ID3D10BlendState*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10BlendState*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10BlendState*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10BlendState*, Guid*, IUnknown, HRESULT)
+    get_desc : Proc(ID3D10BlendState*, D3D10_BLEND_DESC*, Void)
   end
 
   ID3D10BlendState_GUID = "edad8d19-8a35-4d6d-8566-2ea276cde161"
@@ -1907,14 +1907,14 @@ lib LibWin32
   end
 
   struct ID3D10RasterizerStateVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    get_desc : UInt64
+    query_interface : Proc(ID3D10RasterizerState*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10RasterizerState*, UInt32)
+    release : Proc(ID3D10RasterizerState*, UInt32)
+    get_device : Proc(ID3D10RasterizerState*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10RasterizerState*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10RasterizerState*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10RasterizerState*, Guid*, IUnknown, HRESULT)
+    get_desc : Proc(ID3D10RasterizerState*, D3D10_RASTERIZER_DESC*, Void)
   end
 
   ID3D10RasterizerState_GUID = "a2a07292-89af-4345-be2e-c53d9fbb6e9f"
@@ -1924,16 +1924,16 @@ lib LibWin32
   end
 
   struct ID3D10ResourceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    get_type : UInt64
-    set_eviction_priority : UInt64
-    get_eviction_priority : UInt64
+    query_interface : Proc(ID3D10Resource*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10Resource*, UInt32)
+    release : Proc(ID3D10Resource*, UInt32)
+    get_device : Proc(ID3D10Resource*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10Resource*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10Resource*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10Resource*, Guid*, IUnknown, HRESULT)
+    get_type : Proc(ID3D10Resource*, D3D10_RESOURCE_DIMENSION*, Void)
+    set_eviction_priority : Proc(ID3D10Resource*, UInt32, Void)
+    get_eviction_priority : Proc(ID3D10Resource*, UInt32)
   end
 
   ID3D10Resource_GUID = "9b7e4c01-342c-4106-a19f-4f2704f689f0"
@@ -1943,19 +1943,19 @@ lib LibWin32
   end
 
   struct ID3D10BufferVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    get_type : UInt64
-    set_eviction_priority : UInt64
-    get_eviction_priority : UInt64
-    map : UInt64
-    unmap : UInt64
-    get_desc : UInt64
+    query_interface : Proc(ID3D10Buffer*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10Buffer*, UInt32)
+    release : Proc(ID3D10Buffer*, UInt32)
+    get_device : Proc(ID3D10Buffer*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10Buffer*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10Buffer*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10Buffer*, Guid*, IUnknown, HRESULT)
+    get_type : Proc(ID3D10Buffer*, D3D10_RESOURCE_DIMENSION*, Void)
+    set_eviction_priority : Proc(ID3D10Buffer*, UInt32, Void)
+    get_eviction_priority : Proc(ID3D10Buffer*, UInt32)
+    map : Proc(ID3D10Buffer*, D3D10_MAP, UInt32, Void**, HRESULT)
+    unmap : Proc(ID3D10Buffer*, Void)
+    get_desc : Proc(ID3D10Buffer*, D3D10_BUFFER_DESC*, Void)
   end
 
   ID3D10Buffer_GUID = "9b7e4c02-342c-4106-a19f-4f2704f689f0"
@@ -1965,19 +1965,19 @@ lib LibWin32
   end
 
   struct ID3D10Texture1DVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    get_type : UInt64
-    set_eviction_priority : UInt64
-    get_eviction_priority : UInt64
-    map : UInt64
-    unmap : UInt64
-    get_desc : UInt64
+    query_interface : Proc(ID3D10Texture1D*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10Texture1D*, UInt32)
+    release : Proc(ID3D10Texture1D*, UInt32)
+    get_device : Proc(ID3D10Texture1D*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10Texture1D*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10Texture1D*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10Texture1D*, Guid*, IUnknown, HRESULT)
+    get_type : Proc(ID3D10Texture1D*, D3D10_RESOURCE_DIMENSION*, Void)
+    set_eviction_priority : Proc(ID3D10Texture1D*, UInt32, Void)
+    get_eviction_priority : Proc(ID3D10Texture1D*, UInt32)
+    map : Proc(ID3D10Texture1D*, UInt32, D3D10_MAP, UInt32, Void**, HRESULT)
+    unmap : Proc(ID3D10Texture1D*, UInt32, Void)
+    get_desc : Proc(ID3D10Texture1D*, D3D10_TEXTURE1D_DESC*, Void)
   end
 
   ID3D10Texture1D_GUID = "9b7e4c03-342c-4106-a19f-4f2704f689f0"
@@ -1987,19 +1987,19 @@ lib LibWin32
   end
 
   struct ID3D10Texture2DVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    get_type : UInt64
-    set_eviction_priority : UInt64
-    get_eviction_priority : UInt64
-    map : UInt64
-    unmap : UInt64
-    get_desc : UInt64
+    query_interface : Proc(ID3D10Texture2D*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10Texture2D*, UInt32)
+    release : Proc(ID3D10Texture2D*, UInt32)
+    get_device : Proc(ID3D10Texture2D*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10Texture2D*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10Texture2D*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10Texture2D*, Guid*, IUnknown, HRESULT)
+    get_type : Proc(ID3D10Texture2D*, D3D10_RESOURCE_DIMENSION*, Void)
+    set_eviction_priority : Proc(ID3D10Texture2D*, UInt32, Void)
+    get_eviction_priority : Proc(ID3D10Texture2D*, UInt32)
+    map : Proc(ID3D10Texture2D*, UInt32, D3D10_MAP, UInt32, D3D10_MAPPED_TEXTURE2D*, HRESULT)
+    unmap : Proc(ID3D10Texture2D*, UInt32, Void)
+    get_desc : Proc(ID3D10Texture2D*, D3D10_TEXTURE2D_DESC*, Void)
   end
 
   ID3D10Texture2D_GUID = "9b7e4c04-342c-4106-a19f-4f2704f689f0"
@@ -2009,19 +2009,19 @@ lib LibWin32
   end
 
   struct ID3D10Texture3DVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    get_type : UInt64
-    set_eviction_priority : UInt64
-    get_eviction_priority : UInt64
-    map : UInt64
-    unmap : UInt64
-    get_desc : UInt64
+    query_interface : Proc(ID3D10Texture3D*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10Texture3D*, UInt32)
+    release : Proc(ID3D10Texture3D*, UInt32)
+    get_device : Proc(ID3D10Texture3D*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10Texture3D*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10Texture3D*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10Texture3D*, Guid*, IUnknown, HRESULT)
+    get_type : Proc(ID3D10Texture3D*, D3D10_RESOURCE_DIMENSION*, Void)
+    set_eviction_priority : Proc(ID3D10Texture3D*, UInt32, Void)
+    get_eviction_priority : Proc(ID3D10Texture3D*, UInt32)
+    map : Proc(ID3D10Texture3D*, UInt32, D3D10_MAP, UInt32, D3D10_MAPPED_TEXTURE3D*, HRESULT)
+    unmap : Proc(ID3D10Texture3D*, UInt32, Void)
+    get_desc : Proc(ID3D10Texture3D*, D3D10_TEXTURE3D_DESC*, Void)
   end
 
   ID3D10Texture3D_GUID = "9b7e4c05-342c-4106-a19f-4f2704f689f0"
@@ -2031,14 +2031,14 @@ lib LibWin32
   end
 
   struct ID3D10ViewVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    get_resource : UInt64
+    query_interface : Proc(ID3D10View*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10View*, UInt32)
+    release : Proc(ID3D10View*, UInt32)
+    get_device : Proc(ID3D10View*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10View*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10View*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10View*, Guid*, IUnknown, HRESULT)
+    get_resource : Proc(ID3D10View*, ID3D10Resource*, Void)
   end
 
   ID3D10View_GUID = "c902b03f-60a7-49ba-9936-2a3ab37a7e33"
@@ -2048,15 +2048,15 @@ lib LibWin32
   end
 
   struct ID3D10ShaderResourceViewVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    get_resource : UInt64
-    get_desc : UInt64
+    query_interface : Proc(ID3D10ShaderResourceView*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10ShaderResourceView*, UInt32)
+    release : Proc(ID3D10ShaderResourceView*, UInt32)
+    get_device : Proc(ID3D10ShaderResourceView*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10ShaderResourceView*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10ShaderResourceView*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10ShaderResourceView*, Guid*, IUnknown, HRESULT)
+    get_resource : Proc(ID3D10ShaderResourceView*, ID3D10Resource*, Void)
+    get_desc : Proc(ID3D10ShaderResourceView*, D3D10_SHADER_RESOURCE_VIEW_DESC*, Void)
   end
 
   ID3D10ShaderResourceView_GUID = "9b7e4c07-342c-4106-a19f-4f2704f689f0"
@@ -2066,15 +2066,15 @@ lib LibWin32
   end
 
   struct ID3D10RenderTargetViewVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    get_resource : UInt64
-    get_desc : UInt64
+    query_interface : Proc(ID3D10RenderTargetView*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10RenderTargetView*, UInt32)
+    release : Proc(ID3D10RenderTargetView*, UInt32)
+    get_device : Proc(ID3D10RenderTargetView*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10RenderTargetView*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10RenderTargetView*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10RenderTargetView*, Guid*, IUnknown, HRESULT)
+    get_resource : Proc(ID3D10RenderTargetView*, ID3D10Resource*, Void)
+    get_desc : Proc(ID3D10RenderTargetView*, D3D10_RENDER_TARGET_VIEW_DESC*, Void)
   end
 
   ID3D10RenderTargetView_GUID = "9b7e4c08-342c-4106-a19f-4f2704f689f0"
@@ -2084,15 +2084,15 @@ lib LibWin32
   end
 
   struct ID3D10DepthStencilViewVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    get_resource : UInt64
-    get_desc : UInt64
+    query_interface : Proc(ID3D10DepthStencilView*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10DepthStencilView*, UInt32)
+    release : Proc(ID3D10DepthStencilView*, UInt32)
+    get_device : Proc(ID3D10DepthStencilView*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10DepthStencilView*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10DepthStencilView*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10DepthStencilView*, Guid*, IUnknown, HRESULT)
+    get_resource : Proc(ID3D10DepthStencilView*, ID3D10Resource*, Void)
+    get_desc : Proc(ID3D10DepthStencilView*, D3D10_DEPTH_STENCIL_VIEW_DESC*, Void)
   end
 
   ID3D10DepthStencilView_GUID = "9b7e4c09-342c-4106-a19f-4f2704f689f0"
@@ -2102,13 +2102,13 @@ lib LibWin32
   end
 
   struct ID3D10VertexShaderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
+    query_interface : Proc(ID3D10VertexShader*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10VertexShader*, UInt32)
+    release : Proc(ID3D10VertexShader*, UInt32)
+    get_device : Proc(ID3D10VertexShader*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10VertexShader*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10VertexShader*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10VertexShader*, Guid*, IUnknown, HRESULT)
   end
 
   ID3D10VertexShader_GUID = "9b7e4c0a-342c-4106-a19f-4f2704f689f0"
@@ -2118,13 +2118,13 @@ lib LibWin32
   end
 
   struct ID3D10GeometryShaderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
+    query_interface : Proc(ID3D10GeometryShader*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10GeometryShader*, UInt32)
+    release : Proc(ID3D10GeometryShader*, UInt32)
+    get_device : Proc(ID3D10GeometryShader*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10GeometryShader*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10GeometryShader*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10GeometryShader*, Guid*, IUnknown, HRESULT)
   end
 
   ID3D10GeometryShader_GUID = "6316be88-54cd-4040-ab44-20461bc81f68"
@@ -2134,13 +2134,13 @@ lib LibWin32
   end
 
   struct ID3D10PixelShaderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
+    query_interface : Proc(ID3D10PixelShader*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10PixelShader*, UInt32)
+    release : Proc(ID3D10PixelShader*, UInt32)
+    get_device : Proc(ID3D10PixelShader*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10PixelShader*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10PixelShader*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10PixelShader*, Guid*, IUnknown, HRESULT)
   end
 
   ID3D10PixelShader_GUID = "4968b601-9d00-4cde-8346-8e7f675819b6"
@@ -2150,13 +2150,13 @@ lib LibWin32
   end
 
   struct ID3D10InputLayoutVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
+    query_interface : Proc(ID3D10InputLayout*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10InputLayout*, UInt32)
+    release : Proc(ID3D10InputLayout*, UInt32)
+    get_device : Proc(ID3D10InputLayout*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10InputLayout*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10InputLayout*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10InputLayout*, Guid*, IUnknown, HRESULT)
   end
 
   ID3D10InputLayout_GUID = "9b7e4c0b-342c-4106-a19f-4f2704f689f0"
@@ -2166,14 +2166,14 @@ lib LibWin32
   end
 
   struct ID3D10SamplerStateVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    get_desc : UInt64
+    query_interface : Proc(ID3D10SamplerState*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10SamplerState*, UInt32)
+    release : Proc(ID3D10SamplerState*, UInt32)
+    get_device : Proc(ID3D10SamplerState*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10SamplerState*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10SamplerState*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10SamplerState*, Guid*, IUnknown, HRESULT)
+    get_desc : Proc(ID3D10SamplerState*, D3D10_SAMPLER_DESC*, Void)
   end
 
   ID3D10SamplerState_GUID = "9b7e4c0c-342c-4106-a19f-4f2704f689f0"
@@ -2183,17 +2183,17 @@ lib LibWin32
   end
 
   struct ID3D10AsynchronousVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    begin_ : UInt64
-    end_ : UInt64
-    get_data : UInt64
-    get_data_size : UInt64
+    query_interface : Proc(ID3D10Asynchronous*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10Asynchronous*, UInt32)
+    release : Proc(ID3D10Asynchronous*, UInt32)
+    get_device : Proc(ID3D10Asynchronous*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10Asynchronous*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10Asynchronous*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10Asynchronous*, Guid*, IUnknown, HRESULT)
+    begin_ : Proc(ID3D10Asynchronous*, Void)
+    end_ : Proc(ID3D10Asynchronous*, Void)
+    get_data : Proc(ID3D10Asynchronous*, Void*, UInt32, UInt32, HRESULT)
+    get_data_size : Proc(ID3D10Asynchronous*, UInt32)
   end
 
   ID3D10Asynchronous_GUID = "9b7e4c0d-342c-4106-a19f-4f2704f689f0"
@@ -2203,18 +2203,18 @@ lib LibWin32
   end
 
   struct ID3D10QueryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    begin_ : UInt64
-    end_ : UInt64
-    get_data : UInt64
-    get_data_size : UInt64
-    get_desc : UInt64
+    query_interface : Proc(ID3D10Query*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10Query*, UInt32)
+    release : Proc(ID3D10Query*, UInt32)
+    get_device : Proc(ID3D10Query*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10Query*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10Query*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10Query*, Guid*, IUnknown, HRESULT)
+    begin_ : Proc(ID3D10Query*, Void)
+    end_ : Proc(ID3D10Query*, Void)
+    get_data : Proc(ID3D10Query*, Void*, UInt32, UInt32, HRESULT)
+    get_data_size : Proc(ID3D10Query*, UInt32)
+    get_desc : Proc(ID3D10Query*, D3D10_QUERY_DESC*, Void)
   end
 
   ID3D10Query_GUID = "9b7e4c0e-342c-4106-a19f-4f2704f689f0"
@@ -2224,18 +2224,18 @@ lib LibWin32
   end
 
   struct ID3D10PredicateVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    begin_ : UInt64
-    end_ : UInt64
-    get_data : UInt64
-    get_data_size : UInt64
-    get_desc : UInt64
+    query_interface : Proc(ID3D10Predicate*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10Predicate*, UInt32)
+    release : Proc(ID3D10Predicate*, UInt32)
+    get_device : Proc(ID3D10Predicate*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10Predicate*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10Predicate*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10Predicate*, Guid*, IUnknown, HRESULT)
+    begin_ : Proc(ID3D10Predicate*, Void)
+    end_ : Proc(ID3D10Predicate*, Void)
+    get_data : Proc(ID3D10Predicate*, Void*, UInt32, UInt32, HRESULT)
+    get_data_size : Proc(ID3D10Predicate*, UInt32)
+    get_desc : Proc(ID3D10Predicate*, D3D10_QUERY_DESC*, Void)
   end
 
   ID3D10Predicate_GUID = "9b7e4c10-342c-4106-a19f-4f2704f689f0"
@@ -2245,18 +2245,18 @@ lib LibWin32
   end
 
   struct ID3D10CounterVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    begin_ : UInt64
-    end_ : UInt64
-    get_data : UInt64
-    get_data_size : UInt64
-    get_desc : UInt64
+    query_interface : Proc(ID3D10Counter*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10Counter*, UInt32)
+    release : Proc(ID3D10Counter*, UInt32)
+    get_device : Proc(ID3D10Counter*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10Counter*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10Counter*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10Counter*, Guid*, IUnknown, HRESULT)
+    begin_ : Proc(ID3D10Counter*, Void)
+    end_ : Proc(ID3D10Counter*, Void)
+    get_data : Proc(ID3D10Counter*, Void*, UInt32, UInt32, HRESULT)
+    get_data_size : Proc(ID3D10Counter*, UInt32)
+    get_desc : Proc(ID3D10Counter*, D3D10_COUNTER_DESC*, Void)
   end
 
   ID3D10Counter_GUID = "9b7e4c11-342c-4106-a19f-4f2704f689f0"
@@ -2266,104 +2266,104 @@ lib LibWin32
   end
 
   struct ID3D10DeviceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    vs_set_constant_buffers : UInt64
-    ps_set_shader_resources : UInt64
-    ps_set_shader : UInt64
-    ps_set_samplers : UInt64
-    vs_set_shader : UInt64
-    draw_indexed : UInt64
-    draw : UInt64
-    ps_set_constant_buffers : UInt64
-    ia_set_input_layout : UInt64
-    ia_set_vertex_buffers : UInt64
-    ia_set_index_buffer : UInt64
-    draw_indexed_instanced : UInt64
-    draw_instanced : UInt64
-    gs_set_constant_buffers : UInt64
-    gs_set_shader : UInt64
-    ia_set_primitive_topology : UInt64
-    vs_set_shader_resources : UInt64
-    vs_set_samplers : UInt64
-    set_predication : UInt64
-    gs_set_shader_resources : UInt64
-    gs_set_samplers : UInt64
-    om_set_render_targets : UInt64
-    om_set_blend_state : UInt64
-    om_set_depth_stencil_state : UInt64
-    so_set_targets : UInt64
-    draw_auto : UInt64
-    rs_set_state : UInt64
-    rs_set_viewports : UInt64
-    rs_set_scissor_rects : UInt64
-    copy_subresource_region : UInt64
-    copy_resource : UInt64
-    update_subresource : UInt64
-    clear_render_target_view : UInt64
-    clear_depth_stencil_view : UInt64
-    generate_mips : UInt64
-    resolve_subresource : UInt64
-    vs_get_constant_buffers : UInt64
-    ps_get_shader_resources : UInt64
-    ps_get_shader : UInt64
-    ps_get_samplers : UInt64
-    vs_get_shader : UInt64
-    ps_get_constant_buffers : UInt64
-    ia_get_input_layout : UInt64
-    ia_get_vertex_buffers : UInt64
-    ia_get_index_buffer : UInt64
-    gs_get_constant_buffers : UInt64
-    gs_get_shader : UInt64
-    ia_get_primitive_topology : UInt64
-    vs_get_shader_resources : UInt64
-    vs_get_samplers : UInt64
-    get_predication : UInt64
-    gs_get_shader_resources : UInt64
-    gs_get_samplers : UInt64
-    om_get_render_targets : UInt64
-    om_get_blend_state : UInt64
-    om_get_depth_stencil_state : UInt64
-    so_get_targets : UInt64
-    rs_get_state : UInt64
-    rs_get_viewports : UInt64
-    rs_get_scissor_rects : UInt64
-    get_device_removed_reason : UInt64
-    set_exception_mode : UInt64
-    get_exception_mode : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    clear_state : UInt64
-    flush : UInt64
-    create_buffer : UInt64
-    create_texture1_d : UInt64
-    create_texture2_d : UInt64
-    create_texture3_d : UInt64
-    create_shader_resource_view : UInt64
-    create_render_target_view : UInt64
-    create_depth_stencil_view : UInt64
-    create_input_layout : UInt64
-    create_vertex_shader : UInt64
-    create_geometry_shader : UInt64
-    create_geometry_shader_with_stream_output : UInt64
-    create_pixel_shader : UInt64
-    create_blend_state : UInt64
-    create_depth_stencil_state : UInt64
-    create_rasterizer_state : UInt64
-    create_sampler_state : UInt64
-    create_query : UInt64
-    create_predicate : UInt64
-    create_counter : UInt64
-    check_format_support : UInt64
-    check_multisample_quality_levels : UInt64
-    check_counter_info : UInt64
-    check_counter : UInt64
-    get_creation_flags : UInt64
-    open_shared_resource : UInt64
-    set_text_filter_size : UInt64
-    get_text_filter_size : UInt64
+    query_interface : Proc(ID3D10Device*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10Device*, UInt32)
+    release : Proc(ID3D10Device*, UInt32)
+    vs_set_constant_buffers : Proc(ID3D10Device*, UInt32, UInt32, ID3D10Buffer*, Void)
+    ps_set_shader_resources : Proc(ID3D10Device*, UInt32, UInt32, ID3D10ShaderResourceView*, Void)
+    ps_set_shader : Proc(ID3D10Device*, ID3D10PixelShader, Void)
+    ps_set_samplers : Proc(ID3D10Device*, UInt32, UInt32, ID3D10SamplerState*, Void)
+    vs_set_shader : Proc(ID3D10Device*, ID3D10VertexShader, Void)
+    draw_indexed : Proc(ID3D10Device*, UInt32, UInt32, Int32, Void)
+    draw : Proc(ID3D10Device*, UInt32, UInt32, Void)
+    ps_set_constant_buffers : Proc(ID3D10Device*, UInt32, UInt32, ID3D10Buffer*, Void)
+    ia_set_input_layout : Proc(ID3D10Device*, ID3D10InputLayout, Void)
+    ia_set_vertex_buffers : Proc(ID3D10Device*, UInt32, UInt32, ID3D10Buffer*, UInt32*, UInt32*, Void)
+    ia_set_index_buffer : Proc(ID3D10Device*, ID3D10Buffer, DXGI_FORMAT, UInt32, Void)
+    draw_indexed_instanced : Proc(ID3D10Device*, UInt32, UInt32, UInt32, Int32, UInt32, Void)
+    draw_instanced : Proc(ID3D10Device*, UInt32, UInt32, UInt32, UInt32, Void)
+    gs_set_constant_buffers : Proc(ID3D10Device*, UInt32, UInt32, ID3D10Buffer*, Void)
+    gs_set_shader : Proc(ID3D10Device*, ID3D10GeometryShader, Void)
+    ia_set_primitive_topology : Proc(ID3D10Device*, D3D_PRIMITIVE_TOPOLOGY, Void)
+    vs_set_shader_resources : Proc(ID3D10Device*, UInt32, UInt32, ID3D10ShaderResourceView*, Void)
+    vs_set_samplers : Proc(ID3D10Device*, UInt32, UInt32, ID3D10SamplerState*, Void)
+    set_predication : Proc(ID3D10Device*, ID3D10Predicate, LibC::BOOL, Void)
+    gs_set_shader_resources : Proc(ID3D10Device*, UInt32, UInt32, ID3D10ShaderResourceView*, Void)
+    gs_set_samplers : Proc(ID3D10Device*, UInt32, UInt32, ID3D10SamplerState*, Void)
+    om_set_render_targets : Proc(ID3D10Device*, UInt32, ID3D10RenderTargetView*, ID3D10DepthStencilView, Void)
+    om_set_blend_state : Proc(ID3D10Device*, ID3D10BlendState, Float32*, UInt32, Void)
+    om_set_depth_stencil_state : Proc(ID3D10Device*, ID3D10DepthStencilState, UInt32, Void)
+    so_set_targets : Proc(ID3D10Device*, UInt32, ID3D10Buffer*, UInt32*, Void)
+    draw_auto : Proc(ID3D10Device*, Void)
+    rs_set_state : Proc(ID3D10Device*, ID3D10RasterizerState, Void)
+    rs_set_viewports : Proc(ID3D10Device*, UInt32, D3D10_VIEWPORT*, Void)
+    rs_set_scissor_rects : Proc(ID3D10Device*, UInt32, RECT*, Void)
+    copy_subresource_region : Proc(ID3D10Device*, ID3D10Resource, UInt32, UInt32, UInt32, UInt32, ID3D10Resource, UInt32, D3D10_BOX*, Void)
+    copy_resource : Proc(ID3D10Device*, ID3D10Resource, ID3D10Resource, Void)
+    update_subresource : Proc(ID3D10Device*, ID3D10Resource, UInt32, D3D10_BOX*, Void*, UInt32, UInt32, Void)
+    clear_render_target_view : Proc(ID3D10Device*, ID3D10RenderTargetView, Float32*, Void)
+    clear_depth_stencil_view : Proc(ID3D10Device*, ID3D10DepthStencilView, UInt32, Float32, UInt8, Void)
+    generate_mips : Proc(ID3D10Device*, ID3D10ShaderResourceView, Void)
+    resolve_subresource : Proc(ID3D10Device*, ID3D10Resource, UInt32, ID3D10Resource, UInt32, DXGI_FORMAT, Void)
+    vs_get_constant_buffers : Proc(ID3D10Device*, UInt32, UInt32, ID3D10Buffer*, Void)
+    ps_get_shader_resources : Proc(ID3D10Device*, UInt32, UInt32, ID3D10ShaderResourceView*, Void)
+    ps_get_shader : Proc(ID3D10Device*, ID3D10PixelShader*, Void)
+    ps_get_samplers : Proc(ID3D10Device*, UInt32, UInt32, ID3D10SamplerState*, Void)
+    vs_get_shader : Proc(ID3D10Device*, ID3D10VertexShader*, Void)
+    ps_get_constant_buffers : Proc(ID3D10Device*, UInt32, UInt32, ID3D10Buffer*, Void)
+    ia_get_input_layout : Proc(ID3D10Device*, ID3D10InputLayout*, Void)
+    ia_get_vertex_buffers : Proc(ID3D10Device*, UInt32, UInt32, ID3D10Buffer*, UInt32*, UInt32*, Void)
+    ia_get_index_buffer : Proc(ID3D10Device*, ID3D10Buffer*, DXGI_FORMAT*, UInt32*, Void)
+    gs_get_constant_buffers : Proc(ID3D10Device*, UInt32, UInt32, ID3D10Buffer*, Void)
+    gs_get_shader : Proc(ID3D10Device*, ID3D10GeometryShader*, Void)
+    ia_get_primitive_topology : Proc(ID3D10Device*, D3D_PRIMITIVE_TOPOLOGY*, Void)
+    vs_get_shader_resources : Proc(ID3D10Device*, UInt32, UInt32, ID3D10ShaderResourceView*, Void)
+    vs_get_samplers : Proc(ID3D10Device*, UInt32, UInt32, ID3D10SamplerState*, Void)
+    get_predication : Proc(ID3D10Device*, ID3D10Predicate*, LibC::BOOL*, Void)
+    gs_get_shader_resources : Proc(ID3D10Device*, UInt32, UInt32, ID3D10ShaderResourceView*, Void)
+    gs_get_samplers : Proc(ID3D10Device*, UInt32, UInt32, ID3D10SamplerState*, Void)
+    om_get_render_targets : Proc(ID3D10Device*, UInt32, ID3D10RenderTargetView*, ID3D10DepthStencilView*, Void)
+    om_get_blend_state : Proc(ID3D10Device*, ID3D10BlendState*, Float32*, UInt32*, Void)
+    om_get_depth_stencil_state : Proc(ID3D10Device*, ID3D10DepthStencilState*, UInt32*, Void)
+    so_get_targets : Proc(ID3D10Device*, UInt32, ID3D10Buffer*, UInt32*, Void)
+    rs_get_state : Proc(ID3D10Device*, ID3D10RasterizerState*, Void)
+    rs_get_viewports : Proc(ID3D10Device*, UInt32*, D3D10_VIEWPORT*, Void)
+    rs_get_scissor_rects : Proc(ID3D10Device*, UInt32*, RECT*, Void)
+    get_device_removed_reason : Proc(ID3D10Device*, HRESULT)
+    set_exception_mode : Proc(ID3D10Device*, UInt32, HRESULT)
+    get_exception_mode : Proc(ID3D10Device*, UInt32)
+    get_private_data : Proc(ID3D10Device*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10Device*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10Device*, Guid*, IUnknown, HRESULT)
+    clear_state : Proc(ID3D10Device*, Void)
+    flush : Proc(ID3D10Device*, Void)
+    create_buffer : Proc(ID3D10Device*, D3D10_BUFFER_DESC*, D3D10_SUBRESOURCE_DATA*, ID3D10Buffer*, HRESULT)
+    create_texture1_d : Proc(ID3D10Device*, D3D10_TEXTURE1D_DESC*, D3D10_SUBRESOURCE_DATA*, ID3D10Texture1D*, HRESULT)
+    create_texture2_d : Proc(ID3D10Device*, D3D10_TEXTURE2D_DESC*, D3D10_SUBRESOURCE_DATA*, ID3D10Texture2D*, HRESULT)
+    create_texture3_d : Proc(ID3D10Device*, D3D10_TEXTURE3D_DESC*, D3D10_SUBRESOURCE_DATA*, ID3D10Texture3D*, HRESULT)
+    create_shader_resource_view : Proc(ID3D10Device*, ID3D10Resource, D3D10_SHADER_RESOURCE_VIEW_DESC*, ID3D10ShaderResourceView*, HRESULT)
+    create_render_target_view : Proc(ID3D10Device*, ID3D10Resource, D3D10_RENDER_TARGET_VIEW_DESC*, ID3D10RenderTargetView*, HRESULT)
+    create_depth_stencil_view : Proc(ID3D10Device*, ID3D10Resource, D3D10_DEPTH_STENCIL_VIEW_DESC*, ID3D10DepthStencilView*, HRESULT)
+    create_input_layout : Proc(ID3D10Device*, D3D10_INPUT_ELEMENT_DESC*, UInt32, Void*, LibC::UINT_PTR, ID3D10InputLayout*, HRESULT)
+    create_vertex_shader : Proc(ID3D10Device*, Void*, LibC::UINT_PTR, ID3D10VertexShader*, HRESULT)
+    create_geometry_shader : Proc(ID3D10Device*, Void*, LibC::UINT_PTR, ID3D10GeometryShader*, HRESULT)
+    create_geometry_shader_with_stream_output : Proc(ID3D10Device*, Void*, LibC::UINT_PTR, D3D10_SO_DECLARATION_ENTRY*, UInt32, UInt32, ID3D10GeometryShader*, HRESULT)
+    create_pixel_shader : Proc(ID3D10Device*, Void*, LibC::UINT_PTR, ID3D10PixelShader*, HRESULT)
+    create_blend_state : Proc(ID3D10Device*, D3D10_BLEND_DESC*, ID3D10BlendState*, HRESULT)
+    create_depth_stencil_state : Proc(ID3D10Device*, D3D10_DEPTH_STENCIL_DESC*, ID3D10DepthStencilState*, HRESULT)
+    create_rasterizer_state : Proc(ID3D10Device*, D3D10_RASTERIZER_DESC*, ID3D10RasterizerState*, HRESULT)
+    create_sampler_state : Proc(ID3D10Device*, D3D10_SAMPLER_DESC*, ID3D10SamplerState*, HRESULT)
+    create_query : Proc(ID3D10Device*, D3D10_QUERY_DESC*, ID3D10Query*, HRESULT)
+    create_predicate : Proc(ID3D10Device*, D3D10_QUERY_DESC*, ID3D10Predicate*, HRESULT)
+    create_counter : Proc(ID3D10Device*, D3D10_COUNTER_DESC*, ID3D10Counter*, HRESULT)
+    check_format_support : Proc(ID3D10Device*, DXGI_FORMAT, UInt32*, HRESULT)
+    check_multisample_quality_levels : Proc(ID3D10Device*, DXGI_FORMAT, UInt32, UInt32*, HRESULT)
+    check_counter_info : Proc(ID3D10Device*, D3D10_COUNTER_INFO*, Void)
+    check_counter : Proc(ID3D10Device*, D3D10_COUNTER_DESC*, D3D10_COUNTER_TYPE*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)
+    get_creation_flags : Proc(ID3D10Device*, UInt32)
+    open_shared_resource : Proc(ID3D10Device*, LibC::HANDLE, Guid*, Void**, HRESULT)
+    set_text_filter_size : Proc(ID3D10Device*, UInt32, UInt32, Void)
+    get_text_filter_size : Proc(ID3D10Device*, UInt32*, UInt32*, Void)
   end
 
   ID3D10Device_GUID = "9b7e4c0f-342c-4106-a19f-4f2704f689f0"
@@ -2373,13 +2373,13 @@ lib LibWin32
   end
 
   struct ID3D10MultithreadVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    enter : UInt64
-    leave : UInt64
-    set_multithread_protected : UInt64
-    get_multithread_protected : UInt64
+    query_interface : Proc(ID3D10Multithread*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10Multithread*, UInt32)
+    release : Proc(ID3D10Multithread*, UInt32)
+    enter : Proc(ID3D10Multithread*, Void)
+    leave : Proc(ID3D10Multithread*, Void)
+    set_multithread_protected : Proc(ID3D10Multithread*, LibC::BOOL, LibC::BOOL)
+    get_multithread_protected : Proc(ID3D10Multithread*, LibC::BOOL)
   end
 
   ID3D10Multithread_GUID = "9b7e4e00-342c-4106-a19f-4f2704f689f0"
@@ -2389,16 +2389,16 @@ lib LibWin32
   end
 
   struct ID3D10DebugVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_feature_mask : UInt64
-    get_feature_mask : UInt64
-    set_present_per_render_op_delay : UInt64
-    get_present_per_render_op_delay : UInt64
-    set_swap_chain : UInt64
-    get_swap_chain : UInt64
-    validate : UInt64
+    query_interface : Proc(ID3D10Debug*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10Debug*, UInt32)
+    release : Proc(ID3D10Debug*, UInt32)
+    set_feature_mask : Proc(ID3D10Debug*, UInt32, HRESULT)
+    get_feature_mask : Proc(ID3D10Debug*, UInt32)
+    set_present_per_render_op_delay : Proc(ID3D10Debug*, UInt32, HRESULT)
+    get_present_per_render_op_delay : Proc(ID3D10Debug*, UInt32)
+    set_swap_chain : Proc(ID3D10Debug*, IDXGISwapChain, HRESULT)
+    get_swap_chain : Proc(ID3D10Debug*, IDXGISwapChain*, HRESULT)
+    validate : Proc(ID3D10Debug*, HRESULT)
   end
 
   ID3D10Debug_GUID = "9b7e4e01-342c-4106-a19f-4f2704f689f0"
@@ -2408,11 +2408,11 @@ lib LibWin32
   end
 
   struct ID3D10SwitchToRefVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_use_ref : UInt64
-    get_use_ref : UInt64
+    query_interface : Proc(ID3D10SwitchToRef*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10SwitchToRef*, UInt32)
+    release : Proc(ID3D10SwitchToRef*, UInt32)
+    set_use_ref : Proc(ID3D10SwitchToRef*, LibC::BOOL, LibC::BOOL)
+    get_use_ref : Proc(ID3D10SwitchToRef*, LibC::BOOL)
   end
 
   ID3D10SwitchToRef_GUID = "9b7e4e02-342c-4106-a19f-4f2704f689f0"
@@ -2422,44 +2422,44 @@ lib LibWin32
   end
 
   struct ID3D10InfoQueueVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_message_count_limit : UInt64
-    clear_stored_messages : UInt64
-    get_message : UInt64
-    get_num_messages_allowed_by_storage_filter : UInt64
-    get_num_messages_denied_by_storage_filter : UInt64
-    get_num_stored_messages : UInt64
-    get_num_stored_messages_allowed_by_retrieval_filter : UInt64
-    get_num_messages_discarded_by_message_count_limit : UInt64
-    get_message_count_limit : UInt64
-    add_storage_filter_entries : UInt64
-    get_storage_filter : UInt64
-    clear_storage_filter : UInt64
-    push_empty_storage_filter : UInt64
-    push_copy_of_storage_filter : UInt64
-    push_storage_filter : UInt64
-    pop_storage_filter : UInt64
-    get_storage_filter_stack_size : UInt64
-    add_retrieval_filter_entries : UInt64
-    get_retrieval_filter : UInt64
-    clear_retrieval_filter : UInt64
-    push_empty_retrieval_filter : UInt64
-    push_copy_of_retrieval_filter : UInt64
-    push_retrieval_filter : UInt64
-    pop_retrieval_filter : UInt64
-    get_retrieval_filter_stack_size : UInt64
-    add_message : UInt64
-    add_application_message : UInt64
-    set_break_on_category : UInt64
-    set_break_on_severity : UInt64
-    set_break_on_id : UInt64
-    get_break_on_category : UInt64
-    get_break_on_severity : UInt64
-    get_break_on_id : UInt64
-    set_mute_debug_output : UInt64
-    get_mute_debug_output : UInt64
+    query_interface : Proc(ID3D10InfoQueue*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10InfoQueue*, UInt32)
+    release : Proc(ID3D10InfoQueue*, UInt32)
+    set_message_count_limit : Proc(ID3D10InfoQueue*, UInt64, HRESULT)
+    clear_stored_messages : Proc(ID3D10InfoQueue*, Void)
+    get_message : Proc(ID3D10InfoQueue*, UInt64, D3D10_MESSAGE*, LibC::UINT_PTR*, HRESULT)
+    get_num_messages_allowed_by_storage_filter : Proc(ID3D10InfoQueue*, UInt64)
+    get_num_messages_denied_by_storage_filter : Proc(ID3D10InfoQueue*, UInt64)
+    get_num_stored_messages : Proc(ID3D10InfoQueue*, UInt64)
+    get_num_stored_messages_allowed_by_retrieval_filter : Proc(ID3D10InfoQueue*, UInt64)
+    get_num_messages_discarded_by_message_count_limit : Proc(ID3D10InfoQueue*, UInt64)
+    get_message_count_limit : Proc(ID3D10InfoQueue*, UInt64)
+    add_storage_filter_entries : Proc(ID3D10InfoQueue*, D3D10_INFO_QUEUE_FILTER*, HRESULT)
+    get_storage_filter : Proc(ID3D10InfoQueue*, D3D10_INFO_QUEUE_FILTER*, LibC::UINT_PTR*, HRESULT)
+    clear_storage_filter : Proc(ID3D10InfoQueue*, Void)
+    push_empty_storage_filter : Proc(ID3D10InfoQueue*, HRESULT)
+    push_copy_of_storage_filter : Proc(ID3D10InfoQueue*, HRESULT)
+    push_storage_filter : Proc(ID3D10InfoQueue*, D3D10_INFO_QUEUE_FILTER*, HRESULT)
+    pop_storage_filter : Proc(ID3D10InfoQueue*, Void)
+    get_storage_filter_stack_size : Proc(ID3D10InfoQueue*, UInt32)
+    add_retrieval_filter_entries : Proc(ID3D10InfoQueue*, D3D10_INFO_QUEUE_FILTER*, HRESULT)
+    get_retrieval_filter : Proc(ID3D10InfoQueue*, D3D10_INFO_QUEUE_FILTER*, LibC::UINT_PTR*, HRESULT)
+    clear_retrieval_filter : Proc(ID3D10InfoQueue*, Void)
+    push_empty_retrieval_filter : Proc(ID3D10InfoQueue*, HRESULT)
+    push_copy_of_retrieval_filter : Proc(ID3D10InfoQueue*, HRESULT)
+    push_retrieval_filter : Proc(ID3D10InfoQueue*, D3D10_INFO_QUEUE_FILTER*, HRESULT)
+    pop_retrieval_filter : Proc(ID3D10InfoQueue*, Void)
+    get_retrieval_filter_stack_size : Proc(ID3D10InfoQueue*, UInt32)
+    add_message : Proc(ID3D10InfoQueue*, D3D10_MESSAGE_CATEGORY, D3D10_MESSAGE_SEVERITY, D3D10_MESSAGE_ID, PSTR, HRESULT)
+    add_application_message : Proc(ID3D10InfoQueue*, D3D10_MESSAGE_SEVERITY, PSTR, HRESULT)
+    set_break_on_category : Proc(ID3D10InfoQueue*, D3D10_MESSAGE_CATEGORY, LibC::BOOL, HRESULT)
+    set_break_on_severity : Proc(ID3D10InfoQueue*, D3D10_MESSAGE_SEVERITY, LibC::BOOL, HRESULT)
+    set_break_on_id : Proc(ID3D10InfoQueue*, D3D10_MESSAGE_ID, LibC::BOOL, HRESULT)
+    get_break_on_category : Proc(ID3D10InfoQueue*, D3D10_MESSAGE_CATEGORY, LibC::BOOL)
+    get_break_on_severity : Proc(ID3D10InfoQueue*, D3D10_MESSAGE_SEVERITY, LibC::BOOL)
+    get_break_on_id : Proc(ID3D10InfoQueue*, D3D10_MESSAGE_ID, LibC::BOOL)
+    set_mute_debug_output : Proc(ID3D10InfoQueue*, LibC::BOOL, Void)
+    get_mute_debug_output : Proc(ID3D10InfoQueue*, LibC::BOOL)
   end
 
   ID3D10InfoQueue_GUID = "1b940b17-2642-4d1f-ab1f-b99bad0c395f"
@@ -2469,10 +2469,10 @@ lib LibWin32
   end
 
   struct ID3D10ShaderReflectionTypeVTbl
-    get_desc : UInt64
-    get_member_type_by_index : UInt64
-    get_member_type_by_name : UInt64
-    get_member_type_name : UInt64
+    get_desc : Proc(ID3D10ShaderReflectionType*, D3D10_SHADER_TYPE_DESC*, HRESULT)
+    get_member_type_by_index : Proc(ID3D10ShaderReflectionType*, UInt32, ID3D10ShaderReflectionType)
+    get_member_type_by_name : Proc(ID3D10ShaderReflectionType*, PSTR, ID3D10ShaderReflectionType)
+    get_member_type_name : Proc(ID3D10ShaderReflectionType*, UInt32, PSTR)
   end
 
   ID3D10ShaderReflectionType_GUID = "c530ad7d-9b16-4395-a979-ba2ecff83add"
@@ -2482,8 +2482,8 @@ lib LibWin32
   end
 
   struct ID3D10ShaderReflectionVariableVTbl
-    get_desc : UInt64
-    get_type : UInt64
+    get_desc : Proc(ID3D10ShaderReflectionVariable*, D3D10_SHADER_VARIABLE_DESC*, HRESULT)
+    get_type : Proc(ID3D10ShaderReflectionVariable*, ID3D10ShaderReflectionType)
   end
 
   ID3D10ShaderReflectionVariable_GUID = "1bf63c95-2650-405d-99c1-3636bd1da0a1"
@@ -2493,9 +2493,9 @@ lib LibWin32
   end
 
   struct ID3D10ShaderReflectionConstantBufferVTbl
-    get_desc : UInt64
-    get_variable_by_index : UInt64
-    get_variable_by_name : UInt64
+    get_desc : Proc(ID3D10ShaderReflectionConstantBuffer*, D3D10_SHADER_BUFFER_DESC*, HRESULT)
+    get_variable_by_index : Proc(ID3D10ShaderReflectionConstantBuffer*, UInt32, ID3D10ShaderReflectionVariable)
+    get_variable_by_name : Proc(ID3D10ShaderReflectionConstantBuffer*, PSTR, ID3D10ShaderReflectionVariable)
   end
 
   ID3D10ShaderReflectionConstantBuffer_GUID = "66c66a94-dddd-4b62-a66a-f0da33c2b4d0"
@@ -2505,15 +2505,15 @@ lib LibWin32
   end
 
   struct ID3D10ShaderReflectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_desc : UInt64
-    get_constant_buffer_by_index : UInt64
-    get_constant_buffer_by_name : UInt64
-    get_resource_binding_desc : UInt64
-    get_input_parameter_desc : UInt64
-    get_output_parameter_desc : UInt64
+    query_interface : Proc(ID3D10ShaderReflection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10ShaderReflection*, UInt32)
+    release : Proc(ID3D10ShaderReflection*, UInt32)
+    get_desc : Proc(ID3D10ShaderReflection*, D3D10_SHADER_DESC*, HRESULT)
+    get_constant_buffer_by_index : Proc(ID3D10ShaderReflection*, UInt32, ID3D10ShaderReflectionConstantBuffer)
+    get_constant_buffer_by_name : Proc(ID3D10ShaderReflection*, PSTR, ID3D10ShaderReflectionConstantBuffer)
+    get_resource_binding_desc : Proc(ID3D10ShaderReflection*, UInt32, D3D10_SHADER_INPUT_BIND_DESC*, HRESULT)
+    get_input_parameter_desc : Proc(ID3D10ShaderReflection*, UInt32, D3D10_SIGNATURE_PARAMETER_DESC*, HRESULT)
+    get_output_parameter_desc : Proc(ID3D10ShaderReflection*, UInt32, D3D10_SIGNATURE_PARAMETER_DESC*, HRESULT)
   end
 
   ID3D10ShaderReflection_GUID = "d40e20b6-f8f7-42ad-ab20-4baf8f15dfaa"
@@ -2523,13 +2523,13 @@ lib LibWin32
   end
 
   struct ID3D10StateBlockVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    capture : UInt64
-    apply : UInt64
-    release_all_device_objects : UInt64
-    get_device : UInt64
+    query_interface : Proc(ID3D10StateBlock*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10StateBlock*, UInt32)
+    release : Proc(ID3D10StateBlock*, UInt32)
+    capture : Proc(ID3D10StateBlock*, HRESULT)
+    apply : Proc(ID3D10StateBlock*, HRESULT)
+    release_all_device_objects : Proc(ID3D10StateBlock*, HRESULT)
+    get_device : Proc(ID3D10StateBlock*, ID3D10Device*, HRESULT)
   end
 
   ID3D10StateBlock_GUID = "0803425a-57f5-4dd6-9465-a87570834a08"
@@ -2539,13 +2539,13 @@ lib LibWin32
   end
 
   struct ID3D10EffectTypeVTbl
-    is_valid : UInt64
-    get_desc : UInt64
-    get_member_type_by_index : UInt64
-    get_member_type_by_name : UInt64
-    get_member_type_by_semantic : UInt64
-    get_member_name : UInt64
-    get_member_semantic : UInt64
+    is_valid : Proc(ID3D10EffectType*, LibC::BOOL)
+    get_desc : Proc(ID3D10EffectType*, D3D10_EFFECT_TYPE_DESC*, HRESULT)
+    get_member_type_by_index : Proc(ID3D10EffectType*, UInt32, ID3D10EffectType)
+    get_member_type_by_name : Proc(ID3D10EffectType*, PSTR, ID3D10EffectType)
+    get_member_type_by_semantic : Proc(ID3D10EffectType*, PSTR, ID3D10EffectType)
+    get_member_name : Proc(ID3D10EffectType*, UInt32, PSTR)
+    get_member_semantic : Proc(ID3D10EffectType*, UInt32, PSTR)
   end
 
   ID3D10EffectType_GUID = "4e9e1ddc-cd9d-4772-a837-00180b9b88fd"
@@ -2555,31 +2555,31 @@ lib LibWin32
   end
 
   struct ID3D10EffectVariableVTbl
-    is_valid : UInt64
-    get_type : UInt64
-    get_desc : UInt64
-    get_annotation_by_index : UInt64
-    get_annotation_by_name : UInt64
-    get_member_by_index : UInt64
-    get_member_by_name : UInt64
-    get_member_by_semantic : UInt64
-    get_element : UInt64
-    get_parent_constant_buffer : UInt64
-    as_scalar : UInt64
-    as_vector : UInt64
-    as_matrix : UInt64
-    as_string : UInt64
-    as_shader_resource : UInt64
-    as_render_target_view : UInt64
-    as_depth_stencil_view : UInt64
-    as_constant_buffer : UInt64
-    as_shader : UInt64
-    as_blend : UInt64
-    as_depth_stencil : UInt64
-    as_rasterizer : UInt64
-    as_sampler : UInt64
-    set_raw_value : UInt64
-    get_raw_value : UInt64
+    is_valid : Proc(ID3D10EffectVariable*, LibC::BOOL)
+    get_type : Proc(ID3D10EffectVariable*, ID3D10EffectType)
+    get_desc : Proc(ID3D10EffectVariable*, D3D10_EFFECT_VARIABLE_DESC*, HRESULT)
+    get_annotation_by_index : Proc(ID3D10EffectVariable*, UInt32, ID3D10EffectVariable)
+    get_annotation_by_name : Proc(ID3D10EffectVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_index : Proc(ID3D10EffectVariable*, UInt32, ID3D10EffectVariable)
+    get_member_by_name : Proc(ID3D10EffectVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_semantic : Proc(ID3D10EffectVariable*, PSTR, ID3D10EffectVariable)
+    get_element : Proc(ID3D10EffectVariable*, UInt32, ID3D10EffectVariable)
+    get_parent_constant_buffer : Proc(ID3D10EffectVariable*, ID3D10EffectConstantBuffer)
+    as_scalar : Proc(ID3D10EffectVariable*, ID3D10EffectScalarVariable)
+    as_vector : Proc(ID3D10EffectVariable*, ID3D10EffectVectorVariable)
+    as_matrix : Proc(ID3D10EffectVariable*, ID3D10EffectMatrixVariable)
+    as_string : Proc(ID3D10EffectVariable*, ID3D10EffectStringVariable)
+    as_shader_resource : Proc(ID3D10EffectVariable*, ID3D10EffectShaderResourceVariable)
+    as_render_target_view : Proc(ID3D10EffectVariable*, ID3D10EffectRenderTargetViewVariable)
+    as_depth_stencil_view : Proc(ID3D10EffectVariable*, ID3D10EffectDepthStencilViewVariable)
+    as_constant_buffer : Proc(ID3D10EffectVariable*, ID3D10EffectConstantBuffer)
+    as_shader : Proc(ID3D10EffectVariable*, ID3D10EffectShaderVariable)
+    as_blend : Proc(ID3D10EffectVariable*, ID3D10EffectBlendVariable)
+    as_depth_stencil : Proc(ID3D10EffectVariable*, ID3D10EffectDepthStencilVariable)
+    as_rasterizer : Proc(ID3D10EffectVariable*, ID3D10EffectRasterizerVariable)
+    as_sampler : Proc(ID3D10EffectVariable*, ID3D10EffectSamplerVariable)
+    set_raw_value : Proc(ID3D10EffectVariable*, Void*, UInt32, UInt32, HRESULT)
+    get_raw_value : Proc(ID3D10EffectVariable*, Void*, UInt32, UInt32, HRESULT)
   end
 
   ID3D10EffectVariable_GUID = "ae897105-00e6-45bf-bb8e-281dd6db8e1b"
@@ -2589,43 +2589,43 @@ lib LibWin32
   end
 
   struct ID3D10EffectScalarVariableVTbl
-    is_valid : UInt64
-    get_type : UInt64
-    get_desc : UInt64
-    get_annotation_by_index : UInt64
-    get_annotation_by_name : UInt64
-    get_member_by_index : UInt64
-    get_member_by_name : UInt64
-    get_member_by_semantic : UInt64
-    get_element : UInt64
-    get_parent_constant_buffer : UInt64
-    as_scalar : UInt64
-    as_vector : UInt64
-    as_matrix : UInt64
-    as_string : UInt64
-    as_shader_resource : UInt64
-    as_render_target_view : UInt64
-    as_depth_stencil_view : UInt64
-    as_constant_buffer : UInt64
-    as_shader : UInt64
-    as_blend : UInt64
-    as_depth_stencil : UInt64
-    as_rasterizer : UInt64
-    as_sampler : UInt64
-    set_raw_value : UInt64
-    get_raw_value : UInt64
-    set_float : UInt64
-    get_float : UInt64
-    set_float_array : UInt64
-    get_float_array : UInt64
-    set_int : UInt64
-    get_int : UInt64
-    set_int_array : UInt64
-    get_int_array : UInt64
-    set_bool : UInt64
-    get_bool : UInt64
-    set_bool_array : UInt64
-    get_bool_array : UInt64
+    is_valid : Proc(ID3D10EffectScalarVariable*, LibC::BOOL)
+    get_type : Proc(ID3D10EffectScalarVariable*, ID3D10EffectType)
+    get_desc : Proc(ID3D10EffectScalarVariable*, D3D10_EFFECT_VARIABLE_DESC*, HRESULT)
+    get_annotation_by_index : Proc(ID3D10EffectScalarVariable*, UInt32, ID3D10EffectVariable)
+    get_annotation_by_name : Proc(ID3D10EffectScalarVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_index : Proc(ID3D10EffectScalarVariable*, UInt32, ID3D10EffectVariable)
+    get_member_by_name : Proc(ID3D10EffectScalarVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_semantic : Proc(ID3D10EffectScalarVariable*, PSTR, ID3D10EffectVariable)
+    get_element : Proc(ID3D10EffectScalarVariable*, UInt32, ID3D10EffectVariable)
+    get_parent_constant_buffer : Proc(ID3D10EffectScalarVariable*, ID3D10EffectConstantBuffer)
+    as_scalar : Proc(ID3D10EffectScalarVariable*, ID3D10EffectScalarVariable)
+    as_vector : Proc(ID3D10EffectScalarVariable*, ID3D10EffectVectorVariable)
+    as_matrix : Proc(ID3D10EffectScalarVariable*, ID3D10EffectMatrixVariable)
+    as_string : Proc(ID3D10EffectScalarVariable*, ID3D10EffectStringVariable)
+    as_shader_resource : Proc(ID3D10EffectScalarVariable*, ID3D10EffectShaderResourceVariable)
+    as_render_target_view : Proc(ID3D10EffectScalarVariable*, ID3D10EffectRenderTargetViewVariable)
+    as_depth_stencil_view : Proc(ID3D10EffectScalarVariable*, ID3D10EffectDepthStencilViewVariable)
+    as_constant_buffer : Proc(ID3D10EffectScalarVariable*, ID3D10EffectConstantBuffer)
+    as_shader : Proc(ID3D10EffectScalarVariable*, ID3D10EffectShaderVariable)
+    as_blend : Proc(ID3D10EffectScalarVariable*, ID3D10EffectBlendVariable)
+    as_depth_stencil : Proc(ID3D10EffectScalarVariable*, ID3D10EffectDepthStencilVariable)
+    as_rasterizer : Proc(ID3D10EffectScalarVariable*, ID3D10EffectRasterizerVariable)
+    as_sampler : Proc(ID3D10EffectScalarVariable*, ID3D10EffectSamplerVariable)
+    set_raw_value : Proc(ID3D10EffectScalarVariable*, Void*, UInt32, UInt32, HRESULT)
+    get_raw_value : Proc(ID3D10EffectScalarVariable*, Void*, UInt32, UInt32, HRESULT)
+    set_float : Proc(ID3D10EffectScalarVariable*, Float32, HRESULT)
+    get_float : Proc(ID3D10EffectScalarVariable*, Float32*, HRESULT)
+    set_float_array : Proc(ID3D10EffectScalarVariable*, Float32*, UInt32, UInt32, HRESULT)
+    get_float_array : Proc(ID3D10EffectScalarVariable*, Float32*, UInt32, UInt32, HRESULT)
+    set_int : Proc(ID3D10EffectScalarVariable*, Int32, HRESULT)
+    get_int : Proc(ID3D10EffectScalarVariable*, Int32*, HRESULT)
+    set_int_array : Proc(ID3D10EffectScalarVariable*, Int32*, UInt32, UInt32, HRESULT)
+    get_int_array : Proc(ID3D10EffectScalarVariable*, Int32*, UInt32, UInt32, HRESULT)
+    set_bool : Proc(ID3D10EffectScalarVariable*, LibC::BOOL, HRESULT)
+    get_bool : Proc(ID3D10EffectScalarVariable*, LibC::BOOL*, HRESULT)
+    set_bool_array : Proc(ID3D10EffectScalarVariable*, LibC::BOOL*, UInt32, UInt32, HRESULT)
+    get_bool_array : Proc(ID3D10EffectScalarVariable*, LibC::BOOL*, UInt32, UInt32, HRESULT)
   end
 
   ID3D10EffectScalarVariable_GUID = "00e48f7b-d2c8-49e8-a86c-022dee53431f"
@@ -2635,43 +2635,43 @@ lib LibWin32
   end
 
   struct ID3D10EffectVectorVariableVTbl
-    is_valid : UInt64
-    get_type : UInt64
-    get_desc : UInt64
-    get_annotation_by_index : UInt64
-    get_annotation_by_name : UInt64
-    get_member_by_index : UInt64
-    get_member_by_name : UInt64
-    get_member_by_semantic : UInt64
-    get_element : UInt64
-    get_parent_constant_buffer : UInt64
-    as_scalar : UInt64
-    as_vector : UInt64
-    as_matrix : UInt64
-    as_string : UInt64
-    as_shader_resource : UInt64
-    as_render_target_view : UInt64
-    as_depth_stencil_view : UInt64
-    as_constant_buffer : UInt64
-    as_shader : UInt64
-    as_blend : UInt64
-    as_depth_stencil : UInt64
-    as_rasterizer : UInt64
-    as_sampler : UInt64
-    set_raw_value : UInt64
-    get_raw_value : UInt64
-    set_bool_vector : UInt64
-    set_int_vector : UInt64
-    set_float_vector : UInt64
-    get_bool_vector : UInt64
-    get_int_vector : UInt64
-    get_float_vector : UInt64
-    set_bool_vector_array : UInt64
-    set_int_vector_array : UInt64
-    set_float_vector_array : UInt64
-    get_bool_vector_array : UInt64
-    get_int_vector_array : UInt64
-    get_float_vector_array : UInt64
+    is_valid : Proc(ID3D10EffectVectorVariable*, LibC::BOOL)
+    get_type : Proc(ID3D10EffectVectorVariable*, ID3D10EffectType)
+    get_desc : Proc(ID3D10EffectVectorVariable*, D3D10_EFFECT_VARIABLE_DESC*, HRESULT)
+    get_annotation_by_index : Proc(ID3D10EffectVectorVariable*, UInt32, ID3D10EffectVariable)
+    get_annotation_by_name : Proc(ID3D10EffectVectorVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_index : Proc(ID3D10EffectVectorVariable*, UInt32, ID3D10EffectVariable)
+    get_member_by_name : Proc(ID3D10EffectVectorVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_semantic : Proc(ID3D10EffectVectorVariable*, PSTR, ID3D10EffectVariable)
+    get_element : Proc(ID3D10EffectVectorVariable*, UInt32, ID3D10EffectVariable)
+    get_parent_constant_buffer : Proc(ID3D10EffectVectorVariable*, ID3D10EffectConstantBuffer)
+    as_scalar : Proc(ID3D10EffectVectorVariable*, ID3D10EffectScalarVariable)
+    as_vector : Proc(ID3D10EffectVectorVariable*, ID3D10EffectVectorVariable)
+    as_matrix : Proc(ID3D10EffectVectorVariable*, ID3D10EffectMatrixVariable)
+    as_string : Proc(ID3D10EffectVectorVariable*, ID3D10EffectStringVariable)
+    as_shader_resource : Proc(ID3D10EffectVectorVariable*, ID3D10EffectShaderResourceVariable)
+    as_render_target_view : Proc(ID3D10EffectVectorVariable*, ID3D10EffectRenderTargetViewVariable)
+    as_depth_stencil_view : Proc(ID3D10EffectVectorVariable*, ID3D10EffectDepthStencilViewVariable)
+    as_constant_buffer : Proc(ID3D10EffectVectorVariable*, ID3D10EffectConstantBuffer)
+    as_shader : Proc(ID3D10EffectVectorVariable*, ID3D10EffectShaderVariable)
+    as_blend : Proc(ID3D10EffectVectorVariable*, ID3D10EffectBlendVariable)
+    as_depth_stencil : Proc(ID3D10EffectVectorVariable*, ID3D10EffectDepthStencilVariable)
+    as_rasterizer : Proc(ID3D10EffectVectorVariable*, ID3D10EffectRasterizerVariable)
+    as_sampler : Proc(ID3D10EffectVectorVariable*, ID3D10EffectSamplerVariable)
+    set_raw_value : Proc(ID3D10EffectVectorVariable*, Void*, UInt32, UInt32, HRESULT)
+    get_raw_value : Proc(ID3D10EffectVectorVariable*, Void*, UInt32, UInt32, HRESULT)
+    set_bool_vector : Proc(ID3D10EffectVectorVariable*, LibC::BOOL*, HRESULT)
+    set_int_vector : Proc(ID3D10EffectVectorVariable*, Int32*, HRESULT)
+    set_float_vector : Proc(ID3D10EffectVectorVariable*, Float32*, HRESULT)
+    get_bool_vector : Proc(ID3D10EffectVectorVariable*, LibC::BOOL*, HRESULT)
+    get_int_vector : Proc(ID3D10EffectVectorVariable*, Int32*, HRESULT)
+    get_float_vector : Proc(ID3D10EffectVectorVariable*, Float32*, HRESULT)
+    set_bool_vector_array : Proc(ID3D10EffectVectorVariable*, LibC::BOOL*, UInt32, UInt32, HRESULT)
+    set_int_vector_array : Proc(ID3D10EffectVectorVariable*, Int32*, UInt32, UInt32, HRESULT)
+    set_float_vector_array : Proc(ID3D10EffectVectorVariable*, Float32*, UInt32, UInt32, HRESULT)
+    get_bool_vector_array : Proc(ID3D10EffectVectorVariable*, LibC::BOOL*, UInt32, UInt32, HRESULT)
+    get_int_vector_array : Proc(ID3D10EffectVectorVariable*, Int32*, UInt32, UInt32, HRESULT)
+    get_float_vector_array : Proc(ID3D10EffectVectorVariable*, Float32*, UInt32, UInt32, HRESULT)
   end
 
   ID3D10EffectVectorVariable_GUID = "62b98c44-1f82-4c67-bcd0-72cf8f217e81"
@@ -2681,39 +2681,39 @@ lib LibWin32
   end
 
   struct ID3D10EffectMatrixVariableVTbl
-    is_valid : UInt64
-    get_type : UInt64
-    get_desc : UInt64
-    get_annotation_by_index : UInt64
-    get_annotation_by_name : UInt64
-    get_member_by_index : UInt64
-    get_member_by_name : UInt64
-    get_member_by_semantic : UInt64
-    get_element : UInt64
-    get_parent_constant_buffer : UInt64
-    as_scalar : UInt64
-    as_vector : UInt64
-    as_matrix : UInt64
-    as_string : UInt64
-    as_shader_resource : UInt64
-    as_render_target_view : UInt64
-    as_depth_stencil_view : UInt64
-    as_constant_buffer : UInt64
-    as_shader : UInt64
-    as_blend : UInt64
-    as_depth_stencil : UInt64
-    as_rasterizer : UInt64
-    as_sampler : UInt64
-    set_raw_value : UInt64
-    get_raw_value : UInt64
-    set_matrix : UInt64
-    get_matrix : UInt64
-    set_matrix_array : UInt64
-    get_matrix_array : UInt64
-    set_matrix_transpose : UInt64
-    get_matrix_transpose : UInt64
-    set_matrix_transpose_array : UInt64
-    get_matrix_transpose_array : UInt64
+    is_valid : Proc(ID3D10EffectMatrixVariable*, LibC::BOOL)
+    get_type : Proc(ID3D10EffectMatrixVariable*, ID3D10EffectType)
+    get_desc : Proc(ID3D10EffectMatrixVariable*, D3D10_EFFECT_VARIABLE_DESC*, HRESULT)
+    get_annotation_by_index : Proc(ID3D10EffectMatrixVariable*, UInt32, ID3D10EffectVariable)
+    get_annotation_by_name : Proc(ID3D10EffectMatrixVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_index : Proc(ID3D10EffectMatrixVariable*, UInt32, ID3D10EffectVariable)
+    get_member_by_name : Proc(ID3D10EffectMatrixVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_semantic : Proc(ID3D10EffectMatrixVariable*, PSTR, ID3D10EffectVariable)
+    get_element : Proc(ID3D10EffectMatrixVariable*, UInt32, ID3D10EffectVariable)
+    get_parent_constant_buffer : Proc(ID3D10EffectMatrixVariable*, ID3D10EffectConstantBuffer)
+    as_scalar : Proc(ID3D10EffectMatrixVariable*, ID3D10EffectScalarVariable)
+    as_vector : Proc(ID3D10EffectMatrixVariable*, ID3D10EffectVectorVariable)
+    as_matrix : Proc(ID3D10EffectMatrixVariable*, ID3D10EffectMatrixVariable)
+    as_string : Proc(ID3D10EffectMatrixVariable*, ID3D10EffectStringVariable)
+    as_shader_resource : Proc(ID3D10EffectMatrixVariable*, ID3D10EffectShaderResourceVariable)
+    as_render_target_view : Proc(ID3D10EffectMatrixVariable*, ID3D10EffectRenderTargetViewVariable)
+    as_depth_stencil_view : Proc(ID3D10EffectMatrixVariable*, ID3D10EffectDepthStencilViewVariable)
+    as_constant_buffer : Proc(ID3D10EffectMatrixVariable*, ID3D10EffectConstantBuffer)
+    as_shader : Proc(ID3D10EffectMatrixVariable*, ID3D10EffectShaderVariable)
+    as_blend : Proc(ID3D10EffectMatrixVariable*, ID3D10EffectBlendVariable)
+    as_depth_stencil : Proc(ID3D10EffectMatrixVariable*, ID3D10EffectDepthStencilVariable)
+    as_rasterizer : Proc(ID3D10EffectMatrixVariable*, ID3D10EffectRasterizerVariable)
+    as_sampler : Proc(ID3D10EffectMatrixVariable*, ID3D10EffectSamplerVariable)
+    set_raw_value : Proc(ID3D10EffectMatrixVariable*, Void*, UInt32, UInt32, HRESULT)
+    get_raw_value : Proc(ID3D10EffectMatrixVariable*, Void*, UInt32, UInt32, HRESULT)
+    set_matrix : Proc(ID3D10EffectMatrixVariable*, Float32*, HRESULT)
+    get_matrix : Proc(ID3D10EffectMatrixVariable*, Float32*, HRESULT)
+    set_matrix_array : Proc(ID3D10EffectMatrixVariable*, Float32*, UInt32, UInt32, HRESULT)
+    get_matrix_array : Proc(ID3D10EffectMatrixVariable*, Float32*, UInt32, UInt32, HRESULT)
+    set_matrix_transpose : Proc(ID3D10EffectMatrixVariable*, Float32*, HRESULT)
+    get_matrix_transpose : Proc(ID3D10EffectMatrixVariable*, Float32*, HRESULT)
+    set_matrix_transpose_array : Proc(ID3D10EffectMatrixVariable*, Float32*, UInt32, UInt32, HRESULT)
+    get_matrix_transpose_array : Proc(ID3D10EffectMatrixVariable*, Float32*, UInt32, UInt32, HRESULT)
   end
 
   ID3D10EffectMatrixVariable_GUID = "50666c24-b82f-4eed-a172-5b6e7e8522e0"
@@ -2723,33 +2723,33 @@ lib LibWin32
   end
 
   struct ID3D10EffectStringVariableVTbl
-    is_valid : UInt64
-    get_type : UInt64
-    get_desc : UInt64
-    get_annotation_by_index : UInt64
-    get_annotation_by_name : UInt64
-    get_member_by_index : UInt64
-    get_member_by_name : UInt64
-    get_member_by_semantic : UInt64
-    get_element : UInt64
-    get_parent_constant_buffer : UInt64
-    as_scalar : UInt64
-    as_vector : UInt64
-    as_matrix : UInt64
-    as_string : UInt64
-    as_shader_resource : UInt64
-    as_render_target_view : UInt64
-    as_depth_stencil_view : UInt64
-    as_constant_buffer : UInt64
-    as_shader : UInt64
-    as_blend : UInt64
-    as_depth_stencil : UInt64
-    as_rasterizer : UInt64
-    as_sampler : UInt64
-    set_raw_value : UInt64
-    get_raw_value : UInt64
-    get_string : UInt64
-    get_string_array : UInt64
+    is_valid : Proc(ID3D10EffectStringVariable*, LibC::BOOL)
+    get_type : Proc(ID3D10EffectStringVariable*, ID3D10EffectType)
+    get_desc : Proc(ID3D10EffectStringVariable*, D3D10_EFFECT_VARIABLE_DESC*, HRESULT)
+    get_annotation_by_index : Proc(ID3D10EffectStringVariable*, UInt32, ID3D10EffectVariable)
+    get_annotation_by_name : Proc(ID3D10EffectStringVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_index : Proc(ID3D10EffectStringVariable*, UInt32, ID3D10EffectVariable)
+    get_member_by_name : Proc(ID3D10EffectStringVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_semantic : Proc(ID3D10EffectStringVariable*, PSTR, ID3D10EffectVariable)
+    get_element : Proc(ID3D10EffectStringVariable*, UInt32, ID3D10EffectVariable)
+    get_parent_constant_buffer : Proc(ID3D10EffectStringVariable*, ID3D10EffectConstantBuffer)
+    as_scalar : Proc(ID3D10EffectStringVariable*, ID3D10EffectScalarVariable)
+    as_vector : Proc(ID3D10EffectStringVariable*, ID3D10EffectVectorVariable)
+    as_matrix : Proc(ID3D10EffectStringVariable*, ID3D10EffectMatrixVariable)
+    as_string : Proc(ID3D10EffectStringVariable*, ID3D10EffectStringVariable)
+    as_shader_resource : Proc(ID3D10EffectStringVariable*, ID3D10EffectShaderResourceVariable)
+    as_render_target_view : Proc(ID3D10EffectStringVariable*, ID3D10EffectRenderTargetViewVariable)
+    as_depth_stencil_view : Proc(ID3D10EffectStringVariable*, ID3D10EffectDepthStencilViewVariable)
+    as_constant_buffer : Proc(ID3D10EffectStringVariable*, ID3D10EffectConstantBuffer)
+    as_shader : Proc(ID3D10EffectStringVariable*, ID3D10EffectShaderVariable)
+    as_blend : Proc(ID3D10EffectStringVariable*, ID3D10EffectBlendVariable)
+    as_depth_stencil : Proc(ID3D10EffectStringVariable*, ID3D10EffectDepthStencilVariable)
+    as_rasterizer : Proc(ID3D10EffectStringVariable*, ID3D10EffectRasterizerVariable)
+    as_sampler : Proc(ID3D10EffectStringVariable*, ID3D10EffectSamplerVariable)
+    set_raw_value : Proc(ID3D10EffectStringVariable*, Void*, UInt32, UInt32, HRESULT)
+    get_raw_value : Proc(ID3D10EffectStringVariable*, Void*, UInt32, UInt32, HRESULT)
+    get_string : Proc(ID3D10EffectStringVariable*, PSTR*, HRESULT)
+    get_string_array : Proc(ID3D10EffectStringVariable*, PSTR*, UInt32, UInt32, HRESULT)
   end
 
   ID3D10EffectStringVariable_GUID = "71417501-8df9-4e0a-a78a-255f9756baff"
@@ -2759,35 +2759,35 @@ lib LibWin32
   end
 
   struct ID3D10EffectShaderResourceVariableVTbl
-    is_valid : UInt64
-    get_type : UInt64
-    get_desc : UInt64
-    get_annotation_by_index : UInt64
-    get_annotation_by_name : UInt64
-    get_member_by_index : UInt64
-    get_member_by_name : UInt64
-    get_member_by_semantic : UInt64
-    get_element : UInt64
-    get_parent_constant_buffer : UInt64
-    as_scalar : UInt64
-    as_vector : UInt64
-    as_matrix : UInt64
-    as_string : UInt64
-    as_shader_resource : UInt64
-    as_render_target_view : UInt64
-    as_depth_stencil_view : UInt64
-    as_constant_buffer : UInt64
-    as_shader : UInt64
-    as_blend : UInt64
-    as_depth_stencil : UInt64
-    as_rasterizer : UInt64
-    as_sampler : UInt64
-    set_raw_value : UInt64
-    get_raw_value : UInt64
-    set_resource : UInt64
-    get_resource : UInt64
-    set_resource_array : UInt64
-    get_resource_array : UInt64
+    is_valid : Proc(ID3D10EffectShaderResourceVariable*, LibC::BOOL)
+    get_type : Proc(ID3D10EffectShaderResourceVariable*, ID3D10EffectType)
+    get_desc : Proc(ID3D10EffectShaderResourceVariable*, D3D10_EFFECT_VARIABLE_DESC*, HRESULT)
+    get_annotation_by_index : Proc(ID3D10EffectShaderResourceVariable*, UInt32, ID3D10EffectVariable)
+    get_annotation_by_name : Proc(ID3D10EffectShaderResourceVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_index : Proc(ID3D10EffectShaderResourceVariable*, UInt32, ID3D10EffectVariable)
+    get_member_by_name : Proc(ID3D10EffectShaderResourceVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_semantic : Proc(ID3D10EffectShaderResourceVariable*, PSTR, ID3D10EffectVariable)
+    get_element : Proc(ID3D10EffectShaderResourceVariable*, UInt32, ID3D10EffectVariable)
+    get_parent_constant_buffer : Proc(ID3D10EffectShaderResourceVariable*, ID3D10EffectConstantBuffer)
+    as_scalar : Proc(ID3D10EffectShaderResourceVariable*, ID3D10EffectScalarVariable)
+    as_vector : Proc(ID3D10EffectShaderResourceVariable*, ID3D10EffectVectorVariable)
+    as_matrix : Proc(ID3D10EffectShaderResourceVariable*, ID3D10EffectMatrixVariable)
+    as_string : Proc(ID3D10EffectShaderResourceVariable*, ID3D10EffectStringVariable)
+    as_shader_resource : Proc(ID3D10EffectShaderResourceVariable*, ID3D10EffectShaderResourceVariable)
+    as_render_target_view : Proc(ID3D10EffectShaderResourceVariable*, ID3D10EffectRenderTargetViewVariable)
+    as_depth_stencil_view : Proc(ID3D10EffectShaderResourceVariable*, ID3D10EffectDepthStencilViewVariable)
+    as_constant_buffer : Proc(ID3D10EffectShaderResourceVariable*, ID3D10EffectConstantBuffer)
+    as_shader : Proc(ID3D10EffectShaderResourceVariable*, ID3D10EffectShaderVariable)
+    as_blend : Proc(ID3D10EffectShaderResourceVariable*, ID3D10EffectBlendVariable)
+    as_depth_stencil : Proc(ID3D10EffectShaderResourceVariable*, ID3D10EffectDepthStencilVariable)
+    as_rasterizer : Proc(ID3D10EffectShaderResourceVariable*, ID3D10EffectRasterizerVariable)
+    as_sampler : Proc(ID3D10EffectShaderResourceVariable*, ID3D10EffectSamplerVariable)
+    set_raw_value : Proc(ID3D10EffectShaderResourceVariable*, Void*, UInt32, UInt32, HRESULT)
+    get_raw_value : Proc(ID3D10EffectShaderResourceVariable*, Void*, UInt32, UInt32, HRESULT)
+    set_resource : Proc(ID3D10EffectShaderResourceVariable*, ID3D10ShaderResourceView, HRESULT)
+    get_resource : Proc(ID3D10EffectShaderResourceVariable*, ID3D10ShaderResourceView*, HRESULT)
+    set_resource_array : Proc(ID3D10EffectShaderResourceVariable*, ID3D10ShaderResourceView*, UInt32, UInt32, HRESULT)
+    get_resource_array : Proc(ID3D10EffectShaderResourceVariable*, ID3D10ShaderResourceView*, UInt32, UInt32, HRESULT)
   end
 
   ID3D10EffectShaderResourceVariable_GUID = "c0a7157b-d872-4b1d-8073-efc2acd4b1fc"
@@ -2797,35 +2797,35 @@ lib LibWin32
   end
 
   struct ID3D10EffectRenderTargetViewVariableVTbl
-    is_valid : UInt64
-    get_type : UInt64
-    get_desc : UInt64
-    get_annotation_by_index : UInt64
-    get_annotation_by_name : UInt64
-    get_member_by_index : UInt64
-    get_member_by_name : UInt64
-    get_member_by_semantic : UInt64
-    get_element : UInt64
-    get_parent_constant_buffer : UInt64
-    as_scalar : UInt64
-    as_vector : UInt64
-    as_matrix : UInt64
-    as_string : UInt64
-    as_shader_resource : UInt64
-    as_render_target_view : UInt64
-    as_depth_stencil_view : UInt64
-    as_constant_buffer : UInt64
-    as_shader : UInt64
-    as_blend : UInt64
-    as_depth_stencil : UInt64
-    as_rasterizer : UInt64
-    as_sampler : UInt64
-    set_raw_value : UInt64
-    get_raw_value : UInt64
-    set_render_target : UInt64
-    get_render_target : UInt64
-    set_render_target_array : UInt64
-    get_render_target_array : UInt64
+    is_valid : Proc(ID3D10EffectRenderTargetViewVariable*, LibC::BOOL)
+    get_type : Proc(ID3D10EffectRenderTargetViewVariable*, ID3D10EffectType)
+    get_desc : Proc(ID3D10EffectRenderTargetViewVariable*, D3D10_EFFECT_VARIABLE_DESC*, HRESULT)
+    get_annotation_by_index : Proc(ID3D10EffectRenderTargetViewVariable*, UInt32, ID3D10EffectVariable)
+    get_annotation_by_name : Proc(ID3D10EffectRenderTargetViewVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_index : Proc(ID3D10EffectRenderTargetViewVariable*, UInt32, ID3D10EffectVariable)
+    get_member_by_name : Proc(ID3D10EffectRenderTargetViewVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_semantic : Proc(ID3D10EffectRenderTargetViewVariable*, PSTR, ID3D10EffectVariable)
+    get_element : Proc(ID3D10EffectRenderTargetViewVariable*, UInt32, ID3D10EffectVariable)
+    get_parent_constant_buffer : Proc(ID3D10EffectRenderTargetViewVariable*, ID3D10EffectConstantBuffer)
+    as_scalar : Proc(ID3D10EffectRenderTargetViewVariable*, ID3D10EffectScalarVariable)
+    as_vector : Proc(ID3D10EffectRenderTargetViewVariable*, ID3D10EffectVectorVariable)
+    as_matrix : Proc(ID3D10EffectRenderTargetViewVariable*, ID3D10EffectMatrixVariable)
+    as_string : Proc(ID3D10EffectRenderTargetViewVariable*, ID3D10EffectStringVariable)
+    as_shader_resource : Proc(ID3D10EffectRenderTargetViewVariable*, ID3D10EffectShaderResourceVariable)
+    as_render_target_view : Proc(ID3D10EffectRenderTargetViewVariable*, ID3D10EffectRenderTargetViewVariable)
+    as_depth_stencil_view : Proc(ID3D10EffectRenderTargetViewVariable*, ID3D10EffectDepthStencilViewVariable)
+    as_constant_buffer : Proc(ID3D10EffectRenderTargetViewVariable*, ID3D10EffectConstantBuffer)
+    as_shader : Proc(ID3D10EffectRenderTargetViewVariable*, ID3D10EffectShaderVariable)
+    as_blend : Proc(ID3D10EffectRenderTargetViewVariable*, ID3D10EffectBlendVariable)
+    as_depth_stencil : Proc(ID3D10EffectRenderTargetViewVariable*, ID3D10EffectDepthStencilVariable)
+    as_rasterizer : Proc(ID3D10EffectRenderTargetViewVariable*, ID3D10EffectRasterizerVariable)
+    as_sampler : Proc(ID3D10EffectRenderTargetViewVariable*, ID3D10EffectSamplerVariable)
+    set_raw_value : Proc(ID3D10EffectRenderTargetViewVariable*, Void*, UInt32, UInt32, HRESULT)
+    get_raw_value : Proc(ID3D10EffectRenderTargetViewVariable*, Void*, UInt32, UInt32, HRESULT)
+    set_render_target : Proc(ID3D10EffectRenderTargetViewVariable*, ID3D10RenderTargetView, HRESULT)
+    get_render_target : Proc(ID3D10EffectRenderTargetViewVariable*, ID3D10RenderTargetView*, HRESULT)
+    set_render_target_array : Proc(ID3D10EffectRenderTargetViewVariable*, ID3D10RenderTargetView*, UInt32, UInt32, HRESULT)
+    get_render_target_array : Proc(ID3D10EffectRenderTargetViewVariable*, ID3D10RenderTargetView*, UInt32, UInt32, HRESULT)
   end
 
   ID3D10EffectRenderTargetViewVariable_GUID = "28ca0cc3-c2c9-40bb-b57f-67b737122b17"
@@ -2835,35 +2835,35 @@ lib LibWin32
   end
 
   struct ID3D10EffectDepthStencilViewVariableVTbl
-    is_valid : UInt64
-    get_type : UInt64
-    get_desc : UInt64
-    get_annotation_by_index : UInt64
-    get_annotation_by_name : UInt64
-    get_member_by_index : UInt64
-    get_member_by_name : UInt64
-    get_member_by_semantic : UInt64
-    get_element : UInt64
-    get_parent_constant_buffer : UInt64
-    as_scalar : UInt64
-    as_vector : UInt64
-    as_matrix : UInt64
-    as_string : UInt64
-    as_shader_resource : UInt64
-    as_render_target_view : UInt64
-    as_depth_stencil_view : UInt64
-    as_constant_buffer : UInt64
-    as_shader : UInt64
-    as_blend : UInt64
-    as_depth_stencil : UInt64
-    as_rasterizer : UInt64
-    as_sampler : UInt64
-    set_raw_value : UInt64
-    get_raw_value : UInt64
-    set_depth_stencil : UInt64
-    get_depth_stencil : UInt64
-    set_depth_stencil_array : UInt64
-    get_depth_stencil_array : UInt64
+    is_valid : Proc(ID3D10EffectDepthStencilViewVariable*, LibC::BOOL)
+    get_type : Proc(ID3D10EffectDepthStencilViewVariable*, ID3D10EffectType)
+    get_desc : Proc(ID3D10EffectDepthStencilViewVariable*, D3D10_EFFECT_VARIABLE_DESC*, HRESULT)
+    get_annotation_by_index : Proc(ID3D10EffectDepthStencilViewVariable*, UInt32, ID3D10EffectVariable)
+    get_annotation_by_name : Proc(ID3D10EffectDepthStencilViewVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_index : Proc(ID3D10EffectDepthStencilViewVariable*, UInt32, ID3D10EffectVariable)
+    get_member_by_name : Proc(ID3D10EffectDepthStencilViewVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_semantic : Proc(ID3D10EffectDepthStencilViewVariable*, PSTR, ID3D10EffectVariable)
+    get_element : Proc(ID3D10EffectDepthStencilViewVariable*, UInt32, ID3D10EffectVariable)
+    get_parent_constant_buffer : Proc(ID3D10EffectDepthStencilViewVariable*, ID3D10EffectConstantBuffer)
+    as_scalar : Proc(ID3D10EffectDepthStencilViewVariable*, ID3D10EffectScalarVariable)
+    as_vector : Proc(ID3D10EffectDepthStencilViewVariable*, ID3D10EffectVectorVariable)
+    as_matrix : Proc(ID3D10EffectDepthStencilViewVariable*, ID3D10EffectMatrixVariable)
+    as_string : Proc(ID3D10EffectDepthStencilViewVariable*, ID3D10EffectStringVariable)
+    as_shader_resource : Proc(ID3D10EffectDepthStencilViewVariable*, ID3D10EffectShaderResourceVariable)
+    as_render_target_view : Proc(ID3D10EffectDepthStencilViewVariable*, ID3D10EffectRenderTargetViewVariable)
+    as_depth_stencil_view : Proc(ID3D10EffectDepthStencilViewVariable*, ID3D10EffectDepthStencilViewVariable)
+    as_constant_buffer : Proc(ID3D10EffectDepthStencilViewVariable*, ID3D10EffectConstantBuffer)
+    as_shader : Proc(ID3D10EffectDepthStencilViewVariable*, ID3D10EffectShaderVariable)
+    as_blend : Proc(ID3D10EffectDepthStencilViewVariable*, ID3D10EffectBlendVariable)
+    as_depth_stencil : Proc(ID3D10EffectDepthStencilViewVariable*, ID3D10EffectDepthStencilVariable)
+    as_rasterizer : Proc(ID3D10EffectDepthStencilViewVariable*, ID3D10EffectRasterizerVariable)
+    as_sampler : Proc(ID3D10EffectDepthStencilViewVariable*, ID3D10EffectSamplerVariable)
+    set_raw_value : Proc(ID3D10EffectDepthStencilViewVariable*, Void*, UInt32, UInt32, HRESULT)
+    get_raw_value : Proc(ID3D10EffectDepthStencilViewVariable*, Void*, UInt32, UInt32, HRESULT)
+    set_depth_stencil : Proc(ID3D10EffectDepthStencilViewVariable*, ID3D10DepthStencilView, HRESULT)
+    get_depth_stencil : Proc(ID3D10EffectDepthStencilViewVariable*, ID3D10DepthStencilView*, HRESULT)
+    set_depth_stencil_array : Proc(ID3D10EffectDepthStencilViewVariable*, ID3D10DepthStencilView*, UInt32, UInt32, HRESULT)
+    get_depth_stencil_array : Proc(ID3D10EffectDepthStencilViewVariable*, ID3D10DepthStencilView*, UInt32, UInt32, HRESULT)
   end
 
   ID3D10EffectDepthStencilViewVariable_GUID = "3e02c918-cc79-4985-b622-2d92ad701623"
@@ -2873,35 +2873,35 @@ lib LibWin32
   end
 
   struct ID3D10EffectConstantBufferVTbl
-    is_valid : UInt64
-    get_type : UInt64
-    get_desc : UInt64
-    get_annotation_by_index : UInt64
-    get_annotation_by_name : UInt64
-    get_member_by_index : UInt64
-    get_member_by_name : UInt64
-    get_member_by_semantic : UInt64
-    get_element : UInt64
-    get_parent_constant_buffer : UInt64
-    as_scalar : UInt64
-    as_vector : UInt64
-    as_matrix : UInt64
-    as_string : UInt64
-    as_shader_resource : UInt64
-    as_render_target_view : UInt64
-    as_depth_stencil_view : UInt64
-    as_constant_buffer : UInt64
-    as_shader : UInt64
-    as_blend : UInt64
-    as_depth_stencil : UInt64
-    as_rasterizer : UInt64
-    as_sampler : UInt64
-    set_raw_value : UInt64
-    get_raw_value : UInt64
-    set_constant_buffer : UInt64
-    get_constant_buffer : UInt64
-    set_texture_buffer : UInt64
-    get_texture_buffer : UInt64
+    is_valid : Proc(ID3D10EffectConstantBuffer*, LibC::BOOL)
+    get_type : Proc(ID3D10EffectConstantBuffer*, ID3D10EffectType)
+    get_desc : Proc(ID3D10EffectConstantBuffer*, D3D10_EFFECT_VARIABLE_DESC*, HRESULT)
+    get_annotation_by_index : Proc(ID3D10EffectConstantBuffer*, UInt32, ID3D10EffectVariable)
+    get_annotation_by_name : Proc(ID3D10EffectConstantBuffer*, PSTR, ID3D10EffectVariable)
+    get_member_by_index : Proc(ID3D10EffectConstantBuffer*, UInt32, ID3D10EffectVariable)
+    get_member_by_name : Proc(ID3D10EffectConstantBuffer*, PSTR, ID3D10EffectVariable)
+    get_member_by_semantic : Proc(ID3D10EffectConstantBuffer*, PSTR, ID3D10EffectVariable)
+    get_element : Proc(ID3D10EffectConstantBuffer*, UInt32, ID3D10EffectVariable)
+    get_parent_constant_buffer : Proc(ID3D10EffectConstantBuffer*, ID3D10EffectConstantBuffer)
+    as_scalar : Proc(ID3D10EffectConstantBuffer*, ID3D10EffectScalarVariable)
+    as_vector : Proc(ID3D10EffectConstantBuffer*, ID3D10EffectVectorVariable)
+    as_matrix : Proc(ID3D10EffectConstantBuffer*, ID3D10EffectMatrixVariable)
+    as_string : Proc(ID3D10EffectConstantBuffer*, ID3D10EffectStringVariable)
+    as_shader_resource : Proc(ID3D10EffectConstantBuffer*, ID3D10EffectShaderResourceVariable)
+    as_render_target_view : Proc(ID3D10EffectConstantBuffer*, ID3D10EffectRenderTargetViewVariable)
+    as_depth_stencil_view : Proc(ID3D10EffectConstantBuffer*, ID3D10EffectDepthStencilViewVariable)
+    as_constant_buffer : Proc(ID3D10EffectConstantBuffer*, ID3D10EffectConstantBuffer)
+    as_shader : Proc(ID3D10EffectConstantBuffer*, ID3D10EffectShaderVariable)
+    as_blend : Proc(ID3D10EffectConstantBuffer*, ID3D10EffectBlendVariable)
+    as_depth_stencil : Proc(ID3D10EffectConstantBuffer*, ID3D10EffectDepthStencilVariable)
+    as_rasterizer : Proc(ID3D10EffectConstantBuffer*, ID3D10EffectRasterizerVariable)
+    as_sampler : Proc(ID3D10EffectConstantBuffer*, ID3D10EffectSamplerVariable)
+    set_raw_value : Proc(ID3D10EffectConstantBuffer*, Void*, UInt32, UInt32, HRESULT)
+    get_raw_value : Proc(ID3D10EffectConstantBuffer*, Void*, UInt32, UInt32, HRESULT)
+    set_constant_buffer : Proc(ID3D10EffectConstantBuffer*, ID3D10Buffer, HRESULT)
+    get_constant_buffer : Proc(ID3D10EffectConstantBuffer*, ID3D10Buffer*, HRESULT)
+    set_texture_buffer : Proc(ID3D10EffectConstantBuffer*, ID3D10ShaderResourceView, HRESULT)
+    get_texture_buffer : Proc(ID3D10EffectConstantBuffer*, ID3D10ShaderResourceView*, HRESULT)
   end
 
   ID3D10EffectConstantBuffer_GUID = "56648f4d-cc8b-4444-a5ad-b5a3d76e91b3"
@@ -2911,37 +2911,37 @@ lib LibWin32
   end
 
   struct ID3D10EffectShaderVariableVTbl
-    is_valid : UInt64
-    get_type : UInt64
-    get_desc : UInt64
-    get_annotation_by_index : UInt64
-    get_annotation_by_name : UInt64
-    get_member_by_index : UInt64
-    get_member_by_name : UInt64
-    get_member_by_semantic : UInt64
-    get_element : UInt64
-    get_parent_constant_buffer : UInt64
-    as_scalar : UInt64
-    as_vector : UInt64
-    as_matrix : UInt64
-    as_string : UInt64
-    as_shader_resource : UInt64
-    as_render_target_view : UInt64
-    as_depth_stencil_view : UInt64
-    as_constant_buffer : UInt64
-    as_shader : UInt64
-    as_blend : UInt64
-    as_depth_stencil : UInt64
-    as_rasterizer : UInt64
-    as_sampler : UInt64
-    set_raw_value : UInt64
-    get_raw_value : UInt64
-    get_shader_desc : UInt64
-    get_vertex_shader : UInt64
-    get_geometry_shader : UInt64
-    get_pixel_shader : UInt64
-    get_input_signature_element_desc : UInt64
-    get_output_signature_element_desc : UInt64
+    is_valid : Proc(ID3D10EffectShaderVariable*, LibC::BOOL)
+    get_type : Proc(ID3D10EffectShaderVariable*, ID3D10EffectType)
+    get_desc : Proc(ID3D10EffectShaderVariable*, D3D10_EFFECT_VARIABLE_DESC*, HRESULT)
+    get_annotation_by_index : Proc(ID3D10EffectShaderVariable*, UInt32, ID3D10EffectVariable)
+    get_annotation_by_name : Proc(ID3D10EffectShaderVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_index : Proc(ID3D10EffectShaderVariable*, UInt32, ID3D10EffectVariable)
+    get_member_by_name : Proc(ID3D10EffectShaderVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_semantic : Proc(ID3D10EffectShaderVariable*, PSTR, ID3D10EffectVariable)
+    get_element : Proc(ID3D10EffectShaderVariable*, UInt32, ID3D10EffectVariable)
+    get_parent_constant_buffer : Proc(ID3D10EffectShaderVariable*, ID3D10EffectConstantBuffer)
+    as_scalar : Proc(ID3D10EffectShaderVariable*, ID3D10EffectScalarVariable)
+    as_vector : Proc(ID3D10EffectShaderVariable*, ID3D10EffectVectorVariable)
+    as_matrix : Proc(ID3D10EffectShaderVariable*, ID3D10EffectMatrixVariable)
+    as_string : Proc(ID3D10EffectShaderVariable*, ID3D10EffectStringVariable)
+    as_shader_resource : Proc(ID3D10EffectShaderVariable*, ID3D10EffectShaderResourceVariable)
+    as_render_target_view : Proc(ID3D10EffectShaderVariable*, ID3D10EffectRenderTargetViewVariable)
+    as_depth_stencil_view : Proc(ID3D10EffectShaderVariable*, ID3D10EffectDepthStencilViewVariable)
+    as_constant_buffer : Proc(ID3D10EffectShaderVariable*, ID3D10EffectConstantBuffer)
+    as_shader : Proc(ID3D10EffectShaderVariable*, ID3D10EffectShaderVariable)
+    as_blend : Proc(ID3D10EffectShaderVariable*, ID3D10EffectBlendVariable)
+    as_depth_stencil : Proc(ID3D10EffectShaderVariable*, ID3D10EffectDepthStencilVariable)
+    as_rasterizer : Proc(ID3D10EffectShaderVariable*, ID3D10EffectRasterizerVariable)
+    as_sampler : Proc(ID3D10EffectShaderVariable*, ID3D10EffectSamplerVariable)
+    set_raw_value : Proc(ID3D10EffectShaderVariable*, Void*, UInt32, UInt32, HRESULT)
+    get_raw_value : Proc(ID3D10EffectShaderVariable*, Void*, UInt32, UInt32, HRESULT)
+    get_shader_desc : Proc(ID3D10EffectShaderVariable*, UInt32, D3D10_EFFECT_SHADER_DESC*, HRESULT)
+    get_vertex_shader : Proc(ID3D10EffectShaderVariable*, UInt32, ID3D10VertexShader*, HRESULT)
+    get_geometry_shader : Proc(ID3D10EffectShaderVariable*, UInt32, ID3D10GeometryShader*, HRESULT)
+    get_pixel_shader : Proc(ID3D10EffectShaderVariable*, UInt32, ID3D10PixelShader*, HRESULT)
+    get_input_signature_element_desc : Proc(ID3D10EffectShaderVariable*, UInt32, UInt32, D3D10_SIGNATURE_PARAMETER_DESC*, HRESULT)
+    get_output_signature_element_desc : Proc(ID3D10EffectShaderVariable*, UInt32, UInt32, D3D10_SIGNATURE_PARAMETER_DESC*, HRESULT)
   end
 
   ID3D10EffectShaderVariable_GUID = "80849279-c799-4797-8c33-0407a07d9e06"
@@ -2951,33 +2951,33 @@ lib LibWin32
   end
 
   struct ID3D10EffectBlendVariableVTbl
-    is_valid : UInt64
-    get_type : UInt64
-    get_desc : UInt64
-    get_annotation_by_index : UInt64
-    get_annotation_by_name : UInt64
-    get_member_by_index : UInt64
-    get_member_by_name : UInt64
-    get_member_by_semantic : UInt64
-    get_element : UInt64
-    get_parent_constant_buffer : UInt64
-    as_scalar : UInt64
-    as_vector : UInt64
-    as_matrix : UInt64
-    as_string : UInt64
-    as_shader_resource : UInt64
-    as_render_target_view : UInt64
-    as_depth_stencil_view : UInt64
-    as_constant_buffer : UInt64
-    as_shader : UInt64
-    as_blend : UInt64
-    as_depth_stencil : UInt64
-    as_rasterizer : UInt64
-    as_sampler : UInt64
-    set_raw_value : UInt64
-    get_raw_value : UInt64
-    get_blend_state : UInt64
-    get_backing_store : UInt64
+    is_valid : Proc(ID3D10EffectBlendVariable*, LibC::BOOL)
+    get_type : Proc(ID3D10EffectBlendVariable*, ID3D10EffectType)
+    get_desc : Proc(ID3D10EffectBlendVariable*, D3D10_EFFECT_VARIABLE_DESC*, HRESULT)
+    get_annotation_by_index : Proc(ID3D10EffectBlendVariable*, UInt32, ID3D10EffectVariable)
+    get_annotation_by_name : Proc(ID3D10EffectBlendVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_index : Proc(ID3D10EffectBlendVariable*, UInt32, ID3D10EffectVariable)
+    get_member_by_name : Proc(ID3D10EffectBlendVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_semantic : Proc(ID3D10EffectBlendVariable*, PSTR, ID3D10EffectVariable)
+    get_element : Proc(ID3D10EffectBlendVariable*, UInt32, ID3D10EffectVariable)
+    get_parent_constant_buffer : Proc(ID3D10EffectBlendVariable*, ID3D10EffectConstantBuffer)
+    as_scalar : Proc(ID3D10EffectBlendVariable*, ID3D10EffectScalarVariable)
+    as_vector : Proc(ID3D10EffectBlendVariable*, ID3D10EffectVectorVariable)
+    as_matrix : Proc(ID3D10EffectBlendVariable*, ID3D10EffectMatrixVariable)
+    as_string : Proc(ID3D10EffectBlendVariable*, ID3D10EffectStringVariable)
+    as_shader_resource : Proc(ID3D10EffectBlendVariable*, ID3D10EffectShaderResourceVariable)
+    as_render_target_view : Proc(ID3D10EffectBlendVariable*, ID3D10EffectRenderTargetViewVariable)
+    as_depth_stencil_view : Proc(ID3D10EffectBlendVariable*, ID3D10EffectDepthStencilViewVariable)
+    as_constant_buffer : Proc(ID3D10EffectBlendVariable*, ID3D10EffectConstantBuffer)
+    as_shader : Proc(ID3D10EffectBlendVariable*, ID3D10EffectShaderVariable)
+    as_blend : Proc(ID3D10EffectBlendVariable*, ID3D10EffectBlendVariable)
+    as_depth_stencil : Proc(ID3D10EffectBlendVariable*, ID3D10EffectDepthStencilVariable)
+    as_rasterizer : Proc(ID3D10EffectBlendVariable*, ID3D10EffectRasterizerVariable)
+    as_sampler : Proc(ID3D10EffectBlendVariable*, ID3D10EffectSamplerVariable)
+    set_raw_value : Proc(ID3D10EffectBlendVariable*, Void*, UInt32, UInt32, HRESULT)
+    get_raw_value : Proc(ID3D10EffectBlendVariable*, Void*, UInt32, UInt32, HRESULT)
+    get_blend_state : Proc(ID3D10EffectBlendVariable*, UInt32, ID3D10BlendState*, HRESULT)
+    get_backing_store : Proc(ID3D10EffectBlendVariable*, UInt32, D3D10_BLEND_DESC*, HRESULT)
   end
 
   ID3D10EffectBlendVariable_GUID = "1fcd2294-df6d-4eae-86b3-0e9160cfb07b"
@@ -2987,33 +2987,33 @@ lib LibWin32
   end
 
   struct ID3D10EffectDepthStencilVariableVTbl
-    is_valid : UInt64
-    get_type : UInt64
-    get_desc : UInt64
-    get_annotation_by_index : UInt64
-    get_annotation_by_name : UInt64
-    get_member_by_index : UInt64
-    get_member_by_name : UInt64
-    get_member_by_semantic : UInt64
-    get_element : UInt64
-    get_parent_constant_buffer : UInt64
-    as_scalar : UInt64
-    as_vector : UInt64
-    as_matrix : UInt64
-    as_string : UInt64
-    as_shader_resource : UInt64
-    as_render_target_view : UInt64
-    as_depth_stencil_view : UInt64
-    as_constant_buffer : UInt64
-    as_shader : UInt64
-    as_blend : UInt64
-    as_depth_stencil : UInt64
-    as_rasterizer : UInt64
-    as_sampler : UInt64
-    set_raw_value : UInt64
-    get_raw_value : UInt64
-    get_depth_stencil_state : UInt64
-    get_backing_store : UInt64
+    is_valid : Proc(ID3D10EffectDepthStencilVariable*, LibC::BOOL)
+    get_type : Proc(ID3D10EffectDepthStencilVariable*, ID3D10EffectType)
+    get_desc : Proc(ID3D10EffectDepthStencilVariable*, D3D10_EFFECT_VARIABLE_DESC*, HRESULT)
+    get_annotation_by_index : Proc(ID3D10EffectDepthStencilVariable*, UInt32, ID3D10EffectVariable)
+    get_annotation_by_name : Proc(ID3D10EffectDepthStencilVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_index : Proc(ID3D10EffectDepthStencilVariable*, UInt32, ID3D10EffectVariable)
+    get_member_by_name : Proc(ID3D10EffectDepthStencilVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_semantic : Proc(ID3D10EffectDepthStencilVariable*, PSTR, ID3D10EffectVariable)
+    get_element : Proc(ID3D10EffectDepthStencilVariable*, UInt32, ID3D10EffectVariable)
+    get_parent_constant_buffer : Proc(ID3D10EffectDepthStencilVariable*, ID3D10EffectConstantBuffer)
+    as_scalar : Proc(ID3D10EffectDepthStencilVariable*, ID3D10EffectScalarVariable)
+    as_vector : Proc(ID3D10EffectDepthStencilVariable*, ID3D10EffectVectorVariable)
+    as_matrix : Proc(ID3D10EffectDepthStencilVariable*, ID3D10EffectMatrixVariable)
+    as_string : Proc(ID3D10EffectDepthStencilVariable*, ID3D10EffectStringVariable)
+    as_shader_resource : Proc(ID3D10EffectDepthStencilVariable*, ID3D10EffectShaderResourceVariable)
+    as_render_target_view : Proc(ID3D10EffectDepthStencilVariable*, ID3D10EffectRenderTargetViewVariable)
+    as_depth_stencil_view : Proc(ID3D10EffectDepthStencilVariable*, ID3D10EffectDepthStencilViewVariable)
+    as_constant_buffer : Proc(ID3D10EffectDepthStencilVariable*, ID3D10EffectConstantBuffer)
+    as_shader : Proc(ID3D10EffectDepthStencilVariable*, ID3D10EffectShaderVariable)
+    as_blend : Proc(ID3D10EffectDepthStencilVariable*, ID3D10EffectBlendVariable)
+    as_depth_stencil : Proc(ID3D10EffectDepthStencilVariable*, ID3D10EffectDepthStencilVariable)
+    as_rasterizer : Proc(ID3D10EffectDepthStencilVariable*, ID3D10EffectRasterizerVariable)
+    as_sampler : Proc(ID3D10EffectDepthStencilVariable*, ID3D10EffectSamplerVariable)
+    set_raw_value : Proc(ID3D10EffectDepthStencilVariable*, Void*, UInt32, UInt32, HRESULT)
+    get_raw_value : Proc(ID3D10EffectDepthStencilVariable*, Void*, UInt32, UInt32, HRESULT)
+    get_depth_stencil_state : Proc(ID3D10EffectDepthStencilVariable*, UInt32, ID3D10DepthStencilState*, HRESULT)
+    get_backing_store : Proc(ID3D10EffectDepthStencilVariable*, UInt32, D3D10_DEPTH_STENCIL_DESC*, HRESULT)
   end
 
   ID3D10EffectDepthStencilVariable_GUID = "af482368-330a-46a5-9a5c-01c71af24c8d"
@@ -3023,33 +3023,33 @@ lib LibWin32
   end
 
   struct ID3D10EffectRasterizerVariableVTbl
-    is_valid : UInt64
-    get_type : UInt64
-    get_desc : UInt64
-    get_annotation_by_index : UInt64
-    get_annotation_by_name : UInt64
-    get_member_by_index : UInt64
-    get_member_by_name : UInt64
-    get_member_by_semantic : UInt64
-    get_element : UInt64
-    get_parent_constant_buffer : UInt64
-    as_scalar : UInt64
-    as_vector : UInt64
-    as_matrix : UInt64
-    as_string : UInt64
-    as_shader_resource : UInt64
-    as_render_target_view : UInt64
-    as_depth_stencil_view : UInt64
-    as_constant_buffer : UInt64
-    as_shader : UInt64
-    as_blend : UInt64
-    as_depth_stencil : UInt64
-    as_rasterizer : UInt64
-    as_sampler : UInt64
-    set_raw_value : UInt64
-    get_raw_value : UInt64
-    get_rasterizer_state : UInt64
-    get_backing_store : UInt64
+    is_valid : Proc(ID3D10EffectRasterizerVariable*, LibC::BOOL)
+    get_type : Proc(ID3D10EffectRasterizerVariable*, ID3D10EffectType)
+    get_desc : Proc(ID3D10EffectRasterizerVariable*, D3D10_EFFECT_VARIABLE_DESC*, HRESULT)
+    get_annotation_by_index : Proc(ID3D10EffectRasterizerVariable*, UInt32, ID3D10EffectVariable)
+    get_annotation_by_name : Proc(ID3D10EffectRasterizerVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_index : Proc(ID3D10EffectRasterizerVariable*, UInt32, ID3D10EffectVariable)
+    get_member_by_name : Proc(ID3D10EffectRasterizerVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_semantic : Proc(ID3D10EffectRasterizerVariable*, PSTR, ID3D10EffectVariable)
+    get_element : Proc(ID3D10EffectRasterizerVariable*, UInt32, ID3D10EffectVariable)
+    get_parent_constant_buffer : Proc(ID3D10EffectRasterizerVariable*, ID3D10EffectConstantBuffer)
+    as_scalar : Proc(ID3D10EffectRasterizerVariable*, ID3D10EffectScalarVariable)
+    as_vector : Proc(ID3D10EffectRasterizerVariable*, ID3D10EffectVectorVariable)
+    as_matrix : Proc(ID3D10EffectRasterizerVariable*, ID3D10EffectMatrixVariable)
+    as_string : Proc(ID3D10EffectRasterizerVariable*, ID3D10EffectStringVariable)
+    as_shader_resource : Proc(ID3D10EffectRasterizerVariable*, ID3D10EffectShaderResourceVariable)
+    as_render_target_view : Proc(ID3D10EffectRasterizerVariable*, ID3D10EffectRenderTargetViewVariable)
+    as_depth_stencil_view : Proc(ID3D10EffectRasterizerVariable*, ID3D10EffectDepthStencilViewVariable)
+    as_constant_buffer : Proc(ID3D10EffectRasterizerVariable*, ID3D10EffectConstantBuffer)
+    as_shader : Proc(ID3D10EffectRasterizerVariable*, ID3D10EffectShaderVariable)
+    as_blend : Proc(ID3D10EffectRasterizerVariable*, ID3D10EffectBlendVariable)
+    as_depth_stencil : Proc(ID3D10EffectRasterizerVariable*, ID3D10EffectDepthStencilVariable)
+    as_rasterizer : Proc(ID3D10EffectRasterizerVariable*, ID3D10EffectRasterizerVariable)
+    as_sampler : Proc(ID3D10EffectRasterizerVariable*, ID3D10EffectSamplerVariable)
+    set_raw_value : Proc(ID3D10EffectRasterizerVariable*, Void*, UInt32, UInt32, HRESULT)
+    get_raw_value : Proc(ID3D10EffectRasterizerVariable*, Void*, UInt32, UInt32, HRESULT)
+    get_rasterizer_state : Proc(ID3D10EffectRasterizerVariable*, UInt32, ID3D10RasterizerState*, HRESULT)
+    get_backing_store : Proc(ID3D10EffectRasterizerVariable*, UInt32, D3D10_RASTERIZER_DESC*, HRESULT)
   end
 
   ID3D10EffectRasterizerVariable_GUID = "21af9f0e-4d94-4ea9-9785-2cb76b8c0b34"
@@ -3059,33 +3059,33 @@ lib LibWin32
   end
 
   struct ID3D10EffectSamplerVariableVTbl
-    is_valid : UInt64
-    get_type : UInt64
-    get_desc : UInt64
-    get_annotation_by_index : UInt64
-    get_annotation_by_name : UInt64
-    get_member_by_index : UInt64
-    get_member_by_name : UInt64
-    get_member_by_semantic : UInt64
-    get_element : UInt64
-    get_parent_constant_buffer : UInt64
-    as_scalar : UInt64
-    as_vector : UInt64
-    as_matrix : UInt64
-    as_string : UInt64
-    as_shader_resource : UInt64
-    as_render_target_view : UInt64
-    as_depth_stencil_view : UInt64
-    as_constant_buffer : UInt64
-    as_shader : UInt64
-    as_blend : UInt64
-    as_depth_stencil : UInt64
-    as_rasterizer : UInt64
-    as_sampler : UInt64
-    set_raw_value : UInt64
-    get_raw_value : UInt64
-    get_sampler : UInt64
-    get_backing_store : UInt64
+    is_valid : Proc(ID3D10EffectSamplerVariable*, LibC::BOOL)
+    get_type : Proc(ID3D10EffectSamplerVariable*, ID3D10EffectType)
+    get_desc : Proc(ID3D10EffectSamplerVariable*, D3D10_EFFECT_VARIABLE_DESC*, HRESULT)
+    get_annotation_by_index : Proc(ID3D10EffectSamplerVariable*, UInt32, ID3D10EffectVariable)
+    get_annotation_by_name : Proc(ID3D10EffectSamplerVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_index : Proc(ID3D10EffectSamplerVariable*, UInt32, ID3D10EffectVariable)
+    get_member_by_name : Proc(ID3D10EffectSamplerVariable*, PSTR, ID3D10EffectVariable)
+    get_member_by_semantic : Proc(ID3D10EffectSamplerVariable*, PSTR, ID3D10EffectVariable)
+    get_element : Proc(ID3D10EffectSamplerVariable*, UInt32, ID3D10EffectVariable)
+    get_parent_constant_buffer : Proc(ID3D10EffectSamplerVariable*, ID3D10EffectConstantBuffer)
+    as_scalar : Proc(ID3D10EffectSamplerVariable*, ID3D10EffectScalarVariable)
+    as_vector : Proc(ID3D10EffectSamplerVariable*, ID3D10EffectVectorVariable)
+    as_matrix : Proc(ID3D10EffectSamplerVariable*, ID3D10EffectMatrixVariable)
+    as_string : Proc(ID3D10EffectSamplerVariable*, ID3D10EffectStringVariable)
+    as_shader_resource : Proc(ID3D10EffectSamplerVariable*, ID3D10EffectShaderResourceVariable)
+    as_render_target_view : Proc(ID3D10EffectSamplerVariable*, ID3D10EffectRenderTargetViewVariable)
+    as_depth_stencil_view : Proc(ID3D10EffectSamplerVariable*, ID3D10EffectDepthStencilViewVariable)
+    as_constant_buffer : Proc(ID3D10EffectSamplerVariable*, ID3D10EffectConstantBuffer)
+    as_shader : Proc(ID3D10EffectSamplerVariable*, ID3D10EffectShaderVariable)
+    as_blend : Proc(ID3D10EffectSamplerVariable*, ID3D10EffectBlendVariable)
+    as_depth_stencil : Proc(ID3D10EffectSamplerVariable*, ID3D10EffectDepthStencilVariable)
+    as_rasterizer : Proc(ID3D10EffectSamplerVariable*, ID3D10EffectRasterizerVariable)
+    as_sampler : Proc(ID3D10EffectSamplerVariable*, ID3D10EffectSamplerVariable)
+    set_raw_value : Proc(ID3D10EffectSamplerVariable*, Void*, UInt32, UInt32, HRESULT)
+    get_raw_value : Proc(ID3D10EffectSamplerVariable*, Void*, UInt32, UInt32, HRESULT)
+    get_sampler : Proc(ID3D10EffectSamplerVariable*, UInt32, ID3D10SamplerState*, HRESULT)
+    get_backing_store : Proc(ID3D10EffectSamplerVariable*, UInt32, D3D10_SAMPLER_DESC*, HRESULT)
   end
 
   ID3D10EffectSamplerVariable_GUID = "6530d5c7-07e9-4271-a418-e7ce4bd1e480"
@@ -3095,15 +3095,15 @@ lib LibWin32
   end
 
   struct ID3D10EffectPassVTbl
-    is_valid : UInt64
-    get_desc : UInt64
-    get_vertex_shader_desc : UInt64
-    get_geometry_shader_desc : UInt64
-    get_pixel_shader_desc : UInt64
-    get_annotation_by_index : UInt64
-    get_annotation_by_name : UInt64
-    apply : UInt64
-    compute_state_block_mask : UInt64
+    is_valid : Proc(ID3D10EffectPass*, LibC::BOOL)
+    get_desc : Proc(ID3D10EffectPass*, D3D10_PASS_DESC*, HRESULT)
+    get_vertex_shader_desc : Proc(ID3D10EffectPass*, D3D10_PASS_SHADER_DESC*, HRESULT)
+    get_geometry_shader_desc : Proc(ID3D10EffectPass*, D3D10_PASS_SHADER_DESC*, HRESULT)
+    get_pixel_shader_desc : Proc(ID3D10EffectPass*, D3D10_PASS_SHADER_DESC*, HRESULT)
+    get_annotation_by_index : Proc(ID3D10EffectPass*, UInt32, ID3D10EffectVariable)
+    get_annotation_by_name : Proc(ID3D10EffectPass*, PSTR, ID3D10EffectVariable)
+    apply : Proc(ID3D10EffectPass*, UInt32, HRESULT)
+    compute_state_block_mask : Proc(ID3D10EffectPass*, D3D10_STATE_BLOCK_MASK*, HRESULT)
   end
 
   ID3D10EffectPass_GUID = "5cfbeb89-1a06-46e0-b282-e3f9bfa36a54"
@@ -3113,13 +3113,13 @@ lib LibWin32
   end
 
   struct ID3D10EffectTechniqueVTbl
-    is_valid : UInt64
-    get_desc : UInt64
-    get_annotation_by_index : UInt64
-    get_annotation_by_name : UInt64
-    get_pass_by_index : UInt64
-    get_pass_by_name : UInt64
-    compute_state_block_mask : UInt64
+    is_valid : Proc(ID3D10EffectTechnique*, LibC::BOOL)
+    get_desc : Proc(ID3D10EffectTechnique*, D3D10_TECHNIQUE_DESC*, HRESULT)
+    get_annotation_by_index : Proc(ID3D10EffectTechnique*, UInt32, ID3D10EffectVariable)
+    get_annotation_by_name : Proc(ID3D10EffectTechnique*, PSTR, ID3D10EffectVariable)
+    get_pass_by_index : Proc(ID3D10EffectTechnique*, UInt32, ID3D10EffectPass)
+    get_pass_by_name : Proc(ID3D10EffectTechnique*, PSTR, ID3D10EffectPass)
+    compute_state_block_mask : Proc(ID3D10EffectTechnique*, D3D10_STATE_BLOCK_MASK*, HRESULT)
   end
 
   ID3D10EffectTechnique_GUID = "db122ce8-d1c9-4292-b237-24ed3de8b175"
@@ -3129,22 +3129,22 @@ lib LibWin32
   end
 
   struct ID3D10EffectVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    is_valid : UInt64
-    is_pool : UInt64
-    get_device : UInt64
-    get_desc : UInt64
-    get_constant_buffer_by_index : UInt64
-    get_constant_buffer_by_name : UInt64
-    get_variable_by_index : UInt64
-    get_variable_by_name : UInt64
-    get_variable_by_semantic : UInt64
-    get_technique_by_index : UInt64
-    get_technique_by_name : UInt64
-    optimize : UInt64
-    is_optimized : UInt64
+    query_interface : Proc(ID3D10Effect*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10Effect*, UInt32)
+    release : Proc(ID3D10Effect*, UInt32)
+    is_valid : Proc(ID3D10Effect*, LibC::BOOL)
+    is_pool : Proc(ID3D10Effect*, LibC::BOOL)
+    get_device : Proc(ID3D10Effect*, ID3D10Device*, HRESULT)
+    get_desc : Proc(ID3D10Effect*, D3D10_EFFECT_DESC*, HRESULT)
+    get_constant_buffer_by_index : Proc(ID3D10Effect*, UInt32, ID3D10EffectConstantBuffer)
+    get_constant_buffer_by_name : Proc(ID3D10Effect*, PSTR, ID3D10EffectConstantBuffer)
+    get_variable_by_index : Proc(ID3D10Effect*, UInt32, ID3D10EffectVariable)
+    get_variable_by_name : Proc(ID3D10Effect*, PSTR, ID3D10EffectVariable)
+    get_variable_by_semantic : Proc(ID3D10Effect*, PSTR, ID3D10EffectVariable)
+    get_technique_by_index : Proc(ID3D10Effect*, UInt32, ID3D10EffectTechnique)
+    get_technique_by_name : Proc(ID3D10Effect*, PSTR, ID3D10EffectTechnique)
+    optimize : Proc(ID3D10Effect*, HRESULT)
+    is_optimized : Proc(ID3D10Effect*, LibC::BOOL)
   end
 
   ID3D10Effect_GUID = "51b0ca8b-ec0b-4519-870d-8ee1cb5017c7"
@@ -3154,10 +3154,10 @@ lib LibWin32
   end
 
   struct ID3D10EffectPoolVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    as_effect : UInt64
+    query_interface : Proc(ID3D10EffectPool*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10EffectPool*, UInt32)
+    release : Proc(ID3D10EffectPool*, UInt32)
+    as_effect : Proc(ID3D10EffectPool*, ID3D10Effect)
   end
 
   ID3D10EffectPool_GUID = "9537ab04-3250-412e-8213-fcd2f8677933"
@@ -3167,15 +3167,15 @@ lib LibWin32
   end
 
   struct ID3D10BlendState1VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    get_desc : UInt64
-    get_desc1 : UInt64
+    query_interface : Proc(ID3D10BlendState1*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10BlendState1*, UInt32)
+    release : Proc(ID3D10BlendState1*, UInt32)
+    get_device : Proc(ID3D10BlendState1*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10BlendState1*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10BlendState1*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10BlendState1*, Guid*, IUnknown, HRESULT)
+    get_desc : Proc(ID3D10BlendState1*, D3D10_BLEND_DESC*, Void)
+    get_desc1 : Proc(ID3D10BlendState1*, D3D10_BLEND_DESC1*, Void)
   end
 
   ID3D10BlendState1_GUID = "edad8d99-8a35-4d6d-8566-2ea276cde161"
@@ -3185,16 +3185,16 @@ lib LibWin32
   end
 
   struct ID3D10ShaderResourceView1VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    get_resource : UInt64
-    get_desc : UInt64
-    get_desc1 : UInt64
+    query_interface : Proc(ID3D10ShaderResourceView1*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10ShaderResourceView1*, UInt32)
+    release : Proc(ID3D10ShaderResourceView1*, UInt32)
+    get_device : Proc(ID3D10ShaderResourceView1*, ID3D10Device*, Void)
+    get_private_data : Proc(ID3D10ShaderResourceView1*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10ShaderResourceView1*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10ShaderResourceView1*, Guid*, IUnknown, HRESULT)
+    get_resource : Proc(ID3D10ShaderResourceView1*, ID3D10Resource*, Void)
+    get_desc : Proc(ID3D10ShaderResourceView1*, D3D10_SHADER_RESOURCE_VIEW_DESC*, Void)
+    get_desc1 : Proc(ID3D10ShaderResourceView1*, D3D10_SHADER_RESOURCE_VIEW_DESC1*, Void)
   end
 
   ID3D10ShaderResourceView1_GUID = "9b7e4c87-342c-4106-a19f-4f2704f689f0"
@@ -3204,107 +3204,107 @@ lib LibWin32
   end
 
   struct ID3D10Device1VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    vs_set_constant_buffers : UInt64
-    ps_set_shader_resources : UInt64
-    ps_set_shader : UInt64
-    ps_set_samplers : UInt64
-    vs_set_shader : UInt64
-    draw_indexed : UInt64
-    draw : UInt64
-    ps_set_constant_buffers : UInt64
-    ia_set_input_layout : UInt64
-    ia_set_vertex_buffers : UInt64
-    ia_set_index_buffer : UInt64
-    draw_indexed_instanced : UInt64
-    draw_instanced : UInt64
-    gs_set_constant_buffers : UInt64
-    gs_set_shader : UInt64
-    ia_set_primitive_topology : UInt64
-    vs_set_shader_resources : UInt64
-    vs_set_samplers : UInt64
-    set_predication : UInt64
-    gs_set_shader_resources : UInt64
-    gs_set_samplers : UInt64
-    om_set_render_targets : UInt64
-    om_set_blend_state : UInt64
-    om_set_depth_stencil_state : UInt64
-    so_set_targets : UInt64
-    draw_auto : UInt64
-    rs_set_state : UInt64
-    rs_set_viewports : UInt64
-    rs_set_scissor_rects : UInt64
-    copy_subresource_region : UInt64
-    copy_resource : UInt64
-    update_subresource : UInt64
-    clear_render_target_view : UInt64
-    clear_depth_stencil_view : UInt64
-    generate_mips : UInt64
-    resolve_subresource : UInt64
-    vs_get_constant_buffers : UInt64
-    ps_get_shader_resources : UInt64
-    ps_get_shader : UInt64
-    ps_get_samplers : UInt64
-    vs_get_shader : UInt64
-    ps_get_constant_buffers : UInt64
-    ia_get_input_layout : UInt64
-    ia_get_vertex_buffers : UInt64
-    ia_get_index_buffer : UInt64
-    gs_get_constant_buffers : UInt64
-    gs_get_shader : UInt64
-    ia_get_primitive_topology : UInt64
-    vs_get_shader_resources : UInt64
-    vs_get_samplers : UInt64
-    get_predication : UInt64
-    gs_get_shader_resources : UInt64
-    gs_get_samplers : UInt64
-    om_get_render_targets : UInt64
-    om_get_blend_state : UInt64
-    om_get_depth_stencil_state : UInt64
-    so_get_targets : UInt64
-    rs_get_state : UInt64
-    rs_get_viewports : UInt64
-    rs_get_scissor_rects : UInt64
-    get_device_removed_reason : UInt64
-    set_exception_mode : UInt64
-    get_exception_mode : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    clear_state : UInt64
-    flush : UInt64
-    create_buffer : UInt64
-    create_texture1_d : UInt64
-    create_texture2_d : UInt64
-    create_texture3_d : UInt64
-    create_shader_resource_view : UInt64
-    create_render_target_view : UInt64
-    create_depth_stencil_view : UInt64
-    create_input_layout : UInt64
-    create_vertex_shader : UInt64
-    create_geometry_shader : UInt64
-    create_geometry_shader_with_stream_output : UInt64
-    create_pixel_shader : UInt64
-    create_blend_state : UInt64
-    create_depth_stencil_state : UInt64
-    create_rasterizer_state : UInt64
-    create_sampler_state : UInt64
-    create_query : UInt64
-    create_predicate : UInt64
-    create_counter : UInt64
-    check_format_support : UInt64
-    check_multisample_quality_levels : UInt64
-    check_counter_info : UInt64
-    check_counter : UInt64
-    get_creation_flags : UInt64
-    open_shared_resource : UInt64
-    set_text_filter_size : UInt64
-    get_text_filter_size : UInt64
-    create_shader_resource_view1 : UInt64
-    create_blend_state1 : UInt64
-    get_feature_level : UInt64
+    query_interface : Proc(ID3D10Device1*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10Device1*, UInt32)
+    release : Proc(ID3D10Device1*, UInt32)
+    vs_set_constant_buffers : Proc(ID3D10Device1*, UInt32, UInt32, ID3D10Buffer*, Void)
+    ps_set_shader_resources : Proc(ID3D10Device1*, UInt32, UInt32, ID3D10ShaderResourceView*, Void)
+    ps_set_shader : Proc(ID3D10Device1*, ID3D10PixelShader, Void)
+    ps_set_samplers : Proc(ID3D10Device1*, UInt32, UInt32, ID3D10SamplerState*, Void)
+    vs_set_shader : Proc(ID3D10Device1*, ID3D10VertexShader, Void)
+    draw_indexed : Proc(ID3D10Device1*, UInt32, UInt32, Int32, Void)
+    draw : Proc(ID3D10Device1*, UInt32, UInt32, Void)
+    ps_set_constant_buffers : Proc(ID3D10Device1*, UInt32, UInt32, ID3D10Buffer*, Void)
+    ia_set_input_layout : Proc(ID3D10Device1*, ID3D10InputLayout, Void)
+    ia_set_vertex_buffers : Proc(ID3D10Device1*, UInt32, UInt32, ID3D10Buffer*, UInt32*, UInt32*, Void)
+    ia_set_index_buffer : Proc(ID3D10Device1*, ID3D10Buffer, DXGI_FORMAT, UInt32, Void)
+    draw_indexed_instanced : Proc(ID3D10Device1*, UInt32, UInt32, UInt32, Int32, UInt32, Void)
+    draw_instanced : Proc(ID3D10Device1*, UInt32, UInt32, UInt32, UInt32, Void)
+    gs_set_constant_buffers : Proc(ID3D10Device1*, UInt32, UInt32, ID3D10Buffer*, Void)
+    gs_set_shader : Proc(ID3D10Device1*, ID3D10GeometryShader, Void)
+    ia_set_primitive_topology : Proc(ID3D10Device1*, D3D_PRIMITIVE_TOPOLOGY, Void)
+    vs_set_shader_resources : Proc(ID3D10Device1*, UInt32, UInt32, ID3D10ShaderResourceView*, Void)
+    vs_set_samplers : Proc(ID3D10Device1*, UInt32, UInt32, ID3D10SamplerState*, Void)
+    set_predication : Proc(ID3D10Device1*, ID3D10Predicate, LibC::BOOL, Void)
+    gs_set_shader_resources : Proc(ID3D10Device1*, UInt32, UInt32, ID3D10ShaderResourceView*, Void)
+    gs_set_samplers : Proc(ID3D10Device1*, UInt32, UInt32, ID3D10SamplerState*, Void)
+    om_set_render_targets : Proc(ID3D10Device1*, UInt32, ID3D10RenderTargetView*, ID3D10DepthStencilView, Void)
+    om_set_blend_state : Proc(ID3D10Device1*, ID3D10BlendState, Float32*, UInt32, Void)
+    om_set_depth_stencil_state : Proc(ID3D10Device1*, ID3D10DepthStencilState, UInt32, Void)
+    so_set_targets : Proc(ID3D10Device1*, UInt32, ID3D10Buffer*, UInt32*, Void)
+    draw_auto : Proc(ID3D10Device1*, Void)
+    rs_set_state : Proc(ID3D10Device1*, ID3D10RasterizerState, Void)
+    rs_set_viewports : Proc(ID3D10Device1*, UInt32, D3D10_VIEWPORT*, Void)
+    rs_set_scissor_rects : Proc(ID3D10Device1*, UInt32, RECT*, Void)
+    copy_subresource_region : Proc(ID3D10Device1*, ID3D10Resource, UInt32, UInt32, UInt32, UInt32, ID3D10Resource, UInt32, D3D10_BOX*, Void)
+    copy_resource : Proc(ID3D10Device1*, ID3D10Resource, ID3D10Resource, Void)
+    update_subresource : Proc(ID3D10Device1*, ID3D10Resource, UInt32, D3D10_BOX*, Void*, UInt32, UInt32, Void)
+    clear_render_target_view : Proc(ID3D10Device1*, ID3D10RenderTargetView, Float32*, Void)
+    clear_depth_stencil_view : Proc(ID3D10Device1*, ID3D10DepthStencilView, UInt32, Float32, UInt8, Void)
+    generate_mips : Proc(ID3D10Device1*, ID3D10ShaderResourceView, Void)
+    resolve_subresource : Proc(ID3D10Device1*, ID3D10Resource, UInt32, ID3D10Resource, UInt32, DXGI_FORMAT, Void)
+    vs_get_constant_buffers : Proc(ID3D10Device1*, UInt32, UInt32, ID3D10Buffer*, Void)
+    ps_get_shader_resources : Proc(ID3D10Device1*, UInt32, UInt32, ID3D10ShaderResourceView*, Void)
+    ps_get_shader : Proc(ID3D10Device1*, ID3D10PixelShader*, Void)
+    ps_get_samplers : Proc(ID3D10Device1*, UInt32, UInt32, ID3D10SamplerState*, Void)
+    vs_get_shader : Proc(ID3D10Device1*, ID3D10VertexShader*, Void)
+    ps_get_constant_buffers : Proc(ID3D10Device1*, UInt32, UInt32, ID3D10Buffer*, Void)
+    ia_get_input_layout : Proc(ID3D10Device1*, ID3D10InputLayout*, Void)
+    ia_get_vertex_buffers : Proc(ID3D10Device1*, UInt32, UInt32, ID3D10Buffer*, UInt32*, UInt32*, Void)
+    ia_get_index_buffer : Proc(ID3D10Device1*, ID3D10Buffer*, DXGI_FORMAT*, UInt32*, Void)
+    gs_get_constant_buffers : Proc(ID3D10Device1*, UInt32, UInt32, ID3D10Buffer*, Void)
+    gs_get_shader : Proc(ID3D10Device1*, ID3D10GeometryShader*, Void)
+    ia_get_primitive_topology : Proc(ID3D10Device1*, D3D_PRIMITIVE_TOPOLOGY*, Void)
+    vs_get_shader_resources : Proc(ID3D10Device1*, UInt32, UInt32, ID3D10ShaderResourceView*, Void)
+    vs_get_samplers : Proc(ID3D10Device1*, UInt32, UInt32, ID3D10SamplerState*, Void)
+    get_predication : Proc(ID3D10Device1*, ID3D10Predicate*, LibC::BOOL*, Void)
+    gs_get_shader_resources : Proc(ID3D10Device1*, UInt32, UInt32, ID3D10ShaderResourceView*, Void)
+    gs_get_samplers : Proc(ID3D10Device1*, UInt32, UInt32, ID3D10SamplerState*, Void)
+    om_get_render_targets : Proc(ID3D10Device1*, UInt32, ID3D10RenderTargetView*, ID3D10DepthStencilView*, Void)
+    om_get_blend_state : Proc(ID3D10Device1*, ID3D10BlendState*, Float32*, UInt32*, Void)
+    om_get_depth_stencil_state : Proc(ID3D10Device1*, ID3D10DepthStencilState*, UInt32*, Void)
+    so_get_targets : Proc(ID3D10Device1*, UInt32, ID3D10Buffer*, UInt32*, Void)
+    rs_get_state : Proc(ID3D10Device1*, ID3D10RasterizerState*, Void)
+    rs_get_viewports : Proc(ID3D10Device1*, UInt32*, D3D10_VIEWPORT*, Void)
+    rs_get_scissor_rects : Proc(ID3D10Device1*, UInt32*, RECT*, Void)
+    get_device_removed_reason : Proc(ID3D10Device1*, HRESULT)
+    set_exception_mode : Proc(ID3D10Device1*, UInt32, HRESULT)
+    get_exception_mode : Proc(ID3D10Device1*, UInt32)
+    get_private_data : Proc(ID3D10Device1*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(ID3D10Device1*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(ID3D10Device1*, Guid*, IUnknown, HRESULT)
+    clear_state : Proc(ID3D10Device1*, Void)
+    flush : Proc(ID3D10Device1*, Void)
+    create_buffer : Proc(ID3D10Device1*, D3D10_BUFFER_DESC*, D3D10_SUBRESOURCE_DATA*, ID3D10Buffer*, HRESULT)
+    create_texture1_d : Proc(ID3D10Device1*, D3D10_TEXTURE1D_DESC*, D3D10_SUBRESOURCE_DATA*, ID3D10Texture1D*, HRESULT)
+    create_texture2_d : Proc(ID3D10Device1*, D3D10_TEXTURE2D_DESC*, D3D10_SUBRESOURCE_DATA*, ID3D10Texture2D*, HRESULT)
+    create_texture3_d : Proc(ID3D10Device1*, D3D10_TEXTURE3D_DESC*, D3D10_SUBRESOURCE_DATA*, ID3D10Texture3D*, HRESULT)
+    create_shader_resource_view : Proc(ID3D10Device1*, ID3D10Resource, D3D10_SHADER_RESOURCE_VIEW_DESC*, ID3D10ShaderResourceView*, HRESULT)
+    create_render_target_view : Proc(ID3D10Device1*, ID3D10Resource, D3D10_RENDER_TARGET_VIEW_DESC*, ID3D10RenderTargetView*, HRESULT)
+    create_depth_stencil_view : Proc(ID3D10Device1*, ID3D10Resource, D3D10_DEPTH_STENCIL_VIEW_DESC*, ID3D10DepthStencilView*, HRESULT)
+    create_input_layout : Proc(ID3D10Device1*, D3D10_INPUT_ELEMENT_DESC*, UInt32, Void*, LibC::UINT_PTR, ID3D10InputLayout*, HRESULT)
+    create_vertex_shader : Proc(ID3D10Device1*, Void*, LibC::UINT_PTR, ID3D10VertexShader*, HRESULT)
+    create_geometry_shader : Proc(ID3D10Device1*, Void*, LibC::UINT_PTR, ID3D10GeometryShader*, HRESULT)
+    create_geometry_shader_with_stream_output : Proc(ID3D10Device1*, Void*, LibC::UINT_PTR, D3D10_SO_DECLARATION_ENTRY*, UInt32, UInt32, ID3D10GeometryShader*, HRESULT)
+    create_pixel_shader : Proc(ID3D10Device1*, Void*, LibC::UINT_PTR, ID3D10PixelShader*, HRESULT)
+    create_blend_state : Proc(ID3D10Device1*, D3D10_BLEND_DESC*, ID3D10BlendState*, HRESULT)
+    create_depth_stencil_state : Proc(ID3D10Device1*, D3D10_DEPTH_STENCIL_DESC*, ID3D10DepthStencilState*, HRESULT)
+    create_rasterizer_state : Proc(ID3D10Device1*, D3D10_RASTERIZER_DESC*, ID3D10RasterizerState*, HRESULT)
+    create_sampler_state : Proc(ID3D10Device1*, D3D10_SAMPLER_DESC*, ID3D10SamplerState*, HRESULT)
+    create_query : Proc(ID3D10Device1*, D3D10_QUERY_DESC*, ID3D10Query*, HRESULT)
+    create_predicate : Proc(ID3D10Device1*, D3D10_QUERY_DESC*, ID3D10Predicate*, HRESULT)
+    create_counter : Proc(ID3D10Device1*, D3D10_COUNTER_DESC*, ID3D10Counter*, HRESULT)
+    check_format_support : Proc(ID3D10Device1*, DXGI_FORMAT, UInt32*, HRESULT)
+    check_multisample_quality_levels : Proc(ID3D10Device1*, DXGI_FORMAT, UInt32, UInt32*, HRESULT)
+    check_counter_info : Proc(ID3D10Device1*, D3D10_COUNTER_INFO*, Void)
+    check_counter : Proc(ID3D10Device1*, D3D10_COUNTER_DESC*, D3D10_COUNTER_TYPE*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)
+    get_creation_flags : Proc(ID3D10Device1*, UInt32)
+    open_shared_resource : Proc(ID3D10Device1*, LibC::HANDLE, Guid*, Void**, HRESULT)
+    set_text_filter_size : Proc(ID3D10Device1*, UInt32, UInt32, Void)
+    get_text_filter_size : Proc(ID3D10Device1*, UInt32*, UInt32*, Void)
+    create_shader_resource_view1 : Proc(ID3D10Device1*, ID3D10Resource, D3D10_SHADER_RESOURCE_VIEW_DESC1*, ID3D10ShaderResourceView1*, HRESULT)
+    create_blend_state1 : Proc(ID3D10Device1*, D3D10_BLEND_DESC1*, ID3D10BlendState1*, HRESULT)
+    get_feature_level : Proc(ID3D10Device1*, D3D10_FEATURE_LEVEL1)
   end
 
   ID3D10Device1_GUID = "9b7e4c8f-342c-4106-a19f-4f2704f689f0"
@@ -3314,24 +3314,24 @@ lib LibWin32
   end
 
   struct ID3D10ShaderReflection1VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_desc : UInt64
-    get_constant_buffer_by_index : UInt64
-    get_constant_buffer_by_name : UInt64
-    get_resource_binding_desc : UInt64
-    get_input_parameter_desc : UInt64
-    get_output_parameter_desc : UInt64
-    get_variable_by_name : UInt64
-    get_resource_binding_desc_by_name : UInt64
-    get_mov_instruction_count : UInt64
-    get_movc_instruction_count : UInt64
-    get_conversion_instruction_count : UInt64
-    get_bitwise_instruction_count : UInt64
-    get_gs_input_primitive : UInt64
-    is_level9_shader : UInt64
-    is_sample_frequency_shader : UInt64
+    query_interface : Proc(ID3D10ShaderReflection1*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID3D10ShaderReflection1*, UInt32)
+    release : Proc(ID3D10ShaderReflection1*, UInt32)
+    get_desc : Proc(ID3D10ShaderReflection1*, D3D10_SHADER_DESC*, HRESULT)
+    get_constant_buffer_by_index : Proc(ID3D10ShaderReflection1*, UInt32, ID3D10ShaderReflectionConstantBuffer)
+    get_constant_buffer_by_name : Proc(ID3D10ShaderReflection1*, PSTR, ID3D10ShaderReflectionConstantBuffer)
+    get_resource_binding_desc : Proc(ID3D10ShaderReflection1*, UInt32, D3D10_SHADER_INPUT_BIND_DESC*, HRESULT)
+    get_input_parameter_desc : Proc(ID3D10ShaderReflection1*, UInt32, D3D10_SIGNATURE_PARAMETER_DESC*, HRESULT)
+    get_output_parameter_desc : Proc(ID3D10ShaderReflection1*, UInt32, D3D10_SIGNATURE_PARAMETER_DESC*, HRESULT)
+    get_variable_by_name : Proc(ID3D10ShaderReflection1*, PSTR, ID3D10ShaderReflectionVariable)
+    get_resource_binding_desc_by_name : Proc(ID3D10ShaderReflection1*, PSTR, D3D10_SHADER_INPUT_BIND_DESC*, HRESULT)
+    get_mov_instruction_count : Proc(ID3D10ShaderReflection1*, UInt32*, HRESULT)
+    get_movc_instruction_count : Proc(ID3D10ShaderReflection1*, UInt32*, HRESULT)
+    get_conversion_instruction_count : Proc(ID3D10ShaderReflection1*, UInt32*, HRESULT)
+    get_bitwise_instruction_count : Proc(ID3D10ShaderReflection1*, UInt32*, HRESULT)
+    get_gs_input_primitive : Proc(ID3D10ShaderReflection1*, D3D_PRIMITIVE*, HRESULT)
+    is_level9_shader : Proc(ID3D10ShaderReflection1*, LibC::BOOL*, HRESULT)
+    is_sample_frequency_shader : Proc(ID3D10ShaderReflection1*, LibC::BOOL*, HRESULT)
   end
 
   ID3D10ShaderReflection1_GUID = "c3457783-a846-47ce-9520-cea6f66e7447"
@@ -3429,3079 +3429,3079 @@ lib LibWin32
   fun D3D10CreateDeviceAndSwapChain1(padapter : IDXGIAdapter, drivertype : D3D10_DRIVER_TYPE, software : HINSTANCE, flags : UInt32, hardwarelevel : D3D10_FEATURE_LEVEL1, sdkversion : UInt32, pswapchaindesc : DXGI_SWAP_CHAIN_DESC*, ppswapchain : IDXGISwapChain*, ppdevice : ID3D10Device1*) : HRESULT
 end
 struct LibWin32::ID3D10DeviceChild
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10DeviceChild*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10DeviceChild*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10DeviceChild*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10DeviceChild*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10DeviceChild*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10DeviceChild*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10DeviceChild*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
 end
 struct LibWin32::ID3D10DepthStencilState
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10DepthStencilState*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10DepthStencilState*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10DepthStencilState*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10DepthStencilState*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10DepthStencilState*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10DepthStencilState*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10DepthStencilState*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def get_desc(pdesc : D3D10_DEPTH_STENCIL_DESC*) : Void
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_DEPTH_STENCIL_DESC*, Void)).call(pdesc)
+  def get_desc(this : ID3D10DepthStencilState*, pdesc : D3D10_DEPTH_STENCIL_DESC*) : Void
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
 end
 struct LibWin32::ID3D10BlendState
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10BlendState*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10BlendState*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10BlendState*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10BlendState*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10BlendState*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10BlendState*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10BlendState*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def get_desc(pdesc : D3D10_BLEND_DESC*) : Void
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_BLEND_DESC*, Void)).call(pdesc)
+  def get_desc(this : ID3D10BlendState*, pdesc : D3D10_BLEND_DESC*) : Void
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
 end
 struct LibWin32::ID3D10RasterizerState
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10RasterizerState*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10RasterizerState*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10RasterizerState*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10RasterizerState*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10RasterizerState*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10RasterizerState*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10RasterizerState*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def get_desc(pdesc : D3D10_RASTERIZER_DESC*) : Void
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_RASTERIZER_DESC*, Void)).call(pdesc)
+  def get_desc(this : ID3D10RasterizerState*, pdesc : D3D10_RASTERIZER_DESC*) : Void
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
 end
 struct LibWin32::ID3D10Resource
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10Resource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10Resource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10Resource*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10Resource*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10Resource*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10Resource*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10Resource*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def get_type(rtype : D3D10_RESOURCE_DIMENSION*) : Void
-    @lpVtbl.value.get_type.unsafe_as(Proc(D3D10_RESOURCE_DIMENSION*, Void)).call(rtype)
+  def get_type(this : ID3D10Resource*, rtype : D3D10_RESOURCE_DIMENSION*) : Void
+    @lpVtbl.value.get_type.call(this, rtype)
   end
-  def set_eviction_priority(evictionpriority : UInt32) : Void
-    @lpVtbl.value.set_eviction_priority.unsafe_as(Proc(UInt32, Void)).call(evictionpriority)
+  def set_eviction_priority(this : ID3D10Resource*, evictionpriority : UInt32) : Void
+    @lpVtbl.value.set_eviction_priority.call(this, evictionpriority)
   end
-  def get_eviction_priority : UInt32
-    @lpVtbl.value.get_eviction_priority.unsafe_as(Proc(UInt32)).call
+  def get_eviction_priority(this : ID3D10Resource*) : UInt32
+    @lpVtbl.value.get_eviction_priority.call(this)
   end
 end
 struct LibWin32::ID3D10Buffer
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10Buffer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10Buffer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10Buffer*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10Buffer*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10Buffer*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10Buffer*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10Buffer*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def get_type(rtype : D3D10_RESOURCE_DIMENSION*) : Void
-    @lpVtbl.value.get_type.unsafe_as(Proc(D3D10_RESOURCE_DIMENSION*, Void)).call(rtype)
+  def get_type(this : ID3D10Buffer*, rtype : D3D10_RESOURCE_DIMENSION*) : Void
+    @lpVtbl.value.get_type.call(this, rtype)
   end
-  def set_eviction_priority(evictionpriority : UInt32) : Void
-    @lpVtbl.value.set_eviction_priority.unsafe_as(Proc(UInt32, Void)).call(evictionpriority)
+  def set_eviction_priority(this : ID3D10Buffer*, evictionpriority : UInt32) : Void
+    @lpVtbl.value.set_eviction_priority.call(this, evictionpriority)
   end
-  def get_eviction_priority : UInt32
-    @lpVtbl.value.get_eviction_priority.unsafe_as(Proc(UInt32)).call
+  def get_eviction_priority(this : ID3D10Buffer*) : UInt32
+    @lpVtbl.value.get_eviction_priority.call(this)
   end
-  def map(maptype : D3D10_MAP, mapflags : UInt32, ppdata : Void**) : HRESULT
-    @lpVtbl.value.map.unsafe_as(Proc(D3D10_MAP, UInt32, Void**, HRESULT)).call(maptype, mapflags, ppdata)
+  def map(this : ID3D10Buffer*, maptype : D3D10_MAP, mapflags : UInt32, ppdata : Void**) : HRESULT
+    @lpVtbl.value.map.call(this, maptype, mapflags, ppdata)
   end
-  def unmap : Void
-    @lpVtbl.value.unmap.unsafe_as(Proc(Void)).call
+  def unmap(this : ID3D10Buffer*) : Void
+    @lpVtbl.value.unmap.call(this)
   end
-  def get_desc(pdesc : D3D10_BUFFER_DESC*) : Void
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_BUFFER_DESC*, Void)).call(pdesc)
+  def get_desc(this : ID3D10Buffer*, pdesc : D3D10_BUFFER_DESC*) : Void
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
 end
 struct LibWin32::ID3D10Texture1D
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10Texture1D*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10Texture1D*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10Texture1D*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10Texture1D*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10Texture1D*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10Texture1D*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10Texture1D*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def get_type(rtype : D3D10_RESOURCE_DIMENSION*) : Void
-    @lpVtbl.value.get_type.unsafe_as(Proc(D3D10_RESOURCE_DIMENSION*, Void)).call(rtype)
+  def get_type(this : ID3D10Texture1D*, rtype : D3D10_RESOURCE_DIMENSION*) : Void
+    @lpVtbl.value.get_type.call(this, rtype)
   end
-  def set_eviction_priority(evictionpriority : UInt32) : Void
-    @lpVtbl.value.set_eviction_priority.unsafe_as(Proc(UInt32, Void)).call(evictionpriority)
+  def set_eviction_priority(this : ID3D10Texture1D*, evictionpriority : UInt32) : Void
+    @lpVtbl.value.set_eviction_priority.call(this, evictionpriority)
   end
-  def get_eviction_priority : UInt32
-    @lpVtbl.value.get_eviction_priority.unsafe_as(Proc(UInt32)).call
+  def get_eviction_priority(this : ID3D10Texture1D*) : UInt32
+    @lpVtbl.value.get_eviction_priority.call(this)
   end
-  def map(subresource : UInt32, maptype : D3D10_MAP, mapflags : UInt32, ppdata : Void**) : HRESULT
-    @lpVtbl.value.map.unsafe_as(Proc(UInt32, D3D10_MAP, UInt32, Void**, HRESULT)).call(subresource, maptype, mapflags, ppdata)
+  def map(this : ID3D10Texture1D*, subresource : UInt32, maptype : D3D10_MAP, mapflags : UInt32, ppdata : Void**) : HRESULT
+    @lpVtbl.value.map.call(this, subresource, maptype, mapflags, ppdata)
   end
-  def unmap(subresource : UInt32) : Void
-    @lpVtbl.value.unmap.unsafe_as(Proc(UInt32, Void)).call(subresource)
+  def unmap(this : ID3D10Texture1D*, subresource : UInt32) : Void
+    @lpVtbl.value.unmap.call(this, subresource)
   end
-  def get_desc(pdesc : D3D10_TEXTURE1D_DESC*) : Void
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_TEXTURE1D_DESC*, Void)).call(pdesc)
+  def get_desc(this : ID3D10Texture1D*, pdesc : D3D10_TEXTURE1D_DESC*) : Void
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
 end
 struct LibWin32::ID3D10Texture2D
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10Texture2D*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10Texture2D*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10Texture2D*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10Texture2D*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10Texture2D*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10Texture2D*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10Texture2D*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def get_type(rtype : D3D10_RESOURCE_DIMENSION*) : Void
-    @lpVtbl.value.get_type.unsafe_as(Proc(D3D10_RESOURCE_DIMENSION*, Void)).call(rtype)
+  def get_type(this : ID3D10Texture2D*, rtype : D3D10_RESOURCE_DIMENSION*) : Void
+    @lpVtbl.value.get_type.call(this, rtype)
   end
-  def set_eviction_priority(evictionpriority : UInt32) : Void
-    @lpVtbl.value.set_eviction_priority.unsafe_as(Proc(UInt32, Void)).call(evictionpriority)
+  def set_eviction_priority(this : ID3D10Texture2D*, evictionpriority : UInt32) : Void
+    @lpVtbl.value.set_eviction_priority.call(this, evictionpriority)
   end
-  def get_eviction_priority : UInt32
-    @lpVtbl.value.get_eviction_priority.unsafe_as(Proc(UInt32)).call
+  def get_eviction_priority(this : ID3D10Texture2D*) : UInt32
+    @lpVtbl.value.get_eviction_priority.call(this)
   end
-  def map(subresource : UInt32, maptype : D3D10_MAP, mapflags : UInt32, pmappedtex2d : D3D10_MAPPED_TEXTURE2D*) : HRESULT
-    @lpVtbl.value.map.unsafe_as(Proc(UInt32, D3D10_MAP, UInt32, D3D10_MAPPED_TEXTURE2D*, HRESULT)).call(subresource, maptype, mapflags, pmappedtex2d)
+  def map(this : ID3D10Texture2D*, subresource : UInt32, maptype : D3D10_MAP, mapflags : UInt32, pmappedtex2d : D3D10_MAPPED_TEXTURE2D*) : HRESULT
+    @lpVtbl.value.map.call(this, subresource, maptype, mapflags, pmappedtex2d)
   end
-  def unmap(subresource : UInt32) : Void
-    @lpVtbl.value.unmap.unsafe_as(Proc(UInt32, Void)).call(subresource)
+  def unmap(this : ID3D10Texture2D*, subresource : UInt32) : Void
+    @lpVtbl.value.unmap.call(this, subresource)
   end
-  def get_desc(pdesc : D3D10_TEXTURE2D_DESC*) : Void
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_TEXTURE2D_DESC*, Void)).call(pdesc)
+  def get_desc(this : ID3D10Texture2D*, pdesc : D3D10_TEXTURE2D_DESC*) : Void
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
 end
 struct LibWin32::ID3D10Texture3D
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10Texture3D*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10Texture3D*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10Texture3D*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10Texture3D*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10Texture3D*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10Texture3D*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10Texture3D*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def get_type(rtype : D3D10_RESOURCE_DIMENSION*) : Void
-    @lpVtbl.value.get_type.unsafe_as(Proc(D3D10_RESOURCE_DIMENSION*, Void)).call(rtype)
+  def get_type(this : ID3D10Texture3D*, rtype : D3D10_RESOURCE_DIMENSION*) : Void
+    @lpVtbl.value.get_type.call(this, rtype)
   end
-  def set_eviction_priority(evictionpriority : UInt32) : Void
-    @lpVtbl.value.set_eviction_priority.unsafe_as(Proc(UInt32, Void)).call(evictionpriority)
+  def set_eviction_priority(this : ID3D10Texture3D*, evictionpriority : UInt32) : Void
+    @lpVtbl.value.set_eviction_priority.call(this, evictionpriority)
   end
-  def get_eviction_priority : UInt32
-    @lpVtbl.value.get_eviction_priority.unsafe_as(Proc(UInt32)).call
+  def get_eviction_priority(this : ID3D10Texture3D*) : UInt32
+    @lpVtbl.value.get_eviction_priority.call(this)
   end
-  def map(subresource : UInt32, maptype : D3D10_MAP, mapflags : UInt32, pmappedtex3d : D3D10_MAPPED_TEXTURE3D*) : HRESULT
-    @lpVtbl.value.map.unsafe_as(Proc(UInt32, D3D10_MAP, UInt32, D3D10_MAPPED_TEXTURE3D*, HRESULT)).call(subresource, maptype, mapflags, pmappedtex3d)
+  def map(this : ID3D10Texture3D*, subresource : UInt32, maptype : D3D10_MAP, mapflags : UInt32, pmappedtex3d : D3D10_MAPPED_TEXTURE3D*) : HRESULT
+    @lpVtbl.value.map.call(this, subresource, maptype, mapflags, pmappedtex3d)
   end
-  def unmap(subresource : UInt32) : Void
-    @lpVtbl.value.unmap.unsafe_as(Proc(UInt32, Void)).call(subresource)
+  def unmap(this : ID3D10Texture3D*, subresource : UInt32) : Void
+    @lpVtbl.value.unmap.call(this, subresource)
   end
-  def get_desc(pdesc : D3D10_TEXTURE3D_DESC*) : Void
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_TEXTURE3D_DESC*, Void)).call(pdesc)
+  def get_desc(this : ID3D10Texture3D*, pdesc : D3D10_TEXTURE3D_DESC*) : Void
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
 end
 struct LibWin32::ID3D10View
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10View*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10View*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10View*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10View*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10View*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10View*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10View*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def get_resource(ppresource : ID3D10Resource*) : Void
-    @lpVtbl.value.get_resource.unsafe_as(Proc(ID3D10Resource*, Void)).call(ppresource)
+  def get_resource(this : ID3D10View*, ppresource : ID3D10Resource*) : Void
+    @lpVtbl.value.get_resource.call(this, ppresource)
   end
 end
 struct LibWin32::ID3D10ShaderResourceView
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10ShaderResourceView*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10ShaderResourceView*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10ShaderResourceView*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10ShaderResourceView*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10ShaderResourceView*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10ShaderResourceView*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10ShaderResourceView*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def get_resource(ppresource : ID3D10Resource*) : Void
-    @lpVtbl.value.get_resource.unsafe_as(Proc(ID3D10Resource*, Void)).call(ppresource)
+  def get_resource(this : ID3D10ShaderResourceView*, ppresource : ID3D10Resource*) : Void
+    @lpVtbl.value.get_resource.call(this, ppresource)
   end
-  def get_desc(pdesc : D3D10_SHADER_RESOURCE_VIEW_DESC*) : Void
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_SHADER_RESOURCE_VIEW_DESC*, Void)).call(pdesc)
+  def get_desc(this : ID3D10ShaderResourceView*, pdesc : D3D10_SHADER_RESOURCE_VIEW_DESC*) : Void
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
 end
 struct LibWin32::ID3D10RenderTargetView
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10RenderTargetView*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10RenderTargetView*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10RenderTargetView*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10RenderTargetView*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10RenderTargetView*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10RenderTargetView*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10RenderTargetView*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def get_resource(ppresource : ID3D10Resource*) : Void
-    @lpVtbl.value.get_resource.unsafe_as(Proc(ID3D10Resource*, Void)).call(ppresource)
+  def get_resource(this : ID3D10RenderTargetView*, ppresource : ID3D10Resource*) : Void
+    @lpVtbl.value.get_resource.call(this, ppresource)
   end
-  def get_desc(pdesc : D3D10_RENDER_TARGET_VIEW_DESC*) : Void
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_RENDER_TARGET_VIEW_DESC*, Void)).call(pdesc)
+  def get_desc(this : ID3D10RenderTargetView*, pdesc : D3D10_RENDER_TARGET_VIEW_DESC*) : Void
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
 end
 struct LibWin32::ID3D10DepthStencilView
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10DepthStencilView*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10DepthStencilView*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10DepthStencilView*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10DepthStencilView*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10DepthStencilView*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10DepthStencilView*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10DepthStencilView*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def get_resource(ppresource : ID3D10Resource*) : Void
-    @lpVtbl.value.get_resource.unsafe_as(Proc(ID3D10Resource*, Void)).call(ppresource)
+  def get_resource(this : ID3D10DepthStencilView*, ppresource : ID3D10Resource*) : Void
+    @lpVtbl.value.get_resource.call(this, ppresource)
   end
-  def get_desc(pdesc : D3D10_DEPTH_STENCIL_VIEW_DESC*) : Void
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_DEPTH_STENCIL_VIEW_DESC*, Void)).call(pdesc)
+  def get_desc(this : ID3D10DepthStencilView*, pdesc : D3D10_DEPTH_STENCIL_VIEW_DESC*) : Void
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
 end
 struct LibWin32::ID3D10VertexShader
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10VertexShader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10VertexShader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10VertexShader*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10VertexShader*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10VertexShader*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10VertexShader*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10VertexShader*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
 end
 struct LibWin32::ID3D10GeometryShader
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10GeometryShader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10GeometryShader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10GeometryShader*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10GeometryShader*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10GeometryShader*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10GeometryShader*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10GeometryShader*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
 end
 struct LibWin32::ID3D10PixelShader
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10PixelShader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10PixelShader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10PixelShader*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10PixelShader*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10PixelShader*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10PixelShader*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10PixelShader*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
 end
 struct LibWin32::ID3D10InputLayout
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10InputLayout*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10InputLayout*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10InputLayout*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10InputLayout*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10InputLayout*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10InputLayout*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10InputLayout*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
 end
 struct LibWin32::ID3D10SamplerState
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10SamplerState*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10SamplerState*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10SamplerState*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10SamplerState*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10SamplerState*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10SamplerState*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10SamplerState*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def get_desc(pdesc : D3D10_SAMPLER_DESC*) : Void
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_SAMPLER_DESC*, Void)).call(pdesc)
+  def get_desc(this : ID3D10SamplerState*, pdesc : D3D10_SAMPLER_DESC*) : Void
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
 end
 struct LibWin32::ID3D10Asynchronous
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10Asynchronous*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10Asynchronous*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10Asynchronous*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10Asynchronous*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10Asynchronous*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10Asynchronous*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10Asynchronous*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def begin_ : Void
-    @lpVtbl.value.begin_.unsafe_as(Proc(Void)).call
+  def begin_(this : ID3D10Asynchronous*) : Void
+    @lpVtbl.value.begin_.call(this)
   end
-  def end_ : Void
-    @lpVtbl.value.end_.unsafe_as(Proc(Void)).call
+  def end_(this : ID3D10Asynchronous*) : Void
+    @lpVtbl.value.end_.call(this)
   end
-  def get_data(pdata : Void*, datasize : UInt32, getdataflags : UInt32) : HRESULT
-    @lpVtbl.value.get_data.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, datasize, getdataflags)
+  def get_data(this : ID3D10Asynchronous*, pdata : Void*, datasize : UInt32, getdataflags : UInt32) : HRESULT
+    @lpVtbl.value.get_data.call(this, pdata, datasize, getdataflags)
   end
-  def get_data_size : UInt32
-    @lpVtbl.value.get_data_size.unsafe_as(Proc(UInt32)).call
+  def get_data_size(this : ID3D10Asynchronous*) : UInt32
+    @lpVtbl.value.get_data_size.call(this)
   end
 end
 struct LibWin32::ID3D10Query
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10Query*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10Query*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10Query*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10Query*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10Query*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10Query*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10Query*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def begin_ : Void
-    @lpVtbl.value.begin_.unsafe_as(Proc(Void)).call
+  def begin_(this : ID3D10Query*) : Void
+    @lpVtbl.value.begin_.call(this)
   end
-  def end_ : Void
-    @lpVtbl.value.end_.unsafe_as(Proc(Void)).call
+  def end_(this : ID3D10Query*) : Void
+    @lpVtbl.value.end_.call(this)
   end
-  def get_data(pdata : Void*, datasize : UInt32, getdataflags : UInt32) : HRESULT
-    @lpVtbl.value.get_data.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, datasize, getdataflags)
+  def get_data(this : ID3D10Query*, pdata : Void*, datasize : UInt32, getdataflags : UInt32) : HRESULT
+    @lpVtbl.value.get_data.call(this, pdata, datasize, getdataflags)
   end
-  def get_data_size : UInt32
-    @lpVtbl.value.get_data_size.unsafe_as(Proc(UInt32)).call
+  def get_data_size(this : ID3D10Query*) : UInt32
+    @lpVtbl.value.get_data_size.call(this)
   end
-  def get_desc(pdesc : D3D10_QUERY_DESC*) : Void
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_QUERY_DESC*, Void)).call(pdesc)
+  def get_desc(this : ID3D10Query*, pdesc : D3D10_QUERY_DESC*) : Void
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
 end
 struct LibWin32::ID3D10Predicate
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10Predicate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10Predicate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10Predicate*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10Predicate*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10Predicate*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10Predicate*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10Predicate*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def begin_ : Void
-    @lpVtbl.value.begin_.unsafe_as(Proc(Void)).call
+  def begin_(this : ID3D10Predicate*) : Void
+    @lpVtbl.value.begin_.call(this)
   end
-  def end_ : Void
-    @lpVtbl.value.end_.unsafe_as(Proc(Void)).call
+  def end_(this : ID3D10Predicate*) : Void
+    @lpVtbl.value.end_.call(this)
   end
-  def get_data(pdata : Void*, datasize : UInt32, getdataflags : UInt32) : HRESULT
-    @lpVtbl.value.get_data.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, datasize, getdataflags)
+  def get_data(this : ID3D10Predicate*, pdata : Void*, datasize : UInt32, getdataflags : UInt32) : HRESULT
+    @lpVtbl.value.get_data.call(this, pdata, datasize, getdataflags)
   end
-  def get_data_size : UInt32
-    @lpVtbl.value.get_data_size.unsafe_as(Proc(UInt32)).call
+  def get_data_size(this : ID3D10Predicate*) : UInt32
+    @lpVtbl.value.get_data_size.call(this)
   end
-  def get_desc(pdesc : D3D10_QUERY_DESC*) : Void
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_QUERY_DESC*, Void)).call(pdesc)
+  def get_desc(this : ID3D10Predicate*, pdesc : D3D10_QUERY_DESC*) : Void
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
 end
 struct LibWin32::ID3D10Counter
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10Counter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10Counter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10Counter*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10Counter*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10Counter*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10Counter*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10Counter*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def begin_ : Void
-    @lpVtbl.value.begin_.unsafe_as(Proc(Void)).call
+  def begin_(this : ID3D10Counter*) : Void
+    @lpVtbl.value.begin_.call(this)
   end
-  def end_ : Void
-    @lpVtbl.value.end_.unsafe_as(Proc(Void)).call
+  def end_(this : ID3D10Counter*) : Void
+    @lpVtbl.value.end_.call(this)
   end
-  def get_data(pdata : Void*, datasize : UInt32, getdataflags : UInt32) : HRESULT
-    @lpVtbl.value.get_data.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, datasize, getdataflags)
+  def get_data(this : ID3D10Counter*, pdata : Void*, datasize : UInt32, getdataflags : UInt32) : HRESULT
+    @lpVtbl.value.get_data.call(this, pdata, datasize, getdataflags)
   end
-  def get_data_size : UInt32
-    @lpVtbl.value.get_data_size.unsafe_as(Proc(UInt32)).call
+  def get_data_size(this : ID3D10Counter*) : UInt32
+    @lpVtbl.value.get_data_size.call(this)
   end
-  def get_desc(pdesc : D3D10_COUNTER_DESC*) : Void
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_COUNTER_DESC*, Void)).call(pdesc)
+  def get_desc(this : ID3D10Counter*, pdesc : D3D10_COUNTER_DESC*) : Void
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
 end
 struct LibWin32::ID3D10Device
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10Device*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10Device*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10Device*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def vs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
-    @lpVtbl.value.vs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D10Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  def vs_set_constant_buffers(this : ID3D10Device*, startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
+    @lpVtbl.value.vs_set_constant_buffers.call(this, startslot, numbuffers, ppconstantbuffers)
   end
-  def ps_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
-    @lpVtbl.value.ps_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D10ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  def ps_set_shader_resources(this : ID3D10Device*, startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
+    @lpVtbl.value.ps_set_shader_resources.call(this, startslot, numviews, ppshaderresourceviews)
   end
-  def ps_set_shader(ppixelshader : ID3D10PixelShader) : Void
-    @lpVtbl.value.ps_set_shader.unsafe_as(Proc(ID3D10PixelShader, Void)).call(ppixelshader)
+  def ps_set_shader(this : ID3D10Device*, ppixelshader : ID3D10PixelShader) : Void
+    @lpVtbl.value.ps_set_shader.call(this, ppixelshader)
   end
-  def ps_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
-    @lpVtbl.value.ps_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D10SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  def ps_set_samplers(this : ID3D10Device*, startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
+    @lpVtbl.value.ps_set_samplers.call(this, startslot, numsamplers, ppsamplers)
   end
-  def vs_set_shader(pvertexshader : ID3D10VertexShader) : Void
-    @lpVtbl.value.vs_set_shader.unsafe_as(Proc(ID3D10VertexShader, Void)).call(pvertexshader)
+  def vs_set_shader(this : ID3D10Device*, pvertexshader : ID3D10VertexShader) : Void
+    @lpVtbl.value.vs_set_shader.call(this, pvertexshader)
   end
-  def draw_indexed(indexcount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32) : Void
-    @lpVtbl.value.draw_indexed.unsafe_as(Proc(UInt32, UInt32, Int32, Void)).call(indexcount, startindexlocation, basevertexlocation)
+  def draw_indexed(this : ID3D10Device*, indexcount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32) : Void
+    @lpVtbl.value.draw_indexed.call(this, indexcount, startindexlocation, basevertexlocation)
   end
-  def draw(vertexcount : UInt32, startvertexlocation : UInt32) : Void
-    @lpVtbl.value.draw.unsafe_as(Proc(UInt32, UInt32, Void)).call(vertexcount, startvertexlocation)
+  def draw(this : ID3D10Device*, vertexcount : UInt32, startvertexlocation : UInt32) : Void
+    @lpVtbl.value.draw.call(this, vertexcount, startvertexlocation)
   end
-  def ps_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
-    @lpVtbl.value.ps_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D10Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  def ps_set_constant_buffers(this : ID3D10Device*, startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
+    @lpVtbl.value.ps_set_constant_buffers.call(this, startslot, numbuffers, ppconstantbuffers)
   end
-  def ia_set_input_layout(pinputlayout : ID3D10InputLayout) : Void
-    @lpVtbl.value.ia_set_input_layout.unsafe_as(Proc(ID3D10InputLayout, Void)).call(pinputlayout)
+  def ia_set_input_layout(this : ID3D10Device*, pinputlayout : ID3D10InputLayout) : Void
+    @lpVtbl.value.ia_set_input_layout.call(this, pinputlayout)
   end
-  def ia_set_vertex_buffers(startslot : UInt32, numbuffers : UInt32, ppvertexbuffers : ID3D10Buffer*, pstrides : UInt32*, poffsets : UInt32*) : Void
-    @lpVtbl.value.ia_set_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D10Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppvertexbuffers, pstrides, poffsets)
+  def ia_set_vertex_buffers(this : ID3D10Device*, startslot : UInt32, numbuffers : UInt32, ppvertexbuffers : ID3D10Buffer*, pstrides : UInt32*, poffsets : UInt32*) : Void
+    @lpVtbl.value.ia_set_vertex_buffers.call(this, startslot, numbuffers, ppvertexbuffers, pstrides, poffsets)
   end
-  def ia_set_index_buffer(pindexbuffer : ID3D10Buffer, format : DXGI_FORMAT, offset : UInt32) : Void
-    @lpVtbl.value.ia_set_index_buffer.unsafe_as(Proc(ID3D10Buffer, DXGI_FORMAT, UInt32, Void)).call(pindexbuffer, format, offset)
+  def ia_set_index_buffer(this : ID3D10Device*, pindexbuffer : ID3D10Buffer, format : DXGI_FORMAT, offset : UInt32) : Void
+    @lpVtbl.value.ia_set_index_buffer.call(this, pindexbuffer, format, offset)
   end
-  def draw_indexed_instanced(indexcountperinstance : UInt32, instancecount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32, startinstancelocation : UInt32) : Void
-    @lpVtbl.value.draw_indexed_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, Int32, UInt32, Void)).call(indexcountperinstance, instancecount, startindexlocation, basevertexlocation, startinstancelocation)
+  def draw_indexed_instanced(this : ID3D10Device*, indexcountperinstance : UInt32, instancecount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_indexed_instanced.call(this, indexcountperinstance, instancecount, startindexlocation, basevertexlocation, startinstancelocation)
   end
-  def draw_instanced(vertexcountperinstance : UInt32, instancecount : UInt32, startvertexlocation : UInt32, startinstancelocation : UInt32) : Void
-    @lpVtbl.value.draw_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, Void)).call(vertexcountperinstance, instancecount, startvertexlocation, startinstancelocation)
+  def draw_instanced(this : ID3D10Device*, vertexcountperinstance : UInt32, instancecount : UInt32, startvertexlocation : UInt32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_instanced.call(this, vertexcountperinstance, instancecount, startvertexlocation, startinstancelocation)
   end
-  def gs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
-    @lpVtbl.value.gs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D10Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  def gs_set_constant_buffers(this : ID3D10Device*, startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
+    @lpVtbl.value.gs_set_constant_buffers.call(this, startslot, numbuffers, ppconstantbuffers)
   end
-  def gs_set_shader(pshader : ID3D10GeometryShader) : Void
-    @lpVtbl.value.gs_set_shader.unsafe_as(Proc(ID3D10GeometryShader, Void)).call(pshader)
+  def gs_set_shader(this : ID3D10Device*, pshader : ID3D10GeometryShader) : Void
+    @lpVtbl.value.gs_set_shader.call(this, pshader)
   end
-  def ia_set_primitive_topology(topology : D3D_PRIMITIVE_TOPOLOGY) : Void
-    @lpVtbl.value.ia_set_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY, Void)).call(topology)
+  def ia_set_primitive_topology(this : ID3D10Device*, topology : D3D_PRIMITIVE_TOPOLOGY) : Void
+    @lpVtbl.value.ia_set_primitive_topology.call(this, topology)
   end
-  def vs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
-    @lpVtbl.value.vs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D10ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  def vs_set_shader_resources(this : ID3D10Device*, startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
+    @lpVtbl.value.vs_set_shader_resources.call(this, startslot, numviews, ppshaderresourceviews)
   end
-  def vs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
-    @lpVtbl.value.vs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D10SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  def vs_set_samplers(this : ID3D10Device*, startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
+    @lpVtbl.value.vs_set_samplers.call(this, startslot, numsamplers, ppsamplers)
   end
-  def set_predication(ppredicate : ID3D10Predicate, predicatevalue : LibC::BOOL) : Void
-    @lpVtbl.value.set_predication.unsafe_as(Proc(ID3D10Predicate, LibC::BOOL, Void)).call(ppredicate, predicatevalue)
+  def set_predication(this : ID3D10Device*, ppredicate : ID3D10Predicate, predicatevalue : LibC::BOOL) : Void
+    @lpVtbl.value.set_predication.call(this, ppredicate, predicatevalue)
   end
-  def gs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
-    @lpVtbl.value.gs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D10ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  def gs_set_shader_resources(this : ID3D10Device*, startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
+    @lpVtbl.value.gs_set_shader_resources.call(this, startslot, numviews, ppshaderresourceviews)
   end
-  def gs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
-    @lpVtbl.value.gs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D10SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  def gs_set_samplers(this : ID3D10Device*, startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
+    @lpVtbl.value.gs_set_samplers.call(this, startslot, numsamplers, ppsamplers)
   end
-  def om_set_render_targets(numviews : UInt32, pprendertargetviews : ID3D10RenderTargetView*, pdepthstencilview : ID3D10DepthStencilView) : Void
-    @lpVtbl.value.om_set_render_targets.unsafe_as(Proc(UInt32, ID3D10RenderTargetView*, ID3D10DepthStencilView, Void)).call(numviews, pprendertargetviews, pdepthstencilview)
+  def om_set_render_targets(this : ID3D10Device*, numviews : UInt32, pprendertargetviews : ID3D10RenderTargetView*, pdepthstencilview : ID3D10DepthStencilView) : Void
+    @lpVtbl.value.om_set_render_targets.call(this, numviews, pprendertargetviews, pdepthstencilview)
   end
-  def om_set_blend_state(pblendstate : ID3D10BlendState, blendfactor : Float32*, samplemask : UInt32) : Void
-    @lpVtbl.value.om_set_blend_state.unsafe_as(Proc(ID3D10BlendState, Float32*, UInt32, Void)).call(pblendstate, blendfactor, samplemask)
+  def om_set_blend_state(this : ID3D10Device*, pblendstate : ID3D10BlendState, blendfactor : Float32*, samplemask : UInt32) : Void
+    @lpVtbl.value.om_set_blend_state.call(this, pblendstate, blendfactor, samplemask)
   end
-  def om_set_depth_stencil_state(pdepthstencilstate : ID3D10DepthStencilState, stencilref : UInt32) : Void
-    @lpVtbl.value.om_set_depth_stencil_state.unsafe_as(Proc(ID3D10DepthStencilState, UInt32, Void)).call(pdepthstencilstate, stencilref)
+  def om_set_depth_stencil_state(this : ID3D10Device*, pdepthstencilstate : ID3D10DepthStencilState, stencilref : UInt32) : Void
+    @lpVtbl.value.om_set_depth_stencil_state.call(this, pdepthstencilstate, stencilref)
   end
-  def so_set_targets(numbuffers : UInt32, ppsotargets : ID3D10Buffer*, poffsets : UInt32*) : Void
-    @lpVtbl.value.so_set_targets.unsafe_as(Proc(UInt32, ID3D10Buffer*, UInt32*, Void)).call(numbuffers, ppsotargets, poffsets)
+  def so_set_targets(this : ID3D10Device*, numbuffers : UInt32, ppsotargets : ID3D10Buffer*, poffsets : UInt32*) : Void
+    @lpVtbl.value.so_set_targets.call(this, numbuffers, ppsotargets, poffsets)
   end
-  def draw_auto : Void
-    @lpVtbl.value.draw_auto.unsafe_as(Proc(Void)).call
+  def draw_auto(this : ID3D10Device*) : Void
+    @lpVtbl.value.draw_auto.call(this)
   end
-  def rs_set_state(prasterizerstate : ID3D10RasterizerState) : Void
-    @lpVtbl.value.rs_set_state.unsafe_as(Proc(ID3D10RasterizerState, Void)).call(prasterizerstate)
+  def rs_set_state(this : ID3D10Device*, prasterizerstate : ID3D10RasterizerState) : Void
+    @lpVtbl.value.rs_set_state.call(this, prasterizerstate)
   end
-  def rs_set_viewports(numviewports : UInt32, pviewports : D3D10_VIEWPORT*) : Void
-    @lpVtbl.value.rs_set_viewports.unsafe_as(Proc(UInt32, D3D10_VIEWPORT*, Void)).call(numviewports, pviewports)
+  def rs_set_viewports(this : ID3D10Device*, numviewports : UInt32, pviewports : D3D10_VIEWPORT*) : Void
+    @lpVtbl.value.rs_set_viewports.call(this, numviewports, pviewports)
   end
-  def rs_set_scissor_rects(numrects : UInt32, prects : RECT*) : Void
-    @lpVtbl.value.rs_set_scissor_rects.unsafe_as(Proc(UInt32, RECT*, Void)).call(numrects, prects)
+  def rs_set_scissor_rects(this : ID3D10Device*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.rs_set_scissor_rects.call(this, numrects, prects)
   end
-  def copy_subresource_region(pdstresource : ID3D10Resource, dstsubresource : UInt32, dstx : UInt32, dsty : UInt32, dstz : UInt32, psrcresource : ID3D10Resource, srcsubresource : UInt32, psrcbox : D3D10_BOX*) : Void
-    @lpVtbl.value.copy_subresource_region.unsafe_as(Proc(ID3D10Resource, UInt32, UInt32, UInt32, UInt32, ID3D10Resource, UInt32, D3D10_BOX*, Void)).call(pdstresource, dstsubresource, dstx, dsty, dstz, psrcresource, srcsubresource, psrcbox)
+  def copy_subresource_region(this : ID3D10Device*, pdstresource : ID3D10Resource, dstsubresource : UInt32, dstx : UInt32, dsty : UInt32, dstz : UInt32, psrcresource : ID3D10Resource, srcsubresource : UInt32, psrcbox : D3D10_BOX*) : Void
+    @lpVtbl.value.copy_subresource_region.call(this, pdstresource, dstsubresource, dstx, dsty, dstz, psrcresource, srcsubresource, psrcbox)
   end
-  def copy_resource(pdstresource : ID3D10Resource, psrcresource : ID3D10Resource) : Void
-    @lpVtbl.value.copy_resource.unsafe_as(Proc(ID3D10Resource, ID3D10Resource, Void)).call(pdstresource, psrcresource)
+  def copy_resource(this : ID3D10Device*, pdstresource : ID3D10Resource, psrcresource : ID3D10Resource) : Void
+    @lpVtbl.value.copy_resource.call(this, pdstresource, psrcresource)
   end
-  def update_subresource(pdstresource : ID3D10Resource, dstsubresource : UInt32, pdstbox : D3D10_BOX*, psrcdata : Void*, srcrowpitch : UInt32, srcdepthpitch : UInt32) : Void
-    @lpVtbl.value.update_subresource.unsafe_as(Proc(ID3D10Resource, UInt32, D3D10_BOX*, Void*, UInt32, UInt32, Void)).call(pdstresource, dstsubresource, pdstbox, psrcdata, srcrowpitch, srcdepthpitch)
+  def update_subresource(this : ID3D10Device*, pdstresource : ID3D10Resource, dstsubresource : UInt32, pdstbox : D3D10_BOX*, psrcdata : Void*, srcrowpitch : UInt32, srcdepthpitch : UInt32) : Void
+    @lpVtbl.value.update_subresource.call(this, pdstresource, dstsubresource, pdstbox, psrcdata, srcrowpitch, srcdepthpitch)
   end
-  def clear_render_target_view(prendertargetview : ID3D10RenderTargetView, colorrgba : Float32*) : Void
-    @lpVtbl.value.clear_render_target_view.unsafe_as(Proc(ID3D10RenderTargetView, Float32*, Void)).call(prendertargetview, colorrgba)
+  def clear_render_target_view(this : ID3D10Device*, prendertargetview : ID3D10RenderTargetView, colorrgba : Float32*) : Void
+    @lpVtbl.value.clear_render_target_view.call(this, prendertargetview, colorrgba)
   end
-  def clear_depth_stencil_view(pdepthstencilview : ID3D10DepthStencilView, clearflags : UInt32, depth : Float32, stencil : UInt8) : Void
-    @lpVtbl.value.clear_depth_stencil_view.unsafe_as(Proc(ID3D10DepthStencilView, UInt32, Float32, UInt8, Void)).call(pdepthstencilview, clearflags, depth, stencil)
+  def clear_depth_stencil_view(this : ID3D10Device*, pdepthstencilview : ID3D10DepthStencilView, clearflags : UInt32, depth : Float32, stencil : UInt8) : Void
+    @lpVtbl.value.clear_depth_stencil_view.call(this, pdepthstencilview, clearflags, depth, stencil)
   end
-  def generate_mips(pshaderresourceview : ID3D10ShaderResourceView) : Void
-    @lpVtbl.value.generate_mips.unsafe_as(Proc(ID3D10ShaderResourceView, Void)).call(pshaderresourceview)
+  def generate_mips(this : ID3D10Device*, pshaderresourceview : ID3D10ShaderResourceView) : Void
+    @lpVtbl.value.generate_mips.call(this, pshaderresourceview)
   end
-  def resolve_subresource(pdstresource : ID3D10Resource, dstsubresource : UInt32, psrcresource : ID3D10Resource, srcsubresource : UInt32, format : DXGI_FORMAT) : Void
-    @lpVtbl.value.resolve_subresource.unsafe_as(Proc(ID3D10Resource, UInt32, ID3D10Resource, UInt32, DXGI_FORMAT, Void)).call(pdstresource, dstsubresource, psrcresource, srcsubresource, format)
+  def resolve_subresource(this : ID3D10Device*, pdstresource : ID3D10Resource, dstsubresource : UInt32, psrcresource : ID3D10Resource, srcsubresource : UInt32, format : DXGI_FORMAT) : Void
+    @lpVtbl.value.resolve_subresource.call(this, pdstresource, dstsubresource, psrcresource, srcsubresource, format)
   end
-  def vs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
-    @lpVtbl.value.vs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D10Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  def vs_get_constant_buffers(this : ID3D10Device*, startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
+    @lpVtbl.value.vs_get_constant_buffers.call(this, startslot, numbuffers, ppconstantbuffers)
   end
-  def ps_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
-    @lpVtbl.value.ps_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D10ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  def ps_get_shader_resources(this : ID3D10Device*, startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
+    @lpVtbl.value.ps_get_shader_resources.call(this, startslot, numviews, ppshaderresourceviews)
   end
-  def ps_get_shader(pppixelshader : ID3D10PixelShader*) : Void
-    @lpVtbl.value.ps_get_shader.unsafe_as(Proc(ID3D10PixelShader*, Void)).call(pppixelshader)
+  def ps_get_shader(this : ID3D10Device*, pppixelshader : ID3D10PixelShader*) : Void
+    @lpVtbl.value.ps_get_shader.call(this, pppixelshader)
   end
-  def ps_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
-    @lpVtbl.value.ps_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D10SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  def ps_get_samplers(this : ID3D10Device*, startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
+    @lpVtbl.value.ps_get_samplers.call(this, startslot, numsamplers, ppsamplers)
   end
-  def vs_get_shader(ppvertexshader : ID3D10VertexShader*) : Void
-    @lpVtbl.value.vs_get_shader.unsafe_as(Proc(ID3D10VertexShader*, Void)).call(ppvertexshader)
+  def vs_get_shader(this : ID3D10Device*, ppvertexshader : ID3D10VertexShader*) : Void
+    @lpVtbl.value.vs_get_shader.call(this, ppvertexshader)
   end
-  def ps_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
-    @lpVtbl.value.ps_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D10Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  def ps_get_constant_buffers(this : ID3D10Device*, startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
+    @lpVtbl.value.ps_get_constant_buffers.call(this, startslot, numbuffers, ppconstantbuffers)
   end
-  def ia_get_input_layout(ppinputlayout : ID3D10InputLayout*) : Void
-    @lpVtbl.value.ia_get_input_layout.unsafe_as(Proc(ID3D10InputLayout*, Void)).call(ppinputlayout)
+  def ia_get_input_layout(this : ID3D10Device*, ppinputlayout : ID3D10InputLayout*) : Void
+    @lpVtbl.value.ia_get_input_layout.call(this, ppinputlayout)
   end
-  def ia_get_vertex_buffers(startslot : UInt32, numbuffers : UInt32, ppvertexbuffers : ID3D10Buffer*, pstrides : UInt32*, poffsets : UInt32*) : Void
-    @lpVtbl.value.ia_get_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D10Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppvertexbuffers, pstrides, poffsets)
+  def ia_get_vertex_buffers(this : ID3D10Device*, startslot : UInt32, numbuffers : UInt32, ppvertexbuffers : ID3D10Buffer*, pstrides : UInt32*, poffsets : UInt32*) : Void
+    @lpVtbl.value.ia_get_vertex_buffers.call(this, startslot, numbuffers, ppvertexbuffers, pstrides, poffsets)
   end
-  def ia_get_index_buffer(pindexbuffer : ID3D10Buffer*, format : DXGI_FORMAT*, offset : UInt32*) : Void
-    @lpVtbl.value.ia_get_index_buffer.unsafe_as(Proc(ID3D10Buffer*, DXGI_FORMAT*, UInt32*, Void)).call(pindexbuffer, format, offset)
+  def ia_get_index_buffer(this : ID3D10Device*, pindexbuffer : ID3D10Buffer*, format : DXGI_FORMAT*, offset : UInt32*) : Void
+    @lpVtbl.value.ia_get_index_buffer.call(this, pindexbuffer, format, offset)
   end
-  def gs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
-    @lpVtbl.value.gs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D10Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  def gs_get_constant_buffers(this : ID3D10Device*, startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
+    @lpVtbl.value.gs_get_constant_buffers.call(this, startslot, numbuffers, ppconstantbuffers)
   end
-  def gs_get_shader(ppgeometryshader : ID3D10GeometryShader*) : Void
-    @lpVtbl.value.gs_get_shader.unsafe_as(Proc(ID3D10GeometryShader*, Void)).call(ppgeometryshader)
+  def gs_get_shader(this : ID3D10Device*, ppgeometryshader : ID3D10GeometryShader*) : Void
+    @lpVtbl.value.gs_get_shader.call(this, ppgeometryshader)
   end
-  def ia_get_primitive_topology(ptopology : D3D_PRIMITIVE_TOPOLOGY*) : Void
-    @lpVtbl.value.ia_get_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY*, Void)).call(ptopology)
+  def ia_get_primitive_topology(this : ID3D10Device*, ptopology : D3D_PRIMITIVE_TOPOLOGY*) : Void
+    @lpVtbl.value.ia_get_primitive_topology.call(this, ptopology)
   end
-  def vs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
-    @lpVtbl.value.vs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D10ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  def vs_get_shader_resources(this : ID3D10Device*, startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
+    @lpVtbl.value.vs_get_shader_resources.call(this, startslot, numviews, ppshaderresourceviews)
   end
-  def vs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
-    @lpVtbl.value.vs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D10SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  def vs_get_samplers(this : ID3D10Device*, startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
+    @lpVtbl.value.vs_get_samplers.call(this, startslot, numsamplers, ppsamplers)
   end
-  def get_predication(pppredicate : ID3D10Predicate*, ppredicatevalue : LibC::BOOL*) : Void
-    @lpVtbl.value.get_predication.unsafe_as(Proc(ID3D10Predicate*, LibC::BOOL*, Void)).call(pppredicate, ppredicatevalue)
+  def get_predication(this : ID3D10Device*, pppredicate : ID3D10Predicate*, ppredicatevalue : LibC::BOOL*) : Void
+    @lpVtbl.value.get_predication.call(this, pppredicate, ppredicatevalue)
   end
-  def gs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
-    @lpVtbl.value.gs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D10ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  def gs_get_shader_resources(this : ID3D10Device*, startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
+    @lpVtbl.value.gs_get_shader_resources.call(this, startslot, numviews, ppshaderresourceviews)
   end
-  def gs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
-    @lpVtbl.value.gs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D10SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  def gs_get_samplers(this : ID3D10Device*, startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
+    @lpVtbl.value.gs_get_samplers.call(this, startslot, numsamplers, ppsamplers)
   end
-  def om_get_render_targets(numviews : UInt32, pprendertargetviews : ID3D10RenderTargetView*, ppdepthstencilview : ID3D10DepthStencilView*) : Void
-    @lpVtbl.value.om_get_render_targets.unsafe_as(Proc(UInt32, ID3D10RenderTargetView*, ID3D10DepthStencilView*, Void)).call(numviews, pprendertargetviews, ppdepthstencilview)
+  def om_get_render_targets(this : ID3D10Device*, numviews : UInt32, pprendertargetviews : ID3D10RenderTargetView*, ppdepthstencilview : ID3D10DepthStencilView*) : Void
+    @lpVtbl.value.om_get_render_targets.call(this, numviews, pprendertargetviews, ppdepthstencilview)
   end
-  def om_get_blend_state(ppblendstate : ID3D10BlendState*, blendfactor : Float32*, psamplemask : UInt32*) : Void
-    @lpVtbl.value.om_get_blend_state.unsafe_as(Proc(ID3D10BlendState*, Float32*, UInt32*, Void)).call(ppblendstate, blendfactor, psamplemask)
+  def om_get_blend_state(this : ID3D10Device*, ppblendstate : ID3D10BlendState*, blendfactor : Float32*, psamplemask : UInt32*) : Void
+    @lpVtbl.value.om_get_blend_state.call(this, ppblendstate, blendfactor, psamplemask)
   end
-  def om_get_depth_stencil_state(ppdepthstencilstate : ID3D10DepthStencilState*, pstencilref : UInt32*) : Void
-    @lpVtbl.value.om_get_depth_stencil_state.unsafe_as(Proc(ID3D10DepthStencilState*, UInt32*, Void)).call(ppdepthstencilstate, pstencilref)
+  def om_get_depth_stencil_state(this : ID3D10Device*, ppdepthstencilstate : ID3D10DepthStencilState*, pstencilref : UInt32*) : Void
+    @lpVtbl.value.om_get_depth_stencil_state.call(this, ppdepthstencilstate, pstencilref)
   end
-  def so_get_targets(numbuffers : UInt32, ppsotargets : ID3D10Buffer*, poffsets : UInt32*) : Void
-    @lpVtbl.value.so_get_targets.unsafe_as(Proc(UInt32, ID3D10Buffer*, UInt32*, Void)).call(numbuffers, ppsotargets, poffsets)
+  def so_get_targets(this : ID3D10Device*, numbuffers : UInt32, ppsotargets : ID3D10Buffer*, poffsets : UInt32*) : Void
+    @lpVtbl.value.so_get_targets.call(this, numbuffers, ppsotargets, poffsets)
   end
-  def rs_get_state(pprasterizerstate : ID3D10RasterizerState*) : Void
-    @lpVtbl.value.rs_get_state.unsafe_as(Proc(ID3D10RasterizerState*, Void)).call(pprasterizerstate)
+  def rs_get_state(this : ID3D10Device*, pprasterizerstate : ID3D10RasterizerState*) : Void
+    @lpVtbl.value.rs_get_state.call(this, pprasterizerstate)
   end
-  def rs_get_viewports(numviewports : UInt32*, pviewports : D3D10_VIEWPORT*) : Void
-    @lpVtbl.value.rs_get_viewports.unsafe_as(Proc(UInt32*, D3D10_VIEWPORT*, Void)).call(numviewports, pviewports)
+  def rs_get_viewports(this : ID3D10Device*, numviewports : UInt32*, pviewports : D3D10_VIEWPORT*) : Void
+    @lpVtbl.value.rs_get_viewports.call(this, numviewports, pviewports)
   end
-  def rs_get_scissor_rects(numrects : UInt32*, prects : RECT*) : Void
-    @lpVtbl.value.rs_get_scissor_rects.unsafe_as(Proc(UInt32*, RECT*, Void)).call(numrects, prects)
+  def rs_get_scissor_rects(this : ID3D10Device*, numrects : UInt32*, prects : RECT*) : Void
+    @lpVtbl.value.rs_get_scissor_rects.call(this, numrects, prects)
   end
-  def get_device_removed_reason : HRESULT
-    @lpVtbl.value.get_device_removed_reason.unsafe_as(Proc(HRESULT)).call
+  def get_device_removed_reason(this : ID3D10Device*) : HRESULT
+    @lpVtbl.value.get_device_removed_reason.call(this)
   end
-  def set_exception_mode(raiseflags : UInt32) : HRESULT
-    @lpVtbl.value.set_exception_mode.unsafe_as(Proc(UInt32, HRESULT)).call(raiseflags)
+  def set_exception_mode(this : ID3D10Device*, raiseflags : UInt32) : HRESULT
+    @lpVtbl.value.set_exception_mode.call(this, raiseflags)
   end
-  def get_exception_mode : UInt32
-    @lpVtbl.value.get_exception_mode.unsafe_as(Proc(UInt32)).call
+  def get_exception_mode(this : ID3D10Device*) : UInt32
+    @lpVtbl.value.get_exception_mode.call(this)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10Device*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10Device*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10Device*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def clear_state : Void
-    @lpVtbl.value.clear_state.unsafe_as(Proc(Void)).call
+  def clear_state(this : ID3D10Device*) : Void
+    @lpVtbl.value.clear_state.call(this)
   end
-  def flush : Void
-    @lpVtbl.value.flush.unsafe_as(Proc(Void)).call
+  def flush(this : ID3D10Device*) : Void
+    @lpVtbl.value.flush.call(this)
   end
-  def create_buffer(pdesc : D3D10_BUFFER_DESC*, pinitialdata : D3D10_SUBRESOURCE_DATA*, ppbuffer : ID3D10Buffer*) : HRESULT
-    @lpVtbl.value.create_buffer.unsafe_as(Proc(D3D10_BUFFER_DESC*, D3D10_SUBRESOURCE_DATA*, ID3D10Buffer*, HRESULT)).call(pdesc, pinitialdata, ppbuffer)
+  def create_buffer(this : ID3D10Device*, pdesc : D3D10_BUFFER_DESC*, pinitialdata : D3D10_SUBRESOURCE_DATA*, ppbuffer : ID3D10Buffer*) : HRESULT
+    @lpVtbl.value.create_buffer.call(this, pdesc, pinitialdata, ppbuffer)
   end
-  def create_texture1_d(pdesc : D3D10_TEXTURE1D_DESC*, pinitialdata : D3D10_SUBRESOURCE_DATA*, pptexture1d : ID3D10Texture1D*) : HRESULT
-    @lpVtbl.value.create_texture1_d.unsafe_as(Proc(D3D10_TEXTURE1D_DESC*, D3D10_SUBRESOURCE_DATA*, ID3D10Texture1D*, HRESULT)).call(pdesc, pinitialdata, pptexture1d)
+  def create_texture1_d(this : ID3D10Device*, pdesc : D3D10_TEXTURE1D_DESC*, pinitialdata : D3D10_SUBRESOURCE_DATA*, pptexture1d : ID3D10Texture1D*) : HRESULT
+    @lpVtbl.value.create_texture1_d.call(this, pdesc, pinitialdata, pptexture1d)
   end
-  def create_texture2_d(pdesc : D3D10_TEXTURE2D_DESC*, pinitialdata : D3D10_SUBRESOURCE_DATA*, pptexture2d : ID3D10Texture2D*) : HRESULT
-    @lpVtbl.value.create_texture2_d.unsafe_as(Proc(D3D10_TEXTURE2D_DESC*, D3D10_SUBRESOURCE_DATA*, ID3D10Texture2D*, HRESULT)).call(pdesc, pinitialdata, pptexture2d)
+  def create_texture2_d(this : ID3D10Device*, pdesc : D3D10_TEXTURE2D_DESC*, pinitialdata : D3D10_SUBRESOURCE_DATA*, pptexture2d : ID3D10Texture2D*) : HRESULT
+    @lpVtbl.value.create_texture2_d.call(this, pdesc, pinitialdata, pptexture2d)
   end
-  def create_texture3_d(pdesc : D3D10_TEXTURE3D_DESC*, pinitialdata : D3D10_SUBRESOURCE_DATA*, pptexture3d : ID3D10Texture3D*) : HRESULT
-    @lpVtbl.value.create_texture3_d.unsafe_as(Proc(D3D10_TEXTURE3D_DESC*, D3D10_SUBRESOURCE_DATA*, ID3D10Texture3D*, HRESULT)).call(pdesc, pinitialdata, pptexture3d)
+  def create_texture3_d(this : ID3D10Device*, pdesc : D3D10_TEXTURE3D_DESC*, pinitialdata : D3D10_SUBRESOURCE_DATA*, pptexture3d : ID3D10Texture3D*) : HRESULT
+    @lpVtbl.value.create_texture3_d.call(this, pdesc, pinitialdata, pptexture3d)
   end
-  def create_shader_resource_view(presource : ID3D10Resource, pdesc : D3D10_SHADER_RESOURCE_VIEW_DESC*, ppsrview : ID3D10ShaderResourceView*) : HRESULT
-    @lpVtbl.value.create_shader_resource_view.unsafe_as(Proc(ID3D10Resource, D3D10_SHADER_RESOURCE_VIEW_DESC*, ID3D10ShaderResourceView*, HRESULT)).call(presource, pdesc, ppsrview)
+  def create_shader_resource_view(this : ID3D10Device*, presource : ID3D10Resource, pdesc : D3D10_SHADER_RESOURCE_VIEW_DESC*, ppsrview : ID3D10ShaderResourceView*) : HRESULT
+    @lpVtbl.value.create_shader_resource_view.call(this, presource, pdesc, ppsrview)
   end
-  def create_render_target_view(presource : ID3D10Resource, pdesc : D3D10_RENDER_TARGET_VIEW_DESC*, pprtview : ID3D10RenderTargetView*) : HRESULT
-    @lpVtbl.value.create_render_target_view.unsafe_as(Proc(ID3D10Resource, D3D10_RENDER_TARGET_VIEW_DESC*, ID3D10RenderTargetView*, HRESULT)).call(presource, pdesc, pprtview)
+  def create_render_target_view(this : ID3D10Device*, presource : ID3D10Resource, pdesc : D3D10_RENDER_TARGET_VIEW_DESC*, pprtview : ID3D10RenderTargetView*) : HRESULT
+    @lpVtbl.value.create_render_target_view.call(this, presource, pdesc, pprtview)
   end
-  def create_depth_stencil_view(presource : ID3D10Resource, pdesc : D3D10_DEPTH_STENCIL_VIEW_DESC*, ppdepthstencilview : ID3D10DepthStencilView*) : HRESULT
-    @lpVtbl.value.create_depth_stencil_view.unsafe_as(Proc(ID3D10Resource, D3D10_DEPTH_STENCIL_VIEW_DESC*, ID3D10DepthStencilView*, HRESULT)).call(presource, pdesc, ppdepthstencilview)
+  def create_depth_stencil_view(this : ID3D10Device*, presource : ID3D10Resource, pdesc : D3D10_DEPTH_STENCIL_VIEW_DESC*, ppdepthstencilview : ID3D10DepthStencilView*) : HRESULT
+    @lpVtbl.value.create_depth_stencil_view.call(this, presource, pdesc, ppdepthstencilview)
   end
-  def create_input_layout(pinputelementdescs : D3D10_INPUT_ELEMENT_DESC*, numelements : UInt32, pshaderbytecodewithinputsignature : Void*, bytecodelength : LibC::UINT_PTR, ppinputlayout : ID3D10InputLayout*) : HRESULT
-    @lpVtbl.value.create_input_layout.unsafe_as(Proc(D3D10_INPUT_ELEMENT_DESC*, UInt32, Void*, LibC::UINT_PTR, ID3D10InputLayout*, HRESULT)).call(pinputelementdescs, numelements, pshaderbytecodewithinputsignature, bytecodelength, ppinputlayout)
+  def create_input_layout(this : ID3D10Device*, pinputelementdescs : D3D10_INPUT_ELEMENT_DESC*, numelements : UInt32, pshaderbytecodewithinputsignature : Void*, bytecodelength : LibC::UINT_PTR, ppinputlayout : ID3D10InputLayout*) : HRESULT
+    @lpVtbl.value.create_input_layout.call(this, pinputelementdescs, numelements, pshaderbytecodewithinputsignature, bytecodelength, ppinputlayout)
   end
-  def create_vertex_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, ppvertexshader : ID3D10VertexShader*) : HRESULT
-    @lpVtbl.value.create_vertex_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D10VertexShader*, HRESULT)).call(pshaderbytecode, bytecodelength, ppvertexshader)
+  def create_vertex_shader(this : ID3D10Device*, pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, ppvertexshader : ID3D10VertexShader*) : HRESULT
+    @lpVtbl.value.create_vertex_shader.call(this, pshaderbytecode, bytecodelength, ppvertexshader)
   end
-  def create_geometry_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, ppgeometryshader : ID3D10GeometryShader*) : HRESULT
-    @lpVtbl.value.create_geometry_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D10GeometryShader*, HRESULT)).call(pshaderbytecode, bytecodelength, ppgeometryshader)
+  def create_geometry_shader(this : ID3D10Device*, pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, ppgeometryshader : ID3D10GeometryShader*) : HRESULT
+    @lpVtbl.value.create_geometry_shader.call(this, pshaderbytecode, bytecodelength, ppgeometryshader)
   end
-  def create_geometry_shader_with_stream_output(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, psodeclaration : D3D10_SO_DECLARATION_ENTRY*, numentries : UInt32, outputstreamstride : UInt32, ppgeometryshader : ID3D10GeometryShader*) : HRESULT
-    @lpVtbl.value.create_geometry_shader_with_stream_output.unsafe_as(Proc(Void*, LibC::UINT_PTR, D3D10_SO_DECLARATION_ENTRY*, UInt32, UInt32, ID3D10GeometryShader*, HRESULT)).call(pshaderbytecode, bytecodelength, psodeclaration, numentries, outputstreamstride, ppgeometryshader)
+  def create_geometry_shader_with_stream_output(this : ID3D10Device*, pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, psodeclaration : D3D10_SO_DECLARATION_ENTRY*, numentries : UInt32, outputstreamstride : UInt32, ppgeometryshader : ID3D10GeometryShader*) : HRESULT
+    @lpVtbl.value.create_geometry_shader_with_stream_output.call(this, pshaderbytecode, bytecodelength, psodeclaration, numentries, outputstreamstride, ppgeometryshader)
   end
-  def create_pixel_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pppixelshader : ID3D10PixelShader*) : HRESULT
-    @lpVtbl.value.create_pixel_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D10PixelShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pppixelshader)
+  def create_pixel_shader(this : ID3D10Device*, pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pppixelshader : ID3D10PixelShader*) : HRESULT
+    @lpVtbl.value.create_pixel_shader.call(this, pshaderbytecode, bytecodelength, pppixelshader)
   end
-  def create_blend_state(pblendstatedesc : D3D10_BLEND_DESC*, ppblendstate : ID3D10BlendState*) : HRESULT
-    @lpVtbl.value.create_blend_state.unsafe_as(Proc(D3D10_BLEND_DESC*, ID3D10BlendState*, HRESULT)).call(pblendstatedesc, ppblendstate)
+  def create_blend_state(this : ID3D10Device*, pblendstatedesc : D3D10_BLEND_DESC*, ppblendstate : ID3D10BlendState*) : HRESULT
+    @lpVtbl.value.create_blend_state.call(this, pblendstatedesc, ppblendstate)
   end
-  def create_depth_stencil_state(pdepthstencildesc : D3D10_DEPTH_STENCIL_DESC*, ppdepthstencilstate : ID3D10DepthStencilState*) : HRESULT
-    @lpVtbl.value.create_depth_stencil_state.unsafe_as(Proc(D3D10_DEPTH_STENCIL_DESC*, ID3D10DepthStencilState*, HRESULT)).call(pdepthstencildesc, ppdepthstencilstate)
+  def create_depth_stencil_state(this : ID3D10Device*, pdepthstencildesc : D3D10_DEPTH_STENCIL_DESC*, ppdepthstencilstate : ID3D10DepthStencilState*) : HRESULT
+    @lpVtbl.value.create_depth_stencil_state.call(this, pdepthstencildesc, ppdepthstencilstate)
   end
-  def create_rasterizer_state(prasterizerdesc : D3D10_RASTERIZER_DESC*, pprasterizerstate : ID3D10RasterizerState*) : HRESULT
-    @lpVtbl.value.create_rasterizer_state.unsafe_as(Proc(D3D10_RASTERIZER_DESC*, ID3D10RasterizerState*, HRESULT)).call(prasterizerdesc, pprasterizerstate)
+  def create_rasterizer_state(this : ID3D10Device*, prasterizerdesc : D3D10_RASTERIZER_DESC*, pprasterizerstate : ID3D10RasterizerState*) : HRESULT
+    @lpVtbl.value.create_rasterizer_state.call(this, prasterizerdesc, pprasterizerstate)
   end
-  def create_sampler_state(psamplerdesc : D3D10_SAMPLER_DESC*, ppsamplerstate : ID3D10SamplerState*) : HRESULT
-    @lpVtbl.value.create_sampler_state.unsafe_as(Proc(D3D10_SAMPLER_DESC*, ID3D10SamplerState*, HRESULT)).call(psamplerdesc, ppsamplerstate)
+  def create_sampler_state(this : ID3D10Device*, psamplerdesc : D3D10_SAMPLER_DESC*, ppsamplerstate : ID3D10SamplerState*) : HRESULT
+    @lpVtbl.value.create_sampler_state.call(this, psamplerdesc, ppsamplerstate)
   end
-  def create_query(pquerydesc : D3D10_QUERY_DESC*, ppquery : ID3D10Query*) : HRESULT
-    @lpVtbl.value.create_query.unsafe_as(Proc(D3D10_QUERY_DESC*, ID3D10Query*, HRESULT)).call(pquerydesc, ppquery)
+  def create_query(this : ID3D10Device*, pquerydesc : D3D10_QUERY_DESC*, ppquery : ID3D10Query*) : HRESULT
+    @lpVtbl.value.create_query.call(this, pquerydesc, ppquery)
   end
-  def create_predicate(ppredicatedesc : D3D10_QUERY_DESC*, pppredicate : ID3D10Predicate*) : HRESULT
-    @lpVtbl.value.create_predicate.unsafe_as(Proc(D3D10_QUERY_DESC*, ID3D10Predicate*, HRESULT)).call(ppredicatedesc, pppredicate)
+  def create_predicate(this : ID3D10Device*, ppredicatedesc : D3D10_QUERY_DESC*, pppredicate : ID3D10Predicate*) : HRESULT
+    @lpVtbl.value.create_predicate.call(this, ppredicatedesc, pppredicate)
   end
-  def create_counter(pcounterdesc : D3D10_COUNTER_DESC*, ppcounter : ID3D10Counter*) : HRESULT
-    @lpVtbl.value.create_counter.unsafe_as(Proc(D3D10_COUNTER_DESC*, ID3D10Counter*, HRESULT)).call(pcounterdesc, ppcounter)
+  def create_counter(this : ID3D10Device*, pcounterdesc : D3D10_COUNTER_DESC*, ppcounter : ID3D10Counter*) : HRESULT
+    @lpVtbl.value.create_counter.call(this, pcounterdesc, ppcounter)
   end
-  def check_format_support(format : DXGI_FORMAT, pformatsupport : UInt32*) : HRESULT
-    @lpVtbl.value.check_format_support.unsafe_as(Proc(DXGI_FORMAT, UInt32*, HRESULT)).call(format, pformatsupport)
+  def check_format_support(this : ID3D10Device*, format : DXGI_FORMAT, pformatsupport : UInt32*) : HRESULT
+    @lpVtbl.value.check_format_support.call(this, format, pformatsupport)
   end
-  def check_multisample_quality_levels(format : DXGI_FORMAT, samplecount : UInt32, pnumqualitylevels : UInt32*) : HRESULT
-    @lpVtbl.value.check_multisample_quality_levels.unsafe_as(Proc(DXGI_FORMAT, UInt32, UInt32*, HRESULT)).call(format, samplecount, pnumqualitylevels)
+  def check_multisample_quality_levels(this : ID3D10Device*, format : DXGI_FORMAT, samplecount : UInt32, pnumqualitylevels : UInt32*) : HRESULT
+    @lpVtbl.value.check_multisample_quality_levels.call(this, format, samplecount, pnumqualitylevels)
   end
-  def check_counter_info(pcounterinfo : D3D10_COUNTER_INFO*) : Void
-    @lpVtbl.value.check_counter_info.unsafe_as(Proc(D3D10_COUNTER_INFO*, Void)).call(pcounterinfo)
+  def check_counter_info(this : ID3D10Device*, pcounterinfo : D3D10_COUNTER_INFO*) : Void
+    @lpVtbl.value.check_counter_info.call(this, pcounterinfo)
   end
-  def check_counter(pdesc : D3D10_COUNTER_DESC*, ptype : D3D10_COUNTER_TYPE*, pactivecounters : UInt32*, szname : UInt8*, pnamelength : UInt32*, szunits : UInt8*, punitslength : UInt32*, szdescription : UInt8*, pdescriptionlength : UInt32*) : HRESULT
-    @lpVtbl.value.check_counter.unsafe_as(Proc(D3D10_COUNTER_DESC*, D3D10_COUNTER_TYPE*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)).call(pdesc, ptype, pactivecounters, szname, pnamelength, szunits, punitslength, szdescription, pdescriptionlength)
+  def check_counter(this : ID3D10Device*, pdesc : D3D10_COUNTER_DESC*, ptype : D3D10_COUNTER_TYPE*, pactivecounters : UInt32*, szname : UInt8*, pnamelength : UInt32*, szunits : UInt8*, punitslength : UInt32*, szdescription : UInt8*, pdescriptionlength : UInt32*) : HRESULT
+    @lpVtbl.value.check_counter.call(this, pdesc, ptype, pactivecounters, szname, pnamelength, szunits, punitslength, szdescription, pdescriptionlength)
   end
-  def get_creation_flags : UInt32
-    @lpVtbl.value.get_creation_flags.unsafe_as(Proc(UInt32)).call
+  def get_creation_flags(this : ID3D10Device*) : UInt32
+    @lpVtbl.value.get_creation_flags.call(this)
   end
-  def open_shared_resource(hresource : LibC::HANDLE, returnedinterface : Guid*, ppresource : Void**) : HRESULT
-    @lpVtbl.value.open_shared_resource.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hresource, returnedinterface, ppresource)
+  def open_shared_resource(this : ID3D10Device*, hresource : LibC::HANDLE, returnedinterface : Guid*, ppresource : Void**) : HRESULT
+    @lpVtbl.value.open_shared_resource.call(this, hresource, returnedinterface, ppresource)
   end
-  def set_text_filter_size(width : UInt32, height : UInt32) : Void
-    @lpVtbl.value.set_text_filter_size.unsafe_as(Proc(UInt32, UInt32, Void)).call(width, height)
+  def set_text_filter_size(this : ID3D10Device*, width : UInt32, height : UInt32) : Void
+    @lpVtbl.value.set_text_filter_size.call(this, width, height)
   end
-  def get_text_filter_size(pwidth : UInt32*, pheight : UInt32*) : Void
-    @lpVtbl.value.get_text_filter_size.unsafe_as(Proc(UInt32*, UInt32*, Void)).call(pwidth, pheight)
+  def get_text_filter_size(this : ID3D10Device*, pwidth : UInt32*, pheight : UInt32*) : Void
+    @lpVtbl.value.get_text_filter_size.call(this, pwidth, pheight)
   end
 end
 struct LibWin32::ID3D10Multithread
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10Multithread*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10Multithread*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10Multithread*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def enter : Void
-    @lpVtbl.value.enter.unsafe_as(Proc(Void)).call
+  def enter(this : ID3D10Multithread*) : Void
+    @lpVtbl.value.enter.call(this)
   end
-  def leave : Void
-    @lpVtbl.value.leave.unsafe_as(Proc(Void)).call
+  def leave(this : ID3D10Multithread*) : Void
+    @lpVtbl.value.leave.call(this)
   end
-  def set_multithread_protected(bmtprotect : LibC::BOOL) : LibC::BOOL
-    @lpVtbl.value.set_multithread_protected.unsafe_as(Proc(LibC::BOOL, LibC::BOOL)).call(bmtprotect)
+  def set_multithread_protected(this : ID3D10Multithread*, bmtprotect : LibC::BOOL) : LibC::BOOL
+    @lpVtbl.value.set_multithread_protected.call(this, bmtprotect)
   end
-  def get_multithread_protected : LibC::BOOL
-    @lpVtbl.value.get_multithread_protected.unsafe_as(Proc(LibC::BOOL)).call
+  def get_multithread_protected(this : ID3D10Multithread*) : LibC::BOOL
+    @lpVtbl.value.get_multithread_protected.call(this)
   end
 end
 struct LibWin32::ID3D10Debug
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10Debug*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10Debug*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10Debug*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_feature_mask(mask : UInt32) : HRESULT
-    @lpVtbl.value.set_feature_mask.unsafe_as(Proc(UInt32, HRESULT)).call(mask)
+  def set_feature_mask(this : ID3D10Debug*, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_feature_mask.call(this, mask)
   end
-  def get_feature_mask : UInt32
-    @lpVtbl.value.get_feature_mask.unsafe_as(Proc(UInt32)).call
+  def get_feature_mask(this : ID3D10Debug*) : UInt32
+    @lpVtbl.value.get_feature_mask.call(this)
   end
-  def set_present_per_render_op_delay(milliseconds : UInt32) : HRESULT
-    @lpVtbl.value.set_present_per_render_op_delay.unsafe_as(Proc(UInt32, HRESULT)).call(milliseconds)
+  def set_present_per_render_op_delay(this : ID3D10Debug*, milliseconds : UInt32) : HRESULT
+    @lpVtbl.value.set_present_per_render_op_delay.call(this, milliseconds)
   end
-  def get_present_per_render_op_delay : UInt32
-    @lpVtbl.value.get_present_per_render_op_delay.unsafe_as(Proc(UInt32)).call
+  def get_present_per_render_op_delay(this : ID3D10Debug*) : UInt32
+    @lpVtbl.value.get_present_per_render_op_delay.call(this)
   end
-  def set_swap_chain(pswapchain : IDXGISwapChain) : HRESULT
-    @lpVtbl.value.set_swap_chain.unsafe_as(Proc(IDXGISwapChain, HRESULT)).call(pswapchain)
+  def set_swap_chain(this : ID3D10Debug*, pswapchain : IDXGISwapChain) : HRESULT
+    @lpVtbl.value.set_swap_chain.call(this, pswapchain)
   end
-  def get_swap_chain(ppswapchain : IDXGISwapChain*) : HRESULT
-    @lpVtbl.value.get_swap_chain.unsafe_as(Proc(IDXGISwapChain*, HRESULT)).call(ppswapchain)
+  def get_swap_chain(this : ID3D10Debug*, ppswapchain : IDXGISwapChain*) : HRESULT
+    @lpVtbl.value.get_swap_chain.call(this, ppswapchain)
   end
-  def validate : HRESULT
-    @lpVtbl.value.validate.unsafe_as(Proc(HRESULT)).call
+  def validate(this : ID3D10Debug*) : HRESULT
+    @lpVtbl.value.validate.call(this)
   end
 end
 struct LibWin32::ID3D10SwitchToRef
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10SwitchToRef*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10SwitchToRef*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10SwitchToRef*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_use_ref(useref : LibC::BOOL) : LibC::BOOL
-    @lpVtbl.value.set_use_ref.unsafe_as(Proc(LibC::BOOL, LibC::BOOL)).call(useref)
+  def set_use_ref(this : ID3D10SwitchToRef*, useref : LibC::BOOL) : LibC::BOOL
+    @lpVtbl.value.set_use_ref.call(this, useref)
   end
-  def get_use_ref : LibC::BOOL
-    @lpVtbl.value.get_use_ref.unsafe_as(Proc(LibC::BOOL)).call
+  def get_use_ref(this : ID3D10SwitchToRef*) : LibC::BOOL
+    @lpVtbl.value.get_use_ref.call(this)
   end
 end
 struct LibWin32::ID3D10InfoQueue
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10InfoQueue*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10InfoQueue*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10InfoQueue*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_message_count_limit(messagecountlimit : UInt64) : HRESULT
-    @lpVtbl.value.set_message_count_limit.unsafe_as(Proc(UInt64, HRESULT)).call(messagecountlimit)
+  def set_message_count_limit(this : ID3D10InfoQueue*, messagecountlimit : UInt64) : HRESULT
+    @lpVtbl.value.set_message_count_limit.call(this, messagecountlimit)
   end
-  def clear_stored_messages : Void
-    @lpVtbl.value.clear_stored_messages.unsafe_as(Proc(Void)).call
+  def clear_stored_messages(this : ID3D10InfoQueue*) : Void
+    @lpVtbl.value.clear_stored_messages.call(this)
   end
-  def get_message(messageindex : UInt64, pmessage : D3D10_MESSAGE*, pmessagebytelength : LibC::UINT_PTR*) : HRESULT
-    @lpVtbl.value.get_message.unsafe_as(Proc(UInt64, D3D10_MESSAGE*, LibC::UINT_PTR*, HRESULT)).call(messageindex, pmessage, pmessagebytelength)
+  def get_message(this : ID3D10InfoQueue*, messageindex : UInt64, pmessage : D3D10_MESSAGE*, pmessagebytelength : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_message.call(this, messageindex, pmessage, pmessagebytelength)
   end
-  def get_num_messages_allowed_by_storage_filter : UInt64
-    @lpVtbl.value.get_num_messages_allowed_by_storage_filter.unsafe_as(Proc(UInt64)).call
+  def get_num_messages_allowed_by_storage_filter(this : ID3D10InfoQueue*) : UInt64
+    @lpVtbl.value.get_num_messages_allowed_by_storage_filter.call(this)
   end
-  def get_num_messages_denied_by_storage_filter : UInt64
-    @lpVtbl.value.get_num_messages_denied_by_storage_filter.unsafe_as(Proc(UInt64)).call
+  def get_num_messages_denied_by_storage_filter(this : ID3D10InfoQueue*) : UInt64
+    @lpVtbl.value.get_num_messages_denied_by_storage_filter.call(this)
   end
-  def get_num_stored_messages : UInt64
-    @lpVtbl.value.get_num_stored_messages.unsafe_as(Proc(UInt64)).call
+  def get_num_stored_messages(this : ID3D10InfoQueue*) : UInt64
+    @lpVtbl.value.get_num_stored_messages.call(this)
   end
-  def get_num_stored_messages_allowed_by_retrieval_filter : UInt64
-    @lpVtbl.value.get_num_stored_messages_allowed_by_retrieval_filter.unsafe_as(Proc(UInt64)).call
+  def get_num_stored_messages_allowed_by_retrieval_filter(this : ID3D10InfoQueue*) : UInt64
+    @lpVtbl.value.get_num_stored_messages_allowed_by_retrieval_filter.call(this)
   end
-  def get_num_messages_discarded_by_message_count_limit : UInt64
-    @lpVtbl.value.get_num_messages_discarded_by_message_count_limit.unsafe_as(Proc(UInt64)).call
+  def get_num_messages_discarded_by_message_count_limit(this : ID3D10InfoQueue*) : UInt64
+    @lpVtbl.value.get_num_messages_discarded_by_message_count_limit.call(this)
   end
-  def get_message_count_limit : UInt64
-    @lpVtbl.value.get_message_count_limit.unsafe_as(Proc(UInt64)).call
+  def get_message_count_limit(this : ID3D10InfoQueue*) : UInt64
+    @lpVtbl.value.get_message_count_limit.call(this)
   end
-  def add_storage_filter_entries(pfilter : D3D10_INFO_QUEUE_FILTER*) : HRESULT
-    @lpVtbl.value.add_storage_filter_entries.unsafe_as(Proc(D3D10_INFO_QUEUE_FILTER*, HRESULT)).call(pfilter)
+  def add_storage_filter_entries(this : ID3D10InfoQueue*, pfilter : D3D10_INFO_QUEUE_FILTER*) : HRESULT
+    @lpVtbl.value.add_storage_filter_entries.call(this, pfilter)
   end
-  def get_storage_filter(pfilter : D3D10_INFO_QUEUE_FILTER*, pfilterbytelength : LibC::UINT_PTR*) : HRESULT
-    @lpVtbl.value.get_storage_filter.unsafe_as(Proc(D3D10_INFO_QUEUE_FILTER*, LibC::UINT_PTR*, HRESULT)).call(pfilter, pfilterbytelength)
+  def get_storage_filter(this : ID3D10InfoQueue*, pfilter : D3D10_INFO_QUEUE_FILTER*, pfilterbytelength : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_storage_filter.call(this, pfilter, pfilterbytelength)
   end
-  def clear_storage_filter : Void
-    @lpVtbl.value.clear_storage_filter.unsafe_as(Proc(Void)).call
+  def clear_storage_filter(this : ID3D10InfoQueue*) : Void
+    @lpVtbl.value.clear_storage_filter.call(this)
   end
-  def push_empty_storage_filter : HRESULT
-    @lpVtbl.value.push_empty_storage_filter.unsafe_as(Proc(HRESULT)).call
+  def push_empty_storage_filter(this : ID3D10InfoQueue*) : HRESULT
+    @lpVtbl.value.push_empty_storage_filter.call(this)
   end
-  def push_copy_of_storage_filter : HRESULT
-    @lpVtbl.value.push_copy_of_storage_filter.unsafe_as(Proc(HRESULT)).call
+  def push_copy_of_storage_filter(this : ID3D10InfoQueue*) : HRESULT
+    @lpVtbl.value.push_copy_of_storage_filter.call(this)
   end
-  def push_storage_filter(pfilter : D3D10_INFO_QUEUE_FILTER*) : HRESULT
-    @lpVtbl.value.push_storage_filter.unsafe_as(Proc(D3D10_INFO_QUEUE_FILTER*, HRESULT)).call(pfilter)
+  def push_storage_filter(this : ID3D10InfoQueue*, pfilter : D3D10_INFO_QUEUE_FILTER*) : HRESULT
+    @lpVtbl.value.push_storage_filter.call(this, pfilter)
   end
-  def pop_storage_filter : Void
-    @lpVtbl.value.pop_storage_filter.unsafe_as(Proc(Void)).call
+  def pop_storage_filter(this : ID3D10InfoQueue*) : Void
+    @lpVtbl.value.pop_storage_filter.call(this)
   end
-  def get_storage_filter_stack_size : UInt32
-    @lpVtbl.value.get_storage_filter_stack_size.unsafe_as(Proc(UInt32)).call
+  def get_storage_filter_stack_size(this : ID3D10InfoQueue*) : UInt32
+    @lpVtbl.value.get_storage_filter_stack_size.call(this)
   end
-  def add_retrieval_filter_entries(pfilter : D3D10_INFO_QUEUE_FILTER*) : HRESULT
-    @lpVtbl.value.add_retrieval_filter_entries.unsafe_as(Proc(D3D10_INFO_QUEUE_FILTER*, HRESULT)).call(pfilter)
+  def add_retrieval_filter_entries(this : ID3D10InfoQueue*, pfilter : D3D10_INFO_QUEUE_FILTER*) : HRESULT
+    @lpVtbl.value.add_retrieval_filter_entries.call(this, pfilter)
   end
-  def get_retrieval_filter(pfilter : D3D10_INFO_QUEUE_FILTER*, pfilterbytelength : LibC::UINT_PTR*) : HRESULT
-    @lpVtbl.value.get_retrieval_filter.unsafe_as(Proc(D3D10_INFO_QUEUE_FILTER*, LibC::UINT_PTR*, HRESULT)).call(pfilter, pfilterbytelength)
+  def get_retrieval_filter(this : ID3D10InfoQueue*, pfilter : D3D10_INFO_QUEUE_FILTER*, pfilterbytelength : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_retrieval_filter.call(this, pfilter, pfilterbytelength)
   end
-  def clear_retrieval_filter : Void
-    @lpVtbl.value.clear_retrieval_filter.unsafe_as(Proc(Void)).call
+  def clear_retrieval_filter(this : ID3D10InfoQueue*) : Void
+    @lpVtbl.value.clear_retrieval_filter.call(this)
   end
-  def push_empty_retrieval_filter : HRESULT
-    @lpVtbl.value.push_empty_retrieval_filter.unsafe_as(Proc(HRESULT)).call
+  def push_empty_retrieval_filter(this : ID3D10InfoQueue*) : HRESULT
+    @lpVtbl.value.push_empty_retrieval_filter.call(this)
   end
-  def push_copy_of_retrieval_filter : HRESULT
-    @lpVtbl.value.push_copy_of_retrieval_filter.unsafe_as(Proc(HRESULT)).call
+  def push_copy_of_retrieval_filter(this : ID3D10InfoQueue*) : HRESULT
+    @lpVtbl.value.push_copy_of_retrieval_filter.call(this)
   end
-  def push_retrieval_filter(pfilter : D3D10_INFO_QUEUE_FILTER*) : HRESULT
-    @lpVtbl.value.push_retrieval_filter.unsafe_as(Proc(D3D10_INFO_QUEUE_FILTER*, HRESULT)).call(pfilter)
+  def push_retrieval_filter(this : ID3D10InfoQueue*, pfilter : D3D10_INFO_QUEUE_FILTER*) : HRESULT
+    @lpVtbl.value.push_retrieval_filter.call(this, pfilter)
   end
-  def pop_retrieval_filter : Void
-    @lpVtbl.value.pop_retrieval_filter.unsafe_as(Proc(Void)).call
+  def pop_retrieval_filter(this : ID3D10InfoQueue*) : Void
+    @lpVtbl.value.pop_retrieval_filter.call(this)
   end
-  def get_retrieval_filter_stack_size : UInt32
-    @lpVtbl.value.get_retrieval_filter_stack_size.unsafe_as(Proc(UInt32)).call
+  def get_retrieval_filter_stack_size(this : ID3D10InfoQueue*) : UInt32
+    @lpVtbl.value.get_retrieval_filter_stack_size.call(this)
   end
-  def add_message(category : D3D10_MESSAGE_CATEGORY, severity : D3D10_MESSAGE_SEVERITY, id : D3D10_MESSAGE_ID, pdescription : PSTR) : HRESULT
-    @lpVtbl.value.add_message.unsafe_as(Proc(D3D10_MESSAGE_CATEGORY, D3D10_MESSAGE_SEVERITY, D3D10_MESSAGE_ID, PSTR, HRESULT)).call(category, severity, id, pdescription)
+  def add_message(this : ID3D10InfoQueue*, category : D3D10_MESSAGE_CATEGORY, severity : D3D10_MESSAGE_SEVERITY, id : D3D10_MESSAGE_ID, pdescription : PSTR) : HRESULT
+    @lpVtbl.value.add_message.call(this, category, severity, id, pdescription)
   end
-  def add_application_message(severity : D3D10_MESSAGE_SEVERITY, pdescription : PSTR) : HRESULT
-    @lpVtbl.value.add_application_message.unsafe_as(Proc(D3D10_MESSAGE_SEVERITY, PSTR, HRESULT)).call(severity, pdescription)
+  def add_application_message(this : ID3D10InfoQueue*, severity : D3D10_MESSAGE_SEVERITY, pdescription : PSTR) : HRESULT
+    @lpVtbl.value.add_application_message.call(this, severity, pdescription)
   end
-  def set_break_on_category(category : D3D10_MESSAGE_CATEGORY, benable : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_break_on_category.unsafe_as(Proc(D3D10_MESSAGE_CATEGORY, LibC::BOOL, HRESULT)).call(category, benable)
+  def set_break_on_category(this : ID3D10InfoQueue*, category : D3D10_MESSAGE_CATEGORY, benable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_break_on_category.call(this, category, benable)
   end
-  def set_break_on_severity(severity : D3D10_MESSAGE_SEVERITY, benable : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_break_on_severity.unsafe_as(Proc(D3D10_MESSAGE_SEVERITY, LibC::BOOL, HRESULT)).call(severity, benable)
+  def set_break_on_severity(this : ID3D10InfoQueue*, severity : D3D10_MESSAGE_SEVERITY, benable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_break_on_severity.call(this, severity, benable)
   end
-  def set_break_on_id(id : D3D10_MESSAGE_ID, benable : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_break_on_id.unsafe_as(Proc(D3D10_MESSAGE_ID, LibC::BOOL, HRESULT)).call(id, benable)
+  def set_break_on_id(this : ID3D10InfoQueue*, id : D3D10_MESSAGE_ID, benable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_break_on_id.call(this, id, benable)
   end
-  def get_break_on_category(category : D3D10_MESSAGE_CATEGORY) : LibC::BOOL
-    @lpVtbl.value.get_break_on_category.unsafe_as(Proc(D3D10_MESSAGE_CATEGORY, LibC::BOOL)).call(category)
+  def get_break_on_category(this : ID3D10InfoQueue*, category : D3D10_MESSAGE_CATEGORY) : LibC::BOOL
+    @lpVtbl.value.get_break_on_category.call(this, category)
   end
-  def get_break_on_severity(severity : D3D10_MESSAGE_SEVERITY) : LibC::BOOL
-    @lpVtbl.value.get_break_on_severity.unsafe_as(Proc(D3D10_MESSAGE_SEVERITY, LibC::BOOL)).call(severity)
+  def get_break_on_severity(this : ID3D10InfoQueue*, severity : D3D10_MESSAGE_SEVERITY) : LibC::BOOL
+    @lpVtbl.value.get_break_on_severity.call(this, severity)
   end
-  def get_break_on_id(id : D3D10_MESSAGE_ID) : LibC::BOOL
-    @lpVtbl.value.get_break_on_id.unsafe_as(Proc(D3D10_MESSAGE_ID, LibC::BOOL)).call(id)
+  def get_break_on_id(this : ID3D10InfoQueue*, id : D3D10_MESSAGE_ID) : LibC::BOOL
+    @lpVtbl.value.get_break_on_id.call(this, id)
   end
-  def set_mute_debug_output(bmute : LibC::BOOL) : Void
-    @lpVtbl.value.set_mute_debug_output.unsafe_as(Proc(LibC::BOOL, Void)).call(bmute)
+  def set_mute_debug_output(this : ID3D10InfoQueue*, bmute : LibC::BOOL) : Void
+    @lpVtbl.value.set_mute_debug_output.call(this, bmute)
   end
-  def get_mute_debug_output : LibC::BOOL
-    @lpVtbl.value.get_mute_debug_output.unsafe_as(Proc(LibC::BOOL)).call
+  def get_mute_debug_output(this : ID3D10InfoQueue*) : LibC::BOOL
+    @lpVtbl.value.get_mute_debug_output.call(this)
   end
 end
 struct LibWin32::ID3D10ShaderReflectionType
-  def get_desc(pdesc : D3D10_SHADER_TYPE_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_SHADER_TYPE_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10ShaderReflectionType*, pdesc : D3D10_SHADER_TYPE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_member_type_by_index(index : UInt32) : ID3D10ShaderReflectionType
-    @lpVtbl.value.get_member_type_by_index.unsafe_as(Proc(UInt32, ID3D10ShaderReflectionType)).call(index)
+  def get_member_type_by_index(this : ID3D10ShaderReflectionType*, index : UInt32) : ID3D10ShaderReflectionType
+    @lpVtbl.value.get_member_type_by_index.call(this, index)
   end
-  def get_member_type_by_name(name : PSTR) : ID3D10ShaderReflectionType
-    @lpVtbl.value.get_member_type_by_name.unsafe_as(Proc(PSTR, ID3D10ShaderReflectionType)).call(name)
+  def get_member_type_by_name(this : ID3D10ShaderReflectionType*, name : PSTR) : ID3D10ShaderReflectionType
+    @lpVtbl.value.get_member_type_by_name.call(this, name)
   end
-  def get_member_type_name(index : UInt32) : PSTR
-    @lpVtbl.value.get_member_type_name.unsafe_as(Proc(UInt32, PSTR)).call(index)
+  def get_member_type_name(this : ID3D10ShaderReflectionType*, index : UInt32) : PSTR
+    @lpVtbl.value.get_member_type_name.call(this, index)
   end
 end
 struct LibWin32::ID3D10ShaderReflectionVariable
-  def get_desc(pdesc : D3D10_SHADER_VARIABLE_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_SHADER_VARIABLE_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10ShaderReflectionVariable*, pdesc : D3D10_SHADER_VARIABLE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_type : ID3D10ShaderReflectionType
-    @lpVtbl.value.get_type.unsafe_as(Proc(ID3D10ShaderReflectionType)).call
+  def get_type(this : ID3D10ShaderReflectionVariable*) : ID3D10ShaderReflectionType
+    @lpVtbl.value.get_type.call(this)
   end
 end
 struct LibWin32::ID3D10ShaderReflectionConstantBuffer
-  def get_desc(pdesc : D3D10_SHADER_BUFFER_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_SHADER_BUFFER_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10ShaderReflectionConstantBuffer*, pdesc : D3D10_SHADER_BUFFER_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_variable_by_index(index : UInt32) : ID3D10ShaderReflectionVariable
-    @lpVtbl.value.get_variable_by_index.unsafe_as(Proc(UInt32, ID3D10ShaderReflectionVariable)).call(index)
+  def get_variable_by_index(this : ID3D10ShaderReflectionConstantBuffer*, index : UInt32) : ID3D10ShaderReflectionVariable
+    @lpVtbl.value.get_variable_by_index.call(this, index)
   end
-  def get_variable_by_name(name : PSTR) : ID3D10ShaderReflectionVariable
-    @lpVtbl.value.get_variable_by_name.unsafe_as(Proc(PSTR, ID3D10ShaderReflectionVariable)).call(name)
+  def get_variable_by_name(this : ID3D10ShaderReflectionConstantBuffer*, name : PSTR) : ID3D10ShaderReflectionVariable
+    @lpVtbl.value.get_variable_by_name.call(this, name)
   end
 end
 struct LibWin32::ID3D10ShaderReflection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10ShaderReflection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10ShaderReflection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10ShaderReflection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_desc(pdesc : D3D10_SHADER_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_SHADER_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10ShaderReflection*, pdesc : D3D10_SHADER_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_constant_buffer_by_index(index : UInt32) : ID3D10ShaderReflectionConstantBuffer
-    @lpVtbl.value.get_constant_buffer_by_index.unsafe_as(Proc(UInt32, ID3D10ShaderReflectionConstantBuffer)).call(index)
+  def get_constant_buffer_by_index(this : ID3D10ShaderReflection*, index : UInt32) : ID3D10ShaderReflectionConstantBuffer
+    @lpVtbl.value.get_constant_buffer_by_index.call(this, index)
   end
-  def get_constant_buffer_by_name(name : PSTR) : ID3D10ShaderReflectionConstantBuffer
-    @lpVtbl.value.get_constant_buffer_by_name.unsafe_as(Proc(PSTR, ID3D10ShaderReflectionConstantBuffer)).call(name)
+  def get_constant_buffer_by_name(this : ID3D10ShaderReflection*, name : PSTR) : ID3D10ShaderReflectionConstantBuffer
+    @lpVtbl.value.get_constant_buffer_by_name.call(this, name)
   end
-  def get_resource_binding_desc(resourceindex : UInt32, pdesc : D3D10_SHADER_INPUT_BIND_DESC*) : HRESULT
-    @lpVtbl.value.get_resource_binding_desc.unsafe_as(Proc(UInt32, D3D10_SHADER_INPUT_BIND_DESC*, HRESULT)).call(resourceindex, pdesc)
+  def get_resource_binding_desc(this : ID3D10ShaderReflection*, resourceindex : UInt32, pdesc : D3D10_SHADER_INPUT_BIND_DESC*) : HRESULT
+    @lpVtbl.value.get_resource_binding_desc.call(this, resourceindex, pdesc)
   end
-  def get_input_parameter_desc(parameterindex : UInt32, pdesc : D3D10_SIGNATURE_PARAMETER_DESC*) : HRESULT
-    @lpVtbl.value.get_input_parameter_desc.unsafe_as(Proc(UInt32, D3D10_SIGNATURE_PARAMETER_DESC*, HRESULT)).call(parameterindex, pdesc)
+  def get_input_parameter_desc(this : ID3D10ShaderReflection*, parameterindex : UInt32, pdesc : D3D10_SIGNATURE_PARAMETER_DESC*) : HRESULT
+    @lpVtbl.value.get_input_parameter_desc.call(this, parameterindex, pdesc)
   end
-  def get_output_parameter_desc(parameterindex : UInt32, pdesc : D3D10_SIGNATURE_PARAMETER_DESC*) : HRESULT
-    @lpVtbl.value.get_output_parameter_desc.unsafe_as(Proc(UInt32, D3D10_SIGNATURE_PARAMETER_DESC*, HRESULT)).call(parameterindex, pdesc)
+  def get_output_parameter_desc(this : ID3D10ShaderReflection*, parameterindex : UInt32, pdesc : D3D10_SIGNATURE_PARAMETER_DESC*) : HRESULT
+    @lpVtbl.value.get_output_parameter_desc.call(this, parameterindex, pdesc)
   end
 end
 struct LibWin32::ID3D10StateBlock
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10StateBlock*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10StateBlock*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10StateBlock*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def capture : HRESULT
-    @lpVtbl.value.capture.unsafe_as(Proc(HRESULT)).call
+  def capture(this : ID3D10StateBlock*) : HRESULT
+    @lpVtbl.value.capture.call(this)
   end
-  def apply : HRESULT
-    @lpVtbl.value.apply.unsafe_as(Proc(HRESULT)).call
+  def apply(this : ID3D10StateBlock*) : HRESULT
+    @lpVtbl.value.apply.call(this)
   end
-  def release_all_device_objects : HRESULT
-    @lpVtbl.value.release_all_device_objects.unsafe_as(Proc(HRESULT)).call
+  def release_all_device_objects(this : ID3D10StateBlock*) : HRESULT
+    @lpVtbl.value.release_all_device_objects.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : HRESULT
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, HRESULT)).call(ppdevice)
+  def get_device(this : ID3D10StateBlock*, ppdevice : ID3D10Device*) : HRESULT
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
 end
 struct LibWin32::ID3D10EffectType
-  def is_valid : LibC::BOOL
-    @lpVtbl.value.is_valid.unsafe_as(Proc(LibC::BOOL)).call
+  def is_valid(this : ID3D10EffectType*) : LibC::BOOL
+    @lpVtbl.value.is_valid.call(this)
   end
-  def get_desc(pdesc : D3D10_EFFECT_TYPE_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_EFFECT_TYPE_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10EffectType*, pdesc : D3D10_EFFECT_TYPE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_member_type_by_index(index : UInt32) : ID3D10EffectType
-    @lpVtbl.value.get_member_type_by_index.unsafe_as(Proc(UInt32, ID3D10EffectType)).call(index)
+  def get_member_type_by_index(this : ID3D10EffectType*, index : UInt32) : ID3D10EffectType
+    @lpVtbl.value.get_member_type_by_index.call(this, index)
   end
-  def get_member_type_by_name(name : PSTR) : ID3D10EffectType
-    @lpVtbl.value.get_member_type_by_name.unsafe_as(Proc(PSTR, ID3D10EffectType)).call(name)
+  def get_member_type_by_name(this : ID3D10EffectType*, name : PSTR) : ID3D10EffectType
+    @lpVtbl.value.get_member_type_by_name.call(this, name)
   end
-  def get_member_type_by_semantic(semantic : PSTR) : ID3D10EffectType
-    @lpVtbl.value.get_member_type_by_semantic.unsafe_as(Proc(PSTR, ID3D10EffectType)).call(semantic)
+  def get_member_type_by_semantic(this : ID3D10EffectType*, semantic : PSTR) : ID3D10EffectType
+    @lpVtbl.value.get_member_type_by_semantic.call(this, semantic)
   end
-  def get_member_name(index : UInt32) : PSTR
-    @lpVtbl.value.get_member_name.unsafe_as(Proc(UInt32, PSTR)).call(index)
+  def get_member_name(this : ID3D10EffectType*, index : UInt32) : PSTR
+    @lpVtbl.value.get_member_name.call(this, index)
   end
-  def get_member_semantic(index : UInt32) : PSTR
-    @lpVtbl.value.get_member_semantic.unsafe_as(Proc(UInt32, PSTR)).call(index)
+  def get_member_semantic(this : ID3D10EffectType*, index : UInt32) : PSTR
+    @lpVtbl.value.get_member_semantic.call(this, index)
   end
 end
 struct LibWin32::ID3D10EffectVariable
-  def is_valid : LibC::BOOL
-    @lpVtbl.value.is_valid.unsafe_as(Proc(LibC::BOOL)).call
+  def is_valid(this : ID3D10EffectVariable*) : LibC::BOOL
+    @lpVtbl.value.is_valid.call(this)
   end
-  def get_type : ID3D10EffectType
-    @lpVtbl.value.get_type.unsafe_as(Proc(ID3D10EffectType)).call
+  def get_type(this : ID3D10EffectVariable*) : ID3D10EffectType
+    @lpVtbl.value.get_type.call(this)
   end
-  def get_desc(pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_EFFECT_VARIABLE_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10EffectVariable*, pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_annotation_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_annotation_by_index(this : ID3D10EffectVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_index.call(this, index)
   end
-  def get_annotation_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_annotation_by_name(this : ID3D10EffectVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_name.call(this, name)
   end
-  def get_member_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_member_by_index(this : ID3D10EffectVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_index.call(this, index)
   end
-  def get_member_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_member_by_name(this : ID3D10EffectVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_name.call(this, name)
   end
-  def get_member_by_semantic(semantic : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_semantic.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(semantic)
+  def get_member_by_semantic(this : ID3D10EffectVariable*, semantic : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_semantic.call(this, semantic)
   end
-  def get_element(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_element.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_element(this : ID3D10EffectVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_element.call(this, index)
   end
-  def get_parent_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.get_parent_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def get_parent_constant_buffer(this : ID3D10EffectVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.get_parent_constant_buffer.call(this)
   end
-  def as_scalar : ID3D10EffectScalarVariable
-    @lpVtbl.value.as_scalar.unsafe_as(Proc(ID3D10EffectScalarVariable)).call
+  def as_scalar(this : ID3D10EffectVariable*) : ID3D10EffectScalarVariable
+    @lpVtbl.value.as_scalar.call(this)
   end
-  def as_vector : ID3D10EffectVectorVariable
-    @lpVtbl.value.as_vector.unsafe_as(Proc(ID3D10EffectVectorVariable)).call
+  def as_vector(this : ID3D10EffectVariable*) : ID3D10EffectVectorVariable
+    @lpVtbl.value.as_vector.call(this)
   end
-  def as_matrix : ID3D10EffectMatrixVariable
-    @lpVtbl.value.as_matrix.unsafe_as(Proc(ID3D10EffectMatrixVariable)).call
+  def as_matrix(this : ID3D10EffectVariable*) : ID3D10EffectMatrixVariable
+    @lpVtbl.value.as_matrix.call(this)
   end
-  def as_string : ID3D10EffectStringVariable
-    @lpVtbl.value.as_string.unsafe_as(Proc(ID3D10EffectStringVariable)).call
+  def as_string(this : ID3D10EffectVariable*) : ID3D10EffectStringVariable
+    @lpVtbl.value.as_string.call(this)
   end
-  def as_shader_resource : ID3D10EffectShaderResourceVariable
-    @lpVtbl.value.as_shader_resource.unsafe_as(Proc(ID3D10EffectShaderResourceVariable)).call
+  def as_shader_resource(this : ID3D10EffectVariable*) : ID3D10EffectShaderResourceVariable
+    @lpVtbl.value.as_shader_resource.call(this)
   end
-  def as_render_target_view : ID3D10EffectRenderTargetViewVariable
-    @lpVtbl.value.as_render_target_view.unsafe_as(Proc(ID3D10EffectRenderTargetViewVariable)).call
+  def as_render_target_view(this : ID3D10EffectVariable*) : ID3D10EffectRenderTargetViewVariable
+    @lpVtbl.value.as_render_target_view.call(this)
   end
-  def as_depth_stencil_view : ID3D10EffectDepthStencilViewVariable
-    @lpVtbl.value.as_depth_stencil_view.unsafe_as(Proc(ID3D10EffectDepthStencilViewVariable)).call
+  def as_depth_stencil_view(this : ID3D10EffectVariable*) : ID3D10EffectDepthStencilViewVariable
+    @lpVtbl.value.as_depth_stencil_view.call(this)
   end
-  def as_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.as_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def as_constant_buffer(this : ID3D10EffectVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.as_constant_buffer.call(this)
   end
-  def as_shader : ID3D10EffectShaderVariable
-    @lpVtbl.value.as_shader.unsafe_as(Proc(ID3D10EffectShaderVariable)).call
+  def as_shader(this : ID3D10EffectVariable*) : ID3D10EffectShaderVariable
+    @lpVtbl.value.as_shader.call(this)
   end
-  def as_blend : ID3D10EffectBlendVariable
-    @lpVtbl.value.as_blend.unsafe_as(Proc(ID3D10EffectBlendVariable)).call
+  def as_blend(this : ID3D10EffectVariable*) : ID3D10EffectBlendVariable
+    @lpVtbl.value.as_blend.call(this)
   end
-  def as_depth_stencil : ID3D10EffectDepthStencilVariable
-    @lpVtbl.value.as_depth_stencil.unsafe_as(Proc(ID3D10EffectDepthStencilVariable)).call
+  def as_depth_stencil(this : ID3D10EffectVariable*) : ID3D10EffectDepthStencilVariable
+    @lpVtbl.value.as_depth_stencil.call(this)
   end
-  def as_rasterizer : ID3D10EffectRasterizerVariable
-    @lpVtbl.value.as_rasterizer.unsafe_as(Proc(ID3D10EffectRasterizerVariable)).call
+  def as_rasterizer(this : ID3D10EffectVariable*) : ID3D10EffectRasterizerVariable
+    @lpVtbl.value.as_rasterizer.call(this)
   end
-  def as_sampler : ID3D10EffectSamplerVariable
-    @lpVtbl.value.as_sampler.unsafe_as(Proc(ID3D10EffectSamplerVariable)).call
+  def as_sampler(this : ID3D10EffectVariable*) : ID3D10EffectSamplerVariable
+    @lpVtbl.value.as_sampler.call(this)
   end
-  def set_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.set_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def set_raw_value(this : ID3D10EffectVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.set_raw_value.call(this, pdata, offset, bytecount)
   end
-  def get_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.get_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def get_raw_value(this : ID3D10EffectVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.get_raw_value.call(this, pdata, offset, bytecount)
   end
 end
 struct LibWin32::ID3D10EffectScalarVariable
-  def is_valid : LibC::BOOL
-    @lpVtbl.value.is_valid.unsafe_as(Proc(LibC::BOOL)).call
+  def is_valid(this : ID3D10EffectScalarVariable*) : LibC::BOOL
+    @lpVtbl.value.is_valid.call(this)
   end
-  def get_type : ID3D10EffectType
-    @lpVtbl.value.get_type.unsafe_as(Proc(ID3D10EffectType)).call
+  def get_type(this : ID3D10EffectScalarVariable*) : ID3D10EffectType
+    @lpVtbl.value.get_type.call(this)
   end
-  def get_desc(pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_EFFECT_VARIABLE_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10EffectScalarVariable*, pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_annotation_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_annotation_by_index(this : ID3D10EffectScalarVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_index.call(this, index)
   end
-  def get_annotation_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_annotation_by_name(this : ID3D10EffectScalarVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_name.call(this, name)
   end
-  def get_member_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_member_by_index(this : ID3D10EffectScalarVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_index.call(this, index)
   end
-  def get_member_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_member_by_name(this : ID3D10EffectScalarVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_name.call(this, name)
   end
-  def get_member_by_semantic(semantic : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_semantic.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(semantic)
+  def get_member_by_semantic(this : ID3D10EffectScalarVariable*, semantic : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_semantic.call(this, semantic)
   end
-  def get_element(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_element.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_element(this : ID3D10EffectScalarVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_element.call(this, index)
   end
-  def get_parent_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.get_parent_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def get_parent_constant_buffer(this : ID3D10EffectScalarVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.get_parent_constant_buffer.call(this)
   end
-  def as_scalar : ID3D10EffectScalarVariable
-    @lpVtbl.value.as_scalar.unsafe_as(Proc(ID3D10EffectScalarVariable)).call
+  def as_scalar(this : ID3D10EffectScalarVariable*) : ID3D10EffectScalarVariable
+    @lpVtbl.value.as_scalar.call(this)
   end
-  def as_vector : ID3D10EffectVectorVariable
-    @lpVtbl.value.as_vector.unsafe_as(Proc(ID3D10EffectVectorVariable)).call
+  def as_vector(this : ID3D10EffectScalarVariable*) : ID3D10EffectVectorVariable
+    @lpVtbl.value.as_vector.call(this)
   end
-  def as_matrix : ID3D10EffectMatrixVariable
-    @lpVtbl.value.as_matrix.unsafe_as(Proc(ID3D10EffectMatrixVariable)).call
+  def as_matrix(this : ID3D10EffectScalarVariable*) : ID3D10EffectMatrixVariable
+    @lpVtbl.value.as_matrix.call(this)
   end
-  def as_string : ID3D10EffectStringVariable
-    @lpVtbl.value.as_string.unsafe_as(Proc(ID3D10EffectStringVariable)).call
+  def as_string(this : ID3D10EffectScalarVariable*) : ID3D10EffectStringVariable
+    @lpVtbl.value.as_string.call(this)
   end
-  def as_shader_resource : ID3D10EffectShaderResourceVariable
-    @lpVtbl.value.as_shader_resource.unsafe_as(Proc(ID3D10EffectShaderResourceVariable)).call
+  def as_shader_resource(this : ID3D10EffectScalarVariable*) : ID3D10EffectShaderResourceVariable
+    @lpVtbl.value.as_shader_resource.call(this)
   end
-  def as_render_target_view : ID3D10EffectRenderTargetViewVariable
-    @lpVtbl.value.as_render_target_view.unsafe_as(Proc(ID3D10EffectRenderTargetViewVariable)).call
+  def as_render_target_view(this : ID3D10EffectScalarVariable*) : ID3D10EffectRenderTargetViewVariable
+    @lpVtbl.value.as_render_target_view.call(this)
   end
-  def as_depth_stencil_view : ID3D10EffectDepthStencilViewVariable
-    @lpVtbl.value.as_depth_stencil_view.unsafe_as(Proc(ID3D10EffectDepthStencilViewVariable)).call
+  def as_depth_stencil_view(this : ID3D10EffectScalarVariable*) : ID3D10EffectDepthStencilViewVariable
+    @lpVtbl.value.as_depth_stencil_view.call(this)
   end
-  def as_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.as_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def as_constant_buffer(this : ID3D10EffectScalarVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.as_constant_buffer.call(this)
   end
-  def as_shader : ID3D10EffectShaderVariable
-    @lpVtbl.value.as_shader.unsafe_as(Proc(ID3D10EffectShaderVariable)).call
+  def as_shader(this : ID3D10EffectScalarVariable*) : ID3D10EffectShaderVariable
+    @lpVtbl.value.as_shader.call(this)
   end
-  def as_blend : ID3D10EffectBlendVariable
-    @lpVtbl.value.as_blend.unsafe_as(Proc(ID3D10EffectBlendVariable)).call
+  def as_blend(this : ID3D10EffectScalarVariable*) : ID3D10EffectBlendVariable
+    @lpVtbl.value.as_blend.call(this)
   end
-  def as_depth_stencil : ID3D10EffectDepthStencilVariable
-    @lpVtbl.value.as_depth_stencil.unsafe_as(Proc(ID3D10EffectDepthStencilVariable)).call
+  def as_depth_stencil(this : ID3D10EffectScalarVariable*) : ID3D10EffectDepthStencilVariable
+    @lpVtbl.value.as_depth_stencil.call(this)
   end
-  def as_rasterizer : ID3D10EffectRasterizerVariable
-    @lpVtbl.value.as_rasterizer.unsafe_as(Proc(ID3D10EffectRasterizerVariable)).call
+  def as_rasterizer(this : ID3D10EffectScalarVariable*) : ID3D10EffectRasterizerVariable
+    @lpVtbl.value.as_rasterizer.call(this)
   end
-  def as_sampler : ID3D10EffectSamplerVariable
-    @lpVtbl.value.as_sampler.unsafe_as(Proc(ID3D10EffectSamplerVariable)).call
+  def as_sampler(this : ID3D10EffectScalarVariable*) : ID3D10EffectSamplerVariable
+    @lpVtbl.value.as_sampler.call(this)
   end
-  def set_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.set_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def set_raw_value(this : ID3D10EffectScalarVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.set_raw_value.call(this, pdata, offset, bytecount)
   end
-  def get_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.get_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def get_raw_value(this : ID3D10EffectScalarVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.get_raw_value.call(this, pdata, offset, bytecount)
   end
-  def set_float(value : Float32) : HRESULT
-    @lpVtbl.value.set_float.unsafe_as(Proc(Float32, HRESULT)).call(value)
+  def set_float(this : ID3D10EffectScalarVariable*, value : Float32) : HRESULT
+    @lpVtbl.value.set_float.call(this, value)
   end
-  def get_float(pvalue : Float32*) : HRESULT
-    @lpVtbl.value.get_float.unsafe_as(Proc(Float32*, HRESULT)).call(pvalue)
+  def get_float(this : ID3D10EffectScalarVariable*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_float.call(this, pvalue)
   end
-  def set_float_array(pdata : Float32*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.set_float_array.unsafe_as(Proc(Float32*, UInt32, UInt32, HRESULT)).call(pdata, offset, count)
+  def set_float_array(this : ID3D10EffectScalarVariable*, pdata : Float32*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.set_float_array.call(this, pdata, offset, count)
   end
-  def get_float_array(pdata : Float32*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.get_float_array.unsafe_as(Proc(Float32*, UInt32, UInt32, HRESULT)).call(pdata, offset, count)
+  def get_float_array(this : ID3D10EffectScalarVariable*, pdata : Float32*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.get_float_array.call(this, pdata, offset, count)
   end
-  def set_int(value : Int32) : HRESULT
-    @lpVtbl.value.set_int.unsafe_as(Proc(Int32, HRESULT)).call(value)
+  def set_int(this : ID3D10EffectScalarVariable*, value : Int32) : HRESULT
+    @lpVtbl.value.set_int.call(this, value)
   end
-  def get_int(pvalue : Int32*) : HRESULT
-    @lpVtbl.value.get_int.unsafe_as(Proc(Int32*, HRESULT)).call(pvalue)
+  def get_int(this : ID3D10EffectScalarVariable*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_int.call(this, pvalue)
   end
-  def set_int_array(pdata : Int32*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.set_int_array.unsafe_as(Proc(Int32*, UInt32, UInt32, HRESULT)).call(pdata, offset, count)
+  def set_int_array(this : ID3D10EffectScalarVariable*, pdata : Int32*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.set_int_array.call(this, pdata, offset, count)
   end
-  def get_int_array(pdata : Int32*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.get_int_array.unsafe_as(Proc(Int32*, UInt32, UInt32, HRESULT)).call(pdata, offset, count)
+  def get_int_array(this : ID3D10EffectScalarVariable*, pdata : Int32*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.get_int_array.call(this, pdata, offset, count)
   end
-  def set_bool(value : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_bool.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(value)
+  def set_bool(this : ID3D10EffectScalarVariable*, value : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_bool.call(this, value)
   end
-  def get_bool(pvalue : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_bool.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pvalue)
+  def get_bool(this : ID3D10EffectScalarVariable*, pvalue : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_bool.call(this, pvalue)
   end
-  def set_bool_array(pdata : LibC::BOOL*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.set_bool_array.unsafe_as(Proc(LibC::BOOL*, UInt32, UInt32, HRESULT)).call(pdata, offset, count)
+  def set_bool_array(this : ID3D10EffectScalarVariable*, pdata : LibC::BOOL*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.set_bool_array.call(this, pdata, offset, count)
   end
-  def get_bool_array(pdata : LibC::BOOL*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.get_bool_array.unsafe_as(Proc(LibC::BOOL*, UInt32, UInt32, HRESULT)).call(pdata, offset, count)
+  def get_bool_array(this : ID3D10EffectScalarVariable*, pdata : LibC::BOOL*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.get_bool_array.call(this, pdata, offset, count)
   end
 end
 struct LibWin32::ID3D10EffectVectorVariable
-  def is_valid : LibC::BOOL
-    @lpVtbl.value.is_valid.unsafe_as(Proc(LibC::BOOL)).call
+  def is_valid(this : ID3D10EffectVectorVariable*) : LibC::BOOL
+    @lpVtbl.value.is_valid.call(this)
   end
-  def get_type : ID3D10EffectType
-    @lpVtbl.value.get_type.unsafe_as(Proc(ID3D10EffectType)).call
+  def get_type(this : ID3D10EffectVectorVariable*) : ID3D10EffectType
+    @lpVtbl.value.get_type.call(this)
   end
-  def get_desc(pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_EFFECT_VARIABLE_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10EffectVectorVariable*, pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_annotation_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_annotation_by_index(this : ID3D10EffectVectorVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_index.call(this, index)
   end
-  def get_annotation_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_annotation_by_name(this : ID3D10EffectVectorVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_name.call(this, name)
   end
-  def get_member_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_member_by_index(this : ID3D10EffectVectorVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_index.call(this, index)
   end
-  def get_member_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_member_by_name(this : ID3D10EffectVectorVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_name.call(this, name)
   end
-  def get_member_by_semantic(semantic : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_semantic.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(semantic)
+  def get_member_by_semantic(this : ID3D10EffectVectorVariable*, semantic : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_semantic.call(this, semantic)
   end
-  def get_element(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_element.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_element(this : ID3D10EffectVectorVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_element.call(this, index)
   end
-  def get_parent_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.get_parent_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def get_parent_constant_buffer(this : ID3D10EffectVectorVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.get_parent_constant_buffer.call(this)
   end
-  def as_scalar : ID3D10EffectScalarVariable
-    @lpVtbl.value.as_scalar.unsafe_as(Proc(ID3D10EffectScalarVariable)).call
+  def as_scalar(this : ID3D10EffectVectorVariable*) : ID3D10EffectScalarVariable
+    @lpVtbl.value.as_scalar.call(this)
   end
-  def as_vector : ID3D10EffectVectorVariable
-    @lpVtbl.value.as_vector.unsafe_as(Proc(ID3D10EffectVectorVariable)).call
+  def as_vector(this : ID3D10EffectVectorVariable*) : ID3D10EffectVectorVariable
+    @lpVtbl.value.as_vector.call(this)
   end
-  def as_matrix : ID3D10EffectMatrixVariable
-    @lpVtbl.value.as_matrix.unsafe_as(Proc(ID3D10EffectMatrixVariable)).call
+  def as_matrix(this : ID3D10EffectVectorVariable*) : ID3D10EffectMatrixVariable
+    @lpVtbl.value.as_matrix.call(this)
   end
-  def as_string : ID3D10EffectStringVariable
-    @lpVtbl.value.as_string.unsafe_as(Proc(ID3D10EffectStringVariable)).call
+  def as_string(this : ID3D10EffectVectorVariable*) : ID3D10EffectStringVariable
+    @lpVtbl.value.as_string.call(this)
   end
-  def as_shader_resource : ID3D10EffectShaderResourceVariable
-    @lpVtbl.value.as_shader_resource.unsafe_as(Proc(ID3D10EffectShaderResourceVariable)).call
+  def as_shader_resource(this : ID3D10EffectVectorVariable*) : ID3D10EffectShaderResourceVariable
+    @lpVtbl.value.as_shader_resource.call(this)
   end
-  def as_render_target_view : ID3D10EffectRenderTargetViewVariable
-    @lpVtbl.value.as_render_target_view.unsafe_as(Proc(ID3D10EffectRenderTargetViewVariable)).call
+  def as_render_target_view(this : ID3D10EffectVectorVariable*) : ID3D10EffectRenderTargetViewVariable
+    @lpVtbl.value.as_render_target_view.call(this)
   end
-  def as_depth_stencil_view : ID3D10EffectDepthStencilViewVariable
-    @lpVtbl.value.as_depth_stencil_view.unsafe_as(Proc(ID3D10EffectDepthStencilViewVariable)).call
+  def as_depth_stencil_view(this : ID3D10EffectVectorVariable*) : ID3D10EffectDepthStencilViewVariable
+    @lpVtbl.value.as_depth_stencil_view.call(this)
   end
-  def as_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.as_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def as_constant_buffer(this : ID3D10EffectVectorVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.as_constant_buffer.call(this)
   end
-  def as_shader : ID3D10EffectShaderVariable
-    @lpVtbl.value.as_shader.unsafe_as(Proc(ID3D10EffectShaderVariable)).call
+  def as_shader(this : ID3D10EffectVectorVariable*) : ID3D10EffectShaderVariable
+    @lpVtbl.value.as_shader.call(this)
   end
-  def as_blend : ID3D10EffectBlendVariable
-    @lpVtbl.value.as_blend.unsafe_as(Proc(ID3D10EffectBlendVariable)).call
+  def as_blend(this : ID3D10EffectVectorVariable*) : ID3D10EffectBlendVariable
+    @lpVtbl.value.as_blend.call(this)
   end
-  def as_depth_stencil : ID3D10EffectDepthStencilVariable
-    @lpVtbl.value.as_depth_stencil.unsafe_as(Proc(ID3D10EffectDepthStencilVariable)).call
+  def as_depth_stencil(this : ID3D10EffectVectorVariable*) : ID3D10EffectDepthStencilVariable
+    @lpVtbl.value.as_depth_stencil.call(this)
   end
-  def as_rasterizer : ID3D10EffectRasterizerVariable
-    @lpVtbl.value.as_rasterizer.unsafe_as(Proc(ID3D10EffectRasterizerVariable)).call
+  def as_rasterizer(this : ID3D10EffectVectorVariable*) : ID3D10EffectRasterizerVariable
+    @lpVtbl.value.as_rasterizer.call(this)
   end
-  def as_sampler : ID3D10EffectSamplerVariable
-    @lpVtbl.value.as_sampler.unsafe_as(Proc(ID3D10EffectSamplerVariable)).call
+  def as_sampler(this : ID3D10EffectVectorVariable*) : ID3D10EffectSamplerVariable
+    @lpVtbl.value.as_sampler.call(this)
   end
-  def set_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.set_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def set_raw_value(this : ID3D10EffectVectorVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.set_raw_value.call(this, pdata, offset, bytecount)
   end
-  def get_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.get_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def get_raw_value(this : ID3D10EffectVectorVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.get_raw_value.call(this, pdata, offset, bytecount)
   end
-  def set_bool_vector(pdata : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.set_bool_vector.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pdata)
+  def set_bool_vector(this : ID3D10EffectVectorVariable*, pdata : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.set_bool_vector.call(this, pdata)
   end
-  def set_int_vector(pdata : Int32*) : HRESULT
-    @lpVtbl.value.set_int_vector.unsafe_as(Proc(Int32*, HRESULT)).call(pdata)
+  def set_int_vector(this : ID3D10EffectVectorVariable*, pdata : Int32*) : HRESULT
+    @lpVtbl.value.set_int_vector.call(this, pdata)
   end
-  def set_float_vector(pdata : Float32*) : HRESULT
-    @lpVtbl.value.set_float_vector.unsafe_as(Proc(Float32*, HRESULT)).call(pdata)
+  def set_float_vector(this : ID3D10EffectVectorVariable*, pdata : Float32*) : HRESULT
+    @lpVtbl.value.set_float_vector.call(this, pdata)
   end
-  def get_bool_vector(pdata : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_bool_vector.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pdata)
+  def get_bool_vector(this : ID3D10EffectVectorVariable*, pdata : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_bool_vector.call(this, pdata)
   end
-  def get_int_vector(pdata : Int32*) : HRESULT
-    @lpVtbl.value.get_int_vector.unsafe_as(Proc(Int32*, HRESULT)).call(pdata)
+  def get_int_vector(this : ID3D10EffectVectorVariable*, pdata : Int32*) : HRESULT
+    @lpVtbl.value.get_int_vector.call(this, pdata)
   end
-  def get_float_vector(pdata : Float32*) : HRESULT
-    @lpVtbl.value.get_float_vector.unsafe_as(Proc(Float32*, HRESULT)).call(pdata)
+  def get_float_vector(this : ID3D10EffectVectorVariable*, pdata : Float32*) : HRESULT
+    @lpVtbl.value.get_float_vector.call(this, pdata)
   end
-  def set_bool_vector_array(pdata : LibC::BOOL*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.set_bool_vector_array.unsafe_as(Proc(LibC::BOOL*, UInt32, UInt32, HRESULT)).call(pdata, offset, count)
+  def set_bool_vector_array(this : ID3D10EffectVectorVariable*, pdata : LibC::BOOL*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.set_bool_vector_array.call(this, pdata, offset, count)
   end
-  def set_int_vector_array(pdata : Int32*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.set_int_vector_array.unsafe_as(Proc(Int32*, UInt32, UInt32, HRESULT)).call(pdata, offset, count)
+  def set_int_vector_array(this : ID3D10EffectVectorVariable*, pdata : Int32*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.set_int_vector_array.call(this, pdata, offset, count)
   end
-  def set_float_vector_array(pdata : Float32*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.set_float_vector_array.unsafe_as(Proc(Float32*, UInt32, UInt32, HRESULT)).call(pdata, offset, count)
+  def set_float_vector_array(this : ID3D10EffectVectorVariable*, pdata : Float32*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.set_float_vector_array.call(this, pdata, offset, count)
   end
-  def get_bool_vector_array(pdata : LibC::BOOL*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.get_bool_vector_array.unsafe_as(Proc(LibC::BOOL*, UInt32, UInt32, HRESULT)).call(pdata, offset, count)
+  def get_bool_vector_array(this : ID3D10EffectVectorVariable*, pdata : LibC::BOOL*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.get_bool_vector_array.call(this, pdata, offset, count)
   end
-  def get_int_vector_array(pdata : Int32*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.get_int_vector_array.unsafe_as(Proc(Int32*, UInt32, UInt32, HRESULT)).call(pdata, offset, count)
+  def get_int_vector_array(this : ID3D10EffectVectorVariable*, pdata : Int32*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.get_int_vector_array.call(this, pdata, offset, count)
   end
-  def get_float_vector_array(pdata : Float32*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.get_float_vector_array.unsafe_as(Proc(Float32*, UInt32, UInt32, HRESULT)).call(pdata, offset, count)
+  def get_float_vector_array(this : ID3D10EffectVectorVariable*, pdata : Float32*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.get_float_vector_array.call(this, pdata, offset, count)
   end
 end
 struct LibWin32::ID3D10EffectMatrixVariable
-  def is_valid : LibC::BOOL
-    @lpVtbl.value.is_valid.unsafe_as(Proc(LibC::BOOL)).call
+  def is_valid(this : ID3D10EffectMatrixVariable*) : LibC::BOOL
+    @lpVtbl.value.is_valid.call(this)
   end
-  def get_type : ID3D10EffectType
-    @lpVtbl.value.get_type.unsafe_as(Proc(ID3D10EffectType)).call
+  def get_type(this : ID3D10EffectMatrixVariable*) : ID3D10EffectType
+    @lpVtbl.value.get_type.call(this)
   end
-  def get_desc(pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_EFFECT_VARIABLE_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10EffectMatrixVariable*, pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_annotation_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_annotation_by_index(this : ID3D10EffectMatrixVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_index.call(this, index)
   end
-  def get_annotation_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_annotation_by_name(this : ID3D10EffectMatrixVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_name.call(this, name)
   end
-  def get_member_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_member_by_index(this : ID3D10EffectMatrixVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_index.call(this, index)
   end
-  def get_member_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_member_by_name(this : ID3D10EffectMatrixVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_name.call(this, name)
   end
-  def get_member_by_semantic(semantic : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_semantic.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(semantic)
+  def get_member_by_semantic(this : ID3D10EffectMatrixVariable*, semantic : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_semantic.call(this, semantic)
   end
-  def get_element(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_element.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_element(this : ID3D10EffectMatrixVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_element.call(this, index)
   end
-  def get_parent_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.get_parent_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def get_parent_constant_buffer(this : ID3D10EffectMatrixVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.get_parent_constant_buffer.call(this)
   end
-  def as_scalar : ID3D10EffectScalarVariable
-    @lpVtbl.value.as_scalar.unsafe_as(Proc(ID3D10EffectScalarVariable)).call
+  def as_scalar(this : ID3D10EffectMatrixVariable*) : ID3D10EffectScalarVariable
+    @lpVtbl.value.as_scalar.call(this)
   end
-  def as_vector : ID3D10EffectVectorVariable
-    @lpVtbl.value.as_vector.unsafe_as(Proc(ID3D10EffectVectorVariable)).call
+  def as_vector(this : ID3D10EffectMatrixVariable*) : ID3D10EffectVectorVariable
+    @lpVtbl.value.as_vector.call(this)
   end
-  def as_matrix : ID3D10EffectMatrixVariable
-    @lpVtbl.value.as_matrix.unsafe_as(Proc(ID3D10EffectMatrixVariable)).call
+  def as_matrix(this : ID3D10EffectMatrixVariable*) : ID3D10EffectMatrixVariable
+    @lpVtbl.value.as_matrix.call(this)
   end
-  def as_string : ID3D10EffectStringVariable
-    @lpVtbl.value.as_string.unsafe_as(Proc(ID3D10EffectStringVariable)).call
+  def as_string(this : ID3D10EffectMatrixVariable*) : ID3D10EffectStringVariable
+    @lpVtbl.value.as_string.call(this)
   end
-  def as_shader_resource : ID3D10EffectShaderResourceVariable
-    @lpVtbl.value.as_shader_resource.unsafe_as(Proc(ID3D10EffectShaderResourceVariable)).call
+  def as_shader_resource(this : ID3D10EffectMatrixVariable*) : ID3D10EffectShaderResourceVariable
+    @lpVtbl.value.as_shader_resource.call(this)
   end
-  def as_render_target_view : ID3D10EffectRenderTargetViewVariable
-    @lpVtbl.value.as_render_target_view.unsafe_as(Proc(ID3D10EffectRenderTargetViewVariable)).call
+  def as_render_target_view(this : ID3D10EffectMatrixVariable*) : ID3D10EffectRenderTargetViewVariable
+    @lpVtbl.value.as_render_target_view.call(this)
   end
-  def as_depth_stencil_view : ID3D10EffectDepthStencilViewVariable
-    @lpVtbl.value.as_depth_stencil_view.unsafe_as(Proc(ID3D10EffectDepthStencilViewVariable)).call
+  def as_depth_stencil_view(this : ID3D10EffectMatrixVariable*) : ID3D10EffectDepthStencilViewVariable
+    @lpVtbl.value.as_depth_stencil_view.call(this)
   end
-  def as_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.as_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def as_constant_buffer(this : ID3D10EffectMatrixVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.as_constant_buffer.call(this)
   end
-  def as_shader : ID3D10EffectShaderVariable
-    @lpVtbl.value.as_shader.unsafe_as(Proc(ID3D10EffectShaderVariable)).call
+  def as_shader(this : ID3D10EffectMatrixVariable*) : ID3D10EffectShaderVariable
+    @lpVtbl.value.as_shader.call(this)
   end
-  def as_blend : ID3D10EffectBlendVariable
-    @lpVtbl.value.as_blend.unsafe_as(Proc(ID3D10EffectBlendVariable)).call
+  def as_blend(this : ID3D10EffectMatrixVariable*) : ID3D10EffectBlendVariable
+    @lpVtbl.value.as_blend.call(this)
   end
-  def as_depth_stencil : ID3D10EffectDepthStencilVariable
-    @lpVtbl.value.as_depth_stencil.unsafe_as(Proc(ID3D10EffectDepthStencilVariable)).call
+  def as_depth_stencil(this : ID3D10EffectMatrixVariable*) : ID3D10EffectDepthStencilVariable
+    @lpVtbl.value.as_depth_stencil.call(this)
   end
-  def as_rasterizer : ID3D10EffectRasterizerVariable
-    @lpVtbl.value.as_rasterizer.unsafe_as(Proc(ID3D10EffectRasterizerVariable)).call
+  def as_rasterizer(this : ID3D10EffectMatrixVariable*) : ID3D10EffectRasterizerVariable
+    @lpVtbl.value.as_rasterizer.call(this)
   end
-  def as_sampler : ID3D10EffectSamplerVariable
-    @lpVtbl.value.as_sampler.unsafe_as(Proc(ID3D10EffectSamplerVariable)).call
+  def as_sampler(this : ID3D10EffectMatrixVariable*) : ID3D10EffectSamplerVariable
+    @lpVtbl.value.as_sampler.call(this)
   end
-  def set_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.set_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def set_raw_value(this : ID3D10EffectMatrixVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.set_raw_value.call(this, pdata, offset, bytecount)
   end
-  def get_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.get_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def get_raw_value(this : ID3D10EffectMatrixVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.get_raw_value.call(this, pdata, offset, bytecount)
   end
-  def set_matrix(pdata : Float32*) : HRESULT
-    @lpVtbl.value.set_matrix.unsafe_as(Proc(Float32*, HRESULT)).call(pdata)
+  def set_matrix(this : ID3D10EffectMatrixVariable*, pdata : Float32*) : HRESULT
+    @lpVtbl.value.set_matrix.call(this, pdata)
   end
-  def get_matrix(pdata : Float32*) : HRESULT
-    @lpVtbl.value.get_matrix.unsafe_as(Proc(Float32*, HRESULT)).call(pdata)
+  def get_matrix(this : ID3D10EffectMatrixVariable*, pdata : Float32*) : HRESULT
+    @lpVtbl.value.get_matrix.call(this, pdata)
   end
-  def set_matrix_array(pdata : Float32*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.set_matrix_array.unsafe_as(Proc(Float32*, UInt32, UInt32, HRESULT)).call(pdata, offset, count)
+  def set_matrix_array(this : ID3D10EffectMatrixVariable*, pdata : Float32*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.set_matrix_array.call(this, pdata, offset, count)
   end
-  def get_matrix_array(pdata : Float32*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.get_matrix_array.unsafe_as(Proc(Float32*, UInt32, UInt32, HRESULT)).call(pdata, offset, count)
+  def get_matrix_array(this : ID3D10EffectMatrixVariable*, pdata : Float32*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.get_matrix_array.call(this, pdata, offset, count)
   end
-  def set_matrix_transpose(pdata : Float32*) : HRESULT
-    @lpVtbl.value.set_matrix_transpose.unsafe_as(Proc(Float32*, HRESULT)).call(pdata)
+  def set_matrix_transpose(this : ID3D10EffectMatrixVariable*, pdata : Float32*) : HRESULT
+    @lpVtbl.value.set_matrix_transpose.call(this, pdata)
   end
-  def get_matrix_transpose(pdata : Float32*) : HRESULT
-    @lpVtbl.value.get_matrix_transpose.unsafe_as(Proc(Float32*, HRESULT)).call(pdata)
+  def get_matrix_transpose(this : ID3D10EffectMatrixVariable*, pdata : Float32*) : HRESULT
+    @lpVtbl.value.get_matrix_transpose.call(this, pdata)
   end
-  def set_matrix_transpose_array(pdata : Float32*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.set_matrix_transpose_array.unsafe_as(Proc(Float32*, UInt32, UInt32, HRESULT)).call(pdata, offset, count)
+  def set_matrix_transpose_array(this : ID3D10EffectMatrixVariable*, pdata : Float32*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.set_matrix_transpose_array.call(this, pdata, offset, count)
   end
-  def get_matrix_transpose_array(pdata : Float32*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.get_matrix_transpose_array.unsafe_as(Proc(Float32*, UInt32, UInt32, HRESULT)).call(pdata, offset, count)
+  def get_matrix_transpose_array(this : ID3D10EffectMatrixVariable*, pdata : Float32*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.get_matrix_transpose_array.call(this, pdata, offset, count)
   end
 end
 struct LibWin32::ID3D10EffectStringVariable
-  def is_valid : LibC::BOOL
-    @lpVtbl.value.is_valid.unsafe_as(Proc(LibC::BOOL)).call
+  def is_valid(this : ID3D10EffectStringVariable*) : LibC::BOOL
+    @lpVtbl.value.is_valid.call(this)
   end
-  def get_type : ID3D10EffectType
-    @lpVtbl.value.get_type.unsafe_as(Proc(ID3D10EffectType)).call
+  def get_type(this : ID3D10EffectStringVariable*) : ID3D10EffectType
+    @lpVtbl.value.get_type.call(this)
   end
-  def get_desc(pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_EFFECT_VARIABLE_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10EffectStringVariable*, pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_annotation_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_annotation_by_index(this : ID3D10EffectStringVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_index.call(this, index)
   end
-  def get_annotation_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_annotation_by_name(this : ID3D10EffectStringVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_name.call(this, name)
   end
-  def get_member_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_member_by_index(this : ID3D10EffectStringVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_index.call(this, index)
   end
-  def get_member_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_member_by_name(this : ID3D10EffectStringVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_name.call(this, name)
   end
-  def get_member_by_semantic(semantic : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_semantic.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(semantic)
+  def get_member_by_semantic(this : ID3D10EffectStringVariable*, semantic : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_semantic.call(this, semantic)
   end
-  def get_element(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_element.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_element(this : ID3D10EffectStringVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_element.call(this, index)
   end
-  def get_parent_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.get_parent_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def get_parent_constant_buffer(this : ID3D10EffectStringVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.get_parent_constant_buffer.call(this)
   end
-  def as_scalar : ID3D10EffectScalarVariable
-    @lpVtbl.value.as_scalar.unsafe_as(Proc(ID3D10EffectScalarVariable)).call
+  def as_scalar(this : ID3D10EffectStringVariable*) : ID3D10EffectScalarVariable
+    @lpVtbl.value.as_scalar.call(this)
   end
-  def as_vector : ID3D10EffectVectorVariable
-    @lpVtbl.value.as_vector.unsafe_as(Proc(ID3D10EffectVectorVariable)).call
+  def as_vector(this : ID3D10EffectStringVariable*) : ID3D10EffectVectorVariable
+    @lpVtbl.value.as_vector.call(this)
   end
-  def as_matrix : ID3D10EffectMatrixVariable
-    @lpVtbl.value.as_matrix.unsafe_as(Proc(ID3D10EffectMatrixVariable)).call
+  def as_matrix(this : ID3D10EffectStringVariable*) : ID3D10EffectMatrixVariable
+    @lpVtbl.value.as_matrix.call(this)
   end
-  def as_string : ID3D10EffectStringVariable
-    @lpVtbl.value.as_string.unsafe_as(Proc(ID3D10EffectStringVariable)).call
+  def as_string(this : ID3D10EffectStringVariable*) : ID3D10EffectStringVariable
+    @lpVtbl.value.as_string.call(this)
   end
-  def as_shader_resource : ID3D10EffectShaderResourceVariable
-    @lpVtbl.value.as_shader_resource.unsafe_as(Proc(ID3D10EffectShaderResourceVariable)).call
+  def as_shader_resource(this : ID3D10EffectStringVariable*) : ID3D10EffectShaderResourceVariable
+    @lpVtbl.value.as_shader_resource.call(this)
   end
-  def as_render_target_view : ID3D10EffectRenderTargetViewVariable
-    @lpVtbl.value.as_render_target_view.unsafe_as(Proc(ID3D10EffectRenderTargetViewVariable)).call
+  def as_render_target_view(this : ID3D10EffectStringVariable*) : ID3D10EffectRenderTargetViewVariable
+    @lpVtbl.value.as_render_target_view.call(this)
   end
-  def as_depth_stencil_view : ID3D10EffectDepthStencilViewVariable
-    @lpVtbl.value.as_depth_stencil_view.unsafe_as(Proc(ID3D10EffectDepthStencilViewVariable)).call
+  def as_depth_stencil_view(this : ID3D10EffectStringVariable*) : ID3D10EffectDepthStencilViewVariable
+    @lpVtbl.value.as_depth_stencil_view.call(this)
   end
-  def as_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.as_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def as_constant_buffer(this : ID3D10EffectStringVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.as_constant_buffer.call(this)
   end
-  def as_shader : ID3D10EffectShaderVariable
-    @lpVtbl.value.as_shader.unsafe_as(Proc(ID3D10EffectShaderVariable)).call
+  def as_shader(this : ID3D10EffectStringVariable*) : ID3D10EffectShaderVariable
+    @lpVtbl.value.as_shader.call(this)
   end
-  def as_blend : ID3D10EffectBlendVariable
-    @lpVtbl.value.as_blend.unsafe_as(Proc(ID3D10EffectBlendVariable)).call
+  def as_blend(this : ID3D10EffectStringVariable*) : ID3D10EffectBlendVariable
+    @lpVtbl.value.as_blend.call(this)
   end
-  def as_depth_stencil : ID3D10EffectDepthStencilVariable
-    @lpVtbl.value.as_depth_stencil.unsafe_as(Proc(ID3D10EffectDepthStencilVariable)).call
+  def as_depth_stencil(this : ID3D10EffectStringVariable*) : ID3D10EffectDepthStencilVariable
+    @lpVtbl.value.as_depth_stencil.call(this)
   end
-  def as_rasterizer : ID3D10EffectRasterizerVariable
-    @lpVtbl.value.as_rasterizer.unsafe_as(Proc(ID3D10EffectRasterizerVariable)).call
+  def as_rasterizer(this : ID3D10EffectStringVariable*) : ID3D10EffectRasterizerVariable
+    @lpVtbl.value.as_rasterizer.call(this)
   end
-  def as_sampler : ID3D10EffectSamplerVariable
-    @lpVtbl.value.as_sampler.unsafe_as(Proc(ID3D10EffectSamplerVariable)).call
+  def as_sampler(this : ID3D10EffectStringVariable*) : ID3D10EffectSamplerVariable
+    @lpVtbl.value.as_sampler.call(this)
   end
-  def set_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.set_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def set_raw_value(this : ID3D10EffectStringVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.set_raw_value.call(this, pdata, offset, bytecount)
   end
-  def get_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.get_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def get_raw_value(this : ID3D10EffectStringVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.get_raw_value.call(this, pdata, offset, bytecount)
   end
-  def get_string(ppstring : PSTR*) : HRESULT
-    @lpVtbl.value.get_string.unsafe_as(Proc(PSTR*, HRESULT)).call(ppstring)
+  def get_string(this : ID3D10EffectStringVariable*, ppstring : PSTR*) : HRESULT
+    @lpVtbl.value.get_string.call(this, ppstring)
   end
-  def get_string_array(ppstrings : PSTR*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.get_string_array.unsafe_as(Proc(PSTR*, UInt32, UInt32, HRESULT)).call(ppstrings, offset, count)
+  def get_string_array(this : ID3D10EffectStringVariable*, ppstrings : PSTR*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.get_string_array.call(this, ppstrings, offset, count)
   end
 end
 struct LibWin32::ID3D10EffectShaderResourceVariable
-  def is_valid : LibC::BOOL
-    @lpVtbl.value.is_valid.unsafe_as(Proc(LibC::BOOL)).call
+  def is_valid(this : ID3D10EffectShaderResourceVariable*) : LibC::BOOL
+    @lpVtbl.value.is_valid.call(this)
   end
-  def get_type : ID3D10EffectType
-    @lpVtbl.value.get_type.unsafe_as(Proc(ID3D10EffectType)).call
+  def get_type(this : ID3D10EffectShaderResourceVariable*) : ID3D10EffectType
+    @lpVtbl.value.get_type.call(this)
   end
-  def get_desc(pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_EFFECT_VARIABLE_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10EffectShaderResourceVariable*, pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_annotation_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_annotation_by_index(this : ID3D10EffectShaderResourceVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_index.call(this, index)
   end
-  def get_annotation_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_annotation_by_name(this : ID3D10EffectShaderResourceVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_name.call(this, name)
   end
-  def get_member_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_member_by_index(this : ID3D10EffectShaderResourceVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_index.call(this, index)
   end
-  def get_member_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_member_by_name(this : ID3D10EffectShaderResourceVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_name.call(this, name)
   end
-  def get_member_by_semantic(semantic : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_semantic.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(semantic)
+  def get_member_by_semantic(this : ID3D10EffectShaderResourceVariable*, semantic : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_semantic.call(this, semantic)
   end
-  def get_element(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_element.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_element(this : ID3D10EffectShaderResourceVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_element.call(this, index)
   end
-  def get_parent_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.get_parent_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def get_parent_constant_buffer(this : ID3D10EffectShaderResourceVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.get_parent_constant_buffer.call(this)
   end
-  def as_scalar : ID3D10EffectScalarVariable
-    @lpVtbl.value.as_scalar.unsafe_as(Proc(ID3D10EffectScalarVariable)).call
+  def as_scalar(this : ID3D10EffectShaderResourceVariable*) : ID3D10EffectScalarVariable
+    @lpVtbl.value.as_scalar.call(this)
   end
-  def as_vector : ID3D10EffectVectorVariable
-    @lpVtbl.value.as_vector.unsafe_as(Proc(ID3D10EffectVectorVariable)).call
+  def as_vector(this : ID3D10EffectShaderResourceVariable*) : ID3D10EffectVectorVariable
+    @lpVtbl.value.as_vector.call(this)
   end
-  def as_matrix : ID3D10EffectMatrixVariable
-    @lpVtbl.value.as_matrix.unsafe_as(Proc(ID3D10EffectMatrixVariable)).call
+  def as_matrix(this : ID3D10EffectShaderResourceVariable*) : ID3D10EffectMatrixVariable
+    @lpVtbl.value.as_matrix.call(this)
   end
-  def as_string : ID3D10EffectStringVariable
-    @lpVtbl.value.as_string.unsafe_as(Proc(ID3D10EffectStringVariable)).call
+  def as_string(this : ID3D10EffectShaderResourceVariable*) : ID3D10EffectStringVariable
+    @lpVtbl.value.as_string.call(this)
   end
-  def as_shader_resource : ID3D10EffectShaderResourceVariable
-    @lpVtbl.value.as_shader_resource.unsafe_as(Proc(ID3D10EffectShaderResourceVariable)).call
+  def as_shader_resource(this : ID3D10EffectShaderResourceVariable*) : ID3D10EffectShaderResourceVariable
+    @lpVtbl.value.as_shader_resource.call(this)
   end
-  def as_render_target_view : ID3D10EffectRenderTargetViewVariable
-    @lpVtbl.value.as_render_target_view.unsafe_as(Proc(ID3D10EffectRenderTargetViewVariable)).call
+  def as_render_target_view(this : ID3D10EffectShaderResourceVariable*) : ID3D10EffectRenderTargetViewVariable
+    @lpVtbl.value.as_render_target_view.call(this)
   end
-  def as_depth_stencil_view : ID3D10EffectDepthStencilViewVariable
-    @lpVtbl.value.as_depth_stencil_view.unsafe_as(Proc(ID3D10EffectDepthStencilViewVariable)).call
+  def as_depth_stencil_view(this : ID3D10EffectShaderResourceVariable*) : ID3D10EffectDepthStencilViewVariable
+    @lpVtbl.value.as_depth_stencil_view.call(this)
   end
-  def as_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.as_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def as_constant_buffer(this : ID3D10EffectShaderResourceVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.as_constant_buffer.call(this)
   end
-  def as_shader : ID3D10EffectShaderVariable
-    @lpVtbl.value.as_shader.unsafe_as(Proc(ID3D10EffectShaderVariable)).call
+  def as_shader(this : ID3D10EffectShaderResourceVariable*) : ID3D10EffectShaderVariable
+    @lpVtbl.value.as_shader.call(this)
   end
-  def as_blend : ID3D10EffectBlendVariable
-    @lpVtbl.value.as_blend.unsafe_as(Proc(ID3D10EffectBlendVariable)).call
+  def as_blend(this : ID3D10EffectShaderResourceVariable*) : ID3D10EffectBlendVariable
+    @lpVtbl.value.as_blend.call(this)
   end
-  def as_depth_stencil : ID3D10EffectDepthStencilVariable
-    @lpVtbl.value.as_depth_stencil.unsafe_as(Proc(ID3D10EffectDepthStencilVariable)).call
+  def as_depth_stencil(this : ID3D10EffectShaderResourceVariable*) : ID3D10EffectDepthStencilVariable
+    @lpVtbl.value.as_depth_stencil.call(this)
   end
-  def as_rasterizer : ID3D10EffectRasterizerVariable
-    @lpVtbl.value.as_rasterizer.unsafe_as(Proc(ID3D10EffectRasterizerVariable)).call
+  def as_rasterizer(this : ID3D10EffectShaderResourceVariable*) : ID3D10EffectRasterizerVariable
+    @lpVtbl.value.as_rasterizer.call(this)
   end
-  def as_sampler : ID3D10EffectSamplerVariable
-    @lpVtbl.value.as_sampler.unsafe_as(Proc(ID3D10EffectSamplerVariable)).call
+  def as_sampler(this : ID3D10EffectShaderResourceVariable*) : ID3D10EffectSamplerVariable
+    @lpVtbl.value.as_sampler.call(this)
   end
-  def set_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.set_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def set_raw_value(this : ID3D10EffectShaderResourceVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.set_raw_value.call(this, pdata, offset, bytecount)
   end
-  def get_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.get_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def get_raw_value(this : ID3D10EffectShaderResourceVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.get_raw_value.call(this, pdata, offset, bytecount)
   end
-  def set_resource(presource : ID3D10ShaderResourceView) : HRESULT
-    @lpVtbl.value.set_resource.unsafe_as(Proc(ID3D10ShaderResourceView, HRESULT)).call(presource)
+  def set_resource(this : ID3D10EffectShaderResourceVariable*, presource : ID3D10ShaderResourceView) : HRESULT
+    @lpVtbl.value.set_resource.call(this, presource)
   end
-  def get_resource(ppresource : ID3D10ShaderResourceView*) : HRESULT
-    @lpVtbl.value.get_resource.unsafe_as(Proc(ID3D10ShaderResourceView*, HRESULT)).call(ppresource)
+  def get_resource(this : ID3D10EffectShaderResourceVariable*, ppresource : ID3D10ShaderResourceView*) : HRESULT
+    @lpVtbl.value.get_resource.call(this, ppresource)
   end
-  def set_resource_array(ppresources : ID3D10ShaderResourceView*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.set_resource_array.unsafe_as(Proc(ID3D10ShaderResourceView*, UInt32, UInt32, HRESULT)).call(ppresources, offset, count)
+  def set_resource_array(this : ID3D10EffectShaderResourceVariable*, ppresources : ID3D10ShaderResourceView*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.set_resource_array.call(this, ppresources, offset, count)
   end
-  def get_resource_array(ppresources : ID3D10ShaderResourceView*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.get_resource_array.unsafe_as(Proc(ID3D10ShaderResourceView*, UInt32, UInt32, HRESULT)).call(ppresources, offset, count)
+  def get_resource_array(this : ID3D10EffectShaderResourceVariable*, ppresources : ID3D10ShaderResourceView*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.get_resource_array.call(this, ppresources, offset, count)
   end
 end
 struct LibWin32::ID3D10EffectRenderTargetViewVariable
-  def is_valid : LibC::BOOL
-    @lpVtbl.value.is_valid.unsafe_as(Proc(LibC::BOOL)).call
+  def is_valid(this : ID3D10EffectRenderTargetViewVariable*) : LibC::BOOL
+    @lpVtbl.value.is_valid.call(this)
   end
-  def get_type : ID3D10EffectType
-    @lpVtbl.value.get_type.unsafe_as(Proc(ID3D10EffectType)).call
+  def get_type(this : ID3D10EffectRenderTargetViewVariable*) : ID3D10EffectType
+    @lpVtbl.value.get_type.call(this)
   end
-  def get_desc(pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_EFFECT_VARIABLE_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10EffectRenderTargetViewVariable*, pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_annotation_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_annotation_by_index(this : ID3D10EffectRenderTargetViewVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_index.call(this, index)
   end
-  def get_annotation_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_annotation_by_name(this : ID3D10EffectRenderTargetViewVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_name.call(this, name)
   end
-  def get_member_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_member_by_index(this : ID3D10EffectRenderTargetViewVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_index.call(this, index)
   end
-  def get_member_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_member_by_name(this : ID3D10EffectRenderTargetViewVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_name.call(this, name)
   end
-  def get_member_by_semantic(semantic : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_semantic.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(semantic)
+  def get_member_by_semantic(this : ID3D10EffectRenderTargetViewVariable*, semantic : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_semantic.call(this, semantic)
   end
-  def get_element(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_element.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_element(this : ID3D10EffectRenderTargetViewVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_element.call(this, index)
   end
-  def get_parent_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.get_parent_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def get_parent_constant_buffer(this : ID3D10EffectRenderTargetViewVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.get_parent_constant_buffer.call(this)
   end
-  def as_scalar : ID3D10EffectScalarVariable
-    @lpVtbl.value.as_scalar.unsafe_as(Proc(ID3D10EffectScalarVariable)).call
+  def as_scalar(this : ID3D10EffectRenderTargetViewVariable*) : ID3D10EffectScalarVariable
+    @lpVtbl.value.as_scalar.call(this)
   end
-  def as_vector : ID3D10EffectVectorVariable
-    @lpVtbl.value.as_vector.unsafe_as(Proc(ID3D10EffectVectorVariable)).call
+  def as_vector(this : ID3D10EffectRenderTargetViewVariable*) : ID3D10EffectVectorVariable
+    @lpVtbl.value.as_vector.call(this)
   end
-  def as_matrix : ID3D10EffectMatrixVariable
-    @lpVtbl.value.as_matrix.unsafe_as(Proc(ID3D10EffectMatrixVariable)).call
+  def as_matrix(this : ID3D10EffectRenderTargetViewVariable*) : ID3D10EffectMatrixVariable
+    @lpVtbl.value.as_matrix.call(this)
   end
-  def as_string : ID3D10EffectStringVariable
-    @lpVtbl.value.as_string.unsafe_as(Proc(ID3D10EffectStringVariable)).call
+  def as_string(this : ID3D10EffectRenderTargetViewVariable*) : ID3D10EffectStringVariable
+    @lpVtbl.value.as_string.call(this)
   end
-  def as_shader_resource : ID3D10EffectShaderResourceVariable
-    @lpVtbl.value.as_shader_resource.unsafe_as(Proc(ID3D10EffectShaderResourceVariable)).call
+  def as_shader_resource(this : ID3D10EffectRenderTargetViewVariable*) : ID3D10EffectShaderResourceVariable
+    @lpVtbl.value.as_shader_resource.call(this)
   end
-  def as_render_target_view : ID3D10EffectRenderTargetViewVariable
-    @lpVtbl.value.as_render_target_view.unsafe_as(Proc(ID3D10EffectRenderTargetViewVariable)).call
+  def as_render_target_view(this : ID3D10EffectRenderTargetViewVariable*) : ID3D10EffectRenderTargetViewVariable
+    @lpVtbl.value.as_render_target_view.call(this)
   end
-  def as_depth_stencil_view : ID3D10EffectDepthStencilViewVariable
-    @lpVtbl.value.as_depth_stencil_view.unsafe_as(Proc(ID3D10EffectDepthStencilViewVariable)).call
+  def as_depth_stencil_view(this : ID3D10EffectRenderTargetViewVariable*) : ID3D10EffectDepthStencilViewVariable
+    @lpVtbl.value.as_depth_stencil_view.call(this)
   end
-  def as_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.as_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def as_constant_buffer(this : ID3D10EffectRenderTargetViewVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.as_constant_buffer.call(this)
   end
-  def as_shader : ID3D10EffectShaderVariable
-    @lpVtbl.value.as_shader.unsafe_as(Proc(ID3D10EffectShaderVariable)).call
+  def as_shader(this : ID3D10EffectRenderTargetViewVariable*) : ID3D10EffectShaderVariable
+    @lpVtbl.value.as_shader.call(this)
   end
-  def as_blend : ID3D10EffectBlendVariable
-    @lpVtbl.value.as_blend.unsafe_as(Proc(ID3D10EffectBlendVariable)).call
+  def as_blend(this : ID3D10EffectRenderTargetViewVariable*) : ID3D10EffectBlendVariable
+    @lpVtbl.value.as_blend.call(this)
   end
-  def as_depth_stencil : ID3D10EffectDepthStencilVariable
-    @lpVtbl.value.as_depth_stencil.unsafe_as(Proc(ID3D10EffectDepthStencilVariable)).call
+  def as_depth_stencil(this : ID3D10EffectRenderTargetViewVariable*) : ID3D10EffectDepthStencilVariable
+    @lpVtbl.value.as_depth_stencil.call(this)
   end
-  def as_rasterizer : ID3D10EffectRasterizerVariable
-    @lpVtbl.value.as_rasterizer.unsafe_as(Proc(ID3D10EffectRasterizerVariable)).call
+  def as_rasterizer(this : ID3D10EffectRenderTargetViewVariable*) : ID3D10EffectRasterizerVariable
+    @lpVtbl.value.as_rasterizer.call(this)
   end
-  def as_sampler : ID3D10EffectSamplerVariable
-    @lpVtbl.value.as_sampler.unsafe_as(Proc(ID3D10EffectSamplerVariable)).call
+  def as_sampler(this : ID3D10EffectRenderTargetViewVariable*) : ID3D10EffectSamplerVariable
+    @lpVtbl.value.as_sampler.call(this)
   end
-  def set_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.set_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def set_raw_value(this : ID3D10EffectRenderTargetViewVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.set_raw_value.call(this, pdata, offset, bytecount)
   end
-  def get_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.get_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def get_raw_value(this : ID3D10EffectRenderTargetViewVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.get_raw_value.call(this, pdata, offset, bytecount)
   end
-  def set_render_target(presource : ID3D10RenderTargetView) : HRESULT
-    @lpVtbl.value.set_render_target.unsafe_as(Proc(ID3D10RenderTargetView, HRESULT)).call(presource)
+  def set_render_target(this : ID3D10EffectRenderTargetViewVariable*, presource : ID3D10RenderTargetView) : HRESULT
+    @lpVtbl.value.set_render_target.call(this, presource)
   end
-  def get_render_target(ppresource : ID3D10RenderTargetView*) : HRESULT
-    @lpVtbl.value.get_render_target.unsafe_as(Proc(ID3D10RenderTargetView*, HRESULT)).call(ppresource)
+  def get_render_target(this : ID3D10EffectRenderTargetViewVariable*, ppresource : ID3D10RenderTargetView*) : HRESULT
+    @lpVtbl.value.get_render_target.call(this, ppresource)
   end
-  def set_render_target_array(ppresources : ID3D10RenderTargetView*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.set_render_target_array.unsafe_as(Proc(ID3D10RenderTargetView*, UInt32, UInt32, HRESULT)).call(ppresources, offset, count)
+  def set_render_target_array(this : ID3D10EffectRenderTargetViewVariable*, ppresources : ID3D10RenderTargetView*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.set_render_target_array.call(this, ppresources, offset, count)
   end
-  def get_render_target_array(ppresources : ID3D10RenderTargetView*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.get_render_target_array.unsafe_as(Proc(ID3D10RenderTargetView*, UInt32, UInt32, HRESULT)).call(ppresources, offset, count)
+  def get_render_target_array(this : ID3D10EffectRenderTargetViewVariable*, ppresources : ID3D10RenderTargetView*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.get_render_target_array.call(this, ppresources, offset, count)
   end
 end
 struct LibWin32::ID3D10EffectDepthStencilViewVariable
-  def is_valid : LibC::BOOL
-    @lpVtbl.value.is_valid.unsafe_as(Proc(LibC::BOOL)).call
+  def is_valid(this : ID3D10EffectDepthStencilViewVariable*) : LibC::BOOL
+    @lpVtbl.value.is_valid.call(this)
   end
-  def get_type : ID3D10EffectType
-    @lpVtbl.value.get_type.unsafe_as(Proc(ID3D10EffectType)).call
+  def get_type(this : ID3D10EffectDepthStencilViewVariable*) : ID3D10EffectType
+    @lpVtbl.value.get_type.call(this)
   end
-  def get_desc(pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_EFFECT_VARIABLE_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10EffectDepthStencilViewVariable*, pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_annotation_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_annotation_by_index(this : ID3D10EffectDepthStencilViewVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_index.call(this, index)
   end
-  def get_annotation_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_annotation_by_name(this : ID3D10EffectDepthStencilViewVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_name.call(this, name)
   end
-  def get_member_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_member_by_index(this : ID3D10EffectDepthStencilViewVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_index.call(this, index)
   end
-  def get_member_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_member_by_name(this : ID3D10EffectDepthStencilViewVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_name.call(this, name)
   end
-  def get_member_by_semantic(semantic : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_semantic.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(semantic)
+  def get_member_by_semantic(this : ID3D10EffectDepthStencilViewVariable*, semantic : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_semantic.call(this, semantic)
   end
-  def get_element(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_element.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_element(this : ID3D10EffectDepthStencilViewVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_element.call(this, index)
   end
-  def get_parent_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.get_parent_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def get_parent_constant_buffer(this : ID3D10EffectDepthStencilViewVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.get_parent_constant_buffer.call(this)
   end
-  def as_scalar : ID3D10EffectScalarVariable
-    @lpVtbl.value.as_scalar.unsafe_as(Proc(ID3D10EffectScalarVariable)).call
+  def as_scalar(this : ID3D10EffectDepthStencilViewVariable*) : ID3D10EffectScalarVariable
+    @lpVtbl.value.as_scalar.call(this)
   end
-  def as_vector : ID3D10EffectVectorVariable
-    @lpVtbl.value.as_vector.unsafe_as(Proc(ID3D10EffectVectorVariable)).call
+  def as_vector(this : ID3D10EffectDepthStencilViewVariable*) : ID3D10EffectVectorVariable
+    @lpVtbl.value.as_vector.call(this)
   end
-  def as_matrix : ID3D10EffectMatrixVariable
-    @lpVtbl.value.as_matrix.unsafe_as(Proc(ID3D10EffectMatrixVariable)).call
+  def as_matrix(this : ID3D10EffectDepthStencilViewVariable*) : ID3D10EffectMatrixVariable
+    @lpVtbl.value.as_matrix.call(this)
   end
-  def as_string : ID3D10EffectStringVariable
-    @lpVtbl.value.as_string.unsafe_as(Proc(ID3D10EffectStringVariable)).call
+  def as_string(this : ID3D10EffectDepthStencilViewVariable*) : ID3D10EffectStringVariable
+    @lpVtbl.value.as_string.call(this)
   end
-  def as_shader_resource : ID3D10EffectShaderResourceVariable
-    @lpVtbl.value.as_shader_resource.unsafe_as(Proc(ID3D10EffectShaderResourceVariable)).call
+  def as_shader_resource(this : ID3D10EffectDepthStencilViewVariable*) : ID3D10EffectShaderResourceVariable
+    @lpVtbl.value.as_shader_resource.call(this)
   end
-  def as_render_target_view : ID3D10EffectRenderTargetViewVariable
-    @lpVtbl.value.as_render_target_view.unsafe_as(Proc(ID3D10EffectRenderTargetViewVariable)).call
+  def as_render_target_view(this : ID3D10EffectDepthStencilViewVariable*) : ID3D10EffectRenderTargetViewVariable
+    @lpVtbl.value.as_render_target_view.call(this)
   end
-  def as_depth_stencil_view : ID3D10EffectDepthStencilViewVariable
-    @lpVtbl.value.as_depth_stencil_view.unsafe_as(Proc(ID3D10EffectDepthStencilViewVariable)).call
+  def as_depth_stencil_view(this : ID3D10EffectDepthStencilViewVariable*) : ID3D10EffectDepthStencilViewVariable
+    @lpVtbl.value.as_depth_stencil_view.call(this)
   end
-  def as_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.as_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def as_constant_buffer(this : ID3D10EffectDepthStencilViewVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.as_constant_buffer.call(this)
   end
-  def as_shader : ID3D10EffectShaderVariable
-    @lpVtbl.value.as_shader.unsafe_as(Proc(ID3D10EffectShaderVariable)).call
+  def as_shader(this : ID3D10EffectDepthStencilViewVariable*) : ID3D10EffectShaderVariable
+    @lpVtbl.value.as_shader.call(this)
   end
-  def as_blend : ID3D10EffectBlendVariable
-    @lpVtbl.value.as_blend.unsafe_as(Proc(ID3D10EffectBlendVariable)).call
+  def as_blend(this : ID3D10EffectDepthStencilViewVariable*) : ID3D10EffectBlendVariable
+    @lpVtbl.value.as_blend.call(this)
   end
-  def as_depth_stencil : ID3D10EffectDepthStencilVariable
-    @lpVtbl.value.as_depth_stencil.unsafe_as(Proc(ID3D10EffectDepthStencilVariable)).call
+  def as_depth_stencil(this : ID3D10EffectDepthStencilViewVariable*) : ID3D10EffectDepthStencilVariable
+    @lpVtbl.value.as_depth_stencil.call(this)
   end
-  def as_rasterizer : ID3D10EffectRasterizerVariable
-    @lpVtbl.value.as_rasterizer.unsafe_as(Proc(ID3D10EffectRasterizerVariable)).call
+  def as_rasterizer(this : ID3D10EffectDepthStencilViewVariable*) : ID3D10EffectRasterizerVariable
+    @lpVtbl.value.as_rasterizer.call(this)
   end
-  def as_sampler : ID3D10EffectSamplerVariable
-    @lpVtbl.value.as_sampler.unsafe_as(Proc(ID3D10EffectSamplerVariable)).call
+  def as_sampler(this : ID3D10EffectDepthStencilViewVariable*) : ID3D10EffectSamplerVariable
+    @lpVtbl.value.as_sampler.call(this)
   end
-  def set_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.set_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def set_raw_value(this : ID3D10EffectDepthStencilViewVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.set_raw_value.call(this, pdata, offset, bytecount)
   end
-  def get_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.get_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def get_raw_value(this : ID3D10EffectDepthStencilViewVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.get_raw_value.call(this, pdata, offset, bytecount)
   end
-  def set_depth_stencil(presource : ID3D10DepthStencilView) : HRESULT
-    @lpVtbl.value.set_depth_stencil.unsafe_as(Proc(ID3D10DepthStencilView, HRESULT)).call(presource)
+  def set_depth_stencil(this : ID3D10EffectDepthStencilViewVariable*, presource : ID3D10DepthStencilView) : HRESULT
+    @lpVtbl.value.set_depth_stencil.call(this, presource)
   end
-  def get_depth_stencil(ppresource : ID3D10DepthStencilView*) : HRESULT
-    @lpVtbl.value.get_depth_stencil.unsafe_as(Proc(ID3D10DepthStencilView*, HRESULT)).call(ppresource)
+  def get_depth_stencil(this : ID3D10EffectDepthStencilViewVariable*, ppresource : ID3D10DepthStencilView*) : HRESULT
+    @lpVtbl.value.get_depth_stencil.call(this, ppresource)
   end
-  def set_depth_stencil_array(ppresources : ID3D10DepthStencilView*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.set_depth_stencil_array.unsafe_as(Proc(ID3D10DepthStencilView*, UInt32, UInt32, HRESULT)).call(ppresources, offset, count)
+  def set_depth_stencil_array(this : ID3D10EffectDepthStencilViewVariable*, ppresources : ID3D10DepthStencilView*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.set_depth_stencil_array.call(this, ppresources, offset, count)
   end
-  def get_depth_stencil_array(ppresources : ID3D10DepthStencilView*, offset : UInt32, count : UInt32) : HRESULT
-    @lpVtbl.value.get_depth_stencil_array.unsafe_as(Proc(ID3D10DepthStencilView*, UInt32, UInt32, HRESULT)).call(ppresources, offset, count)
+  def get_depth_stencil_array(this : ID3D10EffectDepthStencilViewVariable*, ppresources : ID3D10DepthStencilView*, offset : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.get_depth_stencil_array.call(this, ppresources, offset, count)
   end
 end
 struct LibWin32::ID3D10EffectConstantBuffer
-  def is_valid : LibC::BOOL
-    @lpVtbl.value.is_valid.unsafe_as(Proc(LibC::BOOL)).call
+  def is_valid(this : ID3D10EffectConstantBuffer*) : LibC::BOOL
+    @lpVtbl.value.is_valid.call(this)
   end
-  def get_type : ID3D10EffectType
-    @lpVtbl.value.get_type.unsafe_as(Proc(ID3D10EffectType)).call
+  def get_type(this : ID3D10EffectConstantBuffer*) : ID3D10EffectType
+    @lpVtbl.value.get_type.call(this)
   end
-  def get_desc(pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_EFFECT_VARIABLE_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10EffectConstantBuffer*, pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_annotation_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_annotation_by_index(this : ID3D10EffectConstantBuffer*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_index.call(this, index)
   end
-  def get_annotation_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_annotation_by_name(this : ID3D10EffectConstantBuffer*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_name.call(this, name)
   end
-  def get_member_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_member_by_index(this : ID3D10EffectConstantBuffer*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_index.call(this, index)
   end
-  def get_member_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_member_by_name(this : ID3D10EffectConstantBuffer*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_name.call(this, name)
   end
-  def get_member_by_semantic(semantic : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_semantic.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(semantic)
+  def get_member_by_semantic(this : ID3D10EffectConstantBuffer*, semantic : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_semantic.call(this, semantic)
   end
-  def get_element(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_element.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_element(this : ID3D10EffectConstantBuffer*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_element.call(this, index)
   end
-  def get_parent_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.get_parent_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def get_parent_constant_buffer(this : ID3D10EffectConstantBuffer*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.get_parent_constant_buffer.call(this)
   end
-  def as_scalar : ID3D10EffectScalarVariable
-    @lpVtbl.value.as_scalar.unsafe_as(Proc(ID3D10EffectScalarVariable)).call
+  def as_scalar(this : ID3D10EffectConstantBuffer*) : ID3D10EffectScalarVariable
+    @lpVtbl.value.as_scalar.call(this)
   end
-  def as_vector : ID3D10EffectVectorVariable
-    @lpVtbl.value.as_vector.unsafe_as(Proc(ID3D10EffectVectorVariable)).call
+  def as_vector(this : ID3D10EffectConstantBuffer*) : ID3D10EffectVectorVariable
+    @lpVtbl.value.as_vector.call(this)
   end
-  def as_matrix : ID3D10EffectMatrixVariable
-    @lpVtbl.value.as_matrix.unsafe_as(Proc(ID3D10EffectMatrixVariable)).call
+  def as_matrix(this : ID3D10EffectConstantBuffer*) : ID3D10EffectMatrixVariable
+    @lpVtbl.value.as_matrix.call(this)
   end
-  def as_string : ID3D10EffectStringVariable
-    @lpVtbl.value.as_string.unsafe_as(Proc(ID3D10EffectStringVariable)).call
+  def as_string(this : ID3D10EffectConstantBuffer*) : ID3D10EffectStringVariable
+    @lpVtbl.value.as_string.call(this)
   end
-  def as_shader_resource : ID3D10EffectShaderResourceVariable
-    @lpVtbl.value.as_shader_resource.unsafe_as(Proc(ID3D10EffectShaderResourceVariable)).call
+  def as_shader_resource(this : ID3D10EffectConstantBuffer*) : ID3D10EffectShaderResourceVariable
+    @lpVtbl.value.as_shader_resource.call(this)
   end
-  def as_render_target_view : ID3D10EffectRenderTargetViewVariable
-    @lpVtbl.value.as_render_target_view.unsafe_as(Proc(ID3D10EffectRenderTargetViewVariable)).call
+  def as_render_target_view(this : ID3D10EffectConstantBuffer*) : ID3D10EffectRenderTargetViewVariable
+    @lpVtbl.value.as_render_target_view.call(this)
   end
-  def as_depth_stencil_view : ID3D10EffectDepthStencilViewVariable
-    @lpVtbl.value.as_depth_stencil_view.unsafe_as(Proc(ID3D10EffectDepthStencilViewVariable)).call
+  def as_depth_stencil_view(this : ID3D10EffectConstantBuffer*) : ID3D10EffectDepthStencilViewVariable
+    @lpVtbl.value.as_depth_stencil_view.call(this)
   end
-  def as_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.as_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def as_constant_buffer(this : ID3D10EffectConstantBuffer*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.as_constant_buffer.call(this)
   end
-  def as_shader : ID3D10EffectShaderVariable
-    @lpVtbl.value.as_shader.unsafe_as(Proc(ID3D10EffectShaderVariable)).call
+  def as_shader(this : ID3D10EffectConstantBuffer*) : ID3D10EffectShaderVariable
+    @lpVtbl.value.as_shader.call(this)
   end
-  def as_blend : ID3D10EffectBlendVariable
-    @lpVtbl.value.as_blend.unsafe_as(Proc(ID3D10EffectBlendVariable)).call
+  def as_blend(this : ID3D10EffectConstantBuffer*) : ID3D10EffectBlendVariable
+    @lpVtbl.value.as_blend.call(this)
   end
-  def as_depth_stencil : ID3D10EffectDepthStencilVariable
-    @lpVtbl.value.as_depth_stencil.unsafe_as(Proc(ID3D10EffectDepthStencilVariable)).call
+  def as_depth_stencil(this : ID3D10EffectConstantBuffer*) : ID3D10EffectDepthStencilVariable
+    @lpVtbl.value.as_depth_stencil.call(this)
   end
-  def as_rasterizer : ID3D10EffectRasterizerVariable
-    @lpVtbl.value.as_rasterizer.unsafe_as(Proc(ID3D10EffectRasterizerVariable)).call
+  def as_rasterizer(this : ID3D10EffectConstantBuffer*) : ID3D10EffectRasterizerVariable
+    @lpVtbl.value.as_rasterizer.call(this)
   end
-  def as_sampler : ID3D10EffectSamplerVariable
-    @lpVtbl.value.as_sampler.unsafe_as(Proc(ID3D10EffectSamplerVariable)).call
+  def as_sampler(this : ID3D10EffectConstantBuffer*) : ID3D10EffectSamplerVariable
+    @lpVtbl.value.as_sampler.call(this)
   end
-  def set_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.set_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def set_raw_value(this : ID3D10EffectConstantBuffer*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.set_raw_value.call(this, pdata, offset, bytecount)
   end
-  def get_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.get_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def get_raw_value(this : ID3D10EffectConstantBuffer*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.get_raw_value.call(this, pdata, offset, bytecount)
   end
-  def set_constant_buffer(pconstantbuffer : ID3D10Buffer) : HRESULT
-    @lpVtbl.value.set_constant_buffer.unsafe_as(Proc(ID3D10Buffer, HRESULT)).call(pconstantbuffer)
+  def set_constant_buffer(this : ID3D10EffectConstantBuffer*, pconstantbuffer : ID3D10Buffer) : HRESULT
+    @lpVtbl.value.set_constant_buffer.call(this, pconstantbuffer)
   end
-  def get_constant_buffer(ppconstantbuffer : ID3D10Buffer*) : HRESULT
-    @lpVtbl.value.get_constant_buffer.unsafe_as(Proc(ID3D10Buffer*, HRESULT)).call(ppconstantbuffer)
+  def get_constant_buffer(this : ID3D10EffectConstantBuffer*, ppconstantbuffer : ID3D10Buffer*) : HRESULT
+    @lpVtbl.value.get_constant_buffer.call(this, ppconstantbuffer)
   end
-  def set_texture_buffer(ptexturebuffer : ID3D10ShaderResourceView) : HRESULT
-    @lpVtbl.value.set_texture_buffer.unsafe_as(Proc(ID3D10ShaderResourceView, HRESULT)).call(ptexturebuffer)
+  def set_texture_buffer(this : ID3D10EffectConstantBuffer*, ptexturebuffer : ID3D10ShaderResourceView) : HRESULT
+    @lpVtbl.value.set_texture_buffer.call(this, ptexturebuffer)
   end
-  def get_texture_buffer(pptexturebuffer : ID3D10ShaderResourceView*) : HRESULT
-    @lpVtbl.value.get_texture_buffer.unsafe_as(Proc(ID3D10ShaderResourceView*, HRESULT)).call(pptexturebuffer)
+  def get_texture_buffer(this : ID3D10EffectConstantBuffer*, pptexturebuffer : ID3D10ShaderResourceView*) : HRESULT
+    @lpVtbl.value.get_texture_buffer.call(this, pptexturebuffer)
   end
 end
 struct LibWin32::ID3D10EffectShaderVariable
-  def is_valid : LibC::BOOL
-    @lpVtbl.value.is_valid.unsafe_as(Proc(LibC::BOOL)).call
+  def is_valid(this : ID3D10EffectShaderVariable*) : LibC::BOOL
+    @lpVtbl.value.is_valid.call(this)
   end
-  def get_type : ID3D10EffectType
-    @lpVtbl.value.get_type.unsafe_as(Proc(ID3D10EffectType)).call
+  def get_type(this : ID3D10EffectShaderVariable*) : ID3D10EffectType
+    @lpVtbl.value.get_type.call(this)
   end
-  def get_desc(pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_EFFECT_VARIABLE_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10EffectShaderVariable*, pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_annotation_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_annotation_by_index(this : ID3D10EffectShaderVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_index.call(this, index)
   end
-  def get_annotation_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_annotation_by_name(this : ID3D10EffectShaderVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_name.call(this, name)
   end
-  def get_member_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_member_by_index(this : ID3D10EffectShaderVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_index.call(this, index)
   end
-  def get_member_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_member_by_name(this : ID3D10EffectShaderVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_name.call(this, name)
   end
-  def get_member_by_semantic(semantic : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_semantic.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(semantic)
+  def get_member_by_semantic(this : ID3D10EffectShaderVariable*, semantic : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_semantic.call(this, semantic)
   end
-  def get_element(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_element.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_element(this : ID3D10EffectShaderVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_element.call(this, index)
   end
-  def get_parent_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.get_parent_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def get_parent_constant_buffer(this : ID3D10EffectShaderVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.get_parent_constant_buffer.call(this)
   end
-  def as_scalar : ID3D10EffectScalarVariable
-    @lpVtbl.value.as_scalar.unsafe_as(Proc(ID3D10EffectScalarVariable)).call
+  def as_scalar(this : ID3D10EffectShaderVariable*) : ID3D10EffectScalarVariable
+    @lpVtbl.value.as_scalar.call(this)
   end
-  def as_vector : ID3D10EffectVectorVariable
-    @lpVtbl.value.as_vector.unsafe_as(Proc(ID3D10EffectVectorVariable)).call
+  def as_vector(this : ID3D10EffectShaderVariable*) : ID3D10EffectVectorVariable
+    @lpVtbl.value.as_vector.call(this)
   end
-  def as_matrix : ID3D10EffectMatrixVariable
-    @lpVtbl.value.as_matrix.unsafe_as(Proc(ID3D10EffectMatrixVariable)).call
+  def as_matrix(this : ID3D10EffectShaderVariable*) : ID3D10EffectMatrixVariable
+    @lpVtbl.value.as_matrix.call(this)
   end
-  def as_string : ID3D10EffectStringVariable
-    @lpVtbl.value.as_string.unsafe_as(Proc(ID3D10EffectStringVariable)).call
+  def as_string(this : ID3D10EffectShaderVariable*) : ID3D10EffectStringVariable
+    @lpVtbl.value.as_string.call(this)
   end
-  def as_shader_resource : ID3D10EffectShaderResourceVariable
-    @lpVtbl.value.as_shader_resource.unsafe_as(Proc(ID3D10EffectShaderResourceVariable)).call
+  def as_shader_resource(this : ID3D10EffectShaderVariable*) : ID3D10EffectShaderResourceVariable
+    @lpVtbl.value.as_shader_resource.call(this)
   end
-  def as_render_target_view : ID3D10EffectRenderTargetViewVariable
-    @lpVtbl.value.as_render_target_view.unsafe_as(Proc(ID3D10EffectRenderTargetViewVariable)).call
+  def as_render_target_view(this : ID3D10EffectShaderVariable*) : ID3D10EffectRenderTargetViewVariable
+    @lpVtbl.value.as_render_target_view.call(this)
   end
-  def as_depth_stencil_view : ID3D10EffectDepthStencilViewVariable
-    @lpVtbl.value.as_depth_stencil_view.unsafe_as(Proc(ID3D10EffectDepthStencilViewVariable)).call
+  def as_depth_stencil_view(this : ID3D10EffectShaderVariable*) : ID3D10EffectDepthStencilViewVariable
+    @lpVtbl.value.as_depth_stencil_view.call(this)
   end
-  def as_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.as_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def as_constant_buffer(this : ID3D10EffectShaderVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.as_constant_buffer.call(this)
   end
-  def as_shader : ID3D10EffectShaderVariable
-    @lpVtbl.value.as_shader.unsafe_as(Proc(ID3D10EffectShaderVariable)).call
+  def as_shader(this : ID3D10EffectShaderVariable*) : ID3D10EffectShaderVariable
+    @lpVtbl.value.as_shader.call(this)
   end
-  def as_blend : ID3D10EffectBlendVariable
-    @lpVtbl.value.as_blend.unsafe_as(Proc(ID3D10EffectBlendVariable)).call
+  def as_blend(this : ID3D10EffectShaderVariable*) : ID3D10EffectBlendVariable
+    @lpVtbl.value.as_blend.call(this)
   end
-  def as_depth_stencil : ID3D10EffectDepthStencilVariable
-    @lpVtbl.value.as_depth_stencil.unsafe_as(Proc(ID3D10EffectDepthStencilVariable)).call
+  def as_depth_stencil(this : ID3D10EffectShaderVariable*) : ID3D10EffectDepthStencilVariable
+    @lpVtbl.value.as_depth_stencil.call(this)
   end
-  def as_rasterizer : ID3D10EffectRasterizerVariable
-    @lpVtbl.value.as_rasterizer.unsafe_as(Proc(ID3D10EffectRasterizerVariable)).call
+  def as_rasterizer(this : ID3D10EffectShaderVariable*) : ID3D10EffectRasterizerVariable
+    @lpVtbl.value.as_rasterizer.call(this)
   end
-  def as_sampler : ID3D10EffectSamplerVariable
-    @lpVtbl.value.as_sampler.unsafe_as(Proc(ID3D10EffectSamplerVariable)).call
+  def as_sampler(this : ID3D10EffectShaderVariable*) : ID3D10EffectSamplerVariable
+    @lpVtbl.value.as_sampler.call(this)
   end
-  def set_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.set_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def set_raw_value(this : ID3D10EffectShaderVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.set_raw_value.call(this, pdata, offset, bytecount)
   end
-  def get_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.get_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def get_raw_value(this : ID3D10EffectShaderVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.get_raw_value.call(this, pdata, offset, bytecount)
   end
-  def get_shader_desc(shaderindex : UInt32, pdesc : D3D10_EFFECT_SHADER_DESC*) : HRESULT
-    @lpVtbl.value.get_shader_desc.unsafe_as(Proc(UInt32, D3D10_EFFECT_SHADER_DESC*, HRESULT)).call(shaderindex, pdesc)
+  def get_shader_desc(this : ID3D10EffectShaderVariable*, shaderindex : UInt32, pdesc : D3D10_EFFECT_SHADER_DESC*) : HRESULT
+    @lpVtbl.value.get_shader_desc.call(this, shaderindex, pdesc)
   end
-  def get_vertex_shader(shaderindex : UInt32, ppvs : ID3D10VertexShader*) : HRESULT
-    @lpVtbl.value.get_vertex_shader.unsafe_as(Proc(UInt32, ID3D10VertexShader*, HRESULT)).call(shaderindex, ppvs)
+  def get_vertex_shader(this : ID3D10EffectShaderVariable*, shaderindex : UInt32, ppvs : ID3D10VertexShader*) : HRESULT
+    @lpVtbl.value.get_vertex_shader.call(this, shaderindex, ppvs)
   end
-  def get_geometry_shader(shaderindex : UInt32, ppgs : ID3D10GeometryShader*) : HRESULT
-    @lpVtbl.value.get_geometry_shader.unsafe_as(Proc(UInt32, ID3D10GeometryShader*, HRESULT)).call(shaderindex, ppgs)
+  def get_geometry_shader(this : ID3D10EffectShaderVariable*, shaderindex : UInt32, ppgs : ID3D10GeometryShader*) : HRESULT
+    @lpVtbl.value.get_geometry_shader.call(this, shaderindex, ppgs)
   end
-  def get_pixel_shader(shaderindex : UInt32, ppps : ID3D10PixelShader*) : HRESULT
-    @lpVtbl.value.get_pixel_shader.unsafe_as(Proc(UInt32, ID3D10PixelShader*, HRESULT)).call(shaderindex, ppps)
+  def get_pixel_shader(this : ID3D10EffectShaderVariable*, shaderindex : UInt32, ppps : ID3D10PixelShader*) : HRESULT
+    @lpVtbl.value.get_pixel_shader.call(this, shaderindex, ppps)
   end
-  def get_input_signature_element_desc(shaderindex : UInt32, element : UInt32, pdesc : D3D10_SIGNATURE_PARAMETER_DESC*) : HRESULT
-    @lpVtbl.value.get_input_signature_element_desc.unsafe_as(Proc(UInt32, UInt32, D3D10_SIGNATURE_PARAMETER_DESC*, HRESULT)).call(shaderindex, element, pdesc)
+  def get_input_signature_element_desc(this : ID3D10EffectShaderVariable*, shaderindex : UInt32, element : UInt32, pdesc : D3D10_SIGNATURE_PARAMETER_DESC*) : HRESULT
+    @lpVtbl.value.get_input_signature_element_desc.call(this, shaderindex, element, pdesc)
   end
-  def get_output_signature_element_desc(shaderindex : UInt32, element : UInt32, pdesc : D3D10_SIGNATURE_PARAMETER_DESC*) : HRESULT
-    @lpVtbl.value.get_output_signature_element_desc.unsafe_as(Proc(UInt32, UInt32, D3D10_SIGNATURE_PARAMETER_DESC*, HRESULT)).call(shaderindex, element, pdesc)
+  def get_output_signature_element_desc(this : ID3D10EffectShaderVariable*, shaderindex : UInt32, element : UInt32, pdesc : D3D10_SIGNATURE_PARAMETER_DESC*) : HRESULT
+    @lpVtbl.value.get_output_signature_element_desc.call(this, shaderindex, element, pdesc)
   end
 end
 struct LibWin32::ID3D10EffectBlendVariable
-  def is_valid : LibC::BOOL
-    @lpVtbl.value.is_valid.unsafe_as(Proc(LibC::BOOL)).call
+  def is_valid(this : ID3D10EffectBlendVariable*) : LibC::BOOL
+    @lpVtbl.value.is_valid.call(this)
   end
-  def get_type : ID3D10EffectType
-    @lpVtbl.value.get_type.unsafe_as(Proc(ID3D10EffectType)).call
+  def get_type(this : ID3D10EffectBlendVariable*) : ID3D10EffectType
+    @lpVtbl.value.get_type.call(this)
   end
-  def get_desc(pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_EFFECT_VARIABLE_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10EffectBlendVariable*, pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_annotation_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_annotation_by_index(this : ID3D10EffectBlendVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_index.call(this, index)
   end
-  def get_annotation_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_annotation_by_name(this : ID3D10EffectBlendVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_name.call(this, name)
   end
-  def get_member_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_member_by_index(this : ID3D10EffectBlendVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_index.call(this, index)
   end
-  def get_member_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_member_by_name(this : ID3D10EffectBlendVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_name.call(this, name)
   end
-  def get_member_by_semantic(semantic : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_semantic.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(semantic)
+  def get_member_by_semantic(this : ID3D10EffectBlendVariable*, semantic : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_semantic.call(this, semantic)
   end
-  def get_element(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_element.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_element(this : ID3D10EffectBlendVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_element.call(this, index)
   end
-  def get_parent_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.get_parent_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def get_parent_constant_buffer(this : ID3D10EffectBlendVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.get_parent_constant_buffer.call(this)
   end
-  def as_scalar : ID3D10EffectScalarVariable
-    @lpVtbl.value.as_scalar.unsafe_as(Proc(ID3D10EffectScalarVariable)).call
+  def as_scalar(this : ID3D10EffectBlendVariable*) : ID3D10EffectScalarVariable
+    @lpVtbl.value.as_scalar.call(this)
   end
-  def as_vector : ID3D10EffectVectorVariable
-    @lpVtbl.value.as_vector.unsafe_as(Proc(ID3D10EffectVectorVariable)).call
+  def as_vector(this : ID3D10EffectBlendVariable*) : ID3D10EffectVectorVariable
+    @lpVtbl.value.as_vector.call(this)
   end
-  def as_matrix : ID3D10EffectMatrixVariable
-    @lpVtbl.value.as_matrix.unsafe_as(Proc(ID3D10EffectMatrixVariable)).call
+  def as_matrix(this : ID3D10EffectBlendVariable*) : ID3D10EffectMatrixVariable
+    @lpVtbl.value.as_matrix.call(this)
   end
-  def as_string : ID3D10EffectStringVariable
-    @lpVtbl.value.as_string.unsafe_as(Proc(ID3D10EffectStringVariable)).call
+  def as_string(this : ID3D10EffectBlendVariable*) : ID3D10EffectStringVariable
+    @lpVtbl.value.as_string.call(this)
   end
-  def as_shader_resource : ID3D10EffectShaderResourceVariable
-    @lpVtbl.value.as_shader_resource.unsafe_as(Proc(ID3D10EffectShaderResourceVariable)).call
+  def as_shader_resource(this : ID3D10EffectBlendVariable*) : ID3D10EffectShaderResourceVariable
+    @lpVtbl.value.as_shader_resource.call(this)
   end
-  def as_render_target_view : ID3D10EffectRenderTargetViewVariable
-    @lpVtbl.value.as_render_target_view.unsafe_as(Proc(ID3D10EffectRenderTargetViewVariable)).call
+  def as_render_target_view(this : ID3D10EffectBlendVariable*) : ID3D10EffectRenderTargetViewVariable
+    @lpVtbl.value.as_render_target_view.call(this)
   end
-  def as_depth_stencil_view : ID3D10EffectDepthStencilViewVariable
-    @lpVtbl.value.as_depth_stencil_view.unsafe_as(Proc(ID3D10EffectDepthStencilViewVariable)).call
+  def as_depth_stencil_view(this : ID3D10EffectBlendVariable*) : ID3D10EffectDepthStencilViewVariable
+    @lpVtbl.value.as_depth_stencil_view.call(this)
   end
-  def as_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.as_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def as_constant_buffer(this : ID3D10EffectBlendVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.as_constant_buffer.call(this)
   end
-  def as_shader : ID3D10EffectShaderVariable
-    @lpVtbl.value.as_shader.unsafe_as(Proc(ID3D10EffectShaderVariable)).call
+  def as_shader(this : ID3D10EffectBlendVariable*) : ID3D10EffectShaderVariable
+    @lpVtbl.value.as_shader.call(this)
   end
-  def as_blend : ID3D10EffectBlendVariable
-    @lpVtbl.value.as_blend.unsafe_as(Proc(ID3D10EffectBlendVariable)).call
+  def as_blend(this : ID3D10EffectBlendVariable*) : ID3D10EffectBlendVariable
+    @lpVtbl.value.as_blend.call(this)
   end
-  def as_depth_stencil : ID3D10EffectDepthStencilVariable
-    @lpVtbl.value.as_depth_stencil.unsafe_as(Proc(ID3D10EffectDepthStencilVariable)).call
+  def as_depth_stencil(this : ID3D10EffectBlendVariable*) : ID3D10EffectDepthStencilVariable
+    @lpVtbl.value.as_depth_stencil.call(this)
   end
-  def as_rasterizer : ID3D10EffectRasterizerVariable
-    @lpVtbl.value.as_rasterizer.unsafe_as(Proc(ID3D10EffectRasterizerVariable)).call
+  def as_rasterizer(this : ID3D10EffectBlendVariable*) : ID3D10EffectRasterizerVariable
+    @lpVtbl.value.as_rasterizer.call(this)
   end
-  def as_sampler : ID3D10EffectSamplerVariable
-    @lpVtbl.value.as_sampler.unsafe_as(Proc(ID3D10EffectSamplerVariable)).call
+  def as_sampler(this : ID3D10EffectBlendVariable*) : ID3D10EffectSamplerVariable
+    @lpVtbl.value.as_sampler.call(this)
   end
-  def set_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.set_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def set_raw_value(this : ID3D10EffectBlendVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.set_raw_value.call(this, pdata, offset, bytecount)
   end
-  def get_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.get_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def get_raw_value(this : ID3D10EffectBlendVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.get_raw_value.call(this, pdata, offset, bytecount)
   end
-  def get_blend_state(index : UInt32, ppblendstate : ID3D10BlendState*) : HRESULT
-    @lpVtbl.value.get_blend_state.unsafe_as(Proc(UInt32, ID3D10BlendState*, HRESULT)).call(index, ppblendstate)
+  def get_blend_state(this : ID3D10EffectBlendVariable*, index : UInt32, ppblendstate : ID3D10BlendState*) : HRESULT
+    @lpVtbl.value.get_blend_state.call(this, index, ppblendstate)
   end
-  def get_backing_store(index : UInt32, pblenddesc : D3D10_BLEND_DESC*) : HRESULT
-    @lpVtbl.value.get_backing_store.unsafe_as(Proc(UInt32, D3D10_BLEND_DESC*, HRESULT)).call(index, pblenddesc)
+  def get_backing_store(this : ID3D10EffectBlendVariable*, index : UInt32, pblenddesc : D3D10_BLEND_DESC*) : HRESULT
+    @lpVtbl.value.get_backing_store.call(this, index, pblenddesc)
   end
 end
 struct LibWin32::ID3D10EffectDepthStencilVariable
-  def is_valid : LibC::BOOL
-    @lpVtbl.value.is_valid.unsafe_as(Proc(LibC::BOOL)).call
+  def is_valid(this : ID3D10EffectDepthStencilVariable*) : LibC::BOOL
+    @lpVtbl.value.is_valid.call(this)
   end
-  def get_type : ID3D10EffectType
-    @lpVtbl.value.get_type.unsafe_as(Proc(ID3D10EffectType)).call
+  def get_type(this : ID3D10EffectDepthStencilVariable*) : ID3D10EffectType
+    @lpVtbl.value.get_type.call(this)
   end
-  def get_desc(pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_EFFECT_VARIABLE_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10EffectDepthStencilVariable*, pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_annotation_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_annotation_by_index(this : ID3D10EffectDepthStencilVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_index.call(this, index)
   end
-  def get_annotation_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_annotation_by_name(this : ID3D10EffectDepthStencilVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_name.call(this, name)
   end
-  def get_member_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_member_by_index(this : ID3D10EffectDepthStencilVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_index.call(this, index)
   end
-  def get_member_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_member_by_name(this : ID3D10EffectDepthStencilVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_name.call(this, name)
   end
-  def get_member_by_semantic(semantic : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_semantic.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(semantic)
+  def get_member_by_semantic(this : ID3D10EffectDepthStencilVariable*, semantic : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_semantic.call(this, semantic)
   end
-  def get_element(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_element.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_element(this : ID3D10EffectDepthStencilVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_element.call(this, index)
   end
-  def get_parent_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.get_parent_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def get_parent_constant_buffer(this : ID3D10EffectDepthStencilVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.get_parent_constant_buffer.call(this)
   end
-  def as_scalar : ID3D10EffectScalarVariable
-    @lpVtbl.value.as_scalar.unsafe_as(Proc(ID3D10EffectScalarVariable)).call
+  def as_scalar(this : ID3D10EffectDepthStencilVariable*) : ID3D10EffectScalarVariable
+    @lpVtbl.value.as_scalar.call(this)
   end
-  def as_vector : ID3D10EffectVectorVariable
-    @lpVtbl.value.as_vector.unsafe_as(Proc(ID3D10EffectVectorVariable)).call
+  def as_vector(this : ID3D10EffectDepthStencilVariable*) : ID3D10EffectVectorVariable
+    @lpVtbl.value.as_vector.call(this)
   end
-  def as_matrix : ID3D10EffectMatrixVariable
-    @lpVtbl.value.as_matrix.unsafe_as(Proc(ID3D10EffectMatrixVariable)).call
+  def as_matrix(this : ID3D10EffectDepthStencilVariable*) : ID3D10EffectMatrixVariable
+    @lpVtbl.value.as_matrix.call(this)
   end
-  def as_string : ID3D10EffectStringVariable
-    @lpVtbl.value.as_string.unsafe_as(Proc(ID3D10EffectStringVariable)).call
+  def as_string(this : ID3D10EffectDepthStencilVariable*) : ID3D10EffectStringVariable
+    @lpVtbl.value.as_string.call(this)
   end
-  def as_shader_resource : ID3D10EffectShaderResourceVariable
-    @lpVtbl.value.as_shader_resource.unsafe_as(Proc(ID3D10EffectShaderResourceVariable)).call
+  def as_shader_resource(this : ID3D10EffectDepthStencilVariable*) : ID3D10EffectShaderResourceVariable
+    @lpVtbl.value.as_shader_resource.call(this)
   end
-  def as_render_target_view : ID3D10EffectRenderTargetViewVariable
-    @lpVtbl.value.as_render_target_view.unsafe_as(Proc(ID3D10EffectRenderTargetViewVariable)).call
+  def as_render_target_view(this : ID3D10EffectDepthStencilVariable*) : ID3D10EffectRenderTargetViewVariable
+    @lpVtbl.value.as_render_target_view.call(this)
   end
-  def as_depth_stencil_view : ID3D10EffectDepthStencilViewVariable
-    @lpVtbl.value.as_depth_stencil_view.unsafe_as(Proc(ID3D10EffectDepthStencilViewVariable)).call
+  def as_depth_stencil_view(this : ID3D10EffectDepthStencilVariable*) : ID3D10EffectDepthStencilViewVariable
+    @lpVtbl.value.as_depth_stencil_view.call(this)
   end
-  def as_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.as_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def as_constant_buffer(this : ID3D10EffectDepthStencilVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.as_constant_buffer.call(this)
   end
-  def as_shader : ID3D10EffectShaderVariable
-    @lpVtbl.value.as_shader.unsafe_as(Proc(ID3D10EffectShaderVariable)).call
+  def as_shader(this : ID3D10EffectDepthStencilVariable*) : ID3D10EffectShaderVariable
+    @lpVtbl.value.as_shader.call(this)
   end
-  def as_blend : ID3D10EffectBlendVariable
-    @lpVtbl.value.as_blend.unsafe_as(Proc(ID3D10EffectBlendVariable)).call
+  def as_blend(this : ID3D10EffectDepthStencilVariable*) : ID3D10EffectBlendVariable
+    @lpVtbl.value.as_blend.call(this)
   end
-  def as_depth_stencil : ID3D10EffectDepthStencilVariable
-    @lpVtbl.value.as_depth_stencil.unsafe_as(Proc(ID3D10EffectDepthStencilVariable)).call
+  def as_depth_stencil(this : ID3D10EffectDepthStencilVariable*) : ID3D10EffectDepthStencilVariable
+    @lpVtbl.value.as_depth_stencil.call(this)
   end
-  def as_rasterizer : ID3D10EffectRasterizerVariable
-    @lpVtbl.value.as_rasterizer.unsafe_as(Proc(ID3D10EffectRasterizerVariable)).call
+  def as_rasterizer(this : ID3D10EffectDepthStencilVariable*) : ID3D10EffectRasterizerVariable
+    @lpVtbl.value.as_rasterizer.call(this)
   end
-  def as_sampler : ID3D10EffectSamplerVariable
-    @lpVtbl.value.as_sampler.unsafe_as(Proc(ID3D10EffectSamplerVariable)).call
+  def as_sampler(this : ID3D10EffectDepthStencilVariable*) : ID3D10EffectSamplerVariable
+    @lpVtbl.value.as_sampler.call(this)
   end
-  def set_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.set_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def set_raw_value(this : ID3D10EffectDepthStencilVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.set_raw_value.call(this, pdata, offset, bytecount)
   end
-  def get_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.get_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def get_raw_value(this : ID3D10EffectDepthStencilVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.get_raw_value.call(this, pdata, offset, bytecount)
   end
-  def get_depth_stencil_state(index : UInt32, ppdepthstencilstate : ID3D10DepthStencilState*) : HRESULT
-    @lpVtbl.value.get_depth_stencil_state.unsafe_as(Proc(UInt32, ID3D10DepthStencilState*, HRESULT)).call(index, ppdepthstencilstate)
+  def get_depth_stencil_state(this : ID3D10EffectDepthStencilVariable*, index : UInt32, ppdepthstencilstate : ID3D10DepthStencilState*) : HRESULT
+    @lpVtbl.value.get_depth_stencil_state.call(this, index, ppdepthstencilstate)
   end
-  def get_backing_store(index : UInt32, pdepthstencildesc : D3D10_DEPTH_STENCIL_DESC*) : HRESULT
-    @lpVtbl.value.get_backing_store.unsafe_as(Proc(UInt32, D3D10_DEPTH_STENCIL_DESC*, HRESULT)).call(index, pdepthstencildesc)
+  def get_backing_store(this : ID3D10EffectDepthStencilVariable*, index : UInt32, pdepthstencildesc : D3D10_DEPTH_STENCIL_DESC*) : HRESULT
+    @lpVtbl.value.get_backing_store.call(this, index, pdepthstencildesc)
   end
 end
 struct LibWin32::ID3D10EffectRasterizerVariable
-  def is_valid : LibC::BOOL
-    @lpVtbl.value.is_valid.unsafe_as(Proc(LibC::BOOL)).call
+  def is_valid(this : ID3D10EffectRasterizerVariable*) : LibC::BOOL
+    @lpVtbl.value.is_valid.call(this)
   end
-  def get_type : ID3D10EffectType
-    @lpVtbl.value.get_type.unsafe_as(Proc(ID3D10EffectType)).call
+  def get_type(this : ID3D10EffectRasterizerVariable*) : ID3D10EffectType
+    @lpVtbl.value.get_type.call(this)
   end
-  def get_desc(pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_EFFECT_VARIABLE_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10EffectRasterizerVariable*, pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_annotation_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_annotation_by_index(this : ID3D10EffectRasterizerVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_index.call(this, index)
   end
-  def get_annotation_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_annotation_by_name(this : ID3D10EffectRasterizerVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_name.call(this, name)
   end
-  def get_member_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_member_by_index(this : ID3D10EffectRasterizerVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_index.call(this, index)
   end
-  def get_member_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_member_by_name(this : ID3D10EffectRasterizerVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_name.call(this, name)
   end
-  def get_member_by_semantic(semantic : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_semantic.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(semantic)
+  def get_member_by_semantic(this : ID3D10EffectRasterizerVariable*, semantic : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_semantic.call(this, semantic)
   end
-  def get_element(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_element.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_element(this : ID3D10EffectRasterizerVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_element.call(this, index)
   end
-  def get_parent_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.get_parent_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def get_parent_constant_buffer(this : ID3D10EffectRasterizerVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.get_parent_constant_buffer.call(this)
   end
-  def as_scalar : ID3D10EffectScalarVariable
-    @lpVtbl.value.as_scalar.unsafe_as(Proc(ID3D10EffectScalarVariable)).call
+  def as_scalar(this : ID3D10EffectRasterizerVariable*) : ID3D10EffectScalarVariable
+    @lpVtbl.value.as_scalar.call(this)
   end
-  def as_vector : ID3D10EffectVectorVariable
-    @lpVtbl.value.as_vector.unsafe_as(Proc(ID3D10EffectVectorVariable)).call
+  def as_vector(this : ID3D10EffectRasterizerVariable*) : ID3D10EffectVectorVariable
+    @lpVtbl.value.as_vector.call(this)
   end
-  def as_matrix : ID3D10EffectMatrixVariable
-    @lpVtbl.value.as_matrix.unsafe_as(Proc(ID3D10EffectMatrixVariable)).call
+  def as_matrix(this : ID3D10EffectRasterizerVariable*) : ID3D10EffectMatrixVariable
+    @lpVtbl.value.as_matrix.call(this)
   end
-  def as_string : ID3D10EffectStringVariable
-    @lpVtbl.value.as_string.unsafe_as(Proc(ID3D10EffectStringVariable)).call
+  def as_string(this : ID3D10EffectRasterizerVariable*) : ID3D10EffectStringVariable
+    @lpVtbl.value.as_string.call(this)
   end
-  def as_shader_resource : ID3D10EffectShaderResourceVariable
-    @lpVtbl.value.as_shader_resource.unsafe_as(Proc(ID3D10EffectShaderResourceVariable)).call
+  def as_shader_resource(this : ID3D10EffectRasterizerVariable*) : ID3D10EffectShaderResourceVariable
+    @lpVtbl.value.as_shader_resource.call(this)
   end
-  def as_render_target_view : ID3D10EffectRenderTargetViewVariable
-    @lpVtbl.value.as_render_target_view.unsafe_as(Proc(ID3D10EffectRenderTargetViewVariable)).call
+  def as_render_target_view(this : ID3D10EffectRasterizerVariable*) : ID3D10EffectRenderTargetViewVariable
+    @lpVtbl.value.as_render_target_view.call(this)
   end
-  def as_depth_stencil_view : ID3D10EffectDepthStencilViewVariable
-    @lpVtbl.value.as_depth_stencil_view.unsafe_as(Proc(ID3D10EffectDepthStencilViewVariable)).call
+  def as_depth_stencil_view(this : ID3D10EffectRasterizerVariable*) : ID3D10EffectDepthStencilViewVariable
+    @lpVtbl.value.as_depth_stencil_view.call(this)
   end
-  def as_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.as_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def as_constant_buffer(this : ID3D10EffectRasterizerVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.as_constant_buffer.call(this)
   end
-  def as_shader : ID3D10EffectShaderVariable
-    @lpVtbl.value.as_shader.unsafe_as(Proc(ID3D10EffectShaderVariable)).call
+  def as_shader(this : ID3D10EffectRasterizerVariable*) : ID3D10EffectShaderVariable
+    @lpVtbl.value.as_shader.call(this)
   end
-  def as_blend : ID3D10EffectBlendVariable
-    @lpVtbl.value.as_blend.unsafe_as(Proc(ID3D10EffectBlendVariable)).call
+  def as_blend(this : ID3D10EffectRasterizerVariable*) : ID3D10EffectBlendVariable
+    @lpVtbl.value.as_blend.call(this)
   end
-  def as_depth_stencil : ID3D10EffectDepthStencilVariable
-    @lpVtbl.value.as_depth_stencil.unsafe_as(Proc(ID3D10EffectDepthStencilVariable)).call
+  def as_depth_stencil(this : ID3D10EffectRasterizerVariable*) : ID3D10EffectDepthStencilVariable
+    @lpVtbl.value.as_depth_stencil.call(this)
   end
-  def as_rasterizer : ID3D10EffectRasterizerVariable
-    @lpVtbl.value.as_rasterizer.unsafe_as(Proc(ID3D10EffectRasterizerVariable)).call
+  def as_rasterizer(this : ID3D10EffectRasterizerVariable*) : ID3D10EffectRasterizerVariable
+    @lpVtbl.value.as_rasterizer.call(this)
   end
-  def as_sampler : ID3D10EffectSamplerVariable
-    @lpVtbl.value.as_sampler.unsafe_as(Proc(ID3D10EffectSamplerVariable)).call
+  def as_sampler(this : ID3D10EffectRasterizerVariable*) : ID3D10EffectSamplerVariable
+    @lpVtbl.value.as_sampler.call(this)
   end
-  def set_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.set_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def set_raw_value(this : ID3D10EffectRasterizerVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.set_raw_value.call(this, pdata, offset, bytecount)
   end
-  def get_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.get_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def get_raw_value(this : ID3D10EffectRasterizerVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.get_raw_value.call(this, pdata, offset, bytecount)
   end
-  def get_rasterizer_state(index : UInt32, pprasterizerstate : ID3D10RasterizerState*) : HRESULT
-    @lpVtbl.value.get_rasterizer_state.unsafe_as(Proc(UInt32, ID3D10RasterizerState*, HRESULT)).call(index, pprasterizerstate)
+  def get_rasterizer_state(this : ID3D10EffectRasterizerVariable*, index : UInt32, pprasterizerstate : ID3D10RasterizerState*) : HRESULT
+    @lpVtbl.value.get_rasterizer_state.call(this, index, pprasterizerstate)
   end
-  def get_backing_store(index : UInt32, prasterizerdesc : D3D10_RASTERIZER_DESC*) : HRESULT
-    @lpVtbl.value.get_backing_store.unsafe_as(Proc(UInt32, D3D10_RASTERIZER_DESC*, HRESULT)).call(index, prasterizerdesc)
+  def get_backing_store(this : ID3D10EffectRasterizerVariable*, index : UInt32, prasterizerdesc : D3D10_RASTERIZER_DESC*) : HRESULT
+    @lpVtbl.value.get_backing_store.call(this, index, prasterizerdesc)
   end
 end
 struct LibWin32::ID3D10EffectSamplerVariable
-  def is_valid : LibC::BOOL
-    @lpVtbl.value.is_valid.unsafe_as(Proc(LibC::BOOL)).call
+  def is_valid(this : ID3D10EffectSamplerVariable*) : LibC::BOOL
+    @lpVtbl.value.is_valid.call(this)
   end
-  def get_type : ID3D10EffectType
-    @lpVtbl.value.get_type.unsafe_as(Proc(ID3D10EffectType)).call
+  def get_type(this : ID3D10EffectSamplerVariable*) : ID3D10EffectType
+    @lpVtbl.value.get_type.call(this)
   end
-  def get_desc(pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_EFFECT_VARIABLE_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10EffectSamplerVariable*, pdesc : D3D10_EFFECT_VARIABLE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_annotation_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_annotation_by_index(this : ID3D10EffectSamplerVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_index.call(this, index)
   end
-  def get_annotation_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_annotation_by_name(this : ID3D10EffectSamplerVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_name.call(this, name)
   end
-  def get_member_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_member_by_index(this : ID3D10EffectSamplerVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_index.call(this, index)
   end
-  def get_member_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_member_by_name(this : ID3D10EffectSamplerVariable*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_name.call(this, name)
   end
-  def get_member_by_semantic(semantic : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_member_by_semantic.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(semantic)
+  def get_member_by_semantic(this : ID3D10EffectSamplerVariable*, semantic : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_member_by_semantic.call(this, semantic)
   end
-  def get_element(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_element.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_element(this : ID3D10EffectSamplerVariable*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_element.call(this, index)
   end
-  def get_parent_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.get_parent_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def get_parent_constant_buffer(this : ID3D10EffectSamplerVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.get_parent_constant_buffer.call(this)
   end
-  def as_scalar : ID3D10EffectScalarVariable
-    @lpVtbl.value.as_scalar.unsafe_as(Proc(ID3D10EffectScalarVariable)).call
+  def as_scalar(this : ID3D10EffectSamplerVariable*) : ID3D10EffectScalarVariable
+    @lpVtbl.value.as_scalar.call(this)
   end
-  def as_vector : ID3D10EffectVectorVariable
-    @lpVtbl.value.as_vector.unsafe_as(Proc(ID3D10EffectVectorVariable)).call
+  def as_vector(this : ID3D10EffectSamplerVariable*) : ID3D10EffectVectorVariable
+    @lpVtbl.value.as_vector.call(this)
   end
-  def as_matrix : ID3D10EffectMatrixVariable
-    @lpVtbl.value.as_matrix.unsafe_as(Proc(ID3D10EffectMatrixVariable)).call
+  def as_matrix(this : ID3D10EffectSamplerVariable*) : ID3D10EffectMatrixVariable
+    @lpVtbl.value.as_matrix.call(this)
   end
-  def as_string : ID3D10EffectStringVariable
-    @lpVtbl.value.as_string.unsafe_as(Proc(ID3D10EffectStringVariable)).call
+  def as_string(this : ID3D10EffectSamplerVariable*) : ID3D10EffectStringVariable
+    @lpVtbl.value.as_string.call(this)
   end
-  def as_shader_resource : ID3D10EffectShaderResourceVariable
-    @lpVtbl.value.as_shader_resource.unsafe_as(Proc(ID3D10EffectShaderResourceVariable)).call
+  def as_shader_resource(this : ID3D10EffectSamplerVariable*) : ID3D10EffectShaderResourceVariable
+    @lpVtbl.value.as_shader_resource.call(this)
   end
-  def as_render_target_view : ID3D10EffectRenderTargetViewVariable
-    @lpVtbl.value.as_render_target_view.unsafe_as(Proc(ID3D10EffectRenderTargetViewVariable)).call
+  def as_render_target_view(this : ID3D10EffectSamplerVariable*) : ID3D10EffectRenderTargetViewVariable
+    @lpVtbl.value.as_render_target_view.call(this)
   end
-  def as_depth_stencil_view : ID3D10EffectDepthStencilViewVariable
-    @lpVtbl.value.as_depth_stencil_view.unsafe_as(Proc(ID3D10EffectDepthStencilViewVariable)).call
+  def as_depth_stencil_view(this : ID3D10EffectSamplerVariable*) : ID3D10EffectDepthStencilViewVariable
+    @lpVtbl.value.as_depth_stencil_view.call(this)
   end
-  def as_constant_buffer : ID3D10EffectConstantBuffer
-    @lpVtbl.value.as_constant_buffer.unsafe_as(Proc(ID3D10EffectConstantBuffer)).call
+  def as_constant_buffer(this : ID3D10EffectSamplerVariable*) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.as_constant_buffer.call(this)
   end
-  def as_shader : ID3D10EffectShaderVariable
-    @lpVtbl.value.as_shader.unsafe_as(Proc(ID3D10EffectShaderVariable)).call
+  def as_shader(this : ID3D10EffectSamplerVariable*) : ID3D10EffectShaderVariable
+    @lpVtbl.value.as_shader.call(this)
   end
-  def as_blend : ID3D10EffectBlendVariable
-    @lpVtbl.value.as_blend.unsafe_as(Proc(ID3D10EffectBlendVariable)).call
+  def as_blend(this : ID3D10EffectSamplerVariable*) : ID3D10EffectBlendVariable
+    @lpVtbl.value.as_blend.call(this)
   end
-  def as_depth_stencil : ID3D10EffectDepthStencilVariable
-    @lpVtbl.value.as_depth_stencil.unsafe_as(Proc(ID3D10EffectDepthStencilVariable)).call
+  def as_depth_stencil(this : ID3D10EffectSamplerVariable*) : ID3D10EffectDepthStencilVariable
+    @lpVtbl.value.as_depth_stencil.call(this)
   end
-  def as_rasterizer : ID3D10EffectRasterizerVariable
-    @lpVtbl.value.as_rasterizer.unsafe_as(Proc(ID3D10EffectRasterizerVariable)).call
+  def as_rasterizer(this : ID3D10EffectSamplerVariable*) : ID3D10EffectRasterizerVariable
+    @lpVtbl.value.as_rasterizer.call(this)
   end
-  def as_sampler : ID3D10EffectSamplerVariable
-    @lpVtbl.value.as_sampler.unsafe_as(Proc(ID3D10EffectSamplerVariable)).call
+  def as_sampler(this : ID3D10EffectSamplerVariable*) : ID3D10EffectSamplerVariable
+    @lpVtbl.value.as_sampler.call(this)
   end
-  def set_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.set_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def set_raw_value(this : ID3D10EffectSamplerVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.set_raw_value.call(this, pdata, offset, bytecount)
   end
-  def get_raw_value(pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
-    @lpVtbl.value.get_raw_value.unsafe_as(Proc(Void*, UInt32, UInt32, HRESULT)).call(pdata, offset, bytecount)
+  def get_raw_value(this : ID3D10EffectSamplerVariable*, pdata : Void*, offset : UInt32, bytecount : UInt32) : HRESULT
+    @lpVtbl.value.get_raw_value.call(this, pdata, offset, bytecount)
   end
-  def get_sampler(index : UInt32, ppsampler : ID3D10SamplerState*) : HRESULT
-    @lpVtbl.value.get_sampler.unsafe_as(Proc(UInt32, ID3D10SamplerState*, HRESULT)).call(index, ppsampler)
+  def get_sampler(this : ID3D10EffectSamplerVariable*, index : UInt32, ppsampler : ID3D10SamplerState*) : HRESULT
+    @lpVtbl.value.get_sampler.call(this, index, ppsampler)
   end
-  def get_backing_store(index : UInt32, psamplerdesc : D3D10_SAMPLER_DESC*) : HRESULT
-    @lpVtbl.value.get_backing_store.unsafe_as(Proc(UInt32, D3D10_SAMPLER_DESC*, HRESULT)).call(index, psamplerdesc)
+  def get_backing_store(this : ID3D10EffectSamplerVariable*, index : UInt32, psamplerdesc : D3D10_SAMPLER_DESC*) : HRESULT
+    @lpVtbl.value.get_backing_store.call(this, index, psamplerdesc)
   end
 end
 struct LibWin32::ID3D10EffectPass
-  def is_valid : LibC::BOOL
-    @lpVtbl.value.is_valid.unsafe_as(Proc(LibC::BOOL)).call
+  def is_valid(this : ID3D10EffectPass*) : LibC::BOOL
+    @lpVtbl.value.is_valid.call(this)
   end
-  def get_desc(pdesc : D3D10_PASS_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_PASS_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10EffectPass*, pdesc : D3D10_PASS_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_vertex_shader_desc(pdesc : D3D10_PASS_SHADER_DESC*) : HRESULT
-    @lpVtbl.value.get_vertex_shader_desc.unsafe_as(Proc(D3D10_PASS_SHADER_DESC*, HRESULT)).call(pdesc)
+  def get_vertex_shader_desc(this : ID3D10EffectPass*, pdesc : D3D10_PASS_SHADER_DESC*) : HRESULT
+    @lpVtbl.value.get_vertex_shader_desc.call(this, pdesc)
   end
-  def get_geometry_shader_desc(pdesc : D3D10_PASS_SHADER_DESC*) : HRESULT
-    @lpVtbl.value.get_geometry_shader_desc.unsafe_as(Proc(D3D10_PASS_SHADER_DESC*, HRESULT)).call(pdesc)
+  def get_geometry_shader_desc(this : ID3D10EffectPass*, pdesc : D3D10_PASS_SHADER_DESC*) : HRESULT
+    @lpVtbl.value.get_geometry_shader_desc.call(this, pdesc)
   end
-  def get_pixel_shader_desc(pdesc : D3D10_PASS_SHADER_DESC*) : HRESULT
-    @lpVtbl.value.get_pixel_shader_desc.unsafe_as(Proc(D3D10_PASS_SHADER_DESC*, HRESULT)).call(pdesc)
+  def get_pixel_shader_desc(this : ID3D10EffectPass*, pdesc : D3D10_PASS_SHADER_DESC*) : HRESULT
+    @lpVtbl.value.get_pixel_shader_desc.call(this, pdesc)
   end
-  def get_annotation_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_annotation_by_index(this : ID3D10EffectPass*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_index.call(this, index)
   end
-  def get_annotation_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_annotation_by_name(this : ID3D10EffectPass*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_name.call(this, name)
   end
-  def apply(flags : UInt32) : HRESULT
-    @lpVtbl.value.apply.unsafe_as(Proc(UInt32, HRESULT)).call(flags)
+  def apply(this : ID3D10EffectPass*, flags : UInt32) : HRESULT
+    @lpVtbl.value.apply.call(this, flags)
   end
-  def compute_state_block_mask(pstateblockmask : D3D10_STATE_BLOCK_MASK*) : HRESULT
-    @lpVtbl.value.compute_state_block_mask.unsafe_as(Proc(D3D10_STATE_BLOCK_MASK*, HRESULT)).call(pstateblockmask)
+  def compute_state_block_mask(this : ID3D10EffectPass*, pstateblockmask : D3D10_STATE_BLOCK_MASK*) : HRESULT
+    @lpVtbl.value.compute_state_block_mask.call(this, pstateblockmask)
   end
 end
 struct LibWin32::ID3D10EffectTechnique
-  def is_valid : LibC::BOOL
-    @lpVtbl.value.is_valid.unsafe_as(Proc(LibC::BOOL)).call
+  def is_valid(this : ID3D10EffectTechnique*) : LibC::BOOL
+    @lpVtbl.value.is_valid.call(this)
   end
-  def get_desc(pdesc : D3D10_TECHNIQUE_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_TECHNIQUE_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10EffectTechnique*, pdesc : D3D10_TECHNIQUE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_annotation_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_annotation_by_index(this : ID3D10EffectTechnique*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_index.call(this, index)
   end
-  def get_annotation_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_annotation_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_annotation_by_name(this : ID3D10EffectTechnique*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_annotation_by_name.call(this, name)
   end
-  def get_pass_by_index(index : UInt32) : ID3D10EffectPass
-    @lpVtbl.value.get_pass_by_index.unsafe_as(Proc(UInt32, ID3D10EffectPass)).call(index)
+  def get_pass_by_index(this : ID3D10EffectTechnique*, index : UInt32) : ID3D10EffectPass
+    @lpVtbl.value.get_pass_by_index.call(this, index)
   end
-  def get_pass_by_name(name : PSTR) : ID3D10EffectPass
-    @lpVtbl.value.get_pass_by_name.unsafe_as(Proc(PSTR, ID3D10EffectPass)).call(name)
+  def get_pass_by_name(this : ID3D10EffectTechnique*, name : PSTR) : ID3D10EffectPass
+    @lpVtbl.value.get_pass_by_name.call(this, name)
   end
-  def compute_state_block_mask(pstateblockmask : D3D10_STATE_BLOCK_MASK*) : HRESULT
-    @lpVtbl.value.compute_state_block_mask.unsafe_as(Proc(D3D10_STATE_BLOCK_MASK*, HRESULT)).call(pstateblockmask)
+  def compute_state_block_mask(this : ID3D10EffectTechnique*, pstateblockmask : D3D10_STATE_BLOCK_MASK*) : HRESULT
+    @lpVtbl.value.compute_state_block_mask.call(this, pstateblockmask)
   end
 end
 struct LibWin32::ID3D10Effect
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10Effect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10Effect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10Effect*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def is_valid : LibC::BOOL
-    @lpVtbl.value.is_valid.unsafe_as(Proc(LibC::BOOL)).call
+  def is_valid(this : ID3D10Effect*) : LibC::BOOL
+    @lpVtbl.value.is_valid.call(this)
   end
-  def is_pool : LibC::BOOL
-    @lpVtbl.value.is_pool.unsafe_as(Proc(LibC::BOOL)).call
+  def is_pool(this : ID3D10Effect*) : LibC::BOOL
+    @lpVtbl.value.is_pool.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : HRESULT
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, HRESULT)).call(ppdevice)
+  def get_device(this : ID3D10Effect*, ppdevice : ID3D10Device*) : HRESULT
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_desc(pdesc : D3D10_EFFECT_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_EFFECT_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10Effect*, pdesc : D3D10_EFFECT_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_constant_buffer_by_index(index : UInt32) : ID3D10EffectConstantBuffer
-    @lpVtbl.value.get_constant_buffer_by_index.unsafe_as(Proc(UInt32, ID3D10EffectConstantBuffer)).call(index)
+  def get_constant_buffer_by_index(this : ID3D10Effect*, index : UInt32) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.get_constant_buffer_by_index.call(this, index)
   end
-  def get_constant_buffer_by_name(name : PSTR) : ID3D10EffectConstantBuffer
-    @lpVtbl.value.get_constant_buffer_by_name.unsafe_as(Proc(PSTR, ID3D10EffectConstantBuffer)).call(name)
+  def get_constant_buffer_by_name(this : ID3D10Effect*, name : PSTR) : ID3D10EffectConstantBuffer
+    @lpVtbl.value.get_constant_buffer_by_name.call(this, name)
   end
-  def get_variable_by_index(index : UInt32) : ID3D10EffectVariable
-    @lpVtbl.value.get_variable_by_index.unsafe_as(Proc(UInt32, ID3D10EffectVariable)).call(index)
+  def get_variable_by_index(this : ID3D10Effect*, index : UInt32) : ID3D10EffectVariable
+    @lpVtbl.value.get_variable_by_index.call(this, index)
   end
-  def get_variable_by_name(name : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_variable_by_name.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(name)
+  def get_variable_by_name(this : ID3D10Effect*, name : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_variable_by_name.call(this, name)
   end
-  def get_variable_by_semantic(semantic : PSTR) : ID3D10EffectVariable
-    @lpVtbl.value.get_variable_by_semantic.unsafe_as(Proc(PSTR, ID3D10EffectVariable)).call(semantic)
+  def get_variable_by_semantic(this : ID3D10Effect*, semantic : PSTR) : ID3D10EffectVariable
+    @lpVtbl.value.get_variable_by_semantic.call(this, semantic)
   end
-  def get_technique_by_index(index : UInt32) : ID3D10EffectTechnique
-    @lpVtbl.value.get_technique_by_index.unsafe_as(Proc(UInt32, ID3D10EffectTechnique)).call(index)
+  def get_technique_by_index(this : ID3D10Effect*, index : UInt32) : ID3D10EffectTechnique
+    @lpVtbl.value.get_technique_by_index.call(this, index)
   end
-  def get_technique_by_name(name : PSTR) : ID3D10EffectTechnique
-    @lpVtbl.value.get_technique_by_name.unsafe_as(Proc(PSTR, ID3D10EffectTechnique)).call(name)
+  def get_technique_by_name(this : ID3D10Effect*, name : PSTR) : ID3D10EffectTechnique
+    @lpVtbl.value.get_technique_by_name.call(this, name)
   end
-  def optimize : HRESULT
-    @lpVtbl.value.optimize.unsafe_as(Proc(HRESULT)).call
+  def optimize(this : ID3D10Effect*) : HRESULT
+    @lpVtbl.value.optimize.call(this)
   end
-  def is_optimized : LibC::BOOL
-    @lpVtbl.value.is_optimized.unsafe_as(Proc(LibC::BOOL)).call
+  def is_optimized(this : ID3D10Effect*) : LibC::BOOL
+    @lpVtbl.value.is_optimized.call(this)
   end
 end
 struct LibWin32::ID3D10EffectPool
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10EffectPool*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10EffectPool*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10EffectPool*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def as_effect : ID3D10Effect
-    @lpVtbl.value.as_effect.unsafe_as(Proc(ID3D10Effect)).call
+  def as_effect(this : ID3D10EffectPool*) : ID3D10Effect
+    @lpVtbl.value.as_effect.call(this)
   end
 end
 struct LibWin32::ID3D10BlendState1
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10BlendState1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10BlendState1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10BlendState1*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10BlendState1*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10BlendState1*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10BlendState1*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10BlendState1*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def get_desc(pdesc : D3D10_BLEND_DESC*) : Void
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_BLEND_DESC*, Void)).call(pdesc)
+  def get_desc(this : ID3D10BlendState1*, pdesc : D3D10_BLEND_DESC*) : Void
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_desc1(pdesc : D3D10_BLEND_DESC1*) : Void
-    @lpVtbl.value.get_desc1.unsafe_as(Proc(D3D10_BLEND_DESC1*, Void)).call(pdesc)
+  def get_desc1(this : ID3D10BlendState1*, pdesc : D3D10_BLEND_DESC1*) : Void
+    @lpVtbl.value.get_desc1.call(this, pdesc)
   end
 end
 struct LibWin32::ID3D10ShaderResourceView1
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10ShaderResourceView1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10ShaderResourceView1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10ShaderResourceView1*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device(ppdevice : ID3D10Device*) : Void
-    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D10Device*, Void)).call(ppdevice)
+  def get_device(this : ID3D10ShaderResourceView1*, ppdevice : ID3D10Device*) : Void
+    @lpVtbl.value.get_device.call(this, ppdevice)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10ShaderResourceView1*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10ShaderResourceView1*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10ShaderResourceView1*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def get_resource(ppresource : ID3D10Resource*) : Void
-    @lpVtbl.value.get_resource.unsafe_as(Proc(ID3D10Resource*, Void)).call(ppresource)
+  def get_resource(this : ID3D10ShaderResourceView1*, ppresource : ID3D10Resource*) : Void
+    @lpVtbl.value.get_resource.call(this, ppresource)
   end
-  def get_desc(pdesc : D3D10_SHADER_RESOURCE_VIEW_DESC*) : Void
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_SHADER_RESOURCE_VIEW_DESC*, Void)).call(pdesc)
+  def get_desc(this : ID3D10ShaderResourceView1*, pdesc : D3D10_SHADER_RESOURCE_VIEW_DESC*) : Void
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_desc1(pdesc : D3D10_SHADER_RESOURCE_VIEW_DESC1*) : Void
-    @lpVtbl.value.get_desc1.unsafe_as(Proc(D3D10_SHADER_RESOURCE_VIEW_DESC1*, Void)).call(pdesc)
+  def get_desc1(this : ID3D10ShaderResourceView1*, pdesc : D3D10_SHADER_RESOURCE_VIEW_DESC1*) : Void
+    @lpVtbl.value.get_desc1.call(this, pdesc)
   end
 end
 struct LibWin32::ID3D10Device1
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10Device1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10Device1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10Device1*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def vs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
-    @lpVtbl.value.vs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D10Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  def vs_set_constant_buffers(this : ID3D10Device1*, startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
+    @lpVtbl.value.vs_set_constant_buffers.call(this, startslot, numbuffers, ppconstantbuffers)
   end
-  def ps_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
-    @lpVtbl.value.ps_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D10ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  def ps_set_shader_resources(this : ID3D10Device1*, startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
+    @lpVtbl.value.ps_set_shader_resources.call(this, startslot, numviews, ppshaderresourceviews)
   end
-  def ps_set_shader(ppixelshader : ID3D10PixelShader) : Void
-    @lpVtbl.value.ps_set_shader.unsafe_as(Proc(ID3D10PixelShader, Void)).call(ppixelshader)
+  def ps_set_shader(this : ID3D10Device1*, ppixelshader : ID3D10PixelShader) : Void
+    @lpVtbl.value.ps_set_shader.call(this, ppixelshader)
   end
-  def ps_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
-    @lpVtbl.value.ps_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D10SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  def ps_set_samplers(this : ID3D10Device1*, startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
+    @lpVtbl.value.ps_set_samplers.call(this, startslot, numsamplers, ppsamplers)
   end
-  def vs_set_shader(pvertexshader : ID3D10VertexShader) : Void
-    @lpVtbl.value.vs_set_shader.unsafe_as(Proc(ID3D10VertexShader, Void)).call(pvertexshader)
+  def vs_set_shader(this : ID3D10Device1*, pvertexshader : ID3D10VertexShader) : Void
+    @lpVtbl.value.vs_set_shader.call(this, pvertexshader)
   end
-  def draw_indexed(indexcount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32) : Void
-    @lpVtbl.value.draw_indexed.unsafe_as(Proc(UInt32, UInt32, Int32, Void)).call(indexcount, startindexlocation, basevertexlocation)
+  def draw_indexed(this : ID3D10Device1*, indexcount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32) : Void
+    @lpVtbl.value.draw_indexed.call(this, indexcount, startindexlocation, basevertexlocation)
   end
-  def draw(vertexcount : UInt32, startvertexlocation : UInt32) : Void
-    @lpVtbl.value.draw.unsafe_as(Proc(UInt32, UInt32, Void)).call(vertexcount, startvertexlocation)
+  def draw(this : ID3D10Device1*, vertexcount : UInt32, startvertexlocation : UInt32) : Void
+    @lpVtbl.value.draw.call(this, vertexcount, startvertexlocation)
   end
-  def ps_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
-    @lpVtbl.value.ps_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D10Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  def ps_set_constant_buffers(this : ID3D10Device1*, startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
+    @lpVtbl.value.ps_set_constant_buffers.call(this, startslot, numbuffers, ppconstantbuffers)
   end
-  def ia_set_input_layout(pinputlayout : ID3D10InputLayout) : Void
-    @lpVtbl.value.ia_set_input_layout.unsafe_as(Proc(ID3D10InputLayout, Void)).call(pinputlayout)
+  def ia_set_input_layout(this : ID3D10Device1*, pinputlayout : ID3D10InputLayout) : Void
+    @lpVtbl.value.ia_set_input_layout.call(this, pinputlayout)
   end
-  def ia_set_vertex_buffers(startslot : UInt32, numbuffers : UInt32, ppvertexbuffers : ID3D10Buffer*, pstrides : UInt32*, poffsets : UInt32*) : Void
-    @lpVtbl.value.ia_set_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D10Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppvertexbuffers, pstrides, poffsets)
+  def ia_set_vertex_buffers(this : ID3D10Device1*, startslot : UInt32, numbuffers : UInt32, ppvertexbuffers : ID3D10Buffer*, pstrides : UInt32*, poffsets : UInt32*) : Void
+    @lpVtbl.value.ia_set_vertex_buffers.call(this, startslot, numbuffers, ppvertexbuffers, pstrides, poffsets)
   end
-  def ia_set_index_buffer(pindexbuffer : ID3D10Buffer, format : DXGI_FORMAT, offset : UInt32) : Void
-    @lpVtbl.value.ia_set_index_buffer.unsafe_as(Proc(ID3D10Buffer, DXGI_FORMAT, UInt32, Void)).call(pindexbuffer, format, offset)
+  def ia_set_index_buffer(this : ID3D10Device1*, pindexbuffer : ID3D10Buffer, format : DXGI_FORMAT, offset : UInt32) : Void
+    @lpVtbl.value.ia_set_index_buffer.call(this, pindexbuffer, format, offset)
   end
-  def draw_indexed_instanced(indexcountperinstance : UInt32, instancecount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32, startinstancelocation : UInt32) : Void
-    @lpVtbl.value.draw_indexed_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, Int32, UInt32, Void)).call(indexcountperinstance, instancecount, startindexlocation, basevertexlocation, startinstancelocation)
+  def draw_indexed_instanced(this : ID3D10Device1*, indexcountperinstance : UInt32, instancecount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_indexed_instanced.call(this, indexcountperinstance, instancecount, startindexlocation, basevertexlocation, startinstancelocation)
   end
-  def draw_instanced(vertexcountperinstance : UInt32, instancecount : UInt32, startvertexlocation : UInt32, startinstancelocation : UInt32) : Void
-    @lpVtbl.value.draw_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, Void)).call(vertexcountperinstance, instancecount, startvertexlocation, startinstancelocation)
+  def draw_instanced(this : ID3D10Device1*, vertexcountperinstance : UInt32, instancecount : UInt32, startvertexlocation : UInt32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_instanced.call(this, vertexcountperinstance, instancecount, startvertexlocation, startinstancelocation)
   end
-  def gs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
-    @lpVtbl.value.gs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D10Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  def gs_set_constant_buffers(this : ID3D10Device1*, startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
+    @lpVtbl.value.gs_set_constant_buffers.call(this, startslot, numbuffers, ppconstantbuffers)
   end
-  def gs_set_shader(pshader : ID3D10GeometryShader) : Void
-    @lpVtbl.value.gs_set_shader.unsafe_as(Proc(ID3D10GeometryShader, Void)).call(pshader)
+  def gs_set_shader(this : ID3D10Device1*, pshader : ID3D10GeometryShader) : Void
+    @lpVtbl.value.gs_set_shader.call(this, pshader)
   end
-  def ia_set_primitive_topology(topology : D3D_PRIMITIVE_TOPOLOGY) : Void
-    @lpVtbl.value.ia_set_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY, Void)).call(topology)
+  def ia_set_primitive_topology(this : ID3D10Device1*, topology : D3D_PRIMITIVE_TOPOLOGY) : Void
+    @lpVtbl.value.ia_set_primitive_topology.call(this, topology)
   end
-  def vs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
-    @lpVtbl.value.vs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D10ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  def vs_set_shader_resources(this : ID3D10Device1*, startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
+    @lpVtbl.value.vs_set_shader_resources.call(this, startslot, numviews, ppshaderresourceviews)
   end
-  def vs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
-    @lpVtbl.value.vs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D10SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  def vs_set_samplers(this : ID3D10Device1*, startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
+    @lpVtbl.value.vs_set_samplers.call(this, startslot, numsamplers, ppsamplers)
   end
-  def set_predication(ppredicate : ID3D10Predicate, predicatevalue : LibC::BOOL) : Void
-    @lpVtbl.value.set_predication.unsafe_as(Proc(ID3D10Predicate, LibC::BOOL, Void)).call(ppredicate, predicatevalue)
+  def set_predication(this : ID3D10Device1*, ppredicate : ID3D10Predicate, predicatevalue : LibC::BOOL) : Void
+    @lpVtbl.value.set_predication.call(this, ppredicate, predicatevalue)
   end
-  def gs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
-    @lpVtbl.value.gs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D10ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  def gs_set_shader_resources(this : ID3D10Device1*, startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
+    @lpVtbl.value.gs_set_shader_resources.call(this, startslot, numviews, ppshaderresourceviews)
   end
-  def gs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
-    @lpVtbl.value.gs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D10SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  def gs_set_samplers(this : ID3D10Device1*, startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
+    @lpVtbl.value.gs_set_samplers.call(this, startslot, numsamplers, ppsamplers)
   end
-  def om_set_render_targets(numviews : UInt32, pprendertargetviews : ID3D10RenderTargetView*, pdepthstencilview : ID3D10DepthStencilView) : Void
-    @lpVtbl.value.om_set_render_targets.unsafe_as(Proc(UInt32, ID3D10RenderTargetView*, ID3D10DepthStencilView, Void)).call(numviews, pprendertargetviews, pdepthstencilview)
+  def om_set_render_targets(this : ID3D10Device1*, numviews : UInt32, pprendertargetviews : ID3D10RenderTargetView*, pdepthstencilview : ID3D10DepthStencilView) : Void
+    @lpVtbl.value.om_set_render_targets.call(this, numviews, pprendertargetviews, pdepthstencilview)
   end
-  def om_set_blend_state(pblendstate : ID3D10BlendState, blendfactor : Float32*, samplemask : UInt32) : Void
-    @lpVtbl.value.om_set_blend_state.unsafe_as(Proc(ID3D10BlendState, Float32*, UInt32, Void)).call(pblendstate, blendfactor, samplemask)
+  def om_set_blend_state(this : ID3D10Device1*, pblendstate : ID3D10BlendState, blendfactor : Float32*, samplemask : UInt32) : Void
+    @lpVtbl.value.om_set_blend_state.call(this, pblendstate, blendfactor, samplemask)
   end
-  def om_set_depth_stencil_state(pdepthstencilstate : ID3D10DepthStencilState, stencilref : UInt32) : Void
-    @lpVtbl.value.om_set_depth_stencil_state.unsafe_as(Proc(ID3D10DepthStencilState, UInt32, Void)).call(pdepthstencilstate, stencilref)
+  def om_set_depth_stencil_state(this : ID3D10Device1*, pdepthstencilstate : ID3D10DepthStencilState, stencilref : UInt32) : Void
+    @lpVtbl.value.om_set_depth_stencil_state.call(this, pdepthstencilstate, stencilref)
   end
-  def so_set_targets(numbuffers : UInt32, ppsotargets : ID3D10Buffer*, poffsets : UInt32*) : Void
-    @lpVtbl.value.so_set_targets.unsafe_as(Proc(UInt32, ID3D10Buffer*, UInt32*, Void)).call(numbuffers, ppsotargets, poffsets)
+  def so_set_targets(this : ID3D10Device1*, numbuffers : UInt32, ppsotargets : ID3D10Buffer*, poffsets : UInt32*) : Void
+    @lpVtbl.value.so_set_targets.call(this, numbuffers, ppsotargets, poffsets)
   end
-  def draw_auto : Void
-    @lpVtbl.value.draw_auto.unsafe_as(Proc(Void)).call
+  def draw_auto(this : ID3D10Device1*) : Void
+    @lpVtbl.value.draw_auto.call(this)
   end
-  def rs_set_state(prasterizerstate : ID3D10RasterizerState) : Void
-    @lpVtbl.value.rs_set_state.unsafe_as(Proc(ID3D10RasterizerState, Void)).call(prasterizerstate)
+  def rs_set_state(this : ID3D10Device1*, prasterizerstate : ID3D10RasterizerState) : Void
+    @lpVtbl.value.rs_set_state.call(this, prasterizerstate)
   end
-  def rs_set_viewports(numviewports : UInt32, pviewports : D3D10_VIEWPORT*) : Void
-    @lpVtbl.value.rs_set_viewports.unsafe_as(Proc(UInt32, D3D10_VIEWPORT*, Void)).call(numviewports, pviewports)
+  def rs_set_viewports(this : ID3D10Device1*, numviewports : UInt32, pviewports : D3D10_VIEWPORT*) : Void
+    @lpVtbl.value.rs_set_viewports.call(this, numviewports, pviewports)
   end
-  def rs_set_scissor_rects(numrects : UInt32, prects : RECT*) : Void
-    @lpVtbl.value.rs_set_scissor_rects.unsafe_as(Proc(UInt32, RECT*, Void)).call(numrects, prects)
+  def rs_set_scissor_rects(this : ID3D10Device1*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.rs_set_scissor_rects.call(this, numrects, prects)
   end
-  def copy_subresource_region(pdstresource : ID3D10Resource, dstsubresource : UInt32, dstx : UInt32, dsty : UInt32, dstz : UInt32, psrcresource : ID3D10Resource, srcsubresource : UInt32, psrcbox : D3D10_BOX*) : Void
-    @lpVtbl.value.copy_subresource_region.unsafe_as(Proc(ID3D10Resource, UInt32, UInt32, UInt32, UInt32, ID3D10Resource, UInt32, D3D10_BOX*, Void)).call(pdstresource, dstsubresource, dstx, dsty, dstz, psrcresource, srcsubresource, psrcbox)
+  def copy_subresource_region(this : ID3D10Device1*, pdstresource : ID3D10Resource, dstsubresource : UInt32, dstx : UInt32, dsty : UInt32, dstz : UInt32, psrcresource : ID3D10Resource, srcsubresource : UInt32, psrcbox : D3D10_BOX*) : Void
+    @lpVtbl.value.copy_subresource_region.call(this, pdstresource, dstsubresource, dstx, dsty, dstz, psrcresource, srcsubresource, psrcbox)
   end
-  def copy_resource(pdstresource : ID3D10Resource, psrcresource : ID3D10Resource) : Void
-    @lpVtbl.value.copy_resource.unsafe_as(Proc(ID3D10Resource, ID3D10Resource, Void)).call(pdstresource, psrcresource)
+  def copy_resource(this : ID3D10Device1*, pdstresource : ID3D10Resource, psrcresource : ID3D10Resource) : Void
+    @lpVtbl.value.copy_resource.call(this, pdstresource, psrcresource)
   end
-  def update_subresource(pdstresource : ID3D10Resource, dstsubresource : UInt32, pdstbox : D3D10_BOX*, psrcdata : Void*, srcrowpitch : UInt32, srcdepthpitch : UInt32) : Void
-    @lpVtbl.value.update_subresource.unsafe_as(Proc(ID3D10Resource, UInt32, D3D10_BOX*, Void*, UInt32, UInt32, Void)).call(pdstresource, dstsubresource, pdstbox, psrcdata, srcrowpitch, srcdepthpitch)
+  def update_subresource(this : ID3D10Device1*, pdstresource : ID3D10Resource, dstsubresource : UInt32, pdstbox : D3D10_BOX*, psrcdata : Void*, srcrowpitch : UInt32, srcdepthpitch : UInt32) : Void
+    @lpVtbl.value.update_subresource.call(this, pdstresource, dstsubresource, pdstbox, psrcdata, srcrowpitch, srcdepthpitch)
   end
-  def clear_render_target_view(prendertargetview : ID3D10RenderTargetView, colorrgba : Float32*) : Void
-    @lpVtbl.value.clear_render_target_view.unsafe_as(Proc(ID3D10RenderTargetView, Float32*, Void)).call(prendertargetview, colorrgba)
+  def clear_render_target_view(this : ID3D10Device1*, prendertargetview : ID3D10RenderTargetView, colorrgba : Float32*) : Void
+    @lpVtbl.value.clear_render_target_view.call(this, prendertargetview, colorrgba)
   end
-  def clear_depth_stencil_view(pdepthstencilview : ID3D10DepthStencilView, clearflags : UInt32, depth : Float32, stencil : UInt8) : Void
-    @lpVtbl.value.clear_depth_stencil_view.unsafe_as(Proc(ID3D10DepthStencilView, UInt32, Float32, UInt8, Void)).call(pdepthstencilview, clearflags, depth, stencil)
+  def clear_depth_stencil_view(this : ID3D10Device1*, pdepthstencilview : ID3D10DepthStencilView, clearflags : UInt32, depth : Float32, stencil : UInt8) : Void
+    @lpVtbl.value.clear_depth_stencil_view.call(this, pdepthstencilview, clearflags, depth, stencil)
   end
-  def generate_mips(pshaderresourceview : ID3D10ShaderResourceView) : Void
-    @lpVtbl.value.generate_mips.unsafe_as(Proc(ID3D10ShaderResourceView, Void)).call(pshaderresourceview)
+  def generate_mips(this : ID3D10Device1*, pshaderresourceview : ID3D10ShaderResourceView) : Void
+    @lpVtbl.value.generate_mips.call(this, pshaderresourceview)
   end
-  def resolve_subresource(pdstresource : ID3D10Resource, dstsubresource : UInt32, psrcresource : ID3D10Resource, srcsubresource : UInt32, format : DXGI_FORMAT) : Void
-    @lpVtbl.value.resolve_subresource.unsafe_as(Proc(ID3D10Resource, UInt32, ID3D10Resource, UInt32, DXGI_FORMAT, Void)).call(pdstresource, dstsubresource, psrcresource, srcsubresource, format)
+  def resolve_subresource(this : ID3D10Device1*, pdstresource : ID3D10Resource, dstsubresource : UInt32, psrcresource : ID3D10Resource, srcsubresource : UInt32, format : DXGI_FORMAT) : Void
+    @lpVtbl.value.resolve_subresource.call(this, pdstresource, dstsubresource, psrcresource, srcsubresource, format)
   end
-  def vs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
-    @lpVtbl.value.vs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D10Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  def vs_get_constant_buffers(this : ID3D10Device1*, startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
+    @lpVtbl.value.vs_get_constant_buffers.call(this, startslot, numbuffers, ppconstantbuffers)
   end
-  def ps_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
-    @lpVtbl.value.ps_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D10ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  def ps_get_shader_resources(this : ID3D10Device1*, startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
+    @lpVtbl.value.ps_get_shader_resources.call(this, startslot, numviews, ppshaderresourceviews)
   end
-  def ps_get_shader(pppixelshader : ID3D10PixelShader*) : Void
-    @lpVtbl.value.ps_get_shader.unsafe_as(Proc(ID3D10PixelShader*, Void)).call(pppixelshader)
+  def ps_get_shader(this : ID3D10Device1*, pppixelshader : ID3D10PixelShader*) : Void
+    @lpVtbl.value.ps_get_shader.call(this, pppixelshader)
   end
-  def ps_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
-    @lpVtbl.value.ps_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D10SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  def ps_get_samplers(this : ID3D10Device1*, startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
+    @lpVtbl.value.ps_get_samplers.call(this, startslot, numsamplers, ppsamplers)
   end
-  def vs_get_shader(ppvertexshader : ID3D10VertexShader*) : Void
-    @lpVtbl.value.vs_get_shader.unsafe_as(Proc(ID3D10VertexShader*, Void)).call(ppvertexshader)
+  def vs_get_shader(this : ID3D10Device1*, ppvertexshader : ID3D10VertexShader*) : Void
+    @lpVtbl.value.vs_get_shader.call(this, ppvertexshader)
   end
-  def ps_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
-    @lpVtbl.value.ps_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D10Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  def ps_get_constant_buffers(this : ID3D10Device1*, startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
+    @lpVtbl.value.ps_get_constant_buffers.call(this, startslot, numbuffers, ppconstantbuffers)
   end
-  def ia_get_input_layout(ppinputlayout : ID3D10InputLayout*) : Void
-    @lpVtbl.value.ia_get_input_layout.unsafe_as(Proc(ID3D10InputLayout*, Void)).call(ppinputlayout)
+  def ia_get_input_layout(this : ID3D10Device1*, ppinputlayout : ID3D10InputLayout*) : Void
+    @lpVtbl.value.ia_get_input_layout.call(this, ppinputlayout)
   end
-  def ia_get_vertex_buffers(startslot : UInt32, numbuffers : UInt32, ppvertexbuffers : ID3D10Buffer*, pstrides : UInt32*, poffsets : UInt32*) : Void
-    @lpVtbl.value.ia_get_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D10Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppvertexbuffers, pstrides, poffsets)
+  def ia_get_vertex_buffers(this : ID3D10Device1*, startslot : UInt32, numbuffers : UInt32, ppvertexbuffers : ID3D10Buffer*, pstrides : UInt32*, poffsets : UInt32*) : Void
+    @lpVtbl.value.ia_get_vertex_buffers.call(this, startslot, numbuffers, ppvertexbuffers, pstrides, poffsets)
   end
-  def ia_get_index_buffer(pindexbuffer : ID3D10Buffer*, format : DXGI_FORMAT*, offset : UInt32*) : Void
-    @lpVtbl.value.ia_get_index_buffer.unsafe_as(Proc(ID3D10Buffer*, DXGI_FORMAT*, UInt32*, Void)).call(pindexbuffer, format, offset)
+  def ia_get_index_buffer(this : ID3D10Device1*, pindexbuffer : ID3D10Buffer*, format : DXGI_FORMAT*, offset : UInt32*) : Void
+    @lpVtbl.value.ia_get_index_buffer.call(this, pindexbuffer, format, offset)
   end
-  def gs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
-    @lpVtbl.value.gs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D10Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  def gs_get_constant_buffers(this : ID3D10Device1*, startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D10Buffer*) : Void
+    @lpVtbl.value.gs_get_constant_buffers.call(this, startslot, numbuffers, ppconstantbuffers)
   end
-  def gs_get_shader(ppgeometryshader : ID3D10GeometryShader*) : Void
-    @lpVtbl.value.gs_get_shader.unsafe_as(Proc(ID3D10GeometryShader*, Void)).call(ppgeometryshader)
+  def gs_get_shader(this : ID3D10Device1*, ppgeometryshader : ID3D10GeometryShader*) : Void
+    @lpVtbl.value.gs_get_shader.call(this, ppgeometryshader)
   end
-  def ia_get_primitive_topology(ptopology : D3D_PRIMITIVE_TOPOLOGY*) : Void
-    @lpVtbl.value.ia_get_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY*, Void)).call(ptopology)
+  def ia_get_primitive_topology(this : ID3D10Device1*, ptopology : D3D_PRIMITIVE_TOPOLOGY*) : Void
+    @lpVtbl.value.ia_get_primitive_topology.call(this, ptopology)
   end
-  def vs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
-    @lpVtbl.value.vs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D10ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  def vs_get_shader_resources(this : ID3D10Device1*, startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
+    @lpVtbl.value.vs_get_shader_resources.call(this, startslot, numviews, ppshaderresourceviews)
   end
-  def vs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
-    @lpVtbl.value.vs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D10SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  def vs_get_samplers(this : ID3D10Device1*, startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
+    @lpVtbl.value.vs_get_samplers.call(this, startslot, numsamplers, ppsamplers)
   end
-  def get_predication(pppredicate : ID3D10Predicate*, ppredicatevalue : LibC::BOOL*) : Void
-    @lpVtbl.value.get_predication.unsafe_as(Proc(ID3D10Predicate*, LibC::BOOL*, Void)).call(pppredicate, ppredicatevalue)
+  def get_predication(this : ID3D10Device1*, pppredicate : ID3D10Predicate*, ppredicatevalue : LibC::BOOL*) : Void
+    @lpVtbl.value.get_predication.call(this, pppredicate, ppredicatevalue)
   end
-  def gs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
-    @lpVtbl.value.gs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D10ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  def gs_get_shader_resources(this : ID3D10Device1*, startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D10ShaderResourceView*) : Void
+    @lpVtbl.value.gs_get_shader_resources.call(this, startslot, numviews, ppshaderresourceviews)
   end
-  def gs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
-    @lpVtbl.value.gs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D10SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  def gs_get_samplers(this : ID3D10Device1*, startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D10SamplerState*) : Void
+    @lpVtbl.value.gs_get_samplers.call(this, startslot, numsamplers, ppsamplers)
   end
-  def om_get_render_targets(numviews : UInt32, pprendertargetviews : ID3D10RenderTargetView*, ppdepthstencilview : ID3D10DepthStencilView*) : Void
-    @lpVtbl.value.om_get_render_targets.unsafe_as(Proc(UInt32, ID3D10RenderTargetView*, ID3D10DepthStencilView*, Void)).call(numviews, pprendertargetviews, ppdepthstencilview)
+  def om_get_render_targets(this : ID3D10Device1*, numviews : UInt32, pprendertargetviews : ID3D10RenderTargetView*, ppdepthstencilview : ID3D10DepthStencilView*) : Void
+    @lpVtbl.value.om_get_render_targets.call(this, numviews, pprendertargetviews, ppdepthstencilview)
   end
-  def om_get_blend_state(ppblendstate : ID3D10BlendState*, blendfactor : Float32*, psamplemask : UInt32*) : Void
-    @lpVtbl.value.om_get_blend_state.unsafe_as(Proc(ID3D10BlendState*, Float32*, UInt32*, Void)).call(ppblendstate, blendfactor, psamplemask)
+  def om_get_blend_state(this : ID3D10Device1*, ppblendstate : ID3D10BlendState*, blendfactor : Float32*, psamplemask : UInt32*) : Void
+    @lpVtbl.value.om_get_blend_state.call(this, ppblendstate, blendfactor, psamplemask)
   end
-  def om_get_depth_stencil_state(ppdepthstencilstate : ID3D10DepthStencilState*, pstencilref : UInt32*) : Void
-    @lpVtbl.value.om_get_depth_stencil_state.unsafe_as(Proc(ID3D10DepthStencilState*, UInt32*, Void)).call(ppdepthstencilstate, pstencilref)
+  def om_get_depth_stencil_state(this : ID3D10Device1*, ppdepthstencilstate : ID3D10DepthStencilState*, pstencilref : UInt32*) : Void
+    @lpVtbl.value.om_get_depth_stencil_state.call(this, ppdepthstencilstate, pstencilref)
   end
-  def so_get_targets(numbuffers : UInt32, ppsotargets : ID3D10Buffer*, poffsets : UInt32*) : Void
-    @lpVtbl.value.so_get_targets.unsafe_as(Proc(UInt32, ID3D10Buffer*, UInt32*, Void)).call(numbuffers, ppsotargets, poffsets)
+  def so_get_targets(this : ID3D10Device1*, numbuffers : UInt32, ppsotargets : ID3D10Buffer*, poffsets : UInt32*) : Void
+    @lpVtbl.value.so_get_targets.call(this, numbuffers, ppsotargets, poffsets)
   end
-  def rs_get_state(pprasterizerstate : ID3D10RasterizerState*) : Void
-    @lpVtbl.value.rs_get_state.unsafe_as(Proc(ID3D10RasterizerState*, Void)).call(pprasterizerstate)
+  def rs_get_state(this : ID3D10Device1*, pprasterizerstate : ID3D10RasterizerState*) : Void
+    @lpVtbl.value.rs_get_state.call(this, pprasterizerstate)
   end
-  def rs_get_viewports(numviewports : UInt32*, pviewports : D3D10_VIEWPORT*) : Void
-    @lpVtbl.value.rs_get_viewports.unsafe_as(Proc(UInt32*, D3D10_VIEWPORT*, Void)).call(numviewports, pviewports)
+  def rs_get_viewports(this : ID3D10Device1*, numviewports : UInt32*, pviewports : D3D10_VIEWPORT*) : Void
+    @lpVtbl.value.rs_get_viewports.call(this, numviewports, pviewports)
   end
-  def rs_get_scissor_rects(numrects : UInt32*, prects : RECT*) : Void
-    @lpVtbl.value.rs_get_scissor_rects.unsafe_as(Proc(UInt32*, RECT*, Void)).call(numrects, prects)
+  def rs_get_scissor_rects(this : ID3D10Device1*, numrects : UInt32*, prects : RECT*) : Void
+    @lpVtbl.value.rs_get_scissor_rects.call(this, numrects, prects)
   end
-  def get_device_removed_reason : HRESULT
-    @lpVtbl.value.get_device_removed_reason.unsafe_as(Proc(HRESULT)).call
+  def get_device_removed_reason(this : ID3D10Device1*) : HRESULT
+    @lpVtbl.value.get_device_removed_reason.call(this)
   end
-  def set_exception_mode(raiseflags : UInt32) : HRESULT
-    @lpVtbl.value.set_exception_mode.unsafe_as(Proc(UInt32, HRESULT)).call(raiseflags)
+  def set_exception_mode(this : ID3D10Device1*, raiseflags : UInt32) : HRESULT
+    @lpVtbl.value.set_exception_mode.call(this, raiseflags)
   end
-  def get_exception_mode : UInt32
-    @lpVtbl.value.get_exception_mode.unsafe_as(Proc(UInt32)).call
+  def get_exception_mode(this : ID3D10Device1*) : UInt32
+    @lpVtbl.value.get_exception_mode.call(this)
   end
-  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  def get_private_data(this : ID3D10Device1*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  def set_private_data(this : ID3D10Device1*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
   end
-  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  def set_private_data_interface(this : ID3D10Device1*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
   end
-  def clear_state : Void
-    @lpVtbl.value.clear_state.unsafe_as(Proc(Void)).call
+  def clear_state(this : ID3D10Device1*) : Void
+    @lpVtbl.value.clear_state.call(this)
   end
-  def flush : Void
-    @lpVtbl.value.flush.unsafe_as(Proc(Void)).call
+  def flush(this : ID3D10Device1*) : Void
+    @lpVtbl.value.flush.call(this)
   end
-  def create_buffer(pdesc : D3D10_BUFFER_DESC*, pinitialdata : D3D10_SUBRESOURCE_DATA*, ppbuffer : ID3D10Buffer*) : HRESULT
-    @lpVtbl.value.create_buffer.unsafe_as(Proc(D3D10_BUFFER_DESC*, D3D10_SUBRESOURCE_DATA*, ID3D10Buffer*, HRESULT)).call(pdesc, pinitialdata, ppbuffer)
+  def create_buffer(this : ID3D10Device1*, pdesc : D3D10_BUFFER_DESC*, pinitialdata : D3D10_SUBRESOURCE_DATA*, ppbuffer : ID3D10Buffer*) : HRESULT
+    @lpVtbl.value.create_buffer.call(this, pdesc, pinitialdata, ppbuffer)
   end
-  def create_texture1_d(pdesc : D3D10_TEXTURE1D_DESC*, pinitialdata : D3D10_SUBRESOURCE_DATA*, pptexture1d : ID3D10Texture1D*) : HRESULT
-    @lpVtbl.value.create_texture1_d.unsafe_as(Proc(D3D10_TEXTURE1D_DESC*, D3D10_SUBRESOURCE_DATA*, ID3D10Texture1D*, HRESULT)).call(pdesc, pinitialdata, pptexture1d)
+  def create_texture1_d(this : ID3D10Device1*, pdesc : D3D10_TEXTURE1D_DESC*, pinitialdata : D3D10_SUBRESOURCE_DATA*, pptexture1d : ID3D10Texture1D*) : HRESULT
+    @lpVtbl.value.create_texture1_d.call(this, pdesc, pinitialdata, pptexture1d)
   end
-  def create_texture2_d(pdesc : D3D10_TEXTURE2D_DESC*, pinitialdata : D3D10_SUBRESOURCE_DATA*, pptexture2d : ID3D10Texture2D*) : HRESULT
-    @lpVtbl.value.create_texture2_d.unsafe_as(Proc(D3D10_TEXTURE2D_DESC*, D3D10_SUBRESOURCE_DATA*, ID3D10Texture2D*, HRESULT)).call(pdesc, pinitialdata, pptexture2d)
+  def create_texture2_d(this : ID3D10Device1*, pdesc : D3D10_TEXTURE2D_DESC*, pinitialdata : D3D10_SUBRESOURCE_DATA*, pptexture2d : ID3D10Texture2D*) : HRESULT
+    @lpVtbl.value.create_texture2_d.call(this, pdesc, pinitialdata, pptexture2d)
   end
-  def create_texture3_d(pdesc : D3D10_TEXTURE3D_DESC*, pinitialdata : D3D10_SUBRESOURCE_DATA*, pptexture3d : ID3D10Texture3D*) : HRESULT
-    @lpVtbl.value.create_texture3_d.unsafe_as(Proc(D3D10_TEXTURE3D_DESC*, D3D10_SUBRESOURCE_DATA*, ID3D10Texture3D*, HRESULT)).call(pdesc, pinitialdata, pptexture3d)
+  def create_texture3_d(this : ID3D10Device1*, pdesc : D3D10_TEXTURE3D_DESC*, pinitialdata : D3D10_SUBRESOURCE_DATA*, pptexture3d : ID3D10Texture3D*) : HRESULT
+    @lpVtbl.value.create_texture3_d.call(this, pdesc, pinitialdata, pptexture3d)
   end
-  def create_shader_resource_view(presource : ID3D10Resource, pdesc : D3D10_SHADER_RESOURCE_VIEW_DESC*, ppsrview : ID3D10ShaderResourceView*) : HRESULT
-    @lpVtbl.value.create_shader_resource_view.unsafe_as(Proc(ID3D10Resource, D3D10_SHADER_RESOURCE_VIEW_DESC*, ID3D10ShaderResourceView*, HRESULT)).call(presource, pdesc, ppsrview)
+  def create_shader_resource_view(this : ID3D10Device1*, presource : ID3D10Resource, pdesc : D3D10_SHADER_RESOURCE_VIEW_DESC*, ppsrview : ID3D10ShaderResourceView*) : HRESULT
+    @lpVtbl.value.create_shader_resource_view.call(this, presource, pdesc, ppsrview)
   end
-  def create_render_target_view(presource : ID3D10Resource, pdesc : D3D10_RENDER_TARGET_VIEW_DESC*, pprtview : ID3D10RenderTargetView*) : HRESULT
-    @lpVtbl.value.create_render_target_view.unsafe_as(Proc(ID3D10Resource, D3D10_RENDER_TARGET_VIEW_DESC*, ID3D10RenderTargetView*, HRESULT)).call(presource, pdesc, pprtview)
+  def create_render_target_view(this : ID3D10Device1*, presource : ID3D10Resource, pdesc : D3D10_RENDER_TARGET_VIEW_DESC*, pprtview : ID3D10RenderTargetView*) : HRESULT
+    @lpVtbl.value.create_render_target_view.call(this, presource, pdesc, pprtview)
   end
-  def create_depth_stencil_view(presource : ID3D10Resource, pdesc : D3D10_DEPTH_STENCIL_VIEW_DESC*, ppdepthstencilview : ID3D10DepthStencilView*) : HRESULT
-    @lpVtbl.value.create_depth_stencil_view.unsafe_as(Proc(ID3D10Resource, D3D10_DEPTH_STENCIL_VIEW_DESC*, ID3D10DepthStencilView*, HRESULT)).call(presource, pdesc, ppdepthstencilview)
+  def create_depth_stencil_view(this : ID3D10Device1*, presource : ID3D10Resource, pdesc : D3D10_DEPTH_STENCIL_VIEW_DESC*, ppdepthstencilview : ID3D10DepthStencilView*) : HRESULT
+    @lpVtbl.value.create_depth_stencil_view.call(this, presource, pdesc, ppdepthstencilview)
   end
-  def create_input_layout(pinputelementdescs : D3D10_INPUT_ELEMENT_DESC*, numelements : UInt32, pshaderbytecodewithinputsignature : Void*, bytecodelength : LibC::UINT_PTR, ppinputlayout : ID3D10InputLayout*) : HRESULT
-    @lpVtbl.value.create_input_layout.unsafe_as(Proc(D3D10_INPUT_ELEMENT_DESC*, UInt32, Void*, LibC::UINT_PTR, ID3D10InputLayout*, HRESULT)).call(pinputelementdescs, numelements, pshaderbytecodewithinputsignature, bytecodelength, ppinputlayout)
+  def create_input_layout(this : ID3D10Device1*, pinputelementdescs : D3D10_INPUT_ELEMENT_DESC*, numelements : UInt32, pshaderbytecodewithinputsignature : Void*, bytecodelength : LibC::UINT_PTR, ppinputlayout : ID3D10InputLayout*) : HRESULT
+    @lpVtbl.value.create_input_layout.call(this, pinputelementdescs, numelements, pshaderbytecodewithinputsignature, bytecodelength, ppinputlayout)
   end
-  def create_vertex_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, ppvertexshader : ID3D10VertexShader*) : HRESULT
-    @lpVtbl.value.create_vertex_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D10VertexShader*, HRESULT)).call(pshaderbytecode, bytecodelength, ppvertexshader)
+  def create_vertex_shader(this : ID3D10Device1*, pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, ppvertexshader : ID3D10VertexShader*) : HRESULT
+    @lpVtbl.value.create_vertex_shader.call(this, pshaderbytecode, bytecodelength, ppvertexshader)
   end
-  def create_geometry_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, ppgeometryshader : ID3D10GeometryShader*) : HRESULT
-    @lpVtbl.value.create_geometry_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D10GeometryShader*, HRESULT)).call(pshaderbytecode, bytecodelength, ppgeometryshader)
+  def create_geometry_shader(this : ID3D10Device1*, pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, ppgeometryshader : ID3D10GeometryShader*) : HRESULT
+    @lpVtbl.value.create_geometry_shader.call(this, pshaderbytecode, bytecodelength, ppgeometryshader)
   end
-  def create_geometry_shader_with_stream_output(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, psodeclaration : D3D10_SO_DECLARATION_ENTRY*, numentries : UInt32, outputstreamstride : UInt32, ppgeometryshader : ID3D10GeometryShader*) : HRESULT
-    @lpVtbl.value.create_geometry_shader_with_stream_output.unsafe_as(Proc(Void*, LibC::UINT_PTR, D3D10_SO_DECLARATION_ENTRY*, UInt32, UInt32, ID3D10GeometryShader*, HRESULT)).call(pshaderbytecode, bytecodelength, psodeclaration, numentries, outputstreamstride, ppgeometryshader)
+  def create_geometry_shader_with_stream_output(this : ID3D10Device1*, pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, psodeclaration : D3D10_SO_DECLARATION_ENTRY*, numentries : UInt32, outputstreamstride : UInt32, ppgeometryshader : ID3D10GeometryShader*) : HRESULT
+    @lpVtbl.value.create_geometry_shader_with_stream_output.call(this, pshaderbytecode, bytecodelength, psodeclaration, numentries, outputstreamstride, ppgeometryshader)
   end
-  def create_pixel_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pppixelshader : ID3D10PixelShader*) : HRESULT
-    @lpVtbl.value.create_pixel_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D10PixelShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pppixelshader)
+  def create_pixel_shader(this : ID3D10Device1*, pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pppixelshader : ID3D10PixelShader*) : HRESULT
+    @lpVtbl.value.create_pixel_shader.call(this, pshaderbytecode, bytecodelength, pppixelshader)
   end
-  def create_blend_state(pblendstatedesc : D3D10_BLEND_DESC*, ppblendstate : ID3D10BlendState*) : HRESULT
-    @lpVtbl.value.create_blend_state.unsafe_as(Proc(D3D10_BLEND_DESC*, ID3D10BlendState*, HRESULT)).call(pblendstatedesc, ppblendstate)
+  def create_blend_state(this : ID3D10Device1*, pblendstatedesc : D3D10_BLEND_DESC*, ppblendstate : ID3D10BlendState*) : HRESULT
+    @lpVtbl.value.create_blend_state.call(this, pblendstatedesc, ppblendstate)
   end
-  def create_depth_stencil_state(pdepthstencildesc : D3D10_DEPTH_STENCIL_DESC*, ppdepthstencilstate : ID3D10DepthStencilState*) : HRESULT
-    @lpVtbl.value.create_depth_stencil_state.unsafe_as(Proc(D3D10_DEPTH_STENCIL_DESC*, ID3D10DepthStencilState*, HRESULT)).call(pdepthstencildesc, ppdepthstencilstate)
+  def create_depth_stencil_state(this : ID3D10Device1*, pdepthstencildesc : D3D10_DEPTH_STENCIL_DESC*, ppdepthstencilstate : ID3D10DepthStencilState*) : HRESULT
+    @lpVtbl.value.create_depth_stencil_state.call(this, pdepthstencildesc, ppdepthstencilstate)
   end
-  def create_rasterizer_state(prasterizerdesc : D3D10_RASTERIZER_DESC*, pprasterizerstate : ID3D10RasterizerState*) : HRESULT
-    @lpVtbl.value.create_rasterizer_state.unsafe_as(Proc(D3D10_RASTERIZER_DESC*, ID3D10RasterizerState*, HRESULT)).call(prasterizerdesc, pprasterizerstate)
+  def create_rasterizer_state(this : ID3D10Device1*, prasterizerdesc : D3D10_RASTERIZER_DESC*, pprasterizerstate : ID3D10RasterizerState*) : HRESULT
+    @lpVtbl.value.create_rasterizer_state.call(this, prasterizerdesc, pprasterizerstate)
   end
-  def create_sampler_state(psamplerdesc : D3D10_SAMPLER_DESC*, ppsamplerstate : ID3D10SamplerState*) : HRESULT
-    @lpVtbl.value.create_sampler_state.unsafe_as(Proc(D3D10_SAMPLER_DESC*, ID3D10SamplerState*, HRESULT)).call(psamplerdesc, ppsamplerstate)
+  def create_sampler_state(this : ID3D10Device1*, psamplerdesc : D3D10_SAMPLER_DESC*, ppsamplerstate : ID3D10SamplerState*) : HRESULT
+    @lpVtbl.value.create_sampler_state.call(this, psamplerdesc, ppsamplerstate)
   end
-  def create_query(pquerydesc : D3D10_QUERY_DESC*, ppquery : ID3D10Query*) : HRESULT
-    @lpVtbl.value.create_query.unsafe_as(Proc(D3D10_QUERY_DESC*, ID3D10Query*, HRESULT)).call(pquerydesc, ppquery)
+  def create_query(this : ID3D10Device1*, pquerydesc : D3D10_QUERY_DESC*, ppquery : ID3D10Query*) : HRESULT
+    @lpVtbl.value.create_query.call(this, pquerydesc, ppquery)
   end
-  def create_predicate(ppredicatedesc : D3D10_QUERY_DESC*, pppredicate : ID3D10Predicate*) : HRESULT
-    @lpVtbl.value.create_predicate.unsafe_as(Proc(D3D10_QUERY_DESC*, ID3D10Predicate*, HRESULT)).call(ppredicatedesc, pppredicate)
+  def create_predicate(this : ID3D10Device1*, ppredicatedesc : D3D10_QUERY_DESC*, pppredicate : ID3D10Predicate*) : HRESULT
+    @lpVtbl.value.create_predicate.call(this, ppredicatedesc, pppredicate)
   end
-  def create_counter(pcounterdesc : D3D10_COUNTER_DESC*, ppcounter : ID3D10Counter*) : HRESULT
-    @lpVtbl.value.create_counter.unsafe_as(Proc(D3D10_COUNTER_DESC*, ID3D10Counter*, HRESULT)).call(pcounterdesc, ppcounter)
+  def create_counter(this : ID3D10Device1*, pcounterdesc : D3D10_COUNTER_DESC*, ppcounter : ID3D10Counter*) : HRESULT
+    @lpVtbl.value.create_counter.call(this, pcounterdesc, ppcounter)
   end
-  def check_format_support(format : DXGI_FORMAT, pformatsupport : UInt32*) : HRESULT
-    @lpVtbl.value.check_format_support.unsafe_as(Proc(DXGI_FORMAT, UInt32*, HRESULT)).call(format, pformatsupport)
+  def check_format_support(this : ID3D10Device1*, format : DXGI_FORMAT, pformatsupport : UInt32*) : HRESULT
+    @lpVtbl.value.check_format_support.call(this, format, pformatsupport)
   end
-  def check_multisample_quality_levels(format : DXGI_FORMAT, samplecount : UInt32, pnumqualitylevels : UInt32*) : HRESULT
-    @lpVtbl.value.check_multisample_quality_levels.unsafe_as(Proc(DXGI_FORMAT, UInt32, UInt32*, HRESULT)).call(format, samplecount, pnumqualitylevels)
+  def check_multisample_quality_levels(this : ID3D10Device1*, format : DXGI_FORMAT, samplecount : UInt32, pnumqualitylevels : UInt32*) : HRESULT
+    @lpVtbl.value.check_multisample_quality_levels.call(this, format, samplecount, pnumqualitylevels)
   end
-  def check_counter_info(pcounterinfo : D3D10_COUNTER_INFO*) : Void
-    @lpVtbl.value.check_counter_info.unsafe_as(Proc(D3D10_COUNTER_INFO*, Void)).call(pcounterinfo)
+  def check_counter_info(this : ID3D10Device1*, pcounterinfo : D3D10_COUNTER_INFO*) : Void
+    @lpVtbl.value.check_counter_info.call(this, pcounterinfo)
   end
-  def check_counter(pdesc : D3D10_COUNTER_DESC*, ptype : D3D10_COUNTER_TYPE*, pactivecounters : UInt32*, szname : UInt8*, pnamelength : UInt32*, szunits : UInt8*, punitslength : UInt32*, szdescription : UInt8*, pdescriptionlength : UInt32*) : HRESULT
-    @lpVtbl.value.check_counter.unsafe_as(Proc(D3D10_COUNTER_DESC*, D3D10_COUNTER_TYPE*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)).call(pdesc, ptype, pactivecounters, szname, pnamelength, szunits, punitslength, szdescription, pdescriptionlength)
+  def check_counter(this : ID3D10Device1*, pdesc : D3D10_COUNTER_DESC*, ptype : D3D10_COUNTER_TYPE*, pactivecounters : UInt32*, szname : UInt8*, pnamelength : UInt32*, szunits : UInt8*, punitslength : UInt32*, szdescription : UInt8*, pdescriptionlength : UInt32*) : HRESULT
+    @lpVtbl.value.check_counter.call(this, pdesc, ptype, pactivecounters, szname, pnamelength, szunits, punitslength, szdescription, pdescriptionlength)
   end
-  def get_creation_flags : UInt32
-    @lpVtbl.value.get_creation_flags.unsafe_as(Proc(UInt32)).call
+  def get_creation_flags(this : ID3D10Device1*) : UInt32
+    @lpVtbl.value.get_creation_flags.call(this)
   end
-  def open_shared_resource(hresource : LibC::HANDLE, returnedinterface : Guid*, ppresource : Void**) : HRESULT
-    @lpVtbl.value.open_shared_resource.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hresource, returnedinterface, ppresource)
+  def open_shared_resource(this : ID3D10Device1*, hresource : LibC::HANDLE, returnedinterface : Guid*, ppresource : Void**) : HRESULT
+    @lpVtbl.value.open_shared_resource.call(this, hresource, returnedinterface, ppresource)
   end
-  def set_text_filter_size(width : UInt32, height : UInt32) : Void
-    @lpVtbl.value.set_text_filter_size.unsafe_as(Proc(UInt32, UInt32, Void)).call(width, height)
+  def set_text_filter_size(this : ID3D10Device1*, width : UInt32, height : UInt32) : Void
+    @lpVtbl.value.set_text_filter_size.call(this, width, height)
   end
-  def get_text_filter_size(pwidth : UInt32*, pheight : UInt32*) : Void
-    @lpVtbl.value.get_text_filter_size.unsafe_as(Proc(UInt32*, UInt32*, Void)).call(pwidth, pheight)
+  def get_text_filter_size(this : ID3D10Device1*, pwidth : UInt32*, pheight : UInt32*) : Void
+    @lpVtbl.value.get_text_filter_size.call(this, pwidth, pheight)
   end
-  def create_shader_resource_view1(presource : ID3D10Resource, pdesc : D3D10_SHADER_RESOURCE_VIEW_DESC1*, ppsrview : ID3D10ShaderResourceView1*) : HRESULT
-    @lpVtbl.value.create_shader_resource_view1.unsafe_as(Proc(ID3D10Resource, D3D10_SHADER_RESOURCE_VIEW_DESC1*, ID3D10ShaderResourceView1*, HRESULT)).call(presource, pdesc, ppsrview)
+  def create_shader_resource_view1(this : ID3D10Device1*, presource : ID3D10Resource, pdesc : D3D10_SHADER_RESOURCE_VIEW_DESC1*, ppsrview : ID3D10ShaderResourceView1*) : HRESULT
+    @lpVtbl.value.create_shader_resource_view1.call(this, presource, pdesc, ppsrview)
   end
-  def create_blend_state1(pblendstatedesc : D3D10_BLEND_DESC1*, ppblendstate : ID3D10BlendState1*) : HRESULT
-    @lpVtbl.value.create_blend_state1.unsafe_as(Proc(D3D10_BLEND_DESC1*, ID3D10BlendState1*, HRESULT)).call(pblendstatedesc, ppblendstate)
+  def create_blend_state1(this : ID3D10Device1*, pblendstatedesc : D3D10_BLEND_DESC1*, ppblendstate : ID3D10BlendState1*) : HRESULT
+    @lpVtbl.value.create_blend_state1.call(this, pblendstatedesc, ppblendstate)
   end
-  def get_feature_level : D3D10_FEATURE_LEVEL1
-    @lpVtbl.value.get_feature_level.unsafe_as(Proc(D3D10_FEATURE_LEVEL1)).call
+  def get_feature_level(this : ID3D10Device1*) : D3D10_FEATURE_LEVEL1
+    @lpVtbl.value.get_feature_level.call(this)
   end
 end
 struct LibWin32::ID3D10ShaderReflection1
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID3D10ShaderReflection1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID3D10ShaderReflection1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID3D10ShaderReflection1*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_desc(pdesc : D3D10_SHADER_DESC*) : HRESULT
-    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D10_SHADER_DESC*, HRESULT)).call(pdesc)
+  def get_desc(this : ID3D10ShaderReflection1*, pdesc : D3D10_SHADER_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
   end
-  def get_constant_buffer_by_index(index : UInt32) : ID3D10ShaderReflectionConstantBuffer
-    @lpVtbl.value.get_constant_buffer_by_index.unsafe_as(Proc(UInt32, ID3D10ShaderReflectionConstantBuffer)).call(index)
+  def get_constant_buffer_by_index(this : ID3D10ShaderReflection1*, index : UInt32) : ID3D10ShaderReflectionConstantBuffer
+    @lpVtbl.value.get_constant_buffer_by_index.call(this, index)
   end
-  def get_constant_buffer_by_name(name : PSTR) : ID3D10ShaderReflectionConstantBuffer
-    @lpVtbl.value.get_constant_buffer_by_name.unsafe_as(Proc(PSTR, ID3D10ShaderReflectionConstantBuffer)).call(name)
+  def get_constant_buffer_by_name(this : ID3D10ShaderReflection1*, name : PSTR) : ID3D10ShaderReflectionConstantBuffer
+    @lpVtbl.value.get_constant_buffer_by_name.call(this, name)
   end
-  def get_resource_binding_desc(resourceindex : UInt32, pdesc : D3D10_SHADER_INPUT_BIND_DESC*) : HRESULT
-    @lpVtbl.value.get_resource_binding_desc.unsafe_as(Proc(UInt32, D3D10_SHADER_INPUT_BIND_DESC*, HRESULT)).call(resourceindex, pdesc)
+  def get_resource_binding_desc(this : ID3D10ShaderReflection1*, resourceindex : UInt32, pdesc : D3D10_SHADER_INPUT_BIND_DESC*) : HRESULT
+    @lpVtbl.value.get_resource_binding_desc.call(this, resourceindex, pdesc)
   end
-  def get_input_parameter_desc(parameterindex : UInt32, pdesc : D3D10_SIGNATURE_PARAMETER_DESC*) : HRESULT
-    @lpVtbl.value.get_input_parameter_desc.unsafe_as(Proc(UInt32, D3D10_SIGNATURE_PARAMETER_DESC*, HRESULT)).call(parameterindex, pdesc)
+  def get_input_parameter_desc(this : ID3D10ShaderReflection1*, parameterindex : UInt32, pdesc : D3D10_SIGNATURE_PARAMETER_DESC*) : HRESULT
+    @lpVtbl.value.get_input_parameter_desc.call(this, parameterindex, pdesc)
   end
-  def get_output_parameter_desc(parameterindex : UInt32, pdesc : D3D10_SIGNATURE_PARAMETER_DESC*) : HRESULT
-    @lpVtbl.value.get_output_parameter_desc.unsafe_as(Proc(UInt32, D3D10_SIGNATURE_PARAMETER_DESC*, HRESULT)).call(parameterindex, pdesc)
+  def get_output_parameter_desc(this : ID3D10ShaderReflection1*, parameterindex : UInt32, pdesc : D3D10_SIGNATURE_PARAMETER_DESC*) : HRESULT
+    @lpVtbl.value.get_output_parameter_desc.call(this, parameterindex, pdesc)
   end
-  def get_variable_by_name(name : PSTR) : ID3D10ShaderReflectionVariable
-    @lpVtbl.value.get_variable_by_name.unsafe_as(Proc(PSTR, ID3D10ShaderReflectionVariable)).call(name)
+  def get_variable_by_name(this : ID3D10ShaderReflection1*, name : PSTR) : ID3D10ShaderReflectionVariable
+    @lpVtbl.value.get_variable_by_name.call(this, name)
   end
-  def get_resource_binding_desc_by_name(name : PSTR, pdesc : D3D10_SHADER_INPUT_BIND_DESC*) : HRESULT
-    @lpVtbl.value.get_resource_binding_desc_by_name.unsafe_as(Proc(PSTR, D3D10_SHADER_INPUT_BIND_DESC*, HRESULT)).call(name, pdesc)
+  def get_resource_binding_desc_by_name(this : ID3D10ShaderReflection1*, name : PSTR, pdesc : D3D10_SHADER_INPUT_BIND_DESC*) : HRESULT
+    @lpVtbl.value.get_resource_binding_desc_by_name.call(this, name, pdesc)
   end
-  def get_mov_instruction_count(pcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_mov_instruction_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcount)
+  def get_mov_instruction_count(this : ID3D10ShaderReflection1*, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_mov_instruction_count.call(this, pcount)
   end
-  def get_movc_instruction_count(pcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_movc_instruction_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcount)
+  def get_movc_instruction_count(this : ID3D10ShaderReflection1*, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_movc_instruction_count.call(this, pcount)
   end
-  def get_conversion_instruction_count(pcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_conversion_instruction_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcount)
+  def get_conversion_instruction_count(this : ID3D10ShaderReflection1*, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_conversion_instruction_count.call(this, pcount)
   end
-  def get_bitwise_instruction_count(pcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_bitwise_instruction_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcount)
+  def get_bitwise_instruction_count(this : ID3D10ShaderReflection1*, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_bitwise_instruction_count.call(this, pcount)
   end
-  def get_gs_input_primitive(pprim : D3D_PRIMITIVE*) : HRESULT
-    @lpVtbl.value.get_gs_input_primitive.unsafe_as(Proc(D3D_PRIMITIVE*, HRESULT)).call(pprim)
+  def get_gs_input_primitive(this : ID3D10ShaderReflection1*, pprim : D3D_PRIMITIVE*) : HRESULT
+    @lpVtbl.value.get_gs_input_primitive.call(this, pprim)
   end
-  def is_level9_shader(pblevel9shader : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_level9_shader.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pblevel9shader)
+  def is_level9_shader(this : ID3D10ShaderReflection1*, pblevel9shader : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_level9_shader.call(this, pblevel9shader)
   end
-  def is_sample_frequency_shader(pbsamplefrequency : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_sample_frequency_shader.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbsamplefrequency)
+  def is_sample_frequency_shader(this : ID3D10ShaderReflection1*, pbsamplefrequency : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_sample_frequency_shader.call(this, pbsamplefrequency)
   end
 end

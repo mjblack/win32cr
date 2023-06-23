@@ -49,18 +49,18 @@ lib LibWin32
 
 
   struct ISensNetworkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    connection_made : UInt64
-    connection_made_no_qoc_info : UInt64
-    connection_lost : UInt64
-    destination_reachable : UInt64
-    destination_reachable_no_qoc_info : UInt64
+    query_interface : Proc(ISensNetwork*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISensNetwork*, UInt32)
+    release : Proc(ISensNetwork*, UInt32)
+    get_type_info_count : Proc(ISensNetwork*, UInt32*, HRESULT)
+    get_type_info : Proc(ISensNetwork*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISensNetwork*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISensNetwork*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    connection_made : Proc(ISensNetwork*, UInt8*, UInt32, SENS_QOCINFO*, HRESULT)
+    connection_made_no_qoc_info : Proc(ISensNetwork*, UInt8*, UInt32, HRESULT)
+    connection_lost : Proc(ISensNetwork*, UInt8*, SENS_CONNECTION_TYPE, HRESULT)
+    destination_reachable : Proc(ISensNetwork*, UInt8*, UInt8*, UInt32, SENS_QOCINFO*, HRESULT)
+    destination_reachable_no_qoc_info : Proc(ISensNetwork*, UInt8*, UInt8*, UInt32, HRESULT)
   end
 
   ISensNetwork_GUID = "d597bab1-5b9f-11d1-8dd2-00aa004abd5e"
@@ -70,16 +70,16 @@ lib LibWin32
   end
 
   struct ISensOnNowVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    on_ac_power : UInt64
-    on_battery_power : UInt64
-    battery_low : UInt64
+    query_interface : Proc(ISensOnNow*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISensOnNow*, UInt32)
+    release : Proc(ISensOnNow*, UInt32)
+    get_type_info_count : Proc(ISensOnNow*, UInt32*, HRESULT)
+    get_type_info : Proc(ISensOnNow*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISensOnNow*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISensOnNow*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    on_ac_power : Proc(ISensOnNow*, HRESULT)
+    on_battery_power : Proc(ISensOnNow*, UInt32, HRESULT)
+    battery_low : Proc(ISensOnNow*, UInt32, HRESULT)
   end
 
   ISensOnNow_GUID = "d597bab2-5b9f-11d1-8dd2-00aa004abd5e"
@@ -89,20 +89,20 @@ lib LibWin32
   end
 
   struct ISensLogonVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    logon : UInt64
-    logoff : UInt64
-    start_shell : UInt64
-    display_lock : UInt64
-    display_unlock : UInt64
-    start_screen_saver : UInt64
-    stop_screen_saver : UInt64
+    query_interface : Proc(ISensLogon*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISensLogon*, UInt32)
+    release : Proc(ISensLogon*, UInt32)
+    get_type_info_count : Proc(ISensLogon*, UInt32*, HRESULT)
+    get_type_info : Proc(ISensLogon*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISensLogon*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISensLogon*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    logon : Proc(ISensLogon*, UInt8*, HRESULT)
+    logoff : Proc(ISensLogon*, UInt8*, HRESULT)
+    start_shell : Proc(ISensLogon*, UInt8*, HRESULT)
+    display_lock : Proc(ISensLogon*, UInt8*, HRESULT)
+    display_unlock : Proc(ISensLogon*, UInt8*, HRESULT)
+    start_screen_saver : Proc(ISensLogon*, UInt8*, HRESULT)
+    stop_screen_saver : Proc(ISensLogon*, UInt8*, HRESULT)
   end
 
   ISensLogon_GUID = "d597bab3-5b9f-11d1-8dd2-00aa004abd5e"
@@ -112,18 +112,18 @@ lib LibWin32
   end
 
   struct ISensLogon2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    logon : UInt64
-    logoff : UInt64
-    session_disconnect : UInt64
-    session_reconnect : UInt64
-    post_shell : UInt64
+    query_interface : Proc(ISensLogon2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISensLogon2*, UInt32)
+    release : Proc(ISensLogon2*, UInt32)
+    get_type_info_count : Proc(ISensLogon2*, UInt32*, HRESULT)
+    get_type_info : Proc(ISensLogon2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISensLogon2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISensLogon2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    logon : Proc(ISensLogon2*, UInt8*, UInt32, HRESULT)
+    logoff : Proc(ISensLogon2*, UInt8*, UInt32, HRESULT)
+    session_disconnect : Proc(ISensLogon2*, UInt8*, UInt32, HRESULT)
+    session_reconnect : Proc(ISensLogon2*, UInt8*, UInt32, HRESULT)
+    post_shell : Proc(ISensLogon2*, UInt8*, UInt32, HRESULT)
   end
 
   ISensLogon2_GUID = "d597bab4-5b9f-11d1-8dd2-00aa004abd5e"
@@ -143,154 +143,154 @@ lib LibWin32
   fun IsNetworkAlive(lpdwflags : UInt32*) : LibC::BOOL
 end
 struct LibWin32::ISensNetwork
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISensNetwork*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISensNetwork*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISensNetwork*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISensNetwork*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISensNetwork*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISensNetwork*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISensNetwork*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def connection_made(bstrconnection : UInt8*, ultype : UInt32, lpqocinfo : SENS_QOCINFO*) : HRESULT
-    @lpVtbl.value.connection_made.unsafe_as(Proc(UInt8*, UInt32, SENS_QOCINFO*, HRESULT)).call(bstrconnection, ultype, lpqocinfo)
+  def connection_made(this : ISensNetwork*, bstrconnection : UInt8*, ultype : UInt32, lpqocinfo : SENS_QOCINFO*) : HRESULT
+    @lpVtbl.value.connection_made.call(this, bstrconnection, ultype, lpqocinfo)
   end
-  def connection_made_no_qoc_info(bstrconnection : UInt8*, ultype : UInt32) : HRESULT
-    @lpVtbl.value.connection_made_no_qoc_info.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(bstrconnection, ultype)
+  def connection_made_no_qoc_info(this : ISensNetwork*, bstrconnection : UInt8*, ultype : UInt32) : HRESULT
+    @lpVtbl.value.connection_made_no_qoc_info.call(this, bstrconnection, ultype)
   end
-  def connection_lost(bstrconnection : UInt8*, ultype : SENS_CONNECTION_TYPE) : HRESULT
-    @lpVtbl.value.connection_lost.unsafe_as(Proc(UInt8*, SENS_CONNECTION_TYPE, HRESULT)).call(bstrconnection, ultype)
+  def connection_lost(this : ISensNetwork*, bstrconnection : UInt8*, ultype : SENS_CONNECTION_TYPE) : HRESULT
+    @lpVtbl.value.connection_lost.call(this, bstrconnection, ultype)
   end
-  def destination_reachable(bstrdestination : UInt8*, bstrconnection : UInt8*, ultype : UInt32, lpqocinfo : SENS_QOCINFO*) : HRESULT
-    @lpVtbl.value.destination_reachable.unsafe_as(Proc(UInt8*, UInt8*, UInt32, SENS_QOCINFO*, HRESULT)).call(bstrdestination, bstrconnection, ultype, lpqocinfo)
+  def destination_reachable(this : ISensNetwork*, bstrdestination : UInt8*, bstrconnection : UInt8*, ultype : UInt32, lpqocinfo : SENS_QOCINFO*) : HRESULT
+    @lpVtbl.value.destination_reachable.call(this, bstrdestination, bstrconnection, ultype, lpqocinfo)
   end
-  def destination_reachable_no_qoc_info(bstrdestination : UInt8*, bstrconnection : UInt8*, ultype : UInt32) : HRESULT
-    @lpVtbl.value.destination_reachable_no_qoc_info.unsafe_as(Proc(UInt8*, UInt8*, UInt32, HRESULT)).call(bstrdestination, bstrconnection, ultype)
+  def destination_reachable_no_qoc_info(this : ISensNetwork*, bstrdestination : UInt8*, bstrconnection : UInt8*, ultype : UInt32) : HRESULT
+    @lpVtbl.value.destination_reachable_no_qoc_info.call(this, bstrdestination, bstrconnection, ultype)
   end
 end
 struct LibWin32::ISensOnNow
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISensOnNow*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISensOnNow*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISensOnNow*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISensOnNow*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISensOnNow*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISensOnNow*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISensOnNow*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def on_ac_power : HRESULT
-    @lpVtbl.value.on_ac_power.unsafe_as(Proc(HRESULT)).call
+  def on_ac_power(this : ISensOnNow*) : HRESULT
+    @lpVtbl.value.on_ac_power.call(this)
   end
-  def on_battery_power(dwbatterylifepercent : UInt32) : HRESULT
-    @lpVtbl.value.on_battery_power.unsafe_as(Proc(UInt32, HRESULT)).call(dwbatterylifepercent)
+  def on_battery_power(this : ISensOnNow*, dwbatterylifepercent : UInt32) : HRESULT
+    @lpVtbl.value.on_battery_power.call(this, dwbatterylifepercent)
   end
-  def battery_low(dwbatterylifepercent : UInt32) : HRESULT
-    @lpVtbl.value.battery_low.unsafe_as(Proc(UInt32, HRESULT)).call(dwbatterylifepercent)
+  def battery_low(this : ISensOnNow*, dwbatterylifepercent : UInt32) : HRESULT
+    @lpVtbl.value.battery_low.call(this, dwbatterylifepercent)
   end
 end
 struct LibWin32::ISensLogon
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISensLogon*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISensLogon*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISensLogon*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISensLogon*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISensLogon*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISensLogon*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISensLogon*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def logon(bstrusername : UInt8*) : HRESULT
-    @lpVtbl.value.logon.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrusername)
+  def logon(this : ISensLogon*, bstrusername : UInt8*) : HRESULT
+    @lpVtbl.value.logon.call(this, bstrusername)
   end
-  def logoff(bstrusername : UInt8*) : HRESULT
-    @lpVtbl.value.logoff.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrusername)
+  def logoff(this : ISensLogon*, bstrusername : UInt8*) : HRESULT
+    @lpVtbl.value.logoff.call(this, bstrusername)
   end
-  def start_shell(bstrusername : UInt8*) : HRESULT
-    @lpVtbl.value.start_shell.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrusername)
+  def start_shell(this : ISensLogon*, bstrusername : UInt8*) : HRESULT
+    @lpVtbl.value.start_shell.call(this, bstrusername)
   end
-  def display_lock(bstrusername : UInt8*) : HRESULT
-    @lpVtbl.value.display_lock.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrusername)
+  def display_lock(this : ISensLogon*, bstrusername : UInt8*) : HRESULT
+    @lpVtbl.value.display_lock.call(this, bstrusername)
   end
-  def display_unlock(bstrusername : UInt8*) : HRESULT
-    @lpVtbl.value.display_unlock.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrusername)
+  def display_unlock(this : ISensLogon*, bstrusername : UInt8*) : HRESULT
+    @lpVtbl.value.display_unlock.call(this, bstrusername)
   end
-  def start_screen_saver(bstrusername : UInt8*) : HRESULT
-    @lpVtbl.value.start_screen_saver.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrusername)
+  def start_screen_saver(this : ISensLogon*, bstrusername : UInt8*) : HRESULT
+    @lpVtbl.value.start_screen_saver.call(this, bstrusername)
   end
-  def stop_screen_saver(bstrusername : UInt8*) : HRESULT
-    @lpVtbl.value.stop_screen_saver.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrusername)
+  def stop_screen_saver(this : ISensLogon*, bstrusername : UInt8*) : HRESULT
+    @lpVtbl.value.stop_screen_saver.call(this, bstrusername)
   end
 end
 struct LibWin32::ISensLogon2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISensLogon2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISensLogon2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISensLogon2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISensLogon2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISensLogon2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISensLogon2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISensLogon2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def logon(bstrusername : UInt8*, dwsessionid : UInt32) : HRESULT
-    @lpVtbl.value.logon.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(bstrusername, dwsessionid)
+  def logon(this : ISensLogon2*, bstrusername : UInt8*, dwsessionid : UInt32) : HRESULT
+    @lpVtbl.value.logon.call(this, bstrusername, dwsessionid)
   end
-  def logoff(bstrusername : UInt8*, dwsessionid : UInt32) : HRESULT
-    @lpVtbl.value.logoff.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(bstrusername, dwsessionid)
+  def logoff(this : ISensLogon2*, bstrusername : UInt8*, dwsessionid : UInt32) : HRESULT
+    @lpVtbl.value.logoff.call(this, bstrusername, dwsessionid)
   end
-  def session_disconnect(bstrusername : UInt8*, dwsessionid : UInt32) : HRESULT
-    @lpVtbl.value.session_disconnect.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(bstrusername, dwsessionid)
+  def session_disconnect(this : ISensLogon2*, bstrusername : UInt8*, dwsessionid : UInt32) : HRESULT
+    @lpVtbl.value.session_disconnect.call(this, bstrusername, dwsessionid)
   end
-  def session_reconnect(bstrusername : UInt8*, dwsessionid : UInt32) : HRESULT
-    @lpVtbl.value.session_reconnect.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(bstrusername, dwsessionid)
+  def session_reconnect(this : ISensLogon2*, bstrusername : UInt8*, dwsessionid : UInt32) : HRESULT
+    @lpVtbl.value.session_reconnect.call(this, bstrusername, dwsessionid)
   end
-  def post_shell(bstrusername : UInt8*, dwsessionid : UInt32) : HRESULT
-    @lpVtbl.value.post_shell.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(bstrusername, dwsessionid)
+  def post_shell(this : ISensLogon2*, bstrusername : UInt8*, dwsessionid : UInt32) : HRESULT
+    @lpVtbl.value.post_shell.call(this, bstrusername, dwsessionid)
   end
 end

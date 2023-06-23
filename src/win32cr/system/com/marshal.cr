@@ -26,15 +26,15 @@ lib LibWin32
 
 
   struct IMarshalVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_unmarshal_class : UInt64
-    get_marshal_size_max : UInt64
-    marshal_interface : UInt64
-    unmarshal_interface : UInt64
-    release_marshal_data : UInt64
-    disconnect_object : UInt64
+    query_interface : Proc(IMarshal*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMarshal*, UInt32)
+    release : Proc(IMarshal*, UInt32)
+    get_unmarshal_class : Proc(IMarshal*, Guid*, Void*, UInt32, Void*, UInt32, Guid*, HRESULT)
+    get_marshal_size_max : Proc(IMarshal*, Guid*, Void*, UInt32, Void*, UInt32, UInt32*, HRESULT)
+    marshal_interface : Proc(IMarshal*, IStream, Guid*, Void*, UInt32, Void*, UInt32, HRESULT)
+    unmarshal_interface : Proc(IMarshal*, IStream, Guid*, Void**, HRESULT)
+    release_marshal_data : Proc(IMarshal*, IStream, HRESULT)
+    disconnect_object : Proc(IMarshal*, UInt32, HRESULT)
   end
 
   IMarshal_GUID = "00000003-0000-0000-c000-000000000046"
@@ -44,15 +44,15 @@ lib LibWin32
   end
 
   struct IMarshal2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_unmarshal_class : UInt64
-    get_marshal_size_max : UInt64
-    marshal_interface : UInt64
-    unmarshal_interface : UInt64
-    release_marshal_data : UInt64
-    disconnect_object : UInt64
+    query_interface : Proc(IMarshal2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMarshal2*, UInt32)
+    release : Proc(IMarshal2*, UInt32)
+    get_unmarshal_class : Proc(IMarshal2*, Guid*, Void*, UInt32, Void*, UInt32, Guid*, HRESULT)
+    get_marshal_size_max : Proc(IMarshal2*, Guid*, Void*, UInt32, Void*, UInt32, UInt32*, HRESULT)
+    marshal_interface : Proc(IMarshal2*, IStream, Guid*, Void*, UInt32, Void*, UInt32, HRESULT)
+    unmarshal_interface : Proc(IMarshal2*, IStream, Guid*, Void**, HRESULT)
+    release_marshal_data : Proc(IMarshal2*, IStream, HRESULT)
+    disconnect_object : Proc(IMarshal2*, UInt32, HRESULT)
   end
 
   IMarshal2_GUID = "000001cf-0000-0000-c000-000000000046"
@@ -62,21 +62,21 @@ lib LibWin32
   end
 
   struct IMarshalingStreamVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    read : UInt64
-    write : UInt64
-    seek : UInt64
-    set_size : UInt64
-    copy_to : UInt64
-    commit : UInt64
-    revert : UInt64
-    lock_region : UInt64
-    unlock_region : UInt64
-    stat : UInt64
-    clone : UInt64
-    get_marshaling_context_attribute : UInt64
+    query_interface : Proc(IMarshalingStream*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMarshalingStream*, UInt32)
+    release : Proc(IMarshalingStream*, UInt32)
+    read : Proc(IMarshalingStream*, Void*, UInt32, UInt32*, HRESULT)
+    write : Proc(IMarshalingStream*, Void*, UInt32, UInt32*, HRESULT)
+    seek : Proc(IMarshalingStream*, LARGE_INTEGER, STREAM_SEEK, ULARGE_INTEGER*, HRESULT)
+    set_size : Proc(IMarshalingStream*, ULARGE_INTEGER, HRESULT)
+    copy_to : Proc(IMarshalingStream*, IStream, ULARGE_INTEGER, ULARGE_INTEGER*, ULARGE_INTEGER*, HRESULT)
+    commit : Proc(IMarshalingStream*, UInt32, HRESULT)
+    revert : Proc(IMarshalingStream*, HRESULT)
+    lock_region : Proc(IMarshalingStream*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
+    unlock_region : Proc(IMarshalingStream*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
+    stat : Proc(IMarshalingStream*, STATSTG*, UInt32, HRESULT)
+    clone : Proc(IMarshalingStream*, IStream*, HRESULT)
+    get_marshaling_context_attribute : Proc(IMarshalingStream*, CO_MARSHALING_CONTEXT_ATTRIBUTES, LibC::UINT_PTR*, HRESULT)
   end
 
   IMarshalingStream_GUID = "d8f2f5e6-6102-4863-9f26-389a4676efde"
@@ -450,107 +450,107 @@ lib LibWin32
   fun HPALETTE_UserFree64(param0 : UInt32*, param1 : HPALETTE*) : Void
 end
 struct LibWin32::IMarshal
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMarshal*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMarshal*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMarshal*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_unmarshal_class(riid : Guid*, pv : Void*, dwdestcontext : UInt32, pvdestcontext : Void*, mshlflags : UInt32, pcid : Guid*) : HRESULT
-    @lpVtbl.value.get_unmarshal_class.unsafe_as(Proc(Guid*, Void*, UInt32, Void*, UInt32, Guid*, HRESULT)).call(riid, pv, dwdestcontext, pvdestcontext, mshlflags, pcid)
+  def get_unmarshal_class(this : IMarshal*, riid : Guid*, pv : Void*, dwdestcontext : UInt32, pvdestcontext : Void*, mshlflags : UInt32, pcid : Guid*) : HRESULT
+    @lpVtbl.value.get_unmarshal_class.call(this, riid, pv, dwdestcontext, pvdestcontext, mshlflags, pcid)
   end
-  def get_marshal_size_max(riid : Guid*, pv : Void*, dwdestcontext : UInt32, pvdestcontext : Void*, mshlflags : UInt32, psize : UInt32*) : HRESULT
-    @lpVtbl.value.get_marshal_size_max.unsafe_as(Proc(Guid*, Void*, UInt32, Void*, UInt32, UInt32*, HRESULT)).call(riid, pv, dwdestcontext, pvdestcontext, mshlflags, psize)
+  def get_marshal_size_max(this : IMarshal*, riid : Guid*, pv : Void*, dwdestcontext : UInt32, pvdestcontext : Void*, mshlflags : UInt32, psize : UInt32*) : HRESULT
+    @lpVtbl.value.get_marshal_size_max.call(this, riid, pv, dwdestcontext, pvdestcontext, mshlflags, psize)
   end
-  def marshal_interface(pstm : IStream, riid : Guid*, pv : Void*, dwdestcontext : UInt32, pvdestcontext : Void*, mshlflags : UInt32) : HRESULT
-    @lpVtbl.value.marshal_interface.unsafe_as(Proc(IStream, Guid*, Void*, UInt32, Void*, UInt32, HRESULT)).call(pstm, riid, pv, dwdestcontext, pvdestcontext, mshlflags)
+  def marshal_interface(this : IMarshal*, pstm : IStream, riid : Guid*, pv : Void*, dwdestcontext : UInt32, pvdestcontext : Void*, mshlflags : UInt32) : HRESULT
+    @lpVtbl.value.marshal_interface.call(this, pstm, riid, pv, dwdestcontext, pvdestcontext, mshlflags)
   end
-  def unmarshal_interface(pstm : IStream, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.unmarshal_interface.unsafe_as(Proc(IStream, Guid*, Void**, HRESULT)).call(pstm, riid, ppv)
+  def unmarshal_interface(this : IMarshal*, pstm : IStream, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.unmarshal_interface.call(this, pstm, riid, ppv)
   end
-  def release_marshal_data(pstm : IStream) : HRESULT
-    @lpVtbl.value.release_marshal_data.unsafe_as(Proc(IStream, HRESULT)).call(pstm)
+  def release_marshal_data(this : IMarshal*, pstm : IStream) : HRESULT
+    @lpVtbl.value.release_marshal_data.call(this, pstm)
   end
-  def disconnect_object(dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.disconnect_object.unsafe_as(Proc(UInt32, HRESULT)).call(dwreserved)
+  def disconnect_object(this : IMarshal*, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.disconnect_object.call(this, dwreserved)
   end
 end
 struct LibWin32::IMarshal2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMarshal2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMarshal2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMarshal2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_unmarshal_class(riid : Guid*, pv : Void*, dwdestcontext : UInt32, pvdestcontext : Void*, mshlflags : UInt32, pcid : Guid*) : HRESULT
-    @lpVtbl.value.get_unmarshal_class.unsafe_as(Proc(Guid*, Void*, UInt32, Void*, UInt32, Guid*, HRESULT)).call(riid, pv, dwdestcontext, pvdestcontext, mshlflags, pcid)
+  def get_unmarshal_class(this : IMarshal2*, riid : Guid*, pv : Void*, dwdestcontext : UInt32, pvdestcontext : Void*, mshlflags : UInt32, pcid : Guid*) : HRESULT
+    @lpVtbl.value.get_unmarshal_class.call(this, riid, pv, dwdestcontext, pvdestcontext, mshlflags, pcid)
   end
-  def get_marshal_size_max(riid : Guid*, pv : Void*, dwdestcontext : UInt32, pvdestcontext : Void*, mshlflags : UInt32, psize : UInt32*) : HRESULT
-    @lpVtbl.value.get_marshal_size_max.unsafe_as(Proc(Guid*, Void*, UInt32, Void*, UInt32, UInt32*, HRESULT)).call(riid, pv, dwdestcontext, pvdestcontext, mshlflags, psize)
+  def get_marshal_size_max(this : IMarshal2*, riid : Guid*, pv : Void*, dwdestcontext : UInt32, pvdestcontext : Void*, mshlflags : UInt32, psize : UInt32*) : HRESULT
+    @lpVtbl.value.get_marshal_size_max.call(this, riid, pv, dwdestcontext, pvdestcontext, mshlflags, psize)
   end
-  def marshal_interface(pstm : IStream, riid : Guid*, pv : Void*, dwdestcontext : UInt32, pvdestcontext : Void*, mshlflags : UInt32) : HRESULT
-    @lpVtbl.value.marshal_interface.unsafe_as(Proc(IStream, Guid*, Void*, UInt32, Void*, UInt32, HRESULT)).call(pstm, riid, pv, dwdestcontext, pvdestcontext, mshlflags)
+  def marshal_interface(this : IMarshal2*, pstm : IStream, riid : Guid*, pv : Void*, dwdestcontext : UInt32, pvdestcontext : Void*, mshlflags : UInt32) : HRESULT
+    @lpVtbl.value.marshal_interface.call(this, pstm, riid, pv, dwdestcontext, pvdestcontext, mshlflags)
   end
-  def unmarshal_interface(pstm : IStream, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.unmarshal_interface.unsafe_as(Proc(IStream, Guid*, Void**, HRESULT)).call(pstm, riid, ppv)
+  def unmarshal_interface(this : IMarshal2*, pstm : IStream, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.unmarshal_interface.call(this, pstm, riid, ppv)
   end
-  def release_marshal_data(pstm : IStream) : HRESULT
-    @lpVtbl.value.release_marshal_data.unsafe_as(Proc(IStream, HRESULT)).call(pstm)
+  def release_marshal_data(this : IMarshal2*, pstm : IStream) : HRESULT
+    @lpVtbl.value.release_marshal_data.call(this, pstm)
   end
-  def disconnect_object(dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.disconnect_object.unsafe_as(Proc(UInt32, HRESULT)).call(dwreserved)
+  def disconnect_object(this : IMarshal2*, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.disconnect_object.call(this, dwreserved)
   end
 end
 struct LibWin32::IMarshalingStream
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMarshalingStream*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMarshalingStream*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMarshalingStream*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def read(pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
-    @lpVtbl.value.read.unsafe_as(Proc(Void*, UInt32, UInt32*, HRESULT)).call(pv, cb, pcbread)
+  def read(this : IMarshalingStream*, pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
+    @lpVtbl.value.read.call(this, pv, cb, pcbread)
   end
-  def write(pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
-    @lpVtbl.value.write.unsafe_as(Proc(Void*, UInt32, UInt32*, HRESULT)).call(pv, cb, pcbwritten)
+  def write(this : IMarshalingStream*, pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
+    @lpVtbl.value.write.call(this, pv, cb, pcbwritten)
   end
-  def seek(dlibmove : LARGE_INTEGER, dworigin : STREAM_SEEK, plibnewposition : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.seek.unsafe_as(Proc(LARGE_INTEGER, STREAM_SEEK, ULARGE_INTEGER*, HRESULT)).call(dlibmove, dworigin, plibnewposition)
+  def seek(this : IMarshalingStream*, dlibmove : LARGE_INTEGER, dworigin : STREAM_SEEK, plibnewposition : ULARGE_INTEGER*) : HRESULT
+    @lpVtbl.value.seek.call(this, dlibmove, dworigin, plibnewposition)
   end
-  def set_size(libnewsize : ULARGE_INTEGER) : HRESULT
-    @lpVtbl.value.set_size.unsafe_as(Proc(ULARGE_INTEGER, HRESULT)).call(libnewsize)
+  def set_size(this : IMarshalingStream*, libnewsize : ULARGE_INTEGER) : HRESULT
+    @lpVtbl.value.set_size.call(this, libnewsize)
   end
-  def copy_to(pstm : IStream, cb : ULARGE_INTEGER, pcbread : ULARGE_INTEGER*, pcbwritten : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.copy_to.unsafe_as(Proc(IStream, ULARGE_INTEGER, ULARGE_INTEGER*, ULARGE_INTEGER*, HRESULT)).call(pstm, cb, pcbread, pcbwritten)
+  def copy_to(this : IMarshalingStream*, pstm : IStream, cb : ULARGE_INTEGER, pcbread : ULARGE_INTEGER*, pcbwritten : ULARGE_INTEGER*) : HRESULT
+    @lpVtbl.value.copy_to.call(this, pstm, cb, pcbread, pcbwritten)
   end
-  def commit(grfcommitflags : UInt32) : HRESULT
-    @lpVtbl.value.commit.unsafe_as(Proc(UInt32, HRESULT)).call(grfcommitflags)
+  def commit(this : IMarshalingStream*, grfcommitflags : UInt32) : HRESULT
+    @lpVtbl.value.commit.call(this, grfcommitflags)
   end
-  def revert : HRESULT
-    @lpVtbl.value.revert.unsafe_as(Proc(HRESULT)).call
+  def revert(this : IMarshalingStream*) : HRESULT
+    @lpVtbl.value.revert.call(this)
   end
-  def lock_region(liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.lock_region.unsafe_as(Proc(ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)).call(liboffset, cb, dwlocktype)
+  def lock_region(this : IMarshalingStream*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
+    @lpVtbl.value.lock_region.call(this, liboffset, cb, dwlocktype)
   end
-  def unlock_region(liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.unlock_region.unsafe_as(Proc(ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)).call(liboffset, cb, dwlocktype)
+  def unlock_region(this : IMarshalingStream*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
+    @lpVtbl.value.unlock_region.call(this, liboffset, cb, dwlocktype)
   end
-  def stat(pstatstg : STATSTG*, grfstatflag : UInt32) : HRESULT
-    @lpVtbl.value.stat.unsafe_as(Proc(STATSTG*, UInt32, HRESULT)).call(pstatstg, grfstatflag)
+  def stat(this : IMarshalingStream*, pstatstg : STATSTG*, grfstatflag : UInt32) : HRESULT
+    @lpVtbl.value.stat.call(this, pstatstg, grfstatflag)
   end
-  def clone(ppstm : IStream*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IStream*, HRESULT)).call(ppstm)
+  def clone(this : IMarshalingStream*, ppstm : IStream*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppstm)
   end
-  def get_marshaling_context_attribute(attribute : CO_MARSHALING_CONTEXT_ATTRIBUTES, pattributevalue : LibC::UINT_PTR*) : HRESULT
-    @lpVtbl.value.get_marshaling_context_attribute.unsafe_as(Proc(CO_MARSHALING_CONTEXT_ATTRIBUTES, LibC::UINT_PTR*, HRESULT)).call(attribute, pattributevalue)
+  def get_marshaling_context_attribute(this : IMarshalingStream*, attribute : CO_MARSHALING_CONTEXT_ATTRIBUTES, pattributevalue : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_marshaling_context_attribute.call(this, attribute, pattributevalue)
   end
 end

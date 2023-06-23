@@ -867,17 +867,17 @@ lib LibWin32
 
 
   struct IWSManVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    create_session : UInt64
-    create_connection_options : UInt64
-    get_command_line : UInt64
-    get_error : UInt64
+    query_interface : Proc(IWSMan*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSMan*, UInt32)
+    release : Proc(IWSMan*, UInt32)
+    get_type_info_count : Proc(IWSMan*, UInt32*, HRESULT)
+    get_type_info : Proc(IWSMan*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWSMan*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWSMan*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    create_session : Proc(IWSMan*, UInt8*, Int32, IDispatch, IDispatch*, HRESULT)
+    create_connection_options : Proc(IWSMan*, IDispatch*, HRESULT)
+    get_command_line : Proc(IWSMan*, UInt8**, HRESULT)
+    get_error : Proc(IWSMan*, UInt8**, HRESULT)
   end
 
   IWSMan_GUID = "190d8637-5cd3-496d-ad24-69636bb5a3b5"
@@ -887,37 +887,37 @@ lib LibWin32
   end
 
   struct IWSManExVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    create_session : UInt64
-    create_connection_options : UInt64
-    get_command_line : UInt64
-    get_error : UInt64
-    create_resource_locator : UInt64
-    session_flag_utf8 : UInt64
-    session_flag_cred_username_password : UInt64
-    session_flag_skip_ca_check : UInt64
-    session_flag_skip_cn_check : UInt64
-    session_flag_use_digest : UInt64
-    session_flag_use_negotiate : UInt64
-    session_flag_use_basic : UInt64
-    session_flag_use_kerberos : UInt64
-    session_flag_no_encryption : UInt64
-    session_flag_enable_spn_server_port : UInt64
-    session_flag_use_no_authentication : UInt64
-    enumeration_flag_non_xml_text : UInt64
-    enumeration_flag_return_epr : UInt64
-    enumeration_flag_return_object_and_epr : UInt64
-    get_error_message : UInt64
-    enumeration_flag_hierarchy_deep : UInt64
-    enumeration_flag_hierarchy_shallow : UInt64
-    enumeration_flag_hierarchy_deep_base_props_only : UInt64
-    enumeration_flag_return_object : UInt64
+    query_interface : Proc(IWSManEx*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSManEx*, UInt32)
+    release : Proc(IWSManEx*, UInt32)
+    get_type_info_count : Proc(IWSManEx*, UInt32*, HRESULT)
+    get_type_info : Proc(IWSManEx*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWSManEx*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWSManEx*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    create_session : Proc(IWSManEx*, UInt8*, Int32, IDispatch, IDispatch*, HRESULT)
+    create_connection_options : Proc(IWSManEx*, IDispatch*, HRESULT)
+    get_command_line : Proc(IWSManEx*, UInt8**, HRESULT)
+    get_error : Proc(IWSManEx*, UInt8**, HRESULT)
+    create_resource_locator : Proc(IWSManEx*, UInt8*, IDispatch*, HRESULT)
+    session_flag_utf8 : Proc(IWSManEx*, Int32*, HRESULT)
+    session_flag_cred_username_password : Proc(IWSManEx*, Int32*, HRESULT)
+    session_flag_skip_ca_check : Proc(IWSManEx*, Int32*, HRESULT)
+    session_flag_skip_cn_check : Proc(IWSManEx*, Int32*, HRESULT)
+    session_flag_use_digest : Proc(IWSManEx*, Int32*, HRESULT)
+    session_flag_use_negotiate : Proc(IWSManEx*, Int32*, HRESULT)
+    session_flag_use_basic : Proc(IWSManEx*, Int32*, HRESULT)
+    session_flag_use_kerberos : Proc(IWSManEx*, Int32*, HRESULT)
+    session_flag_no_encryption : Proc(IWSManEx*, Int32*, HRESULT)
+    session_flag_enable_spn_server_port : Proc(IWSManEx*, Int32*, HRESULT)
+    session_flag_use_no_authentication : Proc(IWSManEx*, Int32*, HRESULT)
+    enumeration_flag_non_xml_text : Proc(IWSManEx*, Int32*, HRESULT)
+    enumeration_flag_return_epr : Proc(IWSManEx*, Int32*, HRESULT)
+    enumeration_flag_return_object_and_epr : Proc(IWSManEx*, Int32*, HRESULT)
+    get_error_message : Proc(IWSManEx*, UInt32, UInt8**, HRESULT)
+    enumeration_flag_hierarchy_deep : Proc(IWSManEx*, Int32*, HRESULT)
+    enumeration_flag_hierarchy_shallow : Proc(IWSManEx*, Int32*, HRESULT)
+    enumeration_flag_hierarchy_deep_base_props_only : Proc(IWSManEx*, Int32*, HRESULT)
+    enumeration_flag_return_object : Proc(IWSManEx*, Int32*, HRESULT)
   end
 
   IWSManEx_GUID = "2d53bdaa-798e-49e6-a1aa-74d01256f411"
@@ -927,38 +927,38 @@ lib LibWin32
   end
 
   struct IWSManEx2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    create_session : UInt64
-    create_connection_options : UInt64
-    get_command_line : UInt64
-    get_error : UInt64
-    create_resource_locator : UInt64
-    session_flag_utf8 : UInt64
-    session_flag_cred_username_password : UInt64
-    session_flag_skip_ca_check : UInt64
-    session_flag_skip_cn_check : UInt64
-    session_flag_use_digest : UInt64
-    session_flag_use_negotiate : UInt64
-    session_flag_use_basic : UInt64
-    session_flag_use_kerberos : UInt64
-    session_flag_no_encryption : UInt64
-    session_flag_enable_spn_server_port : UInt64
-    session_flag_use_no_authentication : UInt64
-    enumeration_flag_non_xml_text : UInt64
-    enumeration_flag_return_epr : UInt64
-    enumeration_flag_return_object_and_epr : UInt64
-    get_error_message : UInt64
-    enumeration_flag_hierarchy_deep : UInt64
-    enumeration_flag_hierarchy_shallow : UInt64
-    enumeration_flag_hierarchy_deep_base_props_only : UInt64
-    enumeration_flag_return_object : UInt64
-    session_flag_use_client_certificate : UInt64
+    query_interface : Proc(IWSManEx2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSManEx2*, UInt32)
+    release : Proc(IWSManEx2*, UInt32)
+    get_type_info_count : Proc(IWSManEx2*, UInt32*, HRESULT)
+    get_type_info : Proc(IWSManEx2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWSManEx2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWSManEx2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    create_session : Proc(IWSManEx2*, UInt8*, Int32, IDispatch, IDispatch*, HRESULT)
+    create_connection_options : Proc(IWSManEx2*, IDispatch*, HRESULT)
+    get_command_line : Proc(IWSManEx2*, UInt8**, HRESULT)
+    get_error : Proc(IWSManEx2*, UInt8**, HRESULT)
+    create_resource_locator : Proc(IWSManEx2*, UInt8*, IDispatch*, HRESULT)
+    session_flag_utf8 : Proc(IWSManEx2*, Int32*, HRESULT)
+    session_flag_cred_username_password : Proc(IWSManEx2*, Int32*, HRESULT)
+    session_flag_skip_ca_check : Proc(IWSManEx2*, Int32*, HRESULT)
+    session_flag_skip_cn_check : Proc(IWSManEx2*, Int32*, HRESULT)
+    session_flag_use_digest : Proc(IWSManEx2*, Int32*, HRESULT)
+    session_flag_use_negotiate : Proc(IWSManEx2*, Int32*, HRESULT)
+    session_flag_use_basic : Proc(IWSManEx2*, Int32*, HRESULT)
+    session_flag_use_kerberos : Proc(IWSManEx2*, Int32*, HRESULT)
+    session_flag_no_encryption : Proc(IWSManEx2*, Int32*, HRESULT)
+    session_flag_enable_spn_server_port : Proc(IWSManEx2*, Int32*, HRESULT)
+    session_flag_use_no_authentication : Proc(IWSManEx2*, Int32*, HRESULT)
+    enumeration_flag_non_xml_text : Proc(IWSManEx2*, Int32*, HRESULT)
+    enumeration_flag_return_epr : Proc(IWSManEx2*, Int32*, HRESULT)
+    enumeration_flag_return_object_and_epr : Proc(IWSManEx2*, Int32*, HRESULT)
+    get_error_message : Proc(IWSManEx2*, UInt32, UInt8**, HRESULT)
+    enumeration_flag_hierarchy_deep : Proc(IWSManEx2*, Int32*, HRESULT)
+    enumeration_flag_hierarchy_shallow : Proc(IWSManEx2*, Int32*, HRESULT)
+    enumeration_flag_hierarchy_deep_base_props_only : Proc(IWSManEx2*, Int32*, HRESULT)
+    enumeration_flag_return_object : Proc(IWSManEx2*, Int32*, HRESULT)
+    session_flag_use_client_certificate : Proc(IWSManEx2*, Int32*, HRESULT)
   end
 
   IWSManEx2_GUID = "1d1b5ae0-42d9-4021-8261-3987619512e9"
@@ -968,45 +968,45 @@ lib LibWin32
   end
 
   struct IWSManEx3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    create_session : UInt64
-    create_connection_options : UInt64
-    get_command_line : UInt64
-    get_error : UInt64
-    create_resource_locator : UInt64
-    session_flag_utf8 : UInt64
-    session_flag_cred_username_password : UInt64
-    session_flag_skip_ca_check : UInt64
-    session_flag_skip_cn_check : UInt64
-    session_flag_use_digest : UInt64
-    session_flag_use_negotiate : UInt64
-    session_flag_use_basic : UInt64
-    session_flag_use_kerberos : UInt64
-    session_flag_no_encryption : UInt64
-    session_flag_enable_spn_server_port : UInt64
-    session_flag_use_no_authentication : UInt64
-    enumeration_flag_non_xml_text : UInt64
-    enumeration_flag_return_epr : UInt64
-    enumeration_flag_return_object_and_epr : UInt64
-    get_error_message : UInt64
-    enumeration_flag_hierarchy_deep : UInt64
-    enumeration_flag_hierarchy_shallow : UInt64
-    enumeration_flag_hierarchy_deep_base_props_only : UInt64
-    enumeration_flag_return_object : UInt64
-    session_flag_use_client_certificate : UInt64
-    session_flag_utf16 : UInt64
-    session_flag_use_cred_ssp : UInt64
-    enumeration_flag_association_instance : UInt64
-    enumeration_flag_associated_instance : UInt64
-    session_flag_skip_revocation_check : UInt64
-    session_flag_allow_negotiate_implicit_credentials : UInt64
-    session_flag_use_ssl : UInt64
+    query_interface : Proc(IWSManEx3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSManEx3*, UInt32)
+    release : Proc(IWSManEx3*, UInt32)
+    get_type_info_count : Proc(IWSManEx3*, UInt32*, HRESULT)
+    get_type_info : Proc(IWSManEx3*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWSManEx3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWSManEx3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    create_session : Proc(IWSManEx3*, UInt8*, Int32, IDispatch, IDispatch*, HRESULT)
+    create_connection_options : Proc(IWSManEx3*, IDispatch*, HRESULT)
+    get_command_line : Proc(IWSManEx3*, UInt8**, HRESULT)
+    get_error : Proc(IWSManEx3*, UInt8**, HRESULT)
+    create_resource_locator : Proc(IWSManEx3*, UInt8*, IDispatch*, HRESULT)
+    session_flag_utf8 : Proc(IWSManEx3*, Int32*, HRESULT)
+    session_flag_cred_username_password : Proc(IWSManEx3*, Int32*, HRESULT)
+    session_flag_skip_ca_check : Proc(IWSManEx3*, Int32*, HRESULT)
+    session_flag_skip_cn_check : Proc(IWSManEx3*, Int32*, HRESULT)
+    session_flag_use_digest : Proc(IWSManEx3*, Int32*, HRESULT)
+    session_flag_use_negotiate : Proc(IWSManEx3*, Int32*, HRESULT)
+    session_flag_use_basic : Proc(IWSManEx3*, Int32*, HRESULT)
+    session_flag_use_kerberos : Proc(IWSManEx3*, Int32*, HRESULT)
+    session_flag_no_encryption : Proc(IWSManEx3*, Int32*, HRESULT)
+    session_flag_enable_spn_server_port : Proc(IWSManEx3*, Int32*, HRESULT)
+    session_flag_use_no_authentication : Proc(IWSManEx3*, Int32*, HRESULT)
+    enumeration_flag_non_xml_text : Proc(IWSManEx3*, Int32*, HRESULT)
+    enumeration_flag_return_epr : Proc(IWSManEx3*, Int32*, HRESULT)
+    enumeration_flag_return_object_and_epr : Proc(IWSManEx3*, Int32*, HRESULT)
+    get_error_message : Proc(IWSManEx3*, UInt32, UInt8**, HRESULT)
+    enumeration_flag_hierarchy_deep : Proc(IWSManEx3*, Int32*, HRESULT)
+    enumeration_flag_hierarchy_shallow : Proc(IWSManEx3*, Int32*, HRESULT)
+    enumeration_flag_hierarchy_deep_base_props_only : Proc(IWSManEx3*, Int32*, HRESULT)
+    enumeration_flag_return_object : Proc(IWSManEx3*, Int32*, HRESULT)
+    session_flag_use_client_certificate : Proc(IWSManEx3*, Int32*, HRESULT)
+    session_flag_utf16 : Proc(IWSManEx3*, Int32*, HRESULT)
+    session_flag_use_cred_ssp : Proc(IWSManEx3*, Int32*, HRESULT)
+    enumeration_flag_association_instance : Proc(IWSManEx3*, Int32*, HRESULT)
+    enumeration_flag_associated_instance : Proc(IWSManEx3*, Int32*, HRESULT)
+    session_flag_skip_revocation_check : Proc(IWSManEx3*, Int32*, HRESULT)
+    session_flag_allow_negotiate_implicit_credentials : Proc(IWSManEx3*, Int32*, HRESULT)
+    session_flag_use_ssl : Proc(IWSManEx3*, Int32*, HRESULT)
   end
 
   IWSManEx3_GUID = "6400e966-011d-4eac-8474-049e0848afad"
@@ -1016,16 +1016,16 @@ lib LibWin32
   end
 
   struct IWSManConnectionOptionsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_user_name : UInt64
-    put_user_name : UInt64
-    put_password : UInt64
+    query_interface : Proc(IWSManConnectionOptions*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSManConnectionOptions*, UInt32)
+    release : Proc(IWSManConnectionOptions*, UInt32)
+    get_type_info_count : Proc(IWSManConnectionOptions*, UInt32*, HRESULT)
+    get_type_info : Proc(IWSManConnectionOptions*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWSManConnectionOptions*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWSManConnectionOptions*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_user_name : Proc(IWSManConnectionOptions*, UInt8**, HRESULT)
+    put_user_name : Proc(IWSManConnectionOptions*, UInt8*, HRESULT)
+    put_password : Proc(IWSManConnectionOptions*, UInt8*, HRESULT)
   end
 
   IWSManConnectionOptions_GUID = "f704e861-9e52-464f-b786-da5eb2320fdd"
@@ -1035,18 +1035,18 @@ lib LibWin32
   end
 
   struct IWSManConnectionOptionsExVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_user_name : UInt64
-    put_user_name : UInt64
-    put_password : UInt64
-    get_certificate_thumbprint : UInt64
-    put_certificate_thumbprint : UInt64
+    query_interface : Proc(IWSManConnectionOptionsEx*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSManConnectionOptionsEx*, UInt32)
+    release : Proc(IWSManConnectionOptionsEx*, UInt32)
+    get_type_info_count : Proc(IWSManConnectionOptionsEx*, UInt32*, HRESULT)
+    get_type_info : Proc(IWSManConnectionOptionsEx*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWSManConnectionOptionsEx*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWSManConnectionOptionsEx*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_user_name : Proc(IWSManConnectionOptionsEx*, UInt8**, HRESULT)
+    put_user_name : Proc(IWSManConnectionOptionsEx*, UInt8*, HRESULT)
+    put_password : Proc(IWSManConnectionOptionsEx*, UInt8*, HRESULT)
+    get_certificate_thumbprint : Proc(IWSManConnectionOptionsEx*, UInt8**, HRESULT)
+    put_certificate_thumbprint : Proc(IWSManConnectionOptionsEx*, UInt8*, HRESULT)
   end
 
   IWSManConnectionOptionsEx_GUID = "ef43edf7-2a48-4d93-9526-8bd6ab6d4a6b"
@@ -1056,26 +1056,26 @@ lib LibWin32
   end
 
   struct IWSManConnectionOptionsEx2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_user_name : UInt64
-    put_user_name : UInt64
-    put_password : UInt64
-    get_certificate_thumbprint : UInt64
-    put_certificate_thumbprint : UInt64
-    set_proxy : UInt64
-    proxy_ie_config : UInt64
-    proxy_win_http_config : UInt64
-    proxy_auto_detect : UInt64
-    proxy_no_proxy_server : UInt64
-    proxy_authentication_use_negotiate : UInt64
-    proxy_authentication_use_basic : UInt64
-    proxy_authentication_use_digest : UInt64
+    query_interface : Proc(IWSManConnectionOptionsEx2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSManConnectionOptionsEx2*, UInt32)
+    release : Proc(IWSManConnectionOptionsEx2*, UInt32)
+    get_type_info_count : Proc(IWSManConnectionOptionsEx2*, UInt32*, HRESULT)
+    get_type_info : Proc(IWSManConnectionOptionsEx2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWSManConnectionOptionsEx2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWSManConnectionOptionsEx2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_user_name : Proc(IWSManConnectionOptionsEx2*, UInt8**, HRESULT)
+    put_user_name : Proc(IWSManConnectionOptionsEx2*, UInt8*, HRESULT)
+    put_password : Proc(IWSManConnectionOptionsEx2*, UInt8*, HRESULT)
+    get_certificate_thumbprint : Proc(IWSManConnectionOptionsEx2*, UInt8**, HRESULT)
+    put_certificate_thumbprint : Proc(IWSManConnectionOptionsEx2*, UInt8*, HRESULT)
+    set_proxy : Proc(IWSManConnectionOptionsEx2*, Int32, Int32, UInt8*, UInt8*, HRESULT)
+    proxy_ie_config : Proc(IWSManConnectionOptionsEx2*, Int32*, HRESULT)
+    proxy_win_http_config : Proc(IWSManConnectionOptionsEx2*, Int32*, HRESULT)
+    proxy_auto_detect : Proc(IWSManConnectionOptionsEx2*, Int32*, HRESULT)
+    proxy_no_proxy_server : Proc(IWSManConnectionOptionsEx2*, Int32*, HRESULT)
+    proxy_authentication_use_negotiate : Proc(IWSManConnectionOptionsEx2*, Int32*, HRESULT)
+    proxy_authentication_use_basic : Proc(IWSManConnectionOptionsEx2*, Int32*, HRESULT)
+    proxy_authentication_use_digest : Proc(IWSManConnectionOptionsEx2*, Int32*, HRESULT)
   end
 
   IWSManConnectionOptionsEx2_GUID = "f500c9ec-24ee-48ab-b38d-fc9a164c658e"
@@ -1085,25 +1085,25 @@ lib LibWin32
   end
 
   struct IWSManSessionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get : UInt64
-    put : UInt64
-    create : UInt64
-    delete : UInt64
-    invoke2 : UInt64
-    enumerate : UInt64
-    identify : UInt64
-    get_error : UInt64
-    get_batch_items : UInt64
-    put_batch_items : UInt64
-    get_timeout : UInt64
-    put_timeout : UInt64
+    query_interface : Proc(IWSManSession*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSManSession*, UInt32)
+    release : Proc(IWSManSession*, UInt32)
+    get_type_info_count : Proc(IWSManSession*, UInt32*, HRESULT)
+    get_type_info : Proc(IWSManSession*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWSManSession*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWSManSession*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get : Proc(IWSManSession*, VARIANT, Int32, UInt8**, HRESULT)
+    put : Proc(IWSManSession*, VARIANT, UInt8*, Int32, UInt8**, HRESULT)
+    create : Proc(IWSManSession*, VARIANT, UInt8*, Int32, UInt8**, HRESULT)
+    delete : Proc(IWSManSession*, VARIANT, Int32, HRESULT)
+    invoke2 : Proc(IWSManSession*, UInt8*, VARIANT, UInt8*, Int32, UInt8**, HRESULT)
+    enumerate : Proc(IWSManSession*, VARIANT, UInt8*, UInt8*, Int32, IDispatch*, HRESULT)
+    identify : Proc(IWSManSession*, Int32, UInt8**, HRESULT)
+    get_error : Proc(IWSManSession*, UInt8**, HRESULT)
+    get_batch_items : Proc(IWSManSession*, Int32*, HRESULT)
+    put_batch_items : Proc(IWSManSession*, Int32, HRESULT)
+    get_timeout : Proc(IWSManSession*, Int32*, HRESULT)
+    put_timeout : Proc(IWSManSession*, Int32, HRESULT)
   end
 
   IWSManSession_GUID = "fc84fc58-1286-40c4-9da0-c8ef6ec241e0"
@@ -1113,16 +1113,16 @@ lib LibWin32
   end
 
   struct IWSManEnumeratorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    read_item : UInt64
-    get_at_end_of_stream : UInt64
-    get_error : UInt64
+    query_interface : Proc(IWSManEnumerator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSManEnumerator*, UInt32)
+    release : Proc(IWSManEnumerator*, UInt32)
+    get_type_info_count : Proc(IWSManEnumerator*, UInt32*, HRESULT)
+    get_type_info : Proc(IWSManEnumerator*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWSManEnumerator*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWSManEnumerator*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    read_item : Proc(IWSManEnumerator*, UInt8**, HRESULT)
+    get_at_end_of_stream : Proc(IWSManEnumerator*, Int16*, HRESULT)
+    get_error : Proc(IWSManEnumerator*, UInt8**, HRESULT)
   end
 
   IWSManEnumerator_GUID = "f3457ca9-abb9-4fa5-b850-90e8ca300e7f"
@@ -1132,26 +1132,26 @@ lib LibWin32
   end
 
   struct IWSManResourceLocatorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    put_resource_uri : UInt64
-    get_resource_uri : UInt64
-    add_selector : UInt64
-    clear_selectors : UInt64
-    get_fragment_path : UInt64
-    put_fragment_path : UInt64
-    get_fragment_dialect : UInt64
-    put_fragment_dialect : UInt64
-    add_option : UInt64
-    put_must_understand_options : UInt64
-    get_must_understand_options : UInt64
-    clear_options : UInt64
-    get_error : UInt64
+    query_interface : Proc(IWSManResourceLocator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSManResourceLocator*, UInt32)
+    release : Proc(IWSManResourceLocator*, UInt32)
+    get_type_info_count : Proc(IWSManResourceLocator*, UInt32*, HRESULT)
+    get_type_info : Proc(IWSManResourceLocator*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWSManResourceLocator*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWSManResourceLocator*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    put_resource_uri : Proc(IWSManResourceLocator*, UInt8*, HRESULT)
+    get_resource_uri : Proc(IWSManResourceLocator*, UInt8**, HRESULT)
+    add_selector : Proc(IWSManResourceLocator*, UInt8*, VARIANT, HRESULT)
+    clear_selectors : Proc(IWSManResourceLocator*, HRESULT)
+    get_fragment_path : Proc(IWSManResourceLocator*, UInt8**, HRESULT)
+    put_fragment_path : Proc(IWSManResourceLocator*, UInt8*, HRESULT)
+    get_fragment_dialect : Proc(IWSManResourceLocator*, UInt8**, HRESULT)
+    put_fragment_dialect : Proc(IWSManResourceLocator*, UInt8*, HRESULT)
+    add_option : Proc(IWSManResourceLocator*, UInt8*, VARIANT, LibC::BOOL, HRESULT)
+    put_must_understand_options : Proc(IWSManResourceLocator*, LibC::BOOL, HRESULT)
+    get_must_understand_options : Proc(IWSManResourceLocator*, LibC::BOOL*, HRESULT)
+    clear_options : Proc(IWSManResourceLocator*, HRESULT)
+    get_error : Proc(IWSManResourceLocator*, UInt8**, HRESULT)
   end
 
   IWSManResourceLocator_GUID = "a7a1ba28-de41-466a-ad0a-c4059ead7428"
@@ -1161,9 +1161,9 @@ lib LibWin32
   end
 
   struct IWSManResourceLocatorInternalVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
+    query_interface : Proc(IWSManResourceLocatorInternal*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSManResourceLocatorInternal*, UInt32)
+    release : Proc(IWSManResourceLocatorInternal*, UInt32)
   end
 
   IWSManResourceLocatorInternal_GUID = "effaead7-7ec8-4716-b9be-f2e7e9fb4adb"
@@ -1173,14 +1173,14 @@ lib LibWin32
   end
 
   struct IWSManInternalVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    config_sddl : UInt64
+    query_interface : Proc(IWSManInternal*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWSManInternal*, UInt32)
+    release : Proc(IWSManInternal*, UInt32)
+    get_type_info_count : Proc(IWSManInternal*, UInt32*, HRESULT)
+    get_type_info : Proc(IWSManInternal*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWSManInternal*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWSManInternal*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    config_sddl : Proc(IWSManInternal*, IDispatch, VARIANT, Int32, UInt8**, HRESULT)
   end
 
   IWSManInternal_GUID = "04ae2b1d-9954-4d99-94a9-a961e72c3a13"
@@ -1290,671 +1290,671 @@ lib LibWin32
   fun WSManPluginAuthzQueryQuotaComplete(senderdetails : WSMAN_SENDER_DETAILS*, flags : UInt32, quota : WSMAN_AUTHZ_QUOTA*, errorcode : UInt32, extendederrorinformation : LibC::LPWSTR) : UInt32
 end
 struct LibWin32::IWSMan
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSMan*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSMan*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSMan*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWSMan*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWSMan*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWSMan*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWSMan*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def create_session(connection : UInt8*, flags : Int32, connectionoptions : IDispatch, session : IDispatch*) : HRESULT
-    @lpVtbl.value.create_session.unsafe_as(Proc(UInt8*, Int32, IDispatch, IDispatch*, HRESULT)).call(connection, flags, connectionoptions, session)
+  def create_session(this : IWSMan*, connection : UInt8*, flags : Int32, connectionoptions : IDispatch, session : IDispatch*) : HRESULT
+    @lpVtbl.value.create_session.call(this, connection, flags, connectionoptions, session)
   end
-  def create_connection_options(connectionoptions : IDispatch*) : HRESULT
-    @lpVtbl.value.create_connection_options.unsafe_as(Proc(IDispatch*, HRESULT)).call(connectionoptions)
+  def create_connection_options(this : IWSMan*, connectionoptions : IDispatch*) : HRESULT
+    @lpVtbl.value.create_connection_options.call(this, connectionoptions)
   end
-  def get_command_line(value : UInt8**) : HRESULT
-    @lpVtbl.value.get_command_line.unsafe_as(Proc(UInt8**, HRESULT)).call(value)
+  def get_command_line(this : IWSMan*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_command_line.call(this, value)
   end
-  def get_error(value : UInt8**) : HRESULT
-    @lpVtbl.value.get_error.unsafe_as(Proc(UInt8**, HRESULT)).call(value)
+  def get_error(this : IWSMan*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_error.call(this, value)
   end
 end
 struct LibWin32::IWSManEx
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSManEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSManEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSManEx*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWSManEx*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWSManEx*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWSManEx*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWSManEx*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def create_session(connection : UInt8*, flags : Int32, connectionoptions : IDispatch, session : IDispatch*) : HRESULT
-    @lpVtbl.value.create_session.unsafe_as(Proc(UInt8*, Int32, IDispatch, IDispatch*, HRESULT)).call(connection, flags, connectionoptions, session)
+  def create_session(this : IWSManEx*, connection : UInt8*, flags : Int32, connectionoptions : IDispatch, session : IDispatch*) : HRESULT
+    @lpVtbl.value.create_session.call(this, connection, flags, connectionoptions, session)
   end
-  def create_connection_options(connectionoptions : IDispatch*) : HRESULT
-    @lpVtbl.value.create_connection_options.unsafe_as(Proc(IDispatch*, HRESULT)).call(connectionoptions)
+  def create_connection_options(this : IWSManEx*, connectionoptions : IDispatch*) : HRESULT
+    @lpVtbl.value.create_connection_options.call(this, connectionoptions)
   end
-  def get_command_line(value : UInt8**) : HRESULT
-    @lpVtbl.value.get_command_line.unsafe_as(Proc(UInt8**, HRESULT)).call(value)
+  def get_command_line(this : IWSManEx*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_command_line.call(this, value)
   end
-  def get_error(value : UInt8**) : HRESULT
-    @lpVtbl.value.get_error.unsafe_as(Proc(UInt8**, HRESULT)).call(value)
+  def get_error(this : IWSManEx*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_error.call(this, value)
   end
-  def create_resource_locator(strresourcelocator : UInt8*, newresourcelocator : IDispatch*) : HRESULT
-    @lpVtbl.value.create_resource_locator.unsafe_as(Proc(UInt8*, IDispatch*, HRESULT)).call(strresourcelocator, newresourcelocator)
+  def create_resource_locator(this : IWSManEx*, strresourcelocator : UInt8*, newresourcelocator : IDispatch*) : HRESULT
+    @lpVtbl.value.create_resource_locator.call(this, strresourcelocator, newresourcelocator)
   end
-  def session_flag_utf8(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_utf8.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_utf8(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_utf8.call(this, flags)
   end
-  def session_flag_cred_username_password(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_cred_username_password.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_cred_username_password(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_cred_username_password.call(this, flags)
   end
-  def session_flag_skip_ca_check(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_skip_ca_check.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_skip_ca_check(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_skip_ca_check.call(this, flags)
   end
-  def session_flag_skip_cn_check(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_skip_cn_check.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_skip_cn_check(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_skip_cn_check.call(this, flags)
   end
-  def session_flag_use_digest(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_use_digest.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_use_digest(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_digest.call(this, flags)
   end
-  def session_flag_use_negotiate(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_use_negotiate.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_use_negotiate(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_negotiate.call(this, flags)
   end
-  def session_flag_use_basic(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_use_basic.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_use_basic(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_basic.call(this, flags)
   end
-  def session_flag_use_kerberos(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_use_kerberos.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_use_kerberos(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_kerberos.call(this, flags)
   end
-  def session_flag_no_encryption(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_no_encryption.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_no_encryption(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_no_encryption.call(this, flags)
   end
-  def session_flag_enable_spn_server_port(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_enable_spn_server_port.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_enable_spn_server_port(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_enable_spn_server_port.call(this, flags)
   end
-  def session_flag_use_no_authentication(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_use_no_authentication.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_use_no_authentication(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_no_authentication.call(this, flags)
   end
-  def enumeration_flag_non_xml_text(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_non_xml_text.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_non_xml_text(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_non_xml_text.call(this, flags)
   end
-  def enumeration_flag_return_epr(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_return_epr.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_return_epr(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_return_epr.call(this, flags)
   end
-  def enumeration_flag_return_object_and_epr(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_return_object_and_epr.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_return_object_and_epr(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_return_object_and_epr.call(this, flags)
   end
-  def get_error_message(errornumber : UInt32, errormessage : UInt8**) : HRESULT
-    @lpVtbl.value.get_error_message.unsafe_as(Proc(UInt32, UInt8**, HRESULT)).call(errornumber, errormessage)
+  def get_error_message(this : IWSManEx*, errornumber : UInt32, errormessage : UInt8**) : HRESULT
+    @lpVtbl.value.get_error_message.call(this, errornumber, errormessage)
   end
-  def enumeration_flag_hierarchy_deep(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_hierarchy_deep.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_hierarchy_deep(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_hierarchy_deep.call(this, flags)
   end
-  def enumeration_flag_hierarchy_shallow(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_hierarchy_shallow.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_hierarchy_shallow(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_hierarchy_shallow.call(this, flags)
   end
-  def enumeration_flag_hierarchy_deep_base_props_only(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_hierarchy_deep_base_props_only.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_hierarchy_deep_base_props_only(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_hierarchy_deep_base_props_only.call(this, flags)
   end
-  def enumeration_flag_return_object(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_return_object.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_return_object(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_return_object.call(this, flags)
   end
 end
 struct LibWin32::IWSManEx2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSManEx2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSManEx2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSManEx2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWSManEx2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWSManEx2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWSManEx2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWSManEx2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def create_session(connection : UInt8*, flags : Int32, connectionoptions : IDispatch, session : IDispatch*) : HRESULT
-    @lpVtbl.value.create_session.unsafe_as(Proc(UInt8*, Int32, IDispatch, IDispatch*, HRESULT)).call(connection, flags, connectionoptions, session)
+  def create_session(this : IWSManEx2*, connection : UInt8*, flags : Int32, connectionoptions : IDispatch, session : IDispatch*) : HRESULT
+    @lpVtbl.value.create_session.call(this, connection, flags, connectionoptions, session)
   end
-  def create_connection_options(connectionoptions : IDispatch*) : HRESULT
-    @lpVtbl.value.create_connection_options.unsafe_as(Proc(IDispatch*, HRESULT)).call(connectionoptions)
+  def create_connection_options(this : IWSManEx2*, connectionoptions : IDispatch*) : HRESULT
+    @lpVtbl.value.create_connection_options.call(this, connectionoptions)
   end
-  def get_command_line(value : UInt8**) : HRESULT
-    @lpVtbl.value.get_command_line.unsafe_as(Proc(UInt8**, HRESULT)).call(value)
+  def get_command_line(this : IWSManEx2*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_command_line.call(this, value)
   end
-  def get_error(value : UInt8**) : HRESULT
-    @lpVtbl.value.get_error.unsafe_as(Proc(UInt8**, HRESULT)).call(value)
+  def get_error(this : IWSManEx2*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_error.call(this, value)
   end
-  def create_resource_locator(strresourcelocator : UInt8*, newresourcelocator : IDispatch*) : HRESULT
-    @lpVtbl.value.create_resource_locator.unsafe_as(Proc(UInt8*, IDispatch*, HRESULT)).call(strresourcelocator, newresourcelocator)
+  def create_resource_locator(this : IWSManEx2*, strresourcelocator : UInt8*, newresourcelocator : IDispatch*) : HRESULT
+    @lpVtbl.value.create_resource_locator.call(this, strresourcelocator, newresourcelocator)
   end
-  def session_flag_utf8(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_utf8.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_utf8(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_utf8.call(this, flags)
   end
-  def session_flag_cred_username_password(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_cred_username_password.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_cred_username_password(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_cred_username_password.call(this, flags)
   end
-  def session_flag_skip_ca_check(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_skip_ca_check.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_skip_ca_check(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_skip_ca_check.call(this, flags)
   end
-  def session_flag_skip_cn_check(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_skip_cn_check.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_skip_cn_check(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_skip_cn_check.call(this, flags)
   end
-  def session_flag_use_digest(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_use_digest.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_use_digest(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_digest.call(this, flags)
   end
-  def session_flag_use_negotiate(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_use_negotiate.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_use_negotiate(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_negotiate.call(this, flags)
   end
-  def session_flag_use_basic(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_use_basic.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_use_basic(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_basic.call(this, flags)
   end
-  def session_flag_use_kerberos(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_use_kerberos.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_use_kerberos(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_kerberos.call(this, flags)
   end
-  def session_flag_no_encryption(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_no_encryption.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_no_encryption(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_no_encryption.call(this, flags)
   end
-  def session_flag_enable_spn_server_port(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_enable_spn_server_port.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_enable_spn_server_port(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_enable_spn_server_port.call(this, flags)
   end
-  def session_flag_use_no_authentication(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_use_no_authentication.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_use_no_authentication(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_no_authentication.call(this, flags)
   end
-  def enumeration_flag_non_xml_text(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_non_xml_text.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_non_xml_text(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_non_xml_text.call(this, flags)
   end
-  def enumeration_flag_return_epr(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_return_epr.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_return_epr(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_return_epr.call(this, flags)
   end
-  def enumeration_flag_return_object_and_epr(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_return_object_and_epr.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_return_object_and_epr(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_return_object_and_epr.call(this, flags)
   end
-  def get_error_message(errornumber : UInt32, errormessage : UInt8**) : HRESULT
-    @lpVtbl.value.get_error_message.unsafe_as(Proc(UInt32, UInt8**, HRESULT)).call(errornumber, errormessage)
+  def get_error_message(this : IWSManEx2*, errornumber : UInt32, errormessage : UInt8**) : HRESULT
+    @lpVtbl.value.get_error_message.call(this, errornumber, errormessage)
   end
-  def enumeration_flag_hierarchy_deep(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_hierarchy_deep.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_hierarchy_deep(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_hierarchy_deep.call(this, flags)
   end
-  def enumeration_flag_hierarchy_shallow(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_hierarchy_shallow.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_hierarchy_shallow(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_hierarchy_shallow.call(this, flags)
   end
-  def enumeration_flag_hierarchy_deep_base_props_only(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_hierarchy_deep_base_props_only.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_hierarchy_deep_base_props_only(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_hierarchy_deep_base_props_only.call(this, flags)
   end
-  def enumeration_flag_return_object(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_return_object.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_return_object(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_return_object.call(this, flags)
   end
-  def session_flag_use_client_certificate(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_use_client_certificate.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_use_client_certificate(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_client_certificate.call(this, flags)
   end
 end
 struct LibWin32::IWSManEx3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSManEx3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSManEx3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSManEx3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWSManEx3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWSManEx3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWSManEx3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWSManEx3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def create_session(connection : UInt8*, flags : Int32, connectionoptions : IDispatch, session : IDispatch*) : HRESULT
-    @lpVtbl.value.create_session.unsafe_as(Proc(UInt8*, Int32, IDispatch, IDispatch*, HRESULT)).call(connection, flags, connectionoptions, session)
+  def create_session(this : IWSManEx3*, connection : UInt8*, flags : Int32, connectionoptions : IDispatch, session : IDispatch*) : HRESULT
+    @lpVtbl.value.create_session.call(this, connection, flags, connectionoptions, session)
   end
-  def create_connection_options(connectionoptions : IDispatch*) : HRESULT
-    @lpVtbl.value.create_connection_options.unsafe_as(Proc(IDispatch*, HRESULT)).call(connectionoptions)
+  def create_connection_options(this : IWSManEx3*, connectionoptions : IDispatch*) : HRESULT
+    @lpVtbl.value.create_connection_options.call(this, connectionoptions)
   end
-  def get_command_line(value : UInt8**) : HRESULT
-    @lpVtbl.value.get_command_line.unsafe_as(Proc(UInt8**, HRESULT)).call(value)
+  def get_command_line(this : IWSManEx3*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_command_line.call(this, value)
   end
-  def get_error(value : UInt8**) : HRESULT
-    @lpVtbl.value.get_error.unsafe_as(Proc(UInt8**, HRESULT)).call(value)
+  def get_error(this : IWSManEx3*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_error.call(this, value)
   end
-  def create_resource_locator(strresourcelocator : UInt8*, newresourcelocator : IDispatch*) : HRESULT
-    @lpVtbl.value.create_resource_locator.unsafe_as(Proc(UInt8*, IDispatch*, HRESULT)).call(strresourcelocator, newresourcelocator)
+  def create_resource_locator(this : IWSManEx3*, strresourcelocator : UInt8*, newresourcelocator : IDispatch*) : HRESULT
+    @lpVtbl.value.create_resource_locator.call(this, strresourcelocator, newresourcelocator)
   end
-  def session_flag_utf8(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_utf8.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_utf8(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_utf8.call(this, flags)
   end
-  def session_flag_cred_username_password(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_cred_username_password.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_cred_username_password(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_cred_username_password.call(this, flags)
   end
-  def session_flag_skip_ca_check(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_skip_ca_check.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_skip_ca_check(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_skip_ca_check.call(this, flags)
   end
-  def session_flag_skip_cn_check(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_skip_cn_check.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_skip_cn_check(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_skip_cn_check.call(this, flags)
   end
-  def session_flag_use_digest(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_use_digest.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_use_digest(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_digest.call(this, flags)
   end
-  def session_flag_use_negotiate(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_use_negotiate.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_use_negotiate(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_negotiate.call(this, flags)
   end
-  def session_flag_use_basic(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_use_basic.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_use_basic(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_basic.call(this, flags)
   end
-  def session_flag_use_kerberos(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_use_kerberos.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_use_kerberos(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_kerberos.call(this, flags)
   end
-  def session_flag_no_encryption(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_no_encryption.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_no_encryption(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_no_encryption.call(this, flags)
   end
-  def session_flag_enable_spn_server_port(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_enable_spn_server_port.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_enable_spn_server_port(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_enable_spn_server_port.call(this, flags)
   end
-  def session_flag_use_no_authentication(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_use_no_authentication.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_use_no_authentication(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_no_authentication.call(this, flags)
   end
-  def enumeration_flag_non_xml_text(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_non_xml_text.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_non_xml_text(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_non_xml_text.call(this, flags)
   end
-  def enumeration_flag_return_epr(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_return_epr.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_return_epr(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_return_epr.call(this, flags)
   end
-  def enumeration_flag_return_object_and_epr(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_return_object_and_epr.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_return_object_and_epr(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_return_object_and_epr.call(this, flags)
   end
-  def get_error_message(errornumber : UInt32, errormessage : UInt8**) : HRESULT
-    @lpVtbl.value.get_error_message.unsafe_as(Proc(UInt32, UInt8**, HRESULT)).call(errornumber, errormessage)
+  def get_error_message(this : IWSManEx3*, errornumber : UInt32, errormessage : UInt8**) : HRESULT
+    @lpVtbl.value.get_error_message.call(this, errornumber, errormessage)
   end
-  def enumeration_flag_hierarchy_deep(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_hierarchy_deep.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_hierarchy_deep(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_hierarchy_deep.call(this, flags)
   end
-  def enumeration_flag_hierarchy_shallow(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_hierarchy_shallow.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_hierarchy_shallow(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_hierarchy_shallow.call(this, flags)
   end
-  def enumeration_flag_hierarchy_deep_base_props_only(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_hierarchy_deep_base_props_only.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_hierarchy_deep_base_props_only(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_hierarchy_deep_base_props_only.call(this, flags)
   end
-  def enumeration_flag_return_object(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_return_object.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_return_object(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_return_object.call(this, flags)
   end
-  def session_flag_use_client_certificate(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_use_client_certificate.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_use_client_certificate(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_client_certificate.call(this, flags)
   end
-  def session_flag_utf16(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_utf16.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_utf16(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_utf16.call(this, flags)
   end
-  def session_flag_use_cred_ssp(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_use_cred_ssp.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_use_cred_ssp(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_cred_ssp.call(this, flags)
   end
-  def enumeration_flag_association_instance(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_association_instance.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_association_instance(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_association_instance.call(this, flags)
   end
-  def enumeration_flag_associated_instance(flags : Int32*) : HRESULT
-    @lpVtbl.value.enumeration_flag_associated_instance.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def enumeration_flag_associated_instance(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_associated_instance.call(this, flags)
   end
-  def session_flag_skip_revocation_check(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_skip_revocation_check.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_skip_revocation_check(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_skip_revocation_check.call(this, flags)
   end
-  def session_flag_allow_negotiate_implicit_credentials(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_allow_negotiate_implicit_credentials.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_allow_negotiate_implicit_credentials(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_allow_negotiate_implicit_credentials.call(this, flags)
   end
-  def session_flag_use_ssl(flags : Int32*) : HRESULT
-    @lpVtbl.value.session_flag_use_ssl.unsafe_as(Proc(Int32*, HRESULT)).call(flags)
+  def session_flag_use_ssl(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_ssl.call(this, flags)
   end
 end
 struct LibWin32::IWSManConnectionOptions
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSManConnectionOptions*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSManConnectionOptions*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSManConnectionOptions*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWSManConnectionOptions*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWSManConnectionOptions*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWSManConnectionOptions*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWSManConnectionOptions*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_user_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_user_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_user_name(this : IWSManConnectionOptions*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_name.call(this, name)
   end
-  def put_user_name(name : UInt8*) : HRESULT
-    @lpVtbl.value.put_user_name.unsafe_as(Proc(UInt8*, HRESULT)).call(name)
+  def put_user_name(this : IWSManConnectionOptions*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_user_name.call(this, name)
   end
-  def put_password(password : UInt8*) : HRESULT
-    @lpVtbl.value.put_password.unsafe_as(Proc(UInt8*, HRESULT)).call(password)
+  def put_password(this : IWSManConnectionOptions*, password : UInt8*) : HRESULT
+    @lpVtbl.value.put_password.call(this, password)
   end
 end
 struct LibWin32::IWSManConnectionOptionsEx
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSManConnectionOptionsEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSManConnectionOptionsEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSManConnectionOptionsEx*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWSManConnectionOptionsEx*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWSManConnectionOptionsEx*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWSManConnectionOptionsEx*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWSManConnectionOptionsEx*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_user_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_user_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_user_name(this : IWSManConnectionOptionsEx*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_name.call(this, name)
   end
-  def put_user_name(name : UInt8*) : HRESULT
-    @lpVtbl.value.put_user_name.unsafe_as(Proc(UInt8*, HRESULT)).call(name)
+  def put_user_name(this : IWSManConnectionOptionsEx*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_user_name.call(this, name)
   end
-  def put_password(password : UInt8*) : HRESULT
-    @lpVtbl.value.put_password.unsafe_as(Proc(UInt8*, HRESULT)).call(password)
+  def put_password(this : IWSManConnectionOptionsEx*, password : UInt8*) : HRESULT
+    @lpVtbl.value.put_password.call(this, password)
   end
-  def get_certificate_thumbprint(thumbprint : UInt8**) : HRESULT
-    @lpVtbl.value.get_certificate_thumbprint.unsafe_as(Proc(UInt8**, HRESULT)).call(thumbprint)
+  def get_certificate_thumbprint(this : IWSManConnectionOptionsEx*, thumbprint : UInt8**) : HRESULT
+    @lpVtbl.value.get_certificate_thumbprint.call(this, thumbprint)
   end
-  def put_certificate_thumbprint(thumbprint : UInt8*) : HRESULT
-    @lpVtbl.value.put_certificate_thumbprint.unsafe_as(Proc(UInt8*, HRESULT)).call(thumbprint)
+  def put_certificate_thumbprint(this : IWSManConnectionOptionsEx*, thumbprint : UInt8*) : HRESULT
+    @lpVtbl.value.put_certificate_thumbprint.call(this, thumbprint)
   end
 end
 struct LibWin32::IWSManConnectionOptionsEx2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSManConnectionOptionsEx2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSManConnectionOptionsEx2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSManConnectionOptionsEx2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWSManConnectionOptionsEx2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWSManConnectionOptionsEx2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWSManConnectionOptionsEx2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWSManConnectionOptionsEx2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_user_name(name : UInt8**) : HRESULT
-    @lpVtbl.value.get_user_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  def get_user_name(this : IWSManConnectionOptionsEx2*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_name.call(this, name)
   end
-  def put_user_name(name : UInt8*) : HRESULT
-    @lpVtbl.value.put_user_name.unsafe_as(Proc(UInt8*, HRESULT)).call(name)
+  def put_user_name(this : IWSManConnectionOptionsEx2*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_user_name.call(this, name)
   end
-  def put_password(password : UInt8*) : HRESULT
-    @lpVtbl.value.put_password.unsafe_as(Proc(UInt8*, HRESULT)).call(password)
+  def put_password(this : IWSManConnectionOptionsEx2*, password : UInt8*) : HRESULT
+    @lpVtbl.value.put_password.call(this, password)
   end
-  def get_certificate_thumbprint(thumbprint : UInt8**) : HRESULT
-    @lpVtbl.value.get_certificate_thumbprint.unsafe_as(Proc(UInt8**, HRESULT)).call(thumbprint)
+  def get_certificate_thumbprint(this : IWSManConnectionOptionsEx2*, thumbprint : UInt8**) : HRESULT
+    @lpVtbl.value.get_certificate_thumbprint.call(this, thumbprint)
   end
-  def put_certificate_thumbprint(thumbprint : UInt8*) : HRESULT
-    @lpVtbl.value.put_certificate_thumbprint.unsafe_as(Proc(UInt8*, HRESULT)).call(thumbprint)
+  def put_certificate_thumbprint(this : IWSManConnectionOptionsEx2*, thumbprint : UInt8*) : HRESULT
+    @lpVtbl.value.put_certificate_thumbprint.call(this, thumbprint)
   end
-  def set_proxy(accesstype : Int32, authenticationmechanism : Int32, username : UInt8*, password : UInt8*) : HRESULT
-    @lpVtbl.value.set_proxy.unsafe_as(Proc(Int32, Int32, UInt8*, UInt8*, HRESULT)).call(accesstype, authenticationmechanism, username, password)
+  def set_proxy(this : IWSManConnectionOptionsEx2*, accesstype : Int32, authenticationmechanism : Int32, username : UInt8*, password : UInt8*) : HRESULT
+    @lpVtbl.value.set_proxy.call(this, accesstype, authenticationmechanism, username, password)
   end
-  def proxy_ie_config(value : Int32*) : HRESULT
-    @lpVtbl.value.proxy_ie_config.unsafe_as(Proc(Int32*, HRESULT)).call(value)
+  def proxy_ie_config(this : IWSManConnectionOptionsEx2*, value : Int32*) : HRESULT
+    @lpVtbl.value.proxy_ie_config.call(this, value)
   end
-  def proxy_win_http_config(value : Int32*) : HRESULT
-    @lpVtbl.value.proxy_win_http_config.unsafe_as(Proc(Int32*, HRESULT)).call(value)
+  def proxy_win_http_config(this : IWSManConnectionOptionsEx2*, value : Int32*) : HRESULT
+    @lpVtbl.value.proxy_win_http_config.call(this, value)
   end
-  def proxy_auto_detect(value : Int32*) : HRESULT
-    @lpVtbl.value.proxy_auto_detect.unsafe_as(Proc(Int32*, HRESULT)).call(value)
+  def proxy_auto_detect(this : IWSManConnectionOptionsEx2*, value : Int32*) : HRESULT
+    @lpVtbl.value.proxy_auto_detect.call(this, value)
   end
-  def proxy_no_proxy_server(value : Int32*) : HRESULT
-    @lpVtbl.value.proxy_no_proxy_server.unsafe_as(Proc(Int32*, HRESULT)).call(value)
+  def proxy_no_proxy_server(this : IWSManConnectionOptionsEx2*, value : Int32*) : HRESULT
+    @lpVtbl.value.proxy_no_proxy_server.call(this, value)
   end
-  def proxy_authentication_use_negotiate(value : Int32*) : HRESULT
-    @lpVtbl.value.proxy_authentication_use_negotiate.unsafe_as(Proc(Int32*, HRESULT)).call(value)
+  def proxy_authentication_use_negotiate(this : IWSManConnectionOptionsEx2*, value : Int32*) : HRESULT
+    @lpVtbl.value.proxy_authentication_use_negotiate.call(this, value)
   end
-  def proxy_authentication_use_basic(value : Int32*) : HRESULT
-    @lpVtbl.value.proxy_authentication_use_basic.unsafe_as(Proc(Int32*, HRESULT)).call(value)
+  def proxy_authentication_use_basic(this : IWSManConnectionOptionsEx2*, value : Int32*) : HRESULT
+    @lpVtbl.value.proxy_authentication_use_basic.call(this, value)
   end
-  def proxy_authentication_use_digest(value : Int32*) : HRESULT
-    @lpVtbl.value.proxy_authentication_use_digest.unsafe_as(Proc(Int32*, HRESULT)).call(value)
+  def proxy_authentication_use_digest(this : IWSManConnectionOptionsEx2*, value : Int32*) : HRESULT
+    @lpVtbl.value.proxy_authentication_use_digest.call(this, value)
   end
 end
 struct LibWin32::IWSManSession
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSManSession*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSManSession*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSManSession*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWSManSession*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWSManSession*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWSManSession*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWSManSession*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get(resourceuri : VARIANT, flags : Int32, resource : UInt8**) : HRESULT
-    @lpVtbl.value.get.unsafe_as(Proc(VARIANT, Int32, UInt8**, HRESULT)).call(resourceuri, flags, resource)
+  def get(this : IWSManSession*, resourceuri : VARIANT, flags : Int32, resource : UInt8**) : HRESULT
+    @lpVtbl.value.get.call(this, resourceuri, flags, resource)
   end
-  def put(resourceuri : VARIANT, resource : UInt8*, flags : Int32, resultresource : UInt8**) : HRESULT
-    @lpVtbl.value.put.unsafe_as(Proc(VARIANT, UInt8*, Int32, UInt8**, HRESULT)).call(resourceuri, resource, flags, resultresource)
+  def put(this : IWSManSession*, resourceuri : VARIANT, resource : UInt8*, flags : Int32, resultresource : UInt8**) : HRESULT
+    @lpVtbl.value.put.call(this, resourceuri, resource, flags, resultresource)
   end
-  def create(resourceuri : VARIANT, resource : UInt8*, flags : Int32, newuri : UInt8**) : HRESULT
-    @lpVtbl.value.create.unsafe_as(Proc(VARIANT, UInt8*, Int32, UInt8**, HRESULT)).call(resourceuri, resource, flags, newuri)
+  def create(this : IWSManSession*, resourceuri : VARIANT, resource : UInt8*, flags : Int32, newuri : UInt8**) : HRESULT
+    @lpVtbl.value.create.call(this, resourceuri, resource, flags, newuri)
   end
-  def delete(resourceuri : VARIANT, flags : Int32) : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(resourceuri, flags)
+  def delete(this : IWSManSession*, resourceuri : VARIANT, flags : Int32) : HRESULT
+    @lpVtbl.value.delete.call(this, resourceuri, flags)
   end
-  def invoke2(actionuri : UInt8*, resourceuri : VARIANT, parameters : UInt8*, flags : Int32, result : UInt8**) : HRESULT
-    @lpVtbl.value.invoke2.unsafe_as(Proc(UInt8*, VARIANT, UInt8*, Int32, UInt8**, HRESULT)).call(actionuri, resourceuri, parameters, flags, result)
+  def invoke2(this : IWSManSession*, actionuri : UInt8*, resourceuri : VARIANT, parameters : UInt8*, flags : Int32, result : UInt8**) : HRESULT
+    @lpVtbl.value.invoke2.call(this, actionuri, resourceuri, parameters, flags, result)
   end
-  def enumerate(resourceuri : VARIANT, filter : UInt8*, dialect : UInt8*, flags : Int32, resultset : IDispatch*) : HRESULT
-    @lpVtbl.value.enumerate.unsafe_as(Proc(VARIANT, UInt8*, UInt8*, Int32, IDispatch*, HRESULT)).call(resourceuri, filter, dialect, flags, resultset)
+  def enumerate(this : IWSManSession*, resourceuri : VARIANT, filter : UInt8*, dialect : UInt8*, flags : Int32, resultset : IDispatch*) : HRESULT
+    @lpVtbl.value.enumerate.call(this, resourceuri, filter, dialect, flags, resultset)
   end
-  def identify(flags : Int32, result : UInt8**) : HRESULT
-    @lpVtbl.value.identify.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(flags, result)
+  def identify(this : IWSManSession*, flags : Int32, result : UInt8**) : HRESULT
+    @lpVtbl.value.identify.call(this, flags, result)
   end
-  def get_error(value : UInt8**) : HRESULT
-    @lpVtbl.value.get_error.unsafe_as(Proc(UInt8**, HRESULT)).call(value)
+  def get_error(this : IWSManSession*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_error.call(this, value)
   end
-  def get_batch_items(value : Int32*) : HRESULT
-    @lpVtbl.value.get_batch_items.unsafe_as(Proc(Int32*, HRESULT)).call(value)
+  def get_batch_items(this : IWSManSession*, value : Int32*) : HRESULT
+    @lpVtbl.value.get_batch_items.call(this, value)
   end
-  def put_batch_items(value : Int32) : HRESULT
-    @lpVtbl.value.put_batch_items.unsafe_as(Proc(Int32, HRESULT)).call(value)
+  def put_batch_items(this : IWSManSession*, value : Int32) : HRESULT
+    @lpVtbl.value.put_batch_items.call(this, value)
   end
-  def get_timeout(value : Int32*) : HRESULT
-    @lpVtbl.value.get_timeout.unsafe_as(Proc(Int32*, HRESULT)).call(value)
+  def get_timeout(this : IWSManSession*, value : Int32*) : HRESULT
+    @lpVtbl.value.get_timeout.call(this, value)
   end
-  def put_timeout(value : Int32) : HRESULT
-    @lpVtbl.value.put_timeout.unsafe_as(Proc(Int32, HRESULT)).call(value)
+  def put_timeout(this : IWSManSession*, value : Int32) : HRESULT
+    @lpVtbl.value.put_timeout.call(this, value)
   end
 end
 struct LibWin32::IWSManEnumerator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSManEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSManEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSManEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWSManEnumerator*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWSManEnumerator*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWSManEnumerator*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWSManEnumerator*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def read_item(resource : UInt8**) : HRESULT
-    @lpVtbl.value.read_item.unsafe_as(Proc(UInt8**, HRESULT)).call(resource)
+  def read_item(this : IWSManEnumerator*, resource : UInt8**) : HRESULT
+    @lpVtbl.value.read_item.call(this, resource)
   end
-  def get_at_end_of_stream(eos : Int16*) : HRESULT
-    @lpVtbl.value.get_at_end_of_stream.unsafe_as(Proc(Int16*, HRESULT)).call(eos)
+  def get_at_end_of_stream(this : IWSManEnumerator*, eos : Int16*) : HRESULT
+    @lpVtbl.value.get_at_end_of_stream.call(this, eos)
   end
-  def get_error(value : UInt8**) : HRESULT
-    @lpVtbl.value.get_error.unsafe_as(Proc(UInt8**, HRESULT)).call(value)
+  def get_error(this : IWSManEnumerator*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_error.call(this, value)
   end
 end
 struct LibWin32::IWSManResourceLocator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSManResourceLocator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSManResourceLocator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSManResourceLocator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWSManResourceLocator*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWSManResourceLocator*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWSManResourceLocator*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWSManResourceLocator*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def put_resource_uri(uri : UInt8*) : HRESULT
-    @lpVtbl.value.put_resource_uri.unsafe_as(Proc(UInt8*, HRESULT)).call(uri)
+  def put_resource_uri(this : IWSManResourceLocator*, uri : UInt8*) : HRESULT
+    @lpVtbl.value.put_resource_uri.call(this, uri)
   end
-  def get_resource_uri(uri : UInt8**) : HRESULT
-    @lpVtbl.value.get_resource_uri.unsafe_as(Proc(UInt8**, HRESULT)).call(uri)
+  def get_resource_uri(this : IWSManResourceLocator*, uri : UInt8**) : HRESULT
+    @lpVtbl.value.get_resource_uri.call(this, uri)
   end
-  def add_selector(resourceselname : UInt8*, selvalue : VARIANT) : HRESULT
-    @lpVtbl.value.add_selector.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(resourceselname, selvalue)
+  def add_selector(this : IWSManResourceLocator*, resourceselname : UInt8*, selvalue : VARIANT) : HRESULT
+    @lpVtbl.value.add_selector.call(this, resourceselname, selvalue)
   end
-  def clear_selectors : HRESULT
-    @lpVtbl.value.clear_selectors.unsafe_as(Proc(HRESULT)).call
+  def clear_selectors(this : IWSManResourceLocator*) : HRESULT
+    @lpVtbl.value.clear_selectors.call(this)
   end
-  def get_fragment_path(text : UInt8**) : HRESULT
-    @lpVtbl.value.get_fragment_path.unsafe_as(Proc(UInt8**, HRESULT)).call(text)
+  def get_fragment_path(this : IWSManResourceLocator*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_fragment_path.call(this, text)
   end
-  def put_fragment_path(text : UInt8*) : HRESULT
-    @lpVtbl.value.put_fragment_path.unsafe_as(Proc(UInt8*, HRESULT)).call(text)
+  def put_fragment_path(this : IWSManResourceLocator*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_fragment_path.call(this, text)
   end
-  def get_fragment_dialect(text : UInt8**) : HRESULT
-    @lpVtbl.value.get_fragment_dialect.unsafe_as(Proc(UInt8**, HRESULT)).call(text)
+  def get_fragment_dialect(this : IWSManResourceLocator*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_fragment_dialect.call(this, text)
   end
-  def put_fragment_dialect(text : UInt8*) : HRESULT
-    @lpVtbl.value.put_fragment_dialect.unsafe_as(Proc(UInt8*, HRESULT)).call(text)
+  def put_fragment_dialect(this : IWSManResourceLocator*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_fragment_dialect.call(this, text)
   end
-  def add_option(optionname : UInt8*, optionvalue : VARIANT, mustcomply : LibC::BOOL) : HRESULT
-    @lpVtbl.value.add_option.unsafe_as(Proc(UInt8*, VARIANT, LibC::BOOL, HRESULT)).call(optionname, optionvalue, mustcomply)
+  def add_option(this : IWSManResourceLocator*, optionname : UInt8*, optionvalue : VARIANT, mustcomply : LibC::BOOL) : HRESULT
+    @lpVtbl.value.add_option.call(this, optionname, optionvalue, mustcomply)
   end
-  def put_must_understand_options(mustunderstand : LibC::BOOL) : HRESULT
-    @lpVtbl.value.put_must_understand_options.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(mustunderstand)
+  def put_must_understand_options(this : IWSManResourceLocator*, mustunderstand : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_must_understand_options.call(this, mustunderstand)
   end
-  def get_must_understand_options(mustunderstand : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_must_understand_options.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(mustunderstand)
+  def get_must_understand_options(this : IWSManResourceLocator*, mustunderstand : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_must_understand_options.call(this, mustunderstand)
   end
-  def clear_options : HRESULT
-    @lpVtbl.value.clear_options.unsafe_as(Proc(HRESULT)).call
+  def clear_options(this : IWSManResourceLocator*) : HRESULT
+    @lpVtbl.value.clear_options.call(this)
   end
-  def get_error(value : UInt8**) : HRESULT
-    @lpVtbl.value.get_error.unsafe_as(Proc(UInt8**, HRESULT)).call(value)
+  def get_error(this : IWSManResourceLocator*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_error.call(this, value)
   end
 end
 struct LibWin32::IWSManResourceLocatorInternal
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSManResourceLocatorInternal*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSManResourceLocatorInternal*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSManResourceLocatorInternal*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
 end
 struct LibWin32::IWSManInternal
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWSManInternal*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWSManInternal*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWSManInternal*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWSManInternal*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWSManInternal*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWSManInternal*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWSManInternal*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def config_sddl(session : IDispatch, resourceuri : VARIANT, flags : Int32, resource : UInt8**) : HRESULT
-    @lpVtbl.value.config_sddl.unsafe_as(Proc(IDispatch, VARIANT, Int32, UInt8**, HRESULT)).call(session, resourceuri, flags, resource)
+  def config_sddl(this : IWSManInternal*, session : IDispatch, resourceuri : VARIANT, flags : Int32, resource : UInt8**) : HRESULT
+    @lpVtbl.value.config_sddl.call(this, session, resourceuri, flags, resource)
   end
 end

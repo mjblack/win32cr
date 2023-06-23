@@ -479,19 +479,19 @@ lib LibWin32
 
 
   struct IXAPOVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_registration_properties : UInt64
-    is_input_format_supported : UInt64
-    is_output_format_supported : UInt64
-    initialize : UInt64
-    reset : UInt64
-    lock_for_process : UInt64
-    unlock_for_process : UInt64
-    process : UInt64
-    calc_input_frames : UInt64
-    calc_output_frames : UInt64
+    query_interface : Proc(IXAPO*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXAPO*, UInt32)
+    release : Proc(IXAPO*, UInt32)
+    get_registration_properties : Proc(IXAPO*, XAPO_REGISTRATION_PROPERTIES**, HRESULT)
+    is_input_format_supported : Proc(IXAPO*, WAVEFORMATEX*, WAVEFORMATEX*, WAVEFORMATEX**, HRESULT)
+    is_output_format_supported : Proc(IXAPO*, WAVEFORMATEX*, WAVEFORMATEX*, WAVEFORMATEX**, HRESULT)
+    initialize : Proc(IXAPO*, Void*, UInt32, HRESULT)
+    reset : Proc(IXAPO*, Void)
+    lock_for_process : Proc(IXAPO*, UInt32, XAPO_LOCKFORPROCESS_PARAMETERS*, UInt32, XAPO_LOCKFORPROCESS_PARAMETERS*, HRESULT)
+    unlock_for_process : Proc(IXAPO*, Void)
+    process : Proc(IXAPO*, UInt32, XAPO_PROCESS_BUFFER_PARAMETERS*, UInt32, XAPO_PROCESS_BUFFER_PARAMETERS*, LibC::BOOL, Void)
+    calc_input_frames : Proc(IXAPO*, UInt32, UInt32)
+    calc_output_frames : Proc(IXAPO*, UInt32, UInt32)
   end
 
   IXAPO_GUID = "a410b984-9839-4819-a0be-2856ae6b3adb"
@@ -501,11 +501,11 @@ lib LibWin32
   end
 
   struct IXAPOParametersVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_parameters : UInt64
-    get_parameters : UInt64
+    query_interface : Proc(IXAPOParameters*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXAPOParameters*, UInt32)
+    release : Proc(IXAPOParameters*, UInt32)
+    set_parameters : Proc(IXAPOParameters*, Void*, UInt32, Void)
+    get_parameters : Proc(IXAPOParameters*, Void*, UInt32, Void)
   end
 
   IXAPOParameters_GUID = "26d95c66-80f2-499a-ad54-5ae7f01c6d98"
@@ -515,19 +515,19 @@ lib LibWin32
   end
 
   struct IXAudio2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    register_for_callbacks : UInt64
-    unregister_for_callbacks : UInt64
-    create_source_voice : UInt64
-    create_submix_voice : UInt64
-    create_mastering_voice : UInt64
-    start_engine : UInt64
-    stop_engine : UInt64
-    commit_changes : UInt64
-    get_performance_data : UInt64
-    set_debug_configuration : UInt64
+    query_interface : Proc(IXAudio2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXAudio2*, UInt32)
+    release : Proc(IXAudio2*, UInt32)
+    register_for_callbacks : Proc(IXAudio2*, IXAudio2EngineCallback, HRESULT)
+    unregister_for_callbacks : Proc(IXAudio2*, IXAudio2EngineCallback, Void)
+    create_source_voice : Proc(IXAudio2*, IXAudio2SourceVoice*, WAVEFORMATEX*, UInt32, Float32, IXAudio2VoiceCallback, XAUDIO2_VOICE_SENDS*, XAUDIO2_EFFECT_CHAIN*, HRESULT)
+    create_submix_voice : Proc(IXAudio2*, IXAudio2SubmixVoice*, UInt32, UInt32, UInt32, UInt32, XAUDIO2_VOICE_SENDS*, XAUDIO2_EFFECT_CHAIN*, HRESULT)
+    create_mastering_voice : Proc(IXAudio2*, IXAudio2MasteringVoice*, UInt32, UInt32, UInt32, LibC::LPWSTR, XAUDIO2_EFFECT_CHAIN*, AUDIO_STREAM_CATEGORY, HRESULT)
+    start_engine : Proc(IXAudio2*, HRESULT)
+    stop_engine : Proc(IXAudio2*, Void)
+    commit_changes : Proc(IXAudio2*, UInt32, HRESULT)
+    get_performance_data : Proc(IXAudio2*, XAUDIO2_PERFORMANCE_DATA*, Void)
+    set_debug_configuration : Proc(IXAudio2*, XAUDIO2_DEBUG_CONFIGURATION*, Void*, Void)
   end
 
   IXAudio2_GUID = "2b02e3cf-2e0b-4ec3-be45-1b2a3fe7210d"
@@ -537,11 +537,11 @@ lib LibWin32
   end
 
   struct IXAudio2ExtensionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_processing_quantum : UInt64
-    get_processor : UInt64
+    query_interface : Proc(IXAudio2Extension*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXAudio2Extension*, UInt32)
+    release : Proc(IXAudio2Extension*, UInt32)
+    get_processing_quantum : Proc(IXAudio2Extension*, UInt32*, UInt32*, Void)
+    get_processor : Proc(IXAudio2Extension*, UInt32*, Void)
   end
 
   IXAudio2Extension_GUID = "84ac29bb-d619-44d2-b197-e4acf7df3ed6"
@@ -551,25 +551,25 @@ lib LibWin32
   end
 
   struct IXAudio2VoiceVTbl
-    get_voice_details : UInt64
-    set_output_voices : UInt64
-    set_effect_chain : UInt64
-    enable_effect : UInt64
-    disable_effect : UInt64
-    get_effect_state : UInt64
-    set_effect_parameters : UInt64
-    get_effect_parameters : UInt64
-    set_filter_parameters : UInt64
-    get_filter_parameters : UInt64
-    set_output_filter_parameters : UInt64
-    get_output_filter_parameters : UInt64
-    set_volume : UInt64
-    get_volume : UInt64
-    set_channel_volumes : UInt64
-    get_channel_volumes : UInt64
-    set_output_matrix : UInt64
-    get_output_matrix : UInt64
-    destroy_voice : UInt64
+    get_voice_details : Proc(IXAudio2Voice*, XAUDIO2_VOICE_DETAILS*, Void)
+    set_output_voices : Proc(IXAudio2Voice*, XAUDIO2_VOICE_SENDS*, HRESULT)
+    set_effect_chain : Proc(IXAudio2Voice*, XAUDIO2_EFFECT_CHAIN*, HRESULT)
+    enable_effect : Proc(IXAudio2Voice*, UInt32, UInt32, HRESULT)
+    disable_effect : Proc(IXAudio2Voice*, UInt32, UInt32, HRESULT)
+    get_effect_state : Proc(IXAudio2Voice*, UInt32, LibC::BOOL*, Void)
+    set_effect_parameters : Proc(IXAudio2Voice*, UInt32, Void*, UInt32, UInt32, HRESULT)
+    get_effect_parameters : Proc(IXAudio2Voice*, UInt32, Void*, UInt32, HRESULT)
+    set_filter_parameters : Proc(IXAudio2Voice*, XAUDIO2_FILTER_PARAMETERS*, UInt32, HRESULT)
+    get_filter_parameters : Proc(IXAudio2Voice*, XAUDIO2_FILTER_PARAMETERS*, Void)
+    set_output_filter_parameters : Proc(IXAudio2Voice*, IXAudio2Voice, XAUDIO2_FILTER_PARAMETERS*, UInt32, HRESULT)
+    get_output_filter_parameters : Proc(IXAudio2Voice*, IXAudio2Voice, XAUDIO2_FILTER_PARAMETERS*, Void)
+    set_volume : Proc(IXAudio2Voice*, Float32, UInt32, HRESULT)
+    get_volume : Proc(IXAudio2Voice*, Float32*, Void)
+    set_channel_volumes : Proc(IXAudio2Voice*, UInt32, Float32*, UInt32, HRESULT)
+    get_channel_volumes : Proc(IXAudio2Voice*, UInt32, Float32*, Void)
+    set_output_matrix : Proc(IXAudio2Voice*, IXAudio2Voice, UInt32, UInt32, Float32*, UInt32, HRESULT)
+    get_output_matrix : Proc(IXAudio2Voice*, IXAudio2Voice, UInt32, UInt32, Float32*, Void)
+    destroy_voice : Proc(IXAudio2Voice*, Void)
   end
 
   struct IXAudio2Voice
@@ -577,35 +577,35 @@ lib LibWin32
   end
 
   struct IXAudio2SourceVoiceVTbl
-    get_voice_details : UInt64
-    set_output_voices : UInt64
-    set_effect_chain : UInt64
-    enable_effect : UInt64
-    disable_effect : UInt64
-    get_effect_state : UInt64
-    set_effect_parameters : UInt64
-    get_effect_parameters : UInt64
-    set_filter_parameters : UInt64
-    get_filter_parameters : UInt64
-    set_output_filter_parameters : UInt64
-    get_output_filter_parameters : UInt64
-    set_volume : UInt64
-    get_volume : UInt64
-    set_channel_volumes : UInt64
-    get_channel_volumes : UInt64
-    set_output_matrix : UInt64
-    get_output_matrix : UInt64
-    destroy_voice : UInt64
-    start : UInt64
-    stop : UInt64
-    submit_source_buffer : UInt64
-    flush_source_buffers : UInt64
-    discontinuity : UInt64
-    exit_loop : UInt64
-    get_state : UInt64
-    set_frequency_ratio : UInt64
-    get_frequency_ratio : UInt64
-    set_source_sample_rate : UInt64
+    get_voice_details : Proc(IXAudio2SourceVoice*, XAUDIO2_VOICE_DETAILS*, Void)
+    set_output_voices : Proc(IXAudio2SourceVoice*, XAUDIO2_VOICE_SENDS*, HRESULT)
+    set_effect_chain : Proc(IXAudio2SourceVoice*, XAUDIO2_EFFECT_CHAIN*, HRESULT)
+    enable_effect : Proc(IXAudio2SourceVoice*, UInt32, UInt32, HRESULT)
+    disable_effect : Proc(IXAudio2SourceVoice*, UInt32, UInt32, HRESULT)
+    get_effect_state : Proc(IXAudio2SourceVoice*, UInt32, LibC::BOOL*, Void)
+    set_effect_parameters : Proc(IXAudio2SourceVoice*, UInt32, Void*, UInt32, UInt32, HRESULT)
+    get_effect_parameters : Proc(IXAudio2SourceVoice*, UInt32, Void*, UInt32, HRESULT)
+    set_filter_parameters : Proc(IXAudio2SourceVoice*, XAUDIO2_FILTER_PARAMETERS*, UInt32, HRESULT)
+    get_filter_parameters : Proc(IXAudio2SourceVoice*, XAUDIO2_FILTER_PARAMETERS*, Void)
+    set_output_filter_parameters : Proc(IXAudio2SourceVoice*, IXAudio2Voice, XAUDIO2_FILTER_PARAMETERS*, UInt32, HRESULT)
+    get_output_filter_parameters : Proc(IXAudio2SourceVoice*, IXAudio2Voice, XAUDIO2_FILTER_PARAMETERS*, Void)
+    set_volume : Proc(IXAudio2SourceVoice*, Float32, UInt32, HRESULT)
+    get_volume : Proc(IXAudio2SourceVoice*, Float32*, Void)
+    set_channel_volumes : Proc(IXAudio2SourceVoice*, UInt32, Float32*, UInt32, HRESULT)
+    get_channel_volumes : Proc(IXAudio2SourceVoice*, UInt32, Float32*, Void)
+    set_output_matrix : Proc(IXAudio2SourceVoice*, IXAudio2Voice, UInt32, UInt32, Float32*, UInt32, HRESULT)
+    get_output_matrix : Proc(IXAudio2SourceVoice*, IXAudio2Voice, UInt32, UInt32, Float32*, Void)
+    destroy_voice : Proc(IXAudio2SourceVoice*, Void)
+    start : Proc(IXAudio2SourceVoice*, UInt32, UInt32, HRESULT)
+    stop : Proc(IXAudio2SourceVoice*, UInt32, UInt32, HRESULT)
+    submit_source_buffer : Proc(IXAudio2SourceVoice*, XAUDIO2_BUFFER*, XAUDIO2_BUFFER_WMA*, HRESULT)
+    flush_source_buffers : Proc(IXAudio2SourceVoice*, HRESULT)
+    discontinuity : Proc(IXAudio2SourceVoice*, HRESULT)
+    exit_loop : Proc(IXAudio2SourceVoice*, UInt32, HRESULT)
+    get_state : Proc(IXAudio2SourceVoice*, XAUDIO2_VOICE_STATE*, UInt32, Void)
+    set_frequency_ratio : Proc(IXAudio2SourceVoice*, Float32, UInt32, HRESULT)
+    get_frequency_ratio : Proc(IXAudio2SourceVoice*, Float32*, Void)
+    set_source_sample_rate : Proc(IXAudio2SourceVoice*, UInt32, HRESULT)
   end
 
   struct IXAudio2SourceVoice
@@ -613,25 +613,25 @@ lib LibWin32
   end
 
   struct IXAudio2SubmixVoiceVTbl
-    get_voice_details : UInt64
-    set_output_voices : UInt64
-    set_effect_chain : UInt64
-    enable_effect : UInt64
-    disable_effect : UInt64
-    get_effect_state : UInt64
-    set_effect_parameters : UInt64
-    get_effect_parameters : UInt64
-    set_filter_parameters : UInt64
-    get_filter_parameters : UInt64
-    set_output_filter_parameters : UInt64
-    get_output_filter_parameters : UInt64
-    set_volume : UInt64
-    get_volume : UInt64
-    set_channel_volumes : UInt64
-    get_channel_volumes : UInt64
-    set_output_matrix : UInt64
-    get_output_matrix : UInt64
-    destroy_voice : UInt64
+    get_voice_details : Proc(IXAudio2SubmixVoice*, XAUDIO2_VOICE_DETAILS*, Void)
+    set_output_voices : Proc(IXAudio2SubmixVoice*, XAUDIO2_VOICE_SENDS*, HRESULT)
+    set_effect_chain : Proc(IXAudio2SubmixVoice*, XAUDIO2_EFFECT_CHAIN*, HRESULT)
+    enable_effect : Proc(IXAudio2SubmixVoice*, UInt32, UInt32, HRESULT)
+    disable_effect : Proc(IXAudio2SubmixVoice*, UInt32, UInt32, HRESULT)
+    get_effect_state : Proc(IXAudio2SubmixVoice*, UInt32, LibC::BOOL*, Void)
+    set_effect_parameters : Proc(IXAudio2SubmixVoice*, UInt32, Void*, UInt32, UInt32, HRESULT)
+    get_effect_parameters : Proc(IXAudio2SubmixVoice*, UInt32, Void*, UInt32, HRESULT)
+    set_filter_parameters : Proc(IXAudio2SubmixVoice*, XAUDIO2_FILTER_PARAMETERS*, UInt32, HRESULT)
+    get_filter_parameters : Proc(IXAudio2SubmixVoice*, XAUDIO2_FILTER_PARAMETERS*, Void)
+    set_output_filter_parameters : Proc(IXAudio2SubmixVoice*, IXAudio2Voice, XAUDIO2_FILTER_PARAMETERS*, UInt32, HRESULT)
+    get_output_filter_parameters : Proc(IXAudio2SubmixVoice*, IXAudio2Voice, XAUDIO2_FILTER_PARAMETERS*, Void)
+    set_volume : Proc(IXAudio2SubmixVoice*, Float32, UInt32, HRESULT)
+    get_volume : Proc(IXAudio2SubmixVoice*, Float32*, Void)
+    set_channel_volumes : Proc(IXAudio2SubmixVoice*, UInt32, Float32*, UInt32, HRESULT)
+    get_channel_volumes : Proc(IXAudio2SubmixVoice*, UInt32, Float32*, Void)
+    set_output_matrix : Proc(IXAudio2SubmixVoice*, IXAudio2Voice, UInt32, UInt32, Float32*, UInt32, HRESULT)
+    get_output_matrix : Proc(IXAudio2SubmixVoice*, IXAudio2Voice, UInt32, UInt32, Float32*, Void)
+    destroy_voice : Proc(IXAudio2SubmixVoice*, Void)
   end
 
   struct IXAudio2SubmixVoice
@@ -639,26 +639,26 @@ lib LibWin32
   end
 
   struct IXAudio2MasteringVoiceVTbl
-    get_voice_details : UInt64
-    set_output_voices : UInt64
-    set_effect_chain : UInt64
-    enable_effect : UInt64
-    disable_effect : UInt64
-    get_effect_state : UInt64
-    set_effect_parameters : UInt64
-    get_effect_parameters : UInt64
-    set_filter_parameters : UInt64
-    get_filter_parameters : UInt64
-    set_output_filter_parameters : UInt64
-    get_output_filter_parameters : UInt64
-    set_volume : UInt64
-    get_volume : UInt64
-    set_channel_volumes : UInt64
-    get_channel_volumes : UInt64
-    set_output_matrix : UInt64
-    get_output_matrix : UInt64
-    destroy_voice : UInt64
-    get_channel_mask : UInt64
+    get_voice_details : Proc(IXAudio2MasteringVoice*, XAUDIO2_VOICE_DETAILS*, Void)
+    set_output_voices : Proc(IXAudio2MasteringVoice*, XAUDIO2_VOICE_SENDS*, HRESULT)
+    set_effect_chain : Proc(IXAudio2MasteringVoice*, XAUDIO2_EFFECT_CHAIN*, HRESULT)
+    enable_effect : Proc(IXAudio2MasteringVoice*, UInt32, UInt32, HRESULT)
+    disable_effect : Proc(IXAudio2MasteringVoice*, UInt32, UInt32, HRESULT)
+    get_effect_state : Proc(IXAudio2MasteringVoice*, UInt32, LibC::BOOL*, Void)
+    set_effect_parameters : Proc(IXAudio2MasteringVoice*, UInt32, Void*, UInt32, UInt32, HRESULT)
+    get_effect_parameters : Proc(IXAudio2MasteringVoice*, UInt32, Void*, UInt32, HRESULT)
+    set_filter_parameters : Proc(IXAudio2MasteringVoice*, XAUDIO2_FILTER_PARAMETERS*, UInt32, HRESULT)
+    get_filter_parameters : Proc(IXAudio2MasteringVoice*, XAUDIO2_FILTER_PARAMETERS*, Void)
+    set_output_filter_parameters : Proc(IXAudio2MasteringVoice*, IXAudio2Voice, XAUDIO2_FILTER_PARAMETERS*, UInt32, HRESULT)
+    get_output_filter_parameters : Proc(IXAudio2MasteringVoice*, IXAudio2Voice, XAUDIO2_FILTER_PARAMETERS*, Void)
+    set_volume : Proc(IXAudio2MasteringVoice*, Float32, UInt32, HRESULT)
+    get_volume : Proc(IXAudio2MasteringVoice*, Float32*, Void)
+    set_channel_volumes : Proc(IXAudio2MasteringVoice*, UInt32, Float32*, UInt32, HRESULT)
+    get_channel_volumes : Proc(IXAudio2MasteringVoice*, UInt32, Float32*, Void)
+    set_output_matrix : Proc(IXAudio2MasteringVoice*, IXAudio2Voice, UInt32, UInt32, Float32*, UInt32, HRESULT)
+    get_output_matrix : Proc(IXAudio2MasteringVoice*, IXAudio2Voice, UInt32, UInt32, Float32*, Void)
+    destroy_voice : Proc(IXAudio2MasteringVoice*, Void)
+    get_channel_mask : Proc(IXAudio2MasteringVoice*, UInt32*, HRESULT)
   end
 
   struct IXAudio2MasteringVoice
@@ -666,9 +666,9 @@ lib LibWin32
   end
 
   struct IXAudio2EngineCallbackVTbl
-    on_processing_pass_start : UInt64
-    on_processing_pass_end : UInt64
-    on_critical_error : UInt64
+    on_processing_pass_start : Proc(IXAudio2EngineCallback*, Void)
+    on_processing_pass_end : Proc(IXAudio2EngineCallback*, Void)
+    on_critical_error : Proc(IXAudio2EngineCallback*, HRESULT, Void)
   end
 
   struct IXAudio2EngineCallback
@@ -676,13 +676,13 @@ lib LibWin32
   end
 
   struct IXAudio2VoiceCallbackVTbl
-    on_voice_processing_pass_start : UInt64
-    on_voice_processing_pass_end : UInt64
-    on_stream_end : UInt64
-    on_buffer_start : UInt64
-    on_buffer_end : UInt64
-    on_loop_end : UInt64
-    on_voice_error : UInt64
+    on_voice_processing_pass_start : Proc(IXAudio2VoiceCallback*, UInt32, Void)
+    on_voice_processing_pass_end : Proc(IXAudio2VoiceCallback*, Void)
+    on_stream_end : Proc(IXAudio2VoiceCallback*, Void)
+    on_buffer_start : Proc(IXAudio2VoiceCallback*, Void*, Void)
+    on_buffer_end : Proc(IXAudio2VoiceCallback*, Void*, Void)
+    on_loop_end : Proc(IXAudio2VoiceCallback*, Void*, Void)
+    on_voice_error : Proc(IXAudio2VoiceCallback*, Void*, HRESULT, Void)
   end
 
   struct IXAudio2VoiceCallback
@@ -690,13 +690,13 @@ lib LibWin32
   end
 
   struct IXAPOHrtfParametersVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_source_position : UInt64
-    set_source_orientation : UInt64
-    set_source_gain : UInt64
-    set_environment : UInt64
+    query_interface : Proc(IXAPOHrtfParameters*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXAPOHrtfParameters*, UInt32)
+    release : Proc(IXAPOHrtfParameters*, UInt32)
+    set_source_position : Proc(IXAPOHrtfParameters*, HrtfPosition*, HRESULT)
+    set_source_orientation : Proc(IXAPOHrtfParameters*, HrtfOrientation*, HRESULT)
+    set_source_gain : Proc(IXAPOHrtfParameters*, Float32, HRESULT)
+    set_environment : Proc(IXAPOHrtfParameters*, HrtfEnvironment, HRESULT)
   end
 
   IXAPOHrtfParameters_GUID = "15b3cd66-e9de-4464-b6e6-2bc3cf63d455"
@@ -722,444 +722,444 @@ lib LibWin32
   fun CreateHrtfApo(init : HrtfApoInit*, xapo : IXAPO*) : HRESULT
 end
 struct LibWin32::IXAPO
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXAPO*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXAPO*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXAPO*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_registration_properties(ppregistrationproperties : XAPO_REGISTRATION_PROPERTIES**) : HRESULT
-    @lpVtbl.value.get_registration_properties.unsafe_as(Proc(XAPO_REGISTRATION_PROPERTIES**, HRESULT)).call(ppregistrationproperties)
+  def get_registration_properties(this : IXAPO*, ppregistrationproperties : XAPO_REGISTRATION_PROPERTIES**) : HRESULT
+    @lpVtbl.value.get_registration_properties.call(this, ppregistrationproperties)
   end
-  def is_input_format_supported(poutputformat : WAVEFORMATEX*, prequestedinputformat : WAVEFORMATEX*, ppsupportedinputformat : WAVEFORMATEX**) : HRESULT
-    @lpVtbl.value.is_input_format_supported.unsafe_as(Proc(WAVEFORMATEX*, WAVEFORMATEX*, WAVEFORMATEX**, HRESULT)).call(poutputformat, prequestedinputformat, ppsupportedinputformat)
+  def is_input_format_supported(this : IXAPO*, poutputformat : WAVEFORMATEX*, prequestedinputformat : WAVEFORMATEX*, ppsupportedinputformat : WAVEFORMATEX**) : HRESULT
+    @lpVtbl.value.is_input_format_supported.call(this, poutputformat, prequestedinputformat, ppsupportedinputformat)
   end
-  def is_output_format_supported(pinputformat : WAVEFORMATEX*, prequestedoutputformat : WAVEFORMATEX*, ppsupportedoutputformat : WAVEFORMATEX**) : HRESULT
-    @lpVtbl.value.is_output_format_supported.unsafe_as(Proc(WAVEFORMATEX*, WAVEFORMATEX*, WAVEFORMATEX**, HRESULT)).call(pinputformat, prequestedoutputformat, ppsupportedoutputformat)
+  def is_output_format_supported(this : IXAPO*, pinputformat : WAVEFORMATEX*, prequestedoutputformat : WAVEFORMATEX*, ppsupportedoutputformat : WAVEFORMATEX**) : HRESULT
+    @lpVtbl.value.is_output_format_supported.call(this, pinputformat, prequestedoutputformat, ppsupportedoutputformat)
   end
-  def initialize(pdata : Void*, databytesize : UInt32) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(Void*, UInt32, HRESULT)).call(pdata, databytesize)
+  def initialize(this : IXAPO*, pdata : Void*, databytesize : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, pdata, databytesize)
   end
-  def reset : Void
-    @lpVtbl.value.reset.unsafe_as(Proc(Void)).call
+  def reset(this : IXAPO*) : Void
+    @lpVtbl.value.reset.call(this)
   end
-  def lock_for_process(inputlockedparametercount : UInt32, pinputlockedparameters : XAPO_LOCKFORPROCESS_PARAMETERS*, outputlockedparametercount : UInt32, poutputlockedparameters : XAPO_LOCKFORPROCESS_PARAMETERS*) : HRESULT
-    @lpVtbl.value.lock_for_process.unsafe_as(Proc(UInt32, XAPO_LOCKFORPROCESS_PARAMETERS*, UInt32, XAPO_LOCKFORPROCESS_PARAMETERS*, HRESULT)).call(inputlockedparametercount, pinputlockedparameters, outputlockedparametercount, poutputlockedparameters)
+  def lock_for_process(this : IXAPO*, inputlockedparametercount : UInt32, pinputlockedparameters : XAPO_LOCKFORPROCESS_PARAMETERS*, outputlockedparametercount : UInt32, poutputlockedparameters : XAPO_LOCKFORPROCESS_PARAMETERS*) : HRESULT
+    @lpVtbl.value.lock_for_process.call(this, inputlockedparametercount, pinputlockedparameters, outputlockedparametercount, poutputlockedparameters)
   end
-  def unlock_for_process : Void
-    @lpVtbl.value.unlock_for_process.unsafe_as(Proc(Void)).call
+  def unlock_for_process(this : IXAPO*) : Void
+    @lpVtbl.value.unlock_for_process.call(this)
   end
-  def process(inputprocessparametercount : UInt32, pinputprocessparameters : XAPO_PROCESS_BUFFER_PARAMETERS*, outputprocessparametercount : UInt32, poutputprocessparameters : XAPO_PROCESS_BUFFER_PARAMETERS*, isenabled : LibC::BOOL) : Void
-    @lpVtbl.value.process.unsafe_as(Proc(UInt32, XAPO_PROCESS_BUFFER_PARAMETERS*, UInt32, XAPO_PROCESS_BUFFER_PARAMETERS*, LibC::BOOL, Void)).call(inputprocessparametercount, pinputprocessparameters, outputprocessparametercount, poutputprocessparameters, isenabled)
+  def process(this : IXAPO*, inputprocessparametercount : UInt32, pinputprocessparameters : XAPO_PROCESS_BUFFER_PARAMETERS*, outputprocessparametercount : UInt32, poutputprocessparameters : XAPO_PROCESS_BUFFER_PARAMETERS*, isenabled : LibC::BOOL) : Void
+    @lpVtbl.value.process.call(this, inputprocessparametercount, pinputprocessparameters, outputprocessparametercount, poutputprocessparameters, isenabled)
   end
-  def calc_input_frames(outputframecount : UInt32) : UInt32
-    @lpVtbl.value.calc_input_frames.unsafe_as(Proc(UInt32, UInt32)).call(outputframecount)
+  def calc_input_frames(this : IXAPO*, outputframecount : UInt32) : UInt32
+    @lpVtbl.value.calc_input_frames.call(this, outputframecount)
   end
-  def calc_output_frames(inputframecount : UInt32) : UInt32
-    @lpVtbl.value.calc_output_frames.unsafe_as(Proc(UInt32, UInt32)).call(inputframecount)
+  def calc_output_frames(this : IXAPO*, inputframecount : UInt32) : UInt32
+    @lpVtbl.value.calc_output_frames.call(this, inputframecount)
   end
 end
 struct LibWin32::IXAPOParameters
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXAPOParameters*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXAPOParameters*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXAPOParameters*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_parameters(pparameters : Void*, parameterbytesize : UInt32) : Void
-    @lpVtbl.value.set_parameters.unsafe_as(Proc(Void*, UInt32, Void)).call(pparameters, parameterbytesize)
+  def set_parameters(this : IXAPOParameters*, pparameters : Void*, parameterbytesize : UInt32) : Void
+    @lpVtbl.value.set_parameters.call(this, pparameters, parameterbytesize)
   end
-  def get_parameters(pparameters : Void*, parameterbytesize : UInt32) : Void
-    @lpVtbl.value.get_parameters.unsafe_as(Proc(Void*, UInt32, Void)).call(pparameters, parameterbytesize)
+  def get_parameters(this : IXAPOParameters*, pparameters : Void*, parameterbytesize : UInt32) : Void
+    @lpVtbl.value.get_parameters.call(this, pparameters, parameterbytesize)
   end
 end
 struct LibWin32::IXAudio2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXAudio2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXAudio2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXAudio2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def register_for_callbacks(pcallback : IXAudio2EngineCallback) : HRESULT
-    @lpVtbl.value.register_for_callbacks.unsafe_as(Proc(IXAudio2EngineCallback, HRESULT)).call(pcallback)
+  def register_for_callbacks(this : IXAudio2*, pcallback : IXAudio2EngineCallback) : HRESULT
+    @lpVtbl.value.register_for_callbacks.call(this, pcallback)
   end
-  def unregister_for_callbacks(pcallback : IXAudio2EngineCallback) : Void
-    @lpVtbl.value.unregister_for_callbacks.unsafe_as(Proc(IXAudio2EngineCallback, Void)).call(pcallback)
+  def unregister_for_callbacks(this : IXAudio2*, pcallback : IXAudio2EngineCallback) : Void
+    @lpVtbl.value.unregister_for_callbacks.call(this, pcallback)
   end
-  def create_source_voice(ppsourcevoice : IXAudio2SourceVoice*, psourceformat : WAVEFORMATEX*, flags : UInt32, maxfrequencyratio : Float32, pcallback : IXAudio2VoiceCallback, psendlist : XAUDIO2_VOICE_SENDS*, peffectchain : XAUDIO2_EFFECT_CHAIN*) : HRESULT
-    @lpVtbl.value.create_source_voice.unsafe_as(Proc(IXAudio2SourceVoice*, WAVEFORMATEX*, UInt32, Float32, IXAudio2VoiceCallback, XAUDIO2_VOICE_SENDS*, XAUDIO2_EFFECT_CHAIN*, HRESULT)).call(ppsourcevoice, psourceformat, flags, maxfrequencyratio, pcallback, psendlist, peffectchain)
+  def create_source_voice(this : IXAudio2*, ppsourcevoice : IXAudio2SourceVoice*, psourceformat : WAVEFORMATEX*, flags : UInt32, maxfrequencyratio : Float32, pcallback : IXAudio2VoiceCallback, psendlist : XAUDIO2_VOICE_SENDS*, peffectchain : XAUDIO2_EFFECT_CHAIN*) : HRESULT
+    @lpVtbl.value.create_source_voice.call(this, ppsourcevoice, psourceformat, flags, maxfrequencyratio, pcallback, psendlist, peffectchain)
   end
-  def create_submix_voice(ppsubmixvoice : IXAudio2SubmixVoice*, inputchannels : UInt32, inputsamplerate : UInt32, flags : UInt32, processingstage : UInt32, psendlist : XAUDIO2_VOICE_SENDS*, peffectchain : XAUDIO2_EFFECT_CHAIN*) : HRESULT
-    @lpVtbl.value.create_submix_voice.unsafe_as(Proc(IXAudio2SubmixVoice*, UInt32, UInt32, UInt32, UInt32, XAUDIO2_VOICE_SENDS*, XAUDIO2_EFFECT_CHAIN*, HRESULT)).call(ppsubmixvoice, inputchannels, inputsamplerate, flags, processingstage, psendlist, peffectchain)
+  def create_submix_voice(this : IXAudio2*, ppsubmixvoice : IXAudio2SubmixVoice*, inputchannels : UInt32, inputsamplerate : UInt32, flags : UInt32, processingstage : UInt32, psendlist : XAUDIO2_VOICE_SENDS*, peffectchain : XAUDIO2_EFFECT_CHAIN*) : HRESULT
+    @lpVtbl.value.create_submix_voice.call(this, ppsubmixvoice, inputchannels, inputsamplerate, flags, processingstage, psendlist, peffectchain)
   end
-  def create_mastering_voice(ppmasteringvoice : IXAudio2MasteringVoice*, inputchannels : UInt32, inputsamplerate : UInt32, flags : UInt32, szdeviceid : LibC::LPWSTR, peffectchain : XAUDIO2_EFFECT_CHAIN*, streamcategory : AUDIO_STREAM_CATEGORY) : HRESULT
-    @lpVtbl.value.create_mastering_voice.unsafe_as(Proc(IXAudio2MasteringVoice*, UInt32, UInt32, UInt32, LibC::LPWSTR, XAUDIO2_EFFECT_CHAIN*, AUDIO_STREAM_CATEGORY, HRESULT)).call(ppmasteringvoice, inputchannels, inputsamplerate, flags, szdeviceid, peffectchain, streamcategory)
+  def create_mastering_voice(this : IXAudio2*, ppmasteringvoice : IXAudio2MasteringVoice*, inputchannels : UInt32, inputsamplerate : UInt32, flags : UInt32, szdeviceid : LibC::LPWSTR, peffectchain : XAUDIO2_EFFECT_CHAIN*, streamcategory : AUDIO_STREAM_CATEGORY) : HRESULT
+    @lpVtbl.value.create_mastering_voice.call(this, ppmasteringvoice, inputchannels, inputsamplerate, flags, szdeviceid, peffectchain, streamcategory)
   end
-  def start_engine : HRESULT
-    @lpVtbl.value.start_engine.unsafe_as(Proc(HRESULT)).call
+  def start_engine(this : IXAudio2*) : HRESULT
+    @lpVtbl.value.start_engine.call(this)
   end
-  def stop_engine : Void
-    @lpVtbl.value.stop_engine.unsafe_as(Proc(Void)).call
+  def stop_engine(this : IXAudio2*) : Void
+    @lpVtbl.value.stop_engine.call(this)
   end
-  def commit_changes(operationset : UInt32) : HRESULT
-    @lpVtbl.value.commit_changes.unsafe_as(Proc(UInt32, HRESULT)).call(operationset)
+  def commit_changes(this : IXAudio2*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.commit_changes.call(this, operationset)
   end
-  def get_performance_data(pperfdata : XAUDIO2_PERFORMANCE_DATA*) : Void
-    @lpVtbl.value.get_performance_data.unsafe_as(Proc(XAUDIO2_PERFORMANCE_DATA*, Void)).call(pperfdata)
+  def get_performance_data(this : IXAudio2*, pperfdata : XAUDIO2_PERFORMANCE_DATA*) : Void
+    @lpVtbl.value.get_performance_data.call(this, pperfdata)
   end
-  def set_debug_configuration(pdebugconfiguration : XAUDIO2_DEBUG_CONFIGURATION*, preserved : Void*) : Void
-    @lpVtbl.value.set_debug_configuration.unsafe_as(Proc(XAUDIO2_DEBUG_CONFIGURATION*, Void*, Void)).call(pdebugconfiguration, preserved)
+  def set_debug_configuration(this : IXAudio2*, pdebugconfiguration : XAUDIO2_DEBUG_CONFIGURATION*, preserved : Void*) : Void
+    @lpVtbl.value.set_debug_configuration.call(this, pdebugconfiguration, preserved)
   end
 end
 struct LibWin32::IXAudio2Extension
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXAudio2Extension*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXAudio2Extension*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXAudio2Extension*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_processing_quantum(quantumnumerator : UInt32*, quantumdenominator : UInt32*) : Void
-    @lpVtbl.value.get_processing_quantum.unsafe_as(Proc(UInt32*, UInt32*, Void)).call(quantumnumerator, quantumdenominator)
+  def get_processing_quantum(this : IXAudio2Extension*, quantumnumerator : UInt32*, quantumdenominator : UInt32*) : Void
+    @lpVtbl.value.get_processing_quantum.call(this, quantumnumerator, quantumdenominator)
   end
-  def get_processor(processor : UInt32*) : Void
-    @lpVtbl.value.get_processor.unsafe_as(Proc(UInt32*, Void)).call(processor)
+  def get_processor(this : IXAudio2Extension*, processor : UInt32*) : Void
+    @lpVtbl.value.get_processor.call(this, processor)
   end
 end
 struct LibWin32::IXAudio2Voice
-  def get_voice_details(pvoicedetails : XAUDIO2_VOICE_DETAILS*) : Void
-    @lpVtbl.value.get_voice_details.unsafe_as(Proc(XAUDIO2_VOICE_DETAILS*, Void)).call(pvoicedetails)
+  def get_voice_details(this : IXAudio2Voice*, pvoicedetails : XAUDIO2_VOICE_DETAILS*) : Void
+    @lpVtbl.value.get_voice_details.call(this, pvoicedetails)
   end
-  def set_output_voices(psendlist : XAUDIO2_VOICE_SENDS*) : HRESULT
-    @lpVtbl.value.set_output_voices.unsafe_as(Proc(XAUDIO2_VOICE_SENDS*, HRESULT)).call(psendlist)
+  def set_output_voices(this : IXAudio2Voice*, psendlist : XAUDIO2_VOICE_SENDS*) : HRESULT
+    @lpVtbl.value.set_output_voices.call(this, psendlist)
   end
-  def set_effect_chain(peffectchain : XAUDIO2_EFFECT_CHAIN*) : HRESULT
-    @lpVtbl.value.set_effect_chain.unsafe_as(Proc(XAUDIO2_EFFECT_CHAIN*, HRESULT)).call(peffectchain)
+  def set_effect_chain(this : IXAudio2Voice*, peffectchain : XAUDIO2_EFFECT_CHAIN*) : HRESULT
+    @lpVtbl.value.set_effect_chain.call(this, peffectchain)
   end
-  def enable_effect(effectindex : UInt32, operationset : UInt32) : HRESULT
-    @lpVtbl.value.enable_effect.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(effectindex, operationset)
+  def enable_effect(this : IXAudio2Voice*, effectindex : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.enable_effect.call(this, effectindex, operationset)
   end
-  def disable_effect(effectindex : UInt32, operationset : UInt32) : HRESULT
-    @lpVtbl.value.disable_effect.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(effectindex, operationset)
+  def disable_effect(this : IXAudio2Voice*, effectindex : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.disable_effect.call(this, effectindex, operationset)
   end
-  def get_effect_state(effectindex : UInt32, penabled : LibC::BOOL*) : Void
-    @lpVtbl.value.get_effect_state.unsafe_as(Proc(UInt32, LibC::BOOL*, Void)).call(effectindex, penabled)
+  def get_effect_state(this : IXAudio2Voice*, effectindex : UInt32, penabled : LibC::BOOL*) : Void
+    @lpVtbl.value.get_effect_state.call(this, effectindex, penabled)
   end
-  def set_effect_parameters(effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_effect_parameters.unsafe_as(Proc(UInt32, Void*, UInt32, UInt32, HRESULT)).call(effectindex, pparameters, parametersbytesize, operationset)
+  def set_effect_parameters(this : IXAudio2Voice*, effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_effect_parameters.call(this, effectindex, pparameters, parametersbytesize, operationset)
   end
-  def get_effect_parameters(effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32) : HRESULT
-    @lpVtbl.value.get_effect_parameters.unsafe_as(Proc(UInt32, Void*, UInt32, HRESULT)).call(effectindex, pparameters, parametersbytesize)
+  def get_effect_parameters(this : IXAudio2Voice*, effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_parameters.call(this, effectindex, pparameters, parametersbytesize)
   end
-  def set_filter_parameters(pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_filter_parameters.unsafe_as(Proc(XAUDIO2_FILTER_PARAMETERS*, UInt32, HRESULT)).call(pparameters, operationset)
+  def set_filter_parameters(this : IXAudio2Voice*, pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_filter_parameters.call(this, pparameters, operationset)
   end
-  def get_filter_parameters(pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
-    @lpVtbl.value.get_filter_parameters.unsafe_as(Proc(XAUDIO2_FILTER_PARAMETERS*, Void)).call(pparameters)
+  def get_filter_parameters(this : IXAudio2Voice*, pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
+    @lpVtbl.value.get_filter_parameters.call(this, pparameters)
   end
-  def set_output_filter_parameters(pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_output_filter_parameters.unsafe_as(Proc(IXAudio2Voice, XAUDIO2_FILTER_PARAMETERS*, UInt32, HRESULT)).call(pdestinationvoice, pparameters, operationset)
+  def set_output_filter_parameters(this : IXAudio2Voice*, pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_output_filter_parameters.call(this, pdestinationvoice, pparameters, operationset)
   end
-  def get_output_filter_parameters(pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
-    @lpVtbl.value.get_output_filter_parameters.unsafe_as(Proc(IXAudio2Voice, XAUDIO2_FILTER_PARAMETERS*, Void)).call(pdestinationvoice, pparameters)
+  def get_output_filter_parameters(this : IXAudio2Voice*, pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
+    @lpVtbl.value.get_output_filter_parameters.call(this, pdestinationvoice, pparameters)
   end
-  def set_volume(volume : Float32, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_volume.unsafe_as(Proc(Float32, UInt32, HRESULT)).call(volume, operationset)
+  def set_volume(this : IXAudio2Voice*, volume : Float32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_volume.call(this, volume, operationset)
   end
-  def get_volume(pvolume : Float32*) : Void
-    @lpVtbl.value.get_volume.unsafe_as(Proc(Float32*, Void)).call(pvolume)
+  def get_volume(this : IXAudio2Voice*, pvolume : Float32*) : Void
+    @lpVtbl.value.get_volume.call(this, pvolume)
   end
-  def set_channel_volumes(channels : UInt32, pvolumes : Float32*, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_channel_volumes.unsafe_as(Proc(UInt32, Float32*, UInt32, HRESULT)).call(channels, pvolumes, operationset)
+  def set_channel_volumes(this : IXAudio2Voice*, channels : UInt32, pvolumes : Float32*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_channel_volumes.call(this, channels, pvolumes, operationset)
   end
-  def get_channel_volumes(channels : UInt32, pvolumes : Float32*) : Void
-    @lpVtbl.value.get_channel_volumes.unsafe_as(Proc(UInt32, Float32*, Void)).call(channels, pvolumes)
+  def get_channel_volumes(this : IXAudio2Voice*, channels : UInt32, pvolumes : Float32*) : Void
+    @lpVtbl.value.get_channel_volumes.call(this, channels, pvolumes)
   end
-  def set_output_matrix(pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_output_matrix.unsafe_as(Proc(IXAudio2Voice, UInt32, UInt32, Float32*, UInt32, HRESULT)).call(pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix, operationset)
+  def set_output_matrix(this : IXAudio2Voice*, pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_output_matrix.call(this, pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix, operationset)
   end
-  def get_output_matrix(pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*) : Void
-    @lpVtbl.value.get_output_matrix.unsafe_as(Proc(IXAudio2Voice, UInt32, UInt32, Float32*, Void)).call(pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix)
+  def get_output_matrix(this : IXAudio2Voice*, pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*) : Void
+    @lpVtbl.value.get_output_matrix.call(this, pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix)
   end
-  def destroy_voice : Void
-    @lpVtbl.value.destroy_voice.unsafe_as(Proc(Void)).call
+  def destroy_voice(this : IXAudio2Voice*) : Void
+    @lpVtbl.value.destroy_voice.call(this)
   end
 end
 struct LibWin32::IXAudio2SourceVoice
-  def get_voice_details(pvoicedetails : XAUDIO2_VOICE_DETAILS*) : Void
-    @lpVtbl.value.get_voice_details.unsafe_as(Proc(XAUDIO2_VOICE_DETAILS*, Void)).call(pvoicedetails)
+  def get_voice_details(this : IXAudio2SourceVoice*, pvoicedetails : XAUDIO2_VOICE_DETAILS*) : Void
+    @lpVtbl.value.get_voice_details.call(this, pvoicedetails)
   end
-  def set_output_voices(psendlist : XAUDIO2_VOICE_SENDS*) : HRESULT
-    @lpVtbl.value.set_output_voices.unsafe_as(Proc(XAUDIO2_VOICE_SENDS*, HRESULT)).call(psendlist)
+  def set_output_voices(this : IXAudio2SourceVoice*, psendlist : XAUDIO2_VOICE_SENDS*) : HRESULT
+    @lpVtbl.value.set_output_voices.call(this, psendlist)
   end
-  def set_effect_chain(peffectchain : XAUDIO2_EFFECT_CHAIN*) : HRESULT
-    @lpVtbl.value.set_effect_chain.unsafe_as(Proc(XAUDIO2_EFFECT_CHAIN*, HRESULT)).call(peffectchain)
+  def set_effect_chain(this : IXAudio2SourceVoice*, peffectchain : XAUDIO2_EFFECT_CHAIN*) : HRESULT
+    @lpVtbl.value.set_effect_chain.call(this, peffectchain)
   end
-  def enable_effect(effectindex : UInt32, operationset : UInt32) : HRESULT
-    @lpVtbl.value.enable_effect.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(effectindex, operationset)
+  def enable_effect(this : IXAudio2SourceVoice*, effectindex : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.enable_effect.call(this, effectindex, operationset)
   end
-  def disable_effect(effectindex : UInt32, operationset : UInt32) : HRESULT
-    @lpVtbl.value.disable_effect.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(effectindex, operationset)
+  def disable_effect(this : IXAudio2SourceVoice*, effectindex : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.disable_effect.call(this, effectindex, operationset)
   end
-  def get_effect_state(effectindex : UInt32, penabled : LibC::BOOL*) : Void
-    @lpVtbl.value.get_effect_state.unsafe_as(Proc(UInt32, LibC::BOOL*, Void)).call(effectindex, penabled)
+  def get_effect_state(this : IXAudio2SourceVoice*, effectindex : UInt32, penabled : LibC::BOOL*) : Void
+    @lpVtbl.value.get_effect_state.call(this, effectindex, penabled)
   end
-  def set_effect_parameters(effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_effect_parameters.unsafe_as(Proc(UInt32, Void*, UInt32, UInt32, HRESULT)).call(effectindex, pparameters, parametersbytesize, operationset)
+  def set_effect_parameters(this : IXAudio2SourceVoice*, effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_effect_parameters.call(this, effectindex, pparameters, parametersbytesize, operationset)
   end
-  def get_effect_parameters(effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32) : HRESULT
-    @lpVtbl.value.get_effect_parameters.unsafe_as(Proc(UInt32, Void*, UInt32, HRESULT)).call(effectindex, pparameters, parametersbytesize)
+  def get_effect_parameters(this : IXAudio2SourceVoice*, effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_parameters.call(this, effectindex, pparameters, parametersbytesize)
   end
-  def set_filter_parameters(pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_filter_parameters.unsafe_as(Proc(XAUDIO2_FILTER_PARAMETERS*, UInt32, HRESULT)).call(pparameters, operationset)
+  def set_filter_parameters(this : IXAudio2SourceVoice*, pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_filter_parameters.call(this, pparameters, operationset)
   end
-  def get_filter_parameters(pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
-    @lpVtbl.value.get_filter_parameters.unsafe_as(Proc(XAUDIO2_FILTER_PARAMETERS*, Void)).call(pparameters)
+  def get_filter_parameters(this : IXAudio2SourceVoice*, pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
+    @lpVtbl.value.get_filter_parameters.call(this, pparameters)
   end
-  def set_output_filter_parameters(pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_output_filter_parameters.unsafe_as(Proc(IXAudio2Voice, XAUDIO2_FILTER_PARAMETERS*, UInt32, HRESULT)).call(pdestinationvoice, pparameters, operationset)
+  def set_output_filter_parameters(this : IXAudio2SourceVoice*, pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_output_filter_parameters.call(this, pdestinationvoice, pparameters, operationset)
   end
-  def get_output_filter_parameters(pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
-    @lpVtbl.value.get_output_filter_parameters.unsafe_as(Proc(IXAudio2Voice, XAUDIO2_FILTER_PARAMETERS*, Void)).call(pdestinationvoice, pparameters)
+  def get_output_filter_parameters(this : IXAudio2SourceVoice*, pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
+    @lpVtbl.value.get_output_filter_parameters.call(this, pdestinationvoice, pparameters)
   end
-  def set_volume(volume : Float32, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_volume.unsafe_as(Proc(Float32, UInt32, HRESULT)).call(volume, operationset)
+  def set_volume(this : IXAudio2SourceVoice*, volume : Float32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_volume.call(this, volume, operationset)
   end
-  def get_volume(pvolume : Float32*) : Void
-    @lpVtbl.value.get_volume.unsafe_as(Proc(Float32*, Void)).call(pvolume)
+  def get_volume(this : IXAudio2SourceVoice*, pvolume : Float32*) : Void
+    @lpVtbl.value.get_volume.call(this, pvolume)
   end
-  def set_channel_volumes(channels : UInt32, pvolumes : Float32*, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_channel_volumes.unsafe_as(Proc(UInt32, Float32*, UInt32, HRESULT)).call(channels, pvolumes, operationset)
+  def set_channel_volumes(this : IXAudio2SourceVoice*, channels : UInt32, pvolumes : Float32*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_channel_volumes.call(this, channels, pvolumes, operationset)
   end
-  def get_channel_volumes(channels : UInt32, pvolumes : Float32*) : Void
-    @lpVtbl.value.get_channel_volumes.unsafe_as(Proc(UInt32, Float32*, Void)).call(channels, pvolumes)
+  def get_channel_volumes(this : IXAudio2SourceVoice*, channels : UInt32, pvolumes : Float32*) : Void
+    @lpVtbl.value.get_channel_volumes.call(this, channels, pvolumes)
   end
-  def set_output_matrix(pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_output_matrix.unsafe_as(Proc(IXAudio2Voice, UInt32, UInt32, Float32*, UInt32, HRESULT)).call(pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix, operationset)
+  def set_output_matrix(this : IXAudio2SourceVoice*, pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_output_matrix.call(this, pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix, operationset)
   end
-  def get_output_matrix(pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*) : Void
-    @lpVtbl.value.get_output_matrix.unsafe_as(Proc(IXAudio2Voice, UInt32, UInt32, Float32*, Void)).call(pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix)
+  def get_output_matrix(this : IXAudio2SourceVoice*, pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*) : Void
+    @lpVtbl.value.get_output_matrix.call(this, pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix)
   end
-  def destroy_voice : Void
-    @lpVtbl.value.destroy_voice.unsafe_as(Proc(Void)).call
+  def destroy_voice(this : IXAudio2SourceVoice*) : Void
+    @lpVtbl.value.destroy_voice.call(this)
   end
-  def start(flags : UInt32, operationset : UInt32) : HRESULT
-    @lpVtbl.value.start.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(flags, operationset)
+  def start(this : IXAudio2SourceVoice*, flags : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.start.call(this, flags, operationset)
   end
-  def stop(flags : UInt32, operationset : UInt32) : HRESULT
-    @lpVtbl.value.stop.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(flags, operationset)
+  def stop(this : IXAudio2SourceVoice*, flags : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.stop.call(this, flags, operationset)
   end
-  def submit_source_buffer(pbuffer : XAUDIO2_BUFFER*, pbufferwma : XAUDIO2_BUFFER_WMA*) : HRESULT
-    @lpVtbl.value.submit_source_buffer.unsafe_as(Proc(XAUDIO2_BUFFER*, XAUDIO2_BUFFER_WMA*, HRESULT)).call(pbuffer, pbufferwma)
+  def submit_source_buffer(this : IXAudio2SourceVoice*, pbuffer : XAUDIO2_BUFFER*, pbufferwma : XAUDIO2_BUFFER_WMA*) : HRESULT
+    @lpVtbl.value.submit_source_buffer.call(this, pbuffer, pbufferwma)
   end
-  def flush_source_buffers : HRESULT
-    @lpVtbl.value.flush_source_buffers.unsafe_as(Proc(HRESULT)).call
+  def flush_source_buffers(this : IXAudio2SourceVoice*) : HRESULT
+    @lpVtbl.value.flush_source_buffers.call(this)
   end
-  def discontinuity : HRESULT
-    @lpVtbl.value.discontinuity.unsafe_as(Proc(HRESULT)).call
+  def discontinuity(this : IXAudio2SourceVoice*) : HRESULT
+    @lpVtbl.value.discontinuity.call(this)
   end
-  def exit_loop(operationset : UInt32) : HRESULT
-    @lpVtbl.value.exit_loop.unsafe_as(Proc(UInt32, HRESULT)).call(operationset)
+  def exit_loop(this : IXAudio2SourceVoice*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.exit_loop.call(this, operationset)
   end
-  def get_state(pvoicestate : XAUDIO2_VOICE_STATE*, flags : UInt32) : Void
-    @lpVtbl.value.get_state.unsafe_as(Proc(XAUDIO2_VOICE_STATE*, UInt32, Void)).call(pvoicestate, flags)
+  def get_state(this : IXAudio2SourceVoice*, pvoicestate : XAUDIO2_VOICE_STATE*, flags : UInt32) : Void
+    @lpVtbl.value.get_state.call(this, pvoicestate, flags)
   end
-  def set_frequency_ratio(ratio : Float32, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_frequency_ratio.unsafe_as(Proc(Float32, UInt32, HRESULT)).call(ratio, operationset)
+  def set_frequency_ratio(this : IXAudio2SourceVoice*, ratio : Float32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_frequency_ratio.call(this, ratio, operationset)
   end
-  def get_frequency_ratio(pratio : Float32*) : Void
-    @lpVtbl.value.get_frequency_ratio.unsafe_as(Proc(Float32*, Void)).call(pratio)
+  def get_frequency_ratio(this : IXAudio2SourceVoice*, pratio : Float32*) : Void
+    @lpVtbl.value.get_frequency_ratio.call(this, pratio)
   end
-  def set_source_sample_rate(newsourcesamplerate : UInt32) : HRESULT
-    @lpVtbl.value.set_source_sample_rate.unsafe_as(Proc(UInt32, HRESULT)).call(newsourcesamplerate)
+  def set_source_sample_rate(this : IXAudio2SourceVoice*, newsourcesamplerate : UInt32) : HRESULT
+    @lpVtbl.value.set_source_sample_rate.call(this, newsourcesamplerate)
   end
 end
 struct LibWin32::IXAudio2SubmixVoice
-  def get_voice_details(pvoicedetails : XAUDIO2_VOICE_DETAILS*) : Void
-    @lpVtbl.value.get_voice_details.unsafe_as(Proc(XAUDIO2_VOICE_DETAILS*, Void)).call(pvoicedetails)
+  def get_voice_details(this : IXAudio2SubmixVoice*, pvoicedetails : XAUDIO2_VOICE_DETAILS*) : Void
+    @lpVtbl.value.get_voice_details.call(this, pvoicedetails)
   end
-  def set_output_voices(psendlist : XAUDIO2_VOICE_SENDS*) : HRESULT
-    @lpVtbl.value.set_output_voices.unsafe_as(Proc(XAUDIO2_VOICE_SENDS*, HRESULT)).call(psendlist)
+  def set_output_voices(this : IXAudio2SubmixVoice*, psendlist : XAUDIO2_VOICE_SENDS*) : HRESULT
+    @lpVtbl.value.set_output_voices.call(this, psendlist)
   end
-  def set_effect_chain(peffectchain : XAUDIO2_EFFECT_CHAIN*) : HRESULT
-    @lpVtbl.value.set_effect_chain.unsafe_as(Proc(XAUDIO2_EFFECT_CHAIN*, HRESULT)).call(peffectchain)
+  def set_effect_chain(this : IXAudio2SubmixVoice*, peffectchain : XAUDIO2_EFFECT_CHAIN*) : HRESULT
+    @lpVtbl.value.set_effect_chain.call(this, peffectchain)
   end
-  def enable_effect(effectindex : UInt32, operationset : UInt32) : HRESULT
-    @lpVtbl.value.enable_effect.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(effectindex, operationset)
+  def enable_effect(this : IXAudio2SubmixVoice*, effectindex : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.enable_effect.call(this, effectindex, operationset)
   end
-  def disable_effect(effectindex : UInt32, operationset : UInt32) : HRESULT
-    @lpVtbl.value.disable_effect.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(effectindex, operationset)
+  def disable_effect(this : IXAudio2SubmixVoice*, effectindex : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.disable_effect.call(this, effectindex, operationset)
   end
-  def get_effect_state(effectindex : UInt32, penabled : LibC::BOOL*) : Void
-    @lpVtbl.value.get_effect_state.unsafe_as(Proc(UInt32, LibC::BOOL*, Void)).call(effectindex, penabled)
+  def get_effect_state(this : IXAudio2SubmixVoice*, effectindex : UInt32, penabled : LibC::BOOL*) : Void
+    @lpVtbl.value.get_effect_state.call(this, effectindex, penabled)
   end
-  def set_effect_parameters(effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_effect_parameters.unsafe_as(Proc(UInt32, Void*, UInt32, UInt32, HRESULT)).call(effectindex, pparameters, parametersbytesize, operationset)
+  def set_effect_parameters(this : IXAudio2SubmixVoice*, effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_effect_parameters.call(this, effectindex, pparameters, parametersbytesize, operationset)
   end
-  def get_effect_parameters(effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32) : HRESULT
-    @lpVtbl.value.get_effect_parameters.unsafe_as(Proc(UInt32, Void*, UInt32, HRESULT)).call(effectindex, pparameters, parametersbytesize)
+  def get_effect_parameters(this : IXAudio2SubmixVoice*, effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_parameters.call(this, effectindex, pparameters, parametersbytesize)
   end
-  def set_filter_parameters(pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_filter_parameters.unsafe_as(Proc(XAUDIO2_FILTER_PARAMETERS*, UInt32, HRESULT)).call(pparameters, operationset)
+  def set_filter_parameters(this : IXAudio2SubmixVoice*, pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_filter_parameters.call(this, pparameters, operationset)
   end
-  def get_filter_parameters(pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
-    @lpVtbl.value.get_filter_parameters.unsafe_as(Proc(XAUDIO2_FILTER_PARAMETERS*, Void)).call(pparameters)
+  def get_filter_parameters(this : IXAudio2SubmixVoice*, pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
+    @lpVtbl.value.get_filter_parameters.call(this, pparameters)
   end
-  def set_output_filter_parameters(pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_output_filter_parameters.unsafe_as(Proc(IXAudio2Voice, XAUDIO2_FILTER_PARAMETERS*, UInt32, HRESULT)).call(pdestinationvoice, pparameters, operationset)
+  def set_output_filter_parameters(this : IXAudio2SubmixVoice*, pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_output_filter_parameters.call(this, pdestinationvoice, pparameters, operationset)
   end
-  def get_output_filter_parameters(pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
-    @lpVtbl.value.get_output_filter_parameters.unsafe_as(Proc(IXAudio2Voice, XAUDIO2_FILTER_PARAMETERS*, Void)).call(pdestinationvoice, pparameters)
+  def get_output_filter_parameters(this : IXAudio2SubmixVoice*, pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
+    @lpVtbl.value.get_output_filter_parameters.call(this, pdestinationvoice, pparameters)
   end
-  def set_volume(volume : Float32, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_volume.unsafe_as(Proc(Float32, UInt32, HRESULT)).call(volume, operationset)
+  def set_volume(this : IXAudio2SubmixVoice*, volume : Float32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_volume.call(this, volume, operationset)
   end
-  def get_volume(pvolume : Float32*) : Void
-    @lpVtbl.value.get_volume.unsafe_as(Proc(Float32*, Void)).call(pvolume)
+  def get_volume(this : IXAudio2SubmixVoice*, pvolume : Float32*) : Void
+    @lpVtbl.value.get_volume.call(this, pvolume)
   end
-  def set_channel_volumes(channels : UInt32, pvolumes : Float32*, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_channel_volumes.unsafe_as(Proc(UInt32, Float32*, UInt32, HRESULT)).call(channels, pvolumes, operationset)
+  def set_channel_volumes(this : IXAudio2SubmixVoice*, channels : UInt32, pvolumes : Float32*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_channel_volumes.call(this, channels, pvolumes, operationset)
   end
-  def get_channel_volumes(channels : UInt32, pvolumes : Float32*) : Void
-    @lpVtbl.value.get_channel_volumes.unsafe_as(Proc(UInt32, Float32*, Void)).call(channels, pvolumes)
+  def get_channel_volumes(this : IXAudio2SubmixVoice*, channels : UInt32, pvolumes : Float32*) : Void
+    @lpVtbl.value.get_channel_volumes.call(this, channels, pvolumes)
   end
-  def set_output_matrix(pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_output_matrix.unsafe_as(Proc(IXAudio2Voice, UInt32, UInt32, Float32*, UInt32, HRESULT)).call(pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix, operationset)
+  def set_output_matrix(this : IXAudio2SubmixVoice*, pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_output_matrix.call(this, pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix, operationset)
   end
-  def get_output_matrix(pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*) : Void
-    @lpVtbl.value.get_output_matrix.unsafe_as(Proc(IXAudio2Voice, UInt32, UInt32, Float32*, Void)).call(pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix)
+  def get_output_matrix(this : IXAudio2SubmixVoice*, pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*) : Void
+    @lpVtbl.value.get_output_matrix.call(this, pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix)
   end
-  def destroy_voice : Void
-    @lpVtbl.value.destroy_voice.unsafe_as(Proc(Void)).call
+  def destroy_voice(this : IXAudio2SubmixVoice*) : Void
+    @lpVtbl.value.destroy_voice.call(this)
   end
 end
 struct LibWin32::IXAudio2MasteringVoice
-  def get_voice_details(pvoicedetails : XAUDIO2_VOICE_DETAILS*) : Void
-    @lpVtbl.value.get_voice_details.unsafe_as(Proc(XAUDIO2_VOICE_DETAILS*, Void)).call(pvoicedetails)
+  def get_voice_details(this : IXAudio2MasteringVoice*, pvoicedetails : XAUDIO2_VOICE_DETAILS*) : Void
+    @lpVtbl.value.get_voice_details.call(this, pvoicedetails)
   end
-  def set_output_voices(psendlist : XAUDIO2_VOICE_SENDS*) : HRESULT
-    @lpVtbl.value.set_output_voices.unsafe_as(Proc(XAUDIO2_VOICE_SENDS*, HRESULT)).call(psendlist)
+  def set_output_voices(this : IXAudio2MasteringVoice*, psendlist : XAUDIO2_VOICE_SENDS*) : HRESULT
+    @lpVtbl.value.set_output_voices.call(this, psendlist)
   end
-  def set_effect_chain(peffectchain : XAUDIO2_EFFECT_CHAIN*) : HRESULT
-    @lpVtbl.value.set_effect_chain.unsafe_as(Proc(XAUDIO2_EFFECT_CHAIN*, HRESULT)).call(peffectchain)
+  def set_effect_chain(this : IXAudio2MasteringVoice*, peffectchain : XAUDIO2_EFFECT_CHAIN*) : HRESULT
+    @lpVtbl.value.set_effect_chain.call(this, peffectchain)
   end
-  def enable_effect(effectindex : UInt32, operationset : UInt32) : HRESULT
-    @lpVtbl.value.enable_effect.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(effectindex, operationset)
+  def enable_effect(this : IXAudio2MasteringVoice*, effectindex : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.enable_effect.call(this, effectindex, operationset)
   end
-  def disable_effect(effectindex : UInt32, operationset : UInt32) : HRESULT
-    @lpVtbl.value.disable_effect.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(effectindex, operationset)
+  def disable_effect(this : IXAudio2MasteringVoice*, effectindex : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.disable_effect.call(this, effectindex, operationset)
   end
-  def get_effect_state(effectindex : UInt32, penabled : LibC::BOOL*) : Void
-    @lpVtbl.value.get_effect_state.unsafe_as(Proc(UInt32, LibC::BOOL*, Void)).call(effectindex, penabled)
+  def get_effect_state(this : IXAudio2MasteringVoice*, effectindex : UInt32, penabled : LibC::BOOL*) : Void
+    @lpVtbl.value.get_effect_state.call(this, effectindex, penabled)
   end
-  def set_effect_parameters(effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_effect_parameters.unsafe_as(Proc(UInt32, Void*, UInt32, UInt32, HRESULT)).call(effectindex, pparameters, parametersbytesize, operationset)
+  def set_effect_parameters(this : IXAudio2MasteringVoice*, effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_effect_parameters.call(this, effectindex, pparameters, parametersbytesize, operationset)
   end
-  def get_effect_parameters(effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32) : HRESULT
-    @lpVtbl.value.get_effect_parameters.unsafe_as(Proc(UInt32, Void*, UInt32, HRESULT)).call(effectindex, pparameters, parametersbytesize)
+  def get_effect_parameters(this : IXAudio2MasteringVoice*, effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_parameters.call(this, effectindex, pparameters, parametersbytesize)
   end
-  def set_filter_parameters(pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_filter_parameters.unsafe_as(Proc(XAUDIO2_FILTER_PARAMETERS*, UInt32, HRESULT)).call(pparameters, operationset)
+  def set_filter_parameters(this : IXAudio2MasteringVoice*, pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_filter_parameters.call(this, pparameters, operationset)
   end
-  def get_filter_parameters(pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
-    @lpVtbl.value.get_filter_parameters.unsafe_as(Proc(XAUDIO2_FILTER_PARAMETERS*, Void)).call(pparameters)
+  def get_filter_parameters(this : IXAudio2MasteringVoice*, pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
+    @lpVtbl.value.get_filter_parameters.call(this, pparameters)
   end
-  def set_output_filter_parameters(pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_output_filter_parameters.unsafe_as(Proc(IXAudio2Voice, XAUDIO2_FILTER_PARAMETERS*, UInt32, HRESULT)).call(pdestinationvoice, pparameters, operationset)
+  def set_output_filter_parameters(this : IXAudio2MasteringVoice*, pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_output_filter_parameters.call(this, pdestinationvoice, pparameters, operationset)
   end
-  def get_output_filter_parameters(pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
-    @lpVtbl.value.get_output_filter_parameters.unsafe_as(Proc(IXAudio2Voice, XAUDIO2_FILTER_PARAMETERS*, Void)).call(pdestinationvoice, pparameters)
+  def get_output_filter_parameters(this : IXAudio2MasteringVoice*, pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
+    @lpVtbl.value.get_output_filter_parameters.call(this, pdestinationvoice, pparameters)
   end
-  def set_volume(volume : Float32, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_volume.unsafe_as(Proc(Float32, UInt32, HRESULT)).call(volume, operationset)
+  def set_volume(this : IXAudio2MasteringVoice*, volume : Float32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_volume.call(this, volume, operationset)
   end
-  def get_volume(pvolume : Float32*) : Void
-    @lpVtbl.value.get_volume.unsafe_as(Proc(Float32*, Void)).call(pvolume)
+  def get_volume(this : IXAudio2MasteringVoice*, pvolume : Float32*) : Void
+    @lpVtbl.value.get_volume.call(this, pvolume)
   end
-  def set_channel_volumes(channels : UInt32, pvolumes : Float32*, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_channel_volumes.unsafe_as(Proc(UInt32, Float32*, UInt32, HRESULT)).call(channels, pvolumes, operationset)
+  def set_channel_volumes(this : IXAudio2MasteringVoice*, channels : UInt32, pvolumes : Float32*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_channel_volumes.call(this, channels, pvolumes, operationset)
   end
-  def get_channel_volumes(channels : UInt32, pvolumes : Float32*) : Void
-    @lpVtbl.value.get_channel_volumes.unsafe_as(Proc(UInt32, Float32*, Void)).call(channels, pvolumes)
+  def get_channel_volumes(this : IXAudio2MasteringVoice*, channels : UInt32, pvolumes : Float32*) : Void
+    @lpVtbl.value.get_channel_volumes.call(this, channels, pvolumes)
   end
-  def set_output_matrix(pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*, operationset : UInt32) : HRESULT
-    @lpVtbl.value.set_output_matrix.unsafe_as(Proc(IXAudio2Voice, UInt32, UInt32, Float32*, UInt32, HRESULT)).call(pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix, operationset)
+  def set_output_matrix(this : IXAudio2MasteringVoice*, pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_output_matrix.call(this, pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix, operationset)
   end
-  def get_output_matrix(pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*) : Void
-    @lpVtbl.value.get_output_matrix.unsafe_as(Proc(IXAudio2Voice, UInt32, UInt32, Float32*, Void)).call(pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix)
+  def get_output_matrix(this : IXAudio2MasteringVoice*, pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*) : Void
+    @lpVtbl.value.get_output_matrix.call(this, pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix)
   end
-  def destroy_voice : Void
-    @lpVtbl.value.destroy_voice.unsafe_as(Proc(Void)).call
+  def destroy_voice(this : IXAudio2MasteringVoice*) : Void
+    @lpVtbl.value.destroy_voice.call(this)
   end
-  def get_channel_mask(pchannelmask : UInt32*) : HRESULT
-    @lpVtbl.value.get_channel_mask.unsafe_as(Proc(UInt32*, HRESULT)).call(pchannelmask)
+  def get_channel_mask(this : IXAudio2MasteringVoice*, pchannelmask : UInt32*) : HRESULT
+    @lpVtbl.value.get_channel_mask.call(this, pchannelmask)
   end
 end
 struct LibWin32::IXAudio2EngineCallback
-  def on_processing_pass_start : Void
-    @lpVtbl.value.on_processing_pass_start.unsafe_as(Proc(Void)).call
+  def on_processing_pass_start(this : IXAudio2EngineCallback*) : Void
+    @lpVtbl.value.on_processing_pass_start.call(this)
   end
-  def on_processing_pass_end : Void
-    @lpVtbl.value.on_processing_pass_end.unsafe_as(Proc(Void)).call
+  def on_processing_pass_end(this : IXAudio2EngineCallback*) : Void
+    @lpVtbl.value.on_processing_pass_end.call(this)
   end
-  def on_critical_error(error : HRESULT) : Void
-    @lpVtbl.value.on_critical_error.unsafe_as(Proc(HRESULT, Void)).call(error)
+  def on_critical_error(this : IXAudio2EngineCallback*, error : HRESULT) : Void
+    @lpVtbl.value.on_critical_error.call(this, error)
   end
 end
 struct LibWin32::IXAudio2VoiceCallback
-  def on_voice_processing_pass_start(bytesrequired : UInt32) : Void
-    @lpVtbl.value.on_voice_processing_pass_start.unsafe_as(Proc(UInt32, Void)).call(bytesrequired)
+  def on_voice_processing_pass_start(this : IXAudio2VoiceCallback*, bytesrequired : UInt32) : Void
+    @lpVtbl.value.on_voice_processing_pass_start.call(this, bytesrequired)
   end
-  def on_voice_processing_pass_end : Void
-    @lpVtbl.value.on_voice_processing_pass_end.unsafe_as(Proc(Void)).call
+  def on_voice_processing_pass_end(this : IXAudio2VoiceCallback*) : Void
+    @lpVtbl.value.on_voice_processing_pass_end.call(this)
   end
-  def on_stream_end : Void
-    @lpVtbl.value.on_stream_end.unsafe_as(Proc(Void)).call
+  def on_stream_end(this : IXAudio2VoiceCallback*) : Void
+    @lpVtbl.value.on_stream_end.call(this)
   end
-  def on_buffer_start(pbuffercontext : Void*) : Void
-    @lpVtbl.value.on_buffer_start.unsafe_as(Proc(Void*, Void)).call(pbuffercontext)
+  def on_buffer_start(this : IXAudio2VoiceCallback*, pbuffercontext : Void*) : Void
+    @lpVtbl.value.on_buffer_start.call(this, pbuffercontext)
   end
-  def on_buffer_end(pbuffercontext : Void*) : Void
-    @lpVtbl.value.on_buffer_end.unsafe_as(Proc(Void*, Void)).call(pbuffercontext)
+  def on_buffer_end(this : IXAudio2VoiceCallback*, pbuffercontext : Void*) : Void
+    @lpVtbl.value.on_buffer_end.call(this, pbuffercontext)
   end
-  def on_loop_end(pbuffercontext : Void*) : Void
-    @lpVtbl.value.on_loop_end.unsafe_as(Proc(Void*, Void)).call(pbuffercontext)
+  def on_loop_end(this : IXAudio2VoiceCallback*, pbuffercontext : Void*) : Void
+    @lpVtbl.value.on_loop_end.call(this, pbuffercontext)
   end
-  def on_voice_error(pbuffercontext : Void*, error : HRESULT) : Void
-    @lpVtbl.value.on_voice_error.unsafe_as(Proc(Void*, HRESULT, Void)).call(pbuffercontext, error)
+  def on_voice_error(this : IXAudio2VoiceCallback*, pbuffercontext : Void*, error : HRESULT) : Void
+    @lpVtbl.value.on_voice_error.call(this, pbuffercontext, error)
   end
 end
 struct LibWin32::IXAPOHrtfParameters
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXAPOHrtfParameters*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXAPOHrtfParameters*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXAPOHrtfParameters*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_source_position(position : HrtfPosition*) : HRESULT
-    @lpVtbl.value.set_source_position.unsafe_as(Proc(HrtfPosition*, HRESULT)).call(position)
+  def set_source_position(this : IXAPOHrtfParameters*, position : HrtfPosition*) : HRESULT
+    @lpVtbl.value.set_source_position.call(this, position)
   end
-  def set_source_orientation(orientation : HrtfOrientation*) : HRESULT
-    @lpVtbl.value.set_source_orientation.unsafe_as(Proc(HrtfOrientation*, HRESULT)).call(orientation)
+  def set_source_orientation(this : IXAPOHrtfParameters*, orientation : HrtfOrientation*) : HRESULT
+    @lpVtbl.value.set_source_orientation.call(this, orientation)
   end
-  def set_source_gain(gain : Float32) : HRESULT
-    @lpVtbl.value.set_source_gain.unsafe_as(Proc(Float32, HRESULT)).call(gain)
+  def set_source_gain(this : IXAPOHrtfParameters*, gain : Float32) : HRESULT
+    @lpVtbl.value.set_source_gain.call(this, gain)
   end
-  def set_environment(environment : HrtfEnvironment) : HRESULT
-    @lpVtbl.value.set_environment.unsafe_as(Proc(HrtfEnvironment, HRESULT)).call(environment)
+  def set_environment(this : IXAPOHrtfParameters*, environment : HrtfEnvironment) : HRESULT
+    @lpVtbl.value.set_environment.call(this, environment)
   end
 end

@@ -4077,29 +4077,29 @@ lib LibWin32
 
 
   struct IDirectDrawVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    compact : UInt64
-    create_clipper : UInt64
-    create_palette : UInt64
-    create_surface : UInt64
-    duplicate_surface : UInt64
-    enum_display_modes : UInt64
-    enum_surfaces : UInt64
-    flip_to_gdi_surface : UInt64
-    get_caps : UInt64
-    get_display_mode : UInt64
-    get_four_cc_codes : UInt64
-    get_gdi_surface : UInt64
-    get_monitor_frequency : UInt64
-    get_scan_line : UInt64
-    get_vertical_blank_status : UInt64
-    initialize : UInt64
-    restore_display_mode : UInt64
-    set_cooperative_level : UInt64
-    set_display_mode : UInt64
-    wait_for_vertical_blank : UInt64
+    query_interface : Proc(IDirectDraw*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectDraw*, UInt32)
+    release : Proc(IDirectDraw*, UInt32)
+    compact : Proc(IDirectDraw*, HRESULT)
+    create_clipper : Proc(IDirectDraw*, UInt32, IDirectDrawClipper*, IUnknown, HRESULT)
+    create_palette : Proc(IDirectDraw*, UInt32, PALETTEENTRY*, IDirectDrawPalette*, IUnknown, HRESULT)
+    create_surface : Proc(IDirectDraw*, DDSURFACEDESC*, IDirectDrawSurface*, IUnknown, HRESULT)
+    duplicate_surface : Proc(IDirectDraw*, IDirectDrawSurface, IDirectDrawSurface*, HRESULT)
+    enum_display_modes : Proc(IDirectDraw*, UInt32, DDSURFACEDESC*, Void*, LPDDENUMMODESCALLBACK, HRESULT)
+    enum_surfaces : Proc(IDirectDraw*, UInt32, DDSURFACEDESC*, Void*, LPDDENUMSURFACESCALLBACK, HRESULT)
+    flip_to_gdi_surface : Proc(IDirectDraw*, HRESULT)
+    get_caps : Proc(IDirectDraw*, DDCAPS_DX7*, DDCAPS_DX7*, HRESULT)
+    get_display_mode : Proc(IDirectDraw*, DDSURFACEDESC*, HRESULT)
+    get_four_cc_codes : Proc(IDirectDraw*, UInt32*, UInt32*, HRESULT)
+    get_gdi_surface : Proc(IDirectDraw*, IDirectDrawSurface*, HRESULT)
+    get_monitor_frequency : Proc(IDirectDraw*, UInt32*, HRESULT)
+    get_scan_line : Proc(IDirectDraw*, UInt32*, HRESULT)
+    get_vertical_blank_status : Proc(IDirectDraw*, Int32*, HRESULT)
+    initialize : Proc(IDirectDraw*, Guid*, HRESULT)
+    restore_display_mode : Proc(IDirectDraw*, HRESULT)
+    set_cooperative_level : Proc(IDirectDraw*, LibC::HANDLE, UInt32, HRESULT)
+    set_display_mode : Proc(IDirectDraw*, UInt32, UInt32, UInt32, HRESULT)
+    wait_for_vertical_blank : Proc(IDirectDraw*, UInt32, LibC::HANDLE, HRESULT)
   end
 
   IDirectDraw_GUID = "6c14db80-a733-11ce-a521-0020af0be560"
@@ -4109,30 +4109,30 @@ lib LibWin32
   end
 
   struct IDirectDraw2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    compact : UInt64
-    create_clipper : UInt64
-    create_palette : UInt64
-    create_surface : UInt64
-    duplicate_surface : UInt64
-    enum_display_modes : UInt64
-    enum_surfaces : UInt64
-    flip_to_gdi_surface : UInt64
-    get_caps : UInt64
-    get_display_mode : UInt64
-    get_four_cc_codes : UInt64
-    get_gdi_surface : UInt64
-    get_monitor_frequency : UInt64
-    get_scan_line : UInt64
-    get_vertical_blank_status : UInt64
-    initialize : UInt64
-    restore_display_mode : UInt64
-    set_cooperative_level : UInt64
-    set_display_mode : UInt64
-    wait_for_vertical_blank : UInt64
-    get_available_vid_mem : UInt64
+    query_interface : Proc(IDirectDraw2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectDraw2*, UInt32)
+    release : Proc(IDirectDraw2*, UInt32)
+    compact : Proc(IDirectDraw2*, HRESULT)
+    create_clipper : Proc(IDirectDraw2*, UInt32, IDirectDrawClipper*, IUnknown, HRESULT)
+    create_palette : Proc(IDirectDraw2*, UInt32, PALETTEENTRY*, IDirectDrawPalette*, IUnknown, HRESULT)
+    create_surface : Proc(IDirectDraw2*, DDSURFACEDESC*, IDirectDrawSurface*, IUnknown, HRESULT)
+    duplicate_surface : Proc(IDirectDraw2*, IDirectDrawSurface, IDirectDrawSurface*, HRESULT)
+    enum_display_modes : Proc(IDirectDraw2*, UInt32, DDSURFACEDESC*, Void*, LPDDENUMMODESCALLBACK, HRESULT)
+    enum_surfaces : Proc(IDirectDraw2*, UInt32, DDSURFACEDESC*, Void*, LPDDENUMSURFACESCALLBACK, HRESULT)
+    flip_to_gdi_surface : Proc(IDirectDraw2*, HRESULT)
+    get_caps : Proc(IDirectDraw2*, DDCAPS_DX7*, DDCAPS_DX7*, HRESULT)
+    get_display_mode : Proc(IDirectDraw2*, DDSURFACEDESC*, HRESULT)
+    get_four_cc_codes : Proc(IDirectDraw2*, UInt32*, UInt32*, HRESULT)
+    get_gdi_surface : Proc(IDirectDraw2*, IDirectDrawSurface*, HRESULT)
+    get_monitor_frequency : Proc(IDirectDraw2*, UInt32*, HRESULT)
+    get_scan_line : Proc(IDirectDraw2*, UInt32*, HRESULT)
+    get_vertical_blank_status : Proc(IDirectDraw2*, Int32*, HRESULT)
+    initialize : Proc(IDirectDraw2*, Guid*, HRESULT)
+    restore_display_mode : Proc(IDirectDraw2*, HRESULT)
+    set_cooperative_level : Proc(IDirectDraw2*, LibC::HANDLE, UInt32, HRESULT)
+    set_display_mode : Proc(IDirectDraw2*, UInt32, UInt32, UInt32, UInt32, UInt32, HRESULT)
+    wait_for_vertical_blank : Proc(IDirectDraw2*, UInt32, LibC::HANDLE, HRESULT)
+    get_available_vid_mem : Proc(IDirectDraw2*, DDSCAPS*, UInt32*, UInt32*, HRESULT)
   end
 
   IDirectDraw2_GUID = "b3a6f3e0-2b43-11cf-a2de-00aa00b93356"
@@ -4142,34 +4142,34 @@ lib LibWin32
   end
 
   struct IDirectDraw4VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    compact : UInt64
-    create_clipper : UInt64
-    create_palette : UInt64
-    create_surface : UInt64
-    duplicate_surface : UInt64
-    enum_display_modes : UInt64
-    enum_surfaces : UInt64
-    flip_to_gdi_surface : UInt64
-    get_caps : UInt64
-    get_display_mode : UInt64
-    get_four_cc_codes : UInt64
-    get_gdi_surface : UInt64
-    get_monitor_frequency : UInt64
-    get_scan_line : UInt64
-    get_vertical_blank_status : UInt64
-    initialize : UInt64
-    restore_display_mode : UInt64
-    set_cooperative_level : UInt64
-    set_display_mode : UInt64
-    wait_for_vertical_blank : UInt64
-    get_available_vid_mem : UInt64
-    get_surface_from_dc : UInt64
-    restore_all_surfaces : UInt64
-    test_cooperative_level : UInt64
-    get_device_identifier : UInt64
+    query_interface : Proc(IDirectDraw4*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectDraw4*, UInt32)
+    release : Proc(IDirectDraw4*, UInt32)
+    compact : Proc(IDirectDraw4*, HRESULT)
+    create_clipper : Proc(IDirectDraw4*, UInt32, IDirectDrawClipper*, IUnknown, HRESULT)
+    create_palette : Proc(IDirectDraw4*, UInt32, PALETTEENTRY*, IDirectDrawPalette*, IUnknown, HRESULT)
+    create_surface : Proc(IDirectDraw4*, DDSURFACEDESC2*, IDirectDrawSurface4*, IUnknown, HRESULT)
+    duplicate_surface : Proc(IDirectDraw4*, IDirectDrawSurface4, IDirectDrawSurface4*, HRESULT)
+    enum_display_modes : Proc(IDirectDraw4*, UInt32, DDSURFACEDESC2*, Void*, LPDDENUMMODESCALLBACK2, HRESULT)
+    enum_surfaces : Proc(IDirectDraw4*, UInt32, DDSURFACEDESC2*, Void*, LPDDENUMSURFACESCALLBACK2, HRESULT)
+    flip_to_gdi_surface : Proc(IDirectDraw4*, HRESULT)
+    get_caps : Proc(IDirectDraw4*, DDCAPS_DX7*, DDCAPS_DX7*, HRESULT)
+    get_display_mode : Proc(IDirectDraw4*, DDSURFACEDESC2*, HRESULT)
+    get_four_cc_codes : Proc(IDirectDraw4*, UInt32*, UInt32*, HRESULT)
+    get_gdi_surface : Proc(IDirectDraw4*, IDirectDrawSurface4*, HRESULT)
+    get_monitor_frequency : Proc(IDirectDraw4*, UInt32*, HRESULT)
+    get_scan_line : Proc(IDirectDraw4*, UInt32*, HRESULT)
+    get_vertical_blank_status : Proc(IDirectDraw4*, Int32*, HRESULT)
+    initialize : Proc(IDirectDraw4*, Guid*, HRESULT)
+    restore_display_mode : Proc(IDirectDraw4*, HRESULT)
+    set_cooperative_level : Proc(IDirectDraw4*, LibC::HANDLE, UInt32, HRESULT)
+    set_display_mode : Proc(IDirectDraw4*, UInt32, UInt32, UInt32, UInt32, UInt32, HRESULT)
+    wait_for_vertical_blank : Proc(IDirectDraw4*, UInt32, LibC::HANDLE, HRESULT)
+    get_available_vid_mem : Proc(IDirectDraw4*, DDSCAPS2*, UInt32*, UInt32*, HRESULT)
+    get_surface_from_dc : Proc(IDirectDraw4*, HDC, IDirectDrawSurface4*, HRESULT)
+    restore_all_surfaces : Proc(IDirectDraw4*, HRESULT)
+    test_cooperative_level : Proc(IDirectDraw4*, HRESULT)
+    get_device_identifier : Proc(IDirectDraw4*, DDDEVICEIDENTIFIER*, UInt32, HRESULT)
   end
 
   IDirectDraw4_GUID = "9c59509a-39bd-11d1-8c4a-00c04fd930c5"
@@ -4179,36 +4179,36 @@ lib LibWin32
   end
 
   struct IDirectDraw7VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    compact : UInt64
-    create_clipper : UInt64
-    create_palette : UInt64
-    create_surface : UInt64
-    duplicate_surface : UInt64
-    enum_display_modes : UInt64
-    enum_surfaces : UInt64
-    flip_to_gdi_surface : UInt64
-    get_caps : UInt64
-    get_display_mode : UInt64
-    get_four_cc_codes : UInt64
-    get_gdi_surface : UInt64
-    get_monitor_frequency : UInt64
-    get_scan_line : UInt64
-    get_vertical_blank_status : UInt64
-    initialize : UInt64
-    restore_display_mode : UInt64
-    set_cooperative_level : UInt64
-    set_display_mode : UInt64
-    wait_for_vertical_blank : UInt64
-    get_available_vid_mem : UInt64
-    get_surface_from_dc : UInt64
-    restore_all_surfaces : UInt64
-    test_cooperative_level : UInt64
-    get_device_identifier : UInt64
-    start_mode_test : UInt64
-    evaluate_mode : UInt64
+    query_interface : Proc(IDirectDraw7*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectDraw7*, UInt32)
+    release : Proc(IDirectDraw7*, UInt32)
+    compact : Proc(IDirectDraw7*, HRESULT)
+    create_clipper : Proc(IDirectDraw7*, UInt32, IDirectDrawClipper*, IUnknown, HRESULT)
+    create_palette : Proc(IDirectDraw7*, UInt32, PALETTEENTRY*, IDirectDrawPalette*, IUnknown, HRESULT)
+    create_surface : Proc(IDirectDraw7*, DDSURFACEDESC2*, IDirectDrawSurface7*, IUnknown, HRESULT)
+    duplicate_surface : Proc(IDirectDraw7*, IDirectDrawSurface7, IDirectDrawSurface7*, HRESULT)
+    enum_display_modes : Proc(IDirectDraw7*, UInt32, DDSURFACEDESC2*, Void*, LPDDENUMMODESCALLBACK2, HRESULT)
+    enum_surfaces : Proc(IDirectDraw7*, UInt32, DDSURFACEDESC2*, Void*, LPDDENUMSURFACESCALLBACK7, HRESULT)
+    flip_to_gdi_surface : Proc(IDirectDraw7*, HRESULT)
+    get_caps : Proc(IDirectDraw7*, DDCAPS_DX7*, DDCAPS_DX7*, HRESULT)
+    get_display_mode : Proc(IDirectDraw7*, DDSURFACEDESC2*, HRESULT)
+    get_four_cc_codes : Proc(IDirectDraw7*, UInt32*, UInt32*, HRESULT)
+    get_gdi_surface : Proc(IDirectDraw7*, IDirectDrawSurface7*, HRESULT)
+    get_monitor_frequency : Proc(IDirectDraw7*, UInt32*, HRESULT)
+    get_scan_line : Proc(IDirectDraw7*, UInt32*, HRESULT)
+    get_vertical_blank_status : Proc(IDirectDraw7*, Int32*, HRESULT)
+    initialize : Proc(IDirectDraw7*, Guid*, HRESULT)
+    restore_display_mode : Proc(IDirectDraw7*, HRESULT)
+    set_cooperative_level : Proc(IDirectDraw7*, LibC::HANDLE, UInt32, HRESULT)
+    set_display_mode : Proc(IDirectDraw7*, UInt32, UInt32, UInt32, UInt32, UInt32, HRESULT)
+    wait_for_vertical_blank : Proc(IDirectDraw7*, UInt32, LibC::HANDLE, HRESULT)
+    get_available_vid_mem : Proc(IDirectDraw7*, DDSCAPS2*, UInt32*, UInt32*, HRESULT)
+    get_surface_from_dc : Proc(IDirectDraw7*, HDC, IDirectDrawSurface7*, HRESULT)
+    restore_all_surfaces : Proc(IDirectDraw7*, HRESULT)
+    test_cooperative_level : Proc(IDirectDraw7*, HRESULT)
+    get_device_identifier : Proc(IDirectDraw7*, DDDEVICEIDENTIFIER2*, UInt32, HRESULT)
+    start_mode_test : Proc(IDirectDraw7*, SIZE*, UInt32, UInt32, HRESULT)
+    evaluate_mode : Proc(IDirectDraw7*, UInt32, UInt32*, HRESULT)
   end
 
   IDirectDraw7_GUID = "15e65ec0-3b9c-11d2-b92f-00609797ea5b"
@@ -4218,13 +4218,13 @@ lib LibWin32
   end
 
   struct IDirectDrawPaletteVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_caps : UInt64
-    get_entries : UInt64
-    initialize : UInt64
-    set_entries : UInt64
+    query_interface : Proc(IDirectDrawPalette*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectDrawPalette*, UInt32)
+    release : Proc(IDirectDrawPalette*, UInt32)
+    get_caps : Proc(IDirectDrawPalette*, UInt32*, HRESULT)
+    get_entries : Proc(IDirectDrawPalette*, UInt32, UInt32, UInt32, PALETTEENTRY*, HRESULT)
+    initialize : Proc(IDirectDrawPalette*, IDirectDraw, UInt32, PALETTEENTRY*, HRESULT)
+    set_entries : Proc(IDirectDrawPalette*, UInt32, UInt32, UInt32, PALETTEENTRY*, HRESULT)
   end
 
   IDirectDrawPalette_GUID = "6c14db84-a733-11ce-a521-0020af0be560"
@@ -4234,15 +4234,15 @@ lib LibWin32
   end
 
   struct IDirectDrawClipperVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_clip_list : UInt64
-    get_h_wnd : UInt64
-    initialize : UInt64
-    is_clip_list_changed : UInt64
-    set_clip_list : UInt64
-    set_h_wnd : UInt64
+    query_interface : Proc(IDirectDrawClipper*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectDrawClipper*, UInt32)
+    release : Proc(IDirectDrawClipper*, UInt32)
+    get_clip_list : Proc(IDirectDrawClipper*, RECT*, RGNDATA*, UInt32*, HRESULT)
+    get_h_wnd : Proc(IDirectDrawClipper*, HANDLE*, HRESULT)
+    initialize : Proc(IDirectDrawClipper*, IDirectDraw, UInt32, HRESULT)
+    is_clip_list_changed : Proc(IDirectDrawClipper*, LibC::BOOL*, HRESULT)
+    set_clip_list : Proc(IDirectDrawClipper*, RGNDATA*, UInt32, HRESULT)
+    set_h_wnd : Proc(IDirectDrawClipper*, UInt32, LibC::HANDLE, HRESULT)
   end
 
   IDirectDrawClipper_GUID = "6c14db85-a733-11ce-a521-0020af0be560"
@@ -4252,42 +4252,42 @@ lib LibWin32
   end
 
   struct IDirectDrawSurfaceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add_attached_surface : UInt64
-    add_overlay_dirty_rect : UInt64
-    blt : UInt64
-    blt_batch : UInt64
-    blt_fast : UInt64
-    delete_attached_surface : UInt64
-    enum_attached_surfaces : UInt64
-    enum_overlay_z_orders : UInt64
-    flip : UInt64
-    get_attached_surface : UInt64
-    get_blt_status : UInt64
-    get_caps : UInt64
-    get_clipper : UInt64
-    get_color_key : UInt64
-    get_dc : UInt64
-    get_flip_status : UInt64
-    get_overlay_position : UInt64
-    get_palette : UInt64
-    get_pixel_format : UInt64
-    get_surface_desc : UInt64
-    initialize : UInt64
-    is_lost : UInt64
-    lock : UInt64
-    release_dc : UInt64
-    restore : UInt64
-    set_clipper : UInt64
-    set_color_key : UInt64
-    set_overlay_position : UInt64
-    set_palette : UInt64
-    unlock : UInt64
-    update_overlay : UInt64
-    update_overlay_display : UInt64
-    update_overlay_z_order : UInt64
+    query_interface : Proc(IDirectDrawSurface*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectDrawSurface*, UInt32)
+    release : Proc(IDirectDrawSurface*, UInt32)
+    add_attached_surface : Proc(IDirectDrawSurface*, IDirectDrawSurface, HRESULT)
+    add_overlay_dirty_rect : Proc(IDirectDrawSurface*, RECT*, HRESULT)
+    blt : Proc(IDirectDrawSurface*, RECT*, IDirectDrawSurface, RECT*, UInt32, DDBLTFX*, HRESULT)
+    blt_batch : Proc(IDirectDrawSurface*, DDBLTBATCH*, UInt32, UInt32, HRESULT)
+    blt_fast : Proc(IDirectDrawSurface*, UInt32, UInt32, IDirectDrawSurface, RECT*, UInt32, HRESULT)
+    delete_attached_surface : Proc(IDirectDrawSurface*, UInt32, IDirectDrawSurface, HRESULT)
+    enum_attached_surfaces : Proc(IDirectDrawSurface*, Void*, LPDDENUMSURFACESCALLBACK, HRESULT)
+    enum_overlay_z_orders : Proc(IDirectDrawSurface*, UInt32, Void*, LPDDENUMSURFACESCALLBACK, HRESULT)
+    flip : Proc(IDirectDrawSurface*, IDirectDrawSurface, UInt32, HRESULT)
+    get_attached_surface : Proc(IDirectDrawSurface*, DDSCAPS*, IDirectDrawSurface*, HRESULT)
+    get_blt_status : Proc(IDirectDrawSurface*, UInt32, HRESULT)
+    get_caps : Proc(IDirectDrawSurface*, DDSCAPS*, HRESULT)
+    get_clipper : Proc(IDirectDrawSurface*, IDirectDrawClipper*, HRESULT)
+    get_color_key : Proc(IDirectDrawSurface*, UInt32, DDCOLORKEY*, HRESULT)
+    get_dc : Proc(IDirectDrawSurface*, HDC*, HRESULT)
+    get_flip_status : Proc(IDirectDrawSurface*, UInt32, HRESULT)
+    get_overlay_position : Proc(IDirectDrawSurface*, Int32*, Int32*, HRESULT)
+    get_palette : Proc(IDirectDrawSurface*, IDirectDrawPalette*, HRESULT)
+    get_pixel_format : Proc(IDirectDrawSurface*, DDPIXELFORMAT*, HRESULT)
+    get_surface_desc : Proc(IDirectDrawSurface*, DDSURFACEDESC*, HRESULT)
+    initialize : Proc(IDirectDrawSurface*, IDirectDraw, DDSURFACEDESC*, HRESULT)
+    is_lost : Proc(IDirectDrawSurface*, HRESULT)
+    lock : Proc(IDirectDrawSurface*, RECT*, DDSURFACEDESC*, UInt32, LibC::HANDLE, HRESULT)
+    release_dc : Proc(IDirectDrawSurface*, HDC, HRESULT)
+    restore : Proc(IDirectDrawSurface*, HRESULT)
+    set_clipper : Proc(IDirectDrawSurface*, IDirectDrawClipper, HRESULT)
+    set_color_key : Proc(IDirectDrawSurface*, UInt32, DDCOLORKEY*, HRESULT)
+    set_overlay_position : Proc(IDirectDrawSurface*, Int32, Int32, HRESULT)
+    set_palette : Proc(IDirectDrawSurface*, IDirectDrawPalette, HRESULT)
+    unlock : Proc(IDirectDrawSurface*, Void*, HRESULT)
+    update_overlay : Proc(IDirectDrawSurface*, RECT*, IDirectDrawSurface, RECT*, UInt32, DDOVERLAYFX*, HRESULT)
+    update_overlay_display : Proc(IDirectDrawSurface*, UInt32, HRESULT)
+    update_overlay_z_order : Proc(IDirectDrawSurface*, UInt32, IDirectDrawSurface, HRESULT)
   end
 
   IDirectDrawSurface_GUID = "6c14db81-a733-11ce-a521-0020af0be560"
@@ -4297,45 +4297,45 @@ lib LibWin32
   end
 
   struct IDirectDrawSurface2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add_attached_surface : UInt64
-    add_overlay_dirty_rect : UInt64
-    blt : UInt64
-    blt_batch : UInt64
-    blt_fast : UInt64
-    delete_attached_surface : UInt64
-    enum_attached_surfaces : UInt64
-    enum_overlay_z_orders : UInt64
-    flip : UInt64
-    get_attached_surface : UInt64
-    get_blt_status : UInt64
-    get_caps : UInt64
-    get_clipper : UInt64
-    get_color_key : UInt64
-    get_dc : UInt64
-    get_flip_status : UInt64
-    get_overlay_position : UInt64
-    get_palette : UInt64
-    get_pixel_format : UInt64
-    get_surface_desc : UInt64
-    initialize : UInt64
-    is_lost : UInt64
-    lock : UInt64
-    release_dc : UInt64
-    restore : UInt64
-    set_clipper : UInt64
-    set_color_key : UInt64
-    set_overlay_position : UInt64
-    set_palette : UInt64
-    unlock : UInt64
-    update_overlay : UInt64
-    update_overlay_display : UInt64
-    update_overlay_z_order : UInt64
-    get_dd_interface : UInt64
-    page_lock : UInt64
-    page_unlock : UInt64
+    query_interface : Proc(IDirectDrawSurface2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectDrawSurface2*, UInt32)
+    release : Proc(IDirectDrawSurface2*, UInt32)
+    add_attached_surface : Proc(IDirectDrawSurface2*, IDirectDrawSurface2, HRESULT)
+    add_overlay_dirty_rect : Proc(IDirectDrawSurface2*, RECT*, HRESULT)
+    blt : Proc(IDirectDrawSurface2*, RECT*, IDirectDrawSurface2, RECT*, UInt32, DDBLTFX*, HRESULT)
+    blt_batch : Proc(IDirectDrawSurface2*, DDBLTBATCH*, UInt32, UInt32, HRESULT)
+    blt_fast : Proc(IDirectDrawSurface2*, UInt32, UInt32, IDirectDrawSurface2, RECT*, UInt32, HRESULT)
+    delete_attached_surface : Proc(IDirectDrawSurface2*, UInt32, IDirectDrawSurface2, HRESULT)
+    enum_attached_surfaces : Proc(IDirectDrawSurface2*, Void*, LPDDENUMSURFACESCALLBACK, HRESULT)
+    enum_overlay_z_orders : Proc(IDirectDrawSurface2*, UInt32, Void*, LPDDENUMSURFACESCALLBACK, HRESULT)
+    flip : Proc(IDirectDrawSurface2*, IDirectDrawSurface2, UInt32, HRESULT)
+    get_attached_surface : Proc(IDirectDrawSurface2*, DDSCAPS*, IDirectDrawSurface2*, HRESULT)
+    get_blt_status : Proc(IDirectDrawSurface2*, UInt32, HRESULT)
+    get_caps : Proc(IDirectDrawSurface2*, DDSCAPS*, HRESULT)
+    get_clipper : Proc(IDirectDrawSurface2*, IDirectDrawClipper*, HRESULT)
+    get_color_key : Proc(IDirectDrawSurface2*, UInt32, DDCOLORKEY*, HRESULT)
+    get_dc : Proc(IDirectDrawSurface2*, HDC*, HRESULT)
+    get_flip_status : Proc(IDirectDrawSurface2*, UInt32, HRESULT)
+    get_overlay_position : Proc(IDirectDrawSurface2*, Int32*, Int32*, HRESULT)
+    get_palette : Proc(IDirectDrawSurface2*, IDirectDrawPalette*, HRESULT)
+    get_pixel_format : Proc(IDirectDrawSurface2*, DDPIXELFORMAT*, HRESULT)
+    get_surface_desc : Proc(IDirectDrawSurface2*, DDSURFACEDESC*, HRESULT)
+    initialize : Proc(IDirectDrawSurface2*, IDirectDraw, DDSURFACEDESC*, HRESULT)
+    is_lost : Proc(IDirectDrawSurface2*, HRESULT)
+    lock : Proc(IDirectDrawSurface2*, RECT*, DDSURFACEDESC*, UInt32, LibC::HANDLE, HRESULT)
+    release_dc : Proc(IDirectDrawSurface2*, HDC, HRESULT)
+    restore : Proc(IDirectDrawSurface2*, HRESULT)
+    set_clipper : Proc(IDirectDrawSurface2*, IDirectDrawClipper, HRESULT)
+    set_color_key : Proc(IDirectDrawSurface2*, UInt32, DDCOLORKEY*, HRESULT)
+    set_overlay_position : Proc(IDirectDrawSurface2*, Int32, Int32, HRESULT)
+    set_palette : Proc(IDirectDrawSurface2*, IDirectDrawPalette, HRESULT)
+    unlock : Proc(IDirectDrawSurface2*, Void*, HRESULT)
+    update_overlay : Proc(IDirectDrawSurface2*, RECT*, IDirectDrawSurface2, RECT*, UInt32, DDOVERLAYFX*, HRESULT)
+    update_overlay_display : Proc(IDirectDrawSurface2*, UInt32, HRESULT)
+    update_overlay_z_order : Proc(IDirectDrawSurface2*, UInt32, IDirectDrawSurface2, HRESULT)
+    get_dd_interface : Proc(IDirectDrawSurface2*, Void**, HRESULT)
+    page_lock : Proc(IDirectDrawSurface2*, UInt32, HRESULT)
+    page_unlock : Proc(IDirectDrawSurface2*, UInt32, HRESULT)
   end
 
   IDirectDrawSurface2_GUID = "57805885-6eec-11cf-9441-a82303c10e27"
@@ -4345,46 +4345,46 @@ lib LibWin32
   end
 
   struct IDirectDrawSurface3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add_attached_surface : UInt64
-    add_overlay_dirty_rect : UInt64
-    blt : UInt64
-    blt_batch : UInt64
-    blt_fast : UInt64
-    delete_attached_surface : UInt64
-    enum_attached_surfaces : UInt64
-    enum_overlay_z_orders : UInt64
-    flip : UInt64
-    get_attached_surface : UInt64
-    get_blt_status : UInt64
-    get_caps : UInt64
-    get_clipper : UInt64
-    get_color_key : UInt64
-    get_dc : UInt64
-    get_flip_status : UInt64
-    get_overlay_position : UInt64
-    get_palette : UInt64
-    get_pixel_format : UInt64
-    get_surface_desc : UInt64
-    initialize : UInt64
-    is_lost : UInt64
-    lock : UInt64
-    release_dc : UInt64
-    restore : UInt64
-    set_clipper : UInt64
-    set_color_key : UInt64
-    set_overlay_position : UInt64
-    set_palette : UInt64
-    unlock : UInt64
-    update_overlay : UInt64
-    update_overlay_display : UInt64
-    update_overlay_z_order : UInt64
-    get_dd_interface : UInt64
-    page_lock : UInt64
-    page_unlock : UInt64
-    set_surface_desc : UInt64
+    query_interface : Proc(IDirectDrawSurface3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectDrawSurface3*, UInt32)
+    release : Proc(IDirectDrawSurface3*, UInt32)
+    add_attached_surface : Proc(IDirectDrawSurface3*, IDirectDrawSurface3, HRESULT)
+    add_overlay_dirty_rect : Proc(IDirectDrawSurface3*, RECT*, HRESULT)
+    blt : Proc(IDirectDrawSurface3*, RECT*, IDirectDrawSurface3, RECT*, UInt32, DDBLTFX*, HRESULT)
+    blt_batch : Proc(IDirectDrawSurface3*, DDBLTBATCH*, UInt32, UInt32, HRESULT)
+    blt_fast : Proc(IDirectDrawSurface3*, UInt32, UInt32, IDirectDrawSurface3, RECT*, UInt32, HRESULT)
+    delete_attached_surface : Proc(IDirectDrawSurface3*, UInt32, IDirectDrawSurface3, HRESULT)
+    enum_attached_surfaces : Proc(IDirectDrawSurface3*, Void*, LPDDENUMSURFACESCALLBACK, HRESULT)
+    enum_overlay_z_orders : Proc(IDirectDrawSurface3*, UInt32, Void*, LPDDENUMSURFACESCALLBACK, HRESULT)
+    flip : Proc(IDirectDrawSurface3*, IDirectDrawSurface3, UInt32, HRESULT)
+    get_attached_surface : Proc(IDirectDrawSurface3*, DDSCAPS*, IDirectDrawSurface3*, HRESULT)
+    get_blt_status : Proc(IDirectDrawSurface3*, UInt32, HRESULT)
+    get_caps : Proc(IDirectDrawSurface3*, DDSCAPS*, HRESULT)
+    get_clipper : Proc(IDirectDrawSurface3*, IDirectDrawClipper*, HRESULT)
+    get_color_key : Proc(IDirectDrawSurface3*, UInt32, DDCOLORKEY*, HRESULT)
+    get_dc : Proc(IDirectDrawSurface3*, HDC*, HRESULT)
+    get_flip_status : Proc(IDirectDrawSurface3*, UInt32, HRESULT)
+    get_overlay_position : Proc(IDirectDrawSurface3*, Int32*, Int32*, HRESULT)
+    get_palette : Proc(IDirectDrawSurface3*, IDirectDrawPalette*, HRESULT)
+    get_pixel_format : Proc(IDirectDrawSurface3*, DDPIXELFORMAT*, HRESULT)
+    get_surface_desc : Proc(IDirectDrawSurface3*, DDSURFACEDESC*, HRESULT)
+    initialize : Proc(IDirectDrawSurface3*, IDirectDraw, DDSURFACEDESC*, HRESULT)
+    is_lost : Proc(IDirectDrawSurface3*, HRESULT)
+    lock : Proc(IDirectDrawSurface3*, RECT*, DDSURFACEDESC*, UInt32, LibC::HANDLE, HRESULT)
+    release_dc : Proc(IDirectDrawSurface3*, HDC, HRESULT)
+    restore : Proc(IDirectDrawSurface3*, HRESULT)
+    set_clipper : Proc(IDirectDrawSurface3*, IDirectDrawClipper, HRESULT)
+    set_color_key : Proc(IDirectDrawSurface3*, UInt32, DDCOLORKEY*, HRESULT)
+    set_overlay_position : Proc(IDirectDrawSurface3*, Int32, Int32, HRESULT)
+    set_palette : Proc(IDirectDrawSurface3*, IDirectDrawPalette, HRESULT)
+    unlock : Proc(IDirectDrawSurface3*, Void*, HRESULT)
+    update_overlay : Proc(IDirectDrawSurface3*, RECT*, IDirectDrawSurface3, RECT*, UInt32, DDOVERLAYFX*, HRESULT)
+    update_overlay_display : Proc(IDirectDrawSurface3*, UInt32, HRESULT)
+    update_overlay_z_order : Proc(IDirectDrawSurface3*, UInt32, IDirectDrawSurface3, HRESULT)
+    get_dd_interface : Proc(IDirectDrawSurface3*, Void**, HRESULT)
+    page_lock : Proc(IDirectDrawSurface3*, UInt32, HRESULT)
+    page_unlock : Proc(IDirectDrawSurface3*, UInt32, HRESULT)
+    set_surface_desc : Proc(IDirectDrawSurface3*, DDSURFACEDESC*, UInt32, HRESULT)
   end
 
   IDirectDrawSurface3_GUID = "da044e00-69b2-11d0-a1d5-00aa00b8dfbb"
@@ -4394,51 +4394,51 @@ lib LibWin32
   end
 
   struct IDirectDrawSurface4VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add_attached_surface : UInt64
-    add_overlay_dirty_rect : UInt64
-    blt : UInt64
-    blt_batch : UInt64
-    blt_fast : UInt64
-    delete_attached_surface : UInt64
-    enum_attached_surfaces : UInt64
-    enum_overlay_z_orders : UInt64
-    flip : UInt64
-    get_attached_surface : UInt64
-    get_blt_status : UInt64
-    get_caps : UInt64
-    get_clipper : UInt64
-    get_color_key : UInt64
-    get_dc : UInt64
-    get_flip_status : UInt64
-    get_overlay_position : UInt64
-    get_palette : UInt64
-    get_pixel_format : UInt64
-    get_surface_desc : UInt64
-    initialize : UInt64
-    is_lost : UInt64
-    lock : UInt64
-    release_dc : UInt64
-    restore : UInt64
-    set_clipper : UInt64
-    set_color_key : UInt64
-    set_overlay_position : UInt64
-    set_palette : UInt64
-    unlock : UInt64
-    update_overlay : UInt64
-    update_overlay_display : UInt64
-    update_overlay_z_order : UInt64
-    get_dd_interface : UInt64
-    page_lock : UInt64
-    page_unlock : UInt64
-    set_surface_desc : UInt64
-    set_private_data : UInt64
-    get_private_data : UInt64
-    free_private_data : UInt64
-    get_uniqueness_value : UInt64
-    change_uniqueness_value : UInt64
+    query_interface : Proc(IDirectDrawSurface4*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectDrawSurface4*, UInt32)
+    release : Proc(IDirectDrawSurface4*, UInt32)
+    add_attached_surface : Proc(IDirectDrawSurface4*, IDirectDrawSurface4, HRESULT)
+    add_overlay_dirty_rect : Proc(IDirectDrawSurface4*, RECT*, HRESULT)
+    blt : Proc(IDirectDrawSurface4*, RECT*, IDirectDrawSurface4, RECT*, UInt32, DDBLTFX*, HRESULT)
+    blt_batch : Proc(IDirectDrawSurface4*, DDBLTBATCH*, UInt32, UInt32, HRESULT)
+    blt_fast : Proc(IDirectDrawSurface4*, UInt32, UInt32, IDirectDrawSurface4, RECT*, UInt32, HRESULT)
+    delete_attached_surface : Proc(IDirectDrawSurface4*, UInt32, IDirectDrawSurface4, HRESULT)
+    enum_attached_surfaces : Proc(IDirectDrawSurface4*, Void*, LPDDENUMSURFACESCALLBACK2, HRESULT)
+    enum_overlay_z_orders : Proc(IDirectDrawSurface4*, UInt32, Void*, LPDDENUMSURFACESCALLBACK2, HRESULT)
+    flip : Proc(IDirectDrawSurface4*, IDirectDrawSurface4, UInt32, HRESULT)
+    get_attached_surface : Proc(IDirectDrawSurface4*, DDSCAPS2*, IDirectDrawSurface4*, HRESULT)
+    get_blt_status : Proc(IDirectDrawSurface4*, UInt32, HRESULT)
+    get_caps : Proc(IDirectDrawSurface4*, DDSCAPS2*, HRESULT)
+    get_clipper : Proc(IDirectDrawSurface4*, IDirectDrawClipper*, HRESULT)
+    get_color_key : Proc(IDirectDrawSurface4*, UInt32, DDCOLORKEY*, HRESULT)
+    get_dc : Proc(IDirectDrawSurface4*, HDC*, HRESULT)
+    get_flip_status : Proc(IDirectDrawSurface4*, UInt32, HRESULT)
+    get_overlay_position : Proc(IDirectDrawSurface4*, Int32*, Int32*, HRESULT)
+    get_palette : Proc(IDirectDrawSurface4*, IDirectDrawPalette*, HRESULT)
+    get_pixel_format : Proc(IDirectDrawSurface4*, DDPIXELFORMAT*, HRESULT)
+    get_surface_desc : Proc(IDirectDrawSurface4*, DDSURFACEDESC2*, HRESULT)
+    initialize : Proc(IDirectDrawSurface4*, IDirectDraw, DDSURFACEDESC2*, HRESULT)
+    is_lost : Proc(IDirectDrawSurface4*, HRESULT)
+    lock : Proc(IDirectDrawSurface4*, RECT*, DDSURFACEDESC2*, UInt32, LibC::HANDLE, HRESULT)
+    release_dc : Proc(IDirectDrawSurface4*, HDC, HRESULT)
+    restore : Proc(IDirectDrawSurface4*, HRESULT)
+    set_clipper : Proc(IDirectDrawSurface4*, IDirectDrawClipper, HRESULT)
+    set_color_key : Proc(IDirectDrawSurface4*, UInt32, DDCOLORKEY*, HRESULT)
+    set_overlay_position : Proc(IDirectDrawSurface4*, Int32, Int32, HRESULT)
+    set_palette : Proc(IDirectDrawSurface4*, IDirectDrawPalette, HRESULT)
+    unlock : Proc(IDirectDrawSurface4*, RECT*, HRESULT)
+    update_overlay : Proc(IDirectDrawSurface4*, RECT*, IDirectDrawSurface4, RECT*, UInt32, DDOVERLAYFX*, HRESULT)
+    update_overlay_display : Proc(IDirectDrawSurface4*, UInt32, HRESULT)
+    update_overlay_z_order : Proc(IDirectDrawSurface4*, UInt32, IDirectDrawSurface4, HRESULT)
+    get_dd_interface : Proc(IDirectDrawSurface4*, Void**, HRESULT)
+    page_lock : Proc(IDirectDrawSurface4*, UInt32, HRESULT)
+    page_unlock : Proc(IDirectDrawSurface4*, UInt32, HRESULT)
+    set_surface_desc : Proc(IDirectDrawSurface4*, DDSURFACEDESC2*, UInt32, HRESULT)
+    set_private_data : Proc(IDirectDrawSurface4*, Guid*, Void*, UInt32, UInt32, HRESULT)
+    get_private_data : Proc(IDirectDrawSurface4*, Guid*, Void*, UInt32*, HRESULT)
+    free_private_data : Proc(IDirectDrawSurface4*, Guid*, HRESULT)
+    get_uniqueness_value : Proc(IDirectDrawSurface4*, UInt32*, HRESULT)
+    change_uniqueness_value : Proc(IDirectDrawSurface4*, HRESULT)
   end
 
   IDirectDrawSurface4_GUID = "0b2b8630-ad35-11d0-8ea6-00609797ea5b"
@@ -4448,55 +4448,55 @@ lib LibWin32
   end
 
   struct IDirectDrawSurface7VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add_attached_surface : UInt64
-    add_overlay_dirty_rect : UInt64
-    blt : UInt64
-    blt_batch : UInt64
-    blt_fast : UInt64
-    delete_attached_surface : UInt64
-    enum_attached_surfaces : UInt64
-    enum_overlay_z_orders : UInt64
-    flip : UInt64
-    get_attached_surface : UInt64
-    get_blt_status : UInt64
-    get_caps : UInt64
-    get_clipper : UInt64
-    get_color_key : UInt64
-    get_dc : UInt64
-    get_flip_status : UInt64
-    get_overlay_position : UInt64
-    get_palette : UInt64
-    get_pixel_format : UInt64
-    get_surface_desc : UInt64
-    initialize : UInt64
-    is_lost : UInt64
-    lock : UInt64
-    release_dc : UInt64
-    restore : UInt64
-    set_clipper : UInt64
-    set_color_key : UInt64
-    set_overlay_position : UInt64
-    set_palette : UInt64
-    unlock : UInt64
-    update_overlay : UInt64
-    update_overlay_display : UInt64
-    update_overlay_z_order : UInt64
-    get_dd_interface : UInt64
-    page_lock : UInt64
-    page_unlock : UInt64
-    set_surface_desc : UInt64
-    set_private_data : UInt64
-    get_private_data : UInt64
-    free_private_data : UInt64
-    get_uniqueness_value : UInt64
-    change_uniqueness_value : UInt64
-    set_priority : UInt64
-    get_priority : UInt64
-    set_lod : UInt64
-    get_lod : UInt64
+    query_interface : Proc(IDirectDrawSurface7*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectDrawSurface7*, UInt32)
+    release : Proc(IDirectDrawSurface7*, UInt32)
+    add_attached_surface : Proc(IDirectDrawSurface7*, IDirectDrawSurface7, HRESULT)
+    add_overlay_dirty_rect : Proc(IDirectDrawSurface7*, RECT*, HRESULT)
+    blt : Proc(IDirectDrawSurface7*, RECT*, IDirectDrawSurface7, RECT*, UInt32, DDBLTFX*, HRESULT)
+    blt_batch : Proc(IDirectDrawSurface7*, DDBLTBATCH*, UInt32, UInt32, HRESULT)
+    blt_fast : Proc(IDirectDrawSurface7*, UInt32, UInt32, IDirectDrawSurface7, RECT*, UInt32, HRESULT)
+    delete_attached_surface : Proc(IDirectDrawSurface7*, UInt32, IDirectDrawSurface7, HRESULT)
+    enum_attached_surfaces : Proc(IDirectDrawSurface7*, Void*, LPDDENUMSURFACESCALLBACK7, HRESULT)
+    enum_overlay_z_orders : Proc(IDirectDrawSurface7*, UInt32, Void*, LPDDENUMSURFACESCALLBACK7, HRESULT)
+    flip : Proc(IDirectDrawSurface7*, IDirectDrawSurface7, UInt32, HRESULT)
+    get_attached_surface : Proc(IDirectDrawSurface7*, DDSCAPS2*, IDirectDrawSurface7*, HRESULT)
+    get_blt_status : Proc(IDirectDrawSurface7*, UInt32, HRESULT)
+    get_caps : Proc(IDirectDrawSurface7*, DDSCAPS2*, HRESULT)
+    get_clipper : Proc(IDirectDrawSurface7*, IDirectDrawClipper*, HRESULT)
+    get_color_key : Proc(IDirectDrawSurface7*, UInt32, DDCOLORKEY*, HRESULT)
+    get_dc : Proc(IDirectDrawSurface7*, HDC*, HRESULT)
+    get_flip_status : Proc(IDirectDrawSurface7*, UInt32, HRESULT)
+    get_overlay_position : Proc(IDirectDrawSurface7*, Int32*, Int32*, HRESULT)
+    get_palette : Proc(IDirectDrawSurface7*, IDirectDrawPalette*, HRESULT)
+    get_pixel_format : Proc(IDirectDrawSurface7*, DDPIXELFORMAT*, HRESULT)
+    get_surface_desc : Proc(IDirectDrawSurface7*, DDSURFACEDESC2*, HRESULT)
+    initialize : Proc(IDirectDrawSurface7*, IDirectDraw, DDSURFACEDESC2*, HRESULT)
+    is_lost : Proc(IDirectDrawSurface7*, HRESULT)
+    lock : Proc(IDirectDrawSurface7*, RECT*, DDSURFACEDESC2*, UInt32, LibC::HANDLE, HRESULT)
+    release_dc : Proc(IDirectDrawSurface7*, HDC, HRESULT)
+    restore : Proc(IDirectDrawSurface7*, HRESULT)
+    set_clipper : Proc(IDirectDrawSurface7*, IDirectDrawClipper, HRESULT)
+    set_color_key : Proc(IDirectDrawSurface7*, UInt32, DDCOLORKEY*, HRESULT)
+    set_overlay_position : Proc(IDirectDrawSurface7*, Int32, Int32, HRESULT)
+    set_palette : Proc(IDirectDrawSurface7*, IDirectDrawPalette, HRESULT)
+    unlock : Proc(IDirectDrawSurface7*, RECT*, HRESULT)
+    update_overlay : Proc(IDirectDrawSurface7*, RECT*, IDirectDrawSurface7, RECT*, UInt32, DDOVERLAYFX*, HRESULT)
+    update_overlay_display : Proc(IDirectDrawSurface7*, UInt32, HRESULT)
+    update_overlay_z_order : Proc(IDirectDrawSurface7*, UInt32, IDirectDrawSurface7, HRESULT)
+    get_dd_interface : Proc(IDirectDrawSurface7*, Void**, HRESULT)
+    page_lock : Proc(IDirectDrawSurface7*, UInt32, HRESULT)
+    page_unlock : Proc(IDirectDrawSurface7*, UInt32, HRESULT)
+    set_surface_desc : Proc(IDirectDrawSurface7*, DDSURFACEDESC2*, UInt32, HRESULT)
+    set_private_data : Proc(IDirectDrawSurface7*, Guid*, Void*, UInt32, UInt32, HRESULT)
+    get_private_data : Proc(IDirectDrawSurface7*, Guid*, Void*, UInt32*, HRESULT)
+    free_private_data : Proc(IDirectDrawSurface7*, Guid*, HRESULT)
+    get_uniqueness_value : Proc(IDirectDrawSurface7*, UInt32*, HRESULT)
+    change_uniqueness_value : Proc(IDirectDrawSurface7*, HRESULT)
+    set_priority : Proc(IDirectDrawSurface7*, UInt32, HRESULT)
+    get_priority : Proc(IDirectDrawSurface7*, UInt32*, HRESULT)
+    set_lod : Proc(IDirectDrawSurface7*, UInt32, HRESULT)
+    get_lod : Proc(IDirectDrawSurface7*, UInt32*, HRESULT)
   end
 
   IDirectDrawSurface7_GUID = "06675a80-3b9b-11d2-b92f-00609797ea5b"
@@ -4506,11 +4506,11 @@ lib LibWin32
   end
 
   struct IDirectDrawColorControlVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_color_controls : UInt64
-    set_color_controls : UInt64
+    query_interface : Proc(IDirectDrawColorControl*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectDrawColorControl*, UInt32)
+    release : Proc(IDirectDrawColorControl*, UInt32)
+    get_color_controls : Proc(IDirectDrawColorControl*, DDCOLORCONTROL*, HRESULT)
+    set_color_controls : Proc(IDirectDrawColorControl*, DDCOLORCONTROL*, HRESULT)
   end
 
   IDirectDrawColorControl_GUID = "4b9f0ee0-0d7e-11d0-9b06-00a0c903a3b8"
@@ -4520,11 +4520,11 @@ lib LibWin32
   end
 
   struct IDirectDrawGammaControlVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_gamma_ramp : UInt64
-    set_gamma_ramp : UInt64
+    query_interface : Proc(IDirectDrawGammaControl*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectDrawGammaControl*, UInt32)
+    release : Proc(IDirectDrawGammaControl*, UInt32)
+    get_gamma_ramp : Proc(IDirectDrawGammaControl*, UInt32, DDGAMMARAMP*, HRESULT)
+    set_gamma_ramp : Proc(IDirectDrawGammaControl*, UInt32, DDGAMMARAMP*, HRESULT)
   end
 
   IDirectDrawGammaControl_GUID = "69c11c3e-b46b-11d1-ad7a-00c04fc29b4e"
@@ -4534,13 +4534,13 @@ lib LibWin32
   end
 
   struct IDDVideoPortContainerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_video_port : UInt64
-    enum_video_ports : UInt64
-    get_video_port_connect_info : UInt64
-    query_video_port_status : UInt64
+    query_interface : Proc(IDDVideoPortContainer*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDDVideoPortContainer*, UInt32)
+    release : Proc(IDDVideoPortContainer*, UInt32)
+    create_video_port : Proc(IDDVideoPortContainer*, UInt32, DDVIDEOPORTDESC*, IDirectDrawVideoPort*, IUnknown, HRESULT)
+    enum_video_ports : Proc(IDDVideoPortContainer*, UInt32, DDVIDEOPORTCAPS*, Void*, LPDDENUMVIDEOCALLBACK, HRESULT)
+    get_video_port_connect_info : Proc(IDDVideoPortContainer*, UInt32, UInt32*, DDVIDEOPORTCONNECT*, HRESULT)
+    query_video_port_status : Proc(IDDVideoPortContainer*, UInt32, DDVIDEOPORTSTATUS*, HRESULT)
   end
 
   IDDVideoPortContainer_GUID = "6c142760-a733-11ce-a521-0020af0be560"
@@ -4550,23 +4550,23 @@ lib LibWin32
   end
 
   struct IDirectDrawVideoPortVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    flip : UInt64
-    get_bandwidth_info : UInt64
-    get_color_controls : UInt64
-    get_input_formats : UInt64
-    get_output_formats : UInt64
-    get_field_polarity : UInt64
-    get_video_line : UInt64
-    get_video_signal_status : UInt64
-    set_color_controls : UInt64
-    set_target_surface : UInt64
-    start_video : UInt64
-    stop_video : UInt64
-    update_video : UInt64
-    wait_for_sync : UInt64
+    query_interface : Proc(IDirectDrawVideoPort*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectDrawVideoPort*, UInt32)
+    release : Proc(IDirectDrawVideoPort*, UInt32)
+    flip : Proc(IDirectDrawVideoPort*, IDirectDrawSurface, UInt32, HRESULT)
+    get_bandwidth_info : Proc(IDirectDrawVideoPort*, DDPIXELFORMAT*, UInt32, UInt32, UInt32, DDVIDEOPORTBANDWIDTH*, HRESULT)
+    get_color_controls : Proc(IDirectDrawVideoPort*, DDCOLORCONTROL*, HRESULT)
+    get_input_formats : Proc(IDirectDrawVideoPort*, UInt32*, DDPIXELFORMAT*, UInt32, HRESULT)
+    get_output_formats : Proc(IDirectDrawVideoPort*, DDPIXELFORMAT*, UInt32*, DDPIXELFORMAT*, UInt32, HRESULT)
+    get_field_polarity : Proc(IDirectDrawVideoPort*, Int32*, HRESULT)
+    get_video_line : Proc(IDirectDrawVideoPort*, UInt32*, HRESULT)
+    get_video_signal_status : Proc(IDirectDrawVideoPort*, UInt32*, HRESULT)
+    set_color_controls : Proc(IDirectDrawVideoPort*, DDCOLORCONTROL*, HRESULT)
+    set_target_surface : Proc(IDirectDrawVideoPort*, IDirectDrawSurface, UInt32, HRESULT)
+    start_video : Proc(IDirectDrawVideoPort*, DDVIDEOPORTINFO*, HRESULT)
+    stop_video : Proc(IDirectDrawVideoPort*, HRESULT)
+    update_video : Proc(IDirectDrawVideoPort*, DDVIDEOPORTINFO*, HRESULT)
+    wait_for_sync : Proc(IDirectDrawVideoPort*, UInt32, UInt32, UInt32, HRESULT)
   end
 
   IDirectDrawVideoPort_GUID = "b36d93e0-2b43-11cf-a2de-00aa00b93356"
@@ -4576,11 +4576,11 @@ lib LibWin32
   end
 
   struct IDirectDrawVideoPortNotifyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    acquire_notification : UInt64
-    release_notification : UInt64
+    query_interface : Proc(IDirectDrawVideoPortNotify*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectDrawVideoPortNotify*, UInt32)
+    release : Proc(IDirectDrawVideoPortNotify*, UInt32)
+    acquire_notification : Proc(IDirectDrawVideoPortNotify*, LibC::HANDLE*, DDVIDEOPORTNOTIFY*, HRESULT)
+    release_notification : Proc(IDirectDrawVideoPortNotify*, LibC::HANDLE, HRESULT)
   end
 
   IDirectDrawVideoPortNotify_GUID = "a655fb94-0589-4e57-b333-567a89468c88"
@@ -4590,12 +4590,12 @@ lib LibWin32
   end
 
   struct IDirectDrawKernelVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_caps : UInt64
-    get_kernel_handle : UInt64
-    release_kernel_handle : UInt64
+    query_interface : Proc(IDirectDrawKernel*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectDrawKernel*, UInt32)
+    release : Proc(IDirectDrawKernel*, UInt32)
+    get_caps : Proc(IDirectDrawKernel*, DDKERNELCAPS*, HRESULT)
+    get_kernel_handle : Proc(IDirectDrawKernel*, LibC::UINT_PTR*, HRESULT)
+    release_kernel_handle : Proc(IDirectDrawKernel*, HRESULT)
   end
 
   IDirectDrawKernel_GUID = "8d56c120-6a08-11d0-9b06-00a0c903a3b8"
@@ -4605,11 +4605,11 @@ lib LibWin32
   end
 
   struct IDirectDrawSurfaceKernelVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_kernel_handle : UInt64
-    release_kernel_handle : UInt64
+    query_interface : Proc(IDirectDrawSurfaceKernel*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDirectDrawSurfaceKernel*, UInt32)
+    release : Proc(IDirectDrawSurfaceKernel*, UInt32)
+    get_kernel_handle : Proc(IDirectDrawSurfaceKernel*, LibC::UINT_PTR*, HRESULT)
+    release_kernel_handle : Proc(IDirectDrawSurfaceKernel*, HRESULT)
   end
 
   IDirectDrawSurfaceKernel_GUID = "60755da0-6a40-11d0-9b06-00a0c903a3b8"
@@ -4641,1178 +4641,1178 @@ lib LibWin32
   fun DirectDrawCreateClipper(dwflags : UInt32, lplpddclipper : IDirectDrawClipper*, punkouter : IUnknown) : HRESULT
 end
 struct LibWin32::IDirectDraw
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectDraw*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectDraw*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectDraw*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def compact : HRESULT
-    @lpVtbl.value.compact.unsafe_as(Proc(HRESULT)).call
+  def compact(this : IDirectDraw*) : HRESULT
+    @lpVtbl.value.compact.call(this)
   end
-  def create_clipper(param0 : UInt32, param1 : IDirectDrawClipper*, param2 : IUnknown) : HRESULT
-    @lpVtbl.value.create_clipper.unsafe_as(Proc(UInt32, IDirectDrawClipper*, IUnknown, HRESULT)).call(param0, param1, param2)
+  def create_clipper(this : IDirectDraw*, param0 : UInt32, param1 : IDirectDrawClipper*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_clipper.call(this, param0, param1, param2)
   end
-  def create_palette(param0 : UInt32, param1 : PALETTEENTRY*, param2 : IDirectDrawPalette*, param3 : IUnknown) : HRESULT
-    @lpVtbl.value.create_palette.unsafe_as(Proc(UInt32, PALETTEENTRY*, IDirectDrawPalette*, IUnknown, HRESULT)).call(param0, param1, param2, param3)
+  def create_palette(this : IDirectDraw*, param0 : UInt32, param1 : PALETTEENTRY*, param2 : IDirectDrawPalette*, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_palette.call(this, param0, param1, param2, param3)
   end
-  def create_surface(param0 : DDSURFACEDESC*, param1 : IDirectDrawSurface*, param2 : IUnknown) : HRESULT
-    @lpVtbl.value.create_surface.unsafe_as(Proc(DDSURFACEDESC*, IDirectDrawSurface*, IUnknown, HRESULT)).call(param0, param1, param2)
+  def create_surface(this : IDirectDraw*, param0 : DDSURFACEDESC*, param1 : IDirectDrawSurface*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_surface.call(this, param0, param1, param2)
   end
-  def duplicate_surface(param0 : IDirectDrawSurface, param1 : IDirectDrawSurface*) : HRESULT
-    @lpVtbl.value.duplicate_surface.unsafe_as(Proc(IDirectDrawSurface, IDirectDrawSurface*, HRESULT)).call(param0, param1)
+  def duplicate_surface(this : IDirectDraw*, param0 : IDirectDrawSurface, param1 : IDirectDrawSurface*) : HRESULT
+    @lpVtbl.value.duplicate_surface.call(this, param0, param1)
   end
-  def enum_display_modes(param0 : UInt32, param1 : DDSURFACEDESC*, param2 : Void*, param3 : LPDDENUMMODESCALLBACK) : HRESULT
-    @lpVtbl.value.enum_display_modes.unsafe_as(Proc(UInt32, DDSURFACEDESC*, Void*, LPDDENUMMODESCALLBACK, HRESULT)).call(param0, param1, param2, param3)
+  def enum_display_modes(this : IDirectDraw*, param0 : UInt32, param1 : DDSURFACEDESC*, param2 : Void*, param3 : LPDDENUMMODESCALLBACK) : HRESULT
+    @lpVtbl.value.enum_display_modes.call(this, param0, param1, param2, param3)
   end
-  def enum_surfaces(param0 : UInt32, param1 : DDSURFACEDESC*, param2 : Void*, param3 : LPDDENUMSURFACESCALLBACK) : HRESULT
-    @lpVtbl.value.enum_surfaces.unsafe_as(Proc(UInt32, DDSURFACEDESC*, Void*, LPDDENUMSURFACESCALLBACK, HRESULT)).call(param0, param1, param2, param3)
+  def enum_surfaces(this : IDirectDraw*, param0 : UInt32, param1 : DDSURFACEDESC*, param2 : Void*, param3 : LPDDENUMSURFACESCALLBACK) : HRESULT
+    @lpVtbl.value.enum_surfaces.call(this, param0, param1, param2, param3)
   end
-  def flip_to_gdi_surface : HRESULT
-    @lpVtbl.value.flip_to_gdi_surface.unsafe_as(Proc(HRESULT)).call
+  def flip_to_gdi_surface(this : IDirectDraw*) : HRESULT
+    @lpVtbl.value.flip_to_gdi_surface.call(this)
   end
-  def get_caps(param0 : DDCAPS_DX7*, param1 : DDCAPS_DX7*) : HRESULT
-    @lpVtbl.value.get_caps.unsafe_as(Proc(DDCAPS_DX7*, DDCAPS_DX7*, HRESULT)).call(param0, param1)
+  def get_caps(this : IDirectDraw*, param0 : DDCAPS_DX7*, param1 : DDCAPS_DX7*) : HRESULT
+    @lpVtbl.value.get_caps.call(this, param0, param1)
   end
-  def get_display_mode(param0 : DDSURFACEDESC*) : HRESULT
-    @lpVtbl.value.get_display_mode.unsafe_as(Proc(DDSURFACEDESC*, HRESULT)).call(param0)
+  def get_display_mode(this : IDirectDraw*, param0 : DDSURFACEDESC*) : HRESULT
+    @lpVtbl.value.get_display_mode.call(this, param0)
   end
-  def get_four_cc_codes(param0 : UInt32*, param1 : UInt32*) : HRESULT
-    @lpVtbl.value.get_four_cc_codes.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(param0, param1)
+  def get_four_cc_codes(this : IDirectDraw*, param0 : UInt32*, param1 : UInt32*) : HRESULT
+    @lpVtbl.value.get_four_cc_codes.call(this, param0, param1)
   end
-  def get_gdi_surface(param0 : IDirectDrawSurface*) : HRESULT
-    @lpVtbl.value.get_gdi_surface.unsafe_as(Proc(IDirectDrawSurface*, HRESULT)).call(param0)
+  def get_gdi_surface(this : IDirectDraw*, param0 : IDirectDrawSurface*) : HRESULT
+    @lpVtbl.value.get_gdi_surface.call(this, param0)
   end
-  def get_monitor_frequency(param0 : UInt32*) : HRESULT
-    @lpVtbl.value.get_monitor_frequency.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  def get_monitor_frequency(this : IDirectDraw*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_monitor_frequency.call(this, param0)
   end
-  def get_scan_line(param0 : UInt32*) : HRESULT
-    @lpVtbl.value.get_scan_line.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  def get_scan_line(this : IDirectDraw*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_scan_line.call(this, param0)
   end
-  def get_vertical_blank_status(param0 : Int32*) : HRESULT
-    @lpVtbl.value.get_vertical_blank_status.unsafe_as(Proc(Int32*, HRESULT)).call(param0)
+  def get_vertical_blank_status(this : IDirectDraw*, param0 : Int32*) : HRESULT
+    @lpVtbl.value.get_vertical_blank_status.call(this, param0)
   end
-  def initialize(param0 : Guid*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(Guid*, HRESULT)).call(param0)
+  def initialize(this : IDirectDraw*, param0 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0)
   end
-  def restore_display_mode : HRESULT
-    @lpVtbl.value.restore_display_mode.unsafe_as(Proc(HRESULT)).call
+  def restore_display_mode(this : IDirectDraw*) : HRESULT
+    @lpVtbl.value.restore_display_mode.call(this)
   end
-  def set_cooperative_level(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
-    @lpVtbl.value.set_cooperative_level.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  def set_cooperative_level(this : IDirectDraw*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.call(this, param0, param1)
   end
-  def set_display_mode(param0 : UInt32, param1 : UInt32, param2 : UInt32) : HRESULT
-    @lpVtbl.value.set_display_mode.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(param0, param1, param2)
+  def set_display_mode(this : IDirectDraw*, param0 : UInt32, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.set_display_mode.call(this, param0, param1, param2)
   end
-  def wait_for_vertical_blank(param0 : UInt32, param1 : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.wait_for_vertical_blank.unsafe_as(Proc(UInt32, LibC::HANDLE, HRESULT)).call(param0, param1)
+  def wait_for_vertical_blank(this : IDirectDraw*, param0 : UInt32, param1 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.wait_for_vertical_blank.call(this, param0, param1)
   end
 end
 struct LibWin32::IDirectDraw2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectDraw2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectDraw2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectDraw2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def compact : HRESULT
-    @lpVtbl.value.compact.unsafe_as(Proc(HRESULT)).call
+  def compact(this : IDirectDraw2*) : HRESULT
+    @lpVtbl.value.compact.call(this)
   end
-  def create_clipper(param0 : UInt32, param1 : IDirectDrawClipper*, param2 : IUnknown) : HRESULT
-    @lpVtbl.value.create_clipper.unsafe_as(Proc(UInt32, IDirectDrawClipper*, IUnknown, HRESULT)).call(param0, param1, param2)
+  def create_clipper(this : IDirectDraw2*, param0 : UInt32, param1 : IDirectDrawClipper*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_clipper.call(this, param0, param1, param2)
   end
-  def create_palette(param0 : UInt32, param1 : PALETTEENTRY*, param2 : IDirectDrawPalette*, param3 : IUnknown) : HRESULT
-    @lpVtbl.value.create_palette.unsafe_as(Proc(UInt32, PALETTEENTRY*, IDirectDrawPalette*, IUnknown, HRESULT)).call(param0, param1, param2, param3)
+  def create_palette(this : IDirectDraw2*, param0 : UInt32, param1 : PALETTEENTRY*, param2 : IDirectDrawPalette*, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_palette.call(this, param0, param1, param2, param3)
   end
-  def create_surface(param0 : DDSURFACEDESC*, param1 : IDirectDrawSurface*, param2 : IUnknown) : HRESULT
-    @lpVtbl.value.create_surface.unsafe_as(Proc(DDSURFACEDESC*, IDirectDrawSurface*, IUnknown, HRESULT)).call(param0, param1, param2)
+  def create_surface(this : IDirectDraw2*, param0 : DDSURFACEDESC*, param1 : IDirectDrawSurface*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_surface.call(this, param0, param1, param2)
   end
-  def duplicate_surface(param0 : IDirectDrawSurface, param1 : IDirectDrawSurface*) : HRESULT
-    @lpVtbl.value.duplicate_surface.unsafe_as(Proc(IDirectDrawSurface, IDirectDrawSurface*, HRESULT)).call(param0, param1)
+  def duplicate_surface(this : IDirectDraw2*, param0 : IDirectDrawSurface, param1 : IDirectDrawSurface*) : HRESULT
+    @lpVtbl.value.duplicate_surface.call(this, param0, param1)
   end
-  def enum_display_modes(param0 : UInt32, param1 : DDSURFACEDESC*, param2 : Void*, param3 : LPDDENUMMODESCALLBACK) : HRESULT
-    @lpVtbl.value.enum_display_modes.unsafe_as(Proc(UInt32, DDSURFACEDESC*, Void*, LPDDENUMMODESCALLBACK, HRESULT)).call(param0, param1, param2, param3)
+  def enum_display_modes(this : IDirectDraw2*, param0 : UInt32, param1 : DDSURFACEDESC*, param2 : Void*, param3 : LPDDENUMMODESCALLBACK) : HRESULT
+    @lpVtbl.value.enum_display_modes.call(this, param0, param1, param2, param3)
   end
-  def enum_surfaces(param0 : UInt32, param1 : DDSURFACEDESC*, param2 : Void*, param3 : LPDDENUMSURFACESCALLBACK) : HRESULT
-    @lpVtbl.value.enum_surfaces.unsafe_as(Proc(UInt32, DDSURFACEDESC*, Void*, LPDDENUMSURFACESCALLBACK, HRESULT)).call(param0, param1, param2, param3)
+  def enum_surfaces(this : IDirectDraw2*, param0 : UInt32, param1 : DDSURFACEDESC*, param2 : Void*, param3 : LPDDENUMSURFACESCALLBACK) : HRESULT
+    @lpVtbl.value.enum_surfaces.call(this, param0, param1, param2, param3)
   end
-  def flip_to_gdi_surface : HRESULT
-    @lpVtbl.value.flip_to_gdi_surface.unsafe_as(Proc(HRESULT)).call
+  def flip_to_gdi_surface(this : IDirectDraw2*) : HRESULT
+    @lpVtbl.value.flip_to_gdi_surface.call(this)
   end
-  def get_caps(param0 : DDCAPS_DX7*, param1 : DDCAPS_DX7*) : HRESULT
-    @lpVtbl.value.get_caps.unsafe_as(Proc(DDCAPS_DX7*, DDCAPS_DX7*, HRESULT)).call(param0, param1)
+  def get_caps(this : IDirectDraw2*, param0 : DDCAPS_DX7*, param1 : DDCAPS_DX7*) : HRESULT
+    @lpVtbl.value.get_caps.call(this, param0, param1)
   end
-  def get_display_mode(param0 : DDSURFACEDESC*) : HRESULT
-    @lpVtbl.value.get_display_mode.unsafe_as(Proc(DDSURFACEDESC*, HRESULT)).call(param0)
+  def get_display_mode(this : IDirectDraw2*, param0 : DDSURFACEDESC*) : HRESULT
+    @lpVtbl.value.get_display_mode.call(this, param0)
   end
-  def get_four_cc_codes(param0 : UInt32*, param1 : UInt32*) : HRESULT
-    @lpVtbl.value.get_four_cc_codes.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(param0, param1)
+  def get_four_cc_codes(this : IDirectDraw2*, param0 : UInt32*, param1 : UInt32*) : HRESULT
+    @lpVtbl.value.get_four_cc_codes.call(this, param0, param1)
   end
-  def get_gdi_surface(param0 : IDirectDrawSurface*) : HRESULT
-    @lpVtbl.value.get_gdi_surface.unsafe_as(Proc(IDirectDrawSurface*, HRESULT)).call(param0)
+  def get_gdi_surface(this : IDirectDraw2*, param0 : IDirectDrawSurface*) : HRESULT
+    @lpVtbl.value.get_gdi_surface.call(this, param0)
   end
-  def get_monitor_frequency(param0 : UInt32*) : HRESULT
-    @lpVtbl.value.get_monitor_frequency.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  def get_monitor_frequency(this : IDirectDraw2*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_monitor_frequency.call(this, param0)
   end
-  def get_scan_line(param0 : UInt32*) : HRESULT
-    @lpVtbl.value.get_scan_line.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  def get_scan_line(this : IDirectDraw2*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_scan_line.call(this, param0)
   end
-  def get_vertical_blank_status(param0 : Int32*) : HRESULT
-    @lpVtbl.value.get_vertical_blank_status.unsafe_as(Proc(Int32*, HRESULT)).call(param0)
+  def get_vertical_blank_status(this : IDirectDraw2*, param0 : Int32*) : HRESULT
+    @lpVtbl.value.get_vertical_blank_status.call(this, param0)
   end
-  def initialize(param0 : Guid*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(Guid*, HRESULT)).call(param0)
+  def initialize(this : IDirectDraw2*, param0 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0)
   end
-  def restore_display_mode : HRESULT
-    @lpVtbl.value.restore_display_mode.unsafe_as(Proc(HRESULT)).call
+  def restore_display_mode(this : IDirectDraw2*) : HRESULT
+    @lpVtbl.value.restore_display_mode.call(this)
   end
-  def set_cooperative_level(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
-    @lpVtbl.value.set_cooperative_level.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  def set_cooperative_level(this : IDirectDraw2*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.call(this, param0, param1)
   end
-  def set_display_mode(param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : UInt32, param4 : UInt32) : HRESULT
-    @lpVtbl.value.set_display_mode.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, UInt32, HRESULT)).call(param0, param1, param2, param3, param4)
+  def set_display_mode(this : IDirectDraw2*, param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : UInt32, param4 : UInt32) : HRESULT
+    @lpVtbl.value.set_display_mode.call(this, param0, param1, param2, param3, param4)
   end
-  def wait_for_vertical_blank(param0 : UInt32, param1 : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.wait_for_vertical_blank.unsafe_as(Proc(UInt32, LibC::HANDLE, HRESULT)).call(param0, param1)
+  def wait_for_vertical_blank(this : IDirectDraw2*, param0 : UInt32, param1 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.wait_for_vertical_blank.call(this, param0, param1)
   end
-  def get_available_vid_mem(param0 : DDSCAPS*, param1 : UInt32*, param2 : UInt32*) : HRESULT
-    @lpVtbl.value.get_available_vid_mem.unsafe_as(Proc(DDSCAPS*, UInt32*, UInt32*, HRESULT)).call(param0, param1, param2)
+  def get_available_vid_mem(this : IDirectDraw2*, param0 : DDSCAPS*, param1 : UInt32*, param2 : UInt32*) : HRESULT
+    @lpVtbl.value.get_available_vid_mem.call(this, param0, param1, param2)
   end
 end
 struct LibWin32::IDirectDraw4
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectDraw4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectDraw4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectDraw4*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def compact : HRESULT
-    @lpVtbl.value.compact.unsafe_as(Proc(HRESULT)).call
+  def compact(this : IDirectDraw4*) : HRESULT
+    @lpVtbl.value.compact.call(this)
   end
-  def create_clipper(param0 : UInt32, param1 : IDirectDrawClipper*, param2 : IUnknown) : HRESULT
-    @lpVtbl.value.create_clipper.unsafe_as(Proc(UInt32, IDirectDrawClipper*, IUnknown, HRESULT)).call(param0, param1, param2)
+  def create_clipper(this : IDirectDraw4*, param0 : UInt32, param1 : IDirectDrawClipper*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_clipper.call(this, param0, param1, param2)
   end
-  def create_palette(param0 : UInt32, param1 : PALETTEENTRY*, param2 : IDirectDrawPalette*, param3 : IUnknown) : HRESULT
-    @lpVtbl.value.create_palette.unsafe_as(Proc(UInt32, PALETTEENTRY*, IDirectDrawPalette*, IUnknown, HRESULT)).call(param0, param1, param2, param3)
+  def create_palette(this : IDirectDraw4*, param0 : UInt32, param1 : PALETTEENTRY*, param2 : IDirectDrawPalette*, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_palette.call(this, param0, param1, param2, param3)
   end
-  def create_surface(param0 : DDSURFACEDESC2*, param1 : IDirectDrawSurface4*, param2 : IUnknown) : HRESULT
-    @lpVtbl.value.create_surface.unsafe_as(Proc(DDSURFACEDESC2*, IDirectDrawSurface4*, IUnknown, HRESULT)).call(param0, param1, param2)
+  def create_surface(this : IDirectDraw4*, param0 : DDSURFACEDESC2*, param1 : IDirectDrawSurface4*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_surface.call(this, param0, param1, param2)
   end
-  def duplicate_surface(param0 : IDirectDrawSurface4, param1 : IDirectDrawSurface4*) : HRESULT
-    @lpVtbl.value.duplicate_surface.unsafe_as(Proc(IDirectDrawSurface4, IDirectDrawSurface4*, HRESULT)).call(param0, param1)
+  def duplicate_surface(this : IDirectDraw4*, param0 : IDirectDrawSurface4, param1 : IDirectDrawSurface4*) : HRESULT
+    @lpVtbl.value.duplicate_surface.call(this, param0, param1)
   end
-  def enum_display_modes(param0 : UInt32, param1 : DDSURFACEDESC2*, param2 : Void*, param3 : LPDDENUMMODESCALLBACK2) : HRESULT
-    @lpVtbl.value.enum_display_modes.unsafe_as(Proc(UInt32, DDSURFACEDESC2*, Void*, LPDDENUMMODESCALLBACK2, HRESULT)).call(param0, param1, param2, param3)
+  def enum_display_modes(this : IDirectDraw4*, param0 : UInt32, param1 : DDSURFACEDESC2*, param2 : Void*, param3 : LPDDENUMMODESCALLBACK2) : HRESULT
+    @lpVtbl.value.enum_display_modes.call(this, param0, param1, param2, param3)
   end
-  def enum_surfaces(param0 : UInt32, param1 : DDSURFACEDESC2*, param2 : Void*, param3 : LPDDENUMSURFACESCALLBACK2) : HRESULT
-    @lpVtbl.value.enum_surfaces.unsafe_as(Proc(UInt32, DDSURFACEDESC2*, Void*, LPDDENUMSURFACESCALLBACK2, HRESULT)).call(param0, param1, param2, param3)
+  def enum_surfaces(this : IDirectDraw4*, param0 : UInt32, param1 : DDSURFACEDESC2*, param2 : Void*, param3 : LPDDENUMSURFACESCALLBACK2) : HRESULT
+    @lpVtbl.value.enum_surfaces.call(this, param0, param1, param2, param3)
   end
-  def flip_to_gdi_surface : HRESULT
-    @lpVtbl.value.flip_to_gdi_surface.unsafe_as(Proc(HRESULT)).call
+  def flip_to_gdi_surface(this : IDirectDraw4*) : HRESULT
+    @lpVtbl.value.flip_to_gdi_surface.call(this)
   end
-  def get_caps(param0 : DDCAPS_DX7*, param1 : DDCAPS_DX7*) : HRESULT
-    @lpVtbl.value.get_caps.unsafe_as(Proc(DDCAPS_DX7*, DDCAPS_DX7*, HRESULT)).call(param0, param1)
+  def get_caps(this : IDirectDraw4*, param0 : DDCAPS_DX7*, param1 : DDCAPS_DX7*) : HRESULT
+    @lpVtbl.value.get_caps.call(this, param0, param1)
   end
-  def get_display_mode(param0 : DDSURFACEDESC2*) : HRESULT
-    @lpVtbl.value.get_display_mode.unsafe_as(Proc(DDSURFACEDESC2*, HRESULT)).call(param0)
+  def get_display_mode(this : IDirectDraw4*, param0 : DDSURFACEDESC2*) : HRESULT
+    @lpVtbl.value.get_display_mode.call(this, param0)
   end
-  def get_four_cc_codes(param0 : UInt32*, param1 : UInt32*) : HRESULT
-    @lpVtbl.value.get_four_cc_codes.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(param0, param1)
+  def get_four_cc_codes(this : IDirectDraw4*, param0 : UInt32*, param1 : UInt32*) : HRESULT
+    @lpVtbl.value.get_four_cc_codes.call(this, param0, param1)
   end
-  def get_gdi_surface(param0 : IDirectDrawSurface4*) : HRESULT
-    @lpVtbl.value.get_gdi_surface.unsafe_as(Proc(IDirectDrawSurface4*, HRESULT)).call(param0)
+  def get_gdi_surface(this : IDirectDraw4*, param0 : IDirectDrawSurface4*) : HRESULT
+    @lpVtbl.value.get_gdi_surface.call(this, param0)
   end
-  def get_monitor_frequency(param0 : UInt32*) : HRESULT
-    @lpVtbl.value.get_monitor_frequency.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  def get_monitor_frequency(this : IDirectDraw4*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_monitor_frequency.call(this, param0)
   end
-  def get_scan_line(param0 : UInt32*) : HRESULT
-    @lpVtbl.value.get_scan_line.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  def get_scan_line(this : IDirectDraw4*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_scan_line.call(this, param0)
   end
-  def get_vertical_blank_status(param0 : Int32*) : HRESULT
-    @lpVtbl.value.get_vertical_blank_status.unsafe_as(Proc(Int32*, HRESULT)).call(param0)
+  def get_vertical_blank_status(this : IDirectDraw4*, param0 : Int32*) : HRESULT
+    @lpVtbl.value.get_vertical_blank_status.call(this, param0)
   end
-  def initialize(param0 : Guid*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(Guid*, HRESULT)).call(param0)
+  def initialize(this : IDirectDraw4*, param0 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0)
   end
-  def restore_display_mode : HRESULT
-    @lpVtbl.value.restore_display_mode.unsafe_as(Proc(HRESULT)).call
+  def restore_display_mode(this : IDirectDraw4*) : HRESULT
+    @lpVtbl.value.restore_display_mode.call(this)
   end
-  def set_cooperative_level(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
-    @lpVtbl.value.set_cooperative_level.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  def set_cooperative_level(this : IDirectDraw4*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.call(this, param0, param1)
   end
-  def set_display_mode(param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : UInt32, param4 : UInt32) : HRESULT
-    @lpVtbl.value.set_display_mode.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, UInt32, HRESULT)).call(param0, param1, param2, param3, param4)
+  def set_display_mode(this : IDirectDraw4*, param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : UInt32, param4 : UInt32) : HRESULT
+    @lpVtbl.value.set_display_mode.call(this, param0, param1, param2, param3, param4)
   end
-  def wait_for_vertical_blank(param0 : UInt32, param1 : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.wait_for_vertical_blank.unsafe_as(Proc(UInt32, LibC::HANDLE, HRESULT)).call(param0, param1)
+  def wait_for_vertical_blank(this : IDirectDraw4*, param0 : UInt32, param1 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.wait_for_vertical_blank.call(this, param0, param1)
   end
-  def get_available_vid_mem(param0 : DDSCAPS2*, param1 : UInt32*, param2 : UInt32*) : HRESULT
-    @lpVtbl.value.get_available_vid_mem.unsafe_as(Proc(DDSCAPS2*, UInt32*, UInt32*, HRESULT)).call(param0, param1, param2)
+  def get_available_vid_mem(this : IDirectDraw4*, param0 : DDSCAPS2*, param1 : UInt32*, param2 : UInt32*) : HRESULT
+    @lpVtbl.value.get_available_vid_mem.call(this, param0, param1, param2)
   end
-  def get_surface_from_dc(param0 : HDC, param1 : IDirectDrawSurface4*) : HRESULT
-    @lpVtbl.value.get_surface_from_dc.unsafe_as(Proc(HDC, IDirectDrawSurface4*, HRESULT)).call(param0, param1)
+  def get_surface_from_dc(this : IDirectDraw4*, param0 : HDC, param1 : IDirectDrawSurface4*) : HRESULT
+    @lpVtbl.value.get_surface_from_dc.call(this, param0, param1)
   end
-  def restore_all_surfaces : HRESULT
-    @lpVtbl.value.restore_all_surfaces.unsafe_as(Proc(HRESULT)).call
+  def restore_all_surfaces(this : IDirectDraw4*) : HRESULT
+    @lpVtbl.value.restore_all_surfaces.call(this)
   end
-  def test_cooperative_level : HRESULT
-    @lpVtbl.value.test_cooperative_level.unsafe_as(Proc(HRESULT)).call
+  def test_cooperative_level(this : IDirectDraw4*) : HRESULT
+    @lpVtbl.value.test_cooperative_level.call(this)
   end
-  def get_device_identifier(param0 : DDDEVICEIDENTIFIER*, param1 : UInt32) : HRESULT
-    @lpVtbl.value.get_device_identifier.unsafe_as(Proc(DDDEVICEIDENTIFIER*, UInt32, HRESULT)).call(param0, param1)
+  def get_device_identifier(this : IDirectDraw4*, param0 : DDDEVICEIDENTIFIER*, param1 : UInt32) : HRESULT
+    @lpVtbl.value.get_device_identifier.call(this, param0, param1)
   end
 end
 struct LibWin32::IDirectDraw7
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectDraw7*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectDraw7*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectDraw7*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def compact : HRESULT
-    @lpVtbl.value.compact.unsafe_as(Proc(HRESULT)).call
+  def compact(this : IDirectDraw7*) : HRESULT
+    @lpVtbl.value.compact.call(this)
   end
-  def create_clipper(param0 : UInt32, param1 : IDirectDrawClipper*, param2 : IUnknown) : HRESULT
-    @lpVtbl.value.create_clipper.unsafe_as(Proc(UInt32, IDirectDrawClipper*, IUnknown, HRESULT)).call(param0, param1, param2)
+  def create_clipper(this : IDirectDraw7*, param0 : UInt32, param1 : IDirectDrawClipper*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_clipper.call(this, param0, param1, param2)
   end
-  def create_palette(param0 : UInt32, param1 : PALETTEENTRY*, param2 : IDirectDrawPalette*, param3 : IUnknown) : HRESULT
-    @lpVtbl.value.create_palette.unsafe_as(Proc(UInt32, PALETTEENTRY*, IDirectDrawPalette*, IUnknown, HRESULT)).call(param0, param1, param2, param3)
+  def create_palette(this : IDirectDraw7*, param0 : UInt32, param1 : PALETTEENTRY*, param2 : IDirectDrawPalette*, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_palette.call(this, param0, param1, param2, param3)
   end
-  def create_surface(param0 : DDSURFACEDESC2*, param1 : IDirectDrawSurface7*, param2 : IUnknown) : HRESULT
-    @lpVtbl.value.create_surface.unsafe_as(Proc(DDSURFACEDESC2*, IDirectDrawSurface7*, IUnknown, HRESULT)).call(param0, param1, param2)
+  def create_surface(this : IDirectDraw7*, param0 : DDSURFACEDESC2*, param1 : IDirectDrawSurface7*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_surface.call(this, param0, param1, param2)
   end
-  def duplicate_surface(param0 : IDirectDrawSurface7, param1 : IDirectDrawSurface7*) : HRESULT
-    @lpVtbl.value.duplicate_surface.unsafe_as(Proc(IDirectDrawSurface7, IDirectDrawSurface7*, HRESULT)).call(param0, param1)
+  def duplicate_surface(this : IDirectDraw7*, param0 : IDirectDrawSurface7, param1 : IDirectDrawSurface7*) : HRESULT
+    @lpVtbl.value.duplicate_surface.call(this, param0, param1)
   end
-  def enum_display_modes(param0 : UInt32, param1 : DDSURFACEDESC2*, param2 : Void*, param3 : LPDDENUMMODESCALLBACK2) : HRESULT
-    @lpVtbl.value.enum_display_modes.unsafe_as(Proc(UInt32, DDSURFACEDESC2*, Void*, LPDDENUMMODESCALLBACK2, HRESULT)).call(param0, param1, param2, param3)
+  def enum_display_modes(this : IDirectDraw7*, param0 : UInt32, param1 : DDSURFACEDESC2*, param2 : Void*, param3 : LPDDENUMMODESCALLBACK2) : HRESULT
+    @lpVtbl.value.enum_display_modes.call(this, param0, param1, param2, param3)
   end
-  def enum_surfaces(param0 : UInt32, param1 : DDSURFACEDESC2*, param2 : Void*, param3 : LPDDENUMSURFACESCALLBACK7) : HRESULT
-    @lpVtbl.value.enum_surfaces.unsafe_as(Proc(UInt32, DDSURFACEDESC2*, Void*, LPDDENUMSURFACESCALLBACK7, HRESULT)).call(param0, param1, param2, param3)
+  def enum_surfaces(this : IDirectDraw7*, param0 : UInt32, param1 : DDSURFACEDESC2*, param2 : Void*, param3 : LPDDENUMSURFACESCALLBACK7) : HRESULT
+    @lpVtbl.value.enum_surfaces.call(this, param0, param1, param2, param3)
   end
-  def flip_to_gdi_surface : HRESULT
-    @lpVtbl.value.flip_to_gdi_surface.unsafe_as(Proc(HRESULT)).call
+  def flip_to_gdi_surface(this : IDirectDraw7*) : HRESULT
+    @lpVtbl.value.flip_to_gdi_surface.call(this)
   end
-  def get_caps(param0 : DDCAPS_DX7*, param1 : DDCAPS_DX7*) : HRESULT
-    @lpVtbl.value.get_caps.unsafe_as(Proc(DDCAPS_DX7*, DDCAPS_DX7*, HRESULT)).call(param0, param1)
+  def get_caps(this : IDirectDraw7*, param0 : DDCAPS_DX7*, param1 : DDCAPS_DX7*) : HRESULT
+    @lpVtbl.value.get_caps.call(this, param0, param1)
   end
-  def get_display_mode(param0 : DDSURFACEDESC2*) : HRESULT
-    @lpVtbl.value.get_display_mode.unsafe_as(Proc(DDSURFACEDESC2*, HRESULT)).call(param0)
+  def get_display_mode(this : IDirectDraw7*, param0 : DDSURFACEDESC2*) : HRESULT
+    @lpVtbl.value.get_display_mode.call(this, param0)
   end
-  def get_four_cc_codes(param0 : UInt32*, param1 : UInt32*) : HRESULT
-    @lpVtbl.value.get_four_cc_codes.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(param0, param1)
+  def get_four_cc_codes(this : IDirectDraw7*, param0 : UInt32*, param1 : UInt32*) : HRESULT
+    @lpVtbl.value.get_four_cc_codes.call(this, param0, param1)
   end
-  def get_gdi_surface(param0 : IDirectDrawSurface7*) : HRESULT
-    @lpVtbl.value.get_gdi_surface.unsafe_as(Proc(IDirectDrawSurface7*, HRESULT)).call(param0)
+  def get_gdi_surface(this : IDirectDraw7*, param0 : IDirectDrawSurface7*) : HRESULT
+    @lpVtbl.value.get_gdi_surface.call(this, param0)
   end
-  def get_monitor_frequency(param0 : UInt32*) : HRESULT
-    @lpVtbl.value.get_monitor_frequency.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  def get_monitor_frequency(this : IDirectDraw7*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_monitor_frequency.call(this, param0)
   end
-  def get_scan_line(param0 : UInt32*) : HRESULT
-    @lpVtbl.value.get_scan_line.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  def get_scan_line(this : IDirectDraw7*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_scan_line.call(this, param0)
   end
-  def get_vertical_blank_status(param0 : Int32*) : HRESULT
-    @lpVtbl.value.get_vertical_blank_status.unsafe_as(Proc(Int32*, HRESULT)).call(param0)
+  def get_vertical_blank_status(this : IDirectDraw7*, param0 : Int32*) : HRESULT
+    @lpVtbl.value.get_vertical_blank_status.call(this, param0)
   end
-  def initialize(param0 : Guid*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(Guid*, HRESULT)).call(param0)
+  def initialize(this : IDirectDraw7*, param0 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0)
   end
-  def restore_display_mode : HRESULT
-    @lpVtbl.value.restore_display_mode.unsafe_as(Proc(HRESULT)).call
+  def restore_display_mode(this : IDirectDraw7*) : HRESULT
+    @lpVtbl.value.restore_display_mode.call(this)
   end
-  def set_cooperative_level(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
-    @lpVtbl.value.set_cooperative_level.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  def set_cooperative_level(this : IDirectDraw7*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.call(this, param0, param1)
   end
-  def set_display_mode(param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : UInt32, param4 : UInt32) : HRESULT
-    @lpVtbl.value.set_display_mode.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, UInt32, HRESULT)).call(param0, param1, param2, param3, param4)
+  def set_display_mode(this : IDirectDraw7*, param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : UInt32, param4 : UInt32) : HRESULT
+    @lpVtbl.value.set_display_mode.call(this, param0, param1, param2, param3, param4)
   end
-  def wait_for_vertical_blank(param0 : UInt32, param1 : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.wait_for_vertical_blank.unsafe_as(Proc(UInt32, LibC::HANDLE, HRESULT)).call(param0, param1)
+  def wait_for_vertical_blank(this : IDirectDraw7*, param0 : UInt32, param1 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.wait_for_vertical_blank.call(this, param0, param1)
   end
-  def get_available_vid_mem(param0 : DDSCAPS2*, param1 : UInt32*, param2 : UInt32*) : HRESULT
-    @lpVtbl.value.get_available_vid_mem.unsafe_as(Proc(DDSCAPS2*, UInt32*, UInt32*, HRESULT)).call(param0, param1, param2)
+  def get_available_vid_mem(this : IDirectDraw7*, param0 : DDSCAPS2*, param1 : UInt32*, param2 : UInt32*) : HRESULT
+    @lpVtbl.value.get_available_vid_mem.call(this, param0, param1, param2)
   end
-  def get_surface_from_dc(param0 : HDC, param1 : IDirectDrawSurface7*) : HRESULT
-    @lpVtbl.value.get_surface_from_dc.unsafe_as(Proc(HDC, IDirectDrawSurface7*, HRESULT)).call(param0, param1)
+  def get_surface_from_dc(this : IDirectDraw7*, param0 : HDC, param1 : IDirectDrawSurface7*) : HRESULT
+    @lpVtbl.value.get_surface_from_dc.call(this, param0, param1)
   end
-  def restore_all_surfaces : HRESULT
-    @lpVtbl.value.restore_all_surfaces.unsafe_as(Proc(HRESULT)).call
+  def restore_all_surfaces(this : IDirectDraw7*) : HRESULT
+    @lpVtbl.value.restore_all_surfaces.call(this)
   end
-  def test_cooperative_level : HRESULT
-    @lpVtbl.value.test_cooperative_level.unsafe_as(Proc(HRESULT)).call
+  def test_cooperative_level(this : IDirectDraw7*) : HRESULT
+    @lpVtbl.value.test_cooperative_level.call(this)
   end
-  def get_device_identifier(param0 : DDDEVICEIDENTIFIER2*, param1 : UInt32) : HRESULT
-    @lpVtbl.value.get_device_identifier.unsafe_as(Proc(DDDEVICEIDENTIFIER2*, UInt32, HRESULT)).call(param0, param1)
+  def get_device_identifier(this : IDirectDraw7*, param0 : DDDEVICEIDENTIFIER2*, param1 : UInt32) : HRESULT
+    @lpVtbl.value.get_device_identifier.call(this, param0, param1)
   end
-  def start_mode_test(param0 : SIZE*, param1 : UInt32, param2 : UInt32) : HRESULT
-    @lpVtbl.value.start_mode_test.unsafe_as(Proc(SIZE*, UInt32, UInt32, HRESULT)).call(param0, param1, param2)
+  def start_mode_test(this : IDirectDraw7*, param0 : SIZE*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.start_mode_test.call(this, param0, param1, param2)
   end
-  def evaluate_mode(param0 : UInt32, param1 : UInt32*) : HRESULT
-    @lpVtbl.value.evaluate_mode.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(param0, param1)
+  def evaluate_mode(this : IDirectDraw7*, param0 : UInt32, param1 : UInt32*) : HRESULT
+    @lpVtbl.value.evaluate_mode.call(this, param0, param1)
   end
 end
 struct LibWin32::IDirectDrawPalette
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectDrawPalette*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectDrawPalette*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectDrawPalette*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_caps(param0 : UInt32*) : HRESULT
-    @lpVtbl.value.get_caps.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  def get_caps(this : IDirectDrawPalette*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_caps.call(this, param0)
   end
-  def get_entries(param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : PALETTEENTRY*) : HRESULT
-    @lpVtbl.value.get_entries.unsafe_as(Proc(UInt32, UInt32, UInt32, PALETTEENTRY*, HRESULT)).call(param0, param1, param2, param3)
+  def get_entries(this : IDirectDrawPalette*, param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : PALETTEENTRY*) : HRESULT
+    @lpVtbl.value.get_entries.call(this, param0, param1, param2, param3)
   end
-  def initialize(param0 : IDirectDraw, param1 : UInt32, param2 : PALETTEENTRY*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(IDirectDraw, UInt32, PALETTEENTRY*, HRESULT)).call(param0, param1, param2)
+  def initialize(this : IDirectDrawPalette*, param0 : IDirectDraw, param1 : UInt32, param2 : PALETTEENTRY*) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1, param2)
   end
-  def set_entries(param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : PALETTEENTRY*) : HRESULT
-    @lpVtbl.value.set_entries.unsafe_as(Proc(UInt32, UInt32, UInt32, PALETTEENTRY*, HRESULT)).call(param0, param1, param2, param3)
+  def set_entries(this : IDirectDrawPalette*, param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : PALETTEENTRY*) : HRESULT
+    @lpVtbl.value.set_entries.call(this, param0, param1, param2, param3)
   end
 end
 struct LibWin32::IDirectDrawClipper
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectDrawClipper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectDrawClipper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectDrawClipper*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_clip_list(param0 : RECT*, param1 : RGNDATA*, param2 : UInt32*) : HRESULT
-    @lpVtbl.value.get_clip_list.unsafe_as(Proc(RECT*, RGNDATA*, UInt32*, HRESULT)).call(param0, param1, param2)
+  def get_clip_list(this : IDirectDrawClipper*, param0 : RECT*, param1 : RGNDATA*, param2 : UInt32*) : HRESULT
+    @lpVtbl.value.get_clip_list.call(this, param0, param1, param2)
   end
-  def get_h_wnd(param0 : HANDLE*) : HRESULT
-    @lpVtbl.value.get_h_wnd.unsafe_as(Proc(HANDLE*, HRESULT)).call(param0)
+  def get_h_wnd(this : IDirectDrawClipper*, param0 : HANDLE*) : HRESULT
+    @lpVtbl.value.get_h_wnd.call(this, param0)
   end
-  def initialize(param0 : IDirectDraw, param1 : UInt32) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(IDirectDraw, UInt32, HRESULT)).call(param0, param1)
+  def initialize(this : IDirectDrawClipper*, param0 : IDirectDraw, param1 : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1)
   end
-  def is_clip_list_changed(param0 : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_clip_list_changed.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(param0)
+  def is_clip_list_changed(this : IDirectDrawClipper*, param0 : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_clip_list_changed.call(this, param0)
   end
-  def set_clip_list(param0 : RGNDATA*, param1 : UInt32) : HRESULT
-    @lpVtbl.value.set_clip_list.unsafe_as(Proc(RGNDATA*, UInt32, HRESULT)).call(param0, param1)
+  def set_clip_list(this : IDirectDrawClipper*, param0 : RGNDATA*, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_clip_list.call(this, param0, param1)
   end
-  def set_h_wnd(param0 : UInt32, param1 : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.set_h_wnd.unsafe_as(Proc(UInt32, LibC::HANDLE, HRESULT)).call(param0, param1)
+  def set_h_wnd(this : IDirectDrawClipper*, param0 : UInt32, param1 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_h_wnd.call(this, param0, param1)
   end
 end
 struct LibWin32::IDirectDrawSurface
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectDrawSurface*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectDrawSurface*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectDrawSurface*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add_attached_surface(param0 : IDirectDrawSurface) : HRESULT
-    @lpVtbl.value.add_attached_surface.unsafe_as(Proc(IDirectDrawSurface, HRESULT)).call(param0)
+  def add_attached_surface(this : IDirectDrawSurface*, param0 : IDirectDrawSurface) : HRESULT
+    @lpVtbl.value.add_attached_surface.call(this, param0)
   end
-  def add_overlay_dirty_rect(param0 : RECT*) : HRESULT
-    @lpVtbl.value.add_overlay_dirty_rect.unsafe_as(Proc(RECT*, HRESULT)).call(param0)
+  def add_overlay_dirty_rect(this : IDirectDrawSurface*, param0 : RECT*) : HRESULT
+    @lpVtbl.value.add_overlay_dirty_rect.call(this, param0)
   end
-  def blt(param0 : RECT*, param1 : IDirectDrawSurface, param2 : RECT*, param3 : UInt32, param4 : DDBLTFX*) : HRESULT
-    @lpVtbl.value.blt.unsafe_as(Proc(RECT*, IDirectDrawSurface, RECT*, UInt32, DDBLTFX*, HRESULT)).call(param0, param1, param2, param3, param4)
+  def blt(this : IDirectDrawSurface*, param0 : RECT*, param1 : IDirectDrawSurface, param2 : RECT*, param3 : UInt32, param4 : DDBLTFX*) : HRESULT
+    @lpVtbl.value.blt.call(this, param0, param1, param2, param3, param4)
   end
-  def blt_batch(param0 : DDBLTBATCH*, param1 : UInt32, param2 : UInt32) : HRESULT
-    @lpVtbl.value.blt_batch.unsafe_as(Proc(DDBLTBATCH*, UInt32, UInt32, HRESULT)).call(param0, param1, param2)
+  def blt_batch(this : IDirectDrawSurface*, param0 : DDBLTBATCH*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.blt_batch.call(this, param0, param1, param2)
   end
-  def blt_fast(param0 : UInt32, param1 : UInt32, param2 : IDirectDrawSurface, param3 : RECT*, param4 : UInt32) : HRESULT
-    @lpVtbl.value.blt_fast.unsafe_as(Proc(UInt32, UInt32, IDirectDrawSurface, RECT*, UInt32, HRESULT)).call(param0, param1, param2, param3, param4)
+  def blt_fast(this : IDirectDrawSurface*, param0 : UInt32, param1 : UInt32, param2 : IDirectDrawSurface, param3 : RECT*, param4 : UInt32) : HRESULT
+    @lpVtbl.value.blt_fast.call(this, param0, param1, param2, param3, param4)
   end
-  def delete_attached_surface(param0 : UInt32, param1 : IDirectDrawSurface) : HRESULT
-    @lpVtbl.value.delete_attached_surface.unsafe_as(Proc(UInt32, IDirectDrawSurface, HRESULT)).call(param0, param1)
+  def delete_attached_surface(this : IDirectDrawSurface*, param0 : UInt32, param1 : IDirectDrawSurface) : HRESULT
+    @lpVtbl.value.delete_attached_surface.call(this, param0, param1)
   end
-  def enum_attached_surfaces(param0 : Void*, param1 : LPDDENUMSURFACESCALLBACK) : HRESULT
-    @lpVtbl.value.enum_attached_surfaces.unsafe_as(Proc(Void*, LPDDENUMSURFACESCALLBACK, HRESULT)).call(param0, param1)
+  def enum_attached_surfaces(this : IDirectDrawSurface*, param0 : Void*, param1 : LPDDENUMSURFACESCALLBACK) : HRESULT
+    @lpVtbl.value.enum_attached_surfaces.call(this, param0, param1)
   end
-  def enum_overlay_z_orders(param0 : UInt32, param1 : Void*, param2 : LPDDENUMSURFACESCALLBACK) : HRESULT
-    @lpVtbl.value.enum_overlay_z_orders.unsafe_as(Proc(UInt32, Void*, LPDDENUMSURFACESCALLBACK, HRESULT)).call(param0, param1, param2)
+  def enum_overlay_z_orders(this : IDirectDrawSurface*, param0 : UInt32, param1 : Void*, param2 : LPDDENUMSURFACESCALLBACK) : HRESULT
+    @lpVtbl.value.enum_overlay_z_orders.call(this, param0, param1, param2)
   end
-  def flip(param0 : IDirectDrawSurface, param1 : UInt32) : HRESULT
-    @lpVtbl.value.flip.unsafe_as(Proc(IDirectDrawSurface, UInt32, HRESULT)).call(param0, param1)
+  def flip(this : IDirectDrawSurface*, param0 : IDirectDrawSurface, param1 : UInt32) : HRESULT
+    @lpVtbl.value.flip.call(this, param0, param1)
   end
-  def get_attached_surface(param0 : DDSCAPS*, param1 : IDirectDrawSurface*) : HRESULT
-    @lpVtbl.value.get_attached_surface.unsafe_as(Proc(DDSCAPS*, IDirectDrawSurface*, HRESULT)).call(param0, param1)
+  def get_attached_surface(this : IDirectDrawSurface*, param0 : DDSCAPS*, param1 : IDirectDrawSurface*) : HRESULT
+    @lpVtbl.value.get_attached_surface.call(this, param0, param1)
   end
-  def get_blt_status(param0 : UInt32) : HRESULT
-    @lpVtbl.value.get_blt_status.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def get_blt_status(this : IDirectDrawSurface*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.get_blt_status.call(this, param0)
   end
-  def get_caps(param0 : DDSCAPS*) : HRESULT
-    @lpVtbl.value.get_caps.unsafe_as(Proc(DDSCAPS*, HRESULT)).call(param0)
+  def get_caps(this : IDirectDrawSurface*, param0 : DDSCAPS*) : HRESULT
+    @lpVtbl.value.get_caps.call(this, param0)
   end
-  def get_clipper(param0 : IDirectDrawClipper*) : HRESULT
-    @lpVtbl.value.get_clipper.unsafe_as(Proc(IDirectDrawClipper*, HRESULT)).call(param0)
+  def get_clipper(this : IDirectDrawSurface*, param0 : IDirectDrawClipper*) : HRESULT
+    @lpVtbl.value.get_clipper.call(this, param0)
   end
-  def get_color_key(param0 : UInt32, param1 : DDCOLORKEY*) : HRESULT
-    @lpVtbl.value.get_color_key.unsafe_as(Proc(UInt32, DDCOLORKEY*, HRESULT)).call(param0, param1)
+  def get_color_key(this : IDirectDrawSurface*, param0 : UInt32, param1 : DDCOLORKEY*) : HRESULT
+    @lpVtbl.value.get_color_key.call(this, param0, param1)
   end
-  def get_dc(param0 : HDC*) : HRESULT
-    @lpVtbl.value.get_dc.unsafe_as(Proc(HDC*, HRESULT)).call(param0)
+  def get_dc(this : IDirectDrawSurface*, param0 : HDC*) : HRESULT
+    @lpVtbl.value.get_dc.call(this, param0)
   end
-  def get_flip_status(param0 : UInt32) : HRESULT
-    @lpVtbl.value.get_flip_status.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def get_flip_status(this : IDirectDrawSurface*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.get_flip_status.call(this, param0)
   end
-  def get_overlay_position(param0 : Int32*, param1 : Int32*) : HRESULT
-    @lpVtbl.value.get_overlay_position.unsafe_as(Proc(Int32*, Int32*, HRESULT)).call(param0, param1)
+  def get_overlay_position(this : IDirectDrawSurface*, param0 : Int32*, param1 : Int32*) : HRESULT
+    @lpVtbl.value.get_overlay_position.call(this, param0, param1)
   end
-  def get_palette(param0 : IDirectDrawPalette*) : HRESULT
-    @lpVtbl.value.get_palette.unsafe_as(Proc(IDirectDrawPalette*, HRESULT)).call(param0)
+  def get_palette(this : IDirectDrawSurface*, param0 : IDirectDrawPalette*) : HRESULT
+    @lpVtbl.value.get_palette.call(this, param0)
   end
-  def get_pixel_format(param0 : DDPIXELFORMAT*) : HRESULT
-    @lpVtbl.value.get_pixel_format.unsafe_as(Proc(DDPIXELFORMAT*, HRESULT)).call(param0)
+  def get_pixel_format(this : IDirectDrawSurface*, param0 : DDPIXELFORMAT*) : HRESULT
+    @lpVtbl.value.get_pixel_format.call(this, param0)
   end
-  def get_surface_desc(param0 : DDSURFACEDESC*) : HRESULT
-    @lpVtbl.value.get_surface_desc.unsafe_as(Proc(DDSURFACEDESC*, HRESULT)).call(param0)
+  def get_surface_desc(this : IDirectDrawSurface*, param0 : DDSURFACEDESC*) : HRESULT
+    @lpVtbl.value.get_surface_desc.call(this, param0)
   end
-  def initialize(param0 : IDirectDraw, param1 : DDSURFACEDESC*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(IDirectDraw, DDSURFACEDESC*, HRESULT)).call(param0, param1)
+  def initialize(this : IDirectDrawSurface*, param0 : IDirectDraw, param1 : DDSURFACEDESC*) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1)
   end
-  def is_lost : HRESULT
-    @lpVtbl.value.is_lost.unsafe_as(Proc(HRESULT)).call
+  def is_lost(this : IDirectDrawSurface*) : HRESULT
+    @lpVtbl.value.is_lost.call(this)
   end
-  def lock(param0 : RECT*, param1 : DDSURFACEDESC*, param2 : UInt32, param3 : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.lock.unsafe_as(Proc(RECT*, DDSURFACEDESC*, UInt32, LibC::HANDLE, HRESULT)).call(param0, param1, param2, param3)
+  def lock(this : IDirectDrawSurface*, param0 : RECT*, param1 : DDSURFACEDESC*, param2 : UInt32, param3 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.lock.call(this, param0, param1, param2, param3)
   end
-  def release_dc(param0 : HDC) : HRESULT
-    @lpVtbl.value.release_dc.unsafe_as(Proc(HDC, HRESULT)).call(param0)
+  def release_dc(this : IDirectDrawSurface*, param0 : HDC) : HRESULT
+    @lpVtbl.value.release_dc.call(this, param0)
   end
-  def restore : HRESULT
-    @lpVtbl.value.restore.unsafe_as(Proc(HRESULT)).call
+  def restore(this : IDirectDrawSurface*) : HRESULT
+    @lpVtbl.value.restore.call(this)
   end
-  def set_clipper(param0 : IDirectDrawClipper) : HRESULT
-    @lpVtbl.value.set_clipper.unsafe_as(Proc(IDirectDrawClipper, HRESULT)).call(param0)
+  def set_clipper(this : IDirectDrawSurface*, param0 : IDirectDrawClipper) : HRESULT
+    @lpVtbl.value.set_clipper.call(this, param0)
   end
-  def set_color_key(param0 : UInt32, param1 : DDCOLORKEY*) : HRESULT
-    @lpVtbl.value.set_color_key.unsafe_as(Proc(UInt32, DDCOLORKEY*, HRESULT)).call(param0, param1)
+  def set_color_key(this : IDirectDrawSurface*, param0 : UInt32, param1 : DDCOLORKEY*) : HRESULT
+    @lpVtbl.value.set_color_key.call(this, param0, param1)
   end
-  def set_overlay_position(param0 : Int32, param1 : Int32) : HRESULT
-    @lpVtbl.value.set_overlay_position.unsafe_as(Proc(Int32, Int32, HRESULT)).call(param0, param1)
+  def set_overlay_position(this : IDirectDrawSurface*, param0 : Int32, param1 : Int32) : HRESULT
+    @lpVtbl.value.set_overlay_position.call(this, param0, param1)
   end
-  def set_palette(param0 : IDirectDrawPalette) : HRESULT
-    @lpVtbl.value.set_palette.unsafe_as(Proc(IDirectDrawPalette, HRESULT)).call(param0)
+  def set_palette(this : IDirectDrawSurface*, param0 : IDirectDrawPalette) : HRESULT
+    @lpVtbl.value.set_palette.call(this, param0)
   end
-  def unlock(param0 : Void*) : HRESULT
-    @lpVtbl.value.unlock.unsafe_as(Proc(Void*, HRESULT)).call(param0)
+  def unlock(this : IDirectDrawSurface*, param0 : Void*) : HRESULT
+    @lpVtbl.value.unlock.call(this, param0)
   end
-  def update_overlay(param0 : RECT*, param1 : IDirectDrawSurface, param2 : RECT*, param3 : UInt32, param4 : DDOVERLAYFX*) : HRESULT
-    @lpVtbl.value.update_overlay.unsafe_as(Proc(RECT*, IDirectDrawSurface, RECT*, UInt32, DDOVERLAYFX*, HRESULT)).call(param0, param1, param2, param3, param4)
+  def update_overlay(this : IDirectDrawSurface*, param0 : RECT*, param1 : IDirectDrawSurface, param2 : RECT*, param3 : UInt32, param4 : DDOVERLAYFX*) : HRESULT
+    @lpVtbl.value.update_overlay.call(this, param0, param1, param2, param3, param4)
   end
-  def update_overlay_display(param0 : UInt32) : HRESULT
-    @lpVtbl.value.update_overlay_display.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def update_overlay_display(this : IDirectDrawSurface*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.update_overlay_display.call(this, param0)
   end
-  def update_overlay_z_order(param0 : UInt32, param1 : IDirectDrawSurface) : HRESULT
-    @lpVtbl.value.update_overlay_z_order.unsafe_as(Proc(UInt32, IDirectDrawSurface, HRESULT)).call(param0, param1)
+  def update_overlay_z_order(this : IDirectDrawSurface*, param0 : UInt32, param1 : IDirectDrawSurface) : HRESULT
+    @lpVtbl.value.update_overlay_z_order.call(this, param0, param1)
   end
 end
 struct LibWin32::IDirectDrawSurface2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectDrawSurface2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectDrawSurface2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectDrawSurface2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add_attached_surface(param0 : IDirectDrawSurface2) : HRESULT
-    @lpVtbl.value.add_attached_surface.unsafe_as(Proc(IDirectDrawSurface2, HRESULT)).call(param0)
+  def add_attached_surface(this : IDirectDrawSurface2*, param0 : IDirectDrawSurface2) : HRESULT
+    @lpVtbl.value.add_attached_surface.call(this, param0)
   end
-  def add_overlay_dirty_rect(param0 : RECT*) : HRESULT
-    @lpVtbl.value.add_overlay_dirty_rect.unsafe_as(Proc(RECT*, HRESULT)).call(param0)
+  def add_overlay_dirty_rect(this : IDirectDrawSurface2*, param0 : RECT*) : HRESULT
+    @lpVtbl.value.add_overlay_dirty_rect.call(this, param0)
   end
-  def blt(param0 : RECT*, param1 : IDirectDrawSurface2, param2 : RECT*, param3 : UInt32, param4 : DDBLTFX*) : HRESULT
-    @lpVtbl.value.blt.unsafe_as(Proc(RECT*, IDirectDrawSurface2, RECT*, UInt32, DDBLTFX*, HRESULT)).call(param0, param1, param2, param3, param4)
+  def blt(this : IDirectDrawSurface2*, param0 : RECT*, param1 : IDirectDrawSurface2, param2 : RECT*, param3 : UInt32, param4 : DDBLTFX*) : HRESULT
+    @lpVtbl.value.blt.call(this, param0, param1, param2, param3, param4)
   end
-  def blt_batch(param0 : DDBLTBATCH*, param1 : UInt32, param2 : UInt32) : HRESULT
-    @lpVtbl.value.blt_batch.unsafe_as(Proc(DDBLTBATCH*, UInt32, UInt32, HRESULT)).call(param0, param1, param2)
+  def blt_batch(this : IDirectDrawSurface2*, param0 : DDBLTBATCH*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.blt_batch.call(this, param0, param1, param2)
   end
-  def blt_fast(param0 : UInt32, param1 : UInt32, param2 : IDirectDrawSurface2, param3 : RECT*, param4 : UInt32) : HRESULT
-    @lpVtbl.value.blt_fast.unsafe_as(Proc(UInt32, UInt32, IDirectDrawSurface2, RECT*, UInt32, HRESULT)).call(param0, param1, param2, param3, param4)
+  def blt_fast(this : IDirectDrawSurface2*, param0 : UInt32, param1 : UInt32, param2 : IDirectDrawSurface2, param3 : RECT*, param4 : UInt32) : HRESULT
+    @lpVtbl.value.blt_fast.call(this, param0, param1, param2, param3, param4)
   end
-  def delete_attached_surface(param0 : UInt32, param1 : IDirectDrawSurface2) : HRESULT
-    @lpVtbl.value.delete_attached_surface.unsafe_as(Proc(UInt32, IDirectDrawSurface2, HRESULT)).call(param0, param1)
+  def delete_attached_surface(this : IDirectDrawSurface2*, param0 : UInt32, param1 : IDirectDrawSurface2) : HRESULT
+    @lpVtbl.value.delete_attached_surface.call(this, param0, param1)
   end
-  def enum_attached_surfaces(param0 : Void*, param1 : LPDDENUMSURFACESCALLBACK) : HRESULT
-    @lpVtbl.value.enum_attached_surfaces.unsafe_as(Proc(Void*, LPDDENUMSURFACESCALLBACK, HRESULT)).call(param0, param1)
+  def enum_attached_surfaces(this : IDirectDrawSurface2*, param0 : Void*, param1 : LPDDENUMSURFACESCALLBACK) : HRESULT
+    @lpVtbl.value.enum_attached_surfaces.call(this, param0, param1)
   end
-  def enum_overlay_z_orders(param0 : UInt32, param1 : Void*, param2 : LPDDENUMSURFACESCALLBACK) : HRESULT
-    @lpVtbl.value.enum_overlay_z_orders.unsafe_as(Proc(UInt32, Void*, LPDDENUMSURFACESCALLBACK, HRESULT)).call(param0, param1, param2)
+  def enum_overlay_z_orders(this : IDirectDrawSurface2*, param0 : UInt32, param1 : Void*, param2 : LPDDENUMSURFACESCALLBACK) : HRESULT
+    @lpVtbl.value.enum_overlay_z_orders.call(this, param0, param1, param2)
   end
-  def flip(param0 : IDirectDrawSurface2, param1 : UInt32) : HRESULT
-    @lpVtbl.value.flip.unsafe_as(Proc(IDirectDrawSurface2, UInt32, HRESULT)).call(param0, param1)
+  def flip(this : IDirectDrawSurface2*, param0 : IDirectDrawSurface2, param1 : UInt32) : HRESULT
+    @lpVtbl.value.flip.call(this, param0, param1)
   end
-  def get_attached_surface(param0 : DDSCAPS*, param1 : IDirectDrawSurface2*) : HRESULT
-    @lpVtbl.value.get_attached_surface.unsafe_as(Proc(DDSCAPS*, IDirectDrawSurface2*, HRESULT)).call(param0, param1)
+  def get_attached_surface(this : IDirectDrawSurface2*, param0 : DDSCAPS*, param1 : IDirectDrawSurface2*) : HRESULT
+    @lpVtbl.value.get_attached_surface.call(this, param0, param1)
   end
-  def get_blt_status(param0 : UInt32) : HRESULT
-    @lpVtbl.value.get_blt_status.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def get_blt_status(this : IDirectDrawSurface2*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.get_blt_status.call(this, param0)
   end
-  def get_caps(param0 : DDSCAPS*) : HRESULT
-    @lpVtbl.value.get_caps.unsafe_as(Proc(DDSCAPS*, HRESULT)).call(param0)
+  def get_caps(this : IDirectDrawSurface2*, param0 : DDSCAPS*) : HRESULT
+    @lpVtbl.value.get_caps.call(this, param0)
   end
-  def get_clipper(param0 : IDirectDrawClipper*) : HRESULT
-    @lpVtbl.value.get_clipper.unsafe_as(Proc(IDirectDrawClipper*, HRESULT)).call(param0)
+  def get_clipper(this : IDirectDrawSurface2*, param0 : IDirectDrawClipper*) : HRESULT
+    @lpVtbl.value.get_clipper.call(this, param0)
   end
-  def get_color_key(param0 : UInt32, param1 : DDCOLORKEY*) : HRESULT
-    @lpVtbl.value.get_color_key.unsafe_as(Proc(UInt32, DDCOLORKEY*, HRESULT)).call(param0, param1)
+  def get_color_key(this : IDirectDrawSurface2*, param0 : UInt32, param1 : DDCOLORKEY*) : HRESULT
+    @lpVtbl.value.get_color_key.call(this, param0, param1)
   end
-  def get_dc(param0 : HDC*) : HRESULT
-    @lpVtbl.value.get_dc.unsafe_as(Proc(HDC*, HRESULT)).call(param0)
+  def get_dc(this : IDirectDrawSurface2*, param0 : HDC*) : HRESULT
+    @lpVtbl.value.get_dc.call(this, param0)
   end
-  def get_flip_status(param0 : UInt32) : HRESULT
-    @lpVtbl.value.get_flip_status.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def get_flip_status(this : IDirectDrawSurface2*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.get_flip_status.call(this, param0)
   end
-  def get_overlay_position(param0 : Int32*, param1 : Int32*) : HRESULT
-    @lpVtbl.value.get_overlay_position.unsafe_as(Proc(Int32*, Int32*, HRESULT)).call(param0, param1)
+  def get_overlay_position(this : IDirectDrawSurface2*, param0 : Int32*, param1 : Int32*) : HRESULT
+    @lpVtbl.value.get_overlay_position.call(this, param0, param1)
   end
-  def get_palette(param0 : IDirectDrawPalette*) : HRESULT
-    @lpVtbl.value.get_palette.unsafe_as(Proc(IDirectDrawPalette*, HRESULT)).call(param0)
+  def get_palette(this : IDirectDrawSurface2*, param0 : IDirectDrawPalette*) : HRESULT
+    @lpVtbl.value.get_palette.call(this, param0)
   end
-  def get_pixel_format(param0 : DDPIXELFORMAT*) : HRESULT
-    @lpVtbl.value.get_pixel_format.unsafe_as(Proc(DDPIXELFORMAT*, HRESULT)).call(param0)
+  def get_pixel_format(this : IDirectDrawSurface2*, param0 : DDPIXELFORMAT*) : HRESULT
+    @lpVtbl.value.get_pixel_format.call(this, param0)
   end
-  def get_surface_desc(param0 : DDSURFACEDESC*) : HRESULT
-    @lpVtbl.value.get_surface_desc.unsafe_as(Proc(DDSURFACEDESC*, HRESULT)).call(param0)
+  def get_surface_desc(this : IDirectDrawSurface2*, param0 : DDSURFACEDESC*) : HRESULT
+    @lpVtbl.value.get_surface_desc.call(this, param0)
   end
-  def initialize(param0 : IDirectDraw, param1 : DDSURFACEDESC*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(IDirectDraw, DDSURFACEDESC*, HRESULT)).call(param0, param1)
+  def initialize(this : IDirectDrawSurface2*, param0 : IDirectDraw, param1 : DDSURFACEDESC*) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1)
   end
-  def is_lost : HRESULT
-    @lpVtbl.value.is_lost.unsafe_as(Proc(HRESULT)).call
+  def is_lost(this : IDirectDrawSurface2*) : HRESULT
+    @lpVtbl.value.is_lost.call(this)
   end
-  def lock(param0 : RECT*, param1 : DDSURFACEDESC*, param2 : UInt32, param3 : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.lock.unsafe_as(Proc(RECT*, DDSURFACEDESC*, UInt32, LibC::HANDLE, HRESULT)).call(param0, param1, param2, param3)
+  def lock(this : IDirectDrawSurface2*, param0 : RECT*, param1 : DDSURFACEDESC*, param2 : UInt32, param3 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.lock.call(this, param0, param1, param2, param3)
   end
-  def release_dc(param0 : HDC) : HRESULT
-    @lpVtbl.value.release_dc.unsafe_as(Proc(HDC, HRESULT)).call(param0)
+  def release_dc(this : IDirectDrawSurface2*, param0 : HDC) : HRESULT
+    @lpVtbl.value.release_dc.call(this, param0)
   end
-  def restore : HRESULT
-    @lpVtbl.value.restore.unsafe_as(Proc(HRESULT)).call
+  def restore(this : IDirectDrawSurface2*) : HRESULT
+    @lpVtbl.value.restore.call(this)
   end
-  def set_clipper(param0 : IDirectDrawClipper) : HRESULT
-    @lpVtbl.value.set_clipper.unsafe_as(Proc(IDirectDrawClipper, HRESULT)).call(param0)
+  def set_clipper(this : IDirectDrawSurface2*, param0 : IDirectDrawClipper) : HRESULT
+    @lpVtbl.value.set_clipper.call(this, param0)
   end
-  def set_color_key(param0 : UInt32, param1 : DDCOLORKEY*) : HRESULT
-    @lpVtbl.value.set_color_key.unsafe_as(Proc(UInt32, DDCOLORKEY*, HRESULT)).call(param0, param1)
+  def set_color_key(this : IDirectDrawSurface2*, param0 : UInt32, param1 : DDCOLORKEY*) : HRESULT
+    @lpVtbl.value.set_color_key.call(this, param0, param1)
   end
-  def set_overlay_position(param0 : Int32, param1 : Int32) : HRESULT
-    @lpVtbl.value.set_overlay_position.unsafe_as(Proc(Int32, Int32, HRESULT)).call(param0, param1)
+  def set_overlay_position(this : IDirectDrawSurface2*, param0 : Int32, param1 : Int32) : HRESULT
+    @lpVtbl.value.set_overlay_position.call(this, param0, param1)
   end
-  def set_palette(param0 : IDirectDrawPalette) : HRESULT
-    @lpVtbl.value.set_palette.unsafe_as(Proc(IDirectDrawPalette, HRESULT)).call(param0)
+  def set_palette(this : IDirectDrawSurface2*, param0 : IDirectDrawPalette) : HRESULT
+    @lpVtbl.value.set_palette.call(this, param0)
   end
-  def unlock(param0 : Void*) : HRESULT
-    @lpVtbl.value.unlock.unsafe_as(Proc(Void*, HRESULT)).call(param0)
+  def unlock(this : IDirectDrawSurface2*, param0 : Void*) : HRESULT
+    @lpVtbl.value.unlock.call(this, param0)
   end
-  def update_overlay(param0 : RECT*, param1 : IDirectDrawSurface2, param2 : RECT*, param3 : UInt32, param4 : DDOVERLAYFX*) : HRESULT
-    @lpVtbl.value.update_overlay.unsafe_as(Proc(RECT*, IDirectDrawSurface2, RECT*, UInt32, DDOVERLAYFX*, HRESULT)).call(param0, param1, param2, param3, param4)
+  def update_overlay(this : IDirectDrawSurface2*, param0 : RECT*, param1 : IDirectDrawSurface2, param2 : RECT*, param3 : UInt32, param4 : DDOVERLAYFX*) : HRESULT
+    @lpVtbl.value.update_overlay.call(this, param0, param1, param2, param3, param4)
   end
-  def update_overlay_display(param0 : UInt32) : HRESULT
-    @lpVtbl.value.update_overlay_display.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def update_overlay_display(this : IDirectDrawSurface2*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.update_overlay_display.call(this, param0)
   end
-  def update_overlay_z_order(param0 : UInt32, param1 : IDirectDrawSurface2) : HRESULT
-    @lpVtbl.value.update_overlay_z_order.unsafe_as(Proc(UInt32, IDirectDrawSurface2, HRESULT)).call(param0, param1)
+  def update_overlay_z_order(this : IDirectDrawSurface2*, param0 : UInt32, param1 : IDirectDrawSurface2) : HRESULT
+    @lpVtbl.value.update_overlay_z_order.call(this, param0, param1)
   end
-  def get_dd_interface(param0 : Void**) : HRESULT
-    @lpVtbl.value.get_dd_interface.unsafe_as(Proc(Void**, HRESULT)).call(param0)
+  def get_dd_interface(this : IDirectDrawSurface2*, param0 : Void**) : HRESULT
+    @lpVtbl.value.get_dd_interface.call(this, param0)
   end
-  def page_lock(param0 : UInt32) : HRESULT
-    @lpVtbl.value.page_lock.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def page_lock(this : IDirectDrawSurface2*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.page_lock.call(this, param0)
   end
-  def page_unlock(param0 : UInt32) : HRESULT
-    @lpVtbl.value.page_unlock.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def page_unlock(this : IDirectDrawSurface2*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.page_unlock.call(this, param0)
   end
 end
 struct LibWin32::IDirectDrawSurface3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectDrawSurface3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectDrawSurface3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectDrawSurface3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add_attached_surface(param0 : IDirectDrawSurface3) : HRESULT
-    @lpVtbl.value.add_attached_surface.unsafe_as(Proc(IDirectDrawSurface3, HRESULT)).call(param0)
+  def add_attached_surface(this : IDirectDrawSurface3*, param0 : IDirectDrawSurface3) : HRESULT
+    @lpVtbl.value.add_attached_surface.call(this, param0)
   end
-  def add_overlay_dirty_rect(param0 : RECT*) : HRESULT
-    @lpVtbl.value.add_overlay_dirty_rect.unsafe_as(Proc(RECT*, HRESULT)).call(param0)
+  def add_overlay_dirty_rect(this : IDirectDrawSurface3*, param0 : RECT*) : HRESULT
+    @lpVtbl.value.add_overlay_dirty_rect.call(this, param0)
   end
-  def blt(param0 : RECT*, param1 : IDirectDrawSurface3, param2 : RECT*, param3 : UInt32, param4 : DDBLTFX*) : HRESULT
-    @lpVtbl.value.blt.unsafe_as(Proc(RECT*, IDirectDrawSurface3, RECT*, UInt32, DDBLTFX*, HRESULT)).call(param0, param1, param2, param3, param4)
+  def blt(this : IDirectDrawSurface3*, param0 : RECT*, param1 : IDirectDrawSurface3, param2 : RECT*, param3 : UInt32, param4 : DDBLTFX*) : HRESULT
+    @lpVtbl.value.blt.call(this, param0, param1, param2, param3, param4)
   end
-  def blt_batch(param0 : DDBLTBATCH*, param1 : UInt32, param2 : UInt32) : HRESULT
-    @lpVtbl.value.blt_batch.unsafe_as(Proc(DDBLTBATCH*, UInt32, UInt32, HRESULT)).call(param0, param1, param2)
+  def blt_batch(this : IDirectDrawSurface3*, param0 : DDBLTBATCH*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.blt_batch.call(this, param0, param1, param2)
   end
-  def blt_fast(param0 : UInt32, param1 : UInt32, param2 : IDirectDrawSurface3, param3 : RECT*, param4 : UInt32) : HRESULT
-    @lpVtbl.value.blt_fast.unsafe_as(Proc(UInt32, UInt32, IDirectDrawSurface3, RECT*, UInt32, HRESULT)).call(param0, param1, param2, param3, param4)
+  def blt_fast(this : IDirectDrawSurface3*, param0 : UInt32, param1 : UInt32, param2 : IDirectDrawSurface3, param3 : RECT*, param4 : UInt32) : HRESULT
+    @lpVtbl.value.blt_fast.call(this, param0, param1, param2, param3, param4)
   end
-  def delete_attached_surface(param0 : UInt32, param1 : IDirectDrawSurface3) : HRESULT
-    @lpVtbl.value.delete_attached_surface.unsafe_as(Proc(UInt32, IDirectDrawSurface3, HRESULT)).call(param0, param1)
+  def delete_attached_surface(this : IDirectDrawSurface3*, param0 : UInt32, param1 : IDirectDrawSurface3) : HRESULT
+    @lpVtbl.value.delete_attached_surface.call(this, param0, param1)
   end
-  def enum_attached_surfaces(param0 : Void*, param1 : LPDDENUMSURFACESCALLBACK) : HRESULT
-    @lpVtbl.value.enum_attached_surfaces.unsafe_as(Proc(Void*, LPDDENUMSURFACESCALLBACK, HRESULT)).call(param0, param1)
+  def enum_attached_surfaces(this : IDirectDrawSurface3*, param0 : Void*, param1 : LPDDENUMSURFACESCALLBACK) : HRESULT
+    @lpVtbl.value.enum_attached_surfaces.call(this, param0, param1)
   end
-  def enum_overlay_z_orders(param0 : UInt32, param1 : Void*, param2 : LPDDENUMSURFACESCALLBACK) : HRESULT
-    @lpVtbl.value.enum_overlay_z_orders.unsafe_as(Proc(UInt32, Void*, LPDDENUMSURFACESCALLBACK, HRESULT)).call(param0, param1, param2)
+  def enum_overlay_z_orders(this : IDirectDrawSurface3*, param0 : UInt32, param1 : Void*, param2 : LPDDENUMSURFACESCALLBACK) : HRESULT
+    @lpVtbl.value.enum_overlay_z_orders.call(this, param0, param1, param2)
   end
-  def flip(param0 : IDirectDrawSurface3, param1 : UInt32) : HRESULT
-    @lpVtbl.value.flip.unsafe_as(Proc(IDirectDrawSurface3, UInt32, HRESULT)).call(param0, param1)
+  def flip(this : IDirectDrawSurface3*, param0 : IDirectDrawSurface3, param1 : UInt32) : HRESULT
+    @lpVtbl.value.flip.call(this, param0, param1)
   end
-  def get_attached_surface(param0 : DDSCAPS*, param1 : IDirectDrawSurface3*) : HRESULT
-    @lpVtbl.value.get_attached_surface.unsafe_as(Proc(DDSCAPS*, IDirectDrawSurface3*, HRESULT)).call(param0, param1)
+  def get_attached_surface(this : IDirectDrawSurface3*, param0 : DDSCAPS*, param1 : IDirectDrawSurface3*) : HRESULT
+    @lpVtbl.value.get_attached_surface.call(this, param0, param1)
   end
-  def get_blt_status(param0 : UInt32) : HRESULT
-    @lpVtbl.value.get_blt_status.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def get_blt_status(this : IDirectDrawSurface3*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.get_blt_status.call(this, param0)
   end
-  def get_caps(param0 : DDSCAPS*) : HRESULT
-    @lpVtbl.value.get_caps.unsafe_as(Proc(DDSCAPS*, HRESULT)).call(param0)
+  def get_caps(this : IDirectDrawSurface3*, param0 : DDSCAPS*) : HRESULT
+    @lpVtbl.value.get_caps.call(this, param0)
   end
-  def get_clipper(param0 : IDirectDrawClipper*) : HRESULT
-    @lpVtbl.value.get_clipper.unsafe_as(Proc(IDirectDrawClipper*, HRESULT)).call(param0)
+  def get_clipper(this : IDirectDrawSurface3*, param0 : IDirectDrawClipper*) : HRESULT
+    @lpVtbl.value.get_clipper.call(this, param0)
   end
-  def get_color_key(param0 : UInt32, param1 : DDCOLORKEY*) : HRESULT
-    @lpVtbl.value.get_color_key.unsafe_as(Proc(UInt32, DDCOLORKEY*, HRESULT)).call(param0, param1)
+  def get_color_key(this : IDirectDrawSurface3*, param0 : UInt32, param1 : DDCOLORKEY*) : HRESULT
+    @lpVtbl.value.get_color_key.call(this, param0, param1)
   end
-  def get_dc(param0 : HDC*) : HRESULT
-    @lpVtbl.value.get_dc.unsafe_as(Proc(HDC*, HRESULT)).call(param0)
+  def get_dc(this : IDirectDrawSurface3*, param0 : HDC*) : HRESULT
+    @lpVtbl.value.get_dc.call(this, param0)
   end
-  def get_flip_status(param0 : UInt32) : HRESULT
-    @lpVtbl.value.get_flip_status.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def get_flip_status(this : IDirectDrawSurface3*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.get_flip_status.call(this, param0)
   end
-  def get_overlay_position(param0 : Int32*, param1 : Int32*) : HRESULT
-    @lpVtbl.value.get_overlay_position.unsafe_as(Proc(Int32*, Int32*, HRESULT)).call(param0, param1)
+  def get_overlay_position(this : IDirectDrawSurface3*, param0 : Int32*, param1 : Int32*) : HRESULT
+    @lpVtbl.value.get_overlay_position.call(this, param0, param1)
   end
-  def get_palette(param0 : IDirectDrawPalette*) : HRESULT
-    @lpVtbl.value.get_palette.unsafe_as(Proc(IDirectDrawPalette*, HRESULT)).call(param0)
+  def get_palette(this : IDirectDrawSurface3*, param0 : IDirectDrawPalette*) : HRESULT
+    @lpVtbl.value.get_palette.call(this, param0)
   end
-  def get_pixel_format(param0 : DDPIXELFORMAT*) : HRESULT
-    @lpVtbl.value.get_pixel_format.unsafe_as(Proc(DDPIXELFORMAT*, HRESULT)).call(param0)
+  def get_pixel_format(this : IDirectDrawSurface3*, param0 : DDPIXELFORMAT*) : HRESULT
+    @lpVtbl.value.get_pixel_format.call(this, param0)
   end
-  def get_surface_desc(param0 : DDSURFACEDESC*) : HRESULT
-    @lpVtbl.value.get_surface_desc.unsafe_as(Proc(DDSURFACEDESC*, HRESULT)).call(param0)
+  def get_surface_desc(this : IDirectDrawSurface3*, param0 : DDSURFACEDESC*) : HRESULT
+    @lpVtbl.value.get_surface_desc.call(this, param0)
   end
-  def initialize(param0 : IDirectDraw, param1 : DDSURFACEDESC*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(IDirectDraw, DDSURFACEDESC*, HRESULT)).call(param0, param1)
+  def initialize(this : IDirectDrawSurface3*, param0 : IDirectDraw, param1 : DDSURFACEDESC*) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1)
   end
-  def is_lost : HRESULT
-    @lpVtbl.value.is_lost.unsafe_as(Proc(HRESULT)).call
+  def is_lost(this : IDirectDrawSurface3*) : HRESULT
+    @lpVtbl.value.is_lost.call(this)
   end
-  def lock(param0 : RECT*, param1 : DDSURFACEDESC*, param2 : UInt32, param3 : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.lock.unsafe_as(Proc(RECT*, DDSURFACEDESC*, UInt32, LibC::HANDLE, HRESULT)).call(param0, param1, param2, param3)
+  def lock(this : IDirectDrawSurface3*, param0 : RECT*, param1 : DDSURFACEDESC*, param2 : UInt32, param3 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.lock.call(this, param0, param1, param2, param3)
   end
-  def release_dc(param0 : HDC) : HRESULT
-    @lpVtbl.value.release_dc.unsafe_as(Proc(HDC, HRESULT)).call(param0)
+  def release_dc(this : IDirectDrawSurface3*, param0 : HDC) : HRESULT
+    @lpVtbl.value.release_dc.call(this, param0)
   end
-  def restore : HRESULT
-    @lpVtbl.value.restore.unsafe_as(Proc(HRESULT)).call
+  def restore(this : IDirectDrawSurface3*) : HRESULT
+    @lpVtbl.value.restore.call(this)
   end
-  def set_clipper(param0 : IDirectDrawClipper) : HRESULT
-    @lpVtbl.value.set_clipper.unsafe_as(Proc(IDirectDrawClipper, HRESULT)).call(param0)
+  def set_clipper(this : IDirectDrawSurface3*, param0 : IDirectDrawClipper) : HRESULT
+    @lpVtbl.value.set_clipper.call(this, param0)
   end
-  def set_color_key(param0 : UInt32, param1 : DDCOLORKEY*) : HRESULT
-    @lpVtbl.value.set_color_key.unsafe_as(Proc(UInt32, DDCOLORKEY*, HRESULT)).call(param0, param1)
+  def set_color_key(this : IDirectDrawSurface3*, param0 : UInt32, param1 : DDCOLORKEY*) : HRESULT
+    @lpVtbl.value.set_color_key.call(this, param0, param1)
   end
-  def set_overlay_position(param0 : Int32, param1 : Int32) : HRESULT
-    @lpVtbl.value.set_overlay_position.unsafe_as(Proc(Int32, Int32, HRESULT)).call(param0, param1)
+  def set_overlay_position(this : IDirectDrawSurface3*, param0 : Int32, param1 : Int32) : HRESULT
+    @lpVtbl.value.set_overlay_position.call(this, param0, param1)
   end
-  def set_palette(param0 : IDirectDrawPalette) : HRESULT
-    @lpVtbl.value.set_palette.unsafe_as(Proc(IDirectDrawPalette, HRESULT)).call(param0)
+  def set_palette(this : IDirectDrawSurface3*, param0 : IDirectDrawPalette) : HRESULT
+    @lpVtbl.value.set_palette.call(this, param0)
   end
-  def unlock(param0 : Void*) : HRESULT
-    @lpVtbl.value.unlock.unsafe_as(Proc(Void*, HRESULT)).call(param0)
+  def unlock(this : IDirectDrawSurface3*, param0 : Void*) : HRESULT
+    @lpVtbl.value.unlock.call(this, param0)
   end
-  def update_overlay(param0 : RECT*, param1 : IDirectDrawSurface3, param2 : RECT*, param3 : UInt32, param4 : DDOVERLAYFX*) : HRESULT
-    @lpVtbl.value.update_overlay.unsafe_as(Proc(RECT*, IDirectDrawSurface3, RECT*, UInt32, DDOVERLAYFX*, HRESULT)).call(param0, param1, param2, param3, param4)
+  def update_overlay(this : IDirectDrawSurface3*, param0 : RECT*, param1 : IDirectDrawSurface3, param2 : RECT*, param3 : UInt32, param4 : DDOVERLAYFX*) : HRESULT
+    @lpVtbl.value.update_overlay.call(this, param0, param1, param2, param3, param4)
   end
-  def update_overlay_display(param0 : UInt32) : HRESULT
-    @lpVtbl.value.update_overlay_display.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def update_overlay_display(this : IDirectDrawSurface3*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.update_overlay_display.call(this, param0)
   end
-  def update_overlay_z_order(param0 : UInt32, param1 : IDirectDrawSurface3) : HRESULT
-    @lpVtbl.value.update_overlay_z_order.unsafe_as(Proc(UInt32, IDirectDrawSurface3, HRESULT)).call(param0, param1)
+  def update_overlay_z_order(this : IDirectDrawSurface3*, param0 : UInt32, param1 : IDirectDrawSurface3) : HRESULT
+    @lpVtbl.value.update_overlay_z_order.call(this, param0, param1)
   end
-  def get_dd_interface(param0 : Void**) : HRESULT
-    @lpVtbl.value.get_dd_interface.unsafe_as(Proc(Void**, HRESULT)).call(param0)
+  def get_dd_interface(this : IDirectDrawSurface3*, param0 : Void**) : HRESULT
+    @lpVtbl.value.get_dd_interface.call(this, param0)
   end
-  def page_lock(param0 : UInt32) : HRESULT
-    @lpVtbl.value.page_lock.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def page_lock(this : IDirectDrawSurface3*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.page_lock.call(this, param0)
   end
-  def page_unlock(param0 : UInt32) : HRESULT
-    @lpVtbl.value.page_unlock.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def page_unlock(this : IDirectDrawSurface3*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.page_unlock.call(this, param0)
   end
-  def set_surface_desc(param0 : DDSURFACEDESC*, param1 : UInt32) : HRESULT
-    @lpVtbl.value.set_surface_desc.unsafe_as(Proc(DDSURFACEDESC*, UInt32, HRESULT)).call(param0, param1)
+  def set_surface_desc(this : IDirectDrawSurface3*, param0 : DDSURFACEDESC*, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_surface_desc.call(this, param0, param1)
   end
 end
 struct LibWin32::IDirectDrawSurface4
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectDrawSurface4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectDrawSurface4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectDrawSurface4*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add_attached_surface(param0 : IDirectDrawSurface4) : HRESULT
-    @lpVtbl.value.add_attached_surface.unsafe_as(Proc(IDirectDrawSurface4, HRESULT)).call(param0)
+  def add_attached_surface(this : IDirectDrawSurface4*, param0 : IDirectDrawSurface4) : HRESULT
+    @lpVtbl.value.add_attached_surface.call(this, param0)
   end
-  def add_overlay_dirty_rect(param0 : RECT*) : HRESULT
-    @lpVtbl.value.add_overlay_dirty_rect.unsafe_as(Proc(RECT*, HRESULT)).call(param0)
+  def add_overlay_dirty_rect(this : IDirectDrawSurface4*, param0 : RECT*) : HRESULT
+    @lpVtbl.value.add_overlay_dirty_rect.call(this, param0)
   end
-  def blt(param0 : RECT*, param1 : IDirectDrawSurface4, param2 : RECT*, param3 : UInt32, param4 : DDBLTFX*) : HRESULT
-    @lpVtbl.value.blt.unsafe_as(Proc(RECT*, IDirectDrawSurface4, RECT*, UInt32, DDBLTFX*, HRESULT)).call(param0, param1, param2, param3, param4)
+  def blt(this : IDirectDrawSurface4*, param0 : RECT*, param1 : IDirectDrawSurface4, param2 : RECT*, param3 : UInt32, param4 : DDBLTFX*) : HRESULT
+    @lpVtbl.value.blt.call(this, param0, param1, param2, param3, param4)
   end
-  def blt_batch(param0 : DDBLTBATCH*, param1 : UInt32, param2 : UInt32) : HRESULT
-    @lpVtbl.value.blt_batch.unsafe_as(Proc(DDBLTBATCH*, UInt32, UInt32, HRESULT)).call(param0, param1, param2)
+  def blt_batch(this : IDirectDrawSurface4*, param0 : DDBLTBATCH*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.blt_batch.call(this, param0, param1, param2)
   end
-  def blt_fast(param0 : UInt32, param1 : UInt32, param2 : IDirectDrawSurface4, param3 : RECT*, param4 : UInt32) : HRESULT
-    @lpVtbl.value.blt_fast.unsafe_as(Proc(UInt32, UInt32, IDirectDrawSurface4, RECT*, UInt32, HRESULT)).call(param0, param1, param2, param3, param4)
+  def blt_fast(this : IDirectDrawSurface4*, param0 : UInt32, param1 : UInt32, param2 : IDirectDrawSurface4, param3 : RECT*, param4 : UInt32) : HRESULT
+    @lpVtbl.value.blt_fast.call(this, param0, param1, param2, param3, param4)
   end
-  def delete_attached_surface(param0 : UInt32, param1 : IDirectDrawSurface4) : HRESULT
-    @lpVtbl.value.delete_attached_surface.unsafe_as(Proc(UInt32, IDirectDrawSurface4, HRESULT)).call(param0, param1)
+  def delete_attached_surface(this : IDirectDrawSurface4*, param0 : UInt32, param1 : IDirectDrawSurface4) : HRESULT
+    @lpVtbl.value.delete_attached_surface.call(this, param0, param1)
   end
-  def enum_attached_surfaces(param0 : Void*, param1 : LPDDENUMSURFACESCALLBACK2) : HRESULT
-    @lpVtbl.value.enum_attached_surfaces.unsafe_as(Proc(Void*, LPDDENUMSURFACESCALLBACK2, HRESULT)).call(param0, param1)
+  def enum_attached_surfaces(this : IDirectDrawSurface4*, param0 : Void*, param1 : LPDDENUMSURFACESCALLBACK2) : HRESULT
+    @lpVtbl.value.enum_attached_surfaces.call(this, param0, param1)
   end
-  def enum_overlay_z_orders(param0 : UInt32, param1 : Void*, param2 : LPDDENUMSURFACESCALLBACK2) : HRESULT
-    @lpVtbl.value.enum_overlay_z_orders.unsafe_as(Proc(UInt32, Void*, LPDDENUMSURFACESCALLBACK2, HRESULT)).call(param0, param1, param2)
+  def enum_overlay_z_orders(this : IDirectDrawSurface4*, param0 : UInt32, param1 : Void*, param2 : LPDDENUMSURFACESCALLBACK2) : HRESULT
+    @lpVtbl.value.enum_overlay_z_orders.call(this, param0, param1, param2)
   end
-  def flip(param0 : IDirectDrawSurface4, param1 : UInt32) : HRESULT
-    @lpVtbl.value.flip.unsafe_as(Proc(IDirectDrawSurface4, UInt32, HRESULT)).call(param0, param1)
+  def flip(this : IDirectDrawSurface4*, param0 : IDirectDrawSurface4, param1 : UInt32) : HRESULT
+    @lpVtbl.value.flip.call(this, param0, param1)
   end
-  def get_attached_surface(param0 : DDSCAPS2*, param1 : IDirectDrawSurface4*) : HRESULT
-    @lpVtbl.value.get_attached_surface.unsafe_as(Proc(DDSCAPS2*, IDirectDrawSurface4*, HRESULT)).call(param0, param1)
+  def get_attached_surface(this : IDirectDrawSurface4*, param0 : DDSCAPS2*, param1 : IDirectDrawSurface4*) : HRESULT
+    @lpVtbl.value.get_attached_surface.call(this, param0, param1)
   end
-  def get_blt_status(param0 : UInt32) : HRESULT
-    @lpVtbl.value.get_blt_status.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def get_blt_status(this : IDirectDrawSurface4*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.get_blt_status.call(this, param0)
   end
-  def get_caps(param0 : DDSCAPS2*) : HRESULT
-    @lpVtbl.value.get_caps.unsafe_as(Proc(DDSCAPS2*, HRESULT)).call(param0)
+  def get_caps(this : IDirectDrawSurface4*, param0 : DDSCAPS2*) : HRESULT
+    @lpVtbl.value.get_caps.call(this, param0)
   end
-  def get_clipper(param0 : IDirectDrawClipper*) : HRESULT
-    @lpVtbl.value.get_clipper.unsafe_as(Proc(IDirectDrawClipper*, HRESULT)).call(param0)
+  def get_clipper(this : IDirectDrawSurface4*, param0 : IDirectDrawClipper*) : HRESULT
+    @lpVtbl.value.get_clipper.call(this, param0)
   end
-  def get_color_key(param0 : UInt32, param1 : DDCOLORKEY*) : HRESULT
-    @lpVtbl.value.get_color_key.unsafe_as(Proc(UInt32, DDCOLORKEY*, HRESULT)).call(param0, param1)
+  def get_color_key(this : IDirectDrawSurface4*, param0 : UInt32, param1 : DDCOLORKEY*) : HRESULT
+    @lpVtbl.value.get_color_key.call(this, param0, param1)
   end
-  def get_dc(param0 : HDC*) : HRESULT
-    @lpVtbl.value.get_dc.unsafe_as(Proc(HDC*, HRESULT)).call(param0)
+  def get_dc(this : IDirectDrawSurface4*, param0 : HDC*) : HRESULT
+    @lpVtbl.value.get_dc.call(this, param0)
   end
-  def get_flip_status(param0 : UInt32) : HRESULT
-    @lpVtbl.value.get_flip_status.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def get_flip_status(this : IDirectDrawSurface4*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.get_flip_status.call(this, param0)
   end
-  def get_overlay_position(param0 : Int32*, param1 : Int32*) : HRESULT
-    @lpVtbl.value.get_overlay_position.unsafe_as(Proc(Int32*, Int32*, HRESULT)).call(param0, param1)
+  def get_overlay_position(this : IDirectDrawSurface4*, param0 : Int32*, param1 : Int32*) : HRESULT
+    @lpVtbl.value.get_overlay_position.call(this, param0, param1)
   end
-  def get_palette(param0 : IDirectDrawPalette*) : HRESULT
-    @lpVtbl.value.get_palette.unsafe_as(Proc(IDirectDrawPalette*, HRESULT)).call(param0)
+  def get_palette(this : IDirectDrawSurface4*, param0 : IDirectDrawPalette*) : HRESULT
+    @lpVtbl.value.get_palette.call(this, param0)
   end
-  def get_pixel_format(param0 : DDPIXELFORMAT*) : HRESULT
-    @lpVtbl.value.get_pixel_format.unsafe_as(Proc(DDPIXELFORMAT*, HRESULT)).call(param0)
+  def get_pixel_format(this : IDirectDrawSurface4*, param0 : DDPIXELFORMAT*) : HRESULT
+    @lpVtbl.value.get_pixel_format.call(this, param0)
   end
-  def get_surface_desc(param0 : DDSURFACEDESC2*) : HRESULT
-    @lpVtbl.value.get_surface_desc.unsafe_as(Proc(DDSURFACEDESC2*, HRESULT)).call(param0)
+  def get_surface_desc(this : IDirectDrawSurface4*, param0 : DDSURFACEDESC2*) : HRESULT
+    @lpVtbl.value.get_surface_desc.call(this, param0)
   end
-  def initialize(param0 : IDirectDraw, param1 : DDSURFACEDESC2*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(IDirectDraw, DDSURFACEDESC2*, HRESULT)).call(param0, param1)
+  def initialize(this : IDirectDrawSurface4*, param0 : IDirectDraw, param1 : DDSURFACEDESC2*) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1)
   end
-  def is_lost : HRESULT
-    @lpVtbl.value.is_lost.unsafe_as(Proc(HRESULT)).call
+  def is_lost(this : IDirectDrawSurface4*) : HRESULT
+    @lpVtbl.value.is_lost.call(this)
   end
-  def lock(param0 : RECT*, param1 : DDSURFACEDESC2*, param2 : UInt32, param3 : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.lock.unsafe_as(Proc(RECT*, DDSURFACEDESC2*, UInt32, LibC::HANDLE, HRESULT)).call(param0, param1, param2, param3)
+  def lock(this : IDirectDrawSurface4*, param0 : RECT*, param1 : DDSURFACEDESC2*, param2 : UInt32, param3 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.lock.call(this, param0, param1, param2, param3)
   end
-  def release_dc(param0 : HDC) : HRESULT
-    @lpVtbl.value.release_dc.unsafe_as(Proc(HDC, HRESULT)).call(param0)
+  def release_dc(this : IDirectDrawSurface4*, param0 : HDC) : HRESULT
+    @lpVtbl.value.release_dc.call(this, param0)
   end
-  def restore : HRESULT
-    @lpVtbl.value.restore.unsafe_as(Proc(HRESULT)).call
+  def restore(this : IDirectDrawSurface4*) : HRESULT
+    @lpVtbl.value.restore.call(this)
   end
-  def set_clipper(param0 : IDirectDrawClipper) : HRESULT
-    @lpVtbl.value.set_clipper.unsafe_as(Proc(IDirectDrawClipper, HRESULT)).call(param0)
+  def set_clipper(this : IDirectDrawSurface4*, param0 : IDirectDrawClipper) : HRESULT
+    @lpVtbl.value.set_clipper.call(this, param0)
   end
-  def set_color_key(param0 : UInt32, param1 : DDCOLORKEY*) : HRESULT
-    @lpVtbl.value.set_color_key.unsafe_as(Proc(UInt32, DDCOLORKEY*, HRESULT)).call(param0, param1)
+  def set_color_key(this : IDirectDrawSurface4*, param0 : UInt32, param1 : DDCOLORKEY*) : HRESULT
+    @lpVtbl.value.set_color_key.call(this, param0, param1)
   end
-  def set_overlay_position(param0 : Int32, param1 : Int32) : HRESULT
-    @lpVtbl.value.set_overlay_position.unsafe_as(Proc(Int32, Int32, HRESULT)).call(param0, param1)
+  def set_overlay_position(this : IDirectDrawSurface4*, param0 : Int32, param1 : Int32) : HRESULT
+    @lpVtbl.value.set_overlay_position.call(this, param0, param1)
   end
-  def set_palette(param0 : IDirectDrawPalette) : HRESULT
-    @lpVtbl.value.set_palette.unsafe_as(Proc(IDirectDrawPalette, HRESULT)).call(param0)
+  def set_palette(this : IDirectDrawSurface4*, param0 : IDirectDrawPalette) : HRESULT
+    @lpVtbl.value.set_palette.call(this, param0)
   end
-  def unlock(param0 : RECT*) : HRESULT
-    @lpVtbl.value.unlock.unsafe_as(Proc(RECT*, HRESULT)).call(param0)
+  def unlock(this : IDirectDrawSurface4*, param0 : RECT*) : HRESULT
+    @lpVtbl.value.unlock.call(this, param0)
   end
-  def update_overlay(param0 : RECT*, param1 : IDirectDrawSurface4, param2 : RECT*, param3 : UInt32, param4 : DDOVERLAYFX*) : HRESULT
-    @lpVtbl.value.update_overlay.unsafe_as(Proc(RECT*, IDirectDrawSurface4, RECT*, UInt32, DDOVERLAYFX*, HRESULT)).call(param0, param1, param2, param3, param4)
+  def update_overlay(this : IDirectDrawSurface4*, param0 : RECT*, param1 : IDirectDrawSurface4, param2 : RECT*, param3 : UInt32, param4 : DDOVERLAYFX*) : HRESULT
+    @lpVtbl.value.update_overlay.call(this, param0, param1, param2, param3, param4)
   end
-  def update_overlay_display(param0 : UInt32) : HRESULT
-    @lpVtbl.value.update_overlay_display.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def update_overlay_display(this : IDirectDrawSurface4*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.update_overlay_display.call(this, param0)
   end
-  def update_overlay_z_order(param0 : UInt32, param1 : IDirectDrawSurface4) : HRESULT
-    @lpVtbl.value.update_overlay_z_order.unsafe_as(Proc(UInt32, IDirectDrawSurface4, HRESULT)).call(param0, param1)
+  def update_overlay_z_order(this : IDirectDrawSurface4*, param0 : UInt32, param1 : IDirectDrawSurface4) : HRESULT
+    @lpVtbl.value.update_overlay_z_order.call(this, param0, param1)
   end
-  def get_dd_interface(param0 : Void**) : HRESULT
-    @lpVtbl.value.get_dd_interface.unsafe_as(Proc(Void**, HRESULT)).call(param0)
+  def get_dd_interface(this : IDirectDrawSurface4*, param0 : Void**) : HRESULT
+    @lpVtbl.value.get_dd_interface.call(this, param0)
   end
-  def page_lock(param0 : UInt32) : HRESULT
-    @lpVtbl.value.page_lock.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def page_lock(this : IDirectDrawSurface4*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.page_lock.call(this, param0)
   end
-  def page_unlock(param0 : UInt32) : HRESULT
-    @lpVtbl.value.page_unlock.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def page_unlock(this : IDirectDrawSurface4*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.page_unlock.call(this, param0)
   end
-  def set_surface_desc(param0 : DDSURFACEDESC2*, param1 : UInt32) : HRESULT
-    @lpVtbl.value.set_surface_desc.unsafe_as(Proc(DDSURFACEDESC2*, UInt32, HRESULT)).call(param0, param1)
+  def set_surface_desc(this : IDirectDrawSurface4*, param0 : DDSURFACEDESC2*, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_surface_desc.call(this, param0, param1)
   end
-  def set_private_data(param0 : Guid*, param1 : Void*, param2 : UInt32, param3 : UInt32) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, Void*, UInt32, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  def set_private_data(this : IDirectDrawSurface4*, param0 : Guid*, param1 : Void*, param2 : UInt32, param3 : UInt32) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, param0, param1, param2, param3)
   end
-  def get_private_data(param0 : Guid*, param1 : Void*, param2 : UInt32*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, Void*, UInt32*, HRESULT)).call(param0, param1, param2)
+  def get_private_data(this : IDirectDrawSurface4*, param0 : Guid*, param1 : Void*, param2 : UInt32*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, param0, param1, param2)
   end
-  def free_private_data(param0 : Guid*) : HRESULT
-    @lpVtbl.value.free_private_data.unsafe_as(Proc(Guid*, HRESULT)).call(param0)
+  def free_private_data(this : IDirectDrawSurface4*, param0 : Guid*) : HRESULT
+    @lpVtbl.value.free_private_data.call(this, param0)
   end
-  def get_uniqueness_value(param0 : UInt32*) : HRESULT
-    @lpVtbl.value.get_uniqueness_value.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  def get_uniqueness_value(this : IDirectDrawSurface4*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_uniqueness_value.call(this, param0)
   end
-  def change_uniqueness_value : HRESULT
-    @lpVtbl.value.change_uniqueness_value.unsafe_as(Proc(HRESULT)).call
+  def change_uniqueness_value(this : IDirectDrawSurface4*) : HRESULT
+    @lpVtbl.value.change_uniqueness_value.call(this)
   end
 end
 struct LibWin32::IDirectDrawSurface7
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectDrawSurface7*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectDrawSurface7*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectDrawSurface7*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add_attached_surface(param0 : IDirectDrawSurface7) : HRESULT
-    @lpVtbl.value.add_attached_surface.unsafe_as(Proc(IDirectDrawSurface7, HRESULT)).call(param0)
+  def add_attached_surface(this : IDirectDrawSurface7*, param0 : IDirectDrawSurface7) : HRESULT
+    @lpVtbl.value.add_attached_surface.call(this, param0)
   end
-  def add_overlay_dirty_rect(param0 : RECT*) : HRESULT
-    @lpVtbl.value.add_overlay_dirty_rect.unsafe_as(Proc(RECT*, HRESULT)).call(param0)
+  def add_overlay_dirty_rect(this : IDirectDrawSurface7*, param0 : RECT*) : HRESULT
+    @lpVtbl.value.add_overlay_dirty_rect.call(this, param0)
   end
-  def blt(param0 : RECT*, param1 : IDirectDrawSurface7, param2 : RECT*, param3 : UInt32, param4 : DDBLTFX*) : HRESULT
-    @lpVtbl.value.blt.unsafe_as(Proc(RECT*, IDirectDrawSurface7, RECT*, UInt32, DDBLTFX*, HRESULT)).call(param0, param1, param2, param3, param4)
+  def blt(this : IDirectDrawSurface7*, param0 : RECT*, param1 : IDirectDrawSurface7, param2 : RECT*, param3 : UInt32, param4 : DDBLTFX*) : HRESULT
+    @lpVtbl.value.blt.call(this, param0, param1, param2, param3, param4)
   end
-  def blt_batch(param0 : DDBLTBATCH*, param1 : UInt32, param2 : UInt32) : HRESULT
-    @lpVtbl.value.blt_batch.unsafe_as(Proc(DDBLTBATCH*, UInt32, UInt32, HRESULT)).call(param0, param1, param2)
+  def blt_batch(this : IDirectDrawSurface7*, param0 : DDBLTBATCH*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.blt_batch.call(this, param0, param1, param2)
   end
-  def blt_fast(param0 : UInt32, param1 : UInt32, param2 : IDirectDrawSurface7, param3 : RECT*, param4 : UInt32) : HRESULT
-    @lpVtbl.value.blt_fast.unsafe_as(Proc(UInt32, UInt32, IDirectDrawSurface7, RECT*, UInt32, HRESULT)).call(param0, param1, param2, param3, param4)
+  def blt_fast(this : IDirectDrawSurface7*, param0 : UInt32, param1 : UInt32, param2 : IDirectDrawSurface7, param3 : RECT*, param4 : UInt32) : HRESULT
+    @lpVtbl.value.blt_fast.call(this, param0, param1, param2, param3, param4)
   end
-  def delete_attached_surface(param0 : UInt32, param1 : IDirectDrawSurface7) : HRESULT
-    @lpVtbl.value.delete_attached_surface.unsafe_as(Proc(UInt32, IDirectDrawSurface7, HRESULT)).call(param0, param1)
+  def delete_attached_surface(this : IDirectDrawSurface7*, param0 : UInt32, param1 : IDirectDrawSurface7) : HRESULT
+    @lpVtbl.value.delete_attached_surface.call(this, param0, param1)
   end
-  def enum_attached_surfaces(param0 : Void*, param1 : LPDDENUMSURFACESCALLBACK7) : HRESULT
-    @lpVtbl.value.enum_attached_surfaces.unsafe_as(Proc(Void*, LPDDENUMSURFACESCALLBACK7, HRESULT)).call(param0, param1)
+  def enum_attached_surfaces(this : IDirectDrawSurface7*, param0 : Void*, param1 : LPDDENUMSURFACESCALLBACK7) : HRESULT
+    @lpVtbl.value.enum_attached_surfaces.call(this, param0, param1)
   end
-  def enum_overlay_z_orders(param0 : UInt32, param1 : Void*, param2 : LPDDENUMSURFACESCALLBACK7) : HRESULT
-    @lpVtbl.value.enum_overlay_z_orders.unsafe_as(Proc(UInt32, Void*, LPDDENUMSURFACESCALLBACK7, HRESULT)).call(param0, param1, param2)
+  def enum_overlay_z_orders(this : IDirectDrawSurface7*, param0 : UInt32, param1 : Void*, param2 : LPDDENUMSURFACESCALLBACK7) : HRESULT
+    @lpVtbl.value.enum_overlay_z_orders.call(this, param0, param1, param2)
   end
-  def flip(param0 : IDirectDrawSurface7, param1 : UInt32) : HRESULT
-    @lpVtbl.value.flip.unsafe_as(Proc(IDirectDrawSurface7, UInt32, HRESULT)).call(param0, param1)
+  def flip(this : IDirectDrawSurface7*, param0 : IDirectDrawSurface7, param1 : UInt32) : HRESULT
+    @lpVtbl.value.flip.call(this, param0, param1)
   end
-  def get_attached_surface(param0 : DDSCAPS2*, param1 : IDirectDrawSurface7*) : HRESULT
-    @lpVtbl.value.get_attached_surface.unsafe_as(Proc(DDSCAPS2*, IDirectDrawSurface7*, HRESULT)).call(param0, param1)
+  def get_attached_surface(this : IDirectDrawSurface7*, param0 : DDSCAPS2*, param1 : IDirectDrawSurface7*) : HRESULT
+    @lpVtbl.value.get_attached_surface.call(this, param0, param1)
   end
-  def get_blt_status(param0 : UInt32) : HRESULT
-    @lpVtbl.value.get_blt_status.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def get_blt_status(this : IDirectDrawSurface7*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.get_blt_status.call(this, param0)
   end
-  def get_caps(param0 : DDSCAPS2*) : HRESULT
-    @lpVtbl.value.get_caps.unsafe_as(Proc(DDSCAPS2*, HRESULT)).call(param0)
+  def get_caps(this : IDirectDrawSurface7*, param0 : DDSCAPS2*) : HRESULT
+    @lpVtbl.value.get_caps.call(this, param0)
   end
-  def get_clipper(param0 : IDirectDrawClipper*) : HRESULT
-    @lpVtbl.value.get_clipper.unsafe_as(Proc(IDirectDrawClipper*, HRESULT)).call(param0)
+  def get_clipper(this : IDirectDrawSurface7*, param0 : IDirectDrawClipper*) : HRESULT
+    @lpVtbl.value.get_clipper.call(this, param0)
   end
-  def get_color_key(param0 : UInt32, param1 : DDCOLORKEY*) : HRESULT
-    @lpVtbl.value.get_color_key.unsafe_as(Proc(UInt32, DDCOLORKEY*, HRESULT)).call(param0, param1)
+  def get_color_key(this : IDirectDrawSurface7*, param0 : UInt32, param1 : DDCOLORKEY*) : HRESULT
+    @lpVtbl.value.get_color_key.call(this, param0, param1)
   end
-  def get_dc(param0 : HDC*) : HRESULT
-    @lpVtbl.value.get_dc.unsafe_as(Proc(HDC*, HRESULT)).call(param0)
+  def get_dc(this : IDirectDrawSurface7*, param0 : HDC*) : HRESULT
+    @lpVtbl.value.get_dc.call(this, param0)
   end
-  def get_flip_status(param0 : UInt32) : HRESULT
-    @lpVtbl.value.get_flip_status.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def get_flip_status(this : IDirectDrawSurface7*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.get_flip_status.call(this, param0)
   end
-  def get_overlay_position(param0 : Int32*, param1 : Int32*) : HRESULT
-    @lpVtbl.value.get_overlay_position.unsafe_as(Proc(Int32*, Int32*, HRESULT)).call(param0, param1)
+  def get_overlay_position(this : IDirectDrawSurface7*, param0 : Int32*, param1 : Int32*) : HRESULT
+    @lpVtbl.value.get_overlay_position.call(this, param0, param1)
   end
-  def get_palette(param0 : IDirectDrawPalette*) : HRESULT
-    @lpVtbl.value.get_palette.unsafe_as(Proc(IDirectDrawPalette*, HRESULT)).call(param0)
+  def get_palette(this : IDirectDrawSurface7*, param0 : IDirectDrawPalette*) : HRESULT
+    @lpVtbl.value.get_palette.call(this, param0)
   end
-  def get_pixel_format(param0 : DDPIXELFORMAT*) : HRESULT
-    @lpVtbl.value.get_pixel_format.unsafe_as(Proc(DDPIXELFORMAT*, HRESULT)).call(param0)
+  def get_pixel_format(this : IDirectDrawSurface7*, param0 : DDPIXELFORMAT*) : HRESULT
+    @lpVtbl.value.get_pixel_format.call(this, param0)
   end
-  def get_surface_desc(param0 : DDSURFACEDESC2*) : HRESULT
-    @lpVtbl.value.get_surface_desc.unsafe_as(Proc(DDSURFACEDESC2*, HRESULT)).call(param0)
+  def get_surface_desc(this : IDirectDrawSurface7*, param0 : DDSURFACEDESC2*) : HRESULT
+    @lpVtbl.value.get_surface_desc.call(this, param0)
   end
-  def initialize(param0 : IDirectDraw, param1 : DDSURFACEDESC2*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(IDirectDraw, DDSURFACEDESC2*, HRESULT)).call(param0, param1)
+  def initialize(this : IDirectDrawSurface7*, param0 : IDirectDraw, param1 : DDSURFACEDESC2*) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1)
   end
-  def is_lost : HRESULT
-    @lpVtbl.value.is_lost.unsafe_as(Proc(HRESULT)).call
+  def is_lost(this : IDirectDrawSurface7*) : HRESULT
+    @lpVtbl.value.is_lost.call(this)
   end
-  def lock(param0 : RECT*, param1 : DDSURFACEDESC2*, param2 : UInt32, param3 : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.lock.unsafe_as(Proc(RECT*, DDSURFACEDESC2*, UInt32, LibC::HANDLE, HRESULT)).call(param0, param1, param2, param3)
+  def lock(this : IDirectDrawSurface7*, param0 : RECT*, param1 : DDSURFACEDESC2*, param2 : UInt32, param3 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.lock.call(this, param0, param1, param2, param3)
   end
-  def release_dc(param0 : HDC) : HRESULT
-    @lpVtbl.value.release_dc.unsafe_as(Proc(HDC, HRESULT)).call(param0)
+  def release_dc(this : IDirectDrawSurface7*, param0 : HDC) : HRESULT
+    @lpVtbl.value.release_dc.call(this, param0)
   end
-  def restore : HRESULT
-    @lpVtbl.value.restore.unsafe_as(Proc(HRESULT)).call
+  def restore(this : IDirectDrawSurface7*) : HRESULT
+    @lpVtbl.value.restore.call(this)
   end
-  def set_clipper(param0 : IDirectDrawClipper) : HRESULT
-    @lpVtbl.value.set_clipper.unsafe_as(Proc(IDirectDrawClipper, HRESULT)).call(param0)
+  def set_clipper(this : IDirectDrawSurface7*, param0 : IDirectDrawClipper) : HRESULT
+    @lpVtbl.value.set_clipper.call(this, param0)
   end
-  def set_color_key(param0 : UInt32, param1 : DDCOLORKEY*) : HRESULT
-    @lpVtbl.value.set_color_key.unsafe_as(Proc(UInt32, DDCOLORKEY*, HRESULT)).call(param0, param1)
+  def set_color_key(this : IDirectDrawSurface7*, param0 : UInt32, param1 : DDCOLORKEY*) : HRESULT
+    @lpVtbl.value.set_color_key.call(this, param0, param1)
   end
-  def set_overlay_position(param0 : Int32, param1 : Int32) : HRESULT
-    @lpVtbl.value.set_overlay_position.unsafe_as(Proc(Int32, Int32, HRESULT)).call(param0, param1)
+  def set_overlay_position(this : IDirectDrawSurface7*, param0 : Int32, param1 : Int32) : HRESULT
+    @lpVtbl.value.set_overlay_position.call(this, param0, param1)
   end
-  def set_palette(param0 : IDirectDrawPalette) : HRESULT
-    @lpVtbl.value.set_palette.unsafe_as(Proc(IDirectDrawPalette, HRESULT)).call(param0)
+  def set_palette(this : IDirectDrawSurface7*, param0 : IDirectDrawPalette) : HRESULT
+    @lpVtbl.value.set_palette.call(this, param0)
   end
-  def unlock(param0 : RECT*) : HRESULT
-    @lpVtbl.value.unlock.unsafe_as(Proc(RECT*, HRESULT)).call(param0)
+  def unlock(this : IDirectDrawSurface7*, param0 : RECT*) : HRESULT
+    @lpVtbl.value.unlock.call(this, param0)
   end
-  def update_overlay(param0 : RECT*, param1 : IDirectDrawSurface7, param2 : RECT*, param3 : UInt32, param4 : DDOVERLAYFX*) : HRESULT
-    @lpVtbl.value.update_overlay.unsafe_as(Proc(RECT*, IDirectDrawSurface7, RECT*, UInt32, DDOVERLAYFX*, HRESULT)).call(param0, param1, param2, param3, param4)
+  def update_overlay(this : IDirectDrawSurface7*, param0 : RECT*, param1 : IDirectDrawSurface7, param2 : RECT*, param3 : UInt32, param4 : DDOVERLAYFX*) : HRESULT
+    @lpVtbl.value.update_overlay.call(this, param0, param1, param2, param3, param4)
   end
-  def update_overlay_display(param0 : UInt32) : HRESULT
-    @lpVtbl.value.update_overlay_display.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def update_overlay_display(this : IDirectDrawSurface7*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.update_overlay_display.call(this, param0)
   end
-  def update_overlay_z_order(param0 : UInt32, param1 : IDirectDrawSurface7) : HRESULT
-    @lpVtbl.value.update_overlay_z_order.unsafe_as(Proc(UInt32, IDirectDrawSurface7, HRESULT)).call(param0, param1)
+  def update_overlay_z_order(this : IDirectDrawSurface7*, param0 : UInt32, param1 : IDirectDrawSurface7) : HRESULT
+    @lpVtbl.value.update_overlay_z_order.call(this, param0, param1)
   end
-  def get_dd_interface(param0 : Void**) : HRESULT
-    @lpVtbl.value.get_dd_interface.unsafe_as(Proc(Void**, HRESULT)).call(param0)
+  def get_dd_interface(this : IDirectDrawSurface7*, param0 : Void**) : HRESULT
+    @lpVtbl.value.get_dd_interface.call(this, param0)
   end
-  def page_lock(param0 : UInt32) : HRESULT
-    @lpVtbl.value.page_lock.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def page_lock(this : IDirectDrawSurface7*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.page_lock.call(this, param0)
   end
-  def page_unlock(param0 : UInt32) : HRESULT
-    @lpVtbl.value.page_unlock.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def page_unlock(this : IDirectDrawSurface7*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.page_unlock.call(this, param0)
   end
-  def set_surface_desc(param0 : DDSURFACEDESC2*, param1 : UInt32) : HRESULT
-    @lpVtbl.value.set_surface_desc.unsafe_as(Proc(DDSURFACEDESC2*, UInt32, HRESULT)).call(param0, param1)
+  def set_surface_desc(this : IDirectDrawSurface7*, param0 : DDSURFACEDESC2*, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_surface_desc.call(this, param0, param1)
   end
-  def set_private_data(param0 : Guid*, param1 : Void*, param2 : UInt32, param3 : UInt32) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, Void*, UInt32, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  def set_private_data(this : IDirectDrawSurface7*, param0 : Guid*, param1 : Void*, param2 : UInt32, param3 : UInt32) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, param0, param1, param2, param3)
   end
-  def get_private_data(param0 : Guid*, param1 : Void*, param2 : UInt32*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, Void*, UInt32*, HRESULT)).call(param0, param1, param2)
+  def get_private_data(this : IDirectDrawSurface7*, param0 : Guid*, param1 : Void*, param2 : UInt32*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, param0, param1, param2)
   end
-  def free_private_data(param0 : Guid*) : HRESULT
-    @lpVtbl.value.free_private_data.unsafe_as(Proc(Guid*, HRESULT)).call(param0)
+  def free_private_data(this : IDirectDrawSurface7*, param0 : Guid*) : HRESULT
+    @lpVtbl.value.free_private_data.call(this, param0)
   end
-  def get_uniqueness_value(param0 : UInt32*) : HRESULT
-    @lpVtbl.value.get_uniqueness_value.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  def get_uniqueness_value(this : IDirectDrawSurface7*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_uniqueness_value.call(this, param0)
   end
-  def change_uniqueness_value : HRESULT
-    @lpVtbl.value.change_uniqueness_value.unsafe_as(Proc(HRESULT)).call
+  def change_uniqueness_value(this : IDirectDrawSurface7*) : HRESULT
+    @lpVtbl.value.change_uniqueness_value.call(this)
   end
-  def set_priority(param0 : UInt32) : HRESULT
-    @lpVtbl.value.set_priority.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def set_priority(this : IDirectDrawSurface7*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.set_priority.call(this, param0)
   end
-  def get_priority(param0 : UInt32*) : HRESULT
-    @lpVtbl.value.get_priority.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  def get_priority(this : IDirectDrawSurface7*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, param0)
   end
-  def set_lod(param0 : UInt32) : HRESULT
-    @lpVtbl.value.set_lod.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  def set_lod(this : IDirectDrawSurface7*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.set_lod.call(this, param0)
   end
-  def get_lod(param0 : UInt32*) : HRESULT
-    @lpVtbl.value.get_lod.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  def get_lod(this : IDirectDrawSurface7*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_lod.call(this, param0)
   end
 end
 struct LibWin32::IDirectDrawColorControl
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectDrawColorControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectDrawColorControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectDrawColorControl*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_color_controls(param0 : DDCOLORCONTROL*) : HRESULT
-    @lpVtbl.value.get_color_controls.unsafe_as(Proc(DDCOLORCONTROL*, HRESULT)).call(param0)
+  def get_color_controls(this : IDirectDrawColorControl*, param0 : DDCOLORCONTROL*) : HRESULT
+    @lpVtbl.value.get_color_controls.call(this, param0)
   end
-  def set_color_controls(param0 : DDCOLORCONTROL*) : HRESULT
-    @lpVtbl.value.set_color_controls.unsafe_as(Proc(DDCOLORCONTROL*, HRESULT)).call(param0)
+  def set_color_controls(this : IDirectDrawColorControl*, param0 : DDCOLORCONTROL*) : HRESULT
+    @lpVtbl.value.set_color_controls.call(this, param0)
   end
 end
 struct LibWin32::IDirectDrawGammaControl
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectDrawGammaControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectDrawGammaControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectDrawGammaControl*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_gamma_ramp(param0 : UInt32, param1 : DDGAMMARAMP*) : HRESULT
-    @lpVtbl.value.get_gamma_ramp.unsafe_as(Proc(UInt32, DDGAMMARAMP*, HRESULT)).call(param0, param1)
+  def get_gamma_ramp(this : IDirectDrawGammaControl*, param0 : UInt32, param1 : DDGAMMARAMP*) : HRESULT
+    @lpVtbl.value.get_gamma_ramp.call(this, param0, param1)
   end
-  def set_gamma_ramp(param0 : UInt32, param1 : DDGAMMARAMP*) : HRESULT
-    @lpVtbl.value.set_gamma_ramp.unsafe_as(Proc(UInt32, DDGAMMARAMP*, HRESULT)).call(param0, param1)
+  def set_gamma_ramp(this : IDirectDrawGammaControl*, param0 : UInt32, param1 : DDGAMMARAMP*) : HRESULT
+    @lpVtbl.value.set_gamma_ramp.call(this, param0, param1)
   end
 end
 struct LibWin32::IDDVideoPortContainer
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDDVideoPortContainer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDDVideoPortContainer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDDVideoPortContainer*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_video_port(param0 : UInt32, param1 : DDVIDEOPORTDESC*, param2 : IDirectDrawVideoPort*, param3 : IUnknown) : HRESULT
-    @lpVtbl.value.create_video_port.unsafe_as(Proc(UInt32, DDVIDEOPORTDESC*, IDirectDrawVideoPort*, IUnknown, HRESULT)).call(param0, param1, param2, param3)
+  def create_video_port(this : IDDVideoPortContainer*, param0 : UInt32, param1 : DDVIDEOPORTDESC*, param2 : IDirectDrawVideoPort*, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_video_port.call(this, param0, param1, param2, param3)
   end
-  def enum_video_ports(param0 : UInt32, param1 : DDVIDEOPORTCAPS*, param2 : Void*, param3 : LPDDENUMVIDEOCALLBACK) : HRESULT
-    @lpVtbl.value.enum_video_ports.unsafe_as(Proc(UInt32, DDVIDEOPORTCAPS*, Void*, LPDDENUMVIDEOCALLBACK, HRESULT)).call(param0, param1, param2, param3)
+  def enum_video_ports(this : IDDVideoPortContainer*, param0 : UInt32, param1 : DDVIDEOPORTCAPS*, param2 : Void*, param3 : LPDDENUMVIDEOCALLBACK) : HRESULT
+    @lpVtbl.value.enum_video_ports.call(this, param0, param1, param2, param3)
   end
-  def get_video_port_connect_info(param0 : UInt32, pcinfo : UInt32*, param2 : DDVIDEOPORTCONNECT*) : HRESULT
-    @lpVtbl.value.get_video_port_connect_info.unsafe_as(Proc(UInt32, UInt32*, DDVIDEOPORTCONNECT*, HRESULT)).call(param0, pcinfo, param2)
+  def get_video_port_connect_info(this : IDDVideoPortContainer*, param0 : UInt32, pcinfo : UInt32*, param2 : DDVIDEOPORTCONNECT*) : HRESULT
+    @lpVtbl.value.get_video_port_connect_info.call(this, param0, pcinfo, param2)
   end
-  def query_video_port_status(param0 : UInt32, param1 : DDVIDEOPORTSTATUS*) : HRESULT
-    @lpVtbl.value.query_video_port_status.unsafe_as(Proc(UInt32, DDVIDEOPORTSTATUS*, HRESULT)).call(param0, param1)
+  def query_video_port_status(this : IDDVideoPortContainer*, param0 : UInt32, param1 : DDVIDEOPORTSTATUS*) : HRESULT
+    @lpVtbl.value.query_video_port_status.call(this, param0, param1)
   end
 end
 struct LibWin32::IDirectDrawVideoPort
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectDrawVideoPort*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectDrawVideoPort*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectDrawVideoPort*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def flip(param0 : IDirectDrawSurface, param1 : UInt32) : HRESULT
-    @lpVtbl.value.flip.unsafe_as(Proc(IDirectDrawSurface, UInt32, HRESULT)).call(param0, param1)
+  def flip(this : IDirectDrawVideoPort*, param0 : IDirectDrawSurface, param1 : UInt32) : HRESULT
+    @lpVtbl.value.flip.call(this, param0, param1)
   end
-  def get_bandwidth_info(param0 : DDPIXELFORMAT*, param1 : UInt32, param2 : UInt32, param3 : UInt32, param4 : DDVIDEOPORTBANDWIDTH*) : HRESULT
-    @lpVtbl.value.get_bandwidth_info.unsafe_as(Proc(DDPIXELFORMAT*, UInt32, UInt32, UInt32, DDVIDEOPORTBANDWIDTH*, HRESULT)).call(param0, param1, param2, param3, param4)
+  def get_bandwidth_info(this : IDirectDrawVideoPort*, param0 : DDPIXELFORMAT*, param1 : UInt32, param2 : UInt32, param3 : UInt32, param4 : DDVIDEOPORTBANDWIDTH*) : HRESULT
+    @lpVtbl.value.get_bandwidth_info.call(this, param0, param1, param2, param3, param4)
   end
-  def get_color_controls(param0 : DDCOLORCONTROL*) : HRESULT
-    @lpVtbl.value.get_color_controls.unsafe_as(Proc(DDCOLORCONTROL*, HRESULT)).call(param0)
+  def get_color_controls(this : IDirectDrawVideoPort*, param0 : DDCOLORCONTROL*) : HRESULT
+    @lpVtbl.value.get_color_controls.call(this, param0)
   end
-  def get_input_formats(lpnumformats : UInt32*, param1 : DDPIXELFORMAT*, param2 : UInt32) : HRESULT
-    @lpVtbl.value.get_input_formats.unsafe_as(Proc(UInt32*, DDPIXELFORMAT*, UInt32, HRESULT)).call(lpnumformats, param1, param2)
+  def get_input_formats(this : IDirectDrawVideoPort*, lpnumformats : UInt32*, param1 : DDPIXELFORMAT*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_input_formats.call(this, lpnumformats, param1, param2)
   end
-  def get_output_formats(param0 : DDPIXELFORMAT*, lpnumformats : UInt32*, param2 : DDPIXELFORMAT*, param3 : UInt32) : HRESULT
-    @lpVtbl.value.get_output_formats.unsafe_as(Proc(DDPIXELFORMAT*, UInt32*, DDPIXELFORMAT*, UInt32, HRESULT)).call(param0, lpnumformats, param2, param3)
+  def get_output_formats(this : IDirectDrawVideoPort*, param0 : DDPIXELFORMAT*, lpnumformats : UInt32*, param2 : DDPIXELFORMAT*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.get_output_formats.call(this, param0, lpnumformats, param2, param3)
   end
-  def get_field_polarity(param0 : Int32*) : HRESULT
-    @lpVtbl.value.get_field_polarity.unsafe_as(Proc(Int32*, HRESULT)).call(param0)
+  def get_field_polarity(this : IDirectDrawVideoPort*, param0 : Int32*) : HRESULT
+    @lpVtbl.value.get_field_polarity.call(this, param0)
   end
-  def get_video_line(param0 : UInt32*) : HRESULT
-    @lpVtbl.value.get_video_line.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  def get_video_line(this : IDirectDrawVideoPort*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_video_line.call(this, param0)
   end
-  def get_video_signal_status(param0 : UInt32*) : HRESULT
-    @lpVtbl.value.get_video_signal_status.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  def get_video_signal_status(this : IDirectDrawVideoPort*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_video_signal_status.call(this, param0)
   end
-  def set_color_controls(param0 : DDCOLORCONTROL*) : HRESULT
-    @lpVtbl.value.set_color_controls.unsafe_as(Proc(DDCOLORCONTROL*, HRESULT)).call(param0)
+  def set_color_controls(this : IDirectDrawVideoPort*, param0 : DDCOLORCONTROL*) : HRESULT
+    @lpVtbl.value.set_color_controls.call(this, param0)
   end
-  def set_target_surface(param0 : IDirectDrawSurface, param1 : UInt32) : HRESULT
-    @lpVtbl.value.set_target_surface.unsafe_as(Proc(IDirectDrawSurface, UInt32, HRESULT)).call(param0, param1)
+  def set_target_surface(this : IDirectDrawVideoPort*, param0 : IDirectDrawSurface, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_target_surface.call(this, param0, param1)
   end
-  def start_video(param0 : DDVIDEOPORTINFO*) : HRESULT
-    @lpVtbl.value.start_video.unsafe_as(Proc(DDVIDEOPORTINFO*, HRESULT)).call(param0)
+  def start_video(this : IDirectDrawVideoPort*, param0 : DDVIDEOPORTINFO*) : HRESULT
+    @lpVtbl.value.start_video.call(this, param0)
   end
-  def stop_video : HRESULT
-    @lpVtbl.value.stop_video.unsafe_as(Proc(HRESULT)).call
+  def stop_video(this : IDirectDrawVideoPort*) : HRESULT
+    @lpVtbl.value.stop_video.call(this)
   end
-  def update_video(param0 : DDVIDEOPORTINFO*) : HRESULT
-    @lpVtbl.value.update_video.unsafe_as(Proc(DDVIDEOPORTINFO*, HRESULT)).call(param0)
+  def update_video(this : IDirectDrawVideoPort*, param0 : DDVIDEOPORTINFO*) : HRESULT
+    @lpVtbl.value.update_video.call(this, param0)
   end
-  def wait_for_sync(param0 : UInt32, param1 : UInt32, param2 : UInt32) : HRESULT
-    @lpVtbl.value.wait_for_sync.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(param0, param1, param2)
+  def wait_for_sync(this : IDirectDrawVideoPort*, param0 : UInt32, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.wait_for_sync.call(this, param0, param1, param2)
   end
 end
 struct LibWin32::IDirectDrawVideoPortNotify
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectDrawVideoPortNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectDrawVideoPortNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectDrawVideoPortNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def acquire_notification(param0 : LibC::HANDLE*, param1 : DDVIDEOPORTNOTIFY*) : HRESULT
-    @lpVtbl.value.acquire_notification.unsafe_as(Proc(LibC::HANDLE*, DDVIDEOPORTNOTIFY*, HRESULT)).call(param0, param1)
+  def acquire_notification(this : IDirectDrawVideoPortNotify*, param0 : LibC::HANDLE*, param1 : DDVIDEOPORTNOTIFY*) : HRESULT
+    @lpVtbl.value.acquire_notification.call(this, param0, param1)
   end
-  def release_notification(param0 : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.release_notification.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(param0)
+  def release_notification(this : IDirectDrawVideoPortNotify*, param0 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.release_notification.call(this, param0)
   end
 end
 struct LibWin32::IDirectDrawKernel
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectDrawKernel*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectDrawKernel*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectDrawKernel*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_caps(param0 : DDKERNELCAPS*) : HRESULT
-    @lpVtbl.value.get_caps.unsafe_as(Proc(DDKERNELCAPS*, HRESULT)).call(param0)
+  def get_caps(this : IDirectDrawKernel*, param0 : DDKERNELCAPS*) : HRESULT
+    @lpVtbl.value.get_caps.call(this, param0)
   end
-  def get_kernel_handle(param0 : LibC::UINT_PTR*) : HRESULT
-    @lpVtbl.value.get_kernel_handle.unsafe_as(Proc(LibC::UINT_PTR*, HRESULT)).call(param0)
+  def get_kernel_handle(this : IDirectDrawKernel*, param0 : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_kernel_handle.call(this, param0)
   end
-  def release_kernel_handle : HRESULT
-    @lpVtbl.value.release_kernel_handle.unsafe_as(Proc(HRESULT)).call
+  def release_kernel_handle(this : IDirectDrawKernel*) : HRESULT
+    @lpVtbl.value.release_kernel_handle.call(this)
   end
 end
 struct LibWin32::IDirectDrawSurfaceKernel
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDirectDrawSurfaceKernel*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDirectDrawSurfaceKernel*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDirectDrawSurfaceKernel*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_kernel_handle(param0 : LibC::UINT_PTR*) : HRESULT
-    @lpVtbl.value.get_kernel_handle.unsafe_as(Proc(LibC::UINT_PTR*, HRESULT)).call(param0)
+  def get_kernel_handle(this : IDirectDrawSurfaceKernel*, param0 : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_kernel_handle.call(this, param0)
   end
-  def release_kernel_handle : HRESULT
-    @lpVtbl.value.release_kernel_handle.unsafe_as(Proc(HRESULT)).call
+  def release_kernel_handle(this : IDirectDrawSurfaceKernel*) : HRESULT
+    @lpVtbl.value.release_kernel_handle.call(this)
   end
 end

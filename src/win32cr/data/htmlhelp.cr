@@ -434,33 +434,33 @@ lib LibWin32
 
 
   struct IITPropListVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_class_id : UInt64
-    is_dirty : UInt64
-    load : UInt64
-    save : UInt64
-    get_size_max : UInt64
-    init_new : UInt64
-    set : UInt64
-    set2 : UInt64
-    set3 : UInt64
-    add : UInt64
-    get : UInt64
-    clear : UInt64
-    set_persist : UInt64
-    set_persist2 : UInt64
-    get_first : UInt64
-    get_next : UInt64
-    get_prop_count : UInt64
-    save_header : UInt64
-    save_data : UInt64
-    get_header_size : UInt64
-    get_data_size : UInt64
-    save_data_to_stream : UInt64
-    load_from_mem : UInt64
-    save_to_mem : UInt64
+    query_interface : Proc(IITPropList*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IITPropList*, UInt32)
+    release : Proc(IITPropList*, UInt32)
+    get_class_id : Proc(IITPropList*, Guid*, HRESULT)
+    is_dirty : Proc(IITPropList*, HRESULT)
+    load : Proc(IITPropList*, IStream, HRESULT)
+    save : Proc(IITPropList*, IStream, LibC::BOOL, HRESULT)
+    get_size_max : Proc(IITPropList*, ULARGE_INTEGER*, HRESULT)
+    init_new : Proc(IITPropList*, HRESULT)
+    set : Proc(IITPropList*, UInt32, LibC::LPWSTR, UInt32, HRESULT)
+    set2 : Proc(IITPropList*, UInt32, Void*, UInt32, UInt32, HRESULT)
+    set3 : Proc(IITPropList*, UInt32, UInt32, UInt32, HRESULT)
+    add : Proc(IITPropList*, CProperty*, HRESULT)
+    get : Proc(IITPropList*, UInt32, CProperty*, HRESULT)
+    clear : Proc(IITPropList*, HRESULT)
+    set_persist : Proc(IITPropList*, LibC::BOOL, HRESULT)
+    set_persist2 : Proc(IITPropList*, UInt32, LibC::BOOL, HRESULT)
+    get_first : Proc(IITPropList*, CProperty*, HRESULT)
+    get_next : Proc(IITPropList*, CProperty*, HRESULT)
+    get_prop_count : Proc(IITPropList*, Int32*, HRESULT)
+    save_header : Proc(IITPropList*, Void*, UInt32, HRESULT)
+    save_data : Proc(IITPropList*, Void*, UInt32, Void*, UInt32, HRESULT)
+    get_header_size : Proc(IITPropList*, UInt32*, HRESULT)
+    get_data_size : Proc(IITPropList*, Void*, UInt32, UInt32*, HRESULT)
+    save_data_to_stream : Proc(IITPropList*, Void*, UInt32, IStream, HRESULT)
+    load_from_mem : Proc(IITPropList*, Void*, UInt32, HRESULT)
+    save_to_mem : Proc(IITPropList*, Void*, UInt32, HRESULT)
   end
 
   IITPropList_GUID = "1f403bb1-9997-11d0-a850-00aa006c7d01"
@@ -470,14 +470,14 @@ lib LibWin32
   end
 
   struct IITDatabaseVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    open : UInt64
-    close : UInt64
-    create_object : UInt64
-    get_object : UInt64
-    get_object_persistence : UInt64
+    query_interface : Proc(IITDatabase*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IITDatabase*, UInt32)
+    release : Proc(IITDatabase*, UInt32)
+    open : Proc(IITDatabase*, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
+    close : Proc(IITDatabase*, HRESULT)
+    create_object : Proc(IITDatabase*, Guid*, UInt32*, HRESULT)
+    get_object : Proc(IITDatabase*, UInt32, Guid*, Void**, HRESULT)
+    get_object_persistence : Proc(IITDatabase*, LibC::LPWSTR, UInt32, Void**, LibC::BOOL, HRESULT)
   end
 
   IITDatabase_GUID = "8fa0d5a2-dedf-11d0-9a61-00c04fb68bf7"
@@ -487,22 +487,22 @@ lib LibWin32
   end
 
   struct IITWordWheelVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    open : UInt64
-    close : UInt64
-    get_locale_info : UInt64
-    get_sorter_instance : UInt64
-    count : UInt64
-    lookup : UInt64
-    lookup2 : UInt64
-    lookup3 : UInt64
-    set_group : UInt64
-    get_group : UInt64
-    get_data_count : UInt64
-    get_data : UInt64
-    get_data_columns : UInt64
+    query_interface : Proc(IITWordWheel*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IITWordWheel*, UInt32)
+    release : Proc(IITWordWheel*, UInt32)
+    open : Proc(IITWordWheel*, IITDatabase, LibC::LPWSTR, WORD_WHEEL_OPEN_FLAGS, HRESULT)
+    close : Proc(IITWordWheel*, HRESULT)
+    get_locale_info : Proc(IITWordWheel*, UInt32*, UInt32*, HRESULT)
+    get_sorter_instance : Proc(IITWordWheel*, UInt32*, HRESULT)
+    count : Proc(IITWordWheel*, Int32*, HRESULT)
+    lookup : Proc(IITWordWheel*, Void*, LibC::BOOL, Int32*, HRESULT)
+    lookup2 : Proc(IITWordWheel*, Int32, IITResultSet, Int32, HRESULT)
+    lookup3 : Proc(IITWordWheel*, Int32, Void*, UInt32, HRESULT)
+    set_group : Proc(IITWordWheel*, IITGroup*, HRESULT)
+    get_group : Proc(IITWordWheel*, IITGroup**, HRESULT)
+    get_data_count : Proc(IITWordWheel*, Int32, UInt32*, HRESULT)
+    get_data : Proc(IITWordWheel*, Int32, IITResultSet, HRESULT)
+    get_data_columns : Proc(IITWordWheel*, IITResultSet, HRESULT)
   end
 
   IITWordWheel_GUID = "8fa0d5a4-dedf-11d0-9a61-00c04fb68bf7"
@@ -512,11 +512,11 @@ lib LibWin32
   end
 
   struct IStemSinkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    put_alt_word : UInt64
-    put_word : UInt64
+    query_interface : Proc(IStemSink*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IStemSink*, UInt32)
+    release : Proc(IStemSink*, UInt32)
+    put_alt_word : Proc(IStemSink*, LibC::LPWSTR, UInt32, HRESULT)
+    put_word : Proc(IStemSink*, LibC::LPWSTR, UInt32, HRESULT)
   end
 
   IStemSink_GUID = "fe77c330-7f42-11ce-be57-00aa0051fe20"
@@ -526,14 +526,14 @@ lib LibWin32
   end
 
   struct IStemmerConfigVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_locale_info : UInt64
-    get_locale_info : UInt64
-    set_control_info : UInt64
-    get_control_info : UInt64
-    load_external_stemmer_data : UInt64
+    query_interface : Proc(IStemmerConfig*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IStemmerConfig*, UInt32)
+    release : Proc(IStemmerConfig*, UInt32)
+    set_locale_info : Proc(IStemmerConfig*, UInt32, UInt32, HRESULT)
+    get_locale_info : Proc(IStemmerConfig*, UInt32*, UInt32*, HRESULT)
+    set_control_info : Proc(IStemmerConfig*, UInt32, UInt32, HRESULT)
+    get_control_info : Proc(IStemmerConfig*, UInt32*, UInt32*, HRESULT)
+    load_external_stemmer_data : Proc(IStemmerConfig*, IStream, UInt32, HRESULT)
   end
 
   IStemmerConfig_GUID = "8fa0d5a7-dedf-11d0-9a61-00c04fb68bf7"
@@ -543,18 +543,18 @@ lib LibWin32
   end
 
   struct IWordBreakerConfigVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_locale_info : UInt64
-    get_locale_info : UInt64
-    set_break_word_type : UInt64
-    get_break_word_type : UInt64
-    set_control_info : UInt64
-    get_control_info : UInt64
-    load_external_breaker_data : UInt64
-    set_word_stemmer : UInt64
-    get_word_stemmer : UInt64
+    query_interface : Proc(IWordBreakerConfig*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWordBreakerConfig*, UInt32)
+    release : Proc(IWordBreakerConfig*, UInt32)
+    set_locale_info : Proc(IWordBreakerConfig*, UInt32, UInt32, HRESULT)
+    get_locale_info : Proc(IWordBreakerConfig*, UInt32*, UInt32*, HRESULT)
+    set_break_word_type : Proc(IWordBreakerConfig*, UInt32, HRESULT)
+    get_break_word_type : Proc(IWordBreakerConfig*, UInt32*, HRESULT)
+    set_control_info : Proc(IWordBreakerConfig*, UInt32, UInt32, HRESULT)
+    get_control_info : Proc(IWordBreakerConfig*, UInt32*, UInt32*, HRESULT)
+    load_external_breaker_data : Proc(IWordBreakerConfig*, IStream, UInt32, HRESULT)
+    set_word_stemmer : Proc(IWordBreakerConfig*, Guid*, IStemmer, HRESULT)
+    get_word_stemmer : Proc(IWordBreakerConfig*, IStemmer*, HRESULT)
   end
 
   IWordBreakerConfig_GUID = "8fa0d5a6-dedf-11d0-9a61-00c04fb68bf7"
@@ -564,39 +564,39 @@ lib LibWin32
   end
 
   struct IITResultSetVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_column_priority : UInt64
-    set_column_heap : UInt64
-    set_key_prop : UInt64
-    add : UInt64
-    add2 : UInt64
-    add3 : UInt64
-    add4 : UInt64
-    append : UInt64
-    set : UInt64
-    set2 : UInt64
-    set3 : UInt64
-    set4 : UInt64
-    copy : UInt64
-    append_rows : UInt64
-    get : UInt64
-    get_key_prop : UInt64
-    get_column_priority : UInt64
-    get_row_count : UInt64
-    get_column_count : UInt64
-    get_column : UInt64
-    get_column2 : UInt64
-    get_column_from_prop_id : UInt64
-    clear : UInt64
-    clear_rows : UInt64
-    free : UInt64
-    is_completed : UInt64
-    cancel : UInt64
-    pause : UInt64
-    get_row_status : UInt64
-    get_column_status : UInt64
+    query_interface : Proc(IITResultSet*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IITResultSet*, UInt32)
+    release : Proc(IITResultSet*, UInt32)
+    set_column_priority : Proc(IITResultSet*, Int32, PRIORITY, HRESULT)
+    set_column_heap : Proc(IITResultSet*, Int32, Void*, PFNCOLHEAPFREE, HRESULT)
+    set_key_prop : Proc(IITResultSet*, UInt32, HRESULT)
+    add : Proc(IITResultSet*, UInt32, UInt32, PRIORITY, HRESULT)
+    add2 : Proc(IITResultSet*, UInt32, LibC::LPWSTR, PRIORITY, HRESULT)
+    add3 : Proc(IITResultSet*, UInt32, Void*, UInt32, PRIORITY, HRESULT)
+    add4 : Proc(IITResultSet*, Void*, HRESULT)
+    append : Proc(IITResultSet*, Void*, Void*, HRESULT)
+    set : Proc(IITResultSet*, Int32, Int32, Void*, UInt32, HRESULT)
+    set2 : Proc(IITResultSet*, Int32, Int32, LibC::LPWSTR, HRESULT)
+    set3 : Proc(IITResultSet*, Int32, Int32, LibC::UINT_PTR, HRESULT)
+    set4 : Proc(IITResultSet*, Int32, Void*, Void*, HRESULT)
+    copy : Proc(IITResultSet*, IITResultSet, HRESULT)
+    append_rows : Proc(IITResultSet*, IITResultSet, Int32, Int32, Int32*, HRESULT)
+    get : Proc(IITResultSet*, Int32, Int32, CProperty*, HRESULT)
+    get_key_prop : Proc(IITResultSet*, UInt32*, HRESULT)
+    get_column_priority : Proc(IITResultSet*, Int32, PRIORITY*, HRESULT)
+    get_row_count : Proc(IITResultSet*, Int32*, HRESULT)
+    get_column_count : Proc(IITResultSet*, Int32*, HRESULT)
+    get_column : Proc(IITResultSet*, Int32, UInt32*, UInt32*, Void**, UInt32*, PRIORITY*, HRESULT)
+    get_column2 : Proc(IITResultSet*, Int32, UInt32*, HRESULT)
+    get_column_from_prop_id : Proc(IITResultSet*, UInt32, Int32*, HRESULT)
+    clear : Proc(IITResultSet*, HRESULT)
+    clear_rows : Proc(IITResultSet*, HRESULT)
+    free : Proc(IITResultSet*, HRESULT)
+    is_completed : Proc(IITResultSet*, HRESULT)
+    cancel : Proc(IITResultSet*, HRESULT)
+    pause : Proc(IITResultSet*, LibC::BOOL, HRESULT)
+    get_row_status : Proc(IITResultSet*, Int32, Int32, ROWSTATUS*, HRESULT)
+    get_column_status : Proc(IITResultSet*, COLUMNSTATUS*, HRESULT)
   end
 
   IITResultSet_GUID = "3bb91d41-998b-11d0-a850-00aa006c7d01"
@@ -607,343 +607,343 @@ lib LibWin32
 
 end
 struct LibWin32::IITPropList
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IITPropList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IITPropList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IITPropList*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_class_id(pclassid : Guid*) : HRESULT
-    @lpVtbl.value.get_class_id.unsafe_as(Proc(Guid*, HRESULT)).call(pclassid)
+  def get_class_id(this : IITPropList*, pclassid : Guid*) : HRESULT
+    @lpVtbl.value.get_class_id.call(this, pclassid)
   end
-  def is_dirty : HRESULT
-    @lpVtbl.value.is_dirty.unsafe_as(Proc(HRESULT)).call
+  def is_dirty(this : IITPropList*) : HRESULT
+    @lpVtbl.value.is_dirty.call(this)
   end
-  def load(pstm : IStream) : HRESULT
-    @lpVtbl.value.load.unsafe_as(Proc(IStream, HRESULT)).call(pstm)
+  def load(this : IITPropList*, pstm : IStream) : HRESULT
+    @lpVtbl.value.load.call(this, pstm)
   end
-  def save(pstm : IStream, fcleardirty : LibC::BOOL) : HRESULT
-    @lpVtbl.value.save.unsafe_as(Proc(IStream, LibC::BOOL, HRESULT)).call(pstm, fcleardirty)
+  def save(this : IITPropList*, pstm : IStream, fcleardirty : LibC::BOOL) : HRESULT
+    @lpVtbl.value.save.call(this, pstm, fcleardirty)
   end
-  def get_size_max(pcbsize : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.get_size_max.unsafe_as(Proc(ULARGE_INTEGER*, HRESULT)).call(pcbsize)
+  def get_size_max(this : IITPropList*, pcbsize : ULARGE_INTEGER*) : HRESULT
+    @lpVtbl.value.get_size_max.call(this, pcbsize)
   end
-  def init_new : HRESULT
-    @lpVtbl.value.init_new.unsafe_as(Proc(HRESULT)).call
+  def init_new(this : IITPropList*) : HRESULT
+    @lpVtbl.value.init_new.call(this)
   end
-  def set(propid : UInt32, lpszwstring : LibC::LPWSTR, dwoperation : UInt32) : HRESULT
-    @lpVtbl.value.set.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, HRESULT)).call(propid, lpszwstring, dwoperation)
+  def set(this : IITPropList*, propid : UInt32, lpszwstring : LibC::LPWSTR, dwoperation : UInt32) : HRESULT
+    @lpVtbl.value.set.call(this, propid, lpszwstring, dwoperation)
   end
-  def set2(propid : UInt32, lpvdata : Void*, cbdata : UInt32, dwoperation : UInt32) : HRESULT
-    @lpVtbl.value.set2.unsafe_as(Proc(UInt32, Void*, UInt32, UInt32, HRESULT)).call(propid, lpvdata, cbdata, dwoperation)
+  def set2(this : IITPropList*, propid : UInt32, lpvdata : Void*, cbdata : UInt32, dwoperation : UInt32) : HRESULT
+    @lpVtbl.value.set2.call(this, propid, lpvdata, cbdata, dwoperation)
   end
-  def set3(propid : UInt32, dwdata : UInt32, dwoperation : UInt32) : HRESULT
-    @lpVtbl.value.set3.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(propid, dwdata, dwoperation)
+  def set3(this : IITPropList*, propid : UInt32, dwdata : UInt32, dwoperation : UInt32) : HRESULT
+    @lpVtbl.value.set3.call(this, propid, dwdata, dwoperation)
   end
-  def add(prop : CProperty*) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(CProperty*, HRESULT)).call(prop)
+  def add(this : IITPropList*, prop : CProperty*) : HRESULT
+    @lpVtbl.value.add.call(this, prop)
   end
-  def get(propid : UInt32, property : CProperty*) : HRESULT
-    @lpVtbl.value.get.unsafe_as(Proc(UInt32, CProperty*, HRESULT)).call(propid, property)
+  def get(this : IITPropList*, propid : UInt32, property : CProperty*) : HRESULT
+    @lpVtbl.value.get.call(this, propid, property)
   end
-  def clear : HRESULT
-    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  def clear(this : IITPropList*) : HRESULT
+    @lpVtbl.value.clear.call(this)
   end
-  def set_persist(fpersist : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_persist.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fpersist)
+  def set_persist(this : IITPropList*, fpersist : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_persist.call(this, fpersist)
   end
-  def set_persist2(propid : UInt32, fpersist : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_persist2.unsafe_as(Proc(UInt32, LibC::BOOL, HRESULT)).call(propid, fpersist)
+  def set_persist2(this : IITPropList*, propid : UInt32, fpersist : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_persist2.call(this, propid, fpersist)
   end
-  def get_first(property : CProperty*) : HRESULT
-    @lpVtbl.value.get_first.unsafe_as(Proc(CProperty*, HRESULT)).call(property)
+  def get_first(this : IITPropList*, property : CProperty*) : HRESULT
+    @lpVtbl.value.get_first.call(this, property)
   end
-  def get_next(property : CProperty*) : HRESULT
-    @lpVtbl.value.get_next.unsafe_as(Proc(CProperty*, HRESULT)).call(property)
+  def get_next(this : IITPropList*, property : CProperty*) : HRESULT
+    @lpVtbl.value.get_next.call(this, property)
   end
-  def get_prop_count(cprop : Int32*) : HRESULT
-    @lpVtbl.value.get_prop_count.unsafe_as(Proc(Int32*, HRESULT)).call(cprop)
+  def get_prop_count(this : IITPropList*, cprop : Int32*) : HRESULT
+    @lpVtbl.value.get_prop_count.call(this, cprop)
   end
-  def save_header(lpvdata : Void*, dwhdrsize : UInt32) : HRESULT
-    @lpVtbl.value.save_header.unsafe_as(Proc(Void*, UInt32, HRESULT)).call(lpvdata, dwhdrsize)
+  def save_header(this : IITPropList*, lpvdata : Void*, dwhdrsize : UInt32) : HRESULT
+    @lpVtbl.value.save_header.call(this, lpvdata, dwhdrsize)
   end
-  def save_data(lpvheader : Void*, dwhdrsize : UInt32, lpvdata : Void*, dwbufsize : UInt32) : HRESULT
-    @lpVtbl.value.save_data.unsafe_as(Proc(Void*, UInt32, Void*, UInt32, HRESULT)).call(lpvheader, dwhdrsize, lpvdata, dwbufsize)
+  def save_data(this : IITPropList*, lpvheader : Void*, dwhdrsize : UInt32, lpvdata : Void*, dwbufsize : UInt32) : HRESULT
+    @lpVtbl.value.save_data.call(this, lpvheader, dwhdrsize, lpvdata, dwbufsize)
   end
-  def get_header_size(dwhdrsize : UInt32*) : HRESULT
-    @lpVtbl.value.get_header_size.unsafe_as(Proc(UInt32*, HRESULT)).call(dwhdrsize)
+  def get_header_size(this : IITPropList*, dwhdrsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_header_size.call(this, dwhdrsize)
   end
-  def get_data_size(lpvheader : Void*, dwhdrsize : UInt32, dwdatasize : UInt32*) : HRESULT
-    @lpVtbl.value.get_data_size.unsafe_as(Proc(Void*, UInt32, UInt32*, HRESULT)).call(lpvheader, dwhdrsize, dwdatasize)
+  def get_data_size(this : IITPropList*, lpvheader : Void*, dwhdrsize : UInt32, dwdatasize : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_size.call(this, lpvheader, dwhdrsize, dwdatasize)
   end
-  def save_data_to_stream(lpvheader : Void*, dwhdrsize : UInt32, pstream : IStream) : HRESULT
-    @lpVtbl.value.save_data_to_stream.unsafe_as(Proc(Void*, UInt32, IStream, HRESULT)).call(lpvheader, dwhdrsize, pstream)
+  def save_data_to_stream(this : IITPropList*, lpvheader : Void*, dwhdrsize : UInt32, pstream : IStream) : HRESULT
+    @lpVtbl.value.save_data_to_stream.call(this, lpvheader, dwhdrsize, pstream)
   end
-  def load_from_mem(lpvdata : Void*, dwbufsize : UInt32) : HRESULT
-    @lpVtbl.value.load_from_mem.unsafe_as(Proc(Void*, UInt32, HRESULT)).call(lpvdata, dwbufsize)
+  def load_from_mem(this : IITPropList*, lpvdata : Void*, dwbufsize : UInt32) : HRESULT
+    @lpVtbl.value.load_from_mem.call(this, lpvdata, dwbufsize)
   end
-  def save_to_mem(lpvdata : Void*, dwbufsize : UInt32) : HRESULT
-    @lpVtbl.value.save_to_mem.unsafe_as(Proc(Void*, UInt32, HRESULT)).call(lpvdata, dwbufsize)
+  def save_to_mem(this : IITPropList*, lpvdata : Void*, dwbufsize : UInt32) : HRESULT
+    @lpVtbl.value.save_to_mem.call(this, lpvdata, dwbufsize)
   end
 end
 struct LibWin32::IITDatabase
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IITDatabase*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IITDatabase*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IITDatabase*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def open(lpszhost : LibC::LPWSTR, lpszmoniker : LibC::LPWSTR, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.open.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(lpszhost, lpszmoniker, dwflags)
+  def open(this : IITDatabase*, lpszhost : LibC::LPWSTR, lpszmoniker : LibC::LPWSTR, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.open.call(this, lpszhost, lpszmoniker, dwflags)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : IITDatabase*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
-  def create_object(rclsid : Guid*, pdwobjinstance : UInt32*) : HRESULT
-    @lpVtbl.value.create_object.unsafe_as(Proc(Guid*, UInt32*, HRESULT)).call(rclsid, pdwobjinstance)
+  def create_object(this : IITDatabase*, rclsid : Guid*, pdwobjinstance : UInt32*) : HRESULT
+    @lpVtbl.value.create_object.call(this, rclsid, pdwobjinstance)
   end
-  def get_object(dwobjinstance : UInt32, riid : Guid*, ppvobj : Void**) : HRESULT
-    @lpVtbl.value.get_object.unsafe_as(Proc(UInt32, Guid*, Void**, HRESULT)).call(dwobjinstance, riid, ppvobj)
+  def get_object(this : IITDatabase*, dwobjinstance : UInt32, riid : Guid*, ppvobj : Void**) : HRESULT
+    @lpVtbl.value.get_object.call(this, dwobjinstance, riid, ppvobj)
   end
-  def get_object_persistence(lpwszobject : LibC::LPWSTR, dwobjinstance : UInt32, ppvpersistence : Void**, fstream : LibC::BOOL) : HRESULT
-    @lpVtbl.value.get_object_persistence.unsafe_as(Proc(LibC::LPWSTR, UInt32, Void**, LibC::BOOL, HRESULT)).call(lpwszobject, dwobjinstance, ppvpersistence, fstream)
+  def get_object_persistence(this : IITDatabase*, lpwszobject : LibC::LPWSTR, dwobjinstance : UInt32, ppvpersistence : Void**, fstream : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_object_persistence.call(this, lpwszobject, dwobjinstance, ppvpersistence, fstream)
   end
 end
 struct LibWin32::IITWordWheel
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IITWordWheel*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IITWordWheel*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IITWordWheel*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def open(lpitdb : IITDatabase, lpszmoniker : LibC::LPWSTR, dwflags : WORD_WHEEL_OPEN_FLAGS) : HRESULT
-    @lpVtbl.value.open.unsafe_as(Proc(IITDatabase, LibC::LPWSTR, WORD_WHEEL_OPEN_FLAGS, HRESULT)).call(lpitdb, lpszmoniker, dwflags)
+  def open(this : IITWordWheel*, lpitdb : IITDatabase, lpszmoniker : LibC::LPWSTR, dwflags : WORD_WHEEL_OPEN_FLAGS) : HRESULT
+    @lpVtbl.value.open.call(this, lpitdb, lpszmoniker, dwflags)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : IITWordWheel*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
-  def get_locale_info(pdwcodepageid : UInt32*, plcid : UInt32*) : HRESULT
-    @lpVtbl.value.get_locale_info.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwcodepageid, plcid)
+  def get_locale_info(this : IITWordWheel*, pdwcodepageid : UInt32*, plcid : UInt32*) : HRESULT
+    @lpVtbl.value.get_locale_info.call(this, pdwcodepageid, plcid)
   end
-  def get_sorter_instance(pdwobjinstance : UInt32*) : HRESULT
-    @lpVtbl.value.get_sorter_instance.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwobjinstance)
+  def get_sorter_instance(this : IITWordWheel*, pdwobjinstance : UInt32*) : HRESULT
+    @lpVtbl.value.get_sorter_instance.call(this, pdwobjinstance)
   end
-  def count(pcentries : Int32*) : HRESULT
-    @lpVtbl.value.count.unsafe_as(Proc(Int32*, HRESULT)).call(pcentries)
+  def count(this : IITWordWheel*, pcentries : Int32*) : HRESULT
+    @lpVtbl.value.count.call(this, pcentries)
   end
-  def lookup(lpcvprefix : Void*, fexactmatch : LibC::BOOL, plentry : Int32*) : HRESULT
-    @lpVtbl.value.lookup.unsafe_as(Proc(Void*, LibC::BOOL, Int32*, HRESULT)).call(lpcvprefix, fexactmatch, plentry)
+  def lookup(this : IITWordWheel*, lpcvprefix : Void*, fexactmatch : LibC::BOOL, plentry : Int32*) : HRESULT
+    @lpVtbl.value.lookup.call(this, lpcvprefix, fexactmatch, plentry)
   end
-  def lookup2(lentry : Int32, lpitresult : IITResultSet, centries : Int32) : HRESULT
-    @lpVtbl.value.lookup2.unsafe_as(Proc(Int32, IITResultSet, Int32, HRESULT)).call(lentry, lpitresult, centries)
+  def lookup2(this : IITWordWheel*, lentry : Int32, lpitresult : IITResultSet, centries : Int32) : HRESULT
+    @lpVtbl.value.lookup2.call(this, lentry, lpitresult, centries)
   end
-  def lookup3(lentry : Int32, lpvkeybuf : Void*, cbkeybuf : UInt32) : HRESULT
-    @lpVtbl.value.lookup3.unsafe_as(Proc(Int32, Void*, UInt32, HRESULT)).call(lentry, lpvkeybuf, cbkeybuf)
+  def lookup3(this : IITWordWheel*, lentry : Int32, lpvkeybuf : Void*, cbkeybuf : UInt32) : HRESULT
+    @lpVtbl.value.lookup3.call(this, lentry, lpvkeybuf, cbkeybuf)
   end
-  def set_group(piitgroup : IITGroup*) : HRESULT
-    @lpVtbl.value.set_group.unsafe_as(Proc(IITGroup*, HRESULT)).call(piitgroup)
+  def set_group(this : IITWordWheel*, piitgroup : IITGroup*) : HRESULT
+    @lpVtbl.value.set_group.call(this, piitgroup)
   end
-  def get_group(ppiitgroup : IITGroup**) : HRESULT
-    @lpVtbl.value.get_group.unsafe_as(Proc(IITGroup**, HRESULT)).call(ppiitgroup)
+  def get_group(this : IITWordWheel*, ppiitgroup : IITGroup**) : HRESULT
+    @lpVtbl.value.get_group.call(this, ppiitgroup)
   end
-  def get_data_count(lentry : Int32, pdwcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_data_count.unsafe_as(Proc(Int32, UInt32*, HRESULT)).call(lentry, pdwcount)
+  def get_data_count(this : IITWordWheel*, lentry : Int32, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_count.call(this, lentry, pdwcount)
   end
-  def get_data(lentry : Int32, lpitresult : IITResultSet) : HRESULT
-    @lpVtbl.value.get_data.unsafe_as(Proc(Int32, IITResultSet, HRESULT)).call(lentry, lpitresult)
+  def get_data(this : IITWordWheel*, lentry : Int32, lpitresult : IITResultSet) : HRESULT
+    @lpVtbl.value.get_data.call(this, lentry, lpitresult)
   end
-  def get_data_columns(prs : IITResultSet) : HRESULT
-    @lpVtbl.value.get_data_columns.unsafe_as(Proc(IITResultSet, HRESULT)).call(prs)
+  def get_data_columns(this : IITWordWheel*, prs : IITResultSet) : HRESULT
+    @lpVtbl.value.get_data_columns.call(this, prs)
   end
 end
 struct LibWin32::IStemSink
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IStemSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IStemSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IStemSink*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def put_alt_word(pwcinbuf : LibC::LPWSTR, cwc : UInt32) : HRESULT
-    @lpVtbl.value.put_alt_word.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(pwcinbuf, cwc)
+  def put_alt_word(this : IStemSink*, pwcinbuf : LibC::LPWSTR, cwc : UInt32) : HRESULT
+    @lpVtbl.value.put_alt_word.call(this, pwcinbuf, cwc)
   end
-  def put_word(pwcinbuf : LibC::LPWSTR, cwc : UInt32) : HRESULT
-    @lpVtbl.value.put_word.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(pwcinbuf, cwc)
+  def put_word(this : IStemSink*, pwcinbuf : LibC::LPWSTR, cwc : UInt32) : HRESULT
+    @lpVtbl.value.put_word.call(this, pwcinbuf, cwc)
   end
 end
 struct LibWin32::IStemmerConfig
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IStemmerConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IStemmerConfig*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IStemmerConfig*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_locale_info(dwcodepageid : UInt32, lcid : UInt32) : HRESULT
-    @lpVtbl.value.set_locale_info.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(dwcodepageid, lcid)
+  def set_locale_info(this : IStemmerConfig*, dwcodepageid : UInt32, lcid : UInt32) : HRESULT
+    @lpVtbl.value.set_locale_info.call(this, dwcodepageid, lcid)
   end
-  def get_locale_info(pdwcodepageid : UInt32*, plcid : UInt32*) : HRESULT
-    @lpVtbl.value.get_locale_info.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwcodepageid, plcid)
+  def get_locale_info(this : IStemmerConfig*, pdwcodepageid : UInt32*, plcid : UInt32*) : HRESULT
+    @lpVtbl.value.get_locale_info.call(this, pdwcodepageid, plcid)
   end
-  def set_control_info(grfstemflags : UInt32, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.set_control_info.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(grfstemflags, dwreserved)
+  def set_control_info(this : IStemmerConfig*, grfstemflags : UInt32, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.set_control_info.call(this, grfstemflags, dwreserved)
   end
-  def get_control_info(pgrfstemflags : UInt32*, pdwreserved : UInt32*) : HRESULT
-    @lpVtbl.value.get_control_info.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pgrfstemflags, pdwreserved)
+  def get_control_info(this : IStemmerConfig*, pgrfstemflags : UInt32*, pdwreserved : UInt32*) : HRESULT
+    @lpVtbl.value.get_control_info.call(this, pgrfstemflags, pdwreserved)
   end
-  def load_external_stemmer_data(pstream : IStream, dwextdatatype : UInt32) : HRESULT
-    @lpVtbl.value.load_external_stemmer_data.unsafe_as(Proc(IStream, UInt32, HRESULT)).call(pstream, dwextdatatype)
+  def load_external_stemmer_data(this : IStemmerConfig*, pstream : IStream, dwextdatatype : UInt32) : HRESULT
+    @lpVtbl.value.load_external_stemmer_data.call(this, pstream, dwextdatatype)
   end
 end
 struct LibWin32::IWordBreakerConfig
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWordBreakerConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWordBreakerConfig*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWordBreakerConfig*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_locale_info(dwcodepageid : UInt32, lcid : UInt32) : HRESULT
-    @lpVtbl.value.set_locale_info.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(dwcodepageid, lcid)
+  def set_locale_info(this : IWordBreakerConfig*, dwcodepageid : UInt32, lcid : UInt32) : HRESULT
+    @lpVtbl.value.set_locale_info.call(this, dwcodepageid, lcid)
   end
-  def get_locale_info(pdwcodepageid : UInt32*, plcid : UInt32*) : HRESULT
-    @lpVtbl.value.get_locale_info.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwcodepageid, plcid)
+  def get_locale_info(this : IWordBreakerConfig*, pdwcodepageid : UInt32*, plcid : UInt32*) : HRESULT
+    @lpVtbl.value.get_locale_info.call(this, pdwcodepageid, plcid)
   end
-  def set_break_word_type(dwbreakwordtype : UInt32) : HRESULT
-    @lpVtbl.value.set_break_word_type.unsafe_as(Proc(UInt32, HRESULT)).call(dwbreakwordtype)
+  def set_break_word_type(this : IWordBreakerConfig*, dwbreakwordtype : UInt32) : HRESULT
+    @lpVtbl.value.set_break_word_type.call(this, dwbreakwordtype)
   end
-  def get_break_word_type(pdwbreakwordtype : UInt32*) : HRESULT
-    @lpVtbl.value.get_break_word_type.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwbreakwordtype)
+  def get_break_word_type(this : IWordBreakerConfig*, pdwbreakwordtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_break_word_type.call(this, pdwbreakwordtype)
   end
-  def set_control_info(grfbreakflags : UInt32, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.set_control_info.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(grfbreakflags, dwreserved)
+  def set_control_info(this : IWordBreakerConfig*, grfbreakflags : UInt32, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.set_control_info.call(this, grfbreakflags, dwreserved)
   end
-  def get_control_info(pgrfbreakflags : UInt32*, pdwreserved : UInt32*) : HRESULT
-    @lpVtbl.value.get_control_info.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pgrfbreakflags, pdwreserved)
+  def get_control_info(this : IWordBreakerConfig*, pgrfbreakflags : UInt32*, pdwreserved : UInt32*) : HRESULT
+    @lpVtbl.value.get_control_info.call(this, pgrfbreakflags, pdwreserved)
   end
-  def load_external_breaker_data(pstream : IStream, dwextdatatype : UInt32) : HRESULT
-    @lpVtbl.value.load_external_breaker_data.unsafe_as(Proc(IStream, UInt32, HRESULT)).call(pstream, dwextdatatype)
+  def load_external_breaker_data(this : IWordBreakerConfig*, pstream : IStream, dwextdatatype : UInt32) : HRESULT
+    @lpVtbl.value.load_external_breaker_data.call(this, pstream, dwextdatatype)
   end
-  def set_word_stemmer(rclsid : Guid*, pstemmer : IStemmer) : HRESULT
-    @lpVtbl.value.set_word_stemmer.unsafe_as(Proc(Guid*, IStemmer, HRESULT)).call(rclsid, pstemmer)
+  def set_word_stemmer(this : IWordBreakerConfig*, rclsid : Guid*, pstemmer : IStemmer) : HRESULT
+    @lpVtbl.value.set_word_stemmer.call(this, rclsid, pstemmer)
   end
-  def get_word_stemmer(ppstemmer : IStemmer*) : HRESULT
-    @lpVtbl.value.get_word_stemmer.unsafe_as(Proc(IStemmer*, HRESULT)).call(ppstemmer)
+  def get_word_stemmer(this : IWordBreakerConfig*, ppstemmer : IStemmer*) : HRESULT
+    @lpVtbl.value.get_word_stemmer.call(this, ppstemmer)
   end
 end
 struct LibWin32::IITResultSet
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IITResultSet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IITResultSet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IITResultSet*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_column_priority(lcolumnindex : Int32, columnpriority : PRIORITY) : HRESULT
-    @lpVtbl.value.set_column_priority.unsafe_as(Proc(Int32, PRIORITY, HRESULT)).call(lcolumnindex, columnpriority)
+  def set_column_priority(this : IITResultSet*, lcolumnindex : Int32, columnpriority : PRIORITY) : HRESULT
+    @lpVtbl.value.set_column_priority.call(this, lcolumnindex, columnpriority)
   end
-  def set_column_heap(lcolumnindex : Int32, lpvheap : Void*, pfncolheapfree : PFNCOLHEAPFREE) : HRESULT
-    @lpVtbl.value.set_column_heap.unsafe_as(Proc(Int32, Void*, PFNCOLHEAPFREE, HRESULT)).call(lcolumnindex, lpvheap, pfncolheapfree)
+  def set_column_heap(this : IITResultSet*, lcolumnindex : Int32, lpvheap : Void*, pfncolheapfree : PFNCOLHEAPFREE) : HRESULT
+    @lpVtbl.value.set_column_heap.call(this, lcolumnindex, lpvheap, pfncolheapfree)
   end
-  def set_key_prop(propid : UInt32) : HRESULT
-    @lpVtbl.value.set_key_prop.unsafe_as(Proc(UInt32, HRESULT)).call(propid)
+  def set_key_prop(this : IITResultSet*, propid : UInt32) : HRESULT
+    @lpVtbl.value.set_key_prop.call(this, propid)
   end
-  def add(propid : UInt32, dwdefaultdata : UInt32, priority : PRIORITY) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(UInt32, UInt32, PRIORITY, HRESULT)).call(propid, dwdefaultdata, priority)
+  def add(this : IITResultSet*, propid : UInt32, dwdefaultdata : UInt32, priority : PRIORITY) : HRESULT
+    @lpVtbl.value.add.call(this, propid, dwdefaultdata, priority)
   end
-  def add2(propid : UInt32, lpszwdefault : LibC::LPWSTR, priority : PRIORITY) : HRESULT
-    @lpVtbl.value.add2.unsafe_as(Proc(UInt32, LibC::LPWSTR, PRIORITY, HRESULT)).call(propid, lpszwdefault, priority)
+  def add2(this : IITResultSet*, propid : UInt32, lpszwdefault : LibC::LPWSTR, priority : PRIORITY) : HRESULT
+    @lpVtbl.value.add2.call(this, propid, lpszwdefault, priority)
   end
-  def add3(propid : UInt32, lpvdefaultdata : Void*, cbdata : UInt32, priority : PRIORITY) : HRESULT
-    @lpVtbl.value.add3.unsafe_as(Proc(UInt32, Void*, UInt32, PRIORITY, HRESULT)).call(propid, lpvdefaultdata, cbdata, priority)
+  def add3(this : IITResultSet*, propid : UInt32, lpvdefaultdata : Void*, cbdata : UInt32, priority : PRIORITY) : HRESULT
+    @lpVtbl.value.add3.call(this, propid, lpvdefaultdata, cbdata, priority)
   end
-  def add4(lpvhdr : Void*) : HRESULT
-    @lpVtbl.value.add4.unsafe_as(Proc(Void*, HRESULT)).call(lpvhdr)
+  def add4(this : IITResultSet*, lpvhdr : Void*) : HRESULT
+    @lpVtbl.value.add4.call(this, lpvhdr)
   end
-  def append(lpvhdr : Void*, lpvdata : Void*) : HRESULT
-    @lpVtbl.value.append.unsafe_as(Proc(Void*, Void*, HRESULT)).call(lpvhdr, lpvdata)
+  def append(this : IITResultSet*, lpvhdr : Void*, lpvdata : Void*) : HRESULT
+    @lpVtbl.value.append.call(this, lpvhdr, lpvdata)
   end
-  def set(lrowindex : Int32, lcolumnindex : Int32, lpvdata : Void*, cbdata : UInt32) : HRESULT
-    @lpVtbl.value.set.unsafe_as(Proc(Int32, Int32, Void*, UInt32, HRESULT)).call(lrowindex, lcolumnindex, lpvdata, cbdata)
+  def set(this : IITResultSet*, lrowindex : Int32, lcolumnindex : Int32, lpvdata : Void*, cbdata : UInt32) : HRESULT
+    @lpVtbl.value.set.call(this, lrowindex, lcolumnindex, lpvdata, cbdata)
   end
-  def set2(lrowindex : Int32, lcolumnindex : Int32, lpwstr : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set2.unsafe_as(Proc(Int32, Int32, LibC::LPWSTR, HRESULT)).call(lrowindex, lcolumnindex, lpwstr)
+  def set2(this : IITResultSet*, lrowindex : Int32, lcolumnindex : Int32, lpwstr : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set2.call(this, lrowindex, lcolumnindex, lpwstr)
   end
-  def set3(lrowindex : Int32, lcolumnindex : Int32, dwdata : LibC::UINT_PTR) : HRESULT
-    @lpVtbl.value.set3.unsafe_as(Proc(Int32, Int32, LibC::UINT_PTR, HRESULT)).call(lrowindex, lcolumnindex, dwdata)
+  def set3(this : IITResultSet*, lrowindex : Int32, lcolumnindex : Int32, dwdata : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.set3.call(this, lrowindex, lcolumnindex, dwdata)
   end
-  def set4(lrowindex : Int32, lpvhdr : Void*, lpvdata : Void*) : HRESULT
-    @lpVtbl.value.set4.unsafe_as(Proc(Int32, Void*, Void*, HRESULT)).call(lrowindex, lpvhdr, lpvdata)
+  def set4(this : IITResultSet*, lrowindex : Int32, lpvhdr : Void*, lpvdata : Void*) : HRESULT
+    @lpVtbl.value.set4.call(this, lrowindex, lpvhdr, lpvdata)
   end
-  def copy(prscopy : IITResultSet) : HRESULT
-    @lpVtbl.value.copy.unsafe_as(Proc(IITResultSet, HRESULT)).call(prscopy)
+  def copy(this : IITResultSet*, prscopy : IITResultSet) : HRESULT
+    @lpVtbl.value.copy.call(this, prscopy)
   end
-  def append_rows(pressrc : IITResultSet, lrowsrcfirst : Int32, csrcrows : Int32, lrowfirstdest : Int32*) : HRESULT
-    @lpVtbl.value.append_rows.unsafe_as(Proc(IITResultSet, Int32, Int32, Int32*, HRESULT)).call(pressrc, lrowsrcfirst, csrcrows, lrowfirstdest)
+  def append_rows(this : IITResultSet*, pressrc : IITResultSet, lrowsrcfirst : Int32, csrcrows : Int32, lrowfirstdest : Int32*) : HRESULT
+    @lpVtbl.value.append_rows.call(this, pressrc, lrowsrcfirst, csrcrows, lrowfirstdest)
   end
-  def get(lrowindex : Int32, lcolumnindex : Int32, prop : CProperty*) : HRESULT
-    @lpVtbl.value.get.unsafe_as(Proc(Int32, Int32, CProperty*, HRESULT)).call(lrowindex, lcolumnindex, prop)
+  def get(this : IITResultSet*, lrowindex : Int32, lcolumnindex : Int32, prop : CProperty*) : HRESULT
+    @lpVtbl.value.get.call(this, lrowindex, lcolumnindex, prop)
   end
-  def get_key_prop(keypropid : UInt32*) : HRESULT
-    @lpVtbl.value.get_key_prop.unsafe_as(Proc(UInt32*, HRESULT)).call(keypropid)
+  def get_key_prop(this : IITResultSet*, keypropid : UInt32*) : HRESULT
+    @lpVtbl.value.get_key_prop.call(this, keypropid)
   end
-  def get_column_priority(lcolumnindex : Int32, columnpriority : PRIORITY*) : HRESULT
-    @lpVtbl.value.get_column_priority.unsafe_as(Proc(Int32, PRIORITY*, HRESULT)).call(lcolumnindex, columnpriority)
+  def get_column_priority(this : IITResultSet*, lcolumnindex : Int32, columnpriority : PRIORITY*) : HRESULT
+    @lpVtbl.value.get_column_priority.call(this, lcolumnindex, columnpriority)
   end
-  def get_row_count(lnumberofrows : Int32*) : HRESULT
-    @lpVtbl.value.get_row_count.unsafe_as(Proc(Int32*, HRESULT)).call(lnumberofrows)
+  def get_row_count(this : IITResultSet*, lnumberofrows : Int32*) : HRESULT
+    @lpVtbl.value.get_row_count.call(this, lnumberofrows)
   end
-  def get_column_count(lnumberofcolumns : Int32*) : HRESULT
-    @lpVtbl.value.get_column_count.unsafe_as(Proc(Int32*, HRESULT)).call(lnumberofcolumns)
+  def get_column_count(this : IITResultSet*, lnumberofcolumns : Int32*) : HRESULT
+    @lpVtbl.value.get_column_count.call(this, lnumberofcolumns)
   end
-  def get_column(lcolumnindex : Int32, propid : UInt32*, dwtype : UInt32*, lpvdefaultvalue : Void**, cbsize : UInt32*, columnpriority : PRIORITY*) : HRESULT
-    @lpVtbl.value.get_column.unsafe_as(Proc(Int32, UInt32*, UInt32*, Void**, UInt32*, PRIORITY*, HRESULT)).call(lcolumnindex, propid, dwtype, lpvdefaultvalue, cbsize, columnpriority)
+  def get_column(this : IITResultSet*, lcolumnindex : Int32, propid : UInt32*, dwtype : UInt32*, lpvdefaultvalue : Void**, cbsize : UInt32*, columnpriority : PRIORITY*) : HRESULT
+    @lpVtbl.value.get_column.call(this, lcolumnindex, propid, dwtype, lpvdefaultvalue, cbsize, columnpriority)
   end
-  def get_column2(lcolumnindex : Int32, propid : UInt32*) : HRESULT
-    @lpVtbl.value.get_column2.unsafe_as(Proc(Int32, UInt32*, HRESULT)).call(lcolumnindex, propid)
+  def get_column2(this : IITResultSet*, lcolumnindex : Int32, propid : UInt32*) : HRESULT
+    @lpVtbl.value.get_column2.call(this, lcolumnindex, propid)
   end
-  def get_column_from_prop_id(propid : UInt32, lcolumnindex : Int32*) : HRESULT
-    @lpVtbl.value.get_column_from_prop_id.unsafe_as(Proc(UInt32, Int32*, HRESULT)).call(propid, lcolumnindex)
+  def get_column_from_prop_id(this : IITResultSet*, propid : UInt32, lcolumnindex : Int32*) : HRESULT
+    @lpVtbl.value.get_column_from_prop_id.call(this, propid, lcolumnindex)
   end
-  def clear : HRESULT
-    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  def clear(this : IITResultSet*) : HRESULT
+    @lpVtbl.value.clear.call(this)
   end
-  def clear_rows : HRESULT
-    @lpVtbl.value.clear_rows.unsafe_as(Proc(HRESULT)).call
+  def clear_rows(this : IITResultSet*) : HRESULT
+    @lpVtbl.value.clear_rows.call(this)
   end
-  def free : HRESULT
-    @lpVtbl.value.free.unsafe_as(Proc(HRESULT)).call
+  def free(this : IITResultSet*) : HRESULT
+    @lpVtbl.value.free.call(this)
   end
-  def is_completed : HRESULT
-    @lpVtbl.value.is_completed.unsafe_as(Proc(HRESULT)).call
+  def is_completed(this : IITResultSet*) : HRESULT
+    @lpVtbl.value.is_completed.call(this)
   end
-  def cancel : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  def cancel(this : IITResultSet*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
   end
-  def pause(fpause : LibC::BOOL) : HRESULT
-    @lpVtbl.value.pause.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fpause)
+  def pause(this : IITResultSet*, fpause : LibC::BOOL) : HRESULT
+    @lpVtbl.value.pause.call(this, fpause)
   end
-  def get_row_status(lrowfirst : Int32, crows : Int32, lprowstatus : ROWSTATUS*) : HRESULT
-    @lpVtbl.value.get_row_status.unsafe_as(Proc(Int32, Int32, ROWSTATUS*, HRESULT)).call(lrowfirst, crows, lprowstatus)
+  def get_row_status(this : IITResultSet*, lrowfirst : Int32, crows : Int32, lprowstatus : ROWSTATUS*) : HRESULT
+    @lpVtbl.value.get_row_status.call(this, lrowfirst, crows, lprowstatus)
   end
-  def get_column_status(lpcolstatus : COLUMNSTATUS*) : HRESULT
-    @lpVtbl.value.get_column_status.unsafe_as(Proc(COLUMNSTATUS*, HRESULT)).call(lpcolstatus)
+  def get_column_status(this : IITResultSet*, lpcolstatus : COLUMNSTATUS*) : HRESULT
+    @lpVtbl.value.get_column_status.call(this, lpcolstatus)
   end
 end

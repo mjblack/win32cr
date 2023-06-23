@@ -488,13 +488,13 @@ lib LibWin32
 
 
   struct IVssEnumObjectVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    next : UInt64
-    skip : UInt64
-    reset : UInt64
-    clone : UInt64
+    query_interface : Proc(IVssEnumObject*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssEnumObject*, UInt32)
+    release : Proc(IVssEnumObject*, UInt32)
+    next : Proc(IVssEnumObject*, UInt32, VSS_OBJECT_PROP*, UInt32*, HRESULT)
+    skip : Proc(IVssEnumObject*, UInt32, HRESULT)
+    reset : Proc(IVssEnumObject*, HRESULT)
+    clone : Proc(IVssEnumObject*, IVssEnumObject*, HRESULT)
   end
 
   IVssEnumObject_GUID = "ae1c7110-2f60-11d3-8a39-00c04f72d8e3"
@@ -504,12 +504,12 @@ lib LibWin32
   end
 
   struct IVssAsyncVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    cancel : UInt64
-    wait : UInt64
-    query_status : UInt64
+    query_interface : Proc(IVssAsync*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssAsync*, UInt32)
+    release : Proc(IVssAsync*, UInt32)
+    cancel : Proc(IVssAsync*, HRESULT)
+    wait : Proc(IVssAsync*, UInt32, HRESULT)
+    query_status : Proc(IVssAsync*, HRESULT*, Int32*, HRESULT)
   end
 
   IVssAsync_GUID = "507c37b4-cf5b-4e95-b0af-14eb9767467e"
@@ -519,14 +519,14 @@ lib LibWin32
   end
 
   struct IVssWMFiledescVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_path : UInt64
-    get_filespec : UInt64
-    get_recursive : UInt64
-    get_alternate_location : UInt64
-    get_backup_type_mask : UInt64
+    query_interface : Proc(IVssWMFiledesc*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssWMFiledesc*, UInt32)
+    release : Proc(IVssWMFiledesc*, UInt32)
+    get_path : Proc(IVssWMFiledesc*, UInt8**, HRESULT)
+    get_filespec : Proc(IVssWMFiledesc*, UInt8**, HRESULT)
+    get_recursive : Proc(IVssWMFiledesc*, Bool*, HRESULT)
+    get_alternate_location : Proc(IVssWMFiledesc*, UInt8**, HRESULT)
+    get_backup_type_mask : Proc(IVssWMFiledesc*, UInt32*, HRESULT)
   end
 
   struct IVssWMFiledesc
@@ -534,12 +534,12 @@ lib LibWin32
   end
 
   struct IVssWMDependencyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_writer_id : UInt64
-    get_logical_path : UInt64
-    get_component_name : UInt64
+    query_interface : Proc(IVssWMDependency*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssWMDependency*, UInt32)
+    release : Proc(IVssWMDependency*, UInt32)
+    get_writer_id : Proc(IVssWMDependency*, Guid*, HRESULT)
+    get_logical_path : Proc(IVssWMDependency*, UInt8**, HRESULT)
+    get_component_name : Proc(IVssWMDependency*, UInt8**, HRESULT)
   end
 
   struct IVssWMDependency
@@ -547,47 +547,47 @@ lib LibWin32
   end
 
   struct IVssComponentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_logical_path : UInt64
-    get_component_type : UInt64
-    get_component_name : UInt64
-    get_backup_succeeded : UInt64
-    get_alternate_location_mapping_count : UInt64
-    get_alternate_location_mapping : UInt64
-    set_backup_metadata : UInt64
-    get_backup_metadata : UInt64
-    add_partial_file : UInt64
-    get_partial_file_count : UInt64
-    get_partial_file : UInt64
-    is_selected_for_restore : UInt64
-    get_additional_restores : UInt64
-    get_new_target_count : UInt64
-    get_new_target : UInt64
-    add_directed_target : UInt64
-    get_directed_target_count : UInt64
-    get_directed_target : UInt64
-    set_restore_metadata : UInt64
-    get_restore_metadata : UInt64
-    set_restore_target : UInt64
-    get_restore_target : UInt64
-    set_pre_restore_failure_msg : UInt64
-    get_pre_restore_failure_msg : UInt64
-    set_post_restore_failure_msg : UInt64
-    get_post_restore_failure_msg : UInt64
-    set_backup_stamp : UInt64
-    get_backup_stamp : UInt64
-    get_previous_backup_stamp : UInt64
-    get_backup_options : UInt64
-    get_restore_options : UInt64
-    get_restore_subcomponent_count : UInt64
-    get_restore_subcomponent : UInt64
-    get_file_restore_status : UInt64
-    add_differenced_files_by_last_modify_time : UInt64
-    add_differenced_files_by_last_modify_lsn : UInt64
-    get_differenced_files_count : UInt64
-    get_differenced_file : UInt64
+    query_interface : Proc(IVssComponent*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssComponent*, UInt32)
+    release : Proc(IVssComponent*, UInt32)
+    get_logical_path : Proc(IVssComponent*, UInt8**, HRESULT)
+    get_component_type : Proc(IVssComponent*, VSS_COMPONENT_TYPE*, HRESULT)
+    get_component_name : Proc(IVssComponent*, UInt8**, HRESULT)
+    get_backup_succeeded : Proc(IVssComponent*, Bool*, HRESULT)
+    get_alternate_location_mapping_count : Proc(IVssComponent*, UInt32*, HRESULT)
+    get_alternate_location_mapping : Proc(IVssComponent*, UInt32, IVssWMFiledesc*, HRESULT)
+    set_backup_metadata : Proc(IVssComponent*, LibC::LPWSTR, HRESULT)
+    get_backup_metadata : Proc(IVssComponent*, UInt8**, HRESULT)
+    add_partial_file : Proc(IVssComponent*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    get_partial_file_count : Proc(IVssComponent*, UInt32*, HRESULT)
+    get_partial_file : Proc(IVssComponent*, UInt32, UInt8**, UInt8**, UInt8**, UInt8**, HRESULT)
+    is_selected_for_restore : Proc(IVssComponent*, Bool*, HRESULT)
+    get_additional_restores : Proc(IVssComponent*, Bool*, HRESULT)
+    get_new_target_count : Proc(IVssComponent*, UInt32*, HRESULT)
+    get_new_target : Proc(IVssComponent*, UInt32, IVssWMFiledesc*, HRESULT)
+    add_directed_target : Proc(IVssComponent*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    get_directed_target_count : Proc(IVssComponent*, UInt32*, HRESULT)
+    get_directed_target : Proc(IVssComponent*, UInt32, UInt8**, UInt8**, UInt8**, UInt8**, UInt8**, UInt8**, HRESULT)
+    set_restore_metadata : Proc(IVssComponent*, LibC::LPWSTR, HRESULT)
+    get_restore_metadata : Proc(IVssComponent*, UInt8**, HRESULT)
+    set_restore_target : Proc(IVssComponent*, VSS_RESTORE_TARGET, HRESULT)
+    get_restore_target : Proc(IVssComponent*, VSS_RESTORE_TARGET*, HRESULT)
+    set_pre_restore_failure_msg : Proc(IVssComponent*, LibC::LPWSTR, HRESULT)
+    get_pre_restore_failure_msg : Proc(IVssComponent*, UInt8**, HRESULT)
+    set_post_restore_failure_msg : Proc(IVssComponent*, LibC::LPWSTR, HRESULT)
+    get_post_restore_failure_msg : Proc(IVssComponent*, UInt8**, HRESULT)
+    set_backup_stamp : Proc(IVssComponent*, LibC::LPWSTR, HRESULT)
+    get_backup_stamp : Proc(IVssComponent*, UInt8**, HRESULT)
+    get_previous_backup_stamp : Proc(IVssComponent*, UInt8**, HRESULT)
+    get_backup_options : Proc(IVssComponent*, UInt8**, HRESULT)
+    get_restore_options : Proc(IVssComponent*, UInt8**, HRESULT)
+    get_restore_subcomponent_count : Proc(IVssComponent*, UInt32*, HRESULT)
+    get_restore_subcomponent : Proc(IVssComponent*, UInt32, UInt8**, UInt8**, Bool*, HRESULT)
+    get_file_restore_status : Proc(IVssComponent*, VSS_FILE_RESTORE_STATUS*, HRESULT)
+    add_differenced_files_by_last_modify_time : Proc(IVssComponent*, LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, FILETIME, HRESULT)
+    add_differenced_files_by_last_modify_lsn : Proc(IVssComponent*, LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, UInt8*, HRESULT)
+    get_differenced_files_count : Proc(IVssComponent*, UInt32*, HRESULT)
+    get_differenced_file : Proc(IVssComponent*, UInt32, UInt8**, UInt8**, LibC::BOOL*, UInt8**, FILETIME*, HRESULT)
   end
 
   IVssComponent_GUID = "d2c72c96-c121-4518-b627-e5a93d010ead"
@@ -597,9 +597,9 @@ lib LibWin32
   end
 
   struct IVssWriterComponentsVTbl
-    get_component_count : UInt64
-    get_writer_info : UInt64
-    get_component : UInt64
+    get_component_count : Proc(IVssWriterComponents*, UInt32*, HRESULT)
+    get_writer_info : Proc(IVssWriterComponents*, Guid*, Guid*, HRESULT)
+    get_component : Proc(IVssWriterComponents*, UInt32, IVssComponent*, HRESULT)
   end
 
   struct IVssWriterComponents
@@ -607,54 +607,54 @@ lib LibWin32
   end
 
   struct IVssComponentExVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_logical_path : UInt64
-    get_component_type : UInt64
-    get_component_name : UInt64
-    get_backup_succeeded : UInt64
-    get_alternate_location_mapping_count : UInt64
-    get_alternate_location_mapping : UInt64
-    set_backup_metadata : UInt64
-    get_backup_metadata : UInt64
-    add_partial_file : UInt64
-    get_partial_file_count : UInt64
-    get_partial_file : UInt64
-    is_selected_for_restore : UInt64
-    get_additional_restores : UInt64
-    get_new_target_count : UInt64
-    get_new_target : UInt64
-    add_directed_target : UInt64
-    get_directed_target_count : UInt64
-    get_directed_target : UInt64
-    set_restore_metadata : UInt64
-    get_restore_metadata : UInt64
-    set_restore_target : UInt64
-    get_restore_target : UInt64
-    set_pre_restore_failure_msg : UInt64
-    get_pre_restore_failure_msg : UInt64
-    set_post_restore_failure_msg : UInt64
-    get_post_restore_failure_msg : UInt64
-    set_backup_stamp : UInt64
-    get_backup_stamp : UInt64
-    get_previous_backup_stamp : UInt64
-    get_backup_options : UInt64
-    get_restore_options : UInt64
-    get_restore_subcomponent_count : UInt64
-    get_restore_subcomponent : UInt64
-    get_file_restore_status : UInt64
-    add_differenced_files_by_last_modify_time : UInt64
-    add_differenced_files_by_last_modify_lsn : UInt64
-    get_differenced_files_count : UInt64
-    get_differenced_file : UInt64
-    set_prepare_for_backup_failure_msg : UInt64
-    set_post_snapshot_failure_msg : UInt64
-    get_prepare_for_backup_failure_msg : UInt64
-    get_post_snapshot_failure_msg : UInt64
-    get_authoritative_restore : UInt64
-    get_roll_forward : UInt64
-    get_restore_name : UInt64
+    query_interface : Proc(IVssComponentEx*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssComponentEx*, UInt32)
+    release : Proc(IVssComponentEx*, UInt32)
+    get_logical_path : Proc(IVssComponentEx*, UInt8**, HRESULT)
+    get_component_type : Proc(IVssComponentEx*, VSS_COMPONENT_TYPE*, HRESULT)
+    get_component_name : Proc(IVssComponentEx*, UInt8**, HRESULT)
+    get_backup_succeeded : Proc(IVssComponentEx*, Bool*, HRESULT)
+    get_alternate_location_mapping_count : Proc(IVssComponentEx*, UInt32*, HRESULT)
+    get_alternate_location_mapping : Proc(IVssComponentEx*, UInt32, IVssWMFiledesc*, HRESULT)
+    set_backup_metadata : Proc(IVssComponentEx*, LibC::LPWSTR, HRESULT)
+    get_backup_metadata : Proc(IVssComponentEx*, UInt8**, HRESULT)
+    add_partial_file : Proc(IVssComponentEx*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    get_partial_file_count : Proc(IVssComponentEx*, UInt32*, HRESULT)
+    get_partial_file : Proc(IVssComponentEx*, UInt32, UInt8**, UInt8**, UInt8**, UInt8**, HRESULT)
+    is_selected_for_restore : Proc(IVssComponentEx*, Bool*, HRESULT)
+    get_additional_restores : Proc(IVssComponentEx*, Bool*, HRESULT)
+    get_new_target_count : Proc(IVssComponentEx*, UInt32*, HRESULT)
+    get_new_target : Proc(IVssComponentEx*, UInt32, IVssWMFiledesc*, HRESULT)
+    add_directed_target : Proc(IVssComponentEx*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    get_directed_target_count : Proc(IVssComponentEx*, UInt32*, HRESULT)
+    get_directed_target : Proc(IVssComponentEx*, UInt32, UInt8**, UInt8**, UInt8**, UInt8**, UInt8**, UInt8**, HRESULT)
+    set_restore_metadata : Proc(IVssComponentEx*, LibC::LPWSTR, HRESULT)
+    get_restore_metadata : Proc(IVssComponentEx*, UInt8**, HRESULT)
+    set_restore_target : Proc(IVssComponentEx*, VSS_RESTORE_TARGET, HRESULT)
+    get_restore_target : Proc(IVssComponentEx*, VSS_RESTORE_TARGET*, HRESULT)
+    set_pre_restore_failure_msg : Proc(IVssComponentEx*, LibC::LPWSTR, HRESULT)
+    get_pre_restore_failure_msg : Proc(IVssComponentEx*, UInt8**, HRESULT)
+    set_post_restore_failure_msg : Proc(IVssComponentEx*, LibC::LPWSTR, HRESULT)
+    get_post_restore_failure_msg : Proc(IVssComponentEx*, UInt8**, HRESULT)
+    set_backup_stamp : Proc(IVssComponentEx*, LibC::LPWSTR, HRESULT)
+    get_backup_stamp : Proc(IVssComponentEx*, UInt8**, HRESULT)
+    get_previous_backup_stamp : Proc(IVssComponentEx*, UInt8**, HRESULT)
+    get_backup_options : Proc(IVssComponentEx*, UInt8**, HRESULT)
+    get_restore_options : Proc(IVssComponentEx*, UInt8**, HRESULT)
+    get_restore_subcomponent_count : Proc(IVssComponentEx*, UInt32*, HRESULT)
+    get_restore_subcomponent : Proc(IVssComponentEx*, UInt32, UInt8**, UInt8**, Bool*, HRESULT)
+    get_file_restore_status : Proc(IVssComponentEx*, VSS_FILE_RESTORE_STATUS*, HRESULT)
+    add_differenced_files_by_last_modify_time : Proc(IVssComponentEx*, LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, FILETIME, HRESULT)
+    add_differenced_files_by_last_modify_lsn : Proc(IVssComponentEx*, LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, UInt8*, HRESULT)
+    get_differenced_files_count : Proc(IVssComponentEx*, UInt32*, HRESULT)
+    get_differenced_file : Proc(IVssComponentEx*, UInt32, UInt8**, UInt8**, LibC::BOOL*, UInt8**, FILETIME*, HRESULT)
+    set_prepare_for_backup_failure_msg : Proc(IVssComponentEx*, LibC::LPWSTR, HRESULT)
+    set_post_snapshot_failure_msg : Proc(IVssComponentEx*, LibC::LPWSTR, HRESULT)
+    get_prepare_for_backup_failure_msg : Proc(IVssComponentEx*, UInt8**, HRESULT)
+    get_post_snapshot_failure_msg : Proc(IVssComponentEx*, UInt8**, HRESULT)
+    get_authoritative_restore : Proc(IVssComponentEx*, Bool*, HRESULT)
+    get_roll_forward : Proc(IVssComponentEx*, VSS_ROLLFORWARD_TYPE*, UInt8**, HRESULT)
+    get_restore_name : Proc(IVssComponentEx*, UInt8**, HRESULT)
   end
 
   IVssComponentEx_GUID = "156c8b5e-f131-4bd7-9c97-d1923be7e1fa"
@@ -664,56 +664,56 @@ lib LibWin32
   end
 
   struct IVssComponentEx2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_logical_path : UInt64
-    get_component_type : UInt64
-    get_component_name : UInt64
-    get_backup_succeeded : UInt64
-    get_alternate_location_mapping_count : UInt64
-    get_alternate_location_mapping : UInt64
-    set_backup_metadata : UInt64
-    get_backup_metadata : UInt64
-    add_partial_file : UInt64
-    get_partial_file_count : UInt64
-    get_partial_file : UInt64
-    is_selected_for_restore : UInt64
-    get_additional_restores : UInt64
-    get_new_target_count : UInt64
-    get_new_target : UInt64
-    add_directed_target : UInt64
-    get_directed_target_count : UInt64
-    get_directed_target : UInt64
-    set_restore_metadata : UInt64
-    get_restore_metadata : UInt64
-    set_restore_target : UInt64
-    get_restore_target : UInt64
-    set_pre_restore_failure_msg : UInt64
-    get_pre_restore_failure_msg : UInt64
-    set_post_restore_failure_msg : UInt64
-    get_post_restore_failure_msg : UInt64
-    set_backup_stamp : UInt64
-    get_backup_stamp : UInt64
-    get_previous_backup_stamp : UInt64
-    get_backup_options : UInt64
-    get_restore_options : UInt64
-    get_restore_subcomponent_count : UInt64
-    get_restore_subcomponent : UInt64
-    get_file_restore_status : UInt64
-    add_differenced_files_by_last_modify_time : UInt64
-    add_differenced_files_by_last_modify_lsn : UInt64
-    get_differenced_files_count : UInt64
-    get_differenced_file : UInt64
-    set_prepare_for_backup_failure_msg : UInt64
-    set_post_snapshot_failure_msg : UInt64
-    get_prepare_for_backup_failure_msg : UInt64
-    get_post_snapshot_failure_msg : UInt64
-    get_authoritative_restore : UInt64
-    get_roll_forward : UInt64
-    get_restore_name : UInt64
-    set_failure : UInt64
-    get_failure : UInt64
+    query_interface : Proc(IVssComponentEx2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssComponentEx2*, UInt32)
+    release : Proc(IVssComponentEx2*, UInt32)
+    get_logical_path : Proc(IVssComponentEx2*, UInt8**, HRESULT)
+    get_component_type : Proc(IVssComponentEx2*, VSS_COMPONENT_TYPE*, HRESULT)
+    get_component_name : Proc(IVssComponentEx2*, UInt8**, HRESULT)
+    get_backup_succeeded : Proc(IVssComponentEx2*, Bool*, HRESULT)
+    get_alternate_location_mapping_count : Proc(IVssComponentEx2*, UInt32*, HRESULT)
+    get_alternate_location_mapping : Proc(IVssComponentEx2*, UInt32, IVssWMFiledesc*, HRESULT)
+    set_backup_metadata : Proc(IVssComponentEx2*, LibC::LPWSTR, HRESULT)
+    get_backup_metadata : Proc(IVssComponentEx2*, UInt8**, HRESULT)
+    add_partial_file : Proc(IVssComponentEx2*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    get_partial_file_count : Proc(IVssComponentEx2*, UInt32*, HRESULT)
+    get_partial_file : Proc(IVssComponentEx2*, UInt32, UInt8**, UInt8**, UInt8**, UInt8**, HRESULT)
+    is_selected_for_restore : Proc(IVssComponentEx2*, Bool*, HRESULT)
+    get_additional_restores : Proc(IVssComponentEx2*, Bool*, HRESULT)
+    get_new_target_count : Proc(IVssComponentEx2*, UInt32*, HRESULT)
+    get_new_target : Proc(IVssComponentEx2*, UInt32, IVssWMFiledesc*, HRESULT)
+    add_directed_target : Proc(IVssComponentEx2*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    get_directed_target_count : Proc(IVssComponentEx2*, UInt32*, HRESULT)
+    get_directed_target : Proc(IVssComponentEx2*, UInt32, UInt8**, UInt8**, UInt8**, UInt8**, UInt8**, UInt8**, HRESULT)
+    set_restore_metadata : Proc(IVssComponentEx2*, LibC::LPWSTR, HRESULT)
+    get_restore_metadata : Proc(IVssComponentEx2*, UInt8**, HRESULT)
+    set_restore_target : Proc(IVssComponentEx2*, VSS_RESTORE_TARGET, HRESULT)
+    get_restore_target : Proc(IVssComponentEx2*, VSS_RESTORE_TARGET*, HRESULT)
+    set_pre_restore_failure_msg : Proc(IVssComponentEx2*, LibC::LPWSTR, HRESULT)
+    get_pre_restore_failure_msg : Proc(IVssComponentEx2*, UInt8**, HRESULT)
+    set_post_restore_failure_msg : Proc(IVssComponentEx2*, LibC::LPWSTR, HRESULT)
+    get_post_restore_failure_msg : Proc(IVssComponentEx2*, UInt8**, HRESULT)
+    set_backup_stamp : Proc(IVssComponentEx2*, LibC::LPWSTR, HRESULT)
+    get_backup_stamp : Proc(IVssComponentEx2*, UInt8**, HRESULT)
+    get_previous_backup_stamp : Proc(IVssComponentEx2*, UInt8**, HRESULT)
+    get_backup_options : Proc(IVssComponentEx2*, UInt8**, HRESULT)
+    get_restore_options : Proc(IVssComponentEx2*, UInt8**, HRESULT)
+    get_restore_subcomponent_count : Proc(IVssComponentEx2*, UInt32*, HRESULT)
+    get_restore_subcomponent : Proc(IVssComponentEx2*, UInt32, UInt8**, UInt8**, Bool*, HRESULT)
+    get_file_restore_status : Proc(IVssComponentEx2*, VSS_FILE_RESTORE_STATUS*, HRESULT)
+    add_differenced_files_by_last_modify_time : Proc(IVssComponentEx2*, LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, FILETIME, HRESULT)
+    add_differenced_files_by_last_modify_lsn : Proc(IVssComponentEx2*, LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, UInt8*, HRESULT)
+    get_differenced_files_count : Proc(IVssComponentEx2*, UInt32*, HRESULT)
+    get_differenced_file : Proc(IVssComponentEx2*, UInt32, UInt8**, UInt8**, LibC::BOOL*, UInt8**, FILETIME*, HRESULT)
+    set_prepare_for_backup_failure_msg : Proc(IVssComponentEx2*, LibC::LPWSTR, HRESULT)
+    set_post_snapshot_failure_msg : Proc(IVssComponentEx2*, LibC::LPWSTR, HRESULT)
+    get_prepare_for_backup_failure_msg : Proc(IVssComponentEx2*, UInt8**, HRESULT)
+    get_post_snapshot_failure_msg : Proc(IVssComponentEx2*, UInt8**, HRESULT)
+    get_authoritative_restore : Proc(IVssComponentEx2*, Bool*, HRESULT)
+    get_roll_forward : Proc(IVssComponentEx2*, VSS_ROLLFORWARD_TYPE*, UInt8**, HRESULT)
+    get_restore_name : Proc(IVssComponentEx2*, UInt8**, HRESULT)
+    set_failure : Proc(IVssComponentEx2*, HRESULT, HRESULT, LibC::LPWSTR, UInt32, HRESULT)
+    get_failure : Proc(IVssComponentEx2*, HRESULT*, HRESULT*, UInt8**, UInt32*, HRESULT)
   end
 
   IVssComponentEx2_GUID = "3b5be0f2-07a9-4e4b-bdd3-cfdc8e2c0d2d"
@@ -723,18 +723,18 @@ lib LibWin32
   end
 
   struct IVssCreateWriterMetadataVTbl
-    add_include_files : UInt64
-    add_exclude_files : UInt64
-    add_component : UInt64
-    add_database_files : UInt64
-    add_database_log_files : UInt64
-    add_files_to_file_group : UInt64
-    set_restore_method : UInt64
-    add_alternate_location_mapping : UInt64
-    add_component_dependency : UInt64
-    set_backup_schema : UInt64
-    get_document : UInt64
-    save_as_xml : UInt64
+    add_include_files : Proc(IVssCreateWriterMetadata*, LibC::LPWSTR, LibC::LPWSTR, UInt8, LibC::LPWSTR, HRESULT)
+    add_exclude_files : Proc(IVssCreateWriterMetadata*, LibC::LPWSTR, LibC::LPWSTR, UInt8, HRESULT)
+    add_component : Proc(IVssCreateWriterMetadata*, VSS_COMPONENT_TYPE, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt8*, UInt32, UInt8, UInt8, UInt8, UInt8, UInt32, HRESULT)
+    add_database_files : Proc(IVssCreateWriterMetadata*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
+    add_database_log_files : Proc(IVssCreateWriterMetadata*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
+    add_files_to_file_group : Proc(IVssCreateWriterMetadata*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt8, LibC::LPWSTR, UInt32, HRESULT)
+    set_restore_method : Proc(IVssCreateWriterMetadata*, VSS_RESTOREMETHOD_ENUM, LibC::LPWSTR, LibC::LPWSTR, VSS_WRITERRESTORE_ENUM, UInt8, HRESULT)
+    add_alternate_location_mapping : Proc(IVssCreateWriterMetadata*, LibC::LPWSTR, LibC::LPWSTR, UInt8, LibC::LPWSTR, HRESULT)
+    add_component_dependency : Proc(IVssCreateWriterMetadata*, LibC::LPWSTR, LibC::LPWSTR, Guid, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    set_backup_schema : Proc(IVssCreateWriterMetadata*, UInt32, HRESULT)
+    get_document : Proc(IVssCreateWriterMetadata*, IXMLDOMDocument*, HRESULT)
+    save_as_xml : Proc(IVssCreateWriterMetadata*, UInt8**, HRESULT)
   end
 
   struct IVssCreateWriterMetadata
@@ -742,31 +742,31 @@ lib LibWin32
   end
 
   struct IVssWriterImplVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    initialize : UInt64
-    subscribe : UInt64
-    unsubscribe : UInt64
-    uninitialize : UInt64
-    get_current_volume_array : UInt64
-    get_current_volume_count : UInt64
-    get_snapshot_device_name : UInt64
-    get_current_snapshot_set_id : UInt64
-    get_context : UInt64
-    get_current_level : UInt64
-    is_path_affected : UInt64
-    is_bootable_system_state_backed_up : UInt64
-    are_components_selected : UInt64
-    get_backup_type : UInt64
-    get_restore_type : UInt64
-    set_writer_failure : UInt64
-    is_partial_file_support_enabled : UInt64
-    install_alternate_writer : UInt64
-    get_identity_information : UInt64
-    set_writer_failure_ex : UInt64
-    get_session_id : UInt64
-    is_writer_shutting_down : UInt64
+    query_interface : Proc(IVssWriterImpl*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssWriterImpl*, UInt32)
+    release : Proc(IVssWriterImpl*, UInt32)
+    initialize : Proc(IVssWriterImpl*, Guid, LibC::LPWSTR, LibC::LPWSTR, UInt32, UInt32, VSS_USAGE_TYPE, VSS_SOURCE_TYPE, VSS_APPLICATION_LEVEL, UInt32, VSS_ALTERNATE_WRITER_STATE, UInt8, HRESULT)
+    subscribe : Proc(IVssWriterImpl*, UInt32, UInt32, HRESULT)
+    unsubscribe : Proc(IVssWriterImpl*, HRESULT)
+    uninitialize : Proc(IVssWriterImpl*, Void)
+    get_current_volume_array : Proc(IVssWriterImpl*, LibC::LPWSTR**)
+    get_current_volume_count : Proc(IVssWriterImpl*, UInt32)
+    get_snapshot_device_name : Proc(IVssWriterImpl*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
+    get_current_snapshot_set_id : Proc(IVssWriterImpl*, Guid)
+    get_context : Proc(IVssWriterImpl*, Int32)
+    get_current_level : Proc(IVssWriterImpl*, VSS_APPLICATION_LEVEL)
+    is_path_affected : Proc(IVssWriterImpl*, LibC::LPWSTR, Bool)
+    is_bootable_system_state_backed_up : Proc(IVssWriterImpl*, Bool)
+    are_components_selected : Proc(IVssWriterImpl*, Bool)
+    get_backup_type : Proc(IVssWriterImpl*, VSS_BACKUP_TYPE)
+    get_restore_type : Proc(IVssWriterImpl*, VSS_RESTORE_TYPE)
+    set_writer_failure : Proc(IVssWriterImpl*, HRESULT, HRESULT)
+    is_partial_file_support_enabled : Proc(IVssWriterImpl*, Bool)
+    install_alternate_writer : Proc(IVssWriterImpl*, Guid, Guid, HRESULT)
+    get_identity_information : Proc(IVssWriterImpl*, IVssExamineWriterMetadata**)
+    set_writer_failure_ex : Proc(IVssWriterImpl*, HRESULT, HRESULT, LibC::LPWSTR, HRESULT)
+    get_session_id : Proc(IVssWriterImpl*, Guid*, HRESULT)
+    is_writer_shutting_down : Proc(IVssWriterImpl*, Bool)
   end
 
   struct IVssWriterImpl
@@ -774,16 +774,16 @@ lib LibWin32
   end
 
   struct IVssCreateExpressWriterMetadataVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add_exclude_files : UInt64
-    add_component : UInt64
-    add_files_to_file_group : UInt64
-    set_restore_method : UInt64
-    add_component_dependency : UInt64
-    set_backup_schema : UInt64
-    save_as_xml : UInt64
+    query_interface : Proc(IVssCreateExpressWriterMetadata*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssCreateExpressWriterMetadata*, UInt32)
+    release : Proc(IVssCreateExpressWriterMetadata*, UInt32)
+    add_exclude_files : Proc(IVssCreateExpressWriterMetadata*, LibC::LPWSTR, LibC::LPWSTR, UInt8, HRESULT)
+    add_component : Proc(IVssCreateExpressWriterMetadata*, VSS_COMPONENT_TYPE, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt8*, UInt32, UInt8, UInt8, UInt8, UInt8, UInt32, HRESULT)
+    add_files_to_file_group : Proc(IVssCreateExpressWriterMetadata*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt8, LibC::LPWSTR, UInt32, HRESULT)
+    set_restore_method : Proc(IVssCreateExpressWriterMetadata*, VSS_RESTOREMETHOD_ENUM, LibC::LPWSTR, LibC::LPWSTR, VSS_WRITERRESTORE_ENUM, UInt8, HRESULT)
+    add_component_dependency : Proc(IVssCreateExpressWriterMetadata*, LibC::LPWSTR, LibC::LPWSTR, Guid, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    set_backup_schema : Proc(IVssCreateExpressWriterMetadata*, UInt32, HRESULT)
+    save_as_xml : Proc(IVssCreateExpressWriterMetadata*, UInt8**, HRESULT)
   end
 
   IVssCreateExpressWriterMetadata_GUID = "9c772e77-b26e-427f-92dd-c996f41ea5e3"
@@ -793,13 +793,13 @@ lib LibWin32
   end
 
   struct IVssExpressWriterVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_metadata : UInt64
-    load_metadata : UInt64
-    register : UInt64
-    unregister : UInt64
+    query_interface : Proc(IVssExpressWriter*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssExpressWriter*, UInt32)
+    release : Proc(IVssExpressWriter*, UInt32)
+    create_metadata : Proc(IVssExpressWriter*, Guid, LibC::LPWSTR, VSS_USAGE_TYPE, UInt32, UInt32, UInt32, IVssCreateExpressWriterMetadata*, HRESULT)
+    load_metadata : Proc(IVssExpressWriter*, LibC::LPWSTR, UInt32, HRESULT)
+    register : Proc(IVssExpressWriter*, HRESULT)
+    unregister : Proc(IVssExpressWriter*, Guid, HRESULT)
   end
 
   IVssExpressWriter_GUID = "e33affdc-59c7-47b1-97d5-4266598f6235"
@@ -809,12 +809,12 @@ lib LibWin32
   end
 
   struct IVssSnapshotMgmtVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_provider_mgmt_interface : UInt64
-    query_volumes_supported_for_snapshots : UInt64
-    query_snapshots_by_volume : UInt64
+    query_interface : Proc(IVssSnapshotMgmt*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssSnapshotMgmt*, UInt32)
+    release : Proc(IVssSnapshotMgmt*, UInt32)
+    get_provider_mgmt_interface : Proc(IVssSnapshotMgmt*, Guid, Guid*, IUnknown*, HRESULT)
+    query_volumes_supported_for_snapshots : Proc(IVssSnapshotMgmt*, Guid, Int32, IVssEnumMgmtObject*, HRESULT)
+    query_snapshots_by_volume : Proc(IVssSnapshotMgmt*, UInt16*, Guid, IVssEnumObject*, HRESULT)
   end
 
   IVssSnapshotMgmt_GUID = "fa7df749-66e7-4986-a27f-e2f04ae53772"
@@ -824,10 +824,10 @@ lib LibWin32
   end
 
   struct IVssSnapshotMgmt2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_min_diff_area_size : UInt64
+    query_interface : Proc(IVssSnapshotMgmt2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssSnapshotMgmt2*, UInt32)
+    release : Proc(IVssSnapshotMgmt2*, UInt32)
+    get_min_diff_area_size : Proc(IVssSnapshotMgmt2*, Int64*, HRESULT)
   end
 
   IVssSnapshotMgmt2_GUID = "0f61ec39-fe82-45f2-a3f0-768b5d427102"
@@ -837,15 +837,15 @@ lib LibWin32
   end
 
   struct IVssDifferentialSoftwareSnapshotMgmtVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add_diff_area : UInt64
-    change_diff_area_maximum_size : UInt64
-    query_volumes_supported_for_diff_areas : UInt64
-    query_diff_areas_for_volume : UInt64
-    query_diff_areas_on_volume : UInt64
-    query_diff_areas_for_snapshot : UInt64
+    query_interface : Proc(IVssDifferentialSoftwareSnapshotMgmt*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssDifferentialSoftwareSnapshotMgmt*, UInt32)
+    release : Proc(IVssDifferentialSoftwareSnapshotMgmt*, UInt32)
+    add_diff_area : Proc(IVssDifferentialSoftwareSnapshotMgmt*, UInt16*, UInt16*, Int64, HRESULT)
+    change_diff_area_maximum_size : Proc(IVssDifferentialSoftwareSnapshotMgmt*, UInt16*, UInt16*, Int64, HRESULT)
+    query_volumes_supported_for_diff_areas : Proc(IVssDifferentialSoftwareSnapshotMgmt*, UInt16*, IVssEnumMgmtObject*, HRESULT)
+    query_diff_areas_for_volume : Proc(IVssDifferentialSoftwareSnapshotMgmt*, UInt16*, IVssEnumMgmtObject*, HRESULT)
+    query_diff_areas_on_volume : Proc(IVssDifferentialSoftwareSnapshotMgmt*, UInt16*, IVssEnumMgmtObject*, HRESULT)
+    query_diff_areas_for_snapshot : Proc(IVssDifferentialSoftwareSnapshotMgmt*, Guid, IVssEnumMgmtObject*, HRESULT)
   end
 
   IVssDifferentialSoftwareSnapshotMgmt_GUID = "214a0f28-b737-4026-b847-4f9e37d79529"
@@ -855,19 +855,19 @@ lib LibWin32
   end
 
   struct IVssDifferentialSoftwareSnapshotMgmt2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add_diff_area : UInt64
-    change_diff_area_maximum_size : UInt64
-    query_volumes_supported_for_diff_areas : UInt64
-    query_diff_areas_for_volume : UInt64
-    query_diff_areas_on_volume : UInt64
-    query_diff_areas_for_snapshot : UInt64
-    change_diff_area_maximum_size_ex : UInt64
-    migrate_diff_areas : UInt64
-    query_migration_status : UInt64
-    set_snapshot_priority : UInt64
+    query_interface : Proc(IVssDifferentialSoftwareSnapshotMgmt2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssDifferentialSoftwareSnapshotMgmt2*, UInt32)
+    release : Proc(IVssDifferentialSoftwareSnapshotMgmt2*, UInt32)
+    add_diff_area : Proc(IVssDifferentialSoftwareSnapshotMgmt2*, UInt16*, UInt16*, Int64, HRESULT)
+    change_diff_area_maximum_size : Proc(IVssDifferentialSoftwareSnapshotMgmt2*, UInt16*, UInt16*, Int64, HRESULT)
+    query_volumes_supported_for_diff_areas : Proc(IVssDifferentialSoftwareSnapshotMgmt2*, UInt16*, IVssEnumMgmtObject*, HRESULT)
+    query_diff_areas_for_volume : Proc(IVssDifferentialSoftwareSnapshotMgmt2*, UInt16*, IVssEnumMgmtObject*, HRESULT)
+    query_diff_areas_on_volume : Proc(IVssDifferentialSoftwareSnapshotMgmt2*, UInt16*, IVssEnumMgmtObject*, HRESULT)
+    query_diff_areas_for_snapshot : Proc(IVssDifferentialSoftwareSnapshotMgmt2*, Guid, IVssEnumMgmtObject*, HRESULT)
+    change_diff_area_maximum_size_ex : Proc(IVssDifferentialSoftwareSnapshotMgmt2*, UInt16*, UInt16*, Int64, LibC::BOOL, HRESULT)
+    migrate_diff_areas : Proc(IVssDifferentialSoftwareSnapshotMgmt2*, UInt16*, UInt16*, UInt16*, HRESULT)
+    query_migration_status : Proc(IVssDifferentialSoftwareSnapshotMgmt2*, UInt16*, UInt16*, IVssAsync*, HRESULT)
+    set_snapshot_priority : Proc(IVssDifferentialSoftwareSnapshotMgmt2*, Guid, UInt8, HRESULT)
   end
 
   IVssDifferentialSoftwareSnapshotMgmt2_GUID = "949d7353-675f-4275-8969-f044c6277815"
@@ -877,24 +877,24 @@ lib LibWin32
   end
 
   struct IVssDifferentialSoftwareSnapshotMgmt3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add_diff_area : UInt64
-    change_diff_area_maximum_size : UInt64
-    query_volumes_supported_for_diff_areas : UInt64
-    query_diff_areas_for_volume : UInt64
-    query_diff_areas_on_volume : UInt64
-    query_diff_areas_for_snapshot : UInt64
-    change_diff_area_maximum_size_ex : UInt64
-    migrate_diff_areas : UInt64
-    query_migration_status : UInt64
-    set_snapshot_priority : UInt64
-    set_volume_protect_level : UInt64
-    get_volume_protect_level : UInt64
-    clear_volume_protect_fault : UInt64
-    delete_unused_diff_areas : UInt64
-    query_snapshot_delta_bitmap : UInt64
+    query_interface : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, UInt32)
+    release : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, UInt32)
+    add_diff_area : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, UInt16*, UInt16*, Int64, HRESULT)
+    change_diff_area_maximum_size : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, UInt16*, UInt16*, Int64, HRESULT)
+    query_volumes_supported_for_diff_areas : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, UInt16*, IVssEnumMgmtObject*, HRESULT)
+    query_diff_areas_for_volume : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, UInt16*, IVssEnumMgmtObject*, HRESULT)
+    query_diff_areas_on_volume : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, UInt16*, IVssEnumMgmtObject*, HRESULT)
+    query_diff_areas_for_snapshot : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, Guid, IVssEnumMgmtObject*, HRESULT)
+    change_diff_area_maximum_size_ex : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, UInt16*, UInt16*, Int64, LibC::BOOL, HRESULT)
+    migrate_diff_areas : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, UInt16*, UInt16*, UInt16*, HRESULT)
+    query_migration_status : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, UInt16*, UInt16*, IVssAsync*, HRESULT)
+    set_snapshot_priority : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, Guid, UInt8, HRESULT)
+    set_volume_protect_level : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, UInt16*, VSS_PROTECTION_LEVEL, HRESULT)
+    get_volume_protect_level : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, UInt16*, VSS_VOLUME_PROTECTION_INFO*, HRESULT)
+    clear_volume_protect_fault : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, UInt16*, HRESULT)
+    delete_unused_diff_areas : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, UInt16*, HRESULT)
+    query_snapshot_delta_bitmap : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, Guid, Guid, UInt32*, UInt32*, UInt8**, HRESULT)
   end
 
   IVssDifferentialSoftwareSnapshotMgmt3_GUID = "383f7e71-a4c5-401f-b27f-f826289f8458"
@@ -904,13 +904,13 @@ lib LibWin32
   end
 
   struct IVssEnumMgmtObjectVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    next : UInt64
-    skip : UInt64
-    reset : UInt64
-    clone : UInt64
+    query_interface : Proc(IVssEnumMgmtObject*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssEnumMgmtObject*, UInt32)
+    release : Proc(IVssEnumMgmtObject*, UInt32)
+    next : Proc(IVssEnumMgmtObject*, UInt32, VSS_MGMT_OBJECT_PROP*, UInt32*, HRESULT)
+    skip : Proc(IVssEnumMgmtObject*, UInt32, HRESULT)
+    reset : Proc(IVssEnumMgmtObject*, HRESULT)
+    clone : Proc(IVssEnumMgmtObject*, IVssEnumMgmtObject*, HRESULT)
   end
 
   IVssEnumMgmtObject_GUID = "01954e6b-9254-4e6e-808c-c9e05d007696"
@@ -920,13 +920,13 @@ lib LibWin32
   end
 
   struct IVssAdminVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    register_provider : UInt64
-    unregister_provider : UInt64
-    query_providers : UInt64
-    abort_all_snapshots_in_progress : UInt64
+    query_interface : Proc(IVssAdmin*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssAdmin*, UInt32)
+    release : Proc(IVssAdmin*, UInt32)
+    register_provider : Proc(IVssAdmin*, Guid, Guid, UInt16*, VSS_PROVIDER_TYPE, UInt16*, Guid, HRESULT)
+    unregister_provider : Proc(IVssAdmin*, Guid, HRESULT)
+    query_providers : Proc(IVssAdmin*, IVssEnumObject*, HRESULT)
+    abort_all_snapshots_in_progress : Proc(IVssAdmin*, HRESULT)
   end
 
   IVssAdmin_GUID = "77ed5996-2f63-11d3-8a39-00c04f72d8e3"
@@ -936,16 +936,16 @@ lib LibWin32
   end
 
   struct IVssAdminExVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    register_provider : UInt64
-    unregister_provider : UInt64
-    query_providers : UInt64
-    abort_all_snapshots_in_progress : UInt64
-    get_provider_capability : UInt64
-    get_provider_context : UInt64
-    set_provider_context : UInt64
+    query_interface : Proc(IVssAdminEx*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssAdminEx*, UInt32)
+    release : Proc(IVssAdminEx*, UInt32)
+    register_provider : Proc(IVssAdminEx*, Guid, Guid, UInt16*, VSS_PROVIDER_TYPE, UInt16*, Guid, HRESULT)
+    unregister_provider : Proc(IVssAdminEx*, Guid, HRESULT)
+    query_providers : Proc(IVssAdminEx*, IVssEnumObject*, HRESULT)
+    abort_all_snapshots_in_progress : Proc(IVssAdminEx*, HRESULT)
+    get_provider_capability : Proc(IVssAdminEx*, Guid, UInt64*, HRESULT)
+    get_provider_context : Proc(IVssAdminEx*, Guid, Int32*, HRESULT)
+    set_provider_context : Proc(IVssAdminEx*, Guid, Int32, HRESULT)
   end
 
   IVssAdminEx_GUID = "7858a9f8-b1fa-41a6-964f-b9b36b8cd8d8"
@@ -955,19 +955,19 @@ lib LibWin32
   end
 
   struct IVssSoftwareSnapshotProviderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_context : UInt64
-    get_snapshot_properties : UInt64
-    query : UInt64
-    delete_snapshots : UInt64
-    begin_prepare_snapshot : UInt64
-    is_volume_supported : UInt64
-    is_volume_snapshotted : UInt64
-    set_snapshot_property : UInt64
-    revert_to_snapshot : UInt64
-    query_revert_status : UInt64
+    query_interface : Proc(IVssSoftwareSnapshotProvider*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssSoftwareSnapshotProvider*, UInt32)
+    release : Proc(IVssSoftwareSnapshotProvider*, UInt32)
+    set_context : Proc(IVssSoftwareSnapshotProvider*, Int32, HRESULT)
+    get_snapshot_properties : Proc(IVssSoftwareSnapshotProvider*, Guid, VSS_SNAPSHOT_PROP*, HRESULT)
+    query : Proc(IVssSoftwareSnapshotProvider*, Guid, VSS_OBJECT_TYPE, VSS_OBJECT_TYPE, IVssEnumObject*, HRESULT)
+    delete_snapshots : Proc(IVssSoftwareSnapshotProvider*, Guid, VSS_OBJECT_TYPE, LibC::BOOL, Int32*, Guid*, HRESULT)
+    begin_prepare_snapshot : Proc(IVssSoftwareSnapshotProvider*, Guid, Guid, UInt16*, Int32, HRESULT)
+    is_volume_supported : Proc(IVssSoftwareSnapshotProvider*, UInt16*, LibC::BOOL*, HRESULT)
+    is_volume_snapshotted : Proc(IVssSoftwareSnapshotProvider*, UInt16*, LibC::BOOL*, Int32*, HRESULT)
+    set_snapshot_property : Proc(IVssSoftwareSnapshotProvider*, Guid, VSS_SNAPSHOT_PROPERTY_ID, VARIANT, HRESULT)
+    revert_to_snapshot : Proc(IVssSoftwareSnapshotProvider*, Guid, HRESULT)
+    query_revert_status : Proc(IVssSoftwareSnapshotProvider*, UInt16*, IVssAsync*, HRESULT)
   end
 
   IVssSoftwareSnapshotProvider_GUID = "609e123e-2c5a-44d3-8f01-0b1d9a47d1ff"
@@ -977,16 +977,16 @@ lib LibWin32
   end
 
   struct IVssProviderCreateSnapshotSetVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    end_prepare_snapshots : UInt64
-    pre_commit_snapshots : UInt64
-    commit_snapshots : UInt64
-    post_commit_snapshots : UInt64
-    pre_final_commit_snapshots : UInt64
-    post_final_commit_snapshots : UInt64
-    abort_snapshots : UInt64
+    query_interface : Proc(IVssProviderCreateSnapshotSet*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssProviderCreateSnapshotSet*, UInt32)
+    release : Proc(IVssProviderCreateSnapshotSet*, UInt32)
+    end_prepare_snapshots : Proc(IVssProviderCreateSnapshotSet*, Guid, HRESULT)
+    pre_commit_snapshots : Proc(IVssProviderCreateSnapshotSet*, Guid, HRESULT)
+    commit_snapshots : Proc(IVssProviderCreateSnapshotSet*, Guid, HRESULT)
+    post_commit_snapshots : Proc(IVssProviderCreateSnapshotSet*, Guid, Int32, HRESULT)
+    pre_final_commit_snapshots : Proc(IVssProviderCreateSnapshotSet*, Guid, HRESULT)
+    post_final_commit_snapshots : Proc(IVssProviderCreateSnapshotSet*, Guid, HRESULT)
+    abort_snapshots : Proc(IVssProviderCreateSnapshotSet*, Guid, HRESULT)
   end
 
   IVssProviderCreateSnapshotSet_GUID = "5f894e5b-1e39-4778-8e23-9abad9f0e08c"
@@ -996,11 +996,11 @@ lib LibWin32
   end
 
   struct IVssProviderNotificationsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_load : UInt64
-    on_unload : UInt64
+    query_interface : Proc(IVssProviderNotifications*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssProviderNotifications*, UInt32)
+    release : Proc(IVssProviderNotifications*, UInt32)
+    on_load : Proc(IVssProviderNotifications*, IUnknown, HRESULT)
+    on_unload : Proc(IVssProviderNotifications*, LibC::BOOL, HRESULT)
   end
 
   IVssProviderNotifications_GUID = "e561901f-03a5-4afe-86d0-72baeece7004"
@@ -1010,15 +1010,15 @@ lib LibWin32
   end
 
   struct IVssHardwareSnapshotProviderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    are_luns_supported : UInt64
-    fill_in_lun_info : UInt64
-    begin_prepare_snapshot : UInt64
-    get_target_luns : UInt64
-    locate_luns : UInt64
-    on_lun_empty : UInt64
+    query_interface : Proc(IVssHardwareSnapshotProvider*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssHardwareSnapshotProvider*, UInt32)
+    release : Proc(IVssHardwareSnapshotProvider*, UInt32)
+    are_luns_supported : Proc(IVssHardwareSnapshotProvider*, Int32, Int32, UInt16**, VDS_LUN_INFORMATION*, LibC::BOOL*, HRESULT)
+    fill_in_lun_info : Proc(IVssHardwareSnapshotProvider*, UInt16*, VDS_LUN_INFORMATION*, LibC::BOOL*, HRESULT)
+    begin_prepare_snapshot : Proc(IVssHardwareSnapshotProvider*, Guid, Guid, Int32, Int32, UInt16**, VDS_LUN_INFORMATION*, HRESULT)
+    get_target_luns : Proc(IVssHardwareSnapshotProvider*, Int32, UInt16**, VDS_LUN_INFORMATION*, VDS_LUN_INFORMATION*, HRESULT)
+    locate_luns : Proc(IVssHardwareSnapshotProvider*, Int32, VDS_LUN_INFORMATION*, HRESULT)
+    on_lun_empty : Proc(IVssHardwareSnapshotProvider*, UInt16*, VDS_LUN_INFORMATION*, HRESULT)
   end
 
   IVssHardwareSnapshotProvider_GUID = "9593a157-44e9-4344-bbeb-44fbf9b06b10"
@@ -1028,19 +1028,19 @@ lib LibWin32
   end
 
   struct IVssHardwareSnapshotProviderExVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    are_luns_supported : UInt64
-    fill_in_lun_info : UInt64
-    begin_prepare_snapshot : UInt64
-    get_target_luns : UInt64
-    locate_luns : UInt64
-    on_lun_empty : UInt64
-    get_provider_capabilities : UInt64
-    on_lun_state_change : UInt64
-    resync_luns : UInt64
-    on_reuse_luns : UInt64
+    query_interface : Proc(IVssHardwareSnapshotProviderEx*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssHardwareSnapshotProviderEx*, UInt32)
+    release : Proc(IVssHardwareSnapshotProviderEx*, UInt32)
+    are_luns_supported : Proc(IVssHardwareSnapshotProviderEx*, Int32, Int32, UInt16**, VDS_LUN_INFORMATION*, LibC::BOOL*, HRESULT)
+    fill_in_lun_info : Proc(IVssHardwareSnapshotProviderEx*, UInt16*, VDS_LUN_INFORMATION*, LibC::BOOL*, HRESULT)
+    begin_prepare_snapshot : Proc(IVssHardwareSnapshotProviderEx*, Guid, Guid, Int32, Int32, UInt16**, VDS_LUN_INFORMATION*, HRESULT)
+    get_target_luns : Proc(IVssHardwareSnapshotProviderEx*, Int32, UInt16**, VDS_LUN_INFORMATION*, VDS_LUN_INFORMATION*, HRESULT)
+    locate_luns : Proc(IVssHardwareSnapshotProviderEx*, Int32, VDS_LUN_INFORMATION*, HRESULT)
+    on_lun_empty : Proc(IVssHardwareSnapshotProviderEx*, UInt16*, VDS_LUN_INFORMATION*, HRESULT)
+    get_provider_capabilities : Proc(IVssHardwareSnapshotProviderEx*, UInt64*, HRESULT)
+    on_lun_state_change : Proc(IVssHardwareSnapshotProviderEx*, VDS_LUN_INFORMATION*, VDS_LUN_INFORMATION*, UInt32, UInt32, HRESULT)
+    resync_luns : Proc(IVssHardwareSnapshotProviderEx*, VDS_LUN_INFORMATION*, VDS_LUN_INFORMATION*, UInt32, IVssAsync*, HRESULT)
+    on_reuse_luns : Proc(IVssHardwareSnapshotProviderEx*, VDS_LUN_INFORMATION*, VDS_LUN_INFORMATION*, UInt32, HRESULT)
   end
 
   IVssHardwareSnapshotProviderEx_GUID = "7f5ba925-cdb1-4d11-a71f-339eb7e709fd"
@@ -1050,17 +1050,17 @@ lib LibWin32
   end
 
   struct IVssFileShareSnapshotProviderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_context : UInt64
-    get_snapshot_properties : UInt64
-    query : UInt64
-    delete_snapshots : UInt64
-    begin_prepare_snapshot : UInt64
-    is_path_supported : UInt64
-    is_path_snapshotted : UInt64
-    set_snapshot_property : UInt64
+    query_interface : Proc(IVssFileShareSnapshotProvider*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVssFileShareSnapshotProvider*, UInt32)
+    release : Proc(IVssFileShareSnapshotProvider*, UInt32)
+    set_context : Proc(IVssFileShareSnapshotProvider*, Int32, HRESULT)
+    get_snapshot_properties : Proc(IVssFileShareSnapshotProvider*, Guid, VSS_SNAPSHOT_PROP*, HRESULT)
+    query : Proc(IVssFileShareSnapshotProvider*, Guid, VSS_OBJECT_TYPE, VSS_OBJECT_TYPE, IVssEnumObject*, HRESULT)
+    delete_snapshots : Proc(IVssFileShareSnapshotProvider*, Guid, VSS_OBJECT_TYPE, LibC::BOOL, Int32*, Guid*, HRESULT)
+    begin_prepare_snapshot : Proc(IVssFileShareSnapshotProvider*, Guid, Guid, UInt16*, Int32, Guid, HRESULT)
+    is_path_supported : Proc(IVssFileShareSnapshotProvider*, UInt16*, LibC::BOOL*, HRESULT)
+    is_path_snapshotted : Proc(IVssFileShareSnapshotProvider*, UInt16*, LibC::BOOL*, Int32*, HRESULT)
+    set_snapshot_property : Proc(IVssFileShareSnapshotProvider*, Guid, VSS_SNAPSHOT_PROPERTY_ID, VARIANT, HRESULT)
   end
 
   IVssFileShareSnapshotProvider_GUID = "c8636060-7c2e-11df-8c4a-0800200c9a66"
@@ -1074,1128 +1074,1128 @@ lib LibWin32
   fun CreateVssExpressWriterInternal(ppwriter : IVssExpressWriter*) : HRESULT
 end
 struct LibWin32::IVssEnumObject
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssEnumObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssEnumObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssEnumObject*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def next(celt : UInt32, rgelt : VSS_OBJECT_PROP*, pceltfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(UInt32, VSS_OBJECT_PROP*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  def next(this : IVssEnumObject*, celt : UInt32, rgelt : VSS_OBJECT_PROP*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
   end
-  def skip(celt : UInt32) : HRESULT
-    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  def skip(this : IVssEnumObject*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IVssEnumObject*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def clone(ppenum : IVssEnumObject*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IVssEnumObject*, HRESULT)).call(ppenum)
+  def clone(this : IVssEnumObject*, ppenum : IVssEnumObject*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
   end
 end
 struct LibWin32::IVssAsync
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssAsync*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssAsync*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssAsync*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def cancel : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  def cancel(this : IVssAsync*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
   end
-  def wait(dwmilliseconds : UInt32) : HRESULT
-    @lpVtbl.value.wait.unsafe_as(Proc(UInt32, HRESULT)).call(dwmilliseconds)
+  def wait(this : IVssAsync*, dwmilliseconds : UInt32) : HRESULT
+    @lpVtbl.value.wait.call(this, dwmilliseconds)
   end
-  def query_status(phrresult : HRESULT*, preserved : Int32*) : HRESULT
-    @lpVtbl.value.query_status.unsafe_as(Proc(HRESULT*, Int32*, HRESULT)).call(phrresult, preserved)
+  def query_status(this : IVssAsync*, phrresult : HRESULT*, preserved : Int32*) : HRESULT
+    @lpVtbl.value.query_status.call(this, phrresult, preserved)
   end
 end
 struct LibWin32::IVssWMFiledesc
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssWMFiledesc*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssWMFiledesc*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssWMFiledesc*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_path(pbstrpath : UInt8**) : HRESULT
-    @lpVtbl.value.get_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrpath)
+  def get_path(this : IVssWMFiledesc*, pbstrpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.call(this, pbstrpath)
   end
-  def get_filespec(pbstrfilespec : UInt8**) : HRESULT
-    @lpVtbl.value.get_filespec.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrfilespec)
+  def get_filespec(this : IVssWMFiledesc*, pbstrfilespec : UInt8**) : HRESULT
+    @lpVtbl.value.get_filespec.call(this, pbstrfilespec)
   end
-  def get_recursive(pbrecursive : Bool*) : HRESULT
-    @lpVtbl.value.get_recursive.unsafe_as(Proc(Bool*, HRESULT)).call(pbrecursive)
+  def get_recursive(this : IVssWMFiledesc*, pbrecursive : Bool*) : HRESULT
+    @lpVtbl.value.get_recursive.call(this, pbrecursive)
   end
-  def get_alternate_location(pbstralternatelocation : UInt8**) : HRESULT
-    @lpVtbl.value.get_alternate_location.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstralternatelocation)
+  def get_alternate_location(this : IVssWMFiledesc*, pbstralternatelocation : UInt8**) : HRESULT
+    @lpVtbl.value.get_alternate_location.call(this, pbstralternatelocation)
   end
-  def get_backup_type_mask(pdwtypemask : UInt32*) : HRESULT
-    @lpVtbl.value.get_backup_type_mask.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwtypemask)
+  def get_backup_type_mask(this : IVssWMFiledesc*, pdwtypemask : UInt32*) : HRESULT
+    @lpVtbl.value.get_backup_type_mask.call(this, pdwtypemask)
   end
 end
 struct LibWin32::IVssWMDependency
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssWMDependency*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssWMDependency*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssWMDependency*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_writer_id(pwriterid : Guid*) : HRESULT
-    @lpVtbl.value.get_writer_id.unsafe_as(Proc(Guid*, HRESULT)).call(pwriterid)
+  def get_writer_id(this : IVssWMDependency*, pwriterid : Guid*) : HRESULT
+    @lpVtbl.value.get_writer_id.call(this, pwriterid)
   end
-  def get_logical_path(pbstrlogicalpath : UInt8**) : HRESULT
-    @lpVtbl.value.get_logical_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrlogicalpath)
+  def get_logical_path(this : IVssWMDependency*, pbstrlogicalpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_logical_path.call(this, pbstrlogicalpath)
   end
-  def get_component_name(pbstrcomponentname : UInt8**) : HRESULT
-    @lpVtbl.value.get_component_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcomponentname)
+  def get_component_name(this : IVssWMDependency*, pbstrcomponentname : UInt8**) : HRESULT
+    @lpVtbl.value.get_component_name.call(this, pbstrcomponentname)
   end
 end
 struct LibWin32::IVssComponent
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssComponent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssComponent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssComponent*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_logical_path(pbstrpath : UInt8**) : HRESULT
-    @lpVtbl.value.get_logical_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrpath)
+  def get_logical_path(this : IVssComponent*, pbstrpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_logical_path.call(this, pbstrpath)
   end
-  def get_component_type(pct : VSS_COMPONENT_TYPE*) : HRESULT
-    @lpVtbl.value.get_component_type.unsafe_as(Proc(VSS_COMPONENT_TYPE*, HRESULT)).call(pct)
+  def get_component_type(this : IVssComponent*, pct : VSS_COMPONENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_component_type.call(this, pct)
   end
-  def get_component_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_component_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_component_name(this : IVssComponent*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_component_name.call(this, pbstrname)
   end
-  def get_backup_succeeded(pbsucceeded : Bool*) : HRESULT
-    @lpVtbl.value.get_backup_succeeded.unsafe_as(Proc(Bool*, HRESULT)).call(pbsucceeded)
+  def get_backup_succeeded(this : IVssComponent*, pbsucceeded : Bool*) : HRESULT
+    @lpVtbl.value.get_backup_succeeded.call(this, pbsucceeded)
   end
-  def get_alternate_location_mapping_count(pcmappings : UInt32*) : HRESULT
-    @lpVtbl.value.get_alternate_location_mapping_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcmappings)
+  def get_alternate_location_mapping_count(this : IVssComponent*, pcmappings : UInt32*) : HRESULT
+    @lpVtbl.value.get_alternate_location_mapping_count.call(this, pcmappings)
   end
-  def get_alternate_location_mapping(imapping : UInt32, ppfiledesc : IVssWMFiledesc*) : HRESULT
-    @lpVtbl.value.get_alternate_location_mapping.unsafe_as(Proc(UInt32, IVssWMFiledesc*, HRESULT)).call(imapping, ppfiledesc)
+  def get_alternate_location_mapping(this : IVssComponent*, imapping : UInt32, ppfiledesc : IVssWMFiledesc*) : HRESULT
+    @lpVtbl.value.get_alternate_location_mapping.call(this, imapping, ppfiledesc)
   end
-  def set_backup_metadata(wszdata : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_backup_metadata.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszdata)
+  def set_backup_metadata(this : IVssComponent*, wszdata : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_backup_metadata.call(this, wszdata)
   end
-  def get_backup_metadata(pbstrdata : UInt8**) : HRESULT
-    @lpVtbl.value.get_backup_metadata.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdata)
+  def get_backup_metadata(this : IVssComponent*, pbstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_backup_metadata.call(this, pbstrdata)
   end
-  def add_partial_file(wszpath : LibC::LPWSTR, wszfilename : LibC::LPWSTR, wszranges : LibC::LPWSTR, wszmetadata : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.add_partial_file.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(wszpath, wszfilename, wszranges, wszmetadata)
+  def add_partial_file(this : IVssComponent*, wszpath : LibC::LPWSTR, wszfilename : LibC::LPWSTR, wszranges : LibC::LPWSTR, wszmetadata : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_partial_file.call(this, wszpath, wszfilename, wszranges, wszmetadata)
   end
-  def get_partial_file_count(pcpartialfiles : UInt32*) : HRESULT
-    @lpVtbl.value.get_partial_file_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcpartialfiles)
+  def get_partial_file_count(this : IVssComponent*, pcpartialfiles : UInt32*) : HRESULT
+    @lpVtbl.value.get_partial_file_count.call(this, pcpartialfiles)
   end
-  def get_partial_file(ipartialfile : UInt32, pbstrpath : UInt8**, pbstrfilename : UInt8**, pbstrrange : UInt8**, pbstrmetadata : UInt8**) : HRESULT
-    @lpVtbl.value.get_partial_file.unsafe_as(Proc(UInt32, UInt8**, UInt8**, UInt8**, UInt8**, HRESULT)).call(ipartialfile, pbstrpath, pbstrfilename, pbstrrange, pbstrmetadata)
+  def get_partial_file(this : IVssComponent*, ipartialfile : UInt32, pbstrpath : UInt8**, pbstrfilename : UInt8**, pbstrrange : UInt8**, pbstrmetadata : UInt8**) : HRESULT
+    @lpVtbl.value.get_partial_file.call(this, ipartialfile, pbstrpath, pbstrfilename, pbstrrange, pbstrmetadata)
   end
-  def is_selected_for_restore(pbselectedforrestore : Bool*) : HRESULT
-    @lpVtbl.value.is_selected_for_restore.unsafe_as(Proc(Bool*, HRESULT)).call(pbselectedforrestore)
+  def is_selected_for_restore(this : IVssComponent*, pbselectedforrestore : Bool*) : HRESULT
+    @lpVtbl.value.is_selected_for_restore.call(this, pbselectedforrestore)
   end
-  def get_additional_restores(pbadditionalrestores : Bool*) : HRESULT
-    @lpVtbl.value.get_additional_restores.unsafe_as(Proc(Bool*, HRESULT)).call(pbadditionalrestores)
+  def get_additional_restores(this : IVssComponent*, pbadditionalrestores : Bool*) : HRESULT
+    @lpVtbl.value.get_additional_restores.call(this, pbadditionalrestores)
   end
-  def get_new_target_count(pcnewtarget : UInt32*) : HRESULT
-    @lpVtbl.value.get_new_target_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcnewtarget)
+  def get_new_target_count(this : IVssComponent*, pcnewtarget : UInt32*) : HRESULT
+    @lpVtbl.value.get_new_target_count.call(this, pcnewtarget)
   end
-  def get_new_target(inewtarget : UInt32, ppfiledesc : IVssWMFiledesc*) : HRESULT
-    @lpVtbl.value.get_new_target.unsafe_as(Proc(UInt32, IVssWMFiledesc*, HRESULT)).call(inewtarget, ppfiledesc)
+  def get_new_target(this : IVssComponent*, inewtarget : UInt32, ppfiledesc : IVssWMFiledesc*) : HRESULT
+    @lpVtbl.value.get_new_target.call(this, inewtarget, ppfiledesc)
   end
-  def add_directed_target(wszsourcepath : LibC::LPWSTR, wszsourcefilename : LibC::LPWSTR, wszsourcerangelist : LibC::LPWSTR, wszdestinationpath : LibC::LPWSTR, wszdestinationfilename : LibC::LPWSTR, wszdestinationrangelist : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.add_directed_target.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(wszsourcepath, wszsourcefilename, wszsourcerangelist, wszdestinationpath, wszdestinationfilename, wszdestinationrangelist)
+  def add_directed_target(this : IVssComponent*, wszsourcepath : LibC::LPWSTR, wszsourcefilename : LibC::LPWSTR, wszsourcerangelist : LibC::LPWSTR, wszdestinationpath : LibC::LPWSTR, wszdestinationfilename : LibC::LPWSTR, wszdestinationrangelist : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_directed_target.call(this, wszsourcepath, wszsourcefilename, wszsourcerangelist, wszdestinationpath, wszdestinationfilename, wszdestinationrangelist)
   end
-  def get_directed_target_count(pcdirectedtarget : UInt32*) : HRESULT
-    @lpVtbl.value.get_directed_target_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcdirectedtarget)
+  def get_directed_target_count(this : IVssComponent*, pcdirectedtarget : UInt32*) : HRESULT
+    @lpVtbl.value.get_directed_target_count.call(this, pcdirectedtarget)
   end
-  def get_directed_target(idirectedtarget : UInt32, pbstrsourcepath : UInt8**, pbstrsourcefilename : UInt8**, pbstrsourcerangelist : UInt8**, pbstrdestinationpath : UInt8**, pbstrdestinationfilename : UInt8**, pbstrdestinationrangelist : UInt8**) : HRESULT
-    @lpVtbl.value.get_directed_target.unsafe_as(Proc(UInt32, UInt8**, UInt8**, UInt8**, UInt8**, UInt8**, UInt8**, HRESULT)).call(idirectedtarget, pbstrsourcepath, pbstrsourcefilename, pbstrsourcerangelist, pbstrdestinationpath, pbstrdestinationfilename, pbstrdestinationrangelist)
+  def get_directed_target(this : IVssComponent*, idirectedtarget : UInt32, pbstrsourcepath : UInt8**, pbstrsourcefilename : UInt8**, pbstrsourcerangelist : UInt8**, pbstrdestinationpath : UInt8**, pbstrdestinationfilename : UInt8**, pbstrdestinationrangelist : UInt8**) : HRESULT
+    @lpVtbl.value.get_directed_target.call(this, idirectedtarget, pbstrsourcepath, pbstrsourcefilename, pbstrsourcerangelist, pbstrdestinationpath, pbstrdestinationfilename, pbstrdestinationrangelist)
   end
-  def set_restore_metadata(wszrestoremetadata : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_restore_metadata.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszrestoremetadata)
+  def set_restore_metadata(this : IVssComponent*, wszrestoremetadata : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_restore_metadata.call(this, wszrestoremetadata)
   end
-  def get_restore_metadata(pbstrrestoremetadata : UInt8**) : HRESULT
-    @lpVtbl.value.get_restore_metadata.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrrestoremetadata)
+  def get_restore_metadata(this : IVssComponent*, pbstrrestoremetadata : UInt8**) : HRESULT
+    @lpVtbl.value.get_restore_metadata.call(this, pbstrrestoremetadata)
   end
-  def set_restore_target(target : VSS_RESTORE_TARGET) : HRESULT
-    @lpVtbl.value.set_restore_target.unsafe_as(Proc(VSS_RESTORE_TARGET, HRESULT)).call(target)
+  def set_restore_target(this : IVssComponent*, target : VSS_RESTORE_TARGET) : HRESULT
+    @lpVtbl.value.set_restore_target.call(this, target)
   end
-  def get_restore_target(ptarget : VSS_RESTORE_TARGET*) : HRESULT
-    @lpVtbl.value.get_restore_target.unsafe_as(Proc(VSS_RESTORE_TARGET*, HRESULT)).call(ptarget)
+  def get_restore_target(this : IVssComponent*, ptarget : VSS_RESTORE_TARGET*) : HRESULT
+    @lpVtbl.value.get_restore_target.call(this, ptarget)
   end
-  def set_pre_restore_failure_msg(wszprerestorefailuremsg : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_pre_restore_failure_msg.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszprerestorefailuremsg)
+  def set_pre_restore_failure_msg(this : IVssComponent*, wszprerestorefailuremsg : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_pre_restore_failure_msg.call(this, wszprerestorefailuremsg)
   end
-  def get_pre_restore_failure_msg(pbstrprerestorefailuremsg : UInt8**) : HRESULT
-    @lpVtbl.value.get_pre_restore_failure_msg.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprerestorefailuremsg)
+  def get_pre_restore_failure_msg(this : IVssComponent*, pbstrprerestorefailuremsg : UInt8**) : HRESULT
+    @lpVtbl.value.get_pre_restore_failure_msg.call(this, pbstrprerestorefailuremsg)
   end
-  def set_post_restore_failure_msg(wszpostrestorefailuremsg : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_post_restore_failure_msg.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszpostrestorefailuremsg)
+  def set_post_restore_failure_msg(this : IVssComponent*, wszpostrestorefailuremsg : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_post_restore_failure_msg.call(this, wszpostrestorefailuremsg)
   end
-  def get_post_restore_failure_msg(pbstrpostrestorefailuremsg : UInt8**) : HRESULT
-    @lpVtbl.value.get_post_restore_failure_msg.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrpostrestorefailuremsg)
+  def get_post_restore_failure_msg(this : IVssComponent*, pbstrpostrestorefailuremsg : UInt8**) : HRESULT
+    @lpVtbl.value.get_post_restore_failure_msg.call(this, pbstrpostrestorefailuremsg)
   end
-  def set_backup_stamp(wszbackupstamp : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_backup_stamp.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszbackupstamp)
+  def set_backup_stamp(this : IVssComponent*, wszbackupstamp : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_backup_stamp.call(this, wszbackupstamp)
   end
-  def get_backup_stamp(pbstrbackupstamp : UInt8**) : HRESULT
-    @lpVtbl.value.get_backup_stamp.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbackupstamp)
+  def get_backup_stamp(this : IVssComponent*, pbstrbackupstamp : UInt8**) : HRESULT
+    @lpVtbl.value.get_backup_stamp.call(this, pbstrbackupstamp)
   end
-  def get_previous_backup_stamp(pbstrbackupstamp : UInt8**) : HRESULT
-    @lpVtbl.value.get_previous_backup_stamp.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbackupstamp)
+  def get_previous_backup_stamp(this : IVssComponent*, pbstrbackupstamp : UInt8**) : HRESULT
+    @lpVtbl.value.get_previous_backup_stamp.call(this, pbstrbackupstamp)
   end
-  def get_backup_options(pbstrbackupoptions : UInt8**) : HRESULT
-    @lpVtbl.value.get_backup_options.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbackupoptions)
+  def get_backup_options(this : IVssComponent*, pbstrbackupoptions : UInt8**) : HRESULT
+    @lpVtbl.value.get_backup_options.call(this, pbstrbackupoptions)
   end
-  def get_restore_options(pbstrrestoreoptions : UInt8**) : HRESULT
-    @lpVtbl.value.get_restore_options.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrrestoreoptions)
+  def get_restore_options(this : IVssComponent*, pbstrrestoreoptions : UInt8**) : HRESULT
+    @lpVtbl.value.get_restore_options.call(this, pbstrrestoreoptions)
   end
-  def get_restore_subcomponent_count(pcrestoresubcomponent : UInt32*) : HRESULT
-    @lpVtbl.value.get_restore_subcomponent_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcrestoresubcomponent)
+  def get_restore_subcomponent_count(this : IVssComponent*, pcrestoresubcomponent : UInt32*) : HRESULT
+    @lpVtbl.value.get_restore_subcomponent_count.call(this, pcrestoresubcomponent)
   end
-  def get_restore_subcomponent(icomponent : UInt32, pbstrlogicalpath : UInt8**, pbstrcomponentname : UInt8**, pbrepair : Bool*) : HRESULT
-    @lpVtbl.value.get_restore_subcomponent.unsafe_as(Proc(UInt32, UInt8**, UInt8**, Bool*, HRESULT)).call(icomponent, pbstrlogicalpath, pbstrcomponentname, pbrepair)
+  def get_restore_subcomponent(this : IVssComponent*, icomponent : UInt32, pbstrlogicalpath : UInt8**, pbstrcomponentname : UInt8**, pbrepair : Bool*) : HRESULT
+    @lpVtbl.value.get_restore_subcomponent.call(this, icomponent, pbstrlogicalpath, pbstrcomponentname, pbrepair)
   end
-  def get_file_restore_status(pstatus : VSS_FILE_RESTORE_STATUS*) : HRESULT
-    @lpVtbl.value.get_file_restore_status.unsafe_as(Proc(VSS_FILE_RESTORE_STATUS*, HRESULT)).call(pstatus)
+  def get_file_restore_status(this : IVssComponent*, pstatus : VSS_FILE_RESTORE_STATUS*) : HRESULT
+    @lpVtbl.value.get_file_restore_status.call(this, pstatus)
   end
-  def add_differenced_files_by_last_modify_time(wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : LibC::BOOL, ftlastmodifytime : FILETIME) : HRESULT
-    @lpVtbl.value.add_differenced_files_by_last_modify_time.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, FILETIME, HRESULT)).call(wszpath, wszfilespec, brecursive, ftlastmodifytime)
+  def add_differenced_files_by_last_modify_time(this : IVssComponent*, wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : LibC::BOOL, ftlastmodifytime : FILETIME) : HRESULT
+    @lpVtbl.value.add_differenced_files_by_last_modify_time.call(this, wszpath, wszfilespec, brecursive, ftlastmodifytime)
   end
-  def add_differenced_files_by_last_modify_lsn(wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : LibC::BOOL, bstrlsnstring : UInt8*) : HRESULT
-    @lpVtbl.value.add_differenced_files_by_last_modify_lsn.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, UInt8*, HRESULT)).call(wszpath, wszfilespec, brecursive, bstrlsnstring)
+  def add_differenced_files_by_last_modify_lsn(this : IVssComponent*, wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : LibC::BOOL, bstrlsnstring : UInt8*) : HRESULT
+    @lpVtbl.value.add_differenced_files_by_last_modify_lsn.call(this, wszpath, wszfilespec, brecursive, bstrlsnstring)
   end
-  def get_differenced_files_count(pcdifferencedfiles : UInt32*) : HRESULT
-    @lpVtbl.value.get_differenced_files_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcdifferencedfiles)
+  def get_differenced_files_count(this : IVssComponent*, pcdifferencedfiles : UInt32*) : HRESULT
+    @lpVtbl.value.get_differenced_files_count.call(this, pcdifferencedfiles)
   end
-  def get_differenced_file(idifferencedfile : UInt32, pbstrpath : UInt8**, pbstrfilespec : UInt8**, pbrecursive : LibC::BOOL*, pbstrlsnstring : UInt8**, pftlastmodifytime : FILETIME*) : HRESULT
-    @lpVtbl.value.get_differenced_file.unsafe_as(Proc(UInt32, UInt8**, UInt8**, LibC::BOOL*, UInt8**, FILETIME*, HRESULT)).call(idifferencedfile, pbstrpath, pbstrfilespec, pbrecursive, pbstrlsnstring, pftlastmodifytime)
+  def get_differenced_file(this : IVssComponent*, idifferencedfile : UInt32, pbstrpath : UInt8**, pbstrfilespec : UInt8**, pbrecursive : LibC::BOOL*, pbstrlsnstring : UInt8**, pftlastmodifytime : FILETIME*) : HRESULT
+    @lpVtbl.value.get_differenced_file.call(this, idifferencedfile, pbstrpath, pbstrfilespec, pbrecursive, pbstrlsnstring, pftlastmodifytime)
   end
 end
 struct LibWin32::IVssWriterComponents
-  def get_component_count(pccomponents : UInt32*) : HRESULT
-    @lpVtbl.value.get_component_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pccomponents)
+  def get_component_count(this : IVssWriterComponents*, pccomponents : UInt32*) : HRESULT
+    @lpVtbl.value.get_component_count.call(this, pccomponents)
   end
-  def get_writer_info(pidinstance : Guid*, pidwriter : Guid*) : HRESULT
-    @lpVtbl.value.get_writer_info.unsafe_as(Proc(Guid*, Guid*, HRESULT)).call(pidinstance, pidwriter)
+  def get_writer_info(this : IVssWriterComponents*, pidinstance : Guid*, pidwriter : Guid*) : HRESULT
+    @lpVtbl.value.get_writer_info.call(this, pidinstance, pidwriter)
   end
-  def get_component(icomponent : UInt32, ppcomponent : IVssComponent*) : HRESULT
-    @lpVtbl.value.get_component.unsafe_as(Proc(UInt32, IVssComponent*, HRESULT)).call(icomponent, ppcomponent)
+  def get_component(this : IVssWriterComponents*, icomponent : UInt32, ppcomponent : IVssComponent*) : HRESULT
+    @lpVtbl.value.get_component.call(this, icomponent, ppcomponent)
   end
 end
 struct LibWin32::IVssComponentEx
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssComponentEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssComponentEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssComponentEx*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_logical_path(pbstrpath : UInt8**) : HRESULT
-    @lpVtbl.value.get_logical_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrpath)
+  def get_logical_path(this : IVssComponentEx*, pbstrpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_logical_path.call(this, pbstrpath)
   end
-  def get_component_type(pct : VSS_COMPONENT_TYPE*) : HRESULT
-    @lpVtbl.value.get_component_type.unsafe_as(Proc(VSS_COMPONENT_TYPE*, HRESULT)).call(pct)
+  def get_component_type(this : IVssComponentEx*, pct : VSS_COMPONENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_component_type.call(this, pct)
   end
-  def get_component_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_component_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_component_name(this : IVssComponentEx*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_component_name.call(this, pbstrname)
   end
-  def get_backup_succeeded(pbsucceeded : Bool*) : HRESULT
-    @lpVtbl.value.get_backup_succeeded.unsafe_as(Proc(Bool*, HRESULT)).call(pbsucceeded)
+  def get_backup_succeeded(this : IVssComponentEx*, pbsucceeded : Bool*) : HRESULT
+    @lpVtbl.value.get_backup_succeeded.call(this, pbsucceeded)
   end
-  def get_alternate_location_mapping_count(pcmappings : UInt32*) : HRESULT
-    @lpVtbl.value.get_alternate_location_mapping_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcmappings)
+  def get_alternate_location_mapping_count(this : IVssComponentEx*, pcmappings : UInt32*) : HRESULT
+    @lpVtbl.value.get_alternate_location_mapping_count.call(this, pcmappings)
   end
-  def get_alternate_location_mapping(imapping : UInt32, ppfiledesc : IVssWMFiledesc*) : HRESULT
-    @lpVtbl.value.get_alternate_location_mapping.unsafe_as(Proc(UInt32, IVssWMFiledesc*, HRESULT)).call(imapping, ppfiledesc)
+  def get_alternate_location_mapping(this : IVssComponentEx*, imapping : UInt32, ppfiledesc : IVssWMFiledesc*) : HRESULT
+    @lpVtbl.value.get_alternate_location_mapping.call(this, imapping, ppfiledesc)
   end
-  def set_backup_metadata(wszdata : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_backup_metadata.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszdata)
+  def set_backup_metadata(this : IVssComponentEx*, wszdata : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_backup_metadata.call(this, wszdata)
   end
-  def get_backup_metadata(pbstrdata : UInt8**) : HRESULT
-    @lpVtbl.value.get_backup_metadata.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdata)
+  def get_backup_metadata(this : IVssComponentEx*, pbstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_backup_metadata.call(this, pbstrdata)
   end
-  def add_partial_file(wszpath : LibC::LPWSTR, wszfilename : LibC::LPWSTR, wszranges : LibC::LPWSTR, wszmetadata : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.add_partial_file.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(wszpath, wszfilename, wszranges, wszmetadata)
+  def add_partial_file(this : IVssComponentEx*, wszpath : LibC::LPWSTR, wszfilename : LibC::LPWSTR, wszranges : LibC::LPWSTR, wszmetadata : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_partial_file.call(this, wszpath, wszfilename, wszranges, wszmetadata)
   end
-  def get_partial_file_count(pcpartialfiles : UInt32*) : HRESULT
-    @lpVtbl.value.get_partial_file_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcpartialfiles)
+  def get_partial_file_count(this : IVssComponentEx*, pcpartialfiles : UInt32*) : HRESULT
+    @lpVtbl.value.get_partial_file_count.call(this, pcpartialfiles)
   end
-  def get_partial_file(ipartialfile : UInt32, pbstrpath : UInt8**, pbstrfilename : UInt8**, pbstrrange : UInt8**, pbstrmetadata : UInt8**) : HRESULT
-    @lpVtbl.value.get_partial_file.unsafe_as(Proc(UInt32, UInt8**, UInt8**, UInt8**, UInt8**, HRESULT)).call(ipartialfile, pbstrpath, pbstrfilename, pbstrrange, pbstrmetadata)
+  def get_partial_file(this : IVssComponentEx*, ipartialfile : UInt32, pbstrpath : UInt8**, pbstrfilename : UInt8**, pbstrrange : UInt8**, pbstrmetadata : UInt8**) : HRESULT
+    @lpVtbl.value.get_partial_file.call(this, ipartialfile, pbstrpath, pbstrfilename, pbstrrange, pbstrmetadata)
   end
-  def is_selected_for_restore(pbselectedforrestore : Bool*) : HRESULT
-    @lpVtbl.value.is_selected_for_restore.unsafe_as(Proc(Bool*, HRESULT)).call(pbselectedforrestore)
+  def is_selected_for_restore(this : IVssComponentEx*, pbselectedforrestore : Bool*) : HRESULT
+    @lpVtbl.value.is_selected_for_restore.call(this, pbselectedforrestore)
   end
-  def get_additional_restores(pbadditionalrestores : Bool*) : HRESULT
-    @lpVtbl.value.get_additional_restores.unsafe_as(Proc(Bool*, HRESULT)).call(pbadditionalrestores)
+  def get_additional_restores(this : IVssComponentEx*, pbadditionalrestores : Bool*) : HRESULT
+    @lpVtbl.value.get_additional_restores.call(this, pbadditionalrestores)
   end
-  def get_new_target_count(pcnewtarget : UInt32*) : HRESULT
-    @lpVtbl.value.get_new_target_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcnewtarget)
+  def get_new_target_count(this : IVssComponentEx*, pcnewtarget : UInt32*) : HRESULT
+    @lpVtbl.value.get_new_target_count.call(this, pcnewtarget)
   end
-  def get_new_target(inewtarget : UInt32, ppfiledesc : IVssWMFiledesc*) : HRESULT
-    @lpVtbl.value.get_new_target.unsafe_as(Proc(UInt32, IVssWMFiledesc*, HRESULT)).call(inewtarget, ppfiledesc)
+  def get_new_target(this : IVssComponentEx*, inewtarget : UInt32, ppfiledesc : IVssWMFiledesc*) : HRESULT
+    @lpVtbl.value.get_new_target.call(this, inewtarget, ppfiledesc)
   end
-  def add_directed_target(wszsourcepath : LibC::LPWSTR, wszsourcefilename : LibC::LPWSTR, wszsourcerangelist : LibC::LPWSTR, wszdestinationpath : LibC::LPWSTR, wszdestinationfilename : LibC::LPWSTR, wszdestinationrangelist : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.add_directed_target.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(wszsourcepath, wszsourcefilename, wszsourcerangelist, wszdestinationpath, wszdestinationfilename, wszdestinationrangelist)
+  def add_directed_target(this : IVssComponentEx*, wszsourcepath : LibC::LPWSTR, wszsourcefilename : LibC::LPWSTR, wszsourcerangelist : LibC::LPWSTR, wszdestinationpath : LibC::LPWSTR, wszdestinationfilename : LibC::LPWSTR, wszdestinationrangelist : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_directed_target.call(this, wszsourcepath, wszsourcefilename, wszsourcerangelist, wszdestinationpath, wszdestinationfilename, wszdestinationrangelist)
   end
-  def get_directed_target_count(pcdirectedtarget : UInt32*) : HRESULT
-    @lpVtbl.value.get_directed_target_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcdirectedtarget)
+  def get_directed_target_count(this : IVssComponentEx*, pcdirectedtarget : UInt32*) : HRESULT
+    @lpVtbl.value.get_directed_target_count.call(this, pcdirectedtarget)
   end
-  def get_directed_target(idirectedtarget : UInt32, pbstrsourcepath : UInt8**, pbstrsourcefilename : UInt8**, pbstrsourcerangelist : UInt8**, pbstrdestinationpath : UInt8**, pbstrdestinationfilename : UInt8**, pbstrdestinationrangelist : UInt8**) : HRESULT
-    @lpVtbl.value.get_directed_target.unsafe_as(Proc(UInt32, UInt8**, UInt8**, UInt8**, UInt8**, UInt8**, UInt8**, HRESULT)).call(idirectedtarget, pbstrsourcepath, pbstrsourcefilename, pbstrsourcerangelist, pbstrdestinationpath, pbstrdestinationfilename, pbstrdestinationrangelist)
+  def get_directed_target(this : IVssComponentEx*, idirectedtarget : UInt32, pbstrsourcepath : UInt8**, pbstrsourcefilename : UInt8**, pbstrsourcerangelist : UInt8**, pbstrdestinationpath : UInt8**, pbstrdestinationfilename : UInt8**, pbstrdestinationrangelist : UInt8**) : HRESULT
+    @lpVtbl.value.get_directed_target.call(this, idirectedtarget, pbstrsourcepath, pbstrsourcefilename, pbstrsourcerangelist, pbstrdestinationpath, pbstrdestinationfilename, pbstrdestinationrangelist)
   end
-  def set_restore_metadata(wszrestoremetadata : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_restore_metadata.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszrestoremetadata)
+  def set_restore_metadata(this : IVssComponentEx*, wszrestoremetadata : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_restore_metadata.call(this, wszrestoremetadata)
   end
-  def get_restore_metadata(pbstrrestoremetadata : UInt8**) : HRESULT
-    @lpVtbl.value.get_restore_metadata.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrrestoremetadata)
+  def get_restore_metadata(this : IVssComponentEx*, pbstrrestoremetadata : UInt8**) : HRESULT
+    @lpVtbl.value.get_restore_metadata.call(this, pbstrrestoremetadata)
   end
-  def set_restore_target(target : VSS_RESTORE_TARGET) : HRESULT
-    @lpVtbl.value.set_restore_target.unsafe_as(Proc(VSS_RESTORE_TARGET, HRESULT)).call(target)
+  def set_restore_target(this : IVssComponentEx*, target : VSS_RESTORE_TARGET) : HRESULT
+    @lpVtbl.value.set_restore_target.call(this, target)
   end
-  def get_restore_target(ptarget : VSS_RESTORE_TARGET*) : HRESULT
-    @lpVtbl.value.get_restore_target.unsafe_as(Proc(VSS_RESTORE_TARGET*, HRESULT)).call(ptarget)
+  def get_restore_target(this : IVssComponentEx*, ptarget : VSS_RESTORE_TARGET*) : HRESULT
+    @lpVtbl.value.get_restore_target.call(this, ptarget)
   end
-  def set_pre_restore_failure_msg(wszprerestorefailuremsg : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_pre_restore_failure_msg.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszprerestorefailuremsg)
+  def set_pre_restore_failure_msg(this : IVssComponentEx*, wszprerestorefailuremsg : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_pre_restore_failure_msg.call(this, wszprerestorefailuremsg)
   end
-  def get_pre_restore_failure_msg(pbstrprerestorefailuremsg : UInt8**) : HRESULT
-    @lpVtbl.value.get_pre_restore_failure_msg.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprerestorefailuremsg)
+  def get_pre_restore_failure_msg(this : IVssComponentEx*, pbstrprerestorefailuremsg : UInt8**) : HRESULT
+    @lpVtbl.value.get_pre_restore_failure_msg.call(this, pbstrprerestorefailuremsg)
   end
-  def set_post_restore_failure_msg(wszpostrestorefailuremsg : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_post_restore_failure_msg.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszpostrestorefailuremsg)
+  def set_post_restore_failure_msg(this : IVssComponentEx*, wszpostrestorefailuremsg : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_post_restore_failure_msg.call(this, wszpostrestorefailuremsg)
   end
-  def get_post_restore_failure_msg(pbstrpostrestorefailuremsg : UInt8**) : HRESULT
-    @lpVtbl.value.get_post_restore_failure_msg.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrpostrestorefailuremsg)
+  def get_post_restore_failure_msg(this : IVssComponentEx*, pbstrpostrestorefailuremsg : UInt8**) : HRESULT
+    @lpVtbl.value.get_post_restore_failure_msg.call(this, pbstrpostrestorefailuremsg)
   end
-  def set_backup_stamp(wszbackupstamp : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_backup_stamp.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszbackupstamp)
+  def set_backup_stamp(this : IVssComponentEx*, wszbackupstamp : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_backup_stamp.call(this, wszbackupstamp)
   end
-  def get_backup_stamp(pbstrbackupstamp : UInt8**) : HRESULT
-    @lpVtbl.value.get_backup_stamp.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbackupstamp)
+  def get_backup_stamp(this : IVssComponentEx*, pbstrbackupstamp : UInt8**) : HRESULT
+    @lpVtbl.value.get_backup_stamp.call(this, pbstrbackupstamp)
   end
-  def get_previous_backup_stamp(pbstrbackupstamp : UInt8**) : HRESULT
-    @lpVtbl.value.get_previous_backup_stamp.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbackupstamp)
+  def get_previous_backup_stamp(this : IVssComponentEx*, pbstrbackupstamp : UInt8**) : HRESULT
+    @lpVtbl.value.get_previous_backup_stamp.call(this, pbstrbackupstamp)
   end
-  def get_backup_options(pbstrbackupoptions : UInt8**) : HRESULT
-    @lpVtbl.value.get_backup_options.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbackupoptions)
+  def get_backup_options(this : IVssComponentEx*, pbstrbackupoptions : UInt8**) : HRESULT
+    @lpVtbl.value.get_backup_options.call(this, pbstrbackupoptions)
   end
-  def get_restore_options(pbstrrestoreoptions : UInt8**) : HRESULT
-    @lpVtbl.value.get_restore_options.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrrestoreoptions)
+  def get_restore_options(this : IVssComponentEx*, pbstrrestoreoptions : UInt8**) : HRESULT
+    @lpVtbl.value.get_restore_options.call(this, pbstrrestoreoptions)
   end
-  def get_restore_subcomponent_count(pcrestoresubcomponent : UInt32*) : HRESULT
-    @lpVtbl.value.get_restore_subcomponent_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcrestoresubcomponent)
+  def get_restore_subcomponent_count(this : IVssComponentEx*, pcrestoresubcomponent : UInt32*) : HRESULT
+    @lpVtbl.value.get_restore_subcomponent_count.call(this, pcrestoresubcomponent)
   end
-  def get_restore_subcomponent(icomponent : UInt32, pbstrlogicalpath : UInt8**, pbstrcomponentname : UInt8**, pbrepair : Bool*) : HRESULT
-    @lpVtbl.value.get_restore_subcomponent.unsafe_as(Proc(UInt32, UInt8**, UInt8**, Bool*, HRESULT)).call(icomponent, pbstrlogicalpath, pbstrcomponentname, pbrepair)
+  def get_restore_subcomponent(this : IVssComponentEx*, icomponent : UInt32, pbstrlogicalpath : UInt8**, pbstrcomponentname : UInt8**, pbrepair : Bool*) : HRESULT
+    @lpVtbl.value.get_restore_subcomponent.call(this, icomponent, pbstrlogicalpath, pbstrcomponentname, pbrepair)
   end
-  def get_file_restore_status(pstatus : VSS_FILE_RESTORE_STATUS*) : HRESULT
-    @lpVtbl.value.get_file_restore_status.unsafe_as(Proc(VSS_FILE_RESTORE_STATUS*, HRESULT)).call(pstatus)
+  def get_file_restore_status(this : IVssComponentEx*, pstatus : VSS_FILE_RESTORE_STATUS*) : HRESULT
+    @lpVtbl.value.get_file_restore_status.call(this, pstatus)
   end
-  def add_differenced_files_by_last_modify_time(wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : LibC::BOOL, ftlastmodifytime : FILETIME) : HRESULT
-    @lpVtbl.value.add_differenced_files_by_last_modify_time.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, FILETIME, HRESULT)).call(wszpath, wszfilespec, brecursive, ftlastmodifytime)
+  def add_differenced_files_by_last_modify_time(this : IVssComponentEx*, wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : LibC::BOOL, ftlastmodifytime : FILETIME) : HRESULT
+    @lpVtbl.value.add_differenced_files_by_last_modify_time.call(this, wszpath, wszfilespec, brecursive, ftlastmodifytime)
   end
-  def add_differenced_files_by_last_modify_lsn(wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : LibC::BOOL, bstrlsnstring : UInt8*) : HRESULT
-    @lpVtbl.value.add_differenced_files_by_last_modify_lsn.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, UInt8*, HRESULT)).call(wszpath, wszfilespec, brecursive, bstrlsnstring)
+  def add_differenced_files_by_last_modify_lsn(this : IVssComponentEx*, wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : LibC::BOOL, bstrlsnstring : UInt8*) : HRESULT
+    @lpVtbl.value.add_differenced_files_by_last_modify_lsn.call(this, wszpath, wszfilespec, brecursive, bstrlsnstring)
   end
-  def get_differenced_files_count(pcdifferencedfiles : UInt32*) : HRESULT
-    @lpVtbl.value.get_differenced_files_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcdifferencedfiles)
+  def get_differenced_files_count(this : IVssComponentEx*, pcdifferencedfiles : UInt32*) : HRESULT
+    @lpVtbl.value.get_differenced_files_count.call(this, pcdifferencedfiles)
   end
-  def get_differenced_file(idifferencedfile : UInt32, pbstrpath : UInt8**, pbstrfilespec : UInt8**, pbrecursive : LibC::BOOL*, pbstrlsnstring : UInt8**, pftlastmodifytime : FILETIME*) : HRESULT
-    @lpVtbl.value.get_differenced_file.unsafe_as(Proc(UInt32, UInt8**, UInt8**, LibC::BOOL*, UInt8**, FILETIME*, HRESULT)).call(idifferencedfile, pbstrpath, pbstrfilespec, pbrecursive, pbstrlsnstring, pftlastmodifytime)
+  def get_differenced_file(this : IVssComponentEx*, idifferencedfile : UInt32, pbstrpath : UInt8**, pbstrfilespec : UInt8**, pbrecursive : LibC::BOOL*, pbstrlsnstring : UInt8**, pftlastmodifytime : FILETIME*) : HRESULT
+    @lpVtbl.value.get_differenced_file.call(this, idifferencedfile, pbstrpath, pbstrfilespec, pbrecursive, pbstrlsnstring, pftlastmodifytime)
   end
-  def set_prepare_for_backup_failure_msg(wszfailuremsg : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_prepare_for_backup_failure_msg.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszfailuremsg)
+  def set_prepare_for_backup_failure_msg(this : IVssComponentEx*, wszfailuremsg : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_prepare_for_backup_failure_msg.call(this, wszfailuremsg)
   end
-  def set_post_snapshot_failure_msg(wszfailuremsg : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_post_snapshot_failure_msg.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszfailuremsg)
+  def set_post_snapshot_failure_msg(this : IVssComponentEx*, wszfailuremsg : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_post_snapshot_failure_msg.call(this, wszfailuremsg)
   end
-  def get_prepare_for_backup_failure_msg(pbstrfailuremsg : UInt8**) : HRESULT
-    @lpVtbl.value.get_prepare_for_backup_failure_msg.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrfailuremsg)
+  def get_prepare_for_backup_failure_msg(this : IVssComponentEx*, pbstrfailuremsg : UInt8**) : HRESULT
+    @lpVtbl.value.get_prepare_for_backup_failure_msg.call(this, pbstrfailuremsg)
   end
-  def get_post_snapshot_failure_msg(pbstrfailuremsg : UInt8**) : HRESULT
-    @lpVtbl.value.get_post_snapshot_failure_msg.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrfailuremsg)
+  def get_post_snapshot_failure_msg(this : IVssComponentEx*, pbstrfailuremsg : UInt8**) : HRESULT
+    @lpVtbl.value.get_post_snapshot_failure_msg.call(this, pbstrfailuremsg)
   end
-  def get_authoritative_restore(pbauth : Bool*) : HRESULT
-    @lpVtbl.value.get_authoritative_restore.unsafe_as(Proc(Bool*, HRESULT)).call(pbauth)
+  def get_authoritative_restore(this : IVssComponentEx*, pbauth : Bool*) : HRESULT
+    @lpVtbl.value.get_authoritative_restore.call(this, pbauth)
   end
-  def get_roll_forward(prolltype : VSS_ROLLFORWARD_TYPE*, pbstrpoint : UInt8**) : HRESULT
-    @lpVtbl.value.get_roll_forward.unsafe_as(Proc(VSS_ROLLFORWARD_TYPE*, UInt8**, HRESULT)).call(prolltype, pbstrpoint)
+  def get_roll_forward(this : IVssComponentEx*, prolltype : VSS_ROLLFORWARD_TYPE*, pbstrpoint : UInt8**) : HRESULT
+    @lpVtbl.value.get_roll_forward.call(this, prolltype, pbstrpoint)
   end
-  def get_restore_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_restore_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_restore_name(this : IVssComponentEx*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_restore_name.call(this, pbstrname)
   end
 end
 struct LibWin32::IVssComponentEx2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssComponentEx2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssComponentEx2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssComponentEx2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_logical_path(pbstrpath : UInt8**) : HRESULT
-    @lpVtbl.value.get_logical_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrpath)
+  def get_logical_path(this : IVssComponentEx2*, pbstrpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_logical_path.call(this, pbstrpath)
   end
-  def get_component_type(pct : VSS_COMPONENT_TYPE*) : HRESULT
-    @lpVtbl.value.get_component_type.unsafe_as(Proc(VSS_COMPONENT_TYPE*, HRESULT)).call(pct)
+  def get_component_type(this : IVssComponentEx2*, pct : VSS_COMPONENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_component_type.call(this, pct)
   end
-  def get_component_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_component_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_component_name(this : IVssComponentEx2*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_component_name.call(this, pbstrname)
   end
-  def get_backup_succeeded(pbsucceeded : Bool*) : HRESULT
-    @lpVtbl.value.get_backup_succeeded.unsafe_as(Proc(Bool*, HRESULT)).call(pbsucceeded)
+  def get_backup_succeeded(this : IVssComponentEx2*, pbsucceeded : Bool*) : HRESULT
+    @lpVtbl.value.get_backup_succeeded.call(this, pbsucceeded)
   end
-  def get_alternate_location_mapping_count(pcmappings : UInt32*) : HRESULT
-    @lpVtbl.value.get_alternate_location_mapping_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcmappings)
+  def get_alternate_location_mapping_count(this : IVssComponentEx2*, pcmappings : UInt32*) : HRESULT
+    @lpVtbl.value.get_alternate_location_mapping_count.call(this, pcmappings)
   end
-  def get_alternate_location_mapping(imapping : UInt32, ppfiledesc : IVssWMFiledesc*) : HRESULT
-    @lpVtbl.value.get_alternate_location_mapping.unsafe_as(Proc(UInt32, IVssWMFiledesc*, HRESULT)).call(imapping, ppfiledesc)
+  def get_alternate_location_mapping(this : IVssComponentEx2*, imapping : UInt32, ppfiledesc : IVssWMFiledesc*) : HRESULT
+    @lpVtbl.value.get_alternate_location_mapping.call(this, imapping, ppfiledesc)
   end
-  def set_backup_metadata(wszdata : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_backup_metadata.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszdata)
+  def set_backup_metadata(this : IVssComponentEx2*, wszdata : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_backup_metadata.call(this, wszdata)
   end
-  def get_backup_metadata(pbstrdata : UInt8**) : HRESULT
-    @lpVtbl.value.get_backup_metadata.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdata)
+  def get_backup_metadata(this : IVssComponentEx2*, pbstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_backup_metadata.call(this, pbstrdata)
   end
-  def add_partial_file(wszpath : LibC::LPWSTR, wszfilename : LibC::LPWSTR, wszranges : LibC::LPWSTR, wszmetadata : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.add_partial_file.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(wszpath, wszfilename, wszranges, wszmetadata)
+  def add_partial_file(this : IVssComponentEx2*, wszpath : LibC::LPWSTR, wszfilename : LibC::LPWSTR, wszranges : LibC::LPWSTR, wszmetadata : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_partial_file.call(this, wszpath, wszfilename, wszranges, wszmetadata)
   end
-  def get_partial_file_count(pcpartialfiles : UInt32*) : HRESULT
-    @lpVtbl.value.get_partial_file_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcpartialfiles)
+  def get_partial_file_count(this : IVssComponentEx2*, pcpartialfiles : UInt32*) : HRESULT
+    @lpVtbl.value.get_partial_file_count.call(this, pcpartialfiles)
   end
-  def get_partial_file(ipartialfile : UInt32, pbstrpath : UInt8**, pbstrfilename : UInt8**, pbstrrange : UInt8**, pbstrmetadata : UInt8**) : HRESULT
-    @lpVtbl.value.get_partial_file.unsafe_as(Proc(UInt32, UInt8**, UInt8**, UInt8**, UInt8**, HRESULT)).call(ipartialfile, pbstrpath, pbstrfilename, pbstrrange, pbstrmetadata)
+  def get_partial_file(this : IVssComponentEx2*, ipartialfile : UInt32, pbstrpath : UInt8**, pbstrfilename : UInt8**, pbstrrange : UInt8**, pbstrmetadata : UInt8**) : HRESULT
+    @lpVtbl.value.get_partial_file.call(this, ipartialfile, pbstrpath, pbstrfilename, pbstrrange, pbstrmetadata)
   end
-  def is_selected_for_restore(pbselectedforrestore : Bool*) : HRESULT
-    @lpVtbl.value.is_selected_for_restore.unsafe_as(Proc(Bool*, HRESULT)).call(pbselectedforrestore)
+  def is_selected_for_restore(this : IVssComponentEx2*, pbselectedforrestore : Bool*) : HRESULT
+    @lpVtbl.value.is_selected_for_restore.call(this, pbselectedforrestore)
   end
-  def get_additional_restores(pbadditionalrestores : Bool*) : HRESULT
-    @lpVtbl.value.get_additional_restores.unsafe_as(Proc(Bool*, HRESULT)).call(pbadditionalrestores)
+  def get_additional_restores(this : IVssComponentEx2*, pbadditionalrestores : Bool*) : HRESULT
+    @lpVtbl.value.get_additional_restores.call(this, pbadditionalrestores)
   end
-  def get_new_target_count(pcnewtarget : UInt32*) : HRESULT
-    @lpVtbl.value.get_new_target_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcnewtarget)
+  def get_new_target_count(this : IVssComponentEx2*, pcnewtarget : UInt32*) : HRESULT
+    @lpVtbl.value.get_new_target_count.call(this, pcnewtarget)
   end
-  def get_new_target(inewtarget : UInt32, ppfiledesc : IVssWMFiledesc*) : HRESULT
-    @lpVtbl.value.get_new_target.unsafe_as(Proc(UInt32, IVssWMFiledesc*, HRESULT)).call(inewtarget, ppfiledesc)
+  def get_new_target(this : IVssComponentEx2*, inewtarget : UInt32, ppfiledesc : IVssWMFiledesc*) : HRESULT
+    @lpVtbl.value.get_new_target.call(this, inewtarget, ppfiledesc)
   end
-  def add_directed_target(wszsourcepath : LibC::LPWSTR, wszsourcefilename : LibC::LPWSTR, wszsourcerangelist : LibC::LPWSTR, wszdestinationpath : LibC::LPWSTR, wszdestinationfilename : LibC::LPWSTR, wszdestinationrangelist : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.add_directed_target.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(wszsourcepath, wszsourcefilename, wszsourcerangelist, wszdestinationpath, wszdestinationfilename, wszdestinationrangelist)
+  def add_directed_target(this : IVssComponentEx2*, wszsourcepath : LibC::LPWSTR, wszsourcefilename : LibC::LPWSTR, wszsourcerangelist : LibC::LPWSTR, wszdestinationpath : LibC::LPWSTR, wszdestinationfilename : LibC::LPWSTR, wszdestinationrangelist : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_directed_target.call(this, wszsourcepath, wszsourcefilename, wszsourcerangelist, wszdestinationpath, wszdestinationfilename, wszdestinationrangelist)
   end
-  def get_directed_target_count(pcdirectedtarget : UInt32*) : HRESULT
-    @lpVtbl.value.get_directed_target_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcdirectedtarget)
+  def get_directed_target_count(this : IVssComponentEx2*, pcdirectedtarget : UInt32*) : HRESULT
+    @lpVtbl.value.get_directed_target_count.call(this, pcdirectedtarget)
   end
-  def get_directed_target(idirectedtarget : UInt32, pbstrsourcepath : UInt8**, pbstrsourcefilename : UInt8**, pbstrsourcerangelist : UInt8**, pbstrdestinationpath : UInt8**, pbstrdestinationfilename : UInt8**, pbstrdestinationrangelist : UInt8**) : HRESULT
-    @lpVtbl.value.get_directed_target.unsafe_as(Proc(UInt32, UInt8**, UInt8**, UInt8**, UInt8**, UInt8**, UInt8**, HRESULT)).call(idirectedtarget, pbstrsourcepath, pbstrsourcefilename, pbstrsourcerangelist, pbstrdestinationpath, pbstrdestinationfilename, pbstrdestinationrangelist)
+  def get_directed_target(this : IVssComponentEx2*, idirectedtarget : UInt32, pbstrsourcepath : UInt8**, pbstrsourcefilename : UInt8**, pbstrsourcerangelist : UInt8**, pbstrdestinationpath : UInt8**, pbstrdestinationfilename : UInt8**, pbstrdestinationrangelist : UInt8**) : HRESULT
+    @lpVtbl.value.get_directed_target.call(this, idirectedtarget, pbstrsourcepath, pbstrsourcefilename, pbstrsourcerangelist, pbstrdestinationpath, pbstrdestinationfilename, pbstrdestinationrangelist)
   end
-  def set_restore_metadata(wszrestoremetadata : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_restore_metadata.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszrestoremetadata)
+  def set_restore_metadata(this : IVssComponentEx2*, wszrestoremetadata : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_restore_metadata.call(this, wszrestoremetadata)
   end
-  def get_restore_metadata(pbstrrestoremetadata : UInt8**) : HRESULT
-    @lpVtbl.value.get_restore_metadata.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrrestoremetadata)
+  def get_restore_metadata(this : IVssComponentEx2*, pbstrrestoremetadata : UInt8**) : HRESULT
+    @lpVtbl.value.get_restore_metadata.call(this, pbstrrestoremetadata)
   end
-  def set_restore_target(target : VSS_RESTORE_TARGET) : HRESULT
-    @lpVtbl.value.set_restore_target.unsafe_as(Proc(VSS_RESTORE_TARGET, HRESULT)).call(target)
+  def set_restore_target(this : IVssComponentEx2*, target : VSS_RESTORE_TARGET) : HRESULT
+    @lpVtbl.value.set_restore_target.call(this, target)
   end
-  def get_restore_target(ptarget : VSS_RESTORE_TARGET*) : HRESULT
-    @lpVtbl.value.get_restore_target.unsafe_as(Proc(VSS_RESTORE_TARGET*, HRESULT)).call(ptarget)
+  def get_restore_target(this : IVssComponentEx2*, ptarget : VSS_RESTORE_TARGET*) : HRESULT
+    @lpVtbl.value.get_restore_target.call(this, ptarget)
   end
-  def set_pre_restore_failure_msg(wszprerestorefailuremsg : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_pre_restore_failure_msg.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszprerestorefailuremsg)
+  def set_pre_restore_failure_msg(this : IVssComponentEx2*, wszprerestorefailuremsg : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_pre_restore_failure_msg.call(this, wszprerestorefailuremsg)
   end
-  def get_pre_restore_failure_msg(pbstrprerestorefailuremsg : UInt8**) : HRESULT
-    @lpVtbl.value.get_pre_restore_failure_msg.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprerestorefailuremsg)
+  def get_pre_restore_failure_msg(this : IVssComponentEx2*, pbstrprerestorefailuremsg : UInt8**) : HRESULT
+    @lpVtbl.value.get_pre_restore_failure_msg.call(this, pbstrprerestorefailuremsg)
   end
-  def set_post_restore_failure_msg(wszpostrestorefailuremsg : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_post_restore_failure_msg.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszpostrestorefailuremsg)
+  def set_post_restore_failure_msg(this : IVssComponentEx2*, wszpostrestorefailuremsg : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_post_restore_failure_msg.call(this, wszpostrestorefailuremsg)
   end
-  def get_post_restore_failure_msg(pbstrpostrestorefailuremsg : UInt8**) : HRESULT
-    @lpVtbl.value.get_post_restore_failure_msg.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrpostrestorefailuremsg)
+  def get_post_restore_failure_msg(this : IVssComponentEx2*, pbstrpostrestorefailuremsg : UInt8**) : HRESULT
+    @lpVtbl.value.get_post_restore_failure_msg.call(this, pbstrpostrestorefailuremsg)
   end
-  def set_backup_stamp(wszbackupstamp : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_backup_stamp.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszbackupstamp)
+  def set_backup_stamp(this : IVssComponentEx2*, wszbackupstamp : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_backup_stamp.call(this, wszbackupstamp)
   end
-  def get_backup_stamp(pbstrbackupstamp : UInt8**) : HRESULT
-    @lpVtbl.value.get_backup_stamp.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbackupstamp)
+  def get_backup_stamp(this : IVssComponentEx2*, pbstrbackupstamp : UInt8**) : HRESULT
+    @lpVtbl.value.get_backup_stamp.call(this, pbstrbackupstamp)
   end
-  def get_previous_backup_stamp(pbstrbackupstamp : UInt8**) : HRESULT
-    @lpVtbl.value.get_previous_backup_stamp.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbackupstamp)
+  def get_previous_backup_stamp(this : IVssComponentEx2*, pbstrbackupstamp : UInt8**) : HRESULT
+    @lpVtbl.value.get_previous_backup_stamp.call(this, pbstrbackupstamp)
   end
-  def get_backup_options(pbstrbackupoptions : UInt8**) : HRESULT
-    @lpVtbl.value.get_backup_options.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbackupoptions)
+  def get_backup_options(this : IVssComponentEx2*, pbstrbackupoptions : UInt8**) : HRESULT
+    @lpVtbl.value.get_backup_options.call(this, pbstrbackupoptions)
   end
-  def get_restore_options(pbstrrestoreoptions : UInt8**) : HRESULT
-    @lpVtbl.value.get_restore_options.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrrestoreoptions)
+  def get_restore_options(this : IVssComponentEx2*, pbstrrestoreoptions : UInt8**) : HRESULT
+    @lpVtbl.value.get_restore_options.call(this, pbstrrestoreoptions)
   end
-  def get_restore_subcomponent_count(pcrestoresubcomponent : UInt32*) : HRESULT
-    @lpVtbl.value.get_restore_subcomponent_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcrestoresubcomponent)
+  def get_restore_subcomponent_count(this : IVssComponentEx2*, pcrestoresubcomponent : UInt32*) : HRESULT
+    @lpVtbl.value.get_restore_subcomponent_count.call(this, pcrestoresubcomponent)
   end
-  def get_restore_subcomponent(icomponent : UInt32, pbstrlogicalpath : UInt8**, pbstrcomponentname : UInt8**, pbrepair : Bool*) : HRESULT
-    @lpVtbl.value.get_restore_subcomponent.unsafe_as(Proc(UInt32, UInt8**, UInt8**, Bool*, HRESULT)).call(icomponent, pbstrlogicalpath, pbstrcomponentname, pbrepair)
+  def get_restore_subcomponent(this : IVssComponentEx2*, icomponent : UInt32, pbstrlogicalpath : UInt8**, pbstrcomponentname : UInt8**, pbrepair : Bool*) : HRESULT
+    @lpVtbl.value.get_restore_subcomponent.call(this, icomponent, pbstrlogicalpath, pbstrcomponentname, pbrepair)
   end
-  def get_file_restore_status(pstatus : VSS_FILE_RESTORE_STATUS*) : HRESULT
-    @lpVtbl.value.get_file_restore_status.unsafe_as(Proc(VSS_FILE_RESTORE_STATUS*, HRESULT)).call(pstatus)
+  def get_file_restore_status(this : IVssComponentEx2*, pstatus : VSS_FILE_RESTORE_STATUS*) : HRESULT
+    @lpVtbl.value.get_file_restore_status.call(this, pstatus)
   end
-  def add_differenced_files_by_last_modify_time(wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : LibC::BOOL, ftlastmodifytime : FILETIME) : HRESULT
-    @lpVtbl.value.add_differenced_files_by_last_modify_time.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, FILETIME, HRESULT)).call(wszpath, wszfilespec, brecursive, ftlastmodifytime)
+  def add_differenced_files_by_last_modify_time(this : IVssComponentEx2*, wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : LibC::BOOL, ftlastmodifytime : FILETIME) : HRESULT
+    @lpVtbl.value.add_differenced_files_by_last_modify_time.call(this, wszpath, wszfilespec, brecursive, ftlastmodifytime)
   end
-  def add_differenced_files_by_last_modify_lsn(wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : LibC::BOOL, bstrlsnstring : UInt8*) : HRESULT
-    @lpVtbl.value.add_differenced_files_by_last_modify_lsn.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, UInt8*, HRESULT)).call(wszpath, wszfilespec, brecursive, bstrlsnstring)
+  def add_differenced_files_by_last_modify_lsn(this : IVssComponentEx2*, wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : LibC::BOOL, bstrlsnstring : UInt8*) : HRESULT
+    @lpVtbl.value.add_differenced_files_by_last_modify_lsn.call(this, wszpath, wszfilespec, brecursive, bstrlsnstring)
   end
-  def get_differenced_files_count(pcdifferencedfiles : UInt32*) : HRESULT
-    @lpVtbl.value.get_differenced_files_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcdifferencedfiles)
+  def get_differenced_files_count(this : IVssComponentEx2*, pcdifferencedfiles : UInt32*) : HRESULT
+    @lpVtbl.value.get_differenced_files_count.call(this, pcdifferencedfiles)
   end
-  def get_differenced_file(idifferencedfile : UInt32, pbstrpath : UInt8**, pbstrfilespec : UInt8**, pbrecursive : LibC::BOOL*, pbstrlsnstring : UInt8**, pftlastmodifytime : FILETIME*) : HRESULT
-    @lpVtbl.value.get_differenced_file.unsafe_as(Proc(UInt32, UInt8**, UInt8**, LibC::BOOL*, UInt8**, FILETIME*, HRESULT)).call(idifferencedfile, pbstrpath, pbstrfilespec, pbrecursive, pbstrlsnstring, pftlastmodifytime)
+  def get_differenced_file(this : IVssComponentEx2*, idifferencedfile : UInt32, pbstrpath : UInt8**, pbstrfilespec : UInt8**, pbrecursive : LibC::BOOL*, pbstrlsnstring : UInt8**, pftlastmodifytime : FILETIME*) : HRESULT
+    @lpVtbl.value.get_differenced_file.call(this, idifferencedfile, pbstrpath, pbstrfilespec, pbrecursive, pbstrlsnstring, pftlastmodifytime)
   end
-  def set_prepare_for_backup_failure_msg(wszfailuremsg : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_prepare_for_backup_failure_msg.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszfailuremsg)
+  def set_prepare_for_backup_failure_msg(this : IVssComponentEx2*, wszfailuremsg : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_prepare_for_backup_failure_msg.call(this, wszfailuremsg)
   end
-  def set_post_snapshot_failure_msg(wszfailuremsg : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_post_snapshot_failure_msg.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszfailuremsg)
+  def set_post_snapshot_failure_msg(this : IVssComponentEx2*, wszfailuremsg : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_post_snapshot_failure_msg.call(this, wszfailuremsg)
   end
-  def get_prepare_for_backup_failure_msg(pbstrfailuremsg : UInt8**) : HRESULT
-    @lpVtbl.value.get_prepare_for_backup_failure_msg.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrfailuremsg)
+  def get_prepare_for_backup_failure_msg(this : IVssComponentEx2*, pbstrfailuremsg : UInt8**) : HRESULT
+    @lpVtbl.value.get_prepare_for_backup_failure_msg.call(this, pbstrfailuremsg)
   end
-  def get_post_snapshot_failure_msg(pbstrfailuremsg : UInt8**) : HRESULT
-    @lpVtbl.value.get_post_snapshot_failure_msg.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrfailuremsg)
+  def get_post_snapshot_failure_msg(this : IVssComponentEx2*, pbstrfailuremsg : UInt8**) : HRESULT
+    @lpVtbl.value.get_post_snapshot_failure_msg.call(this, pbstrfailuremsg)
   end
-  def get_authoritative_restore(pbauth : Bool*) : HRESULT
-    @lpVtbl.value.get_authoritative_restore.unsafe_as(Proc(Bool*, HRESULT)).call(pbauth)
+  def get_authoritative_restore(this : IVssComponentEx2*, pbauth : Bool*) : HRESULT
+    @lpVtbl.value.get_authoritative_restore.call(this, pbauth)
   end
-  def get_roll_forward(prolltype : VSS_ROLLFORWARD_TYPE*, pbstrpoint : UInt8**) : HRESULT
-    @lpVtbl.value.get_roll_forward.unsafe_as(Proc(VSS_ROLLFORWARD_TYPE*, UInt8**, HRESULT)).call(prolltype, pbstrpoint)
+  def get_roll_forward(this : IVssComponentEx2*, prolltype : VSS_ROLLFORWARD_TYPE*, pbstrpoint : UInt8**) : HRESULT
+    @lpVtbl.value.get_roll_forward.call(this, prolltype, pbstrpoint)
   end
-  def get_restore_name(pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_restore_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  def get_restore_name(this : IVssComponentEx2*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_restore_name.call(this, pbstrname)
   end
-  def set_failure(hr : HRESULT, hrapplication : HRESULT, wszapplicationmessage : LibC::LPWSTR, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.set_failure.unsafe_as(Proc(HRESULT, HRESULT, LibC::LPWSTR, UInt32, HRESULT)).call(hr, hrapplication, wszapplicationmessage, dwreserved)
+  def set_failure(this : IVssComponentEx2*, hr : HRESULT, hrapplication : HRESULT, wszapplicationmessage : LibC::LPWSTR, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.set_failure.call(this, hr, hrapplication, wszapplicationmessage, dwreserved)
   end
-  def get_failure(phr : HRESULT*, phrapplication : HRESULT*, pbstrapplicationmessage : UInt8**, pdwreserved : UInt32*) : HRESULT
-    @lpVtbl.value.get_failure.unsafe_as(Proc(HRESULT*, HRESULT*, UInt8**, UInt32*, HRESULT)).call(phr, phrapplication, pbstrapplicationmessage, pdwreserved)
+  def get_failure(this : IVssComponentEx2*, phr : HRESULT*, phrapplication : HRESULT*, pbstrapplicationmessage : UInt8**, pdwreserved : UInt32*) : HRESULT
+    @lpVtbl.value.get_failure.call(this, phr, phrapplication, pbstrapplicationmessage, pdwreserved)
   end
 end
 struct LibWin32::IVssCreateWriterMetadata
-  def add_include_files(wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : UInt8, wszalternatelocation : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.add_include_files.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt8, LibC::LPWSTR, HRESULT)).call(wszpath, wszfilespec, brecursive, wszalternatelocation)
+  def add_include_files(this : IVssCreateWriterMetadata*, wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : UInt8, wszalternatelocation : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_include_files.call(this, wszpath, wszfilespec, brecursive, wszalternatelocation)
   end
-  def add_exclude_files(wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : UInt8) : HRESULT
-    @lpVtbl.value.add_exclude_files.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt8, HRESULT)).call(wszpath, wszfilespec, brecursive)
+  def add_exclude_files(this : IVssCreateWriterMetadata*, wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : UInt8) : HRESULT
+    @lpVtbl.value.add_exclude_files.call(this, wszpath, wszfilespec, brecursive)
   end
-  def add_component(ct : VSS_COMPONENT_TYPE, wszlogicalpath : LibC::LPWSTR, wszcomponentname : LibC::LPWSTR, wszcaption : LibC::LPWSTR, pbicon : UInt8*, cbicon : UInt32, brestoremetadata : UInt8, bnotifyonbackupcomplete : UInt8, bselectable : UInt8, bselectableforrestore : UInt8, dwcomponentflags : UInt32) : HRESULT
-    @lpVtbl.value.add_component.unsafe_as(Proc(VSS_COMPONENT_TYPE, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt8*, UInt32, UInt8, UInt8, UInt8, UInt8, UInt32, HRESULT)).call(ct, wszlogicalpath, wszcomponentname, wszcaption, pbicon, cbicon, brestoremetadata, bnotifyonbackupcomplete, bselectable, bselectableforrestore, dwcomponentflags)
+  def add_component(this : IVssCreateWriterMetadata*, ct : VSS_COMPONENT_TYPE, wszlogicalpath : LibC::LPWSTR, wszcomponentname : LibC::LPWSTR, wszcaption : LibC::LPWSTR, pbicon : UInt8*, cbicon : UInt32, brestoremetadata : UInt8, bnotifyonbackupcomplete : UInt8, bselectable : UInt8, bselectableforrestore : UInt8, dwcomponentflags : UInt32) : HRESULT
+    @lpVtbl.value.add_component.call(this, ct, wszlogicalpath, wszcomponentname, wszcaption, pbicon, cbicon, brestoremetadata, bnotifyonbackupcomplete, bselectable, bselectableforrestore, dwcomponentflags)
   end
-  def add_database_files(wszlogicalpath : LibC::LPWSTR, wszdatabasename : LibC::LPWSTR, wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, dwbackuptypemask : UInt32) : HRESULT
-    @lpVtbl.value.add_database_files.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(wszlogicalpath, wszdatabasename, wszpath, wszfilespec, dwbackuptypemask)
+  def add_database_files(this : IVssCreateWriterMetadata*, wszlogicalpath : LibC::LPWSTR, wszdatabasename : LibC::LPWSTR, wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, dwbackuptypemask : UInt32) : HRESULT
+    @lpVtbl.value.add_database_files.call(this, wszlogicalpath, wszdatabasename, wszpath, wszfilespec, dwbackuptypemask)
   end
-  def add_database_log_files(wszlogicalpath : LibC::LPWSTR, wszdatabasename : LibC::LPWSTR, wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, dwbackuptypemask : UInt32) : HRESULT
-    @lpVtbl.value.add_database_log_files.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(wszlogicalpath, wszdatabasename, wszpath, wszfilespec, dwbackuptypemask)
+  def add_database_log_files(this : IVssCreateWriterMetadata*, wszlogicalpath : LibC::LPWSTR, wszdatabasename : LibC::LPWSTR, wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, dwbackuptypemask : UInt32) : HRESULT
+    @lpVtbl.value.add_database_log_files.call(this, wszlogicalpath, wszdatabasename, wszpath, wszfilespec, dwbackuptypemask)
   end
-  def add_files_to_file_group(wszlogicalpath : LibC::LPWSTR, wszgroupname : LibC::LPWSTR, wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : UInt8, wszalternatelocation : LibC::LPWSTR, dwbackuptypemask : UInt32) : HRESULT
-    @lpVtbl.value.add_files_to_file_group.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt8, LibC::LPWSTR, UInt32, HRESULT)).call(wszlogicalpath, wszgroupname, wszpath, wszfilespec, brecursive, wszalternatelocation, dwbackuptypemask)
+  def add_files_to_file_group(this : IVssCreateWriterMetadata*, wszlogicalpath : LibC::LPWSTR, wszgroupname : LibC::LPWSTR, wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : UInt8, wszalternatelocation : LibC::LPWSTR, dwbackuptypemask : UInt32) : HRESULT
+    @lpVtbl.value.add_files_to_file_group.call(this, wszlogicalpath, wszgroupname, wszpath, wszfilespec, brecursive, wszalternatelocation, dwbackuptypemask)
   end
-  def set_restore_method(method : VSS_RESTOREMETHOD_ENUM, wszservice : LibC::LPWSTR, wszuserprocedure : LibC::LPWSTR, writerrestore : VSS_WRITERRESTORE_ENUM, brebootrequired : UInt8) : HRESULT
-    @lpVtbl.value.set_restore_method.unsafe_as(Proc(VSS_RESTOREMETHOD_ENUM, LibC::LPWSTR, LibC::LPWSTR, VSS_WRITERRESTORE_ENUM, UInt8, HRESULT)).call(method, wszservice, wszuserprocedure, writerrestore, brebootrequired)
+  def set_restore_method(this : IVssCreateWriterMetadata*, method : VSS_RESTOREMETHOD_ENUM, wszservice : LibC::LPWSTR, wszuserprocedure : LibC::LPWSTR, writerrestore : VSS_WRITERRESTORE_ENUM, brebootrequired : UInt8) : HRESULT
+    @lpVtbl.value.set_restore_method.call(this, method, wszservice, wszuserprocedure, writerrestore, brebootrequired)
   end
-  def add_alternate_location_mapping(wszsourcepath : LibC::LPWSTR, wszsourcefilespec : LibC::LPWSTR, brecursive : UInt8, wszdestination : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.add_alternate_location_mapping.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt8, LibC::LPWSTR, HRESULT)).call(wszsourcepath, wszsourcefilespec, brecursive, wszdestination)
+  def add_alternate_location_mapping(this : IVssCreateWriterMetadata*, wszsourcepath : LibC::LPWSTR, wszsourcefilespec : LibC::LPWSTR, brecursive : UInt8, wszdestination : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_alternate_location_mapping.call(this, wszsourcepath, wszsourcefilespec, brecursive, wszdestination)
   end
-  def add_component_dependency(wszforlogicalpath : LibC::LPWSTR, wszforcomponentname : LibC::LPWSTR, onwriterid : Guid, wszonlogicalpath : LibC::LPWSTR, wszoncomponentname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.add_component_dependency.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, Guid, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(wszforlogicalpath, wszforcomponentname, onwriterid, wszonlogicalpath, wszoncomponentname)
+  def add_component_dependency(this : IVssCreateWriterMetadata*, wszforlogicalpath : LibC::LPWSTR, wszforcomponentname : LibC::LPWSTR, onwriterid : Guid, wszonlogicalpath : LibC::LPWSTR, wszoncomponentname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_component_dependency.call(this, wszforlogicalpath, wszforcomponentname, onwriterid, wszonlogicalpath, wszoncomponentname)
   end
-  def set_backup_schema(dwschemamask : UInt32) : HRESULT
-    @lpVtbl.value.set_backup_schema.unsafe_as(Proc(UInt32, HRESULT)).call(dwschemamask)
+  def set_backup_schema(this : IVssCreateWriterMetadata*, dwschemamask : UInt32) : HRESULT
+    @lpVtbl.value.set_backup_schema.call(this, dwschemamask)
   end
-  def get_document(pdoc : IXMLDOMDocument*) : HRESULT
-    @lpVtbl.value.get_document.unsafe_as(Proc(IXMLDOMDocument*, HRESULT)).call(pdoc)
+  def get_document(this : IVssCreateWriterMetadata*, pdoc : IXMLDOMDocument*) : HRESULT
+    @lpVtbl.value.get_document.call(this, pdoc)
   end
-  def save_as_xml(pbstrxml : UInt8**) : HRESULT
-    @lpVtbl.value.save_as_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrxml)
+  def save_as_xml(this : IVssCreateWriterMetadata*, pbstrxml : UInt8**) : HRESULT
+    @lpVtbl.value.save_as_xml.call(this, pbstrxml)
   end
 end
 struct LibWin32::IVssWriterImpl
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssWriterImpl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssWriterImpl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssWriterImpl*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def initialize(writerid : Guid, wszwritername : LibC::LPWSTR, wszwriterinstancename : LibC::LPWSTR, dwmajorversion : UInt32, dwminorversion : UInt32, ut : VSS_USAGE_TYPE, st : VSS_SOURCE_TYPE, nlevel : VSS_APPLICATION_LEVEL, dwtimeout : UInt32, aws : VSS_ALTERNATE_WRITER_STATE, biothrottlingonly : UInt8) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(Guid, LibC::LPWSTR, LibC::LPWSTR, UInt32, UInt32, VSS_USAGE_TYPE, VSS_SOURCE_TYPE, VSS_APPLICATION_LEVEL, UInt32, VSS_ALTERNATE_WRITER_STATE, UInt8, HRESULT)).call(writerid, wszwritername, wszwriterinstancename, dwmajorversion, dwminorversion, ut, st, nlevel, dwtimeout, aws, biothrottlingonly)
+  def initialize(this : IVssWriterImpl*, writerid : Guid, wszwritername : LibC::LPWSTR, wszwriterinstancename : LibC::LPWSTR, dwmajorversion : UInt32, dwminorversion : UInt32, ut : VSS_USAGE_TYPE, st : VSS_SOURCE_TYPE, nlevel : VSS_APPLICATION_LEVEL, dwtimeout : UInt32, aws : VSS_ALTERNATE_WRITER_STATE, biothrottlingonly : UInt8) : HRESULT
+    @lpVtbl.value.initialize.call(this, writerid, wszwritername, wszwriterinstancename, dwmajorversion, dwminorversion, ut, st, nlevel, dwtimeout, aws, biothrottlingonly)
   end
-  def subscribe(dwsubscribetimeout : UInt32, dweventflags : UInt32) : HRESULT
-    @lpVtbl.value.subscribe.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(dwsubscribetimeout, dweventflags)
+  def subscribe(this : IVssWriterImpl*, dwsubscribetimeout : UInt32, dweventflags : UInt32) : HRESULT
+    @lpVtbl.value.subscribe.call(this, dwsubscribetimeout, dweventflags)
   end
-  def unsubscribe : HRESULT
-    @lpVtbl.value.unsubscribe.unsafe_as(Proc(HRESULT)).call
+  def unsubscribe(this : IVssWriterImpl*) : HRESULT
+    @lpVtbl.value.unsubscribe.call(this)
   end
-  def uninitialize : Void
-    @lpVtbl.value.uninitialize.unsafe_as(Proc(Void)).call
+  def uninitialize(this : IVssWriterImpl*) : Void
+    @lpVtbl.value.uninitialize.call(this)
   end
-  def get_current_volume_array : LibC::LPWSTR*
-    @lpVtbl.value.get_current_volume_array.unsafe_as(Proc(LibC::LPWSTR**)).call
+  def get_current_volume_array(this : IVssWriterImpl*) : LibC::LPWSTR*
+    @lpVtbl.value.get_current_volume_array.call(this)
   end
-  def get_current_volume_count : UInt32
-    @lpVtbl.value.get_current_volume_count.unsafe_as(Proc(UInt32)).call
+  def get_current_volume_count(this : IVssWriterImpl*) : UInt32
+    @lpVtbl.value.get_current_volume_count.call(this)
   end
-  def get_snapshot_device_name(wszoriginalvolume : LibC::LPWSTR, ppwszsnapshotdevice : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_snapshot_device_name.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR*, HRESULT)).call(wszoriginalvolume, ppwszsnapshotdevice)
+  def get_snapshot_device_name(this : IVssWriterImpl*, wszoriginalvolume : LibC::LPWSTR, ppwszsnapshotdevice : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_snapshot_device_name.call(this, wszoriginalvolume, ppwszsnapshotdevice)
   end
-  def get_current_snapshot_set_id : Guid
-    @lpVtbl.value.get_current_snapshot_set_id.unsafe_as(Proc(Guid)).call
+  def get_current_snapshot_set_id(this : IVssWriterImpl*) : Guid
+    @lpVtbl.value.get_current_snapshot_set_id.call(this)
   end
-  def get_context : Int32
-    @lpVtbl.value.get_context.unsafe_as(Proc(Int32)).call
+  def get_context(this : IVssWriterImpl*) : Int32
+    @lpVtbl.value.get_context.call(this)
   end
-  def get_current_level : VSS_APPLICATION_LEVEL
-    @lpVtbl.value.get_current_level.unsafe_as(Proc(VSS_APPLICATION_LEVEL)).call
+  def get_current_level(this : IVssWriterImpl*) : VSS_APPLICATION_LEVEL
+    @lpVtbl.value.get_current_level.call(this)
   end
-  def is_path_affected(wszpath : LibC::LPWSTR) : Bool
-    @lpVtbl.value.is_path_affected.unsafe_as(Proc(LibC::LPWSTR, Bool)).call(wszpath)
+  def is_path_affected(this : IVssWriterImpl*, wszpath : LibC::LPWSTR) : Bool
+    @lpVtbl.value.is_path_affected.call(this, wszpath)
   end
-  def is_bootable_system_state_backed_up : Bool
-    @lpVtbl.value.is_bootable_system_state_backed_up.unsafe_as(Proc(Bool)).call
+  def is_bootable_system_state_backed_up(this : IVssWriterImpl*) : Bool
+    @lpVtbl.value.is_bootable_system_state_backed_up.call(this)
   end
-  def are_components_selected : Bool
-    @lpVtbl.value.are_components_selected.unsafe_as(Proc(Bool)).call
+  def are_components_selected(this : IVssWriterImpl*) : Bool
+    @lpVtbl.value.are_components_selected.call(this)
   end
-  def get_backup_type : VSS_BACKUP_TYPE
-    @lpVtbl.value.get_backup_type.unsafe_as(Proc(VSS_BACKUP_TYPE)).call
+  def get_backup_type(this : IVssWriterImpl*) : VSS_BACKUP_TYPE
+    @lpVtbl.value.get_backup_type.call(this)
   end
-  def get_restore_type : VSS_RESTORE_TYPE
-    @lpVtbl.value.get_restore_type.unsafe_as(Proc(VSS_RESTORE_TYPE)).call
+  def get_restore_type(this : IVssWriterImpl*) : VSS_RESTORE_TYPE
+    @lpVtbl.value.get_restore_type.call(this)
   end
-  def set_writer_failure(hr : HRESULT) : HRESULT
-    @lpVtbl.value.set_writer_failure.unsafe_as(Proc(HRESULT, HRESULT)).call(hr)
+  def set_writer_failure(this : IVssWriterImpl*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.set_writer_failure.call(this, hr)
   end
-  def is_partial_file_support_enabled : Bool
-    @lpVtbl.value.is_partial_file_support_enabled.unsafe_as(Proc(Bool)).call
+  def is_partial_file_support_enabled(this : IVssWriterImpl*) : Bool
+    @lpVtbl.value.is_partial_file_support_enabled.call(this)
   end
-  def install_alternate_writer(idwriter : Guid, clsid : Guid) : HRESULT
-    @lpVtbl.value.install_alternate_writer.unsafe_as(Proc(Guid, Guid, HRESULT)).call(idwriter, clsid)
+  def install_alternate_writer(this : IVssWriterImpl*, idwriter : Guid, clsid : Guid) : HRESULT
+    @lpVtbl.value.install_alternate_writer.call(this, idwriter, clsid)
   end
-  def get_identity_information : IVssExamineWriterMetadata*
-    @lpVtbl.value.get_identity_information.unsafe_as(Proc(IVssExamineWriterMetadata**)).call
+  def get_identity_information(this : IVssWriterImpl*) : IVssExamineWriterMetadata*
+    @lpVtbl.value.get_identity_information.call(this)
   end
-  def set_writer_failure_ex(hr : HRESULT, hrapplication : HRESULT, wszapplicationmessage : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_writer_failure_ex.unsafe_as(Proc(HRESULT, HRESULT, LibC::LPWSTR, HRESULT)).call(hr, hrapplication, wszapplicationmessage)
+  def set_writer_failure_ex(this : IVssWriterImpl*, hr : HRESULT, hrapplication : HRESULT, wszapplicationmessage : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_writer_failure_ex.call(this, hr, hrapplication, wszapplicationmessage)
   end
-  def get_session_id(idsession : Guid*) : HRESULT
-    @lpVtbl.value.get_session_id.unsafe_as(Proc(Guid*, HRESULT)).call(idsession)
+  def get_session_id(this : IVssWriterImpl*, idsession : Guid*) : HRESULT
+    @lpVtbl.value.get_session_id.call(this, idsession)
   end
-  def is_writer_shutting_down : Bool
-    @lpVtbl.value.is_writer_shutting_down.unsafe_as(Proc(Bool)).call
+  def is_writer_shutting_down(this : IVssWriterImpl*) : Bool
+    @lpVtbl.value.is_writer_shutting_down.call(this)
   end
 end
 struct LibWin32::IVssCreateExpressWriterMetadata
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssCreateExpressWriterMetadata*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssCreateExpressWriterMetadata*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssCreateExpressWriterMetadata*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add_exclude_files(wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : UInt8) : HRESULT
-    @lpVtbl.value.add_exclude_files.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt8, HRESULT)).call(wszpath, wszfilespec, brecursive)
+  def add_exclude_files(this : IVssCreateExpressWriterMetadata*, wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : UInt8) : HRESULT
+    @lpVtbl.value.add_exclude_files.call(this, wszpath, wszfilespec, brecursive)
   end
-  def add_component(ct : VSS_COMPONENT_TYPE, wszlogicalpath : LibC::LPWSTR, wszcomponentname : LibC::LPWSTR, wszcaption : LibC::LPWSTR, pbicon : UInt8*, cbicon : UInt32, brestoremetadata : UInt8, bnotifyonbackupcomplete : UInt8, bselectable : UInt8, bselectableforrestore : UInt8, dwcomponentflags : UInt32) : HRESULT
-    @lpVtbl.value.add_component.unsafe_as(Proc(VSS_COMPONENT_TYPE, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt8*, UInt32, UInt8, UInt8, UInt8, UInt8, UInt32, HRESULT)).call(ct, wszlogicalpath, wszcomponentname, wszcaption, pbicon, cbicon, brestoremetadata, bnotifyonbackupcomplete, bselectable, bselectableforrestore, dwcomponentflags)
+  def add_component(this : IVssCreateExpressWriterMetadata*, ct : VSS_COMPONENT_TYPE, wszlogicalpath : LibC::LPWSTR, wszcomponentname : LibC::LPWSTR, wszcaption : LibC::LPWSTR, pbicon : UInt8*, cbicon : UInt32, brestoremetadata : UInt8, bnotifyonbackupcomplete : UInt8, bselectable : UInt8, bselectableforrestore : UInt8, dwcomponentflags : UInt32) : HRESULT
+    @lpVtbl.value.add_component.call(this, ct, wszlogicalpath, wszcomponentname, wszcaption, pbicon, cbicon, brestoremetadata, bnotifyonbackupcomplete, bselectable, bselectableforrestore, dwcomponentflags)
   end
-  def add_files_to_file_group(wszlogicalpath : LibC::LPWSTR, wszgroupname : LibC::LPWSTR, wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : UInt8, wszalternatelocation : LibC::LPWSTR, dwbackuptypemask : UInt32) : HRESULT
-    @lpVtbl.value.add_files_to_file_group.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt8, LibC::LPWSTR, UInt32, HRESULT)).call(wszlogicalpath, wszgroupname, wszpath, wszfilespec, brecursive, wszalternatelocation, dwbackuptypemask)
+  def add_files_to_file_group(this : IVssCreateExpressWriterMetadata*, wszlogicalpath : LibC::LPWSTR, wszgroupname : LibC::LPWSTR, wszpath : LibC::LPWSTR, wszfilespec : LibC::LPWSTR, brecursive : UInt8, wszalternatelocation : LibC::LPWSTR, dwbackuptypemask : UInt32) : HRESULT
+    @lpVtbl.value.add_files_to_file_group.call(this, wszlogicalpath, wszgroupname, wszpath, wszfilespec, brecursive, wszalternatelocation, dwbackuptypemask)
   end
-  def set_restore_method(method : VSS_RESTOREMETHOD_ENUM, wszservice : LibC::LPWSTR, wszuserprocedure : LibC::LPWSTR, writerrestore : VSS_WRITERRESTORE_ENUM, brebootrequired : UInt8) : HRESULT
-    @lpVtbl.value.set_restore_method.unsafe_as(Proc(VSS_RESTOREMETHOD_ENUM, LibC::LPWSTR, LibC::LPWSTR, VSS_WRITERRESTORE_ENUM, UInt8, HRESULT)).call(method, wszservice, wszuserprocedure, writerrestore, brebootrequired)
+  def set_restore_method(this : IVssCreateExpressWriterMetadata*, method : VSS_RESTOREMETHOD_ENUM, wszservice : LibC::LPWSTR, wszuserprocedure : LibC::LPWSTR, writerrestore : VSS_WRITERRESTORE_ENUM, brebootrequired : UInt8) : HRESULT
+    @lpVtbl.value.set_restore_method.call(this, method, wszservice, wszuserprocedure, writerrestore, brebootrequired)
   end
-  def add_component_dependency(wszforlogicalpath : LibC::LPWSTR, wszforcomponentname : LibC::LPWSTR, onwriterid : Guid, wszonlogicalpath : LibC::LPWSTR, wszoncomponentname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.add_component_dependency.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, Guid, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(wszforlogicalpath, wszforcomponentname, onwriterid, wszonlogicalpath, wszoncomponentname)
+  def add_component_dependency(this : IVssCreateExpressWriterMetadata*, wszforlogicalpath : LibC::LPWSTR, wszforcomponentname : LibC::LPWSTR, onwriterid : Guid, wszonlogicalpath : LibC::LPWSTR, wszoncomponentname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_component_dependency.call(this, wszforlogicalpath, wszforcomponentname, onwriterid, wszonlogicalpath, wszoncomponentname)
   end
-  def set_backup_schema(dwschemamask : UInt32) : HRESULT
-    @lpVtbl.value.set_backup_schema.unsafe_as(Proc(UInt32, HRESULT)).call(dwschemamask)
+  def set_backup_schema(this : IVssCreateExpressWriterMetadata*, dwschemamask : UInt32) : HRESULT
+    @lpVtbl.value.set_backup_schema.call(this, dwschemamask)
   end
-  def save_as_xml(pbstrxml : UInt8**) : HRESULT
-    @lpVtbl.value.save_as_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrxml)
+  def save_as_xml(this : IVssCreateExpressWriterMetadata*, pbstrxml : UInt8**) : HRESULT
+    @lpVtbl.value.save_as_xml.call(this, pbstrxml)
   end
 end
 struct LibWin32::IVssExpressWriter
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssExpressWriter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssExpressWriter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssExpressWriter*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_metadata(writerid : Guid, writername : LibC::LPWSTR, usagetype : VSS_USAGE_TYPE, versionmajor : UInt32, versionminor : UInt32, reserved : UInt32, ppmetadata : IVssCreateExpressWriterMetadata*) : HRESULT
-    @lpVtbl.value.create_metadata.unsafe_as(Proc(Guid, LibC::LPWSTR, VSS_USAGE_TYPE, UInt32, UInt32, UInt32, IVssCreateExpressWriterMetadata*, HRESULT)).call(writerid, writername, usagetype, versionmajor, versionminor, reserved, ppmetadata)
+  def create_metadata(this : IVssExpressWriter*, writerid : Guid, writername : LibC::LPWSTR, usagetype : VSS_USAGE_TYPE, versionmajor : UInt32, versionminor : UInt32, reserved : UInt32, ppmetadata : IVssCreateExpressWriterMetadata*) : HRESULT
+    @lpVtbl.value.create_metadata.call(this, writerid, writername, usagetype, versionmajor, versionminor, reserved, ppmetadata)
   end
-  def load_metadata(metadata : LibC::LPWSTR, reserved : UInt32) : HRESULT
-    @lpVtbl.value.load_metadata.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(metadata, reserved)
+  def load_metadata(this : IVssExpressWriter*, metadata : LibC::LPWSTR, reserved : UInt32) : HRESULT
+    @lpVtbl.value.load_metadata.call(this, metadata, reserved)
   end
-  def register : HRESULT
-    @lpVtbl.value.register.unsafe_as(Proc(HRESULT)).call
+  def register(this : IVssExpressWriter*) : HRESULT
+    @lpVtbl.value.register.call(this)
   end
-  def unregister(writerid : Guid) : HRESULT
-    @lpVtbl.value.unregister.unsafe_as(Proc(Guid, HRESULT)).call(writerid)
+  def unregister(this : IVssExpressWriter*, writerid : Guid) : HRESULT
+    @lpVtbl.value.unregister.call(this, writerid)
   end
 end
 struct LibWin32::IVssSnapshotMgmt
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssSnapshotMgmt*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssSnapshotMgmt*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssSnapshotMgmt*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_provider_mgmt_interface(providerid : Guid, interfaceid : Guid*, ppitf : IUnknown*) : HRESULT
-    @lpVtbl.value.get_provider_mgmt_interface.unsafe_as(Proc(Guid, Guid*, IUnknown*, HRESULT)).call(providerid, interfaceid, ppitf)
+  def get_provider_mgmt_interface(this : IVssSnapshotMgmt*, providerid : Guid, interfaceid : Guid*, ppitf : IUnknown*) : HRESULT
+    @lpVtbl.value.get_provider_mgmt_interface.call(this, providerid, interfaceid, ppitf)
   end
-  def query_volumes_supported_for_snapshots(providerid : Guid, lcontext : Int32, ppenum : IVssEnumMgmtObject*) : HRESULT
-    @lpVtbl.value.query_volumes_supported_for_snapshots.unsafe_as(Proc(Guid, Int32, IVssEnumMgmtObject*, HRESULT)).call(providerid, lcontext, ppenum)
+  def query_volumes_supported_for_snapshots(this : IVssSnapshotMgmt*, providerid : Guid, lcontext : Int32, ppenum : IVssEnumMgmtObject*) : HRESULT
+    @lpVtbl.value.query_volumes_supported_for_snapshots.call(this, providerid, lcontext, ppenum)
   end
-  def query_snapshots_by_volume(pwszvolumename : UInt16*, providerid : Guid, ppenum : IVssEnumObject*) : HRESULT
-    @lpVtbl.value.query_snapshots_by_volume.unsafe_as(Proc(UInt16*, Guid, IVssEnumObject*, HRESULT)).call(pwszvolumename, providerid, ppenum)
+  def query_snapshots_by_volume(this : IVssSnapshotMgmt*, pwszvolumename : UInt16*, providerid : Guid, ppenum : IVssEnumObject*) : HRESULT
+    @lpVtbl.value.query_snapshots_by_volume.call(this, pwszvolumename, providerid, ppenum)
   end
 end
 struct LibWin32::IVssSnapshotMgmt2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssSnapshotMgmt2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssSnapshotMgmt2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssSnapshotMgmt2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_min_diff_area_size(pllmindiffareasize : Int64*) : HRESULT
-    @lpVtbl.value.get_min_diff_area_size.unsafe_as(Proc(Int64*, HRESULT)).call(pllmindiffareasize)
+  def get_min_diff_area_size(this : IVssSnapshotMgmt2*, pllmindiffareasize : Int64*) : HRESULT
+    @lpVtbl.value.get_min_diff_area_size.call(this, pllmindiffareasize)
   end
 end
 struct LibWin32::IVssDifferentialSoftwareSnapshotMgmt
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssDifferentialSoftwareSnapshotMgmt*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssDifferentialSoftwareSnapshotMgmt*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssDifferentialSoftwareSnapshotMgmt*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add_diff_area(pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, llmaximumdiffspace : Int64) : HRESULT
-    @lpVtbl.value.add_diff_area.unsafe_as(Proc(UInt16*, UInt16*, Int64, HRESULT)).call(pwszvolumename, pwszdiffareavolumename, llmaximumdiffspace)
+  def add_diff_area(this : IVssDifferentialSoftwareSnapshotMgmt*, pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, llmaximumdiffspace : Int64) : HRESULT
+    @lpVtbl.value.add_diff_area.call(this, pwszvolumename, pwszdiffareavolumename, llmaximumdiffspace)
   end
-  def change_diff_area_maximum_size(pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, llmaximumdiffspace : Int64) : HRESULT
-    @lpVtbl.value.change_diff_area_maximum_size.unsafe_as(Proc(UInt16*, UInt16*, Int64, HRESULT)).call(pwszvolumename, pwszdiffareavolumename, llmaximumdiffspace)
+  def change_diff_area_maximum_size(this : IVssDifferentialSoftwareSnapshotMgmt*, pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, llmaximumdiffspace : Int64) : HRESULT
+    @lpVtbl.value.change_diff_area_maximum_size.call(this, pwszvolumename, pwszdiffareavolumename, llmaximumdiffspace)
   end
-  def query_volumes_supported_for_diff_areas(pwszoriginalvolumename : UInt16*, ppenum : IVssEnumMgmtObject*) : HRESULT
-    @lpVtbl.value.query_volumes_supported_for_diff_areas.unsafe_as(Proc(UInt16*, IVssEnumMgmtObject*, HRESULT)).call(pwszoriginalvolumename, ppenum)
+  def query_volumes_supported_for_diff_areas(this : IVssDifferentialSoftwareSnapshotMgmt*, pwszoriginalvolumename : UInt16*, ppenum : IVssEnumMgmtObject*) : HRESULT
+    @lpVtbl.value.query_volumes_supported_for_diff_areas.call(this, pwszoriginalvolumename, ppenum)
   end
-  def query_diff_areas_for_volume(pwszvolumename : UInt16*, ppenum : IVssEnumMgmtObject*) : HRESULT
-    @lpVtbl.value.query_diff_areas_for_volume.unsafe_as(Proc(UInt16*, IVssEnumMgmtObject*, HRESULT)).call(pwszvolumename, ppenum)
+  def query_diff_areas_for_volume(this : IVssDifferentialSoftwareSnapshotMgmt*, pwszvolumename : UInt16*, ppenum : IVssEnumMgmtObject*) : HRESULT
+    @lpVtbl.value.query_diff_areas_for_volume.call(this, pwszvolumename, ppenum)
   end
-  def query_diff_areas_on_volume(pwszvolumename : UInt16*, ppenum : IVssEnumMgmtObject*) : HRESULT
-    @lpVtbl.value.query_diff_areas_on_volume.unsafe_as(Proc(UInt16*, IVssEnumMgmtObject*, HRESULT)).call(pwszvolumename, ppenum)
+  def query_diff_areas_on_volume(this : IVssDifferentialSoftwareSnapshotMgmt*, pwszvolumename : UInt16*, ppenum : IVssEnumMgmtObject*) : HRESULT
+    @lpVtbl.value.query_diff_areas_on_volume.call(this, pwszvolumename, ppenum)
   end
-  def query_diff_areas_for_snapshot(snapshotid : Guid, ppenum : IVssEnumMgmtObject*) : HRESULT
-    @lpVtbl.value.query_diff_areas_for_snapshot.unsafe_as(Proc(Guid, IVssEnumMgmtObject*, HRESULT)).call(snapshotid, ppenum)
+  def query_diff_areas_for_snapshot(this : IVssDifferentialSoftwareSnapshotMgmt*, snapshotid : Guid, ppenum : IVssEnumMgmtObject*) : HRESULT
+    @lpVtbl.value.query_diff_areas_for_snapshot.call(this, snapshotid, ppenum)
   end
 end
 struct LibWin32::IVssDifferentialSoftwareSnapshotMgmt2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssDifferentialSoftwareSnapshotMgmt2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssDifferentialSoftwareSnapshotMgmt2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssDifferentialSoftwareSnapshotMgmt2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add_diff_area(pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, llmaximumdiffspace : Int64) : HRESULT
-    @lpVtbl.value.add_diff_area.unsafe_as(Proc(UInt16*, UInt16*, Int64, HRESULT)).call(pwszvolumename, pwszdiffareavolumename, llmaximumdiffspace)
+  def add_diff_area(this : IVssDifferentialSoftwareSnapshotMgmt2*, pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, llmaximumdiffspace : Int64) : HRESULT
+    @lpVtbl.value.add_diff_area.call(this, pwszvolumename, pwszdiffareavolumename, llmaximumdiffspace)
   end
-  def change_diff_area_maximum_size(pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, llmaximumdiffspace : Int64) : HRESULT
-    @lpVtbl.value.change_diff_area_maximum_size.unsafe_as(Proc(UInt16*, UInt16*, Int64, HRESULT)).call(pwszvolumename, pwszdiffareavolumename, llmaximumdiffspace)
+  def change_diff_area_maximum_size(this : IVssDifferentialSoftwareSnapshotMgmt2*, pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, llmaximumdiffspace : Int64) : HRESULT
+    @lpVtbl.value.change_diff_area_maximum_size.call(this, pwszvolumename, pwszdiffareavolumename, llmaximumdiffspace)
   end
-  def query_volumes_supported_for_diff_areas(pwszoriginalvolumename : UInt16*, ppenum : IVssEnumMgmtObject*) : HRESULT
-    @lpVtbl.value.query_volumes_supported_for_diff_areas.unsafe_as(Proc(UInt16*, IVssEnumMgmtObject*, HRESULT)).call(pwszoriginalvolumename, ppenum)
+  def query_volumes_supported_for_diff_areas(this : IVssDifferentialSoftwareSnapshotMgmt2*, pwszoriginalvolumename : UInt16*, ppenum : IVssEnumMgmtObject*) : HRESULT
+    @lpVtbl.value.query_volumes_supported_for_diff_areas.call(this, pwszoriginalvolumename, ppenum)
   end
-  def query_diff_areas_for_volume(pwszvolumename : UInt16*, ppenum : IVssEnumMgmtObject*) : HRESULT
-    @lpVtbl.value.query_diff_areas_for_volume.unsafe_as(Proc(UInt16*, IVssEnumMgmtObject*, HRESULT)).call(pwszvolumename, ppenum)
+  def query_diff_areas_for_volume(this : IVssDifferentialSoftwareSnapshotMgmt2*, pwszvolumename : UInt16*, ppenum : IVssEnumMgmtObject*) : HRESULT
+    @lpVtbl.value.query_diff_areas_for_volume.call(this, pwszvolumename, ppenum)
   end
-  def query_diff_areas_on_volume(pwszvolumename : UInt16*, ppenum : IVssEnumMgmtObject*) : HRESULT
-    @lpVtbl.value.query_diff_areas_on_volume.unsafe_as(Proc(UInt16*, IVssEnumMgmtObject*, HRESULT)).call(pwszvolumename, ppenum)
+  def query_diff_areas_on_volume(this : IVssDifferentialSoftwareSnapshotMgmt2*, pwszvolumename : UInt16*, ppenum : IVssEnumMgmtObject*) : HRESULT
+    @lpVtbl.value.query_diff_areas_on_volume.call(this, pwszvolumename, ppenum)
   end
-  def query_diff_areas_for_snapshot(snapshotid : Guid, ppenum : IVssEnumMgmtObject*) : HRESULT
-    @lpVtbl.value.query_diff_areas_for_snapshot.unsafe_as(Proc(Guid, IVssEnumMgmtObject*, HRESULT)).call(snapshotid, ppenum)
+  def query_diff_areas_for_snapshot(this : IVssDifferentialSoftwareSnapshotMgmt2*, snapshotid : Guid, ppenum : IVssEnumMgmtObject*) : HRESULT
+    @lpVtbl.value.query_diff_areas_for_snapshot.call(this, snapshotid, ppenum)
   end
-  def change_diff_area_maximum_size_ex(pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, llmaximumdiffspace : Int64, bvolatile : LibC::BOOL) : HRESULT
-    @lpVtbl.value.change_diff_area_maximum_size_ex.unsafe_as(Proc(UInt16*, UInt16*, Int64, LibC::BOOL, HRESULT)).call(pwszvolumename, pwszdiffareavolumename, llmaximumdiffspace, bvolatile)
+  def change_diff_area_maximum_size_ex(this : IVssDifferentialSoftwareSnapshotMgmt2*, pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, llmaximumdiffspace : Int64, bvolatile : LibC::BOOL) : HRESULT
+    @lpVtbl.value.change_diff_area_maximum_size_ex.call(this, pwszvolumename, pwszdiffareavolumename, llmaximumdiffspace, bvolatile)
   end
-  def migrate_diff_areas(pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, pwsznewdiffareavolumename : UInt16*) : HRESULT
-    @lpVtbl.value.migrate_diff_areas.unsafe_as(Proc(UInt16*, UInt16*, UInt16*, HRESULT)).call(pwszvolumename, pwszdiffareavolumename, pwsznewdiffareavolumename)
+  def migrate_diff_areas(this : IVssDifferentialSoftwareSnapshotMgmt2*, pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, pwsznewdiffareavolumename : UInt16*) : HRESULT
+    @lpVtbl.value.migrate_diff_areas.call(this, pwszvolumename, pwszdiffareavolumename, pwsznewdiffareavolumename)
   end
-  def query_migration_status(pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, ppasync : IVssAsync*) : HRESULT
-    @lpVtbl.value.query_migration_status.unsafe_as(Proc(UInt16*, UInt16*, IVssAsync*, HRESULT)).call(pwszvolumename, pwszdiffareavolumename, ppasync)
+  def query_migration_status(this : IVssDifferentialSoftwareSnapshotMgmt2*, pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, ppasync : IVssAsync*) : HRESULT
+    @lpVtbl.value.query_migration_status.call(this, pwszvolumename, pwszdiffareavolumename, ppasync)
   end
-  def set_snapshot_priority(idsnapshot : Guid, priority : UInt8) : HRESULT
-    @lpVtbl.value.set_snapshot_priority.unsafe_as(Proc(Guid, UInt8, HRESULT)).call(idsnapshot, priority)
+  def set_snapshot_priority(this : IVssDifferentialSoftwareSnapshotMgmt2*, idsnapshot : Guid, priority : UInt8) : HRESULT
+    @lpVtbl.value.set_snapshot_priority.call(this, idsnapshot, priority)
   end
 end
 struct LibWin32::IVssDifferentialSoftwareSnapshotMgmt3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssDifferentialSoftwareSnapshotMgmt3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssDifferentialSoftwareSnapshotMgmt3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssDifferentialSoftwareSnapshotMgmt3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add_diff_area(pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, llmaximumdiffspace : Int64) : HRESULT
-    @lpVtbl.value.add_diff_area.unsafe_as(Proc(UInt16*, UInt16*, Int64, HRESULT)).call(pwszvolumename, pwszdiffareavolumename, llmaximumdiffspace)
+  def add_diff_area(this : IVssDifferentialSoftwareSnapshotMgmt3*, pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, llmaximumdiffspace : Int64) : HRESULT
+    @lpVtbl.value.add_diff_area.call(this, pwszvolumename, pwszdiffareavolumename, llmaximumdiffspace)
   end
-  def change_diff_area_maximum_size(pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, llmaximumdiffspace : Int64) : HRESULT
-    @lpVtbl.value.change_diff_area_maximum_size.unsafe_as(Proc(UInt16*, UInt16*, Int64, HRESULT)).call(pwszvolumename, pwszdiffareavolumename, llmaximumdiffspace)
+  def change_diff_area_maximum_size(this : IVssDifferentialSoftwareSnapshotMgmt3*, pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, llmaximumdiffspace : Int64) : HRESULT
+    @lpVtbl.value.change_diff_area_maximum_size.call(this, pwszvolumename, pwszdiffareavolumename, llmaximumdiffspace)
   end
-  def query_volumes_supported_for_diff_areas(pwszoriginalvolumename : UInt16*, ppenum : IVssEnumMgmtObject*) : HRESULT
-    @lpVtbl.value.query_volumes_supported_for_diff_areas.unsafe_as(Proc(UInt16*, IVssEnumMgmtObject*, HRESULT)).call(pwszoriginalvolumename, ppenum)
+  def query_volumes_supported_for_diff_areas(this : IVssDifferentialSoftwareSnapshotMgmt3*, pwszoriginalvolumename : UInt16*, ppenum : IVssEnumMgmtObject*) : HRESULT
+    @lpVtbl.value.query_volumes_supported_for_diff_areas.call(this, pwszoriginalvolumename, ppenum)
   end
-  def query_diff_areas_for_volume(pwszvolumename : UInt16*, ppenum : IVssEnumMgmtObject*) : HRESULT
-    @lpVtbl.value.query_diff_areas_for_volume.unsafe_as(Proc(UInt16*, IVssEnumMgmtObject*, HRESULT)).call(pwszvolumename, ppenum)
+  def query_diff_areas_for_volume(this : IVssDifferentialSoftwareSnapshotMgmt3*, pwszvolumename : UInt16*, ppenum : IVssEnumMgmtObject*) : HRESULT
+    @lpVtbl.value.query_diff_areas_for_volume.call(this, pwszvolumename, ppenum)
   end
-  def query_diff_areas_on_volume(pwszvolumename : UInt16*, ppenum : IVssEnumMgmtObject*) : HRESULT
-    @lpVtbl.value.query_diff_areas_on_volume.unsafe_as(Proc(UInt16*, IVssEnumMgmtObject*, HRESULT)).call(pwszvolumename, ppenum)
+  def query_diff_areas_on_volume(this : IVssDifferentialSoftwareSnapshotMgmt3*, pwszvolumename : UInt16*, ppenum : IVssEnumMgmtObject*) : HRESULT
+    @lpVtbl.value.query_diff_areas_on_volume.call(this, pwszvolumename, ppenum)
   end
-  def query_diff_areas_for_snapshot(snapshotid : Guid, ppenum : IVssEnumMgmtObject*) : HRESULT
-    @lpVtbl.value.query_diff_areas_for_snapshot.unsafe_as(Proc(Guid, IVssEnumMgmtObject*, HRESULT)).call(snapshotid, ppenum)
+  def query_diff_areas_for_snapshot(this : IVssDifferentialSoftwareSnapshotMgmt3*, snapshotid : Guid, ppenum : IVssEnumMgmtObject*) : HRESULT
+    @lpVtbl.value.query_diff_areas_for_snapshot.call(this, snapshotid, ppenum)
   end
-  def change_diff_area_maximum_size_ex(pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, llmaximumdiffspace : Int64, bvolatile : LibC::BOOL) : HRESULT
-    @lpVtbl.value.change_diff_area_maximum_size_ex.unsafe_as(Proc(UInt16*, UInt16*, Int64, LibC::BOOL, HRESULT)).call(pwszvolumename, pwszdiffareavolumename, llmaximumdiffspace, bvolatile)
+  def change_diff_area_maximum_size_ex(this : IVssDifferentialSoftwareSnapshotMgmt3*, pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, llmaximumdiffspace : Int64, bvolatile : LibC::BOOL) : HRESULT
+    @lpVtbl.value.change_diff_area_maximum_size_ex.call(this, pwszvolumename, pwszdiffareavolumename, llmaximumdiffspace, bvolatile)
   end
-  def migrate_diff_areas(pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, pwsznewdiffareavolumename : UInt16*) : HRESULT
-    @lpVtbl.value.migrate_diff_areas.unsafe_as(Proc(UInt16*, UInt16*, UInt16*, HRESULT)).call(pwszvolumename, pwszdiffareavolumename, pwsznewdiffareavolumename)
+  def migrate_diff_areas(this : IVssDifferentialSoftwareSnapshotMgmt3*, pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, pwsznewdiffareavolumename : UInt16*) : HRESULT
+    @lpVtbl.value.migrate_diff_areas.call(this, pwszvolumename, pwszdiffareavolumename, pwsznewdiffareavolumename)
   end
-  def query_migration_status(pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, ppasync : IVssAsync*) : HRESULT
-    @lpVtbl.value.query_migration_status.unsafe_as(Proc(UInt16*, UInt16*, IVssAsync*, HRESULT)).call(pwszvolumename, pwszdiffareavolumename, ppasync)
+  def query_migration_status(this : IVssDifferentialSoftwareSnapshotMgmt3*, pwszvolumename : UInt16*, pwszdiffareavolumename : UInt16*, ppasync : IVssAsync*) : HRESULT
+    @lpVtbl.value.query_migration_status.call(this, pwszvolumename, pwszdiffareavolumename, ppasync)
   end
-  def set_snapshot_priority(idsnapshot : Guid, priority : UInt8) : HRESULT
-    @lpVtbl.value.set_snapshot_priority.unsafe_as(Proc(Guid, UInt8, HRESULT)).call(idsnapshot, priority)
+  def set_snapshot_priority(this : IVssDifferentialSoftwareSnapshotMgmt3*, idsnapshot : Guid, priority : UInt8) : HRESULT
+    @lpVtbl.value.set_snapshot_priority.call(this, idsnapshot, priority)
   end
-  def set_volume_protect_level(pwszvolumename : UInt16*, protectionlevel : VSS_PROTECTION_LEVEL) : HRESULT
-    @lpVtbl.value.set_volume_protect_level.unsafe_as(Proc(UInt16*, VSS_PROTECTION_LEVEL, HRESULT)).call(pwszvolumename, protectionlevel)
+  def set_volume_protect_level(this : IVssDifferentialSoftwareSnapshotMgmt3*, pwszvolumename : UInt16*, protectionlevel : VSS_PROTECTION_LEVEL) : HRESULT
+    @lpVtbl.value.set_volume_protect_level.call(this, pwszvolumename, protectionlevel)
   end
-  def get_volume_protect_level(pwszvolumename : UInt16*, protectionlevel : VSS_VOLUME_PROTECTION_INFO*) : HRESULT
-    @lpVtbl.value.get_volume_protect_level.unsafe_as(Proc(UInt16*, VSS_VOLUME_PROTECTION_INFO*, HRESULT)).call(pwszvolumename, protectionlevel)
+  def get_volume_protect_level(this : IVssDifferentialSoftwareSnapshotMgmt3*, pwszvolumename : UInt16*, protectionlevel : VSS_VOLUME_PROTECTION_INFO*) : HRESULT
+    @lpVtbl.value.get_volume_protect_level.call(this, pwszvolumename, protectionlevel)
   end
-  def clear_volume_protect_fault(pwszvolumename : UInt16*) : HRESULT
-    @lpVtbl.value.clear_volume_protect_fault.unsafe_as(Proc(UInt16*, HRESULT)).call(pwszvolumename)
+  def clear_volume_protect_fault(this : IVssDifferentialSoftwareSnapshotMgmt3*, pwszvolumename : UInt16*) : HRESULT
+    @lpVtbl.value.clear_volume_protect_fault.call(this, pwszvolumename)
   end
-  def delete_unused_diff_areas(pwszdiffareavolumename : UInt16*) : HRESULT
-    @lpVtbl.value.delete_unused_diff_areas.unsafe_as(Proc(UInt16*, HRESULT)).call(pwszdiffareavolumename)
+  def delete_unused_diff_areas(this : IVssDifferentialSoftwareSnapshotMgmt3*, pwszdiffareavolumename : UInt16*) : HRESULT
+    @lpVtbl.value.delete_unused_diff_areas.call(this, pwszdiffareavolumename)
   end
-  def query_snapshot_delta_bitmap(idsnapshotolder : Guid, idsnapshotyounger : Guid, pcblocksizeperbit : UInt32*, pcbitmaplength : UInt32*, ppbbitmap : UInt8**) : HRESULT
-    @lpVtbl.value.query_snapshot_delta_bitmap.unsafe_as(Proc(Guid, Guid, UInt32*, UInt32*, UInt8**, HRESULT)).call(idsnapshotolder, idsnapshotyounger, pcblocksizeperbit, pcbitmaplength, ppbbitmap)
+  def query_snapshot_delta_bitmap(this : IVssDifferentialSoftwareSnapshotMgmt3*, idsnapshotolder : Guid, idsnapshotyounger : Guid, pcblocksizeperbit : UInt32*, pcbitmaplength : UInt32*, ppbbitmap : UInt8**) : HRESULT
+    @lpVtbl.value.query_snapshot_delta_bitmap.call(this, idsnapshotolder, idsnapshotyounger, pcblocksizeperbit, pcbitmaplength, ppbbitmap)
   end
 end
 struct LibWin32::IVssEnumMgmtObject
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssEnumMgmtObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssEnumMgmtObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssEnumMgmtObject*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def next(celt : UInt32, rgelt : VSS_MGMT_OBJECT_PROP*, pceltfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(UInt32, VSS_MGMT_OBJECT_PROP*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  def next(this : IVssEnumMgmtObject*, celt : UInt32, rgelt : VSS_MGMT_OBJECT_PROP*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
   end
-  def skip(celt : UInt32) : HRESULT
-    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  def skip(this : IVssEnumMgmtObject*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IVssEnumMgmtObject*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def clone(ppenum : IVssEnumMgmtObject*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IVssEnumMgmtObject*, HRESULT)).call(ppenum)
+  def clone(this : IVssEnumMgmtObject*, ppenum : IVssEnumMgmtObject*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
   end
 end
 struct LibWin32::IVssAdmin
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssAdmin*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssAdmin*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssAdmin*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def register_provider(pproviderid : Guid, classid : Guid, pwszprovidername : UInt16*, eprovidertype : VSS_PROVIDER_TYPE, pwszproviderversion : UInt16*, providerversionid : Guid) : HRESULT
-    @lpVtbl.value.register_provider.unsafe_as(Proc(Guid, Guid, UInt16*, VSS_PROVIDER_TYPE, UInt16*, Guid, HRESULT)).call(pproviderid, classid, pwszprovidername, eprovidertype, pwszproviderversion, providerversionid)
+  def register_provider(this : IVssAdmin*, pproviderid : Guid, classid : Guid, pwszprovidername : UInt16*, eprovidertype : VSS_PROVIDER_TYPE, pwszproviderversion : UInt16*, providerversionid : Guid) : HRESULT
+    @lpVtbl.value.register_provider.call(this, pproviderid, classid, pwszprovidername, eprovidertype, pwszproviderversion, providerversionid)
   end
-  def unregister_provider(providerid : Guid) : HRESULT
-    @lpVtbl.value.unregister_provider.unsafe_as(Proc(Guid, HRESULT)).call(providerid)
+  def unregister_provider(this : IVssAdmin*, providerid : Guid) : HRESULT
+    @lpVtbl.value.unregister_provider.call(this, providerid)
   end
-  def query_providers(ppenum : IVssEnumObject*) : HRESULT
-    @lpVtbl.value.query_providers.unsafe_as(Proc(IVssEnumObject*, HRESULT)).call(ppenum)
+  def query_providers(this : IVssAdmin*, ppenum : IVssEnumObject*) : HRESULT
+    @lpVtbl.value.query_providers.call(this, ppenum)
   end
-  def abort_all_snapshots_in_progress : HRESULT
-    @lpVtbl.value.abort_all_snapshots_in_progress.unsafe_as(Proc(HRESULT)).call
+  def abort_all_snapshots_in_progress(this : IVssAdmin*) : HRESULT
+    @lpVtbl.value.abort_all_snapshots_in_progress.call(this)
   end
 end
 struct LibWin32::IVssAdminEx
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssAdminEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssAdminEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssAdminEx*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def register_provider(pproviderid : Guid, classid : Guid, pwszprovidername : UInt16*, eprovidertype : VSS_PROVIDER_TYPE, pwszproviderversion : UInt16*, providerversionid : Guid) : HRESULT
-    @lpVtbl.value.register_provider.unsafe_as(Proc(Guid, Guid, UInt16*, VSS_PROVIDER_TYPE, UInt16*, Guid, HRESULT)).call(pproviderid, classid, pwszprovidername, eprovidertype, pwszproviderversion, providerversionid)
+  def register_provider(this : IVssAdminEx*, pproviderid : Guid, classid : Guid, pwszprovidername : UInt16*, eprovidertype : VSS_PROVIDER_TYPE, pwszproviderversion : UInt16*, providerversionid : Guid) : HRESULT
+    @lpVtbl.value.register_provider.call(this, pproviderid, classid, pwszprovidername, eprovidertype, pwszproviderversion, providerversionid)
   end
-  def unregister_provider(providerid : Guid) : HRESULT
-    @lpVtbl.value.unregister_provider.unsafe_as(Proc(Guid, HRESULT)).call(providerid)
+  def unregister_provider(this : IVssAdminEx*, providerid : Guid) : HRESULT
+    @lpVtbl.value.unregister_provider.call(this, providerid)
   end
-  def query_providers(ppenum : IVssEnumObject*) : HRESULT
-    @lpVtbl.value.query_providers.unsafe_as(Proc(IVssEnumObject*, HRESULT)).call(ppenum)
+  def query_providers(this : IVssAdminEx*, ppenum : IVssEnumObject*) : HRESULT
+    @lpVtbl.value.query_providers.call(this, ppenum)
   end
-  def abort_all_snapshots_in_progress : HRESULT
-    @lpVtbl.value.abort_all_snapshots_in_progress.unsafe_as(Proc(HRESULT)).call
+  def abort_all_snapshots_in_progress(this : IVssAdminEx*) : HRESULT
+    @lpVtbl.value.abort_all_snapshots_in_progress.call(this)
   end
-  def get_provider_capability(pproviderid : Guid, plloriginalcapabilitymask : UInt64*) : HRESULT
-    @lpVtbl.value.get_provider_capability.unsafe_as(Proc(Guid, UInt64*, HRESULT)).call(pproviderid, plloriginalcapabilitymask)
+  def get_provider_capability(this : IVssAdminEx*, pproviderid : Guid, plloriginalcapabilitymask : UInt64*) : HRESULT
+    @lpVtbl.value.get_provider_capability.call(this, pproviderid, plloriginalcapabilitymask)
   end
-  def get_provider_context(providerid : Guid, plcontext : Int32*) : HRESULT
-    @lpVtbl.value.get_provider_context.unsafe_as(Proc(Guid, Int32*, HRESULT)).call(providerid, plcontext)
+  def get_provider_context(this : IVssAdminEx*, providerid : Guid, plcontext : Int32*) : HRESULT
+    @lpVtbl.value.get_provider_context.call(this, providerid, plcontext)
   end
-  def set_provider_context(providerid : Guid, lcontext : Int32) : HRESULT
-    @lpVtbl.value.set_provider_context.unsafe_as(Proc(Guid, Int32, HRESULT)).call(providerid, lcontext)
+  def set_provider_context(this : IVssAdminEx*, providerid : Guid, lcontext : Int32) : HRESULT
+    @lpVtbl.value.set_provider_context.call(this, providerid, lcontext)
   end
 end
 struct LibWin32::IVssSoftwareSnapshotProvider
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssSoftwareSnapshotProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssSoftwareSnapshotProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssSoftwareSnapshotProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_context(lcontext : Int32) : HRESULT
-    @lpVtbl.value.set_context.unsafe_as(Proc(Int32, HRESULT)).call(lcontext)
+  def set_context(this : IVssSoftwareSnapshotProvider*, lcontext : Int32) : HRESULT
+    @lpVtbl.value.set_context.call(this, lcontext)
   end
-  def get_snapshot_properties(snapshotid : Guid, pprop : VSS_SNAPSHOT_PROP*) : HRESULT
-    @lpVtbl.value.get_snapshot_properties.unsafe_as(Proc(Guid, VSS_SNAPSHOT_PROP*, HRESULT)).call(snapshotid, pprop)
+  def get_snapshot_properties(this : IVssSoftwareSnapshotProvider*, snapshotid : Guid, pprop : VSS_SNAPSHOT_PROP*) : HRESULT
+    @lpVtbl.value.get_snapshot_properties.call(this, snapshotid, pprop)
   end
-  def query(queriedobjectid : Guid, equeriedobjecttype : VSS_OBJECT_TYPE, ereturnedobjectstype : VSS_OBJECT_TYPE, ppenum : IVssEnumObject*) : HRESULT
-    @lpVtbl.value.query.unsafe_as(Proc(Guid, VSS_OBJECT_TYPE, VSS_OBJECT_TYPE, IVssEnumObject*, HRESULT)).call(queriedobjectid, equeriedobjecttype, ereturnedobjectstype, ppenum)
+  def query(this : IVssSoftwareSnapshotProvider*, queriedobjectid : Guid, equeriedobjecttype : VSS_OBJECT_TYPE, ereturnedobjectstype : VSS_OBJECT_TYPE, ppenum : IVssEnumObject*) : HRESULT
+    @lpVtbl.value.query.call(this, queriedobjectid, equeriedobjecttype, ereturnedobjectstype, ppenum)
   end
-  def delete_snapshots(sourceobjectid : Guid, esourceobjecttype : VSS_OBJECT_TYPE, bforcedelete : LibC::BOOL, pldeletedsnapshots : Int32*, pnondeletedsnapshotid : Guid*) : HRESULT
-    @lpVtbl.value.delete_snapshots.unsafe_as(Proc(Guid, VSS_OBJECT_TYPE, LibC::BOOL, Int32*, Guid*, HRESULT)).call(sourceobjectid, esourceobjecttype, bforcedelete, pldeletedsnapshots, pnondeletedsnapshotid)
+  def delete_snapshots(this : IVssSoftwareSnapshotProvider*, sourceobjectid : Guid, esourceobjecttype : VSS_OBJECT_TYPE, bforcedelete : LibC::BOOL, pldeletedsnapshots : Int32*, pnondeletedsnapshotid : Guid*) : HRESULT
+    @lpVtbl.value.delete_snapshots.call(this, sourceobjectid, esourceobjecttype, bforcedelete, pldeletedsnapshots, pnondeletedsnapshotid)
   end
-  def begin_prepare_snapshot(snapshotsetid : Guid, snapshotid : Guid, pwszvolumename : UInt16*, lnewcontext : Int32) : HRESULT
-    @lpVtbl.value.begin_prepare_snapshot.unsafe_as(Proc(Guid, Guid, UInt16*, Int32, HRESULT)).call(snapshotsetid, snapshotid, pwszvolumename, lnewcontext)
+  def begin_prepare_snapshot(this : IVssSoftwareSnapshotProvider*, snapshotsetid : Guid, snapshotid : Guid, pwszvolumename : UInt16*, lnewcontext : Int32) : HRESULT
+    @lpVtbl.value.begin_prepare_snapshot.call(this, snapshotsetid, snapshotid, pwszvolumename, lnewcontext)
   end
-  def is_volume_supported(pwszvolumename : UInt16*, pbsupportedbythisprovider : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_volume_supported.unsafe_as(Proc(UInt16*, LibC::BOOL*, HRESULT)).call(pwszvolumename, pbsupportedbythisprovider)
+  def is_volume_supported(this : IVssSoftwareSnapshotProvider*, pwszvolumename : UInt16*, pbsupportedbythisprovider : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_volume_supported.call(this, pwszvolumename, pbsupportedbythisprovider)
   end
-  def is_volume_snapshotted(pwszvolumename : UInt16*, pbsnapshotspresent : LibC::BOOL*, plsnapshotcompatibility : Int32*) : HRESULT
-    @lpVtbl.value.is_volume_snapshotted.unsafe_as(Proc(UInt16*, LibC::BOOL*, Int32*, HRESULT)).call(pwszvolumename, pbsnapshotspresent, plsnapshotcompatibility)
+  def is_volume_snapshotted(this : IVssSoftwareSnapshotProvider*, pwszvolumename : UInt16*, pbsnapshotspresent : LibC::BOOL*, plsnapshotcompatibility : Int32*) : HRESULT
+    @lpVtbl.value.is_volume_snapshotted.call(this, pwszvolumename, pbsnapshotspresent, plsnapshotcompatibility)
   end
-  def set_snapshot_property(snapshotid : Guid, esnapshotpropertyid : VSS_SNAPSHOT_PROPERTY_ID, vproperty : VARIANT) : HRESULT
-    @lpVtbl.value.set_snapshot_property.unsafe_as(Proc(Guid, VSS_SNAPSHOT_PROPERTY_ID, VARIANT, HRESULT)).call(snapshotid, esnapshotpropertyid, vproperty)
+  def set_snapshot_property(this : IVssSoftwareSnapshotProvider*, snapshotid : Guid, esnapshotpropertyid : VSS_SNAPSHOT_PROPERTY_ID, vproperty : VARIANT) : HRESULT
+    @lpVtbl.value.set_snapshot_property.call(this, snapshotid, esnapshotpropertyid, vproperty)
   end
-  def revert_to_snapshot(snapshotid : Guid) : HRESULT
-    @lpVtbl.value.revert_to_snapshot.unsafe_as(Proc(Guid, HRESULT)).call(snapshotid)
+  def revert_to_snapshot(this : IVssSoftwareSnapshotProvider*, snapshotid : Guid) : HRESULT
+    @lpVtbl.value.revert_to_snapshot.call(this, snapshotid)
   end
-  def query_revert_status(pwszvolume : UInt16*, ppasync : IVssAsync*) : HRESULT
-    @lpVtbl.value.query_revert_status.unsafe_as(Proc(UInt16*, IVssAsync*, HRESULT)).call(pwszvolume, ppasync)
+  def query_revert_status(this : IVssSoftwareSnapshotProvider*, pwszvolume : UInt16*, ppasync : IVssAsync*) : HRESULT
+    @lpVtbl.value.query_revert_status.call(this, pwszvolume, ppasync)
   end
 end
 struct LibWin32::IVssProviderCreateSnapshotSet
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssProviderCreateSnapshotSet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssProviderCreateSnapshotSet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssProviderCreateSnapshotSet*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def end_prepare_snapshots(snapshotsetid : Guid) : HRESULT
-    @lpVtbl.value.end_prepare_snapshots.unsafe_as(Proc(Guid, HRESULT)).call(snapshotsetid)
+  def end_prepare_snapshots(this : IVssProviderCreateSnapshotSet*, snapshotsetid : Guid) : HRESULT
+    @lpVtbl.value.end_prepare_snapshots.call(this, snapshotsetid)
   end
-  def pre_commit_snapshots(snapshotsetid : Guid) : HRESULT
-    @lpVtbl.value.pre_commit_snapshots.unsafe_as(Proc(Guid, HRESULT)).call(snapshotsetid)
+  def pre_commit_snapshots(this : IVssProviderCreateSnapshotSet*, snapshotsetid : Guid) : HRESULT
+    @lpVtbl.value.pre_commit_snapshots.call(this, snapshotsetid)
   end
-  def commit_snapshots(snapshotsetid : Guid) : HRESULT
-    @lpVtbl.value.commit_snapshots.unsafe_as(Proc(Guid, HRESULT)).call(snapshotsetid)
+  def commit_snapshots(this : IVssProviderCreateSnapshotSet*, snapshotsetid : Guid) : HRESULT
+    @lpVtbl.value.commit_snapshots.call(this, snapshotsetid)
   end
-  def post_commit_snapshots(snapshotsetid : Guid, lsnapshotscount : Int32) : HRESULT
-    @lpVtbl.value.post_commit_snapshots.unsafe_as(Proc(Guid, Int32, HRESULT)).call(snapshotsetid, lsnapshotscount)
+  def post_commit_snapshots(this : IVssProviderCreateSnapshotSet*, snapshotsetid : Guid, lsnapshotscount : Int32) : HRESULT
+    @lpVtbl.value.post_commit_snapshots.call(this, snapshotsetid, lsnapshotscount)
   end
-  def pre_final_commit_snapshots(snapshotsetid : Guid) : HRESULT
-    @lpVtbl.value.pre_final_commit_snapshots.unsafe_as(Proc(Guid, HRESULT)).call(snapshotsetid)
+  def pre_final_commit_snapshots(this : IVssProviderCreateSnapshotSet*, snapshotsetid : Guid) : HRESULT
+    @lpVtbl.value.pre_final_commit_snapshots.call(this, snapshotsetid)
   end
-  def post_final_commit_snapshots(snapshotsetid : Guid) : HRESULT
-    @lpVtbl.value.post_final_commit_snapshots.unsafe_as(Proc(Guid, HRESULT)).call(snapshotsetid)
+  def post_final_commit_snapshots(this : IVssProviderCreateSnapshotSet*, snapshotsetid : Guid) : HRESULT
+    @lpVtbl.value.post_final_commit_snapshots.call(this, snapshotsetid)
   end
-  def abort_snapshots(snapshotsetid : Guid) : HRESULT
-    @lpVtbl.value.abort_snapshots.unsafe_as(Proc(Guid, HRESULT)).call(snapshotsetid)
+  def abort_snapshots(this : IVssProviderCreateSnapshotSet*, snapshotsetid : Guid) : HRESULT
+    @lpVtbl.value.abort_snapshots.call(this, snapshotsetid)
   end
 end
 struct LibWin32::IVssProviderNotifications
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssProviderNotifications*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssProviderNotifications*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssProviderNotifications*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_load(pcallback : IUnknown) : HRESULT
-    @lpVtbl.value.on_load.unsafe_as(Proc(IUnknown, HRESULT)).call(pcallback)
+  def on_load(this : IVssProviderNotifications*, pcallback : IUnknown) : HRESULT
+    @lpVtbl.value.on_load.call(this, pcallback)
   end
-  def on_unload(bforceunload : LibC::BOOL) : HRESULT
-    @lpVtbl.value.on_unload.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bforceunload)
+  def on_unload(this : IVssProviderNotifications*, bforceunload : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_unload.call(this, bforceunload)
   end
 end
 struct LibWin32::IVssHardwareSnapshotProvider
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssHardwareSnapshotProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssHardwareSnapshotProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssHardwareSnapshotProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def are_luns_supported(lluncount : Int32, lcontext : Int32, rgwszdevices : UInt16**, pluninformation : VDS_LUN_INFORMATION*, pbissupported : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.are_luns_supported.unsafe_as(Proc(Int32, Int32, UInt16**, VDS_LUN_INFORMATION*, LibC::BOOL*, HRESULT)).call(lluncount, lcontext, rgwszdevices, pluninformation, pbissupported)
+  def are_luns_supported(this : IVssHardwareSnapshotProvider*, lluncount : Int32, lcontext : Int32, rgwszdevices : UInt16**, pluninformation : VDS_LUN_INFORMATION*, pbissupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.are_luns_supported.call(this, lluncount, lcontext, rgwszdevices, pluninformation, pbissupported)
   end
-  def fill_in_lun_info(wszdevicename : UInt16*, pluninfo : VDS_LUN_INFORMATION*, pbissupported : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.fill_in_lun_info.unsafe_as(Proc(UInt16*, VDS_LUN_INFORMATION*, LibC::BOOL*, HRESULT)).call(wszdevicename, pluninfo, pbissupported)
+  def fill_in_lun_info(this : IVssHardwareSnapshotProvider*, wszdevicename : UInt16*, pluninfo : VDS_LUN_INFORMATION*, pbissupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.fill_in_lun_info.call(this, wszdevicename, pluninfo, pbissupported)
   end
-  def begin_prepare_snapshot(snapshotsetid : Guid, snapshotid : Guid, lcontext : Int32, lluncount : Int32, rgdevicenames : UInt16**, rgluninformation : VDS_LUN_INFORMATION*) : HRESULT
-    @lpVtbl.value.begin_prepare_snapshot.unsafe_as(Proc(Guid, Guid, Int32, Int32, UInt16**, VDS_LUN_INFORMATION*, HRESULT)).call(snapshotsetid, snapshotid, lcontext, lluncount, rgdevicenames, rgluninformation)
+  def begin_prepare_snapshot(this : IVssHardwareSnapshotProvider*, snapshotsetid : Guid, snapshotid : Guid, lcontext : Int32, lluncount : Int32, rgdevicenames : UInt16**, rgluninformation : VDS_LUN_INFORMATION*) : HRESULT
+    @lpVtbl.value.begin_prepare_snapshot.call(this, snapshotsetid, snapshotid, lcontext, lluncount, rgdevicenames, rgluninformation)
   end
-  def get_target_luns(lluncount : Int32, rgdevicenames : UInt16**, rgsourceluns : VDS_LUN_INFORMATION*, rgdestinationluns : VDS_LUN_INFORMATION*) : HRESULT
-    @lpVtbl.value.get_target_luns.unsafe_as(Proc(Int32, UInt16**, VDS_LUN_INFORMATION*, VDS_LUN_INFORMATION*, HRESULT)).call(lluncount, rgdevicenames, rgsourceluns, rgdestinationluns)
+  def get_target_luns(this : IVssHardwareSnapshotProvider*, lluncount : Int32, rgdevicenames : UInt16**, rgsourceluns : VDS_LUN_INFORMATION*, rgdestinationluns : VDS_LUN_INFORMATION*) : HRESULT
+    @lpVtbl.value.get_target_luns.call(this, lluncount, rgdevicenames, rgsourceluns, rgdestinationluns)
   end
-  def locate_luns(lluncount : Int32, rgsourceluns : VDS_LUN_INFORMATION*) : HRESULT
-    @lpVtbl.value.locate_luns.unsafe_as(Proc(Int32, VDS_LUN_INFORMATION*, HRESULT)).call(lluncount, rgsourceluns)
+  def locate_luns(this : IVssHardwareSnapshotProvider*, lluncount : Int32, rgsourceluns : VDS_LUN_INFORMATION*) : HRESULT
+    @lpVtbl.value.locate_luns.call(this, lluncount, rgsourceluns)
   end
-  def on_lun_empty(wszdevicename : UInt16*, pinformation : VDS_LUN_INFORMATION*) : HRESULT
-    @lpVtbl.value.on_lun_empty.unsafe_as(Proc(UInt16*, VDS_LUN_INFORMATION*, HRESULT)).call(wszdevicename, pinformation)
+  def on_lun_empty(this : IVssHardwareSnapshotProvider*, wszdevicename : UInt16*, pinformation : VDS_LUN_INFORMATION*) : HRESULT
+    @lpVtbl.value.on_lun_empty.call(this, wszdevicename, pinformation)
   end
 end
 struct LibWin32::IVssHardwareSnapshotProviderEx
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssHardwareSnapshotProviderEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssHardwareSnapshotProviderEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssHardwareSnapshotProviderEx*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def are_luns_supported(lluncount : Int32, lcontext : Int32, rgwszdevices : UInt16**, pluninformation : VDS_LUN_INFORMATION*, pbissupported : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.are_luns_supported.unsafe_as(Proc(Int32, Int32, UInt16**, VDS_LUN_INFORMATION*, LibC::BOOL*, HRESULT)).call(lluncount, lcontext, rgwszdevices, pluninformation, pbissupported)
+  def are_luns_supported(this : IVssHardwareSnapshotProviderEx*, lluncount : Int32, lcontext : Int32, rgwszdevices : UInt16**, pluninformation : VDS_LUN_INFORMATION*, pbissupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.are_luns_supported.call(this, lluncount, lcontext, rgwszdevices, pluninformation, pbissupported)
   end
-  def fill_in_lun_info(wszdevicename : UInt16*, pluninfo : VDS_LUN_INFORMATION*, pbissupported : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.fill_in_lun_info.unsafe_as(Proc(UInt16*, VDS_LUN_INFORMATION*, LibC::BOOL*, HRESULT)).call(wszdevicename, pluninfo, pbissupported)
+  def fill_in_lun_info(this : IVssHardwareSnapshotProviderEx*, wszdevicename : UInt16*, pluninfo : VDS_LUN_INFORMATION*, pbissupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.fill_in_lun_info.call(this, wszdevicename, pluninfo, pbissupported)
   end
-  def begin_prepare_snapshot(snapshotsetid : Guid, snapshotid : Guid, lcontext : Int32, lluncount : Int32, rgdevicenames : UInt16**, rgluninformation : VDS_LUN_INFORMATION*) : HRESULT
-    @lpVtbl.value.begin_prepare_snapshot.unsafe_as(Proc(Guid, Guid, Int32, Int32, UInt16**, VDS_LUN_INFORMATION*, HRESULT)).call(snapshotsetid, snapshotid, lcontext, lluncount, rgdevicenames, rgluninformation)
+  def begin_prepare_snapshot(this : IVssHardwareSnapshotProviderEx*, snapshotsetid : Guid, snapshotid : Guid, lcontext : Int32, lluncount : Int32, rgdevicenames : UInt16**, rgluninformation : VDS_LUN_INFORMATION*) : HRESULT
+    @lpVtbl.value.begin_prepare_snapshot.call(this, snapshotsetid, snapshotid, lcontext, lluncount, rgdevicenames, rgluninformation)
   end
-  def get_target_luns(lluncount : Int32, rgdevicenames : UInt16**, rgsourceluns : VDS_LUN_INFORMATION*, rgdestinationluns : VDS_LUN_INFORMATION*) : HRESULT
-    @lpVtbl.value.get_target_luns.unsafe_as(Proc(Int32, UInt16**, VDS_LUN_INFORMATION*, VDS_LUN_INFORMATION*, HRESULT)).call(lluncount, rgdevicenames, rgsourceluns, rgdestinationluns)
+  def get_target_luns(this : IVssHardwareSnapshotProviderEx*, lluncount : Int32, rgdevicenames : UInt16**, rgsourceluns : VDS_LUN_INFORMATION*, rgdestinationluns : VDS_LUN_INFORMATION*) : HRESULT
+    @lpVtbl.value.get_target_luns.call(this, lluncount, rgdevicenames, rgsourceluns, rgdestinationluns)
   end
-  def locate_luns(lluncount : Int32, rgsourceluns : VDS_LUN_INFORMATION*) : HRESULT
-    @lpVtbl.value.locate_luns.unsafe_as(Proc(Int32, VDS_LUN_INFORMATION*, HRESULT)).call(lluncount, rgsourceluns)
+  def locate_luns(this : IVssHardwareSnapshotProviderEx*, lluncount : Int32, rgsourceluns : VDS_LUN_INFORMATION*) : HRESULT
+    @lpVtbl.value.locate_luns.call(this, lluncount, rgsourceluns)
   end
-  def on_lun_empty(wszdevicename : UInt16*, pinformation : VDS_LUN_INFORMATION*) : HRESULT
-    @lpVtbl.value.on_lun_empty.unsafe_as(Proc(UInt16*, VDS_LUN_INFORMATION*, HRESULT)).call(wszdevicename, pinformation)
+  def on_lun_empty(this : IVssHardwareSnapshotProviderEx*, wszdevicename : UInt16*, pinformation : VDS_LUN_INFORMATION*) : HRESULT
+    @lpVtbl.value.on_lun_empty.call(this, wszdevicename, pinformation)
   end
-  def get_provider_capabilities(plloriginalcapabilitymask : UInt64*) : HRESULT
-    @lpVtbl.value.get_provider_capabilities.unsafe_as(Proc(UInt64*, HRESULT)).call(plloriginalcapabilitymask)
+  def get_provider_capabilities(this : IVssHardwareSnapshotProviderEx*, plloriginalcapabilitymask : UInt64*) : HRESULT
+    @lpVtbl.value.get_provider_capabilities.call(this, plloriginalcapabilitymask)
   end
-  def on_lun_state_change(psnapshotluns : VDS_LUN_INFORMATION*, poriginalluns : VDS_LUN_INFORMATION*, dwcount : UInt32, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.on_lun_state_change.unsafe_as(Proc(VDS_LUN_INFORMATION*, VDS_LUN_INFORMATION*, UInt32, UInt32, HRESULT)).call(psnapshotluns, poriginalluns, dwcount, dwflags)
+  def on_lun_state_change(this : IVssHardwareSnapshotProviderEx*, psnapshotluns : VDS_LUN_INFORMATION*, poriginalluns : VDS_LUN_INFORMATION*, dwcount : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.on_lun_state_change.call(this, psnapshotluns, poriginalluns, dwcount, dwflags)
   end
-  def resync_luns(psourceluns : VDS_LUN_INFORMATION*, ptargetluns : VDS_LUN_INFORMATION*, dwcount : UInt32, ppasync : IVssAsync*) : HRESULT
-    @lpVtbl.value.resync_luns.unsafe_as(Proc(VDS_LUN_INFORMATION*, VDS_LUN_INFORMATION*, UInt32, IVssAsync*, HRESULT)).call(psourceluns, ptargetluns, dwcount, ppasync)
+  def resync_luns(this : IVssHardwareSnapshotProviderEx*, psourceluns : VDS_LUN_INFORMATION*, ptargetluns : VDS_LUN_INFORMATION*, dwcount : UInt32, ppasync : IVssAsync*) : HRESULT
+    @lpVtbl.value.resync_luns.call(this, psourceluns, ptargetluns, dwcount, ppasync)
   end
-  def on_reuse_luns(psnapshotluns : VDS_LUN_INFORMATION*, poriginalluns : VDS_LUN_INFORMATION*, dwcount : UInt32) : HRESULT
-    @lpVtbl.value.on_reuse_luns.unsafe_as(Proc(VDS_LUN_INFORMATION*, VDS_LUN_INFORMATION*, UInt32, HRESULT)).call(psnapshotluns, poriginalluns, dwcount)
+  def on_reuse_luns(this : IVssHardwareSnapshotProviderEx*, psnapshotluns : VDS_LUN_INFORMATION*, poriginalluns : VDS_LUN_INFORMATION*, dwcount : UInt32) : HRESULT
+    @lpVtbl.value.on_reuse_luns.call(this, psnapshotluns, poriginalluns, dwcount)
   end
 end
 struct LibWin32::IVssFileShareSnapshotProvider
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVssFileShareSnapshotProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVssFileShareSnapshotProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVssFileShareSnapshotProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_context(lcontext : Int32) : HRESULT
-    @lpVtbl.value.set_context.unsafe_as(Proc(Int32, HRESULT)).call(lcontext)
+  def set_context(this : IVssFileShareSnapshotProvider*, lcontext : Int32) : HRESULT
+    @lpVtbl.value.set_context.call(this, lcontext)
   end
-  def get_snapshot_properties(snapshotid : Guid, pprop : VSS_SNAPSHOT_PROP*) : HRESULT
-    @lpVtbl.value.get_snapshot_properties.unsafe_as(Proc(Guid, VSS_SNAPSHOT_PROP*, HRESULT)).call(snapshotid, pprop)
+  def get_snapshot_properties(this : IVssFileShareSnapshotProvider*, snapshotid : Guid, pprop : VSS_SNAPSHOT_PROP*) : HRESULT
+    @lpVtbl.value.get_snapshot_properties.call(this, snapshotid, pprop)
   end
-  def query(queriedobjectid : Guid, equeriedobjecttype : VSS_OBJECT_TYPE, ereturnedobjectstype : VSS_OBJECT_TYPE, ppenum : IVssEnumObject*) : HRESULT
-    @lpVtbl.value.query.unsafe_as(Proc(Guid, VSS_OBJECT_TYPE, VSS_OBJECT_TYPE, IVssEnumObject*, HRESULT)).call(queriedobjectid, equeriedobjecttype, ereturnedobjectstype, ppenum)
+  def query(this : IVssFileShareSnapshotProvider*, queriedobjectid : Guid, equeriedobjecttype : VSS_OBJECT_TYPE, ereturnedobjectstype : VSS_OBJECT_TYPE, ppenum : IVssEnumObject*) : HRESULT
+    @lpVtbl.value.query.call(this, queriedobjectid, equeriedobjecttype, ereturnedobjectstype, ppenum)
   end
-  def delete_snapshots(sourceobjectid : Guid, esourceobjecttype : VSS_OBJECT_TYPE, bforcedelete : LibC::BOOL, pldeletedsnapshots : Int32*, pnondeletedsnapshotid : Guid*) : HRESULT
-    @lpVtbl.value.delete_snapshots.unsafe_as(Proc(Guid, VSS_OBJECT_TYPE, LibC::BOOL, Int32*, Guid*, HRESULT)).call(sourceobjectid, esourceobjecttype, bforcedelete, pldeletedsnapshots, pnondeletedsnapshotid)
+  def delete_snapshots(this : IVssFileShareSnapshotProvider*, sourceobjectid : Guid, esourceobjecttype : VSS_OBJECT_TYPE, bforcedelete : LibC::BOOL, pldeletedsnapshots : Int32*, pnondeletedsnapshotid : Guid*) : HRESULT
+    @lpVtbl.value.delete_snapshots.call(this, sourceobjectid, esourceobjecttype, bforcedelete, pldeletedsnapshots, pnondeletedsnapshotid)
   end
-  def begin_prepare_snapshot(snapshotsetid : Guid, snapshotid : Guid, pwszsharepath : UInt16*, lnewcontext : Int32, providerid : Guid) : HRESULT
-    @lpVtbl.value.begin_prepare_snapshot.unsafe_as(Proc(Guid, Guid, UInt16*, Int32, Guid, HRESULT)).call(snapshotsetid, snapshotid, pwszsharepath, lnewcontext, providerid)
+  def begin_prepare_snapshot(this : IVssFileShareSnapshotProvider*, snapshotsetid : Guid, snapshotid : Guid, pwszsharepath : UInt16*, lnewcontext : Int32, providerid : Guid) : HRESULT
+    @lpVtbl.value.begin_prepare_snapshot.call(this, snapshotsetid, snapshotid, pwszsharepath, lnewcontext, providerid)
   end
-  def is_path_supported(pwszsharepath : UInt16*, pbsupportedbythisprovider : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_path_supported.unsafe_as(Proc(UInt16*, LibC::BOOL*, HRESULT)).call(pwszsharepath, pbsupportedbythisprovider)
+  def is_path_supported(this : IVssFileShareSnapshotProvider*, pwszsharepath : UInt16*, pbsupportedbythisprovider : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_path_supported.call(this, pwszsharepath, pbsupportedbythisprovider)
   end
-  def is_path_snapshotted(pwszsharepath : UInt16*, pbsnapshotspresent : LibC::BOOL*, plsnapshotcompatibility : Int32*) : HRESULT
-    @lpVtbl.value.is_path_snapshotted.unsafe_as(Proc(UInt16*, LibC::BOOL*, Int32*, HRESULT)).call(pwszsharepath, pbsnapshotspresent, plsnapshotcompatibility)
+  def is_path_snapshotted(this : IVssFileShareSnapshotProvider*, pwszsharepath : UInt16*, pbsnapshotspresent : LibC::BOOL*, plsnapshotcompatibility : Int32*) : HRESULT
+    @lpVtbl.value.is_path_snapshotted.call(this, pwszsharepath, pbsnapshotspresent, plsnapshotcompatibility)
   end
-  def set_snapshot_property(snapshotid : Guid, esnapshotpropertyid : VSS_SNAPSHOT_PROPERTY_ID, vproperty : VARIANT) : HRESULT
-    @lpVtbl.value.set_snapshot_property.unsafe_as(Proc(Guid, VSS_SNAPSHOT_PROPERTY_ID, VARIANT, HRESULT)).call(snapshotid, esnapshotpropertyid, vproperty)
+  def set_snapshot_property(this : IVssFileShareSnapshotProvider*, snapshotid : Guid, esnapshotpropertyid : VSS_SNAPSHOT_PROPERTY_ID, vproperty : VARIANT) : HRESULT
+    @lpVtbl.value.set_snapshot_property.call(this, snapshotid, esnapshotpropertyid, vproperty)
   end
 end

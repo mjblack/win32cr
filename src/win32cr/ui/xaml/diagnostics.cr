@@ -127,10 +127,10 @@ lib LibWin32
 
 
   struct IVisualTreeServiceCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_visual_tree_change : UInt64
+    query_interface : Proc(IVisualTreeServiceCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVisualTreeServiceCallback*, UInt32)
+    release : Proc(IVisualTreeServiceCallback*, UInt32)
+    on_visual_tree_change : Proc(IVisualTreeServiceCallback*, ParentChildRelation, VisualElement, VisualMutationType, HRESULT)
   end
 
   IVisualTreeServiceCallback_GUID = "aa7a8931-80e4-4fec-8f3b-553f87b4966e"
@@ -140,11 +140,11 @@ lib LibWin32
   end
 
   struct IVisualTreeServiceCallback2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_visual_tree_change : UInt64
-    on_element_state_changed : UInt64
+    query_interface : Proc(IVisualTreeServiceCallback2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVisualTreeServiceCallback2*, UInt32)
+    release : Proc(IVisualTreeServiceCallback2*, UInt32)
+    on_visual_tree_change : Proc(IVisualTreeServiceCallback2*, ParentChildRelation, VisualElement, VisualMutationType, HRESULT)
+    on_element_state_changed : Proc(IVisualTreeServiceCallback2*, UInt64, VisualElementState, LibC::LPWSTR, HRESULT)
   end
 
   IVisualTreeServiceCallback2_GUID = "bad9eb88-ae77-4397-b948-5fa2db0a19ea"
@@ -154,21 +154,21 @@ lib LibWin32
   end
 
   struct IVisualTreeServiceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    advise_visual_tree_change : UInt64
-    unadvise_visual_tree_change : UInt64
-    get_enums : UInt64
-    create_instance : UInt64
-    get_property_values_chain : UInt64
-    set_property : UInt64
-    clear_property : UInt64
-    get_collection_count : UInt64
-    get_collection_elements : UInt64
-    add_child : UInt64
-    remove_child : UInt64
-    clear_children : UInt64
+    query_interface : Proc(IVisualTreeService*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVisualTreeService*, UInt32)
+    release : Proc(IVisualTreeService*, UInt32)
+    advise_visual_tree_change : Proc(IVisualTreeService*, IVisualTreeServiceCallback, HRESULT)
+    unadvise_visual_tree_change : Proc(IVisualTreeService*, IVisualTreeServiceCallback, HRESULT)
+    get_enums : Proc(IVisualTreeService*, UInt32*, EnumType**, HRESULT)
+    create_instance : Proc(IVisualTreeService*, UInt8*, UInt8*, UInt64*, HRESULT)
+    get_property_values_chain : Proc(IVisualTreeService*, UInt64, UInt32*, PropertyChainSource**, UInt32*, PropertyChainValue**, HRESULT)
+    set_property : Proc(IVisualTreeService*, UInt64, UInt64, UInt32, HRESULT)
+    clear_property : Proc(IVisualTreeService*, UInt64, UInt32, HRESULT)
+    get_collection_count : Proc(IVisualTreeService*, UInt64, UInt32*, HRESULT)
+    get_collection_elements : Proc(IVisualTreeService*, UInt64, UInt32, UInt32*, CollectionElementValue**, HRESULT)
+    add_child : Proc(IVisualTreeService*, UInt64, UInt64, UInt32, HRESULT)
+    remove_child : Proc(IVisualTreeService*, UInt64, UInt32, HRESULT)
+    clear_children : Proc(IVisualTreeService*, UInt64, HRESULT)
   end
 
   IVisualTreeService_GUID = "a593b11a-d17f-48bb-8f66-83910731c8a5"
@@ -178,17 +178,17 @@ lib LibWin32
   end
 
   struct IXamlDiagnosticsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_dispatcher : UInt64
-    get_ui_layer : UInt64
-    get_application : UInt64
-    get_i_inspectable_from_handle : UInt64
-    get_handle_from_i_inspectable : UInt64
-    hit_test : UInt64
-    register_instance : UInt64
-    get_initialization_data : UInt64
+    query_interface : Proc(IXamlDiagnostics*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXamlDiagnostics*, UInt32)
+    release : Proc(IXamlDiagnostics*, UInt32)
+    get_dispatcher : Proc(IXamlDiagnostics*, IInspectable*, HRESULT)
+    get_ui_layer : Proc(IXamlDiagnostics*, IInspectable*, HRESULT)
+    get_application : Proc(IXamlDiagnostics*, IInspectable*, HRESULT)
+    get_i_inspectable_from_handle : Proc(IXamlDiagnostics*, UInt64, IInspectable*, HRESULT)
+    get_handle_from_i_inspectable : Proc(IXamlDiagnostics*, IInspectable, UInt64*, HRESULT)
+    hit_test : Proc(IXamlDiagnostics*, RECT, UInt32*, UInt64**, HRESULT)
+    register_instance : Proc(IXamlDiagnostics*, IInspectable, UInt64*, HRESULT)
+    get_initialization_data : Proc(IXamlDiagnostics*, UInt8**, HRESULT)
   end
 
   IXamlDiagnostics_GUID = "18c9e2b6-3f43-4116-9f2b-ff935d7770d2"
@@ -198,13 +198,13 @@ lib LibWin32
   end
 
   struct IBitmapDataVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    copy_bytes_to : UInt64
-    get_stride : UInt64
-    get_bitmap_description : UInt64
-    get_source_bitmap_description : UInt64
+    query_interface : Proc(IBitmapData*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IBitmapData*, UInt32)
+    release : Proc(IBitmapData*, UInt32)
+    copy_bytes_to : Proc(IBitmapData*, UInt32, UInt32, UInt8*, UInt32*, HRESULT)
+    get_stride : Proc(IBitmapData*, UInt32*, HRESULT)
+    get_bitmap_description : Proc(IBitmapData*, BitmapDescription*, HRESULT)
+    get_source_bitmap_description : Proc(IBitmapData*, BitmapDescription*, HRESULT)
   end
 
   IBitmapData_GUID = "d1a34ef2-cad8-4635-a3d2-fcda8d3f3caf"
@@ -214,25 +214,25 @@ lib LibWin32
   end
 
   struct IVisualTreeService2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    advise_visual_tree_change : UInt64
-    unadvise_visual_tree_change : UInt64
-    get_enums : UInt64
-    create_instance : UInt64
-    get_property_values_chain : UInt64
-    set_property : UInt64
-    clear_property : UInt64
-    get_collection_count : UInt64
-    get_collection_elements : UInt64
-    add_child : UInt64
-    remove_child : UInt64
-    clear_children : UInt64
-    get_property_index : UInt64
-    get_property : UInt64
-    replace_resource : UInt64
-    render_target_bitmap : UInt64
+    query_interface : Proc(IVisualTreeService2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVisualTreeService2*, UInt32)
+    release : Proc(IVisualTreeService2*, UInt32)
+    advise_visual_tree_change : Proc(IVisualTreeService2*, IVisualTreeServiceCallback, HRESULT)
+    unadvise_visual_tree_change : Proc(IVisualTreeService2*, IVisualTreeServiceCallback, HRESULT)
+    get_enums : Proc(IVisualTreeService2*, UInt32*, EnumType**, HRESULT)
+    create_instance : Proc(IVisualTreeService2*, UInt8*, UInt8*, UInt64*, HRESULT)
+    get_property_values_chain : Proc(IVisualTreeService2*, UInt64, UInt32*, PropertyChainSource**, UInt32*, PropertyChainValue**, HRESULT)
+    set_property : Proc(IVisualTreeService2*, UInt64, UInt64, UInt32, HRESULT)
+    clear_property : Proc(IVisualTreeService2*, UInt64, UInt32, HRESULT)
+    get_collection_count : Proc(IVisualTreeService2*, UInt64, UInt32*, HRESULT)
+    get_collection_elements : Proc(IVisualTreeService2*, UInt64, UInt32, UInt32*, CollectionElementValue**, HRESULT)
+    add_child : Proc(IVisualTreeService2*, UInt64, UInt64, UInt32, HRESULT)
+    remove_child : Proc(IVisualTreeService2*, UInt64, UInt32, HRESULT)
+    clear_children : Proc(IVisualTreeService2*, UInt64, HRESULT)
+    get_property_index : Proc(IVisualTreeService2*, UInt64, LibC::LPWSTR, UInt32*, HRESULT)
+    get_property : Proc(IVisualTreeService2*, UInt64, UInt32, UInt64*, HRESULT)
+    replace_resource : Proc(IVisualTreeService2*, UInt64, UInt64, UInt64, HRESULT)
+    render_target_bitmap : Proc(IVisualTreeService2*, UInt64, RenderTargetBitmapOptions, UInt32, UInt32, IBitmapData*, HRESULT)
   end
 
   IVisualTreeService2_GUID = "130f5136-ec43-4f61-89c7-9801a36d2e95"
@@ -242,29 +242,29 @@ lib LibWin32
   end
 
   struct IVisualTreeService3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    advise_visual_tree_change : UInt64
-    unadvise_visual_tree_change : UInt64
-    get_enums : UInt64
-    create_instance : UInt64
-    get_property_values_chain : UInt64
-    set_property : UInt64
-    clear_property : UInt64
-    get_collection_count : UInt64
-    get_collection_elements : UInt64
-    add_child : UInt64
-    remove_child : UInt64
-    clear_children : UInt64
-    get_property_index : UInt64
-    get_property : UInt64
-    replace_resource : UInt64
-    render_target_bitmap : UInt64
-    resolve_resource : UInt64
-    get_dictionary_item : UInt64
-    add_dictionary_item : UInt64
-    remove_dictionary_item : UInt64
+    query_interface : Proc(IVisualTreeService3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IVisualTreeService3*, UInt32)
+    release : Proc(IVisualTreeService3*, UInt32)
+    advise_visual_tree_change : Proc(IVisualTreeService3*, IVisualTreeServiceCallback, HRESULT)
+    unadvise_visual_tree_change : Proc(IVisualTreeService3*, IVisualTreeServiceCallback, HRESULT)
+    get_enums : Proc(IVisualTreeService3*, UInt32*, EnumType**, HRESULT)
+    create_instance : Proc(IVisualTreeService3*, UInt8*, UInt8*, UInt64*, HRESULT)
+    get_property_values_chain : Proc(IVisualTreeService3*, UInt64, UInt32*, PropertyChainSource**, UInt32*, PropertyChainValue**, HRESULT)
+    set_property : Proc(IVisualTreeService3*, UInt64, UInt64, UInt32, HRESULT)
+    clear_property : Proc(IVisualTreeService3*, UInt64, UInt32, HRESULT)
+    get_collection_count : Proc(IVisualTreeService3*, UInt64, UInt32*, HRESULT)
+    get_collection_elements : Proc(IVisualTreeService3*, UInt64, UInt32, UInt32*, CollectionElementValue**, HRESULT)
+    add_child : Proc(IVisualTreeService3*, UInt64, UInt64, UInt32, HRESULT)
+    remove_child : Proc(IVisualTreeService3*, UInt64, UInt32, HRESULT)
+    clear_children : Proc(IVisualTreeService3*, UInt64, HRESULT)
+    get_property_index : Proc(IVisualTreeService3*, UInt64, LibC::LPWSTR, UInt32*, HRESULT)
+    get_property : Proc(IVisualTreeService3*, UInt64, UInt32, UInt64*, HRESULT)
+    replace_resource : Proc(IVisualTreeService3*, UInt64, UInt64, UInt64, HRESULT)
+    render_target_bitmap : Proc(IVisualTreeService3*, UInt64, RenderTargetBitmapOptions, UInt32, UInt32, IBitmapData*, HRESULT)
+    resolve_resource : Proc(IVisualTreeService3*, UInt64, LibC::LPWSTR, ResourceType, UInt32, HRESULT)
+    get_dictionary_item : Proc(IVisualTreeService3*, UInt64, LibC::LPWSTR, LibC::BOOL, UInt64*, HRESULT)
+    add_dictionary_item : Proc(IVisualTreeService3*, UInt64, UInt64, UInt64, HRESULT)
+    remove_dictionary_item : Proc(IVisualTreeService3*, UInt64, UInt64, HRESULT)
   end
 
   IVisualTreeService3_GUID = "0e79c6e0-85a0-4be8-b41a-655cf1fd19bd"
@@ -281,268 +281,268 @@ lib LibWin32
   fun InitializeXamlDiagnosticsEx(endpointname : LibC::LPWSTR, pid : UInt32, wszdllxamldiagnostics : LibC::LPWSTR, wsztapdllname : LibC::LPWSTR, tapclsid : Guid, wszinitializationdata : LibC::LPWSTR) : HRESULT
 end
 struct LibWin32::IVisualTreeServiceCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVisualTreeServiceCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVisualTreeServiceCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVisualTreeServiceCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_visual_tree_change(relation : ParentChildRelation, element : VisualElement, mutationtype : VisualMutationType) : HRESULT
-    @lpVtbl.value.on_visual_tree_change.unsafe_as(Proc(ParentChildRelation, VisualElement, VisualMutationType, HRESULT)).call(relation, element, mutationtype)
+  def on_visual_tree_change(this : IVisualTreeServiceCallback*, relation : ParentChildRelation, element : VisualElement, mutationtype : VisualMutationType) : HRESULT
+    @lpVtbl.value.on_visual_tree_change.call(this, relation, element, mutationtype)
   end
 end
 struct LibWin32::IVisualTreeServiceCallback2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVisualTreeServiceCallback2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVisualTreeServiceCallback2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVisualTreeServiceCallback2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_visual_tree_change(relation : ParentChildRelation, element : VisualElement, mutationtype : VisualMutationType) : HRESULT
-    @lpVtbl.value.on_visual_tree_change.unsafe_as(Proc(ParentChildRelation, VisualElement, VisualMutationType, HRESULT)).call(relation, element, mutationtype)
+  def on_visual_tree_change(this : IVisualTreeServiceCallback2*, relation : ParentChildRelation, element : VisualElement, mutationtype : VisualMutationType) : HRESULT
+    @lpVtbl.value.on_visual_tree_change.call(this, relation, element, mutationtype)
   end
-  def on_element_state_changed(element : UInt64, elementstate : VisualElementState, context : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.on_element_state_changed.unsafe_as(Proc(UInt64, VisualElementState, LibC::LPWSTR, HRESULT)).call(element, elementstate, context)
+  def on_element_state_changed(this : IVisualTreeServiceCallback2*, element : UInt64, elementstate : VisualElementState, context : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.on_element_state_changed.call(this, element, elementstate, context)
   end
 end
 struct LibWin32::IVisualTreeService
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVisualTreeService*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVisualTreeService*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVisualTreeService*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def advise_visual_tree_change(pcallback : IVisualTreeServiceCallback) : HRESULT
-    @lpVtbl.value.advise_visual_tree_change.unsafe_as(Proc(IVisualTreeServiceCallback, HRESULT)).call(pcallback)
+  def advise_visual_tree_change(this : IVisualTreeService*, pcallback : IVisualTreeServiceCallback) : HRESULT
+    @lpVtbl.value.advise_visual_tree_change.call(this, pcallback)
   end
-  def unadvise_visual_tree_change(pcallback : IVisualTreeServiceCallback) : HRESULT
-    @lpVtbl.value.unadvise_visual_tree_change.unsafe_as(Proc(IVisualTreeServiceCallback, HRESULT)).call(pcallback)
+  def unadvise_visual_tree_change(this : IVisualTreeService*, pcallback : IVisualTreeServiceCallback) : HRESULT
+    @lpVtbl.value.unadvise_visual_tree_change.call(this, pcallback)
   end
-  def get_enums(pcount : UInt32*, ppenums : EnumType**) : HRESULT
-    @lpVtbl.value.get_enums.unsafe_as(Proc(UInt32*, EnumType**, HRESULT)).call(pcount, ppenums)
+  def get_enums(this : IVisualTreeService*, pcount : UInt32*, ppenums : EnumType**) : HRESULT
+    @lpVtbl.value.get_enums.call(this, pcount, ppenums)
   end
-  def create_instance(typename : UInt8*, value : UInt8*, pinstancehandle : UInt64*) : HRESULT
-    @lpVtbl.value.create_instance.unsafe_as(Proc(UInt8*, UInt8*, UInt64*, HRESULT)).call(typename, value, pinstancehandle)
+  def create_instance(this : IVisualTreeService*, typename : UInt8*, value : UInt8*, pinstancehandle : UInt64*) : HRESULT
+    @lpVtbl.value.create_instance.call(this, typename, value, pinstancehandle)
   end
-  def get_property_values_chain(instancehandle : UInt64, psourcecount : UInt32*, pppropertysources : PropertyChainSource**, ppropertycount : UInt32*, pppropertyvalues : PropertyChainValue**) : HRESULT
-    @lpVtbl.value.get_property_values_chain.unsafe_as(Proc(UInt64, UInt32*, PropertyChainSource**, UInt32*, PropertyChainValue**, HRESULT)).call(instancehandle, psourcecount, pppropertysources, ppropertycount, pppropertyvalues)
+  def get_property_values_chain(this : IVisualTreeService*, instancehandle : UInt64, psourcecount : UInt32*, pppropertysources : PropertyChainSource**, ppropertycount : UInt32*, pppropertyvalues : PropertyChainValue**) : HRESULT
+    @lpVtbl.value.get_property_values_chain.call(this, instancehandle, psourcecount, pppropertysources, ppropertycount, pppropertyvalues)
   end
-  def set_property(instancehandle : UInt64, value : UInt64, propertyindex : UInt32) : HRESULT
-    @lpVtbl.value.set_property.unsafe_as(Proc(UInt64, UInt64, UInt32, HRESULT)).call(instancehandle, value, propertyindex)
+  def set_property(this : IVisualTreeService*, instancehandle : UInt64, value : UInt64, propertyindex : UInt32) : HRESULT
+    @lpVtbl.value.set_property.call(this, instancehandle, value, propertyindex)
   end
-  def clear_property(instancehandle : UInt64, propertyindex : UInt32) : HRESULT
-    @lpVtbl.value.clear_property.unsafe_as(Proc(UInt64, UInt32, HRESULT)).call(instancehandle, propertyindex)
+  def clear_property(this : IVisualTreeService*, instancehandle : UInt64, propertyindex : UInt32) : HRESULT
+    @lpVtbl.value.clear_property.call(this, instancehandle, propertyindex)
   end
-  def get_collection_count(instancehandle : UInt64, pcollectionsize : UInt32*) : HRESULT
-    @lpVtbl.value.get_collection_count.unsafe_as(Proc(UInt64, UInt32*, HRESULT)).call(instancehandle, pcollectionsize)
+  def get_collection_count(this : IVisualTreeService*, instancehandle : UInt64, pcollectionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_collection_count.call(this, instancehandle, pcollectionsize)
   end
-  def get_collection_elements(instancehandle : UInt64, startindex : UInt32, pelementcount : UInt32*, ppelementvalues : CollectionElementValue**) : HRESULT
-    @lpVtbl.value.get_collection_elements.unsafe_as(Proc(UInt64, UInt32, UInt32*, CollectionElementValue**, HRESULT)).call(instancehandle, startindex, pelementcount, ppelementvalues)
+  def get_collection_elements(this : IVisualTreeService*, instancehandle : UInt64, startindex : UInt32, pelementcount : UInt32*, ppelementvalues : CollectionElementValue**) : HRESULT
+    @lpVtbl.value.get_collection_elements.call(this, instancehandle, startindex, pelementcount, ppelementvalues)
   end
-  def add_child(parent : UInt64, child : UInt64, index : UInt32) : HRESULT
-    @lpVtbl.value.add_child.unsafe_as(Proc(UInt64, UInt64, UInt32, HRESULT)).call(parent, child, index)
+  def add_child(this : IVisualTreeService*, parent : UInt64, child : UInt64, index : UInt32) : HRESULT
+    @lpVtbl.value.add_child.call(this, parent, child, index)
   end
-  def remove_child(parent : UInt64, index : UInt32) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(UInt64, UInt32, HRESULT)).call(parent, index)
+  def remove_child(this : IVisualTreeService*, parent : UInt64, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_child.call(this, parent, index)
   end
-  def clear_children(parent : UInt64) : HRESULT
-    @lpVtbl.value.clear_children.unsafe_as(Proc(UInt64, HRESULT)).call(parent)
+  def clear_children(this : IVisualTreeService*, parent : UInt64) : HRESULT
+    @lpVtbl.value.clear_children.call(this, parent)
   end
 end
 struct LibWin32::IXamlDiagnostics
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXamlDiagnostics*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXamlDiagnostics*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXamlDiagnostics*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_dispatcher(ppdispatcher : IInspectable*) : HRESULT
-    @lpVtbl.value.get_dispatcher.unsafe_as(Proc(IInspectable*, HRESULT)).call(ppdispatcher)
+  def get_dispatcher(this : IXamlDiagnostics*, ppdispatcher : IInspectable*) : HRESULT
+    @lpVtbl.value.get_dispatcher.call(this, ppdispatcher)
   end
-  def get_ui_layer(pplayer : IInspectable*) : HRESULT
-    @lpVtbl.value.get_ui_layer.unsafe_as(Proc(IInspectable*, HRESULT)).call(pplayer)
+  def get_ui_layer(this : IXamlDiagnostics*, pplayer : IInspectable*) : HRESULT
+    @lpVtbl.value.get_ui_layer.call(this, pplayer)
   end
-  def get_application(ppapplication : IInspectable*) : HRESULT
-    @lpVtbl.value.get_application.unsafe_as(Proc(IInspectable*, HRESULT)).call(ppapplication)
+  def get_application(this : IXamlDiagnostics*, ppapplication : IInspectable*) : HRESULT
+    @lpVtbl.value.get_application.call(this, ppapplication)
   end
-  def get_i_inspectable_from_handle(instancehandle : UInt64, ppinstance : IInspectable*) : HRESULT
-    @lpVtbl.value.get_i_inspectable_from_handle.unsafe_as(Proc(UInt64, IInspectable*, HRESULT)).call(instancehandle, ppinstance)
+  def get_i_inspectable_from_handle(this : IXamlDiagnostics*, instancehandle : UInt64, ppinstance : IInspectable*) : HRESULT
+    @lpVtbl.value.get_i_inspectable_from_handle.call(this, instancehandle, ppinstance)
   end
-  def get_handle_from_i_inspectable(pinstance : IInspectable, phandle : UInt64*) : HRESULT
-    @lpVtbl.value.get_handle_from_i_inspectable.unsafe_as(Proc(IInspectable, UInt64*, HRESULT)).call(pinstance, phandle)
+  def get_handle_from_i_inspectable(this : IXamlDiagnostics*, pinstance : IInspectable, phandle : UInt64*) : HRESULT
+    @lpVtbl.value.get_handle_from_i_inspectable.call(this, pinstance, phandle)
   end
-  def hit_test(rect : RECT, pcount : UInt32*, ppinstancehandles : UInt64**) : HRESULT
-    @lpVtbl.value.hit_test.unsafe_as(Proc(RECT, UInt32*, UInt64**, HRESULT)).call(rect, pcount, ppinstancehandles)
+  def hit_test(this : IXamlDiagnostics*, rect : RECT, pcount : UInt32*, ppinstancehandles : UInt64**) : HRESULT
+    @lpVtbl.value.hit_test.call(this, rect, pcount, ppinstancehandles)
   end
-  def register_instance(pinstance : IInspectable, pinstancehandle : UInt64*) : HRESULT
-    @lpVtbl.value.register_instance.unsafe_as(Proc(IInspectable, UInt64*, HRESULT)).call(pinstance, pinstancehandle)
+  def register_instance(this : IXamlDiagnostics*, pinstance : IInspectable, pinstancehandle : UInt64*) : HRESULT
+    @lpVtbl.value.register_instance.call(this, pinstance, pinstancehandle)
   end
-  def get_initialization_data(pinitializationdata : UInt8**) : HRESULT
-    @lpVtbl.value.get_initialization_data.unsafe_as(Proc(UInt8**, HRESULT)).call(pinitializationdata)
+  def get_initialization_data(this : IXamlDiagnostics*, pinitializationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_initialization_data.call(this, pinitializationdata)
   end
 end
 struct LibWin32::IBitmapData
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IBitmapData*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IBitmapData*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IBitmapData*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def copy_bytes_to(sourceoffsetinbytes : UInt32, maxbytestocopy : UInt32, pvbytes : UInt8*, numberofbytescopied : UInt32*) : HRESULT
-    @lpVtbl.value.copy_bytes_to.unsafe_as(Proc(UInt32, UInt32, UInt8*, UInt32*, HRESULT)).call(sourceoffsetinbytes, maxbytestocopy, pvbytes, numberofbytescopied)
+  def copy_bytes_to(this : IBitmapData*, sourceoffsetinbytes : UInt32, maxbytestocopy : UInt32, pvbytes : UInt8*, numberofbytescopied : UInt32*) : HRESULT
+    @lpVtbl.value.copy_bytes_to.call(this, sourceoffsetinbytes, maxbytestocopy, pvbytes, numberofbytescopied)
   end
-  def get_stride(pstride : UInt32*) : HRESULT
-    @lpVtbl.value.get_stride.unsafe_as(Proc(UInt32*, HRESULT)).call(pstride)
+  def get_stride(this : IBitmapData*, pstride : UInt32*) : HRESULT
+    @lpVtbl.value.get_stride.call(this, pstride)
   end
-  def get_bitmap_description(pbitmapdescription : BitmapDescription*) : HRESULT
-    @lpVtbl.value.get_bitmap_description.unsafe_as(Proc(BitmapDescription*, HRESULT)).call(pbitmapdescription)
+  def get_bitmap_description(this : IBitmapData*, pbitmapdescription : BitmapDescription*) : HRESULT
+    @lpVtbl.value.get_bitmap_description.call(this, pbitmapdescription)
   end
-  def get_source_bitmap_description(pbitmapdescription : BitmapDescription*) : HRESULT
-    @lpVtbl.value.get_source_bitmap_description.unsafe_as(Proc(BitmapDescription*, HRESULT)).call(pbitmapdescription)
+  def get_source_bitmap_description(this : IBitmapData*, pbitmapdescription : BitmapDescription*) : HRESULT
+    @lpVtbl.value.get_source_bitmap_description.call(this, pbitmapdescription)
   end
 end
 struct LibWin32::IVisualTreeService2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVisualTreeService2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVisualTreeService2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVisualTreeService2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def advise_visual_tree_change(pcallback : IVisualTreeServiceCallback) : HRESULT
-    @lpVtbl.value.advise_visual_tree_change.unsafe_as(Proc(IVisualTreeServiceCallback, HRESULT)).call(pcallback)
+  def advise_visual_tree_change(this : IVisualTreeService2*, pcallback : IVisualTreeServiceCallback) : HRESULT
+    @lpVtbl.value.advise_visual_tree_change.call(this, pcallback)
   end
-  def unadvise_visual_tree_change(pcallback : IVisualTreeServiceCallback) : HRESULT
-    @lpVtbl.value.unadvise_visual_tree_change.unsafe_as(Proc(IVisualTreeServiceCallback, HRESULT)).call(pcallback)
+  def unadvise_visual_tree_change(this : IVisualTreeService2*, pcallback : IVisualTreeServiceCallback) : HRESULT
+    @lpVtbl.value.unadvise_visual_tree_change.call(this, pcallback)
   end
-  def get_enums(pcount : UInt32*, ppenums : EnumType**) : HRESULT
-    @lpVtbl.value.get_enums.unsafe_as(Proc(UInt32*, EnumType**, HRESULT)).call(pcount, ppenums)
+  def get_enums(this : IVisualTreeService2*, pcount : UInt32*, ppenums : EnumType**) : HRESULT
+    @lpVtbl.value.get_enums.call(this, pcount, ppenums)
   end
-  def create_instance(typename : UInt8*, value : UInt8*, pinstancehandle : UInt64*) : HRESULT
-    @lpVtbl.value.create_instance.unsafe_as(Proc(UInt8*, UInt8*, UInt64*, HRESULT)).call(typename, value, pinstancehandle)
+  def create_instance(this : IVisualTreeService2*, typename : UInt8*, value : UInt8*, pinstancehandle : UInt64*) : HRESULT
+    @lpVtbl.value.create_instance.call(this, typename, value, pinstancehandle)
   end
-  def get_property_values_chain(instancehandle : UInt64, psourcecount : UInt32*, pppropertysources : PropertyChainSource**, ppropertycount : UInt32*, pppropertyvalues : PropertyChainValue**) : HRESULT
-    @lpVtbl.value.get_property_values_chain.unsafe_as(Proc(UInt64, UInt32*, PropertyChainSource**, UInt32*, PropertyChainValue**, HRESULT)).call(instancehandle, psourcecount, pppropertysources, ppropertycount, pppropertyvalues)
+  def get_property_values_chain(this : IVisualTreeService2*, instancehandle : UInt64, psourcecount : UInt32*, pppropertysources : PropertyChainSource**, ppropertycount : UInt32*, pppropertyvalues : PropertyChainValue**) : HRESULT
+    @lpVtbl.value.get_property_values_chain.call(this, instancehandle, psourcecount, pppropertysources, ppropertycount, pppropertyvalues)
   end
-  def set_property(instancehandle : UInt64, value : UInt64, propertyindex : UInt32) : HRESULT
-    @lpVtbl.value.set_property.unsafe_as(Proc(UInt64, UInt64, UInt32, HRESULT)).call(instancehandle, value, propertyindex)
+  def set_property(this : IVisualTreeService2*, instancehandle : UInt64, value : UInt64, propertyindex : UInt32) : HRESULT
+    @lpVtbl.value.set_property.call(this, instancehandle, value, propertyindex)
   end
-  def clear_property(instancehandle : UInt64, propertyindex : UInt32) : HRESULT
-    @lpVtbl.value.clear_property.unsafe_as(Proc(UInt64, UInt32, HRESULT)).call(instancehandle, propertyindex)
+  def clear_property(this : IVisualTreeService2*, instancehandle : UInt64, propertyindex : UInt32) : HRESULT
+    @lpVtbl.value.clear_property.call(this, instancehandle, propertyindex)
   end
-  def get_collection_count(instancehandle : UInt64, pcollectionsize : UInt32*) : HRESULT
-    @lpVtbl.value.get_collection_count.unsafe_as(Proc(UInt64, UInt32*, HRESULT)).call(instancehandle, pcollectionsize)
+  def get_collection_count(this : IVisualTreeService2*, instancehandle : UInt64, pcollectionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_collection_count.call(this, instancehandle, pcollectionsize)
   end
-  def get_collection_elements(instancehandle : UInt64, startindex : UInt32, pelementcount : UInt32*, ppelementvalues : CollectionElementValue**) : HRESULT
-    @lpVtbl.value.get_collection_elements.unsafe_as(Proc(UInt64, UInt32, UInt32*, CollectionElementValue**, HRESULT)).call(instancehandle, startindex, pelementcount, ppelementvalues)
+  def get_collection_elements(this : IVisualTreeService2*, instancehandle : UInt64, startindex : UInt32, pelementcount : UInt32*, ppelementvalues : CollectionElementValue**) : HRESULT
+    @lpVtbl.value.get_collection_elements.call(this, instancehandle, startindex, pelementcount, ppelementvalues)
   end
-  def add_child(parent : UInt64, child : UInt64, index : UInt32) : HRESULT
-    @lpVtbl.value.add_child.unsafe_as(Proc(UInt64, UInt64, UInt32, HRESULT)).call(parent, child, index)
+  def add_child(this : IVisualTreeService2*, parent : UInt64, child : UInt64, index : UInt32) : HRESULT
+    @lpVtbl.value.add_child.call(this, parent, child, index)
   end
-  def remove_child(parent : UInt64, index : UInt32) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(UInt64, UInt32, HRESULT)).call(parent, index)
+  def remove_child(this : IVisualTreeService2*, parent : UInt64, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_child.call(this, parent, index)
   end
-  def clear_children(parent : UInt64) : HRESULT
-    @lpVtbl.value.clear_children.unsafe_as(Proc(UInt64, HRESULT)).call(parent)
+  def clear_children(this : IVisualTreeService2*, parent : UInt64) : HRESULT
+    @lpVtbl.value.clear_children.call(this, parent)
   end
-  def get_property_index(object : UInt64, propertyname : LibC::LPWSTR, ppropertyindex : UInt32*) : HRESULT
-    @lpVtbl.value.get_property_index.unsafe_as(Proc(UInt64, LibC::LPWSTR, UInt32*, HRESULT)).call(object, propertyname, ppropertyindex)
+  def get_property_index(this : IVisualTreeService2*, object : UInt64, propertyname : LibC::LPWSTR, ppropertyindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_index.call(this, object, propertyname, ppropertyindex)
   end
-  def get_property(object : UInt64, propertyindex : UInt32, pvalue : UInt64*) : HRESULT
-    @lpVtbl.value.get_property.unsafe_as(Proc(UInt64, UInt32, UInt64*, HRESULT)).call(object, propertyindex, pvalue)
+  def get_property(this : IVisualTreeService2*, object : UInt64, propertyindex : UInt32, pvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_property.call(this, object, propertyindex, pvalue)
   end
-  def replace_resource(resourcedictionary : UInt64, key : UInt64, newvalue : UInt64) : HRESULT
-    @lpVtbl.value.replace_resource.unsafe_as(Proc(UInt64, UInt64, UInt64, HRESULT)).call(resourcedictionary, key, newvalue)
+  def replace_resource(this : IVisualTreeService2*, resourcedictionary : UInt64, key : UInt64, newvalue : UInt64) : HRESULT
+    @lpVtbl.value.replace_resource.call(this, resourcedictionary, key, newvalue)
   end
-  def render_target_bitmap(handle : UInt64, options : RenderTargetBitmapOptions, maxpixelwidth : UInt32, maxpixelheight : UInt32, ppbitmapdata : IBitmapData*) : HRESULT
-    @lpVtbl.value.render_target_bitmap.unsafe_as(Proc(UInt64, RenderTargetBitmapOptions, UInt32, UInt32, IBitmapData*, HRESULT)).call(handle, options, maxpixelwidth, maxpixelheight, ppbitmapdata)
+  def render_target_bitmap(this : IVisualTreeService2*, handle : UInt64, options : RenderTargetBitmapOptions, maxpixelwidth : UInt32, maxpixelheight : UInt32, ppbitmapdata : IBitmapData*) : HRESULT
+    @lpVtbl.value.render_target_bitmap.call(this, handle, options, maxpixelwidth, maxpixelheight, ppbitmapdata)
   end
 end
 struct LibWin32::IVisualTreeService3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IVisualTreeService3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IVisualTreeService3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IVisualTreeService3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def advise_visual_tree_change(pcallback : IVisualTreeServiceCallback) : HRESULT
-    @lpVtbl.value.advise_visual_tree_change.unsafe_as(Proc(IVisualTreeServiceCallback, HRESULT)).call(pcallback)
+  def advise_visual_tree_change(this : IVisualTreeService3*, pcallback : IVisualTreeServiceCallback) : HRESULT
+    @lpVtbl.value.advise_visual_tree_change.call(this, pcallback)
   end
-  def unadvise_visual_tree_change(pcallback : IVisualTreeServiceCallback) : HRESULT
-    @lpVtbl.value.unadvise_visual_tree_change.unsafe_as(Proc(IVisualTreeServiceCallback, HRESULT)).call(pcallback)
+  def unadvise_visual_tree_change(this : IVisualTreeService3*, pcallback : IVisualTreeServiceCallback) : HRESULT
+    @lpVtbl.value.unadvise_visual_tree_change.call(this, pcallback)
   end
-  def get_enums(pcount : UInt32*, ppenums : EnumType**) : HRESULT
-    @lpVtbl.value.get_enums.unsafe_as(Proc(UInt32*, EnumType**, HRESULT)).call(pcount, ppenums)
+  def get_enums(this : IVisualTreeService3*, pcount : UInt32*, ppenums : EnumType**) : HRESULT
+    @lpVtbl.value.get_enums.call(this, pcount, ppenums)
   end
-  def create_instance(typename : UInt8*, value : UInt8*, pinstancehandle : UInt64*) : HRESULT
-    @lpVtbl.value.create_instance.unsafe_as(Proc(UInt8*, UInt8*, UInt64*, HRESULT)).call(typename, value, pinstancehandle)
+  def create_instance(this : IVisualTreeService3*, typename : UInt8*, value : UInt8*, pinstancehandle : UInt64*) : HRESULT
+    @lpVtbl.value.create_instance.call(this, typename, value, pinstancehandle)
   end
-  def get_property_values_chain(instancehandle : UInt64, psourcecount : UInt32*, pppropertysources : PropertyChainSource**, ppropertycount : UInt32*, pppropertyvalues : PropertyChainValue**) : HRESULT
-    @lpVtbl.value.get_property_values_chain.unsafe_as(Proc(UInt64, UInt32*, PropertyChainSource**, UInt32*, PropertyChainValue**, HRESULT)).call(instancehandle, psourcecount, pppropertysources, ppropertycount, pppropertyvalues)
+  def get_property_values_chain(this : IVisualTreeService3*, instancehandle : UInt64, psourcecount : UInt32*, pppropertysources : PropertyChainSource**, ppropertycount : UInt32*, pppropertyvalues : PropertyChainValue**) : HRESULT
+    @lpVtbl.value.get_property_values_chain.call(this, instancehandle, psourcecount, pppropertysources, ppropertycount, pppropertyvalues)
   end
-  def set_property(instancehandle : UInt64, value : UInt64, propertyindex : UInt32) : HRESULT
-    @lpVtbl.value.set_property.unsafe_as(Proc(UInt64, UInt64, UInt32, HRESULT)).call(instancehandle, value, propertyindex)
+  def set_property(this : IVisualTreeService3*, instancehandle : UInt64, value : UInt64, propertyindex : UInt32) : HRESULT
+    @lpVtbl.value.set_property.call(this, instancehandle, value, propertyindex)
   end
-  def clear_property(instancehandle : UInt64, propertyindex : UInt32) : HRESULT
-    @lpVtbl.value.clear_property.unsafe_as(Proc(UInt64, UInt32, HRESULT)).call(instancehandle, propertyindex)
+  def clear_property(this : IVisualTreeService3*, instancehandle : UInt64, propertyindex : UInt32) : HRESULT
+    @lpVtbl.value.clear_property.call(this, instancehandle, propertyindex)
   end
-  def get_collection_count(instancehandle : UInt64, pcollectionsize : UInt32*) : HRESULT
-    @lpVtbl.value.get_collection_count.unsafe_as(Proc(UInt64, UInt32*, HRESULT)).call(instancehandle, pcollectionsize)
+  def get_collection_count(this : IVisualTreeService3*, instancehandle : UInt64, pcollectionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_collection_count.call(this, instancehandle, pcollectionsize)
   end
-  def get_collection_elements(instancehandle : UInt64, startindex : UInt32, pelementcount : UInt32*, ppelementvalues : CollectionElementValue**) : HRESULT
-    @lpVtbl.value.get_collection_elements.unsafe_as(Proc(UInt64, UInt32, UInt32*, CollectionElementValue**, HRESULT)).call(instancehandle, startindex, pelementcount, ppelementvalues)
+  def get_collection_elements(this : IVisualTreeService3*, instancehandle : UInt64, startindex : UInt32, pelementcount : UInt32*, ppelementvalues : CollectionElementValue**) : HRESULT
+    @lpVtbl.value.get_collection_elements.call(this, instancehandle, startindex, pelementcount, ppelementvalues)
   end
-  def add_child(parent : UInt64, child : UInt64, index : UInt32) : HRESULT
-    @lpVtbl.value.add_child.unsafe_as(Proc(UInt64, UInt64, UInt32, HRESULT)).call(parent, child, index)
+  def add_child(this : IVisualTreeService3*, parent : UInt64, child : UInt64, index : UInt32) : HRESULT
+    @lpVtbl.value.add_child.call(this, parent, child, index)
   end
-  def remove_child(parent : UInt64, index : UInt32) : HRESULT
-    @lpVtbl.value.remove_child.unsafe_as(Proc(UInt64, UInt32, HRESULT)).call(parent, index)
+  def remove_child(this : IVisualTreeService3*, parent : UInt64, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_child.call(this, parent, index)
   end
-  def clear_children(parent : UInt64) : HRESULT
-    @lpVtbl.value.clear_children.unsafe_as(Proc(UInt64, HRESULT)).call(parent)
+  def clear_children(this : IVisualTreeService3*, parent : UInt64) : HRESULT
+    @lpVtbl.value.clear_children.call(this, parent)
   end
-  def get_property_index(object : UInt64, propertyname : LibC::LPWSTR, ppropertyindex : UInt32*) : HRESULT
-    @lpVtbl.value.get_property_index.unsafe_as(Proc(UInt64, LibC::LPWSTR, UInt32*, HRESULT)).call(object, propertyname, ppropertyindex)
+  def get_property_index(this : IVisualTreeService3*, object : UInt64, propertyname : LibC::LPWSTR, ppropertyindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_index.call(this, object, propertyname, ppropertyindex)
   end
-  def get_property(object : UInt64, propertyindex : UInt32, pvalue : UInt64*) : HRESULT
-    @lpVtbl.value.get_property.unsafe_as(Proc(UInt64, UInt32, UInt64*, HRESULT)).call(object, propertyindex, pvalue)
+  def get_property(this : IVisualTreeService3*, object : UInt64, propertyindex : UInt32, pvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_property.call(this, object, propertyindex, pvalue)
   end
-  def replace_resource(resourcedictionary : UInt64, key : UInt64, newvalue : UInt64) : HRESULT
-    @lpVtbl.value.replace_resource.unsafe_as(Proc(UInt64, UInt64, UInt64, HRESULT)).call(resourcedictionary, key, newvalue)
+  def replace_resource(this : IVisualTreeService3*, resourcedictionary : UInt64, key : UInt64, newvalue : UInt64) : HRESULT
+    @lpVtbl.value.replace_resource.call(this, resourcedictionary, key, newvalue)
   end
-  def render_target_bitmap(handle : UInt64, options : RenderTargetBitmapOptions, maxpixelwidth : UInt32, maxpixelheight : UInt32, ppbitmapdata : IBitmapData*) : HRESULT
-    @lpVtbl.value.render_target_bitmap.unsafe_as(Proc(UInt64, RenderTargetBitmapOptions, UInt32, UInt32, IBitmapData*, HRESULT)).call(handle, options, maxpixelwidth, maxpixelheight, ppbitmapdata)
+  def render_target_bitmap(this : IVisualTreeService3*, handle : UInt64, options : RenderTargetBitmapOptions, maxpixelwidth : UInt32, maxpixelheight : UInt32, ppbitmapdata : IBitmapData*) : HRESULT
+    @lpVtbl.value.render_target_bitmap.call(this, handle, options, maxpixelwidth, maxpixelheight, ppbitmapdata)
   end
-  def resolve_resource(resourcecontext : UInt64, resourcename : LibC::LPWSTR, resourcetype : ResourceType, propertyindex : UInt32) : HRESULT
-    @lpVtbl.value.resolve_resource.unsafe_as(Proc(UInt64, LibC::LPWSTR, ResourceType, UInt32, HRESULT)).call(resourcecontext, resourcename, resourcetype, propertyindex)
+  def resolve_resource(this : IVisualTreeService3*, resourcecontext : UInt64, resourcename : LibC::LPWSTR, resourcetype : ResourceType, propertyindex : UInt32) : HRESULT
+    @lpVtbl.value.resolve_resource.call(this, resourcecontext, resourcename, resourcetype, propertyindex)
   end
-  def get_dictionary_item(dictionaryhandle : UInt64, resourcename : LibC::LPWSTR, resourceisimplicitstyle : LibC::BOOL, resourcehandle : UInt64*) : HRESULT
-    @lpVtbl.value.get_dictionary_item.unsafe_as(Proc(UInt64, LibC::LPWSTR, LibC::BOOL, UInt64*, HRESULT)).call(dictionaryhandle, resourcename, resourceisimplicitstyle, resourcehandle)
+  def get_dictionary_item(this : IVisualTreeService3*, dictionaryhandle : UInt64, resourcename : LibC::LPWSTR, resourceisimplicitstyle : LibC::BOOL, resourcehandle : UInt64*) : HRESULT
+    @lpVtbl.value.get_dictionary_item.call(this, dictionaryhandle, resourcename, resourceisimplicitstyle, resourcehandle)
   end
-  def add_dictionary_item(dictionaryhandle : UInt64, resourcekey : UInt64, resourcehandle : UInt64) : HRESULT
-    @lpVtbl.value.add_dictionary_item.unsafe_as(Proc(UInt64, UInt64, UInt64, HRESULT)).call(dictionaryhandle, resourcekey, resourcehandle)
+  def add_dictionary_item(this : IVisualTreeService3*, dictionaryhandle : UInt64, resourcekey : UInt64, resourcehandle : UInt64) : HRESULT
+    @lpVtbl.value.add_dictionary_item.call(this, dictionaryhandle, resourcekey, resourcehandle)
   end
-  def remove_dictionary_item(dictionaryhandle : UInt64, resourcekey : UInt64) : HRESULT
-    @lpVtbl.value.remove_dictionary_item.unsafe_as(Proc(UInt64, UInt64, HRESULT)).call(dictionaryhandle, resourcekey)
+  def remove_dictionary_item(this : IVisualTreeService3*, dictionaryhandle : UInt64, resourcekey : UInt64) : HRESULT
+    @lpVtbl.value.remove_dictionary_item.call(this, dictionaryhandle, resourcekey)
   end
 end

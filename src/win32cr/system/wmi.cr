@@ -2250,19 +2250,19 @@ lib LibWin32
 
 
   struct IWbemPathKeyListVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_count : UInt64
-    set_key : UInt64
-    set_key2 : UInt64
-    get_key : UInt64
-    get_key2 : UInt64
-    remove_key : UInt64
-    remove_all_keys : UInt64
-    make_singleton : UInt64
-    get_info : UInt64
-    get_text : UInt64
+    query_interface : Proc(IWbemPathKeyList*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemPathKeyList*, UInt32)
+    release : Proc(IWbemPathKeyList*, UInt32)
+    get_count : Proc(IWbemPathKeyList*, UInt32*, HRESULT)
+    set_key : Proc(IWbemPathKeyList*, LibC::LPWSTR, UInt32, UInt32, Void*, HRESULT)
+    set_key2 : Proc(IWbemPathKeyList*, LibC::LPWSTR, UInt32, UInt32, VARIANT*, HRESULT)
+    get_key : Proc(IWbemPathKeyList*, UInt32, UInt32, UInt32*, Char*, UInt32*, Void*, UInt32*, HRESULT)
+    get_key2 : Proc(IWbemPathKeyList*, UInt32, UInt32, UInt32*, Char*, VARIANT*, UInt32*, HRESULT)
+    remove_key : Proc(IWbemPathKeyList*, LibC::LPWSTR, UInt32, HRESULT)
+    remove_all_keys : Proc(IWbemPathKeyList*, UInt32, HRESULT)
+    make_singleton : Proc(IWbemPathKeyList*, UInt8, HRESULT)
+    get_info : Proc(IWbemPathKeyList*, UInt32, UInt64*, HRESULT)
+    get_text : Proc(IWbemPathKeyList*, Int32, UInt32*, Char*, HRESULT)
   end
 
   IWbemPathKeyList_GUID = "9ae62877-7544-4bb0-aa26-a13824659ed6"
@@ -2272,35 +2272,35 @@ lib LibWin32
   end
 
   struct IWbemPathVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_text : UInt64
-    get_text : UInt64
-    get_info : UInt64
-    set_server : UInt64
-    get_server : UInt64
-    get_namespace_count : UInt64
-    set_namespace_at : UInt64
-    get_namespace_at : UInt64
-    remove_namespace_at : UInt64
-    remove_all_namespaces : UInt64
-    get_scope_count : UInt64
-    set_scope : UInt64
-    set_scope_from_text : UInt64
-    get_scope : UInt64
-    get_scope_as_text : UInt64
-    remove_scope : UInt64
-    remove_all_scopes : UInt64
-    set_class_name : UInt64
-    get_class_name : UInt64
-    get_key_list : UInt64
-    create_class_part : UInt64
-    delete_class_part : UInt64
-    is_relative : UInt64
-    is_relative_or_child : UInt64
-    is_local : UInt64
-    is_same_class_name : UInt64
+    query_interface : Proc(IWbemPath*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemPath*, UInt32)
+    release : Proc(IWbemPath*, UInt32)
+    set_text : Proc(IWbemPath*, UInt32, LibC::LPWSTR, HRESULT)
+    get_text : Proc(IWbemPath*, Int32, UInt32*, Char*, HRESULT)
+    get_info : Proc(IWbemPath*, UInt32, UInt64*, HRESULT)
+    set_server : Proc(IWbemPath*, LibC::LPWSTR, HRESULT)
+    get_server : Proc(IWbemPath*, UInt32*, Char*, HRESULT)
+    get_namespace_count : Proc(IWbemPath*, UInt32*, HRESULT)
+    set_namespace_at : Proc(IWbemPath*, UInt32, LibC::LPWSTR, HRESULT)
+    get_namespace_at : Proc(IWbemPath*, UInt32, UInt32*, Char*, HRESULT)
+    remove_namespace_at : Proc(IWbemPath*, UInt32, HRESULT)
+    remove_all_namespaces : Proc(IWbemPath*, HRESULT)
+    get_scope_count : Proc(IWbemPath*, UInt32*, HRESULT)
+    set_scope : Proc(IWbemPath*, UInt32, LibC::LPWSTR, HRESULT)
+    set_scope_from_text : Proc(IWbemPath*, UInt32, LibC::LPWSTR, HRESULT)
+    get_scope : Proc(IWbemPath*, UInt32, UInt32*, Char*, IWbemPathKeyList*, HRESULT)
+    get_scope_as_text : Proc(IWbemPath*, UInt32, UInt32*, Char*, HRESULT)
+    remove_scope : Proc(IWbemPath*, UInt32, HRESULT)
+    remove_all_scopes : Proc(IWbemPath*, HRESULT)
+    set_class_name : Proc(IWbemPath*, LibC::LPWSTR, HRESULT)
+    get_class_name : Proc(IWbemPath*, UInt32*, Char*, HRESULT)
+    get_key_list : Proc(IWbemPath*, IWbemPathKeyList*, HRESULT)
+    create_class_part : Proc(IWbemPath*, Int32, LibC::LPWSTR, HRESULT)
+    delete_class_part : Proc(IWbemPath*, Int32, HRESULT)
+    is_relative : Proc(IWbemPath*, LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL)
+    is_relative_or_child : Proc(IWbemPath*, LibC::LPWSTR, LibC::LPWSTR, Int32, LibC::BOOL)
+    is_local : Proc(IWbemPath*, LibC::LPWSTR, LibC::BOOL)
+    is_same_class_name : Proc(IWbemPath*, LibC::LPWSTR, LibC::BOOL)
   end
 
   IWbemPath_GUID = "3bc15af2-736c-477e-9e51-238af8667dcc"
@@ -2310,16 +2310,16 @@ lib LibWin32
   end
 
   struct IWbemQueryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    empty : UInt64
-    set_language_features : UInt64
-    test_language_features : UInt64
-    parse : UInt64
-    get_analysis : UInt64
-    free_memory : UInt64
-    get_query_info : UInt64
+    query_interface : Proc(IWbemQuery*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemQuery*, UInt32)
+    release : Proc(IWbemQuery*, UInt32)
+    empty : Proc(IWbemQuery*, HRESULT)
+    set_language_features : Proc(IWbemQuery*, UInt32, UInt32, UInt32*, HRESULT)
+    test_language_features : Proc(IWbemQuery*, UInt32, UInt32*, UInt32*, HRESULT)
+    parse : Proc(IWbemQuery*, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
+    get_analysis : Proc(IWbemQuery*, UInt32, UInt32, Void**, HRESULT)
+    free_memory : Proc(IWbemQuery*, Void*, HRESULT)
+    get_query_info : Proc(IWbemQuery*, UInt32, UInt32, UInt32, Void*, HRESULT)
   end
 
   IWbemQuery_GUID = "81166f58-dd98-11d3-a120-00105a1f515a"
@@ -2329,33 +2329,33 @@ lib LibWin32
   end
 
   struct IWbemClassObjectVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_qualifier_set : UInt64
-    get : UInt64
-    put : UInt64
-    delete : UInt64
-    get_names : UInt64
-    begin_enumeration : UInt64
-    next : UInt64
-    end_enumeration : UInt64
-    get_property_qualifier_set : UInt64
-    clone : UInt64
-    get_object_text : UInt64
-    spawn_derived_class : UInt64
-    spawn_instance : UInt64
-    compare_to : UInt64
-    get_property_origin : UInt64
-    inherits_from : UInt64
-    get_method : UInt64
-    put_method : UInt64
-    delete_method : UInt64
-    begin_method_enumeration : UInt64
-    next_method : UInt64
-    end_method_enumeration : UInt64
-    get_method_qualifier_set : UInt64
-    get_method_origin : UInt64
+    query_interface : Proc(IWbemClassObject*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemClassObject*, UInt32)
+    release : Proc(IWbemClassObject*, UInt32)
+    get_qualifier_set : Proc(IWbemClassObject*, IWbemQualifierSet*, HRESULT)
+    get : Proc(IWbemClassObject*, LibC::LPWSTR, Int32, VARIANT*, Int32*, Int32*, HRESULT)
+    put : Proc(IWbemClassObject*, LibC::LPWSTR, Int32, VARIANT*, Int32, HRESULT)
+    delete : Proc(IWbemClassObject*, LibC::LPWSTR, HRESULT)
+    get_names : Proc(IWbemClassObject*, LibC::LPWSTR, Int32, VARIANT*, SAFEARRAY**, HRESULT)
+    begin_enumeration : Proc(IWbemClassObject*, Int32, HRESULT)
+    next : Proc(IWbemClassObject*, Int32, UInt8**, VARIANT*, Int32*, Int32*, HRESULT)
+    end_enumeration : Proc(IWbemClassObject*, HRESULT)
+    get_property_qualifier_set : Proc(IWbemClassObject*, LibC::LPWSTR, IWbemQualifierSet*, HRESULT)
+    clone : Proc(IWbemClassObject*, IWbemClassObject*, HRESULT)
+    get_object_text : Proc(IWbemClassObject*, Int32, UInt8**, HRESULT)
+    spawn_derived_class : Proc(IWbemClassObject*, Int32, IWbemClassObject*, HRESULT)
+    spawn_instance : Proc(IWbemClassObject*, Int32, IWbemClassObject*, HRESULT)
+    compare_to : Proc(IWbemClassObject*, Int32, IWbemClassObject, HRESULT)
+    get_property_origin : Proc(IWbemClassObject*, LibC::LPWSTR, UInt8**, HRESULT)
+    inherits_from : Proc(IWbemClassObject*, LibC::LPWSTR, HRESULT)
+    get_method : Proc(IWbemClassObject*, LibC::LPWSTR, Int32, IWbemClassObject*, IWbemClassObject*, HRESULT)
+    put_method : Proc(IWbemClassObject*, LibC::LPWSTR, Int32, IWbemClassObject, IWbemClassObject, HRESULT)
+    delete_method : Proc(IWbemClassObject*, LibC::LPWSTR, HRESULT)
+    begin_method_enumeration : Proc(IWbemClassObject*, Int32, HRESULT)
+    next_method : Proc(IWbemClassObject*, Int32, UInt8**, IWbemClassObject*, IWbemClassObject*, HRESULT)
+    end_method_enumeration : Proc(IWbemClassObject*, HRESULT)
+    get_method_qualifier_set : Proc(IWbemClassObject*, LibC::LPWSTR, IWbemQualifierSet*, HRESULT)
+    get_method_origin : Proc(IWbemClassObject*, LibC::LPWSTR, UInt8**, HRESULT)
   end
 
   IWbemClassObject_GUID = "dc12a681-737f-11cf-884d-00aa004b2e24"
@@ -2365,43 +2365,43 @@ lib LibWin32
   end
 
   struct IWbemObjectAccessVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_qualifier_set : UInt64
-    get : UInt64
-    put : UInt64
-    delete : UInt64
-    get_names : UInt64
-    begin_enumeration : UInt64
-    next : UInt64
-    end_enumeration : UInt64
-    get_property_qualifier_set : UInt64
-    clone : UInt64
-    get_object_text : UInt64
-    spawn_derived_class : UInt64
-    spawn_instance : UInt64
-    compare_to : UInt64
-    get_property_origin : UInt64
-    inherits_from : UInt64
-    get_method : UInt64
-    put_method : UInt64
-    delete_method : UInt64
-    begin_method_enumeration : UInt64
-    next_method : UInt64
-    end_method_enumeration : UInt64
-    get_method_qualifier_set : UInt64
-    get_method_origin : UInt64
-    get_property_handle : UInt64
-    write_property_value : UInt64
-    read_property_value : UInt64
-    read_dword : UInt64
-    write_dword : UInt64
-    read_qword : UInt64
-    write_qword : UInt64
-    get_property_info_by_handle : UInt64
-    lock : UInt64
-    unlock : UInt64
+    query_interface : Proc(IWbemObjectAccess*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemObjectAccess*, UInt32)
+    release : Proc(IWbemObjectAccess*, UInt32)
+    get_qualifier_set : Proc(IWbemObjectAccess*, IWbemQualifierSet*, HRESULT)
+    get : Proc(IWbemObjectAccess*, LibC::LPWSTR, Int32, VARIANT*, Int32*, Int32*, HRESULT)
+    put : Proc(IWbemObjectAccess*, LibC::LPWSTR, Int32, VARIANT*, Int32, HRESULT)
+    delete : Proc(IWbemObjectAccess*, LibC::LPWSTR, HRESULT)
+    get_names : Proc(IWbemObjectAccess*, LibC::LPWSTR, Int32, VARIANT*, SAFEARRAY**, HRESULT)
+    begin_enumeration : Proc(IWbemObjectAccess*, Int32, HRESULT)
+    next : Proc(IWbemObjectAccess*, Int32, UInt8**, VARIANT*, Int32*, Int32*, HRESULT)
+    end_enumeration : Proc(IWbemObjectAccess*, HRESULT)
+    get_property_qualifier_set : Proc(IWbemObjectAccess*, LibC::LPWSTR, IWbemQualifierSet*, HRESULT)
+    clone : Proc(IWbemObjectAccess*, IWbemClassObject*, HRESULT)
+    get_object_text : Proc(IWbemObjectAccess*, Int32, UInt8**, HRESULT)
+    spawn_derived_class : Proc(IWbemObjectAccess*, Int32, IWbemClassObject*, HRESULT)
+    spawn_instance : Proc(IWbemObjectAccess*, Int32, IWbemClassObject*, HRESULT)
+    compare_to : Proc(IWbemObjectAccess*, Int32, IWbemClassObject, HRESULT)
+    get_property_origin : Proc(IWbemObjectAccess*, LibC::LPWSTR, UInt8**, HRESULT)
+    inherits_from : Proc(IWbemObjectAccess*, LibC::LPWSTR, HRESULT)
+    get_method : Proc(IWbemObjectAccess*, LibC::LPWSTR, Int32, IWbemClassObject*, IWbemClassObject*, HRESULT)
+    put_method : Proc(IWbemObjectAccess*, LibC::LPWSTR, Int32, IWbemClassObject, IWbemClassObject, HRESULT)
+    delete_method : Proc(IWbemObjectAccess*, LibC::LPWSTR, HRESULT)
+    begin_method_enumeration : Proc(IWbemObjectAccess*, Int32, HRESULT)
+    next_method : Proc(IWbemObjectAccess*, Int32, UInt8**, IWbemClassObject*, IWbemClassObject*, HRESULT)
+    end_method_enumeration : Proc(IWbemObjectAccess*, HRESULT)
+    get_method_qualifier_set : Proc(IWbemObjectAccess*, LibC::LPWSTR, IWbemQualifierSet*, HRESULT)
+    get_method_origin : Proc(IWbemObjectAccess*, LibC::LPWSTR, UInt8**, HRESULT)
+    get_property_handle : Proc(IWbemObjectAccess*, LibC::LPWSTR, Int32*, Int32*, HRESULT)
+    write_property_value : Proc(IWbemObjectAccess*, Int32, Int32, UInt8*, HRESULT)
+    read_property_value : Proc(IWbemObjectAccess*, Int32, Int32, Int32*, UInt8*, HRESULT)
+    read_dword : Proc(IWbemObjectAccess*, Int32, UInt32*, HRESULT)
+    write_dword : Proc(IWbemObjectAccess*, Int32, UInt32, HRESULT)
+    read_qword : Proc(IWbemObjectAccess*, Int32, UInt64*, HRESULT)
+    write_qword : Proc(IWbemObjectAccess*, Int32, UInt64, HRESULT)
+    get_property_info_by_handle : Proc(IWbemObjectAccess*, Int32, UInt8**, Int32*, HRESULT)
+    lock : Proc(IWbemObjectAccess*, Int32, HRESULT)
+    unlock : Proc(IWbemObjectAccess*, Int32, HRESULT)
   end
 
   IWbemObjectAccess_GUID = "49353c9a-516b-11d1-aea6-00c04fb68820"
@@ -2411,16 +2411,16 @@ lib LibWin32
   end
 
   struct IWbemQualifierSetVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get : UInt64
-    put : UInt64
-    delete : UInt64
-    get_names : UInt64
-    begin_enumeration : UInt64
-    next : UInt64
-    end_enumeration : UInt64
+    query_interface : Proc(IWbemQualifierSet*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemQualifierSet*, UInt32)
+    release : Proc(IWbemQualifierSet*, UInt32)
+    get : Proc(IWbemQualifierSet*, LibC::LPWSTR, Int32, VARIANT*, Int32*, HRESULT)
+    put : Proc(IWbemQualifierSet*, LibC::LPWSTR, VARIANT*, Int32, HRESULT)
+    delete : Proc(IWbemQualifierSet*, LibC::LPWSTR, HRESULT)
+    get_names : Proc(IWbemQualifierSet*, Int32, SAFEARRAY**, HRESULT)
+    begin_enumeration : Proc(IWbemQualifierSet*, Int32, HRESULT)
+    next : Proc(IWbemQualifierSet*, Int32, UInt8**, VARIANT*, Int32*, HRESULT)
+    end_enumeration : Proc(IWbemQualifierSet*, HRESULT)
   end
 
   IWbemQualifierSet_GUID = "dc12a680-737f-11cf-884d-00aa004b2e24"
@@ -2430,32 +2430,32 @@ lib LibWin32
   end
 
   struct IWbemServicesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    open_namespace : UInt64
-    cancel_async_call : UInt64
-    query_object_sink : UInt64
-    get_object : UInt64
-    get_object_async : UInt64
-    put_class : UInt64
-    put_class_async : UInt64
-    delete_class : UInt64
-    delete_class_async : UInt64
-    create_class_enum : UInt64
-    create_class_enum_async : UInt64
-    put_instance : UInt64
-    put_instance_async : UInt64
-    delete_instance : UInt64
-    delete_instance_async : UInt64
-    create_instance_enum : UInt64
-    create_instance_enum_async : UInt64
-    exec_query : UInt64
-    exec_query_async : UInt64
-    exec_notification_query : UInt64
-    exec_notification_query_async : UInt64
-    exec_method : UInt64
-    exec_method_async : UInt64
+    query_interface : Proc(IWbemServices*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemServices*, UInt32)
+    release : Proc(IWbemServices*, UInt32)
+    open_namespace : Proc(IWbemServices*, UInt8*, Int32, IWbemContext, IWbemServices*, IWbemCallResult*, HRESULT)
+    cancel_async_call : Proc(IWbemServices*, IWbemObjectSink, HRESULT)
+    query_object_sink : Proc(IWbemServices*, Int32, IWbemObjectSink*, HRESULT)
+    get_object : Proc(IWbemServices*, UInt8*, Int32, IWbemContext, IWbemClassObject*, IWbemCallResult*, HRESULT)
+    get_object_async : Proc(IWbemServices*, UInt8*, Int32, IWbemContext, IWbemObjectSink, HRESULT)
+    put_class : Proc(IWbemServices*, IWbemClassObject, Int32, IWbemContext, IWbemCallResult*, HRESULT)
+    put_class_async : Proc(IWbemServices*, IWbemClassObject, Int32, IWbemContext, IWbemObjectSink, HRESULT)
+    delete_class : Proc(IWbemServices*, UInt8*, Int32, IWbemContext, IWbemCallResult*, HRESULT)
+    delete_class_async : Proc(IWbemServices*, UInt8*, Int32, IWbemContext, IWbemObjectSink, HRESULT)
+    create_class_enum : Proc(IWbemServices*, UInt8*, Int32, IWbemContext, IEnumWbemClassObject*, HRESULT)
+    create_class_enum_async : Proc(IWbemServices*, UInt8*, Int32, IWbemContext, IWbemObjectSink, HRESULT)
+    put_instance : Proc(IWbemServices*, IWbemClassObject, Int32, IWbemContext, IWbemCallResult*, HRESULT)
+    put_instance_async : Proc(IWbemServices*, IWbemClassObject, Int32, IWbemContext, IWbemObjectSink, HRESULT)
+    delete_instance : Proc(IWbemServices*, UInt8*, Int32, IWbemContext, IWbemCallResult*, HRESULT)
+    delete_instance_async : Proc(IWbemServices*, UInt8*, Int32, IWbemContext, IWbemObjectSink, HRESULT)
+    create_instance_enum : Proc(IWbemServices*, UInt8*, Int32, IWbemContext, IEnumWbemClassObject*, HRESULT)
+    create_instance_enum_async : Proc(IWbemServices*, UInt8*, Int32, IWbemContext, IWbemObjectSink, HRESULT)
+    exec_query : Proc(IWbemServices*, UInt8*, UInt8*, Int32, IWbemContext, IEnumWbemClassObject*, HRESULT)
+    exec_query_async : Proc(IWbemServices*, UInt8*, UInt8*, Int32, IWbemContext, IWbemObjectSink, HRESULT)
+    exec_notification_query : Proc(IWbemServices*, UInt8*, UInt8*, Int32, IWbemContext, IEnumWbemClassObject*, HRESULT)
+    exec_notification_query_async : Proc(IWbemServices*, UInt8*, UInt8*, Int32, IWbemContext, IWbemObjectSink, HRESULT)
+    exec_method : Proc(IWbemServices*, UInt8*, UInt8*, Int32, IWbemContext, IWbemClassObject, IWbemClassObject*, IWbemCallResult*, HRESULT)
+    exec_method_async : Proc(IWbemServices*, UInt8*, UInt8*, Int32, IWbemContext, IWbemClassObject, IWbemObjectSink, HRESULT)
   end
 
   IWbemServices_GUID = "9556dc99-828c-11cf-a37e-00aa003240c7"
@@ -2465,10 +2465,10 @@ lib LibWin32
   end
 
   struct IWbemLocatorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    connect_server : UInt64
+    query_interface : Proc(IWbemLocator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemLocator*, UInt32)
+    release : Proc(IWbemLocator*, UInt32)
+    connect_server : Proc(IWbemLocator*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, UInt8*, IWbemContext, IWbemServices*, HRESULT)
   end
 
   IWbemLocator_GUID = "dc12a687-737f-11cf-884d-00aa004b2e24"
@@ -2478,11 +2478,11 @@ lib LibWin32
   end
 
   struct IWbemObjectSinkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    indicate : UInt64
-    set_status : UInt64
+    query_interface : Proc(IWbemObjectSink*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemObjectSink*, UInt32)
+    release : Proc(IWbemObjectSink*, UInt32)
+    indicate : Proc(IWbemObjectSink*, Int32, IWbemClassObject*, HRESULT)
+    set_status : Proc(IWbemObjectSink*, Int32, HRESULT, UInt8*, IWbemClassObject, HRESULT)
   end
 
   IWbemObjectSink_GUID = "7c857801-7381-11cf-884d-00aa004b2e24"
@@ -2492,14 +2492,14 @@ lib LibWin32
   end
 
   struct IEnumWbemClassObjectVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    reset : UInt64
-    next : UInt64
-    next_async : UInt64
-    clone : UInt64
-    skip : UInt64
+    query_interface : Proc(IEnumWbemClassObject*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEnumWbemClassObject*, UInt32)
+    release : Proc(IEnumWbemClassObject*, UInt32)
+    reset : Proc(IEnumWbemClassObject*, HRESULT)
+    next : Proc(IEnumWbemClassObject*, Int32, UInt32, IWbemClassObject*, UInt32*, HRESULT)
+    next_async : Proc(IEnumWbemClassObject*, UInt32, IWbemObjectSink, HRESULT)
+    clone : Proc(IEnumWbemClassObject*, IEnumWbemClassObject*, HRESULT)
+    skip : Proc(IEnumWbemClassObject*, Int32, UInt32, HRESULT)
   end
 
   IEnumWbemClassObject_GUID = "027947e1-d731-11ce-a357-000000000001"
@@ -2509,13 +2509,13 @@ lib LibWin32
   end
 
   struct IWbemCallResultVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_result_object : UInt64
-    get_result_string : UInt64
-    get_result_services : UInt64
-    get_call_status : UInt64
+    query_interface : Proc(IWbemCallResult*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemCallResult*, UInt32)
+    release : Proc(IWbemCallResult*, UInt32)
+    get_result_object : Proc(IWbemCallResult*, Int32, IWbemClassObject*, HRESULT)
+    get_result_string : Proc(IWbemCallResult*, Int32, UInt8**, HRESULT)
+    get_result_services : Proc(IWbemCallResult*, Int32, IWbemServices*, HRESULT)
+    get_call_status : Proc(IWbemCallResult*, Int32, Int32*, HRESULT)
   end
 
   IWbemCallResult_GUID = "44aca675-e8fc-11d0-a07c-00c04fb68820"
@@ -2525,18 +2525,18 @@ lib LibWin32
   end
 
   struct IWbemContextVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    clone : UInt64
-    get_names : UInt64
-    begin_enumeration : UInt64
-    next : UInt64
-    end_enumeration : UInt64
-    set_value : UInt64
-    get_value : UInt64
-    delete_value : UInt64
-    delete_all : UInt64
+    query_interface : Proc(IWbemContext*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemContext*, UInt32)
+    release : Proc(IWbemContext*, UInt32)
+    clone : Proc(IWbemContext*, IWbemContext*, HRESULT)
+    get_names : Proc(IWbemContext*, Int32, SAFEARRAY**, HRESULT)
+    begin_enumeration : Proc(IWbemContext*, Int32, HRESULT)
+    next : Proc(IWbemContext*, Int32, UInt8**, VARIANT*, HRESULT)
+    end_enumeration : Proc(IWbemContext*, HRESULT)
+    set_value : Proc(IWbemContext*, LibC::LPWSTR, Int32, VARIANT*, HRESULT)
+    get_value : Proc(IWbemContext*, LibC::LPWSTR, Int32, VARIANT*, HRESULT)
+    delete_value : Proc(IWbemContext*, LibC::LPWSTR, Int32, HRESULT)
+    delete_all : Proc(IWbemContext*, HRESULT)
   end
 
   IWbemContext_GUID = "44aca674-e8fc-11d0-a07c-00c04fb68820"
@@ -2546,10 +2546,10 @@ lib LibWin32
   end
 
   struct IUnsecuredApartmentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_object_stub : UInt64
+    query_interface : Proc(IUnsecuredApartment*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUnsecuredApartment*, UInt32)
+    release : Proc(IUnsecuredApartment*, UInt32)
+    create_object_stub : Proc(IUnsecuredApartment*, IUnknown, IUnknown*, HRESULT)
   end
 
   IUnsecuredApartment_GUID = "1cfaba8c-1523-11d1-ad79-00c04fd8fdff"
@@ -2559,11 +2559,11 @@ lib LibWin32
   end
 
   struct IWbemUnsecuredApartmentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_object_stub : UInt64
-    create_sink_stub : UInt64
+    query_interface : Proc(IWbemUnsecuredApartment*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemUnsecuredApartment*, UInt32)
+    release : Proc(IWbemUnsecuredApartment*, UInt32)
+    create_object_stub : Proc(IWbemUnsecuredApartment*, IUnknown, IUnknown*, HRESULT)
+    create_sink_stub : Proc(IWbemUnsecuredApartment*, IWbemObjectSink, UInt32, LibC::LPWSTR, IWbemObjectSink*, HRESULT)
   end
 
   IWbemUnsecuredApartment_GUID = "31739d04-3471-4cf4-9a7c-57a44ae71956"
@@ -2573,11 +2573,11 @@ lib LibWin32
   end
 
   struct IWbemStatusCodeTextVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_error_code_text : UInt64
-    get_facility_code_text : UInt64
+    query_interface : Proc(IWbemStatusCodeText*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemStatusCodeText*, UInt32)
+    release : Proc(IWbemStatusCodeText*, UInt32)
+    get_error_code_text : Proc(IWbemStatusCodeText*, HRESULT, UInt32, Int32, UInt8**, HRESULT)
+    get_facility_code_text : Proc(IWbemStatusCodeText*, HRESULT, UInt32, Int32, UInt8**, HRESULT)
   end
 
   IWbemStatusCodeText_GUID = "eb87e1bc-3233-11d2-aec9-00c04fb68820"
@@ -2587,11 +2587,11 @@ lib LibWin32
   end
 
   struct IWbemBackupRestoreVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    backup : UInt64
-    restore : UInt64
+    query_interface : Proc(IWbemBackupRestore*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemBackupRestore*, UInt32)
+    release : Proc(IWbemBackupRestore*, UInt32)
+    backup : Proc(IWbemBackupRestore*, LibC::LPWSTR, Int32, HRESULT)
+    restore : Proc(IWbemBackupRestore*, LibC::LPWSTR, Int32, HRESULT)
   end
 
   IWbemBackupRestore_GUID = "c49e32c7-bc8b-11d2-85d4-00105a1f8304"
@@ -2601,13 +2601,13 @@ lib LibWin32
   end
 
   struct IWbemBackupRestoreExVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    backup : UInt64
-    restore : UInt64
-    pause : UInt64
-    resume : UInt64
+    query_interface : Proc(IWbemBackupRestoreEx*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemBackupRestoreEx*, UInt32)
+    release : Proc(IWbemBackupRestoreEx*, UInt32)
+    backup : Proc(IWbemBackupRestoreEx*, LibC::LPWSTR, Int32, HRESULT)
+    restore : Proc(IWbemBackupRestoreEx*, LibC::LPWSTR, Int32, HRESULT)
+    pause : Proc(IWbemBackupRestoreEx*, HRESULT)
+    resume : Proc(IWbemBackupRestoreEx*, HRESULT)
   end
 
   IWbemBackupRestoreEx_GUID = "a359dec5-e813-4834-8a2a-ba7f1d777d76"
@@ -2617,10 +2617,10 @@ lib LibWin32
   end
 
   struct IWbemRefresherVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    refresh : UInt64
+    query_interface : Proc(IWbemRefresher*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemRefresher*, UInt32)
+    release : Proc(IWbemRefresher*, UInt32)
+    refresh : Proc(IWbemRefresher*, Int32, HRESULT)
   end
 
   IWbemRefresher_GUID = "49353c99-516b-11d1-aea6-00c04fb68820"
@@ -2630,13 +2630,13 @@ lib LibWin32
   end
 
   struct IWbemHiPerfEnumVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add_objects : UInt64
-    remove_objects : UInt64
-    get_objects : UInt64
-    remove_all : UInt64
+    query_interface : Proc(IWbemHiPerfEnum*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemHiPerfEnum*, UInt32)
+    release : Proc(IWbemHiPerfEnum*, UInt32)
+    add_objects : Proc(IWbemHiPerfEnum*, Int32, UInt32, Int32*, IWbemObjectAccess*, HRESULT)
+    remove_objects : Proc(IWbemHiPerfEnum*, Int32, UInt32, Int32*, HRESULT)
+    get_objects : Proc(IWbemHiPerfEnum*, Int32, UInt32, IWbemObjectAccess*, UInt32*, HRESULT)
+    remove_all : Proc(IWbemHiPerfEnum*, Int32, HRESULT)
   end
 
   IWbemHiPerfEnum_GUID = "2705c288-79ae-11d2-b348-00105a1f8177"
@@ -2646,14 +2646,14 @@ lib LibWin32
   end
 
   struct IWbemConfigureRefresherVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add_object_by_path : UInt64
-    add_object_by_template : UInt64
-    add_refresher : UInt64
-    remove : UInt64
-    add_enum : UInt64
+    query_interface : Proc(IWbemConfigureRefresher*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemConfigureRefresher*, UInt32)
+    release : Proc(IWbemConfigureRefresher*, UInt32)
+    add_object_by_path : Proc(IWbemConfigureRefresher*, IWbemServices, LibC::LPWSTR, Int32, IWbemContext, IWbemClassObject*, Int32*, HRESULT)
+    add_object_by_template : Proc(IWbemConfigureRefresher*, IWbemServices, IWbemClassObject, Int32, IWbemContext, IWbemClassObject*, Int32*, HRESULT)
+    add_refresher : Proc(IWbemConfigureRefresher*, IWbemRefresher, Int32, Int32*, HRESULT)
+    remove : Proc(IWbemConfigureRefresher*, Int32, Int32, HRESULT)
+    add_enum : Proc(IWbemConfigureRefresher*, IWbemServices, LibC::LPWSTR, Int32, IWbemContext, IWbemHiPerfEnum*, Int32*, HRESULT)
   end
 
   IWbemConfigureRefresher_GUID = "49353c92-516b-11d1-aea6-00c04fb68820"
@@ -2663,16 +2663,16 @@ lib LibWin32
   end
 
   struct IWbemObjectSinkExVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    indicate : UInt64
-    set_status : UInt64
-    write_message : UInt64
-    write_error : UInt64
-    prompt_user : UInt64
-    write_progress : UInt64
-    write_stream_parameter : UInt64
+    query_interface : Proc(IWbemObjectSinkEx*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemObjectSinkEx*, UInt32)
+    release : Proc(IWbemObjectSinkEx*, UInt32)
+    indicate : Proc(IWbemObjectSinkEx*, Int32, IWbemClassObject*, HRESULT)
+    set_status : Proc(IWbemObjectSinkEx*, Int32, HRESULT, UInt8*, IWbemClassObject, HRESULT)
+    write_message : Proc(IWbemObjectSinkEx*, UInt32, UInt8*, HRESULT)
+    write_error : Proc(IWbemObjectSinkEx*, IWbemClassObject, UInt8*, HRESULT)
+    prompt_user : Proc(IWbemObjectSinkEx*, UInt8*, UInt8, UInt8*, HRESULT)
+    write_progress : Proc(IWbemObjectSinkEx*, UInt8*, UInt8*, UInt8*, UInt32, UInt32, HRESULT)
+    write_stream_parameter : Proc(IWbemObjectSinkEx*, UInt8*, VARIANT*, UInt32, UInt32, HRESULT)
   end
 
   IWbemObjectSinkEx_GUID = "e7d35cfa-348b-485e-b524-252725d697ca"
@@ -2682,10 +2682,10 @@ lib LibWin32
   end
 
   struct IWbemShutdownVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    shutdown : UInt64
+    query_interface : Proc(IWbemShutdown*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemShutdown*, UInt32)
+    release : Proc(IWbemShutdown*, UInt32)
+    shutdown : Proc(IWbemShutdown*, Int32, UInt32, IWbemContext, HRESULT)
   end
 
   IWbemShutdown_GUID = "b7b31df9-d515-11d3-a11c-00105a1f515a"
@@ -2695,11 +2695,11 @@ lib LibWin32
   end
 
   struct IWbemObjectTextSrcVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_text : UInt64
-    create_from_text : UInt64
+    query_interface : Proc(IWbemObjectTextSrc*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemObjectTextSrc*, UInt32)
+    release : Proc(IWbemObjectTextSrc*, UInt32)
+    get_text : Proc(IWbemObjectTextSrc*, Int32, IWbemClassObject, UInt32, IWbemContext, UInt8**, HRESULT)
+    create_from_text : Proc(IWbemObjectTextSrc*, Int32, UInt8*, UInt32, IWbemContext, IWbemClassObject*, HRESULT)
   end
 
   IWbemObjectTextSrc_GUID = "bfbf883a-cad7-11d3-a11b-00105a1f515a"
@@ -2709,12 +2709,12 @@ lib LibWin32
   end
 
   struct IMofCompilerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    compile_file : UInt64
-    compile_buffer : UInt64
-    create_bmof : UInt64
+    query_interface : Proc(IMofCompiler*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMofCompiler*, UInt32)
+    release : Proc(IMofCompiler*, UInt32)
+    compile_file : Proc(IMofCompiler*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, Int32, Int32, Int32, WBEM_COMPILE_STATUS_INFO*, HRESULT)
+    compile_buffer : Proc(IMofCompiler*, Int32, UInt8*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, Int32, Int32, Int32, WBEM_COMPILE_STATUS_INFO*, HRESULT)
+    create_bmof : Proc(IMofCompiler*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, Int32, Int32, Int32, WBEM_COMPILE_STATUS_INFO*, HRESULT)
   end
 
   IMofCompiler_GUID = "6daf974e-2e37-11d2-aec9-00c04fb68820"
@@ -2724,11 +2724,11 @@ lib LibWin32
   end
 
   struct IWbemPropertyProviderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_property : UInt64
-    put_property : UInt64
+    query_interface : Proc(IWbemPropertyProvider*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemPropertyProvider*, UInt32)
+    release : Proc(IWbemPropertyProvider*, UInt32)
+    get_property : Proc(IWbemPropertyProvider*, Int32, UInt8*, UInt8*, UInt8*, UInt8*, VARIANT*, HRESULT)
+    put_property : Proc(IWbemPropertyProvider*, Int32, UInt8*, UInt8*, UInt8*, UInt8*, VARIANT*, HRESULT)
   end
 
   IWbemPropertyProvider_GUID = "ce61e841-65bc-11d0-b6bd-00aa003240c7"
@@ -2738,10 +2738,10 @@ lib LibWin32
   end
 
   struct IWbemUnboundObjectSinkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    indicate_to_consumer : UInt64
+    query_interface : Proc(IWbemUnboundObjectSink*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemUnboundObjectSink*, UInt32)
+    release : Proc(IWbemUnboundObjectSink*, UInt32)
+    indicate_to_consumer : Proc(IWbemUnboundObjectSink*, IWbemClassObject, Int32, IWbemClassObject*, HRESULT)
   end
 
   IWbemUnboundObjectSink_GUID = "e246107b-b06e-11d0-ad61-00c04fd8fdff"
@@ -2751,10 +2751,10 @@ lib LibWin32
   end
 
   struct IWbemEventProviderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    provide_events : UInt64
+    query_interface : Proc(IWbemEventProvider*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemEventProvider*, UInt32)
+    release : Proc(IWbemEventProvider*, UInt32)
+    provide_events : Proc(IWbemEventProvider*, IWbemObjectSink, Int32, HRESULT)
   end
 
   IWbemEventProvider_GUID = "e245105b-b06e-11d0-ad61-00c04fd8fdff"
@@ -2764,11 +2764,11 @@ lib LibWin32
   end
 
   struct IWbemEventProviderQuerySinkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    new_query : UInt64
-    cancel_query : UInt64
+    query_interface : Proc(IWbemEventProviderQuerySink*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemEventProviderQuerySink*, UInt32)
+    release : Proc(IWbemEventProviderQuerySink*, UInt32)
+    new_query : Proc(IWbemEventProviderQuerySink*, UInt32, UInt16*, UInt16*, HRESULT)
+    cancel_query : Proc(IWbemEventProviderQuerySink*, UInt32, HRESULT)
   end
 
   IWbemEventProviderQuerySink_GUID = "580acaf8-fa1c-11d0-ad72-00c04fd8fdff"
@@ -2778,10 +2778,10 @@ lib LibWin32
   end
 
   struct IWbemEventProviderSecurityVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    access_check : UInt64
+    query_interface : Proc(IWbemEventProviderSecurity*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemEventProviderSecurity*, UInt32)
+    release : Proc(IWbemEventProviderSecurity*, UInt32)
+    access_check : Proc(IWbemEventProviderSecurity*, UInt16*, UInt16*, Int32, UInt8*, HRESULT)
   end
 
   IWbemEventProviderSecurity_GUID = "631f7d96-d993-11d2-b339-00105a1f4aaf"
@@ -2791,10 +2791,10 @@ lib LibWin32
   end
 
   struct IWbemEventConsumerProviderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    find_consumer : UInt64
+    query_interface : Proc(IWbemEventConsumerProvider*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemEventConsumerProvider*, UInt32)
+    release : Proc(IWbemEventConsumerProvider*, UInt32)
+    find_consumer : Proc(IWbemEventConsumerProvider*, IWbemClassObject, IWbemUnboundObjectSink*, HRESULT)
   end
 
   IWbemEventConsumerProvider_GUID = "e246107a-b06e-11d0-ad61-00c04fd8fdff"
@@ -2804,10 +2804,10 @@ lib LibWin32
   end
 
   struct IWbemProviderInitSinkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_status : UInt64
+    query_interface : Proc(IWbemProviderInitSink*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemProviderInitSink*, UInt32)
+    release : Proc(IWbemProviderInitSink*, UInt32)
+    set_status : Proc(IWbemProviderInitSink*, Int32, Int32, HRESULT)
   end
 
   IWbemProviderInitSink_GUID = "1be41571-91dd-11d1-aeb2-00c04fb68820"
@@ -2817,10 +2817,10 @@ lib LibWin32
   end
 
   struct IWbemProviderInitVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    initialize : UInt64
+    query_interface : Proc(IWbemProviderInit*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemProviderInit*, UInt32)
+    release : Proc(IWbemProviderInit*, UInt32)
+    initialize : Proc(IWbemProviderInit*, LibC::LPWSTR, Int32, LibC::LPWSTR, LibC::LPWSTR, IWbemServices, IWbemContext, IWbemProviderInitSink, HRESULT)
   end
 
   IWbemProviderInit_GUID = "1be41572-91dd-11d1-aeb2-00c04fb68820"
@@ -2830,15 +2830,15 @@ lib LibWin32
   end
 
   struct IWbemHiPerfProviderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    query_instances : UInt64
-    create_refresher : UInt64
-    create_refreshable_object : UInt64
-    stop_refreshing : UInt64
-    create_refreshable_enum : UInt64
-    get_objects : UInt64
+    query_interface : Proc(IWbemHiPerfProvider*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemHiPerfProvider*, UInt32)
+    release : Proc(IWbemHiPerfProvider*, UInt32)
+    query_instances : Proc(IWbemHiPerfProvider*, IWbemServices, LibC::LPWSTR, Int32, IWbemContext, IWbemObjectSink, HRESULT)
+    create_refresher : Proc(IWbemHiPerfProvider*, IWbemServices, Int32, IWbemRefresher*, HRESULT)
+    create_refreshable_object : Proc(IWbemHiPerfProvider*, IWbemServices, IWbemObjectAccess, IWbemRefresher, Int32, IWbemContext, IWbemObjectAccess*, Int32*, HRESULT)
+    stop_refreshing : Proc(IWbemHiPerfProvider*, IWbemRefresher, Int32, Int32, HRESULT)
+    create_refreshable_enum : Proc(IWbemHiPerfProvider*, IWbemServices, LibC::LPWSTR, IWbemRefresher, Int32, IWbemContext, IWbemHiPerfEnum, Int32*, HRESULT)
+    get_objects : Proc(IWbemHiPerfProvider*, IWbemServices, Int32, IWbemObjectAccess*, Int32, IWbemContext, HRESULT)
   end
 
   IWbemHiPerfProvider_GUID = "49353c93-516b-11d1-aea6-00c04fb68820"
@@ -2848,11 +2848,11 @@ lib LibWin32
   end
 
   struct IWbemDecoupledRegistrarVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    register : UInt64
-    un_register : UInt64
+    query_interface : Proc(IWbemDecoupledRegistrar*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemDecoupledRegistrar*, UInt32)
+    release : Proc(IWbemDecoupledRegistrar*, UInt32)
+    register : Proc(IWbemDecoupledRegistrar*, Int32, IWbemContext, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IUnknown, HRESULT)
+    un_register : Proc(IWbemDecoupledRegistrar*, HRESULT)
   end
 
   IWbemDecoupledRegistrar_GUID = "1005cbcf-e64f-4646-bcd3-3a089d8a84b4"
@@ -2862,10 +2862,10 @@ lib LibWin32
   end
 
   struct IWbemProviderIdentityVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_registration_object : UInt64
+    query_interface : Proc(IWbemProviderIdentity*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemProviderIdentity*, UInt32)
+    release : Proc(IWbemProviderIdentity*, UInt32)
+    set_registration_object : Proc(IWbemProviderIdentity*, Int32, IWbemClassObject, HRESULT)
   end
 
   IWbemProviderIdentity_GUID = "631f7d97-d993-11d2-b339-00105a1f4aaf"
@@ -2875,13 +2875,13 @@ lib LibWin32
   end
 
   struct IWbemDecoupledBasicEventProviderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    register : UInt64
-    un_register : UInt64
-    get_sink : UInt64
-    get_service : UInt64
+    query_interface : Proc(IWbemDecoupledBasicEventProvider*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemDecoupledBasicEventProvider*, UInt32)
+    release : Proc(IWbemDecoupledBasicEventProvider*, UInt32)
+    register : Proc(IWbemDecoupledBasicEventProvider*, Int32, IWbemContext, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IUnknown, HRESULT)
+    un_register : Proc(IWbemDecoupledBasicEventProvider*, HRESULT)
+    get_sink : Proc(IWbemDecoupledBasicEventProvider*, Int32, IWbemContext, IWbemObjectSink*, HRESULT)
+    get_service : Proc(IWbemDecoupledBasicEventProvider*, Int32, IWbemContext, IWbemServices*, HRESULT)
   end
 
   IWbemDecoupledBasicEventProvider_GUID = "86336d20-ca11-4786-9ef1-bc8a946b42fc"
@@ -2891,15 +2891,15 @@ lib LibWin32
   end
 
   struct IWbemEventSinkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    indicate : UInt64
-    set_status : UInt64
-    set_sink_security : UInt64
-    is_active : UInt64
-    get_restricted_sink : UInt64
-    set_batching_parameters : UInt64
+    query_interface : Proc(IWbemEventSink*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemEventSink*, UInt32)
+    release : Proc(IWbemEventSink*, UInt32)
+    indicate : Proc(IWbemEventSink*, Int32, IWbemClassObject*, HRESULT)
+    set_status : Proc(IWbemEventSink*, Int32, HRESULT, UInt8*, IWbemClassObject, HRESULT)
+    set_sink_security : Proc(IWbemEventSink*, Int32, UInt8*, HRESULT)
+    is_active : Proc(IWbemEventSink*, HRESULT)
+    get_restricted_sink : Proc(IWbemEventSink*, Int32, LibC::LPWSTR*, IUnknown, IWbemEventSink*, HRESULT)
+    set_batching_parameters : Proc(IWbemEventSink*, Int32, UInt32, UInt32, HRESULT)
   end
 
   IWbemEventSink_GUID = "3ae0080a-7e3a-4366-bf89-0feedc931659"
@@ -2909,32 +2909,32 @@ lib LibWin32
   end
 
   struct ISWbemServicesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get : UInt64
-    get_async : UInt64
-    delete : UInt64
-    delete_async : UInt64
-    instances_of : UInt64
-    instances_of_async : UInt64
-    subclasses_of : UInt64
-    subclasses_of_async : UInt64
-    exec_query : UInt64
-    exec_query_async : UInt64
-    associators_of : UInt64
-    associators_of_async : UInt64
-    references_to : UInt64
-    references_to_async : UInt64
-    exec_notification_query : UInt64
-    exec_notification_query_async : UInt64
-    exec_method : UInt64
-    exec_method_async : UInt64
-    get_security_ : UInt64
+    query_interface : Proc(ISWbemServices*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemServices*, UInt32)
+    release : Proc(ISWbemServices*, UInt32)
+    get_type_info_count : Proc(ISWbemServices*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemServices*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemServices*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemServices*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get : Proc(ISWbemServices*, UInt8*, Int32, IDispatch, ISWbemObject*, HRESULT)
+    get_async : Proc(ISWbemServices*, IDispatch, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    delete : Proc(ISWbemServices*, UInt8*, Int32, IDispatch, HRESULT)
+    delete_async : Proc(ISWbemServices*, IDispatch, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    instances_of : Proc(ISWbemServices*, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    instances_of_async : Proc(ISWbemServices*, IDispatch, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    subclasses_of : Proc(ISWbemServices*, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    subclasses_of_async : Proc(ISWbemServices*, IDispatch, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    exec_query : Proc(ISWbemServices*, UInt8*, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    exec_query_async : Proc(ISWbemServices*, IDispatch, UInt8*, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    associators_of : Proc(ISWbemServices*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    associators_of_async : Proc(ISWbemServices*, IDispatch, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    references_to : Proc(ISWbemServices*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    references_to_async : Proc(ISWbemServices*, IDispatch, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    exec_notification_query : Proc(ISWbemServices*, UInt8*, UInt8*, Int32, IDispatch, ISWbemEventSource*, HRESULT)
+    exec_notification_query_async : Proc(ISWbemServices*, IDispatch, UInt8*, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    exec_method : Proc(ISWbemServices*, UInt8*, UInt8*, IDispatch, Int32, IDispatch, ISWbemObject*, HRESULT)
+    exec_method_async : Proc(ISWbemServices*, IDispatch, UInt8*, UInt8*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)
+    get_security_ : Proc(ISWbemServices*, ISWbemSecurity*, HRESULT)
   end
 
   ISWbemServices_GUID = "76a6415c-cb41-11d1-8b02-00600806d9b6"
@@ -2944,15 +2944,15 @@ lib LibWin32
   end
 
   struct ISWbemLocatorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    connect_server : UInt64
-    get_security_ : UInt64
+    query_interface : Proc(ISWbemLocator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemLocator*, UInt32)
+    release : Proc(ISWbemLocator*, UInt32)
+    get_type_info_count : Proc(ISWbemLocator*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemLocator*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemLocator*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemLocator*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    connect_server : Proc(ISWbemLocator*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, IDispatch, ISWbemServices*, HRESULT)
+    get_security_ : Proc(ISWbemLocator*, ISWbemSecurity*, HRESULT)
   end
 
   ISWbemLocator_GUID = "76a6415b-cb41-11d1-8b02-00600806d9b6"
@@ -2962,38 +2962,38 @@ lib LibWin32
   end
 
   struct ISWbemObjectVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    put_ : UInt64
-    put_async_ : UInt64
-    delete_ : UInt64
-    delete_async_ : UInt64
-    instances_ : UInt64
-    instances_async_ : UInt64
-    subclasses_ : UInt64
-    subclasses_async_ : UInt64
-    associators_ : UInt64
-    associators_async_ : UInt64
-    references_ : UInt64
-    references_async_ : UInt64
-    exec_method_ : UInt64
-    exec_method_async_ : UInt64
-    clone_ : UInt64
-    get_object_text_ : UInt64
-    spawn_derived_class_ : UInt64
-    spawn_instance_ : UInt64
-    compare_to_ : UInt64
-    get_qualifiers_ : UInt64
-    get_properties_ : UInt64
-    get_methods_ : UInt64
-    get_derivation_ : UInt64
-    get_path_ : UInt64
-    get_security_ : UInt64
+    query_interface : Proc(ISWbemObject*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemObject*, UInt32)
+    release : Proc(ISWbemObject*, UInt32)
+    get_type_info_count : Proc(ISWbemObject*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemObject*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemObject*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemObject*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    put_ : Proc(ISWbemObject*, Int32, IDispatch, ISWbemObjectPath*, HRESULT)
+    put_async_ : Proc(ISWbemObject*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)
+    delete_ : Proc(ISWbemObject*, Int32, IDispatch, HRESULT)
+    delete_async_ : Proc(ISWbemObject*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)
+    instances_ : Proc(ISWbemObject*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    instances_async_ : Proc(ISWbemObject*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)
+    subclasses_ : Proc(ISWbemObject*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    subclasses_async_ : Proc(ISWbemObject*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)
+    associators_ : Proc(ISWbemObject*, UInt8*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    associators_async_ : Proc(ISWbemObject*, IDispatch, UInt8*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    references_ : Proc(ISWbemObject*, UInt8*, UInt8*, Int16, Int16, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    references_async_ : Proc(ISWbemObject*, IDispatch, UInt8*, UInt8*, Int16, Int16, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    exec_method_ : Proc(ISWbemObject*, UInt8*, IDispatch, Int32, IDispatch, ISWbemObject*, HRESULT)
+    exec_method_async_ : Proc(ISWbemObject*, IDispatch, UInt8*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)
+    clone_ : Proc(ISWbemObject*, ISWbemObject*, HRESULT)
+    get_object_text_ : Proc(ISWbemObject*, Int32, UInt8**, HRESULT)
+    spawn_derived_class_ : Proc(ISWbemObject*, Int32, ISWbemObject*, HRESULT)
+    spawn_instance_ : Proc(ISWbemObject*, Int32, ISWbemObject*, HRESULT)
+    compare_to_ : Proc(ISWbemObject*, IDispatch, Int32, Int16*, HRESULT)
+    get_qualifiers_ : Proc(ISWbemObject*, ISWbemQualifierSet*, HRESULT)
+    get_properties_ : Proc(ISWbemObject*, ISWbemPropertySet*, HRESULT)
+    get_methods_ : Proc(ISWbemObject*, ISWbemMethodSet*, HRESULT)
+    get_derivation_ : Proc(ISWbemObject*, VARIANT*, HRESULT)
+    get_path_ : Proc(ISWbemObject*, ISWbemObjectPath*, HRESULT)
+    get_security_ : Proc(ISWbemObject*, ISWbemSecurity*, HRESULT)
   end
 
   ISWbemObject_GUID = "76a6415a-cb41-11d1-8b02-00600806d9b6"
@@ -3003,18 +3003,18 @@ lib LibWin32
   end
 
   struct ISWbemObjectSetVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get__new_enum : UInt64
-    item : UInt64
-    get_count : UInt64
-    get_security_ : UInt64
-    item_index : UInt64
+    query_interface : Proc(ISWbemObjectSet*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemObjectSet*, UInt32)
+    release : Proc(ISWbemObjectSet*, UInt32)
+    get_type_info_count : Proc(ISWbemObjectSet*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemObjectSet*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemObjectSet*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemObjectSet*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get__new_enum : Proc(ISWbemObjectSet*, IUnknown*, HRESULT)
+    item : Proc(ISWbemObjectSet*, UInt8*, Int32, ISWbemObject*, HRESULT)
+    get_count : Proc(ISWbemObjectSet*, Int32*, HRESULT)
+    get_security_ : Proc(ISWbemObjectSet*, ISWbemSecurity*, HRESULT)
+    item_index : Proc(ISWbemObjectSet*, Int32, ISWbemObject*, HRESULT)
   end
 
   ISWbemObjectSet_GUID = "76a6415f-cb41-11d1-8b02-00600806d9b6"
@@ -3024,16 +3024,16 @@ lib LibWin32
   end
 
   struct ISWbemNamedValueVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_value : UInt64
-    put_value : UInt64
-    get_name : UInt64
+    query_interface : Proc(ISWbemNamedValue*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemNamedValue*, UInt32)
+    release : Proc(ISWbemNamedValue*, UInt32)
+    get_type_info_count : Proc(ISWbemNamedValue*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemNamedValue*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemNamedValue*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemNamedValue*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_value : Proc(ISWbemNamedValue*, VARIANT*, HRESULT)
+    put_value : Proc(ISWbemNamedValue*, VARIANT*, HRESULT)
+    get_name : Proc(ISWbemNamedValue*, UInt8**, HRESULT)
   end
 
   ISWbemNamedValue_GUID = "76a64164-cb41-11d1-8b02-00600806d9b6"
@@ -3043,20 +3043,20 @@ lib LibWin32
   end
 
   struct ISWbemNamedValueSetVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get__new_enum : UInt64
-    item : UInt64
-    get_count : UInt64
-    add : UInt64
-    remove : UInt64
-    clone : UInt64
-    delete_all : UInt64
+    query_interface : Proc(ISWbemNamedValueSet*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemNamedValueSet*, UInt32)
+    release : Proc(ISWbemNamedValueSet*, UInt32)
+    get_type_info_count : Proc(ISWbemNamedValueSet*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemNamedValueSet*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemNamedValueSet*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemNamedValueSet*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get__new_enum : Proc(ISWbemNamedValueSet*, IUnknown*, HRESULT)
+    item : Proc(ISWbemNamedValueSet*, UInt8*, Int32, ISWbemNamedValue*, HRESULT)
+    get_count : Proc(ISWbemNamedValueSet*, Int32*, HRESULT)
+    add : Proc(ISWbemNamedValueSet*, UInt8*, VARIANT*, Int32, ISWbemNamedValue*, HRESULT)
+    remove : Proc(ISWbemNamedValueSet*, UInt8*, Int32, HRESULT)
+    clone : Proc(ISWbemNamedValueSet*, ISWbemNamedValueSet*, HRESULT)
+    delete_all : Proc(ISWbemNamedValueSet*, HRESULT)
   end
 
   ISWbemNamedValueSet_GUID = "cf2376ea-ce8c-11d1-8b05-00600806d9b6"
@@ -3066,24 +3066,24 @@ lib LibWin32
   end
 
   struct ISWbemQualifierVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_value : UInt64
-    put_value : UInt64
-    get_name : UInt64
-    get_is_local : UInt64
-    get_propagates_to_subclass : UInt64
-    put_propagates_to_subclass : UInt64
-    get_propagates_to_instance : UInt64
-    put_propagates_to_instance : UInt64
-    get_is_overridable : UInt64
-    put_is_overridable : UInt64
-    get_is_amended : UInt64
+    query_interface : Proc(ISWbemQualifier*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemQualifier*, UInt32)
+    release : Proc(ISWbemQualifier*, UInt32)
+    get_type_info_count : Proc(ISWbemQualifier*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemQualifier*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemQualifier*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemQualifier*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_value : Proc(ISWbemQualifier*, VARIANT*, HRESULT)
+    put_value : Proc(ISWbemQualifier*, VARIANT*, HRESULT)
+    get_name : Proc(ISWbemQualifier*, UInt8**, HRESULT)
+    get_is_local : Proc(ISWbemQualifier*, Int16*, HRESULT)
+    get_propagates_to_subclass : Proc(ISWbemQualifier*, Int16*, HRESULT)
+    put_propagates_to_subclass : Proc(ISWbemQualifier*, Int16, HRESULT)
+    get_propagates_to_instance : Proc(ISWbemQualifier*, Int16*, HRESULT)
+    put_propagates_to_instance : Proc(ISWbemQualifier*, Int16, HRESULT)
+    get_is_overridable : Proc(ISWbemQualifier*, Int16*, HRESULT)
+    put_is_overridable : Proc(ISWbemQualifier*, Int16, HRESULT)
+    get_is_amended : Proc(ISWbemQualifier*, Int16*, HRESULT)
   end
 
   ISWbemQualifier_GUID = "79b05932-d3b7-11d1-8b06-00600806d9b6"
@@ -3093,18 +3093,18 @@ lib LibWin32
   end
 
   struct ISWbemQualifierSetVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get__new_enum : UInt64
-    item : UInt64
-    get_count : UInt64
-    add : UInt64
-    remove : UInt64
+    query_interface : Proc(ISWbemQualifierSet*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemQualifierSet*, UInt32)
+    release : Proc(ISWbemQualifierSet*, UInt32)
+    get_type_info_count : Proc(ISWbemQualifierSet*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemQualifierSet*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemQualifierSet*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemQualifierSet*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get__new_enum : Proc(ISWbemQualifierSet*, IUnknown*, HRESULT)
+    item : Proc(ISWbemQualifierSet*, UInt8*, Int32, ISWbemQualifier*, HRESULT)
+    get_count : Proc(ISWbemQualifierSet*, Int32*, HRESULT)
+    add : Proc(ISWbemQualifierSet*, UInt8*, VARIANT*, Int16, Int16, Int16, Int32, ISWbemQualifier*, HRESULT)
+    remove : Proc(ISWbemQualifierSet*, UInt8*, Int32, HRESULT)
   end
 
   ISWbemQualifierSet_GUID = "9b16ed16-d3df-11d1-8b08-00600806d9b6"
@@ -3114,21 +3114,21 @@ lib LibWin32
   end
 
   struct ISWbemPropertyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_value : UInt64
-    put_value : UInt64
-    get_name : UInt64
-    get_is_local : UInt64
-    get_origin : UInt64
-    get_cim_type : UInt64
-    get_qualifiers_ : UInt64
-    get_is_array : UInt64
+    query_interface : Proc(ISWbemProperty*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemProperty*, UInt32)
+    release : Proc(ISWbemProperty*, UInt32)
+    get_type_info_count : Proc(ISWbemProperty*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemProperty*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemProperty*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemProperty*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_value : Proc(ISWbemProperty*, VARIANT*, HRESULT)
+    put_value : Proc(ISWbemProperty*, VARIANT*, HRESULT)
+    get_name : Proc(ISWbemProperty*, UInt8**, HRESULT)
+    get_is_local : Proc(ISWbemProperty*, Int16*, HRESULT)
+    get_origin : Proc(ISWbemProperty*, UInt8**, HRESULT)
+    get_cim_type : Proc(ISWbemProperty*, WbemCimtypeEnum*, HRESULT)
+    get_qualifiers_ : Proc(ISWbemProperty*, ISWbemQualifierSet*, HRESULT)
+    get_is_array : Proc(ISWbemProperty*, Int16*, HRESULT)
   end
 
   ISWbemProperty_GUID = "1a388f98-d4ba-11d1-8b09-00600806d9b6"
@@ -3138,18 +3138,18 @@ lib LibWin32
   end
 
   struct ISWbemPropertySetVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get__new_enum : UInt64
-    item : UInt64
-    get_count : UInt64
-    add : UInt64
-    remove : UInt64
+    query_interface : Proc(ISWbemPropertySet*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemPropertySet*, UInt32)
+    release : Proc(ISWbemPropertySet*, UInt32)
+    get_type_info_count : Proc(ISWbemPropertySet*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemPropertySet*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemPropertySet*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemPropertySet*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get__new_enum : Proc(ISWbemPropertySet*, IUnknown*, HRESULT)
+    item : Proc(ISWbemPropertySet*, UInt8*, Int32, ISWbemProperty*, HRESULT)
+    get_count : Proc(ISWbemPropertySet*, Int32*, HRESULT)
+    add : Proc(ISWbemPropertySet*, UInt8*, WbemCimtypeEnum, Int16, Int32, ISWbemProperty*, HRESULT)
+    remove : Proc(ISWbemPropertySet*, UInt8*, Int32, HRESULT)
   end
 
   ISWbemPropertySet_GUID = "dea0a7b2-d4ba-11d1-8b09-00600806d9b6"
@@ -3159,18 +3159,18 @@ lib LibWin32
   end
 
   struct ISWbemMethodVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_name : UInt64
-    get_origin : UInt64
-    get_in_parameters : UInt64
-    get_out_parameters : UInt64
-    get_qualifiers_ : UInt64
+    query_interface : Proc(ISWbemMethod*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemMethod*, UInt32)
+    release : Proc(ISWbemMethod*, UInt32)
+    get_type_info_count : Proc(ISWbemMethod*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemMethod*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemMethod*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemMethod*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_name : Proc(ISWbemMethod*, UInt8**, HRESULT)
+    get_origin : Proc(ISWbemMethod*, UInt8**, HRESULT)
+    get_in_parameters : Proc(ISWbemMethod*, ISWbemObject*, HRESULT)
+    get_out_parameters : Proc(ISWbemMethod*, ISWbemObject*, HRESULT)
+    get_qualifiers_ : Proc(ISWbemMethod*, ISWbemQualifierSet*, HRESULT)
   end
 
   ISWbemMethod_GUID = "422e8e90-d955-11d1-8b09-00600806d9b6"
@@ -3180,16 +3180,16 @@ lib LibWin32
   end
 
   struct ISWbemMethodSetVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get__new_enum : UInt64
-    item : UInt64
-    get_count : UInt64
+    query_interface : Proc(ISWbemMethodSet*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemMethodSet*, UInt32)
+    release : Proc(ISWbemMethodSet*, UInt32)
+    get_type_info_count : Proc(ISWbemMethodSet*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemMethodSet*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemMethodSet*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemMethodSet*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get__new_enum : Proc(ISWbemMethodSet*, IUnknown*, HRESULT)
+    item : Proc(ISWbemMethodSet*, UInt8*, Int32, ISWbemMethod*, HRESULT)
+    get_count : Proc(ISWbemMethodSet*, Int32*, HRESULT)
   end
 
   ISWbemMethodSet_GUID = "c93ba292-d955-11d1-8b09-00600806d9b6"
@@ -3199,15 +3199,15 @@ lib LibWin32
   end
 
   struct ISWbemEventSourceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    next_event : UInt64
-    get_security_ : UInt64
+    query_interface : Proc(ISWbemEventSource*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemEventSource*, UInt32)
+    release : Proc(ISWbemEventSource*, UInt32)
+    get_type_info_count : Proc(ISWbemEventSource*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemEventSource*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemEventSource*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemEventSource*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    next_event : Proc(ISWbemEventSource*, Int32, ISWbemObject*, HRESULT)
+    get_security_ : Proc(ISWbemEventSource*, ISWbemSecurity*, HRESULT)
   end
 
   ISWbemEventSource_GUID = "27d54d92-0ebe-11d2-8b22-00600806d9b6"
@@ -3217,36 +3217,36 @@ lib LibWin32
   end
 
   struct ISWbemObjectPathVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_path : UInt64
-    put_path : UInt64
-    get_rel_path : UInt64
-    put_rel_path : UInt64
-    get_server : UInt64
-    put_server : UInt64
-    get_namespace : UInt64
-    put_namespace : UInt64
-    get_parent_namespace : UInt64
-    get_display_name : UInt64
-    put_display_name : UInt64
-    get_class : UInt64
-    put_class : UInt64
-    get_is_class : UInt64
-    set_as_class : UInt64
-    get_is_singleton : UInt64
-    set_as_singleton : UInt64
-    get_keys : UInt64
-    get_security_ : UInt64
-    get_locale : UInt64
-    put_locale : UInt64
-    get_authority : UInt64
-    put_authority : UInt64
+    query_interface : Proc(ISWbemObjectPath*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemObjectPath*, UInt32)
+    release : Proc(ISWbemObjectPath*, UInt32)
+    get_type_info_count : Proc(ISWbemObjectPath*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemObjectPath*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemObjectPath*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemObjectPath*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_path : Proc(ISWbemObjectPath*, UInt8**, HRESULT)
+    put_path : Proc(ISWbemObjectPath*, UInt8*, HRESULT)
+    get_rel_path : Proc(ISWbemObjectPath*, UInt8**, HRESULT)
+    put_rel_path : Proc(ISWbemObjectPath*, UInt8*, HRESULT)
+    get_server : Proc(ISWbemObjectPath*, UInt8**, HRESULT)
+    put_server : Proc(ISWbemObjectPath*, UInt8*, HRESULT)
+    get_namespace : Proc(ISWbemObjectPath*, UInt8**, HRESULT)
+    put_namespace : Proc(ISWbemObjectPath*, UInt8*, HRESULT)
+    get_parent_namespace : Proc(ISWbemObjectPath*, UInt8**, HRESULT)
+    get_display_name : Proc(ISWbemObjectPath*, UInt8**, HRESULT)
+    put_display_name : Proc(ISWbemObjectPath*, UInt8*, HRESULT)
+    get_class : Proc(ISWbemObjectPath*, UInt8**, HRESULT)
+    put_class : Proc(ISWbemObjectPath*, UInt8*, HRESULT)
+    get_is_class : Proc(ISWbemObjectPath*, Int16*, HRESULT)
+    set_as_class : Proc(ISWbemObjectPath*, HRESULT)
+    get_is_singleton : Proc(ISWbemObjectPath*, Int16*, HRESULT)
+    set_as_singleton : Proc(ISWbemObjectPath*, HRESULT)
+    get_keys : Proc(ISWbemObjectPath*, ISWbemNamedValueSet*, HRESULT)
+    get_security_ : Proc(ISWbemObjectPath*, ISWbemSecurity*, HRESULT)
+    get_locale : Proc(ISWbemObjectPath*, UInt8**, HRESULT)
+    put_locale : Proc(ISWbemObjectPath*, UInt8*, HRESULT)
+    get_authority : Proc(ISWbemObjectPath*, UInt8**, HRESULT)
+    put_authority : Proc(ISWbemObjectPath*, UInt8*, HRESULT)
   end
 
   ISWbemObjectPath_GUID = "5791bc27-ce9c-11d1-97bf-0000f81e849c"
@@ -3256,38 +3256,38 @@ lib LibWin32
   end
 
   struct ISWbemLastErrorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    put_ : UInt64
-    put_async_ : UInt64
-    delete_ : UInt64
-    delete_async_ : UInt64
-    instances_ : UInt64
-    instances_async_ : UInt64
-    subclasses_ : UInt64
-    subclasses_async_ : UInt64
-    associators_ : UInt64
-    associators_async_ : UInt64
-    references_ : UInt64
-    references_async_ : UInt64
-    exec_method_ : UInt64
-    exec_method_async_ : UInt64
-    clone_ : UInt64
-    get_object_text_ : UInt64
-    spawn_derived_class_ : UInt64
-    spawn_instance_ : UInt64
-    compare_to_ : UInt64
-    get_qualifiers_ : UInt64
-    get_properties_ : UInt64
-    get_methods_ : UInt64
-    get_derivation_ : UInt64
-    get_path_ : UInt64
-    get_security_ : UInt64
+    query_interface : Proc(ISWbemLastError*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemLastError*, UInt32)
+    release : Proc(ISWbemLastError*, UInt32)
+    get_type_info_count : Proc(ISWbemLastError*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemLastError*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemLastError*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemLastError*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    put_ : Proc(ISWbemLastError*, Int32, IDispatch, ISWbemObjectPath*, HRESULT)
+    put_async_ : Proc(ISWbemLastError*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)
+    delete_ : Proc(ISWbemLastError*, Int32, IDispatch, HRESULT)
+    delete_async_ : Proc(ISWbemLastError*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)
+    instances_ : Proc(ISWbemLastError*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    instances_async_ : Proc(ISWbemLastError*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)
+    subclasses_ : Proc(ISWbemLastError*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    subclasses_async_ : Proc(ISWbemLastError*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)
+    associators_ : Proc(ISWbemLastError*, UInt8*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    associators_async_ : Proc(ISWbemLastError*, IDispatch, UInt8*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    references_ : Proc(ISWbemLastError*, UInt8*, UInt8*, Int16, Int16, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    references_async_ : Proc(ISWbemLastError*, IDispatch, UInt8*, UInt8*, Int16, Int16, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    exec_method_ : Proc(ISWbemLastError*, UInt8*, IDispatch, Int32, IDispatch, ISWbemObject*, HRESULT)
+    exec_method_async_ : Proc(ISWbemLastError*, IDispatch, UInt8*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)
+    clone_ : Proc(ISWbemLastError*, ISWbemObject*, HRESULT)
+    get_object_text_ : Proc(ISWbemLastError*, Int32, UInt8**, HRESULT)
+    spawn_derived_class_ : Proc(ISWbemLastError*, Int32, ISWbemObject*, HRESULT)
+    spawn_instance_ : Proc(ISWbemLastError*, Int32, ISWbemObject*, HRESULT)
+    compare_to_ : Proc(ISWbemLastError*, IDispatch, Int32, Int16*, HRESULT)
+    get_qualifiers_ : Proc(ISWbemLastError*, ISWbemQualifierSet*, HRESULT)
+    get_properties_ : Proc(ISWbemLastError*, ISWbemPropertySet*, HRESULT)
+    get_methods_ : Proc(ISWbemLastError*, ISWbemMethodSet*, HRESULT)
+    get_derivation_ : Proc(ISWbemLastError*, VARIANT*, HRESULT)
+    get_path_ : Proc(ISWbemLastError*, ISWbemObjectPath*, HRESULT)
+    get_security_ : Proc(ISWbemLastError*, ISWbemSecurity*, HRESULT)
   end
 
   ISWbemLastError_GUID = "d962db84-d4bb-11d1-8b09-00600806d9b6"
@@ -3297,13 +3297,13 @@ lib LibWin32
   end
 
   struct ISWbemSinkEventsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
+    query_interface : Proc(ISWbemSinkEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemSinkEvents*, UInt32)
+    release : Proc(ISWbemSinkEvents*, UInt32)
+    get_type_info_count : Proc(ISWbemSinkEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemSinkEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemSinkEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemSinkEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
   ISWbemSinkEvents_GUID = "75718ca0-f029-11d1-a1ac-00c04fb6c223"
@@ -3313,14 +3313,14 @@ lib LibWin32
   end
 
   struct ISWbemSinkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    cancel : UInt64
+    query_interface : Proc(ISWbemSink*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemSink*, UInt32)
+    release : Proc(ISWbemSink*, UInt32)
+    get_type_info_count : Proc(ISWbemSink*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemSink*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemSink*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemSink*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    cancel : Proc(ISWbemSink*, HRESULT)
   end
 
   ISWbemSink_GUID = "75718c9f-f029-11d1-a1ac-00c04fb6c223"
@@ -3330,18 +3330,18 @@ lib LibWin32
   end
 
   struct ISWbemSecurityVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_impersonation_level : UInt64
-    put_impersonation_level : UInt64
-    get_authentication_level : UInt64
-    put_authentication_level : UInt64
-    get_privileges : UInt64
+    query_interface : Proc(ISWbemSecurity*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemSecurity*, UInt32)
+    release : Proc(ISWbemSecurity*, UInt32)
+    get_type_info_count : Proc(ISWbemSecurity*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemSecurity*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemSecurity*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemSecurity*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_impersonation_level : Proc(ISWbemSecurity*, WbemImpersonationLevelEnum*, HRESULT)
+    put_impersonation_level : Proc(ISWbemSecurity*, WbemImpersonationLevelEnum, HRESULT)
+    get_authentication_level : Proc(ISWbemSecurity*, WbemAuthenticationLevelEnum*, HRESULT)
+    put_authentication_level : Proc(ISWbemSecurity*, WbemAuthenticationLevelEnum, HRESULT)
+    get_privileges : Proc(ISWbemSecurity*, ISWbemPrivilegeSet*, HRESULT)
   end
 
   ISWbemSecurity_GUID = "b54d66e6-2287-11d2-8b33-00600806d9b6"
@@ -3351,18 +3351,18 @@ lib LibWin32
   end
 
   struct ISWbemPrivilegeVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_is_enabled : UInt64
-    put_is_enabled : UInt64
-    get_name : UInt64
-    get_display_name : UInt64
-    get_identifier : UInt64
+    query_interface : Proc(ISWbemPrivilege*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemPrivilege*, UInt32)
+    release : Proc(ISWbemPrivilege*, UInt32)
+    get_type_info_count : Proc(ISWbemPrivilege*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemPrivilege*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemPrivilege*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemPrivilege*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_is_enabled : Proc(ISWbemPrivilege*, Int16*, HRESULT)
+    put_is_enabled : Proc(ISWbemPrivilege*, Int16, HRESULT)
+    get_name : Proc(ISWbemPrivilege*, UInt8**, HRESULT)
+    get_display_name : Proc(ISWbemPrivilege*, UInt8**, HRESULT)
+    get_identifier : Proc(ISWbemPrivilege*, WbemPrivilegeEnum*, HRESULT)
   end
 
   ISWbemPrivilege_GUID = "26ee67bd-5804-11d2-8b4a-00600806d9b6"
@@ -3372,20 +3372,20 @@ lib LibWin32
   end
 
   struct ISWbemPrivilegeSetVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get__new_enum : UInt64
-    item : UInt64
-    get_count : UInt64
-    add : UInt64
-    remove : UInt64
-    delete_all : UInt64
-    add_as_string : UInt64
+    query_interface : Proc(ISWbemPrivilegeSet*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemPrivilegeSet*, UInt32)
+    release : Proc(ISWbemPrivilegeSet*, UInt32)
+    get_type_info_count : Proc(ISWbemPrivilegeSet*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemPrivilegeSet*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemPrivilegeSet*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemPrivilegeSet*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get__new_enum : Proc(ISWbemPrivilegeSet*, IUnknown*, HRESULT)
+    item : Proc(ISWbemPrivilegeSet*, WbemPrivilegeEnum, ISWbemPrivilege*, HRESULT)
+    get_count : Proc(ISWbemPrivilegeSet*, Int32*, HRESULT)
+    add : Proc(ISWbemPrivilegeSet*, WbemPrivilegeEnum, Int16, ISWbemPrivilege*, HRESULT)
+    remove : Proc(ISWbemPrivilegeSet*, WbemPrivilegeEnum, HRESULT)
+    delete_all : Proc(ISWbemPrivilegeSet*, HRESULT)
+    add_as_string : Proc(ISWbemPrivilegeSet*, UInt8*, Int16, ISWbemPrivilege*, HRESULT)
   end
 
   ISWbemPrivilegeSet_GUID = "26ee67bf-5804-11d2-8b4a-00600806d9b6"
@@ -3395,34 +3395,34 @@ lib LibWin32
   end
 
   struct ISWbemServicesExVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get : UInt64
-    get_async : UInt64
-    delete : UInt64
-    delete_async : UInt64
-    instances_of : UInt64
-    instances_of_async : UInt64
-    subclasses_of : UInt64
-    subclasses_of_async : UInt64
-    exec_query : UInt64
-    exec_query_async : UInt64
-    associators_of : UInt64
-    associators_of_async : UInt64
-    references_to : UInt64
-    references_to_async : UInt64
-    exec_notification_query : UInt64
-    exec_notification_query_async : UInt64
-    exec_method : UInt64
-    exec_method_async : UInt64
-    get_security_ : UInt64
-    put : UInt64
-    put_async : UInt64
+    query_interface : Proc(ISWbemServicesEx*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemServicesEx*, UInt32)
+    release : Proc(ISWbemServicesEx*, UInt32)
+    get_type_info_count : Proc(ISWbemServicesEx*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemServicesEx*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemServicesEx*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemServicesEx*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get : Proc(ISWbemServicesEx*, UInt8*, Int32, IDispatch, ISWbemObject*, HRESULT)
+    get_async : Proc(ISWbemServicesEx*, IDispatch, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    delete : Proc(ISWbemServicesEx*, UInt8*, Int32, IDispatch, HRESULT)
+    delete_async : Proc(ISWbemServicesEx*, IDispatch, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    instances_of : Proc(ISWbemServicesEx*, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    instances_of_async : Proc(ISWbemServicesEx*, IDispatch, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    subclasses_of : Proc(ISWbemServicesEx*, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    subclasses_of_async : Proc(ISWbemServicesEx*, IDispatch, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    exec_query : Proc(ISWbemServicesEx*, UInt8*, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    exec_query_async : Proc(ISWbemServicesEx*, IDispatch, UInt8*, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    associators_of : Proc(ISWbemServicesEx*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    associators_of_async : Proc(ISWbemServicesEx*, IDispatch, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    references_to : Proc(ISWbemServicesEx*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    references_to_async : Proc(ISWbemServicesEx*, IDispatch, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    exec_notification_query : Proc(ISWbemServicesEx*, UInt8*, UInt8*, Int32, IDispatch, ISWbemEventSource*, HRESULT)
+    exec_notification_query_async : Proc(ISWbemServicesEx*, IDispatch, UInt8*, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    exec_method : Proc(ISWbemServicesEx*, UInt8*, UInt8*, IDispatch, Int32, IDispatch, ISWbemObject*, HRESULT)
+    exec_method_async : Proc(ISWbemServicesEx*, IDispatch, UInt8*, UInt8*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)
+    get_security_ : Proc(ISWbemServicesEx*, ISWbemSecurity*, HRESULT)
+    put : Proc(ISWbemServicesEx*, ISWbemObjectEx, Int32, IDispatch, ISWbemObjectPath*, HRESULT)
+    put_async : Proc(ISWbemServicesEx*, ISWbemSink, ISWbemObjectEx, Int32, IDispatch, IDispatch, HRESULT)
   end
 
   ISWbemServicesEx_GUID = "d2f68443-85dc-427e-91d8-366554cc754c"
@@ -3432,42 +3432,42 @@ lib LibWin32
   end
 
   struct ISWbemObjectExVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    put_ : UInt64
-    put_async_ : UInt64
-    delete_ : UInt64
-    delete_async_ : UInt64
-    instances_ : UInt64
-    instances_async_ : UInt64
-    subclasses_ : UInt64
-    subclasses_async_ : UInt64
-    associators_ : UInt64
-    associators_async_ : UInt64
-    references_ : UInt64
-    references_async_ : UInt64
-    exec_method_ : UInt64
-    exec_method_async_ : UInt64
-    clone_ : UInt64
-    get_object_text_ : UInt64
-    spawn_derived_class_ : UInt64
-    spawn_instance_ : UInt64
-    compare_to_ : UInt64
-    get_qualifiers_ : UInt64
-    get_properties_ : UInt64
-    get_methods_ : UInt64
-    get_derivation_ : UInt64
-    get_path_ : UInt64
-    get_security_ : UInt64
-    refresh_ : UInt64
-    get_system_properties_ : UInt64
-    get_text_ : UInt64
-    set_from_text_ : UInt64
+    query_interface : Proc(ISWbemObjectEx*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemObjectEx*, UInt32)
+    release : Proc(ISWbemObjectEx*, UInt32)
+    get_type_info_count : Proc(ISWbemObjectEx*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemObjectEx*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemObjectEx*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemObjectEx*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    put_ : Proc(ISWbemObjectEx*, Int32, IDispatch, ISWbemObjectPath*, HRESULT)
+    put_async_ : Proc(ISWbemObjectEx*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)
+    delete_ : Proc(ISWbemObjectEx*, Int32, IDispatch, HRESULT)
+    delete_async_ : Proc(ISWbemObjectEx*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)
+    instances_ : Proc(ISWbemObjectEx*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    instances_async_ : Proc(ISWbemObjectEx*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)
+    subclasses_ : Proc(ISWbemObjectEx*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    subclasses_async_ : Proc(ISWbemObjectEx*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)
+    associators_ : Proc(ISWbemObjectEx*, UInt8*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    associators_async_ : Proc(ISWbemObjectEx*, IDispatch, UInt8*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    references_ : Proc(ISWbemObjectEx*, UInt8*, UInt8*, Int16, Int16, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)
+    references_async_ : Proc(ISWbemObjectEx*, IDispatch, UInt8*, UInt8*, Int16, Int16, UInt8*, Int32, IDispatch, IDispatch, HRESULT)
+    exec_method_ : Proc(ISWbemObjectEx*, UInt8*, IDispatch, Int32, IDispatch, ISWbemObject*, HRESULT)
+    exec_method_async_ : Proc(ISWbemObjectEx*, IDispatch, UInt8*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)
+    clone_ : Proc(ISWbemObjectEx*, ISWbemObject*, HRESULT)
+    get_object_text_ : Proc(ISWbemObjectEx*, Int32, UInt8**, HRESULT)
+    spawn_derived_class_ : Proc(ISWbemObjectEx*, Int32, ISWbemObject*, HRESULT)
+    spawn_instance_ : Proc(ISWbemObjectEx*, Int32, ISWbemObject*, HRESULT)
+    compare_to_ : Proc(ISWbemObjectEx*, IDispatch, Int32, Int16*, HRESULT)
+    get_qualifiers_ : Proc(ISWbemObjectEx*, ISWbemQualifierSet*, HRESULT)
+    get_properties_ : Proc(ISWbemObjectEx*, ISWbemPropertySet*, HRESULT)
+    get_methods_ : Proc(ISWbemObjectEx*, ISWbemMethodSet*, HRESULT)
+    get_derivation_ : Proc(ISWbemObjectEx*, VARIANT*, HRESULT)
+    get_path_ : Proc(ISWbemObjectEx*, ISWbemObjectPath*, HRESULT)
+    get_security_ : Proc(ISWbemObjectEx*, ISWbemSecurity*, HRESULT)
+    refresh_ : Proc(ISWbemObjectEx*, Int32, IDispatch, HRESULT)
+    get_system_properties_ : Proc(ISWbemObjectEx*, ISWbemPropertySet*, HRESULT)
+    get_text_ : Proc(ISWbemObjectEx*, WbemObjectTextFormatEnum, Int32, IDispatch, UInt8**, HRESULT)
+    set_from_text_ : Proc(ISWbemObjectEx*, UInt8*, WbemObjectTextFormatEnum, Int32, IDispatch, HRESULT)
   end
 
   ISWbemObjectEx_GUID = "269ad56a-8a67-4129-bc8c-0506dcfe9880"
@@ -3477,53 +3477,53 @@ lib LibWin32
   end
 
   struct ISWbemDateTimeVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_value : UInt64
-    put_value : UInt64
-    get_year : UInt64
-    put_year : UInt64
-    get_year_specified : UInt64
-    put_year_specified : UInt64
-    get_month : UInt64
-    put_month : UInt64
-    get_month_specified : UInt64
-    put_month_specified : UInt64
-    get_day : UInt64
-    put_day : UInt64
-    get_day_specified : UInt64
-    put_day_specified : UInt64
-    get_hours : UInt64
-    put_hours : UInt64
-    get_hours_specified : UInt64
-    put_hours_specified : UInt64
-    get_minutes : UInt64
-    put_minutes : UInt64
-    get_minutes_specified : UInt64
-    put_minutes_specified : UInt64
-    get_seconds : UInt64
-    put_seconds : UInt64
-    get_seconds_specified : UInt64
-    put_seconds_specified : UInt64
-    get_microseconds : UInt64
-    put_microseconds : UInt64
-    get_microseconds_specified : UInt64
-    put_microseconds_specified : UInt64
-    get_utc : UInt64
-    put_utc : UInt64
-    get_utc_specified : UInt64
-    put_utc_specified : UInt64
-    get_is_interval : UInt64
-    put_is_interval : UInt64
-    get_var_date : UInt64
-    set_var_date : UInt64
-    get_file_time : UInt64
-    set_file_time : UInt64
+    query_interface : Proc(ISWbemDateTime*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemDateTime*, UInt32)
+    release : Proc(ISWbemDateTime*, UInt32)
+    get_type_info_count : Proc(ISWbemDateTime*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemDateTime*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemDateTime*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemDateTime*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_value : Proc(ISWbemDateTime*, UInt8**, HRESULT)
+    put_value : Proc(ISWbemDateTime*, UInt8*, HRESULT)
+    get_year : Proc(ISWbemDateTime*, Int32*, HRESULT)
+    put_year : Proc(ISWbemDateTime*, Int32, HRESULT)
+    get_year_specified : Proc(ISWbemDateTime*, Int16*, HRESULT)
+    put_year_specified : Proc(ISWbemDateTime*, Int16, HRESULT)
+    get_month : Proc(ISWbemDateTime*, Int32*, HRESULT)
+    put_month : Proc(ISWbemDateTime*, Int32, HRESULT)
+    get_month_specified : Proc(ISWbemDateTime*, Int16*, HRESULT)
+    put_month_specified : Proc(ISWbemDateTime*, Int16, HRESULT)
+    get_day : Proc(ISWbemDateTime*, Int32*, HRESULT)
+    put_day : Proc(ISWbemDateTime*, Int32, HRESULT)
+    get_day_specified : Proc(ISWbemDateTime*, Int16*, HRESULT)
+    put_day_specified : Proc(ISWbemDateTime*, Int16, HRESULT)
+    get_hours : Proc(ISWbemDateTime*, Int32*, HRESULT)
+    put_hours : Proc(ISWbemDateTime*, Int32, HRESULT)
+    get_hours_specified : Proc(ISWbemDateTime*, Int16*, HRESULT)
+    put_hours_specified : Proc(ISWbemDateTime*, Int16, HRESULT)
+    get_minutes : Proc(ISWbemDateTime*, Int32*, HRESULT)
+    put_minutes : Proc(ISWbemDateTime*, Int32, HRESULT)
+    get_minutes_specified : Proc(ISWbemDateTime*, Int16*, HRESULT)
+    put_minutes_specified : Proc(ISWbemDateTime*, Int16, HRESULT)
+    get_seconds : Proc(ISWbemDateTime*, Int32*, HRESULT)
+    put_seconds : Proc(ISWbemDateTime*, Int32, HRESULT)
+    get_seconds_specified : Proc(ISWbemDateTime*, Int16*, HRESULT)
+    put_seconds_specified : Proc(ISWbemDateTime*, Int16, HRESULT)
+    get_microseconds : Proc(ISWbemDateTime*, Int32*, HRESULT)
+    put_microseconds : Proc(ISWbemDateTime*, Int32, HRESULT)
+    get_microseconds_specified : Proc(ISWbemDateTime*, Int16*, HRESULT)
+    put_microseconds_specified : Proc(ISWbemDateTime*, Int16, HRESULT)
+    get_utc : Proc(ISWbemDateTime*, Int32*, HRESULT)
+    put_utc : Proc(ISWbemDateTime*, Int32, HRESULT)
+    get_utc_specified : Proc(ISWbemDateTime*, Int16*, HRESULT)
+    put_utc_specified : Proc(ISWbemDateTime*, Int16, HRESULT)
+    get_is_interval : Proc(ISWbemDateTime*, Int16*, HRESULT)
+    put_is_interval : Proc(ISWbemDateTime*, Int16, HRESULT)
+    get_var_date : Proc(ISWbemDateTime*, Int16, Float64*, HRESULT)
+    set_var_date : Proc(ISWbemDateTime*, Float64, Int16, HRESULT)
+    get_file_time : Proc(ISWbemDateTime*, Int16, UInt8**, HRESULT)
+    set_file_time : Proc(ISWbemDateTime*, UInt8*, Int16, HRESULT)
   end
 
   ISWbemDateTime_GUID = "5e97458a-cf77-11d3-b38f-00105a1f473a"
@@ -3533,23 +3533,23 @@ lib LibWin32
   end
 
   struct ISWbemRefresherVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get__new_enum : UInt64
-    item : UInt64
-    get_count : UInt64
-    add : UInt64
-    add_enum : UInt64
-    remove : UInt64
-    refresh : UInt64
-    get_auto_reconnect : UInt64
-    put_auto_reconnect : UInt64
-    delete_all : UInt64
+    query_interface : Proc(ISWbemRefresher*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemRefresher*, UInt32)
+    release : Proc(ISWbemRefresher*, UInt32)
+    get_type_info_count : Proc(ISWbemRefresher*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemRefresher*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemRefresher*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemRefresher*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get__new_enum : Proc(ISWbemRefresher*, IUnknown*, HRESULT)
+    item : Proc(ISWbemRefresher*, Int32, ISWbemRefreshableItem*, HRESULT)
+    get_count : Proc(ISWbemRefresher*, Int32*, HRESULT)
+    add : Proc(ISWbemRefresher*, ISWbemServicesEx, UInt8*, Int32, IDispatch, ISWbemRefreshableItem*, HRESULT)
+    add_enum : Proc(ISWbemRefresher*, ISWbemServicesEx, UInt8*, Int32, IDispatch, ISWbemRefreshableItem*, HRESULT)
+    remove : Proc(ISWbemRefresher*, Int32, Int32, HRESULT)
+    refresh : Proc(ISWbemRefresher*, Int32, HRESULT)
+    get_auto_reconnect : Proc(ISWbemRefresher*, Int16*, HRESULT)
+    put_auto_reconnect : Proc(ISWbemRefresher*, Int16, HRESULT)
+    delete_all : Proc(ISWbemRefresher*, HRESULT)
   end
 
   ISWbemRefresher_GUID = "14d8250e-d9c2-11d3-b38f-00105a1f473a"
@@ -3559,19 +3559,19 @@ lib LibWin32
   end
 
   struct ISWbemRefreshableItemVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_index : UInt64
-    get_refresher : UInt64
-    get_is_set : UInt64
-    get_object : UInt64
-    get_object_set : UInt64
-    remove : UInt64
+    query_interface : Proc(ISWbemRefreshableItem*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISWbemRefreshableItem*, UInt32)
+    release : Proc(ISWbemRefreshableItem*, UInt32)
+    get_type_info_count : Proc(ISWbemRefreshableItem*, UInt32*, HRESULT)
+    get_type_info : Proc(ISWbemRefreshableItem*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(ISWbemRefreshableItem*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(ISWbemRefreshableItem*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_index : Proc(ISWbemRefreshableItem*, Int32*, HRESULT)
+    get_refresher : Proc(ISWbemRefreshableItem*, ISWbemRefresher*, HRESULT)
+    get_is_set : Proc(ISWbemRefreshableItem*, Int16*, HRESULT)
+    get_object : Proc(ISWbemRefreshableItem*, ISWbemObjectEx*, HRESULT)
+    get_object_set : Proc(ISWbemRefreshableItem*, ISWbemObjectSet*, HRESULT)
+    remove : Proc(ISWbemRefreshableItem*, Int32, HRESULT)
   end
 
   ISWbemRefreshableItem_GUID = "5ad4bf92-daab-11d3-b38f-00105a1f473a"
@@ -3581,16 +3581,16 @@ lib LibWin32
   end
 
   struct IWMIExtensionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_wmi_object_path : UInt64
-    get_wmi_object : UInt64
-    get_wmi_services : UInt64
+    query_interface : Proc(IWMIExtension*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMIExtension*, UInt32)
+    release : Proc(IWMIExtension*, UInt32)
+    get_type_info_count : Proc(IWMIExtension*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMIExtension*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMIExtension*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMIExtension*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_wmi_object_path : Proc(IWMIExtension*, UInt8**, HRESULT)
+    get_wmi_object : Proc(IWMIExtension*, ISWbemObject*, HRESULT)
+    get_wmi_services : Proc(IWMIExtension*, ISWbemServices*, HRESULT)
   end
 
   IWMIExtension_GUID = "adc1f06e-5c7e-11d2-8b74-00104b2afb41"
@@ -3600,10 +3600,10 @@ lib LibWin32
   end
 
   struct IWbemTransportVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    initialize : UInt64
+    query_interface : Proc(IWbemTransport*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemTransport*, UInt32)
+    release : Proc(IWbemTransport*, UInt32)
+    initialize : Proc(IWbemTransport*, HRESULT)
   end
 
   IWbemTransport_GUID = "553fe584-2156-11d0-b6ae-00aa003240c7"
@@ -3613,13 +3613,13 @@ lib LibWin32
   end
 
   struct IWbemLevel1LoginVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    establish_position : UInt64
-    request_challenge : UInt64
-    wbem_login : UInt64
-    ntlm_login : UInt64
+    query_interface : Proc(IWbemLevel1Login*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemLevel1Login*, UInt32)
+    release : Proc(IWbemLevel1Login*, UInt32)
+    establish_position : Proc(IWbemLevel1Login*, LibC::LPWSTR, UInt32, UInt32*, HRESULT)
+    request_challenge : Proc(IWbemLevel1Login*, LibC::LPWSTR, LibC::LPWSTR, UInt8*, HRESULT)
+    wbem_login : Proc(IWbemLevel1Login*, LibC::LPWSTR, UInt8*, Int32, IWbemContext, IWbemServices*, HRESULT)
+    ntlm_login : Proc(IWbemLevel1Login*, LibC::LPWSTR, LibC::LPWSTR, Int32, IWbemContext, IWbemServices*, HRESULT)
   end
 
   IWbemLevel1Login_GUID = "f309ad18-d86a-11d0-a075-00c04fb68820"
@@ -3629,10 +3629,10 @@ lib LibWin32
   end
 
   struct IWbemConnectorLoginVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    connector_login : UInt64
+    query_interface : Proc(IWbemConnectorLogin*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemConnectorLogin*, UInt32)
+    release : Proc(IWbemConnectorLogin*, UInt32)
+    connector_login : Proc(IWbemConnectorLogin*, LibC::LPWSTR, LibC::LPWSTR, Int32, IWbemContext, Guid*, Void**, HRESULT)
   end
 
   IWbemConnectorLogin_GUID = "d8ec9cb1-b135-4f10-8b1b-c7188bb0d186"
@@ -3642,10 +3642,10 @@ lib LibWin32
   end
 
   struct IWbemAddressResolutionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    resolve : UInt64
+    query_interface : Proc(IWbemAddressResolution*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemAddressResolution*, UInt32)
+    release : Proc(IWbemAddressResolution*, UInt32)
+    resolve : Proc(IWbemAddressResolution*, LibC::LPWSTR, LibC::LPWSTR, UInt32*, UInt8**, HRESULT)
   end
 
   IWbemAddressResolution_GUID = "f7ce2e12-8c90-11d1-9e7b-00c04fc324a8"
@@ -3655,10 +3655,10 @@ lib LibWin32
   end
 
   struct IWbemClientTransportVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    connect_server : UInt64
+    query_interface : Proc(IWbemClientTransport*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemClientTransport*, UInt32)
+    release : Proc(IWbemClientTransport*, UInt32)
+    connect_server : Proc(IWbemClientTransport*, UInt8*, UInt32, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, UInt8*, IWbemContext, IWbemServices*, HRESULT)
   end
 
   IWbemClientTransport_GUID = "f7ce2e11-8c90-11d1-9e7b-00c04fc324a8"
@@ -3668,12 +3668,12 @@ lib LibWin32
   end
 
   struct IWbemClientConnectionTransportVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    open : UInt64
-    open_async : UInt64
-    cancel : UInt64
+    query_interface : Proc(IWbemClientConnectionTransport*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemClientConnectionTransport*, UInt32)
+    release : Proc(IWbemClientConnectionTransport*, UInt32)
+    open : Proc(IWbemClientConnectionTransport*, UInt8*, UInt32, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, IWbemContext, Guid*, Void**, IWbemCallResult*, HRESULT)
+    open_async : Proc(IWbemClientConnectionTransport*, UInt8*, UInt32, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, IWbemContext, Guid*, IWbemObjectSink, HRESULT)
+    cancel : Proc(IWbemClientConnectionTransport*, Int32, IWbemObjectSink, HRESULT)
   end
 
   IWbemClientConnectionTransport_GUID = "a889c72a-fcc1-4a9e-af61-ed071333fb5b"
@@ -3683,13 +3683,13 @@ lib LibWin32
   end
 
   struct IWbemConstructClassObjectVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_inheritance_chain : UInt64
-    set_property_origin : UInt64
-    set_method_origin : UInt64
-    set_server_namespace : UInt64
+    query_interface : Proc(IWbemConstructClassObject*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWbemConstructClassObject*, UInt32)
+    release : Proc(IWbemConstructClassObject*, UInt32)
+    set_inheritance_chain : Proc(IWbemConstructClassObject*, Int32, LibC::LPWSTR*, HRESULT)
+    set_property_origin : Proc(IWbemConstructClassObject*, LibC::LPWSTR, Int32, HRESULT)
+    set_method_origin : Proc(IWbemConstructClassObject*, LibC::LPWSTR, Int32, HRESULT)
+    set_server_namespace : Proc(IWbemConstructClassObject*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
   IWbemConstructClassObject_GUID = "9ef76194-70d5-11d1-ad90-00c04fd8fdff"
@@ -3703,2599 +3703,2599 @@ lib LibWin32
   fun MI_Application_InitializeV1(flags : UInt32, applicationid : UInt16*, extendederror : MI_Instance**, application : MI_Application*) : MI_Result
 end
 struct LibWin32::IWbemPathKeyList
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemPathKeyList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemPathKeyList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemPathKeyList*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_count(pukeycount : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pukeycount)
+  def get_count(this : IWbemPathKeyList*, pukeycount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pukeycount)
   end
-  def set_key(wszname : LibC::LPWSTR, uflags : UInt32, ucimtype : UInt32, pkeyval : Void*) : HRESULT
-    @lpVtbl.value.set_key.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, Void*, HRESULT)).call(wszname, uflags, ucimtype, pkeyval)
+  def set_key(this : IWbemPathKeyList*, wszname : LibC::LPWSTR, uflags : UInt32, ucimtype : UInt32, pkeyval : Void*) : HRESULT
+    @lpVtbl.value.set_key.call(this, wszname, uflags, ucimtype, pkeyval)
   end
-  def set_key2(wszname : LibC::LPWSTR, uflags : UInt32, ucimtype : UInt32, pkeyval : VARIANT*) : HRESULT
-    @lpVtbl.value.set_key2.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, VARIANT*, HRESULT)).call(wszname, uflags, ucimtype, pkeyval)
+  def set_key2(this : IWbemPathKeyList*, wszname : LibC::LPWSTR, uflags : UInt32, ucimtype : UInt32, pkeyval : VARIANT*) : HRESULT
+    @lpVtbl.value.set_key2.call(this, wszname, uflags, ucimtype, pkeyval)
   end
-  def get_key(ukeyix : UInt32, uflags : UInt32, punamebufsize : UInt32*, pszkeyname : Char*, pukeyvalbufsize : UInt32*, pkeyval : Void*, puapparentcimtype : UInt32*) : HRESULT
-    @lpVtbl.value.get_key.unsafe_as(Proc(UInt32, UInt32, UInt32*, Char*, UInt32*, Void*, UInt32*, HRESULT)).call(ukeyix, uflags, punamebufsize, pszkeyname, pukeyvalbufsize, pkeyval, puapparentcimtype)
+  def get_key(this : IWbemPathKeyList*, ukeyix : UInt32, uflags : UInt32, punamebufsize : UInt32*, pszkeyname : Char*, pukeyvalbufsize : UInt32*, pkeyval : Void*, puapparentcimtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_key.call(this, ukeyix, uflags, punamebufsize, pszkeyname, pukeyvalbufsize, pkeyval, puapparentcimtype)
   end
-  def get_key2(ukeyix : UInt32, uflags : UInt32, punamebufsize : UInt32*, pszkeyname : Char*, pkeyvalue : VARIANT*, puapparentcimtype : UInt32*) : HRESULT
-    @lpVtbl.value.get_key2.unsafe_as(Proc(UInt32, UInt32, UInt32*, Char*, VARIANT*, UInt32*, HRESULT)).call(ukeyix, uflags, punamebufsize, pszkeyname, pkeyvalue, puapparentcimtype)
+  def get_key2(this : IWbemPathKeyList*, ukeyix : UInt32, uflags : UInt32, punamebufsize : UInt32*, pszkeyname : Char*, pkeyvalue : VARIANT*, puapparentcimtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_key2.call(this, ukeyix, uflags, punamebufsize, pszkeyname, pkeyvalue, puapparentcimtype)
   end
-  def remove_key(wszname : LibC::LPWSTR, uflags : UInt32) : HRESULT
-    @lpVtbl.value.remove_key.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(wszname, uflags)
+  def remove_key(this : IWbemPathKeyList*, wszname : LibC::LPWSTR, uflags : UInt32) : HRESULT
+    @lpVtbl.value.remove_key.call(this, wszname, uflags)
   end
-  def remove_all_keys(uflags : UInt32) : HRESULT
-    @lpVtbl.value.remove_all_keys.unsafe_as(Proc(UInt32, HRESULT)).call(uflags)
+  def remove_all_keys(this : IWbemPathKeyList*, uflags : UInt32) : HRESULT
+    @lpVtbl.value.remove_all_keys.call(this, uflags)
   end
-  def make_singleton(bset : UInt8) : HRESULT
-    @lpVtbl.value.make_singleton.unsafe_as(Proc(UInt8, HRESULT)).call(bset)
+  def make_singleton(this : IWbemPathKeyList*, bset : UInt8) : HRESULT
+    @lpVtbl.value.make_singleton.call(this, bset)
   end
-  def get_info(urequestedinfo : UInt32, puresponse : UInt64*) : HRESULT
-    @lpVtbl.value.get_info.unsafe_as(Proc(UInt32, UInt64*, HRESULT)).call(urequestedinfo, puresponse)
+  def get_info(this : IWbemPathKeyList*, urequestedinfo : UInt32, puresponse : UInt64*) : HRESULT
+    @lpVtbl.value.get_info.call(this, urequestedinfo, puresponse)
   end
-  def get_text(lflags : Int32, pubufflength : UInt32*, psztext : Char*) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(Int32, UInt32*, Char*, HRESULT)).call(lflags, pubufflength, psztext)
+  def get_text(this : IWbemPathKeyList*, lflags : Int32, pubufflength : UInt32*, psztext : Char*) : HRESULT
+    @lpVtbl.value.get_text.call(this, lflags, pubufflength, psztext)
   end
 end
 struct LibWin32::IWbemPath
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemPath*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemPath*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemPath*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_text(umode : UInt32, pszpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_text.unsafe_as(Proc(UInt32, LibC::LPWSTR, HRESULT)).call(umode, pszpath)
+  def set_text(this : IWbemPath*, umode : UInt32, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_text.call(this, umode, pszpath)
   end
-  def get_text(lflags : Int32, pubufflength : UInt32*, psztext : Char*) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(Int32, UInt32*, Char*, HRESULT)).call(lflags, pubufflength, psztext)
+  def get_text(this : IWbemPath*, lflags : Int32, pubufflength : UInt32*, psztext : Char*) : HRESULT
+    @lpVtbl.value.get_text.call(this, lflags, pubufflength, psztext)
   end
-  def get_info(urequestedinfo : UInt32, puresponse : UInt64*) : HRESULT
-    @lpVtbl.value.get_info.unsafe_as(Proc(UInt32, UInt64*, HRESULT)).call(urequestedinfo, puresponse)
+  def get_info(this : IWbemPath*, urequestedinfo : UInt32, puresponse : UInt64*) : HRESULT
+    @lpVtbl.value.get_info.call(this, urequestedinfo, puresponse)
   end
-  def set_server(name : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_server.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  def set_server(this : IWbemPath*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_server.call(this, name)
   end
-  def get_server(punamebuflength : UInt32*, pname : Char*) : HRESULT
-    @lpVtbl.value.get_server.unsafe_as(Proc(UInt32*, Char*, HRESULT)).call(punamebuflength, pname)
+  def get_server(this : IWbemPath*, punamebuflength : UInt32*, pname : Char*) : HRESULT
+    @lpVtbl.value.get_server.call(this, punamebuflength, pname)
   end
-  def get_namespace_count(pucount : UInt32*) : HRESULT
-    @lpVtbl.value.get_namespace_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pucount)
+  def get_namespace_count(this : IWbemPath*, pucount : UInt32*) : HRESULT
+    @lpVtbl.value.get_namespace_count.call(this, pucount)
   end
-  def set_namespace_at(uindex : UInt32, pszname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_namespace_at.unsafe_as(Proc(UInt32, LibC::LPWSTR, HRESULT)).call(uindex, pszname)
+  def set_namespace_at(this : IWbemPath*, uindex : UInt32, pszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_namespace_at.call(this, uindex, pszname)
   end
-  def get_namespace_at(uindex : UInt32, punamebuflength : UInt32*, pname : Char*) : HRESULT
-    @lpVtbl.value.get_namespace_at.unsafe_as(Proc(UInt32, UInt32*, Char*, HRESULT)).call(uindex, punamebuflength, pname)
+  def get_namespace_at(this : IWbemPath*, uindex : UInt32, punamebuflength : UInt32*, pname : Char*) : HRESULT
+    @lpVtbl.value.get_namespace_at.call(this, uindex, punamebuflength, pname)
   end
-  def remove_namespace_at(uindex : UInt32) : HRESULT
-    @lpVtbl.value.remove_namespace_at.unsafe_as(Proc(UInt32, HRESULT)).call(uindex)
+  def remove_namespace_at(this : IWbemPath*, uindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_namespace_at.call(this, uindex)
   end
-  def remove_all_namespaces : HRESULT
-    @lpVtbl.value.remove_all_namespaces.unsafe_as(Proc(HRESULT)).call
+  def remove_all_namespaces(this : IWbemPath*) : HRESULT
+    @lpVtbl.value.remove_all_namespaces.call(this)
   end
-  def get_scope_count(pucount : UInt32*) : HRESULT
-    @lpVtbl.value.get_scope_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pucount)
+  def get_scope_count(this : IWbemPath*, pucount : UInt32*) : HRESULT
+    @lpVtbl.value.get_scope_count.call(this, pucount)
   end
-  def set_scope(uindex : UInt32, pszclass : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_scope.unsafe_as(Proc(UInt32, LibC::LPWSTR, HRESULT)).call(uindex, pszclass)
+  def set_scope(this : IWbemPath*, uindex : UInt32, pszclass : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_scope.call(this, uindex, pszclass)
   end
-  def set_scope_from_text(uindex : UInt32, psztext : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_scope_from_text.unsafe_as(Proc(UInt32, LibC::LPWSTR, HRESULT)).call(uindex, psztext)
+  def set_scope_from_text(this : IWbemPath*, uindex : UInt32, psztext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_scope_from_text.call(this, uindex, psztext)
   end
-  def get_scope(uindex : UInt32, puclassnamebufsize : UInt32*, pszclass : Char*, pkeylist : IWbemPathKeyList*) : HRESULT
-    @lpVtbl.value.get_scope.unsafe_as(Proc(UInt32, UInt32*, Char*, IWbemPathKeyList*, HRESULT)).call(uindex, puclassnamebufsize, pszclass, pkeylist)
+  def get_scope(this : IWbemPath*, uindex : UInt32, puclassnamebufsize : UInt32*, pszclass : Char*, pkeylist : IWbemPathKeyList*) : HRESULT
+    @lpVtbl.value.get_scope.call(this, uindex, puclassnamebufsize, pszclass, pkeylist)
   end
-  def get_scope_as_text(uindex : UInt32, putextbufsize : UInt32*, psztext : Char*) : HRESULT
-    @lpVtbl.value.get_scope_as_text.unsafe_as(Proc(UInt32, UInt32*, Char*, HRESULT)).call(uindex, putextbufsize, psztext)
+  def get_scope_as_text(this : IWbemPath*, uindex : UInt32, putextbufsize : UInt32*, psztext : Char*) : HRESULT
+    @lpVtbl.value.get_scope_as_text.call(this, uindex, putextbufsize, psztext)
   end
-  def remove_scope(uindex : UInt32) : HRESULT
-    @lpVtbl.value.remove_scope.unsafe_as(Proc(UInt32, HRESULT)).call(uindex)
+  def remove_scope(this : IWbemPath*, uindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_scope.call(this, uindex)
   end
-  def remove_all_scopes : HRESULT
-    @lpVtbl.value.remove_all_scopes.unsafe_as(Proc(HRESULT)).call
+  def remove_all_scopes(this : IWbemPath*) : HRESULT
+    @lpVtbl.value.remove_all_scopes.call(this)
   end
-  def set_class_name(name : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_class_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  def set_class_name(this : IWbemPath*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_class_name.call(this, name)
   end
-  def get_class_name(pubufflength : UInt32*, pszname : Char*) : HRESULT
-    @lpVtbl.value.get_class_name.unsafe_as(Proc(UInt32*, Char*, HRESULT)).call(pubufflength, pszname)
+  def get_class_name(this : IWbemPath*, pubufflength : UInt32*, pszname : Char*) : HRESULT
+    @lpVtbl.value.get_class_name.call(this, pubufflength, pszname)
   end
-  def get_key_list(pout : IWbemPathKeyList*) : HRESULT
-    @lpVtbl.value.get_key_list.unsafe_as(Proc(IWbemPathKeyList*, HRESULT)).call(pout)
+  def get_key_list(this : IWbemPath*, pout : IWbemPathKeyList*) : HRESULT
+    @lpVtbl.value.get_key_list.call(this, pout)
   end
-  def create_class_part(lflags : Int32, name : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.create_class_part.unsafe_as(Proc(Int32, LibC::LPWSTR, HRESULT)).call(lflags, name)
+  def create_class_part(this : IWbemPath*, lflags : Int32, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.create_class_part.call(this, lflags, name)
   end
-  def delete_class_part(lflags : Int32) : HRESULT
-    @lpVtbl.value.delete_class_part.unsafe_as(Proc(Int32, HRESULT)).call(lflags)
+  def delete_class_part(this : IWbemPath*, lflags : Int32) : HRESULT
+    @lpVtbl.value.delete_class_part.call(this, lflags)
   end
-  def is_relative(wszmachine : LibC::LPWSTR, wsznamespace : LibC::LPWSTR) : LibC::BOOL
-    @lpVtbl.value.is_relative.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL)).call(wszmachine, wsznamespace)
+  def is_relative(this : IWbemPath*, wszmachine : LibC::LPWSTR, wsznamespace : LibC::LPWSTR) : LibC::BOOL
+    @lpVtbl.value.is_relative.call(this, wszmachine, wsznamespace)
   end
-  def is_relative_or_child(wszmachine : LibC::LPWSTR, wsznamespace : LibC::LPWSTR, lflags : Int32) : LibC::BOOL
-    @lpVtbl.value.is_relative_or_child.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, Int32, LibC::BOOL)).call(wszmachine, wsznamespace, lflags)
+  def is_relative_or_child(this : IWbemPath*, wszmachine : LibC::LPWSTR, wsznamespace : LibC::LPWSTR, lflags : Int32) : LibC::BOOL
+    @lpVtbl.value.is_relative_or_child.call(this, wszmachine, wsznamespace, lflags)
   end
-  def is_local(wszmachine : LibC::LPWSTR) : LibC::BOOL
-    @lpVtbl.value.is_local.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL)).call(wszmachine)
+  def is_local(this : IWbemPath*, wszmachine : LibC::LPWSTR) : LibC::BOOL
+    @lpVtbl.value.is_local.call(this, wszmachine)
   end
-  def is_same_class_name(wszclass : LibC::LPWSTR) : LibC::BOOL
-    @lpVtbl.value.is_same_class_name.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL)).call(wszclass)
+  def is_same_class_name(this : IWbemPath*, wszclass : LibC::LPWSTR) : LibC::BOOL
+    @lpVtbl.value.is_same_class_name.call(this, wszclass)
   end
 end
 struct LibWin32::IWbemQuery
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemQuery*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemQuery*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemQuery*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def empty : HRESULT
-    @lpVtbl.value.empty.unsafe_as(Proc(HRESULT)).call
+  def empty(this : IWbemQuery*) : HRESULT
+    @lpVtbl.value.empty.call(this)
   end
-  def set_language_features(uflags : UInt32, uarraysize : UInt32, pufeatures : UInt32*) : HRESULT
-    @lpVtbl.value.set_language_features.unsafe_as(Proc(UInt32, UInt32, UInt32*, HRESULT)).call(uflags, uarraysize, pufeatures)
+  def set_language_features(this : IWbemQuery*, uflags : UInt32, uarraysize : UInt32, pufeatures : UInt32*) : HRESULT
+    @lpVtbl.value.set_language_features.call(this, uflags, uarraysize, pufeatures)
   end
-  def test_language_features(uflags : UInt32, uarraysize : UInt32*, pufeatures : UInt32*) : HRESULT
-    @lpVtbl.value.test_language_features.unsafe_as(Proc(UInt32, UInt32*, UInt32*, HRESULT)).call(uflags, uarraysize, pufeatures)
+  def test_language_features(this : IWbemQuery*, uflags : UInt32, uarraysize : UInt32*, pufeatures : UInt32*) : HRESULT
+    @lpVtbl.value.test_language_features.call(this, uflags, uarraysize, pufeatures)
   end
-  def parse(pszlang : LibC::LPWSTR, pszquery : LibC::LPWSTR, uflags : UInt32) : HRESULT
-    @lpVtbl.value.parse.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(pszlang, pszquery, uflags)
+  def parse(this : IWbemQuery*, pszlang : LibC::LPWSTR, pszquery : LibC::LPWSTR, uflags : UInt32) : HRESULT
+    @lpVtbl.value.parse.call(this, pszlang, pszquery, uflags)
   end
-  def get_analysis(uanalysistype : UInt32, uflags : UInt32, panalysis : Void**) : HRESULT
-    @lpVtbl.value.get_analysis.unsafe_as(Proc(UInt32, UInt32, Void**, HRESULT)).call(uanalysistype, uflags, panalysis)
+  def get_analysis(this : IWbemQuery*, uanalysistype : UInt32, uflags : UInt32, panalysis : Void**) : HRESULT
+    @lpVtbl.value.get_analysis.call(this, uanalysistype, uflags, panalysis)
   end
-  def free_memory(pmem : Void*) : HRESULT
-    @lpVtbl.value.free_memory.unsafe_as(Proc(Void*, HRESULT)).call(pmem)
+  def free_memory(this : IWbemQuery*, pmem : Void*) : HRESULT
+    @lpVtbl.value.free_memory.call(this, pmem)
   end
-  def get_query_info(uanalysistype : UInt32, uinfoid : UInt32, ubufsize : UInt32, pdestbuf : Void*) : HRESULT
-    @lpVtbl.value.get_query_info.unsafe_as(Proc(UInt32, UInt32, UInt32, Void*, HRESULT)).call(uanalysistype, uinfoid, ubufsize, pdestbuf)
+  def get_query_info(this : IWbemQuery*, uanalysistype : UInt32, uinfoid : UInt32, ubufsize : UInt32, pdestbuf : Void*) : HRESULT
+    @lpVtbl.value.get_query_info.call(this, uanalysistype, uinfoid, ubufsize, pdestbuf)
   end
 end
 struct LibWin32::IWbemClassObject
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemClassObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemClassObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemClassObject*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_qualifier_set(ppqualset : IWbemQualifierSet*) : HRESULT
-    @lpVtbl.value.get_qualifier_set.unsafe_as(Proc(IWbemQualifierSet*, HRESULT)).call(ppqualset)
+  def get_qualifier_set(this : IWbemClassObject*, ppqualset : IWbemQualifierSet*) : HRESULT
+    @lpVtbl.value.get_qualifier_set.call(this, ppqualset)
   end
-  def get(wszname : LibC::LPWSTR, lflags : Int32, pval : VARIANT*, ptype : Int32*, plflavor : Int32*) : HRESULT
-    @lpVtbl.value.get.unsafe_as(Proc(LibC::LPWSTR, Int32, VARIANT*, Int32*, Int32*, HRESULT)).call(wszname, lflags, pval, ptype, plflavor)
+  def get(this : IWbemClassObject*, wszname : LibC::LPWSTR, lflags : Int32, pval : VARIANT*, ptype : Int32*, plflavor : Int32*) : HRESULT
+    @lpVtbl.value.get.call(this, wszname, lflags, pval, ptype, plflavor)
   end
-  def put(wszname : LibC::LPWSTR, lflags : Int32, pval : VARIANT*, type : Int32) : HRESULT
-    @lpVtbl.value.put.unsafe_as(Proc(LibC::LPWSTR, Int32, VARIANT*, Int32, HRESULT)).call(wszname, lflags, pval, type)
+  def put(this : IWbemClassObject*, wszname : LibC::LPWSTR, lflags : Int32, pval : VARIANT*, type : Int32) : HRESULT
+    @lpVtbl.value.put.call(this, wszname, lflags, pval, type)
   end
-  def delete(wszname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszname)
+  def delete(this : IWbemClassObject*, wszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete.call(this, wszname)
   end
-  def get_names(wszqualifiername : LibC::LPWSTR, lflags : Int32, pqualifierval : VARIANT*, pnames : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_names.unsafe_as(Proc(LibC::LPWSTR, Int32, VARIANT*, SAFEARRAY**, HRESULT)).call(wszqualifiername, lflags, pqualifierval, pnames)
+  def get_names(this : IWbemClassObject*, wszqualifiername : LibC::LPWSTR, lflags : Int32, pqualifierval : VARIANT*, pnames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_names.call(this, wszqualifiername, lflags, pqualifierval, pnames)
   end
-  def begin_enumeration(lenumflags : Int32) : HRESULT
-    @lpVtbl.value.begin_enumeration.unsafe_as(Proc(Int32, HRESULT)).call(lenumflags)
+  def begin_enumeration(this : IWbemClassObject*, lenumflags : Int32) : HRESULT
+    @lpVtbl.value.begin_enumeration.call(this, lenumflags)
   end
-  def next(lflags : Int32, strname : UInt8**, pval : VARIANT*, ptype : Int32*, plflavor : Int32*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(Int32, UInt8**, VARIANT*, Int32*, Int32*, HRESULT)).call(lflags, strname, pval, ptype, plflavor)
+  def next(this : IWbemClassObject*, lflags : Int32, strname : UInt8**, pval : VARIANT*, ptype : Int32*, plflavor : Int32*) : HRESULT
+    @lpVtbl.value.next.call(this, lflags, strname, pval, ptype, plflavor)
   end
-  def end_enumeration : HRESULT
-    @lpVtbl.value.end_enumeration.unsafe_as(Proc(HRESULT)).call
+  def end_enumeration(this : IWbemClassObject*) : HRESULT
+    @lpVtbl.value.end_enumeration.call(this)
   end
-  def get_property_qualifier_set(wszproperty : LibC::LPWSTR, ppqualset : IWbemQualifierSet*) : HRESULT
-    @lpVtbl.value.get_property_qualifier_set.unsafe_as(Proc(LibC::LPWSTR, IWbemQualifierSet*, HRESULT)).call(wszproperty, ppqualset)
+  def get_property_qualifier_set(this : IWbemClassObject*, wszproperty : LibC::LPWSTR, ppqualset : IWbemQualifierSet*) : HRESULT
+    @lpVtbl.value.get_property_qualifier_set.call(this, wszproperty, ppqualset)
   end
-  def clone(ppcopy : IWbemClassObject*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IWbemClassObject*, HRESULT)).call(ppcopy)
+  def clone(this : IWbemClassObject*, ppcopy : IWbemClassObject*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppcopy)
   end
-  def get_object_text(lflags : Int32, pstrobjecttext : UInt8**) : HRESULT
-    @lpVtbl.value.get_object_text.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(lflags, pstrobjecttext)
+  def get_object_text(this : IWbemClassObject*, lflags : Int32, pstrobjecttext : UInt8**) : HRESULT
+    @lpVtbl.value.get_object_text.call(this, lflags, pstrobjecttext)
   end
-  def spawn_derived_class(lflags : Int32, ppnewclass : IWbemClassObject*) : HRESULT
-    @lpVtbl.value.spawn_derived_class.unsafe_as(Proc(Int32, IWbemClassObject*, HRESULT)).call(lflags, ppnewclass)
+  def spawn_derived_class(this : IWbemClassObject*, lflags : Int32, ppnewclass : IWbemClassObject*) : HRESULT
+    @lpVtbl.value.spawn_derived_class.call(this, lflags, ppnewclass)
   end
-  def spawn_instance(lflags : Int32, ppnewinstance : IWbemClassObject*) : HRESULT
-    @lpVtbl.value.spawn_instance.unsafe_as(Proc(Int32, IWbemClassObject*, HRESULT)).call(lflags, ppnewinstance)
+  def spawn_instance(this : IWbemClassObject*, lflags : Int32, ppnewinstance : IWbemClassObject*) : HRESULT
+    @lpVtbl.value.spawn_instance.call(this, lflags, ppnewinstance)
   end
-  def compare_to(lflags : Int32, pcompareto : IWbemClassObject) : HRESULT
-    @lpVtbl.value.compare_to.unsafe_as(Proc(Int32, IWbemClassObject, HRESULT)).call(lflags, pcompareto)
+  def compare_to(this : IWbemClassObject*, lflags : Int32, pcompareto : IWbemClassObject) : HRESULT
+    @lpVtbl.value.compare_to.call(this, lflags, pcompareto)
   end
-  def get_property_origin(wszname : LibC::LPWSTR, pstrclassname : UInt8**) : HRESULT
-    @lpVtbl.value.get_property_origin.unsafe_as(Proc(LibC::LPWSTR, UInt8**, HRESULT)).call(wszname, pstrclassname)
+  def get_property_origin(this : IWbemClassObject*, wszname : LibC::LPWSTR, pstrclassname : UInt8**) : HRESULT
+    @lpVtbl.value.get_property_origin.call(this, wszname, pstrclassname)
   end
-  def inherits_from(strancestor : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.inherits_from.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(strancestor)
+  def inherits_from(this : IWbemClassObject*, strancestor : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.inherits_from.call(this, strancestor)
   end
-  def get_method(wszname : LibC::LPWSTR, lflags : Int32, ppinsignature : IWbemClassObject*, ppoutsignature : IWbemClassObject*) : HRESULT
-    @lpVtbl.value.get_method.unsafe_as(Proc(LibC::LPWSTR, Int32, IWbemClassObject*, IWbemClassObject*, HRESULT)).call(wszname, lflags, ppinsignature, ppoutsignature)
+  def get_method(this : IWbemClassObject*, wszname : LibC::LPWSTR, lflags : Int32, ppinsignature : IWbemClassObject*, ppoutsignature : IWbemClassObject*) : HRESULT
+    @lpVtbl.value.get_method.call(this, wszname, lflags, ppinsignature, ppoutsignature)
   end
-  def put_method(wszname : LibC::LPWSTR, lflags : Int32, pinsignature : IWbemClassObject, poutsignature : IWbemClassObject) : HRESULT
-    @lpVtbl.value.put_method.unsafe_as(Proc(LibC::LPWSTR, Int32, IWbemClassObject, IWbemClassObject, HRESULT)).call(wszname, lflags, pinsignature, poutsignature)
+  def put_method(this : IWbemClassObject*, wszname : LibC::LPWSTR, lflags : Int32, pinsignature : IWbemClassObject, poutsignature : IWbemClassObject) : HRESULT
+    @lpVtbl.value.put_method.call(this, wszname, lflags, pinsignature, poutsignature)
   end
-  def delete_method(wszname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.delete_method.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszname)
+  def delete_method(this : IWbemClassObject*, wszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_method.call(this, wszname)
   end
-  def begin_method_enumeration(lenumflags : Int32) : HRESULT
-    @lpVtbl.value.begin_method_enumeration.unsafe_as(Proc(Int32, HRESULT)).call(lenumflags)
+  def begin_method_enumeration(this : IWbemClassObject*, lenumflags : Int32) : HRESULT
+    @lpVtbl.value.begin_method_enumeration.call(this, lenumflags)
   end
-  def next_method(lflags : Int32, pstrname : UInt8**, ppinsignature : IWbemClassObject*, ppoutsignature : IWbemClassObject*) : HRESULT
-    @lpVtbl.value.next_method.unsafe_as(Proc(Int32, UInt8**, IWbemClassObject*, IWbemClassObject*, HRESULT)).call(lflags, pstrname, ppinsignature, ppoutsignature)
+  def next_method(this : IWbemClassObject*, lflags : Int32, pstrname : UInt8**, ppinsignature : IWbemClassObject*, ppoutsignature : IWbemClassObject*) : HRESULT
+    @lpVtbl.value.next_method.call(this, lflags, pstrname, ppinsignature, ppoutsignature)
   end
-  def end_method_enumeration : HRESULT
-    @lpVtbl.value.end_method_enumeration.unsafe_as(Proc(HRESULT)).call
+  def end_method_enumeration(this : IWbemClassObject*) : HRESULT
+    @lpVtbl.value.end_method_enumeration.call(this)
   end
-  def get_method_qualifier_set(wszmethod : LibC::LPWSTR, ppqualset : IWbemQualifierSet*) : HRESULT
-    @lpVtbl.value.get_method_qualifier_set.unsafe_as(Proc(LibC::LPWSTR, IWbemQualifierSet*, HRESULT)).call(wszmethod, ppqualset)
+  def get_method_qualifier_set(this : IWbemClassObject*, wszmethod : LibC::LPWSTR, ppqualset : IWbemQualifierSet*) : HRESULT
+    @lpVtbl.value.get_method_qualifier_set.call(this, wszmethod, ppqualset)
   end
-  def get_method_origin(wszmethodname : LibC::LPWSTR, pstrclassname : UInt8**) : HRESULT
-    @lpVtbl.value.get_method_origin.unsafe_as(Proc(LibC::LPWSTR, UInt8**, HRESULT)).call(wszmethodname, pstrclassname)
+  def get_method_origin(this : IWbemClassObject*, wszmethodname : LibC::LPWSTR, pstrclassname : UInt8**) : HRESULT
+    @lpVtbl.value.get_method_origin.call(this, wszmethodname, pstrclassname)
   end
 end
 struct LibWin32::IWbemObjectAccess
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemObjectAccess*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemObjectAccess*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemObjectAccess*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_qualifier_set(ppqualset : IWbemQualifierSet*) : HRESULT
-    @lpVtbl.value.get_qualifier_set.unsafe_as(Proc(IWbemQualifierSet*, HRESULT)).call(ppqualset)
+  def get_qualifier_set(this : IWbemObjectAccess*, ppqualset : IWbemQualifierSet*) : HRESULT
+    @lpVtbl.value.get_qualifier_set.call(this, ppqualset)
   end
-  def get(wszname : LibC::LPWSTR, lflags : Int32, pval : VARIANT*, ptype : Int32*, plflavor : Int32*) : HRESULT
-    @lpVtbl.value.get.unsafe_as(Proc(LibC::LPWSTR, Int32, VARIANT*, Int32*, Int32*, HRESULT)).call(wszname, lflags, pval, ptype, plflavor)
+  def get(this : IWbemObjectAccess*, wszname : LibC::LPWSTR, lflags : Int32, pval : VARIANT*, ptype : Int32*, plflavor : Int32*) : HRESULT
+    @lpVtbl.value.get.call(this, wszname, lflags, pval, ptype, plflavor)
   end
-  def put(wszname : LibC::LPWSTR, lflags : Int32, pval : VARIANT*, type : Int32) : HRESULT
-    @lpVtbl.value.put.unsafe_as(Proc(LibC::LPWSTR, Int32, VARIANT*, Int32, HRESULT)).call(wszname, lflags, pval, type)
+  def put(this : IWbemObjectAccess*, wszname : LibC::LPWSTR, lflags : Int32, pval : VARIANT*, type : Int32) : HRESULT
+    @lpVtbl.value.put.call(this, wszname, lflags, pval, type)
   end
-  def delete(wszname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszname)
+  def delete(this : IWbemObjectAccess*, wszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete.call(this, wszname)
   end
-  def get_names(wszqualifiername : LibC::LPWSTR, lflags : Int32, pqualifierval : VARIANT*, pnames : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_names.unsafe_as(Proc(LibC::LPWSTR, Int32, VARIANT*, SAFEARRAY**, HRESULT)).call(wszqualifiername, lflags, pqualifierval, pnames)
+  def get_names(this : IWbemObjectAccess*, wszqualifiername : LibC::LPWSTR, lflags : Int32, pqualifierval : VARIANT*, pnames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_names.call(this, wszqualifiername, lflags, pqualifierval, pnames)
   end
-  def begin_enumeration(lenumflags : Int32) : HRESULT
-    @lpVtbl.value.begin_enumeration.unsafe_as(Proc(Int32, HRESULT)).call(lenumflags)
+  def begin_enumeration(this : IWbemObjectAccess*, lenumflags : Int32) : HRESULT
+    @lpVtbl.value.begin_enumeration.call(this, lenumflags)
   end
-  def next(lflags : Int32, strname : UInt8**, pval : VARIANT*, ptype : Int32*, plflavor : Int32*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(Int32, UInt8**, VARIANT*, Int32*, Int32*, HRESULT)).call(lflags, strname, pval, ptype, plflavor)
+  def next(this : IWbemObjectAccess*, lflags : Int32, strname : UInt8**, pval : VARIANT*, ptype : Int32*, plflavor : Int32*) : HRESULT
+    @lpVtbl.value.next.call(this, lflags, strname, pval, ptype, plflavor)
   end
-  def end_enumeration : HRESULT
-    @lpVtbl.value.end_enumeration.unsafe_as(Proc(HRESULT)).call
+  def end_enumeration(this : IWbemObjectAccess*) : HRESULT
+    @lpVtbl.value.end_enumeration.call(this)
   end
-  def get_property_qualifier_set(wszproperty : LibC::LPWSTR, ppqualset : IWbemQualifierSet*) : HRESULT
-    @lpVtbl.value.get_property_qualifier_set.unsafe_as(Proc(LibC::LPWSTR, IWbemQualifierSet*, HRESULT)).call(wszproperty, ppqualset)
+  def get_property_qualifier_set(this : IWbemObjectAccess*, wszproperty : LibC::LPWSTR, ppqualset : IWbemQualifierSet*) : HRESULT
+    @lpVtbl.value.get_property_qualifier_set.call(this, wszproperty, ppqualset)
   end
-  def clone(ppcopy : IWbemClassObject*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IWbemClassObject*, HRESULT)).call(ppcopy)
+  def clone(this : IWbemObjectAccess*, ppcopy : IWbemClassObject*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppcopy)
   end
-  def get_object_text(lflags : Int32, pstrobjecttext : UInt8**) : HRESULT
-    @lpVtbl.value.get_object_text.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(lflags, pstrobjecttext)
+  def get_object_text(this : IWbemObjectAccess*, lflags : Int32, pstrobjecttext : UInt8**) : HRESULT
+    @lpVtbl.value.get_object_text.call(this, lflags, pstrobjecttext)
   end
-  def spawn_derived_class(lflags : Int32, ppnewclass : IWbemClassObject*) : HRESULT
-    @lpVtbl.value.spawn_derived_class.unsafe_as(Proc(Int32, IWbemClassObject*, HRESULT)).call(lflags, ppnewclass)
+  def spawn_derived_class(this : IWbemObjectAccess*, lflags : Int32, ppnewclass : IWbemClassObject*) : HRESULT
+    @lpVtbl.value.spawn_derived_class.call(this, lflags, ppnewclass)
   end
-  def spawn_instance(lflags : Int32, ppnewinstance : IWbemClassObject*) : HRESULT
-    @lpVtbl.value.spawn_instance.unsafe_as(Proc(Int32, IWbemClassObject*, HRESULT)).call(lflags, ppnewinstance)
+  def spawn_instance(this : IWbemObjectAccess*, lflags : Int32, ppnewinstance : IWbemClassObject*) : HRESULT
+    @lpVtbl.value.spawn_instance.call(this, lflags, ppnewinstance)
   end
-  def compare_to(lflags : Int32, pcompareto : IWbemClassObject) : HRESULT
-    @lpVtbl.value.compare_to.unsafe_as(Proc(Int32, IWbemClassObject, HRESULT)).call(lflags, pcompareto)
+  def compare_to(this : IWbemObjectAccess*, lflags : Int32, pcompareto : IWbemClassObject) : HRESULT
+    @lpVtbl.value.compare_to.call(this, lflags, pcompareto)
   end
-  def get_property_origin(wszname : LibC::LPWSTR, pstrclassname : UInt8**) : HRESULT
-    @lpVtbl.value.get_property_origin.unsafe_as(Proc(LibC::LPWSTR, UInt8**, HRESULT)).call(wszname, pstrclassname)
+  def get_property_origin(this : IWbemObjectAccess*, wszname : LibC::LPWSTR, pstrclassname : UInt8**) : HRESULT
+    @lpVtbl.value.get_property_origin.call(this, wszname, pstrclassname)
   end
-  def inherits_from(strancestor : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.inherits_from.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(strancestor)
+  def inherits_from(this : IWbemObjectAccess*, strancestor : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.inherits_from.call(this, strancestor)
   end
-  def get_method(wszname : LibC::LPWSTR, lflags : Int32, ppinsignature : IWbemClassObject*, ppoutsignature : IWbemClassObject*) : HRESULT
-    @lpVtbl.value.get_method.unsafe_as(Proc(LibC::LPWSTR, Int32, IWbemClassObject*, IWbemClassObject*, HRESULT)).call(wszname, lflags, ppinsignature, ppoutsignature)
+  def get_method(this : IWbemObjectAccess*, wszname : LibC::LPWSTR, lflags : Int32, ppinsignature : IWbemClassObject*, ppoutsignature : IWbemClassObject*) : HRESULT
+    @lpVtbl.value.get_method.call(this, wszname, lflags, ppinsignature, ppoutsignature)
   end
-  def put_method(wszname : LibC::LPWSTR, lflags : Int32, pinsignature : IWbemClassObject, poutsignature : IWbemClassObject) : HRESULT
-    @lpVtbl.value.put_method.unsafe_as(Proc(LibC::LPWSTR, Int32, IWbemClassObject, IWbemClassObject, HRESULT)).call(wszname, lflags, pinsignature, poutsignature)
+  def put_method(this : IWbemObjectAccess*, wszname : LibC::LPWSTR, lflags : Int32, pinsignature : IWbemClassObject, poutsignature : IWbemClassObject) : HRESULT
+    @lpVtbl.value.put_method.call(this, wszname, lflags, pinsignature, poutsignature)
   end
-  def delete_method(wszname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.delete_method.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszname)
+  def delete_method(this : IWbemObjectAccess*, wszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_method.call(this, wszname)
   end
-  def begin_method_enumeration(lenumflags : Int32) : HRESULT
-    @lpVtbl.value.begin_method_enumeration.unsafe_as(Proc(Int32, HRESULT)).call(lenumflags)
+  def begin_method_enumeration(this : IWbemObjectAccess*, lenumflags : Int32) : HRESULT
+    @lpVtbl.value.begin_method_enumeration.call(this, lenumflags)
   end
-  def next_method(lflags : Int32, pstrname : UInt8**, ppinsignature : IWbemClassObject*, ppoutsignature : IWbemClassObject*) : HRESULT
-    @lpVtbl.value.next_method.unsafe_as(Proc(Int32, UInt8**, IWbemClassObject*, IWbemClassObject*, HRESULT)).call(lflags, pstrname, ppinsignature, ppoutsignature)
+  def next_method(this : IWbemObjectAccess*, lflags : Int32, pstrname : UInt8**, ppinsignature : IWbemClassObject*, ppoutsignature : IWbemClassObject*) : HRESULT
+    @lpVtbl.value.next_method.call(this, lflags, pstrname, ppinsignature, ppoutsignature)
   end
-  def end_method_enumeration : HRESULT
-    @lpVtbl.value.end_method_enumeration.unsafe_as(Proc(HRESULT)).call
+  def end_method_enumeration(this : IWbemObjectAccess*) : HRESULT
+    @lpVtbl.value.end_method_enumeration.call(this)
   end
-  def get_method_qualifier_set(wszmethod : LibC::LPWSTR, ppqualset : IWbemQualifierSet*) : HRESULT
-    @lpVtbl.value.get_method_qualifier_set.unsafe_as(Proc(LibC::LPWSTR, IWbemQualifierSet*, HRESULT)).call(wszmethod, ppqualset)
+  def get_method_qualifier_set(this : IWbemObjectAccess*, wszmethod : LibC::LPWSTR, ppqualset : IWbemQualifierSet*) : HRESULT
+    @lpVtbl.value.get_method_qualifier_set.call(this, wszmethod, ppqualset)
   end
-  def get_method_origin(wszmethodname : LibC::LPWSTR, pstrclassname : UInt8**) : HRESULT
-    @lpVtbl.value.get_method_origin.unsafe_as(Proc(LibC::LPWSTR, UInt8**, HRESULT)).call(wszmethodname, pstrclassname)
+  def get_method_origin(this : IWbemObjectAccess*, wszmethodname : LibC::LPWSTR, pstrclassname : UInt8**) : HRESULT
+    @lpVtbl.value.get_method_origin.call(this, wszmethodname, pstrclassname)
   end
-  def get_property_handle(wszpropertyname : LibC::LPWSTR, ptype : Int32*, plhandle : Int32*) : HRESULT
-    @lpVtbl.value.get_property_handle.unsafe_as(Proc(LibC::LPWSTR, Int32*, Int32*, HRESULT)).call(wszpropertyname, ptype, plhandle)
+  def get_property_handle(this : IWbemObjectAccess*, wszpropertyname : LibC::LPWSTR, ptype : Int32*, plhandle : Int32*) : HRESULT
+    @lpVtbl.value.get_property_handle.call(this, wszpropertyname, ptype, plhandle)
   end
-  def write_property_value(lhandle : Int32, lnumbytes : Int32, adata : UInt8*) : HRESULT
-    @lpVtbl.value.write_property_value.unsafe_as(Proc(Int32, Int32, UInt8*, HRESULT)).call(lhandle, lnumbytes, adata)
+  def write_property_value(this : IWbemObjectAccess*, lhandle : Int32, lnumbytes : Int32, adata : UInt8*) : HRESULT
+    @lpVtbl.value.write_property_value.call(this, lhandle, lnumbytes, adata)
   end
-  def read_property_value(lhandle : Int32, lbuffersize : Int32, plnumbytes : Int32*, adata : UInt8*) : HRESULT
-    @lpVtbl.value.read_property_value.unsafe_as(Proc(Int32, Int32, Int32*, UInt8*, HRESULT)).call(lhandle, lbuffersize, plnumbytes, adata)
+  def read_property_value(this : IWbemObjectAccess*, lhandle : Int32, lbuffersize : Int32, plnumbytes : Int32*, adata : UInt8*) : HRESULT
+    @lpVtbl.value.read_property_value.call(this, lhandle, lbuffersize, plnumbytes, adata)
   end
-  def read_dword(lhandle : Int32, pdw : UInt32*) : HRESULT
-    @lpVtbl.value.read_dword.unsafe_as(Proc(Int32, UInt32*, HRESULT)).call(lhandle, pdw)
+  def read_dword(this : IWbemObjectAccess*, lhandle : Int32, pdw : UInt32*) : HRESULT
+    @lpVtbl.value.read_dword.call(this, lhandle, pdw)
   end
-  def write_dword(lhandle : Int32, dw : UInt32) : HRESULT
-    @lpVtbl.value.write_dword.unsafe_as(Proc(Int32, UInt32, HRESULT)).call(lhandle, dw)
+  def write_dword(this : IWbemObjectAccess*, lhandle : Int32, dw : UInt32) : HRESULT
+    @lpVtbl.value.write_dword.call(this, lhandle, dw)
   end
-  def read_qword(lhandle : Int32, pqw : UInt64*) : HRESULT
-    @lpVtbl.value.read_qword.unsafe_as(Proc(Int32, UInt64*, HRESULT)).call(lhandle, pqw)
+  def read_qword(this : IWbemObjectAccess*, lhandle : Int32, pqw : UInt64*) : HRESULT
+    @lpVtbl.value.read_qword.call(this, lhandle, pqw)
   end
-  def write_qword(lhandle : Int32, pw : UInt64) : HRESULT
-    @lpVtbl.value.write_qword.unsafe_as(Proc(Int32, UInt64, HRESULT)).call(lhandle, pw)
+  def write_qword(this : IWbemObjectAccess*, lhandle : Int32, pw : UInt64) : HRESULT
+    @lpVtbl.value.write_qword.call(this, lhandle, pw)
   end
-  def get_property_info_by_handle(lhandle : Int32, pstrname : UInt8**, ptype : Int32*) : HRESULT
-    @lpVtbl.value.get_property_info_by_handle.unsafe_as(Proc(Int32, UInt8**, Int32*, HRESULT)).call(lhandle, pstrname, ptype)
+  def get_property_info_by_handle(this : IWbemObjectAccess*, lhandle : Int32, pstrname : UInt8**, ptype : Int32*) : HRESULT
+    @lpVtbl.value.get_property_info_by_handle.call(this, lhandle, pstrname, ptype)
   end
-  def lock(lflags : Int32) : HRESULT
-    @lpVtbl.value.lock.unsafe_as(Proc(Int32, HRESULT)).call(lflags)
+  def lock(this : IWbemObjectAccess*, lflags : Int32) : HRESULT
+    @lpVtbl.value.lock.call(this, lflags)
   end
-  def unlock(lflags : Int32) : HRESULT
-    @lpVtbl.value.unlock.unsafe_as(Proc(Int32, HRESULT)).call(lflags)
+  def unlock(this : IWbemObjectAccess*, lflags : Int32) : HRESULT
+    @lpVtbl.value.unlock.call(this, lflags)
   end
 end
 struct LibWin32::IWbemQualifierSet
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemQualifierSet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemQualifierSet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemQualifierSet*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get(wszname : LibC::LPWSTR, lflags : Int32, pval : VARIANT*, plflavor : Int32*) : HRESULT
-    @lpVtbl.value.get.unsafe_as(Proc(LibC::LPWSTR, Int32, VARIANT*, Int32*, HRESULT)).call(wszname, lflags, pval, plflavor)
+  def get(this : IWbemQualifierSet*, wszname : LibC::LPWSTR, lflags : Int32, pval : VARIANT*, plflavor : Int32*) : HRESULT
+    @lpVtbl.value.get.call(this, wszname, lflags, pval, plflavor)
   end
-  def put(wszname : LibC::LPWSTR, pval : VARIANT*, lflavor : Int32) : HRESULT
-    @lpVtbl.value.put.unsafe_as(Proc(LibC::LPWSTR, VARIANT*, Int32, HRESULT)).call(wszname, pval, lflavor)
+  def put(this : IWbemQualifierSet*, wszname : LibC::LPWSTR, pval : VARIANT*, lflavor : Int32) : HRESULT
+    @lpVtbl.value.put.call(this, wszname, pval, lflavor)
   end
-  def delete(wszname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(wszname)
+  def delete(this : IWbemQualifierSet*, wszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete.call(this, wszname)
   end
-  def get_names(lflags : Int32, pnames : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_names.unsafe_as(Proc(Int32, SAFEARRAY**, HRESULT)).call(lflags, pnames)
+  def get_names(this : IWbemQualifierSet*, lflags : Int32, pnames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_names.call(this, lflags, pnames)
   end
-  def begin_enumeration(lflags : Int32) : HRESULT
-    @lpVtbl.value.begin_enumeration.unsafe_as(Proc(Int32, HRESULT)).call(lflags)
+  def begin_enumeration(this : IWbemQualifierSet*, lflags : Int32) : HRESULT
+    @lpVtbl.value.begin_enumeration.call(this, lflags)
   end
-  def next(lflags : Int32, pstrname : UInt8**, pval : VARIANT*, plflavor : Int32*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(Int32, UInt8**, VARIANT*, Int32*, HRESULT)).call(lflags, pstrname, pval, plflavor)
+  def next(this : IWbemQualifierSet*, lflags : Int32, pstrname : UInt8**, pval : VARIANT*, plflavor : Int32*) : HRESULT
+    @lpVtbl.value.next.call(this, lflags, pstrname, pval, plflavor)
   end
-  def end_enumeration : HRESULT
-    @lpVtbl.value.end_enumeration.unsafe_as(Proc(HRESULT)).call
+  def end_enumeration(this : IWbemQualifierSet*) : HRESULT
+    @lpVtbl.value.end_enumeration.call(this)
   end
 end
 struct LibWin32::IWbemServices
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemServices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemServices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemServices*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def open_namespace(strnamespace : UInt8*, lflags : Int32, pctx : IWbemContext, ppworkingnamespace : IWbemServices*, ppresult : IWbemCallResult*) : HRESULT
-    @lpVtbl.value.open_namespace.unsafe_as(Proc(UInt8*, Int32, IWbemContext, IWbemServices*, IWbemCallResult*, HRESULT)).call(strnamespace, lflags, pctx, ppworkingnamespace, ppresult)
+  def open_namespace(this : IWbemServices*, strnamespace : UInt8*, lflags : Int32, pctx : IWbemContext, ppworkingnamespace : IWbemServices*, ppresult : IWbemCallResult*) : HRESULT
+    @lpVtbl.value.open_namespace.call(this, strnamespace, lflags, pctx, ppworkingnamespace, ppresult)
   end
-  def cancel_async_call(psink : IWbemObjectSink) : HRESULT
-    @lpVtbl.value.cancel_async_call.unsafe_as(Proc(IWbemObjectSink, HRESULT)).call(psink)
+  def cancel_async_call(this : IWbemServices*, psink : IWbemObjectSink) : HRESULT
+    @lpVtbl.value.cancel_async_call.call(this, psink)
   end
-  def query_object_sink(lflags : Int32, ppresponsehandler : IWbemObjectSink*) : HRESULT
-    @lpVtbl.value.query_object_sink.unsafe_as(Proc(Int32, IWbemObjectSink*, HRESULT)).call(lflags, ppresponsehandler)
+  def query_object_sink(this : IWbemServices*, lflags : Int32, ppresponsehandler : IWbemObjectSink*) : HRESULT
+    @lpVtbl.value.query_object_sink.call(this, lflags, ppresponsehandler)
   end
-  def get_object(strobjectpath : UInt8*, lflags : Int32, pctx : IWbemContext, ppobject : IWbemClassObject*, ppcallresult : IWbemCallResult*) : HRESULT
-    @lpVtbl.value.get_object.unsafe_as(Proc(UInt8*, Int32, IWbemContext, IWbemClassObject*, IWbemCallResult*, HRESULT)).call(strobjectpath, lflags, pctx, ppobject, ppcallresult)
+  def get_object(this : IWbemServices*, strobjectpath : UInt8*, lflags : Int32, pctx : IWbemContext, ppobject : IWbemClassObject*, ppcallresult : IWbemCallResult*) : HRESULT
+    @lpVtbl.value.get_object.call(this, strobjectpath, lflags, pctx, ppobject, ppcallresult)
   end
-  def get_object_async(strobjectpath : UInt8*, lflags : Int32, pctx : IWbemContext, presponsehandler : IWbemObjectSink) : HRESULT
-    @lpVtbl.value.get_object_async.unsafe_as(Proc(UInt8*, Int32, IWbemContext, IWbemObjectSink, HRESULT)).call(strobjectpath, lflags, pctx, presponsehandler)
+  def get_object_async(this : IWbemServices*, strobjectpath : UInt8*, lflags : Int32, pctx : IWbemContext, presponsehandler : IWbemObjectSink) : HRESULT
+    @lpVtbl.value.get_object_async.call(this, strobjectpath, lflags, pctx, presponsehandler)
   end
-  def put_class(pobject : IWbemClassObject, lflags : Int32, pctx : IWbemContext, ppcallresult : IWbemCallResult*) : HRESULT
-    @lpVtbl.value.put_class.unsafe_as(Proc(IWbemClassObject, Int32, IWbemContext, IWbemCallResult*, HRESULT)).call(pobject, lflags, pctx, ppcallresult)
+  def put_class(this : IWbemServices*, pobject : IWbemClassObject, lflags : Int32, pctx : IWbemContext, ppcallresult : IWbemCallResult*) : HRESULT
+    @lpVtbl.value.put_class.call(this, pobject, lflags, pctx, ppcallresult)
   end
-  def put_class_async(pobject : IWbemClassObject, lflags : Int32, pctx : IWbemContext, presponsehandler : IWbemObjectSink) : HRESULT
-    @lpVtbl.value.put_class_async.unsafe_as(Proc(IWbemClassObject, Int32, IWbemContext, IWbemObjectSink, HRESULT)).call(pobject, lflags, pctx, presponsehandler)
+  def put_class_async(this : IWbemServices*, pobject : IWbemClassObject, lflags : Int32, pctx : IWbemContext, presponsehandler : IWbemObjectSink) : HRESULT
+    @lpVtbl.value.put_class_async.call(this, pobject, lflags, pctx, presponsehandler)
   end
-  def delete_class(strclass : UInt8*, lflags : Int32, pctx : IWbemContext, ppcallresult : IWbemCallResult*) : HRESULT
-    @lpVtbl.value.delete_class.unsafe_as(Proc(UInt8*, Int32, IWbemContext, IWbemCallResult*, HRESULT)).call(strclass, lflags, pctx, ppcallresult)
+  def delete_class(this : IWbemServices*, strclass : UInt8*, lflags : Int32, pctx : IWbemContext, ppcallresult : IWbemCallResult*) : HRESULT
+    @lpVtbl.value.delete_class.call(this, strclass, lflags, pctx, ppcallresult)
   end
-  def delete_class_async(strclass : UInt8*, lflags : Int32, pctx : IWbemContext, presponsehandler : IWbemObjectSink) : HRESULT
-    @lpVtbl.value.delete_class_async.unsafe_as(Proc(UInt8*, Int32, IWbemContext, IWbemObjectSink, HRESULT)).call(strclass, lflags, pctx, presponsehandler)
+  def delete_class_async(this : IWbemServices*, strclass : UInt8*, lflags : Int32, pctx : IWbemContext, presponsehandler : IWbemObjectSink) : HRESULT
+    @lpVtbl.value.delete_class_async.call(this, strclass, lflags, pctx, presponsehandler)
   end
-  def create_class_enum(strsuperclass : UInt8*, lflags : Int32, pctx : IWbemContext, ppenum : IEnumWbemClassObject*) : HRESULT
-    @lpVtbl.value.create_class_enum.unsafe_as(Proc(UInt8*, Int32, IWbemContext, IEnumWbemClassObject*, HRESULT)).call(strsuperclass, lflags, pctx, ppenum)
+  def create_class_enum(this : IWbemServices*, strsuperclass : UInt8*, lflags : Int32, pctx : IWbemContext, ppenum : IEnumWbemClassObject*) : HRESULT
+    @lpVtbl.value.create_class_enum.call(this, strsuperclass, lflags, pctx, ppenum)
   end
-  def create_class_enum_async(strsuperclass : UInt8*, lflags : Int32, pctx : IWbemContext, presponsehandler : IWbemObjectSink) : HRESULT
-    @lpVtbl.value.create_class_enum_async.unsafe_as(Proc(UInt8*, Int32, IWbemContext, IWbemObjectSink, HRESULT)).call(strsuperclass, lflags, pctx, presponsehandler)
+  def create_class_enum_async(this : IWbemServices*, strsuperclass : UInt8*, lflags : Int32, pctx : IWbemContext, presponsehandler : IWbemObjectSink) : HRESULT
+    @lpVtbl.value.create_class_enum_async.call(this, strsuperclass, lflags, pctx, presponsehandler)
   end
-  def put_instance(pinst : IWbemClassObject, lflags : Int32, pctx : IWbemContext, ppcallresult : IWbemCallResult*) : HRESULT
-    @lpVtbl.value.put_instance.unsafe_as(Proc(IWbemClassObject, Int32, IWbemContext, IWbemCallResult*, HRESULT)).call(pinst, lflags, pctx, ppcallresult)
+  def put_instance(this : IWbemServices*, pinst : IWbemClassObject, lflags : Int32, pctx : IWbemContext, ppcallresult : IWbemCallResult*) : HRESULT
+    @lpVtbl.value.put_instance.call(this, pinst, lflags, pctx, ppcallresult)
   end
-  def put_instance_async(pinst : IWbemClassObject, lflags : Int32, pctx : IWbemContext, presponsehandler : IWbemObjectSink) : HRESULT
-    @lpVtbl.value.put_instance_async.unsafe_as(Proc(IWbemClassObject, Int32, IWbemContext, IWbemObjectSink, HRESULT)).call(pinst, lflags, pctx, presponsehandler)
+  def put_instance_async(this : IWbemServices*, pinst : IWbemClassObject, lflags : Int32, pctx : IWbemContext, presponsehandler : IWbemObjectSink) : HRESULT
+    @lpVtbl.value.put_instance_async.call(this, pinst, lflags, pctx, presponsehandler)
   end
-  def delete_instance(strobjectpath : UInt8*, lflags : Int32, pctx : IWbemContext, ppcallresult : IWbemCallResult*) : HRESULT
-    @lpVtbl.value.delete_instance.unsafe_as(Proc(UInt8*, Int32, IWbemContext, IWbemCallResult*, HRESULT)).call(strobjectpath, lflags, pctx, ppcallresult)
+  def delete_instance(this : IWbemServices*, strobjectpath : UInt8*, lflags : Int32, pctx : IWbemContext, ppcallresult : IWbemCallResult*) : HRESULT
+    @lpVtbl.value.delete_instance.call(this, strobjectpath, lflags, pctx, ppcallresult)
   end
-  def delete_instance_async(strobjectpath : UInt8*, lflags : Int32, pctx : IWbemContext, presponsehandler : IWbemObjectSink) : HRESULT
-    @lpVtbl.value.delete_instance_async.unsafe_as(Proc(UInt8*, Int32, IWbemContext, IWbemObjectSink, HRESULT)).call(strobjectpath, lflags, pctx, presponsehandler)
+  def delete_instance_async(this : IWbemServices*, strobjectpath : UInt8*, lflags : Int32, pctx : IWbemContext, presponsehandler : IWbemObjectSink) : HRESULT
+    @lpVtbl.value.delete_instance_async.call(this, strobjectpath, lflags, pctx, presponsehandler)
   end
-  def create_instance_enum(strfilter : UInt8*, lflags : Int32, pctx : IWbemContext, ppenum : IEnumWbemClassObject*) : HRESULT
-    @lpVtbl.value.create_instance_enum.unsafe_as(Proc(UInt8*, Int32, IWbemContext, IEnumWbemClassObject*, HRESULT)).call(strfilter, lflags, pctx, ppenum)
+  def create_instance_enum(this : IWbemServices*, strfilter : UInt8*, lflags : Int32, pctx : IWbemContext, ppenum : IEnumWbemClassObject*) : HRESULT
+    @lpVtbl.value.create_instance_enum.call(this, strfilter, lflags, pctx, ppenum)
   end
-  def create_instance_enum_async(strfilter : UInt8*, lflags : Int32, pctx : IWbemContext, presponsehandler : IWbemObjectSink) : HRESULT
-    @lpVtbl.value.create_instance_enum_async.unsafe_as(Proc(UInt8*, Int32, IWbemContext, IWbemObjectSink, HRESULT)).call(strfilter, lflags, pctx, presponsehandler)
+  def create_instance_enum_async(this : IWbemServices*, strfilter : UInt8*, lflags : Int32, pctx : IWbemContext, presponsehandler : IWbemObjectSink) : HRESULT
+    @lpVtbl.value.create_instance_enum_async.call(this, strfilter, lflags, pctx, presponsehandler)
   end
-  def exec_query(strquerylanguage : UInt8*, strquery : UInt8*, lflags : Int32, pctx : IWbemContext, ppenum : IEnumWbemClassObject*) : HRESULT
-    @lpVtbl.value.exec_query.unsafe_as(Proc(UInt8*, UInt8*, Int32, IWbemContext, IEnumWbemClassObject*, HRESULT)).call(strquerylanguage, strquery, lflags, pctx, ppenum)
+  def exec_query(this : IWbemServices*, strquerylanguage : UInt8*, strquery : UInt8*, lflags : Int32, pctx : IWbemContext, ppenum : IEnumWbemClassObject*) : HRESULT
+    @lpVtbl.value.exec_query.call(this, strquerylanguage, strquery, lflags, pctx, ppenum)
   end
-  def exec_query_async(strquerylanguage : UInt8*, strquery : UInt8*, lflags : Int32, pctx : IWbemContext, presponsehandler : IWbemObjectSink) : HRESULT
-    @lpVtbl.value.exec_query_async.unsafe_as(Proc(UInt8*, UInt8*, Int32, IWbemContext, IWbemObjectSink, HRESULT)).call(strquerylanguage, strquery, lflags, pctx, presponsehandler)
+  def exec_query_async(this : IWbemServices*, strquerylanguage : UInt8*, strquery : UInt8*, lflags : Int32, pctx : IWbemContext, presponsehandler : IWbemObjectSink) : HRESULT
+    @lpVtbl.value.exec_query_async.call(this, strquerylanguage, strquery, lflags, pctx, presponsehandler)
   end
-  def exec_notification_query(strquerylanguage : UInt8*, strquery : UInt8*, lflags : Int32, pctx : IWbemContext, ppenum : IEnumWbemClassObject*) : HRESULT
-    @lpVtbl.value.exec_notification_query.unsafe_as(Proc(UInt8*, UInt8*, Int32, IWbemContext, IEnumWbemClassObject*, HRESULT)).call(strquerylanguage, strquery, lflags, pctx, ppenum)
+  def exec_notification_query(this : IWbemServices*, strquerylanguage : UInt8*, strquery : UInt8*, lflags : Int32, pctx : IWbemContext, ppenum : IEnumWbemClassObject*) : HRESULT
+    @lpVtbl.value.exec_notification_query.call(this, strquerylanguage, strquery, lflags, pctx, ppenum)
   end
-  def exec_notification_query_async(strquerylanguage : UInt8*, strquery : UInt8*, lflags : Int32, pctx : IWbemContext, presponsehandler : IWbemObjectSink) : HRESULT
-    @lpVtbl.value.exec_notification_query_async.unsafe_as(Proc(UInt8*, UInt8*, Int32, IWbemContext, IWbemObjectSink, HRESULT)).call(strquerylanguage, strquery, lflags, pctx, presponsehandler)
+  def exec_notification_query_async(this : IWbemServices*, strquerylanguage : UInt8*, strquery : UInt8*, lflags : Int32, pctx : IWbemContext, presponsehandler : IWbemObjectSink) : HRESULT
+    @lpVtbl.value.exec_notification_query_async.call(this, strquerylanguage, strquery, lflags, pctx, presponsehandler)
   end
-  def exec_method(strobjectpath : UInt8*, strmethodname : UInt8*, lflags : Int32, pctx : IWbemContext, pinparams : IWbemClassObject, ppoutparams : IWbemClassObject*, ppcallresult : IWbemCallResult*) : HRESULT
-    @lpVtbl.value.exec_method.unsafe_as(Proc(UInt8*, UInt8*, Int32, IWbemContext, IWbemClassObject, IWbemClassObject*, IWbemCallResult*, HRESULT)).call(strobjectpath, strmethodname, lflags, pctx, pinparams, ppoutparams, ppcallresult)
+  def exec_method(this : IWbemServices*, strobjectpath : UInt8*, strmethodname : UInt8*, lflags : Int32, pctx : IWbemContext, pinparams : IWbemClassObject, ppoutparams : IWbemClassObject*, ppcallresult : IWbemCallResult*) : HRESULT
+    @lpVtbl.value.exec_method.call(this, strobjectpath, strmethodname, lflags, pctx, pinparams, ppoutparams, ppcallresult)
   end
-  def exec_method_async(strobjectpath : UInt8*, strmethodname : UInt8*, lflags : Int32, pctx : IWbemContext, pinparams : IWbemClassObject, presponsehandler : IWbemObjectSink) : HRESULT
-    @lpVtbl.value.exec_method_async.unsafe_as(Proc(UInt8*, UInt8*, Int32, IWbemContext, IWbemClassObject, IWbemObjectSink, HRESULT)).call(strobjectpath, strmethodname, lflags, pctx, pinparams, presponsehandler)
+  def exec_method_async(this : IWbemServices*, strobjectpath : UInt8*, strmethodname : UInt8*, lflags : Int32, pctx : IWbemContext, pinparams : IWbemClassObject, presponsehandler : IWbemObjectSink) : HRESULT
+    @lpVtbl.value.exec_method_async.call(this, strobjectpath, strmethodname, lflags, pctx, pinparams, presponsehandler)
   end
 end
 struct LibWin32::IWbemLocator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemLocator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemLocator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemLocator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def connect_server(strnetworkresource : UInt8*, struser : UInt8*, strpassword : UInt8*, strlocale : UInt8*, lsecurityflags : Int32, strauthority : UInt8*, pctx : IWbemContext, ppnamespace : IWbemServices*) : HRESULT
-    @lpVtbl.value.connect_server.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, Int32, UInt8*, IWbemContext, IWbemServices*, HRESULT)).call(strnetworkresource, struser, strpassword, strlocale, lsecurityflags, strauthority, pctx, ppnamespace)
+  def connect_server(this : IWbemLocator*, strnetworkresource : UInt8*, struser : UInt8*, strpassword : UInt8*, strlocale : UInt8*, lsecurityflags : Int32, strauthority : UInt8*, pctx : IWbemContext, ppnamespace : IWbemServices*) : HRESULT
+    @lpVtbl.value.connect_server.call(this, strnetworkresource, struser, strpassword, strlocale, lsecurityflags, strauthority, pctx, ppnamespace)
   end
 end
 struct LibWin32::IWbemObjectSink
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemObjectSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemObjectSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemObjectSink*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def indicate(lobjectcount : Int32, apobjarray : IWbemClassObject*) : HRESULT
-    @lpVtbl.value.indicate.unsafe_as(Proc(Int32, IWbemClassObject*, HRESULT)).call(lobjectcount, apobjarray)
+  def indicate(this : IWbemObjectSink*, lobjectcount : Int32, apobjarray : IWbemClassObject*) : HRESULT
+    @lpVtbl.value.indicate.call(this, lobjectcount, apobjarray)
   end
-  def set_status(lflags : Int32, hresult : HRESULT, strparam : UInt8*, pobjparam : IWbemClassObject) : HRESULT
-    @lpVtbl.value.set_status.unsafe_as(Proc(Int32, HRESULT, UInt8*, IWbemClassObject, HRESULT)).call(lflags, hresult, strparam, pobjparam)
+  def set_status(this : IWbemObjectSink*, lflags : Int32, hresult : HRESULT, strparam : UInt8*, pobjparam : IWbemClassObject) : HRESULT
+    @lpVtbl.value.set_status.call(this, lflags, hresult, strparam, pobjparam)
   end
 end
 struct LibWin32::IEnumWbemClassObject
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IEnumWbemClassObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IEnumWbemClassObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IEnumWbemClassObject*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IEnumWbemClassObject*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def next(ltimeout : Int32, ucount : UInt32, apobjects : IWbemClassObject*, pureturned : UInt32*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(Int32, UInt32, IWbemClassObject*, UInt32*, HRESULT)).call(ltimeout, ucount, apobjects, pureturned)
+  def next(this : IEnumWbemClassObject*, ltimeout : Int32, ucount : UInt32, apobjects : IWbemClassObject*, pureturned : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ltimeout, ucount, apobjects, pureturned)
   end
-  def next_async(ucount : UInt32, psink : IWbemObjectSink) : HRESULT
-    @lpVtbl.value.next_async.unsafe_as(Proc(UInt32, IWbemObjectSink, HRESULT)).call(ucount, psink)
+  def next_async(this : IEnumWbemClassObject*, ucount : UInt32, psink : IWbemObjectSink) : HRESULT
+    @lpVtbl.value.next_async.call(this, ucount, psink)
   end
-  def clone(ppenum : IEnumWbemClassObject*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IEnumWbemClassObject*, HRESULT)).call(ppenum)
+  def clone(this : IEnumWbemClassObject*, ppenum : IEnumWbemClassObject*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
   end
-  def skip(ltimeout : Int32, ncount : UInt32) : HRESULT
-    @lpVtbl.value.skip.unsafe_as(Proc(Int32, UInt32, HRESULT)).call(ltimeout, ncount)
+  def skip(this : IEnumWbemClassObject*, ltimeout : Int32, ncount : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, ltimeout, ncount)
   end
 end
 struct LibWin32::IWbemCallResult
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemCallResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemCallResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemCallResult*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_result_object(ltimeout : Int32, ppresultobject : IWbemClassObject*) : HRESULT
-    @lpVtbl.value.get_result_object.unsafe_as(Proc(Int32, IWbemClassObject*, HRESULT)).call(ltimeout, ppresultobject)
+  def get_result_object(this : IWbemCallResult*, ltimeout : Int32, ppresultobject : IWbemClassObject*) : HRESULT
+    @lpVtbl.value.get_result_object.call(this, ltimeout, ppresultobject)
   end
-  def get_result_string(ltimeout : Int32, pstrresultstring : UInt8**) : HRESULT
-    @lpVtbl.value.get_result_string.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(ltimeout, pstrresultstring)
+  def get_result_string(this : IWbemCallResult*, ltimeout : Int32, pstrresultstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_result_string.call(this, ltimeout, pstrresultstring)
   end
-  def get_result_services(ltimeout : Int32, ppservices : IWbemServices*) : HRESULT
-    @lpVtbl.value.get_result_services.unsafe_as(Proc(Int32, IWbemServices*, HRESULT)).call(ltimeout, ppservices)
+  def get_result_services(this : IWbemCallResult*, ltimeout : Int32, ppservices : IWbemServices*) : HRESULT
+    @lpVtbl.value.get_result_services.call(this, ltimeout, ppservices)
   end
-  def get_call_status(ltimeout : Int32, plstatus : Int32*) : HRESULT
-    @lpVtbl.value.get_call_status.unsafe_as(Proc(Int32, Int32*, HRESULT)).call(ltimeout, plstatus)
+  def get_call_status(this : IWbemCallResult*, ltimeout : Int32, plstatus : Int32*) : HRESULT
+    @lpVtbl.value.get_call_status.call(this, ltimeout, plstatus)
   end
 end
 struct LibWin32::IWbemContext
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemContext*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def clone(ppnewcopy : IWbemContext*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IWbemContext*, HRESULT)).call(ppnewcopy)
+  def clone(this : IWbemContext*, ppnewcopy : IWbemContext*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppnewcopy)
   end
-  def get_names(lflags : Int32, pnames : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_names.unsafe_as(Proc(Int32, SAFEARRAY**, HRESULT)).call(lflags, pnames)
+  def get_names(this : IWbemContext*, lflags : Int32, pnames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_names.call(this, lflags, pnames)
   end
-  def begin_enumeration(lflags : Int32) : HRESULT
-    @lpVtbl.value.begin_enumeration.unsafe_as(Proc(Int32, HRESULT)).call(lflags)
+  def begin_enumeration(this : IWbemContext*, lflags : Int32) : HRESULT
+    @lpVtbl.value.begin_enumeration.call(this, lflags)
   end
-  def next(lflags : Int32, pstrname : UInt8**, pvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(Int32, UInt8**, VARIANT*, HRESULT)).call(lflags, pstrname, pvalue)
+  def next(this : IWbemContext*, lflags : Int32, pstrname : UInt8**, pvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.next.call(this, lflags, pstrname, pvalue)
   end
-  def end_enumeration : HRESULT
-    @lpVtbl.value.end_enumeration.unsafe_as(Proc(HRESULT)).call
+  def end_enumeration(this : IWbemContext*) : HRESULT
+    @lpVtbl.value.end_enumeration.call(this)
   end
-  def set_value(wszname : LibC::LPWSTR, lflags : Int32, pvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.set_value.unsafe_as(Proc(LibC::LPWSTR, Int32, VARIANT*, HRESULT)).call(wszname, lflags, pvalue)
+  def set_value(this : IWbemContext*, wszname : LibC::LPWSTR, lflags : Int32, pvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.set_value.call(this, wszname, lflags, pvalue)
   end
-  def get_value(wszname : LibC::LPWSTR, lflags : Int32, pvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_value.unsafe_as(Proc(LibC::LPWSTR, Int32, VARIANT*, HRESULT)).call(wszname, lflags, pvalue)
+  def get_value(this : IWbemContext*, wszname : LibC::LPWSTR, lflags : Int32, pvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, wszname, lflags, pvalue)
   end
-  def delete_value(wszname : LibC::LPWSTR, lflags : Int32) : HRESULT
-    @lpVtbl.value.delete_value.unsafe_as(Proc(LibC::LPWSTR, Int32, HRESULT)).call(wszname, lflags)
+  def delete_value(this : IWbemContext*, wszname : LibC::LPWSTR, lflags : Int32) : HRESULT
+    @lpVtbl.value.delete_value.call(this, wszname, lflags)
   end
-  def delete_all : HRESULT
-    @lpVtbl.value.delete_all.unsafe_as(Proc(HRESULT)).call
+  def delete_all(this : IWbemContext*) : HRESULT
+    @lpVtbl.value.delete_all.call(this)
   end
 end
 struct LibWin32::IUnsecuredApartment
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUnsecuredApartment*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUnsecuredApartment*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUnsecuredApartment*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_object_stub(pobject : IUnknown, ppstub : IUnknown*) : HRESULT
-    @lpVtbl.value.create_object_stub.unsafe_as(Proc(IUnknown, IUnknown*, HRESULT)).call(pobject, ppstub)
+  def create_object_stub(this : IUnsecuredApartment*, pobject : IUnknown, ppstub : IUnknown*) : HRESULT
+    @lpVtbl.value.create_object_stub.call(this, pobject, ppstub)
   end
 end
 struct LibWin32::IWbemUnsecuredApartment
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemUnsecuredApartment*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemUnsecuredApartment*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemUnsecuredApartment*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_object_stub(pobject : IUnknown, ppstub : IUnknown*) : HRESULT
-    @lpVtbl.value.create_object_stub.unsafe_as(Proc(IUnknown, IUnknown*, HRESULT)).call(pobject, ppstub)
+  def create_object_stub(this : IWbemUnsecuredApartment*, pobject : IUnknown, ppstub : IUnknown*) : HRESULT
+    @lpVtbl.value.create_object_stub.call(this, pobject, ppstub)
   end
-  def create_sink_stub(psink : IWbemObjectSink, dwflags : UInt32, wszreserved : LibC::LPWSTR, ppstub : IWbemObjectSink*) : HRESULT
-    @lpVtbl.value.create_sink_stub.unsafe_as(Proc(IWbemObjectSink, UInt32, LibC::LPWSTR, IWbemObjectSink*, HRESULT)).call(psink, dwflags, wszreserved, ppstub)
+  def create_sink_stub(this : IWbemUnsecuredApartment*, psink : IWbemObjectSink, dwflags : UInt32, wszreserved : LibC::LPWSTR, ppstub : IWbemObjectSink*) : HRESULT
+    @lpVtbl.value.create_sink_stub.call(this, psink, dwflags, wszreserved, ppstub)
   end
 end
 struct LibWin32::IWbemStatusCodeText
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemStatusCodeText*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemStatusCodeText*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemStatusCodeText*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_error_code_text(hres : HRESULT, localeid : UInt32, lflags : Int32, messagetext : UInt8**) : HRESULT
-    @lpVtbl.value.get_error_code_text.unsafe_as(Proc(HRESULT, UInt32, Int32, UInt8**, HRESULT)).call(hres, localeid, lflags, messagetext)
+  def get_error_code_text(this : IWbemStatusCodeText*, hres : HRESULT, localeid : UInt32, lflags : Int32, messagetext : UInt8**) : HRESULT
+    @lpVtbl.value.get_error_code_text.call(this, hres, localeid, lflags, messagetext)
   end
-  def get_facility_code_text(hres : HRESULT, localeid : UInt32, lflags : Int32, messagetext : UInt8**) : HRESULT
-    @lpVtbl.value.get_facility_code_text.unsafe_as(Proc(HRESULT, UInt32, Int32, UInt8**, HRESULT)).call(hres, localeid, lflags, messagetext)
+  def get_facility_code_text(this : IWbemStatusCodeText*, hres : HRESULT, localeid : UInt32, lflags : Int32, messagetext : UInt8**) : HRESULT
+    @lpVtbl.value.get_facility_code_text.call(this, hres, localeid, lflags, messagetext)
   end
 end
 struct LibWin32::IWbemBackupRestore
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemBackupRestore*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemBackupRestore*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemBackupRestore*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def backup(strbackuptofile : LibC::LPWSTR, lflags : Int32) : HRESULT
-    @lpVtbl.value.backup.unsafe_as(Proc(LibC::LPWSTR, Int32, HRESULT)).call(strbackuptofile, lflags)
+  def backup(this : IWbemBackupRestore*, strbackuptofile : LibC::LPWSTR, lflags : Int32) : HRESULT
+    @lpVtbl.value.backup.call(this, strbackuptofile, lflags)
   end
-  def restore(strrestorefromfile : LibC::LPWSTR, lflags : Int32) : HRESULT
-    @lpVtbl.value.restore.unsafe_as(Proc(LibC::LPWSTR, Int32, HRESULT)).call(strrestorefromfile, lflags)
+  def restore(this : IWbemBackupRestore*, strrestorefromfile : LibC::LPWSTR, lflags : Int32) : HRESULT
+    @lpVtbl.value.restore.call(this, strrestorefromfile, lflags)
   end
 end
 struct LibWin32::IWbemBackupRestoreEx
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemBackupRestoreEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemBackupRestoreEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemBackupRestoreEx*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def backup(strbackuptofile : LibC::LPWSTR, lflags : Int32) : HRESULT
-    @lpVtbl.value.backup.unsafe_as(Proc(LibC::LPWSTR, Int32, HRESULT)).call(strbackuptofile, lflags)
+  def backup(this : IWbemBackupRestoreEx*, strbackuptofile : LibC::LPWSTR, lflags : Int32) : HRESULT
+    @lpVtbl.value.backup.call(this, strbackuptofile, lflags)
   end
-  def restore(strrestorefromfile : LibC::LPWSTR, lflags : Int32) : HRESULT
-    @lpVtbl.value.restore.unsafe_as(Proc(LibC::LPWSTR, Int32, HRESULT)).call(strrestorefromfile, lflags)
+  def restore(this : IWbemBackupRestoreEx*, strrestorefromfile : LibC::LPWSTR, lflags : Int32) : HRESULT
+    @lpVtbl.value.restore.call(this, strrestorefromfile, lflags)
   end
-  def pause : HRESULT
-    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  def pause(this : IWbemBackupRestoreEx*) : HRESULT
+    @lpVtbl.value.pause.call(this)
   end
-  def resume : HRESULT
-    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  def resume(this : IWbemBackupRestoreEx*) : HRESULT
+    @lpVtbl.value.resume.call(this)
   end
 end
 struct LibWin32::IWbemRefresher
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemRefresher*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemRefresher*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemRefresher*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def refresh(lflags : Int32) : HRESULT
-    @lpVtbl.value.refresh.unsafe_as(Proc(Int32, HRESULT)).call(lflags)
+  def refresh(this : IWbemRefresher*, lflags : Int32) : HRESULT
+    @lpVtbl.value.refresh.call(this, lflags)
   end
 end
 struct LibWin32::IWbemHiPerfEnum
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemHiPerfEnum*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemHiPerfEnum*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemHiPerfEnum*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add_objects(lflags : Int32, unumobjects : UInt32, apids : Int32*, apobj : IWbemObjectAccess*) : HRESULT
-    @lpVtbl.value.add_objects.unsafe_as(Proc(Int32, UInt32, Int32*, IWbemObjectAccess*, HRESULT)).call(lflags, unumobjects, apids, apobj)
+  def add_objects(this : IWbemHiPerfEnum*, lflags : Int32, unumobjects : UInt32, apids : Int32*, apobj : IWbemObjectAccess*) : HRESULT
+    @lpVtbl.value.add_objects.call(this, lflags, unumobjects, apids, apobj)
   end
-  def remove_objects(lflags : Int32, unumobjects : UInt32, apids : Int32*) : HRESULT
-    @lpVtbl.value.remove_objects.unsafe_as(Proc(Int32, UInt32, Int32*, HRESULT)).call(lflags, unumobjects, apids)
+  def remove_objects(this : IWbemHiPerfEnum*, lflags : Int32, unumobjects : UInt32, apids : Int32*) : HRESULT
+    @lpVtbl.value.remove_objects.call(this, lflags, unumobjects, apids)
   end
-  def get_objects(lflags : Int32, unumobjects : UInt32, apobj : IWbemObjectAccess*, pureturned : UInt32*) : HRESULT
-    @lpVtbl.value.get_objects.unsafe_as(Proc(Int32, UInt32, IWbemObjectAccess*, UInt32*, HRESULT)).call(lflags, unumobjects, apobj, pureturned)
+  def get_objects(this : IWbemHiPerfEnum*, lflags : Int32, unumobjects : UInt32, apobj : IWbemObjectAccess*, pureturned : UInt32*) : HRESULT
+    @lpVtbl.value.get_objects.call(this, lflags, unumobjects, apobj, pureturned)
   end
-  def remove_all(lflags : Int32) : HRESULT
-    @lpVtbl.value.remove_all.unsafe_as(Proc(Int32, HRESULT)).call(lflags)
+  def remove_all(this : IWbemHiPerfEnum*, lflags : Int32) : HRESULT
+    @lpVtbl.value.remove_all.call(this, lflags)
   end
 end
 struct LibWin32::IWbemConfigureRefresher
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemConfigureRefresher*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemConfigureRefresher*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemConfigureRefresher*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add_object_by_path(pnamespace : IWbemServices, wszpath : LibC::LPWSTR, lflags : Int32, pcontext : IWbemContext, pprefreshable : IWbemClassObject*, plid : Int32*) : HRESULT
-    @lpVtbl.value.add_object_by_path.unsafe_as(Proc(IWbemServices, LibC::LPWSTR, Int32, IWbemContext, IWbemClassObject*, Int32*, HRESULT)).call(pnamespace, wszpath, lflags, pcontext, pprefreshable, plid)
+  def add_object_by_path(this : IWbemConfigureRefresher*, pnamespace : IWbemServices, wszpath : LibC::LPWSTR, lflags : Int32, pcontext : IWbemContext, pprefreshable : IWbemClassObject*, plid : Int32*) : HRESULT
+    @lpVtbl.value.add_object_by_path.call(this, pnamespace, wszpath, lflags, pcontext, pprefreshable, plid)
   end
-  def add_object_by_template(pnamespace : IWbemServices, ptemplate : IWbemClassObject, lflags : Int32, pcontext : IWbemContext, pprefreshable : IWbemClassObject*, plid : Int32*) : HRESULT
-    @lpVtbl.value.add_object_by_template.unsafe_as(Proc(IWbemServices, IWbemClassObject, Int32, IWbemContext, IWbemClassObject*, Int32*, HRESULT)).call(pnamespace, ptemplate, lflags, pcontext, pprefreshable, plid)
+  def add_object_by_template(this : IWbemConfigureRefresher*, pnamespace : IWbemServices, ptemplate : IWbemClassObject, lflags : Int32, pcontext : IWbemContext, pprefreshable : IWbemClassObject*, plid : Int32*) : HRESULT
+    @lpVtbl.value.add_object_by_template.call(this, pnamespace, ptemplate, lflags, pcontext, pprefreshable, plid)
   end
-  def add_refresher(prefresher : IWbemRefresher, lflags : Int32, plid : Int32*) : HRESULT
-    @lpVtbl.value.add_refresher.unsafe_as(Proc(IWbemRefresher, Int32, Int32*, HRESULT)).call(prefresher, lflags, plid)
+  def add_refresher(this : IWbemConfigureRefresher*, prefresher : IWbemRefresher, lflags : Int32, plid : Int32*) : HRESULT
+    @lpVtbl.value.add_refresher.call(this, prefresher, lflags, plid)
   end
-  def remove(lid : Int32, lflags : Int32) : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(Int32, Int32, HRESULT)).call(lid, lflags)
+  def remove(this : IWbemConfigureRefresher*, lid : Int32, lflags : Int32) : HRESULT
+    @lpVtbl.value.remove.call(this, lid, lflags)
   end
-  def add_enum(pnamespace : IWbemServices, wszclassname : LibC::LPWSTR, lflags : Int32, pcontext : IWbemContext, ppenum : IWbemHiPerfEnum*, plid : Int32*) : HRESULT
-    @lpVtbl.value.add_enum.unsafe_as(Proc(IWbemServices, LibC::LPWSTR, Int32, IWbemContext, IWbemHiPerfEnum*, Int32*, HRESULT)).call(pnamespace, wszclassname, lflags, pcontext, ppenum, plid)
+  def add_enum(this : IWbemConfigureRefresher*, pnamespace : IWbemServices, wszclassname : LibC::LPWSTR, lflags : Int32, pcontext : IWbemContext, ppenum : IWbemHiPerfEnum*, plid : Int32*) : HRESULT
+    @lpVtbl.value.add_enum.call(this, pnamespace, wszclassname, lflags, pcontext, ppenum, plid)
   end
 end
 struct LibWin32::IWbemObjectSinkEx
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemObjectSinkEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemObjectSinkEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemObjectSinkEx*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def indicate(lobjectcount : Int32, apobjarray : IWbemClassObject*) : HRESULT
-    @lpVtbl.value.indicate.unsafe_as(Proc(Int32, IWbemClassObject*, HRESULT)).call(lobjectcount, apobjarray)
+  def indicate(this : IWbemObjectSinkEx*, lobjectcount : Int32, apobjarray : IWbemClassObject*) : HRESULT
+    @lpVtbl.value.indicate.call(this, lobjectcount, apobjarray)
   end
-  def set_status(lflags : Int32, hresult : HRESULT, strparam : UInt8*, pobjparam : IWbemClassObject) : HRESULT
-    @lpVtbl.value.set_status.unsafe_as(Proc(Int32, HRESULT, UInt8*, IWbemClassObject, HRESULT)).call(lflags, hresult, strparam, pobjparam)
+  def set_status(this : IWbemObjectSinkEx*, lflags : Int32, hresult : HRESULT, strparam : UInt8*, pobjparam : IWbemClassObject) : HRESULT
+    @lpVtbl.value.set_status.call(this, lflags, hresult, strparam, pobjparam)
   end
-  def write_message(uchannel : UInt32, strmessage : UInt8*) : HRESULT
-    @lpVtbl.value.write_message.unsafe_as(Proc(UInt32, UInt8*, HRESULT)).call(uchannel, strmessage)
+  def write_message(this : IWbemObjectSinkEx*, uchannel : UInt32, strmessage : UInt8*) : HRESULT
+    @lpVtbl.value.write_message.call(this, uchannel, strmessage)
   end
-  def write_error(pobjerror : IWbemClassObject, pureturned : UInt8*) : HRESULT
-    @lpVtbl.value.write_error.unsafe_as(Proc(IWbemClassObject, UInt8*, HRESULT)).call(pobjerror, pureturned)
+  def write_error(this : IWbemObjectSinkEx*, pobjerror : IWbemClassObject, pureturned : UInt8*) : HRESULT
+    @lpVtbl.value.write_error.call(this, pobjerror, pureturned)
   end
-  def prompt_user(strmessage : UInt8*, uprompttype : UInt8, pureturned : UInt8*) : HRESULT
-    @lpVtbl.value.prompt_user.unsafe_as(Proc(UInt8*, UInt8, UInt8*, HRESULT)).call(strmessage, uprompttype, pureturned)
+  def prompt_user(this : IWbemObjectSinkEx*, strmessage : UInt8*, uprompttype : UInt8, pureturned : UInt8*) : HRESULT
+    @lpVtbl.value.prompt_user.call(this, strmessage, uprompttype, pureturned)
   end
-  def write_progress(stractivity : UInt8*, strcurrentoperation : UInt8*, strstatusdescription : UInt8*, upercentcomplete : UInt32, usecondsremaining : UInt32) : HRESULT
-    @lpVtbl.value.write_progress.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt32, UInt32, HRESULT)).call(stractivity, strcurrentoperation, strstatusdescription, upercentcomplete, usecondsremaining)
+  def write_progress(this : IWbemObjectSinkEx*, stractivity : UInt8*, strcurrentoperation : UInt8*, strstatusdescription : UInt8*, upercentcomplete : UInt32, usecondsremaining : UInt32) : HRESULT
+    @lpVtbl.value.write_progress.call(this, stractivity, strcurrentoperation, strstatusdescription, upercentcomplete, usecondsremaining)
   end
-  def write_stream_parameter(strname : UInt8*, vtvalue : VARIANT*, ultype : UInt32, ulflags : UInt32) : HRESULT
-    @lpVtbl.value.write_stream_parameter.unsafe_as(Proc(UInt8*, VARIANT*, UInt32, UInt32, HRESULT)).call(strname, vtvalue, ultype, ulflags)
+  def write_stream_parameter(this : IWbemObjectSinkEx*, strname : UInt8*, vtvalue : VARIANT*, ultype : UInt32, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.write_stream_parameter.call(this, strname, vtvalue, ultype, ulflags)
   end
 end
 struct LibWin32::IWbemShutdown
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemShutdown*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemShutdown*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemShutdown*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def shutdown(ureason : Int32, umaxmilliseconds : UInt32, pctx : IWbemContext) : HRESULT
-    @lpVtbl.value.shutdown.unsafe_as(Proc(Int32, UInt32, IWbemContext, HRESULT)).call(ureason, umaxmilliseconds, pctx)
+  def shutdown(this : IWbemShutdown*, ureason : Int32, umaxmilliseconds : UInt32, pctx : IWbemContext) : HRESULT
+    @lpVtbl.value.shutdown.call(this, ureason, umaxmilliseconds, pctx)
   end
 end
 struct LibWin32::IWbemObjectTextSrc
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemObjectTextSrc*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemObjectTextSrc*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemObjectTextSrc*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_text(lflags : Int32, pobj : IWbemClassObject, uobjtextformat : UInt32, pctx : IWbemContext, strtext : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.unsafe_as(Proc(Int32, IWbemClassObject, UInt32, IWbemContext, UInt8**, HRESULT)).call(lflags, pobj, uobjtextformat, pctx, strtext)
+  def get_text(this : IWbemObjectTextSrc*, lflags : Int32, pobj : IWbemClassObject, uobjtextformat : UInt32, pctx : IWbemContext, strtext : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, lflags, pobj, uobjtextformat, pctx, strtext)
   end
-  def create_from_text(lflags : Int32, strtext : UInt8*, uobjtextformat : UInt32, pctx : IWbemContext, pnewobj : IWbemClassObject*) : HRESULT
-    @lpVtbl.value.create_from_text.unsafe_as(Proc(Int32, UInt8*, UInt32, IWbemContext, IWbemClassObject*, HRESULT)).call(lflags, strtext, uobjtextformat, pctx, pnewobj)
+  def create_from_text(this : IWbemObjectTextSrc*, lflags : Int32, strtext : UInt8*, uobjtextformat : UInt32, pctx : IWbemContext, pnewobj : IWbemClassObject*) : HRESULT
+    @lpVtbl.value.create_from_text.call(this, lflags, strtext, uobjtextformat, pctx, pnewobj)
   end
 end
 struct LibWin32::IMofCompiler
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMofCompiler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMofCompiler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMofCompiler*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def compile_file(filename : LibC::LPWSTR, serverandnamespace : LibC::LPWSTR, user : LibC::LPWSTR, authority : LibC::LPWSTR, password : LibC::LPWSTR, loptionflags : Int32, lclassflags : Int32, linstanceflags : Int32, pinfo : WBEM_COMPILE_STATUS_INFO*) : HRESULT
-    @lpVtbl.value.compile_file.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, Int32, Int32, Int32, WBEM_COMPILE_STATUS_INFO*, HRESULT)).call(filename, serverandnamespace, user, authority, password, loptionflags, lclassflags, linstanceflags, pinfo)
+  def compile_file(this : IMofCompiler*, filename : LibC::LPWSTR, serverandnamespace : LibC::LPWSTR, user : LibC::LPWSTR, authority : LibC::LPWSTR, password : LibC::LPWSTR, loptionflags : Int32, lclassflags : Int32, linstanceflags : Int32, pinfo : WBEM_COMPILE_STATUS_INFO*) : HRESULT
+    @lpVtbl.value.compile_file.call(this, filename, serverandnamespace, user, authority, password, loptionflags, lclassflags, linstanceflags, pinfo)
   end
-  def compile_buffer(buffsize : Int32, pbuffer : UInt8*, serverandnamespace : LibC::LPWSTR, user : LibC::LPWSTR, authority : LibC::LPWSTR, password : LibC::LPWSTR, loptionflags : Int32, lclassflags : Int32, linstanceflags : Int32, pinfo : WBEM_COMPILE_STATUS_INFO*) : HRESULT
-    @lpVtbl.value.compile_buffer.unsafe_as(Proc(Int32, UInt8*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, Int32, Int32, Int32, WBEM_COMPILE_STATUS_INFO*, HRESULT)).call(buffsize, pbuffer, serverandnamespace, user, authority, password, loptionflags, lclassflags, linstanceflags, pinfo)
+  def compile_buffer(this : IMofCompiler*, buffsize : Int32, pbuffer : UInt8*, serverandnamespace : LibC::LPWSTR, user : LibC::LPWSTR, authority : LibC::LPWSTR, password : LibC::LPWSTR, loptionflags : Int32, lclassflags : Int32, linstanceflags : Int32, pinfo : WBEM_COMPILE_STATUS_INFO*) : HRESULT
+    @lpVtbl.value.compile_buffer.call(this, buffsize, pbuffer, serverandnamespace, user, authority, password, loptionflags, lclassflags, linstanceflags, pinfo)
   end
-  def create_bmof(textfilename : LibC::LPWSTR, bmoffilename : LibC::LPWSTR, serverandnamespace : LibC::LPWSTR, loptionflags : Int32, lclassflags : Int32, linstanceflags : Int32, pinfo : WBEM_COMPILE_STATUS_INFO*) : HRESULT
-    @lpVtbl.value.create_bmof.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, Int32, Int32, Int32, WBEM_COMPILE_STATUS_INFO*, HRESULT)).call(textfilename, bmoffilename, serverandnamespace, loptionflags, lclassflags, linstanceflags, pinfo)
+  def create_bmof(this : IMofCompiler*, textfilename : LibC::LPWSTR, bmoffilename : LibC::LPWSTR, serverandnamespace : LibC::LPWSTR, loptionflags : Int32, lclassflags : Int32, linstanceflags : Int32, pinfo : WBEM_COMPILE_STATUS_INFO*) : HRESULT
+    @lpVtbl.value.create_bmof.call(this, textfilename, bmoffilename, serverandnamespace, loptionflags, lclassflags, linstanceflags, pinfo)
   end
 end
 struct LibWin32::IWbemPropertyProvider
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemPropertyProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemPropertyProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemPropertyProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_property(lflags : Int32, strlocale : UInt8*, strclassmapping : UInt8*, strinstmapping : UInt8*, strpropmapping : UInt8*, pvvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, UInt8*, UInt8*, UInt8*, UInt8*, VARIANT*, HRESULT)).call(lflags, strlocale, strclassmapping, strinstmapping, strpropmapping, pvvalue)
+  def get_property(this : IWbemPropertyProvider*, lflags : Int32, strlocale : UInt8*, strclassmapping : UInt8*, strinstmapping : UInt8*, strpropmapping : UInt8*, pvvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lflags, strlocale, strclassmapping, strinstmapping, strpropmapping, pvvalue)
   end
-  def put_property(lflags : Int32, strlocale : UInt8*, strclassmapping : UInt8*, strinstmapping : UInt8*, strpropmapping : UInt8*, pvvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.put_property.unsafe_as(Proc(Int32, UInt8*, UInt8*, UInt8*, UInt8*, VARIANT*, HRESULT)).call(lflags, strlocale, strclassmapping, strinstmapping, strpropmapping, pvvalue)
+  def put_property(this : IWbemPropertyProvider*, lflags : Int32, strlocale : UInt8*, strclassmapping : UInt8*, strinstmapping : UInt8*, strpropmapping : UInt8*, pvvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.put_property.call(this, lflags, strlocale, strclassmapping, strinstmapping, strpropmapping, pvvalue)
   end
 end
 struct LibWin32::IWbemUnboundObjectSink
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemUnboundObjectSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemUnboundObjectSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemUnboundObjectSink*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def indicate_to_consumer(plogicalconsumer : IWbemClassObject, lnumobjects : Int32, apobjects : IWbemClassObject*) : HRESULT
-    @lpVtbl.value.indicate_to_consumer.unsafe_as(Proc(IWbemClassObject, Int32, IWbemClassObject*, HRESULT)).call(plogicalconsumer, lnumobjects, apobjects)
+  def indicate_to_consumer(this : IWbemUnboundObjectSink*, plogicalconsumer : IWbemClassObject, lnumobjects : Int32, apobjects : IWbemClassObject*) : HRESULT
+    @lpVtbl.value.indicate_to_consumer.call(this, plogicalconsumer, lnumobjects, apobjects)
   end
 end
 struct LibWin32::IWbemEventProvider
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemEventProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemEventProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemEventProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def provide_events(psink : IWbemObjectSink, lflags : Int32) : HRESULT
-    @lpVtbl.value.provide_events.unsafe_as(Proc(IWbemObjectSink, Int32, HRESULT)).call(psink, lflags)
+  def provide_events(this : IWbemEventProvider*, psink : IWbemObjectSink, lflags : Int32) : HRESULT
+    @lpVtbl.value.provide_events.call(this, psink, lflags)
   end
 end
 struct LibWin32::IWbemEventProviderQuerySink
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemEventProviderQuerySink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemEventProviderQuerySink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemEventProviderQuerySink*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def new_query(dwid : UInt32, wszquerylanguage : UInt16*, wszquery : UInt16*) : HRESULT
-    @lpVtbl.value.new_query.unsafe_as(Proc(UInt32, UInt16*, UInt16*, HRESULT)).call(dwid, wszquerylanguage, wszquery)
+  def new_query(this : IWbemEventProviderQuerySink*, dwid : UInt32, wszquerylanguage : UInt16*, wszquery : UInt16*) : HRESULT
+    @lpVtbl.value.new_query.call(this, dwid, wszquerylanguage, wszquery)
   end
-  def cancel_query(dwid : UInt32) : HRESULT
-    @lpVtbl.value.cancel_query.unsafe_as(Proc(UInt32, HRESULT)).call(dwid)
+  def cancel_query(this : IWbemEventProviderQuerySink*, dwid : UInt32) : HRESULT
+    @lpVtbl.value.cancel_query.call(this, dwid)
   end
 end
 struct LibWin32::IWbemEventProviderSecurity
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemEventProviderSecurity*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemEventProviderSecurity*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemEventProviderSecurity*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def access_check(wszquerylanguage : UInt16*, wszquery : UInt16*, lsidlength : Int32, psid : UInt8*) : HRESULT
-    @lpVtbl.value.access_check.unsafe_as(Proc(UInt16*, UInt16*, Int32, UInt8*, HRESULT)).call(wszquerylanguage, wszquery, lsidlength, psid)
+  def access_check(this : IWbemEventProviderSecurity*, wszquerylanguage : UInt16*, wszquery : UInt16*, lsidlength : Int32, psid : UInt8*) : HRESULT
+    @lpVtbl.value.access_check.call(this, wszquerylanguage, wszquery, lsidlength, psid)
   end
 end
 struct LibWin32::IWbemEventConsumerProvider
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemEventConsumerProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemEventConsumerProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemEventConsumerProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def find_consumer(plogicalconsumer : IWbemClassObject, ppconsumer : IWbemUnboundObjectSink*) : HRESULT
-    @lpVtbl.value.find_consumer.unsafe_as(Proc(IWbemClassObject, IWbemUnboundObjectSink*, HRESULT)).call(plogicalconsumer, ppconsumer)
+  def find_consumer(this : IWbemEventConsumerProvider*, plogicalconsumer : IWbemClassObject, ppconsumer : IWbemUnboundObjectSink*) : HRESULT
+    @lpVtbl.value.find_consumer.call(this, plogicalconsumer, ppconsumer)
   end
 end
 struct LibWin32::IWbemProviderInitSink
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemProviderInitSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemProviderInitSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemProviderInitSink*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_status(lstatus : Int32, lflags : Int32) : HRESULT
-    @lpVtbl.value.set_status.unsafe_as(Proc(Int32, Int32, HRESULT)).call(lstatus, lflags)
+  def set_status(this : IWbemProviderInitSink*, lstatus : Int32, lflags : Int32) : HRESULT
+    @lpVtbl.value.set_status.call(this, lstatus, lflags)
   end
 end
 struct LibWin32::IWbemProviderInit
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemProviderInit*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemProviderInit*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemProviderInit*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def initialize(wszuser : LibC::LPWSTR, lflags : Int32, wsznamespace : LibC::LPWSTR, wszlocale : LibC::LPWSTR, pnamespace : IWbemServices, pctx : IWbemContext, pinitsink : IWbemProviderInitSink) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(LibC::LPWSTR, Int32, LibC::LPWSTR, LibC::LPWSTR, IWbemServices, IWbemContext, IWbemProviderInitSink, HRESULT)).call(wszuser, lflags, wsznamespace, wszlocale, pnamespace, pctx, pinitsink)
+  def initialize(this : IWbemProviderInit*, wszuser : LibC::LPWSTR, lflags : Int32, wsznamespace : LibC::LPWSTR, wszlocale : LibC::LPWSTR, pnamespace : IWbemServices, pctx : IWbemContext, pinitsink : IWbemProviderInitSink) : HRESULT
+    @lpVtbl.value.initialize.call(this, wszuser, lflags, wsznamespace, wszlocale, pnamespace, pctx, pinitsink)
   end
 end
 struct LibWin32::IWbemHiPerfProvider
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemHiPerfProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemHiPerfProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemHiPerfProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def query_instances(pnamespace : IWbemServices, wszclass : LibC::LPWSTR, lflags : Int32, pctx : IWbemContext, psink : IWbemObjectSink) : HRESULT
-    @lpVtbl.value.query_instances.unsafe_as(Proc(IWbemServices, LibC::LPWSTR, Int32, IWbemContext, IWbemObjectSink, HRESULT)).call(pnamespace, wszclass, lflags, pctx, psink)
+  def query_instances(this : IWbemHiPerfProvider*, pnamespace : IWbemServices, wszclass : LibC::LPWSTR, lflags : Int32, pctx : IWbemContext, psink : IWbemObjectSink) : HRESULT
+    @lpVtbl.value.query_instances.call(this, pnamespace, wszclass, lflags, pctx, psink)
   end
-  def create_refresher(pnamespace : IWbemServices, lflags : Int32, pprefresher : IWbemRefresher*) : HRESULT
-    @lpVtbl.value.create_refresher.unsafe_as(Proc(IWbemServices, Int32, IWbemRefresher*, HRESULT)).call(pnamespace, lflags, pprefresher)
+  def create_refresher(this : IWbemHiPerfProvider*, pnamespace : IWbemServices, lflags : Int32, pprefresher : IWbemRefresher*) : HRESULT
+    @lpVtbl.value.create_refresher.call(this, pnamespace, lflags, pprefresher)
   end
-  def create_refreshable_object(pnamespace : IWbemServices, ptemplate : IWbemObjectAccess, prefresher : IWbemRefresher, lflags : Int32, pcontext : IWbemContext, pprefreshable : IWbemObjectAccess*, plid : Int32*) : HRESULT
-    @lpVtbl.value.create_refreshable_object.unsafe_as(Proc(IWbemServices, IWbemObjectAccess, IWbemRefresher, Int32, IWbemContext, IWbemObjectAccess*, Int32*, HRESULT)).call(pnamespace, ptemplate, prefresher, lflags, pcontext, pprefreshable, plid)
+  def create_refreshable_object(this : IWbemHiPerfProvider*, pnamespace : IWbemServices, ptemplate : IWbemObjectAccess, prefresher : IWbemRefresher, lflags : Int32, pcontext : IWbemContext, pprefreshable : IWbemObjectAccess*, plid : Int32*) : HRESULT
+    @lpVtbl.value.create_refreshable_object.call(this, pnamespace, ptemplate, prefresher, lflags, pcontext, pprefreshable, plid)
   end
-  def stop_refreshing(prefresher : IWbemRefresher, lid : Int32, lflags : Int32) : HRESULT
-    @lpVtbl.value.stop_refreshing.unsafe_as(Proc(IWbemRefresher, Int32, Int32, HRESULT)).call(prefresher, lid, lflags)
+  def stop_refreshing(this : IWbemHiPerfProvider*, prefresher : IWbemRefresher, lid : Int32, lflags : Int32) : HRESULT
+    @lpVtbl.value.stop_refreshing.call(this, prefresher, lid, lflags)
   end
-  def create_refreshable_enum(pnamespace : IWbemServices, wszclass : LibC::LPWSTR, prefresher : IWbemRefresher, lflags : Int32, pcontext : IWbemContext, phiperfenum : IWbemHiPerfEnum, plid : Int32*) : HRESULT
-    @lpVtbl.value.create_refreshable_enum.unsafe_as(Proc(IWbemServices, LibC::LPWSTR, IWbemRefresher, Int32, IWbemContext, IWbemHiPerfEnum, Int32*, HRESULT)).call(pnamespace, wszclass, prefresher, lflags, pcontext, phiperfenum, plid)
+  def create_refreshable_enum(this : IWbemHiPerfProvider*, pnamespace : IWbemServices, wszclass : LibC::LPWSTR, prefresher : IWbemRefresher, lflags : Int32, pcontext : IWbemContext, phiperfenum : IWbemHiPerfEnum, plid : Int32*) : HRESULT
+    @lpVtbl.value.create_refreshable_enum.call(this, pnamespace, wszclass, prefresher, lflags, pcontext, phiperfenum, plid)
   end
-  def get_objects(pnamespace : IWbemServices, lnumobjects : Int32, apobj : IWbemObjectAccess*, lflags : Int32, pcontext : IWbemContext) : HRESULT
-    @lpVtbl.value.get_objects.unsafe_as(Proc(IWbemServices, Int32, IWbemObjectAccess*, Int32, IWbemContext, HRESULT)).call(pnamespace, lnumobjects, apobj, lflags, pcontext)
+  def get_objects(this : IWbemHiPerfProvider*, pnamespace : IWbemServices, lnumobjects : Int32, apobj : IWbemObjectAccess*, lflags : Int32, pcontext : IWbemContext) : HRESULT
+    @lpVtbl.value.get_objects.call(this, pnamespace, lnumobjects, apobj, lflags, pcontext)
   end
 end
 struct LibWin32::IWbemDecoupledRegistrar
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemDecoupledRegistrar*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemDecoupledRegistrar*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemDecoupledRegistrar*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def register(a_flags : Int32, a_context : IWbemContext, a_user : LibC::LPWSTR, a_locale : LibC::LPWSTR, a_scope : LibC::LPWSTR, a_registration : LibC::LPWSTR, piunknown : IUnknown) : HRESULT
-    @lpVtbl.value.register.unsafe_as(Proc(Int32, IWbemContext, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IUnknown, HRESULT)).call(a_flags, a_context, a_user, a_locale, a_scope, a_registration, piunknown)
+  def register(this : IWbemDecoupledRegistrar*, a_flags : Int32, a_context : IWbemContext, a_user : LibC::LPWSTR, a_locale : LibC::LPWSTR, a_scope : LibC::LPWSTR, a_registration : LibC::LPWSTR, piunknown : IUnknown) : HRESULT
+    @lpVtbl.value.register.call(this, a_flags, a_context, a_user, a_locale, a_scope, a_registration, piunknown)
   end
-  def un_register : HRESULT
-    @lpVtbl.value.un_register.unsafe_as(Proc(HRESULT)).call
+  def un_register(this : IWbemDecoupledRegistrar*) : HRESULT
+    @lpVtbl.value.un_register.call(this)
   end
 end
 struct LibWin32::IWbemProviderIdentity
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemProviderIdentity*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemProviderIdentity*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemProviderIdentity*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_registration_object(lflags : Int32, pprovreg : IWbemClassObject) : HRESULT
-    @lpVtbl.value.set_registration_object.unsafe_as(Proc(Int32, IWbemClassObject, HRESULT)).call(lflags, pprovreg)
+  def set_registration_object(this : IWbemProviderIdentity*, lflags : Int32, pprovreg : IWbemClassObject) : HRESULT
+    @lpVtbl.value.set_registration_object.call(this, lflags, pprovreg)
   end
 end
 struct LibWin32::IWbemDecoupledBasicEventProvider
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemDecoupledBasicEventProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemDecoupledBasicEventProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemDecoupledBasicEventProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def register(a_flags : Int32, a_context : IWbemContext, a_user : LibC::LPWSTR, a_locale : LibC::LPWSTR, a_scope : LibC::LPWSTR, a_registration : LibC::LPWSTR, piunknown : IUnknown) : HRESULT
-    @lpVtbl.value.register.unsafe_as(Proc(Int32, IWbemContext, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IUnknown, HRESULT)).call(a_flags, a_context, a_user, a_locale, a_scope, a_registration, piunknown)
+  def register(this : IWbemDecoupledBasicEventProvider*, a_flags : Int32, a_context : IWbemContext, a_user : LibC::LPWSTR, a_locale : LibC::LPWSTR, a_scope : LibC::LPWSTR, a_registration : LibC::LPWSTR, piunknown : IUnknown) : HRESULT
+    @lpVtbl.value.register.call(this, a_flags, a_context, a_user, a_locale, a_scope, a_registration, piunknown)
   end
-  def un_register : HRESULT
-    @lpVtbl.value.un_register.unsafe_as(Proc(HRESULT)).call
+  def un_register(this : IWbemDecoupledBasicEventProvider*) : HRESULT
+    @lpVtbl.value.un_register.call(this)
   end
-  def get_sink(a_flags : Int32, a_context : IWbemContext, a_sink : IWbemObjectSink*) : HRESULT
-    @lpVtbl.value.get_sink.unsafe_as(Proc(Int32, IWbemContext, IWbemObjectSink*, HRESULT)).call(a_flags, a_context, a_sink)
+  def get_sink(this : IWbemDecoupledBasicEventProvider*, a_flags : Int32, a_context : IWbemContext, a_sink : IWbemObjectSink*) : HRESULT
+    @lpVtbl.value.get_sink.call(this, a_flags, a_context, a_sink)
   end
-  def get_service(a_flags : Int32, a_context : IWbemContext, a_service : IWbemServices*) : HRESULT
-    @lpVtbl.value.get_service.unsafe_as(Proc(Int32, IWbemContext, IWbemServices*, HRESULT)).call(a_flags, a_context, a_service)
+  def get_service(this : IWbemDecoupledBasicEventProvider*, a_flags : Int32, a_context : IWbemContext, a_service : IWbemServices*) : HRESULT
+    @lpVtbl.value.get_service.call(this, a_flags, a_context, a_service)
   end
 end
 struct LibWin32::IWbemEventSink
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemEventSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemEventSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemEventSink*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def indicate(lobjectcount : Int32, apobjarray : IWbemClassObject*) : HRESULT
-    @lpVtbl.value.indicate.unsafe_as(Proc(Int32, IWbemClassObject*, HRESULT)).call(lobjectcount, apobjarray)
+  def indicate(this : IWbemEventSink*, lobjectcount : Int32, apobjarray : IWbemClassObject*) : HRESULT
+    @lpVtbl.value.indicate.call(this, lobjectcount, apobjarray)
   end
-  def set_status(lflags : Int32, hresult : HRESULT, strparam : UInt8*, pobjparam : IWbemClassObject) : HRESULT
-    @lpVtbl.value.set_status.unsafe_as(Proc(Int32, HRESULT, UInt8*, IWbemClassObject, HRESULT)).call(lflags, hresult, strparam, pobjparam)
+  def set_status(this : IWbemEventSink*, lflags : Int32, hresult : HRESULT, strparam : UInt8*, pobjparam : IWbemClassObject) : HRESULT
+    @lpVtbl.value.set_status.call(this, lflags, hresult, strparam, pobjparam)
   end
-  def set_sink_security(lsdlength : Int32, psd : UInt8*) : HRESULT
-    @lpVtbl.value.set_sink_security.unsafe_as(Proc(Int32, UInt8*, HRESULT)).call(lsdlength, psd)
+  def set_sink_security(this : IWbemEventSink*, lsdlength : Int32, psd : UInt8*) : HRESULT
+    @lpVtbl.value.set_sink_security.call(this, lsdlength, psd)
   end
-  def is_active : HRESULT
-    @lpVtbl.value.is_active.unsafe_as(Proc(HRESULT)).call
+  def is_active(this : IWbemEventSink*) : HRESULT
+    @lpVtbl.value.is_active.call(this)
   end
-  def get_restricted_sink(lnumqueries : Int32, awszqueries : LibC::LPWSTR*, pcallback : IUnknown, ppsink : IWbemEventSink*) : HRESULT
-    @lpVtbl.value.get_restricted_sink.unsafe_as(Proc(Int32, LibC::LPWSTR*, IUnknown, IWbemEventSink*, HRESULT)).call(lnumqueries, awszqueries, pcallback, ppsink)
+  def get_restricted_sink(this : IWbemEventSink*, lnumqueries : Int32, awszqueries : LibC::LPWSTR*, pcallback : IUnknown, ppsink : IWbemEventSink*) : HRESULT
+    @lpVtbl.value.get_restricted_sink.call(this, lnumqueries, awszqueries, pcallback, ppsink)
   end
-  def set_batching_parameters(lflags : Int32, dwmaxbuffersize : UInt32, dwmaxsendlatency : UInt32) : HRESULT
-    @lpVtbl.value.set_batching_parameters.unsafe_as(Proc(Int32, UInt32, UInt32, HRESULT)).call(lflags, dwmaxbuffersize, dwmaxsendlatency)
+  def set_batching_parameters(this : IWbemEventSink*, lflags : Int32, dwmaxbuffersize : UInt32, dwmaxsendlatency : UInt32) : HRESULT
+    @lpVtbl.value.set_batching_parameters.call(this, lflags, dwmaxbuffersize, dwmaxsendlatency)
   end
 end
 struct LibWin32::ISWbemServices
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemServices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemServices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemServices*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemServices*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemServices*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemServices*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemServices*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get(strobjectpath : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobject : ISWbemObject*) : HRESULT
-    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, Int32, IDispatch, ISWbemObject*, HRESULT)).call(strobjectpath, iflags, objwbemnamedvalueset, objwbemobject)
+  def get(this : ISWbemServices*, strobjectpath : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobject : ISWbemObject*) : HRESULT
+    @lpVtbl.value.get.call(this, strobjectpath, iflags, objwbemnamedvalueset, objwbemobject)
   end
-  def get_async(objwbemsink : IDispatch, strobjectpath : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.get_async.unsafe_as(Proc(IDispatch, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strobjectpath, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def get_async(this : ISWbemServices*, objwbemsink : IDispatch, strobjectpath : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.get_async.call(this, objwbemsink, strobjectpath, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def delete(strobjectpath : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch) : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(UInt8*, Int32, IDispatch, HRESULT)).call(strobjectpath, iflags, objwbemnamedvalueset)
+  def delete(this : ISWbemServices*, strobjectpath : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch) : HRESULT
+    @lpVtbl.value.delete.call(this, strobjectpath, iflags, objwbemnamedvalueset)
   end
-  def delete_async(objwbemsink : IDispatch, strobjectpath : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.delete_async.unsafe_as(Proc(IDispatch, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strobjectpath, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def delete_async(this : ISWbemServices*, objwbemsink : IDispatch, strobjectpath : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.delete_async.call(this, objwbemsink, strobjectpath, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def instances_of(strclass : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.instances_of.unsafe_as(Proc(UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(strclass, iflags, objwbemnamedvalueset, objwbemobjectset)
+  def instances_of(this : ISWbemServices*, strclass : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.instances_of.call(this, strclass, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def instances_of_async(objwbemsink : IDispatch, strclass : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.instances_of_async.unsafe_as(Proc(IDispatch, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strclass, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def instances_of_async(this : ISWbemServices*, objwbemsink : IDispatch, strclass : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.instances_of_async.call(this, objwbemsink, strclass, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def subclasses_of(strsuperclass : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.subclasses_of.unsafe_as(Proc(UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(strsuperclass, iflags, objwbemnamedvalueset, objwbemobjectset)
+  def subclasses_of(this : ISWbemServices*, strsuperclass : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.subclasses_of.call(this, strsuperclass, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def subclasses_of_async(objwbemsink : IDispatch, strsuperclass : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.subclasses_of_async.unsafe_as(Proc(IDispatch, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strsuperclass, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def subclasses_of_async(this : ISWbemServices*, objwbemsink : IDispatch, strsuperclass : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.subclasses_of_async.call(this, objwbemsink, strsuperclass, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def exec_query(strquery : UInt8*, strquerylanguage : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.exec_query.unsafe_as(Proc(UInt8*, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(strquery, strquerylanguage, iflags, objwbemnamedvalueset, objwbemobjectset)
+  def exec_query(this : ISWbemServices*, strquery : UInt8*, strquerylanguage : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.exec_query.call(this, strquery, strquerylanguage, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def exec_query_async(objwbemsink : IDispatch, strquery : UInt8*, strquerylanguage : UInt8*, lflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.exec_query_async.unsafe_as(Proc(IDispatch, UInt8*, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strquery, strquerylanguage, lflags, objwbemnamedvalueset, objwbemasynccontext)
+  def exec_query_async(this : ISWbemServices*, objwbemsink : IDispatch, strquery : UInt8*, strquerylanguage : UInt8*, lflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.exec_query_async.call(this, objwbemsink, strquery, strquerylanguage, lflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def associators_of(strobjectpath : UInt8*, strassocclass : UInt8*, strresultclass : UInt8*, strresultrole : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredassocqualifier : UInt8*, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.associators_of.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(strobjectpath, strassocclass, strresultclass, strresultrole, strrole, bclassesonly, bschemaonly, strrequiredassocqualifier, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemobjectset)
+  def associators_of(this : ISWbemServices*, strobjectpath : UInt8*, strassocclass : UInt8*, strresultclass : UInt8*, strresultrole : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredassocqualifier : UInt8*, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.associators_of.call(this, strobjectpath, strassocclass, strresultclass, strresultrole, strrole, bclassesonly, bschemaonly, strrequiredassocqualifier, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def associators_of_async(objwbemsink : IDispatch, strobjectpath : UInt8*, strassocclass : UInt8*, strresultclass : UInt8*, strresultrole : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredassocqualifier : UInt8*, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.associators_of_async.unsafe_as(Proc(IDispatch, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strobjectpath, strassocclass, strresultclass, strresultrole, strrole, bclassesonly, bschemaonly, strrequiredassocqualifier, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def associators_of_async(this : ISWbemServices*, objwbemsink : IDispatch, strobjectpath : UInt8*, strassocclass : UInt8*, strresultclass : UInt8*, strresultrole : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredassocqualifier : UInt8*, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.associators_of_async.call(this, objwbemsink, strobjectpath, strassocclass, strresultclass, strresultrole, strrole, bclassesonly, bschemaonly, strrequiredassocqualifier, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def references_to(strobjectpath : UInt8*, strresultclass : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.references_to.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(strobjectpath, strresultclass, strrole, bclassesonly, bschemaonly, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemobjectset)
+  def references_to(this : ISWbemServices*, strobjectpath : UInt8*, strresultclass : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.references_to.call(this, strobjectpath, strresultclass, strrole, bclassesonly, bschemaonly, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def references_to_async(objwbemsink : IDispatch, strobjectpath : UInt8*, strresultclass : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.references_to_async.unsafe_as(Proc(IDispatch, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strobjectpath, strresultclass, strrole, bclassesonly, bschemaonly, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def references_to_async(this : ISWbemServices*, objwbemsink : IDispatch, strobjectpath : UInt8*, strresultclass : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.references_to_async.call(this, objwbemsink, strobjectpath, strresultclass, strrole, bclassesonly, bschemaonly, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def exec_notification_query(strquery : UInt8*, strquerylanguage : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemeventsource : ISWbemEventSource*) : HRESULT
-    @lpVtbl.value.exec_notification_query.unsafe_as(Proc(UInt8*, UInt8*, Int32, IDispatch, ISWbemEventSource*, HRESULT)).call(strquery, strquerylanguage, iflags, objwbemnamedvalueset, objwbemeventsource)
+  def exec_notification_query(this : ISWbemServices*, strquery : UInt8*, strquerylanguage : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemeventsource : ISWbemEventSource*) : HRESULT
+    @lpVtbl.value.exec_notification_query.call(this, strquery, strquerylanguage, iflags, objwbemnamedvalueset, objwbemeventsource)
   end
-  def exec_notification_query_async(objwbemsink : IDispatch, strquery : UInt8*, strquerylanguage : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.exec_notification_query_async.unsafe_as(Proc(IDispatch, UInt8*, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strquery, strquerylanguage, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def exec_notification_query_async(this : ISWbemServices*, objwbemsink : IDispatch, strquery : UInt8*, strquerylanguage : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.exec_notification_query_async.call(this, objwbemsink, strquery, strquerylanguage, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def exec_method(strobjectpath : UInt8*, strmethodname : UInt8*, objwbeminparameters : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemoutparameters : ISWbemObject*) : HRESULT
-    @lpVtbl.value.exec_method.unsafe_as(Proc(UInt8*, UInt8*, IDispatch, Int32, IDispatch, ISWbemObject*, HRESULT)).call(strobjectpath, strmethodname, objwbeminparameters, iflags, objwbemnamedvalueset, objwbemoutparameters)
+  def exec_method(this : ISWbemServices*, strobjectpath : UInt8*, strmethodname : UInt8*, objwbeminparameters : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemoutparameters : ISWbemObject*) : HRESULT
+    @lpVtbl.value.exec_method.call(this, strobjectpath, strmethodname, objwbeminparameters, iflags, objwbemnamedvalueset, objwbemoutparameters)
   end
-  def exec_method_async(objwbemsink : IDispatch, strobjectpath : UInt8*, strmethodname : UInt8*, objwbeminparameters : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.exec_method_async.unsafe_as(Proc(IDispatch, UInt8*, UInt8*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strobjectpath, strmethodname, objwbeminparameters, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def exec_method_async(this : ISWbemServices*, objwbemsink : IDispatch, strobjectpath : UInt8*, strmethodname : UInt8*, objwbeminparameters : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.exec_method_async.call(this, objwbemsink, strobjectpath, strmethodname, objwbeminparameters, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def get_security_(objwbemsecurity : ISWbemSecurity*) : HRESULT
-    @lpVtbl.value.get_security_.unsafe_as(Proc(ISWbemSecurity*, HRESULT)).call(objwbemsecurity)
+  def get_security_(this : ISWbemServices*, objwbemsecurity : ISWbemSecurity*) : HRESULT
+    @lpVtbl.value.get_security_.call(this, objwbemsecurity)
   end
 end
 struct LibWin32::ISWbemLocator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemLocator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemLocator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemLocator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemLocator*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemLocator*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemLocator*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemLocator*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def connect_server(strserver : UInt8*, strnamespace : UInt8*, struser : UInt8*, strpassword : UInt8*, strlocale : UInt8*, strauthority : UInt8*, isecurityflags : Int32, objwbemnamedvalueset : IDispatch, objwbemservices : ISWbemServices*) : HRESULT
-    @lpVtbl.value.connect_server.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, IDispatch, ISWbemServices*, HRESULT)).call(strserver, strnamespace, struser, strpassword, strlocale, strauthority, isecurityflags, objwbemnamedvalueset, objwbemservices)
+  def connect_server(this : ISWbemLocator*, strserver : UInt8*, strnamespace : UInt8*, struser : UInt8*, strpassword : UInt8*, strlocale : UInt8*, strauthority : UInt8*, isecurityflags : Int32, objwbemnamedvalueset : IDispatch, objwbemservices : ISWbemServices*) : HRESULT
+    @lpVtbl.value.connect_server.call(this, strserver, strnamespace, struser, strpassword, strlocale, strauthority, isecurityflags, objwbemnamedvalueset, objwbemservices)
   end
-  def get_security_(objwbemsecurity : ISWbemSecurity*) : HRESULT
-    @lpVtbl.value.get_security_.unsafe_as(Proc(ISWbemSecurity*, HRESULT)).call(objwbemsecurity)
+  def get_security_(this : ISWbemLocator*, objwbemsecurity : ISWbemSecurity*) : HRESULT
+    @lpVtbl.value.get_security_.call(this, objwbemsecurity)
   end
 end
 struct LibWin32::ISWbemObject
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemObject*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemObject*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemObject*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemObject*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemObject*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def put_(iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectpath : ISWbemObjectPath*) : HRESULT
-    @lpVtbl.value.put_.unsafe_as(Proc(Int32, IDispatch, ISWbemObjectPath*, HRESULT)).call(iflags, objwbemnamedvalueset, objwbemobjectpath)
+  def put_(this : ISWbemObject*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectpath : ISWbemObjectPath*) : HRESULT
+    @lpVtbl.value.put_.call(this, iflags, objwbemnamedvalueset, objwbemobjectpath)
   end
-  def put_async_(objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.put_async_.unsafe_as(Proc(IDispatch, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def put_async_(this : ISWbemObject*, objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.put_async_.call(this, objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def delete_(iflags : Int32, objwbemnamedvalueset : IDispatch) : HRESULT
-    @lpVtbl.value.delete_.unsafe_as(Proc(Int32, IDispatch, HRESULT)).call(iflags, objwbemnamedvalueset)
+  def delete_(this : ISWbemObject*, iflags : Int32, objwbemnamedvalueset : IDispatch) : HRESULT
+    @lpVtbl.value.delete_.call(this, iflags, objwbemnamedvalueset)
   end
-  def delete_async_(objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.delete_async_.unsafe_as(Proc(IDispatch, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def delete_async_(this : ISWbemObject*, objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.delete_async_.call(this, objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def instances_(iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.instances_.unsafe_as(Proc(Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(iflags, objwbemnamedvalueset, objwbemobjectset)
+  def instances_(this : ISWbemObject*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.instances_.call(this, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def instances_async_(objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.instances_async_.unsafe_as(Proc(IDispatch, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def instances_async_(this : ISWbemObject*, objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.instances_async_.call(this, objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def subclasses_(iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.subclasses_.unsafe_as(Proc(Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(iflags, objwbemnamedvalueset, objwbemobjectset)
+  def subclasses_(this : ISWbemObject*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.subclasses_.call(this, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def subclasses_async_(objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.subclasses_async_.unsafe_as(Proc(IDispatch, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def subclasses_async_(this : ISWbemObject*, objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.subclasses_async_.call(this, objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def associators_(strassocclass : UInt8*, strresultclass : UInt8*, strresultrole : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredassocqualifier : UInt8*, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.associators_.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(strassocclass, strresultclass, strresultrole, strrole, bclassesonly, bschemaonly, strrequiredassocqualifier, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemobjectset)
+  def associators_(this : ISWbemObject*, strassocclass : UInt8*, strresultclass : UInt8*, strresultrole : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredassocqualifier : UInt8*, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.associators_.call(this, strassocclass, strresultclass, strresultrole, strrole, bclassesonly, bschemaonly, strrequiredassocqualifier, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def associators_async_(objwbemsink : IDispatch, strassocclass : UInt8*, strresultclass : UInt8*, strresultrole : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredassocqualifier : UInt8*, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.associators_async_.unsafe_as(Proc(IDispatch, UInt8*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strassocclass, strresultclass, strresultrole, strrole, bclassesonly, bschemaonly, strrequiredassocqualifier, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def associators_async_(this : ISWbemObject*, objwbemsink : IDispatch, strassocclass : UInt8*, strresultclass : UInt8*, strresultrole : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredassocqualifier : UInt8*, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.associators_async_.call(this, objwbemsink, strassocclass, strresultclass, strresultrole, strrole, bclassesonly, bschemaonly, strrequiredassocqualifier, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def references_(strresultclass : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.references_.unsafe_as(Proc(UInt8*, UInt8*, Int16, Int16, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(strresultclass, strrole, bclassesonly, bschemaonly, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemobjectset)
+  def references_(this : ISWbemObject*, strresultclass : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.references_.call(this, strresultclass, strrole, bclassesonly, bschemaonly, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def references_async_(objwbemsink : IDispatch, strresultclass : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.references_async_.unsafe_as(Proc(IDispatch, UInt8*, UInt8*, Int16, Int16, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strresultclass, strrole, bclassesonly, bschemaonly, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def references_async_(this : ISWbemObject*, objwbemsink : IDispatch, strresultclass : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.references_async_.call(this, objwbemsink, strresultclass, strrole, bclassesonly, bschemaonly, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def exec_method_(strmethodname : UInt8*, objwbeminparameters : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemoutparameters : ISWbemObject*) : HRESULT
-    @lpVtbl.value.exec_method_.unsafe_as(Proc(UInt8*, IDispatch, Int32, IDispatch, ISWbemObject*, HRESULT)).call(strmethodname, objwbeminparameters, iflags, objwbemnamedvalueset, objwbemoutparameters)
+  def exec_method_(this : ISWbemObject*, strmethodname : UInt8*, objwbeminparameters : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemoutparameters : ISWbemObject*) : HRESULT
+    @lpVtbl.value.exec_method_.call(this, strmethodname, objwbeminparameters, iflags, objwbemnamedvalueset, objwbemoutparameters)
   end
-  def exec_method_async_(objwbemsink : IDispatch, strmethodname : UInt8*, objwbeminparameters : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.exec_method_async_.unsafe_as(Proc(IDispatch, UInt8*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strmethodname, objwbeminparameters, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def exec_method_async_(this : ISWbemObject*, objwbemsink : IDispatch, strmethodname : UInt8*, objwbeminparameters : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.exec_method_async_.call(this, objwbemsink, strmethodname, objwbeminparameters, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def clone_(objwbemobject : ISWbemObject*) : HRESULT
-    @lpVtbl.value.clone_.unsafe_as(Proc(ISWbemObject*, HRESULT)).call(objwbemobject)
+  def clone_(this : ISWbemObject*, objwbemobject : ISWbemObject*) : HRESULT
+    @lpVtbl.value.clone_.call(this, objwbemobject)
   end
-  def get_object_text_(iflags : Int32, strobjecttext : UInt8**) : HRESULT
-    @lpVtbl.value.get_object_text_.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(iflags, strobjecttext)
+  def get_object_text_(this : ISWbemObject*, iflags : Int32, strobjecttext : UInt8**) : HRESULT
+    @lpVtbl.value.get_object_text_.call(this, iflags, strobjecttext)
   end
-  def spawn_derived_class_(iflags : Int32, objwbemobject : ISWbemObject*) : HRESULT
-    @lpVtbl.value.spawn_derived_class_.unsafe_as(Proc(Int32, ISWbemObject*, HRESULT)).call(iflags, objwbemobject)
+  def spawn_derived_class_(this : ISWbemObject*, iflags : Int32, objwbemobject : ISWbemObject*) : HRESULT
+    @lpVtbl.value.spawn_derived_class_.call(this, iflags, objwbemobject)
   end
-  def spawn_instance_(iflags : Int32, objwbemobject : ISWbemObject*) : HRESULT
-    @lpVtbl.value.spawn_instance_.unsafe_as(Proc(Int32, ISWbemObject*, HRESULT)).call(iflags, objwbemobject)
+  def spawn_instance_(this : ISWbemObject*, iflags : Int32, objwbemobject : ISWbemObject*) : HRESULT
+    @lpVtbl.value.spawn_instance_.call(this, iflags, objwbemobject)
   end
-  def compare_to_(objwbemobject : IDispatch, iflags : Int32, bresult : Int16*) : HRESULT
-    @lpVtbl.value.compare_to_.unsafe_as(Proc(IDispatch, Int32, Int16*, HRESULT)).call(objwbemobject, iflags, bresult)
+  def compare_to_(this : ISWbemObject*, objwbemobject : IDispatch, iflags : Int32, bresult : Int16*) : HRESULT
+    @lpVtbl.value.compare_to_.call(this, objwbemobject, iflags, bresult)
   end
-  def get_qualifiers_(objwbemqualifierset : ISWbemQualifierSet*) : HRESULT
-    @lpVtbl.value.get_qualifiers_.unsafe_as(Proc(ISWbemQualifierSet*, HRESULT)).call(objwbemqualifierset)
+  def get_qualifiers_(this : ISWbemObject*, objwbemqualifierset : ISWbemQualifierSet*) : HRESULT
+    @lpVtbl.value.get_qualifiers_.call(this, objwbemqualifierset)
   end
-  def get_properties_(objwbempropertyset : ISWbemPropertySet*) : HRESULT
-    @lpVtbl.value.get_properties_.unsafe_as(Proc(ISWbemPropertySet*, HRESULT)).call(objwbempropertyset)
+  def get_properties_(this : ISWbemObject*, objwbempropertyset : ISWbemPropertySet*) : HRESULT
+    @lpVtbl.value.get_properties_.call(this, objwbempropertyset)
   end
-  def get_methods_(objwbemmethodset : ISWbemMethodSet*) : HRESULT
-    @lpVtbl.value.get_methods_.unsafe_as(Proc(ISWbemMethodSet*, HRESULT)).call(objwbemmethodset)
+  def get_methods_(this : ISWbemObject*, objwbemmethodset : ISWbemMethodSet*) : HRESULT
+    @lpVtbl.value.get_methods_.call(this, objwbemmethodset)
   end
-  def get_derivation_(strclassnamearray : VARIANT*) : HRESULT
-    @lpVtbl.value.get_derivation_.unsafe_as(Proc(VARIANT*, HRESULT)).call(strclassnamearray)
+  def get_derivation_(this : ISWbemObject*, strclassnamearray : VARIANT*) : HRESULT
+    @lpVtbl.value.get_derivation_.call(this, strclassnamearray)
   end
-  def get_path_(objwbemobjectpath : ISWbemObjectPath*) : HRESULT
-    @lpVtbl.value.get_path_.unsafe_as(Proc(ISWbemObjectPath*, HRESULT)).call(objwbemobjectpath)
+  def get_path_(this : ISWbemObject*, objwbemobjectpath : ISWbemObjectPath*) : HRESULT
+    @lpVtbl.value.get_path_.call(this, objwbemobjectpath)
   end
-  def get_security_(objwbemsecurity : ISWbemSecurity*) : HRESULT
-    @lpVtbl.value.get_security_.unsafe_as(Proc(ISWbemSecurity*, HRESULT)).call(objwbemsecurity)
+  def get_security_(this : ISWbemObject*, objwbemsecurity : ISWbemSecurity*) : HRESULT
+    @lpVtbl.value.get_security_.call(this, objwbemsecurity)
   end
 end
 struct LibWin32::ISWbemObjectSet
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemObjectSet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemObjectSet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemObjectSet*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemObjectSet*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemObjectSet*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemObjectSet*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemObjectSet*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get__new_enum(punk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(punk)
+  def get__new_enum(this : ISWbemObjectSet*, punk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, punk)
   end
-  def item(strobjectpath : UInt8*, iflags : Int32, objwbemobject : ISWbemObject*) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(UInt8*, Int32, ISWbemObject*, HRESULT)).call(strobjectpath, iflags, objwbemobject)
+  def item(this : ISWbemObjectSet*, strobjectpath : UInt8*, iflags : Int32, objwbemobject : ISWbemObject*) : HRESULT
+    @lpVtbl.value.item.call(this, strobjectpath, iflags, objwbemobject)
   end
-  def get_count(icount : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(icount)
+  def get_count(this : ISWbemObjectSet*, icount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, icount)
   end
-  def get_security_(objwbemsecurity : ISWbemSecurity*) : HRESULT
-    @lpVtbl.value.get_security_.unsafe_as(Proc(ISWbemSecurity*, HRESULT)).call(objwbemsecurity)
+  def get_security_(this : ISWbemObjectSet*, objwbemsecurity : ISWbemSecurity*) : HRESULT
+    @lpVtbl.value.get_security_.call(this, objwbemsecurity)
   end
-  def item_index(lindex : Int32, objwbemobject : ISWbemObject*) : HRESULT
-    @lpVtbl.value.item_index.unsafe_as(Proc(Int32, ISWbemObject*, HRESULT)).call(lindex, objwbemobject)
+  def item_index(this : ISWbemObjectSet*, lindex : Int32, objwbemobject : ISWbemObject*) : HRESULT
+    @lpVtbl.value.item_index.call(this, lindex, objwbemobject)
   end
 end
 struct LibWin32::ISWbemNamedValue
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemNamedValue*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemNamedValue*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemNamedValue*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemNamedValue*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemNamedValue*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemNamedValue*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemNamedValue*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_value(varvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(varvalue)
+  def get_value(this : ISWbemNamedValue*, varvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, varvalue)
   end
-  def put_value(varvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.put_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(varvalue)
+  def put_value(this : ISWbemNamedValue*, varvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.put_value.call(this, varvalue)
   end
-  def get_name(strname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(strname)
+  def get_name(this : ISWbemNamedValue*, strname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, strname)
   end
 end
 struct LibWin32::ISWbemNamedValueSet
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemNamedValueSet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemNamedValueSet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemNamedValueSet*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemNamedValueSet*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemNamedValueSet*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemNamedValueSet*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemNamedValueSet*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get__new_enum(punk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(punk)
+  def get__new_enum(this : ISWbemNamedValueSet*, punk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, punk)
   end
-  def item(strname : UInt8*, iflags : Int32, objwbemnamedvalue : ISWbemNamedValue*) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(UInt8*, Int32, ISWbemNamedValue*, HRESULT)).call(strname, iflags, objwbemnamedvalue)
+  def item(this : ISWbemNamedValueSet*, strname : UInt8*, iflags : Int32, objwbemnamedvalue : ISWbemNamedValue*) : HRESULT
+    @lpVtbl.value.item.call(this, strname, iflags, objwbemnamedvalue)
   end
-  def get_count(icount : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(icount)
+  def get_count(this : ISWbemNamedValueSet*, icount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, icount)
   end
-  def add(strname : UInt8*, varvalue : VARIANT*, iflags : Int32, objwbemnamedvalue : ISWbemNamedValue*) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(UInt8*, VARIANT*, Int32, ISWbemNamedValue*, HRESULT)).call(strname, varvalue, iflags, objwbemnamedvalue)
+  def add(this : ISWbemNamedValueSet*, strname : UInt8*, varvalue : VARIANT*, iflags : Int32, objwbemnamedvalue : ISWbemNamedValue*) : HRESULT
+    @lpVtbl.value.add.call(this, strname, varvalue, iflags, objwbemnamedvalue)
   end
-  def remove(strname : UInt8*, iflags : Int32) : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(UInt8*, Int32, HRESULT)).call(strname, iflags)
+  def remove(this : ISWbemNamedValueSet*, strname : UInt8*, iflags : Int32) : HRESULT
+    @lpVtbl.value.remove.call(this, strname, iflags)
   end
-  def clone(objwbemnamedvalueset : ISWbemNamedValueSet*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(ISWbemNamedValueSet*, HRESULT)).call(objwbemnamedvalueset)
+  def clone(this : ISWbemNamedValueSet*, objwbemnamedvalueset : ISWbemNamedValueSet*) : HRESULT
+    @lpVtbl.value.clone.call(this, objwbemnamedvalueset)
   end
-  def delete_all : HRESULT
-    @lpVtbl.value.delete_all.unsafe_as(Proc(HRESULT)).call
+  def delete_all(this : ISWbemNamedValueSet*) : HRESULT
+    @lpVtbl.value.delete_all.call(this)
   end
 end
 struct LibWin32::ISWbemQualifier
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemQualifier*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemQualifier*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemQualifier*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemQualifier*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemQualifier*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemQualifier*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemQualifier*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_value(varvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(varvalue)
+  def get_value(this : ISWbemQualifier*, varvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, varvalue)
   end
-  def put_value(varvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.put_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(varvalue)
+  def put_value(this : ISWbemQualifier*, varvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.put_value.call(this, varvalue)
   end
-  def get_name(strname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(strname)
+  def get_name(this : ISWbemQualifier*, strname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, strname)
   end
-  def get_is_local(bislocal : Int16*) : HRESULT
-    @lpVtbl.value.get_is_local.unsafe_as(Proc(Int16*, HRESULT)).call(bislocal)
+  def get_is_local(this : ISWbemQualifier*, bislocal : Int16*) : HRESULT
+    @lpVtbl.value.get_is_local.call(this, bislocal)
   end
-  def get_propagates_to_subclass(bpropagatestosubclass : Int16*) : HRESULT
-    @lpVtbl.value.get_propagates_to_subclass.unsafe_as(Proc(Int16*, HRESULT)).call(bpropagatestosubclass)
+  def get_propagates_to_subclass(this : ISWbemQualifier*, bpropagatestosubclass : Int16*) : HRESULT
+    @lpVtbl.value.get_propagates_to_subclass.call(this, bpropagatestosubclass)
   end
-  def put_propagates_to_subclass(bpropagatestosubclass : Int16) : HRESULT
-    @lpVtbl.value.put_propagates_to_subclass.unsafe_as(Proc(Int16, HRESULT)).call(bpropagatestosubclass)
+  def put_propagates_to_subclass(this : ISWbemQualifier*, bpropagatestosubclass : Int16) : HRESULT
+    @lpVtbl.value.put_propagates_to_subclass.call(this, bpropagatestosubclass)
   end
-  def get_propagates_to_instance(bpropagatestoinstance : Int16*) : HRESULT
-    @lpVtbl.value.get_propagates_to_instance.unsafe_as(Proc(Int16*, HRESULT)).call(bpropagatestoinstance)
+  def get_propagates_to_instance(this : ISWbemQualifier*, bpropagatestoinstance : Int16*) : HRESULT
+    @lpVtbl.value.get_propagates_to_instance.call(this, bpropagatestoinstance)
   end
-  def put_propagates_to_instance(bpropagatestoinstance : Int16) : HRESULT
-    @lpVtbl.value.put_propagates_to_instance.unsafe_as(Proc(Int16, HRESULT)).call(bpropagatestoinstance)
+  def put_propagates_to_instance(this : ISWbemQualifier*, bpropagatestoinstance : Int16) : HRESULT
+    @lpVtbl.value.put_propagates_to_instance.call(this, bpropagatestoinstance)
   end
-  def get_is_overridable(bisoverridable : Int16*) : HRESULT
-    @lpVtbl.value.get_is_overridable.unsafe_as(Proc(Int16*, HRESULT)).call(bisoverridable)
+  def get_is_overridable(this : ISWbemQualifier*, bisoverridable : Int16*) : HRESULT
+    @lpVtbl.value.get_is_overridable.call(this, bisoverridable)
   end
-  def put_is_overridable(bisoverridable : Int16) : HRESULT
-    @lpVtbl.value.put_is_overridable.unsafe_as(Proc(Int16, HRESULT)).call(bisoverridable)
+  def put_is_overridable(this : ISWbemQualifier*, bisoverridable : Int16) : HRESULT
+    @lpVtbl.value.put_is_overridable.call(this, bisoverridable)
   end
-  def get_is_amended(bisamended : Int16*) : HRESULT
-    @lpVtbl.value.get_is_amended.unsafe_as(Proc(Int16*, HRESULT)).call(bisamended)
+  def get_is_amended(this : ISWbemQualifier*, bisamended : Int16*) : HRESULT
+    @lpVtbl.value.get_is_amended.call(this, bisamended)
   end
 end
 struct LibWin32::ISWbemQualifierSet
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemQualifierSet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemQualifierSet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemQualifierSet*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemQualifierSet*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemQualifierSet*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemQualifierSet*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemQualifierSet*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get__new_enum(punk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(punk)
+  def get__new_enum(this : ISWbemQualifierSet*, punk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, punk)
   end
-  def item(name : UInt8*, iflags : Int32, objwbemqualifier : ISWbemQualifier*) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(UInt8*, Int32, ISWbemQualifier*, HRESULT)).call(name, iflags, objwbemqualifier)
+  def item(this : ISWbemQualifierSet*, name : UInt8*, iflags : Int32, objwbemqualifier : ISWbemQualifier*) : HRESULT
+    @lpVtbl.value.item.call(this, name, iflags, objwbemqualifier)
   end
-  def get_count(icount : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(icount)
+  def get_count(this : ISWbemQualifierSet*, icount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, icount)
   end
-  def add(strname : UInt8*, varval : VARIANT*, bpropagatestosubclass : Int16, bpropagatestoinstance : Int16, bisoverridable : Int16, iflags : Int32, objwbemqualifier : ISWbemQualifier*) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(UInt8*, VARIANT*, Int16, Int16, Int16, Int32, ISWbemQualifier*, HRESULT)).call(strname, varval, bpropagatestosubclass, bpropagatestoinstance, bisoverridable, iflags, objwbemqualifier)
+  def add(this : ISWbemQualifierSet*, strname : UInt8*, varval : VARIANT*, bpropagatestosubclass : Int16, bpropagatestoinstance : Int16, bisoverridable : Int16, iflags : Int32, objwbemqualifier : ISWbemQualifier*) : HRESULT
+    @lpVtbl.value.add.call(this, strname, varval, bpropagatestosubclass, bpropagatestoinstance, bisoverridable, iflags, objwbemqualifier)
   end
-  def remove(strname : UInt8*, iflags : Int32) : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(UInt8*, Int32, HRESULT)).call(strname, iflags)
+  def remove(this : ISWbemQualifierSet*, strname : UInt8*, iflags : Int32) : HRESULT
+    @lpVtbl.value.remove.call(this, strname, iflags)
   end
 end
 struct LibWin32::ISWbemProperty
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemProperty*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemProperty*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemProperty*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemProperty*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemProperty*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemProperty*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemProperty*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_value(varvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(varvalue)
+  def get_value(this : ISWbemProperty*, varvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, varvalue)
   end
-  def put_value(varvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.put_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(varvalue)
+  def put_value(this : ISWbemProperty*, varvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.put_value.call(this, varvalue)
   end
-  def get_name(strname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(strname)
+  def get_name(this : ISWbemProperty*, strname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, strname)
   end
-  def get_is_local(bislocal : Int16*) : HRESULT
-    @lpVtbl.value.get_is_local.unsafe_as(Proc(Int16*, HRESULT)).call(bislocal)
+  def get_is_local(this : ISWbemProperty*, bislocal : Int16*) : HRESULT
+    @lpVtbl.value.get_is_local.call(this, bislocal)
   end
-  def get_origin(strorigin : UInt8**) : HRESULT
-    @lpVtbl.value.get_origin.unsafe_as(Proc(UInt8**, HRESULT)).call(strorigin)
+  def get_origin(this : ISWbemProperty*, strorigin : UInt8**) : HRESULT
+    @lpVtbl.value.get_origin.call(this, strorigin)
   end
-  def get_cim_type(icimtype : WbemCimtypeEnum*) : HRESULT
-    @lpVtbl.value.get_cim_type.unsafe_as(Proc(WbemCimtypeEnum*, HRESULT)).call(icimtype)
+  def get_cim_type(this : ISWbemProperty*, icimtype : WbemCimtypeEnum*) : HRESULT
+    @lpVtbl.value.get_cim_type.call(this, icimtype)
   end
-  def get_qualifiers_(objwbemqualifierset : ISWbemQualifierSet*) : HRESULT
-    @lpVtbl.value.get_qualifiers_.unsafe_as(Proc(ISWbemQualifierSet*, HRESULT)).call(objwbemqualifierset)
+  def get_qualifiers_(this : ISWbemProperty*, objwbemqualifierset : ISWbemQualifierSet*) : HRESULT
+    @lpVtbl.value.get_qualifiers_.call(this, objwbemqualifierset)
   end
-  def get_is_array(bisarray : Int16*) : HRESULT
-    @lpVtbl.value.get_is_array.unsafe_as(Proc(Int16*, HRESULT)).call(bisarray)
+  def get_is_array(this : ISWbemProperty*, bisarray : Int16*) : HRESULT
+    @lpVtbl.value.get_is_array.call(this, bisarray)
   end
 end
 struct LibWin32::ISWbemPropertySet
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemPropertySet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemPropertySet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemPropertySet*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemPropertySet*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemPropertySet*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemPropertySet*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemPropertySet*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get__new_enum(punk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(punk)
+  def get__new_enum(this : ISWbemPropertySet*, punk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, punk)
   end
-  def item(strname : UInt8*, iflags : Int32, objwbemproperty : ISWbemProperty*) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(UInt8*, Int32, ISWbemProperty*, HRESULT)).call(strname, iflags, objwbemproperty)
+  def item(this : ISWbemPropertySet*, strname : UInt8*, iflags : Int32, objwbemproperty : ISWbemProperty*) : HRESULT
+    @lpVtbl.value.item.call(this, strname, iflags, objwbemproperty)
   end
-  def get_count(icount : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(icount)
+  def get_count(this : ISWbemPropertySet*, icount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, icount)
   end
-  def add(strname : UInt8*, icimtype : WbemCimtypeEnum, bisarray : Int16, iflags : Int32, objwbemproperty : ISWbemProperty*) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(UInt8*, WbemCimtypeEnum, Int16, Int32, ISWbemProperty*, HRESULT)).call(strname, icimtype, bisarray, iflags, objwbemproperty)
+  def add(this : ISWbemPropertySet*, strname : UInt8*, icimtype : WbemCimtypeEnum, bisarray : Int16, iflags : Int32, objwbemproperty : ISWbemProperty*) : HRESULT
+    @lpVtbl.value.add.call(this, strname, icimtype, bisarray, iflags, objwbemproperty)
   end
-  def remove(strname : UInt8*, iflags : Int32) : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(UInt8*, Int32, HRESULT)).call(strname, iflags)
+  def remove(this : ISWbemPropertySet*, strname : UInt8*, iflags : Int32) : HRESULT
+    @lpVtbl.value.remove.call(this, strname, iflags)
   end
 end
 struct LibWin32::ISWbemMethod
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemMethod*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemMethod*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemMethod*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemMethod*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemMethod*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemMethod*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemMethod*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_name(strname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(strname)
+  def get_name(this : ISWbemMethod*, strname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, strname)
   end
-  def get_origin(strorigin : UInt8**) : HRESULT
-    @lpVtbl.value.get_origin.unsafe_as(Proc(UInt8**, HRESULT)).call(strorigin)
+  def get_origin(this : ISWbemMethod*, strorigin : UInt8**) : HRESULT
+    @lpVtbl.value.get_origin.call(this, strorigin)
   end
-  def get_in_parameters(objwbeminparameters : ISWbemObject*) : HRESULT
-    @lpVtbl.value.get_in_parameters.unsafe_as(Proc(ISWbemObject*, HRESULT)).call(objwbeminparameters)
+  def get_in_parameters(this : ISWbemMethod*, objwbeminparameters : ISWbemObject*) : HRESULT
+    @lpVtbl.value.get_in_parameters.call(this, objwbeminparameters)
   end
-  def get_out_parameters(objwbemoutparameters : ISWbemObject*) : HRESULT
-    @lpVtbl.value.get_out_parameters.unsafe_as(Proc(ISWbemObject*, HRESULT)).call(objwbemoutparameters)
+  def get_out_parameters(this : ISWbemMethod*, objwbemoutparameters : ISWbemObject*) : HRESULT
+    @lpVtbl.value.get_out_parameters.call(this, objwbemoutparameters)
   end
-  def get_qualifiers_(objwbemqualifierset : ISWbemQualifierSet*) : HRESULT
-    @lpVtbl.value.get_qualifiers_.unsafe_as(Proc(ISWbemQualifierSet*, HRESULT)).call(objwbemqualifierset)
+  def get_qualifiers_(this : ISWbemMethod*, objwbemqualifierset : ISWbemQualifierSet*) : HRESULT
+    @lpVtbl.value.get_qualifiers_.call(this, objwbemqualifierset)
   end
 end
 struct LibWin32::ISWbemMethodSet
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemMethodSet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemMethodSet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemMethodSet*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemMethodSet*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemMethodSet*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemMethodSet*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemMethodSet*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get__new_enum(punk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(punk)
+  def get__new_enum(this : ISWbemMethodSet*, punk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, punk)
   end
-  def item(strname : UInt8*, iflags : Int32, objwbemmethod : ISWbemMethod*) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(UInt8*, Int32, ISWbemMethod*, HRESULT)).call(strname, iflags, objwbemmethod)
+  def item(this : ISWbemMethodSet*, strname : UInt8*, iflags : Int32, objwbemmethod : ISWbemMethod*) : HRESULT
+    @lpVtbl.value.item.call(this, strname, iflags, objwbemmethod)
   end
-  def get_count(icount : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(icount)
+  def get_count(this : ISWbemMethodSet*, icount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, icount)
   end
 end
 struct LibWin32::ISWbemEventSource
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemEventSource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemEventSource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemEventSource*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemEventSource*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemEventSource*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemEventSource*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemEventSource*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def next_event(itimeoutms : Int32, objwbemobject : ISWbemObject*) : HRESULT
-    @lpVtbl.value.next_event.unsafe_as(Proc(Int32, ISWbemObject*, HRESULT)).call(itimeoutms, objwbemobject)
+  def next_event(this : ISWbemEventSource*, itimeoutms : Int32, objwbemobject : ISWbemObject*) : HRESULT
+    @lpVtbl.value.next_event.call(this, itimeoutms, objwbemobject)
   end
-  def get_security_(objwbemsecurity : ISWbemSecurity*) : HRESULT
-    @lpVtbl.value.get_security_.unsafe_as(Proc(ISWbemSecurity*, HRESULT)).call(objwbemsecurity)
+  def get_security_(this : ISWbemEventSource*, objwbemsecurity : ISWbemSecurity*) : HRESULT
+    @lpVtbl.value.get_security_.call(this, objwbemsecurity)
   end
 end
 struct LibWin32::ISWbemObjectPath
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemObjectPath*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemObjectPath*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemObjectPath*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemObjectPath*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemObjectPath*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemObjectPath*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemObjectPath*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_path(strpath : UInt8**) : HRESULT
-    @lpVtbl.value.get_path.unsafe_as(Proc(UInt8**, HRESULT)).call(strpath)
+  def get_path(this : ISWbemObjectPath*, strpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.call(this, strpath)
   end
-  def put_path(strpath : UInt8*) : HRESULT
-    @lpVtbl.value.put_path.unsafe_as(Proc(UInt8*, HRESULT)).call(strpath)
+  def put_path(this : ISWbemObjectPath*, strpath : UInt8*) : HRESULT
+    @lpVtbl.value.put_path.call(this, strpath)
   end
-  def get_rel_path(strrelpath : UInt8**) : HRESULT
-    @lpVtbl.value.get_rel_path.unsafe_as(Proc(UInt8**, HRESULT)).call(strrelpath)
+  def get_rel_path(this : ISWbemObjectPath*, strrelpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_rel_path.call(this, strrelpath)
   end
-  def put_rel_path(strrelpath : UInt8*) : HRESULT
-    @lpVtbl.value.put_rel_path.unsafe_as(Proc(UInt8*, HRESULT)).call(strrelpath)
+  def put_rel_path(this : ISWbemObjectPath*, strrelpath : UInt8*) : HRESULT
+    @lpVtbl.value.put_rel_path.call(this, strrelpath)
   end
-  def get_server(strserver : UInt8**) : HRESULT
-    @lpVtbl.value.get_server.unsafe_as(Proc(UInt8**, HRESULT)).call(strserver)
+  def get_server(this : ISWbemObjectPath*, strserver : UInt8**) : HRESULT
+    @lpVtbl.value.get_server.call(this, strserver)
   end
-  def put_server(strserver : UInt8*) : HRESULT
-    @lpVtbl.value.put_server.unsafe_as(Proc(UInt8*, HRESULT)).call(strserver)
+  def put_server(this : ISWbemObjectPath*, strserver : UInt8*) : HRESULT
+    @lpVtbl.value.put_server.call(this, strserver)
   end
-  def get_namespace(strnamespace : UInt8**) : HRESULT
-    @lpVtbl.value.get_namespace.unsafe_as(Proc(UInt8**, HRESULT)).call(strnamespace)
+  def get_namespace(this : ISWbemObjectPath*, strnamespace : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace.call(this, strnamespace)
   end
-  def put_namespace(strnamespace : UInt8*) : HRESULT
-    @lpVtbl.value.put_namespace.unsafe_as(Proc(UInt8*, HRESULT)).call(strnamespace)
+  def put_namespace(this : ISWbemObjectPath*, strnamespace : UInt8*) : HRESULT
+    @lpVtbl.value.put_namespace.call(this, strnamespace)
   end
-  def get_parent_namespace(strparentnamespace : UInt8**) : HRESULT
-    @lpVtbl.value.get_parent_namespace.unsafe_as(Proc(UInt8**, HRESULT)).call(strparentnamespace)
+  def get_parent_namespace(this : ISWbemObjectPath*, strparentnamespace : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent_namespace.call(this, strparentnamespace)
   end
-  def get_display_name(strdisplayname : UInt8**) : HRESULT
-    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(strdisplayname)
+  def get_display_name(this : ISWbemObjectPath*, strdisplayname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, strdisplayname)
   end
-  def put_display_name(strdisplayname : UInt8*) : HRESULT
-    @lpVtbl.value.put_display_name.unsafe_as(Proc(UInt8*, HRESULT)).call(strdisplayname)
+  def put_display_name(this : ISWbemObjectPath*, strdisplayname : UInt8*) : HRESULT
+    @lpVtbl.value.put_display_name.call(this, strdisplayname)
   end
-  def get_class(strclass : UInt8**) : HRESULT
-    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(strclass)
+  def get_class(this : ISWbemObjectPath*, strclass : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.call(this, strclass)
   end
-  def put_class(strclass : UInt8*) : HRESULT
-    @lpVtbl.value.put_class.unsafe_as(Proc(UInt8*, HRESULT)).call(strclass)
+  def put_class(this : ISWbemObjectPath*, strclass : UInt8*) : HRESULT
+    @lpVtbl.value.put_class.call(this, strclass)
   end
-  def get_is_class(bisclass : Int16*) : HRESULT
-    @lpVtbl.value.get_is_class.unsafe_as(Proc(Int16*, HRESULT)).call(bisclass)
+  def get_is_class(this : ISWbemObjectPath*, bisclass : Int16*) : HRESULT
+    @lpVtbl.value.get_is_class.call(this, bisclass)
   end
-  def set_as_class : HRESULT
-    @lpVtbl.value.set_as_class.unsafe_as(Proc(HRESULT)).call
+  def set_as_class(this : ISWbemObjectPath*) : HRESULT
+    @lpVtbl.value.set_as_class.call(this)
   end
-  def get_is_singleton(bissingleton : Int16*) : HRESULT
-    @lpVtbl.value.get_is_singleton.unsafe_as(Proc(Int16*, HRESULT)).call(bissingleton)
+  def get_is_singleton(this : ISWbemObjectPath*, bissingleton : Int16*) : HRESULT
+    @lpVtbl.value.get_is_singleton.call(this, bissingleton)
   end
-  def set_as_singleton : HRESULT
-    @lpVtbl.value.set_as_singleton.unsafe_as(Proc(HRESULT)).call
+  def set_as_singleton(this : ISWbemObjectPath*) : HRESULT
+    @lpVtbl.value.set_as_singleton.call(this)
   end
-  def get_keys(objwbemnamedvalueset : ISWbemNamedValueSet*) : HRESULT
-    @lpVtbl.value.get_keys.unsafe_as(Proc(ISWbemNamedValueSet*, HRESULT)).call(objwbemnamedvalueset)
+  def get_keys(this : ISWbemObjectPath*, objwbemnamedvalueset : ISWbemNamedValueSet*) : HRESULT
+    @lpVtbl.value.get_keys.call(this, objwbemnamedvalueset)
   end
-  def get_security_(objwbemsecurity : ISWbemSecurity*) : HRESULT
-    @lpVtbl.value.get_security_.unsafe_as(Proc(ISWbemSecurity*, HRESULT)).call(objwbemsecurity)
+  def get_security_(this : ISWbemObjectPath*, objwbemsecurity : ISWbemSecurity*) : HRESULT
+    @lpVtbl.value.get_security_.call(this, objwbemsecurity)
   end
-  def get_locale(strlocale : UInt8**) : HRESULT
-    @lpVtbl.value.get_locale.unsafe_as(Proc(UInt8**, HRESULT)).call(strlocale)
+  def get_locale(this : ISWbemObjectPath*, strlocale : UInt8**) : HRESULT
+    @lpVtbl.value.get_locale.call(this, strlocale)
   end
-  def put_locale(strlocale : UInt8*) : HRESULT
-    @lpVtbl.value.put_locale.unsafe_as(Proc(UInt8*, HRESULT)).call(strlocale)
+  def put_locale(this : ISWbemObjectPath*, strlocale : UInt8*) : HRESULT
+    @lpVtbl.value.put_locale.call(this, strlocale)
   end
-  def get_authority(strauthority : UInt8**) : HRESULT
-    @lpVtbl.value.get_authority.unsafe_as(Proc(UInt8**, HRESULT)).call(strauthority)
+  def get_authority(this : ISWbemObjectPath*, strauthority : UInt8**) : HRESULT
+    @lpVtbl.value.get_authority.call(this, strauthority)
   end
-  def put_authority(strauthority : UInt8*) : HRESULT
-    @lpVtbl.value.put_authority.unsafe_as(Proc(UInt8*, HRESULT)).call(strauthority)
+  def put_authority(this : ISWbemObjectPath*, strauthority : UInt8*) : HRESULT
+    @lpVtbl.value.put_authority.call(this, strauthority)
   end
 end
 struct LibWin32::ISWbemLastError
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemLastError*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemLastError*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemLastError*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemLastError*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemLastError*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemLastError*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemLastError*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def put_(iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectpath : ISWbemObjectPath*) : HRESULT
-    @lpVtbl.value.put_.unsafe_as(Proc(Int32, IDispatch, ISWbemObjectPath*, HRESULT)).call(iflags, objwbemnamedvalueset, objwbemobjectpath)
+  def put_(this : ISWbemLastError*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectpath : ISWbemObjectPath*) : HRESULT
+    @lpVtbl.value.put_.call(this, iflags, objwbemnamedvalueset, objwbemobjectpath)
   end
-  def put_async_(objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.put_async_.unsafe_as(Proc(IDispatch, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def put_async_(this : ISWbemLastError*, objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.put_async_.call(this, objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def delete_(iflags : Int32, objwbemnamedvalueset : IDispatch) : HRESULT
-    @lpVtbl.value.delete_.unsafe_as(Proc(Int32, IDispatch, HRESULT)).call(iflags, objwbemnamedvalueset)
+  def delete_(this : ISWbemLastError*, iflags : Int32, objwbemnamedvalueset : IDispatch) : HRESULT
+    @lpVtbl.value.delete_.call(this, iflags, objwbemnamedvalueset)
   end
-  def delete_async_(objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.delete_async_.unsafe_as(Proc(IDispatch, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def delete_async_(this : ISWbemLastError*, objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.delete_async_.call(this, objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def instances_(iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.instances_.unsafe_as(Proc(Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(iflags, objwbemnamedvalueset, objwbemobjectset)
+  def instances_(this : ISWbemLastError*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.instances_.call(this, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def instances_async_(objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.instances_async_.unsafe_as(Proc(IDispatch, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def instances_async_(this : ISWbemLastError*, objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.instances_async_.call(this, objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def subclasses_(iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.subclasses_.unsafe_as(Proc(Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(iflags, objwbemnamedvalueset, objwbemobjectset)
+  def subclasses_(this : ISWbemLastError*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.subclasses_.call(this, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def subclasses_async_(objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.subclasses_async_.unsafe_as(Proc(IDispatch, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def subclasses_async_(this : ISWbemLastError*, objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.subclasses_async_.call(this, objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def associators_(strassocclass : UInt8*, strresultclass : UInt8*, strresultrole : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredassocqualifier : UInt8*, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.associators_.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(strassocclass, strresultclass, strresultrole, strrole, bclassesonly, bschemaonly, strrequiredassocqualifier, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemobjectset)
+  def associators_(this : ISWbemLastError*, strassocclass : UInt8*, strresultclass : UInt8*, strresultrole : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredassocqualifier : UInt8*, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.associators_.call(this, strassocclass, strresultclass, strresultrole, strrole, bclassesonly, bschemaonly, strrequiredassocqualifier, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def associators_async_(objwbemsink : IDispatch, strassocclass : UInt8*, strresultclass : UInt8*, strresultrole : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredassocqualifier : UInt8*, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.associators_async_.unsafe_as(Proc(IDispatch, UInt8*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strassocclass, strresultclass, strresultrole, strrole, bclassesonly, bschemaonly, strrequiredassocqualifier, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def associators_async_(this : ISWbemLastError*, objwbemsink : IDispatch, strassocclass : UInt8*, strresultclass : UInt8*, strresultrole : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredassocqualifier : UInt8*, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.associators_async_.call(this, objwbemsink, strassocclass, strresultclass, strresultrole, strrole, bclassesonly, bschemaonly, strrequiredassocqualifier, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def references_(strresultclass : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.references_.unsafe_as(Proc(UInt8*, UInt8*, Int16, Int16, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(strresultclass, strrole, bclassesonly, bschemaonly, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemobjectset)
+  def references_(this : ISWbemLastError*, strresultclass : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.references_.call(this, strresultclass, strrole, bclassesonly, bschemaonly, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def references_async_(objwbemsink : IDispatch, strresultclass : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.references_async_.unsafe_as(Proc(IDispatch, UInt8*, UInt8*, Int16, Int16, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strresultclass, strrole, bclassesonly, bschemaonly, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def references_async_(this : ISWbemLastError*, objwbemsink : IDispatch, strresultclass : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.references_async_.call(this, objwbemsink, strresultclass, strrole, bclassesonly, bschemaonly, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def exec_method_(strmethodname : UInt8*, objwbeminparameters : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemoutparameters : ISWbemObject*) : HRESULT
-    @lpVtbl.value.exec_method_.unsafe_as(Proc(UInt8*, IDispatch, Int32, IDispatch, ISWbemObject*, HRESULT)).call(strmethodname, objwbeminparameters, iflags, objwbemnamedvalueset, objwbemoutparameters)
+  def exec_method_(this : ISWbemLastError*, strmethodname : UInt8*, objwbeminparameters : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemoutparameters : ISWbemObject*) : HRESULT
+    @lpVtbl.value.exec_method_.call(this, strmethodname, objwbeminparameters, iflags, objwbemnamedvalueset, objwbemoutparameters)
   end
-  def exec_method_async_(objwbemsink : IDispatch, strmethodname : UInt8*, objwbeminparameters : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.exec_method_async_.unsafe_as(Proc(IDispatch, UInt8*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strmethodname, objwbeminparameters, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def exec_method_async_(this : ISWbemLastError*, objwbemsink : IDispatch, strmethodname : UInt8*, objwbeminparameters : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.exec_method_async_.call(this, objwbemsink, strmethodname, objwbeminparameters, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def clone_(objwbemobject : ISWbemObject*) : HRESULT
-    @lpVtbl.value.clone_.unsafe_as(Proc(ISWbemObject*, HRESULT)).call(objwbemobject)
+  def clone_(this : ISWbemLastError*, objwbemobject : ISWbemObject*) : HRESULT
+    @lpVtbl.value.clone_.call(this, objwbemobject)
   end
-  def get_object_text_(iflags : Int32, strobjecttext : UInt8**) : HRESULT
-    @lpVtbl.value.get_object_text_.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(iflags, strobjecttext)
+  def get_object_text_(this : ISWbemLastError*, iflags : Int32, strobjecttext : UInt8**) : HRESULT
+    @lpVtbl.value.get_object_text_.call(this, iflags, strobjecttext)
   end
-  def spawn_derived_class_(iflags : Int32, objwbemobject : ISWbemObject*) : HRESULT
-    @lpVtbl.value.spawn_derived_class_.unsafe_as(Proc(Int32, ISWbemObject*, HRESULT)).call(iflags, objwbemobject)
+  def spawn_derived_class_(this : ISWbemLastError*, iflags : Int32, objwbemobject : ISWbemObject*) : HRESULT
+    @lpVtbl.value.spawn_derived_class_.call(this, iflags, objwbemobject)
   end
-  def spawn_instance_(iflags : Int32, objwbemobject : ISWbemObject*) : HRESULT
-    @lpVtbl.value.spawn_instance_.unsafe_as(Proc(Int32, ISWbemObject*, HRESULT)).call(iflags, objwbemobject)
+  def spawn_instance_(this : ISWbemLastError*, iflags : Int32, objwbemobject : ISWbemObject*) : HRESULT
+    @lpVtbl.value.spawn_instance_.call(this, iflags, objwbemobject)
   end
-  def compare_to_(objwbemobject : IDispatch, iflags : Int32, bresult : Int16*) : HRESULT
-    @lpVtbl.value.compare_to_.unsafe_as(Proc(IDispatch, Int32, Int16*, HRESULT)).call(objwbemobject, iflags, bresult)
+  def compare_to_(this : ISWbemLastError*, objwbemobject : IDispatch, iflags : Int32, bresult : Int16*) : HRESULT
+    @lpVtbl.value.compare_to_.call(this, objwbemobject, iflags, bresult)
   end
-  def get_qualifiers_(objwbemqualifierset : ISWbemQualifierSet*) : HRESULT
-    @lpVtbl.value.get_qualifiers_.unsafe_as(Proc(ISWbemQualifierSet*, HRESULT)).call(objwbemqualifierset)
+  def get_qualifiers_(this : ISWbemLastError*, objwbemqualifierset : ISWbemQualifierSet*) : HRESULT
+    @lpVtbl.value.get_qualifiers_.call(this, objwbemqualifierset)
   end
-  def get_properties_(objwbempropertyset : ISWbemPropertySet*) : HRESULT
-    @lpVtbl.value.get_properties_.unsafe_as(Proc(ISWbemPropertySet*, HRESULT)).call(objwbempropertyset)
+  def get_properties_(this : ISWbemLastError*, objwbempropertyset : ISWbemPropertySet*) : HRESULT
+    @lpVtbl.value.get_properties_.call(this, objwbempropertyset)
   end
-  def get_methods_(objwbemmethodset : ISWbemMethodSet*) : HRESULT
-    @lpVtbl.value.get_methods_.unsafe_as(Proc(ISWbemMethodSet*, HRESULT)).call(objwbemmethodset)
+  def get_methods_(this : ISWbemLastError*, objwbemmethodset : ISWbemMethodSet*) : HRESULT
+    @lpVtbl.value.get_methods_.call(this, objwbemmethodset)
   end
-  def get_derivation_(strclassnamearray : VARIANT*) : HRESULT
-    @lpVtbl.value.get_derivation_.unsafe_as(Proc(VARIANT*, HRESULT)).call(strclassnamearray)
+  def get_derivation_(this : ISWbemLastError*, strclassnamearray : VARIANT*) : HRESULT
+    @lpVtbl.value.get_derivation_.call(this, strclassnamearray)
   end
-  def get_path_(objwbemobjectpath : ISWbemObjectPath*) : HRESULT
-    @lpVtbl.value.get_path_.unsafe_as(Proc(ISWbemObjectPath*, HRESULT)).call(objwbemobjectpath)
+  def get_path_(this : ISWbemLastError*, objwbemobjectpath : ISWbemObjectPath*) : HRESULT
+    @lpVtbl.value.get_path_.call(this, objwbemobjectpath)
   end
-  def get_security_(objwbemsecurity : ISWbemSecurity*) : HRESULT
-    @lpVtbl.value.get_security_.unsafe_as(Proc(ISWbemSecurity*, HRESULT)).call(objwbemsecurity)
+  def get_security_(this : ISWbemLastError*, objwbemsecurity : ISWbemSecurity*) : HRESULT
+    @lpVtbl.value.get_security_.call(this, objwbemsecurity)
   end
 end
 struct LibWin32::ISWbemSinkEvents
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemSinkEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemSinkEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemSinkEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemSinkEvents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemSinkEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemSinkEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemSinkEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
 end
 struct LibWin32::ISWbemSink
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemSink*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemSink*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemSink*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemSink*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemSink*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def cancel : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  def cancel(this : ISWbemSink*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
   end
 end
 struct LibWin32::ISWbemSecurity
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemSecurity*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemSecurity*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemSecurity*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemSecurity*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemSecurity*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemSecurity*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemSecurity*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_impersonation_level(iimpersonationlevel : WbemImpersonationLevelEnum*) : HRESULT
-    @lpVtbl.value.get_impersonation_level.unsafe_as(Proc(WbemImpersonationLevelEnum*, HRESULT)).call(iimpersonationlevel)
+  def get_impersonation_level(this : ISWbemSecurity*, iimpersonationlevel : WbemImpersonationLevelEnum*) : HRESULT
+    @lpVtbl.value.get_impersonation_level.call(this, iimpersonationlevel)
   end
-  def put_impersonation_level(iimpersonationlevel : WbemImpersonationLevelEnum) : HRESULT
-    @lpVtbl.value.put_impersonation_level.unsafe_as(Proc(WbemImpersonationLevelEnum, HRESULT)).call(iimpersonationlevel)
+  def put_impersonation_level(this : ISWbemSecurity*, iimpersonationlevel : WbemImpersonationLevelEnum) : HRESULT
+    @lpVtbl.value.put_impersonation_level.call(this, iimpersonationlevel)
   end
-  def get_authentication_level(iauthenticationlevel : WbemAuthenticationLevelEnum*) : HRESULT
-    @lpVtbl.value.get_authentication_level.unsafe_as(Proc(WbemAuthenticationLevelEnum*, HRESULT)).call(iauthenticationlevel)
+  def get_authentication_level(this : ISWbemSecurity*, iauthenticationlevel : WbemAuthenticationLevelEnum*) : HRESULT
+    @lpVtbl.value.get_authentication_level.call(this, iauthenticationlevel)
   end
-  def put_authentication_level(iauthenticationlevel : WbemAuthenticationLevelEnum) : HRESULT
-    @lpVtbl.value.put_authentication_level.unsafe_as(Proc(WbemAuthenticationLevelEnum, HRESULT)).call(iauthenticationlevel)
+  def put_authentication_level(this : ISWbemSecurity*, iauthenticationlevel : WbemAuthenticationLevelEnum) : HRESULT
+    @lpVtbl.value.put_authentication_level.call(this, iauthenticationlevel)
   end
-  def get_privileges(objwbemprivilegeset : ISWbemPrivilegeSet*) : HRESULT
-    @lpVtbl.value.get_privileges.unsafe_as(Proc(ISWbemPrivilegeSet*, HRESULT)).call(objwbemprivilegeset)
+  def get_privileges(this : ISWbemSecurity*, objwbemprivilegeset : ISWbemPrivilegeSet*) : HRESULT
+    @lpVtbl.value.get_privileges.call(this, objwbemprivilegeset)
   end
 end
 struct LibWin32::ISWbemPrivilege
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemPrivilege*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemPrivilege*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemPrivilege*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemPrivilege*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemPrivilege*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemPrivilege*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemPrivilege*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_is_enabled(bisenabled : Int16*) : HRESULT
-    @lpVtbl.value.get_is_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(bisenabled)
+  def get_is_enabled(this : ISWbemPrivilege*, bisenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_is_enabled.call(this, bisenabled)
   end
-  def put_is_enabled(bisenabled : Int16) : HRESULT
-    @lpVtbl.value.put_is_enabled.unsafe_as(Proc(Int16, HRESULT)).call(bisenabled)
+  def put_is_enabled(this : ISWbemPrivilege*, bisenabled : Int16) : HRESULT
+    @lpVtbl.value.put_is_enabled.call(this, bisenabled)
   end
-  def get_name(strdisplayname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(strdisplayname)
+  def get_name(this : ISWbemPrivilege*, strdisplayname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, strdisplayname)
   end
-  def get_display_name(strdisplayname : UInt8**) : HRESULT
-    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(strdisplayname)
+  def get_display_name(this : ISWbemPrivilege*, strdisplayname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, strdisplayname)
   end
-  def get_identifier(iprivilege : WbemPrivilegeEnum*) : HRESULT
-    @lpVtbl.value.get_identifier.unsafe_as(Proc(WbemPrivilegeEnum*, HRESULT)).call(iprivilege)
+  def get_identifier(this : ISWbemPrivilege*, iprivilege : WbemPrivilegeEnum*) : HRESULT
+    @lpVtbl.value.get_identifier.call(this, iprivilege)
   end
 end
 struct LibWin32::ISWbemPrivilegeSet
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemPrivilegeSet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemPrivilegeSet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemPrivilegeSet*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemPrivilegeSet*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemPrivilegeSet*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemPrivilegeSet*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemPrivilegeSet*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get__new_enum(punk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(punk)
+  def get__new_enum(this : ISWbemPrivilegeSet*, punk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, punk)
   end
-  def item(iprivilege : WbemPrivilegeEnum, objwbemprivilege : ISWbemPrivilege*) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(WbemPrivilegeEnum, ISWbemPrivilege*, HRESULT)).call(iprivilege, objwbemprivilege)
+  def item(this : ISWbemPrivilegeSet*, iprivilege : WbemPrivilegeEnum, objwbemprivilege : ISWbemPrivilege*) : HRESULT
+    @lpVtbl.value.item.call(this, iprivilege, objwbemprivilege)
   end
-  def get_count(icount : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(icount)
+  def get_count(this : ISWbemPrivilegeSet*, icount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, icount)
   end
-  def add(iprivilege : WbemPrivilegeEnum, bisenabled : Int16, objwbemprivilege : ISWbemPrivilege*) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(WbemPrivilegeEnum, Int16, ISWbemPrivilege*, HRESULT)).call(iprivilege, bisenabled, objwbemprivilege)
+  def add(this : ISWbemPrivilegeSet*, iprivilege : WbemPrivilegeEnum, bisenabled : Int16, objwbemprivilege : ISWbemPrivilege*) : HRESULT
+    @lpVtbl.value.add.call(this, iprivilege, bisenabled, objwbemprivilege)
   end
-  def remove(iprivilege : WbemPrivilegeEnum) : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(WbemPrivilegeEnum, HRESULT)).call(iprivilege)
+  def remove(this : ISWbemPrivilegeSet*, iprivilege : WbemPrivilegeEnum) : HRESULT
+    @lpVtbl.value.remove.call(this, iprivilege)
   end
-  def delete_all : HRESULT
-    @lpVtbl.value.delete_all.unsafe_as(Proc(HRESULT)).call
+  def delete_all(this : ISWbemPrivilegeSet*) : HRESULT
+    @lpVtbl.value.delete_all.call(this)
   end
-  def add_as_string(strprivilege : UInt8*, bisenabled : Int16, objwbemprivilege : ISWbemPrivilege*) : HRESULT
-    @lpVtbl.value.add_as_string.unsafe_as(Proc(UInt8*, Int16, ISWbemPrivilege*, HRESULT)).call(strprivilege, bisenabled, objwbemprivilege)
+  def add_as_string(this : ISWbemPrivilegeSet*, strprivilege : UInt8*, bisenabled : Int16, objwbemprivilege : ISWbemPrivilege*) : HRESULT
+    @lpVtbl.value.add_as_string.call(this, strprivilege, bisenabled, objwbemprivilege)
   end
 end
 struct LibWin32::ISWbemServicesEx
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemServicesEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemServicesEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemServicesEx*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemServicesEx*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemServicesEx*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemServicesEx*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemServicesEx*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get(strobjectpath : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobject : ISWbemObject*) : HRESULT
-    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, Int32, IDispatch, ISWbemObject*, HRESULT)).call(strobjectpath, iflags, objwbemnamedvalueset, objwbemobject)
+  def get(this : ISWbemServicesEx*, strobjectpath : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobject : ISWbemObject*) : HRESULT
+    @lpVtbl.value.get.call(this, strobjectpath, iflags, objwbemnamedvalueset, objwbemobject)
   end
-  def get_async(objwbemsink : IDispatch, strobjectpath : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.get_async.unsafe_as(Proc(IDispatch, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strobjectpath, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def get_async(this : ISWbemServicesEx*, objwbemsink : IDispatch, strobjectpath : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.get_async.call(this, objwbemsink, strobjectpath, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def delete(strobjectpath : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch) : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(UInt8*, Int32, IDispatch, HRESULT)).call(strobjectpath, iflags, objwbemnamedvalueset)
+  def delete(this : ISWbemServicesEx*, strobjectpath : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch) : HRESULT
+    @lpVtbl.value.delete.call(this, strobjectpath, iflags, objwbemnamedvalueset)
   end
-  def delete_async(objwbemsink : IDispatch, strobjectpath : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.delete_async.unsafe_as(Proc(IDispatch, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strobjectpath, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def delete_async(this : ISWbemServicesEx*, objwbemsink : IDispatch, strobjectpath : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.delete_async.call(this, objwbemsink, strobjectpath, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def instances_of(strclass : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.instances_of.unsafe_as(Proc(UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(strclass, iflags, objwbemnamedvalueset, objwbemobjectset)
+  def instances_of(this : ISWbemServicesEx*, strclass : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.instances_of.call(this, strclass, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def instances_of_async(objwbemsink : IDispatch, strclass : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.instances_of_async.unsafe_as(Proc(IDispatch, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strclass, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def instances_of_async(this : ISWbemServicesEx*, objwbemsink : IDispatch, strclass : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.instances_of_async.call(this, objwbemsink, strclass, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def subclasses_of(strsuperclass : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.subclasses_of.unsafe_as(Proc(UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(strsuperclass, iflags, objwbemnamedvalueset, objwbemobjectset)
+  def subclasses_of(this : ISWbemServicesEx*, strsuperclass : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.subclasses_of.call(this, strsuperclass, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def subclasses_of_async(objwbemsink : IDispatch, strsuperclass : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.subclasses_of_async.unsafe_as(Proc(IDispatch, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strsuperclass, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def subclasses_of_async(this : ISWbemServicesEx*, objwbemsink : IDispatch, strsuperclass : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.subclasses_of_async.call(this, objwbemsink, strsuperclass, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def exec_query(strquery : UInt8*, strquerylanguage : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.exec_query.unsafe_as(Proc(UInt8*, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(strquery, strquerylanguage, iflags, objwbemnamedvalueset, objwbemobjectset)
+  def exec_query(this : ISWbemServicesEx*, strquery : UInt8*, strquerylanguage : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.exec_query.call(this, strquery, strquerylanguage, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def exec_query_async(objwbemsink : IDispatch, strquery : UInt8*, strquerylanguage : UInt8*, lflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.exec_query_async.unsafe_as(Proc(IDispatch, UInt8*, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strquery, strquerylanguage, lflags, objwbemnamedvalueset, objwbemasynccontext)
+  def exec_query_async(this : ISWbemServicesEx*, objwbemsink : IDispatch, strquery : UInt8*, strquerylanguage : UInt8*, lflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.exec_query_async.call(this, objwbemsink, strquery, strquerylanguage, lflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def associators_of(strobjectpath : UInt8*, strassocclass : UInt8*, strresultclass : UInt8*, strresultrole : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredassocqualifier : UInt8*, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.associators_of.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(strobjectpath, strassocclass, strresultclass, strresultrole, strrole, bclassesonly, bschemaonly, strrequiredassocqualifier, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemobjectset)
+  def associators_of(this : ISWbemServicesEx*, strobjectpath : UInt8*, strassocclass : UInt8*, strresultclass : UInt8*, strresultrole : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredassocqualifier : UInt8*, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.associators_of.call(this, strobjectpath, strassocclass, strresultclass, strresultrole, strrole, bclassesonly, bschemaonly, strrequiredassocqualifier, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def associators_of_async(objwbemsink : IDispatch, strobjectpath : UInt8*, strassocclass : UInt8*, strresultclass : UInt8*, strresultrole : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredassocqualifier : UInt8*, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.associators_of_async.unsafe_as(Proc(IDispatch, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strobjectpath, strassocclass, strresultclass, strresultrole, strrole, bclassesonly, bschemaonly, strrequiredassocqualifier, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def associators_of_async(this : ISWbemServicesEx*, objwbemsink : IDispatch, strobjectpath : UInt8*, strassocclass : UInt8*, strresultclass : UInt8*, strresultrole : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredassocqualifier : UInt8*, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.associators_of_async.call(this, objwbemsink, strobjectpath, strassocclass, strresultclass, strresultrole, strrole, bclassesonly, bschemaonly, strrequiredassocqualifier, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def references_to(strobjectpath : UInt8*, strresultclass : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.references_to.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(strobjectpath, strresultclass, strrole, bclassesonly, bschemaonly, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemobjectset)
+  def references_to(this : ISWbemServicesEx*, strobjectpath : UInt8*, strresultclass : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.references_to.call(this, strobjectpath, strresultclass, strrole, bclassesonly, bschemaonly, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def references_to_async(objwbemsink : IDispatch, strobjectpath : UInt8*, strresultclass : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.references_to_async.unsafe_as(Proc(IDispatch, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strobjectpath, strresultclass, strrole, bclassesonly, bschemaonly, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def references_to_async(this : ISWbemServicesEx*, objwbemsink : IDispatch, strobjectpath : UInt8*, strresultclass : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.references_to_async.call(this, objwbemsink, strobjectpath, strresultclass, strrole, bclassesonly, bschemaonly, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def exec_notification_query(strquery : UInt8*, strquerylanguage : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemeventsource : ISWbemEventSource*) : HRESULT
-    @lpVtbl.value.exec_notification_query.unsafe_as(Proc(UInt8*, UInt8*, Int32, IDispatch, ISWbemEventSource*, HRESULT)).call(strquery, strquerylanguage, iflags, objwbemnamedvalueset, objwbemeventsource)
+  def exec_notification_query(this : ISWbemServicesEx*, strquery : UInt8*, strquerylanguage : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemeventsource : ISWbemEventSource*) : HRESULT
+    @lpVtbl.value.exec_notification_query.call(this, strquery, strquerylanguage, iflags, objwbemnamedvalueset, objwbemeventsource)
   end
-  def exec_notification_query_async(objwbemsink : IDispatch, strquery : UInt8*, strquerylanguage : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.exec_notification_query_async.unsafe_as(Proc(IDispatch, UInt8*, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strquery, strquerylanguage, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def exec_notification_query_async(this : ISWbemServicesEx*, objwbemsink : IDispatch, strquery : UInt8*, strquerylanguage : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.exec_notification_query_async.call(this, objwbemsink, strquery, strquerylanguage, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def exec_method(strobjectpath : UInt8*, strmethodname : UInt8*, objwbeminparameters : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemoutparameters : ISWbemObject*) : HRESULT
-    @lpVtbl.value.exec_method.unsafe_as(Proc(UInt8*, UInt8*, IDispatch, Int32, IDispatch, ISWbemObject*, HRESULT)).call(strobjectpath, strmethodname, objwbeminparameters, iflags, objwbemnamedvalueset, objwbemoutparameters)
+  def exec_method(this : ISWbemServicesEx*, strobjectpath : UInt8*, strmethodname : UInt8*, objwbeminparameters : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemoutparameters : ISWbemObject*) : HRESULT
+    @lpVtbl.value.exec_method.call(this, strobjectpath, strmethodname, objwbeminparameters, iflags, objwbemnamedvalueset, objwbemoutparameters)
   end
-  def exec_method_async(objwbemsink : IDispatch, strobjectpath : UInt8*, strmethodname : UInt8*, objwbeminparameters : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.exec_method_async.unsafe_as(Proc(IDispatch, UInt8*, UInt8*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strobjectpath, strmethodname, objwbeminparameters, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def exec_method_async(this : ISWbemServicesEx*, objwbemsink : IDispatch, strobjectpath : UInt8*, strmethodname : UInt8*, objwbeminparameters : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.exec_method_async.call(this, objwbemsink, strobjectpath, strmethodname, objwbeminparameters, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def get_security_(objwbemsecurity : ISWbemSecurity*) : HRESULT
-    @lpVtbl.value.get_security_.unsafe_as(Proc(ISWbemSecurity*, HRESULT)).call(objwbemsecurity)
+  def get_security_(this : ISWbemServicesEx*, objwbemsecurity : ISWbemSecurity*) : HRESULT
+    @lpVtbl.value.get_security_.call(this, objwbemsecurity)
   end
-  def put(objwbemobject : ISWbemObjectEx, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectpath : ISWbemObjectPath*) : HRESULT
-    @lpVtbl.value.put.unsafe_as(Proc(ISWbemObjectEx, Int32, IDispatch, ISWbemObjectPath*, HRESULT)).call(objwbemobject, iflags, objwbemnamedvalueset, objwbemobjectpath)
+  def put(this : ISWbemServicesEx*, objwbemobject : ISWbemObjectEx, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectpath : ISWbemObjectPath*) : HRESULT
+    @lpVtbl.value.put.call(this, objwbemobject, iflags, objwbemnamedvalueset, objwbemobjectpath)
   end
-  def put_async(objwbemsink : ISWbemSink, objwbemobject : ISWbemObjectEx, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.put_async.unsafe_as(Proc(ISWbemSink, ISWbemObjectEx, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, objwbemobject, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def put_async(this : ISWbemServicesEx*, objwbemsink : ISWbemSink, objwbemobject : ISWbemObjectEx, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.put_async.call(this, objwbemsink, objwbemobject, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
 end
 struct LibWin32::ISWbemObjectEx
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemObjectEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemObjectEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemObjectEx*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemObjectEx*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemObjectEx*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemObjectEx*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemObjectEx*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def put_(iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectpath : ISWbemObjectPath*) : HRESULT
-    @lpVtbl.value.put_.unsafe_as(Proc(Int32, IDispatch, ISWbemObjectPath*, HRESULT)).call(iflags, objwbemnamedvalueset, objwbemobjectpath)
+  def put_(this : ISWbemObjectEx*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectpath : ISWbemObjectPath*) : HRESULT
+    @lpVtbl.value.put_.call(this, iflags, objwbemnamedvalueset, objwbemobjectpath)
   end
-  def put_async_(objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.put_async_.unsafe_as(Proc(IDispatch, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def put_async_(this : ISWbemObjectEx*, objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.put_async_.call(this, objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def delete_(iflags : Int32, objwbemnamedvalueset : IDispatch) : HRESULT
-    @lpVtbl.value.delete_.unsafe_as(Proc(Int32, IDispatch, HRESULT)).call(iflags, objwbemnamedvalueset)
+  def delete_(this : ISWbemObjectEx*, iflags : Int32, objwbemnamedvalueset : IDispatch) : HRESULT
+    @lpVtbl.value.delete_.call(this, iflags, objwbemnamedvalueset)
   end
-  def delete_async_(objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.delete_async_.unsafe_as(Proc(IDispatch, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def delete_async_(this : ISWbemObjectEx*, objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.delete_async_.call(this, objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def instances_(iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.instances_.unsafe_as(Proc(Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(iflags, objwbemnamedvalueset, objwbemobjectset)
+  def instances_(this : ISWbemObjectEx*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.instances_.call(this, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def instances_async_(objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.instances_async_.unsafe_as(Proc(IDispatch, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def instances_async_(this : ISWbemObjectEx*, objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.instances_async_.call(this, objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def subclasses_(iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.subclasses_.unsafe_as(Proc(Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(iflags, objwbemnamedvalueset, objwbemobjectset)
+  def subclasses_(this : ISWbemObjectEx*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.subclasses_.call(this, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def subclasses_async_(objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.subclasses_async_.unsafe_as(Proc(IDispatch, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def subclasses_async_(this : ISWbemObjectEx*, objwbemsink : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.subclasses_async_.call(this, objwbemsink, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def associators_(strassocclass : UInt8*, strresultclass : UInt8*, strresultrole : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredassocqualifier : UInt8*, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.associators_.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(strassocclass, strresultclass, strresultrole, strrole, bclassesonly, bschemaonly, strrequiredassocqualifier, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemobjectset)
+  def associators_(this : ISWbemObjectEx*, strassocclass : UInt8*, strresultclass : UInt8*, strresultrole : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredassocqualifier : UInt8*, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.associators_.call(this, strassocclass, strresultclass, strresultrole, strrole, bclassesonly, bschemaonly, strrequiredassocqualifier, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def associators_async_(objwbemsink : IDispatch, strassocclass : UInt8*, strresultclass : UInt8*, strresultrole : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredassocqualifier : UInt8*, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.associators_async_.unsafe_as(Proc(IDispatch, UInt8*, UInt8*, UInt8*, UInt8*, Int16, Int16, UInt8*, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strassocclass, strresultclass, strresultrole, strrole, bclassesonly, bschemaonly, strrequiredassocqualifier, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def associators_async_(this : ISWbemObjectEx*, objwbemsink : IDispatch, strassocclass : UInt8*, strresultclass : UInt8*, strresultrole : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredassocqualifier : UInt8*, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.associators_async_.call(this, objwbemsink, strassocclass, strresultclass, strresultrole, strrole, bclassesonly, bschemaonly, strrequiredassocqualifier, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def references_(strresultclass : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.references_.unsafe_as(Proc(UInt8*, UInt8*, Int16, Int16, UInt8*, Int32, IDispatch, ISWbemObjectSet*, HRESULT)).call(strresultclass, strrole, bclassesonly, bschemaonly, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemobjectset)
+  def references_(this : ISWbemObjectEx*, strresultclass : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.references_.call(this, strresultclass, strrole, bclassesonly, bschemaonly, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemobjectset)
   end
-  def references_async_(objwbemsink : IDispatch, strresultclass : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.references_async_.unsafe_as(Proc(IDispatch, UInt8*, UInt8*, Int16, Int16, UInt8*, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strresultclass, strrole, bclassesonly, bschemaonly, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def references_async_(this : ISWbemObjectEx*, objwbemsink : IDispatch, strresultclass : UInt8*, strrole : UInt8*, bclassesonly : Int16, bschemaonly : Int16, strrequiredqualifier : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.references_async_.call(this, objwbemsink, strresultclass, strrole, bclassesonly, bschemaonly, strrequiredqualifier, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def exec_method_(strmethodname : UInt8*, objwbeminparameters : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemoutparameters : ISWbemObject*) : HRESULT
-    @lpVtbl.value.exec_method_.unsafe_as(Proc(UInt8*, IDispatch, Int32, IDispatch, ISWbemObject*, HRESULT)).call(strmethodname, objwbeminparameters, iflags, objwbemnamedvalueset, objwbemoutparameters)
+  def exec_method_(this : ISWbemObjectEx*, strmethodname : UInt8*, objwbeminparameters : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemoutparameters : ISWbemObject*) : HRESULT
+    @lpVtbl.value.exec_method_.call(this, strmethodname, objwbeminparameters, iflags, objwbemnamedvalueset, objwbemoutparameters)
   end
-  def exec_method_async_(objwbemsink : IDispatch, strmethodname : UInt8*, objwbeminparameters : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
-    @lpVtbl.value.exec_method_async_.unsafe_as(Proc(IDispatch, UInt8*, IDispatch, Int32, IDispatch, IDispatch, HRESULT)).call(objwbemsink, strmethodname, objwbeminparameters, iflags, objwbemnamedvalueset, objwbemasynccontext)
+  def exec_method_async_(this : ISWbemObjectEx*, objwbemsink : IDispatch, strmethodname : UInt8*, objwbeminparameters : IDispatch, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemasynccontext : IDispatch) : HRESULT
+    @lpVtbl.value.exec_method_async_.call(this, objwbemsink, strmethodname, objwbeminparameters, iflags, objwbemnamedvalueset, objwbemasynccontext)
   end
-  def clone_(objwbemobject : ISWbemObject*) : HRESULT
-    @lpVtbl.value.clone_.unsafe_as(Proc(ISWbemObject*, HRESULT)).call(objwbemobject)
+  def clone_(this : ISWbemObjectEx*, objwbemobject : ISWbemObject*) : HRESULT
+    @lpVtbl.value.clone_.call(this, objwbemobject)
   end
-  def get_object_text_(iflags : Int32, strobjecttext : UInt8**) : HRESULT
-    @lpVtbl.value.get_object_text_.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(iflags, strobjecttext)
+  def get_object_text_(this : ISWbemObjectEx*, iflags : Int32, strobjecttext : UInt8**) : HRESULT
+    @lpVtbl.value.get_object_text_.call(this, iflags, strobjecttext)
   end
-  def spawn_derived_class_(iflags : Int32, objwbemobject : ISWbemObject*) : HRESULT
-    @lpVtbl.value.spawn_derived_class_.unsafe_as(Proc(Int32, ISWbemObject*, HRESULT)).call(iflags, objwbemobject)
+  def spawn_derived_class_(this : ISWbemObjectEx*, iflags : Int32, objwbemobject : ISWbemObject*) : HRESULT
+    @lpVtbl.value.spawn_derived_class_.call(this, iflags, objwbemobject)
   end
-  def spawn_instance_(iflags : Int32, objwbemobject : ISWbemObject*) : HRESULT
-    @lpVtbl.value.spawn_instance_.unsafe_as(Proc(Int32, ISWbemObject*, HRESULT)).call(iflags, objwbemobject)
+  def spawn_instance_(this : ISWbemObjectEx*, iflags : Int32, objwbemobject : ISWbemObject*) : HRESULT
+    @lpVtbl.value.spawn_instance_.call(this, iflags, objwbemobject)
   end
-  def compare_to_(objwbemobject : IDispatch, iflags : Int32, bresult : Int16*) : HRESULT
-    @lpVtbl.value.compare_to_.unsafe_as(Proc(IDispatch, Int32, Int16*, HRESULT)).call(objwbemobject, iflags, bresult)
+  def compare_to_(this : ISWbemObjectEx*, objwbemobject : IDispatch, iflags : Int32, bresult : Int16*) : HRESULT
+    @lpVtbl.value.compare_to_.call(this, objwbemobject, iflags, bresult)
   end
-  def get_qualifiers_(objwbemqualifierset : ISWbemQualifierSet*) : HRESULT
-    @lpVtbl.value.get_qualifiers_.unsafe_as(Proc(ISWbemQualifierSet*, HRESULT)).call(objwbemqualifierset)
+  def get_qualifiers_(this : ISWbemObjectEx*, objwbemqualifierset : ISWbemQualifierSet*) : HRESULT
+    @lpVtbl.value.get_qualifiers_.call(this, objwbemqualifierset)
   end
-  def get_properties_(objwbempropertyset : ISWbemPropertySet*) : HRESULT
-    @lpVtbl.value.get_properties_.unsafe_as(Proc(ISWbemPropertySet*, HRESULT)).call(objwbempropertyset)
+  def get_properties_(this : ISWbemObjectEx*, objwbempropertyset : ISWbemPropertySet*) : HRESULT
+    @lpVtbl.value.get_properties_.call(this, objwbempropertyset)
   end
-  def get_methods_(objwbemmethodset : ISWbemMethodSet*) : HRESULT
-    @lpVtbl.value.get_methods_.unsafe_as(Proc(ISWbemMethodSet*, HRESULT)).call(objwbemmethodset)
+  def get_methods_(this : ISWbemObjectEx*, objwbemmethodset : ISWbemMethodSet*) : HRESULT
+    @lpVtbl.value.get_methods_.call(this, objwbemmethodset)
   end
-  def get_derivation_(strclassnamearray : VARIANT*) : HRESULT
-    @lpVtbl.value.get_derivation_.unsafe_as(Proc(VARIANT*, HRESULT)).call(strclassnamearray)
+  def get_derivation_(this : ISWbemObjectEx*, strclassnamearray : VARIANT*) : HRESULT
+    @lpVtbl.value.get_derivation_.call(this, strclassnamearray)
   end
-  def get_path_(objwbemobjectpath : ISWbemObjectPath*) : HRESULT
-    @lpVtbl.value.get_path_.unsafe_as(Proc(ISWbemObjectPath*, HRESULT)).call(objwbemobjectpath)
+  def get_path_(this : ISWbemObjectEx*, objwbemobjectpath : ISWbemObjectPath*) : HRESULT
+    @lpVtbl.value.get_path_.call(this, objwbemobjectpath)
   end
-  def get_security_(objwbemsecurity : ISWbemSecurity*) : HRESULT
-    @lpVtbl.value.get_security_.unsafe_as(Proc(ISWbemSecurity*, HRESULT)).call(objwbemsecurity)
+  def get_security_(this : ISWbemObjectEx*, objwbemsecurity : ISWbemSecurity*) : HRESULT
+    @lpVtbl.value.get_security_.call(this, objwbemsecurity)
   end
-  def refresh_(iflags : Int32, objwbemnamedvalueset : IDispatch) : HRESULT
-    @lpVtbl.value.refresh_.unsafe_as(Proc(Int32, IDispatch, HRESULT)).call(iflags, objwbemnamedvalueset)
+  def refresh_(this : ISWbemObjectEx*, iflags : Int32, objwbemnamedvalueset : IDispatch) : HRESULT
+    @lpVtbl.value.refresh_.call(this, iflags, objwbemnamedvalueset)
   end
-  def get_system_properties_(objwbempropertyset : ISWbemPropertySet*) : HRESULT
-    @lpVtbl.value.get_system_properties_.unsafe_as(Proc(ISWbemPropertySet*, HRESULT)).call(objwbempropertyset)
+  def get_system_properties_(this : ISWbemObjectEx*, objwbempropertyset : ISWbemPropertySet*) : HRESULT
+    @lpVtbl.value.get_system_properties_.call(this, objwbempropertyset)
   end
-  def get_text_(iobjecttextformat : WbemObjectTextFormatEnum, iflags : Int32, objwbemnamedvalueset : IDispatch, bstext : UInt8**) : HRESULT
-    @lpVtbl.value.get_text_.unsafe_as(Proc(WbemObjectTextFormatEnum, Int32, IDispatch, UInt8**, HRESULT)).call(iobjecttextformat, iflags, objwbemnamedvalueset, bstext)
+  def get_text_(this : ISWbemObjectEx*, iobjecttextformat : WbemObjectTextFormatEnum, iflags : Int32, objwbemnamedvalueset : IDispatch, bstext : UInt8**) : HRESULT
+    @lpVtbl.value.get_text_.call(this, iobjecttextformat, iflags, objwbemnamedvalueset, bstext)
   end
-  def set_from_text_(bstext : UInt8*, iobjecttextformat : WbemObjectTextFormatEnum, iflags : Int32, objwbemnamedvalueset : IDispatch) : HRESULT
-    @lpVtbl.value.set_from_text_.unsafe_as(Proc(UInt8*, WbemObjectTextFormatEnum, Int32, IDispatch, HRESULT)).call(bstext, iobjecttextformat, iflags, objwbemnamedvalueset)
+  def set_from_text_(this : ISWbemObjectEx*, bstext : UInt8*, iobjecttextformat : WbemObjectTextFormatEnum, iflags : Int32, objwbemnamedvalueset : IDispatch) : HRESULT
+    @lpVtbl.value.set_from_text_.call(this, bstext, iobjecttextformat, iflags, objwbemnamedvalueset)
   end
 end
 struct LibWin32::ISWbemDateTime
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemDateTime*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemDateTime*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemDateTime*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemDateTime*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemDateTime*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemDateTime*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemDateTime*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_value(strvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_value.unsafe_as(Proc(UInt8**, HRESULT)).call(strvalue)
+  def get_value(this : ISWbemDateTime*, strvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_value.call(this, strvalue)
   end
-  def put_value(strvalue : UInt8*) : HRESULT
-    @lpVtbl.value.put_value.unsafe_as(Proc(UInt8*, HRESULT)).call(strvalue)
+  def put_value(this : ISWbemDateTime*, strvalue : UInt8*) : HRESULT
+    @lpVtbl.value.put_value.call(this, strvalue)
   end
-  def get_year(iyear : Int32*) : HRESULT
-    @lpVtbl.value.get_year.unsafe_as(Proc(Int32*, HRESULT)).call(iyear)
+  def get_year(this : ISWbemDateTime*, iyear : Int32*) : HRESULT
+    @lpVtbl.value.get_year.call(this, iyear)
   end
-  def put_year(iyear : Int32) : HRESULT
-    @lpVtbl.value.put_year.unsafe_as(Proc(Int32, HRESULT)).call(iyear)
+  def put_year(this : ISWbemDateTime*, iyear : Int32) : HRESULT
+    @lpVtbl.value.put_year.call(this, iyear)
   end
-  def get_year_specified(byearspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_year_specified.unsafe_as(Proc(Int16*, HRESULT)).call(byearspecified)
+  def get_year_specified(this : ISWbemDateTime*, byearspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_year_specified.call(this, byearspecified)
   end
-  def put_year_specified(byearspecified : Int16) : HRESULT
-    @lpVtbl.value.put_year_specified.unsafe_as(Proc(Int16, HRESULT)).call(byearspecified)
+  def put_year_specified(this : ISWbemDateTime*, byearspecified : Int16) : HRESULT
+    @lpVtbl.value.put_year_specified.call(this, byearspecified)
   end
-  def get_month(imonth : Int32*) : HRESULT
-    @lpVtbl.value.get_month.unsafe_as(Proc(Int32*, HRESULT)).call(imonth)
+  def get_month(this : ISWbemDateTime*, imonth : Int32*) : HRESULT
+    @lpVtbl.value.get_month.call(this, imonth)
   end
-  def put_month(imonth : Int32) : HRESULT
-    @lpVtbl.value.put_month.unsafe_as(Proc(Int32, HRESULT)).call(imonth)
+  def put_month(this : ISWbemDateTime*, imonth : Int32) : HRESULT
+    @lpVtbl.value.put_month.call(this, imonth)
   end
-  def get_month_specified(bmonthspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_month_specified.unsafe_as(Proc(Int16*, HRESULT)).call(bmonthspecified)
+  def get_month_specified(this : ISWbemDateTime*, bmonthspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_month_specified.call(this, bmonthspecified)
   end
-  def put_month_specified(bmonthspecified : Int16) : HRESULT
-    @lpVtbl.value.put_month_specified.unsafe_as(Proc(Int16, HRESULT)).call(bmonthspecified)
+  def put_month_specified(this : ISWbemDateTime*, bmonthspecified : Int16) : HRESULT
+    @lpVtbl.value.put_month_specified.call(this, bmonthspecified)
   end
-  def get_day(iday : Int32*) : HRESULT
-    @lpVtbl.value.get_day.unsafe_as(Proc(Int32*, HRESULT)).call(iday)
+  def get_day(this : ISWbemDateTime*, iday : Int32*) : HRESULT
+    @lpVtbl.value.get_day.call(this, iday)
   end
-  def put_day(iday : Int32) : HRESULT
-    @lpVtbl.value.put_day.unsafe_as(Proc(Int32, HRESULT)).call(iday)
+  def put_day(this : ISWbemDateTime*, iday : Int32) : HRESULT
+    @lpVtbl.value.put_day.call(this, iday)
   end
-  def get_day_specified(bdayspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_day_specified.unsafe_as(Proc(Int16*, HRESULT)).call(bdayspecified)
+  def get_day_specified(this : ISWbemDateTime*, bdayspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_day_specified.call(this, bdayspecified)
   end
-  def put_day_specified(bdayspecified : Int16) : HRESULT
-    @lpVtbl.value.put_day_specified.unsafe_as(Proc(Int16, HRESULT)).call(bdayspecified)
+  def put_day_specified(this : ISWbemDateTime*, bdayspecified : Int16) : HRESULT
+    @lpVtbl.value.put_day_specified.call(this, bdayspecified)
   end
-  def get_hours(ihours : Int32*) : HRESULT
-    @lpVtbl.value.get_hours.unsafe_as(Proc(Int32*, HRESULT)).call(ihours)
+  def get_hours(this : ISWbemDateTime*, ihours : Int32*) : HRESULT
+    @lpVtbl.value.get_hours.call(this, ihours)
   end
-  def put_hours(ihours : Int32) : HRESULT
-    @lpVtbl.value.put_hours.unsafe_as(Proc(Int32, HRESULT)).call(ihours)
+  def put_hours(this : ISWbemDateTime*, ihours : Int32) : HRESULT
+    @lpVtbl.value.put_hours.call(this, ihours)
   end
-  def get_hours_specified(bhoursspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_hours_specified.unsafe_as(Proc(Int16*, HRESULT)).call(bhoursspecified)
+  def get_hours_specified(this : ISWbemDateTime*, bhoursspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_hours_specified.call(this, bhoursspecified)
   end
-  def put_hours_specified(bhoursspecified : Int16) : HRESULT
-    @lpVtbl.value.put_hours_specified.unsafe_as(Proc(Int16, HRESULT)).call(bhoursspecified)
+  def put_hours_specified(this : ISWbemDateTime*, bhoursspecified : Int16) : HRESULT
+    @lpVtbl.value.put_hours_specified.call(this, bhoursspecified)
   end
-  def get_minutes(iminutes : Int32*) : HRESULT
-    @lpVtbl.value.get_minutes.unsafe_as(Proc(Int32*, HRESULT)).call(iminutes)
+  def get_minutes(this : ISWbemDateTime*, iminutes : Int32*) : HRESULT
+    @lpVtbl.value.get_minutes.call(this, iminutes)
   end
-  def put_minutes(iminutes : Int32) : HRESULT
-    @lpVtbl.value.put_minutes.unsafe_as(Proc(Int32, HRESULT)).call(iminutes)
+  def put_minutes(this : ISWbemDateTime*, iminutes : Int32) : HRESULT
+    @lpVtbl.value.put_minutes.call(this, iminutes)
   end
-  def get_minutes_specified(bminutesspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_minutes_specified.unsafe_as(Proc(Int16*, HRESULT)).call(bminutesspecified)
+  def get_minutes_specified(this : ISWbemDateTime*, bminutesspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_minutes_specified.call(this, bminutesspecified)
   end
-  def put_minutes_specified(bminutesspecified : Int16) : HRESULT
-    @lpVtbl.value.put_minutes_specified.unsafe_as(Proc(Int16, HRESULT)).call(bminutesspecified)
+  def put_minutes_specified(this : ISWbemDateTime*, bminutesspecified : Int16) : HRESULT
+    @lpVtbl.value.put_minutes_specified.call(this, bminutesspecified)
   end
-  def get_seconds(iseconds : Int32*) : HRESULT
-    @lpVtbl.value.get_seconds.unsafe_as(Proc(Int32*, HRESULT)).call(iseconds)
+  def get_seconds(this : ISWbemDateTime*, iseconds : Int32*) : HRESULT
+    @lpVtbl.value.get_seconds.call(this, iseconds)
   end
-  def put_seconds(iseconds : Int32) : HRESULT
-    @lpVtbl.value.put_seconds.unsafe_as(Proc(Int32, HRESULT)).call(iseconds)
+  def put_seconds(this : ISWbemDateTime*, iseconds : Int32) : HRESULT
+    @lpVtbl.value.put_seconds.call(this, iseconds)
   end
-  def get_seconds_specified(bsecondsspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_seconds_specified.unsafe_as(Proc(Int16*, HRESULT)).call(bsecondsspecified)
+  def get_seconds_specified(this : ISWbemDateTime*, bsecondsspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_seconds_specified.call(this, bsecondsspecified)
   end
-  def put_seconds_specified(bsecondsspecified : Int16) : HRESULT
-    @lpVtbl.value.put_seconds_specified.unsafe_as(Proc(Int16, HRESULT)).call(bsecondsspecified)
+  def put_seconds_specified(this : ISWbemDateTime*, bsecondsspecified : Int16) : HRESULT
+    @lpVtbl.value.put_seconds_specified.call(this, bsecondsspecified)
   end
-  def get_microseconds(imicroseconds : Int32*) : HRESULT
-    @lpVtbl.value.get_microseconds.unsafe_as(Proc(Int32*, HRESULT)).call(imicroseconds)
+  def get_microseconds(this : ISWbemDateTime*, imicroseconds : Int32*) : HRESULT
+    @lpVtbl.value.get_microseconds.call(this, imicroseconds)
   end
-  def put_microseconds(imicroseconds : Int32) : HRESULT
-    @lpVtbl.value.put_microseconds.unsafe_as(Proc(Int32, HRESULT)).call(imicroseconds)
+  def put_microseconds(this : ISWbemDateTime*, imicroseconds : Int32) : HRESULT
+    @lpVtbl.value.put_microseconds.call(this, imicroseconds)
   end
-  def get_microseconds_specified(bmicrosecondsspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_microseconds_specified.unsafe_as(Proc(Int16*, HRESULT)).call(bmicrosecondsspecified)
+  def get_microseconds_specified(this : ISWbemDateTime*, bmicrosecondsspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_microseconds_specified.call(this, bmicrosecondsspecified)
   end
-  def put_microseconds_specified(bmicrosecondsspecified : Int16) : HRESULT
-    @lpVtbl.value.put_microseconds_specified.unsafe_as(Proc(Int16, HRESULT)).call(bmicrosecondsspecified)
+  def put_microseconds_specified(this : ISWbemDateTime*, bmicrosecondsspecified : Int16) : HRESULT
+    @lpVtbl.value.put_microseconds_specified.call(this, bmicrosecondsspecified)
   end
-  def get_utc(iutc : Int32*) : HRESULT
-    @lpVtbl.value.get_utc.unsafe_as(Proc(Int32*, HRESULT)).call(iutc)
+  def get_utc(this : ISWbemDateTime*, iutc : Int32*) : HRESULT
+    @lpVtbl.value.get_utc.call(this, iutc)
   end
-  def put_utc(iutc : Int32) : HRESULT
-    @lpVtbl.value.put_utc.unsafe_as(Proc(Int32, HRESULT)).call(iutc)
+  def put_utc(this : ISWbemDateTime*, iutc : Int32) : HRESULT
+    @lpVtbl.value.put_utc.call(this, iutc)
   end
-  def get_utc_specified(butcspecified : Int16*) : HRESULT
-    @lpVtbl.value.get_utc_specified.unsafe_as(Proc(Int16*, HRESULT)).call(butcspecified)
+  def get_utc_specified(this : ISWbemDateTime*, butcspecified : Int16*) : HRESULT
+    @lpVtbl.value.get_utc_specified.call(this, butcspecified)
   end
-  def put_utc_specified(butcspecified : Int16) : HRESULT
-    @lpVtbl.value.put_utc_specified.unsafe_as(Proc(Int16, HRESULT)).call(butcspecified)
+  def put_utc_specified(this : ISWbemDateTime*, butcspecified : Int16) : HRESULT
+    @lpVtbl.value.put_utc_specified.call(this, butcspecified)
   end
-  def get_is_interval(bisinterval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_interval.unsafe_as(Proc(Int16*, HRESULT)).call(bisinterval)
+  def get_is_interval(this : ISWbemDateTime*, bisinterval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_interval.call(this, bisinterval)
   end
-  def put_is_interval(bisinterval : Int16) : HRESULT
-    @lpVtbl.value.put_is_interval.unsafe_as(Proc(Int16, HRESULT)).call(bisinterval)
+  def put_is_interval(this : ISWbemDateTime*, bisinterval : Int16) : HRESULT
+    @lpVtbl.value.put_is_interval.call(this, bisinterval)
   end
-  def get_var_date(bislocal : Int16, dvardate : Float64*) : HRESULT
-    @lpVtbl.value.get_var_date.unsafe_as(Proc(Int16, Float64*, HRESULT)).call(bislocal, dvardate)
+  def get_var_date(this : ISWbemDateTime*, bislocal : Int16, dvardate : Float64*) : HRESULT
+    @lpVtbl.value.get_var_date.call(this, bislocal, dvardate)
   end
-  def set_var_date(dvardate : Float64, bislocal : Int16) : HRESULT
-    @lpVtbl.value.set_var_date.unsafe_as(Proc(Float64, Int16, HRESULT)).call(dvardate, bislocal)
+  def set_var_date(this : ISWbemDateTime*, dvardate : Float64, bislocal : Int16) : HRESULT
+    @lpVtbl.value.set_var_date.call(this, dvardate, bislocal)
   end
-  def get_file_time(bislocal : Int16, strfiletime : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_time.unsafe_as(Proc(Int16, UInt8**, HRESULT)).call(bislocal, strfiletime)
+  def get_file_time(this : ISWbemDateTime*, bislocal : Int16, strfiletime : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_time.call(this, bislocal, strfiletime)
   end
-  def set_file_time(strfiletime : UInt8*, bislocal : Int16) : HRESULT
-    @lpVtbl.value.set_file_time.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(strfiletime, bislocal)
+  def set_file_time(this : ISWbemDateTime*, strfiletime : UInt8*, bislocal : Int16) : HRESULT
+    @lpVtbl.value.set_file_time.call(this, strfiletime, bislocal)
   end
 end
 struct LibWin32::ISWbemRefresher
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemRefresher*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemRefresher*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemRefresher*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemRefresher*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemRefresher*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemRefresher*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemRefresher*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get__new_enum(punk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(punk)
+  def get__new_enum(this : ISWbemRefresher*, punk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, punk)
   end
-  def item(iindex : Int32, objwbemrefreshableitem : ISWbemRefreshableItem*) : HRESULT
-    @lpVtbl.value.item.unsafe_as(Proc(Int32, ISWbemRefreshableItem*, HRESULT)).call(iindex, objwbemrefreshableitem)
+  def item(this : ISWbemRefresher*, iindex : Int32, objwbemrefreshableitem : ISWbemRefreshableItem*) : HRESULT
+    @lpVtbl.value.item.call(this, iindex, objwbemrefreshableitem)
   end
-  def get_count(icount : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(icount)
+  def get_count(this : ISWbemRefresher*, icount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, icount)
   end
-  def add(objwbemservices : ISWbemServicesEx, bsinstancepath : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemrefreshableitem : ISWbemRefreshableItem*) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(ISWbemServicesEx, UInt8*, Int32, IDispatch, ISWbemRefreshableItem*, HRESULT)).call(objwbemservices, bsinstancepath, iflags, objwbemnamedvalueset, objwbemrefreshableitem)
+  def add(this : ISWbemRefresher*, objwbemservices : ISWbemServicesEx, bsinstancepath : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemrefreshableitem : ISWbemRefreshableItem*) : HRESULT
+    @lpVtbl.value.add.call(this, objwbemservices, bsinstancepath, iflags, objwbemnamedvalueset, objwbemrefreshableitem)
   end
-  def add_enum(objwbemservices : ISWbemServicesEx, bsclassname : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemrefreshableitem : ISWbemRefreshableItem*) : HRESULT
-    @lpVtbl.value.add_enum.unsafe_as(Proc(ISWbemServicesEx, UInt8*, Int32, IDispatch, ISWbemRefreshableItem*, HRESULT)).call(objwbemservices, bsclassname, iflags, objwbemnamedvalueset, objwbemrefreshableitem)
+  def add_enum(this : ISWbemRefresher*, objwbemservices : ISWbemServicesEx, bsclassname : UInt8*, iflags : Int32, objwbemnamedvalueset : IDispatch, objwbemrefreshableitem : ISWbemRefreshableItem*) : HRESULT
+    @lpVtbl.value.add_enum.call(this, objwbemservices, bsclassname, iflags, objwbemnamedvalueset, objwbemrefreshableitem)
   end
-  def remove(iindex : Int32, iflags : Int32) : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(Int32, Int32, HRESULT)).call(iindex, iflags)
+  def remove(this : ISWbemRefresher*, iindex : Int32, iflags : Int32) : HRESULT
+    @lpVtbl.value.remove.call(this, iindex, iflags)
   end
-  def refresh(iflags : Int32) : HRESULT
-    @lpVtbl.value.refresh.unsafe_as(Proc(Int32, HRESULT)).call(iflags)
+  def refresh(this : ISWbemRefresher*, iflags : Int32) : HRESULT
+    @lpVtbl.value.refresh.call(this, iflags)
   end
-  def get_auto_reconnect(bcount : Int16*) : HRESULT
-    @lpVtbl.value.get_auto_reconnect.unsafe_as(Proc(Int16*, HRESULT)).call(bcount)
+  def get_auto_reconnect(this : ISWbemRefresher*, bcount : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_reconnect.call(this, bcount)
   end
-  def put_auto_reconnect(bcount : Int16) : HRESULT
-    @lpVtbl.value.put_auto_reconnect.unsafe_as(Proc(Int16, HRESULT)).call(bcount)
+  def put_auto_reconnect(this : ISWbemRefresher*, bcount : Int16) : HRESULT
+    @lpVtbl.value.put_auto_reconnect.call(this, bcount)
   end
-  def delete_all : HRESULT
-    @lpVtbl.value.delete_all.unsafe_as(Proc(HRESULT)).call
+  def delete_all(this : ISWbemRefresher*) : HRESULT
+    @lpVtbl.value.delete_all.call(this)
   end
 end
 struct LibWin32::ISWbemRefreshableItem
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISWbemRefreshableItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISWbemRefreshableItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISWbemRefreshableItem*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : ISWbemRefreshableItem*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : ISWbemRefreshableItem*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : ISWbemRefreshableItem*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : ISWbemRefreshableItem*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_index(iindex : Int32*) : HRESULT
-    @lpVtbl.value.get_index.unsafe_as(Proc(Int32*, HRESULT)).call(iindex)
+  def get_index(this : ISWbemRefreshableItem*, iindex : Int32*) : HRESULT
+    @lpVtbl.value.get_index.call(this, iindex)
   end
-  def get_refresher(objwbemrefresher : ISWbemRefresher*) : HRESULT
-    @lpVtbl.value.get_refresher.unsafe_as(Proc(ISWbemRefresher*, HRESULT)).call(objwbemrefresher)
+  def get_refresher(this : ISWbemRefreshableItem*, objwbemrefresher : ISWbemRefresher*) : HRESULT
+    @lpVtbl.value.get_refresher.call(this, objwbemrefresher)
   end
-  def get_is_set(bisset : Int16*) : HRESULT
-    @lpVtbl.value.get_is_set.unsafe_as(Proc(Int16*, HRESULT)).call(bisset)
+  def get_is_set(this : ISWbemRefreshableItem*, bisset : Int16*) : HRESULT
+    @lpVtbl.value.get_is_set.call(this, bisset)
   end
-  def get_object(objwbemobject : ISWbemObjectEx*) : HRESULT
-    @lpVtbl.value.get_object.unsafe_as(Proc(ISWbemObjectEx*, HRESULT)).call(objwbemobject)
+  def get_object(this : ISWbemRefreshableItem*, objwbemobject : ISWbemObjectEx*) : HRESULT
+    @lpVtbl.value.get_object.call(this, objwbemobject)
   end
-  def get_object_set(objwbemobjectset : ISWbemObjectSet*) : HRESULT
-    @lpVtbl.value.get_object_set.unsafe_as(Proc(ISWbemObjectSet*, HRESULT)).call(objwbemobjectset)
+  def get_object_set(this : ISWbemRefreshableItem*, objwbemobjectset : ISWbemObjectSet*) : HRESULT
+    @lpVtbl.value.get_object_set.call(this, objwbemobjectset)
   end
-  def remove(iflags : Int32) : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(Int32, HRESULT)).call(iflags)
+  def remove(this : ISWbemRefreshableItem*, iflags : Int32) : HRESULT
+    @lpVtbl.value.remove.call(this, iflags)
   end
 end
 struct LibWin32::IWMIExtension
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWMIExtension*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWMIExtension*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWMIExtension*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IWMIExtension*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IWMIExtension*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IWMIExtension*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IWMIExtension*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_wmi_object_path(strwmiobjectpath : UInt8**) : HRESULT
-    @lpVtbl.value.get_wmi_object_path.unsafe_as(Proc(UInt8**, HRESULT)).call(strwmiobjectpath)
+  def get_wmi_object_path(this : IWMIExtension*, strwmiobjectpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_wmi_object_path.call(this, strwmiobjectpath)
   end
-  def get_wmi_object(objwmiobject : ISWbemObject*) : HRESULT
-    @lpVtbl.value.get_wmi_object.unsafe_as(Proc(ISWbemObject*, HRESULT)).call(objwmiobject)
+  def get_wmi_object(this : IWMIExtension*, objwmiobject : ISWbemObject*) : HRESULT
+    @lpVtbl.value.get_wmi_object.call(this, objwmiobject)
   end
-  def get_wmi_services(objwmiservices : ISWbemServices*) : HRESULT
-    @lpVtbl.value.get_wmi_services.unsafe_as(Proc(ISWbemServices*, HRESULT)).call(objwmiservices)
+  def get_wmi_services(this : IWMIExtension*, objwmiservices : ISWbemServices*) : HRESULT
+    @lpVtbl.value.get_wmi_services.call(this, objwmiservices)
   end
 end
 struct LibWin32::IWbemTransport
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemTransport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemTransport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemTransport*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def initialize : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(HRESULT)).call
+  def initialize(this : IWbemTransport*) : HRESULT
+    @lpVtbl.value.initialize.call(this)
   end
 end
 struct LibWin32::IWbemLevel1Login
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemLevel1Login*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemLevel1Login*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemLevel1Login*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def establish_position(wszlocalelist : LibC::LPWSTR, dwnumlocales : UInt32, reserved : UInt32*) : HRESULT
-    @lpVtbl.value.establish_position.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32*, HRESULT)).call(wszlocalelist, dwnumlocales, reserved)
+  def establish_position(this : IWbemLevel1Login*, wszlocalelist : LibC::LPWSTR, dwnumlocales : UInt32, reserved : UInt32*) : HRESULT
+    @lpVtbl.value.establish_position.call(this, wszlocalelist, dwnumlocales, reserved)
   end
-  def request_challenge(wsznetworkresource : LibC::LPWSTR, wszuser : LibC::LPWSTR, nonce : UInt8*) : HRESULT
-    @lpVtbl.value.request_challenge.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt8*, HRESULT)).call(wsznetworkresource, wszuser, nonce)
+  def request_challenge(this : IWbemLevel1Login*, wsznetworkresource : LibC::LPWSTR, wszuser : LibC::LPWSTR, nonce : UInt8*) : HRESULT
+    @lpVtbl.value.request_challenge.call(this, wsznetworkresource, wszuser, nonce)
   end
-  def wbem_login(wszpreferredlocale : LibC::LPWSTR, accesstoken : UInt8*, lflags : Int32, pctx : IWbemContext, ppnamespace : IWbemServices*) : HRESULT
-    @lpVtbl.value.wbem_login.unsafe_as(Proc(LibC::LPWSTR, UInt8*, Int32, IWbemContext, IWbemServices*, HRESULT)).call(wszpreferredlocale, accesstoken, lflags, pctx, ppnamespace)
+  def wbem_login(this : IWbemLevel1Login*, wszpreferredlocale : LibC::LPWSTR, accesstoken : UInt8*, lflags : Int32, pctx : IWbemContext, ppnamespace : IWbemServices*) : HRESULT
+    @lpVtbl.value.wbem_login.call(this, wszpreferredlocale, accesstoken, lflags, pctx, ppnamespace)
   end
-  def ntlm_login(wsznetworkresource : LibC::LPWSTR, wszpreferredlocale : LibC::LPWSTR, lflags : Int32, pctx : IWbemContext, ppnamespace : IWbemServices*) : HRESULT
-    @lpVtbl.value.ntlm_login.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, Int32, IWbemContext, IWbemServices*, HRESULT)).call(wsznetworkresource, wszpreferredlocale, lflags, pctx, ppnamespace)
+  def ntlm_login(this : IWbemLevel1Login*, wsznetworkresource : LibC::LPWSTR, wszpreferredlocale : LibC::LPWSTR, lflags : Int32, pctx : IWbemContext, ppnamespace : IWbemServices*) : HRESULT
+    @lpVtbl.value.ntlm_login.call(this, wsznetworkresource, wszpreferredlocale, lflags, pctx, ppnamespace)
   end
 end
 struct LibWin32::IWbemConnectorLogin
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemConnectorLogin*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemConnectorLogin*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemConnectorLogin*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def connector_login(wsznetworkresource : LibC::LPWSTR, wszpreferredlocale : LibC::LPWSTR, lflags : Int32, pctx : IWbemContext, riid : Guid*, pinterface : Void**) : HRESULT
-    @lpVtbl.value.connector_login.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, Int32, IWbemContext, Guid*, Void**, HRESULT)).call(wsznetworkresource, wszpreferredlocale, lflags, pctx, riid, pinterface)
+  def connector_login(this : IWbemConnectorLogin*, wsznetworkresource : LibC::LPWSTR, wszpreferredlocale : LibC::LPWSTR, lflags : Int32, pctx : IWbemContext, riid : Guid*, pinterface : Void**) : HRESULT
+    @lpVtbl.value.connector_login.call(this, wsznetworkresource, wszpreferredlocale, lflags, pctx, riid, pinterface)
   end
 end
 struct LibWin32::IWbemAddressResolution
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemAddressResolution*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemAddressResolution*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemAddressResolution*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def resolve(wsznamespacepath : LibC::LPWSTR, wszaddresstype : LibC::LPWSTR, pdwaddresslength : UInt32*, pabbinaryaddress : UInt8**) : HRESULT
-    @lpVtbl.value.resolve.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32*, UInt8**, HRESULT)).call(wsznamespacepath, wszaddresstype, pdwaddresslength, pabbinaryaddress)
+  def resolve(this : IWbemAddressResolution*, wsznamespacepath : LibC::LPWSTR, wszaddresstype : LibC::LPWSTR, pdwaddresslength : UInt32*, pabbinaryaddress : UInt8**) : HRESULT
+    @lpVtbl.value.resolve.call(this, wsznamespacepath, wszaddresstype, pdwaddresslength, pabbinaryaddress)
   end
 end
 struct LibWin32::IWbemClientTransport
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemClientTransport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemClientTransport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemClientTransport*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def connect_server(straddresstype : UInt8*, dwbinaryaddresslength : UInt32, abbinaryaddress : UInt8*, strnetworkresource : UInt8*, struser : UInt8*, strpassword : UInt8*, strlocale : UInt8*, lsecurityflags : Int32, strauthority : UInt8*, pctx : IWbemContext, ppnamespace : IWbemServices*) : HRESULT
-    @lpVtbl.value.connect_server.unsafe_as(Proc(UInt8*, UInt32, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, UInt8*, IWbemContext, IWbemServices*, HRESULT)).call(straddresstype, dwbinaryaddresslength, abbinaryaddress, strnetworkresource, struser, strpassword, strlocale, lsecurityflags, strauthority, pctx, ppnamespace)
+  def connect_server(this : IWbemClientTransport*, straddresstype : UInt8*, dwbinaryaddresslength : UInt32, abbinaryaddress : UInt8*, strnetworkresource : UInt8*, struser : UInt8*, strpassword : UInt8*, strlocale : UInt8*, lsecurityflags : Int32, strauthority : UInt8*, pctx : IWbemContext, ppnamespace : IWbemServices*) : HRESULT
+    @lpVtbl.value.connect_server.call(this, straddresstype, dwbinaryaddresslength, abbinaryaddress, strnetworkresource, struser, strpassword, strlocale, lsecurityflags, strauthority, pctx, ppnamespace)
   end
 end
 struct LibWin32::IWbemClientConnectionTransport
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemClientConnectionTransport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemClientConnectionTransport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemClientConnectionTransport*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def open(straddresstype : UInt8*, dwbinaryaddresslength : UInt32, abbinaryaddress : UInt8*, strobject : UInt8*, struser : UInt8*, strpassword : UInt8*, strlocale : UInt8*, lflags : Int32, pctx : IWbemContext, riid : Guid*, pinterface : Void**, pcallres : IWbemCallResult*) : HRESULT
-    @lpVtbl.value.open.unsafe_as(Proc(UInt8*, UInt32, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, IWbemContext, Guid*, Void**, IWbemCallResult*, HRESULT)).call(straddresstype, dwbinaryaddresslength, abbinaryaddress, strobject, struser, strpassword, strlocale, lflags, pctx, riid, pinterface, pcallres)
+  def open(this : IWbemClientConnectionTransport*, straddresstype : UInt8*, dwbinaryaddresslength : UInt32, abbinaryaddress : UInt8*, strobject : UInt8*, struser : UInt8*, strpassword : UInt8*, strlocale : UInt8*, lflags : Int32, pctx : IWbemContext, riid : Guid*, pinterface : Void**, pcallres : IWbemCallResult*) : HRESULT
+    @lpVtbl.value.open.call(this, straddresstype, dwbinaryaddresslength, abbinaryaddress, strobject, struser, strpassword, strlocale, lflags, pctx, riid, pinterface, pcallres)
   end
-  def open_async(straddresstype : UInt8*, dwbinaryaddresslength : UInt32, abbinaryaddress : UInt8*, strobject : UInt8*, struser : UInt8*, strpassword : UInt8*, strlocale : UInt8*, lflags : Int32, pctx : IWbemContext, riid : Guid*, presponsehandler : IWbemObjectSink) : HRESULT
-    @lpVtbl.value.open_async.unsafe_as(Proc(UInt8*, UInt32, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, IWbemContext, Guid*, IWbemObjectSink, HRESULT)).call(straddresstype, dwbinaryaddresslength, abbinaryaddress, strobject, struser, strpassword, strlocale, lflags, pctx, riid, presponsehandler)
+  def open_async(this : IWbemClientConnectionTransport*, straddresstype : UInt8*, dwbinaryaddresslength : UInt32, abbinaryaddress : UInt8*, strobject : UInt8*, struser : UInt8*, strpassword : UInt8*, strlocale : UInt8*, lflags : Int32, pctx : IWbemContext, riid : Guid*, presponsehandler : IWbemObjectSink) : HRESULT
+    @lpVtbl.value.open_async.call(this, straddresstype, dwbinaryaddresslength, abbinaryaddress, strobject, struser, strpassword, strlocale, lflags, pctx, riid, presponsehandler)
   end
-  def cancel(lflags : Int32, phandler : IWbemObjectSink) : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(Int32, IWbemObjectSink, HRESULT)).call(lflags, phandler)
+  def cancel(this : IWbemClientConnectionTransport*, lflags : Int32, phandler : IWbemObjectSink) : HRESULT
+    @lpVtbl.value.cancel.call(this, lflags, phandler)
   end
 end
 struct LibWin32::IWbemConstructClassObject
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWbemConstructClassObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWbemConstructClassObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWbemConstructClassObject*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_inheritance_chain(lnumantecedents : Int32, awszantecedents : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.set_inheritance_chain.unsafe_as(Proc(Int32, LibC::LPWSTR*, HRESULT)).call(lnumantecedents, awszantecedents)
+  def set_inheritance_chain(this : IWbemConstructClassObject*, lnumantecedents : Int32, awszantecedents : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.set_inheritance_chain.call(this, lnumantecedents, awszantecedents)
   end
-  def set_property_origin(wszpropertyname : LibC::LPWSTR, loriginindex : Int32) : HRESULT
-    @lpVtbl.value.set_property_origin.unsafe_as(Proc(LibC::LPWSTR, Int32, HRESULT)).call(wszpropertyname, loriginindex)
+  def set_property_origin(this : IWbemConstructClassObject*, wszpropertyname : LibC::LPWSTR, loriginindex : Int32) : HRESULT
+    @lpVtbl.value.set_property_origin.call(this, wszpropertyname, loriginindex)
   end
-  def set_method_origin(wszmethodname : LibC::LPWSTR, loriginindex : Int32) : HRESULT
-    @lpVtbl.value.set_method_origin.unsafe_as(Proc(LibC::LPWSTR, Int32, HRESULT)).call(wszmethodname, loriginindex)
+  def set_method_origin(this : IWbemConstructClassObject*, wszmethodname : LibC::LPWSTR, loriginindex : Int32) : HRESULT
+    @lpVtbl.value.set_method_origin.call(this, wszmethodname, loriginindex)
   end
-  def set_server_namespace(wszserver : LibC::LPWSTR, wsznamespace : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_server_namespace.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(wszserver, wsznamespace)
+  def set_server_namespace(this : IWbemConstructClassObject*, wszserver : LibC::LPWSTR, wsznamespace : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_server_namespace.call(this, wszserver, wsznamespace)
   end
 end

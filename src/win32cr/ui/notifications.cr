@@ -16,10 +16,10 @@ lib LibWin32
 
 
   struct INotificationActivationCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    activate : UInt64
+    query_interface : Proc(INotificationActivationCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(INotificationActivationCallback*, UInt32)
+    release : Proc(INotificationActivationCallback*, UInt32)
+    activate : Proc(INotificationActivationCallback*, LibC::LPWSTR, LibC::LPWSTR, NOTIFICATION_USER_INPUT_DATA*, UInt32, HRESULT)
   end
 
   INotificationActivationCallback_GUID = "53e31837-6600-4a81-9395-75cffe746f94"
@@ -30,16 +30,16 @@ lib LibWin32
 
 end
 struct LibWin32::INotificationActivationCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : INotificationActivationCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : INotificationActivationCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : INotificationActivationCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def activate(appusermodelid : LibC::LPWSTR, invokedargs : LibC::LPWSTR, data : NOTIFICATION_USER_INPUT_DATA*, count : UInt32) : HRESULT
-    @lpVtbl.value.activate.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, NOTIFICATION_USER_INPUT_DATA*, UInt32, HRESULT)).call(appusermodelid, invokedargs, data, count)
+  def activate(this : INotificationActivationCallback*, appusermodelid : LibC::LPWSTR, invokedargs : LibC::LPWSTR, data : NOTIFICATION_USER_INPUT_DATA*, count : UInt32) : HRESULT
+    @lpVtbl.value.activate.call(this, appusermodelid, invokedargs, data, count)
   end
 end

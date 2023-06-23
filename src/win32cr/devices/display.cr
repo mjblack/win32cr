@@ -2487,13 +2487,13 @@ lib LibWin32
 
 
   struct ICloneViewHelperVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_connected_i_ds : UInt64
-    get_active_topology : UInt64
-    set_active_topology : UInt64
-    commit : UInt64
+    query_interface : Proc(ICloneViewHelper*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ICloneViewHelper*, UInt32)
+    release : Proc(ICloneViewHelper*, UInt32)
+    get_connected_i_ds : Proc(ICloneViewHelper*, LibC::LPWSTR, UInt32*, UInt32*, UInt32, HRESULT)
+    get_active_topology : Proc(ICloneViewHelper*, LibC::LPWSTR, UInt32, UInt32*, UInt32*, HRESULT)
+    set_active_topology : Proc(ICloneViewHelper*, LibC::LPWSTR, UInt32, UInt32, UInt32*, HRESULT)
+    commit : Proc(ICloneViewHelper*, LibC::BOOL, HRESULT)
   end
 
   ICloneViewHelper_GUID = "f6a3d4c4-5632-4d83-b0a1-fb88712b1eb7"
@@ -2503,15 +2503,15 @@ lib LibWin32
   end
 
   struct IViewHelperVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_connected_i_ds : UInt64
-    get_active_topology : UInt64
-    set_active_topology : UInt64
-    commit : UInt64
-    set_configuration : UInt64
-    get_proceed_on_new_configuration : UInt64
+    query_interface : Proc(IViewHelper*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IViewHelper*, UInt32)
+    release : Proc(IViewHelper*, UInt32)
+    get_connected_i_ds : Proc(IViewHelper*, LibC::LPWSTR, UInt32*, UInt32*, UInt32, HRESULT)
+    get_active_topology : Proc(IViewHelper*, LibC::LPWSTR, UInt32, UInt32*, UInt32*, HRESULT)
+    set_active_topology : Proc(IViewHelper*, LibC::LPWSTR, UInt32, UInt32, UInt32*, HRESULT)
+    commit : Proc(IViewHelper*, HRESULT)
+    set_configuration : Proc(IViewHelper*, IStream, UInt32*, HRESULT)
+    get_proceed_on_new_configuration : Proc(IViewHelper*, HRESULT)
   end
 
   IViewHelper_GUID = "e85ccef5-aaaa-47f0-b5e3-61f7aecdc4c1"
@@ -2879,54 +2879,54 @@ lib LibWin32
   fun SetDisplayAutoRotationPreferences(orientation : ORIENTATION_PREFERENCE) : LibC::BOOL
 end
 struct LibWin32::ICloneViewHelper
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ICloneViewHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ICloneViewHelper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ICloneViewHelper*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_connected_i_ds(wszadaptorname : LibC::LPWSTR, pulcount : UInt32*, pulid : UInt32*, ulflags : UInt32) : HRESULT
-    @lpVtbl.value.get_connected_i_ds.unsafe_as(Proc(LibC::LPWSTR, UInt32*, UInt32*, UInt32, HRESULT)).call(wszadaptorname, pulcount, pulid, ulflags)
+  def get_connected_i_ds(this : ICloneViewHelper*, wszadaptorname : LibC::LPWSTR, pulcount : UInt32*, pulid : UInt32*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.get_connected_i_ds.call(this, wszadaptorname, pulcount, pulid, ulflags)
   end
-  def get_active_topology(wszadaptorname : LibC::LPWSTR, ulsourceid : UInt32, pulcount : UInt32*, pultargetid : UInt32*) : HRESULT
-    @lpVtbl.value.get_active_topology.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32*, UInt32*, HRESULT)).call(wszadaptorname, ulsourceid, pulcount, pultargetid)
+  def get_active_topology(this : ICloneViewHelper*, wszadaptorname : LibC::LPWSTR, ulsourceid : UInt32, pulcount : UInt32*, pultargetid : UInt32*) : HRESULT
+    @lpVtbl.value.get_active_topology.call(this, wszadaptorname, ulsourceid, pulcount, pultargetid)
   end
-  def set_active_topology(wszadaptorname : LibC::LPWSTR, ulsourceid : UInt32, ulcount : UInt32, pultargetid : UInt32*) : HRESULT
-    @lpVtbl.value.set_active_topology.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, UInt32*, HRESULT)).call(wszadaptorname, ulsourceid, ulcount, pultargetid)
+  def set_active_topology(this : ICloneViewHelper*, wszadaptorname : LibC::LPWSTR, ulsourceid : UInt32, ulcount : UInt32, pultargetid : UInt32*) : HRESULT
+    @lpVtbl.value.set_active_topology.call(this, wszadaptorname, ulsourceid, ulcount, pultargetid)
   end
-  def commit(ffinalcall : LibC::BOOL) : HRESULT
-    @lpVtbl.value.commit.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(ffinalcall)
+  def commit(this : ICloneViewHelper*, ffinalcall : LibC::BOOL) : HRESULT
+    @lpVtbl.value.commit.call(this, ffinalcall)
   end
 end
 struct LibWin32::IViewHelper
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IViewHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IViewHelper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IViewHelper*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_connected_i_ds(wszadaptorname : LibC::LPWSTR, pulcount : UInt32*, pulid : UInt32*, ulflags : UInt32) : HRESULT
-    @lpVtbl.value.get_connected_i_ds.unsafe_as(Proc(LibC::LPWSTR, UInt32*, UInt32*, UInt32, HRESULT)).call(wszadaptorname, pulcount, pulid, ulflags)
+  def get_connected_i_ds(this : IViewHelper*, wszadaptorname : LibC::LPWSTR, pulcount : UInt32*, pulid : UInt32*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.get_connected_i_ds.call(this, wszadaptorname, pulcount, pulid, ulflags)
   end
-  def get_active_topology(wszadaptorname : LibC::LPWSTR, ulsourceid : UInt32, pulcount : UInt32*, pultargetid : UInt32*) : HRESULT
-    @lpVtbl.value.get_active_topology.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32*, UInt32*, HRESULT)).call(wszadaptorname, ulsourceid, pulcount, pultargetid)
+  def get_active_topology(this : IViewHelper*, wszadaptorname : LibC::LPWSTR, ulsourceid : UInt32, pulcount : UInt32*, pultargetid : UInt32*) : HRESULT
+    @lpVtbl.value.get_active_topology.call(this, wszadaptorname, ulsourceid, pulcount, pultargetid)
   end
-  def set_active_topology(wszadaptorname : LibC::LPWSTR, ulsourceid : UInt32, ulcount : UInt32, pultargetid : UInt32*) : HRESULT
-    @lpVtbl.value.set_active_topology.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, UInt32*, HRESULT)).call(wszadaptorname, ulsourceid, ulcount, pultargetid)
+  def set_active_topology(this : IViewHelper*, wszadaptorname : LibC::LPWSTR, ulsourceid : UInt32, ulcount : UInt32, pultargetid : UInt32*) : HRESULT
+    @lpVtbl.value.set_active_topology.call(this, wszadaptorname, ulsourceid, ulcount, pultargetid)
   end
-  def commit : HRESULT
-    @lpVtbl.value.commit.unsafe_as(Proc(HRESULT)).call
+  def commit(this : IViewHelper*) : HRESULT
+    @lpVtbl.value.commit.call(this)
   end
-  def set_configuration(pistream : IStream, pulstatus : UInt32*) : HRESULT
-    @lpVtbl.value.set_configuration.unsafe_as(Proc(IStream, UInt32*, HRESULT)).call(pistream, pulstatus)
+  def set_configuration(this : IViewHelper*, pistream : IStream, pulstatus : UInt32*) : HRESULT
+    @lpVtbl.value.set_configuration.call(this, pistream, pulstatus)
   end
-  def get_proceed_on_new_configuration : HRESULT
-    @lpVtbl.value.get_proceed_on_new_configuration.unsafe_as(Proc(HRESULT)).call
+  def get_proceed_on_new_configuration(this : IViewHelper*) : HRESULT
+    @lpVtbl.value.get_proceed_on_new_configuration.call(this)
   end
 end

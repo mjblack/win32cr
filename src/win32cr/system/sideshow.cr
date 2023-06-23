@@ -129,11 +129,11 @@ lib LibWin32
 
 
   struct ISideShowSessionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    register_content : UInt64
-    register_notifications : UInt64
+    query_interface : Proc(ISideShowSession*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISideShowSession*, UInt32)
+    release : Proc(ISideShowSession*, UInt32)
+    register_content : Proc(ISideShowSession*, Guid*, Guid*, ISideShowContentManager*, HRESULT)
+    register_notifications : Proc(ISideShowSession*, Guid*, ISideShowNotificationManager*, HRESULT)
   end
 
   ISideShowSession_GUID = "e22331ee-9e7d-4922-9fc2-ab7aa41ce491"
@@ -143,12 +143,12 @@ lib LibWin32
   end
 
   struct ISideShowNotificationManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    show : UInt64
-    revoke : UInt64
-    revoke_all : UInt64
+    query_interface : Proc(ISideShowNotificationManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISideShowNotificationManager*, UInt32)
+    release : Proc(ISideShowNotificationManager*, UInt32)
+    show : Proc(ISideShowNotificationManager*, ISideShowNotification, HRESULT)
+    revoke : Proc(ISideShowNotificationManager*, UInt32, HRESULT)
+    revoke_all : Proc(ISideShowNotificationManager*, HRESULT)
   end
 
   ISideShowNotificationManager_GUID = "63cea909-f2b9-4302-b5e1-c68e6d9ab833"
@@ -158,19 +158,19 @@ lib LibWin32
   end
 
   struct ISideShowNotificationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_notification_id : UInt64
-    put_notification_id : UInt64
-    get_title : UInt64
-    put_title : UInt64
-    get_message : UInt64
-    put_message : UInt64
-    get_image : UInt64
-    put_image : UInt64
-    get_expiration_time : UInt64
-    put_expiration_time : UInt64
+    query_interface : Proc(ISideShowNotification*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISideShowNotification*, UInt32)
+    release : Proc(ISideShowNotification*, UInt32)
+    get_notification_id : Proc(ISideShowNotification*, UInt32*, HRESULT)
+    put_notification_id : Proc(ISideShowNotification*, UInt32, HRESULT)
+    get_title : Proc(ISideShowNotification*, LibC::LPWSTR*, HRESULT)
+    put_title : Proc(ISideShowNotification*, LibC::LPWSTR, HRESULT)
+    get_message : Proc(ISideShowNotification*, LibC::LPWSTR*, HRESULT)
+    put_message : Proc(ISideShowNotification*, LibC::LPWSTR, HRESULT)
+    get_image : Proc(ISideShowNotification*, HANDLE*, HRESULT)
+    put_image : Proc(ISideShowNotification*, LibC::HANDLE, HRESULT)
+    get_expiration_time : Proc(ISideShowNotification*, SYSTEMTIME*, HRESULT)
+    put_expiration_time : Proc(ISideShowNotification*, SYSTEMTIME*, HRESULT)
   end
 
   ISideShowNotification_GUID = "03c93300-8ab2-41c5-9b79-46127a30e148"
@@ -180,14 +180,14 @@ lib LibWin32
   end
 
   struct ISideShowContentManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add : UInt64
-    remove : UInt64
-    remove_all : UInt64
-    set_event_sink : UInt64
-    get_device_capabilities : UInt64
+    query_interface : Proc(ISideShowContentManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISideShowContentManager*, UInt32)
+    release : Proc(ISideShowContentManager*, UInt32)
+    add : Proc(ISideShowContentManager*, ISideShowContent, HRESULT)
+    remove : Proc(ISideShowContentManager*, UInt32, HRESULT)
+    remove_all : Proc(ISideShowContentManager*, HRESULT)
+    set_event_sink : Proc(ISideShowContentManager*, ISideShowEvents, HRESULT)
+    get_device_capabilities : Proc(ISideShowContentManager*, ISideShowCapabilitiesCollection*, HRESULT)
   end
 
   ISideShowContentManager_GUID = "a5d5b66b-eef9-41db-8d7e-e17c33ab10b0"
@@ -197,12 +197,12 @@ lib LibWin32
   end
 
   struct ISideShowContentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_content : UInt64
-    get_content_id : UInt64
-    get_differentiate_content : UInt64
+    query_interface : Proc(ISideShowContent*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISideShowContent*, UInt32)
+    release : Proc(ISideShowContent*, UInt32)
+    get_content : Proc(ISideShowContent*, ISideShowCapabilities, UInt32*, UInt8**, HRESULT)
+    get_content_id : Proc(ISideShowContent*, UInt32*, HRESULT)
+    get_differentiate_content : Proc(ISideShowContent*, LibC::BOOL*, HRESULT)
   end
 
   ISideShowContent_GUID = "c18552ed-74ff-4fec-be07-4cfed29d4887"
@@ -212,13 +212,13 @@ lib LibWin32
   end
 
   struct ISideShowEventsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    content_missing : UInt64
-    application_event : UInt64
-    device_added : UInt64
-    device_removed : UInt64
+    query_interface : Proc(ISideShowEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISideShowEvents*, UInt32)
+    release : Proc(ISideShowEvents*, UInt32)
+    content_missing : Proc(ISideShowEvents*, UInt32, ISideShowContent*, HRESULT)
+    application_event : Proc(ISideShowEvents*, ISideShowCapabilities, UInt32, UInt32, UInt8*, HRESULT)
+    device_added : Proc(ISideShowEvents*, ISideShowCapabilities, HRESULT)
+    device_removed : Proc(ISideShowEvents*, ISideShowCapabilities, HRESULT)
   end
 
   ISideShowEvents_GUID = "61feca4c-deb4-4a7e-8d75-51f1132d615b"
@@ -228,10 +228,10 @@ lib LibWin32
   end
 
   struct ISideShowCapabilitiesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_capability : UInt64
+    query_interface : Proc(ISideShowCapabilities*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISideShowCapabilities*, UInt32)
+    release : Proc(ISideShowCapabilities*, UInt32)
+    get_capability : Proc(ISideShowCapabilities*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
   end
 
   ISideShowCapabilities_GUID = "535e1379-c09e-4a54-a511-597bab3a72b8"
@@ -241,11 +241,11 @@ lib LibWin32
   end
 
   struct ISideShowCapabilitiesCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_count : UInt64
-    get_at : UInt64
+    query_interface : Proc(ISideShowCapabilitiesCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISideShowCapabilitiesCollection*, UInt32)
+    release : Proc(ISideShowCapabilitiesCollection*, UInt32)
+    get_count : Proc(ISideShowCapabilitiesCollection*, UInt32*, HRESULT)
+    get_at : Proc(ISideShowCapabilitiesCollection*, UInt32, ISideShowCapabilities*, HRESULT)
   end
 
   ISideShowCapabilitiesCollection_GUID = "50305597-5e0d-4ff7-b3af-33d0d9bd52dd"
@@ -255,11 +255,11 @@ lib LibWin32
   end
 
   struct ISideShowBulkCapabilitiesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_capability : UInt64
-    get_capabilities : UInt64
+    query_interface : Proc(ISideShowBulkCapabilities*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISideShowBulkCapabilities*, UInt32)
+    release : Proc(ISideShowBulkCapabilities*, UInt32)
+    get_capability : Proc(ISideShowBulkCapabilities*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
+    get_capabilities : Proc(ISideShowBulkCapabilities*, ISideShowKeyCollection, ISideShowPropVariantCollection*, HRESULT)
   end
 
   ISideShowBulkCapabilities_GUID = "3a2b7fbc-3ad5-48bd-bbf1-0e6cfbd10807"
@@ -269,14 +269,14 @@ lib LibWin32
   end
 
   struct ISideShowKeyCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add : UInt64
-    clear : UInt64
-    get_at : UInt64
-    get_count : UInt64
-    remove_at : UInt64
+    query_interface : Proc(ISideShowKeyCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISideShowKeyCollection*, UInt32)
+    release : Proc(ISideShowKeyCollection*, UInt32)
+    add : Proc(ISideShowKeyCollection*, PROPERTYKEY*, HRESULT)
+    clear : Proc(ISideShowKeyCollection*, HRESULT)
+    get_at : Proc(ISideShowKeyCollection*, UInt32, PROPERTYKEY*, HRESULT)
+    get_count : Proc(ISideShowKeyCollection*, UInt32*, HRESULT)
+    remove_at : Proc(ISideShowKeyCollection*, UInt32, HRESULT)
   end
 
   ISideShowKeyCollection_GUID = "045473bc-a37b-4957-b144-68105411ed8e"
@@ -286,14 +286,14 @@ lib LibWin32
   end
 
   struct ISideShowPropVariantCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add : UInt64
-    clear : UInt64
-    get_at : UInt64
-    get_count : UInt64
-    remove_at : UInt64
+    query_interface : Proc(ISideShowPropVariantCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISideShowPropVariantCollection*, UInt32)
+    release : Proc(ISideShowPropVariantCollection*, UInt32)
+    add : Proc(ISideShowPropVariantCollection*, PROPVARIANT*, HRESULT)
+    clear : Proc(ISideShowPropVariantCollection*, HRESULT)
+    get_at : Proc(ISideShowPropVariantCollection*, UInt32, PROPVARIANT*, HRESULT)
+    get_count : Proc(ISideShowPropVariantCollection*, UInt32*, HRESULT)
+    remove_at : Proc(ISideShowPropVariantCollection*, UInt32, HRESULT)
   end
 
   ISideShowPropVariantCollection_GUID = "2ea7a549-7bff-4aae-bab0-22d43111de49"
@@ -304,249 +304,249 @@ lib LibWin32
 
 end
 struct LibWin32::ISideShowSession
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISideShowSession*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISideShowSession*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISideShowSession*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def register_content(in_applicationid : Guid*, in_endpointid : Guid*, out_ppicontent : ISideShowContentManager*) : HRESULT
-    @lpVtbl.value.register_content.unsafe_as(Proc(Guid*, Guid*, ISideShowContentManager*, HRESULT)).call(in_applicationid, in_endpointid, out_ppicontent)
+  def register_content(this : ISideShowSession*, in_applicationid : Guid*, in_endpointid : Guid*, out_ppicontent : ISideShowContentManager*) : HRESULT
+    @lpVtbl.value.register_content.call(this, in_applicationid, in_endpointid, out_ppicontent)
   end
-  def register_notifications(in_applicationid : Guid*, out_ppinotification : ISideShowNotificationManager*) : HRESULT
-    @lpVtbl.value.register_notifications.unsafe_as(Proc(Guid*, ISideShowNotificationManager*, HRESULT)).call(in_applicationid, out_ppinotification)
+  def register_notifications(this : ISideShowSession*, in_applicationid : Guid*, out_ppinotification : ISideShowNotificationManager*) : HRESULT
+    @lpVtbl.value.register_notifications.call(this, in_applicationid, out_ppinotification)
   end
 end
 struct LibWin32::ISideShowNotificationManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISideShowNotificationManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISideShowNotificationManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISideShowNotificationManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def show(in_pinotification : ISideShowNotification) : HRESULT
-    @lpVtbl.value.show.unsafe_as(Proc(ISideShowNotification, HRESULT)).call(in_pinotification)
+  def show(this : ISideShowNotificationManager*, in_pinotification : ISideShowNotification) : HRESULT
+    @lpVtbl.value.show.call(this, in_pinotification)
   end
-  def revoke(in_notificationid : UInt32) : HRESULT
-    @lpVtbl.value.revoke.unsafe_as(Proc(UInt32, HRESULT)).call(in_notificationid)
+  def revoke(this : ISideShowNotificationManager*, in_notificationid : UInt32) : HRESULT
+    @lpVtbl.value.revoke.call(this, in_notificationid)
   end
-  def revoke_all : HRESULT
-    @lpVtbl.value.revoke_all.unsafe_as(Proc(HRESULT)).call
+  def revoke_all(this : ISideShowNotificationManager*) : HRESULT
+    @lpVtbl.value.revoke_all.call(this)
   end
 end
 struct LibWin32::ISideShowNotification
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISideShowNotification*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISideShowNotification*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISideShowNotification*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_notification_id(out_pnotificationid : UInt32*) : HRESULT
-    @lpVtbl.value.get_notification_id.unsafe_as(Proc(UInt32*, HRESULT)).call(out_pnotificationid)
+  def get_notification_id(this : ISideShowNotification*, out_pnotificationid : UInt32*) : HRESULT
+    @lpVtbl.value.get_notification_id.call(this, out_pnotificationid)
   end
-  def put_notification_id(in_notificationid : UInt32) : HRESULT
-    @lpVtbl.value.put_notification_id.unsafe_as(Proc(UInt32, HRESULT)).call(in_notificationid)
+  def put_notification_id(this : ISideShowNotification*, in_notificationid : UInt32) : HRESULT
+    @lpVtbl.value.put_notification_id.call(this, in_notificationid)
   end
-  def get_title(out_ppwsztitle : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_title.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(out_ppwsztitle)
+  def get_title(this : ISideShowNotification*, out_ppwsztitle : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_title.call(this, out_ppwsztitle)
   end
-  def put_title(in_pwsztitle : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.put_title.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(in_pwsztitle)
+  def put_title(this : ISideShowNotification*, in_pwsztitle : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_title.call(this, in_pwsztitle)
   end
-  def get_message(out_ppwszmessage : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_message.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(out_ppwszmessage)
+  def get_message(this : ISideShowNotification*, out_ppwszmessage : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_message.call(this, out_ppwszmessage)
   end
-  def put_message(in_pwszmessage : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.put_message.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(in_pwszmessage)
+  def put_message(this : ISideShowNotification*, in_pwszmessage : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_message.call(this, in_pwszmessage)
   end
-  def get_image(out_phicon : HANDLE*) : HRESULT
-    @lpVtbl.value.get_image.unsafe_as(Proc(HANDLE*, HRESULT)).call(out_phicon)
+  def get_image(this : ISideShowNotification*, out_phicon : HANDLE*) : HRESULT
+    @lpVtbl.value.get_image.call(this, out_phicon)
   end
-  def put_image(in_hicon : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.put_image.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(in_hicon)
+  def put_image(this : ISideShowNotification*, in_hicon : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.put_image.call(this, in_hicon)
   end
-  def get_expiration_time(out_ptime : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.get_expiration_time.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(out_ptime)
+  def get_expiration_time(this : ISideShowNotification*, out_ptime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_expiration_time.call(this, out_ptime)
   end
-  def put_expiration_time(in_ptime : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.put_expiration_time.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(in_ptime)
+  def put_expiration_time(this : ISideShowNotification*, in_ptime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.put_expiration_time.call(this, in_ptime)
   end
 end
 struct LibWin32::ISideShowContentManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISideShowContentManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISideShowContentManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISideShowContentManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add(in_picontent : ISideShowContent) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(ISideShowContent, HRESULT)).call(in_picontent)
+  def add(this : ISideShowContentManager*, in_picontent : ISideShowContent) : HRESULT
+    @lpVtbl.value.add.call(this, in_picontent)
   end
-  def remove(in_contentid : UInt32) : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(UInt32, HRESULT)).call(in_contentid)
+  def remove(this : ISideShowContentManager*, in_contentid : UInt32) : HRESULT
+    @lpVtbl.value.remove.call(this, in_contentid)
   end
-  def remove_all : HRESULT
-    @lpVtbl.value.remove_all.unsafe_as(Proc(HRESULT)).call
+  def remove_all(this : ISideShowContentManager*) : HRESULT
+    @lpVtbl.value.remove_all.call(this)
   end
-  def set_event_sink(in_pievents : ISideShowEvents) : HRESULT
-    @lpVtbl.value.set_event_sink.unsafe_as(Proc(ISideShowEvents, HRESULT)).call(in_pievents)
+  def set_event_sink(this : ISideShowContentManager*, in_pievents : ISideShowEvents) : HRESULT
+    @lpVtbl.value.set_event_sink.call(this, in_pievents)
   end
-  def get_device_capabilities(out_ppcollection : ISideShowCapabilitiesCollection*) : HRESULT
-    @lpVtbl.value.get_device_capabilities.unsafe_as(Proc(ISideShowCapabilitiesCollection*, HRESULT)).call(out_ppcollection)
+  def get_device_capabilities(this : ISideShowContentManager*, out_ppcollection : ISideShowCapabilitiesCollection*) : HRESULT
+    @lpVtbl.value.get_device_capabilities.call(this, out_ppcollection)
   end
 end
 struct LibWin32::ISideShowContent
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISideShowContent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISideShowContent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISideShowContent*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_content(in_picapabilities : ISideShowCapabilities, out_pdwsize : UInt32*, out_ppbdata : UInt8**) : HRESULT
-    @lpVtbl.value.get_content.unsafe_as(Proc(ISideShowCapabilities, UInt32*, UInt8**, HRESULT)).call(in_picapabilities, out_pdwsize, out_ppbdata)
+  def get_content(this : ISideShowContent*, in_picapabilities : ISideShowCapabilities, out_pdwsize : UInt32*, out_ppbdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_content.call(this, in_picapabilities, out_pdwsize, out_ppbdata)
   end
-  def get_content_id(out_pcontentid : UInt32*) : HRESULT
-    @lpVtbl.value.get_content_id.unsafe_as(Proc(UInt32*, HRESULT)).call(out_pcontentid)
+  def get_content_id(this : ISideShowContent*, out_pcontentid : UInt32*) : HRESULT
+    @lpVtbl.value.get_content_id.call(this, out_pcontentid)
   end
-  def get_differentiate_content(out_pfdifferentiatecontent : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_differentiate_content.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(out_pfdifferentiatecontent)
+  def get_differentiate_content(this : ISideShowContent*, out_pfdifferentiatecontent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_differentiate_content.call(this, out_pfdifferentiatecontent)
   end
 end
 struct LibWin32::ISideShowEvents
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISideShowEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISideShowEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISideShowEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def content_missing(in_contentid : UInt32, out_ppicontent : ISideShowContent*) : HRESULT
-    @lpVtbl.value.content_missing.unsafe_as(Proc(UInt32, ISideShowContent*, HRESULT)).call(in_contentid, out_ppicontent)
+  def content_missing(this : ISideShowEvents*, in_contentid : UInt32, out_ppicontent : ISideShowContent*) : HRESULT
+    @lpVtbl.value.content_missing.call(this, in_contentid, out_ppicontent)
   end
-  def application_event(in_picapabilities : ISideShowCapabilities, in_dweventid : UInt32, in_dweventsize : UInt32, in_pbeventdata : UInt8*) : HRESULT
-    @lpVtbl.value.application_event.unsafe_as(Proc(ISideShowCapabilities, UInt32, UInt32, UInt8*, HRESULT)).call(in_picapabilities, in_dweventid, in_dweventsize, in_pbeventdata)
+  def application_event(this : ISideShowEvents*, in_picapabilities : ISideShowCapabilities, in_dweventid : UInt32, in_dweventsize : UInt32, in_pbeventdata : UInt8*) : HRESULT
+    @lpVtbl.value.application_event.call(this, in_picapabilities, in_dweventid, in_dweventsize, in_pbeventdata)
   end
-  def device_added(in_pidevice : ISideShowCapabilities) : HRESULT
-    @lpVtbl.value.device_added.unsafe_as(Proc(ISideShowCapabilities, HRESULT)).call(in_pidevice)
+  def device_added(this : ISideShowEvents*, in_pidevice : ISideShowCapabilities) : HRESULT
+    @lpVtbl.value.device_added.call(this, in_pidevice)
   end
-  def device_removed(in_pidevice : ISideShowCapabilities) : HRESULT
-    @lpVtbl.value.device_removed.unsafe_as(Proc(ISideShowCapabilities, HRESULT)).call(in_pidevice)
+  def device_removed(this : ISideShowEvents*, in_pidevice : ISideShowCapabilities) : HRESULT
+    @lpVtbl.value.device_removed.call(this, in_pidevice)
   end
 end
 struct LibWin32::ISideShowCapabilities
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISideShowCapabilities*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISideShowCapabilities*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISideShowCapabilities*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_capability(in_keycapability : PROPERTYKEY*, inout_pvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_capability.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(in_keycapability, inout_pvalue)
+  def get_capability(this : ISideShowCapabilities*, in_keycapability : PROPERTYKEY*, inout_pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_capability.call(this, in_keycapability, inout_pvalue)
   end
 end
 struct LibWin32::ISideShowCapabilitiesCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISideShowCapabilitiesCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISideShowCapabilitiesCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISideShowCapabilitiesCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_count(out_pdwcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(out_pdwcount)
+  def get_count(this : ISideShowCapabilitiesCollection*, out_pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, out_pdwcount)
   end
-  def get_at(in_dwindex : UInt32, out_ppcapabilities : ISideShowCapabilities*) : HRESULT
-    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, ISideShowCapabilities*, HRESULT)).call(in_dwindex, out_ppcapabilities)
+  def get_at(this : ISideShowCapabilitiesCollection*, in_dwindex : UInt32, out_ppcapabilities : ISideShowCapabilities*) : HRESULT
+    @lpVtbl.value.get_at.call(this, in_dwindex, out_ppcapabilities)
   end
 end
 struct LibWin32::ISideShowBulkCapabilities
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISideShowBulkCapabilities*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISideShowBulkCapabilities*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISideShowBulkCapabilities*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_capability(in_keycapability : PROPERTYKEY*, inout_pvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_capability.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(in_keycapability, inout_pvalue)
+  def get_capability(this : ISideShowBulkCapabilities*, in_keycapability : PROPERTYKEY*, inout_pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_capability.call(this, in_keycapability, inout_pvalue)
   end
-  def get_capabilities(in_keycollection : ISideShowKeyCollection, inout_pvalues : ISideShowPropVariantCollection*) : HRESULT
-    @lpVtbl.value.get_capabilities.unsafe_as(Proc(ISideShowKeyCollection, ISideShowPropVariantCollection*, HRESULT)).call(in_keycollection, inout_pvalues)
+  def get_capabilities(this : ISideShowBulkCapabilities*, in_keycollection : ISideShowKeyCollection, inout_pvalues : ISideShowPropVariantCollection*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, in_keycollection, inout_pvalues)
   end
 end
 struct LibWin32::ISideShowKeyCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISideShowKeyCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISideShowKeyCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISideShowKeyCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add(key : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(PROPERTYKEY*, HRESULT)).call(key)
+  def add(this : ISideShowKeyCollection*, key : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.add.call(this, key)
   end
-  def clear : HRESULT
-    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  def clear(this : ISideShowKeyCollection*) : HRESULT
+    @lpVtbl.value.clear.call(this)
   end
-  def get_at(dwindex : UInt32, pkey : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, PROPERTYKEY*, HRESULT)).call(dwindex, pkey)
+  def get_at(this : ISideShowKeyCollection*, dwindex : UInt32, pkey : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.get_at.call(this, dwindex, pkey)
   end
-  def get_count(pcelems : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcelems)
+  def get_count(this : ISideShowKeyCollection*, pcelems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcelems)
   end
-  def remove_at(dwindex : UInt32) : HRESULT
-    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(dwindex)
+  def remove_at(this : ISideShowKeyCollection*, dwindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, dwindex)
   end
 end
 struct LibWin32::ISideShowPropVariantCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISideShowPropVariantCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISideShowPropVariantCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISideShowPropVariantCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add(pvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(PROPVARIANT*, HRESULT)).call(pvalue)
+  def add(this : ISideShowPropVariantCollection*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.add.call(this, pvalue)
   end
-  def clear : HRESULT
-    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  def clear(this : ISideShowPropVariantCollection*) : HRESULT
+    @lpVtbl.value.clear.call(this)
   end
-  def get_at(dwindex : UInt32, pvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, PROPVARIANT*, HRESULT)).call(dwindex, pvalue)
+  def get_at(this : ISideShowPropVariantCollection*, dwindex : UInt32, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_at.call(this, dwindex, pvalue)
   end
-  def get_count(pcelems : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcelems)
+  def get_count(this : ISideShowPropVariantCollection*, pcelems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcelems)
   end
-  def remove_at(dwindex : UInt32) : HRESULT
-    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(dwindex)
+  def remove_at(this : ISideShowPropVariantCollection*, dwindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, dwindex)
   end
 end

@@ -134,13 +134,13 @@ lib LibWin32
 
 
   struct IRdcGeneratorParametersVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_generator_parameters_type : UInt64
-    get_parameters_version : UInt64
-    get_serialize_size : UInt64
-    serialize : UInt64
+    query_interface : Proc(IRdcGeneratorParameters*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IRdcGeneratorParameters*, UInt32)
+    release : Proc(IRdcGeneratorParameters*, UInt32)
+    get_generator_parameters_type : Proc(IRdcGeneratorParameters*, GeneratorParametersType*, HRESULT)
+    get_parameters_version : Proc(IRdcGeneratorParameters*, UInt32*, UInt32*, HRESULT)
+    get_serialize_size : Proc(IRdcGeneratorParameters*, UInt32*, HRESULT)
+    serialize : Proc(IRdcGeneratorParameters*, UInt32, UInt8*, UInt32*, HRESULT)
   end
 
   IRdcGeneratorParameters_GUID = "96236a71-9dbc-11da-9e3f-0011114ae311"
@@ -150,13 +150,13 @@ lib LibWin32
   end
 
   struct IRdcGeneratorFilterMaxParametersVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_horizon_size : UInt64
-    set_horizon_size : UInt64
-    get_hash_window_size : UInt64
-    set_hash_window_size : UInt64
+    query_interface : Proc(IRdcGeneratorFilterMaxParameters*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IRdcGeneratorFilterMaxParameters*, UInt32)
+    release : Proc(IRdcGeneratorFilterMaxParameters*, UInt32)
+    get_horizon_size : Proc(IRdcGeneratorFilterMaxParameters*, UInt32*, HRESULT)
+    set_horizon_size : Proc(IRdcGeneratorFilterMaxParameters*, UInt32, HRESULT)
+    get_hash_window_size : Proc(IRdcGeneratorFilterMaxParameters*, UInt32*, HRESULT)
+    set_hash_window_size : Proc(IRdcGeneratorFilterMaxParameters*, UInt32, HRESULT)
   end
 
   IRdcGeneratorFilterMaxParameters_GUID = "96236a72-9dbc-11da-9e3f-0011114ae311"
@@ -166,11 +166,11 @@ lib LibWin32
   end
 
   struct IRdcGeneratorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_generator_parameters : UInt64
-    process : UInt64
+    query_interface : Proc(IRdcGenerator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IRdcGenerator*, UInt32)
+    release : Proc(IRdcGenerator*, UInt32)
+    get_generator_parameters : Proc(IRdcGenerator*, UInt32, IRdcGeneratorParameters*, HRESULT)
+    process : Proc(IRdcGenerator*, LibC::BOOL, LibC::BOOL*, RdcBufferPointer*, UInt32, RdcBufferPointer**, RDC_ErrorCode*, HRESULT)
   end
 
   IRdcGenerator_GUID = "96236a73-9dbc-11da-9e3f-0011114ae311"
@@ -180,12 +180,12 @@ lib LibWin32
   end
 
   struct IRdcFileReaderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_file_size : UInt64
-    read : UInt64
-    get_file_position : UInt64
+    query_interface : Proc(IRdcFileReader*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IRdcFileReader*, UInt32)
+    release : Proc(IRdcFileReader*, UInt32)
+    get_file_size : Proc(IRdcFileReader*, UInt64*, HRESULT)
+    read : Proc(IRdcFileReader*, UInt64, UInt32, UInt32*, UInt8*, LibC::BOOL*, HRESULT)
+    get_file_position : Proc(IRdcFileReader*, UInt64*, HRESULT)
   end
 
   IRdcFileReader_GUID = "96236a74-9dbc-11da-9e3f-0011114ae311"
@@ -195,15 +195,15 @@ lib LibWin32
   end
 
   struct IRdcFileWriterVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_file_size : UInt64
-    read : UInt64
-    get_file_position : UInt64
-    write : UInt64
-    truncate : UInt64
-    delete_on_close : UInt64
+    query_interface : Proc(IRdcFileWriter*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IRdcFileWriter*, UInt32)
+    release : Proc(IRdcFileWriter*, UInt32)
+    get_file_size : Proc(IRdcFileWriter*, UInt64*, HRESULT)
+    read : Proc(IRdcFileWriter*, UInt64, UInt32, UInt32*, UInt8*, LibC::BOOL*, HRESULT)
+    get_file_position : Proc(IRdcFileWriter*, UInt64*, HRESULT)
+    write : Proc(IRdcFileWriter*, UInt64, UInt32, UInt8*, HRESULT)
+    truncate : Proc(IRdcFileWriter*, HRESULT)
+    delete_on_close : Proc(IRdcFileWriter*, HRESULT)
   end
 
   IRdcFileWriter_GUID = "96236a75-9dbc-11da-9e3f-0011114ae311"
@@ -213,11 +213,11 @@ lib LibWin32
   end
 
   struct IRdcSignatureReaderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    read_header : UInt64
-    read_signatures : UInt64
+    query_interface : Proc(IRdcSignatureReader*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IRdcSignatureReader*, UInt32)
+    release : Proc(IRdcSignatureReader*, UInt32)
+    read_header : Proc(IRdcSignatureReader*, RDC_ErrorCode*, HRESULT)
+    read_signatures : Proc(IRdcSignatureReader*, RdcSignaturePointer*, LibC::BOOL*, HRESULT)
   end
 
   IRdcSignatureReader_GUID = "96236a76-9dbc-11da-9e3f-0011114ae311"
@@ -227,10 +227,10 @@ lib LibWin32
   end
 
   struct IRdcComparatorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    process : UInt64
+    query_interface : Proc(IRdcComparator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IRdcComparator*, UInt32)
+    release : Proc(IRdcComparator*, UInt32)
+    process : Proc(IRdcComparator*, LibC::BOOL, LibC::BOOL*, RdcBufferPointer*, RdcNeedPointer*, RDC_ErrorCode*, HRESULT)
   end
 
   IRdcComparator_GUID = "96236a77-9dbc-11da-9e3f-0011114ae311"
@@ -240,16 +240,16 @@ lib LibWin32
   end
 
   struct IRdcLibraryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    compute_default_recursion_depth : UInt64
-    create_generator_parameters : UInt64
-    open_generator_parameters : UInt64
-    create_generator : UInt64
-    create_comparator : UInt64
-    create_signature_reader : UInt64
-    get_rdc_version : UInt64
+    query_interface : Proc(IRdcLibrary*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IRdcLibrary*, UInt32)
+    release : Proc(IRdcLibrary*, UInt32)
+    compute_default_recursion_depth : Proc(IRdcLibrary*, UInt64, UInt32*, HRESULT)
+    create_generator_parameters : Proc(IRdcLibrary*, GeneratorParametersType, UInt32, IRdcGeneratorParameters*, HRESULT)
+    open_generator_parameters : Proc(IRdcLibrary*, UInt32, UInt8*, IRdcGeneratorParameters*, HRESULT)
+    create_generator : Proc(IRdcLibrary*, UInt32, IRdcGeneratorParameters*, IRdcGenerator*, HRESULT)
+    create_comparator : Proc(IRdcLibrary*, IRdcFileReader, UInt32, IRdcComparator*, HRESULT)
+    create_signature_reader : Proc(IRdcLibrary*, IRdcFileReader, IRdcSignatureReader*, HRESULT)
+    get_rdc_version : Proc(IRdcLibrary*, UInt32*, UInt32*, HRESULT)
   end
 
   IRdcLibrary_GUID = "96236a78-9dbc-11da-9e3f-0011114ae311"
@@ -259,10 +259,10 @@ lib LibWin32
   end
 
   struct ISimilarityReportProgressVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    report_progress : UInt64
+    query_interface : Proc(ISimilarityReportProgress*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISimilarityReportProgress*, UInt32)
+    release : Proc(ISimilarityReportProgress*, UInt32)
+    report_progress : Proc(ISimilarityReportProgress*, UInt32, HRESULT)
   end
 
   ISimilarityReportProgress_GUID = "96236a7a-9dbc-11da-9e3f-0011114ae311"
@@ -272,10 +272,10 @@ lib LibWin32
   end
 
   struct ISimilarityTableDumpStateVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_next_data : UInt64
+    query_interface : Proc(ISimilarityTableDumpState*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISimilarityTableDumpState*, UInt32)
+    release : Proc(ISimilarityTableDumpState*, UInt32)
+    get_next_data : Proc(ISimilarityTableDumpState*, UInt32, UInt32*, LibC::BOOL*, SimilarityDumpData*, HRESULT)
   end
 
   ISimilarityTableDumpState_GUID = "96236a7b-9dbc-11da-9e3f-0011114ae311"
@@ -285,13 +285,13 @@ lib LibWin32
   end
 
   struct ISimilarityTraitsMappedViewVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    flush : UInt64
-    unmap : UInt64
-    get : UInt64
-    get_view : UInt64
+    query_interface : Proc(ISimilarityTraitsMappedView*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISimilarityTraitsMappedView*, UInt32)
+    release : Proc(ISimilarityTraitsMappedView*, UInt32)
+    flush : Proc(ISimilarityTraitsMappedView*, HRESULT)
+    unmap : Proc(ISimilarityTraitsMappedView*, HRESULT)
+    get : Proc(ISimilarityTraitsMappedView*, UInt64, LibC::BOOL, UInt32, SimilarityMappedViewInfo*, HRESULT)
+    get_view : Proc(ISimilarityTraitsMappedView*, UInt8**, UInt8**, Void)
   end
 
   ISimilarityTraitsMappedView_GUID = "96236a7c-9dbc-11da-9e3f-0011114ae311"
@@ -301,16 +301,16 @@ lib LibWin32
   end
 
   struct ISimilarityTraitsMappingVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    close_mapping : UInt64
-    set_file_size : UInt64
-    get_file_size : UInt64
-    open_mapping : UInt64
-    resize_mapping : UInt64
-    get_page_size : UInt64
-    create_view : UInt64
+    query_interface : Proc(ISimilarityTraitsMapping*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISimilarityTraitsMapping*, UInt32)
+    release : Proc(ISimilarityTraitsMapping*, UInt32)
+    close_mapping : Proc(ISimilarityTraitsMapping*, Void)
+    set_file_size : Proc(ISimilarityTraitsMapping*, UInt64, HRESULT)
+    get_file_size : Proc(ISimilarityTraitsMapping*, UInt64*, HRESULT)
+    open_mapping : Proc(ISimilarityTraitsMapping*, RdcMappingAccessMode, UInt64, UInt64, UInt64*, HRESULT)
+    resize_mapping : Proc(ISimilarityTraitsMapping*, RdcMappingAccessMode, UInt64, UInt64, UInt64*, HRESULT)
+    get_page_size : Proc(ISimilarityTraitsMapping*, UInt32*, Void)
+    create_view : Proc(ISimilarityTraitsMapping*, UInt32, RdcMappingAccessMode, ISimilarityTraitsMappedView*, HRESULT)
   end
 
   ISimilarityTraitsMapping_GUID = "96236a7d-9dbc-11da-9e3f-0011114ae311"
@@ -320,16 +320,16 @@ lib LibWin32
   end
 
   struct ISimilarityTraitsTableVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_table : UInt64
-    create_table_indirect : UInt64
-    close_table : UInt64
-    append : UInt64
-    find_similar_file_index : UInt64
-    begin_dump : UInt64
-    get_last_index : UInt64
+    query_interface : Proc(ISimilarityTraitsTable*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISimilarityTraitsTable*, UInt32)
+    release : Proc(ISimilarityTraitsTable*, UInt32)
+    create_table : Proc(ISimilarityTraitsTable*, LibC::LPWSTR, LibC::BOOL, UInt8*, RdcCreatedTables*, HRESULT)
+    create_table_indirect : Proc(ISimilarityTraitsTable*, ISimilarityTraitsMapping, LibC::BOOL, RdcCreatedTables*, HRESULT)
+    close_table : Proc(ISimilarityTraitsTable*, LibC::BOOL, HRESULT)
+    append : Proc(ISimilarityTraitsTable*, SimilarityData*, UInt32, HRESULT)
+    find_similar_file_index : Proc(ISimilarityTraitsTable*, SimilarityData*, UInt16, FindSimilarFileIndexResults*, UInt32, UInt32*, HRESULT)
+    begin_dump : Proc(ISimilarityTraitsTable*, ISimilarityTableDumpState*, HRESULT)
+    get_last_index : Proc(ISimilarityTraitsTable*, UInt32*, HRESULT)
   end
 
   ISimilarityTraitsTable_GUID = "96236a7e-9dbc-11da-9e3f-0011114ae311"
@@ -339,16 +339,16 @@ lib LibWin32
   end
 
   struct ISimilarityFileIdTableVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_table : UInt64
-    create_table_indirect : UInt64
-    close_table : UInt64
-    append : UInt64
-    lookup : UInt64
-    invalidate : UInt64
-    get_record_count : UInt64
+    query_interface : Proc(ISimilarityFileIdTable*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISimilarityFileIdTable*, UInt32)
+    release : Proc(ISimilarityFileIdTable*, UInt32)
+    create_table : Proc(ISimilarityFileIdTable*, LibC::LPWSTR, LibC::BOOL, UInt8*, UInt32, RdcCreatedTables*, HRESULT)
+    create_table_indirect : Proc(ISimilarityFileIdTable*, IRdcFileWriter, LibC::BOOL, UInt32, RdcCreatedTables*, HRESULT)
+    close_table : Proc(ISimilarityFileIdTable*, LibC::BOOL, HRESULT)
+    append : Proc(ISimilarityFileIdTable*, SimilarityFileId*, UInt32*, HRESULT)
+    lookup : Proc(ISimilarityFileIdTable*, UInt32, SimilarityFileId*, HRESULT)
+    invalidate : Proc(ISimilarityFileIdTable*, UInt32, HRESULT)
+    get_record_count : Proc(ISimilarityFileIdTable*, UInt32*, HRESULT)
   end
 
   ISimilarityFileIdTable_GUID = "96236a7f-9dbc-11da-9e3f-0011114ae311"
@@ -358,11 +358,11 @@ lib LibWin32
   end
 
   struct IRdcSimilarityGeneratorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    enable_similarity : UInt64
-    results : UInt64
+    query_interface : Proc(IRdcSimilarityGenerator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IRdcSimilarityGenerator*, UInt32)
+    release : Proc(IRdcSimilarityGenerator*, UInt32)
+    enable_similarity : Proc(IRdcSimilarityGenerator*, HRESULT)
+    results : Proc(IRdcSimilarityGenerator*, SimilarityData*, HRESULT)
   end
 
   IRdcSimilarityGenerator_GUID = "96236a80-9dbc-11da-9e3f-0011114ae311"
@@ -372,11 +372,11 @@ lib LibWin32
   end
 
   struct IFindSimilarResultsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_size : UInt64
-    get_next_file_id : UInt64
+    query_interface : Proc(IFindSimilarResults*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IFindSimilarResults*, UInt32)
+    release : Proc(IFindSimilarResults*, UInt32)
+    get_size : Proc(IFindSimilarResults*, UInt32*, HRESULT)
+    get_next_file_id : Proc(IFindSimilarResults*, UInt32*, SimilarityFileId*, HRESULT)
   end
 
   IFindSimilarResults_GUID = "96236a81-9dbc-11da-9e3f-0011114ae311"
@@ -386,16 +386,16 @@ lib LibWin32
   end
 
   struct ISimilarityVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_table : UInt64
-    create_table_indirect : UInt64
-    close_table : UInt64
-    append : UInt64
-    find_similar_file_id : UInt64
-    copy_and_swap : UInt64
-    get_record_count : UInt64
+    query_interface : Proc(ISimilarity*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISimilarity*, UInt32)
+    release : Proc(ISimilarity*, UInt32)
+    create_table : Proc(ISimilarity*, LibC::LPWSTR, LibC::BOOL, UInt8*, UInt32, RdcCreatedTables*, HRESULT)
+    create_table_indirect : Proc(ISimilarity*, ISimilarityTraitsMapping, IRdcFileWriter, LibC::BOOL, UInt32, RdcCreatedTables*, HRESULT)
+    close_table : Proc(ISimilarity*, LibC::BOOL, HRESULT)
+    append : Proc(ISimilarity*, SimilarityFileId*, SimilarityData*, HRESULT)
+    find_similar_file_id : Proc(ISimilarity*, SimilarityData*, UInt16, UInt32, IFindSimilarResults*, HRESULT)
+    copy_and_swap : Proc(ISimilarity*, ISimilarity, ISimilarityReportProgress, HRESULT)
+    get_record_count : Proc(ISimilarity*, UInt32*, HRESULT)
   end
 
   ISimilarity_GUID = "96236a83-9dbc-11da-9e3f-0011114ae311"
@@ -406,390 +406,390 @@ lib LibWin32
 
 end
 struct LibWin32::IRdcGeneratorParameters
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IRdcGeneratorParameters*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IRdcGeneratorParameters*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IRdcGeneratorParameters*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_generator_parameters_type(parameterstype : GeneratorParametersType*) : HRESULT
-    @lpVtbl.value.get_generator_parameters_type.unsafe_as(Proc(GeneratorParametersType*, HRESULT)).call(parameterstype)
+  def get_generator_parameters_type(this : IRdcGeneratorParameters*, parameterstype : GeneratorParametersType*) : HRESULT
+    @lpVtbl.value.get_generator_parameters_type.call(this, parameterstype)
   end
-  def get_parameters_version(currentversion : UInt32*, minimumcompatibleappversion : UInt32*) : HRESULT
-    @lpVtbl.value.get_parameters_version.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(currentversion, minimumcompatibleappversion)
+  def get_parameters_version(this : IRdcGeneratorParameters*, currentversion : UInt32*, minimumcompatibleappversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_parameters_version.call(this, currentversion, minimumcompatibleappversion)
   end
-  def get_serialize_size(size : UInt32*) : HRESULT
-    @lpVtbl.value.get_serialize_size.unsafe_as(Proc(UInt32*, HRESULT)).call(size)
+  def get_serialize_size(this : IRdcGeneratorParameters*, size : UInt32*) : HRESULT
+    @lpVtbl.value.get_serialize_size.call(this, size)
   end
-  def serialize(size : UInt32, parametersblob : UInt8*, byteswritten : UInt32*) : HRESULT
-    @lpVtbl.value.serialize.unsafe_as(Proc(UInt32, UInt8*, UInt32*, HRESULT)).call(size, parametersblob, byteswritten)
+  def serialize(this : IRdcGeneratorParameters*, size : UInt32, parametersblob : UInt8*, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.call(this, size, parametersblob, byteswritten)
   end
 end
 struct LibWin32::IRdcGeneratorFilterMaxParameters
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IRdcGeneratorFilterMaxParameters*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IRdcGeneratorFilterMaxParameters*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IRdcGeneratorFilterMaxParameters*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_horizon_size(horizonsize : UInt32*) : HRESULT
-    @lpVtbl.value.get_horizon_size.unsafe_as(Proc(UInt32*, HRESULT)).call(horizonsize)
+  def get_horizon_size(this : IRdcGeneratorFilterMaxParameters*, horizonsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_horizon_size.call(this, horizonsize)
   end
-  def set_horizon_size(horizonsize : UInt32) : HRESULT
-    @lpVtbl.value.set_horizon_size.unsafe_as(Proc(UInt32, HRESULT)).call(horizonsize)
+  def set_horizon_size(this : IRdcGeneratorFilterMaxParameters*, horizonsize : UInt32) : HRESULT
+    @lpVtbl.value.set_horizon_size.call(this, horizonsize)
   end
-  def get_hash_window_size(hashwindowsize : UInt32*) : HRESULT
-    @lpVtbl.value.get_hash_window_size.unsafe_as(Proc(UInt32*, HRESULT)).call(hashwindowsize)
+  def get_hash_window_size(this : IRdcGeneratorFilterMaxParameters*, hashwindowsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_hash_window_size.call(this, hashwindowsize)
   end
-  def set_hash_window_size(hashwindowsize : UInt32) : HRESULT
-    @lpVtbl.value.set_hash_window_size.unsafe_as(Proc(UInt32, HRESULT)).call(hashwindowsize)
+  def set_hash_window_size(this : IRdcGeneratorFilterMaxParameters*, hashwindowsize : UInt32) : HRESULT
+    @lpVtbl.value.set_hash_window_size.call(this, hashwindowsize)
   end
 end
 struct LibWin32::IRdcGenerator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IRdcGenerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IRdcGenerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IRdcGenerator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_generator_parameters(level : UInt32, igeneratorparameters : IRdcGeneratorParameters*) : HRESULT
-    @lpVtbl.value.get_generator_parameters.unsafe_as(Proc(UInt32, IRdcGeneratorParameters*, HRESULT)).call(level, igeneratorparameters)
+  def get_generator_parameters(this : IRdcGenerator*, level : UInt32, igeneratorparameters : IRdcGeneratorParameters*) : HRESULT
+    @lpVtbl.value.get_generator_parameters.call(this, level, igeneratorparameters)
   end
-  def process(endofinput : LibC::BOOL, endofoutput : LibC::BOOL*, inputbuffer : RdcBufferPointer*, depth : UInt32, outputbuffers : RdcBufferPointer**, rdc_errorcode : RDC_ErrorCode*) : HRESULT
-    @lpVtbl.value.process.unsafe_as(Proc(LibC::BOOL, LibC::BOOL*, RdcBufferPointer*, UInt32, RdcBufferPointer**, RDC_ErrorCode*, HRESULT)).call(endofinput, endofoutput, inputbuffer, depth, outputbuffers, rdc_errorcode)
+  def process(this : IRdcGenerator*, endofinput : LibC::BOOL, endofoutput : LibC::BOOL*, inputbuffer : RdcBufferPointer*, depth : UInt32, outputbuffers : RdcBufferPointer**, rdc_errorcode : RDC_ErrorCode*) : HRESULT
+    @lpVtbl.value.process.call(this, endofinput, endofoutput, inputbuffer, depth, outputbuffers, rdc_errorcode)
   end
 end
 struct LibWin32::IRdcFileReader
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IRdcFileReader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IRdcFileReader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IRdcFileReader*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_file_size(filesize : UInt64*) : HRESULT
-    @lpVtbl.value.get_file_size.unsafe_as(Proc(UInt64*, HRESULT)).call(filesize)
+  def get_file_size(this : IRdcFileReader*, filesize : UInt64*) : HRESULT
+    @lpVtbl.value.get_file_size.call(this, filesize)
   end
-  def read(offsetfilestart : UInt64, bytestoread : UInt32, bytesactuallyread : UInt32*, buffer : UInt8*, eof : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.read.unsafe_as(Proc(UInt64, UInt32, UInt32*, UInt8*, LibC::BOOL*, HRESULT)).call(offsetfilestart, bytestoread, bytesactuallyread, buffer, eof)
+  def read(this : IRdcFileReader*, offsetfilestart : UInt64, bytestoread : UInt32, bytesactuallyread : UInt32*, buffer : UInt8*, eof : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.read.call(this, offsetfilestart, bytestoread, bytesactuallyread, buffer, eof)
   end
-  def get_file_position(offsetfromstart : UInt64*) : HRESULT
-    @lpVtbl.value.get_file_position.unsafe_as(Proc(UInt64*, HRESULT)).call(offsetfromstart)
+  def get_file_position(this : IRdcFileReader*, offsetfromstart : UInt64*) : HRESULT
+    @lpVtbl.value.get_file_position.call(this, offsetfromstart)
   end
 end
 struct LibWin32::IRdcFileWriter
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IRdcFileWriter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IRdcFileWriter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IRdcFileWriter*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_file_size(filesize : UInt64*) : HRESULT
-    @lpVtbl.value.get_file_size.unsafe_as(Proc(UInt64*, HRESULT)).call(filesize)
+  def get_file_size(this : IRdcFileWriter*, filesize : UInt64*) : HRESULT
+    @lpVtbl.value.get_file_size.call(this, filesize)
   end
-  def read(offsetfilestart : UInt64, bytestoread : UInt32, bytesactuallyread : UInt32*, buffer : UInt8*, eof : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.read.unsafe_as(Proc(UInt64, UInt32, UInt32*, UInt8*, LibC::BOOL*, HRESULT)).call(offsetfilestart, bytestoread, bytesactuallyread, buffer, eof)
+  def read(this : IRdcFileWriter*, offsetfilestart : UInt64, bytestoread : UInt32, bytesactuallyread : UInt32*, buffer : UInt8*, eof : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.read.call(this, offsetfilestart, bytestoread, bytesactuallyread, buffer, eof)
   end
-  def get_file_position(offsetfromstart : UInt64*) : HRESULT
-    @lpVtbl.value.get_file_position.unsafe_as(Proc(UInt64*, HRESULT)).call(offsetfromstart)
+  def get_file_position(this : IRdcFileWriter*, offsetfromstart : UInt64*) : HRESULT
+    @lpVtbl.value.get_file_position.call(this, offsetfromstart)
   end
-  def write(offsetfilestart : UInt64, bytestowrite : UInt32, buffer : UInt8*) : HRESULT
-    @lpVtbl.value.write.unsafe_as(Proc(UInt64, UInt32, UInt8*, HRESULT)).call(offsetfilestart, bytestowrite, buffer)
+  def write(this : IRdcFileWriter*, offsetfilestart : UInt64, bytestowrite : UInt32, buffer : UInt8*) : HRESULT
+    @lpVtbl.value.write.call(this, offsetfilestart, bytestowrite, buffer)
   end
-  def truncate : HRESULT
-    @lpVtbl.value.truncate.unsafe_as(Proc(HRESULT)).call
+  def truncate(this : IRdcFileWriter*) : HRESULT
+    @lpVtbl.value.truncate.call(this)
   end
-  def delete_on_close : HRESULT
-    @lpVtbl.value.delete_on_close.unsafe_as(Proc(HRESULT)).call
+  def delete_on_close(this : IRdcFileWriter*) : HRESULT
+    @lpVtbl.value.delete_on_close.call(this)
   end
 end
 struct LibWin32::IRdcSignatureReader
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IRdcSignatureReader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IRdcSignatureReader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IRdcSignatureReader*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def read_header(rdc_errorcode : RDC_ErrorCode*) : HRESULT
-    @lpVtbl.value.read_header.unsafe_as(Proc(RDC_ErrorCode*, HRESULT)).call(rdc_errorcode)
+  def read_header(this : IRdcSignatureReader*, rdc_errorcode : RDC_ErrorCode*) : HRESULT
+    @lpVtbl.value.read_header.call(this, rdc_errorcode)
   end
-  def read_signatures(rdcsignaturepointer : RdcSignaturePointer*, endofoutput : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.read_signatures.unsafe_as(Proc(RdcSignaturePointer*, LibC::BOOL*, HRESULT)).call(rdcsignaturepointer, endofoutput)
+  def read_signatures(this : IRdcSignatureReader*, rdcsignaturepointer : RdcSignaturePointer*, endofoutput : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.read_signatures.call(this, rdcsignaturepointer, endofoutput)
   end
 end
 struct LibWin32::IRdcComparator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IRdcComparator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IRdcComparator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IRdcComparator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def process(endofinput : LibC::BOOL, endofoutput : LibC::BOOL*, inputbuffer : RdcBufferPointer*, outputbuffer : RdcNeedPointer*, rdc_errorcode : RDC_ErrorCode*) : HRESULT
-    @lpVtbl.value.process.unsafe_as(Proc(LibC::BOOL, LibC::BOOL*, RdcBufferPointer*, RdcNeedPointer*, RDC_ErrorCode*, HRESULT)).call(endofinput, endofoutput, inputbuffer, outputbuffer, rdc_errorcode)
+  def process(this : IRdcComparator*, endofinput : LibC::BOOL, endofoutput : LibC::BOOL*, inputbuffer : RdcBufferPointer*, outputbuffer : RdcNeedPointer*, rdc_errorcode : RDC_ErrorCode*) : HRESULT
+    @lpVtbl.value.process.call(this, endofinput, endofoutput, inputbuffer, outputbuffer, rdc_errorcode)
   end
 end
 struct LibWin32::IRdcLibrary
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IRdcLibrary*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IRdcLibrary*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IRdcLibrary*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def compute_default_recursion_depth(filesize : UInt64, depth : UInt32*) : HRESULT
-    @lpVtbl.value.compute_default_recursion_depth.unsafe_as(Proc(UInt64, UInt32*, HRESULT)).call(filesize, depth)
+  def compute_default_recursion_depth(this : IRdcLibrary*, filesize : UInt64, depth : UInt32*) : HRESULT
+    @lpVtbl.value.compute_default_recursion_depth.call(this, filesize, depth)
   end
-  def create_generator_parameters(parameterstype : GeneratorParametersType, level : UInt32, igeneratorparameters : IRdcGeneratorParameters*) : HRESULT
-    @lpVtbl.value.create_generator_parameters.unsafe_as(Proc(GeneratorParametersType, UInt32, IRdcGeneratorParameters*, HRESULT)).call(parameterstype, level, igeneratorparameters)
+  def create_generator_parameters(this : IRdcLibrary*, parameterstype : GeneratorParametersType, level : UInt32, igeneratorparameters : IRdcGeneratorParameters*) : HRESULT
+    @lpVtbl.value.create_generator_parameters.call(this, parameterstype, level, igeneratorparameters)
   end
-  def open_generator_parameters(size : UInt32, parametersblob : UInt8*, igeneratorparameters : IRdcGeneratorParameters*) : HRESULT
-    @lpVtbl.value.open_generator_parameters.unsafe_as(Proc(UInt32, UInt8*, IRdcGeneratorParameters*, HRESULT)).call(size, parametersblob, igeneratorparameters)
+  def open_generator_parameters(this : IRdcLibrary*, size : UInt32, parametersblob : UInt8*, igeneratorparameters : IRdcGeneratorParameters*) : HRESULT
+    @lpVtbl.value.open_generator_parameters.call(this, size, parametersblob, igeneratorparameters)
   end
-  def create_generator(depth : UInt32, igeneratorparametersarray : IRdcGeneratorParameters*, igenerator : IRdcGenerator*) : HRESULT
-    @lpVtbl.value.create_generator.unsafe_as(Proc(UInt32, IRdcGeneratorParameters*, IRdcGenerator*, HRESULT)).call(depth, igeneratorparametersarray, igenerator)
+  def create_generator(this : IRdcLibrary*, depth : UInt32, igeneratorparametersarray : IRdcGeneratorParameters*, igenerator : IRdcGenerator*) : HRESULT
+    @lpVtbl.value.create_generator.call(this, depth, igeneratorparametersarray, igenerator)
   end
-  def create_comparator(iseedsignaturesfile : IRdcFileReader, comparatorbuffersize : UInt32, icomparator : IRdcComparator*) : HRESULT
-    @lpVtbl.value.create_comparator.unsafe_as(Proc(IRdcFileReader, UInt32, IRdcComparator*, HRESULT)).call(iseedsignaturesfile, comparatorbuffersize, icomparator)
+  def create_comparator(this : IRdcLibrary*, iseedsignaturesfile : IRdcFileReader, comparatorbuffersize : UInt32, icomparator : IRdcComparator*) : HRESULT
+    @lpVtbl.value.create_comparator.call(this, iseedsignaturesfile, comparatorbuffersize, icomparator)
   end
-  def create_signature_reader(ifilereader : IRdcFileReader, isignaturereader : IRdcSignatureReader*) : HRESULT
-    @lpVtbl.value.create_signature_reader.unsafe_as(Proc(IRdcFileReader, IRdcSignatureReader*, HRESULT)).call(ifilereader, isignaturereader)
+  def create_signature_reader(this : IRdcLibrary*, ifilereader : IRdcFileReader, isignaturereader : IRdcSignatureReader*) : HRESULT
+    @lpVtbl.value.create_signature_reader.call(this, ifilereader, isignaturereader)
   end
-  def get_rdc_version(currentversion : UInt32*, minimumcompatibleappversion : UInt32*) : HRESULT
-    @lpVtbl.value.get_rdc_version.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(currentversion, minimumcompatibleappversion)
+  def get_rdc_version(this : IRdcLibrary*, currentversion : UInt32*, minimumcompatibleappversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_rdc_version.call(this, currentversion, minimumcompatibleappversion)
   end
 end
 struct LibWin32::ISimilarityReportProgress
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISimilarityReportProgress*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISimilarityReportProgress*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISimilarityReportProgress*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def report_progress(percentcompleted : UInt32) : HRESULT
-    @lpVtbl.value.report_progress.unsafe_as(Proc(UInt32, HRESULT)).call(percentcompleted)
+  def report_progress(this : ISimilarityReportProgress*, percentcompleted : UInt32) : HRESULT
+    @lpVtbl.value.report_progress.call(this, percentcompleted)
   end
 end
 struct LibWin32::ISimilarityTableDumpState
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISimilarityTableDumpState*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISimilarityTableDumpState*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISimilarityTableDumpState*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_next_data(resultssize : UInt32, resultsused : UInt32*, eof : LibC::BOOL*, results : SimilarityDumpData*) : HRESULT
-    @lpVtbl.value.get_next_data.unsafe_as(Proc(UInt32, UInt32*, LibC::BOOL*, SimilarityDumpData*, HRESULT)).call(resultssize, resultsused, eof, results)
+  def get_next_data(this : ISimilarityTableDumpState*, resultssize : UInt32, resultsused : UInt32*, eof : LibC::BOOL*, results : SimilarityDumpData*) : HRESULT
+    @lpVtbl.value.get_next_data.call(this, resultssize, resultsused, eof, results)
   end
 end
 struct LibWin32::ISimilarityTraitsMappedView
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISimilarityTraitsMappedView*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISimilarityTraitsMappedView*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISimilarityTraitsMappedView*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def flush : HRESULT
-    @lpVtbl.value.flush.unsafe_as(Proc(HRESULT)).call
+  def flush(this : ISimilarityTraitsMappedView*) : HRESULT
+    @lpVtbl.value.flush.call(this)
   end
-  def unmap : HRESULT
-    @lpVtbl.value.unmap.unsafe_as(Proc(HRESULT)).call
+  def unmap(this : ISimilarityTraitsMappedView*) : HRESULT
+    @lpVtbl.value.unmap.call(this)
   end
-  def get(index : UInt64, dirty : LibC::BOOL, numelements : UInt32, viewinfo : SimilarityMappedViewInfo*) : HRESULT
-    @lpVtbl.value.get.unsafe_as(Proc(UInt64, LibC::BOOL, UInt32, SimilarityMappedViewInfo*, HRESULT)).call(index, dirty, numelements, viewinfo)
+  def get(this : ISimilarityTraitsMappedView*, index : UInt64, dirty : LibC::BOOL, numelements : UInt32, viewinfo : SimilarityMappedViewInfo*) : HRESULT
+    @lpVtbl.value.get.call(this, index, dirty, numelements, viewinfo)
   end
-  def get_view(mappedpagebegin : UInt8**, mappedpageend : UInt8**) : Void
-    @lpVtbl.value.get_view.unsafe_as(Proc(UInt8**, UInt8**, Void)).call(mappedpagebegin, mappedpageend)
+  def get_view(this : ISimilarityTraitsMappedView*, mappedpagebegin : UInt8**, mappedpageend : UInt8**) : Void
+    @lpVtbl.value.get_view.call(this, mappedpagebegin, mappedpageend)
   end
 end
 struct LibWin32::ISimilarityTraitsMapping
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISimilarityTraitsMapping*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISimilarityTraitsMapping*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISimilarityTraitsMapping*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def close_mapping : Void
-    @lpVtbl.value.close_mapping.unsafe_as(Proc(Void)).call
+  def close_mapping(this : ISimilarityTraitsMapping*) : Void
+    @lpVtbl.value.close_mapping.call(this)
   end
-  def set_file_size(filesize : UInt64) : HRESULT
-    @lpVtbl.value.set_file_size.unsafe_as(Proc(UInt64, HRESULT)).call(filesize)
+  def set_file_size(this : ISimilarityTraitsMapping*, filesize : UInt64) : HRESULT
+    @lpVtbl.value.set_file_size.call(this, filesize)
   end
-  def get_file_size(filesize : UInt64*) : HRESULT
-    @lpVtbl.value.get_file_size.unsafe_as(Proc(UInt64*, HRESULT)).call(filesize)
+  def get_file_size(this : ISimilarityTraitsMapping*, filesize : UInt64*) : HRESULT
+    @lpVtbl.value.get_file_size.call(this, filesize)
   end
-  def open_mapping(accessmode : RdcMappingAccessMode, begin_ : UInt64, end_ : UInt64, actualend : UInt64*) : HRESULT
-    @lpVtbl.value.open_mapping.unsafe_as(Proc(RdcMappingAccessMode, UInt64, UInt64, UInt64*, HRESULT)).call(accessmode, begin_, end_, actualend)
+  def open_mapping(this : ISimilarityTraitsMapping*, accessmode : RdcMappingAccessMode, begin_ : UInt64, end_ : UInt64, actualend : UInt64*) : HRESULT
+    @lpVtbl.value.open_mapping.call(this, accessmode, begin_, end_, actualend)
   end
-  def resize_mapping(accessmode : RdcMappingAccessMode, begin_ : UInt64, end_ : UInt64, actualend : UInt64*) : HRESULT
-    @lpVtbl.value.resize_mapping.unsafe_as(Proc(RdcMappingAccessMode, UInt64, UInt64, UInt64*, HRESULT)).call(accessmode, begin_, end_, actualend)
+  def resize_mapping(this : ISimilarityTraitsMapping*, accessmode : RdcMappingAccessMode, begin_ : UInt64, end_ : UInt64, actualend : UInt64*) : HRESULT
+    @lpVtbl.value.resize_mapping.call(this, accessmode, begin_, end_, actualend)
   end
-  def get_page_size(pagesize : UInt32*) : Void
-    @lpVtbl.value.get_page_size.unsafe_as(Proc(UInt32*, Void)).call(pagesize)
+  def get_page_size(this : ISimilarityTraitsMapping*, pagesize : UInt32*) : Void
+    @lpVtbl.value.get_page_size.call(this, pagesize)
   end
-  def create_view(minimummappedpages : UInt32, accessmode : RdcMappingAccessMode, mappedview : ISimilarityTraitsMappedView*) : HRESULT
-    @lpVtbl.value.create_view.unsafe_as(Proc(UInt32, RdcMappingAccessMode, ISimilarityTraitsMappedView*, HRESULT)).call(minimummappedpages, accessmode, mappedview)
+  def create_view(this : ISimilarityTraitsMapping*, minimummappedpages : UInt32, accessmode : RdcMappingAccessMode, mappedview : ISimilarityTraitsMappedView*) : HRESULT
+    @lpVtbl.value.create_view.call(this, minimummappedpages, accessmode, mappedview)
   end
 end
 struct LibWin32::ISimilarityTraitsTable
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISimilarityTraitsTable*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISimilarityTraitsTable*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISimilarityTraitsTable*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_table(path : LibC::LPWSTR, truncate : LibC::BOOL, securitydescriptor : UInt8*, isnew : RdcCreatedTables*) : HRESULT
-    @lpVtbl.value.create_table.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL, UInt8*, RdcCreatedTables*, HRESULT)).call(path, truncate, securitydescriptor, isnew)
+  def create_table(this : ISimilarityTraitsTable*, path : LibC::LPWSTR, truncate : LibC::BOOL, securitydescriptor : UInt8*, isnew : RdcCreatedTables*) : HRESULT
+    @lpVtbl.value.create_table.call(this, path, truncate, securitydescriptor, isnew)
   end
-  def create_table_indirect(mapping : ISimilarityTraitsMapping, truncate : LibC::BOOL, isnew : RdcCreatedTables*) : HRESULT
-    @lpVtbl.value.create_table_indirect.unsafe_as(Proc(ISimilarityTraitsMapping, LibC::BOOL, RdcCreatedTables*, HRESULT)).call(mapping, truncate, isnew)
+  def create_table_indirect(this : ISimilarityTraitsTable*, mapping : ISimilarityTraitsMapping, truncate : LibC::BOOL, isnew : RdcCreatedTables*) : HRESULT
+    @lpVtbl.value.create_table_indirect.call(this, mapping, truncate, isnew)
   end
-  def close_table(isvalid : LibC::BOOL) : HRESULT
-    @lpVtbl.value.close_table.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(isvalid)
+  def close_table(this : ISimilarityTraitsTable*, isvalid : LibC::BOOL) : HRESULT
+    @lpVtbl.value.close_table.call(this, isvalid)
   end
-  def append(data : SimilarityData*, fileindex : UInt32) : HRESULT
-    @lpVtbl.value.append.unsafe_as(Proc(SimilarityData*, UInt32, HRESULT)).call(data, fileindex)
+  def append(this : ISimilarityTraitsTable*, data : SimilarityData*, fileindex : UInt32) : HRESULT
+    @lpVtbl.value.append.call(this, data, fileindex)
   end
-  def find_similar_file_index(similaritydata : SimilarityData*, numberofmatchesrequired : UInt16, findsimilarfileindexresults : FindSimilarFileIndexResults*, resultssize : UInt32, resultsused : UInt32*) : HRESULT
-    @lpVtbl.value.find_similar_file_index.unsafe_as(Proc(SimilarityData*, UInt16, FindSimilarFileIndexResults*, UInt32, UInt32*, HRESULT)).call(similaritydata, numberofmatchesrequired, findsimilarfileindexresults, resultssize, resultsused)
+  def find_similar_file_index(this : ISimilarityTraitsTable*, similaritydata : SimilarityData*, numberofmatchesrequired : UInt16, findsimilarfileindexresults : FindSimilarFileIndexResults*, resultssize : UInt32, resultsused : UInt32*) : HRESULT
+    @lpVtbl.value.find_similar_file_index.call(this, similaritydata, numberofmatchesrequired, findsimilarfileindexresults, resultssize, resultsused)
   end
-  def begin_dump(similaritytabledumpstate : ISimilarityTableDumpState*) : HRESULT
-    @lpVtbl.value.begin_dump.unsafe_as(Proc(ISimilarityTableDumpState*, HRESULT)).call(similaritytabledumpstate)
+  def begin_dump(this : ISimilarityTraitsTable*, similaritytabledumpstate : ISimilarityTableDumpState*) : HRESULT
+    @lpVtbl.value.begin_dump.call(this, similaritytabledumpstate)
   end
-  def get_last_index(fileindex : UInt32*) : HRESULT
-    @lpVtbl.value.get_last_index.unsafe_as(Proc(UInt32*, HRESULT)).call(fileindex)
+  def get_last_index(this : ISimilarityTraitsTable*, fileindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_index.call(this, fileindex)
   end
 end
 struct LibWin32::ISimilarityFileIdTable
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISimilarityFileIdTable*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISimilarityFileIdTable*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISimilarityFileIdTable*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_table(path : LibC::LPWSTR, truncate : LibC::BOOL, securitydescriptor : UInt8*, recordsize : UInt32, isnew : RdcCreatedTables*) : HRESULT
-    @lpVtbl.value.create_table.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL, UInt8*, UInt32, RdcCreatedTables*, HRESULT)).call(path, truncate, securitydescriptor, recordsize, isnew)
+  def create_table(this : ISimilarityFileIdTable*, path : LibC::LPWSTR, truncate : LibC::BOOL, securitydescriptor : UInt8*, recordsize : UInt32, isnew : RdcCreatedTables*) : HRESULT
+    @lpVtbl.value.create_table.call(this, path, truncate, securitydescriptor, recordsize, isnew)
   end
-  def create_table_indirect(fileidfile : IRdcFileWriter, truncate : LibC::BOOL, recordsize : UInt32, isnew : RdcCreatedTables*) : HRESULT
-    @lpVtbl.value.create_table_indirect.unsafe_as(Proc(IRdcFileWriter, LibC::BOOL, UInt32, RdcCreatedTables*, HRESULT)).call(fileidfile, truncate, recordsize, isnew)
+  def create_table_indirect(this : ISimilarityFileIdTable*, fileidfile : IRdcFileWriter, truncate : LibC::BOOL, recordsize : UInt32, isnew : RdcCreatedTables*) : HRESULT
+    @lpVtbl.value.create_table_indirect.call(this, fileidfile, truncate, recordsize, isnew)
   end
-  def close_table(isvalid : LibC::BOOL) : HRESULT
-    @lpVtbl.value.close_table.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(isvalid)
+  def close_table(this : ISimilarityFileIdTable*, isvalid : LibC::BOOL) : HRESULT
+    @lpVtbl.value.close_table.call(this, isvalid)
   end
-  def append(similarityfileid : SimilarityFileId*, similarityfileindex : UInt32*) : HRESULT
-    @lpVtbl.value.append.unsafe_as(Proc(SimilarityFileId*, UInt32*, HRESULT)).call(similarityfileid, similarityfileindex)
+  def append(this : ISimilarityFileIdTable*, similarityfileid : SimilarityFileId*, similarityfileindex : UInt32*) : HRESULT
+    @lpVtbl.value.append.call(this, similarityfileid, similarityfileindex)
   end
-  def lookup(similarityfileindex : UInt32, similarityfileid : SimilarityFileId*) : HRESULT
-    @lpVtbl.value.lookup.unsafe_as(Proc(UInt32, SimilarityFileId*, HRESULT)).call(similarityfileindex, similarityfileid)
+  def lookup(this : ISimilarityFileIdTable*, similarityfileindex : UInt32, similarityfileid : SimilarityFileId*) : HRESULT
+    @lpVtbl.value.lookup.call(this, similarityfileindex, similarityfileid)
   end
-  def invalidate(similarityfileindex : UInt32) : HRESULT
-    @lpVtbl.value.invalidate.unsafe_as(Proc(UInt32, HRESULT)).call(similarityfileindex)
+  def invalidate(this : ISimilarityFileIdTable*, similarityfileindex : UInt32) : HRESULT
+    @lpVtbl.value.invalidate.call(this, similarityfileindex)
   end
-  def get_record_count(recordcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_record_count.unsafe_as(Proc(UInt32*, HRESULT)).call(recordcount)
+  def get_record_count(this : ISimilarityFileIdTable*, recordcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_record_count.call(this, recordcount)
   end
 end
 struct LibWin32::IRdcSimilarityGenerator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IRdcSimilarityGenerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IRdcSimilarityGenerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IRdcSimilarityGenerator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def enable_similarity : HRESULT
-    @lpVtbl.value.enable_similarity.unsafe_as(Proc(HRESULT)).call
+  def enable_similarity(this : IRdcSimilarityGenerator*) : HRESULT
+    @lpVtbl.value.enable_similarity.call(this)
   end
-  def results(similaritydata : SimilarityData*) : HRESULT
-    @lpVtbl.value.results.unsafe_as(Proc(SimilarityData*, HRESULT)).call(similaritydata)
+  def results(this : IRdcSimilarityGenerator*, similaritydata : SimilarityData*) : HRESULT
+    @lpVtbl.value.results.call(this, similaritydata)
   end
 end
 struct LibWin32::IFindSimilarResults
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IFindSimilarResults*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IFindSimilarResults*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IFindSimilarResults*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_size(size : UInt32*) : HRESULT
-    @lpVtbl.value.get_size.unsafe_as(Proc(UInt32*, HRESULT)).call(size)
+  def get_size(this : IFindSimilarResults*, size : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, size)
   end
-  def get_next_file_id(numtraitsmatched : UInt32*, similarityfileid : SimilarityFileId*) : HRESULT
-    @lpVtbl.value.get_next_file_id.unsafe_as(Proc(UInt32*, SimilarityFileId*, HRESULT)).call(numtraitsmatched, similarityfileid)
+  def get_next_file_id(this : IFindSimilarResults*, numtraitsmatched : UInt32*, similarityfileid : SimilarityFileId*) : HRESULT
+    @lpVtbl.value.get_next_file_id.call(this, numtraitsmatched, similarityfileid)
   end
 end
 struct LibWin32::ISimilarity
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISimilarity*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISimilarity*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISimilarity*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_table(path : LibC::LPWSTR, truncate : LibC::BOOL, securitydescriptor : UInt8*, recordsize : UInt32, isnew : RdcCreatedTables*) : HRESULT
-    @lpVtbl.value.create_table.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL, UInt8*, UInt32, RdcCreatedTables*, HRESULT)).call(path, truncate, securitydescriptor, recordsize, isnew)
+  def create_table(this : ISimilarity*, path : LibC::LPWSTR, truncate : LibC::BOOL, securitydescriptor : UInt8*, recordsize : UInt32, isnew : RdcCreatedTables*) : HRESULT
+    @lpVtbl.value.create_table.call(this, path, truncate, securitydescriptor, recordsize, isnew)
   end
-  def create_table_indirect(mapping : ISimilarityTraitsMapping, fileidfile : IRdcFileWriter, truncate : LibC::BOOL, recordsize : UInt32, isnew : RdcCreatedTables*) : HRESULT
-    @lpVtbl.value.create_table_indirect.unsafe_as(Proc(ISimilarityTraitsMapping, IRdcFileWriter, LibC::BOOL, UInt32, RdcCreatedTables*, HRESULT)).call(mapping, fileidfile, truncate, recordsize, isnew)
+  def create_table_indirect(this : ISimilarity*, mapping : ISimilarityTraitsMapping, fileidfile : IRdcFileWriter, truncate : LibC::BOOL, recordsize : UInt32, isnew : RdcCreatedTables*) : HRESULT
+    @lpVtbl.value.create_table_indirect.call(this, mapping, fileidfile, truncate, recordsize, isnew)
   end
-  def close_table(isvalid : LibC::BOOL) : HRESULT
-    @lpVtbl.value.close_table.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(isvalid)
+  def close_table(this : ISimilarity*, isvalid : LibC::BOOL) : HRESULT
+    @lpVtbl.value.close_table.call(this, isvalid)
   end
-  def append(similarityfileid : SimilarityFileId*, similaritydata : SimilarityData*) : HRESULT
-    @lpVtbl.value.append.unsafe_as(Proc(SimilarityFileId*, SimilarityData*, HRESULT)).call(similarityfileid, similaritydata)
+  def append(this : ISimilarity*, similarityfileid : SimilarityFileId*, similaritydata : SimilarityData*) : HRESULT
+    @lpVtbl.value.append.call(this, similarityfileid, similaritydata)
   end
-  def find_similar_file_id(similaritydata : SimilarityData*, numberofmatchesrequired : UInt16, resultssize : UInt32, findsimilarresults : IFindSimilarResults*) : HRESULT
-    @lpVtbl.value.find_similar_file_id.unsafe_as(Proc(SimilarityData*, UInt16, UInt32, IFindSimilarResults*, HRESULT)).call(similaritydata, numberofmatchesrequired, resultssize, findsimilarresults)
+  def find_similar_file_id(this : ISimilarity*, similaritydata : SimilarityData*, numberofmatchesrequired : UInt16, resultssize : UInt32, findsimilarresults : IFindSimilarResults*) : HRESULT
+    @lpVtbl.value.find_similar_file_id.call(this, similaritydata, numberofmatchesrequired, resultssize, findsimilarresults)
   end
-  def copy_and_swap(newsimilaritytables : ISimilarity, reportprogress : ISimilarityReportProgress) : HRESULT
-    @lpVtbl.value.copy_and_swap.unsafe_as(Proc(ISimilarity, ISimilarityReportProgress, HRESULT)).call(newsimilaritytables, reportprogress)
+  def copy_and_swap(this : ISimilarity*, newsimilaritytables : ISimilarity, reportprogress : ISimilarityReportProgress) : HRESULT
+    @lpVtbl.value.copy_and_swap.call(this, newsimilaritytables, reportprogress)
   end
-  def get_record_count(recordcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_record_count.unsafe_as(Proc(UInt32*, HRESULT)).call(recordcount)
+  def get_record_count(this : ISimilarity*, recordcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_record_count.call(this, recordcount)
   end
 end

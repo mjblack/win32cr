@@ -58,11 +58,11 @@ lib LibWin32
 
 
   struct IPresentationBufferVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_available_event : UInt64
-    is_available : UInt64
+    query_interface : Proc(IPresentationBuffer*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPresentationBuffer*, UInt32)
+    release : Proc(IPresentationBuffer*, UInt32)
+    get_available_event : Proc(IPresentationBuffer*, LibC::HANDLE*, HRESULT)
+    is_available : Proc(IPresentationBuffer*, UInt8*, HRESULT)
   end
 
   IPresentationBuffer_GUID = "2e217d3a-5abb-4138-9a13-a775593c89ca"
@@ -72,10 +72,10 @@ lib LibWin32
   end
 
   struct IPresentationContentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_tag : UInt64
+    query_interface : Proc(IPresentationContent*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPresentationContent*, UInt32)
+    release : Proc(IPresentationContent*, UInt32)
+    set_tag : Proc(IPresentationContent*, LibC::UINT_PTR, Void)
   end
 
   IPresentationContent_GUID = "5668bb79-3d8e-415c-b215-f38020f2d252"
@@ -85,18 +85,18 @@ lib LibWin32
   end
 
   struct IPresentationSurfaceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_tag : UInt64
-    set_buffer : UInt64
-    set_color_space : UInt64
-    set_alpha_mode : UInt64
-    set_source_rect : UInt64
-    set_transform : UInt64
-    restrict_to_output : UInt64
-    set_disable_readback : UInt64
-    set_letterboxing_margins : UInt64
+    query_interface : Proc(IPresentationSurface*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPresentationSurface*, UInt32)
+    release : Proc(IPresentationSurface*, UInt32)
+    set_tag : Proc(IPresentationSurface*, LibC::UINT_PTR, Void)
+    set_buffer : Proc(IPresentationSurface*, IPresentationBuffer, HRESULT)
+    set_color_space : Proc(IPresentationSurface*, DXGI_COLOR_SPACE_TYPE, HRESULT)
+    set_alpha_mode : Proc(IPresentationSurface*, DXGI_ALPHA_MODE, HRESULT)
+    set_source_rect : Proc(IPresentationSurface*, RECT*, HRESULT)
+    set_transform : Proc(IPresentationSurface*, PresentationTransform*, HRESULT)
+    restrict_to_output : Proc(IPresentationSurface*, IUnknown, HRESULT)
+    set_disable_readback : Proc(IPresentationSurface*, UInt8, HRESULT)
+    set_letterboxing_margins : Proc(IPresentationSurface*, Float32, Float32, Float32, Float32, HRESULT)
   end
 
   IPresentationSurface_GUID = "956710fb-ea40-4eba-a3eb-4375a0eb4edc"
@@ -106,11 +106,11 @@ lib LibWin32
   end
 
   struct IPresentStatisticsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_present_id : UInt64
-    get_kind : UInt64
+    query_interface : Proc(IPresentStatistics*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPresentStatistics*, UInt32)
+    release : Proc(IPresentStatistics*, UInt32)
+    get_present_id : Proc(IPresentStatistics*, UInt64)
+    get_kind : Proc(IPresentStatistics*, PresentStatisticsKind)
   end
 
   IPresentStatistics_GUID = "b44b8bda-7282-495d-9dd7-ceadd8b4bb86"
@@ -120,22 +120,22 @@ lib LibWin32
   end
 
   struct IPresentationManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add_buffer_from_resource : UInt64
-    create_presentation_surface : UInt64
-    get_next_present_id : UInt64
-    set_target_time : UInt64
-    set_preferred_present_duration : UInt64
-    force_v_sync_interrupt : UInt64
-    present : UInt64
-    get_present_retiring_fence : UInt64
-    cancel_presents_from : UInt64
-    get_lost_event : UInt64
-    get_present_statistics_available_event : UInt64
-    enable_present_statistics_kind : UInt64
-    get_next_present_statistics : UInt64
+    query_interface : Proc(IPresentationManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPresentationManager*, UInt32)
+    release : Proc(IPresentationManager*, UInt32)
+    add_buffer_from_resource : Proc(IPresentationManager*, IUnknown, IPresentationBuffer*, HRESULT)
+    create_presentation_surface : Proc(IPresentationManager*, LibC::HANDLE, IPresentationSurface*, HRESULT)
+    get_next_present_id : Proc(IPresentationManager*, UInt64)
+    set_target_time : Proc(IPresentationManager*, SystemInterruptTime, HRESULT)
+    set_preferred_present_duration : Proc(IPresentationManager*, SystemInterruptTime, SystemInterruptTime, HRESULT)
+    force_v_sync_interrupt : Proc(IPresentationManager*, UInt8, HRESULT)
+    present : Proc(IPresentationManager*, HRESULT)
+    get_present_retiring_fence : Proc(IPresentationManager*, Guid*, Void**, HRESULT)
+    cancel_presents_from : Proc(IPresentationManager*, UInt64, HRESULT)
+    get_lost_event : Proc(IPresentationManager*, LibC::HANDLE*, HRESULT)
+    get_present_statistics_available_event : Proc(IPresentationManager*, LibC::HANDLE*, HRESULT)
+    enable_present_statistics_kind : Proc(IPresentationManager*, PresentStatisticsKind, UInt8, HRESULT)
+    get_next_present_statistics : Proc(IPresentationManager*, IPresentStatistics*, HRESULT)
   end
 
   IPresentationManager_GUID = "fb562f82-6292-470a-88b1-843661e7f20c"
@@ -145,12 +145,12 @@ lib LibWin32
   end
 
   struct IPresentationFactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    is_presentation_supported : UInt64
-    is_presentation_supported_with_independent_flip : UInt64
-    create_presentation_manager : UInt64
+    query_interface : Proc(IPresentationFactory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPresentationFactory*, UInt32)
+    release : Proc(IPresentationFactory*, UInt32)
+    is_presentation_supported : Proc(IPresentationFactory*, UInt8)
+    is_presentation_supported_with_independent_flip : Proc(IPresentationFactory*, UInt8)
+    create_presentation_manager : Proc(IPresentationFactory*, IPresentationManager*, HRESULT)
   end
 
   IPresentationFactory_GUID = "8fb37b58-1d74-4f64-a49c-1f97a80a2ec0"
@@ -160,13 +160,13 @@ lib LibWin32
   end
 
   struct IPresentStatusPresentStatisticsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_present_id : UInt64
-    get_kind : UInt64
-    get_composition_frame_id : UInt64
-    get_present_status : UInt64
+    query_interface : Proc(IPresentStatusPresentStatistics*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPresentStatusPresentStatistics*, UInt32)
+    release : Proc(IPresentStatusPresentStatistics*, UInt32)
+    get_present_id : Proc(IPresentStatusPresentStatistics*, UInt64)
+    get_kind : Proc(IPresentStatusPresentStatistics*, PresentStatisticsKind)
+    get_composition_frame_id : Proc(IPresentStatusPresentStatistics*, UInt64)
+    get_present_status : Proc(IPresentStatusPresentStatistics*, PresentStatus)
   end
 
   IPresentStatusPresentStatistics_GUID = "c9ed2a41-79cb-435e-964e-c8553055420c"
@@ -176,14 +176,14 @@ lib LibWin32
   end
 
   struct ICompositionFramePresentStatisticsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_present_id : UInt64
-    get_kind : UInt64
-    get_content_tag : UInt64
-    get_composition_frame_id : UInt64
-    get_display_instance_array : UInt64
+    query_interface : Proc(ICompositionFramePresentStatistics*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ICompositionFramePresentStatistics*, UInt32)
+    release : Proc(ICompositionFramePresentStatistics*, UInt32)
+    get_present_id : Proc(ICompositionFramePresentStatistics*, UInt64)
+    get_kind : Proc(ICompositionFramePresentStatistics*, PresentStatisticsKind)
+    get_content_tag : Proc(ICompositionFramePresentStatistics*, LibC::UINT_PTR)
+    get_composition_frame_id : Proc(ICompositionFramePresentStatistics*, UInt64)
+    get_display_instance_array : Proc(ICompositionFramePresentStatistics*, UInt32*, CompositionFrameDisplayInstance**, Void)
   end
 
   ICompositionFramePresentStatistics_GUID = "ab41d127-c101-4c0a-911d-f9f2e9d08e64"
@@ -193,16 +193,16 @@ lib LibWin32
   end
 
   struct IIndependentFlipFramePresentStatisticsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_present_id : UInt64
-    get_kind : UInt64
-    get_output_adapter_luid : UInt64
-    get_output_vid_pn_source_id : UInt64
-    get_content_tag : UInt64
-    get_displayed_time : UInt64
-    get_present_duration : UInt64
+    query_interface : Proc(IIndependentFlipFramePresentStatistics*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IIndependentFlipFramePresentStatistics*, UInt32)
+    release : Proc(IIndependentFlipFramePresentStatistics*, UInt32)
+    get_present_id : Proc(IIndependentFlipFramePresentStatistics*, UInt64)
+    get_kind : Proc(IIndependentFlipFramePresentStatistics*, PresentStatisticsKind)
+    get_output_adapter_luid : Proc(IIndependentFlipFramePresentStatistics*, LUID)
+    get_output_vid_pn_source_id : Proc(IIndependentFlipFramePresentStatistics*, UInt32)
+    get_content_tag : Proc(IIndependentFlipFramePresentStatistics*, LibC::UINT_PTR)
+    get_displayed_time : Proc(IIndependentFlipFramePresentStatistics*, SystemInterruptTime)
+    get_present_duration : Proc(IIndependentFlipFramePresentStatistics*, SystemInterruptTime)
   end
 
   IIndependentFlipFramePresentStatistics_GUID = "8c93be27-ad94-4da0-8fd4-2413132d124e"
@@ -216,239 +216,239 @@ lib LibWin32
   fun CreatePresentationFactory(d3ddevice : IUnknown, riid : Guid*, presentationfactory : Void**) : HRESULT
 end
 struct LibWin32::IPresentationBuffer
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPresentationBuffer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPresentationBuffer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPresentationBuffer*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_available_event(availableeventhandle : LibC::HANDLE*) : HRESULT
-    @lpVtbl.value.get_available_event.unsafe_as(Proc(LibC::HANDLE*, HRESULT)).call(availableeventhandle)
+  def get_available_event(this : IPresentationBuffer*, availableeventhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.get_available_event.call(this, availableeventhandle)
   end
-  def is_available(isavailable : UInt8*) : HRESULT
-    @lpVtbl.value.is_available.unsafe_as(Proc(UInt8*, HRESULT)).call(isavailable)
+  def is_available(this : IPresentationBuffer*, isavailable : UInt8*) : HRESULT
+    @lpVtbl.value.is_available.call(this, isavailable)
   end
 end
 struct LibWin32::IPresentationContent
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPresentationContent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPresentationContent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPresentationContent*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_tag(tag : LibC::UINT_PTR) : Void
-    @lpVtbl.value.set_tag.unsafe_as(Proc(LibC::UINT_PTR, Void)).call(tag)
+  def set_tag(this : IPresentationContent*, tag : LibC::UINT_PTR) : Void
+    @lpVtbl.value.set_tag.call(this, tag)
   end
 end
 struct LibWin32::IPresentationSurface
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPresentationSurface*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPresentationSurface*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPresentationSurface*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_tag(tag : LibC::UINT_PTR) : Void
-    @lpVtbl.value.set_tag.unsafe_as(Proc(LibC::UINT_PTR, Void)).call(tag)
+  def set_tag(this : IPresentationSurface*, tag : LibC::UINT_PTR) : Void
+    @lpVtbl.value.set_tag.call(this, tag)
   end
-  def set_buffer(presentationbuffer : IPresentationBuffer) : HRESULT
-    @lpVtbl.value.set_buffer.unsafe_as(Proc(IPresentationBuffer, HRESULT)).call(presentationbuffer)
+  def set_buffer(this : IPresentationSurface*, presentationbuffer : IPresentationBuffer) : HRESULT
+    @lpVtbl.value.set_buffer.call(this, presentationbuffer)
   end
-  def set_color_space(colorspace : DXGI_COLOR_SPACE_TYPE) : HRESULT
-    @lpVtbl.value.set_color_space.unsafe_as(Proc(DXGI_COLOR_SPACE_TYPE, HRESULT)).call(colorspace)
+  def set_color_space(this : IPresentationSurface*, colorspace : DXGI_COLOR_SPACE_TYPE) : HRESULT
+    @lpVtbl.value.set_color_space.call(this, colorspace)
   end
-  def set_alpha_mode(alphamode : DXGI_ALPHA_MODE) : HRESULT
-    @lpVtbl.value.set_alpha_mode.unsafe_as(Proc(DXGI_ALPHA_MODE, HRESULT)).call(alphamode)
+  def set_alpha_mode(this : IPresentationSurface*, alphamode : DXGI_ALPHA_MODE) : HRESULT
+    @lpVtbl.value.set_alpha_mode.call(this, alphamode)
   end
-  def set_source_rect(sourcerect : RECT*) : HRESULT
-    @lpVtbl.value.set_source_rect.unsafe_as(Proc(RECT*, HRESULT)).call(sourcerect)
+  def set_source_rect(this : IPresentationSurface*, sourcerect : RECT*) : HRESULT
+    @lpVtbl.value.set_source_rect.call(this, sourcerect)
   end
-  def set_transform(transform : PresentationTransform*) : HRESULT
-    @lpVtbl.value.set_transform.unsafe_as(Proc(PresentationTransform*, HRESULT)).call(transform)
+  def set_transform(this : IPresentationSurface*, transform : PresentationTransform*) : HRESULT
+    @lpVtbl.value.set_transform.call(this, transform)
   end
-  def restrict_to_output(output : IUnknown) : HRESULT
-    @lpVtbl.value.restrict_to_output.unsafe_as(Proc(IUnknown, HRESULT)).call(output)
+  def restrict_to_output(this : IPresentationSurface*, output : IUnknown) : HRESULT
+    @lpVtbl.value.restrict_to_output.call(this, output)
   end
-  def set_disable_readback(value : UInt8) : HRESULT
-    @lpVtbl.value.set_disable_readback.unsafe_as(Proc(UInt8, HRESULT)).call(value)
+  def set_disable_readback(this : IPresentationSurface*, value : UInt8) : HRESULT
+    @lpVtbl.value.set_disable_readback.call(this, value)
   end
-  def set_letterboxing_margins(leftletterboxsize : Float32, topletterboxsize : Float32, rightletterboxsize : Float32, bottomletterboxsize : Float32) : HRESULT
-    @lpVtbl.value.set_letterboxing_margins.unsafe_as(Proc(Float32, Float32, Float32, Float32, HRESULT)).call(leftletterboxsize, topletterboxsize, rightletterboxsize, bottomletterboxsize)
+  def set_letterboxing_margins(this : IPresentationSurface*, leftletterboxsize : Float32, topletterboxsize : Float32, rightletterboxsize : Float32, bottomletterboxsize : Float32) : HRESULT
+    @lpVtbl.value.set_letterboxing_margins.call(this, leftletterboxsize, topletterboxsize, rightletterboxsize, bottomletterboxsize)
   end
 end
 struct LibWin32::IPresentStatistics
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPresentStatistics*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPresentStatistics*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPresentStatistics*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_present_id : UInt64
-    @lpVtbl.value.get_present_id.unsafe_as(Proc(UInt64)).call
+  def get_present_id(this : IPresentStatistics*) : UInt64
+    @lpVtbl.value.get_present_id.call(this)
   end
-  def get_kind : PresentStatisticsKind
-    @lpVtbl.value.get_kind.unsafe_as(Proc(PresentStatisticsKind)).call
+  def get_kind(this : IPresentStatistics*) : PresentStatisticsKind
+    @lpVtbl.value.get_kind.call(this)
   end
 end
 struct LibWin32::IPresentationManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPresentationManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPresentationManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPresentationManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add_buffer_from_resource(resource : IUnknown, presentationbuffer : IPresentationBuffer*) : HRESULT
-    @lpVtbl.value.add_buffer_from_resource.unsafe_as(Proc(IUnknown, IPresentationBuffer*, HRESULT)).call(resource, presentationbuffer)
+  def add_buffer_from_resource(this : IPresentationManager*, resource : IUnknown, presentationbuffer : IPresentationBuffer*) : HRESULT
+    @lpVtbl.value.add_buffer_from_resource.call(this, resource, presentationbuffer)
   end
-  def create_presentation_surface(compositionsurfacehandle : LibC::HANDLE, presentationsurface : IPresentationSurface*) : HRESULT
-    @lpVtbl.value.create_presentation_surface.unsafe_as(Proc(LibC::HANDLE, IPresentationSurface*, HRESULT)).call(compositionsurfacehandle, presentationsurface)
+  def create_presentation_surface(this : IPresentationManager*, compositionsurfacehandle : LibC::HANDLE, presentationsurface : IPresentationSurface*) : HRESULT
+    @lpVtbl.value.create_presentation_surface.call(this, compositionsurfacehandle, presentationsurface)
   end
-  def get_next_present_id : UInt64
-    @lpVtbl.value.get_next_present_id.unsafe_as(Proc(UInt64)).call
+  def get_next_present_id(this : IPresentationManager*) : UInt64
+    @lpVtbl.value.get_next_present_id.call(this)
   end
-  def set_target_time(targettime : SystemInterruptTime) : HRESULT
-    @lpVtbl.value.set_target_time.unsafe_as(Proc(SystemInterruptTime, HRESULT)).call(targettime)
+  def set_target_time(this : IPresentationManager*, targettime : SystemInterruptTime) : HRESULT
+    @lpVtbl.value.set_target_time.call(this, targettime)
   end
-  def set_preferred_present_duration(preferredduration : SystemInterruptTime, deviationtolerance : SystemInterruptTime) : HRESULT
-    @lpVtbl.value.set_preferred_present_duration.unsafe_as(Proc(SystemInterruptTime, SystemInterruptTime, HRESULT)).call(preferredduration, deviationtolerance)
+  def set_preferred_present_duration(this : IPresentationManager*, preferredduration : SystemInterruptTime, deviationtolerance : SystemInterruptTime) : HRESULT
+    @lpVtbl.value.set_preferred_present_duration.call(this, preferredduration, deviationtolerance)
   end
-  def force_v_sync_interrupt(forcevsyncinterrupt : UInt8) : HRESULT
-    @lpVtbl.value.force_v_sync_interrupt.unsafe_as(Proc(UInt8, HRESULT)).call(forcevsyncinterrupt)
+  def force_v_sync_interrupt(this : IPresentationManager*, forcevsyncinterrupt : UInt8) : HRESULT
+    @lpVtbl.value.force_v_sync_interrupt.call(this, forcevsyncinterrupt)
   end
-  def present : HRESULT
-    @lpVtbl.value.present.unsafe_as(Proc(HRESULT)).call
+  def present(this : IPresentationManager*) : HRESULT
+    @lpVtbl.value.present.call(this)
   end
-  def get_present_retiring_fence(riid : Guid*, fence : Void**) : HRESULT
-    @lpVtbl.value.get_present_retiring_fence.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, fence)
+  def get_present_retiring_fence(this : IPresentationManager*, riid : Guid*, fence : Void**) : HRESULT
+    @lpVtbl.value.get_present_retiring_fence.call(this, riid, fence)
   end
-  def cancel_presents_from(presentidtocancelfrom : UInt64) : HRESULT
-    @lpVtbl.value.cancel_presents_from.unsafe_as(Proc(UInt64, HRESULT)).call(presentidtocancelfrom)
+  def cancel_presents_from(this : IPresentationManager*, presentidtocancelfrom : UInt64) : HRESULT
+    @lpVtbl.value.cancel_presents_from.call(this, presentidtocancelfrom)
   end
-  def get_lost_event(losteventhandle : LibC::HANDLE*) : HRESULT
-    @lpVtbl.value.get_lost_event.unsafe_as(Proc(LibC::HANDLE*, HRESULT)).call(losteventhandle)
+  def get_lost_event(this : IPresentationManager*, losteventhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.get_lost_event.call(this, losteventhandle)
   end
-  def get_present_statistics_available_event(presentstatisticsavailableeventhandle : LibC::HANDLE*) : HRESULT
-    @lpVtbl.value.get_present_statistics_available_event.unsafe_as(Proc(LibC::HANDLE*, HRESULT)).call(presentstatisticsavailableeventhandle)
+  def get_present_statistics_available_event(this : IPresentationManager*, presentstatisticsavailableeventhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.get_present_statistics_available_event.call(this, presentstatisticsavailableeventhandle)
   end
-  def enable_present_statistics_kind(presentstatisticskind : PresentStatisticsKind, enabled : UInt8) : HRESULT
-    @lpVtbl.value.enable_present_statistics_kind.unsafe_as(Proc(PresentStatisticsKind, UInt8, HRESULT)).call(presentstatisticskind, enabled)
+  def enable_present_statistics_kind(this : IPresentationManager*, presentstatisticskind : PresentStatisticsKind, enabled : UInt8) : HRESULT
+    @lpVtbl.value.enable_present_statistics_kind.call(this, presentstatisticskind, enabled)
   end
-  def get_next_present_statistics(nextpresentstatistics : IPresentStatistics*) : HRESULT
-    @lpVtbl.value.get_next_present_statistics.unsafe_as(Proc(IPresentStatistics*, HRESULT)).call(nextpresentstatistics)
+  def get_next_present_statistics(this : IPresentationManager*, nextpresentstatistics : IPresentStatistics*) : HRESULT
+    @lpVtbl.value.get_next_present_statistics.call(this, nextpresentstatistics)
   end
 end
 struct LibWin32::IPresentationFactory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPresentationFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPresentationFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPresentationFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def is_presentation_supported : UInt8
-    @lpVtbl.value.is_presentation_supported.unsafe_as(Proc(UInt8)).call
+  def is_presentation_supported(this : IPresentationFactory*) : UInt8
+    @lpVtbl.value.is_presentation_supported.call(this)
   end
-  def is_presentation_supported_with_independent_flip : UInt8
-    @lpVtbl.value.is_presentation_supported_with_independent_flip.unsafe_as(Proc(UInt8)).call
+  def is_presentation_supported_with_independent_flip(this : IPresentationFactory*) : UInt8
+    @lpVtbl.value.is_presentation_supported_with_independent_flip.call(this)
   end
-  def create_presentation_manager(pppresentationmanager : IPresentationManager*) : HRESULT
-    @lpVtbl.value.create_presentation_manager.unsafe_as(Proc(IPresentationManager*, HRESULT)).call(pppresentationmanager)
+  def create_presentation_manager(this : IPresentationFactory*, pppresentationmanager : IPresentationManager*) : HRESULT
+    @lpVtbl.value.create_presentation_manager.call(this, pppresentationmanager)
   end
 end
 struct LibWin32::IPresentStatusPresentStatistics
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPresentStatusPresentStatistics*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPresentStatusPresentStatistics*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPresentStatusPresentStatistics*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_present_id : UInt64
-    @lpVtbl.value.get_present_id.unsafe_as(Proc(UInt64)).call
+  def get_present_id(this : IPresentStatusPresentStatistics*) : UInt64
+    @lpVtbl.value.get_present_id.call(this)
   end
-  def get_kind : PresentStatisticsKind
-    @lpVtbl.value.get_kind.unsafe_as(Proc(PresentStatisticsKind)).call
+  def get_kind(this : IPresentStatusPresentStatistics*) : PresentStatisticsKind
+    @lpVtbl.value.get_kind.call(this)
   end
-  def get_composition_frame_id : UInt64
-    @lpVtbl.value.get_composition_frame_id.unsafe_as(Proc(UInt64)).call
+  def get_composition_frame_id(this : IPresentStatusPresentStatistics*) : UInt64
+    @lpVtbl.value.get_composition_frame_id.call(this)
   end
-  def get_present_status : PresentStatus
-    @lpVtbl.value.get_present_status.unsafe_as(Proc(PresentStatus)).call
+  def get_present_status(this : IPresentStatusPresentStatistics*) : PresentStatus
+    @lpVtbl.value.get_present_status.call(this)
   end
 end
 struct LibWin32::ICompositionFramePresentStatistics
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ICompositionFramePresentStatistics*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ICompositionFramePresentStatistics*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ICompositionFramePresentStatistics*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_present_id : UInt64
-    @lpVtbl.value.get_present_id.unsafe_as(Proc(UInt64)).call
+  def get_present_id(this : ICompositionFramePresentStatistics*) : UInt64
+    @lpVtbl.value.get_present_id.call(this)
   end
-  def get_kind : PresentStatisticsKind
-    @lpVtbl.value.get_kind.unsafe_as(Proc(PresentStatisticsKind)).call
+  def get_kind(this : ICompositionFramePresentStatistics*) : PresentStatisticsKind
+    @lpVtbl.value.get_kind.call(this)
   end
-  def get_content_tag : LibC::UINT_PTR
-    @lpVtbl.value.get_content_tag.unsafe_as(Proc(LibC::UINT_PTR)).call
+  def get_content_tag(this : ICompositionFramePresentStatistics*) : LibC::UINT_PTR
+    @lpVtbl.value.get_content_tag.call(this)
   end
-  def get_composition_frame_id : UInt64
-    @lpVtbl.value.get_composition_frame_id.unsafe_as(Proc(UInt64)).call
+  def get_composition_frame_id(this : ICompositionFramePresentStatistics*) : UInt64
+    @lpVtbl.value.get_composition_frame_id.call(this)
   end
-  def get_display_instance_array(displayinstancearraycount : UInt32*, displayinstancearray : CompositionFrameDisplayInstance**) : Void
-    @lpVtbl.value.get_display_instance_array.unsafe_as(Proc(UInt32*, CompositionFrameDisplayInstance**, Void)).call(displayinstancearraycount, displayinstancearray)
+  def get_display_instance_array(this : ICompositionFramePresentStatistics*, displayinstancearraycount : UInt32*, displayinstancearray : CompositionFrameDisplayInstance**) : Void
+    @lpVtbl.value.get_display_instance_array.call(this, displayinstancearraycount, displayinstancearray)
   end
 end
 struct LibWin32::IIndependentFlipFramePresentStatistics
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IIndependentFlipFramePresentStatistics*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IIndependentFlipFramePresentStatistics*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IIndependentFlipFramePresentStatistics*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_present_id : UInt64
-    @lpVtbl.value.get_present_id.unsafe_as(Proc(UInt64)).call
+  def get_present_id(this : IIndependentFlipFramePresentStatistics*) : UInt64
+    @lpVtbl.value.get_present_id.call(this)
   end
-  def get_kind : PresentStatisticsKind
-    @lpVtbl.value.get_kind.unsafe_as(Proc(PresentStatisticsKind)).call
+  def get_kind(this : IIndependentFlipFramePresentStatistics*) : PresentStatisticsKind
+    @lpVtbl.value.get_kind.call(this)
   end
-  def get_output_adapter_luid : LUID
-    @lpVtbl.value.get_output_adapter_luid.unsafe_as(Proc(LUID)).call
+  def get_output_adapter_luid(this : IIndependentFlipFramePresentStatistics*) : LUID
+    @lpVtbl.value.get_output_adapter_luid.call(this)
   end
-  def get_output_vid_pn_source_id : UInt32
-    @lpVtbl.value.get_output_vid_pn_source_id.unsafe_as(Proc(UInt32)).call
+  def get_output_vid_pn_source_id(this : IIndependentFlipFramePresentStatistics*) : UInt32
+    @lpVtbl.value.get_output_vid_pn_source_id.call(this)
   end
-  def get_content_tag : LibC::UINT_PTR
-    @lpVtbl.value.get_content_tag.unsafe_as(Proc(LibC::UINT_PTR)).call
+  def get_content_tag(this : IIndependentFlipFramePresentStatistics*) : LibC::UINT_PTR
+    @lpVtbl.value.get_content_tag.call(this)
   end
-  def get_displayed_time : SystemInterruptTime
-    @lpVtbl.value.get_displayed_time.unsafe_as(Proc(SystemInterruptTime)).call
+  def get_displayed_time(this : IIndependentFlipFramePresentStatistics*) : SystemInterruptTime
+    @lpVtbl.value.get_displayed_time.call(this)
   end
-  def get_present_duration : SystemInterruptTime
-    @lpVtbl.value.get_present_duration.unsafe_as(Proc(SystemInterruptTime)).call
+  def get_present_duration(this : IIndependentFlipFramePresentStatistics*) : SystemInterruptTime
+    @lpVtbl.value.get_present_duration.call(this)
   end
 end

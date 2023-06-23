@@ -1437,13 +1437,13 @@ lib LibWin32
 
 
   struct IDMLObjectVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    set_name : UInt64
+    query_interface : Proc(IDMLObject*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDMLObject*, UInt32)
+    release : Proc(IDMLObject*, UInt32)
+    get_private_data : Proc(IDMLObject*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(IDMLObject*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(IDMLObject*, Guid*, IUnknown, HRESULT)
+    set_name : Proc(IDMLObject*, LibC::LPWSTR, HRESULT)
   end
 
   IDMLObject_GUID = "c8263aac-9e0c-4a2d-9b8e-007521a3317c"
@@ -1453,23 +1453,23 @@ lib LibWin32
   end
 
   struct IDMLDeviceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    set_name : UInt64
-    check_feature_support : UInt64
-    create_operator : UInt64
-    compile_operator : UInt64
-    create_operator_initializer : UInt64
-    create_command_recorder : UInt64
-    create_binding_table : UInt64
-    evict : UInt64
-    make_resident : UInt64
-    get_device_removed_reason : UInt64
-    get_parent_device : UInt64
+    query_interface : Proc(IDMLDevice*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDMLDevice*, UInt32)
+    release : Proc(IDMLDevice*, UInt32)
+    get_private_data : Proc(IDMLDevice*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(IDMLDevice*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(IDMLDevice*, Guid*, IUnknown, HRESULT)
+    set_name : Proc(IDMLDevice*, LibC::LPWSTR, HRESULT)
+    check_feature_support : Proc(IDMLDevice*, DML_FEATURE, UInt32, Void*, UInt32, Void*, HRESULT)
+    create_operator : Proc(IDMLDevice*, DML_OPERATOR_DESC*, Guid*, Void**, HRESULT)
+    compile_operator : Proc(IDMLDevice*, IDMLOperator, DML_EXECUTION_FLAGS, Guid*, Void**, HRESULT)
+    create_operator_initializer : Proc(IDMLDevice*, UInt32, IDMLCompiledOperator*, Guid*, Void**, HRESULT)
+    create_command_recorder : Proc(IDMLDevice*, Guid*, Void**, HRESULT)
+    create_binding_table : Proc(IDMLDevice*, DML_BINDING_TABLE_DESC*, Guid*, Void**, HRESULT)
+    evict : Proc(IDMLDevice*, UInt32, IDMLPageable*, HRESULT)
+    make_resident : Proc(IDMLDevice*, UInt32, IDMLPageable*, HRESULT)
+    get_device_removed_reason : Proc(IDMLDevice*, HRESULT)
+    get_parent_device : Proc(IDMLDevice*, Guid*, Void**, HRESULT)
   end
 
   IDMLDevice_GUID = "6dbd6437-96fd-423f-a98c-ae5e7c2a573f"
@@ -1479,14 +1479,14 @@ lib LibWin32
   end
 
   struct IDMLDeviceChildVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    set_name : UInt64
-    get_device : UInt64
+    query_interface : Proc(IDMLDeviceChild*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDMLDeviceChild*, UInt32)
+    release : Proc(IDMLDeviceChild*, UInt32)
+    get_private_data : Proc(IDMLDeviceChild*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(IDMLDeviceChild*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(IDMLDeviceChild*, Guid*, IUnknown, HRESULT)
+    set_name : Proc(IDMLDeviceChild*, LibC::LPWSTR, HRESULT)
+    get_device : Proc(IDMLDeviceChild*, Guid*, Void**, HRESULT)
   end
 
   IDMLDeviceChild_GUID = "27e83142-8165-49e3-974e-2fd66e4cb69d"
@@ -1496,14 +1496,14 @@ lib LibWin32
   end
 
   struct IDMLPageableVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    set_name : UInt64
-    get_device : UInt64
+    query_interface : Proc(IDMLPageable*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDMLPageable*, UInt32)
+    release : Proc(IDMLPageable*, UInt32)
+    get_private_data : Proc(IDMLPageable*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(IDMLPageable*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(IDMLPageable*, Guid*, IUnknown, HRESULT)
+    set_name : Proc(IDMLPageable*, LibC::LPWSTR, HRESULT)
+    get_device : Proc(IDMLPageable*, Guid*, Void**, HRESULT)
   end
 
   IDMLPageable_GUID = "b1ab0825-4542-4a4b-8617-6dde6e8f6201"
@@ -1513,14 +1513,14 @@ lib LibWin32
   end
 
   struct IDMLOperatorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    set_name : UInt64
-    get_device : UInt64
+    query_interface : Proc(IDMLOperator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDMLOperator*, UInt32)
+    release : Proc(IDMLOperator*, UInt32)
+    get_private_data : Proc(IDMLOperator*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(IDMLOperator*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(IDMLOperator*, Guid*, IUnknown, HRESULT)
+    set_name : Proc(IDMLOperator*, LibC::LPWSTR, HRESULT)
+    get_device : Proc(IDMLOperator*, Guid*, Void**, HRESULT)
   end
 
   IDMLOperator_GUID = "26caae7a-3081-4633-9581-226fbe57695d"
@@ -1530,15 +1530,15 @@ lib LibWin32
   end
 
   struct IDMLDispatchableVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    set_name : UInt64
-    get_device : UInt64
-    get_binding_properties : UInt64
+    query_interface : Proc(IDMLDispatchable*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDMLDispatchable*, UInt32)
+    release : Proc(IDMLDispatchable*, UInt32)
+    get_private_data : Proc(IDMLDispatchable*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(IDMLDispatchable*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(IDMLDispatchable*, Guid*, IUnknown, HRESULT)
+    set_name : Proc(IDMLDispatchable*, LibC::LPWSTR, HRESULT)
+    get_device : Proc(IDMLDispatchable*, Guid*, Void**, HRESULT)
+    get_binding_properties : Proc(IDMLDispatchable*, DML_BINDING_PROPERTIES)
   end
 
   IDMLDispatchable_GUID = "dcb821a8-1039-441e-9f1c-b1759c2f3cec"
@@ -1548,15 +1548,15 @@ lib LibWin32
   end
 
   struct IDMLCompiledOperatorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    set_name : UInt64
-    get_device : UInt64
-    get_binding_properties : UInt64
+    query_interface : Proc(IDMLCompiledOperator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDMLCompiledOperator*, UInt32)
+    release : Proc(IDMLCompiledOperator*, UInt32)
+    get_private_data : Proc(IDMLCompiledOperator*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(IDMLCompiledOperator*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(IDMLCompiledOperator*, Guid*, IUnknown, HRESULT)
+    set_name : Proc(IDMLCompiledOperator*, LibC::LPWSTR, HRESULT)
+    get_device : Proc(IDMLCompiledOperator*, Guid*, Void**, HRESULT)
+    get_binding_properties : Proc(IDMLCompiledOperator*, DML_BINDING_PROPERTIES)
   end
 
   IDMLCompiledOperator_GUID = "6b15e56a-bf5c-4902-92d8-da3a650afea4"
@@ -1566,16 +1566,16 @@ lib LibWin32
   end
 
   struct IDMLOperatorInitializerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    set_name : UInt64
-    get_device : UInt64
-    get_binding_properties : UInt64
-    reset : UInt64
+    query_interface : Proc(IDMLOperatorInitializer*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDMLOperatorInitializer*, UInt32)
+    release : Proc(IDMLOperatorInitializer*, UInt32)
+    get_private_data : Proc(IDMLOperatorInitializer*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(IDMLOperatorInitializer*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(IDMLOperatorInitializer*, Guid*, IUnknown, HRESULT)
+    set_name : Proc(IDMLOperatorInitializer*, LibC::LPWSTR, HRESULT)
+    get_device : Proc(IDMLOperatorInitializer*, Guid*, Void**, HRESULT)
+    get_binding_properties : Proc(IDMLOperatorInitializer*, DML_BINDING_PROPERTIES)
+    reset : Proc(IDMLOperatorInitializer*, UInt32, IDMLCompiledOperator*, HRESULT)
   end
 
   IDMLOperatorInitializer_GUID = "427c1113-435c-469c-8676-4d5dd072f813"
@@ -1585,19 +1585,19 @@ lib LibWin32
   end
 
   struct IDMLBindingTableVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    set_name : UInt64
-    get_device : UInt64
-    bind_inputs : UInt64
-    bind_outputs : UInt64
-    bind_temporary_resource : UInt64
-    bind_persistent_resource : UInt64
-    reset : UInt64
+    query_interface : Proc(IDMLBindingTable*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDMLBindingTable*, UInt32)
+    release : Proc(IDMLBindingTable*, UInt32)
+    get_private_data : Proc(IDMLBindingTable*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(IDMLBindingTable*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(IDMLBindingTable*, Guid*, IUnknown, HRESULT)
+    set_name : Proc(IDMLBindingTable*, LibC::LPWSTR, HRESULT)
+    get_device : Proc(IDMLBindingTable*, Guid*, Void**, HRESULT)
+    bind_inputs : Proc(IDMLBindingTable*, UInt32, DML_BINDING_DESC*, Void)
+    bind_outputs : Proc(IDMLBindingTable*, UInt32, DML_BINDING_DESC*, Void)
+    bind_temporary_resource : Proc(IDMLBindingTable*, DML_BINDING_DESC*, Void)
+    bind_persistent_resource : Proc(IDMLBindingTable*, DML_BINDING_DESC*, Void)
+    reset : Proc(IDMLBindingTable*, DML_BINDING_TABLE_DESC*, HRESULT)
   end
 
   IDMLBindingTable_GUID = "29c687dc-de74-4e3b-ab00-1168f2fc3cfc"
@@ -1607,15 +1607,15 @@ lib LibWin32
   end
 
   struct IDMLCommandRecorderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    set_name : UInt64
-    get_device : UInt64
-    record_dispatch : UInt64
+    query_interface : Proc(IDMLCommandRecorder*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDMLCommandRecorder*, UInt32)
+    release : Proc(IDMLCommandRecorder*, UInt32)
+    get_private_data : Proc(IDMLCommandRecorder*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(IDMLCommandRecorder*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(IDMLCommandRecorder*, Guid*, IUnknown, HRESULT)
+    set_name : Proc(IDMLCommandRecorder*, LibC::LPWSTR, HRESULT)
+    get_device : Proc(IDMLCommandRecorder*, Guid*, Void**, HRESULT)
+    record_dispatch : Proc(IDMLCommandRecorder*, ID3D12CommandList, IDMLDispatchable, IDMLBindingTable, Void)
   end
 
   IDMLCommandRecorder_GUID = "e6857a76-2e3e-4fdd-bff4-5d2ba10fb453"
@@ -1625,10 +1625,10 @@ lib LibWin32
   end
 
   struct IDMLDebugDeviceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_mute_debug_output : UInt64
+    query_interface : Proc(IDMLDebugDevice*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDMLDebugDevice*, UInt32)
+    release : Proc(IDMLDebugDevice*, UInt32)
+    set_mute_debug_output : Proc(IDMLDebugDevice*, LibC::BOOL, Void)
   end
 
   IDMLDebugDevice_GUID = "7d6f3ac9-394a-4ac3-92a7-390cc57a8217"
@@ -1638,24 +1638,24 @@ lib LibWin32
   end
 
   struct IDMLDevice1VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_private_data : UInt64
-    set_private_data : UInt64
-    set_private_data_interface : UInt64
-    set_name : UInt64
-    check_feature_support : UInt64
-    create_operator : UInt64
-    compile_operator : UInt64
-    create_operator_initializer : UInt64
-    create_command_recorder : UInt64
-    create_binding_table : UInt64
-    evict : UInt64
-    make_resident : UInt64
-    get_device_removed_reason : UInt64
-    get_parent_device : UInt64
-    compile_graph : UInt64
+    query_interface : Proc(IDMLDevice1*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDMLDevice1*, UInt32)
+    release : Proc(IDMLDevice1*, UInt32)
+    get_private_data : Proc(IDMLDevice1*, Guid*, UInt32*, Void*, HRESULT)
+    set_private_data : Proc(IDMLDevice1*, Guid*, UInt32, Void*, HRESULT)
+    set_private_data_interface : Proc(IDMLDevice1*, Guid*, IUnknown, HRESULT)
+    set_name : Proc(IDMLDevice1*, LibC::LPWSTR, HRESULT)
+    check_feature_support : Proc(IDMLDevice1*, DML_FEATURE, UInt32, Void*, UInt32, Void*, HRESULT)
+    create_operator : Proc(IDMLDevice1*, DML_OPERATOR_DESC*, Guid*, Void**, HRESULT)
+    compile_operator : Proc(IDMLDevice1*, IDMLOperator, DML_EXECUTION_FLAGS, Guid*, Void**, HRESULT)
+    create_operator_initializer : Proc(IDMLDevice1*, UInt32, IDMLCompiledOperator*, Guid*, Void**, HRESULT)
+    create_command_recorder : Proc(IDMLDevice1*, Guid*, Void**, HRESULT)
+    create_binding_table : Proc(IDMLDevice1*, DML_BINDING_TABLE_DESC*, Guid*, Void**, HRESULT)
+    evict : Proc(IDMLDevice1*, UInt32, IDMLPageable*, HRESULT)
+    make_resident : Proc(IDMLDevice1*, UInt32, IDMLPageable*, HRESULT)
+    get_device_removed_reason : Proc(IDMLDevice1*, HRESULT)
+    get_parent_device : Proc(IDMLDevice1*, Guid*, Void**, HRESULT)
+    compile_graph : Proc(IDMLDevice1*, DML_GRAPH_DESC*, DML_EXECUTION_FLAGS, Guid*, Void**, HRESULT)
   end
 
   IDMLDevice1_GUID = "a0884f9a-d2be-4355-aa5d-5901281ad1d2"
@@ -1672,386 +1672,386 @@ lib LibWin32
   fun DMLCreateDevice1(d3d12device : ID3D12Device, flags : DML_CREATE_DEVICE_FLAGS, minimumfeaturelevel : DML_FEATURE_LEVEL, riid : Guid*, ppv : Void**) : HRESULT
 end
 struct LibWin32::IDMLObject
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDMLObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDMLObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDMLObject*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_private_data(guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, datasize, data)
+  def get_private_data(this : IDMLObject*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, data)
+  def set_private_data(this : IDMLObject*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data_interface(guid : Guid*, data : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, data)
+  def set_private_data_interface(this : IDMLObject*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
   end
-  def set_name(name : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  def set_name(this : IDMLObject*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
   end
 end
 struct LibWin32::IDMLDevice
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDMLDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDMLDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDMLDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_private_data(guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, datasize, data)
+  def get_private_data(this : IDMLDevice*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, data)
+  def set_private_data(this : IDMLDevice*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data_interface(guid : Guid*, data : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, data)
+  def set_private_data_interface(this : IDMLDevice*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
   end
-  def set_name(name : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  def set_name(this : IDMLDevice*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
   end
-  def check_feature_support(feature : DML_FEATURE, featurequerydatasize : UInt32, featurequerydata : Void*, featuresupportdatasize : UInt32, featuresupportdata : Void*) : HRESULT
-    @lpVtbl.value.check_feature_support.unsafe_as(Proc(DML_FEATURE, UInt32, Void*, UInt32, Void*, HRESULT)).call(feature, featurequerydatasize, featurequerydata, featuresupportdatasize, featuresupportdata)
+  def check_feature_support(this : IDMLDevice*, feature : DML_FEATURE, featurequerydatasize : UInt32, featurequerydata : Void*, featuresupportdatasize : UInt32, featuresupportdata : Void*) : HRESULT
+    @lpVtbl.value.check_feature_support.call(this, feature, featurequerydatasize, featurequerydata, featuresupportdatasize, featuresupportdata)
   end
-  def create_operator(desc : DML_OPERATOR_DESC*, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.create_operator.unsafe_as(Proc(DML_OPERATOR_DESC*, Guid*, Void**, HRESULT)).call(desc, riid, ppv)
+  def create_operator(this : IDMLDevice*, desc : DML_OPERATOR_DESC*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_operator.call(this, desc, riid, ppv)
   end
-  def compile_operator(op : IDMLOperator, flags : DML_EXECUTION_FLAGS, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.compile_operator.unsafe_as(Proc(IDMLOperator, DML_EXECUTION_FLAGS, Guid*, Void**, HRESULT)).call(op, flags, riid, ppv)
+  def compile_operator(this : IDMLDevice*, op : IDMLOperator, flags : DML_EXECUTION_FLAGS, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.compile_operator.call(this, op, flags, riid, ppv)
   end
-  def create_operator_initializer(operatorcount : UInt32, operators : IDMLCompiledOperator*, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.create_operator_initializer.unsafe_as(Proc(UInt32, IDMLCompiledOperator*, Guid*, Void**, HRESULT)).call(operatorcount, operators, riid, ppv)
+  def create_operator_initializer(this : IDMLDevice*, operatorcount : UInt32, operators : IDMLCompiledOperator*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_operator_initializer.call(this, operatorcount, operators, riid, ppv)
   end
-  def create_command_recorder(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.create_command_recorder.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def create_command_recorder(this : IDMLDevice*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_command_recorder.call(this, riid, ppv)
   end
-  def create_binding_table(desc : DML_BINDING_TABLE_DESC*, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.create_binding_table.unsafe_as(Proc(DML_BINDING_TABLE_DESC*, Guid*, Void**, HRESULT)).call(desc, riid, ppv)
+  def create_binding_table(this : IDMLDevice*, desc : DML_BINDING_TABLE_DESC*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_binding_table.call(this, desc, riid, ppv)
   end
-  def evict(count : UInt32, ppobjects : IDMLPageable*) : HRESULT
-    @lpVtbl.value.evict.unsafe_as(Proc(UInt32, IDMLPageable*, HRESULT)).call(count, ppobjects)
+  def evict(this : IDMLDevice*, count : UInt32, ppobjects : IDMLPageable*) : HRESULT
+    @lpVtbl.value.evict.call(this, count, ppobjects)
   end
-  def make_resident(count : UInt32, ppobjects : IDMLPageable*) : HRESULT
-    @lpVtbl.value.make_resident.unsafe_as(Proc(UInt32, IDMLPageable*, HRESULT)).call(count, ppobjects)
+  def make_resident(this : IDMLDevice*, count : UInt32, ppobjects : IDMLPageable*) : HRESULT
+    @lpVtbl.value.make_resident.call(this, count, ppobjects)
   end
-  def get_device_removed_reason : HRESULT
-    @lpVtbl.value.get_device_removed_reason.unsafe_as(Proc(HRESULT)).call
+  def get_device_removed_reason(this : IDMLDevice*) : HRESULT
+    @lpVtbl.value.get_device_removed_reason.call(this)
   end
-  def get_parent_device(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_parent_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def get_parent_device(this : IDMLDevice*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_parent_device.call(this, riid, ppv)
   end
 end
 struct LibWin32::IDMLDeviceChild
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDMLDeviceChild*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDMLDeviceChild*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDMLDeviceChild*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_private_data(guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, datasize, data)
+  def get_private_data(this : IDMLDeviceChild*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, data)
+  def set_private_data(this : IDMLDeviceChild*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data_interface(guid : Guid*, data : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, data)
+  def set_private_data_interface(this : IDMLDeviceChild*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
   end
-  def set_name(name : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  def set_name(this : IDMLDeviceChild*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
   end
-  def get_device(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def get_device(this : IDMLDeviceChild*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppv)
   end
 end
 struct LibWin32::IDMLPageable
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDMLPageable*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDMLPageable*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDMLPageable*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_private_data(guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, datasize, data)
+  def get_private_data(this : IDMLPageable*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, data)
+  def set_private_data(this : IDMLPageable*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data_interface(guid : Guid*, data : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, data)
+  def set_private_data_interface(this : IDMLPageable*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
   end
-  def set_name(name : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  def set_name(this : IDMLPageable*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
   end
-  def get_device(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def get_device(this : IDMLPageable*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppv)
   end
 end
 struct LibWin32::IDMLOperator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDMLOperator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDMLOperator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDMLOperator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_private_data(guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, datasize, data)
+  def get_private_data(this : IDMLOperator*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, data)
+  def set_private_data(this : IDMLOperator*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data_interface(guid : Guid*, data : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, data)
+  def set_private_data_interface(this : IDMLOperator*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
   end
-  def set_name(name : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  def set_name(this : IDMLOperator*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
   end
-  def get_device(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def get_device(this : IDMLOperator*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppv)
   end
 end
 struct LibWin32::IDMLDispatchable
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDMLDispatchable*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDMLDispatchable*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDMLDispatchable*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_private_data(guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, datasize, data)
+  def get_private_data(this : IDMLDispatchable*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, data)
+  def set_private_data(this : IDMLDispatchable*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data_interface(guid : Guid*, data : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, data)
+  def set_private_data_interface(this : IDMLDispatchable*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
   end
-  def set_name(name : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  def set_name(this : IDMLDispatchable*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
   end
-  def get_device(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def get_device(this : IDMLDispatchable*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppv)
   end
-  def get_binding_properties : DML_BINDING_PROPERTIES
-    @lpVtbl.value.get_binding_properties.unsafe_as(Proc(DML_BINDING_PROPERTIES)).call
+  def get_binding_properties(this : IDMLDispatchable*) : DML_BINDING_PROPERTIES
+    @lpVtbl.value.get_binding_properties.call(this)
   end
 end
 struct LibWin32::IDMLCompiledOperator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDMLCompiledOperator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDMLCompiledOperator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDMLCompiledOperator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_private_data(guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, datasize, data)
+  def get_private_data(this : IDMLCompiledOperator*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, data)
+  def set_private_data(this : IDMLCompiledOperator*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data_interface(guid : Guid*, data : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, data)
+  def set_private_data_interface(this : IDMLCompiledOperator*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
   end
-  def set_name(name : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  def set_name(this : IDMLCompiledOperator*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
   end
-  def get_device(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def get_device(this : IDMLCompiledOperator*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppv)
   end
-  def get_binding_properties : DML_BINDING_PROPERTIES
-    @lpVtbl.value.get_binding_properties.unsafe_as(Proc(DML_BINDING_PROPERTIES)).call
+  def get_binding_properties(this : IDMLCompiledOperator*) : DML_BINDING_PROPERTIES
+    @lpVtbl.value.get_binding_properties.call(this)
   end
 end
 struct LibWin32::IDMLOperatorInitializer
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDMLOperatorInitializer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDMLOperatorInitializer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDMLOperatorInitializer*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_private_data(guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, datasize, data)
+  def get_private_data(this : IDMLOperatorInitializer*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, data)
+  def set_private_data(this : IDMLOperatorInitializer*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data_interface(guid : Guid*, data : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, data)
+  def set_private_data_interface(this : IDMLOperatorInitializer*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
   end
-  def set_name(name : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  def set_name(this : IDMLOperatorInitializer*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
   end
-  def get_device(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def get_device(this : IDMLOperatorInitializer*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppv)
   end
-  def get_binding_properties : DML_BINDING_PROPERTIES
-    @lpVtbl.value.get_binding_properties.unsafe_as(Proc(DML_BINDING_PROPERTIES)).call
+  def get_binding_properties(this : IDMLOperatorInitializer*) : DML_BINDING_PROPERTIES
+    @lpVtbl.value.get_binding_properties.call(this)
   end
-  def reset(operatorcount : UInt32, operators : IDMLCompiledOperator*) : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(UInt32, IDMLCompiledOperator*, HRESULT)).call(operatorcount, operators)
+  def reset(this : IDMLOperatorInitializer*, operatorcount : UInt32, operators : IDMLCompiledOperator*) : HRESULT
+    @lpVtbl.value.reset.call(this, operatorcount, operators)
   end
 end
 struct LibWin32::IDMLBindingTable
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDMLBindingTable*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDMLBindingTable*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDMLBindingTable*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_private_data(guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, datasize, data)
+  def get_private_data(this : IDMLBindingTable*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, data)
+  def set_private_data(this : IDMLBindingTable*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data_interface(guid : Guid*, data : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, data)
+  def set_private_data_interface(this : IDMLBindingTable*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
   end
-  def set_name(name : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  def set_name(this : IDMLBindingTable*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
   end
-  def get_device(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def get_device(this : IDMLBindingTable*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppv)
   end
-  def bind_inputs(bindingcount : UInt32, bindings : DML_BINDING_DESC*) : Void
-    @lpVtbl.value.bind_inputs.unsafe_as(Proc(UInt32, DML_BINDING_DESC*, Void)).call(bindingcount, bindings)
+  def bind_inputs(this : IDMLBindingTable*, bindingcount : UInt32, bindings : DML_BINDING_DESC*) : Void
+    @lpVtbl.value.bind_inputs.call(this, bindingcount, bindings)
   end
-  def bind_outputs(bindingcount : UInt32, bindings : DML_BINDING_DESC*) : Void
-    @lpVtbl.value.bind_outputs.unsafe_as(Proc(UInt32, DML_BINDING_DESC*, Void)).call(bindingcount, bindings)
+  def bind_outputs(this : IDMLBindingTable*, bindingcount : UInt32, bindings : DML_BINDING_DESC*) : Void
+    @lpVtbl.value.bind_outputs.call(this, bindingcount, bindings)
   end
-  def bind_temporary_resource(binding : DML_BINDING_DESC*) : Void
-    @lpVtbl.value.bind_temporary_resource.unsafe_as(Proc(DML_BINDING_DESC*, Void)).call(binding)
+  def bind_temporary_resource(this : IDMLBindingTable*, binding : DML_BINDING_DESC*) : Void
+    @lpVtbl.value.bind_temporary_resource.call(this, binding)
   end
-  def bind_persistent_resource(binding : DML_BINDING_DESC*) : Void
-    @lpVtbl.value.bind_persistent_resource.unsafe_as(Proc(DML_BINDING_DESC*, Void)).call(binding)
+  def bind_persistent_resource(this : IDMLBindingTable*, binding : DML_BINDING_DESC*) : Void
+    @lpVtbl.value.bind_persistent_resource.call(this, binding)
   end
-  def reset(desc : DML_BINDING_TABLE_DESC*) : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(DML_BINDING_TABLE_DESC*, HRESULT)).call(desc)
+  def reset(this : IDMLBindingTable*, desc : DML_BINDING_TABLE_DESC*) : HRESULT
+    @lpVtbl.value.reset.call(this, desc)
   end
 end
 struct LibWin32::IDMLCommandRecorder
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDMLCommandRecorder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDMLCommandRecorder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDMLCommandRecorder*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_private_data(guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, datasize, data)
+  def get_private_data(this : IDMLCommandRecorder*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, data)
+  def set_private_data(this : IDMLCommandRecorder*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data_interface(guid : Guid*, data : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, data)
+  def set_private_data_interface(this : IDMLCommandRecorder*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
   end
-  def set_name(name : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  def set_name(this : IDMLCommandRecorder*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
   end
-  def get_device(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def get_device(this : IDMLCommandRecorder*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppv)
   end
-  def record_dispatch(commandlist : ID3D12CommandList, dispatchable : IDMLDispatchable, bindings : IDMLBindingTable) : Void
-    @lpVtbl.value.record_dispatch.unsafe_as(Proc(ID3D12CommandList, IDMLDispatchable, IDMLBindingTable, Void)).call(commandlist, dispatchable, bindings)
+  def record_dispatch(this : IDMLCommandRecorder*, commandlist : ID3D12CommandList, dispatchable : IDMLDispatchable, bindings : IDMLBindingTable) : Void
+    @lpVtbl.value.record_dispatch.call(this, commandlist, dispatchable, bindings)
   end
 end
 struct LibWin32::IDMLDebugDevice
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDMLDebugDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDMLDebugDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDMLDebugDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_mute_debug_output(mute : LibC::BOOL) : Void
-    @lpVtbl.value.set_mute_debug_output.unsafe_as(Proc(LibC::BOOL, Void)).call(mute)
+  def set_mute_debug_output(this : IDMLDebugDevice*, mute : LibC::BOOL) : Void
+    @lpVtbl.value.set_mute_debug_output.call(this, mute)
   end
 end
 struct LibWin32::IDMLDevice1
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDMLDevice1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDMLDevice1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDMLDevice1*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_private_data(guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
-    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, datasize, data)
+  def get_private_data(this : IDMLDevice1*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data(guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
-    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, data)
+  def set_private_data(this : IDMLDevice1*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
   end
-  def set_private_data_interface(guid : Guid*, data : IUnknown) : HRESULT
-    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, data)
+  def set_private_data_interface(this : IDMLDevice1*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
   end
-  def set_name(name : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  def set_name(this : IDMLDevice1*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
   end
-  def check_feature_support(feature : DML_FEATURE, featurequerydatasize : UInt32, featurequerydata : Void*, featuresupportdatasize : UInt32, featuresupportdata : Void*) : HRESULT
-    @lpVtbl.value.check_feature_support.unsafe_as(Proc(DML_FEATURE, UInt32, Void*, UInt32, Void*, HRESULT)).call(feature, featurequerydatasize, featurequerydata, featuresupportdatasize, featuresupportdata)
+  def check_feature_support(this : IDMLDevice1*, feature : DML_FEATURE, featurequerydatasize : UInt32, featurequerydata : Void*, featuresupportdatasize : UInt32, featuresupportdata : Void*) : HRESULT
+    @lpVtbl.value.check_feature_support.call(this, feature, featurequerydatasize, featurequerydata, featuresupportdatasize, featuresupportdata)
   end
-  def create_operator(desc : DML_OPERATOR_DESC*, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.create_operator.unsafe_as(Proc(DML_OPERATOR_DESC*, Guid*, Void**, HRESULT)).call(desc, riid, ppv)
+  def create_operator(this : IDMLDevice1*, desc : DML_OPERATOR_DESC*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_operator.call(this, desc, riid, ppv)
   end
-  def compile_operator(op : IDMLOperator, flags : DML_EXECUTION_FLAGS, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.compile_operator.unsafe_as(Proc(IDMLOperator, DML_EXECUTION_FLAGS, Guid*, Void**, HRESULT)).call(op, flags, riid, ppv)
+  def compile_operator(this : IDMLDevice1*, op : IDMLOperator, flags : DML_EXECUTION_FLAGS, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.compile_operator.call(this, op, flags, riid, ppv)
   end
-  def create_operator_initializer(operatorcount : UInt32, operators : IDMLCompiledOperator*, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.create_operator_initializer.unsafe_as(Proc(UInt32, IDMLCompiledOperator*, Guid*, Void**, HRESULT)).call(operatorcount, operators, riid, ppv)
+  def create_operator_initializer(this : IDMLDevice1*, operatorcount : UInt32, operators : IDMLCompiledOperator*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_operator_initializer.call(this, operatorcount, operators, riid, ppv)
   end
-  def create_command_recorder(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.create_command_recorder.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def create_command_recorder(this : IDMLDevice1*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_command_recorder.call(this, riid, ppv)
   end
-  def create_binding_table(desc : DML_BINDING_TABLE_DESC*, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.create_binding_table.unsafe_as(Proc(DML_BINDING_TABLE_DESC*, Guid*, Void**, HRESULT)).call(desc, riid, ppv)
+  def create_binding_table(this : IDMLDevice1*, desc : DML_BINDING_TABLE_DESC*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_binding_table.call(this, desc, riid, ppv)
   end
-  def evict(count : UInt32, ppobjects : IDMLPageable*) : HRESULT
-    @lpVtbl.value.evict.unsafe_as(Proc(UInt32, IDMLPageable*, HRESULT)).call(count, ppobjects)
+  def evict(this : IDMLDevice1*, count : UInt32, ppobjects : IDMLPageable*) : HRESULT
+    @lpVtbl.value.evict.call(this, count, ppobjects)
   end
-  def make_resident(count : UInt32, ppobjects : IDMLPageable*) : HRESULT
-    @lpVtbl.value.make_resident.unsafe_as(Proc(UInt32, IDMLPageable*, HRESULT)).call(count, ppobjects)
+  def make_resident(this : IDMLDevice1*, count : UInt32, ppobjects : IDMLPageable*) : HRESULT
+    @lpVtbl.value.make_resident.call(this, count, ppobjects)
   end
-  def get_device_removed_reason : HRESULT
-    @lpVtbl.value.get_device_removed_reason.unsafe_as(Proc(HRESULT)).call
+  def get_device_removed_reason(this : IDMLDevice1*) : HRESULT
+    @lpVtbl.value.get_device_removed_reason.call(this)
   end
-  def get_parent_device(riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_parent_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  def get_parent_device(this : IDMLDevice1*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_parent_device.call(this, riid, ppv)
   end
-  def compile_graph(desc : DML_GRAPH_DESC*, flags : DML_EXECUTION_FLAGS, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.compile_graph.unsafe_as(Proc(DML_GRAPH_DESC*, DML_EXECUTION_FLAGS, Guid*, Void**, HRESULT)).call(desc, flags, riid, ppv)
+  def compile_graph(this : IDMLDevice1*, desc : DML_GRAPH_DESC*, flags : DML_EXECUTION_FLAGS, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.compile_graph.call(this, desc, flags, riid, ppv)
   end
 end

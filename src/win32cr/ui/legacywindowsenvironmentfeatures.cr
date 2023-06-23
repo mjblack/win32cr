@@ -46,11 +46,11 @@ lib LibWin32
 
 
   struct IEmptyVolumeCacheCallBackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    scan_progress : UInt64
-    purge_progress : UInt64
+    query_interface : Proc(IEmptyVolumeCacheCallBack*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEmptyVolumeCacheCallBack*, UInt32)
+    release : Proc(IEmptyVolumeCacheCallBack*, UInt32)
+    scan_progress : Proc(IEmptyVolumeCacheCallBack*, UInt64, UInt32, LibC::LPWSTR, HRESULT)
+    purge_progress : Proc(IEmptyVolumeCacheCallBack*, UInt64, UInt64, UInt32, LibC::LPWSTR, HRESULT)
   end
 
   IEmptyVolumeCacheCallBack_GUID = "6e793361-73c6-11d0-8469-00aa00442901"
@@ -60,14 +60,14 @@ lib LibWin32
   end
 
   struct IEmptyVolumeCacheVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    initialize : UInt64
-    get_space_used : UInt64
-    purge : UInt64
-    show_properties : UInt64
-    deactivate : UInt64
+    query_interface : Proc(IEmptyVolumeCache*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEmptyVolumeCache*, UInt32)
+    release : Proc(IEmptyVolumeCache*, UInt32)
+    initialize : Proc(IEmptyVolumeCache*, HKEY, LibC::LPWSTR, LibC::LPWSTR*, LibC::LPWSTR*, UInt32*, HRESULT)
+    get_space_used : Proc(IEmptyVolumeCache*, UInt64*, IEmptyVolumeCacheCallBack, HRESULT)
+    purge : Proc(IEmptyVolumeCache*, UInt64, IEmptyVolumeCacheCallBack, HRESULT)
+    show_properties : Proc(IEmptyVolumeCache*, LibC::HANDLE, HRESULT)
+    deactivate : Proc(IEmptyVolumeCache*, UInt32*, HRESULT)
   end
 
   IEmptyVolumeCache_GUID = "8fce5227-04da-11d1-a004-00805f8abe06"
@@ -77,15 +77,15 @@ lib LibWin32
   end
 
   struct IEmptyVolumeCache2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    initialize : UInt64
-    get_space_used : UInt64
-    purge : UInt64
-    show_properties : UInt64
-    deactivate : UInt64
-    initialize_ex : UInt64
+    query_interface : Proc(IEmptyVolumeCache2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEmptyVolumeCache2*, UInt32)
+    release : Proc(IEmptyVolumeCache2*, UInt32)
+    initialize : Proc(IEmptyVolumeCache2*, HKEY, LibC::LPWSTR, LibC::LPWSTR*, LibC::LPWSTR*, UInt32*, HRESULT)
+    get_space_used : Proc(IEmptyVolumeCache2*, UInt64*, IEmptyVolumeCacheCallBack, HRESULT)
+    purge : Proc(IEmptyVolumeCache2*, UInt64, IEmptyVolumeCacheCallBack, HRESULT)
+    show_properties : Proc(IEmptyVolumeCache2*, LibC::HANDLE, HRESULT)
+    deactivate : Proc(IEmptyVolumeCache2*, UInt32*, HRESULT)
+    initialize_ex : Proc(IEmptyVolumeCache2*, HKEY, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, LibC::LPWSTR*, LibC::LPWSTR*, UInt32*, HRESULT)
   end
 
   IEmptyVolumeCache2_GUID = "02b7e3ba-4db3-11d2-b2d9-00c04f8eec8c"
@@ -95,11 +95,11 @@ lib LibWin32
   end
 
   struct IReconcileInitiatorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_abort_callback : UInt64
-    set_progress_feedback : UInt64
+    query_interface : Proc(IReconcileInitiator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IReconcileInitiator*, UInt32)
+    release : Proc(IReconcileInitiator*, UInt32)
+    set_abort_callback : Proc(IReconcileInitiator*, IUnknown, HRESULT)
+    set_progress_feedback : Proc(IReconcileInitiator*, UInt32, UInt32, HRESULT)
   end
 
   IReconcileInitiator_GUID = "99180161-da16-101a-935c-444553540000"
@@ -109,11 +109,11 @@ lib LibWin32
   end
 
   struct IReconcilableObjectVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    reconcile : UInt64
-    get_progress_feedback_max_estimate : UInt64
+    query_interface : Proc(IReconcilableObject*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IReconcilableObject*, UInt32)
+    release : Proc(IReconcilableObject*, UInt32)
+    reconcile : Proc(IReconcilableObject*, IReconcileInitiator, UInt32, LibC::HANDLE, LibC::HANDLE, UInt32, IMoniker*, Int32*, IStorage, Void*, HRESULT)
+    get_progress_feedback_max_estimate : Proc(IReconcilableObject*, UInt32*, HRESULT)
   end
 
   IReconcilableObject_GUID = "99180162-da16-101a-935c-444553540000"
@@ -123,10 +123,10 @@ lib LibWin32
   end
 
   struct IBriefcaseInitiatorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    is_moniker_in_briefcase : UInt64
+    query_interface : Proc(IBriefcaseInitiator*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IBriefcaseInitiator*, UInt32)
+    release : Proc(IBriefcaseInitiator*, UInt32)
+    is_moniker_in_briefcase : Proc(IBriefcaseInitiator*, IMoniker, HRESULT)
   end
 
   IBriefcaseInitiator_GUID = "99180164-da16-101a-935c-444553540000"
@@ -136,13 +136,13 @@ lib LibWin32
   end
 
   struct IActiveDesktopPVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_safe_mode : UInt64
-    ensure_update_html : UInt64
-    set_scheme : UInt64
-    get_scheme : UInt64
+    query_interface : Proc(IActiveDesktopP*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IActiveDesktopP*, UInt32)
+    release : Proc(IActiveDesktopP*, UInt32)
+    set_safe_mode : Proc(IActiveDesktopP*, UInt32, HRESULT)
+    ensure_update_html : Proc(IActiveDesktopP*, HRESULT)
+    set_scheme : Proc(IActiveDesktopP*, LibC::LPWSTR, UInt32, HRESULT)
+    get_scheme : Proc(IActiveDesktopP*, Char*, UInt32*, UInt32, HRESULT)
   end
 
   IActiveDesktopP_GUID = "52502ee0-ec80-11d0-89ab-00c04fc2972d"
@@ -152,13 +152,13 @@ lib LibWin32
   end
 
   struct IADesktopP2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    re_read_wallpaper : UInt64
-    get_ad_object_flags : UInt64
-    update_all_desktop_subscriptions : UInt64
-    make_dynamic_changes : UInt64
+    query_interface : Proc(IADesktopP2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IADesktopP2*, UInt32)
+    release : Proc(IADesktopP2*, UInt32)
+    re_read_wallpaper : Proc(IADesktopP2*, HRESULT)
+    get_ad_object_flags : Proc(IADesktopP2*, UInt32*, UInt32, HRESULT)
+    update_all_desktop_subscriptions : Proc(IADesktopP2*, HRESULT)
+    make_dynamic_changes : Proc(IADesktopP2*, IOleObject, HRESULT)
   end
 
   IADesktopP2_GUID = "b22754e2-4574-11d1-9888-006097deacf9"
@@ -169,168 +169,168 @@ lib LibWin32
 
 end
 struct LibWin32::IEmptyVolumeCacheCallBack
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IEmptyVolumeCacheCallBack*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IEmptyVolumeCacheCallBack*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IEmptyVolumeCacheCallBack*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def scan_progress(dwlspaceused : UInt64, dwflags : UInt32, pcwszstatus : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.scan_progress.unsafe_as(Proc(UInt64, UInt32, LibC::LPWSTR, HRESULT)).call(dwlspaceused, dwflags, pcwszstatus)
+  def scan_progress(this : IEmptyVolumeCacheCallBack*, dwlspaceused : UInt64, dwflags : UInt32, pcwszstatus : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.scan_progress.call(this, dwlspaceused, dwflags, pcwszstatus)
   end
-  def purge_progress(dwlspacefreed : UInt64, dwlspacetofree : UInt64, dwflags : UInt32, pcwszstatus : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.purge_progress.unsafe_as(Proc(UInt64, UInt64, UInt32, LibC::LPWSTR, HRESULT)).call(dwlspacefreed, dwlspacetofree, dwflags, pcwszstatus)
+  def purge_progress(this : IEmptyVolumeCacheCallBack*, dwlspacefreed : UInt64, dwlspacetofree : UInt64, dwflags : UInt32, pcwszstatus : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.purge_progress.call(this, dwlspacefreed, dwlspacetofree, dwflags, pcwszstatus)
   end
 end
 struct LibWin32::IEmptyVolumeCache
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IEmptyVolumeCache*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IEmptyVolumeCache*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IEmptyVolumeCache*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def initialize(hkregkey : HKEY, pcwszvolume : LibC::LPWSTR, ppwszdisplayname : LibC::LPWSTR*, ppwszdescription : LibC::LPWSTR*, pdwflags : UInt32*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(HKEY, LibC::LPWSTR, LibC::LPWSTR*, LibC::LPWSTR*, UInt32*, HRESULT)).call(hkregkey, pcwszvolume, ppwszdisplayname, ppwszdescription, pdwflags)
+  def initialize(this : IEmptyVolumeCache*, hkregkey : HKEY, pcwszvolume : LibC::LPWSTR, ppwszdisplayname : LibC::LPWSTR*, ppwszdescription : LibC::LPWSTR*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.initialize.call(this, hkregkey, pcwszvolume, ppwszdisplayname, ppwszdescription, pdwflags)
   end
-  def get_space_used(pdwlspaceused : UInt64*, picb : IEmptyVolumeCacheCallBack) : HRESULT
-    @lpVtbl.value.get_space_used.unsafe_as(Proc(UInt64*, IEmptyVolumeCacheCallBack, HRESULT)).call(pdwlspaceused, picb)
+  def get_space_used(this : IEmptyVolumeCache*, pdwlspaceused : UInt64*, picb : IEmptyVolumeCacheCallBack) : HRESULT
+    @lpVtbl.value.get_space_used.call(this, pdwlspaceused, picb)
   end
-  def purge(dwlspacetofree : UInt64, picb : IEmptyVolumeCacheCallBack) : HRESULT
-    @lpVtbl.value.purge.unsafe_as(Proc(UInt64, IEmptyVolumeCacheCallBack, HRESULT)).call(dwlspacetofree, picb)
+  def purge(this : IEmptyVolumeCache*, dwlspacetofree : UInt64, picb : IEmptyVolumeCacheCallBack) : HRESULT
+    @lpVtbl.value.purge.call(this, dwlspacetofree, picb)
   end
-  def show_properties(hwnd : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.show_properties.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hwnd)
+  def show_properties(this : IEmptyVolumeCache*, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.show_properties.call(this, hwnd)
   end
-  def deactivate(pdwflags : UInt32*) : HRESULT
-    @lpVtbl.value.deactivate.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwflags)
+  def deactivate(this : IEmptyVolumeCache*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.deactivate.call(this, pdwflags)
   end
 end
 struct LibWin32::IEmptyVolumeCache2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IEmptyVolumeCache2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IEmptyVolumeCache2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IEmptyVolumeCache2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def initialize(hkregkey : HKEY, pcwszvolume : LibC::LPWSTR, ppwszdisplayname : LibC::LPWSTR*, ppwszdescription : LibC::LPWSTR*, pdwflags : UInt32*) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(HKEY, LibC::LPWSTR, LibC::LPWSTR*, LibC::LPWSTR*, UInt32*, HRESULT)).call(hkregkey, pcwszvolume, ppwszdisplayname, ppwszdescription, pdwflags)
+  def initialize(this : IEmptyVolumeCache2*, hkregkey : HKEY, pcwszvolume : LibC::LPWSTR, ppwszdisplayname : LibC::LPWSTR*, ppwszdescription : LibC::LPWSTR*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.initialize.call(this, hkregkey, pcwszvolume, ppwszdisplayname, ppwszdescription, pdwflags)
   end
-  def get_space_used(pdwlspaceused : UInt64*, picb : IEmptyVolumeCacheCallBack) : HRESULT
-    @lpVtbl.value.get_space_used.unsafe_as(Proc(UInt64*, IEmptyVolumeCacheCallBack, HRESULT)).call(pdwlspaceused, picb)
+  def get_space_used(this : IEmptyVolumeCache2*, pdwlspaceused : UInt64*, picb : IEmptyVolumeCacheCallBack) : HRESULT
+    @lpVtbl.value.get_space_used.call(this, pdwlspaceused, picb)
   end
-  def purge(dwlspacetofree : UInt64, picb : IEmptyVolumeCacheCallBack) : HRESULT
-    @lpVtbl.value.purge.unsafe_as(Proc(UInt64, IEmptyVolumeCacheCallBack, HRESULT)).call(dwlspacetofree, picb)
+  def purge(this : IEmptyVolumeCache2*, dwlspacetofree : UInt64, picb : IEmptyVolumeCacheCallBack) : HRESULT
+    @lpVtbl.value.purge.call(this, dwlspacetofree, picb)
   end
-  def show_properties(hwnd : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.show_properties.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hwnd)
+  def show_properties(this : IEmptyVolumeCache2*, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.show_properties.call(this, hwnd)
   end
-  def deactivate(pdwflags : UInt32*) : HRESULT
-    @lpVtbl.value.deactivate.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwflags)
+  def deactivate(this : IEmptyVolumeCache2*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.deactivate.call(this, pdwflags)
   end
-  def initialize_ex(hkregkey : HKEY, pcwszvolume : LibC::LPWSTR, pcwszkeyname : LibC::LPWSTR, ppwszdisplayname : LibC::LPWSTR*, ppwszdescription : LibC::LPWSTR*, ppwszbtntext : LibC::LPWSTR*, pdwflags : UInt32*) : HRESULT
-    @lpVtbl.value.initialize_ex.unsafe_as(Proc(HKEY, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, LibC::LPWSTR*, LibC::LPWSTR*, UInt32*, HRESULT)).call(hkregkey, pcwszvolume, pcwszkeyname, ppwszdisplayname, ppwszdescription, ppwszbtntext, pdwflags)
+  def initialize_ex(this : IEmptyVolumeCache2*, hkregkey : HKEY, pcwszvolume : LibC::LPWSTR, pcwszkeyname : LibC::LPWSTR, ppwszdisplayname : LibC::LPWSTR*, ppwszdescription : LibC::LPWSTR*, ppwszbtntext : LibC::LPWSTR*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.initialize_ex.call(this, hkregkey, pcwszvolume, pcwszkeyname, ppwszdisplayname, ppwszdescription, ppwszbtntext, pdwflags)
   end
 end
 struct LibWin32::IReconcileInitiator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IReconcileInitiator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IReconcileInitiator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IReconcileInitiator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_abort_callback(punkforabort : IUnknown) : HRESULT
-    @lpVtbl.value.set_abort_callback.unsafe_as(Proc(IUnknown, HRESULT)).call(punkforabort)
+  def set_abort_callback(this : IReconcileInitiator*, punkforabort : IUnknown) : HRESULT
+    @lpVtbl.value.set_abort_callback.call(this, punkforabort)
   end
-  def set_progress_feedback(ulprogress : UInt32, ulprogressmax : UInt32) : HRESULT
-    @lpVtbl.value.set_progress_feedback.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(ulprogress, ulprogressmax)
+  def set_progress_feedback(this : IReconcileInitiator*, ulprogress : UInt32, ulprogressmax : UInt32) : HRESULT
+    @lpVtbl.value.set_progress_feedback.call(this, ulprogress, ulprogressmax)
   end
 end
 struct LibWin32::IReconcilableObject
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IReconcilableObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IReconcilableObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IReconcilableObject*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def reconcile(pinitiator : IReconcileInitiator, dwflags : UInt32, hwndowner : LibC::HANDLE, hwndprogressfeedback : LibC::HANDLE, ulcinput : UInt32, rgpmkotherinput : IMoniker*, ploutindex : Int32*, pstgnewresidues : IStorage, pvreserved : Void*) : HRESULT
-    @lpVtbl.value.reconcile.unsafe_as(Proc(IReconcileInitiator, UInt32, LibC::HANDLE, LibC::HANDLE, UInt32, IMoniker*, Int32*, IStorage, Void*, HRESULT)).call(pinitiator, dwflags, hwndowner, hwndprogressfeedback, ulcinput, rgpmkotherinput, ploutindex, pstgnewresidues, pvreserved)
+  def reconcile(this : IReconcilableObject*, pinitiator : IReconcileInitiator, dwflags : UInt32, hwndowner : LibC::HANDLE, hwndprogressfeedback : LibC::HANDLE, ulcinput : UInt32, rgpmkotherinput : IMoniker*, ploutindex : Int32*, pstgnewresidues : IStorage, pvreserved : Void*) : HRESULT
+    @lpVtbl.value.reconcile.call(this, pinitiator, dwflags, hwndowner, hwndprogressfeedback, ulcinput, rgpmkotherinput, ploutindex, pstgnewresidues, pvreserved)
   end
-  def get_progress_feedback_max_estimate(pulprogressmax : UInt32*) : HRESULT
-    @lpVtbl.value.get_progress_feedback_max_estimate.unsafe_as(Proc(UInt32*, HRESULT)).call(pulprogressmax)
+  def get_progress_feedback_max_estimate(this : IReconcilableObject*, pulprogressmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_progress_feedback_max_estimate.call(this, pulprogressmax)
   end
 end
 struct LibWin32::IBriefcaseInitiator
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IBriefcaseInitiator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IBriefcaseInitiator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IBriefcaseInitiator*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def is_moniker_in_briefcase(pmk : IMoniker) : HRESULT
-    @lpVtbl.value.is_moniker_in_briefcase.unsafe_as(Proc(IMoniker, HRESULT)).call(pmk)
+  def is_moniker_in_briefcase(this : IBriefcaseInitiator*, pmk : IMoniker) : HRESULT
+    @lpVtbl.value.is_moniker_in_briefcase.call(this, pmk)
   end
 end
 struct LibWin32::IActiveDesktopP
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IActiveDesktopP*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IActiveDesktopP*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IActiveDesktopP*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_safe_mode(dwflags : UInt32) : HRESULT
-    @lpVtbl.value.set_safe_mode.unsafe_as(Proc(UInt32, HRESULT)).call(dwflags)
+  def set_safe_mode(this : IActiveDesktopP*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_safe_mode.call(this, dwflags)
   end
-  def ensure_update_html : HRESULT
-    @lpVtbl.value.ensure_update_html.unsafe_as(Proc(HRESULT)).call
+  def ensure_update_html(this : IActiveDesktopP*) : HRESULT
+    @lpVtbl.value.ensure_update_html.call(this)
   end
-  def set_scheme(pwszschemename : LibC::LPWSTR, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.set_scheme.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(pwszschemename, dwflags)
+  def set_scheme(this : IActiveDesktopP*, pwszschemename : LibC::LPWSTR, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_scheme.call(this, pwszschemename, dwflags)
   end
-  def get_scheme(pwszschemename : Char*, pdwcchbuffer : UInt32*, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.get_scheme.unsafe_as(Proc(Char*, UInt32*, UInt32, HRESULT)).call(pwszschemename, pdwcchbuffer, dwflags)
+  def get_scheme(this : IActiveDesktopP*, pwszschemename : Char*, pdwcchbuffer : UInt32*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.get_scheme.call(this, pwszschemename, pdwcchbuffer, dwflags)
   end
 end
 struct LibWin32::IADesktopP2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IADesktopP2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IADesktopP2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IADesktopP2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def re_read_wallpaper : HRESULT
-    @lpVtbl.value.re_read_wallpaper.unsafe_as(Proc(HRESULT)).call
+  def re_read_wallpaper(this : IADesktopP2*) : HRESULT
+    @lpVtbl.value.re_read_wallpaper.call(this)
   end
-  def get_ad_object_flags(pdwflags : UInt32*, dwmask : UInt32) : HRESULT
-    @lpVtbl.value.get_ad_object_flags.unsafe_as(Proc(UInt32*, UInt32, HRESULT)).call(pdwflags, dwmask)
+  def get_ad_object_flags(this : IADesktopP2*, pdwflags : UInt32*, dwmask : UInt32) : HRESULT
+    @lpVtbl.value.get_ad_object_flags.call(this, pdwflags, dwmask)
   end
-  def update_all_desktop_subscriptions : HRESULT
-    @lpVtbl.value.update_all_desktop_subscriptions.unsafe_as(Proc(HRESULT)).call
+  def update_all_desktop_subscriptions(this : IADesktopP2*) : HRESULT
+    @lpVtbl.value.update_all_desktop_subscriptions.call(this)
   end
-  def make_dynamic_changes(poleobj : IOleObject) : HRESULT
-    @lpVtbl.value.make_dynamic_changes.unsafe_as(Proc(IOleObject, HRESULT)).call(poleobj)
+  def make_dynamic_changes(this : IADesktopP2*, poleobj : IOleObject) : HRESULT
+    @lpVtbl.value.make_dynamic_changes.call(this, poleobj)
   end
 end

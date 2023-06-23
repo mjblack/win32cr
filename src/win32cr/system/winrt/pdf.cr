@@ -29,11 +29,11 @@ lib LibWin32
 
 
   struct IPdfRendererNativeVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    render_page_to_surface : UInt64
-    render_page_to_device_context : UInt64
+    query_interface : Proc(IPdfRendererNative*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPdfRendererNative*, UInt32)
+    release : Proc(IPdfRendererNative*, UInt32)
+    render_page_to_surface : Proc(IPdfRendererNative*, IUnknown, IDXGISurface, POINT, PDF_RENDER_PARAMS*, HRESULT)
+    render_page_to_device_context : Proc(IPdfRendererNative*, IUnknown, ID2D1DeviceContext, PDF_RENDER_PARAMS*, HRESULT)
   end
 
   IPdfRendererNative_GUID = "7d9dcd91-d277-4947-8527-07a0daeda94a"
@@ -47,19 +47,19 @@ lib LibWin32
   fun PdfCreateRenderer(pdevice : IDXGIDevice, pprenderer : IPdfRendererNative*) : HRESULT
 end
 struct LibWin32::IPdfRendererNative
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPdfRendererNative*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPdfRendererNative*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPdfRendererNative*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def render_page_to_surface(pdfpage : IUnknown, psurface : IDXGISurface, offset : POINT, prenderparams : PDF_RENDER_PARAMS*) : HRESULT
-    @lpVtbl.value.render_page_to_surface.unsafe_as(Proc(IUnknown, IDXGISurface, POINT, PDF_RENDER_PARAMS*, HRESULT)).call(pdfpage, psurface, offset, prenderparams)
+  def render_page_to_surface(this : IPdfRendererNative*, pdfpage : IUnknown, psurface : IDXGISurface, offset : POINT, prenderparams : PDF_RENDER_PARAMS*) : HRESULT
+    @lpVtbl.value.render_page_to_surface.call(this, pdfpage, psurface, offset, prenderparams)
   end
-  def render_page_to_device_context(pdfpage : IUnknown, pd2ddevicecontext : ID2D1DeviceContext, prenderparams : PDF_RENDER_PARAMS*) : HRESULT
-    @lpVtbl.value.render_page_to_device_context.unsafe_as(Proc(IUnknown, ID2D1DeviceContext, PDF_RENDER_PARAMS*, HRESULT)).call(pdfpage, pd2ddevicecontext, prenderparams)
+  def render_page_to_device_context(this : IPdfRendererNative*, pdfpage : IUnknown, pd2ddevicecontext : ID2D1DeviceContext, prenderparams : PDF_RENDER_PARAMS*) : HRESULT
+    @lpVtbl.value.render_page_to_device_context.call(this, pdfpage, pd2ddevicecontext, prenderparams)
   end
 end

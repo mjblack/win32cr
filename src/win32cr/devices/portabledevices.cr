@@ -1158,13 +1158,13 @@ lib LibWin32
 
 
   struct IWpdSerializerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_i_portable_device_values_from_buffer : UInt64
-    write_i_portable_device_values_to_buffer : UInt64
-    get_buffer_from_i_portable_device_values : UInt64
-    get_serialized_size : UInt64
+    query_interface : Proc(IWpdSerializer*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWpdSerializer*, UInt32)
+    release : Proc(IWpdSerializer*, UInt32)
+    get_i_portable_device_values_from_buffer : Proc(IWpdSerializer*, UInt8*, UInt32, IPortableDeviceValues*, HRESULT)
+    write_i_portable_device_values_to_buffer : Proc(IWpdSerializer*, UInt32, IPortableDeviceValues, UInt8*, UInt32*, HRESULT)
+    get_buffer_from_i_portable_device_values : Proc(IWpdSerializer*, IPortableDeviceValues, UInt8**, UInt32*, HRESULT)
+    get_serialized_size : Proc(IWpdSerializer*, IPortableDeviceValues, UInt32*, HRESULT)
   end
 
   IWpdSerializer_GUID = "b32f4002-bb27-45ff-af4f-06631c1e8dad"
@@ -1174,49 +1174,49 @@ lib LibWin32
   end
 
   struct IPortableDeviceValuesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_count : UInt64
-    get_at : UInt64
-    set_value : UInt64
-    get_value : UInt64
-    set_string_value : UInt64
-    get_string_value : UInt64
-    set_unsigned_integer_value : UInt64
-    get_unsigned_integer_value : UInt64
-    set_signed_integer_value : UInt64
-    get_signed_integer_value : UInt64
-    set_unsigned_large_integer_value : UInt64
-    get_unsigned_large_integer_value : UInt64
-    set_signed_large_integer_value : UInt64
-    get_signed_large_integer_value : UInt64
-    set_float_value : UInt64
-    get_float_value : UInt64
-    set_error_value : UInt64
-    get_error_value : UInt64
-    set_key_value : UInt64
-    get_key_value : UInt64
-    set_bool_value : UInt64
-    get_bool_value : UInt64
-    set_i_unknown_value : UInt64
-    get_i_unknown_value : UInt64
-    set_guid_value : UInt64
-    get_guid_value : UInt64
-    set_buffer_value : UInt64
-    get_buffer_value : UInt64
-    set_i_portable_device_values_value : UInt64
-    get_i_portable_device_values_value : UInt64
-    set_i_portable_device_prop_variant_collection_value : UInt64
-    get_i_portable_device_prop_variant_collection_value : UInt64
-    set_i_portable_device_key_collection_value : UInt64
-    get_i_portable_device_key_collection_value : UInt64
-    set_i_portable_device_values_collection_value : UInt64
-    get_i_portable_device_values_collection_value : UInt64
-    remove_value : UInt64
-    copy_values_from_property_store : UInt64
-    copy_values_to_property_store : UInt64
-    clear : UInt64
+    query_interface : Proc(IPortableDeviceValues*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceValues*, UInt32)
+    release : Proc(IPortableDeviceValues*, UInt32)
+    get_count : Proc(IPortableDeviceValues*, UInt32*, HRESULT)
+    get_at : Proc(IPortableDeviceValues*, UInt32, PROPERTYKEY*, PROPVARIANT*, HRESULT)
+    set_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
+    get_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
+    set_string_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, LibC::LPWSTR, HRESULT)
+    get_string_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, LibC::LPWSTR*, HRESULT)
+    set_unsigned_integer_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, UInt32, HRESULT)
+    get_unsigned_integer_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, UInt32*, HRESULT)
+    set_signed_integer_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, Int32, HRESULT)
+    get_signed_integer_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, Int32*, HRESULT)
+    set_unsigned_large_integer_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, UInt64, HRESULT)
+    get_unsigned_large_integer_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, UInt64*, HRESULT)
+    set_signed_large_integer_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, Int64, HRESULT)
+    get_signed_large_integer_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, Int64*, HRESULT)
+    set_float_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, Float32, HRESULT)
+    get_float_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, Float32*, HRESULT)
+    set_error_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, HRESULT, HRESULT)
+    get_error_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, HRESULT*, HRESULT)
+    set_key_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, PROPERTYKEY*, HRESULT)
+    get_key_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, PROPERTYKEY*, HRESULT)
+    set_bool_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, LibC::BOOL, HRESULT)
+    get_bool_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, LibC::BOOL*, HRESULT)
+    set_i_unknown_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, IUnknown, HRESULT)
+    get_i_unknown_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, IUnknown*, HRESULT)
+    set_guid_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, Guid*, HRESULT)
+    get_guid_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, Guid*, HRESULT)
+    set_buffer_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, UInt8*, UInt32, HRESULT)
+    get_buffer_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, UInt8**, UInt32*, HRESULT)
+    set_i_portable_device_values_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, IPortableDeviceValues, HRESULT)
+    get_i_portable_device_values_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, IPortableDeviceValues*, HRESULT)
+    set_i_portable_device_prop_variant_collection_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, IPortableDevicePropVariantCollection, HRESULT)
+    get_i_portable_device_prop_variant_collection_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, IPortableDevicePropVariantCollection*, HRESULT)
+    set_i_portable_device_key_collection_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, IPortableDeviceKeyCollection, HRESULT)
+    get_i_portable_device_key_collection_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, IPortableDeviceKeyCollection*, HRESULT)
+    set_i_portable_device_values_collection_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, IPortableDeviceValuesCollection, HRESULT)
+    get_i_portable_device_values_collection_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, IPortableDeviceValuesCollection*, HRESULT)
+    remove_value : Proc(IPortableDeviceValues*, PROPERTYKEY*, HRESULT)
+    copy_values_from_property_store : Proc(IPortableDeviceValues*, IPropertyStore, HRESULT)
+    copy_values_to_property_store : Proc(IPortableDeviceValues*, IPropertyStore, HRESULT)
+    clear : Proc(IPortableDeviceValues*, HRESULT)
   end
 
   IPortableDeviceValues_GUID = "6848f6f2-3155-4f86-b6f5-263eeeab3143"
@@ -1226,14 +1226,14 @@ lib LibWin32
   end
 
   struct IPortableDeviceKeyCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_count : UInt64
-    get_at : UInt64
-    add : UInt64
-    clear : UInt64
-    remove_at : UInt64
+    query_interface : Proc(IPortableDeviceKeyCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceKeyCollection*, UInt32)
+    release : Proc(IPortableDeviceKeyCollection*, UInt32)
+    get_count : Proc(IPortableDeviceKeyCollection*, UInt32*, HRESULT)
+    get_at : Proc(IPortableDeviceKeyCollection*, UInt32, PROPERTYKEY*, HRESULT)
+    add : Proc(IPortableDeviceKeyCollection*, PROPERTYKEY*, HRESULT)
+    clear : Proc(IPortableDeviceKeyCollection*, HRESULT)
+    remove_at : Proc(IPortableDeviceKeyCollection*, UInt32, HRESULT)
   end
 
   IPortableDeviceKeyCollection_GUID = "dada2357-e0ad-492e-98db-dd61c53ba353"
@@ -1243,16 +1243,16 @@ lib LibWin32
   end
 
   struct IPortableDevicePropVariantCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_count : UInt64
-    get_at : UInt64
-    add : UInt64
-    get_type : UInt64
-    change_type : UInt64
-    clear : UInt64
-    remove_at : UInt64
+    query_interface : Proc(IPortableDevicePropVariantCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDevicePropVariantCollection*, UInt32)
+    release : Proc(IPortableDevicePropVariantCollection*, UInt32)
+    get_count : Proc(IPortableDevicePropVariantCollection*, UInt32*, HRESULT)
+    get_at : Proc(IPortableDevicePropVariantCollection*, UInt32, PROPVARIANT*, HRESULT)
+    add : Proc(IPortableDevicePropVariantCollection*, PROPVARIANT*, HRESULT)
+    get_type : Proc(IPortableDevicePropVariantCollection*, UInt16*, HRESULT)
+    change_type : Proc(IPortableDevicePropVariantCollection*, UInt16, HRESULT)
+    clear : Proc(IPortableDevicePropVariantCollection*, HRESULT)
+    remove_at : Proc(IPortableDevicePropVariantCollection*, UInt32, HRESULT)
   end
 
   IPortableDevicePropVariantCollection_GUID = "89b2e422-4f1b-4316-bcef-a44afea83eb3"
@@ -1262,14 +1262,14 @@ lib LibWin32
   end
 
   struct IPortableDeviceValuesCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_count : UInt64
-    get_at : UInt64
-    add : UInt64
-    clear : UInt64
-    remove_at : UInt64
+    query_interface : Proc(IPortableDeviceValuesCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceValuesCollection*, UInt32)
+    release : Proc(IPortableDeviceValuesCollection*, UInt32)
+    get_count : Proc(IPortableDeviceValuesCollection*, UInt32*, HRESULT)
+    get_at : Proc(IPortableDeviceValuesCollection*, UInt32, IPortableDeviceValues*, HRESULT)
+    add : Proc(IPortableDeviceValuesCollection*, IPortableDeviceValues, HRESULT)
+    clear : Proc(IPortableDeviceValuesCollection*, HRESULT)
+    remove_at : Proc(IPortableDeviceValuesCollection*, UInt32, HRESULT)
   end
 
   IPortableDeviceValuesCollection_GUID = "6e3f2d79-4e07-48c4-8208-d8c2e5af4a99"
@@ -1279,16 +1279,16 @@ lib LibWin32
   end
 
   struct IPortableDeviceManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_devices : UInt64
-    refresh_device_list : UInt64
-    get_device_friendly_name : UInt64
-    get_device_description : UInt64
-    get_device_manufacturer : UInt64
-    get_device_property : UInt64
-    get_private_devices : UInt64
+    query_interface : Proc(IPortableDeviceManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceManager*, UInt32)
+    release : Proc(IPortableDeviceManager*, UInt32)
+    get_devices : Proc(IPortableDeviceManager*, LibC::LPWSTR*, UInt32*, HRESULT)
+    refresh_device_list : Proc(IPortableDeviceManager*, HRESULT)
+    get_device_friendly_name : Proc(IPortableDeviceManager*, LibC::LPWSTR, LibC::LPWSTR, UInt32*, HRESULT)
+    get_device_description : Proc(IPortableDeviceManager*, LibC::LPWSTR, LibC::LPWSTR, UInt32*, HRESULT)
+    get_device_manufacturer : Proc(IPortableDeviceManager*, LibC::LPWSTR, LibC::LPWSTR, UInt32*, HRESULT)
+    get_device_property : Proc(IPortableDeviceManager*, LibC::LPWSTR, LibC::LPWSTR, UInt8*, UInt32*, UInt32*, HRESULT)
+    get_private_devices : Proc(IPortableDeviceManager*, LibC::LPWSTR*, UInt32*, HRESULT)
   end
 
   IPortableDeviceManager_GUID = "a1567595-4c2f-4574-a6fa-ecef917b9a40"
@@ -1298,18 +1298,18 @@ lib LibWin32
   end
 
   struct IPortableDeviceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    open : UInt64
-    send_command : UInt64
-    content : UInt64
-    capabilities : UInt64
-    cancel : UInt64
-    close : UInt64
-    advise : UInt64
-    unadvise : UInt64
-    get_pn_p_device_id : UInt64
+    query_interface : Proc(IPortableDevice*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDevice*, UInt32)
+    release : Proc(IPortableDevice*, UInt32)
+    open : Proc(IPortableDevice*, LibC::LPWSTR, IPortableDeviceValues, HRESULT)
+    send_command : Proc(IPortableDevice*, UInt32, IPortableDeviceValues, IPortableDeviceValues*, HRESULT)
+    content : Proc(IPortableDevice*, IPortableDeviceContent*, HRESULT)
+    capabilities : Proc(IPortableDevice*, IPortableDeviceCapabilities*, HRESULT)
+    cancel : Proc(IPortableDevice*, HRESULT)
+    close : Proc(IPortableDevice*, HRESULT)
+    advise : Proc(IPortableDevice*, UInt32, IPortableDeviceEventCallback, IPortableDeviceValues, LibC::LPWSTR*, HRESULT)
+    unadvise : Proc(IPortableDevice*, LibC::LPWSTR, HRESULT)
+    get_pn_p_device_id : Proc(IPortableDevice*, LibC::LPWSTR*, HRESULT)
   end
 
   IPortableDevice_GUID = "625e2df8-6392-4cf0-9ad1-3cfa5f17775c"
@@ -1319,19 +1319,19 @@ lib LibWin32
   end
 
   struct IPortableDeviceContentVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    enum_objects : UInt64
-    properties : UInt64
-    transfer : UInt64
-    create_object_with_properties_only : UInt64
-    create_object_with_properties_and_data : UInt64
-    delete : UInt64
-    get_object_i_ds_from_persistent_unique_i_ds : UInt64
-    cancel : UInt64
-    move : UInt64
-    copy : UInt64
+    query_interface : Proc(IPortableDeviceContent*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceContent*, UInt32)
+    release : Proc(IPortableDeviceContent*, UInt32)
+    enum_objects : Proc(IPortableDeviceContent*, UInt32, LibC::LPWSTR, IPortableDeviceValues, IEnumPortableDeviceObjectIDs*, HRESULT)
+    properties : Proc(IPortableDeviceContent*, IPortableDeviceProperties*, HRESULT)
+    transfer : Proc(IPortableDeviceContent*, IPortableDeviceResources*, HRESULT)
+    create_object_with_properties_only : Proc(IPortableDeviceContent*, IPortableDeviceValues, LibC::LPWSTR*, HRESULT)
+    create_object_with_properties_and_data : Proc(IPortableDeviceContent*, IPortableDeviceValues, IStream*, UInt32*, LibC::LPWSTR*, HRESULT)
+    delete : Proc(IPortableDeviceContent*, UInt32, IPortableDevicePropVariantCollection, IPortableDevicePropVariantCollection*, HRESULT)
+    get_object_i_ds_from_persistent_unique_i_ds : Proc(IPortableDeviceContent*, IPortableDevicePropVariantCollection, IPortableDevicePropVariantCollection*, HRESULT)
+    cancel : Proc(IPortableDeviceContent*, HRESULT)
+    move : Proc(IPortableDeviceContent*, IPortableDevicePropVariantCollection, LibC::LPWSTR, IPortableDevicePropVariantCollection*, HRESULT)
+    copy : Proc(IPortableDeviceContent*, IPortableDevicePropVariantCollection, LibC::LPWSTR, IPortableDevicePropVariantCollection*, HRESULT)
   end
 
   IPortableDeviceContent_GUID = "6a96ed84-7c73-4480-9938-bf5af477d426"
@@ -1341,20 +1341,20 @@ lib LibWin32
   end
 
   struct IPortableDeviceContent2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    enum_objects : UInt64
-    properties : UInt64
-    transfer : UInt64
-    create_object_with_properties_only : UInt64
-    create_object_with_properties_and_data : UInt64
-    delete : UInt64
-    get_object_i_ds_from_persistent_unique_i_ds : UInt64
-    cancel : UInt64
-    move : UInt64
-    copy : UInt64
-    update_object_with_properties_and_data : UInt64
+    query_interface : Proc(IPortableDeviceContent2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceContent2*, UInt32)
+    release : Proc(IPortableDeviceContent2*, UInt32)
+    enum_objects : Proc(IPortableDeviceContent2*, UInt32, LibC::LPWSTR, IPortableDeviceValues, IEnumPortableDeviceObjectIDs*, HRESULT)
+    properties : Proc(IPortableDeviceContent2*, IPortableDeviceProperties*, HRESULT)
+    transfer : Proc(IPortableDeviceContent2*, IPortableDeviceResources*, HRESULT)
+    create_object_with_properties_only : Proc(IPortableDeviceContent2*, IPortableDeviceValues, LibC::LPWSTR*, HRESULT)
+    create_object_with_properties_and_data : Proc(IPortableDeviceContent2*, IPortableDeviceValues, IStream*, UInt32*, LibC::LPWSTR*, HRESULT)
+    delete : Proc(IPortableDeviceContent2*, UInt32, IPortableDevicePropVariantCollection, IPortableDevicePropVariantCollection*, HRESULT)
+    get_object_i_ds_from_persistent_unique_i_ds : Proc(IPortableDeviceContent2*, IPortableDevicePropVariantCollection, IPortableDevicePropVariantCollection*, HRESULT)
+    cancel : Proc(IPortableDeviceContent2*, HRESULT)
+    move : Proc(IPortableDeviceContent2*, IPortableDevicePropVariantCollection, LibC::LPWSTR, IPortableDevicePropVariantCollection*, HRESULT)
+    copy : Proc(IPortableDeviceContent2*, IPortableDevicePropVariantCollection, LibC::LPWSTR, IPortableDevicePropVariantCollection*, HRESULT)
+    update_object_with_properties_and_data : Proc(IPortableDeviceContent2*, LibC::LPWSTR, IPortableDeviceValues, IStream*, UInt32*, HRESULT)
   end
 
   IPortableDeviceContent2_GUID = "9b4add96-f6bf-4034-8708-eca72bf10554"
@@ -1364,14 +1364,14 @@ lib LibWin32
   end
 
   struct IEnumPortableDeviceObjectIDsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    next : UInt64
-    skip : UInt64
-    reset : UInt64
-    clone : UInt64
-    cancel : UInt64
+    query_interface : Proc(IEnumPortableDeviceObjectIDs*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEnumPortableDeviceObjectIDs*, UInt32)
+    release : Proc(IEnumPortableDeviceObjectIDs*, UInt32)
+    next : Proc(IEnumPortableDeviceObjectIDs*, UInt32, LibC::LPWSTR*, UInt32*, HRESULT)
+    skip : Proc(IEnumPortableDeviceObjectIDs*, UInt32, HRESULT)
+    reset : Proc(IEnumPortableDeviceObjectIDs*, HRESULT)
+    clone : Proc(IEnumPortableDeviceObjectIDs*, IEnumPortableDeviceObjectIDs*, HRESULT)
+    cancel : Proc(IEnumPortableDeviceObjectIDs*, HRESULT)
   end
 
   IEnumPortableDeviceObjectIDs_GUID = "10ece955-cf41-4728-bfa0-41eedf1bbf19"
@@ -1381,15 +1381,15 @@ lib LibWin32
   end
 
   struct IPortableDevicePropertiesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_supported_properties : UInt64
-    get_property_attributes : UInt64
-    get_values : UInt64
-    set_values : UInt64
-    delete : UInt64
-    cancel : UInt64
+    query_interface : Proc(IPortableDeviceProperties*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceProperties*, UInt32)
+    release : Proc(IPortableDeviceProperties*, UInt32)
+    get_supported_properties : Proc(IPortableDeviceProperties*, LibC::LPWSTR, IPortableDeviceKeyCollection*, HRESULT)
+    get_property_attributes : Proc(IPortableDeviceProperties*, LibC::LPWSTR, PROPERTYKEY*, IPortableDeviceValues*, HRESULT)
+    get_values : Proc(IPortableDeviceProperties*, LibC::LPWSTR, IPortableDeviceKeyCollection, IPortableDeviceValues*, HRESULT)
+    set_values : Proc(IPortableDeviceProperties*, LibC::LPWSTR, IPortableDeviceValues, IPortableDeviceValues*, HRESULT)
+    delete : Proc(IPortableDeviceProperties*, LibC::LPWSTR, IPortableDeviceKeyCollection, HRESULT)
+    cancel : Proc(IPortableDeviceProperties*, HRESULT)
   end
 
   IPortableDeviceProperties_GUID = "7f6d695c-03df-4439-a809-59266beee3a6"
@@ -1399,15 +1399,15 @@ lib LibWin32
   end
 
   struct IPortableDeviceResourcesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_supported_resources : UInt64
-    get_resource_attributes : UInt64
-    get_stream : UInt64
-    delete : UInt64
-    cancel : UInt64
-    create_resource : UInt64
+    query_interface : Proc(IPortableDeviceResources*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceResources*, UInt32)
+    release : Proc(IPortableDeviceResources*, UInt32)
+    get_supported_resources : Proc(IPortableDeviceResources*, LibC::LPWSTR, IPortableDeviceKeyCollection*, HRESULT)
+    get_resource_attributes : Proc(IPortableDeviceResources*, LibC::LPWSTR, PROPERTYKEY*, IPortableDeviceValues*, HRESULT)
+    get_stream : Proc(IPortableDeviceResources*, LibC::LPWSTR, PROPERTYKEY*, UInt32, UInt32*, IStream*, HRESULT)
+    delete : Proc(IPortableDeviceResources*, LibC::LPWSTR, IPortableDeviceKeyCollection, HRESULT)
+    cancel : Proc(IPortableDeviceResources*, HRESULT)
+    create_resource : Proc(IPortableDeviceResources*, IPortableDeviceValues, IStream*, UInt32*, LibC::LPWSTR*, HRESULT)
   end
 
   IPortableDeviceResources_GUID = "fd8878ac-d841-4d17-891c-e6829cdb6934"
@@ -1417,20 +1417,20 @@ lib LibWin32
   end
 
   struct IPortableDeviceCapabilitiesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_supported_commands : UInt64
-    get_command_options : UInt64
-    get_functional_categories : UInt64
-    get_functional_objects : UInt64
-    get_supported_content_types : UInt64
-    get_supported_formats : UInt64
-    get_supported_format_properties : UInt64
-    get_fixed_property_attributes : UInt64
-    cancel : UInt64
-    get_supported_events : UInt64
-    get_event_options : UInt64
+    query_interface : Proc(IPortableDeviceCapabilities*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceCapabilities*, UInt32)
+    release : Proc(IPortableDeviceCapabilities*, UInt32)
+    get_supported_commands : Proc(IPortableDeviceCapabilities*, IPortableDeviceKeyCollection*, HRESULT)
+    get_command_options : Proc(IPortableDeviceCapabilities*, PROPERTYKEY*, IPortableDeviceValues*, HRESULT)
+    get_functional_categories : Proc(IPortableDeviceCapabilities*, IPortableDevicePropVariantCollection*, HRESULT)
+    get_functional_objects : Proc(IPortableDeviceCapabilities*, Guid*, IPortableDevicePropVariantCollection*, HRESULT)
+    get_supported_content_types : Proc(IPortableDeviceCapabilities*, Guid*, IPortableDevicePropVariantCollection*, HRESULT)
+    get_supported_formats : Proc(IPortableDeviceCapabilities*, Guid*, IPortableDevicePropVariantCollection*, HRESULT)
+    get_supported_format_properties : Proc(IPortableDeviceCapabilities*, Guid*, IPortableDeviceKeyCollection*, HRESULT)
+    get_fixed_property_attributes : Proc(IPortableDeviceCapabilities*, Guid*, PROPERTYKEY*, IPortableDeviceValues*, HRESULT)
+    cancel : Proc(IPortableDeviceCapabilities*, HRESULT)
+    get_supported_events : Proc(IPortableDeviceCapabilities*, IPortableDevicePropVariantCollection*, HRESULT)
+    get_event_options : Proc(IPortableDeviceCapabilities*, Guid*, IPortableDeviceValues*, HRESULT)
   end
 
   IPortableDeviceCapabilities_GUID = "2c8c6dbf-e3dc-4061-becc-8542e810d126"
@@ -1440,10 +1440,10 @@ lib LibWin32
   end
 
   struct IPortableDeviceEventCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_event : UInt64
+    query_interface : Proc(IPortableDeviceEventCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceEventCallback*, UInt32)
+    release : Proc(IPortableDeviceEventCallback*, UInt32)
+    on_event : Proc(IPortableDeviceEventCallback*, IPortableDeviceValues, HRESULT)
   end
 
   IPortableDeviceEventCallback_GUID = "a8792a31-f385-493c-a893-40f64eb45f6e"
@@ -1453,22 +1453,22 @@ lib LibWin32
   end
 
   struct IPortableDeviceDataStreamVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    read : UInt64
-    write : UInt64
-    seek : UInt64
-    set_size : UInt64
-    copy_to : UInt64
-    commit : UInt64
-    revert : UInt64
-    lock_region : UInt64
-    unlock_region : UInt64
-    stat : UInt64
-    clone : UInt64
-    get_object_id : UInt64
-    cancel : UInt64
+    query_interface : Proc(IPortableDeviceDataStream*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceDataStream*, UInt32)
+    release : Proc(IPortableDeviceDataStream*, UInt32)
+    read : Proc(IPortableDeviceDataStream*, Void*, UInt32, UInt32*, HRESULT)
+    write : Proc(IPortableDeviceDataStream*, Void*, UInt32, UInt32*, HRESULT)
+    seek : Proc(IPortableDeviceDataStream*, LARGE_INTEGER, STREAM_SEEK, ULARGE_INTEGER*, HRESULT)
+    set_size : Proc(IPortableDeviceDataStream*, ULARGE_INTEGER, HRESULT)
+    copy_to : Proc(IPortableDeviceDataStream*, IStream, ULARGE_INTEGER, ULARGE_INTEGER*, ULARGE_INTEGER*, HRESULT)
+    commit : Proc(IPortableDeviceDataStream*, UInt32, HRESULT)
+    revert : Proc(IPortableDeviceDataStream*, HRESULT)
+    lock_region : Proc(IPortableDeviceDataStream*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
+    unlock_region : Proc(IPortableDeviceDataStream*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
+    stat : Proc(IPortableDeviceDataStream*, STATSTG*, UInt32, HRESULT)
+    clone : Proc(IPortableDeviceDataStream*, IStream*, HRESULT)
+    get_object_id : Proc(IPortableDeviceDataStream*, LibC::LPWSTR*, HRESULT)
+    cancel : Proc(IPortableDeviceDataStream*, HRESULT)
   end
 
   IPortableDeviceDataStream_GUID = "88e04db3-1012-4d64-9996-f703a950d3f4"
@@ -1478,11 +1478,11 @@ lib LibWin32
   end
 
   struct IPortableDeviceUnitsStreamVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    seek_in_units : UInt64
-    cancel : UInt64
+    query_interface : Proc(IPortableDeviceUnitsStream*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceUnitsStream*, UInt32)
+    release : Proc(IPortableDeviceUnitsStream*, UInt32)
+    seek_in_units : Proc(IPortableDeviceUnitsStream*, LARGE_INTEGER, WPD_STREAM_UNITS, UInt32, ULARGE_INTEGER*, HRESULT)
+    cancel : Proc(IPortableDeviceUnitsStream*, HRESULT)
   end
 
   IPortableDeviceUnitsStream_GUID = "5e98025f-bfc4-47a2-9a5f-bc900a507c67"
@@ -1492,14 +1492,14 @@ lib LibWin32
   end
 
   struct IPortableDevicePropertiesBulkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    queue_get_values_by_object_list : UInt64
-    queue_get_values_by_object_format : UInt64
-    queue_set_values_by_object_list : UInt64
-    start : UInt64
-    cancel : UInt64
+    query_interface : Proc(IPortableDevicePropertiesBulk*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDevicePropertiesBulk*, UInt32)
+    release : Proc(IPortableDevicePropertiesBulk*, UInt32)
+    queue_get_values_by_object_list : Proc(IPortableDevicePropertiesBulk*, IPortableDevicePropVariantCollection, IPortableDeviceKeyCollection, IPortableDevicePropertiesBulkCallback, Guid*, HRESULT)
+    queue_get_values_by_object_format : Proc(IPortableDevicePropertiesBulk*, Guid*, LibC::LPWSTR, UInt32, IPortableDeviceKeyCollection, IPortableDevicePropertiesBulkCallback, Guid*, HRESULT)
+    queue_set_values_by_object_list : Proc(IPortableDevicePropertiesBulk*, IPortableDeviceValuesCollection, IPortableDevicePropertiesBulkCallback, Guid*, HRESULT)
+    start : Proc(IPortableDevicePropertiesBulk*, Guid*, HRESULT)
+    cancel : Proc(IPortableDevicePropertiesBulk*, Guid*, HRESULT)
   end
 
   IPortableDevicePropertiesBulk_GUID = "482b05c0-4056-44ed-9e0f-5e23b009da93"
@@ -1509,12 +1509,12 @@ lib LibWin32
   end
 
   struct IPortableDevicePropertiesBulkCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_start : UInt64
-    on_progress : UInt64
-    on_end : UInt64
+    query_interface : Proc(IPortableDevicePropertiesBulkCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDevicePropertiesBulkCallback*, UInt32)
+    release : Proc(IPortableDevicePropertiesBulkCallback*, UInt32)
+    on_start : Proc(IPortableDevicePropertiesBulkCallback*, Guid*, HRESULT)
+    on_progress : Proc(IPortableDevicePropertiesBulkCallback*, Guid*, IPortableDeviceValuesCollection, HRESULT)
+    on_end : Proc(IPortableDevicePropertiesBulkCallback*, Guid*, HRESULT, HRESULT)
   end
 
   IPortableDevicePropertiesBulkCallback_GUID = "9deacb80-11e8-40e3-a9f3-f557986a7845"
@@ -1524,11 +1524,11 @@ lib LibWin32
   end
 
   struct IPortableDeviceServiceManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device_services : UInt64
-    get_device_for_service : UInt64
+    query_interface : Proc(IPortableDeviceServiceManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceServiceManager*, UInt32)
+    release : Proc(IPortableDeviceServiceManager*, UInt32)
+    get_device_services : Proc(IPortableDeviceServiceManager*, LibC::LPWSTR, Guid*, LibC::LPWSTR*, UInt32*, HRESULT)
+    get_device_for_service : Proc(IPortableDeviceServiceManager*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
   end
 
   IPortableDeviceServiceManager_GUID = "a8abc4e9-a84a-47a9-80b3-c5d9b172a961"
@@ -1538,20 +1538,20 @@ lib LibWin32
   end
 
   struct IPortableDeviceServiceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    open : UInt64
-    capabilities : UInt64
-    content : UInt64
-    methods : UInt64
-    cancel : UInt64
-    close : UInt64
-    get_service_object_id : UInt64
-    get_pn_p_service_id : UInt64
-    advise : UInt64
-    unadvise : UInt64
-    send_command : UInt64
+    query_interface : Proc(IPortableDeviceService*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceService*, UInt32)
+    release : Proc(IPortableDeviceService*, UInt32)
+    open : Proc(IPortableDeviceService*, LibC::LPWSTR, IPortableDeviceValues, HRESULT)
+    capabilities : Proc(IPortableDeviceService*, IPortableDeviceServiceCapabilities*, HRESULT)
+    content : Proc(IPortableDeviceService*, IPortableDeviceContent2*, HRESULT)
+    methods : Proc(IPortableDeviceService*, IPortableDeviceServiceMethods*, HRESULT)
+    cancel : Proc(IPortableDeviceService*, HRESULT)
+    close : Proc(IPortableDeviceService*, HRESULT)
+    get_service_object_id : Proc(IPortableDeviceService*, LibC::LPWSTR*, HRESULT)
+    get_pn_p_service_id : Proc(IPortableDeviceService*, LibC::LPWSTR*, HRESULT)
+    advise : Proc(IPortableDeviceService*, UInt32, IPortableDeviceEventCallback, IPortableDeviceValues, LibC::LPWSTR*, HRESULT)
+    unadvise : Proc(IPortableDeviceService*, LibC::LPWSTR, HRESULT)
+    send_command : Proc(IPortableDeviceService*, UInt32, IPortableDeviceValues, IPortableDeviceValues*, HRESULT)
   end
 
   IPortableDeviceService_GUID = "d3bd3a44-d7b5-40a9-98b7-2fa4d01dec08"
@@ -1561,25 +1561,25 @@ lib LibWin32
   end
 
   struct IPortableDeviceServiceCapabilitiesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_supported_methods : UInt64
-    get_supported_methods_by_format : UInt64
-    get_method_attributes : UInt64
-    get_method_parameter_attributes : UInt64
-    get_supported_formats : UInt64
-    get_format_attributes : UInt64
-    get_supported_format_properties : UInt64
-    get_format_property_attributes : UInt64
-    get_supported_events : UInt64
-    get_event_attributes : UInt64
-    get_event_parameter_attributes : UInt64
-    get_inherited_services : UInt64
-    get_format_rendering_profiles : UInt64
-    get_supported_commands : UInt64
-    get_command_options : UInt64
-    cancel : UInt64
+    query_interface : Proc(IPortableDeviceServiceCapabilities*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceServiceCapabilities*, UInt32)
+    release : Proc(IPortableDeviceServiceCapabilities*, UInt32)
+    get_supported_methods : Proc(IPortableDeviceServiceCapabilities*, IPortableDevicePropVariantCollection*, HRESULT)
+    get_supported_methods_by_format : Proc(IPortableDeviceServiceCapabilities*, Guid*, IPortableDevicePropVariantCollection*, HRESULT)
+    get_method_attributes : Proc(IPortableDeviceServiceCapabilities*, Guid*, IPortableDeviceValues*, HRESULT)
+    get_method_parameter_attributes : Proc(IPortableDeviceServiceCapabilities*, Guid*, PROPERTYKEY*, IPortableDeviceValues*, HRESULT)
+    get_supported_formats : Proc(IPortableDeviceServiceCapabilities*, IPortableDevicePropVariantCollection*, HRESULT)
+    get_format_attributes : Proc(IPortableDeviceServiceCapabilities*, Guid*, IPortableDeviceValues*, HRESULT)
+    get_supported_format_properties : Proc(IPortableDeviceServiceCapabilities*, Guid*, IPortableDeviceKeyCollection*, HRESULT)
+    get_format_property_attributes : Proc(IPortableDeviceServiceCapabilities*, Guid*, PROPERTYKEY*, IPortableDeviceValues*, HRESULT)
+    get_supported_events : Proc(IPortableDeviceServiceCapabilities*, IPortableDevicePropVariantCollection*, HRESULT)
+    get_event_attributes : Proc(IPortableDeviceServiceCapabilities*, Guid*, IPortableDeviceValues*, HRESULT)
+    get_event_parameter_attributes : Proc(IPortableDeviceServiceCapabilities*, Guid*, PROPERTYKEY*, IPortableDeviceValues*, HRESULT)
+    get_inherited_services : Proc(IPortableDeviceServiceCapabilities*, UInt32, IPortableDevicePropVariantCollection*, HRESULT)
+    get_format_rendering_profiles : Proc(IPortableDeviceServiceCapabilities*, Guid*, IPortableDeviceValuesCollection*, HRESULT)
+    get_supported_commands : Proc(IPortableDeviceServiceCapabilities*, IPortableDeviceKeyCollection*, HRESULT)
+    get_command_options : Proc(IPortableDeviceServiceCapabilities*, PROPERTYKEY*, IPortableDeviceValues*, HRESULT)
+    cancel : Proc(IPortableDeviceServiceCapabilities*, HRESULT)
   end
 
   IPortableDeviceServiceCapabilities_GUID = "24dbd89d-413e-43e0-bd5b-197f3c56c886"
@@ -1589,12 +1589,12 @@ lib LibWin32
   end
 
   struct IPortableDeviceServiceMethodsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    invoke : UInt64
-    invoke_async : UInt64
-    cancel : UInt64
+    query_interface : Proc(IPortableDeviceServiceMethods*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceServiceMethods*, UInt32)
+    release : Proc(IPortableDeviceServiceMethods*, UInt32)
+    invoke : Proc(IPortableDeviceServiceMethods*, Guid*, IPortableDeviceValues, IPortableDeviceValues*, HRESULT)
+    invoke_async : Proc(IPortableDeviceServiceMethods*, Guid*, IPortableDeviceValues, IPortableDeviceServiceMethodCallback, HRESULT)
+    cancel : Proc(IPortableDeviceServiceMethods*, IPortableDeviceServiceMethodCallback, HRESULT)
   end
 
   IPortableDeviceServiceMethods_GUID = "e20333c9-fd34-412d-a381-cc6f2d820df7"
@@ -1604,10 +1604,10 @@ lib LibWin32
   end
 
   struct IPortableDeviceServiceMethodCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_complete : UInt64
+    query_interface : Proc(IPortableDeviceServiceMethodCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceServiceMethodCallback*, UInt32)
+    release : Proc(IPortableDeviceServiceMethodCallback*, UInt32)
+    on_complete : Proc(IPortableDeviceServiceMethodCallback*, HRESULT, IPortableDeviceValues, HRESULT)
   end
 
   IPortableDeviceServiceMethodCallback_GUID = "c424233c-afce-4828-a756-7ed7a2350083"
@@ -1617,11 +1617,11 @@ lib LibWin32
   end
 
   struct IPortableDeviceServiceActivationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    open_async : UInt64
-    cancel_open_async : UInt64
+    query_interface : Proc(IPortableDeviceServiceActivation*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceServiceActivation*, UInt32)
+    release : Proc(IPortableDeviceServiceActivation*, UInt32)
+    open_async : Proc(IPortableDeviceServiceActivation*, LibC::LPWSTR, IPortableDeviceValues, IPortableDeviceServiceOpenCallback, HRESULT)
+    cancel_open_async : Proc(IPortableDeviceServiceActivation*, HRESULT)
   end
 
   IPortableDeviceServiceActivation_GUID = "e56b0534-d9b9-425c-9b99-75f97cb3d7c8"
@@ -1631,10 +1631,10 @@ lib LibWin32
   end
 
   struct IPortableDeviceServiceOpenCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_complete : UInt64
+    query_interface : Proc(IPortableDeviceServiceOpenCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceServiceOpenCallback*, UInt32)
+    release : Proc(IPortableDeviceServiceOpenCallback*, UInt32)
+    on_complete : Proc(IPortableDeviceServiceOpenCallback*, HRESULT, HRESULT)
   end
 
   IPortableDeviceServiceOpenCallback_GUID = "bced49c8-8efe-41ed-960b-61313abd47a9"
@@ -1644,10 +1644,10 @@ lib LibWin32
   end
 
   struct IPortableDeviceDispatchFactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_device_dispatch : UInt64
+    query_interface : Proc(IPortableDeviceDispatchFactory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceDispatchFactory*, UInt32)
+    release : Proc(IPortableDeviceDispatchFactory*, UInt32)
+    get_device_dispatch : Proc(IPortableDeviceDispatchFactory*, LibC::LPWSTR, IDispatch*, HRESULT)
   end
 
   IPortableDeviceDispatchFactory_GUID = "5e1eafc3-e3d7-4132-96fa-759c0f9d1e0f"
@@ -1657,15 +1657,15 @@ lib LibWin32
   end
 
   struct IPortableDeviceWebControlVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_type_info_count : UInt64
-    get_type_info : UInt64
-    get_i_ds_of_names : UInt64
-    invoke : UInt64
-    get_device_from_id : UInt64
-    get_device_from_id_async : UInt64
+    query_interface : Proc(IPortableDeviceWebControl*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceWebControl*, UInt32)
+    release : Proc(IPortableDeviceWebControl*, UInt32)
+    get_type_info_count : Proc(IPortableDeviceWebControl*, UInt32*, HRESULT)
+    get_type_info : Proc(IPortableDeviceWebControl*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IPortableDeviceWebControl*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IPortableDeviceWebControl*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    get_device_from_id : Proc(IPortableDeviceWebControl*, UInt8*, IDispatch*, HRESULT)
+    get_device_from_id_async : Proc(IPortableDeviceWebControl*, UInt8*, IDispatch, IDispatch, HRESULT)
   end
 
   IPortableDeviceWebControl_GUID = "94fc7953-5ca1-483a-8aee-df52e7747d00"
@@ -1675,13 +1675,13 @@ lib LibWin32
   end
 
   struct IEnumPortableDeviceConnectorsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    next : UInt64
-    skip : UInt64
-    reset : UInt64
-    clone : UInt64
+    query_interface : Proc(IEnumPortableDeviceConnectors*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEnumPortableDeviceConnectors*, UInt32)
+    release : Proc(IEnumPortableDeviceConnectors*, UInt32)
+    next : Proc(IEnumPortableDeviceConnectors*, UInt32, IPortableDeviceConnector*, UInt32*, HRESULT)
+    skip : Proc(IEnumPortableDeviceConnectors*, UInt32, HRESULT)
+    reset : Proc(IEnumPortableDeviceConnectors*, HRESULT)
+    clone : Proc(IEnumPortableDeviceConnectors*, IEnumPortableDeviceConnectors*, HRESULT)
   end
 
   IEnumPortableDeviceConnectors_GUID = "bfdef549-9247-454f-bd82-06fe80853faa"
@@ -1691,15 +1691,15 @@ lib LibWin32
   end
 
   struct IPortableDeviceConnectorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    connect : UInt64
-    disconnect : UInt64
-    cancel : UInt64
-    get_property : UInt64
-    set_property : UInt64
-    get_pn_pid : UInt64
+    query_interface : Proc(IPortableDeviceConnector*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPortableDeviceConnector*, UInt32)
+    release : Proc(IPortableDeviceConnector*, UInt32)
+    connect : Proc(IPortableDeviceConnector*, IConnectionRequestCallback, HRESULT)
+    disconnect : Proc(IPortableDeviceConnector*, IConnectionRequestCallback, HRESULT)
+    cancel : Proc(IPortableDeviceConnector*, IConnectionRequestCallback, HRESULT)
+    get_property : Proc(IPortableDeviceConnector*, DEVPROPKEY*, UInt32*, UInt8**, UInt32*, HRESULT)
+    set_property : Proc(IPortableDeviceConnector*, DEVPROPKEY*, UInt32, UInt8*, UInt32, HRESULT)
+    get_pn_pid : Proc(IPortableDeviceConnector*, LibC::LPWSTR*, HRESULT)
   end
 
   IPortableDeviceConnector_GUID = "625e2df8-6392-4cf0-9ad1-3cfa5f17775c"
@@ -1709,10 +1709,10 @@ lib LibWin32
   end
 
   struct IConnectionRequestCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_complete : UInt64
+    query_interface : Proc(IConnectionRequestCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IConnectionRequestCallback*, UInt32)
+    release : Proc(IConnectionRequestCallback*, UInt32)
+    on_complete : Proc(IConnectionRequestCallback*, HRESULT, HRESULT)
   end
 
   IConnectionRequestCallback_GUID = "272c9ae0-7161-4ae0-91bd-9f448ee9c427"
@@ -1722,11 +1722,11 @@ lib LibWin32
   end
 
   struct IMediaRadioManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_radio_instances : UInt64
-    on_system_radio_state_change : UInt64
+    query_interface : Proc(IMediaRadioManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMediaRadioManager*, UInt32)
+    release : Proc(IMediaRadioManager*, UInt32)
+    get_radio_instances : Proc(IMediaRadioManager*, IRadioInstanceCollection*, HRESULT)
+    on_system_radio_state_change : Proc(IMediaRadioManager*, SYSTEM_RADIO_STATE, UInt32, HRESULT)
   end
 
   IMediaRadioManager_GUID = "6cfdcab5-fc47-42a5-9241-074b58830e73"
@@ -1736,11 +1736,11 @@ lib LibWin32
   end
 
   struct IRadioInstanceCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_count : UInt64
-    get_at : UInt64
+    query_interface : Proc(IRadioInstanceCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IRadioInstanceCollection*, UInt32)
+    release : Proc(IRadioInstanceCollection*, UInt32)
+    get_count : Proc(IRadioInstanceCollection*, UInt32*, HRESULT)
+    get_at : Proc(IRadioInstanceCollection*, UInt32, IRadioInstance*, HRESULT)
   end
 
   IRadioInstanceCollection_GUID = "e5791fae-5665-4e0c-95be-5fde31644185"
@@ -1750,16 +1750,16 @@ lib LibWin32
   end
 
   struct IRadioInstanceVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_radio_manager_signature : UInt64
-    get_instance_signature : UInt64
-    get_friendly_name : UInt64
-    get_radio_state : UInt64
-    set_radio_state : UInt64
-    is_multi_comm : UInt64
-    is_associating_device : UInt64
+    query_interface : Proc(IRadioInstance*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IRadioInstance*, UInt32)
+    release : Proc(IRadioInstance*, UInt32)
+    get_radio_manager_signature : Proc(IRadioInstance*, Guid*, HRESULT)
+    get_instance_signature : Proc(IRadioInstance*, UInt8**, HRESULT)
+    get_friendly_name : Proc(IRadioInstance*, UInt32, UInt8**, HRESULT)
+    get_radio_state : Proc(IRadioInstance*, DEVICE_RADIO_STATE*, HRESULT)
+    set_radio_state : Proc(IRadioInstance*, DEVICE_RADIO_STATE, UInt32, HRESULT)
+    is_multi_comm : Proc(IRadioInstance*, LibC::BOOL)
+    is_associating_device : Proc(IRadioInstance*, LibC::BOOL)
   end
 
   IRadioInstance_GUID = "70aa1c9e-f2b4-4c61-86d3-6b9fb75fd1a2"
@@ -1769,12 +1769,12 @@ lib LibWin32
   end
 
   struct IMediaRadioManagerNotifySinkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    on_instance_add : UInt64
-    on_instance_remove : UInt64
-    on_instance_radio_change : UInt64
+    query_interface : Proc(IMediaRadioManagerNotifySink*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMediaRadioManagerNotifySink*, UInt32)
+    release : Proc(IMediaRadioManagerNotifySink*, UInt32)
+    on_instance_add : Proc(IMediaRadioManagerNotifySink*, IRadioInstance, HRESULT)
+    on_instance_remove : Proc(IMediaRadioManagerNotifySink*, UInt8*, HRESULT)
+    on_instance_radio_change : Proc(IMediaRadioManagerNotifySink*, UInt8*, DEVICE_RADIO_STATE, HRESULT)
   end
 
   IMediaRadioManagerNotifySink_GUID = "89d81f5f-c147-49ed-a11c-77b20c31e7c9"
@@ -1788,1030 +1788,1030 @@ lib LibWin32
   fun DMProcessConfigXMLFiltered(pszxmlin : LibC::LPWSTR, rgszallowedcspnodes : LibC::LPWSTR*, dwnumallowedcspnodes : UInt32, pbstrxmlout : UInt8**) : HRESULT
 end
 struct LibWin32::IWpdSerializer
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWpdSerializer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWpdSerializer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWpdSerializer*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_i_portable_device_values_from_buffer(pbuffer : UInt8*, dwinputbufferlength : UInt32, ppparams : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.get_i_portable_device_values_from_buffer.unsafe_as(Proc(UInt8*, UInt32, IPortableDeviceValues*, HRESULT)).call(pbuffer, dwinputbufferlength, ppparams)
+  def get_i_portable_device_values_from_buffer(this : IWpdSerializer*, pbuffer : UInt8*, dwinputbufferlength : UInt32, ppparams : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.get_i_portable_device_values_from_buffer.call(this, pbuffer, dwinputbufferlength, ppparams)
   end
-  def write_i_portable_device_values_to_buffer(dwoutputbufferlength : UInt32, presults : IPortableDeviceValues, pbuffer : UInt8*, pdwbyteswritten : UInt32*) : HRESULT
-    @lpVtbl.value.write_i_portable_device_values_to_buffer.unsafe_as(Proc(UInt32, IPortableDeviceValues, UInt8*, UInt32*, HRESULT)).call(dwoutputbufferlength, presults, pbuffer, pdwbyteswritten)
+  def write_i_portable_device_values_to_buffer(this : IWpdSerializer*, dwoutputbufferlength : UInt32, presults : IPortableDeviceValues, pbuffer : UInt8*, pdwbyteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_i_portable_device_values_to_buffer.call(this, dwoutputbufferlength, presults, pbuffer, pdwbyteswritten)
   end
-  def get_buffer_from_i_portable_device_values(psource : IPortableDeviceValues, ppbuffer : UInt8**, pdwbuffersize : UInt32*) : HRESULT
-    @lpVtbl.value.get_buffer_from_i_portable_device_values.unsafe_as(Proc(IPortableDeviceValues, UInt8**, UInt32*, HRESULT)).call(psource, ppbuffer, pdwbuffersize)
+  def get_buffer_from_i_portable_device_values(this : IWpdSerializer*, psource : IPortableDeviceValues, ppbuffer : UInt8**, pdwbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer_from_i_portable_device_values.call(this, psource, ppbuffer, pdwbuffersize)
   end
-  def get_serialized_size(psource : IPortableDeviceValues, pdwsize : UInt32*) : HRESULT
-    @lpVtbl.value.get_serialized_size.unsafe_as(Proc(IPortableDeviceValues, UInt32*, HRESULT)).call(psource, pdwsize)
+  def get_serialized_size(this : IWpdSerializer*, psource : IPortableDeviceValues, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_serialized_size.call(this, psource, pdwsize)
   end
 end
 struct LibWin32::IPortableDeviceValues
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceValues*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceValues*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceValues*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_count(pcelt : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcelt)
+  def get_count(this : IPortableDeviceValues*, pcelt : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcelt)
   end
-  def get_at(index : UInt32, pkey : PROPERTYKEY*, pvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(index, pkey, pvalue)
+  def get_at(this : IPortableDeviceValues*, index : UInt32, pkey : PROPERTYKEY*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_at.call(this, index, pkey, pvalue)
   end
-  def set_value(key : PROPERTYKEY*, pvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.set_value.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(key, pvalue)
+  def set_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_value.call(this, key, pvalue)
   end
-  def get_value(key : PROPERTYKEY*, pvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_value.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(key, pvalue)
+  def get_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, key, pvalue)
   end
-  def set_string_value(key : PROPERTYKEY*, value : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_string_value.unsafe_as(Proc(PROPERTYKEY*, LibC::LPWSTR, HRESULT)).call(key, value)
+  def set_string_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, value : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_string_value.call(this, key, value)
   end
-  def get_string_value(key : PROPERTYKEY*, pvalue : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_string_value.unsafe_as(Proc(PROPERTYKEY*, LibC::LPWSTR*, HRESULT)).call(key, pvalue)
+  def get_string_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, pvalue : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_string_value.call(this, key, pvalue)
   end
-  def set_unsigned_integer_value(key : PROPERTYKEY*, value : UInt32) : HRESULT
-    @lpVtbl.value.set_unsigned_integer_value.unsafe_as(Proc(PROPERTYKEY*, UInt32, HRESULT)).call(key, value)
+  def set_unsigned_integer_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, value : UInt32) : HRESULT
+    @lpVtbl.value.set_unsigned_integer_value.call(this, key, value)
   end
-  def get_unsigned_integer_value(key : PROPERTYKEY*, pvalue : UInt32*) : HRESULT
-    @lpVtbl.value.get_unsigned_integer_value.unsafe_as(Proc(PROPERTYKEY*, UInt32*, HRESULT)).call(key, pvalue)
+  def get_unsigned_integer_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, pvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_unsigned_integer_value.call(this, key, pvalue)
   end
-  def set_signed_integer_value(key : PROPERTYKEY*, value : Int32) : HRESULT
-    @lpVtbl.value.set_signed_integer_value.unsafe_as(Proc(PROPERTYKEY*, Int32, HRESULT)).call(key, value)
+  def set_signed_integer_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, value : Int32) : HRESULT
+    @lpVtbl.value.set_signed_integer_value.call(this, key, value)
   end
-  def get_signed_integer_value(key : PROPERTYKEY*, pvalue : Int32*) : HRESULT
-    @lpVtbl.value.get_signed_integer_value.unsafe_as(Proc(PROPERTYKEY*, Int32*, HRESULT)).call(key, pvalue)
+  def get_signed_integer_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_signed_integer_value.call(this, key, pvalue)
   end
-  def set_unsigned_large_integer_value(key : PROPERTYKEY*, value : UInt64) : HRESULT
-    @lpVtbl.value.set_unsigned_large_integer_value.unsafe_as(Proc(PROPERTYKEY*, UInt64, HRESULT)).call(key, value)
+  def set_unsigned_large_integer_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, value : UInt64) : HRESULT
+    @lpVtbl.value.set_unsigned_large_integer_value.call(this, key, value)
   end
-  def get_unsigned_large_integer_value(key : PROPERTYKEY*, pvalue : UInt64*) : HRESULT
-    @lpVtbl.value.get_unsigned_large_integer_value.unsafe_as(Proc(PROPERTYKEY*, UInt64*, HRESULT)).call(key, pvalue)
+  def get_unsigned_large_integer_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, pvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_unsigned_large_integer_value.call(this, key, pvalue)
   end
-  def set_signed_large_integer_value(key : PROPERTYKEY*, value : Int64) : HRESULT
-    @lpVtbl.value.set_signed_large_integer_value.unsafe_as(Proc(PROPERTYKEY*, Int64, HRESULT)).call(key, value)
+  def set_signed_large_integer_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, value : Int64) : HRESULT
+    @lpVtbl.value.set_signed_large_integer_value.call(this, key, value)
   end
-  def get_signed_large_integer_value(key : PROPERTYKEY*, pvalue : Int64*) : HRESULT
-    @lpVtbl.value.get_signed_large_integer_value.unsafe_as(Proc(PROPERTYKEY*, Int64*, HRESULT)).call(key, pvalue)
+  def get_signed_large_integer_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, pvalue : Int64*) : HRESULT
+    @lpVtbl.value.get_signed_large_integer_value.call(this, key, pvalue)
   end
-  def set_float_value(key : PROPERTYKEY*, value : Float32) : HRESULT
-    @lpVtbl.value.set_float_value.unsafe_as(Proc(PROPERTYKEY*, Float32, HRESULT)).call(key, value)
+  def set_float_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, value : Float32) : HRESULT
+    @lpVtbl.value.set_float_value.call(this, key, value)
   end
-  def get_float_value(key : PROPERTYKEY*, pvalue : Float32*) : HRESULT
-    @lpVtbl.value.get_float_value.unsafe_as(Proc(PROPERTYKEY*, Float32*, HRESULT)).call(key, pvalue)
+  def get_float_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_float_value.call(this, key, pvalue)
   end
-  def set_error_value(key : PROPERTYKEY*, value : HRESULT) : HRESULT
-    @lpVtbl.value.set_error_value.unsafe_as(Proc(PROPERTYKEY*, HRESULT, HRESULT)).call(key, value)
+  def set_error_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, value : HRESULT) : HRESULT
+    @lpVtbl.value.set_error_value.call(this, key, value)
   end
-  def get_error_value(key : PROPERTYKEY*, pvalue : HRESULT*) : HRESULT
-    @lpVtbl.value.get_error_value.unsafe_as(Proc(PROPERTYKEY*, HRESULT*, HRESULT)).call(key, pvalue)
+  def get_error_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, pvalue : HRESULT*) : HRESULT
+    @lpVtbl.value.get_error_value.call(this, key, pvalue)
   end
-  def set_key_value(key : PROPERTYKEY*, value : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.set_key_value.unsafe_as(Proc(PROPERTYKEY*, PROPERTYKEY*, HRESULT)).call(key, value)
+  def set_key_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, value : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.set_key_value.call(this, key, value)
   end
-  def get_key_value(key : PROPERTYKEY*, pvalue : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.get_key_value.unsafe_as(Proc(PROPERTYKEY*, PROPERTYKEY*, HRESULT)).call(key, pvalue)
+  def get_key_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, pvalue : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.get_key_value.call(this, key, pvalue)
   end
-  def set_bool_value(key : PROPERTYKEY*, value : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_bool_value.unsafe_as(Proc(PROPERTYKEY*, LibC::BOOL, HRESULT)).call(key, value)
+  def set_bool_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, value : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_bool_value.call(this, key, value)
   end
-  def get_bool_value(key : PROPERTYKEY*, pvalue : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_bool_value.unsafe_as(Proc(PROPERTYKEY*, LibC::BOOL*, HRESULT)).call(key, pvalue)
+  def get_bool_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, pvalue : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_bool_value.call(this, key, pvalue)
   end
-  def set_i_unknown_value(key : PROPERTYKEY*, pvalue : IUnknown) : HRESULT
-    @lpVtbl.value.set_i_unknown_value.unsafe_as(Proc(PROPERTYKEY*, IUnknown, HRESULT)).call(key, pvalue)
+  def set_i_unknown_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, pvalue : IUnknown) : HRESULT
+    @lpVtbl.value.set_i_unknown_value.call(this, key, pvalue)
   end
-  def get_i_unknown_value(key : PROPERTYKEY*, ppvalue : IUnknown*) : HRESULT
-    @lpVtbl.value.get_i_unknown_value.unsafe_as(Proc(PROPERTYKEY*, IUnknown*, HRESULT)).call(key, ppvalue)
+  def get_i_unknown_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, ppvalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_i_unknown_value.call(this, key, ppvalue)
   end
-  def set_guid_value(key : PROPERTYKEY*, value : Guid*) : HRESULT
-    @lpVtbl.value.set_guid_value.unsafe_as(Proc(PROPERTYKEY*, Guid*, HRESULT)).call(key, value)
+  def set_guid_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, value : Guid*) : HRESULT
+    @lpVtbl.value.set_guid_value.call(this, key, value)
   end
-  def get_guid_value(key : PROPERTYKEY*, pvalue : Guid*) : HRESULT
-    @lpVtbl.value.get_guid_value.unsafe_as(Proc(PROPERTYKEY*, Guid*, HRESULT)).call(key, pvalue)
+  def get_guid_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, pvalue : Guid*) : HRESULT
+    @lpVtbl.value.get_guid_value.call(this, key, pvalue)
   end
-  def set_buffer_value(key : PROPERTYKEY*, pvalue : UInt8*, cbvalue : UInt32) : HRESULT
-    @lpVtbl.value.set_buffer_value.unsafe_as(Proc(PROPERTYKEY*, UInt8*, UInt32, HRESULT)).call(key, pvalue, cbvalue)
+  def set_buffer_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, pvalue : UInt8*, cbvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_buffer_value.call(this, key, pvalue, cbvalue)
   end
-  def get_buffer_value(key : PROPERTYKEY*, ppvalue : UInt8**, pcbvalue : UInt32*) : HRESULT
-    @lpVtbl.value.get_buffer_value.unsafe_as(Proc(PROPERTYKEY*, UInt8**, UInt32*, HRESULT)).call(key, ppvalue, pcbvalue)
+  def get_buffer_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, ppvalue : UInt8**, pcbvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer_value.call(this, key, ppvalue, pcbvalue)
   end
-  def set_i_portable_device_values_value(key : PROPERTYKEY*, pvalue : IPortableDeviceValues) : HRESULT
-    @lpVtbl.value.set_i_portable_device_values_value.unsafe_as(Proc(PROPERTYKEY*, IPortableDeviceValues, HRESULT)).call(key, pvalue)
+  def set_i_portable_device_values_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, pvalue : IPortableDeviceValues) : HRESULT
+    @lpVtbl.value.set_i_portable_device_values_value.call(this, key, pvalue)
   end
-  def get_i_portable_device_values_value(key : PROPERTYKEY*, ppvalue : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.get_i_portable_device_values_value.unsafe_as(Proc(PROPERTYKEY*, IPortableDeviceValues*, HRESULT)).call(key, ppvalue)
+  def get_i_portable_device_values_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, ppvalue : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.get_i_portable_device_values_value.call(this, key, ppvalue)
   end
-  def set_i_portable_device_prop_variant_collection_value(key : PROPERTYKEY*, pvalue : IPortableDevicePropVariantCollection) : HRESULT
-    @lpVtbl.value.set_i_portable_device_prop_variant_collection_value.unsafe_as(Proc(PROPERTYKEY*, IPortableDevicePropVariantCollection, HRESULT)).call(key, pvalue)
+  def set_i_portable_device_prop_variant_collection_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, pvalue : IPortableDevicePropVariantCollection) : HRESULT
+    @lpVtbl.value.set_i_portable_device_prop_variant_collection_value.call(this, key, pvalue)
   end
-  def get_i_portable_device_prop_variant_collection_value(key : PROPERTYKEY*, ppvalue : IPortableDevicePropVariantCollection*) : HRESULT
-    @lpVtbl.value.get_i_portable_device_prop_variant_collection_value.unsafe_as(Proc(PROPERTYKEY*, IPortableDevicePropVariantCollection*, HRESULT)).call(key, ppvalue)
+  def get_i_portable_device_prop_variant_collection_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, ppvalue : IPortableDevicePropVariantCollection*) : HRESULT
+    @lpVtbl.value.get_i_portable_device_prop_variant_collection_value.call(this, key, ppvalue)
   end
-  def set_i_portable_device_key_collection_value(key : PROPERTYKEY*, pvalue : IPortableDeviceKeyCollection) : HRESULT
-    @lpVtbl.value.set_i_portable_device_key_collection_value.unsafe_as(Proc(PROPERTYKEY*, IPortableDeviceKeyCollection, HRESULT)).call(key, pvalue)
+  def set_i_portable_device_key_collection_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, pvalue : IPortableDeviceKeyCollection) : HRESULT
+    @lpVtbl.value.set_i_portable_device_key_collection_value.call(this, key, pvalue)
   end
-  def get_i_portable_device_key_collection_value(key : PROPERTYKEY*, ppvalue : IPortableDeviceKeyCollection*) : HRESULT
-    @lpVtbl.value.get_i_portable_device_key_collection_value.unsafe_as(Proc(PROPERTYKEY*, IPortableDeviceKeyCollection*, HRESULT)).call(key, ppvalue)
+  def get_i_portable_device_key_collection_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, ppvalue : IPortableDeviceKeyCollection*) : HRESULT
+    @lpVtbl.value.get_i_portable_device_key_collection_value.call(this, key, ppvalue)
   end
-  def set_i_portable_device_values_collection_value(key : PROPERTYKEY*, pvalue : IPortableDeviceValuesCollection) : HRESULT
-    @lpVtbl.value.set_i_portable_device_values_collection_value.unsafe_as(Proc(PROPERTYKEY*, IPortableDeviceValuesCollection, HRESULT)).call(key, pvalue)
+  def set_i_portable_device_values_collection_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, pvalue : IPortableDeviceValuesCollection) : HRESULT
+    @lpVtbl.value.set_i_portable_device_values_collection_value.call(this, key, pvalue)
   end
-  def get_i_portable_device_values_collection_value(key : PROPERTYKEY*, ppvalue : IPortableDeviceValuesCollection*) : HRESULT
-    @lpVtbl.value.get_i_portable_device_values_collection_value.unsafe_as(Proc(PROPERTYKEY*, IPortableDeviceValuesCollection*, HRESULT)).call(key, ppvalue)
+  def get_i_portable_device_values_collection_value(this : IPortableDeviceValues*, key : PROPERTYKEY*, ppvalue : IPortableDeviceValuesCollection*) : HRESULT
+    @lpVtbl.value.get_i_portable_device_values_collection_value.call(this, key, ppvalue)
   end
-  def remove_value(key : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.remove_value.unsafe_as(Proc(PROPERTYKEY*, HRESULT)).call(key)
+  def remove_value(this : IPortableDeviceValues*, key : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.remove_value.call(this, key)
   end
-  def copy_values_from_property_store(pstore : IPropertyStore) : HRESULT
-    @lpVtbl.value.copy_values_from_property_store.unsafe_as(Proc(IPropertyStore, HRESULT)).call(pstore)
+  def copy_values_from_property_store(this : IPortableDeviceValues*, pstore : IPropertyStore) : HRESULT
+    @lpVtbl.value.copy_values_from_property_store.call(this, pstore)
   end
-  def copy_values_to_property_store(pstore : IPropertyStore) : HRESULT
-    @lpVtbl.value.copy_values_to_property_store.unsafe_as(Proc(IPropertyStore, HRESULT)).call(pstore)
+  def copy_values_to_property_store(this : IPortableDeviceValues*, pstore : IPropertyStore) : HRESULT
+    @lpVtbl.value.copy_values_to_property_store.call(this, pstore)
   end
-  def clear : HRESULT
-    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  def clear(this : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.clear.call(this)
   end
 end
 struct LibWin32::IPortableDeviceKeyCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceKeyCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceKeyCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceKeyCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_count(pcelems : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcelems)
+  def get_count(this : IPortableDeviceKeyCollection*, pcelems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcelems)
   end
-  def get_at(dwindex : UInt32, pkey : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, PROPERTYKEY*, HRESULT)).call(dwindex, pkey)
+  def get_at(this : IPortableDeviceKeyCollection*, dwindex : UInt32, pkey : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.get_at.call(this, dwindex, pkey)
   end
-  def add(key : PROPERTYKEY*) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(PROPERTYKEY*, HRESULT)).call(key)
+  def add(this : IPortableDeviceKeyCollection*, key : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.add.call(this, key)
   end
-  def clear : HRESULT
-    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  def clear(this : IPortableDeviceKeyCollection*) : HRESULT
+    @lpVtbl.value.clear.call(this)
   end
-  def remove_at(dwindex : UInt32) : HRESULT
-    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(dwindex)
+  def remove_at(this : IPortableDeviceKeyCollection*, dwindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, dwindex)
   end
 end
 struct LibWin32::IPortableDevicePropVariantCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDevicePropVariantCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDevicePropVariantCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDevicePropVariantCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_count(pcelems : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcelems)
+  def get_count(this : IPortableDevicePropVariantCollection*, pcelems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcelems)
   end
-  def get_at(dwindex : UInt32, pvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, PROPVARIANT*, HRESULT)).call(dwindex, pvalue)
+  def get_at(this : IPortableDevicePropVariantCollection*, dwindex : UInt32, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_at.call(this, dwindex, pvalue)
   end
-  def add(pvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(PROPVARIANT*, HRESULT)).call(pvalue)
+  def add(this : IPortableDevicePropVariantCollection*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.add.call(this, pvalue)
   end
-  def get_type(pvt : UInt16*) : HRESULT
-    @lpVtbl.value.get_type.unsafe_as(Proc(UInt16*, HRESULT)).call(pvt)
+  def get_type(this : IPortableDevicePropVariantCollection*, pvt : UInt16*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pvt)
   end
-  def change_type(vt : UInt16) : HRESULT
-    @lpVtbl.value.change_type.unsafe_as(Proc(UInt16, HRESULT)).call(vt)
+  def change_type(this : IPortableDevicePropVariantCollection*, vt : UInt16) : HRESULT
+    @lpVtbl.value.change_type.call(this, vt)
   end
-  def clear : HRESULT
-    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  def clear(this : IPortableDevicePropVariantCollection*) : HRESULT
+    @lpVtbl.value.clear.call(this)
   end
-  def remove_at(dwindex : UInt32) : HRESULT
-    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(dwindex)
+  def remove_at(this : IPortableDevicePropVariantCollection*, dwindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, dwindex)
   end
 end
 struct LibWin32::IPortableDeviceValuesCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceValuesCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceValuesCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceValuesCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_count(pcelems : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcelems)
+  def get_count(this : IPortableDeviceValuesCollection*, pcelems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcelems)
   end
-  def get_at(dwindex : UInt32, ppvalues : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, IPortableDeviceValues*, HRESULT)).call(dwindex, ppvalues)
+  def get_at(this : IPortableDeviceValuesCollection*, dwindex : UInt32, ppvalues : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.get_at.call(this, dwindex, ppvalues)
   end
-  def add(pvalues : IPortableDeviceValues) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(IPortableDeviceValues, HRESULT)).call(pvalues)
+  def add(this : IPortableDeviceValuesCollection*, pvalues : IPortableDeviceValues) : HRESULT
+    @lpVtbl.value.add.call(this, pvalues)
   end
-  def clear : HRESULT
-    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  def clear(this : IPortableDeviceValuesCollection*) : HRESULT
+    @lpVtbl.value.clear.call(this)
   end
-  def remove_at(dwindex : UInt32) : HRESULT
-    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(dwindex)
+  def remove_at(this : IPortableDeviceValuesCollection*, dwindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, dwindex)
   end
 end
 struct LibWin32::IPortableDeviceManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_devices(ppnpdeviceids : LibC::LPWSTR*, pcpnpdeviceids : UInt32*) : HRESULT
-    @lpVtbl.value.get_devices.unsafe_as(Proc(LibC::LPWSTR*, UInt32*, HRESULT)).call(ppnpdeviceids, pcpnpdeviceids)
+  def get_devices(this : IPortableDeviceManager*, ppnpdeviceids : LibC::LPWSTR*, pcpnpdeviceids : UInt32*) : HRESULT
+    @lpVtbl.value.get_devices.call(this, ppnpdeviceids, pcpnpdeviceids)
   end
-  def refresh_device_list : HRESULT
-    @lpVtbl.value.refresh_device_list.unsafe_as(Proc(HRESULT)).call
+  def refresh_device_list(this : IPortableDeviceManager*) : HRESULT
+    @lpVtbl.value.refresh_device_list.call(this)
   end
-  def get_device_friendly_name(pszpnpdeviceid : LibC::LPWSTR, pdevicefriendlyname : LibC::LPWSTR, pcchdevicefriendlyname : UInt32*) : HRESULT
-    @lpVtbl.value.get_device_friendly_name.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32*, HRESULT)).call(pszpnpdeviceid, pdevicefriendlyname, pcchdevicefriendlyname)
+  def get_device_friendly_name(this : IPortableDeviceManager*, pszpnpdeviceid : LibC::LPWSTR, pdevicefriendlyname : LibC::LPWSTR, pcchdevicefriendlyname : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_friendly_name.call(this, pszpnpdeviceid, pdevicefriendlyname, pcchdevicefriendlyname)
   end
-  def get_device_description(pszpnpdeviceid : LibC::LPWSTR, pdevicedescription : LibC::LPWSTR, pcchdevicedescription : UInt32*) : HRESULT
-    @lpVtbl.value.get_device_description.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32*, HRESULT)).call(pszpnpdeviceid, pdevicedescription, pcchdevicedescription)
+  def get_device_description(this : IPortableDeviceManager*, pszpnpdeviceid : LibC::LPWSTR, pdevicedescription : LibC::LPWSTR, pcchdevicedescription : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_description.call(this, pszpnpdeviceid, pdevicedescription, pcchdevicedescription)
   end
-  def get_device_manufacturer(pszpnpdeviceid : LibC::LPWSTR, pdevicemanufacturer : LibC::LPWSTR, pcchdevicemanufacturer : UInt32*) : HRESULT
-    @lpVtbl.value.get_device_manufacturer.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32*, HRESULT)).call(pszpnpdeviceid, pdevicemanufacturer, pcchdevicemanufacturer)
+  def get_device_manufacturer(this : IPortableDeviceManager*, pszpnpdeviceid : LibC::LPWSTR, pdevicemanufacturer : LibC::LPWSTR, pcchdevicemanufacturer : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_manufacturer.call(this, pszpnpdeviceid, pdevicemanufacturer, pcchdevicemanufacturer)
   end
-  def get_device_property(pszpnpdeviceid : LibC::LPWSTR, pszdevicepropertyname : LibC::LPWSTR, pdata : UInt8*, pcbdata : UInt32*, pdwtype : UInt32*) : HRESULT
-    @lpVtbl.value.get_device_property.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt8*, UInt32*, UInt32*, HRESULT)).call(pszpnpdeviceid, pszdevicepropertyname, pdata, pcbdata, pdwtype)
+  def get_device_property(this : IPortableDeviceManager*, pszpnpdeviceid : LibC::LPWSTR, pszdevicepropertyname : LibC::LPWSTR, pdata : UInt8*, pcbdata : UInt32*, pdwtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_property.call(this, pszpnpdeviceid, pszdevicepropertyname, pdata, pcbdata, pdwtype)
   end
-  def get_private_devices(ppnpdeviceids : LibC::LPWSTR*, pcpnpdeviceids : UInt32*) : HRESULT
-    @lpVtbl.value.get_private_devices.unsafe_as(Proc(LibC::LPWSTR*, UInt32*, HRESULT)).call(ppnpdeviceids, pcpnpdeviceids)
+  def get_private_devices(this : IPortableDeviceManager*, ppnpdeviceids : LibC::LPWSTR*, pcpnpdeviceids : UInt32*) : HRESULT
+    @lpVtbl.value.get_private_devices.call(this, ppnpdeviceids, pcpnpdeviceids)
   end
 end
 struct LibWin32::IPortableDevice
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def open(pszpnpdeviceid : LibC::LPWSTR, pclientinfo : IPortableDeviceValues) : HRESULT
-    @lpVtbl.value.open.unsafe_as(Proc(LibC::LPWSTR, IPortableDeviceValues, HRESULT)).call(pszpnpdeviceid, pclientinfo)
+  def open(this : IPortableDevice*, pszpnpdeviceid : LibC::LPWSTR, pclientinfo : IPortableDeviceValues) : HRESULT
+    @lpVtbl.value.open.call(this, pszpnpdeviceid, pclientinfo)
   end
-  def send_command(dwflags : UInt32, pparameters : IPortableDeviceValues, ppresults : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.send_command.unsafe_as(Proc(UInt32, IPortableDeviceValues, IPortableDeviceValues*, HRESULT)).call(dwflags, pparameters, ppresults)
+  def send_command(this : IPortableDevice*, dwflags : UInt32, pparameters : IPortableDeviceValues, ppresults : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.send_command.call(this, dwflags, pparameters, ppresults)
   end
-  def content(ppcontent : IPortableDeviceContent*) : HRESULT
-    @lpVtbl.value.content.unsafe_as(Proc(IPortableDeviceContent*, HRESULT)).call(ppcontent)
+  def content(this : IPortableDevice*, ppcontent : IPortableDeviceContent*) : HRESULT
+    @lpVtbl.value.content.call(this, ppcontent)
   end
-  def capabilities(ppcapabilities : IPortableDeviceCapabilities*) : HRESULT
-    @lpVtbl.value.capabilities.unsafe_as(Proc(IPortableDeviceCapabilities*, HRESULT)).call(ppcapabilities)
+  def capabilities(this : IPortableDevice*, ppcapabilities : IPortableDeviceCapabilities*) : HRESULT
+    @lpVtbl.value.capabilities.call(this, ppcapabilities)
   end
-  def cancel : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  def cancel(this : IPortableDevice*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : IPortableDevice*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
-  def advise(dwflags : UInt32, pcallback : IPortableDeviceEventCallback, pparameters : IPortableDeviceValues, ppszcookie : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.advise.unsafe_as(Proc(UInt32, IPortableDeviceEventCallback, IPortableDeviceValues, LibC::LPWSTR*, HRESULT)).call(dwflags, pcallback, pparameters, ppszcookie)
+  def advise(this : IPortableDevice*, dwflags : UInt32, pcallback : IPortableDeviceEventCallback, pparameters : IPortableDeviceValues, ppszcookie : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.advise.call(this, dwflags, pcallback, pparameters, ppszcookie)
   end
-  def unadvise(pszcookie : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.unadvise.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszcookie)
+  def unadvise(this : IPortableDevice*, pszcookie : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.unadvise.call(this, pszcookie)
   end
-  def get_pn_p_device_id(ppszpnpdeviceid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_pn_p_device_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszpnpdeviceid)
+  def get_pn_p_device_id(this : IPortableDevice*, ppszpnpdeviceid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_pn_p_device_id.call(this, ppszpnpdeviceid)
   end
 end
 struct LibWin32::IPortableDeviceContent
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceContent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceContent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceContent*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def enum_objects(dwflags : UInt32, pszparentobjectid : LibC::LPWSTR, pfilter : IPortableDeviceValues, ppenum : IEnumPortableDeviceObjectIDs*) : HRESULT
-    @lpVtbl.value.enum_objects.unsafe_as(Proc(UInt32, LibC::LPWSTR, IPortableDeviceValues, IEnumPortableDeviceObjectIDs*, HRESULT)).call(dwflags, pszparentobjectid, pfilter, ppenum)
+  def enum_objects(this : IPortableDeviceContent*, dwflags : UInt32, pszparentobjectid : LibC::LPWSTR, pfilter : IPortableDeviceValues, ppenum : IEnumPortableDeviceObjectIDs*) : HRESULT
+    @lpVtbl.value.enum_objects.call(this, dwflags, pszparentobjectid, pfilter, ppenum)
   end
-  def properties(ppproperties : IPortableDeviceProperties*) : HRESULT
-    @lpVtbl.value.properties.unsafe_as(Proc(IPortableDeviceProperties*, HRESULT)).call(ppproperties)
+  def properties(this : IPortableDeviceContent*, ppproperties : IPortableDeviceProperties*) : HRESULT
+    @lpVtbl.value.properties.call(this, ppproperties)
   end
-  def transfer(ppresources : IPortableDeviceResources*) : HRESULT
-    @lpVtbl.value.transfer.unsafe_as(Proc(IPortableDeviceResources*, HRESULT)).call(ppresources)
+  def transfer(this : IPortableDeviceContent*, ppresources : IPortableDeviceResources*) : HRESULT
+    @lpVtbl.value.transfer.call(this, ppresources)
   end
-  def create_object_with_properties_only(pvalues : IPortableDeviceValues, ppszobjectid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.create_object_with_properties_only.unsafe_as(Proc(IPortableDeviceValues, LibC::LPWSTR*, HRESULT)).call(pvalues, ppszobjectid)
+  def create_object_with_properties_only(this : IPortableDeviceContent*, pvalues : IPortableDeviceValues, ppszobjectid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.create_object_with_properties_only.call(this, pvalues, ppszobjectid)
   end
-  def create_object_with_properties_and_data(pvalues : IPortableDeviceValues, ppdata : IStream*, pdwoptimalwritebuffersize : UInt32*, ppszcookie : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.create_object_with_properties_and_data.unsafe_as(Proc(IPortableDeviceValues, IStream*, UInt32*, LibC::LPWSTR*, HRESULT)).call(pvalues, ppdata, pdwoptimalwritebuffersize, ppszcookie)
+  def create_object_with_properties_and_data(this : IPortableDeviceContent*, pvalues : IPortableDeviceValues, ppdata : IStream*, pdwoptimalwritebuffersize : UInt32*, ppszcookie : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.create_object_with_properties_and_data.call(this, pvalues, ppdata, pdwoptimalwritebuffersize, ppszcookie)
   end
-  def delete(dwoptions : UInt32, pobjectids : IPortableDevicePropVariantCollection, ppresults : IPortableDevicePropVariantCollection*) : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(UInt32, IPortableDevicePropVariantCollection, IPortableDevicePropVariantCollection*, HRESULT)).call(dwoptions, pobjectids, ppresults)
+  def delete(this : IPortableDeviceContent*, dwoptions : UInt32, pobjectids : IPortableDevicePropVariantCollection, ppresults : IPortableDevicePropVariantCollection*) : HRESULT
+    @lpVtbl.value.delete.call(this, dwoptions, pobjectids, ppresults)
   end
-  def get_object_i_ds_from_persistent_unique_i_ds(ppersistentuniqueids : IPortableDevicePropVariantCollection, ppobjectids : IPortableDevicePropVariantCollection*) : HRESULT
-    @lpVtbl.value.get_object_i_ds_from_persistent_unique_i_ds.unsafe_as(Proc(IPortableDevicePropVariantCollection, IPortableDevicePropVariantCollection*, HRESULT)).call(ppersistentuniqueids, ppobjectids)
+  def get_object_i_ds_from_persistent_unique_i_ds(this : IPortableDeviceContent*, ppersistentuniqueids : IPortableDevicePropVariantCollection, ppobjectids : IPortableDevicePropVariantCollection*) : HRESULT
+    @lpVtbl.value.get_object_i_ds_from_persistent_unique_i_ds.call(this, ppersistentuniqueids, ppobjectids)
   end
-  def cancel : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  def cancel(this : IPortableDeviceContent*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
   end
-  def move(pobjectids : IPortableDevicePropVariantCollection, pszdestinationfolderobjectid : LibC::LPWSTR, ppresults : IPortableDevicePropVariantCollection*) : HRESULT
-    @lpVtbl.value.move.unsafe_as(Proc(IPortableDevicePropVariantCollection, LibC::LPWSTR, IPortableDevicePropVariantCollection*, HRESULT)).call(pobjectids, pszdestinationfolderobjectid, ppresults)
+  def move(this : IPortableDeviceContent*, pobjectids : IPortableDevicePropVariantCollection, pszdestinationfolderobjectid : LibC::LPWSTR, ppresults : IPortableDevicePropVariantCollection*) : HRESULT
+    @lpVtbl.value.move.call(this, pobjectids, pszdestinationfolderobjectid, ppresults)
   end
-  def copy(pobjectids : IPortableDevicePropVariantCollection, pszdestinationfolderobjectid : LibC::LPWSTR, ppresults : IPortableDevicePropVariantCollection*) : HRESULT
-    @lpVtbl.value.copy.unsafe_as(Proc(IPortableDevicePropVariantCollection, LibC::LPWSTR, IPortableDevicePropVariantCollection*, HRESULT)).call(pobjectids, pszdestinationfolderobjectid, ppresults)
+  def copy(this : IPortableDeviceContent*, pobjectids : IPortableDevicePropVariantCollection, pszdestinationfolderobjectid : LibC::LPWSTR, ppresults : IPortableDevicePropVariantCollection*) : HRESULT
+    @lpVtbl.value.copy.call(this, pobjectids, pszdestinationfolderobjectid, ppresults)
   end
 end
 struct LibWin32::IPortableDeviceContent2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceContent2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceContent2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceContent2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def enum_objects(dwflags : UInt32, pszparentobjectid : LibC::LPWSTR, pfilter : IPortableDeviceValues, ppenum : IEnumPortableDeviceObjectIDs*) : HRESULT
-    @lpVtbl.value.enum_objects.unsafe_as(Proc(UInt32, LibC::LPWSTR, IPortableDeviceValues, IEnumPortableDeviceObjectIDs*, HRESULT)).call(dwflags, pszparentobjectid, pfilter, ppenum)
+  def enum_objects(this : IPortableDeviceContent2*, dwflags : UInt32, pszparentobjectid : LibC::LPWSTR, pfilter : IPortableDeviceValues, ppenum : IEnumPortableDeviceObjectIDs*) : HRESULT
+    @lpVtbl.value.enum_objects.call(this, dwflags, pszparentobjectid, pfilter, ppenum)
   end
-  def properties(ppproperties : IPortableDeviceProperties*) : HRESULT
-    @lpVtbl.value.properties.unsafe_as(Proc(IPortableDeviceProperties*, HRESULT)).call(ppproperties)
+  def properties(this : IPortableDeviceContent2*, ppproperties : IPortableDeviceProperties*) : HRESULT
+    @lpVtbl.value.properties.call(this, ppproperties)
   end
-  def transfer(ppresources : IPortableDeviceResources*) : HRESULT
-    @lpVtbl.value.transfer.unsafe_as(Proc(IPortableDeviceResources*, HRESULT)).call(ppresources)
+  def transfer(this : IPortableDeviceContent2*, ppresources : IPortableDeviceResources*) : HRESULT
+    @lpVtbl.value.transfer.call(this, ppresources)
   end
-  def create_object_with_properties_only(pvalues : IPortableDeviceValues, ppszobjectid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.create_object_with_properties_only.unsafe_as(Proc(IPortableDeviceValues, LibC::LPWSTR*, HRESULT)).call(pvalues, ppszobjectid)
+  def create_object_with_properties_only(this : IPortableDeviceContent2*, pvalues : IPortableDeviceValues, ppszobjectid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.create_object_with_properties_only.call(this, pvalues, ppszobjectid)
   end
-  def create_object_with_properties_and_data(pvalues : IPortableDeviceValues, ppdata : IStream*, pdwoptimalwritebuffersize : UInt32*, ppszcookie : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.create_object_with_properties_and_data.unsafe_as(Proc(IPortableDeviceValues, IStream*, UInt32*, LibC::LPWSTR*, HRESULT)).call(pvalues, ppdata, pdwoptimalwritebuffersize, ppszcookie)
+  def create_object_with_properties_and_data(this : IPortableDeviceContent2*, pvalues : IPortableDeviceValues, ppdata : IStream*, pdwoptimalwritebuffersize : UInt32*, ppszcookie : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.create_object_with_properties_and_data.call(this, pvalues, ppdata, pdwoptimalwritebuffersize, ppszcookie)
   end
-  def delete(dwoptions : UInt32, pobjectids : IPortableDevicePropVariantCollection, ppresults : IPortableDevicePropVariantCollection*) : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(UInt32, IPortableDevicePropVariantCollection, IPortableDevicePropVariantCollection*, HRESULT)).call(dwoptions, pobjectids, ppresults)
+  def delete(this : IPortableDeviceContent2*, dwoptions : UInt32, pobjectids : IPortableDevicePropVariantCollection, ppresults : IPortableDevicePropVariantCollection*) : HRESULT
+    @lpVtbl.value.delete.call(this, dwoptions, pobjectids, ppresults)
   end
-  def get_object_i_ds_from_persistent_unique_i_ds(ppersistentuniqueids : IPortableDevicePropVariantCollection, ppobjectids : IPortableDevicePropVariantCollection*) : HRESULT
-    @lpVtbl.value.get_object_i_ds_from_persistent_unique_i_ds.unsafe_as(Proc(IPortableDevicePropVariantCollection, IPortableDevicePropVariantCollection*, HRESULT)).call(ppersistentuniqueids, ppobjectids)
+  def get_object_i_ds_from_persistent_unique_i_ds(this : IPortableDeviceContent2*, ppersistentuniqueids : IPortableDevicePropVariantCollection, ppobjectids : IPortableDevicePropVariantCollection*) : HRESULT
+    @lpVtbl.value.get_object_i_ds_from_persistent_unique_i_ds.call(this, ppersistentuniqueids, ppobjectids)
   end
-  def cancel : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  def cancel(this : IPortableDeviceContent2*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
   end
-  def move(pobjectids : IPortableDevicePropVariantCollection, pszdestinationfolderobjectid : LibC::LPWSTR, ppresults : IPortableDevicePropVariantCollection*) : HRESULT
-    @lpVtbl.value.move.unsafe_as(Proc(IPortableDevicePropVariantCollection, LibC::LPWSTR, IPortableDevicePropVariantCollection*, HRESULT)).call(pobjectids, pszdestinationfolderobjectid, ppresults)
+  def move(this : IPortableDeviceContent2*, pobjectids : IPortableDevicePropVariantCollection, pszdestinationfolderobjectid : LibC::LPWSTR, ppresults : IPortableDevicePropVariantCollection*) : HRESULT
+    @lpVtbl.value.move.call(this, pobjectids, pszdestinationfolderobjectid, ppresults)
   end
-  def copy(pobjectids : IPortableDevicePropVariantCollection, pszdestinationfolderobjectid : LibC::LPWSTR, ppresults : IPortableDevicePropVariantCollection*) : HRESULT
-    @lpVtbl.value.copy.unsafe_as(Proc(IPortableDevicePropVariantCollection, LibC::LPWSTR, IPortableDevicePropVariantCollection*, HRESULT)).call(pobjectids, pszdestinationfolderobjectid, ppresults)
+  def copy(this : IPortableDeviceContent2*, pobjectids : IPortableDevicePropVariantCollection, pszdestinationfolderobjectid : LibC::LPWSTR, ppresults : IPortableDevicePropVariantCollection*) : HRESULT
+    @lpVtbl.value.copy.call(this, pobjectids, pszdestinationfolderobjectid, ppresults)
   end
-  def update_object_with_properties_and_data(pszobjectid : LibC::LPWSTR, pproperties : IPortableDeviceValues, ppdata : IStream*, pdwoptimalwritebuffersize : UInt32*) : HRESULT
-    @lpVtbl.value.update_object_with_properties_and_data.unsafe_as(Proc(LibC::LPWSTR, IPortableDeviceValues, IStream*, UInt32*, HRESULT)).call(pszobjectid, pproperties, ppdata, pdwoptimalwritebuffersize)
+  def update_object_with_properties_and_data(this : IPortableDeviceContent2*, pszobjectid : LibC::LPWSTR, pproperties : IPortableDeviceValues, ppdata : IStream*, pdwoptimalwritebuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.update_object_with_properties_and_data.call(this, pszobjectid, pproperties, ppdata, pdwoptimalwritebuffersize)
   end
 end
 struct LibWin32::IEnumPortableDeviceObjectIDs
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IEnumPortableDeviceObjectIDs*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IEnumPortableDeviceObjectIDs*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IEnumPortableDeviceObjectIDs*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def next(cobjects : UInt32, pobjids : LibC::LPWSTR*, pcfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(UInt32, LibC::LPWSTR*, UInt32*, HRESULT)).call(cobjects, pobjids, pcfetched)
+  def next(this : IEnumPortableDeviceObjectIDs*, cobjects : UInt32, pobjids : LibC::LPWSTR*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, cobjects, pobjids, pcfetched)
   end
-  def skip(cobjects : UInt32) : HRESULT
-    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(cobjects)
+  def skip(this : IEnumPortableDeviceObjectIDs*, cobjects : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, cobjects)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IEnumPortableDeviceObjectIDs*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def clone(ppenum : IEnumPortableDeviceObjectIDs*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IEnumPortableDeviceObjectIDs*, HRESULT)).call(ppenum)
+  def clone(this : IEnumPortableDeviceObjectIDs*, ppenum : IEnumPortableDeviceObjectIDs*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
   end
-  def cancel : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  def cancel(this : IEnumPortableDeviceObjectIDs*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
   end
 end
 struct LibWin32::IPortableDeviceProperties
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceProperties*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceProperties*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceProperties*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_supported_properties(pszobjectid : LibC::LPWSTR, ppkeys : IPortableDeviceKeyCollection*) : HRESULT
-    @lpVtbl.value.get_supported_properties.unsafe_as(Proc(LibC::LPWSTR, IPortableDeviceKeyCollection*, HRESULT)).call(pszobjectid, ppkeys)
+  def get_supported_properties(this : IPortableDeviceProperties*, pszobjectid : LibC::LPWSTR, ppkeys : IPortableDeviceKeyCollection*) : HRESULT
+    @lpVtbl.value.get_supported_properties.call(this, pszobjectid, ppkeys)
   end
-  def get_property_attributes(pszobjectid : LibC::LPWSTR, key : PROPERTYKEY*, ppattributes : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.get_property_attributes.unsafe_as(Proc(LibC::LPWSTR, PROPERTYKEY*, IPortableDeviceValues*, HRESULT)).call(pszobjectid, key, ppattributes)
+  def get_property_attributes(this : IPortableDeviceProperties*, pszobjectid : LibC::LPWSTR, key : PROPERTYKEY*, ppattributes : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.get_property_attributes.call(this, pszobjectid, key, ppattributes)
   end
-  def get_values(pszobjectid : LibC::LPWSTR, pkeys : IPortableDeviceKeyCollection, ppvalues : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.get_values.unsafe_as(Proc(LibC::LPWSTR, IPortableDeviceKeyCollection, IPortableDeviceValues*, HRESULT)).call(pszobjectid, pkeys, ppvalues)
+  def get_values(this : IPortableDeviceProperties*, pszobjectid : LibC::LPWSTR, pkeys : IPortableDeviceKeyCollection, ppvalues : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.get_values.call(this, pszobjectid, pkeys, ppvalues)
   end
-  def set_values(pszobjectid : LibC::LPWSTR, pvalues : IPortableDeviceValues, ppresults : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.set_values.unsafe_as(Proc(LibC::LPWSTR, IPortableDeviceValues, IPortableDeviceValues*, HRESULT)).call(pszobjectid, pvalues, ppresults)
+  def set_values(this : IPortableDeviceProperties*, pszobjectid : LibC::LPWSTR, pvalues : IPortableDeviceValues, ppresults : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.set_values.call(this, pszobjectid, pvalues, ppresults)
   end
-  def delete(pszobjectid : LibC::LPWSTR, pkeys : IPortableDeviceKeyCollection) : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(LibC::LPWSTR, IPortableDeviceKeyCollection, HRESULT)).call(pszobjectid, pkeys)
+  def delete(this : IPortableDeviceProperties*, pszobjectid : LibC::LPWSTR, pkeys : IPortableDeviceKeyCollection) : HRESULT
+    @lpVtbl.value.delete.call(this, pszobjectid, pkeys)
   end
-  def cancel : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  def cancel(this : IPortableDeviceProperties*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
   end
 end
 struct LibWin32::IPortableDeviceResources
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceResources*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceResources*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceResources*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_supported_resources(pszobjectid : LibC::LPWSTR, ppkeys : IPortableDeviceKeyCollection*) : HRESULT
-    @lpVtbl.value.get_supported_resources.unsafe_as(Proc(LibC::LPWSTR, IPortableDeviceKeyCollection*, HRESULT)).call(pszobjectid, ppkeys)
+  def get_supported_resources(this : IPortableDeviceResources*, pszobjectid : LibC::LPWSTR, ppkeys : IPortableDeviceKeyCollection*) : HRESULT
+    @lpVtbl.value.get_supported_resources.call(this, pszobjectid, ppkeys)
   end
-  def get_resource_attributes(pszobjectid : LibC::LPWSTR, key : PROPERTYKEY*, ppresourceattributes : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.get_resource_attributes.unsafe_as(Proc(LibC::LPWSTR, PROPERTYKEY*, IPortableDeviceValues*, HRESULT)).call(pszobjectid, key, ppresourceattributes)
+  def get_resource_attributes(this : IPortableDeviceResources*, pszobjectid : LibC::LPWSTR, key : PROPERTYKEY*, ppresourceattributes : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.get_resource_attributes.call(this, pszobjectid, key, ppresourceattributes)
   end
-  def get_stream(pszobjectid : LibC::LPWSTR, key : PROPERTYKEY*, dwmode : UInt32, pdwoptimalbuffersize : UInt32*, ppstream : IStream*) : HRESULT
-    @lpVtbl.value.get_stream.unsafe_as(Proc(LibC::LPWSTR, PROPERTYKEY*, UInt32, UInt32*, IStream*, HRESULT)).call(pszobjectid, key, dwmode, pdwoptimalbuffersize, ppstream)
+  def get_stream(this : IPortableDeviceResources*, pszobjectid : LibC::LPWSTR, key : PROPERTYKEY*, dwmode : UInt32, pdwoptimalbuffersize : UInt32*, ppstream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, pszobjectid, key, dwmode, pdwoptimalbuffersize, ppstream)
   end
-  def delete(pszobjectid : LibC::LPWSTR, pkeys : IPortableDeviceKeyCollection) : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(LibC::LPWSTR, IPortableDeviceKeyCollection, HRESULT)).call(pszobjectid, pkeys)
+  def delete(this : IPortableDeviceResources*, pszobjectid : LibC::LPWSTR, pkeys : IPortableDeviceKeyCollection) : HRESULT
+    @lpVtbl.value.delete.call(this, pszobjectid, pkeys)
   end
-  def cancel : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  def cancel(this : IPortableDeviceResources*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
   end
-  def create_resource(presourceattributes : IPortableDeviceValues, ppdata : IStream*, pdwoptimalwritebuffersize : UInt32*, ppszcookie : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.create_resource.unsafe_as(Proc(IPortableDeviceValues, IStream*, UInt32*, LibC::LPWSTR*, HRESULT)).call(presourceattributes, ppdata, pdwoptimalwritebuffersize, ppszcookie)
+  def create_resource(this : IPortableDeviceResources*, presourceattributes : IPortableDeviceValues, ppdata : IStream*, pdwoptimalwritebuffersize : UInt32*, ppszcookie : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.create_resource.call(this, presourceattributes, ppdata, pdwoptimalwritebuffersize, ppszcookie)
   end
 end
 struct LibWin32::IPortableDeviceCapabilities
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceCapabilities*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceCapabilities*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceCapabilities*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_supported_commands(ppcommands : IPortableDeviceKeyCollection*) : HRESULT
-    @lpVtbl.value.get_supported_commands.unsafe_as(Proc(IPortableDeviceKeyCollection*, HRESULT)).call(ppcommands)
+  def get_supported_commands(this : IPortableDeviceCapabilities*, ppcommands : IPortableDeviceKeyCollection*) : HRESULT
+    @lpVtbl.value.get_supported_commands.call(this, ppcommands)
   end
-  def get_command_options(command : PROPERTYKEY*, ppoptions : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.get_command_options.unsafe_as(Proc(PROPERTYKEY*, IPortableDeviceValues*, HRESULT)).call(command, ppoptions)
+  def get_command_options(this : IPortableDeviceCapabilities*, command : PROPERTYKEY*, ppoptions : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.get_command_options.call(this, command, ppoptions)
   end
-  def get_functional_categories(ppcategories : IPortableDevicePropVariantCollection*) : HRESULT
-    @lpVtbl.value.get_functional_categories.unsafe_as(Proc(IPortableDevicePropVariantCollection*, HRESULT)).call(ppcategories)
+  def get_functional_categories(this : IPortableDeviceCapabilities*, ppcategories : IPortableDevicePropVariantCollection*) : HRESULT
+    @lpVtbl.value.get_functional_categories.call(this, ppcategories)
   end
-  def get_functional_objects(category : Guid*, ppobjectids : IPortableDevicePropVariantCollection*) : HRESULT
-    @lpVtbl.value.get_functional_objects.unsafe_as(Proc(Guid*, IPortableDevicePropVariantCollection*, HRESULT)).call(category, ppobjectids)
+  def get_functional_objects(this : IPortableDeviceCapabilities*, category : Guid*, ppobjectids : IPortableDevicePropVariantCollection*) : HRESULT
+    @lpVtbl.value.get_functional_objects.call(this, category, ppobjectids)
   end
-  def get_supported_content_types(category : Guid*, ppcontenttypes : IPortableDevicePropVariantCollection*) : HRESULT
-    @lpVtbl.value.get_supported_content_types.unsafe_as(Proc(Guid*, IPortableDevicePropVariantCollection*, HRESULT)).call(category, ppcontenttypes)
+  def get_supported_content_types(this : IPortableDeviceCapabilities*, category : Guid*, ppcontenttypes : IPortableDevicePropVariantCollection*) : HRESULT
+    @lpVtbl.value.get_supported_content_types.call(this, category, ppcontenttypes)
   end
-  def get_supported_formats(contenttype : Guid*, ppformats : IPortableDevicePropVariantCollection*) : HRESULT
-    @lpVtbl.value.get_supported_formats.unsafe_as(Proc(Guid*, IPortableDevicePropVariantCollection*, HRESULT)).call(contenttype, ppformats)
+  def get_supported_formats(this : IPortableDeviceCapabilities*, contenttype : Guid*, ppformats : IPortableDevicePropVariantCollection*) : HRESULT
+    @lpVtbl.value.get_supported_formats.call(this, contenttype, ppformats)
   end
-  def get_supported_format_properties(format : Guid*, ppkeys : IPortableDeviceKeyCollection*) : HRESULT
-    @lpVtbl.value.get_supported_format_properties.unsafe_as(Proc(Guid*, IPortableDeviceKeyCollection*, HRESULT)).call(format, ppkeys)
+  def get_supported_format_properties(this : IPortableDeviceCapabilities*, format : Guid*, ppkeys : IPortableDeviceKeyCollection*) : HRESULT
+    @lpVtbl.value.get_supported_format_properties.call(this, format, ppkeys)
   end
-  def get_fixed_property_attributes(format : Guid*, key : PROPERTYKEY*, ppattributes : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.get_fixed_property_attributes.unsafe_as(Proc(Guid*, PROPERTYKEY*, IPortableDeviceValues*, HRESULT)).call(format, key, ppattributes)
+  def get_fixed_property_attributes(this : IPortableDeviceCapabilities*, format : Guid*, key : PROPERTYKEY*, ppattributes : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.get_fixed_property_attributes.call(this, format, key, ppattributes)
   end
-  def cancel : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  def cancel(this : IPortableDeviceCapabilities*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
   end
-  def get_supported_events(ppevents : IPortableDevicePropVariantCollection*) : HRESULT
-    @lpVtbl.value.get_supported_events.unsafe_as(Proc(IPortableDevicePropVariantCollection*, HRESULT)).call(ppevents)
+  def get_supported_events(this : IPortableDeviceCapabilities*, ppevents : IPortableDevicePropVariantCollection*) : HRESULT
+    @lpVtbl.value.get_supported_events.call(this, ppevents)
   end
-  def get_event_options(event : Guid*, ppoptions : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.get_event_options.unsafe_as(Proc(Guid*, IPortableDeviceValues*, HRESULT)).call(event, ppoptions)
+  def get_event_options(this : IPortableDeviceCapabilities*, event : Guid*, ppoptions : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.get_event_options.call(this, event, ppoptions)
   end
 end
 struct LibWin32::IPortableDeviceEventCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceEventCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceEventCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceEventCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_event(peventparameters : IPortableDeviceValues) : HRESULT
-    @lpVtbl.value.on_event.unsafe_as(Proc(IPortableDeviceValues, HRESULT)).call(peventparameters)
+  def on_event(this : IPortableDeviceEventCallback*, peventparameters : IPortableDeviceValues) : HRESULT
+    @lpVtbl.value.on_event.call(this, peventparameters)
   end
 end
 struct LibWin32::IPortableDeviceDataStream
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceDataStream*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceDataStream*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceDataStream*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def read(pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
-    @lpVtbl.value.read.unsafe_as(Proc(Void*, UInt32, UInt32*, HRESULT)).call(pv, cb, pcbread)
+  def read(this : IPortableDeviceDataStream*, pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
+    @lpVtbl.value.read.call(this, pv, cb, pcbread)
   end
-  def write(pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
-    @lpVtbl.value.write.unsafe_as(Proc(Void*, UInt32, UInt32*, HRESULT)).call(pv, cb, pcbwritten)
+  def write(this : IPortableDeviceDataStream*, pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
+    @lpVtbl.value.write.call(this, pv, cb, pcbwritten)
   end
-  def seek(dlibmove : LARGE_INTEGER, dworigin : STREAM_SEEK, plibnewposition : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.seek.unsafe_as(Proc(LARGE_INTEGER, STREAM_SEEK, ULARGE_INTEGER*, HRESULT)).call(dlibmove, dworigin, plibnewposition)
+  def seek(this : IPortableDeviceDataStream*, dlibmove : LARGE_INTEGER, dworigin : STREAM_SEEK, plibnewposition : ULARGE_INTEGER*) : HRESULT
+    @lpVtbl.value.seek.call(this, dlibmove, dworigin, plibnewposition)
   end
-  def set_size(libnewsize : ULARGE_INTEGER) : HRESULT
-    @lpVtbl.value.set_size.unsafe_as(Proc(ULARGE_INTEGER, HRESULT)).call(libnewsize)
+  def set_size(this : IPortableDeviceDataStream*, libnewsize : ULARGE_INTEGER) : HRESULT
+    @lpVtbl.value.set_size.call(this, libnewsize)
   end
-  def copy_to(pstm : IStream, cb : ULARGE_INTEGER, pcbread : ULARGE_INTEGER*, pcbwritten : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.copy_to.unsafe_as(Proc(IStream, ULARGE_INTEGER, ULARGE_INTEGER*, ULARGE_INTEGER*, HRESULT)).call(pstm, cb, pcbread, pcbwritten)
+  def copy_to(this : IPortableDeviceDataStream*, pstm : IStream, cb : ULARGE_INTEGER, pcbread : ULARGE_INTEGER*, pcbwritten : ULARGE_INTEGER*) : HRESULT
+    @lpVtbl.value.copy_to.call(this, pstm, cb, pcbread, pcbwritten)
   end
-  def commit(grfcommitflags : UInt32) : HRESULT
-    @lpVtbl.value.commit.unsafe_as(Proc(UInt32, HRESULT)).call(grfcommitflags)
+  def commit(this : IPortableDeviceDataStream*, grfcommitflags : UInt32) : HRESULT
+    @lpVtbl.value.commit.call(this, grfcommitflags)
   end
-  def revert : HRESULT
-    @lpVtbl.value.revert.unsafe_as(Proc(HRESULT)).call
+  def revert(this : IPortableDeviceDataStream*) : HRESULT
+    @lpVtbl.value.revert.call(this)
   end
-  def lock_region(liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.lock_region.unsafe_as(Proc(ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)).call(liboffset, cb, dwlocktype)
+  def lock_region(this : IPortableDeviceDataStream*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
+    @lpVtbl.value.lock_region.call(this, liboffset, cb, dwlocktype)
   end
-  def unlock_region(liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.unlock_region.unsafe_as(Proc(ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)).call(liboffset, cb, dwlocktype)
+  def unlock_region(this : IPortableDeviceDataStream*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
+    @lpVtbl.value.unlock_region.call(this, liboffset, cb, dwlocktype)
   end
-  def stat(pstatstg : STATSTG*, grfstatflag : UInt32) : HRESULT
-    @lpVtbl.value.stat.unsafe_as(Proc(STATSTG*, UInt32, HRESULT)).call(pstatstg, grfstatflag)
+  def stat(this : IPortableDeviceDataStream*, pstatstg : STATSTG*, grfstatflag : UInt32) : HRESULT
+    @lpVtbl.value.stat.call(this, pstatstg, grfstatflag)
   end
-  def clone(ppstm : IStream*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IStream*, HRESULT)).call(ppstm)
+  def clone(this : IPortableDeviceDataStream*, ppstm : IStream*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppstm)
   end
-  def get_object_id(ppszobjectid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_object_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszobjectid)
+  def get_object_id(this : IPortableDeviceDataStream*, ppszobjectid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_object_id.call(this, ppszobjectid)
   end
-  def cancel : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  def cancel(this : IPortableDeviceDataStream*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
   end
 end
 struct LibWin32::IPortableDeviceUnitsStream
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceUnitsStream*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceUnitsStream*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceUnitsStream*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def seek_in_units(dlibmove : LARGE_INTEGER, units : WPD_STREAM_UNITS, dworigin : UInt32, plibnewposition : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.seek_in_units.unsafe_as(Proc(LARGE_INTEGER, WPD_STREAM_UNITS, UInt32, ULARGE_INTEGER*, HRESULT)).call(dlibmove, units, dworigin, plibnewposition)
+  def seek_in_units(this : IPortableDeviceUnitsStream*, dlibmove : LARGE_INTEGER, units : WPD_STREAM_UNITS, dworigin : UInt32, plibnewposition : ULARGE_INTEGER*) : HRESULT
+    @lpVtbl.value.seek_in_units.call(this, dlibmove, units, dworigin, plibnewposition)
   end
-  def cancel : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  def cancel(this : IPortableDeviceUnitsStream*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
   end
 end
 struct LibWin32::IPortableDevicePropertiesBulk
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDevicePropertiesBulk*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDevicePropertiesBulk*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDevicePropertiesBulk*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def queue_get_values_by_object_list(pobjectids : IPortableDevicePropVariantCollection, pkeys : IPortableDeviceKeyCollection, pcallback : IPortableDevicePropertiesBulkCallback, pcontext : Guid*) : HRESULT
-    @lpVtbl.value.queue_get_values_by_object_list.unsafe_as(Proc(IPortableDevicePropVariantCollection, IPortableDeviceKeyCollection, IPortableDevicePropertiesBulkCallback, Guid*, HRESULT)).call(pobjectids, pkeys, pcallback, pcontext)
+  def queue_get_values_by_object_list(this : IPortableDevicePropertiesBulk*, pobjectids : IPortableDevicePropVariantCollection, pkeys : IPortableDeviceKeyCollection, pcallback : IPortableDevicePropertiesBulkCallback, pcontext : Guid*) : HRESULT
+    @lpVtbl.value.queue_get_values_by_object_list.call(this, pobjectids, pkeys, pcallback, pcontext)
   end
-  def queue_get_values_by_object_format(pguidobjectformat : Guid*, pszparentobjectid : LibC::LPWSTR, dwdepth : UInt32, pkeys : IPortableDeviceKeyCollection, pcallback : IPortableDevicePropertiesBulkCallback, pcontext : Guid*) : HRESULT
-    @lpVtbl.value.queue_get_values_by_object_format.unsafe_as(Proc(Guid*, LibC::LPWSTR, UInt32, IPortableDeviceKeyCollection, IPortableDevicePropertiesBulkCallback, Guid*, HRESULT)).call(pguidobjectformat, pszparentobjectid, dwdepth, pkeys, pcallback, pcontext)
+  def queue_get_values_by_object_format(this : IPortableDevicePropertiesBulk*, pguidobjectformat : Guid*, pszparentobjectid : LibC::LPWSTR, dwdepth : UInt32, pkeys : IPortableDeviceKeyCollection, pcallback : IPortableDevicePropertiesBulkCallback, pcontext : Guid*) : HRESULT
+    @lpVtbl.value.queue_get_values_by_object_format.call(this, pguidobjectformat, pszparentobjectid, dwdepth, pkeys, pcallback, pcontext)
   end
-  def queue_set_values_by_object_list(pobjectvalues : IPortableDeviceValuesCollection, pcallback : IPortableDevicePropertiesBulkCallback, pcontext : Guid*) : HRESULT
-    @lpVtbl.value.queue_set_values_by_object_list.unsafe_as(Proc(IPortableDeviceValuesCollection, IPortableDevicePropertiesBulkCallback, Guid*, HRESULT)).call(pobjectvalues, pcallback, pcontext)
+  def queue_set_values_by_object_list(this : IPortableDevicePropertiesBulk*, pobjectvalues : IPortableDeviceValuesCollection, pcallback : IPortableDevicePropertiesBulkCallback, pcontext : Guid*) : HRESULT
+    @lpVtbl.value.queue_set_values_by_object_list.call(this, pobjectvalues, pcallback, pcontext)
   end
-  def start(pcontext : Guid*) : HRESULT
-    @lpVtbl.value.start.unsafe_as(Proc(Guid*, HRESULT)).call(pcontext)
+  def start(this : IPortableDevicePropertiesBulk*, pcontext : Guid*) : HRESULT
+    @lpVtbl.value.start.call(this, pcontext)
   end
-  def cancel(pcontext : Guid*) : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(Guid*, HRESULT)).call(pcontext)
+  def cancel(this : IPortableDevicePropertiesBulk*, pcontext : Guid*) : HRESULT
+    @lpVtbl.value.cancel.call(this, pcontext)
   end
 end
 struct LibWin32::IPortableDevicePropertiesBulkCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDevicePropertiesBulkCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDevicePropertiesBulkCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDevicePropertiesBulkCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_start(pcontext : Guid*) : HRESULT
-    @lpVtbl.value.on_start.unsafe_as(Proc(Guid*, HRESULT)).call(pcontext)
+  def on_start(this : IPortableDevicePropertiesBulkCallback*, pcontext : Guid*) : HRESULT
+    @lpVtbl.value.on_start.call(this, pcontext)
   end
-  def on_progress(pcontext : Guid*, presults : IPortableDeviceValuesCollection) : HRESULT
-    @lpVtbl.value.on_progress.unsafe_as(Proc(Guid*, IPortableDeviceValuesCollection, HRESULT)).call(pcontext, presults)
+  def on_progress(this : IPortableDevicePropertiesBulkCallback*, pcontext : Guid*, presults : IPortableDeviceValuesCollection) : HRESULT
+    @lpVtbl.value.on_progress.call(this, pcontext, presults)
   end
-  def on_end(pcontext : Guid*, hrstatus : HRESULT) : HRESULT
-    @lpVtbl.value.on_end.unsafe_as(Proc(Guid*, HRESULT, HRESULT)).call(pcontext, hrstatus)
+  def on_end(this : IPortableDevicePropertiesBulkCallback*, pcontext : Guid*, hrstatus : HRESULT) : HRESULT
+    @lpVtbl.value.on_end.call(this, pcontext, hrstatus)
   end
 end
 struct LibWin32::IPortableDeviceServiceManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceServiceManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceServiceManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceServiceManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device_services(pszpnpdeviceid : LibC::LPWSTR, guidservicecategory : Guid*, pservices : LibC::LPWSTR*, pcservices : UInt32*) : HRESULT
-    @lpVtbl.value.get_device_services.unsafe_as(Proc(LibC::LPWSTR, Guid*, LibC::LPWSTR*, UInt32*, HRESULT)).call(pszpnpdeviceid, guidservicecategory, pservices, pcservices)
+  def get_device_services(this : IPortableDeviceServiceManager*, pszpnpdeviceid : LibC::LPWSTR, guidservicecategory : Guid*, pservices : LibC::LPWSTR*, pcservices : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_services.call(this, pszpnpdeviceid, guidservicecategory, pservices, pcservices)
   end
-  def get_device_for_service(pszpnpserviceid : LibC::LPWSTR, ppszpnpdeviceid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_device_for_service.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR*, HRESULT)).call(pszpnpserviceid, ppszpnpdeviceid)
+  def get_device_for_service(this : IPortableDeviceServiceManager*, pszpnpserviceid : LibC::LPWSTR, ppszpnpdeviceid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_device_for_service.call(this, pszpnpserviceid, ppszpnpdeviceid)
   end
 end
 struct LibWin32::IPortableDeviceService
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceService*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceService*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceService*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def open(pszpnpserviceid : LibC::LPWSTR, pclientinfo : IPortableDeviceValues) : HRESULT
-    @lpVtbl.value.open.unsafe_as(Proc(LibC::LPWSTR, IPortableDeviceValues, HRESULT)).call(pszpnpserviceid, pclientinfo)
+  def open(this : IPortableDeviceService*, pszpnpserviceid : LibC::LPWSTR, pclientinfo : IPortableDeviceValues) : HRESULT
+    @lpVtbl.value.open.call(this, pszpnpserviceid, pclientinfo)
   end
-  def capabilities(ppcapabilities : IPortableDeviceServiceCapabilities*) : HRESULT
-    @lpVtbl.value.capabilities.unsafe_as(Proc(IPortableDeviceServiceCapabilities*, HRESULT)).call(ppcapabilities)
+  def capabilities(this : IPortableDeviceService*, ppcapabilities : IPortableDeviceServiceCapabilities*) : HRESULT
+    @lpVtbl.value.capabilities.call(this, ppcapabilities)
   end
-  def content(ppcontent : IPortableDeviceContent2*) : HRESULT
-    @lpVtbl.value.content.unsafe_as(Proc(IPortableDeviceContent2*, HRESULT)).call(ppcontent)
+  def content(this : IPortableDeviceService*, ppcontent : IPortableDeviceContent2*) : HRESULT
+    @lpVtbl.value.content.call(this, ppcontent)
   end
-  def methods(ppmethods : IPortableDeviceServiceMethods*) : HRESULT
-    @lpVtbl.value.methods.unsafe_as(Proc(IPortableDeviceServiceMethods*, HRESULT)).call(ppmethods)
+  def methods(this : IPortableDeviceService*, ppmethods : IPortableDeviceServiceMethods*) : HRESULT
+    @lpVtbl.value.methods.call(this, ppmethods)
   end
-  def cancel : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  def cancel(this : IPortableDeviceService*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : IPortableDeviceService*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
-  def get_service_object_id(ppszserviceobjectid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_service_object_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszserviceobjectid)
+  def get_service_object_id(this : IPortableDeviceService*, ppszserviceobjectid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_service_object_id.call(this, ppszserviceobjectid)
   end
-  def get_pn_p_service_id(ppszpnpserviceid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_pn_p_service_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszpnpserviceid)
+  def get_pn_p_service_id(this : IPortableDeviceService*, ppszpnpserviceid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_pn_p_service_id.call(this, ppszpnpserviceid)
   end
-  def advise(dwflags : UInt32, pcallback : IPortableDeviceEventCallback, pparameters : IPortableDeviceValues, ppszcookie : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.advise.unsafe_as(Proc(UInt32, IPortableDeviceEventCallback, IPortableDeviceValues, LibC::LPWSTR*, HRESULT)).call(dwflags, pcallback, pparameters, ppszcookie)
+  def advise(this : IPortableDeviceService*, dwflags : UInt32, pcallback : IPortableDeviceEventCallback, pparameters : IPortableDeviceValues, ppszcookie : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.advise.call(this, dwflags, pcallback, pparameters, ppszcookie)
   end
-  def unadvise(pszcookie : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.unadvise.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszcookie)
+  def unadvise(this : IPortableDeviceService*, pszcookie : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.unadvise.call(this, pszcookie)
   end
-  def send_command(dwflags : UInt32, pparameters : IPortableDeviceValues, ppresults : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.send_command.unsafe_as(Proc(UInt32, IPortableDeviceValues, IPortableDeviceValues*, HRESULT)).call(dwflags, pparameters, ppresults)
+  def send_command(this : IPortableDeviceService*, dwflags : UInt32, pparameters : IPortableDeviceValues, ppresults : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.send_command.call(this, dwflags, pparameters, ppresults)
   end
 end
 struct LibWin32::IPortableDeviceServiceCapabilities
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceServiceCapabilities*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceServiceCapabilities*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceServiceCapabilities*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_supported_methods(ppmethods : IPortableDevicePropVariantCollection*) : HRESULT
-    @lpVtbl.value.get_supported_methods.unsafe_as(Proc(IPortableDevicePropVariantCollection*, HRESULT)).call(ppmethods)
+  def get_supported_methods(this : IPortableDeviceServiceCapabilities*, ppmethods : IPortableDevicePropVariantCollection*) : HRESULT
+    @lpVtbl.value.get_supported_methods.call(this, ppmethods)
   end
-  def get_supported_methods_by_format(format : Guid*, ppmethods : IPortableDevicePropVariantCollection*) : HRESULT
-    @lpVtbl.value.get_supported_methods_by_format.unsafe_as(Proc(Guid*, IPortableDevicePropVariantCollection*, HRESULT)).call(format, ppmethods)
+  def get_supported_methods_by_format(this : IPortableDeviceServiceCapabilities*, format : Guid*, ppmethods : IPortableDevicePropVariantCollection*) : HRESULT
+    @lpVtbl.value.get_supported_methods_by_format.call(this, format, ppmethods)
   end
-  def get_method_attributes(method : Guid*, ppattributes : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.get_method_attributes.unsafe_as(Proc(Guid*, IPortableDeviceValues*, HRESULT)).call(method, ppattributes)
+  def get_method_attributes(this : IPortableDeviceServiceCapabilities*, method : Guid*, ppattributes : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.get_method_attributes.call(this, method, ppattributes)
   end
-  def get_method_parameter_attributes(method : Guid*, parameter : PROPERTYKEY*, ppattributes : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.get_method_parameter_attributes.unsafe_as(Proc(Guid*, PROPERTYKEY*, IPortableDeviceValues*, HRESULT)).call(method, parameter, ppattributes)
+  def get_method_parameter_attributes(this : IPortableDeviceServiceCapabilities*, method : Guid*, parameter : PROPERTYKEY*, ppattributes : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.get_method_parameter_attributes.call(this, method, parameter, ppattributes)
   end
-  def get_supported_formats(ppformats : IPortableDevicePropVariantCollection*) : HRESULT
-    @lpVtbl.value.get_supported_formats.unsafe_as(Proc(IPortableDevicePropVariantCollection*, HRESULT)).call(ppformats)
+  def get_supported_formats(this : IPortableDeviceServiceCapabilities*, ppformats : IPortableDevicePropVariantCollection*) : HRESULT
+    @lpVtbl.value.get_supported_formats.call(this, ppformats)
   end
-  def get_format_attributes(format : Guid*, ppattributes : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.get_format_attributes.unsafe_as(Proc(Guid*, IPortableDeviceValues*, HRESULT)).call(format, ppattributes)
+  def get_format_attributes(this : IPortableDeviceServiceCapabilities*, format : Guid*, ppattributes : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.get_format_attributes.call(this, format, ppattributes)
   end
-  def get_supported_format_properties(format : Guid*, ppkeys : IPortableDeviceKeyCollection*) : HRESULT
-    @lpVtbl.value.get_supported_format_properties.unsafe_as(Proc(Guid*, IPortableDeviceKeyCollection*, HRESULT)).call(format, ppkeys)
+  def get_supported_format_properties(this : IPortableDeviceServiceCapabilities*, format : Guid*, ppkeys : IPortableDeviceKeyCollection*) : HRESULT
+    @lpVtbl.value.get_supported_format_properties.call(this, format, ppkeys)
   end
-  def get_format_property_attributes(format : Guid*, property : PROPERTYKEY*, ppattributes : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.get_format_property_attributes.unsafe_as(Proc(Guid*, PROPERTYKEY*, IPortableDeviceValues*, HRESULT)).call(format, property, ppattributes)
+  def get_format_property_attributes(this : IPortableDeviceServiceCapabilities*, format : Guid*, property : PROPERTYKEY*, ppattributes : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.get_format_property_attributes.call(this, format, property, ppattributes)
   end
-  def get_supported_events(ppevents : IPortableDevicePropVariantCollection*) : HRESULT
-    @lpVtbl.value.get_supported_events.unsafe_as(Proc(IPortableDevicePropVariantCollection*, HRESULT)).call(ppevents)
+  def get_supported_events(this : IPortableDeviceServiceCapabilities*, ppevents : IPortableDevicePropVariantCollection*) : HRESULT
+    @lpVtbl.value.get_supported_events.call(this, ppevents)
   end
-  def get_event_attributes(event : Guid*, ppattributes : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.get_event_attributes.unsafe_as(Proc(Guid*, IPortableDeviceValues*, HRESULT)).call(event, ppattributes)
+  def get_event_attributes(this : IPortableDeviceServiceCapabilities*, event : Guid*, ppattributes : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.get_event_attributes.call(this, event, ppattributes)
   end
-  def get_event_parameter_attributes(event : Guid*, parameter : PROPERTYKEY*, ppattributes : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.get_event_parameter_attributes.unsafe_as(Proc(Guid*, PROPERTYKEY*, IPortableDeviceValues*, HRESULT)).call(event, parameter, ppattributes)
+  def get_event_parameter_attributes(this : IPortableDeviceServiceCapabilities*, event : Guid*, parameter : PROPERTYKEY*, ppattributes : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.get_event_parameter_attributes.call(this, event, parameter, ppattributes)
   end
-  def get_inherited_services(dwinheritancetype : UInt32, ppservices : IPortableDevicePropVariantCollection*) : HRESULT
-    @lpVtbl.value.get_inherited_services.unsafe_as(Proc(UInt32, IPortableDevicePropVariantCollection*, HRESULT)).call(dwinheritancetype, ppservices)
+  def get_inherited_services(this : IPortableDeviceServiceCapabilities*, dwinheritancetype : UInt32, ppservices : IPortableDevicePropVariantCollection*) : HRESULT
+    @lpVtbl.value.get_inherited_services.call(this, dwinheritancetype, ppservices)
   end
-  def get_format_rendering_profiles(format : Guid*, pprenderingprofiles : IPortableDeviceValuesCollection*) : HRESULT
-    @lpVtbl.value.get_format_rendering_profiles.unsafe_as(Proc(Guid*, IPortableDeviceValuesCollection*, HRESULT)).call(format, pprenderingprofiles)
+  def get_format_rendering_profiles(this : IPortableDeviceServiceCapabilities*, format : Guid*, pprenderingprofiles : IPortableDeviceValuesCollection*) : HRESULT
+    @lpVtbl.value.get_format_rendering_profiles.call(this, format, pprenderingprofiles)
   end
-  def get_supported_commands(ppcommands : IPortableDeviceKeyCollection*) : HRESULT
-    @lpVtbl.value.get_supported_commands.unsafe_as(Proc(IPortableDeviceKeyCollection*, HRESULT)).call(ppcommands)
+  def get_supported_commands(this : IPortableDeviceServiceCapabilities*, ppcommands : IPortableDeviceKeyCollection*) : HRESULT
+    @lpVtbl.value.get_supported_commands.call(this, ppcommands)
   end
-  def get_command_options(command : PROPERTYKEY*, ppoptions : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.get_command_options.unsafe_as(Proc(PROPERTYKEY*, IPortableDeviceValues*, HRESULT)).call(command, ppoptions)
+  def get_command_options(this : IPortableDeviceServiceCapabilities*, command : PROPERTYKEY*, ppoptions : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.get_command_options.call(this, command, ppoptions)
   end
-  def cancel : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  def cancel(this : IPortableDeviceServiceCapabilities*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
   end
 end
 struct LibWin32::IPortableDeviceServiceMethods
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceServiceMethods*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceServiceMethods*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceServiceMethods*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def invoke(method : Guid*, pparameters : IPortableDeviceValues, ppresults : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Guid*, IPortableDeviceValues, IPortableDeviceValues*, HRESULT)).call(method, pparameters, ppresults)
+  def invoke(this : IPortableDeviceServiceMethods*, method : Guid*, pparameters : IPortableDeviceValues, ppresults : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.invoke.call(this, method, pparameters, ppresults)
   end
-  def invoke_async(method : Guid*, pparameters : IPortableDeviceValues, pcallback : IPortableDeviceServiceMethodCallback) : HRESULT
-    @lpVtbl.value.invoke_async.unsafe_as(Proc(Guid*, IPortableDeviceValues, IPortableDeviceServiceMethodCallback, HRESULT)).call(method, pparameters, pcallback)
+  def invoke_async(this : IPortableDeviceServiceMethods*, method : Guid*, pparameters : IPortableDeviceValues, pcallback : IPortableDeviceServiceMethodCallback) : HRESULT
+    @lpVtbl.value.invoke_async.call(this, method, pparameters, pcallback)
   end
-  def cancel(pcallback : IPortableDeviceServiceMethodCallback) : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(IPortableDeviceServiceMethodCallback, HRESULT)).call(pcallback)
+  def cancel(this : IPortableDeviceServiceMethods*, pcallback : IPortableDeviceServiceMethodCallback) : HRESULT
+    @lpVtbl.value.cancel.call(this, pcallback)
   end
 end
 struct LibWin32::IPortableDeviceServiceMethodCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceServiceMethodCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceServiceMethodCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceServiceMethodCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_complete(hrstatus : HRESULT, presults : IPortableDeviceValues) : HRESULT
-    @lpVtbl.value.on_complete.unsafe_as(Proc(HRESULT, IPortableDeviceValues, HRESULT)).call(hrstatus, presults)
+  def on_complete(this : IPortableDeviceServiceMethodCallback*, hrstatus : HRESULT, presults : IPortableDeviceValues) : HRESULT
+    @lpVtbl.value.on_complete.call(this, hrstatus, presults)
   end
 end
 struct LibWin32::IPortableDeviceServiceActivation
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceServiceActivation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceServiceActivation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceServiceActivation*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def open_async(pszpnpserviceid : LibC::LPWSTR, pclientinfo : IPortableDeviceValues, pcallback : IPortableDeviceServiceOpenCallback) : HRESULT
-    @lpVtbl.value.open_async.unsafe_as(Proc(LibC::LPWSTR, IPortableDeviceValues, IPortableDeviceServiceOpenCallback, HRESULT)).call(pszpnpserviceid, pclientinfo, pcallback)
+  def open_async(this : IPortableDeviceServiceActivation*, pszpnpserviceid : LibC::LPWSTR, pclientinfo : IPortableDeviceValues, pcallback : IPortableDeviceServiceOpenCallback) : HRESULT
+    @lpVtbl.value.open_async.call(this, pszpnpserviceid, pclientinfo, pcallback)
   end
-  def cancel_open_async : HRESULT
-    @lpVtbl.value.cancel_open_async.unsafe_as(Proc(HRESULT)).call
+  def cancel_open_async(this : IPortableDeviceServiceActivation*) : HRESULT
+    @lpVtbl.value.cancel_open_async.call(this)
   end
 end
 struct LibWin32::IPortableDeviceServiceOpenCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceServiceOpenCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceServiceOpenCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceServiceOpenCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_complete(hrstatus : HRESULT) : HRESULT
-    @lpVtbl.value.on_complete.unsafe_as(Proc(HRESULT, HRESULT)).call(hrstatus)
+  def on_complete(this : IPortableDeviceServiceOpenCallback*, hrstatus : HRESULT) : HRESULT
+    @lpVtbl.value.on_complete.call(this, hrstatus)
   end
 end
 struct LibWin32::IPortableDeviceDispatchFactory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceDispatchFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceDispatchFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceDispatchFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_device_dispatch(pszpnpdeviceid : LibC::LPWSTR, ppdevicedispatch : IDispatch*) : HRESULT
-    @lpVtbl.value.get_device_dispatch.unsafe_as(Proc(LibC::LPWSTR, IDispatch*, HRESULT)).call(pszpnpdeviceid, ppdevicedispatch)
+  def get_device_dispatch(this : IPortableDeviceDispatchFactory*, pszpnpdeviceid : LibC::LPWSTR, ppdevicedispatch : IDispatch*) : HRESULT
+    @lpVtbl.value.get_device_dispatch.call(this, pszpnpdeviceid, ppdevicedispatch)
   end
 end
 struct LibWin32::IPortableDeviceWebControl
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceWebControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceWebControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceWebControl*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_type_info_count(pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  def get_type_info_count(this : IPortableDeviceWebControl*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
   end
-  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  def get_type_info(this : IPortableDeviceWebControl*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
   end
-  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  def get_i_ds_of_names(this : IPortableDeviceWebControl*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
   end
-  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  def invoke(this : IPortableDeviceWebControl*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_device_from_id(deviceid : UInt8*, ppdevice : IDispatch*) : HRESULT
-    @lpVtbl.value.get_device_from_id.unsafe_as(Proc(UInt8*, IDispatch*, HRESULT)).call(deviceid, ppdevice)
+  def get_device_from_id(this : IPortableDeviceWebControl*, deviceid : UInt8*, ppdevice : IDispatch*) : HRESULT
+    @lpVtbl.value.get_device_from_id.call(this, deviceid, ppdevice)
   end
-  def get_device_from_id_async(deviceid : UInt8*, pcompletionhandler : IDispatch, perrorhandler : IDispatch) : HRESULT
-    @lpVtbl.value.get_device_from_id_async.unsafe_as(Proc(UInt8*, IDispatch, IDispatch, HRESULT)).call(deviceid, pcompletionhandler, perrorhandler)
+  def get_device_from_id_async(this : IPortableDeviceWebControl*, deviceid : UInt8*, pcompletionhandler : IDispatch, perrorhandler : IDispatch) : HRESULT
+    @lpVtbl.value.get_device_from_id_async.call(this, deviceid, pcompletionhandler, perrorhandler)
   end
 end
 struct LibWin32::IEnumPortableDeviceConnectors
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IEnumPortableDeviceConnectors*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IEnumPortableDeviceConnectors*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IEnumPortableDeviceConnectors*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def next(crequested : UInt32, pconnectors : IPortableDeviceConnector*, pcfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(UInt32, IPortableDeviceConnector*, UInt32*, HRESULT)).call(crequested, pconnectors, pcfetched)
+  def next(this : IEnumPortableDeviceConnectors*, crequested : UInt32, pconnectors : IPortableDeviceConnector*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, crequested, pconnectors, pcfetched)
   end
-  def skip(cconnectors : UInt32) : HRESULT
-    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(cconnectors)
+  def skip(this : IEnumPortableDeviceConnectors*, cconnectors : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, cconnectors)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IEnumPortableDeviceConnectors*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def clone(ppenum : IEnumPortableDeviceConnectors*) : HRESULT
-    @lpVtbl.value.clone.unsafe_as(Proc(IEnumPortableDeviceConnectors*, HRESULT)).call(ppenum)
+  def clone(this : IEnumPortableDeviceConnectors*, ppenum : IEnumPortableDeviceConnectors*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
   end
 end
 struct LibWin32::IPortableDeviceConnector
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPortableDeviceConnector*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPortableDeviceConnector*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPortableDeviceConnector*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def connect(pcallback : IConnectionRequestCallback) : HRESULT
-    @lpVtbl.value.connect.unsafe_as(Proc(IConnectionRequestCallback, HRESULT)).call(pcallback)
+  def connect(this : IPortableDeviceConnector*, pcallback : IConnectionRequestCallback) : HRESULT
+    @lpVtbl.value.connect.call(this, pcallback)
   end
-  def disconnect(pcallback : IConnectionRequestCallback) : HRESULT
-    @lpVtbl.value.disconnect.unsafe_as(Proc(IConnectionRequestCallback, HRESULT)).call(pcallback)
+  def disconnect(this : IPortableDeviceConnector*, pcallback : IConnectionRequestCallback) : HRESULT
+    @lpVtbl.value.disconnect.call(this, pcallback)
   end
-  def cancel(pcallback : IConnectionRequestCallback) : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(IConnectionRequestCallback, HRESULT)).call(pcallback)
+  def cancel(this : IPortableDeviceConnector*, pcallback : IConnectionRequestCallback) : HRESULT
+    @lpVtbl.value.cancel.call(this, pcallback)
   end
-  def get_property(ppropertykey : DEVPROPKEY*, ppropertytype : UInt32*, ppdata : UInt8**, pcbdata : UInt32*) : HRESULT
-    @lpVtbl.value.get_property.unsafe_as(Proc(DEVPROPKEY*, UInt32*, UInt8**, UInt32*, HRESULT)).call(ppropertykey, ppropertytype, ppdata, pcbdata)
+  def get_property(this : IPortableDeviceConnector*, ppropertykey : DEVPROPKEY*, ppropertytype : UInt32*, ppdata : UInt8**, pcbdata : UInt32*) : HRESULT
+    @lpVtbl.value.get_property.call(this, ppropertykey, ppropertytype, ppdata, pcbdata)
   end
-  def set_property(ppropertykey : DEVPROPKEY*, propertytype : UInt32, pdata : UInt8*, cbdata : UInt32) : HRESULT
-    @lpVtbl.value.set_property.unsafe_as(Proc(DEVPROPKEY*, UInt32, UInt8*, UInt32, HRESULT)).call(ppropertykey, propertytype, pdata, cbdata)
+  def set_property(this : IPortableDeviceConnector*, ppropertykey : DEVPROPKEY*, propertytype : UInt32, pdata : UInt8*, cbdata : UInt32) : HRESULT
+    @lpVtbl.value.set_property.call(this, ppropertykey, propertytype, pdata, cbdata)
   end
-  def get_pn_pid(ppwszpnpid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_pn_pid.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppwszpnpid)
+  def get_pn_pid(this : IPortableDeviceConnector*, ppwszpnpid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_pn_pid.call(this, ppwszpnpid)
   end
 end
 struct LibWin32::IConnectionRequestCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IConnectionRequestCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IConnectionRequestCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IConnectionRequestCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_complete(hrstatus : HRESULT) : HRESULT
-    @lpVtbl.value.on_complete.unsafe_as(Proc(HRESULT, HRESULT)).call(hrstatus)
+  def on_complete(this : IConnectionRequestCallback*, hrstatus : HRESULT) : HRESULT
+    @lpVtbl.value.on_complete.call(this, hrstatus)
   end
 end
 struct LibWin32::IMediaRadioManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMediaRadioManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMediaRadioManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMediaRadioManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_radio_instances(ppcollection : IRadioInstanceCollection*) : HRESULT
-    @lpVtbl.value.get_radio_instances.unsafe_as(Proc(IRadioInstanceCollection*, HRESULT)).call(ppcollection)
+  def get_radio_instances(this : IMediaRadioManager*, ppcollection : IRadioInstanceCollection*) : HRESULT
+    @lpVtbl.value.get_radio_instances.call(this, ppcollection)
   end
-  def on_system_radio_state_change(sysradiostate : SYSTEM_RADIO_STATE, utimeoutsec : UInt32) : HRESULT
-    @lpVtbl.value.on_system_radio_state_change.unsafe_as(Proc(SYSTEM_RADIO_STATE, UInt32, HRESULT)).call(sysradiostate, utimeoutsec)
+  def on_system_radio_state_change(this : IMediaRadioManager*, sysradiostate : SYSTEM_RADIO_STATE, utimeoutsec : UInt32) : HRESULT
+    @lpVtbl.value.on_system_radio_state_change.call(this, sysradiostate, utimeoutsec)
   end
 end
 struct LibWin32::IRadioInstanceCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IRadioInstanceCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IRadioInstanceCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IRadioInstanceCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_count(pcinstance : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcinstance)
+  def get_count(this : IRadioInstanceCollection*, pcinstance : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcinstance)
   end
-  def get_at(uindex : UInt32, ppradioinstance : IRadioInstance*) : HRESULT
-    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, IRadioInstance*, HRESULT)).call(uindex, ppradioinstance)
+  def get_at(this : IRadioInstanceCollection*, uindex : UInt32, ppradioinstance : IRadioInstance*) : HRESULT
+    @lpVtbl.value.get_at.call(this, uindex, ppradioinstance)
   end
 end
 struct LibWin32::IRadioInstance
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IRadioInstance*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IRadioInstance*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IRadioInstance*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_radio_manager_signature(pguidsignature : Guid*) : HRESULT
-    @lpVtbl.value.get_radio_manager_signature.unsafe_as(Proc(Guid*, HRESULT)).call(pguidsignature)
+  def get_radio_manager_signature(this : IRadioInstance*, pguidsignature : Guid*) : HRESULT
+    @lpVtbl.value.get_radio_manager_signature.call(this, pguidsignature)
   end
-  def get_instance_signature(pbstrid : UInt8**) : HRESULT
-    @lpVtbl.value.get_instance_signature.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrid)
+  def get_instance_signature(this : IRadioInstance*, pbstrid : UInt8**) : HRESULT
+    @lpVtbl.value.get_instance_signature.call(this, pbstrid)
   end
-  def get_friendly_name(lcid : UInt32, pbstrname : UInt8**) : HRESULT
-    @lpVtbl.value.get_friendly_name.unsafe_as(Proc(UInt32, UInt8**, HRESULT)).call(lcid, pbstrname)
+  def get_friendly_name(this : IRadioInstance*, lcid : UInt32, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.call(this, lcid, pbstrname)
   end
-  def get_radio_state(pradiostate : DEVICE_RADIO_STATE*) : HRESULT
-    @lpVtbl.value.get_radio_state.unsafe_as(Proc(DEVICE_RADIO_STATE*, HRESULT)).call(pradiostate)
+  def get_radio_state(this : IRadioInstance*, pradiostate : DEVICE_RADIO_STATE*) : HRESULT
+    @lpVtbl.value.get_radio_state.call(this, pradiostate)
   end
-  def set_radio_state(radiostate : DEVICE_RADIO_STATE, utimeoutsec : UInt32) : HRESULT
-    @lpVtbl.value.set_radio_state.unsafe_as(Proc(DEVICE_RADIO_STATE, UInt32, HRESULT)).call(radiostate, utimeoutsec)
+  def set_radio_state(this : IRadioInstance*, radiostate : DEVICE_RADIO_STATE, utimeoutsec : UInt32) : HRESULT
+    @lpVtbl.value.set_radio_state.call(this, radiostate, utimeoutsec)
   end
-  def is_multi_comm : LibC::BOOL
-    @lpVtbl.value.is_multi_comm.unsafe_as(Proc(LibC::BOOL)).call
+  def is_multi_comm(this : IRadioInstance*) : LibC::BOOL
+    @lpVtbl.value.is_multi_comm.call(this)
   end
-  def is_associating_device : LibC::BOOL
-    @lpVtbl.value.is_associating_device.unsafe_as(Proc(LibC::BOOL)).call
+  def is_associating_device(this : IRadioInstance*) : LibC::BOOL
+    @lpVtbl.value.is_associating_device.call(this)
   end
 end
 struct LibWin32::IMediaRadioManagerNotifySink
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMediaRadioManagerNotifySink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMediaRadioManagerNotifySink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMediaRadioManagerNotifySink*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def on_instance_add(pradioinstance : IRadioInstance) : HRESULT
-    @lpVtbl.value.on_instance_add.unsafe_as(Proc(IRadioInstance, HRESULT)).call(pradioinstance)
+  def on_instance_add(this : IMediaRadioManagerNotifySink*, pradioinstance : IRadioInstance) : HRESULT
+    @lpVtbl.value.on_instance_add.call(this, pradioinstance)
   end
-  def on_instance_remove(bstrradioinstanceid : UInt8*) : HRESULT
-    @lpVtbl.value.on_instance_remove.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrradioinstanceid)
+  def on_instance_remove(this : IMediaRadioManagerNotifySink*, bstrradioinstanceid : UInt8*) : HRESULT
+    @lpVtbl.value.on_instance_remove.call(this, bstrradioinstanceid)
   end
-  def on_instance_radio_change(bstrradioinstanceid : UInt8*, radiostate : DEVICE_RADIO_STATE) : HRESULT
-    @lpVtbl.value.on_instance_radio_change.unsafe_as(Proc(UInt8*, DEVICE_RADIO_STATE, HRESULT)).call(bstrradioinstanceid, radiostate)
+  def on_instance_radio_change(this : IMediaRadioManagerNotifySink*, bstrradioinstanceid : UInt8*, radiostate : DEVICE_RADIO_STATE) : HRESULT
+    @lpVtbl.value.on_instance_radio_change.call(this, bstrradioinstanceid, radiostate)
   end
 end

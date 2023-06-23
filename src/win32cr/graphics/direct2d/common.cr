@@ -276,16 +276,16 @@ lib LibWin32
 
 
   struct ID2D1SimplifiedGeometrySinkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_fill_mode : UInt64
-    set_segment_flags : UInt64
-    begin_figure : UInt64
-    add_lines : UInt64
-    add_beziers : UInt64
-    end_figure : UInt64
-    close : UInt64
+    query_interface : Proc(ID2D1SimplifiedGeometrySink*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ID2D1SimplifiedGeometrySink*, UInt32)
+    release : Proc(ID2D1SimplifiedGeometrySink*, UInt32)
+    set_fill_mode : Proc(ID2D1SimplifiedGeometrySink*, D2D1_FILL_MODE, Void)
+    set_segment_flags : Proc(ID2D1SimplifiedGeometrySink*, D2D1_PATH_SEGMENT, Void)
+    begin_figure : Proc(ID2D1SimplifiedGeometrySink*, D2D_POINT_2F, D2D1_FIGURE_BEGIN, Void)
+    add_lines : Proc(ID2D1SimplifiedGeometrySink*, D2D_POINT_2F*, UInt32, Void)
+    add_beziers : Proc(ID2D1SimplifiedGeometrySink*, D2D1_BEZIER_SEGMENT*, UInt32, Void)
+    end_figure : Proc(ID2D1SimplifiedGeometrySink*, D2D1_FIGURE_END, Void)
+    close : Proc(ID2D1SimplifiedGeometrySink*, HRESULT)
   end
 
   ID2D1SimplifiedGeometrySink_GUID = "2cd9069e-12e2-11dc-9fed-001143a055f9"
@@ -296,34 +296,34 @@ lib LibWin32
 
 end
 struct LibWin32::ID2D1SimplifiedGeometrySink
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ID2D1SimplifiedGeometrySink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ID2D1SimplifiedGeometrySink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ID2D1SimplifiedGeometrySink*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_fill_mode(fillmode : D2D1_FILL_MODE) : Void
-    @lpVtbl.value.set_fill_mode.unsafe_as(Proc(D2D1_FILL_MODE, Void)).call(fillmode)
+  def set_fill_mode(this : ID2D1SimplifiedGeometrySink*, fillmode : D2D1_FILL_MODE) : Void
+    @lpVtbl.value.set_fill_mode.call(this, fillmode)
   end
-  def set_segment_flags(vertexflags : D2D1_PATH_SEGMENT) : Void
-    @lpVtbl.value.set_segment_flags.unsafe_as(Proc(D2D1_PATH_SEGMENT, Void)).call(vertexflags)
+  def set_segment_flags(this : ID2D1SimplifiedGeometrySink*, vertexflags : D2D1_PATH_SEGMENT) : Void
+    @lpVtbl.value.set_segment_flags.call(this, vertexflags)
   end
-  def begin_figure(startpoint : D2D_POINT_2F, figurebegin : D2D1_FIGURE_BEGIN) : Void
-    @lpVtbl.value.begin_figure.unsafe_as(Proc(D2D_POINT_2F, D2D1_FIGURE_BEGIN, Void)).call(startpoint, figurebegin)
+  def begin_figure(this : ID2D1SimplifiedGeometrySink*, startpoint : D2D_POINT_2F, figurebegin : D2D1_FIGURE_BEGIN) : Void
+    @lpVtbl.value.begin_figure.call(this, startpoint, figurebegin)
   end
-  def add_lines(points : D2D_POINT_2F*, pointscount : UInt32) : Void
-    @lpVtbl.value.add_lines.unsafe_as(Proc(D2D_POINT_2F*, UInt32, Void)).call(points, pointscount)
+  def add_lines(this : ID2D1SimplifiedGeometrySink*, points : D2D_POINT_2F*, pointscount : UInt32) : Void
+    @lpVtbl.value.add_lines.call(this, points, pointscount)
   end
-  def add_beziers(beziers : D2D1_BEZIER_SEGMENT*, bezierscount : UInt32) : Void
-    @lpVtbl.value.add_beziers.unsafe_as(Proc(D2D1_BEZIER_SEGMENT*, UInt32, Void)).call(beziers, bezierscount)
+  def add_beziers(this : ID2D1SimplifiedGeometrySink*, beziers : D2D1_BEZIER_SEGMENT*, bezierscount : UInt32) : Void
+    @lpVtbl.value.add_beziers.call(this, beziers, bezierscount)
   end
-  def end_figure(figureend : D2D1_FIGURE_END) : Void
-    @lpVtbl.value.end_figure.unsafe_as(Proc(D2D1_FIGURE_END, Void)).call(figureend)
+  def end_figure(this : ID2D1SimplifiedGeometrySink*, figureend : D2D1_FIGURE_END) : Void
+    @lpVtbl.value.end_figure.call(this, figureend)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : ID2D1SimplifiedGeometrySink*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
 end

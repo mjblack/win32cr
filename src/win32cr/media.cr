@@ -176,13 +176,13 @@ lib LibWin32
 
 
   struct IReferenceClockVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_time : UInt64
-    advise_time : UInt64
-    advise_periodic : UInt64
-    unadvise : UInt64
+    query_interface : Proc(IReferenceClock*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IReferenceClock*, UInt32)
+    release : Proc(IReferenceClock*, UInt32)
+    get_time : Proc(IReferenceClock*, Int64*, HRESULT)
+    advise_time : Proc(IReferenceClock*, Int64, Int64, LibC::HANDLE, LibC::UINT_PTR*, HRESULT)
+    advise_periodic : Proc(IReferenceClock*, Int64, Int64, LibC::HANDLE, LibC::UINT_PTR*, HRESULT)
+    unadvise : Proc(IReferenceClock*, LibC::UINT_PTR, HRESULT)
   end
 
   IReferenceClock_GUID = "56a86897-0ad4-11ce-b03a-0020af0ba770"
@@ -192,11 +192,11 @@ lib LibWin32
   end
 
   struct IReferenceClockTimerControlVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_default_timer_resolution : UInt64
-    get_default_timer_resolution : UInt64
+    query_interface : Proc(IReferenceClockTimerControl*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IReferenceClockTimerControl*, UInt32)
+    release : Proc(IReferenceClockTimerControl*, UInt32)
+    set_default_timer_resolution : Proc(IReferenceClockTimerControl*, Int64, HRESULT)
+    get_default_timer_resolution : Proc(IReferenceClockTimerControl*, Int64*, HRESULT)
   end
 
   IReferenceClockTimerControl_GUID = "ebec459c-2eca-4d42-a8af-30df557614b8"
@@ -206,13 +206,13 @@ lib LibWin32
   end
 
   struct IReferenceClock2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_time : UInt64
-    advise_time : UInt64
-    advise_periodic : UInt64
-    unadvise : UInt64
+    query_interface : Proc(IReferenceClock2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IReferenceClock2*, UInt32)
+    release : Proc(IReferenceClock2*, UInt32)
+    get_time : Proc(IReferenceClock2*, Int64*, HRESULT)
+    advise_time : Proc(IReferenceClock2*, Int64, Int64, LibC::HANDLE, LibC::UINT_PTR*, HRESULT)
+    advise_periodic : Proc(IReferenceClock2*, Int64, Int64, LibC::HANDLE, LibC::UINT_PTR*, HRESULT)
+    unadvise : Proc(IReferenceClock2*, LibC::UINT_PTR, HRESULT)
   end
 
   IReferenceClock2_GUID = "36b73885-c2c8-11cf-8b46-00805f6cef60"
@@ -244,65 +244,65 @@ lib LibWin32
   fun timeKillEvent(utimerid : UInt32) : UInt32
 end
 struct LibWin32::IReferenceClock
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IReferenceClock*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IReferenceClock*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IReferenceClock*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_time(ptime : Int64*) : HRESULT
-    @lpVtbl.value.get_time.unsafe_as(Proc(Int64*, HRESULT)).call(ptime)
+  def get_time(this : IReferenceClock*, ptime : Int64*) : HRESULT
+    @lpVtbl.value.get_time.call(this, ptime)
   end
-  def advise_time(basetime : Int64, streamtime : Int64, hevent : LibC::HANDLE, pdwadvisecookie : LibC::UINT_PTR*) : HRESULT
-    @lpVtbl.value.advise_time.unsafe_as(Proc(Int64, Int64, LibC::HANDLE, LibC::UINT_PTR*, HRESULT)).call(basetime, streamtime, hevent, pdwadvisecookie)
+  def advise_time(this : IReferenceClock*, basetime : Int64, streamtime : Int64, hevent : LibC::HANDLE, pdwadvisecookie : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.advise_time.call(this, basetime, streamtime, hevent, pdwadvisecookie)
   end
-  def advise_periodic(starttime : Int64, periodtime : Int64, hsemaphore : LibC::HANDLE, pdwadvisecookie : LibC::UINT_PTR*) : HRESULT
-    @lpVtbl.value.advise_periodic.unsafe_as(Proc(Int64, Int64, LibC::HANDLE, LibC::UINT_PTR*, HRESULT)).call(starttime, periodtime, hsemaphore, pdwadvisecookie)
+  def advise_periodic(this : IReferenceClock*, starttime : Int64, periodtime : Int64, hsemaphore : LibC::HANDLE, pdwadvisecookie : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.advise_periodic.call(this, starttime, periodtime, hsemaphore, pdwadvisecookie)
   end
-  def unadvise(dwadvisecookie : LibC::UINT_PTR) : HRESULT
-    @lpVtbl.value.unadvise.unsafe_as(Proc(LibC::UINT_PTR, HRESULT)).call(dwadvisecookie)
+  def unadvise(this : IReferenceClock*, dwadvisecookie : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.unadvise.call(this, dwadvisecookie)
   end
 end
 struct LibWin32::IReferenceClockTimerControl
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IReferenceClockTimerControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IReferenceClockTimerControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IReferenceClockTimerControl*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_default_timer_resolution(timerresolution : Int64) : HRESULT
-    @lpVtbl.value.set_default_timer_resolution.unsafe_as(Proc(Int64, HRESULT)).call(timerresolution)
+  def set_default_timer_resolution(this : IReferenceClockTimerControl*, timerresolution : Int64) : HRESULT
+    @lpVtbl.value.set_default_timer_resolution.call(this, timerresolution)
   end
-  def get_default_timer_resolution(ptimerresolution : Int64*) : HRESULT
-    @lpVtbl.value.get_default_timer_resolution.unsafe_as(Proc(Int64*, HRESULT)).call(ptimerresolution)
+  def get_default_timer_resolution(this : IReferenceClockTimerControl*, ptimerresolution : Int64*) : HRESULT
+    @lpVtbl.value.get_default_timer_resolution.call(this, ptimerresolution)
   end
 end
 struct LibWin32::IReferenceClock2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IReferenceClock2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IReferenceClock2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IReferenceClock2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_time(ptime : Int64*) : HRESULT
-    @lpVtbl.value.get_time.unsafe_as(Proc(Int64*, HRESULT)).call(ptime)
+  def get_time(this : IReferenceClock2*, ptime : Int64*) : HRESULT
+    @lpVtbl.value.get_time.call(this, ptime)
   end
-  def advise_time(basetime : Int64, streamtime : Int64, hevent : LibC::HANDLE, pdwadvisecookie : LibC::UINT_PTR*) : HRESULT
-    @lpVtbl.value.advise_time.unsafe_as(Proc(Int64, Int64, LibC::HANDLE, LibC::UINT_PTR*, HRESULT)).call(basetime, streamtime, hevent, pdwadvisecookie)
+  def advise_time(this : IReferenceClock2*, basetime : Int64, streamtime : Int64, hevent : LibC::HANDLE, pdwadvisecookie : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.advise_time.call(this, basetime, streamtime, hevent, pdwadvisecookie)
   end
-  def advise_periodic(starttime : Int64, periodtime : Int64, hsemaphore : LibC::HANDLE, pdwadvisecookie : LibC::UINT_PTR*) : HRESULT
-    @lpVtbl.value.advise_periodic.unsafe_as(Proc(Int64, Int64, LibC::HANDLE, LibC::UINT_PTR*, HRESULT)).call(starttime, periodtime, hsemaphore, pdwadvisecookie)
+  def advise_periodic(this : IReferenceClock2*, starttime : Int64, periodtime : Int64, hsemaphore : LibC::HANDLE, pdwadvisecookie : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.advise_periodic.call(this, starttime, periodtime, hsemaphore, pdwadvisecookie)
   end
-  def unadvise(dwadvisecookie : LibC::UINT_PTR) : HRESULT
-    @lpVtbl.value.unadvise.unsafe_as(Proc(LibC::UINT_PTR, HRESULT)).call(dwadvisecookie)
+  def unadvise(this : IReferenceClock2*, dwadvisecookie : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.unadvise.call(this, dwadvisecookie)
   end
 end

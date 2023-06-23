@@ -14,11 +14,11 @@ require "../../ui/windowsandmessaging.cr"
 lib LibWin32
 
   struct IThumbnailExtractorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    extract_thumbnail : UInt64
-    on_file_updated : UInt64
+    query_interface : Proc(IThumbnailExtractor*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IThumbnailExtractor*, UInt32)
+    release : Proc(IThumbnailExtractor*, UInt32)
+    extract_thumbnail : Proc(IThumbnailExtractor*, IStorage, UInt32, UInt32, UInt32*, UInt32*, HBITMAP*, HRESULT)
+    on_file_updated : Proc(IThumbnailExtractor*, IStorage, HRESULT)
   end
 
   IThumbnailExtractor_GUID = "969dc708-5c76-11d1-8d86-0000f804b057"
@@ -28,10 +28,10 @@ lib LibWin32
   end
 
   struct IDummyHICONIncluderVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    dummy : UInt64
+    query_interface : Proc(IDummyHICONIncluder*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDummyHICONIncluder*, UInt32)
+    release : Proc(IDummyHICONIncluder*, UInt32)
+    dummy : Proc(IDummyHICONIncluder*, LibC::HANDLE, HDC, HRESULT)
   end
 
   IDummyHICONIncluder_GUID = "947990de-cc28-11d2-a0f7-00805f858fb1"
@@ -42,33 +42,33 @@ lib LibWin32
 
 end
 struct LibWin32::IThumbnailExtractor
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IThumbnailExtractor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IThumbnailExtractor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IThumbnailExtractor*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def extract_thumbnail(pstg : IStorage, ullength : UInt32, ulheight : UInt32, puloutputlength : UInt32*, puloutputheight : UInt32*, phoutputbitmap : HBITMAP*) : HRESULT
-    @lpVtbl.value.extract_thumbnail.unsafe_as(Proc(IStorage, UInt32, UInt32, UInt32*, UInt32*, HBITMAP*, HRESULT)).call(pstg, ullength, ulheight, puloutputlength, puloutputheight, phoutputbitmap)
+  def extract_thumbnail(this : IThumbnailExtractor*, pstg : IStorage, ullength : UInt32, ulheight : UInt32, puloutputlength : UInt32*, puloutputheight : UInt32*, phoutputbitmap : HBITMAP*) : HRESULT
+    @lpVtbl.value.extract_thumbnail.call(this, pstg, ullength, ulheight, puloutputlength, puloutputheight, phoutputbitmap)
   end
-  def on_file_updated(pstg : IStorage) : HRESULT
-    @lpVtbl.value.on_file_updated.unsafe_as(Proc(IStorage, HRESULT)).call(pstg)
+  def on_file_updated(this : IThumbnailExtractor*, pstg : IStorage) : HRESULT
+    @lpVtbl.value.on_file_updated.call(this, pstg)
   end
 end
 struct LibWin32::IDummyHICONIncluder
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDummyHICONIncluder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDummyHICONIncluder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDummyHICONIncluder*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def dummy(h1 : LibC::HANDLE, h2 : HDC) : HRESULT
-    @lpVtbl.value.dummy.unsafe_as(Proc(LibC::HANDLE, HDC, HRESULT)).call(h1, h2)
+  def dummy(this : IDummyHICONIncluder*, h1 : LibC::HANDLE, h2 : HDC) : HRESULT
+    @lpVtbl.value.dummy.call(this, h1, h2)
   end
 end

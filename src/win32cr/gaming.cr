@@ -97,13 +97,13 @@ lib LibWin32
 
 
   struct IGameExplorerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    add_game : UInt64
-    remove_game : UInt64
-    update_game : UInt64
-    verify_access : UInt64
+    query_interface : Proc(IGameExplorer*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IGameExplorer*, UInt32)
+    release : Proc(IGameExplorer*, UInt32)
+    add_game : Proc(IGameExplorer*, UInt8*, UInt8*, GAME_INSTALL_SCOPE, Guid*, HRESULT)
+    remove_game : Proc(IGameExplorer*, Guid, HRESULT)
+    update_game : Proc(IGameExplorer*, Guid, HRESULT)
+    verify_access : Proc(IGameExplorer*, UInt8*, LibC::BOOL*, HRESULT)
   end
 
   IGameExplorer_GUID = "e7b2fb72-d728-49b3-a5f2-18ebf5f1349e"
@@ -113,21 +113,21 @@ lib LibWin32
   end
 
   struct IGameStatisticsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_max_category_length : UInt64
-    get_max_name_length : UInt64
-    get_max_value_length : UInt64
-    get_max_categories : UInt64
-    get_max_stats_per_category : UInt64
-    set_category_title : UInt64
-    get_category_title : UInt64
-    get_statistic : UInt64
-    set_statistic : UInt64
-    save : UInt64
-    set_last_played_category : UInt64
-    get_last_played_category : UInt64
+    query_interface : Proc(IGameStatistics*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IGameStatistics*, UInt32)
+    release : Proc(IGameStatistics*, UInt32)
+    get_max_category_length : Proc(IGameStatistics*, UInt32*, HRESULT)
+    get_max_name_length : Proc(IGameStatistics*, UInt32*, HRESULT)
+    get_max_value_length : Proc(IGameStatistics*, UInt32*, HRESULT)
+    get_max_categories : Proc(IGameStatistics*, UInt16*, HRESULT)
+    get_max_stats_per_category : Proc(IGameStatistics*, UInt16*, HRESULT)
+    set_category_title : Proc(IGameStatistics*, UInt16, LibC::LPWSTR, HRESULT)
+    get_category_title : Proc(IGameStatistics*, UInt16, LibC::LPWSTR*, HRESULT)
+    get_statistic : Proc(IGameStatistics*, UInt16, UInt16, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
+    set_statistic : Proc(IGameStatistics*, UInt16, UInt16, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    save : Proc(IGameStatistics*, LibC::BOOL, HRESULT)
+    set_last_played_category : Proc(IGameStatistics*, UInt32, HRESULT)
+    get_last_played_category : Proc(IGameStatistics*, UInt32*, HRESULT)
   end
 
   IGameStatistics_GUID = "3887c9ca-04a0-42ae-bc4c-5fa6c7721145"
@@ -137,11 +137,11 @@ lib LibWin32
   end
 
   struct IGameStatisticsMgrVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_game_statistics : UInt64
-    remove_game_statistics : UInt64
+    query_interface : Proc(IGameStatisticsMgr*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IGameStatisticsMgr*, UInt32)
+    release : Proc(IGameStatisticsMgr*, UInt32)
+    get_game_statistics : Proc(IGameStatisticsMgr*, LibC::LPWSTR, GAMESTATS_OPEN_TYPE, GAMESTATS_OPEN_RESULT*, IGameStatistics*, HRESULT)
+    remove_game_statistics : Proc(IGameStatisticsMgr*, LibC::LPWSTR, HRESULT)
   end
 
   IGameStatisticsMgr_GUID = "aff3ea11-e70e-407d-95dd-35e612c41ce2"
@@ -151,12 +151,12 @@ lib LibWin32
   end
 
   struct IGameExplorer2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    install_game : UInt64
-    uninstall_game : UInt64
-    check_access : UInt64
+    query_interface : Proc(IGameExplorer2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IGameExplorer2*, UInt32)
+    release : Proc(IGameExplorer2*, UInt32)
+    install_game : Proc(IGameExplorer2*, LibC::LPWSTR, LibC::LPWSTR, GAME_INSTALL_SCOPE, HRESULT)
+    uninstall_game : Proc(IGameExplorer2*, LibC::LPWSTR, HRESULT)
+    check_access : Proc(IGameExplorer2*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
   end
 
   IGameExplorer2_GUID = "86874aa7-a1ed-450d-a7eb-b89e20b2fff3"
@@ -166,15 +166,15 @@ lib LibWin32
   end
 
   struct IXblIdpAuthManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_gamer_account : UInt64
-    get_gamer_account : UInt64
-    set_app_view_initialized : UInt64
-    get_environment : UInt64
-    get_sandbox : UInt64
-    get_token_and_signature_with_token_result : UInt64
+    query_interface : Proc(IXblIdpAuthManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXblIdpAuthManager*, UInt32)
+    release : Proc(IXblIdpAuthManager*, UInt32)
+    set_gamer_account : Proc(IXblIdpAuthManager*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    get_gamer_account : Proc(IXblIdpAuthManager*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
+    set_app_view_initialized : Proc(IXblIdpAuthManager*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    get_environment : Proc(IXblIdpAuthManager*, LibC::LPWSTR*, HRESULT)
+    get_sandbox : Proc(IXblIdpAuthManager*, LibC::LPWSTR*, HRESULT)
+    get_token_and_signature_with_token_result : Proc(IXblIdpAuthManager*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt8*, UInt32, LibC::BOOL, IXblIdpAuthTokenResult*, HRESULT)
   end
 
   IXblIdpAuthManager_GUID = "eb5ddb08-8bbf-449b-ac21-b02ddeb3b136"
@@ -184,29 +184,29 @@ lib LibWin32
   end
 
   struct IXblIdpAuthTokenResultVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_status : UInt64
-    get_error_code : UInt64
-    get_token : UInt64
-    get_signature : UInt64
-    get_sandbox : UInt64
-    get_environment : UInt64
-    get_msa_account_id : UInt64
-    get_xuid : UInt64
-    get_gamertag : UInt64
-    get_age_group : UInt64
-    get_privileges : UInt64
-    get_msa_target : UInt64
-    get_msa_policy : UInt64
-    get_msa_app_id : UInt64
-    get_redirect : UInt64
-    get_message : UInt64
-    get_help_id : UInt64
-    get_enforcement_bans : UInt64
-    get_restrictions : UInt64
-    get_title_restrictions : UInt64
+    query_interface : Proc(IXblIdpAuthTokenResult*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXblIdpAuthTokenResult*, UInt32)
+    release : Proc(IXblIdpAuthTokenResult*, UInt32)
+    get_status : Proc(IXblIdpAuthTokenResult*, XBL_IDP_AUTH_TOKEN_STATUS*, HRESULT)
+    get_error_code : Proc(IXblIdpAuthTokenResult*, HRESULT*, HRESULT)
+    get_token : Proc(IXblIdpAuthTokenResult*, LibC::LPWSTR*, HRESULT)
+    get_signature : Proc(IXblIdpAuthTokenResult*, LibC::LPWSTR*, HRESULT)
+    get_sandbox : Proc(IXblIdpAuthTokenResult*, LibC::LPWSTR*, HRESULT)
+    get_environment : Proc(IXblIdpAuthTokenResult*, LibC::LPWSTR*, HRESULT)
+    get_msa_account_id : Proc(IXblIdpAuthTokenResult*, LibC::LPWSTR*, HRESULT)
+    get_xuid : Proc(IXblIdpAuthTokenResult*, LibC::LPWSTR*, HRESULT)
+    get_gamertag : Proc(IXblIdpAuthTokenResult*, LibC::LPWSTR*, HRESULT)
+    get_age_group : Proc(IXblIdpAuthTokenResult*, LibC::LPWSTR*, HRESULT)
+    get_privileges : Proc(IXblIdpAuthTokenResult*, LibC::LPWSTR*, HRESULT)
+    get_msa_target : Proc(IXblIdpAuthTokenResult*, LibC::LPWSTR*, HRESULT)
+    get_msa_policy : Proc(IXblIdpAuthTokenResult*, LibC::LPWSTR*, HRESULT)
+    get_msa_app_id : Proc(IXblIdpAuthTokenResult*, LibC::LPWSTR*, HRESULT)
+    get_redirect : Proc(IXblIdpAuthTokenResult*, LibC::LPWSTR*, HRESULT)
+    get_message : Proc(IXblIdpAuthTokenResult*, LibC::LPWSTR*, HRESULT)
+    get_help_id : Proc(IXblIdpAuthTokenResult*, LibC::LPWSTR*, HRESULT)
+    get_enforcement_bans : Proc(IXblIdpAuthTokenResult*, LibC::LPWSTR*, HRESULT)
+    get_restrictions : Proc(IXblIdpAuthTokenResult*, LibC::LPWSTR*, HRESULT)
+    get_title_restrictions : Proc(IXblIdpAuthTokenResult*, LibC::LPWSTR*, HRESULT)
   end
 
   IXblIdpAuthTokenResult_GUID = "46ce0225-f267-4d68-b299-b2762552dec1"
@@ -216,12 +216,12 @@ lib LibWin32
   end
 
   struct IXblIdpAuthTokenResult2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_modern_gamertag : UInt64
-    get_modern_gamertag_suffix : UInt64
-    get_unique_modern_gamertag : UInt64
+    query_interface : Proc(IXblIdpAuthTokenResult2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IXblIdpAuthTokenResult2*, UInt32)
+    release : Proc(IXblIdpAuthTokenResult2*, UInt32)
+    get_modern_gamertag : Proc(IXblIdpAuthTokenResult2*, LibC::LPWSTR*, HRESULT)
+    get_modern_gamertag_suffix : Proc(IXblIdpAuthTokenResult2*, LibC::LPWSTR*, HRESULT)
+    get_unique_modern_gamertag : Proc(IXblIdpAuthTokenResult2*, LibC::LPWSTR*, HRESULT)
   end
 
   IXblIdpAuthTokenResult2_GUID = "75d760b0-60b9-412d-994f-26b2cd5f7812"
@@ -322,229 +322,229 @@ lib LibWin32
   fun ShowUserSettingsUIForUser(user : IInspectable, completionroutine : GameUICompletionRoutine, context : Void*) : HRESULT
 end
 struct LibWin32::IGameExplorer
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IGameExplorer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IGameExplorer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IGameExplorer*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def add_game(bstrgdfbinarypath : UInt8*, bstrgameinstalldirectory : UInt8*, installscope : GAME_INSTALL_SCOPE, pguidinstanceid : Guid*) : HRESULT
-    @lpVtbl.value.add_game.unsafe_as(Proc(UInt8*, UInt8*, GAME_INSTALL_SCOPE, Guid*, HRESULT)).call(bstrgdfbinarypath, bstrgameinstalldirectory, installscope, pguidinstanceid)
+  def add_game(this : IGameExplorer*, bstrgdfbinarypath : UInt8*, bstrgameinstalldirectory : UInt8*, installscope : GAME_INSTALL_SCOPE, pguidinstanceid : Guid*) : HRESULT
+    @lpVtbl.value.add_game.call(this, bstrgdfbinarypath, bstrgameinstalldirectory, installscope, pguidinstanceid)
   end
-  def remove_game(guidinstanceid : Guid) : HRESULT
-    @lpVtbl.value.remove_game.unsafe_as(Proc(Guid, HRESULT)).call(guidinstanceid)
+  def remove_game(this : IGameExplorer*, guidinstanceid : Guid) : HRESULT
+    @lpVtbl.value.remove_game.call(this, guidinstanceid)
   end
-  def update_game(guidinstanceid : Guid) : HRESULT
-    @lpVtbl.value.update_game.unsafe_as(Proc(Guid, HRESULT)).call(guidinstanceid)
+  def update_game(this : IGameExplorer*, guidinstanceid : Guid) : HRESULT
+    @lpVtbl.value.update_game.call(this, guidinstanceid)
   end
-  def verify_access(bstrgdfbinarypath : UInt8*, pfhasaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.verify_access.unsafe_as(Proc(UInt8*, LibC::BOOL*, HRESULT)).call(bstrgdfbinarypath, pfhasaccess)
+  def verify_access(this : IGameExplorer*, bstrgdfbinarypath : UInt8*, pfhasaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.verify_access.call(this, bstrgdfbinarypath, pfhasaccess)
   end
 end
 struct LibWin32::IGameStatistics
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IGameStatistics*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IGameStatistics*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IGameStatistics*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_max_category_length(cch : UInt32*) : HRESULT
-    @lpVtbl.value.get_max_category_length.unsafe_as(Proc(UInt32*, HRESULT)).call(cch)
+  def get_max_category_length(this : IGameStatistics*, cch : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_category_length.call(this, cch)
   end
-  def get_max_name_length(cch : UInt32*) : HRESULT
-    @lpVtbl.value.get_max_name_length.unsafe_as(Proc(UInt32*, HRESULT)).call(cch)
+  def get_max_name_length(this : IGameStatistics*, cch : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_name_length.call(this, cch)
   end
-  def get_max_value_length(cch : UInt32*) : HRESULT
-    @lpVtbl.value.get_max_value_length.unsafe_as(Proc(UInt32*, HRESULT)).call(cch)
+  def get_max_value_length(this : IGameStatistics*, cch : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_value_length.call(this, cch)
   end
-  def get_max_categories(pmax : UInt16*) : HRESULT
-    @lpVtbl.value.get_max_categories.unsafe_as(Proc(UInt16*, HRESULT)).call(pmax)
+  def get_max_categories(this : IGameStatistics*, pmax : UInt16*) : HRESULT
+    @lpVtbl.value.get_max_categories.call(this, pmax)
   end
-  def get_max_stats_per_category(pmax : UInt16*) : HRESULT
-    @lpVtbl.value.get_max_stats_per_category.unsafe_as(Proc(UInt16*, HRESULT)).call(pmax)
+  def get_max_stats_per_category(this : IGameStatistics*, pmax : UInt16*) : HRESULT
+    @lpVtbl.value.get_max_stats_per_category.call(this, pmax)
   end
-  def set_category_title(categoryindex : UInt16, title : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_category_title.unsafe_as(Proc(UInt16, LibC::LPWSTR, HRESULT)).call(categoryindex, title)
+  def set_category_title(this : IGameStatistics*, categoryindex : UInt16, title : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_category_title.call(this, categoryindex, title)
   end
-  def get_category_title(categoryindex : UInt16, ptitle : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_category_title.unsafe_as(Proc(UInt16, LibC::LPWSTR*, HRESULT)).call(categoryindex, ptitle)
+  def get_category_title(this : IGameStatistics*, categoryindex : UInt16, ptitle : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_category_title.call(this, categoryindex, ptitle)
   end
-  def get_statistic(categoryindex : UInt16, statindex : UInt16, pname : LibC::LPWSTR*, pvalue : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_statistic.unsafe_as(Proc(UInt16, UInt16, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)).call(categoryindex, statindex, pname, pvalue)
+  def get_statistic(this : IGameStatistics*, categoryindex : UInt16, statindex : UInt16, pname : LibC::LPWSTR*, pvalue : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_statistic.call(this, categoryindex, statindex, pname, pvalue)
   end
-  def set_statistic(categoryindex : UInt16, statindex : UInt16, name : LibC::LPWSTR, value : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_statistic.unsafe_as(Proc(UInt16, UInt16, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(categoryindex, statindex, name, value)
+  def set_statistic(this : IGameStatistics*, categoryindex : UInt16, statindex : UInt16, name : LibC::LPWSTR, value : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_statistic.call(this, categoryindex, statindex, name, value)
   end
-  def save(trackchanges : LibC::BOOL) : HRESULT
-    @lpVtbl.value.save.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(trackchanges)
+  def save(this : IGameStatistics*, trackchanges : LibC::BOOL) : HRESULT
+    @lpVtbl.value.save.call(this, trackchanges)
   end
-  def set_last_played_category(categoryindex : UInt32) : HRESULT
-    @lpVtbl.value.set_last_played_category.unsafe_as(Proc(UInt32, HRESULT)).call(categoryindex)
+  def set_last_played_category(this : IGameStatistics*, categoryindex : UInt32) : HRESULT
+    @lpVtbl.value.set_last_played_category.call(this, categoryindex)
   end
-  def get_last_played_category(pcategoryindex : UInt32*) : HRESULT
-    @lpVtbl.value.get_last_played_category.unsafe_as(Proc(UInt32*, HRESULT)).call(pcategoryindex)
+  def get_last_played_category(this : IGameStatistics*, pcategoryindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_played_category.call(this, pcategoryindex)
   end
 end
 struct LibWin32::IGameStatisticsMgr
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IGameStatisticsMgr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IGameStatisticsMgr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IGameStatisticsMgr*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_game_statistics(gdfbinarypath : LibC::LPWSTR, opentype : GAMESTATS_OPEN_TYPE, popenresult : GAMESTATS_OPEN_RESULT*, ppistats : IGameStatistics*) : HRESULT
-    @lpVtbl.value.get_game_statistics.unsafe_as(Proc(LibC::LPWSTR, GAMESTATS_OPEN_TYPE, GAMESTATS_OPEN_RESULT*, IGameStatistics*, HRESULT)).call(gdfbinarypath, opentype, popenresult, ppistats)
+  def get_game_statistics(this : IGameStatisticsMgr*, gdfbinarypath : LibC::LPWSTR, opentype : GAMESTATS_OPEN_TYPE, popenresult : GAMESTATS_OPEN_RESULT*, ppistats : IGameStatistics*) : HRESULT
+    @lpVtbl.value.get_game_statistics.call(this, gdfbinarypath, opentype, popenresult, ppistats)
   end
-  def remove_game_statistics(gdfbinarypath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.remove_game_statistics.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(gdfbinarypath)
+  def remove_game_statistics(this : IGameStatisticsMgr*, gdfbinarypath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove_game_statistics.call(this, gdfbinarypath)
   end
 end
 struct LibWin32::IGameExplorer2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IGameExplorer2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IGameExplorer2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IGameExplorer2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def install_game(binarygdfpath : LibC::LPWSTR, installdirectory : LibC::LPWSTR, installscope : GAME_INSTALL_SCOPE) : HRESULT
-    @lpVtbl.value.install_game.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, GAME_INSTALL_SCOPE, HRESULT)).call(binarygdfpath, installdirectory, installscope)
+  def install_game(this : IGameExplorer2*, binarygdfpath : LibC::LPWSTR, installdirectory : LibC::LPWSTR, installscope : GAME_INSTALL_SCOPE) : HRESULT
+    @lpVtbl.value.install_game.call(this, binarygdfpath, installdirectory, installscope)
   end
-  def uninstall_game(binarygdfpath : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.uninstall_game.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(binarygdfpath)
+  def uninstall_game(this : IGameExplorer2*, binarygdfpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.uninstall_game.call(this, binarygdfpath)
   end
-  def check_access(binarygdfpath : LibC::LPWSTR, phasaccess : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.check_access.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL*, HRESULT)).call(binarygdfpath, phasaccess)
+  def check_access(this : IGameExplorer2*, binarygdfpath : LibC::LPWSTR, phasaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_access.call(this, binarygdfpath, phasaccess)
   end
 end
 struct LibWin32::IXblIdpAuthManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXblIdpAuthManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXblIdpAuthManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXblIdpAuthManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_gamer_account(msaaccountid : LibC::LPWSTR, xuid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_gamer_account.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(msaaccountid, xuid)
+  def set_gamer_account(this : IXblIdpAuthManager*, msaaccountid : LibC::LPWSTR, xuid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_gamer_account.call(this, msaaccountid, xuid)
   end
-  def get_gamer_account(msaaccountid : LibC::LPWSTR*, xuid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_gamer_account.unsafe_as(Proc(LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)).call(msaaccountid, xuid)
+  def get_gamer_account(this : IXblIdpAuthManager*, msaaccountid : LibC::LPWSTR*, xuid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_gamer_account.call(this, msaaccountid, xuid)
   end
-  def set_app_view_initialized(appsid : LibC::LPWSTR, msaaccountid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_app_view_initialized.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(appsid, msaaccountid)
+  def set_app_view_initialized(this : IXblIdpAuthManager*, appsid : LibC::LPWSTR, msaaccountid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_app_view_initialized.call(this, appsid, msaaccountid)
   end
-  def get_environment(environment : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_environment.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(environment)
+  def get_environment(this : IXblIdpAuthManager*, environment : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_environment.call(this, environment)
   end
-  def get_sandbox(sandbox : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_sandbox.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(sandbox)
+  def get_sandbox(this : IXblIdpAuthManager*, sandbox : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_sandbox.call(this, sandbox)
   end
-  def get_token_and_signature_with_token_result(msaaccountid : LibC::LPWSTR, appsid : LibC::LPWSTR, msatarget : LibC::LPWSTR, msapolicy : LibC::LPWSTR, httpmethod : LibC::LPWSTR, uri : LibC::LPWSTR, headers : LibC::LPWSTR, body : UInt8*, bodysize : UInt32, forcerefresh : LibC::BOOL, result : IXblIdpAuthTokenResult*) : HRESULT
-    @lpVtbl.value.get_token_and_signature_with_token_result.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt8*, UInt32, LibC::BOOL, IXblIdpAuthTokenResult*, HRESULT)).call(msaaccountid, appsid, msatarget, msapolicy, httpmethod, uri, headers, body, bodysize, forcerefresh, result)
+  def get_token_and_signature_with_token_result(this : IXblIdpAuthManager*, msaaccountid : LibC::LPWSTR, appsid : LibC::LPWSTR, msatarget : LibC::LPWSTR, msapolicy : LibC::LPWSTR, httpmethod : LibC::LPWSTR, uri : LibC::LPWSTR, headers : LibC::LPWSTR, body : UInt8*, bodysize : UInt32, forcerefresh : LibC::BOOL, result : IXblIdpAuthTokenResult*) : HRESULT
+    @lpVtbl.value.get_token_and_signature_with_token_result.call(this, msaaccountid, appsid, msatarget, msapolicy, httpmethod, uri, headers, body, bodysize, forcerefresh, result)
   end
 end
 struct LibWin32::IXblIdpAuthTokenResult
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXblIdpAuthTokenResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXblIdpAuthTokenResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXblIdpAuthTokenResult*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_status(status : XBL_IDP_AUTH_TOKEN_STATUS*) : HRESULT
-    @lpVtbl.value.get_status.unsafe_as(Proc(XBL_IDP_AUTH_TOKEN_STATUS*, HRESULT)).call(status)
+  def get_status(this : IXblIdpAuthTokenResult*, status : XBL_IDP_AUTH_TOKEN_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, status)
   end
-  def get_error_code(errorcode : HRESULT*) : HRESULT
-    @lpVtbl.value.get_error_code.unsafe_as(Proc(HRESULT*, HRESULT)).call(errorcode)
+  def get_error_code(this : IXblIdpAuthTokenResult*, errorcode : HRESULT*) : HRESULT
+    @lpVtbl.value.get_error_code.call(this, errorcode)
   end
-  def get_token(token : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_token.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(token)
+  def get_token(this : IXblIdpAuthTokenResult*, token : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_token.call(this, token)
   end
-  def get_signature(signature : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_signature.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(signature)
+  def get_signature(this : IXblIdpAuthTokenResult*, signature : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_signature.call(this, signature)
   end
-  def get_sandbox(sandbox : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_sandbox.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(sandbox)
+  def get_sandbox(this : IXblIdpAuthTokenResult*, sandbox : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_sandbox.call(this, sandbox)
   end
-  def get_environment(environment : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_environment.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(environment)
+  def get_environment(this : IXblIdpAuthTokenResult*, environment : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_environment.call(this, environment)
   end
-  def get_msa_account_id(msaaccountid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_msa_account_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(msaaccountid)
+  def get_msa_account_id(this : IXblIdpAuthTokenResult*, msaaccountid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_msa_account_id.call(this, msaaccountid)
   end
-  def get_xuid(xuid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_xuid.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(xuid)
+  def get_xuid(this : IXblIdpAuthTokenResult*, xuid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_xuid.call(this, xuid)
   end
-  def get_gamertag(gamertag : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_gamertag.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(gamertag)
+  def get_gamertag(this : IXblIdpAuthTokenResult*, gamertag : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_gamertag.call(this, gamertag)
   end
-  def get_age_group(agegroup : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_age_group.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(agegroup)
+  def get_age_group(this : IXblIdpAuthTokenResult*, agegroup : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_age_group.call(this, agegroup)
   end
-  def get_privileges(privileges : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_privileges.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(privileges)
+  def get_privileges(this : IXblIdpAuthTokenResult*, privileges : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_privileges.call(this, privileges)
   end
-  def get_msa_target(msatarget : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_msa_target.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(msatarget)
+  def get_msa_target(this : IXblIdpAuthTokenResult*, msatarget : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_msa_target.call(this, msatarget)
   end
-  def get_msa_policy(msapolicy : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_msa_policy.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(msapolicy)
+  def get_msa_policy(this : IXblIdpAuthTokenResult*, msapolicy : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_msa_policy.call(this, msapolicy)
   end
-  def get_msa_app_id(msaappid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_msa_app_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(msaappid)
+  def get_msa_app_id(this : IXblIdpAuthTokenResult*, msaappid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_msa_app_id.call(this, msaappid)
   end
-  def get_redirect(redirect : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_redirect.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(redirect)
+  def get_redirect(this : IXblIdpAuthTokenResult*, redirect : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_redirect.call(this, redirect)
   end
-  def get_message(message : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_message.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(message)
+  def get_message(this : IXblIdpAuthTokenResult*, message : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_message.call(this, message)
   end
-  def get_help_id(helpid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_help_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(helpid)
+  def get_help_id(this : IXblIdpAuthTokenResult*, helpid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_help_id.call(this, helpid)
   end
-  def get_enforcement_bans(enforcementbans : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_enforcement_bans.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(enforcementbans)
+  def get_enforcement_bans(this : IXblIdpAuthTokenResult*, enforcementbans : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_enforcement_bans.call(this, enforcementbans)
   end
-  def get_restrictions(restrictions : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_restrictions.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(restrictions)
+  def get_restrictions(this : IXblIdpAuthTokenResult*, restrictions : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_restrictions.call(this, restrictions)
   end
-  def get_title_restrictions(titlerestrictions : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_title_restrictions.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(titlerestrictions)
+  def get_title_restrictions(this : IXblIdpAuthTokenResult*, titlerestrictions : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_title_restrictions.call(this, titlerestrictions)
   end
 end
 struct LibWin32::IXblIdpAuthTokenResult2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IXblIdpAuthTokenResult2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IXblIdpAuthTokenResult2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IXblIdpAuthTokenResult2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_modern_gamertag(value : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_modern_gamertag.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(value)
+  def get_modern_gamertag(this : IXblIdpAuthTokenResult2*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_modern_gamertag.call(this, value)
   end
-  def get_modern_gamertag_suffix(value : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_modern_gamertag_suffix.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(value)
+  def get_modern_gamertag_suffix(this : IXblIdpAuthTokenResult2*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_modern_gamertag_suffix.call(this, value)
   end
-  def get_unique_modern_gamertag(value : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_unique_modern_gamertag.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(value)
+  def get_unique_modern_gamertag(this : IXblIdpAuthTokenResult2*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_unique_modern_gamertag.call(this, value)
   end
 end

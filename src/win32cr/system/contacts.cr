@@ -38,15 +38,15 @@ lib LibWin32
 
 
   struct IContactManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    initialize : UInt64
-    load : UInt64
-    merge_contact_i_ds : UInt64
-    get_me_contact : UInt64
-    set_me_contact : UInt64
-    get_contact_collection : UInt64
+    query_interface : Proc(IContactManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IContactManager*, UInt32)
+    release : Proc(IContactManager*, UInt32)
+    initialize : Proc(IContactManager*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    load : Proc(IContactManager*, LibC::LPWSTR, IContact*, HRESULT)
+    merge_contact_i_ds : Proc(IContactManager*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    get_me_contact : Proc(IContactManager*, IContact*, HRESULT)
+    set_me_contact : Proc(IContactManager*, IContact, HRESULT)
+    get_contact_collection : Proc(IContactManager*, IContactCollection*, HRESULT)
   end
 
   IContactManager_GUID = "ad553d98-deb1-474a-8e17-fc0c2075b738"
@@ -56,12 +56,12 @@ lib LibWin32
   end
 
   struct IContactCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    reset : UInt64
-    next : UInt64
-    get_current : UInt64
+    query_interface : Proc(IContactCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IContactCollection*, UInt32)
+    release : Proc(IContactCollection*, UInt32)
+    reset : Proc(IContactCollection*, HRESULT)
+    next : Proc(IContactCollection*, HRESULT)
+    get_current : Proc(IContactCollection*, IContact*, HRESULT)
   end
 
   IContactCollection_GUID = "b6afa338-d779-11d9-8bde-f66bad1e3f3a"
@@ -71,22 +71,22 @@ lib LibWin32
   end
 
   struct IContactPropertiesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_string : UInt64
-    get_date : UInt64
-    get_binary : UInt64
-    get_labels : UInt64
-    set_string : UInt64
-    set_date : UInt64
-    set_binary : UInt64
-    set_labels : UInt64
-    create_array_node : UInt64
-    delete_property : UInt64
-    delete_array_node : UInt64
-    delete_labels : UInt64
-    get_property_collection : UInt64
+    query_interface : Proc(IContactProperties*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IContactProperties*, UInt32)
+    release : Proc(IContactProperties*, UInt32)
+    get_string : Proc(IContactProperties*, LibC::LPWSTR, UInt32, Char*, UInt32, UInt32*, HRESULT)
+    get_date : Proc(IContactProperties*, LibC::LPWSTR, UInt32, FILETIME*, HRESULT)
+    get_binary : Proc(IContactProperties*, LibC::LPWSTR, UInt32, Char*, UInt32, UInt32*, IStream*, HRESULT)
+    get_labels : Proc(IContactProperties*, LibC::LPWSTR, UInt32, Char*, UInt32, UInt32*, HRESULT)
+    set_string : Proc(IContactProperties*, LibC::LPWSTR, UInt32, LibC::LPWSTR, HRESULT)
+    set_date : Proc(IContactProperties*, LibC::LPWSTR, UInt32, FILETIME, HRESULT)
+    set_binary : Proc(IContactProperties*, LibC::LPWSTR, UInt32, LibC::LPWSTR, IStream, HRESULT)
+    set_labels : Proc(IContactProperties*, LibC::LPWSTR, UInt32, UInt32, LibC::LPWSTR*, HRESULT)
+    create_array_node : Proc(IContactProperties*, LibC::LPWSTR, UInt32, LibC::BOOL, Char*, UInt32, UInt32*, HRESULT)
+    delete_property : Proc(IContactProperties*, LibC::LPWSTR, UInt32, HRESULT)
+    delete_array_node : Proc(IContactProperties*, LibC::LPWSTR, UInt32, HRESULT)
+    delete_labels : Proc(IContactProperties*, LibC::LPWSTR, UInt32, HRESULT)
+    get_property_collection : Proc(IContactProperties*, IContactPropertyCollection*, UInt32, LibC::LPWSTR, UInt32, LibC::LPWSTR*, LibC::BOOL, HRESULT)
   end
 
   IContactProperties_GUID = "70dd27dd-5cbd-46e8-bef0-23b6b346288f"
@@ -96,12 +96,12 @@ lib LibWin32
   end
 
   struct IContactVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_contact_id : UInt64
-    get_path : UInt64
-    commit_changes : UInt64
+    query_interface : Proc(IContact*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IContact*, UInt32)
+    release : Proc(IContact*, UInt32)
+    get_contact_id : Proc(IContact*, Char*, UInt32, UInt32*, HRESULT)
+    get_path : Proc(IContact*, Char*, UInt32, UInt32*, HRESULT)
+    commit_changes : Proc(IContact*, UInt32, HRESULT)
   end
 
   IContact_GUID = "f941b671-bda7-4f77-884a-f46462f226a7"
@@ -111,16 +111,16 @@ lib LibWin32
   end
 
   struct IContactPropertyCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    reset : UInt64
-    next : UInt64
-    get_property_name : UInt64
-    get_property_type : UInt64
-    get_property_version : UInt64
-    get_property_modification_date : UInt64
-    get_property_array_element_id : UInt64
+    query_interface : Proc(IContactPropertyCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IContactPropertyCollection*, UInt32)
+    release : Proc(IContactPropertyCollection*, UInt32)
+    reset : Proc(IContactPropertyCollection*, HRESULT)
+    next : Proc(IContactPropertyCollection*, HRESULT)
+    get_property_name : Proc(IContactPropertyCollection*, Char*, UInt32, UInt32*, HRESULT)
+    get_property_type : Proc(IContactPropertyCollection*, UInt32*, HRESULT)
+    get_property_version : Proc(IContactPropertyCollection*, UInt32*, HRESULT)
+    get_property_modification_date : Proc(IContactPropertyCollection*, FILETIME*, HRESULT)
+    get_property_array_element_id : Proc(IContactPropertyCollection*, Char*, UInt32, UInt32*, HRESULT)
   end
 
   IContactPropertyCollection_GUID = "ffd3adf8-fa64-4328-b1b6-2e0db509cb3c"
@@ -130,24 +130,24 @@ lib LibWin32
   end
 
   struct IContactAggregationManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_version_info : UInt64
-    create_or_open_group : UInt64
-    create_external_contact : UInt64
-    create_server_person : UInt64
-    create_server_contact_link : UInt64
-    flush : UInt64
-    open_aggregate_contact : UInt64
-    open_contact : UInt64
-    open_server_contact_link : UInt64
-    open_server_person : UInt64
-    get_contacts : UInt64
-    get_aggregate_contacts : UInt64
-    get_groups : UInt64
-    get_server_persons : UInt64
-    get_server_contact_links : UInt64
+    query_interface : Proc(IContactAggregationManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IContactAggregationManager*, UInt32)
+    release : Proc(IContactAggregationManager*, UInt32)
+    get_version_info : Proc(IContactAggregationManager*, Int32*, Int32*, HRESULT)
+    create_or_open_group : Proc(IContactAggregationManager*, LibC::LPWSTR, CONTACT_AGGREGATION_CREATE_OR_OPEN_OPTIONS, LibC::BOOL*, IContactAggregationGroup*, HRESULT)
+    create_external_contact : Proc(IContactAggregationManager*, IContactAggregationContact*, HRESULT)
+    create_server_person : Proc(IContactAggregationManager*, IContactAggregationServerPerson*, HRESULT)
+    create_server_contact_link : Proc(IContactAggregationManager*, IContactAggregationLink*, HRESULT)
+    flush : Proc(IContactAggregationManager*, HRESULT)
+    open_aggregate_contact : Proc(IContactAggregationManager*, LibC::LPWSTR, IContactAggregationAggregate*, HRESULT)
+    open_contact : Proc(IContactAggregationManager*, LibC::LPWSTR, IContactAggregationContact*, HRESULT)
+    open_server_contact_link : Proc(IContactAggregationManager*, LibC::LPWSTR, IContactAggregationLink*, HRESULT)
+    open_server_person : Proc(IContactAggregationManager*, LibC::LPWSTR, IContactAggregationServerPerson*, HRESULT)
+    get_contacts : Proc(IContactAggregationManager*, CONTACT_AGGREGATION_COLLECTION_OPTIONS, IContactAggregationContactCollection*, HRESULT)
+    get_aggregate_contacts : Proc(IContactAggregationManager*, CONTACT_AGGREGATION_COLLECTION_OPTIONS, IContactAggregationAggregateCollection*, HRESULT)
+    get_groups : Proc(IContactAggregationManager*, CONTACT_AGGREGATION_COLLECTION_OPTIONS, IContactAggregationGroupCollection*, HRESULT)
+    get_server_persons : Proc(IContactAggregationManager*, IContactAggregationServerPersonCollection*, HRESULT)
+    get_server_contact_links : Proc(IContactAggregationManager*, LibC::LPWSTR, IContactAggregationLinkCollection*, HRESULT)
   end
 
   IContactAggregationManager_GUID = "1d865989-4b1f-4b60-8f34-c2ad468b2b50"
@@ -157,27 +157,27 @@ lib LibWin32
   end
 
   struct IContactAggregationContactVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    delete : UInt64
-    save : UInt64
-    move_to_aggregate : UInt64
-    unlink : UInt64
-    get_account_id : UInt64
-    put_account_id : UInt64
-    get_aggregate_id : UInt64
-    get_id : UInt64
-    get_is_me : UInt64
-    get_is_external : UInt64
-    get_network_source_id : UInt64
-    put_network_source_id : UInt64
-    get_network_source_id_string : UInt64
-    put_network_source_id_string : UInt64
-    get_remote_object_id : UInt64
-    put_remote_object_id : UInt64
-    get_sync_identity_hash : UInt64
-    put_sync_identity_hash : UInt64
+    query_interface : Proc(IContactAggregationContact*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IContactAggregationContact*, UInt32)
+    release : Proc(IContactAggregationContact*, UInt32)
+    delete : Proc(IContactAggregationContact*, HRESULT)
+    save : Proc(IContactAggregationContact*, HRESULT)
+    move_to_aggregate : Proc(IContactAggregationContact*, LibC::LPWSTR, HRESULT)
+    unlink : Proc(IContactAggregationContact*, HRESULT)
+    get_account_id : Proc(IContactAggregationContact*, LibC::LPWSTR*, HRESULT)
+    put_account_id : Proc(IContactAggregationContact*, LibC::LPWSTR, HRESULT)
+    get_aggregate_id : Proc(IContactAggregationContact*, LibC::LPWSTR*, HRESULT)
+    get_id : Proc(IContactAggregationContact*, LibC::LPWSTR*, HRESULT)
+    get_is_me : Proc(IContactAggregationContact*, LibC::BOOL*, HRESULT)
+    get_is_external : Proc(IContactAggregationContact*, LibC::BOOL*, HRESULT)
+    get_network_source_id : Proc(IContactAggregationContact*, UInt32*, HRESULT)
+    put_network_source_id : Proc(IContactAggregationContact*, UInt32, HRESULT)
+    get_network_source_id_string : Proc(IContactAggregationContact*, LibC::LPWSTR*, HRESULT)
+    put_network_source_id_string : Proc(IContactAggregationContact*, LibC::LPWSTR, HRESULT)
+    get_remote_object_id : Proc(IContactAggregationContact*, CONTACT_AGGREGATION_BLOB**, HRESULT)
+    put_remote_object_id : Proc(IContactAggregationContact*, CONTACT_AGGREGATION_BLOB*, HRESULT)
+    get_sync_identity_hash : Proc(IContactAggregationContact*, CONTACT_AGGREGATION_BLOB**, HRESULT)
+    put_sync_identity_hash : Proc(IContactAggregationContact*, CONTACT_AGGREGATION_BLOB*, HRESULT)
   end
 
   IContactAggregationContact_GUID = "1eb22e86-4c86-41f0-9f9f-c251e9fda6c3"
@@ -187,14 +187,14 @@ lib LibWin32
   end
 
   struct IContactAggregationContactCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    find_first : UInt64
-    find_next : UInt64
-    find_first_by_identity_hash : UInt64
-    get_count : UInt64
-    find_first_by_remote_id : UInt64
+    query_interface : Proc(IContactAggregationContactCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IContactAggregationContactCollection*, UInt32)
+    release : Proc(IContactAggregationContactCollection*, UInt32)
+    find_first : Proc(IContactAggregationContactCollection*, IContactAggregationContact*, HRESULT)
+    find_next : Proc(IContactAggregationContactCollection*, IContactAggregationContact*, HRESULT)
+    find_first_by_identity_hash : Proc(IContactAggregationContactCollection*, LibC::LPWSTR, LibC::LPWSTR, CONTACT_AGGREGATION_BLOB*, IContactAggregationContact*, HRESULT)
+    get_count : Proc(IContactAggregationContactCollection*, Int32*, HRESULT)
+    find_first_by_remote_id : Proc(IContactAggregationContactCollection*, LibC::LPWSTR, LibC::LPWSTR, CONTACT_AGGREGATION_BLOB*, IContactAggregationContact*, HRESULT)
   end
 
   IContactAggregationContactCollection_GUID = "826e66fa-81de-43ca-a6fb-8c785cd996c6"
@@ -204,18 +204,18 @@ lib LibWin32
   end
 
   struct IContactAggregationAggregateVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    save : UInt64
-    get_component_items : UInt64
-    link : UInt64
-    get_groups : UInt64
-    get_anti_link : UInt64
-    put_anti_link : UInt64
-    get_favorite_order : UInt64
-    put_favorite_order : UInt64
-    get_id : UInt64
+    query_interface : Proc(IContactAggregationAggregate*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IContactAggregationAggregate*, UInt32)
+    release : Proc(IContactAggregationAggregate*, UInt32)
+    save : Proc(IContactAggregationAggregate*, HRESULT)
+    get_component_items : Proc(IContactAggregationAggregate*, IContactAggregationContactCollection*, HRESULT)
+    link : Proc(IContactAggregationAggregate*, LibC::LPWSTR, HRESULT)
+    get_groups : Proc(IContactAggregationAggregate*, CONTACT_AGGREGATION_COLLECTION_OPTIONS, IContactAggregationGroupCollection*, HRESULT)
+    get_anti_link : Proc(IContactAggregationAggregate*, LibC::LPWSTR*, HRESULT)
+    put_anti_link : Proc(IContactAggregationAggregate*, LibC::LPWSTR, HRESULT)
+    get_favorite_order : Proc(IContactAggregationAggregate*, UInt32*, HRESULT)
+    put_favorite_order : Proc(IContactAggregationAggregate*, UInt32, HRESULT)
+    get_id : Proc(IContactAggregationAggregate*, LibC::LPWSTR*, HRESULT)
   end
 
   IContactAggregationAggregate_GUID = "7ed1c814-cd30-43c8-9b8d-2e489e53d54b"
@@ -225,13 +225,13 @@ lib LibWin32
   end
 
   struct IContactAggregationAggregateCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    find_first : UInt64
-    find_first_by_anti_link_id : UInt64
-    find_next : UInt64
-    get_count : UInt64
+    query_interface : Proc(IContactAggregationAggregateCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IContactAggregationAggregateCollection*, UInt32)
+    release : Proc(IContactAggregationAggregateCollection*, UInt32)
+    find_first : Proc(IContactAggregationAggregateCollection*, IContactAggregationAggregate*, HRESULT)
+    find_first_by_anti_link_id : Proc(IContactAggregationAggregateCollection*, LibC::LPWSTR, IContactAggregationAggregate*, HRESULT)
+    find_next : Proc(IContactAggregationAggregateCollection*, IContactAggregationAggregate*, HRESULT)
+    get_count : Proc(IContactAggregationAggregateCollection*, Int32*, HRESULT)
   end
 
   IContactAggregationAggregateCollection_GUID = "2359f3a6-3a68-40af-98db-0f9eb143c3bb"
@@ -241,19 +241,19 @@ lib LibWin32
   end
 
   struct IContactAggregationGroupVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    delete : UInt64
-    save : UInt64
-    add : UInt64
-    remove : UInt64
-    get_members : UInt64
-    get_global_object_id : UInt64
-    put_global_object_id : UInt64
-    get_id : UInt64
-    get_name : UInt64
-    put_name : UInt64
+    query_interface : Proc(IContactAggregationGroup*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IContactAggregationGroup*, UInt32)
+    release : Proc(IContactAggregationGroup*, UInt32)
+    delete : Proc(IContactAggregationGroup*, HRESULT)
+    save : Proc(IContactAggregationGroup*, HRESULT)
+    add : Proc(IContactAggregationGroup*, LibC::LPWSTR, HRESULT)
+    remove : Proc(IContactAggregationGroup*, LibC::LPWSTR, HRESULT)
+    get_members : Proc(IContactAggregationGroup*, IContactAggregationAggregateCollection*, HRESULT)
+    get_global_object_id : Proc(IContactAggregationGroup*, Guid*, HRESULT)
+    put_global_object_id : Proc(IContactAggregationGroup*, Guid*, HRESULT)
+    get_id : Proc(IContactAggregationGroup*, LibC::LPWSTR*, HRESULT)
+    get_name : Proc(IContactAggregationGroup*, LibC::LPWSTR*, HRESULT)
+    put_name : Proc(IContactAggregationGroup*, LibC::LPWSTR, HRESULT)
   end
 
   IContactAggregationGroup_GUID = "c93c545f-1284-499b-96af-07372af473e0"
@@ -263,13 +263,13 @@ lib LibWin32
   end
 
   struct IContactAggregationGroupCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    find_first : UInt64
-    find_first_by_global_object_id : UInt64
-    find_next : UInt64
-    get_count : UInt64
+    query_interface : Proc(IContactAggregationGroupCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IContactAggregationGroupCollection*, UInt32)
+    release : Proc(IContactAggregationGroupCollection*, UInt32)
+    find_first : Proc(IContactAggregationGroupCollection*, IContactAggregationGroup*, HRESULT)
+    find_first_by_global_object_id : Proc(IContactAggregationGroupCollection*, Guid*, IContactAggregationGroup*, HRESULT)
+    find_next : Proc(IContactAggregationGroupCollection*, IContactAggregationGroup*, HRESULT)
+    get_count : Proc(IContactAggregationGroupCollection*, UInt32*, HRESULT)
   end
 
   IContactAggregationGroupCollection_GUID = "20a19a9c-d2f3-4b83-9143-beffd2cc226d"
@@ -279,26 +279,26 @@ lib LibWin32
   end
 
   struct IContactAggregationLinkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    delete : UInt64
-    save : UInt64
-    get_account_id : UInt64
-    put_account_id : UInt64
-    get_id : UInt64
-    get_is_link_resolved : UInt64
-    put_is_link_resolved : UInt64
-    get_network_source_id_string : UInt64
-    put_network_source_id_string : UInt64
-    get_remote_object_id : UInt64
-    put_remote_object_id : UInt64
-    get_server_person : UInt64
-    put_server_person : UInt64
-    get_server_person_baseline : UInt64
-    put_server_person_baseline : UInt64
-    get_sync_identity_hash : UInt64
-    put_sync_identity_hash : UInt64
+    query_interface : Proc(IContactAggregationLink*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IContactAggregationLink*, UInt32)
+    release : Proc(IContactAggregationLink*, UInt32)
+    delete : Proc(IContactAggregationLink*, HRESULT)
+    save : Proc(IContactAggregationLink*, HRESULT)
+    get_account_id : Proc(IContactAggregationLink*, LibC::LPWSTR*, HRESULT)
+    put_account_id : Proc(IContactAggregationLink*, LibC::LPWSTR, HRESULT)
+    get_id : Proc(IContactAggregationLink*, LibC::LPWSTR*, HRESULT)
+    get_is_link_resolved : Proc(IContactAggregationLink*, LibC::BOOL*, HRESULT)
+    put_is_link_resolved : Proc(IContactAggregationLink*, LibC::BOOL, HRESULT)
+    get_network_source_id_string : Proc(IContactAggregationLink*, LibC::LPWSTR*, HRESULT)
+    put_network_source_id_string : Proc(IContactAggregationLink*, LibC::LPWSTR, HRESULT)
+    get_remote_object_id : Proc(IContactAggregationLink*, CONTACT_AGGREGATION_BLOB**, HRESULT)
+    put_remote_object_id : Proc(IContactAggregationLink*, CONTACT_AGGREGATION_BLOB*, HRESULT)
+    get_server_person : Proc(IContactAggregationLink*, LibC::LPWSTR*, HRESULT)
+    put_server_person : Proc(IContactAggregationLink*, LibC::LPWSTR, HRESULT)
+    get_server_person_baseline : Proc(IContactAggregationLink*, LibC::LPWSTR*, HRESULT)
+    put_server_person_baseline : Proc(IContactAggregationLink*, LibC::LPWSTR, HRESULT)
+    get_sync_identity_hash : Proc(IContactAggregationLink*, CONTACT_AGGREGATION_BLOB**, HRESULT)
+    put_sync_identity_hash : Proc(IContactAggregationLink*, CONTACT_AGGREGATION_BLOB*, HRESULT)
   end
 
   IContactAggregationLink_GUID = "b6813323-a183-4654-8627-79b30de3a0ec"
@@ -308,13 +308,13 @@ lib LibWin32
   end
 
   struct IContactAggregationLinkCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    find_first : UInt64
-    find_first_by_remote_id : UInt64
-    find_next : UInt64
-    get_count : UInt64
+    query_interface : Proc(IContactAggregationLinkCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IContactAggregationLinkCollection*, UInt32)
+    release : Proc(IContactAggregationLinkCollection*, UInt32)
+    find_first : Proc(IContactAggregationLinkCollection*, IContactAggregationLink*, HRESULT)
+    find_first_by_remote_id : Proc(IContactAggregationLinkCollection*, LibC::LPWSTR, LibC::LPWSTR, CONTACT_AGGREGATION_BLOB*, IContactAggregationLink*, HRESULT)
+    find_next : Proc(IContactAggregationLinkCollection*, IContactAggregationLink*, HRESULT)
+    get_count : Proc(IContactAggregationLinkCollection*, UInt32*, HRESULT)
   end
 
   IContactAggregationLinkCollection_GUID = "f8bc0e93-fb55-4f28-b9fa-b1c274153292"
@@ -324,32 +324,32 @@ lib LibWin32
   end
 
   struct IContactAggregationServerPersonVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    delete : UInt64
-    save : UInt64
-    get_aggregate_id : UInt64
-    put_aggregate_id : UInt64
-    get_anti_link : UInt64
-    put_anti_link : UInt64
-    get_anti_link_baseline : UInt64
-    put_anti_link_baseline : UInt64
-    get_favorite_order : UInt64
-    put_favorite_order : UInt64
-    get_favorite_order_baseline : UInt64
-    put_favorite_order_baseline : UInt64
-    get_groups : UInt64
-    put_groups : UInt64
-    get_groups_baseline : UInt64
-    put_groups_baseline : UInt64
-    get_id : UInt64
-    get_is_tombstone : UInt64
-    put_is_tombstone : UInt64
-    get_linked_aggregate_id : UInt64
-    put_linked_aggregate_id : UInt64
-    get_object_id : UInt64
-    put_object_id : UInt64
+    query_interface : Proc(IContactAggregationServerPerson*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IContactAggregationServerPerson*, UInt32)
+    release : Proc(IContactAggregationServerPerson*, UInt32)
+    delete : Proc(IContactAggregationServerPerson*, HRESULT)
+    save : Proc(IContactAggregationServerPerson*, HRESULT)
+    get_aggregate_id : Proc(IContactAggregationServerPerson*, LibC::LPWSTR*, HRESULT)
+    put_aggregate_id : Proc(IContactAggregationServerPerson*, LibC::LPWSTR, HRESULT)
+    get_anti_link : Proc(IContactAggregationServerPerson*, LibC::LPWSTR*, HRESULT)
+    put_anti_link : Proc(IContactAggregationServerPerson*, LibC::LPWSTR, HRESULT)
+    get_anti_link_baseline : Proc(IContactAggregationServerPerson*, LibC::LPWSTR*, HRESULT)
+    put_anti_link_baseline : Proc(IContactAggregationServerPerson*, LibC::LPWSTR, HRESULT)
+    get_favorite_order : Proc(IContactAggregationServerPerson*, UInt32*, HRESULT)
+    put_favorite_order : Proc(IContactAggregationServerPerson*, UInt32, HRESULT)
+    get_favorite_order_baseline : Proc(IContactAggregationServerPerson*, UInt32*, HRESULT)
+    put_favorite_order_baseline : Proc(IContactAggregationServerPerson*, UInt32, HRESULT)
+    get_groups : Proc(IContactAggregationServerPerson*, CONTACT_AGGREGATION_BLOB**, HRESULT)
+    put_groups : Proc(IContactAggregationServerPerson*, CONTACT_AGGREGATION_BLOB*, HRESULT)
+    get_groups_baseline : Proc(IContactAggregationServerPerson*, CONTACT_AGGREGATION_BLOB**, HRESULT)
+    put_groups_baseline : Proc(IContactAggregationServerPerson*, CONTACT_AGGREGATION_BLOB*, HRESULT)
+    get_id : Proc(IContactAggregationServerPerson*, LibC::LPWSTR*, HRESULT)
+    get_is_tombstone : Proc(IContactAggregationServerPerson*, LibC::BOOL*, HRESULT)
+    put_is_tombstone : Proc(IContactAggregationServerPerson*, LibC::BOOL, HRESULT)
+    get_linked_aggregate_id : Proc(IContactAggregationServerPerson*, LibC::LPWSTR*, HRESULT)
+    put_linked_aggregate_id : Proc(IContactAggregationServerPerson*, LibC::LPWSTR, HRESULT)
+    get_object_id : Proc(IContactAggregationServerPerson*, LibC::LPWSTR*, HRESULT)
+    put_object_id : Proc(IContactAggregationServerPerson*, LibC::LPWSTR, HRESULT)
   end
 
   IContactAggregationServerPerson_GUID = "7fdc3d4b-1b82-4334-85c5-25184ee5a5f2"
@@ -359,15 +359,15 @@ lib LibWin32
   end
 
   struct IContactAggregationServerPersonCollectionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    find_first : UInt64
-    find_first_by_server_id : UInt64
-    find_first_by_aggregate_id : UInt64
-    find_first_by_linked_aggregate_id : UInt64
-    find_next : UInt64
-    get_count : UInt64
+    query_interface : Proc(IContactAggregationServerPersonCollection*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IContactAggregationServerPersonCollection*, UInt32)
+    release : Proc(IContactAggregationServerPersonCollection*, UInt32)
+    find_first : Proc(IContactAggregationServerPersonCollection*, IContactAggregationServerPerson*, HRESULT)
+    find_first_by_server_id : Proc(IContactAggregationServerPersonCollection*, LibC::LPWSTR, IContactAggregationServerPerson*, HRESULT)
+    find_first_by_aggregate_id : Proc(IContactAggregationServerPersonCollection*, LibC::LPWSTR, IContactAggregationServerPerson*, HRESULT)
+    find_first_by_linked_aggregate_id : Proc(IContactAggregationServerPersonCollection*, LibC::LPWSTR, IContactAggregationServerPerson*, HRESULT)
+    find_next : Proc(IContactAggregationServerPersonCollection*, IContactAggregationServerPerson*, HRESULT)
+    get_count : Proc(IContactAggregationServerPersonCollection*, UInt32*, HRESULT)
   end
 
   IContactAggregationServerPersonCollection_GUID = "4f730a4a-6604-47b6-a987-669ecf1e5751"
@@ -378,619 +378,619 @@ lib LibWin32
 
 end
 struct LibWin32::IContactManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IContactManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IContactManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IContactManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def initialize(pszappname : LibC::LPWSTR, pszappversion : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.initialize.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pszappname, pszappversion)
+  def initialize(this : IContactManager*, pszappname : LibC::LPWSTR, pszappversion : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.initialize.call(this, pszappname, pszappversion)
   end
-  def load(pszcontactid : LibC::LPWSTR, ppcontact : IContact*) : HRESULT
-    @lpVtbl.value.load.unsafe_as(Proc(LibC::LPWSTR, IContact*, HRESULT)).call(pszcontactid, ppcontact)
+  def load(this : IContactManager*, pszcontactid : LibC::LPWSTR, ppcontact : IContact*) : HRESULT
+    @lpVtbl.value.load.call(this, pszcontactid, ppcontact)
   end
-  def merge_contact_i_ds(psznewcontactid : LibC::LPWSTR, pszoldcontactid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.merge_contact_i_ds.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(psznewcontactid, pszoldcontactid)
+  def merge_contact_i_ds(this : IContactManager*, psznewcontactid : LibC::LPWSTR, pszoldcontactid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.merge_contact_i_ds.call(this, psznewcontactid, pszoldcontactid)
   end
-  def get_me_contact(ppmecontact : IContact*) : HRESULT
-    @lpVtbl.value.get_me_contact.unsafe_as(Proc(IContact*, HRESULT)).call(ppmecontact)
+  def get_me_contact(this : IContactManager*, ppmecontact : IContact*) : HRESULT
+    @lpVtbl.value.get_me_contact.call(this, ppmecontact)
   end
-  def set_me_contact(pmecontact : IContact) : HRESULT
-    @lpVtbl.value.set_me_contact.unsafe_as(Proc(IContact, HRESULT)).call(pmecontact)
+  def set_me_contact(this : IContactManager*, pmecontact : IContact) : HRESULT
+    @lpVtbl.value.set_me_contact.call(this, pmecontact)
   end
-  def get_contact_collection(ppcontactcollection : IContactCollection*) : HRESULT
-    @lpVtbl.value.get_contact_collection.unsafe_as(Proc(IContactCollection*, HRESULT)).call(ppcontactcollection)
+  def get_contact_collection(this : IContactManager*, ppcontactcollection : IContactCollection*) : HRESULT
+    @lpVtbl.value.get_contact_collection.call(this, ppcontactcollection)
   end
 end
 struct LibWin32::IContactCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IContactCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IContactCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IContactCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IContactCollection*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def next : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(HRESULT)).call
+  def next(this : IContactCollection*) : HRESULT
+    @lpVtbl.value.next.call(this)
   end
-  def get_current(ppcontact : IContact*) : HRESULT
-    @lpVtbl.value.get_current.unsafe_as(Proc(IContact*, HRESULT)).call(ppcontact)
+  def get_current(this : IContactCollection*, ppcontact : IContact*) : HRESULT
+    @lpVtbl.value.get_current.call(this, ppcontact)
   end
 end
 struct LibWin32::IContactProperties
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IContactProperties*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IContactProperties*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IContactProperties*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_string(pszpropertyname : LibC::LPWSTR, dwflags : UInt32, pszvalue : Char*, cchvalue : UInt32, pdwcchpropertyvaluerequired : UInt32*) : HRESULT
-    @lpVtbl.value.get_string.unsafe_as(Proc(LibC::LPWSTR, UInt32, Char*, UInt32, UInt32*, HRESULT)).call(pszpropertyname, dwflags, pszvalue, cchvalue, pdwcchpropertyvaluerequired)
+  def get_string(this : IContactProperties*, pszpropertyname : LibC::LPWSTR, dwflags : UInt32, pszvalue : Char*, cchvalue : UInt32, pdwcchpropertyvaluerequired : UInt32*) : HRESULT
+    @lpVtbl.value.get_string.call(this, pszpropertyname, dwflags, pszvalue, cchvalue, pdwcchpropertyvaluerequired)
   end
-  def get_date(pszpropertyname : LibC::LPWSTR, dwflags : UInt32, pftdatetime : FILETIME*) : HRESULT
-    @lpVtbl.value.get_date.unsafe_as(Proc(LibC::LPWSTR, UInt32, FILETIME*, HRESULT)).call(pszpropertyname, dwflags, pftdatetime)
+  def get_date(this : IContactProperties*, pszpropertyname : LibC::LPWSTR, dwflags : UInt32, pftdatetime : FILETIME*) : HRESULT
+    @lpVtbl.value.get_date.call(this, pszpropertyname, dwflags, pftdatetime)
   end
-  def get_binary(pszpropertyname : LibC::LPWSTR, dwflags : UInt32, pszcontenttype : Char*, cchcontenttype : UInt32, pdwcchcontenttyperequired : UInt32*, ppstream : IStream*) : HRESULT
-    @lpVtbl.value.get_binary.unsafe_as(Proc(LibC::LPWSTR, UInt32, Char*, UInt32, UInt32*, IStream*, HRESULT)).call(pszpropertyname, dwflags, pszcontenttype, cchcontenttype, pdwcchcontenttyperequired, ppstream)
+  def get_binary(this : IContactProperties*, pszpropertyname : LibC::LPWSTR, dwflags : UInt32, pszcontenttype : Char*, cchcontenttype : UInt32, pdwcchcontenttyperequired : UInt32*, ppstream : IStream*) : HRESULT
+    @lpVtbl.value.get_binary.call(this, pszpropertyname, dwflags, pszcontenttype, cchcontenttype, pdwcchcontenttyperequired, ppstream)
   end
-  def get_labels(pszarrayelementname : LibC::LPWSTR, dwflags : UInt32, pszlabels : Char*, cchlabels : UInt32, pdwcchlabelsrequired : UInt32*) : HRESULT
-    @lpVtbl.value.get_labels.unsafe_as(Proc(LibC::LPWSTR, UInt32, Char*, UInt32, UInt32*, HRESULT)).call(pszarrayelementname, dwflags, pszlabels, cchlabels, pdwcchlabelsrequired)
+  def get_labels(this : IContactProperties*, pszarrayelementname : LibC::LPWSTR, dwflags : UInt32, pszlabels : Char*, cchlabels : UInt32, pdwcchlabelsrequired : UInt32*) : HRESULT
+    @lpVtbl.value.get_labels.call(this, pszarrayelementname, dwflags, pszlabels, cchlabels, pdwcchlabelsrequired)
   end
-  def set_string(pszpropertyname : LibC::LPWSTR, dwflags : UInt32, pszvalue : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_string.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::LPWSTR, HRESULT)).call(pszpropertyname, dwflags, pszvalue)
+  def set_string(this : IContactProperties*, pszpropertyname : LibC::LPWSTR, dwflags : UInt32, pszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_string.call(this, pszpropertyname, dwflags, pszvalue)
   end
-  def set_date(pszpropertyname : LibC::LPWSTR, dwflags : UInt32, ftdatetime : FILETIME) : HRESULT
-    @lpVtbl.value.set_date.unsafe_as(Proc(LibC::LPWSTR, UInt32, FILETIME, HRESULT)).call(pszpropertyname, dwflags, ftdatetime)
+  def set_date(this : IContactProperties*, pszpropertyname : LibC::LPWSTR, dwflags : UInt32, ftdatetime : FILETIME) : HRESULT
+    @lpVtbl.value.set_date.call(this, pszpropertyname, dwflags, ftdatetime)
   end
-  def set_binary(pszpropertyname : LibC::LPWSTR, dwflags : UInt32, pszcontenttype : LibC::LPWSTR, pstream : IStream) : HRESULT
-    @lpVtbl.value.set_binary.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::LPWSTR, IStream, HRESULT)).call(pszpropertyname, dwflags, pszcontenttype, pstream)
+  def set_binary(this : IContactProperties*, pszpropertyname : LibC::LPWSTR, dwflags : UInt32, pszcontenttype : LibC::LPWSTR, pstream : IStream) : HRESULT
+    @lpVtbl.value.set_binary.call(this, pszpropertyname, dwflags, pszcontenttype, pstream)
   end
-  def set_labels(pszarrayelementname : LibC::LPWSTR, dwflags : UInt32, dwlabelcount : UInt32, ppszlabels : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.set_labels.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, LibC::LPWSTR*, HRESULT)).call(pszarrayelementname, dwflags, dwlabelcount, ppszlabels)
+  def set_labels(this : IContactProperties*, pszarrayelementname : LibC::LPWSTR, dwflags : UInt32, dwlabelcount : UInt32, ppszlabels : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.set_labels.call(this, pszarrayelementname, dwflags, dwlabelcount, ppszlabels)
   end
-  def create_array_node(pszarrayname : LibC::LPWSTR, dwflags : UInt32, fappend : LibC::BOOL, psznewarrayelementname : Char*, cchnewarrayelementname : UInt32, pdwcchnewarrayelementnamerequired : UInt32*) : HRESULT
-    @lpVtbl.value.create_array_node.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::BOOL, Char*, UInt32, UInt32*, HRESULT)).call(pszarrayname, dwflags, fappend, psznewarrayelementname, cchnewarrayelementname, pdwcchnewarrayelementnamerequired)
+  def create_array_node(this : IContactProperties*, pszarrayname : LibC::LPWSTR, dwflags : UInt32, fappend : LibC::BOOL, psznewarrayelementname : Char*, cchnewarrayelementname : UInt32, pdwcchnewarrayelementnamerequired : UInt32*) : HRESULT
+    @lpVtbl.value.create_array_node.call(this, pszarrayname, dwflags, fappend, psznewarrayelementname, cchnewarrayelementname, pdwcchnewarrayelementnamerequired)
   end
-  def delete_property(pszpropertyname : LibC::LPWSTR, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.delete_property.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(pszpropertyname, dwflags)
+  def delete_property(this : IContactProperties*, pszpropertyname : LibC::LPWSTR, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.delete_property.call(this, pszpropertyname, dwflags)
   end
-  def delete_array_node(pszarrayelementname : LibC::LPWSTR, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.delete_array_node.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(pszarrayelementname, dwflags)
+  def delete_array_node(this : IContactProperties*, pszarrayelementname : LibC::LPWSTR, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.delete_array_node.call(this, pszarrayelementname, dwflags)
   end
-  def delete_labels(pszarrayelementname : LibC::LPWSTR, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.delete_labels.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(pszarrayelementname, dwflags)
+  def delete_labels(this : IContactProperties*, pszarrayelementname : LibC::LPWSTR, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.delete_labels.call(this, pszarrayelementname, dwflags)
   end
-  def get_property_collection(pppropertycollection : IContactPropertyCollection*, dwflags : UInt32, pszmultivaluename : LibC::LPWSTR, dwlabelcount : UInt32, ppszlabels : LibC::LPWSTR*, fanylabelmatches : LibC::BOOL) : HRESULT
-    @lpVtbl.value.get_property_collection.unsafe_as(Proc(IContactPropertyCollection*, UInt32, LibC::LPWSTR, UInt32, LibC::LPWSTR*, LibC::BOOL, HRESULT)).call(pppropertycollection, dwflags, pszmultivaluename, dwlabelcount, ppszlabels, fanylabelmatches)
+  def get_property_collection(this : IContactProperties*, pppropertycollection : IContactPropertyCollection*, dwflags : UInt32, pszmultivaluename : LibC::LPWSTR, dwlabelcount : UInt32, ppszlabels : LibC::LPWSTR*, fanylabelmatches : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_property_collection.call(this, pppropertycollection, dwflags, pszmultivaluename, dwlabelcount, ppszlabels, fanylabelmatches)
   end
 end
 struct LibWin32::IContact
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IContact*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IContact*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IContact*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_contact_id(pszcontactid : Char*, cchcontactid : UInt32, pdwcchcontactidrequired : UInt32*) : HRESULT
-    @lpVtbl.value.get_contact_id.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(pszcontactid, cchcontactid, pdwcchcontactidrequired)
+  def get_contact_id(this : IContact*, pszcontactid : Char*, cchcontactid : UInt32, pdwcchcontactidrequired : UInt32*) : HRESULT
+    @lpVtbl.value.get_contact_id.call(this, pszcontactid, cchcontactid, pdwcchcontactidrequired)
   end
-  def get_path(pszpath : Char*, cchpath : UInt32, pdwcchpathrequired : UInt32*) : HRESULT
-    @lpVtbl.value.get_path.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(pszpath, cchpath, pdwcchpathrequired)
+  def get_path(this : IContact*, pszpath : Char*, cchpath : UInt32, pdwcchpathrequired : UInt32*) : HRESULT
+    @lpVtbl.value.get_path.call(this, pszpath, cchpath, pdwcchpathrequired)
   end
-  def commit_changes(dwcommitflags : UInt32) : HRESULT
-    @lpVtbl.value.commit_changes.unsafe_as(Proc(UInt32, HRESULT)).call(dwcommitflags)
+  def commit_changes(this : IContact*, dwcommitflags : UInt32) : HRESULT
+    @lpVtbl.value.commit_changes.call(this, dwcommitflags)
   end
 end
 struct LibWin32::IContactPropertyCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IContactPropertyCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IContactPropertyCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IContactPropertyCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def reset : HRESULT
-    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  def reset(this : IContactPropertyCollection*) : HRESULT
+    @lpVtbl.value.reset.call(this)
   end
-  def next : HRESULT
-    @lpVtbl.value.next.unsafe_as(Proc(HRESULT)).call
+  def next(this : IContactPropertyCollection*) : HRESULT
+    @lpVtbl.value.next.call(this)
   end
-  def get_property_name(pszpropertyname : Char*, cchpropertyname : UInt32, pdwcchpropertynamerequired : UInt32*) : HRESULT
-    @lpVtbl.value.get_property_name.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(pszpropertyname, cchpropertyname, pdwcchpropertynamerequired)
+  def get_property_name(this : IContactPropertyCollection*, pszpropertyname : Char*, cchpropertyname : UInt32, pdwcchpropertynamerequired : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_name.call(this, pszpropertyname, cchpropertyname, pdwcchpropertynamerequired)
   end
-  def get_property_type(pdwtype : UInt32*) : HRESULT
-    @lpVtbl.value.get_property_type.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwtype)
+  def get_property_type(this : IContactPropertyCollection*, pdwtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_type.call(this, pdwtype)
   end
-  def get_property_version(pdwversion : UInt32*) : HRESULT
-    @lpVtbl.value.get_property_version.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwversion)
+  def get_property_version(this : IContactPropertyCollection*, pdwversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_version.call(this, pdwversion)
   end
-  def get_property_modification_date(pftmodificationdate : FILETIME*) : HRESULT
-    @lpVtbl.value.get_property_modification_date.unsafe_as(Proc(FILETIME*, HRESULT)).call(pftmodificationdate)
+  def get_property_modification_date(this : IContactPropertyCollection*, pftmodificationdate : FILETIME*) : HRESULT
+    @lpVtbl.value.get_property_modification_date.call(this, pftmodificationdate)
   end
-  def get_property_array_element_id(pszarrayelementid : Char*, ccharrayelementid : UInt32, pdwccharrayelementidrequired : UInt32*) : HRESULT
-    @lpVtbl.value.get_property_array_element_id.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(pszarrayelementid, ccharrayelementid, pdwccharrayelementidrequired)
+  def get_property_array_element_id(this : IContactPropertyCollection*, pszarrayelementid : Char*, ccharrayelementid : UInt32, pdwccharrayelementidrequired : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_array_element_id.call(this, pszarrayelementid, ccharrayelementid, pdwccharrayelementidrequired)
   end
 end
 struct LibWin32::IContactAggregationManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IContactAggregationManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IContactAggregationManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IContactAggregationManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_version_info(plmajorversion : Int32*, plminorversion : Int32*) : HRESULT
-    @lpVtbl.value.get_version_info.unsafe_as(Proc(Int32*, Int32*, HRESULT)).call(plmajorversion, plminorversion)
+  def get_version_info(this : IContactAggregationManager*, plmajorversion : Int32*, plminorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_version_info.call(this, plmajorversion, plminorversion)
   end
-  def create_or_open_group(pgroupname : LibC::LPWSTR, options : CONTACT_AGGREGATION_CREATE_OR_OPEN_OPTIONS, pcreatedgroup : LibC::BOOL*, ppgroup : IContactAggregationGroup*) : HRESULT
-    @lpVtbl.value.create_or_open_group.unsafe_as(Proc(LibC::LPWSTR, CONTACT_AGGREGATION_CREATE_OR_OPEN_OPTIONS, LibC::BOOL*, IContactAggregationGroup*, HRESULT)).call(pgroupname, options, pcreatedgroup, ppgroup)
+  def create_or_open_group(this : IContactAggregationManager*, pgroupname : LibC::LPWSTR, options : CONTACT_AGGREGATION_CREATE_OR_OPEN_OPTIONS, pcreatedgroup : LibC::BOOL*, ppgroup : IContactAggregationGroup*) : HRESULT
+    @lpVtbl.value.create_or_open_group.call(this, pgroupname, options, pcreatedgroup, ppgroup)
   end
-  def create_external_contact(ppitem : IContactAggregationContact*) : HRESULT
-    @lpVtbl.value.create_external_contact.unsafe_as(Proc(IContactAggregationContact*, HRESULT)).call(ppitem)
+  def create_external_contact(this : IContactAggregationManager*, ppitem : IContactAggregationContact*) : HRESULT
+    @lpVtbl.value.create_external_contact.call(this, ppitem)
   end
-  def create_server_person(ppserverperson : IContactAggregationServerPerson*) : HRESULT
-    @lpVtbl.value.create_server_person.unsafe_as(Proc(IContactAggregationServerPerson*, HRESULT)).call(ppserverperson)
+  def create_server_person(this : IContactAggregationManager*, ppserverperson : IContactAggregationServerPerson*) : HRESULT
+    @lpVtbl.value.create_server_person.call(this, ppserverperson)
   end
-  def create_server_contact_link(ppservercontactlink : IContactAggregationLink*) : HRESULT
-    @lpVtbl.value.create_server_contact_link.unsafe_as(Proc(IContactAggregationLink*, HRESULT)).call(ppservercontactlink)
+  def create_server_contact_link(this : IContactAggregationManager*, ppservercontactlink : IContactAggregationLink*) : HRESULT
+    @lpVtbl.value.create_server_contact_link.call(this, ppservercontactlink)
   end
-  def flush : HRESULT
-    @lpVtbl.value.flush.unsafe_as(Proc(HRESULT)).call
+  def flush(this : IContactAggregationManager*) : HRESULT
+    @lpVtbl.value.flush.call(this)
   end
-  def open_aggregate_contact(pitemid : LibC::LPWSTR, ppitem : IContactAggregationAggregate*) : HRESULT
-    @lpVtbl.value.open_aggregate_contact.unsafe_as(Proc(LibC::LPWSTR, IContactAggregationAggregate*, HRESULT)).call(pitemid, ppitem)
+  def open_aggregate_contact(this : IContactAggregationManager*, pitemid : LibC::LPWSTR, ppitem : IContactAggregationAggregate*) : HRESULT
+    @lpVtbl.value.open_aggregate_contact.call(this, pitemid, ppitem)
   end
-  def open_contact(pitemid : LibC::LPWSTR, ppitem : IContactAggregationContact*) : HRESULT
-    @lpVtbl.value.open_contact.unsafe_as(Proc(LibC::LPWSTR, IContactAggregationContact*, HRESULT)).call(pitemid, ppitem)
+  def open_contact(this : IContactAggregationManager*, pitemid : LibC::LPWSTR, ppitem : IContactAggregationContact*) : HRESULT
+    @lpVtbl.value.open_contact.call(this, pitemid, ppitem)
   end
-  def open_server_contact_link(pitemid : LibC::LPWSTR, ppitem : IContactAggregationLink*) : HRESULT
-    @lpVtbl.value.open_server_contact_link.unsafe_as(Proc(LibC::LPWSTR, IContactAggregationLink*, HRESULT)).call(pitemid, ppitem)
+  def open_server_contact_link(this : IContactAggregationManager*, pitemid : LibC::LPWSTR, ppitem : IContactAggregationLink*) : HRESULT
+    @lpVtbl.value.open_server_contact_link.call(this, pitemid, ppitem)
   end
-  def open_server_person(pitemid : LibC::LPWSTR, ppitem : IContactAggregationServerPerson*) : HRESULT
-    @lpVtbl.value.open_server_person.unsafe_as(Proc(LibC::LPWSTR, IContactAggregationServerPerson*, HRESULT)).call(pitemid, ppitem)
+  def open_server_person(this : IContactAggregationManager*, pitemid : LibC::LPWSTR, ppitem : IContactAggregationServerPerson*) : HRESULT
+    @lpVtbl.value.open_server_person.call(this, pitemid, ppitem)
   end
-  def get_contacts(options : CONTACT_AGGREGATION_COLLECTION_OPTIONS, ppitems : IContactAggregationContactCollection*) : HRESULT
-    @lpVtbl.value.get_contacts.unsafe_as(Proc(CONTACT_AGGREGATION_COLLECTION_OPTIONS, IContactAggregationContactCollection*, HRESULT)).call(options, ppitems)
+  def get_contacts(this : IContactAggregationManager*, options : CONTACT_AGGREGATION_COLLECTION_OPTIONS, ppitems : IContactAggregationContactCollection*) : HRESULT
+    @lpVtbl.value.get_contacts.call(this, options, ppitems)
   end
-  def get_aggregate_contacts(options : CONTACT_AGGREGATION_COLLECTION_OPTIONS, ppaggregates : IContactAggregationAggregateCollection*) : HRESULT
-    @lpVtbl.value.get_aggregate_contacts.unsafe_as(Proc(CONTACT_AGGREGATION_COLLECTION_OPTIONS, IContactAggregationAggregateCollection*, HRESULT)).call(options, ppaggregates)
+  def get_aggregate_contacts(this : IContactAggregationManager*, options : CONTACT_AGGREGATION_COLLECTION_OPTIONS, ppaggregates : IContactAggregationAggregateCollection*) : HRESULT
+    @lpVtbl.value.get_aggregate_contacts.call(this, options, ppaggregates)
   end
-  def get_groups(options : CONTACT_AGGREGATION_COLLECTION_OPTIONS, ppgroups : IContactAggregationGroupCollection*) : HRESULT
-    @lpVtbl.value.get_groups.unsafe_as(Proc(CONTACT_AGGREGATION_COLLECTION_OPTIONS, IContactAggregationGroupCollection*, HRESULT)).call(options, ppgroups)
+  def get_groups(this : IContactAggregationManager*, options : CONTACT_AGGREGATION_COLLECTION_OPTIONS, ppgroups : IContactAggregationGroupCollection*) : HRESULT
+    @lpVtbl.value.get_groups.call(this, options, ppgroups)
   end
-  def get_server_persons(ppserverpersoncollection : IContactAggregationServerPersonCollection*) : HRESULT
-    @lpVtbl.value.get_server_persons.unsafe_as(Proc(IContactAggregationServerPersonCollection*, HRESULT)).call(ppserverpersoncollection)
+  def get_server_persons(this : IContactAggregationManager*, ppserverpersoncollection : IContactAggregationServerPersonCollection*) : HRESULT
+    @lpVtbl.value.get_server_persons.call(this, ppserverpersoncollection)
   end
-  def get_server_contact_links(ppersonitemid : LibC::LPWSTR, ppservercontactlinkcollection : IContactAggregationLinkCollection*) : HRESULT
-    @lpVtbl.value.get_server_contact_links.unsafe_as(Proc(LibC::LPWSTR, IContactAggregationLinkCollection*, HRESULT)).call(ppersonitemid, ppservercontactlinkcollection)
+  def get_server_contact_links(this : IContactAggregationManager*, ppersonitemid : LibC::LPWSTR, ppservercontactlinkcollection : IContactAggregationLinkCollection*) : HRESULT
+    @lpVtbl.value.get_server_contact_links.call(this, ppersonitemid, ppservercontactlinkcollection)
   end
 end
 struct LibWin32::IContactAggregationContact
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IContactAggregationContact*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IContactAggregationContact*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IContactAggregationContact*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def delete : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  def delete(this : IContactAggregationContact*) : HRESULT
+    @lpVtbl.value.delete.call(this)
   end
-  def save : HRESULT
-    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  def save(this : IContactAggregationContact*) : HRESULT
+    @lpVtbl.value.save.call(this)
   end
-  def move_to_aggregate(paggregateid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.move_to_aggregate.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(paggregateid)
+  def move_to_aggregate(this : IContactAggregationContact*, paggregateid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.move_to_aggregate.call(this, paggregateid)
   end
-  def unlink : HRESULT
-    @lpVtbl.value.unlink.unsafe_as(Proc(HRESULT)).call
+  def unlink(this : IContactAggregationContact*) : HRESULT
+    @lpVtbl.value.unlink.call(this)
   end
-  def get_account_id(ppaccountid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_account_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppaccountid)
+  def get_account_id(this : IContactAggregationContact*, ppaccountid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_account_id.call(this, ppaccountid)
   end
-  def put_account_id(paccountid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.put_account_id.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(paccountid)
+  def put_account_id(this : IContactAggregationContact*, paccountid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_account_id.call(this, paccountid)
   end
-  def get_aggregate_id(ppaggregateid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_aggregate_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppaggregateid)
+  def get_aggregate_id(this : IContactAggregationContact*, ppaggregateid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_aggregate_id.call(this, ppaggregateid)
   end
-  def get_id(ppitemid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppitemid)
+  def get_id(this : IContactAggregationContact*, ppitemid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_id.call(this, ppitemid)
   end
-  def get_is_me(pisme : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_me.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisme)
+  def get_is_me(this : IContactAggregationContact*, pisme : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_me.call(this, pisme)
   end
-  def get_is_external(pisexternal : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_external.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisexternal)
+  def get_is_external(this : IContactAggregationContact*, pisexternal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_external.call(this, pisexternal)
   end
-  def get_network_source_id(pnetworksourceid : UInt32*) : HRESULT
-    @lpVtbl.value.get_network_source_id.unsafe_as(Proc(UInt32*, HRESULT)).call(pnetworksourceid)
+  def get_network_source_id(this : IContactAggregationContact*, pnetworksourceid : UInt32*) : HRESULT
+    @lpVtbl.value.get_network_source_id.call(this, pnetworksourceid)
   end
-  def put_network_source_id(networksourceid : UInt32) : HRESULT
-    @lpVtbl.value.put_network_source_id.unsafe_as(Proc(UInt32, HRESULT)).call(networksourceid)
+  def put_network_source_id(this : IContactAggregationContact*, networksourceid : UInt32) : HRESULT
+    @lpVtbl.value.put_network_source_id.call(this, networksourceid)
   end
-  def get_network_source_id_string(ppnetworksourceid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_network_source_id_string.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppnetworksourceid)
+  def get_network_source_id_string(this : IContactAggregationContact*, ppnetworksourceid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_network_source_id_string.call(this, ppnetworksourceid)
   end
-  def put_network_source_id_string(pnetworksourceid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.put_network_source_id_string.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pnetworksourceid)
+  def put_network_source_id_string(this : IContactAggregationContact*, pnetworksourceid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_network_source_id_string.call(this, pnetworksourceid)
   end
-  def get_remote_object_id(ppremoteobjectid : CONTACT_AGGREGATION_BLOB**) : HRESULT
-    @lpVtbl.value.get_remote_object_id.unsafe_as(Proc(CONTACT_AGGREGATION_BLOB**, HRESULT)).call(ppremoteobjectid)
+  def get_remote_object_id(this : IContactAggregationContact*, ppremoteobjectid : CONTACT_AGGREGATION_BLOB**) : HRESULT
+    @lpVtbl.value.get_remote_object_id.call(this, ppremoteobjectid)
   end
-  def put_remote_object_id(premoteobjectid : CONTACT_AGGREGATION_BLOB*) : HRESULT
-    @lpVtbl.value.put_remote_object_id.unsafe_as(Proc(CONTACT_AGGREGATION_BLOB*, HRESULT)).call(premoteobjectid)
+  def put_remote_object_id(this : IContactAggregationContact*, premoteobjectid : CONTACT_AGGREGATION_BLOB*) : HRESULT
+    @lpVtbl.value.put_remote_object_id.call(this, premoteobjectid)
   end
-  def get_sync_identity_hash(ppsyncidentityhash : CONTACT_AGGREGATION_BLOB**) : HRESULT
-    @lpVtbl.value.get_sync_identity_hash.unsafe_as(Proc(CONTACT_AGGREGATION_BLOB**, HRESULT)).call(ppsyncidentityhash)
+  def get_sync_identity_hash(this : IContactAggregationContact*, ppsyncidentityhash : CONTACT_AGGREGATION_BLOB**) : HRESULT
+    @lpVtbl.value.get_sync_identity_hash.call(this, ppsyncidentityhash)
   end
-  def put_sync_identity_hash(psyncidentityhash : CONTACT_AGGREGATION_BLOB*) : HRESULT
-    @lpVtbl.value.put_sync_identity_hash.unsafe_as(Proc(CONTACT_AGGREGATION_BLOB*, HRESULT)).call(psyncidentityhash)
+  def put_sync_identity_hash(this : IContactAggregationContact*, psyncidentityhash : CONTACT_AGGREGATION_BLOB*) : HRESULT
+    @lpVtbl.value.put_sync_identity_hash.call(this, psyncidentityhash)
   end
 end
 struct LibWin32::IContactAggregationContactCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IContactAggregationContactCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IContactAggregationContactCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IContactAggregationContactCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def find_first(ppitem : IContactAggregationContact*) : HRESULT
-    @lpVtbl.value.find_first.unsafe_as(Proc(IContactAggregationContact*, HRESULT)).call(ppitem)
+  def find_first(this : IContactAggregationContactCollection*, ppitem : IContactAggregationContact*) : HRESULT
+    @lpVtbl.value.find_first.call(this, ppitem)
   end
-  def find_next(ppitem : IContactAggregationContact*) : HRESULT
-    @lpVtbl.value.find_next.unsafe_as(Proc(IContactAggregationContact*, HRESULT)).call(ppitem)
+  def find_next(this : IContactAggregationContactCollection*, ppitem : IContactAggregationContact*) : HRESULT
+    @lpVtbl.value.find_next.call(this, ppitem)
   end
-  def find_first_by_identity_hash(psourcetype : LibC::LPWSTR, paccountid : LibC::LPWSTR, pidentityhash : CONTACT_AGGREGATION_BLOB*, ppitem : IContactAggregationContact*) : HRESULT
-    @lpVtbl.value.find_first_by_identity_hash.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, CONTACT_AGGREGATION_BLOB*, IContactAggregationContact*, HRESULT)).call(psourcetype, paccountid, pidentityhash, ppitem)
+  def find_first_by_identity_hash(this : IContactAggregationContactCollection*, psourcetype : LibC::LPWSTR, paccountid : LibC::LPWSTR, pidentityhash : CONTACT_AGGREGATION_BLOB*, ppitem : IContactAggregationContact*) : HRESULT
+    @lpVtbl.value.find_first_by_identity_hash.call(this, psourcetype, paccountid, pidentityhash, ppitem)
   end
-  def get_count(pcount : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pcount)
+  def get_count(this : IContactAggregationContactCollection*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
   end
-  def find_first_by_remote_id(psourcetype : LibC::LPWSTR, paccountid : LibC::LPWSTR, premoteobjectid : CONTACT_AGGREGATION_BLOB*, ppitem : IContactAggregationContact*) : HRESULT
-    @lpVtbl.value.find_first_by_remote_id.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, CONTACT_AGGREGATION_BLOB*, IContactAggregationContact*, HRESULT)).call(psourcetype, paccountid, premoteobjectid, ppitem)
+  def find_first_by_remote_id(this : IContactAggregationContactCollection*, psourcetype : LibC::LPWSTR, paccountid : LibC::LPWSTR, premoteobjectid : CONTACT_AGGREGATION_BLOB*, ppitem : IContactAggregationContact*) : HRESULT
+    @lpVtbl.value.find_first_by_remote_id.call(this, psourcetype, paccountid, premoteobjectid, ppitem)
   end
 end
 struct LibWin32::IContactAggregationAggregate
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IContactAggregationAggregate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IContactAggregationAggregate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IContactAggregationAggregate*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def save : HRESULT
-    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  def save(this : IContactAggregationAggregate*) : HRESULT
+    @lpVtbl.value.save.call(this)
   end
-  def get_component_items(pcomponentitems : IContactAggregationContactCollection*) : HRESULT
-    @lpVtbl.value.get_component_items.unsafe_as(Proc(IContactAggregationContactCollection*, HRESULT)).call(pcomponentitems)
+  def get_component_items(this : IContactAggregationAggregate*, pcomponentitems : IContactAggregationContactCollection*) : HRESULT
+    @lpVtbl.value.get_component_items.call(this, pcomponentitems)
   end
-  def link(paggregateid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.link.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(paggregateid)
+  def link(this : IContactAggregationAggregate*, paggregateid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.link.call(this, paggregateid)
   end
-  def get_groups(options : CONTACT_AGGREGATION_COLLECTION_OPTIONS, ppgroups : IContactAggregationGroupCollection*) : HRESULT
-    @lpVtbl.value.get_groups.unsafe_as(Proc(CONTACT_AGGREGATION_COLLECTION_OPTIONS, IContactAggregationGroupCollection*, HRESULT)).call(options, ppgroups)
+  def get_groups(this : IContactAggregationAggregate*, options : CONTACT_AGGREGATION_COLLECTION_OPTIONS, ppgroups : IContactAggregationGroupCollection*) : HRESULT
+    @lpVtbl.value.get_groups.call(this, options, ppgroups)
   end
-  def get_anti_link(ppantilink : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_anti_link.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppantilink)
+  def get_anti_link(this : IContactAggregationAggregate*, ppantilink : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_anti_link.call(this, ppantilink)
   end
-  def put_anti_link(pantilink : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.put_anti_link.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pantilink)
+  def put_anti_link(this : IContactAggregationAggregate*, pantilink : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_anti_link.call(this, pantilink)
   end
-  def get_favorite_order(pfavoriteorder : UInt32*) : HRESULT
-    @lpVtbl.value.get_favorite_order.unsafe_as(Proc(UInt32*, HRESULT)).call(pfavoriteorder)
+  def get_favorite_order(this : IContactAggregationAggregate*, pfavoriteorder : UInt32*) : HRESULT
+    @lpVtbl.value.get_favorite_order.call(this, pfavoriteorder)
   end
-  def put_favorite_order(favoriteorder : UInt32) : HRESULT
-    @lpVtbl.value.put_favorite_order.unsafe_as(Proc(UInt32, HRESULT)).call(favoriteorder)
+  def put_favorite_order(this : IContactAggregationAggregate*, favoriteorder : UInt32) : HRESULT
+    @lpVtbl.value.put_favorite_order.call(this, favoriteorder)
   end
-  def get_id(ppitemid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppitemid)
+  def get_id(this : IContactAggregationAggregate*, ppitemid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_id.call(this, ppitemid)
   end
 end
 struct LibWin32::IContactAggregationAggregateCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IContactAggregationAggregateCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IContactAggregationAggregateCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IContactAggregationAggregateCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def find_first(ppaggregate : IContactAggregationAggregate*) : HRESULT
-    @lpVtbl.value.find_first.unsafe_as(Proc(IContactAggregationAggregate*, HRESULT)).call(ppaggregate)
+  def find_first(this : IContactAggregationAggregateCollection*, ppaggregate : IContactAggregationAggregate*) : HRESULT
+    @lpVtbl.value.find_first.call(this, ppaggregate)
   end
-  def find_first_by_anti_link_id(pantilinkid : LibC::LPWSTR, ppaggregate : IContactAggregationAggregate*) : HRESULT
-    @lpVtbl.value.find_first_by_anti_link_id.unsafe_as(Proc(LibC::LPWSTR, IContactAggregationAggregate*, HRESULT)).call(pantilinkid, ppaggregate)
+  def find_first_by_anti_link_id(this : IContactAggregationAggregateCollection*, pantilinkid : LibC::LPWSTR, ppaggregate : IContactAggregationAggregate*) : HRESULT
+    @lpVtbl.value.find_first_by_anti_link_id.call(this, pantilinkid, ppaggregate)
   end
-  def find_next(ppaggregate : IContactAggregationAggregate*) : HRESULT
-    @lpVtbl.value.find_next.unsafe_as(Proc(IContactAggregationAggregate*, HRESULT)).call(ppaggregate)
+  def find_next(this : IContactAggregationAggregateCollection*, ppaggregate : IContactAggregationAggregate*) : HRESULT
+    @lpVtbl.value.find_next.call(this, ppaggregate)
   end
-  def get_count(pcount : Int32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pcount)
+  def get_count(this : IContactAggregationAggregateCollection*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
   end
 end
 struct LibWin32::IContactAggregationGroup
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IContactAggregationGroup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IContactAggregationGroup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IContactAggregationGroup*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def delete : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  def delete(this : IContactAggregationGroup*) : HRESULT
+    @lpVtbl.value.delete.call(this)
   end
-  def save : HRESULT
-    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  def save(this : IContactAggregationGroup*) : HRESULT
+    @lpVtbl.value.save.call(this)
   end
-  def add(paggregateid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.add.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(paggregateid)
+  def add(this : IContactAggregationGroup*, paggregateid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add.call(this, paggregateid)
   end
-  def remove(paggregateid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(paggregateid)
+  def remove(this : IContactAggregationGroup*, paggregateid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove.call(this, paggregateid)
   end
-  def get_members(ppaggregatecontactcollection : IContactAggregationAggregateCollection*) : HRESULT
-    @lpVtbl.value.get_members.unsafe_as(Proc(IContactAggregationAggregateCollection*, HRESULT)).call(ppaggregatecontactcollection)
+  def get_members(this : IContactAggregationGroup*, ppaggregatecontactcollection : IContactAggregationAggregateCollection*) : HRESULT
+    @lpVtbl.value.get_members.call(this, ppaggregatecontactcollection)
   end
-  def get_global_object_id(pglobalobjectid : Guid*) : HRESULT
-    @lpVtbl.value.get_global_object_id.unsafe_as(Proc(Guid*, HRESULT)).call(pglobalobjectid)
+  def get_global_object_id(this : IContactAggregationGroup*, pglobalobjectid : Guid*) : HRESULT
+    @lpVtbl.value.get_global_object_id.call(this, pglobalobjectid)
   end
-  def put_global_object_id(pglobalobjectid : Guid*) : HRESULT
-    @lpVtbl.value.put_global_object_id.unsafe_as(Proc(Guid*, HRESULT)).call(pglobalobjectid)
+  def put_global_object_id(this : IContactAggregationGroup*, pglobalobjectid : Guid*) : HRESULT
+    @lpVtbl.value.put_global_object_id.call(this, pglobalobjectid)
   end
-  def get_id(ppitemid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppitemid)
+  def get_id(this : IContactAggregationGroup*, ppitemid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_id.call(this, ppitemid)
   end
-  def get_name(ppname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppname)
+  def get_name(this : IContactAggregationGroup*, ppname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, ppname)
   end
-  def put_name(pname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.put_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pname)
+  def put_name(this : IContactAggregationGroup*, pname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_name.call(this, pname)
   end
 end
 struct LibWin32::IContactAggregationGroupCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IContactAggregationGroupCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IContactAggregationGroupCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IContactAggregationGroupCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def find_first(ppgroup : IContactAggregationGroup*) : HRESULT
-    @lpVtbl.value.find_first.unsafe_as(Proc(IContactAggregationGroup*, HRESULT)).call(ppgroup)
+  def find_first(this : IContactAggregationGroupCollection*, ppgroup : IContactAggregationGroup*) : HRESULT
+    @lpVtbl.value.find_first.call(this, ppgroup)
   end
-  def find_first_by_global_object_id(pglobalobjectid : Guid*, ppgroup : IContactAggregationGroup*) : HRESULT
-    @lpVtbl.value.find_first_by_global_object_id.unsafe_as(Proc(Guid*, IContactAggregationGroup*, HRESULT)).call(pglobalobjectid, ppgroup)
+  def find_first_by_global_object_id(this : IContactAggregationGroupCollection*, pglobalobjectid : Guid*, ppgroup : IContactAggregationGroup*) : HRESULT
+    @lpVtbl.value.find_first_by_global_object_id.call(this, pglobalobjectid, ppgroup)
   end
-  def find_next(ppgroup : IContactAggregationGroup*) : HRESULT
-    @lpVtbl.value.find_next.unsafe_as(Proc(IContactAggregationGroup*, HRESULT)).call(ppgroup)
+  def find_next(this : IContactAggregationGroupCollection*, ppgroup : IContactAggregationGroup*) : HRESULT
+    @lpVtbl.value.find_next.call(this, ppgroup)
   end
-  def get_count(pcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcount)
+  def get_count(this : IContactAggregationGroupCollection*, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
   end
 end
 struct LibWin32::IContactAggregationLink
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IContactAggregationLink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IContactAggregationLink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IContactAggregationLink*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def delete : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  def delete(this : IContactAggregationLink*) : HRESULT
+    @lpVtbl.value.delete.call(this)
   end
-  def save : HRESULT
-    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  def save(this : IContactAggregationLink*) : HRESULT
+    @lpVtbl.value.save.call(this)
   end
-  def get_account_id(ppaccountid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_account_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppaccountid)
+  def get_account_id(this : IContactAggregationLink*, ppaccountid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_account_id.call(this, ppaccountid)
   end
-  def put_account_id(paccountid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.put_account_id.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(paccountid)
+  def put_account_id(this : IContactAggregationLink*, paccountid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_account_id.call(this, paccountid)
   end
-  def get_id(ppitemid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppitemid)
+  def get_id(this : IContactAggregationLink*, ppitemid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_id.call(this, ppitemid)
   end
-  def get_is_link_resolved(pislinkresolved : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_link_resolved.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pislinkresolved)
+  def get_is_link_resolved(this : IContactAggregationLink*, pislinkresolved : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_link_resolved.call(this, pislinkresolved)
   end
-  def put_is_link_resolved(islinkresolved : LibC::BOOL) : HRESULT
-    @lpVtbl.value.put_is_link_resolved.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(islinkresolved)
+  def put_is_link_resolved(this : IContactAggregationLink*, islinkresolved : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_is_link_resolved.call(this, islinkresolved)
   end
-  def get_network_source_id_string(ppnetworksourceid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_network_source_id_string.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppnetworksourceid)
+  def get_network_source_id_string(this : IContactAggregationLink*, ppnetworksourceid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_network_source_id_string.call(this, ppnetworksourceid)
   end
-  def put_network_source_id_string(pnetworksourceid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.put_network_source_id_string.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pnetworksourceid)
+  def put_network_source_id_string(this : IContactAggregationLink*, pnetworksourceid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_network_source_id_string.call(this, pnetworksourceid)
   end
-  def get_remote_object_id(ppremoteobjectid : CONTACT_AGGREGATION_BLOB**) : HRESULT
-    @lpVtbl.value.get_remote_object_id.unsafe_as(Proc(CONTACT_AGGREGATION_BLOB**, HRESULT)).call(ppremoteobjectid)
+  def get_remote_object_id(this : IContactAggregationLink*, ppremoteobjectid : CONTACT_AGGREGATION_BLOB**) : HRESULT
+    @lpVtbl.value.get_remote_object_id.call(this, ppremoteobjectid)
   end
-  def put_remote_object_id(premoteobjectid : CONTACT_AGGREGATION_BLOB*) : HRESULT
-    @lpVtbl.value.put_remote_object_id.unsafe_as(Proc(CONTACT_AGGREGATION_BLOB*, HRESULT)).call(premoteobjectid)
+  def put_remote_object_id(this : IContactAggregationLink*, premoteobjectid : CONTACT_AGGREGATION_BLOB*) : HRESULT
+    @lpVtbl.value.put_remote_object_id.call(this, premoteobjectid)
   end
-  def get_server_person(ppserverpersonid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_server_person.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppserverpersonid)
+  def get_server_person(this : IContactAggregationLink*, ppserverpersonid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_server_person.call(this, ppserverpersonid)
   end
-  def put_server_person(pserverpersonid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.put_server_person.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pserverpersonid)
+  def put_server_person(this : IContactAggregationLink*, pserverpersonid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_server_person.call(this, pserverpersonid)
   end
-  def get_server_person_baseline(ppserverpersonid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_server_person_baseline.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppserverpersonid)
+  def get_server_person_baseline(this : IContactAggregationLink*, ppserverpersonid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_server_person_baseline.call(this, ppserverpersonid)
   end
-  def put_server_person_baseline(pserverpersonid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.put_server_person_baseline.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pserverpersonid)
+  def put_server_person_baseline(this : IContactAggregationLink*, pserverpersonid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_server_person_baseline.call(this, pserverpersonid)
   end
-  def get_sync_identity_hash(ppsyncidentityhash : CONTACT_AGGREGATION_BLOB**) : HRESULT
-    @lpVtbl.value.get_sync_identity_hash.unsafe_as(Proc(CONTACT_AGGREGATION_BLOB**, HRESULT)).call(ppsyncidentityhash)
+  def get_sync_identity_hash(this : IContactAggregationLink*, ppsyncidentityhash : CONTACT_AGGREGATION_BLOB**) : HRESULT
+    @lpVtbl.value.get_sync_identity_hash.call(this, ppsyncidentityhash)
   end
-  def put_sync_identity_hash(psyncidentityhash : CONTACT_AGGREGATION_BLOB*) : HRESULT
-    @lpVtbl.value.put_sync_identity_hash.unsafe_as(Proc(CONTACT_AGGREGATION_BLOB*, HRESULT)).call(psyncidentityhash)
+  def put_sync_identity_hash(this : IContactAggregationLink*, psyncidentityhash : CONTACT_AGGREGATION_BLOB*) : HRESULT
+    @lpVtbl.value.put_sync_identity_hash.call(this, psyncidentityhash)
   end
 end
 struct LibWin32::IContactAggregationLinkCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IContactAggregationLinkCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IContactAggregationLinkCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IContactAggregationLinkCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def find_first(ppservercontactlink : IContactAggregationLink*) : HRESULT
-    @lpVtbl.value.find_first.unsafe_as(Proc(IContactAggregationLink*, HRESULT)).call(ppservercontactlink)
+  def find_first(this : IContactAggregationLinkCollection*, ppservercontactlink : IContactAggregationLink*) : HRESULT
+    @lpVtbl.value.find_first.call(this, ppservercontactlink)
   end
-  def find_first_by_remote_id(psourcetype : LibC::LPWSTR, paccountid : LibC::LPWSTR, premoteid : CONTACT_AGGREGATION_BLOB*, ppservercontactlink : IContactAggregationLink*) : HRESULT
-    @lpVtbl.value.find_first_by_remote_id.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, CONTACT_AGGREGATION_BLOB*, IContactAggregationLink*, HRESULT)).call(psourcetype, paccountid, premoteid, ppservercontactlink)
+  def find_first_by_remote_id(this : IContactAggregationLinkCollection*, psourcetype : LibC::LPWSTR, paccountid : LibC::LPWSTR, premoteid : CONTACT_AGGREGATION_BLOB*, ppservercontactlink : IContactAggregationLink*) : HRESULT
+    @lpVtbl.value.find_first_by_remote_id.call(this, psourcetype, paccountid, premoteid, ppservercontactlink)
   end
-  def find_next(ppservercontactlink : IContactAggregationLink*) : HRESULT
-    @lpVtbl.value.find_next.unsafe_as(Proc(IContactAggregationLink*, HRESULT)).call(ppservercontactlink)
+  def find_next(this : IContactAggregationLinkCollection*, ppservercontactlink : IContactAggregationLink*) : HRESULT
+    @lpVtbl.value.find_next.call(this, ppservercontactlink)
   end
-  def get_count(pcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcount)
+  def get_count(this : IContactAggregationLinkCollection*, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
   end
 end
 struct LibWin32::IContactAggregationServerPerson
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IContactAggregationServerPerson*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IContactAggregationServerPerson*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IContactAggregationServerPerson*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def delete : HRESULT
-    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  def delete(this : IContactAggregationServerPerson*) : HRESULT
+    @lpVtbl.value.delete.call(this)
   end
-  def save : HRESULT
-    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  def save(this : IContactAggregationServerPerson*) : HRESULT
+    @lpVtbl.value.save.call(this)
   end
-  def get_aggregate_id(ppaggregateid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_aggregate_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppaggregateid)
+  def get_aggregate_id(this : IContactAggregationServerPerson*, ppaggregateid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_aggregate_id.call(this, ppaggregateid)
   end
-  def put_aggregate_id(paggregateid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.put_aggregate_id.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(paggregateid)
+  def put_aggregate_id(this : IContactAggregationServerPerson*, paggregateid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_aggregate_id.call(this, paggregateid)
   end
-  def get_anti_link(ppantilink : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_anti_link.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppantilink)
+  def get_anti_link(this : IContactAggregationServerPerson*, ppantilink : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_anti_link.call(this, ppantilink)
   end
-  def put_anti_link(pantilink : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.put_anti_link.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pantilink)
+  def put_anti_link(this : IContactAggregationServerPerson*, pantilink : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_anti_link.call(this, pantilink)
   end
-  def get_anti_link_baseline(ppantilink : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_anti_link_baseline.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppantilink)
+  def get_anti_link_baseline(this : IContactAggregationServerPerson*, ppantilink : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_anti_link_baseline.call(this, ppantilink)
   end
-  def put_anti_link_baseline(pantilink : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.put_anti_link_baseline.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pantilink)
+  def put_anti_link_baseline(this : IContactAggregationServerPerson*, pantilink : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_anti_link_baseline.call(this, pantilink)
   end
-  def get_favorite_order(pfavoriteorder : UInt32*) : HRESULT
-    @lpVtbl.value.get_favorite_order.unsafe_as(Proc(UInt32*, HRESULT)).call(pfavoriteorder)
+  def get_favorite_order(this : IContactAggregationServerPerson*, pfavoriteorder : UInt32*) : HRESULT
+    @lpVtbl.value.get_favorite_order.call(this, pfavoriteorder)
   end
-  def put_favorite_order(favoriteorder : UInt32) : HRESULT
-    @lpVtbl.value.put_favorite_order.unsafe_as(Proc(UInt32, HRESULT)).call(favoriteorder)
+  def put_favorite_order(this : IContactAggregationServerPerson*, favoriteorder : UInt32) : HRESULT
+    @lpVtbl.value.put_favorite_order.call(this, favoriteorder)
   end
-  def get_favorite_order_baseline(pfavoriteorder : UInt32*) : HRESULT
-    @lpVtbl.value.get_favorite_order_baseline.unsafe_as(Proc(UInt32*, HRESULT)).call(pfavoriteorder)
+  def get_favorite_order_baseline(this : IContactAggregationServerPerson*, pfavoriteorder : UInt32*) : HRESULT
+    @lpVtbl.value.get_favorite_order_baseline.call(this, pfavoriteorder)
   end
-  def put_favorite_order_baseline(favoriteorder : UInt32) : HRESULT
-    @lpVtbl.value.put_favorite_order_baseline.unsafe_as(Proc(UInt32, HRESULT)).call(favoriteorder)
+  def put_favorite_order_baseline(this : IContactAggregationServerPerson*, favoriteorder : UInt32) : HRESULT
+    @lpVtbl.value.put_favorite_order_baseline.call(this, favoriteorder)
   end
-  def get_groups(pgroups : CONTACT_AGGREGATION_BLOB**) : HRESULT
-    @lpVtbl.value.get_groups.unsafe_as(Proc(CONTACT_AGGREGATION_BLOB**, HRESULT)).call(pgroups)
+  def get_groups(this : IContactAggregationServerPerson*, pgroups : CONTACT_AGGREGATION_BLOB**) : HRESULT
+    @lpVtbl.value.get_groups.call(this, pgroups)
   end
-  def put_groups(pgroups : CONTACT_AGGREGATION_BLOB*) : HRESULT
-    @lpVtbl.value.put_groups.unsafe_as(Proc(CONTACT_AGGREGATION_BLOB*, HRESULT)).call(pgroups)
+  def put_groups(this : IContactAggregationServerPerson*, pgroups : CONTACT_AGGREGATION_BLOB*) : HRESULT
+    @lpVtbl.value.put_groups.call(this, pgroups)
   end
-  def get_groups_baseline(ppgroups : CONTACT_AGGREGATION_BLOB**) : HRESULT
-    @lpVtbl.value.get_groups_baseline.unsafe_as(Proc(CONTACT_AGGREGATION_BLOB**, HRESULT)).call(ppgroups)
+  def get_groups_baseline(this : IContactAggregationServerPerson*, ppgroups : CONTACT_AGGREGATION_BLOB**) : HRESULT
+    @lpVtbl.value.get_groups_baseline.call(this, ppgroups)
   end
-  def put_groups_baseline(pgroups : CONTACT_AGGREGATION_BLOB*) : HRESULT
-    @lpVtbl.value.put_groups_baseline.unsafe_as(Proc(CONTACT_AGGREGATION_BLOB*, HRESULT)).call(pgroups)
+  def put_groups_baseline(this : IContactAggregationServerPerson*, pgroups : CONTACT_AGGREGATION_BLOB*) : HRESULT
+    @lpVtbl.value.put_groups_baseline.call(this, pgroups)
   end
-  def get_id(ppid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppid)
+  def get_id(this : IContactAggregationServerPerson*, ppid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_id.call(this, ppid)
   end
-  def get_is_tombstone(pistombstone : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_is_tombstone.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pistombstone)
+  def get_is_tombstone(this : IContactAggregationServerPerson*, pistombstone : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_tombstone.call(this, pistombstone)
   end
-  def put_is_tombstone(istombstone : LibC::BOOL) : HRESULT
-    @lpVtbl.value.put_is_tombstone.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(istombstone)
+  def put_is_tombstone(this : IContactAggregationServerPerson*, istombstone : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_is_tombstone.call(this, istombstone)
   end
-  def get_linked_aggregate_id(pplinkedaggregateid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_linked_aggregate_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pplinkedaggregateid)
+  def get_linked_aggregate_id(this : IContactAggregationServerPerson*, pplinkedaggregateid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_linked_aggregate_id.call(this, pplinkedaggregateid)
   end
-  def put_linked_aggregate_id(plinkedaggregateid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.put_linked_aggregate_id.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(plinkedaggregateid)
+  def put_linked_aggregate_id(this : IContactAggregationServerPerson*, plinkedaggregateid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_linked_aggregate_id.call(this, plinkedaggregateid)
   end
-  def get_object_id(ppobjectid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_object_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppobjectid)
+  def get_object_id(this : IContactAggregationServerPerson*, ppobjectid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_object_id.call(this, ppobjectid)
   end
-  def put_object_id(pobjectid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.put_object_id.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pobjectid)
+  def put_object_id(this : IContactAggregationServerPerson*, pobjectid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_object_id.call(this, pobjectid)
   end
 end
 struct LibWin32::IContactAggregationServerPersonCollection
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IContactAggregationServerPersonCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IContactAggregationServerPersonCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IContactAggregationServerPersonCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def find_first(ppserverperson : IContactAggregationServerPerson*) : HRESULT
-    @lpVtbl.value.find_first.unsafe_as(Proc(IContactAggregationServerPerson*, HRESULT)).call(ppserverperson)
+  def find_first(this : IContactAggregationServerPersonCollection*, ppserverperson : IContactAggregationServerPerson*) : HRESULT
+    @lpVtbl.value.find_first.call(this, ppserverperson)
   end
-  def find_first_by_server_id(pserverid : LibC::LPWSTR, ppserverperson : IContactAggregationServerPerson*) : HRESULT
-    @lpVtbl.value.find_first_by_server_id.unsafe_as(Proc(LibC::LPWSTR, IContactAggregationServerPerson*, HRESULT)).call(pserverid, ppserverperson)
+  def find_first_by_server_id(this : IContactAggregationServerPersonCollection*, pserverid : LibC::LPWSTR, ppserverperson : IContactAggregationServerPerson*) : HRESULT
+    @lpVtbl.value.find_first_by_server_id.call(this, pserverid, ppserverperson)
   end
-  def find_first_by_aggregate_id(paggregateid : LibC::LPWSTR, ppserverperson : IContactAggregationServerPerson*) : HRESULT
-    @lpVtbl.value.find_first_by_aggregate_id.unsafe_as(Proc(LibC::LPWSTR, IContactAggregationServerPerson*, HRESULT)).call(paggregateid, ppserverperson)
+  def find_first_by_aggregate_id(this : IContactAggregationServerPersonCollection*, paggregateid : LibC::LPWSTR, ppserverperson : IContactAggregationServerPerson*) : HRESULT
+    @lpVtbl.value.find_first_by_aggregate_id.call(this, paggregateid, ppserverperson)
   end
-  def find_first_by_linked_aggregate_id(paggregateid : LibC::LPWSTR, ppserverperson : IContactAggregationServerPerson*) : HRESULT
-    @lpVtbl.value.find_first_by_linked_aggregate_id.unsafe_as(Proc(LibC::LPWSTR, IContactAggregationServerPerson*, HRESULT)).call(paggregateid, ppserverperson)
+  def find_first_by_linked_aggregate_id(this : IContactAggregationServerPersonCollection*, paggregateid : LibC::LPWSTR, ppserverperson : IContactAggregationServerPerson*) : HRESULT
+    @lpVtbl.value.find_first_by_linked_aggregate_id.call(this, paggregateid, ppserverperson)
   end
-  def find_next(ppserverperson : IContactAggregationServerPerson*) : HRESULT
-    @lpVtbl.value.find_next.unsafe_as(Proc(IContactAggregationServerPerson*, HRESULT)).call(ppserverperson)
+  def find_next(this : IContactAggregationServerPersonCollection*, ppserverperson : IContactAggregationServerPerson*) : HRESULT
+    @lpVtbl.value.find_next.call(this, ppserverperson)
   end
-  def get_count(pcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcount)
+  def get_count(this : IContactAggregationServerPersonCollection*, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
   end
 end

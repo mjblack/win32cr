@@ -4773,12 +4773,12 @@ lib LibWin32
 
 
   struct IKsControlVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    ks_property : UInt64
-    ks_method : UInt64
-    ks_event : UInt64
+    query_interface : Proc(IKsControl*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IKsControl*, UInt32)
+    release : Proc(IKsControl*, UInt32)
+    ks_property : Proc(IKsControl*, KSIDENTIFIER*, UInt32, Void*, UInt32, UInt32*, HRESULT)
+    ks_method : Proc(IKsControl*, KSIDENTIFIER*, UInt32, Void*, UInt32, UInt32*, HRESULT)
+    ks_event : Proc(IKsControl*, KSIDENTIFIER*, UInt32, Void*, UInt32, UInt32*, HRESULT)
   end
 
   IKsControl_GUID = "28f54685-06fd-11d2-b27a-00a0c9223196"
@@ -4788,11 +4788,11 @@ lib LibWin32
   end
 
   struct IKsFormatSupportVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    is_format_supported : UInt64
-    get_device_preferred_format : UInt64
+    query_interface : Proc(IKsFormatSupport*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IKsFormatSupport*, UInt32)
+    release : Proc(IKsFormatSupport*, UInt32)
+    is_format_supported : Proc(IKsFormatSupport*, KSDATAFORMAT*, UInt32, LibC::BOOL*, HRESULT)
+    get_device_preferred_format : Proc(IKsFormatSupport*, KSDATAFORMAT**, HRESULT)
   end
 
   IKsFormatSupport_GUID = "3cb4a69d-bb6f-4d2b-95b7-452d2c155db5"
@@ -4802,11 +4802,11 @@ lib LibWin32
   end
 
   struct IKsJackDescriptionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_jack_count : UInt64
-    get_jack_description : UInt64
+    query_interface : Proc(IKsJackDescription*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IKsJackDescription*, UInt32)
+    release : Proc(IKsJackDescription*, UInt32)
+    get_jack_count : Proc(IKsJackDescription*, UInt32*, HRESULT)
+    get_jack_description : Proc(IKsJackDescription*, UInt32, KSJACK_DESCRIPTION*, HRESULT)
   end
 
   IKsJackDescription_GUID = "4509f757-2d46-4637-8e62-ce7db944f57b"
@@ -4816,11 +4816,11 @@ lib LibWin32
   end
 
   struct IKsJackDescription2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_jack_count : UInt64
-    get_jack_description2 : UInt64
+    query_interface : Proc(IKsJackDescription2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IKsJackDescription2*, UInt32)
+    release : Proc(IKsJackDescription2*, UInt32)
+    get_jack_count : Proc(IKsJackDescription2*, UInt32*, HRESULT)
+    get_jack_description2 : Proc(IKsJackDescription2*, UInt32, KSJACK_DESCRIPTION2*, HRESULT)
   end
 
   IKsJackDescription2_GUID = "478f3a9b-e0c9-4827-9228-6f5505ffe76a"
@@ -4830,10 +4830,10 @@ lib LibWin32
   end
 
   struct IKsJackSinkInformationVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_jack_sink_information : UInt64
+    query_interface : Proc(IKsJackSinkInformation*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IKsJackSinkInformation*, UInt32)
+    release : Proc(IKsJackSinkInformation*, UInt32)
+    get_jack_sink_information : Proc(IKsJackSinkInformation*, KSJACK_SINK_INFORMATION*, HRESULT)
   end
 
   IKsJackSinkInformation_GUID = "d9bd72ed-290f-4581-9ff3-61027a8fe532"
@@ -4843,10 +4843,10 @@ lib LibWin32
   end
 
   struct IKsJackContainerIdVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_jack_container_id : UInt64
+    query_interface : Proc(IKsJackContainerId*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IKsJackContainerId*, UInt32)
+    release : Proc(IKsJackContainerId*, UInt32)
+    get_jack_container_id : Proc(IKsJackContainerId*, Guid*, HRESULT)
   end
 
   IKsJackContainerId_GUID = "c99af463-d629-4ec4-8c00-e54d68154248"
@@ -4856,12 +4856,12 @@ lib LibWin32
   end
 
   struct IKsPropertySetVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set : UInt64
-    get : UInt64
-    query_supported : UInt64
+    query_interface : Proc(IKsPropertySet*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IKsPropertySet*, UInt32)
+    release : Proc(IKsPropertySet*, UInt32)
+    set : Proc(IKsPropertySet*, Guid*, UInt32, Void*, UInt32, Void*, UInt32, HRESULT)
+    get : Proc(IKsPropertySet*, Guid*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, HRESULT)
+    query_supported : Proc(IKsPropertySet*, Guid*, UInt32, UInt32*, HRESULT)
   end
 
   IKsPropertySet_GUID = "31efac30-515c-11d0-a9aa-00aa0061be93"
@@ -4871,11 +4871,11 @@ lib LibWin32
   end
 
   struct IKsAggregateControlVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    ks_add_aggregate : UInt64
-    ks_remove_aggregate : UInt64
+    query_interface : Proc(IKsAggregateControl*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IKsAggregateControl*, UInt32)
+    release : Proc(IKsAggregateControl*, UInt32)
+    ks_add_aggregate : Proc(IKsAggregateControl*, Guid*, HRESULT)
+    ks_remove_aggregate : Proc(IKsAggregateControl*, Guid*, HRESULT)
   end
 
   IKsAggregateControl_GUID = "7f40eac0-3947-11d2-874e-00a0c9223196"
@@ -4885,10 +4885,10 @@ lib LibWin32
   end
 
   struct IKsTopologyVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_node_instance : UInt64
+    query_interface : Proc(IKsTopology*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IKsTopology*, UInt32)
+    release : Proc(IKsTopology*, UInt32)
+    create_node_instance : Proc(IKsTopology*, UInt32, UInt32, UInt32, IUnknown, Guid*, Void**, HRESULT)
   end
 
   IKsTopology_GUID = "28f54683-06fd-11d2-b27a-00a0c9223196"
@@ -4923,152 +4923,152 @@ lib LibWin32
   fun KsCreateTopologyNode2(parenthandle : LibC::HANDLE, nodecreate : KSNODE_CREATE*, desiredaccess : UInt32, nodehandle : LibC::HANDLE*) : HRESULT
 end
 struct LibWin32::IKsControl
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IKsControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IKsControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IKsControl*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def ks_property(property : KSIDENTIFIER*, propertylength : UInt32, propertydata : Void*, datalength : UInt32, bytesreturned : UInt32*) : HRESULT
-    @lpVtbl.value.ks_property.unsafe_as(Proc(KSIDENTIFIER*, UInt32, Void*, UInt32, UInt32*, HRESULT)).call(property, propertylength, propertydata, datalength, bytesreturned)
+  def ks_property(this : IKsControl*, property : KSIDENTIFIER*, propertylength : UInt32, propertydata : Void*, datalength : UInt32, bytesreturned : UInt32*) : HRESULT
+    @lpVtbl.value.ks_property.call(this, property, propertylength, propertydata, datalength, bytesreturned)
   end
-  def ks_method(method : KSIDENTIFIER*, methodlength : UInt32, methoddata : Void*, datalength : UInt32, bytesreturned : UInt32*) : HRESULT
-    @lpVtbl.value.ks_method.unsafe_as(Proc(KSIDENTIFIER*, UInt32, Void*, UInt32, UInt32*, HRESULT)).call(method, methodlength, methoddata, datalength, bytesreturned)
+  def ks_method(this : IKsControl*, method : KSIDENTIFIER*, methodlength : UInt32, methoddata : Void*, datalength : UInt32, bytesreturned : UInt32*) : HRESULT
+    @lpVtbl.value.ks_method.call(this, method, methodlength, methoddata, datalength, bytesreturned)
   end
-  def ks_event(event : KSIDENTIFIER*, eventlength : UInt32, eventdata : Void*, datalength : UInt32, bytesreturned : UInt32*) : HRESULT
-    @lpVtbl.value.ks_event.unsafe_as(Proc(KSIDENTIFIER*, UInt32, Void*, UInt32, UInt32*, HRESULT)).call(event, eventlength, eventdata, datalength, bytesreturned)
+  def ks_event(this : IKsControl*, event : KSIDENTIFIER*, eventlength : UInt32, eventdata : Void*, datalength : UInt32, bytesreturned : UInt32*) : HRESULT
+    @lpVtbl.value.ks_event.call(this, event, eventlength, eventdata, datalength, bytesreturned)
   end
 end
 struct LibWin32::IKsFormatSupport
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IKsFormatSupport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IKsFormatSupport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IKsFormatSupport*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def is_format_supported(pksformat : KSDATAFORMAT*, cbformat : UInt32, pbsupported : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_format_supported.unsafe_as(Proc(KSDATAFORMAT*, UInt32, LibC::BOOL*, HRESULT)).call(pksformat, cbformat, pbsupported)
+  def is_format_supported(this : IKsFormatSupport*, pksformat : KSDATAFORMAT*, cbformat : UInt32, pbsupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_format_supported.call(this, pksformat, cbformat, pbsupported)
   end
-  def get_device_preferred_format(ppksformat : KSDATAFORMAT**) : HRESULT
-    @lpVtbl.value.get_device_preferred_format.unsafe_as(Proc(KSDATAFORMAT**, HRESULT)).call(ppksformat)
+  def get_device_preferred_format(this : IKsFormatSupport*, ppksformat : KSDATAFORMAT**) : HRESULT
+    @lpVtbl.value.get_device_preferred_format.call(this, ppksformat)
   end
 end
 struct LibWin32::IKsJackDescription
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IKsJackDescription*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IKsJackDescription*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IKsJackDescription*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_jack_count(pcjacks : UInt32*) : HRESULT
-    @lpVtbl.value.get_jack_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcjacks)
+  def get_jack_count(this : IKsJackDescription*, pcjacks : UInt32*) : HRESULT
+    @lpVtbl.value.get_jack_count.call(this, pcjacks)
   end
-  def get_jack_description(njack : UInt32, pdescription : KSJACK_DESCRIPTION*) : HRESULT
-    @lpVtbl.value.get_jack_description.unsafe_as(Proc(UInt32, KSJACK_DESCRIPTION*, HRESULT)).call(njack, pdescription)
+  def get_jack_description(this : IKsJackDescription*, njack : UInt32, pdescription : KSJACK_DESCRIPTION*) : HRESULT
+    @lpVtbl.value.get_jack_description.call(this, njack, pdescription)
   end
 end
 struct LibWin32::IKsJackDescription2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IKsJackDescription2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IKsJackDescription2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IKsJackDescription2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_jack_count(pcjacks : UInt32*) : HRESULT
-    @lpVtbl.value.get_jack_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcjacks)
+  def get_jack_count(this : IKsJackDescription2*, pcjacks : UInt32*) : HRESULT
+    @lpVtbl.value.get_jack_count.call(this, pcjacks)
   end
-  def get_jack_description2(njack : UInt32, pdescription2 : KSJACK_DESCRIPTION2*) : HRESULT
-    @lpVtbl.value.get_jack_description2.unsafe_as(Proc(UInt32, KSJACK_DESCRIPTION2*, HRESULT)).call(njack, pdescription2)
+  def get_jack_description2(this : IKsJackDescription2*, njack : UInt32, pdescription2 : KSJACK_DESCRIPTION2*) : HRESULT
+    @lpVtbl.value.get_jack_description2.call(this, njack, pdescription2)
   end
 end
 struct LibWin32::IKsJackSinkInformation
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IKsJackSinkInformation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IKsJackSinkInformation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IKsJackSinkInformation*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_jack_sink_information(pjacksinkinformation : KSJACK_SINK_INFORMATION*) : HRESULT
-    @lpVtbl.value.get_jack_sink_information.unsafe_as(Proc(KSJACK_SINK_INFORMATION*, HRESULT)).call(pjacksinkinformation)
+  def get_jack_sink_information(this : IKsJackSinkInformation*, pjacksinkinformation : KSJACK_SINK_INFORMATION*) : HRESULT
+    @lpVtbl.value.get_jack_sink_information.call(this, pjacksinkinformation)
   end
 end
 struct LibWin32::IKsJackContainerId
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IKsJackContainerId*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IKsJackContainerId*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IKsJackContainerId*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_jack_container_id(pjackcontainerid : Guid*) : HRESULT
-    @lpVtbl.value.get_jack_container_id.unsafe_as(Proc(Guid*, HRESULT)).call(pjackcontainerid)
+  def get_jack_container_id(this : IKsJackContainerId*, pjackcontainerid : Guid*) : HRESULT
+    @lpVtbl.value.get_jack_container_id.call(this, pjackcontainerid)
   end
 end
 struct LibWin32::IKsPropertySet
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IKsPropertySet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IKsPropertySet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IKsPropertySet*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set(propset : Guid*, id : UInt32, instancedata : Void*, instancelength : UInt32, propertydata : Void*, datalength : UInt32) : HRESULT
-    @lpVtbl.value.set.unsafe_as(Proc(Guid*, UInt32, Void*, UInt32, Void*, UInt32, HRESULT)).call(propset, id, instancedata, instancelength, propertydata, datalength)
+  def set(this : IKsPropertySet*, propset : Guid*, id : UInt32, instancedata : Void*, instancelength : UInt32, propertydata : Void*, datalength : UInt32) : HRESULT
+    @lpVtbl.value.set.call(this, propset, id, instancedata, instancelength, propertydata, datalength)
   end
-  def get(propset : Guid*, id : UInt32, instancedata : Void*, instancelength : UInt32, propertydata : Void*, datalength : UInt32, bytesreturned : UInt32*) : HRESULT
-    @lpVtbl.value.get.unsafe_as(Proc(Guid*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, HRESULT)).call(propset, id, instancedata, instancelength, propertydata, datalength, bytesreturned)
+  def get(this : IKsPropertySet*, propset : Guid*, id : UInt32, instancedata : Void*, instancelength : UInt32, propertydata : Void*, datalength : UInt32, bytesreturned : UInt32*) : HRESULT
+    @lpVtbl.value.get.call(this, propset, id, instancedata, instancelength, propertydata, datalength, bytesreturned)
   end
-  def query_supported(propset : Guid*, id : UInt32, typesupport : UInt32*) : HRESULT
-    @lpVtbl.value.query_supported.unsafe_as(Proc(Guid*, UInt32, UInt32*, HRESULT)).call(propset, id, typesupport)
+  def query_supported(this : IKsPropertySet*, propset : Guid*, id : UInt32, typesupport : UInt32*) : HRESULT
+    @lpVtbl.value.query_supported.call(this, propset, id, typesupport)
   end
 end
 struct LibWin32::IKsAggregateControl
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IKsAggregateControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IKsAggregateControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IKsAggregateControl*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def ks_add_aggregate(aggregateclass : Guid*) : HRESULT
-    @lpVtbl.value.ks_add_aggregate.unsafe_as(Proc(Guid*, HRESULT)).call(aggregateclass)
+  def ks_add_aggregate(this : IKsAggregateControl*, aggregateclass : Guid*) : HRESULT
+    @lpVtbl.value.ks_add_aggregate.call(this, aggregateclass)
   end
-  def ks_remove_aggregate(aggregateclass : Guid*) : HRESULT
-    @lpVtbl.value.ks_remove_aggregate.unsafe_as(Proc(Guid*, HRESULT)).call(aggregateclass)
+  def ks_remove_aggregate(this : IKsAggregateControl*, aggregateclass : Guid*) : HRESULT
+    @lpVtbl.value.ks_remove_aggregate.call(this, aggregateclass)
   end
 end
 struct LibWin32::IKsTopology
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IKsTopology*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IKsTopology*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IKsTopology*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_node_instance(nodeid : UInt32, flags : UInt32, desiredaccess : UInt32, unkouter : IUnknown, interfaceid : Guid*, interface : Void**) : HRESULT
-    @lpVtbl.value.create_node_instance.unsafe_as(Proc(UInt32, UInt32, UInt32, IUnknown, Guid*, Void**, HRESULT)).call(nodeid, flags, desiredaccess, unkouter, interfaceid, interface)
+  def create_node_instance(this : IKsTopology*, nodeid : UInt32, flags : UInt32, desiredaccess : UInt32, unkouter : IUnknown, interfaceid : Guid*, interface : Void**) : HRESULT
+    @lpVtbl.value.create_node_instance.call(this, nodeid, flags, desiredaccess, unkouter, interfaceid, interface)
   end
 end

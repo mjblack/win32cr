@@ -879,15 +879,15 @@ lib LibWin32
 
 
   struct IPersistMonikerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_class_id : UInt64
-    is_dirty : UInt64
-    load : UInt64
-    save : UInt64
-    save_completed : UInt64
-    get_cur_moniker : UInt64
+    query_interface : Proc(IPersistMoniker*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IPersistMoniker*, UInt32)
+    release : Proc(IPersistMoniker*, UInt32)
+    get_class_id : Proc(IPersistMoniker*, Guid*, HRESULT)
+    is_dirty : Proc(IPersistMoniker*, HRESULT)
+    load : Proc(IPersistMoniker*, LibC::BOOL, IMoniker, IBindCtx, UInt32, HRESULT)
+    save : Proc(IPersistMoniker*, IMoniker, IBindCtx, LibC::BOOL, HRESULT)
+    save_completed : Proc(IPersistMoniker*, IMoniker, IBindCtx, HRESULT)
+    get_cur_moniker : Proc(IPersistMoniker*, IMoniker*, HRESULT)
   end
 
   IPersistMoniker_GUID = "79eac9c9-baf9-11ce-8c82-00aa004ba90b"
@@ -897,10 +897,10 @@ lib LibWin32
   end
 
   struct IMonikerPropVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    put_property : UInt64
+    query_interface : Proc(IMonikerProp*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMonikerProp*, UInt32)
+    release : Proc(IMonikerProp*, UInt32)
+    put_property : Proc(IMonikerProp*, MONIKERPROPERTY, LibC::LPWSTR, HRESULT)
   end
 
   IMonikerProp_GUID = "a5ca5f7f-1847-4d87-9c5b-918509f7511d"
@@ -910,10 +910,10 @@ lib LibWin32
   end
 
   struct IBindProtocolVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_binding : UInt64
+    query_interface : Proc(IBindProtocol*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IBindProtocol*, UInt32)
+    release : Proc(IBindProtocol*, UInt32)
+    create_binding : Proc(IBindProtocol*, LibC::LPWSTR, IBindCtx, IBinding*, HRESULT)
   end
 
   IBindProtocol_GUID = "79eac9cd-baf9-11ce-8c82-00aa004ba90b"
@@ -923,11 +923,11 @@ lib LibWin32
   end
 
   struct IHttpNegotiateVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    beginning_transaction : UInt64
-    on_response : UInt64
+    query_interface : Proc(IHttpNegotiate*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IHttpNegotiate*, UInt32)
+    release : Proc(IHttpNegotiate*, UInt32)
+    beginning_transaction : Proc(IHttpNegotiate*, LibC::LPWSTR, LibC::LPWSTR, UInt32, LibC::LPWSTR*, HRESULT)
+    on_response : Proc(IHttpNegotiate*, UInt32, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
   end
 
   IHttpNegotiate_GUID = "79eac9d2-baf9-11ce-8c82-00aa004ba90b"
@@ -937,12 +937,12 @@ lib LibWin32
   end
 
   struct IHttpNegotiate2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    beginning_transaction : UInt64
-    on_response : UInt64
-    get_root_security_id : UInt64
+    query_interface : Proc(IHttpNegotiate2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IHttpNegotiate2*, UInt32)
+    release : Proc(IHttpNegotiate2*, UInt32)
+    beginning_transaction : Proc(IHttpNegotiate2*, LibC::LPWSTR, LibC::LPWSTR, UInt32, LibC::LPWSTR*, HRESULT)
+    on_response : Proc(IHttpNegotiate2*, UInt32, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
+    get_root_security_id : Proc(IHttpNegotiate2*, UInt8*, UInt32*, LibC::UINT_PTR, HRESULT)
   end
 
   IHttpNegotiate2_GUID = "4f9f9fcb-e0f4-48eb-b7ab-fa2ea9365cb4"
@@ -952,13 +952,13 @@ lib LibWin32
   end
 
   struct IHttpNegotiate3VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    beginning_transaction : UInt64
-    on_response : UInt64
-    get_root_security_id : UInt64
-    get_serialized_client_cert_context : UInt64
+    query_interface : Proc(IHttpNegotiate3*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IHttpNegotiate3*, UInt32)
+    release : Proc(IHttpNegotiate3*, UInt32)
+    beginning_transaction : Proc(IHttpNegotiate3*, LibC::LPWSTR, LibC::LPWSTR, UInt32, LibC::LPWSTR*, HRESULT)
+    on_response : Proc(IHttpNegotiate3*, UInt32, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
+    get_root_security_id : Proc(IHttpNegotiate3*, UInt8*, UInt32*, LibC::UINT_PTR, HRESULT)
+    get_serialized_client_cert_context : Proc(IHttpNegotiate3*, UInt8**, UInt32*, HRESULT)
   end
 
   IHttpNegotiate3_GUID = "57b6c80a-34c2-4602-bc26-66a02fc57153"
@@ -968,11 +968,11 @@ lib LibWin32
   end
 
   struct IWinInetFileStreamVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_handle_for_unlock : UInt64
-    set_delete_file : UInt64
+    query_interface : Proc(IWinInetFileStream*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWinInetFileStream*, UInt32)
+    release : Proc(IWinInetFileStream*, UInt32)
+    set_handle_for_unlock : Proc(IWinInetFileStream*, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)
+    set_delete_file : Proc(IWinInetFileStream*, LibC::UINT_PTR, HRESULT)
   end
 
   IWinInetFileStream_GUID = "f134c4b7-b1f8-4e75-b886-74b90943becb"
@@ -982,10 +982,10 @@ lib LibWin32
   end
 
   struct IWindowForBindingUIVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_window : UInt64
+    query_interface : Proc(IWindowForBindingUI*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWindowForBindingUI*, UInt32)
+    release : Proc(IWindowForBindingUI*, UInt32)
+    get_window : Proc(IWindowForBindingUI*, Guid*, HANDLE*, HRESULT)
   end
 
   IWindowForBindingUI_GUID = "79eac9d5-bafa-11ce-8c82-00aa004ba90b"
@@ -995,11 +995,11 @@ lib LibWin32
   end
 
   struct ICodeInstallVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_window : UInt64
-    on_code_install_problem : UInt64
+    query_interface : Proc(ICodeInstall*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ICodeInstall*, UInt32)
+    release : Proc(ICodeInstall*, UInt32)
+    get_window : Proc(ICodeInstall*, Guid*, HANDLE*, HRESULT)
+    on_code_install_problem : Proc(ICodeInstall*, UInt32, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
   end
 
   ICodeInstall_GUID = "79eac9d1-baf9-11ce-8c82-00aa004ba90b"
@@ -1009,10 +1009,10 @@ lib LibWin32
   end
 
   struct IUriContainerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_i_uri : UInt64
+    query_interface : Proc(IUriContainer*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUriContainer*, UInt32)
+    release : Proc(IUriContainer*, UInt32)
+    get_i_uri : Proc(IUriContainer*, IUri*, HRESULT)
   end
 
   IUriContainer_GUID = "a158a630-ed6f-45fb-b987-f68676f57752"
@@ -1022,11 +1022,11 @@ lib LibWin32
   end
 
   struct IUriBuilderFactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_i_uri_builder : UInt64
-    create_initialized_i_uri_builder : UInt64
+    query_interface : Proc(IUriBuilderFactory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IUriBuilderFactory*, UInt32)
+    release : Proc(IUriBuilderFactory*, UInt32)
+    create_i_uri_builder : Proc(IUriBuilderFactory*, UInt32, LibC::UINT_PTR, IUriBuilder*, HRESULT)
+    create_initialized_i_uri_builder : Proc(IUriBuilderFactory*, UInt32, LibC::UINT_PTR, IUriBuilder*, HRESULT)
   end
 
   IUriBuilderFactory_GUID = "e982ce48-0b96-440c-bc37-0c869b27a29e"
@@ -1036,10 +1036,10 @@ lib LibWin32
   end
 
   struct IWinInetInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    query_option : UInt64
+    query_interface : Proc(IWinInetInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWinInetInfo*, UInt32)
+    release : Proc(IWinInetInfo*, UInt32)
+    query_option : Proc(IWinInetInfo*, UInt32, Void*, UInt32*, HRESULT)
   end
 
   IWinInetInfo_GUID = "79eac9d6-bafa-11ce-8c82-00aa004ba90b"
@@ -1049,11 +1049,11 @@ lib LibWin32
   end
 
   struct IHttpSecurityVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_window : UInt64
-    on_security_problem : UInt64
+    query_interface : Proc(IHttpSecurity*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IHttpSecurity*, UInt32)
+    release : Proc(IHttpSecurity*, UInt32)
+    get_window : Proc(IHttpSecurity*, Guid*, HANDLE*, HRESULT)
+    on_security_problem : Proc(IHttpSecurity*, UInt32, HRESULT)
   end
 
   IHttpSecurity_GUID = "79eac9d7-bafa-11ce-8c82-00aa004ba90b"
@@ -1063,11 +1063,11 @@ lib LibWin32
   end
 
   struct IWinInetHttpInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    query_option : UInt64
-    query_info : UInt64
+    query_interface : Proc(IWinInetHttpInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWinInetHttpInfo*, UInt32)
+    release : Proc(IWinInetHttpInfo*, UInt32)
+    query_option : Proc(IWinInetHttpInfo*, UInt32, Void*, UInt32*, HRESULT)
+    query_info : Proc(IWinInetHttpInfo*, UInt32, Void*, UInt32*, UInt32*, UInt32*, HRESULT)
   end
 
   IWinInetHttpInfo_GUID = "79eac9d8-bafa-11ce-8c82-00aa004ba90b"
@@ -1077,10 +1077,10 @@ lib LibWin32
   end
 
   struct IWinInetHttpTimeoutsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_request_timeouts : UInt64
+    query_interface : Proc(IWinInetHttpTimeouts*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWinInetHttpTimeouts*, UInt32)
+    release : Proc(IWinInetHttpTimeouts*, UInt32)
+    get_request_timeouts : Proc(IWinInetHttpTimeouts*, UInt32*, UInt32*, UInt32*, HRESULT)
   end
 
   IWinInetHttpTimeouts_GUID = "f286fa56-c1fd-4270-8e67-b3eb790a81e8"
@@ -1090,10 +1090,10 @@ lib LibWin32
   end
 
   struct IWinInetCacheHintsVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_cache_extension : UInt64
+    query_interface : Proc(IWinInetCacheHints*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWinInetCacheHints*, UInt32)
+    release : Proc(IWinInetCacheHints*, UInt32)
+    set_cache_extension : Proc(IWinInetCacheHints*, LibC::LPWSTR, Void*, UInt32*, UInt32*, UInt32*, HRESULT)
   end
 
   IWinInetCacheHints_GUID = "dd1ec3b3-8391-4fdb-a9e6-347c3caaa7dd"
@@ -1103,11 +1103,11 @@ lib LibWin32
   end
 
   struct IWinInetCacheHints2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_cache_extension : UInt64
-    set_cache_extension2 : UInt64
+    query_interface : Proc(IWinInetCacheHints2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWinInetCacheHints2*, UInt32)
+    release : Proc(IWinInetCacheHints2*, UInt32)
+    set_cache_extension : Proc(IWinInetCacheHints2*, LibC::LPWSTR, Void*, UInt32*, UInt32*, UInt32*, HRESULT)
+    set_cache_extension2 : Proc(IWinInetCacheHints2*, LibC::LPWSTR, LibC::LPWSTR, UInt32*, UInt32*, UInt32*, HRESULT)
   end
 
   IWinInetCacheHints2_GUID = "7857aeac-d31f-49bf-884e-dd46df36780a"
@@ -1117,9 +1117,9 @@ lib LibWin32
   end
 
   struct IInternetVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
+    query_interface : Proc(IInternet*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInternet*, UInt32)
+    release : Proc(IInternet*, UInt32)
   end
 
   IInternet_GUID = "79eac9e0-baf9-11ce-8c82-00aa004ba90b"
@@ -1129,11 +1129,11 @@ lib LibWin32
   end
 
   struct IInternetBindInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_bind_info : UInt64
-    get_bind_string : UInt64
+    query_interface : Proc(IInternetBindInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInternetBindInfo*, UInt32)
+    release : Proc(IInternetBindInfo*, UInt32)
+    get_bind_info : Proc(IInternetBindInfo*, UInt32*, BINDINFO*, HRESULT)
+    get_bind_string : Proc(IInternetBindInfo*, UInt32, LibC::LPWSTR*, UInt32, UInt32*, HRESULT)
   end
 
   IInternetBindInfo_GUID = "79eac9e1-baf9-11ce-8c82-00aa004ba90b"
@@ -1143,12 +1143,12 @@ lib LibWin32
   end
 
   struct IInternetBindInfoExVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_bind_info : UInt64
-    get_bind_string : UInt64
-    get_bind_info_ex : UInt64
+    query_interface : Proc(IInternetBindInfoEx*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInternetBindInfoEx*, UInt32)
+    release : Proc(IInternetBindInfoEx*, UInt32)
+    get_bind_info : Proc(IInternetBindInfoEx*, UInt32*, BINDINFO*, HRESULT)
+    get_bind_string : Proc(IInternetBindInfoEx*, UInt32, LibC::LPWSTR*, UInt32, UInt32*, HRESULT)
+    get_bind_info_ex : Proc(IInternetBindInfoEx*, UInt32*, BINDINFO*, UInt32*, UInt32*, HRESULT)
   end
 
   IInternetBindInfoEx_GUID = "a3e015b7-a82c-4dcd-a150-569aeeed36ab"
@@ -1158,15 +1158,15 @@ lib LibWin32
   end
 
   struct IInternetProtocolRootVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    start : UInt64
-    continue : UInt64
-    abort : UInt64
-    terminate : UInt64
-    suspend : UInt64
-    resume : UInt64
+    query_interface : Proc(IInternetProtocolRoot*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInternetProtocolRoot*, UInt32)
+    release : Proc(IInternetProtocolRoot*, UInt32)
+    start : Proc(IInternetProtocolRoot*, LibC::LPWSTR, IInternetProtocolSink, IInternetBindInfo, UInt32, HANDLE_PTR, HRESULT)
+    continue : Proc(IInternetProtocolRoot*, PROTOCOLDATA*, HRESULT)
+    abort : Proc(IInternetProtocolRoot*, HRESULT, UInt32, HRESULT)
+    terminate : Proc(IInternetProtocolRoot*, UInt32, HRESULT)
+    suspend : Proc(IInternetProtocolRoot*, HRESULT)
+    resume : Proc(IInternetProtocolRoot*, HRESULT)
   end
 
   IInternetProtocolRoot_GUID = "79eac9e3-baf9-11ce-8c82-00aa004ba90b"
@@ -1176,19 +1176,19 @@ lib LibWin32
   end
 
   struct IInternetProtocolVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    start : UInt64
-    continue : UInt64
-    abort : UInt64
-    terminate : UInt64
-    suspend : UInt64
-    resume : UInt64
-    read : UInt64
-    seek : UInt64
-    lock_request : UInt64
-    unlock_request : UInt64
+    query_interface : Proc(IInternetProtocol*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInternetProtocol*, UInt32)
+    release : Proc(IInternetProtocol*, UInt32)
+    start : Proc(IInternetProtocol*, LibC::LPWSTR, IInternetProtocolSink, IInternetBindInfo, UInt32, HANDLE_PTR, HRESULT)
+    continue : Proc(IInternetProtocol*, PROTOCOLDATA*, HRESULT)
+    abort : Proc(IInternetProtocol*, HRESULT, UInt32, HRESULT)
+    terminate : Proc(IInternetProtocol*, UInt32, HRESULT)
+    suspend : Proc(IInternetProtocol*, HRESULT)
+    resume : Proc(IInternetProtocol*, HRESULT)
+    read : Proc(IInternetProtocol*, Void*, UInt32, UInt32*, HRESULT)
+    seek : Proc(IInternetProtocol*, LARGE_INTEGER, UInt32, ULARGE_INTEGER*, HRESULT)
+    lock_request : Proc(IInternetProtocol*, UInt32, HRESULT)
+    unlock_request : Proc(IInternetProtocol*, HRESULT)
   end
 
   IInternetProtocol_GUID = "79eac9e4-baf9-11ce-8c82-00aa004ba90b"
@@ -1198,20 +1198,20 @@ lib LibWin32
   end
 
   struct IInternetProtocolExVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    start : UInt64
-    continue : UInt64
-    abort : UInt64
-    terminate : UInt64
-    suspend : UInt64
-    resume : UInt64
-    read : UInt64
-    seek : UInt64
-    lock_request : UInt64
-    unlock_request : UInt64
-    start_ex : UInt64
+    query_interface : Proc(IInternetProtocolEx*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInternetProtocolEx*, UInt32)
+    release : Proc(IInternetProtocolEx*, UInt32)
+    start : Proc(IInternetProtocolEx*, LibC::LPWSTR, IInternetProtocolSink, IInternetBindInfo, UInt32, HANDLE_PTR, HRESULT)
+    continue : Proc(IInternetProtocolEx*, PROTOCOLDATA*, HRESULT)
+    abort : Proc(IInternetProtocolEx*, HRESULT, UInt32, HRESULT)
+    terminate : Proc(IInternetProtocolEx*, UInt32, HRESULT)
+    suspend : Proc(IInternetProtocolEx*, HRESULT)
+    resume : Proc(IInternetProtocolEx*, HRESULT)
+    read : Proc(IInternetProtocolEx*, Void*, UInt32, UInt32*, HRESULT)
+    seek : Proc(IInternetProtocolEx*, LARGE_INTEGER, UInt32, ULARGE_INTEGER*, HRESULT)
+    lock_request : Proc(IInternetProtocolEx*, UInt32, HRESULT)
+    unlock_request : Proc(IInternetProtocolEx*, HRESULT)
+    start_ex : Proc(IInternetProtocolEx*, IUri, IInternetProtocolSink, IInternetBindInfo, UInt32, HANDLE_PTR, HRESULT)
   end
 
   IInternetProtocolEx_GUID = "c7a98e66-1010-492c-a1c8-c809e1f75905"
@@ -1221,13 +1221,13 @@ lib LibWin32
   end
 
   struct IInternetProtocolSinkVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    switch : UInt64
-    report_progress : UInt64
-    report_data : UInt64
-    report_result : UInt64
+    query_interface : Proc(IInternetProtocolSink*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInternetProtocolSink*, UInt32)
+    release : Proc(IInternetProtocolSink*, UInt32)
+    switch : Proc(IInternetProtocolSink*, PROTOCOLDATA*, HRESULT)
+    report_progress : Proc(IInternetProtocolSink*, UInt32, LibC::LPWSTR, HRESULT)
+    report_data : Proc(IInternetProtocolSink*, UInt32, UInt32, UInt32, HRESULT)
+    report_result : Proc(IInternetProtocolSink*, HRESULT, UInt32, LibC::LPWSTR, HRESULT)
   end
 
   IInternetProtocolSink_GUID = "79eac9e5-baf9-11ce-8c82-00aa004ba90b"
@@ -1237,12 +1237,12 @@ lib LibWin32
   end
 
   struct IInternetProtocolSinkStackableVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    switch_sink : UInt64
-    commit_switch : UInt64
-    rollback_switch : UInt64
+    query_interface : Proc(IInternetProtocolSinkStackable*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInternetProtocolSinkStackable*, UInt32)
+    release : Proc(IInternetProtocolSinkStackable*, UInt32)
+    switch_sink : Proc(IInternetProtocolSinkStackable*, IInternetProtocolSink, HRESULT)
+    commit_switch : Proc(IInternetProtocolSinkStackable*, HRESULT)
+    rollback_switch : Proc(IInternetProtocolSinkStackable*, HRESULT)
   end
 
   IInternetProtocolSinkStackable_GUID = "79eac9f0-baf9-11ce-8c82-00aa004ba90b"
@@ -1252,16 +1252,16 @@ lib LibWin32
   end
 
   struct IInternetSessionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    register_name_space : UInt64
-    unregister_name_space : UInt64
-    register_mime_filter : UInt64
-    unregister_mime_filter : UInt64
-    create_binding : UInt64
-    set_session_option : UInt64
-    get_session_option : UInt64
+    query_interface : Proc(IInternetSession*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInternetSession*, UInt32)
+    release : Proc(IInternetSession*, UInt32)
+    register_name_space : Proc(IInternetSession*, IClassFactory, Guid*, LibC::LPWSTR, UInt32, LibC::LPWSTR*, UInt32, HRESULT)
+    unregister_name_space : Proc(IInternetSession*, IClassFactory, LibC::LPWSTR, HRESULT)
+    register_mime_filter : Proc(IInternetSession*, IClassFactory, Guid*, LibC::LPWSTR, HRESULT)
+    unregister_mime_filter : Proc(IInternetSession*, IClassFactory, LibC::LPWSTR, HRESULT)
+    create_binding : Proc(IInternetSession*, IBindCtx, LibC::LPWSTR, IUnknown, IUnknown*, IInternetProtocol*, UInt32, HRESULT)
+    set_session_option : Proc(IInternetSession*, UInt32, Void*, UInt32, UInt32, HRESULT)
+    get_session_option : Proc(IInternetSession*, UInt32, Void*, UInt32*, UInt32, HRESULT)
   end
 
   IInternetSession_GUID = "79eac9e7-baf9-11ce-8c82-00aa004ba90b"
@@ -1271,11 +1271,11 @@ lib LibWin32
   end
 
   struct IInternetThreadSwitchVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    prepare : UInt64
-    continue : UInt64
+    query_interface : Proc(IInternetThreadSwitch*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInternetThreadSwitch*, UInt32)
+    release : Proc(IInternetThreadSwitch*, UInt32)
+    prepare : Proc(IInternetThreadSwitch*, HRESULT)
+    continue : Proc(IInternetThreadSwitch*, HRESULT)
   end
 
   IInternetThreadSwitch_GUID = "79eac9e8-baf9-11ce-8c82-00aa004ba90b"
@@ -1285,11 +1285,11 @@ lib LibWin32
   end
 
   struct IInternetPriorityVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_priority : UInt64
-    get_priority : UInt64
+    query_interface : Proc(IInternetPriority*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInternetPriority*, UInt32)
+    release : Proc(IInternetPriority*, UInt32)
+    set_priority : Proc(IInternetPriority*, Int32, HRESULT)
+    get_priority : Proc(IInternetPriority*, Int32*, HRESULT)
   end
 
   IInternetPriority_GUID = "79eac9eb-baf9-11ce-8c82-00aa004ba90b"
@@ -1299,13 +1299,13 @@ lib LibWin32
   end
 
   struct IInternetProtocolInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    parse_url : UInt64
-    combine_url : UInt64
-    compare_url : UInt64
-    query_info : UInt64
+    query_interface : Proc(IInternetProtocolInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInternetProtocolInfo*, UInt32)
+    release : Proc(IInternetProtocolInfo*, UInt32)
+    parse_url : Proc(IInternetProtocolInfo*, LibC::LPWSTR, PARSEACTION, UInt32, LibC::LPWSTR, UInt32, UInt32*, UInt32, HRESULT)
+    combine_url : Proc(IInternetProtocolInfo*, LibC::LPWSTR, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, UInt32*, UInt32, HRESULT)
+    compare_url : Proc(IInternetProtocolInfo*, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
+    query_info : Proc(IInternetProtocolInfo*, LibC::LPWSTR, QUERYOPTION, UInt32, Void*, UInt32, UInt32*, UInt32, HRESULT)
   end
 
   IInternetProtocolInfo_GUID = "79eac9ec-baf9-11ce-8c82-00aa004ba90b"
@@ -1315,11 +1315,11 @@ lib LibWin32
   end
 
   struct IInternetSecurityMgrSiteVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_window : UInt64
-    enable_modeless : UInt64
+    query_interface : Proc(IInternetSecurityMgrSite*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInternetSecurityMgrSite*, UInt32)
+    release : Proc(IInternetSecurityMgrSite*, UInt32)
+    get_window : Proc(IInternetSecurityMgrSite*, HANDLE*, HRESULT)
+    enable_modeless : Proc(IInternetSecurityMgrSite*, LibC::BOOL, HRESULT)
   end
 
   IInternetSecurityMgrSite_GUID = "79eac9ed-baf9-11ce-8c82-00aa004ba90b"
@@ -1329,17 +1329,17 @@ lib LibWin32
   end
 
   struct IInternetSecurityManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_security_site : UInt64
-    get_security_site : UInt64
-    map_url_to_zone : UInt64
-    get_security_id : UInt64
-    process_url_action : UInt64
-    query_custom_policy : UInt64
-    set_zone_mapping : UInt64
-    get_zone_mappings : UInt64
+    query_interface : Proc(IInternetSecurityManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInternetSecurityManager*, UInt32)
+    release : Proc(IInternetSecurityManager*, UInt32)
+    set_security_site : Proc(IInternetSecurityManager*, IInternetSecurityMgrSite, HRESULT)
+    get_security_site : Proc(IInternetSecurityManager*, IInternetSecurityMgrSite*, HRESULT)
+    map_url_to_zone : Proc(IInternetSecurityManager*, LibC::LPWSTR, UInt32*, UInt32, HRESULT)
+    get_security_id : Proc(IInternetSecurityManager*, LibC::LPWSTR, UInt8*, UInt32*, LibC::UINT_PTR, HRESULT)
+    process_url_action : Proc(IInternetSecurityManager*, LibC::LPWSTR, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32, UInt32, HRESULT)
+    query_custom_policy : Proc(IInternetSecurityManager*, LibC::LPWSTR, Guid*, UInt8**, UInt32*, UInt8*, UInt32, UInt32, HRESULT)
+    set_zone_mapping : Proc(IInternetSecurityManager*, UInt32, LibC::LPWSTR, UInt32, HRESULT)
+    get_zone_mappings : Proc(IInternetSecurityManager*, UInt32, IEnumString*, UInt32, HRESULT)
   end
 
   IInternetSecurityManager_GUID = "79eac9ee-baf9-11ce-8c82-00aa004ba90b"
@@ -1349,18 +1349,18 @@ lib LibWin32
   end
 
   struct IInternetSecurityManagerExVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_security_site : UInt64
-    get_security_site : UInt64
-    map_url_to_zone : UInt64
-    get_security_id : UInt64
-    process_url_action : UInt64
-    query_custom_policy : UInt64
-    set_zone_mapping : UInt64
-    get_zone_mappings : UInt64
-    process_url_action_ex : UInt64
+    query_interface : Proc(IInternetSecurityManagerEx*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInternetSecurityManagerEx*, UInt32)
+    release : Proc(IInternetSecurityManagerEx*, UInt32)
+    set_security_site : Proc(IInternetSecurityManagerEx*, IInternetSecurityMgrSite, HRESULT)
+    get_security_site : Proc(IInternetSecurityManagerEx*, IInternetSecurityMgrSite*, HRESULT)
+    map_url_to_zone : Proc(IInternetSecurityManagerEx*, LibC::LPWSTR, UInt32*, UInt32, HRESULT)
+    get_security_id : Proc(IInternetSecurityManagerEx*, LibC::LPWSTR, UInt8*, UInt32*, LibC::UINT_PTR, HRESULT)
+    process_url_action : Proc(IInternetSecurityManagerEx*, LibC::LPWSTR, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32, UInt32, HRESULT)
+    query_custom_policy : Proc(IInternetSecurityManagerEx*, LibC::LPWSTR, Guid*, UInt8**, UInt32*, UInt8*, UInt32, UInt32, HRESULT)
+    set_zone_mapping : Proc(IInternetSecurityManagerEx*, UInt32, LibC::LPWSTR, UInt32, HRESULT)
+    get_zone_mappings : Proc(IInternetSecurityManagerEx*, UInt32, IEnumString*, UInt32, HRESULT)
+    process_url_action_ex : Proc(IInternetSecurityManagerEx*, LibC::LPWSTR, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32, UInt32, UInt32*, HRESULT)
   end
 
   IInternetSecurityManagerEx_GUID = "f164edf1-cc7c-4f0d-9a94-34222625c393"
@@ -1370,22 +1370,22 @@ lib LibWin32
   end
 
   struct IInternetSecurityManagerEx2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    set_security_site : UInt64
-    get_security_site : UInt64
-    map_url_to_zone : UInt64
-    get_security_id : UInt64
-    process_url_action : UInt64
-    query_custom_policy : UInt64
-    set_zone_mapping : UInt64
-    get_zone_mappings : UInt64
-    process_url_action_ex : UInt64
-    map_url_to_zone_ex2 : UInt64
-    process_url_action_ex2 : UInt64
-    get_security_id_ex2 : UInt64
-    query_custom_policy_ex2 : UInt64
+    query_interface : Proc(IInternetSecurityManagerEx2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInternetSecurityManagerEx2*, UInt32)
+    release : Proc(IInternetSecurityManagerEx2*, UInt32)
+    set_security_site : Proc(IInternetSecurityManagerEx2*, IInternetSecurityMgrSite, HRESULT)
+    get_security_site : Proc(IInternetSecurityManagerEx2*, IInternetSecurityMgrSite*, HRESULT)
+    map_url_to_zone : Proc(IInternetSecurityManagerEx2*, LibC::LPWSTR, UInt32*, UInt32, HRESULT)
+    get_security_id : Proc(IInternetSecurityManagerEx2*, LibC::LPWSTR, UInt8*, UInt32*, LibC::UINT_PTR, HRESULT)
+    process_url_action : Proc(IInternetSecurityManagerEx2*, LibC::LPWSTR, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32, UInt32, HRESULT)
+    query_custom_policy : Proc(IInternetSecurityManagerEx2*, LibC::LPWSTR, Guid*, UInt8**, UInt32*, UInt8*, UInt32, UInt32, HRESULT)
+    set_zone_mapping : Proc(IInternetSecurityManagerEx2*, UInt32, LibC::LPWSTR, UInt32, HRESULT)
+    get_zone_mappings : Proc(IInternetSecurityManagerEx2*, UInt32, IEnumString*, UInt32, HRESULT)
+    process_url_action_ex : Proc(IInternetSecurityManagerEx2*, LibC::LPWSTR, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32, UInt32, UInt32*, HRESULT)
+    map_url_to_zone_ex2 : Proc(IInternetSecurityManagerEx2*, IUri, UInt32*, UInt32, LibC::LPWSTR*, UInt32*, HRESULT)
+    process_url_action_ex2 : Proc(IInternetSecurityManagerEx2*, IUri, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32, LibC::UINT_PTR, UInt32*, HRESULT)
+    get_security_id_ex2 : Proc(IInternetSecurityManagerEx2*, IUri, UInt8*, UInt32*, LibC::UINT_PTR, HRESULT)
+    query_custom_policy_ex2 : Proc(IInternetSecurityManagerEx2*, IUri, Guid*, UInt8**, UInt32*, UInt8*, UInt32, LibC::UINT_PTR, HRESULT)
   end
 
   IInternetSecurityManagerEx2_GUID = "f1e50292-a795-4117-8e09-2b560a72ac60"
@@ -1395,12 +1395,12 @@ lib LibWin32
   end
 
   struct IZoneIdentifierVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_id : UInt64
-    set_id : UInt64
-    remove : UInt64
+    query_interface : Proc(IZoneIdentifier*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IZoneIdentifier*, UInt32)
+    release : Proc(IZoneIdentifier*, UInt32)
+    get_id : Proc(IZoneIdentifier*, UInt32*, HRESULT)
+    set_id : Proc(IZoneIdentifier*, UInt32, HRESULT)
+    remove : Proc(IZoneIdentifier*, HRESULT)
   end
 
   IZoneIdentifier_GUID = "cd45f185-1b21-48e2-967b-ead743a8914e"
@@ -1410,18 +1410,18 @@ lib LibWin32
   end
 
   struct IZoneIdentifier2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_id : UInt64
-    set_id : UInt64
-    remove : UInt64
-    get_last_writer_package_family_name : UInt64
-    set_last_writer_package_family_name : UInt64
-    remove_last_writer_package_family_name : UInt64
-    get_app_zone_id : UInt64
-    set_app_zone_id : UInt64
-    remove_app_zone_id : UInt64
+    query_interface : Proc(IZoneIdentifier2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IZoneIdentifier2*, UInt32)
+    release : Proc(IZoneIdentifier2*, UInt32)
+    get_id : Proc(IZoneIdentifier2*, UInt32*, HRESULT)
+    set_id : Proc(IZoneIdentifier2*, UInt32, HRESULT)
+    remove : Proc(IZoneIdentifier2*, HRESULT)
+    get_last_writer_package_family_name : Proc(IZoneIdentifier2*, LibC::LPWSTR*, HRESULT)
+    set_last_writer_package_family_name : Proc(IZoneIdentifier2*, LibC::LPWSTR, HRESULT)
+    remove_last_writer_package_family_name : Proc(IZoneIdentifier2*, HRESULT)
+    get_app_zone_id : Proc(IZoneIdentifier2*, UInt32*, HRESULT)
+    set_app_zone_id : Proc(IZoneIdentifier2*, UInt32, HRESULT)
+    remove_app_zone_id : Proc(IZoneIdentifier2*, HRESULT)
   end
 
   IZoneIdentifier2_GUID = "eb5e760c-09ef-45c0-b510-70830ce31e6a"
@@ -1431,12 +1431,12 @@ lib LibWin32
   end
 
   struct IInternetHostSecurityManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_security_id : UInt64
-    process_url_action : UInt64
-    query_custom_policy : UInt64
+    query_interface : Proc(IInternetHostSecurityManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInternetHostSecurityManager*, UInt32)
+    release : Proc(IInternetHostSecurityManager*, UInt32)
+    get_security_id : Proc(IInternetHostSecurityManager*, UInt8*, UInt32*, LibC::UINT_PTR, HRESULT)
+    process_url_action : Proc(IInternetHostSecurityManager*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32, UInt32, HRESULT)
+    query_custom_policy : Proc(IInternetHostSecurityManager*, Guid*, UInt8**, UInt32*, UInt8*, UInt32, UInt32, HRESULT)
   end
 
   IInternetHostSecurityManager_GUID = "3af280b6-cb3f-11d0-891e-00c04fb6bfc4"
@@ -1446,21 +1446,21 @@ lib LibWin32
   end
 
   struct IInternetZoneManagerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_zone_attributes : UInt64
-    set_zone_attributes : UInt64
-    get_zone_custom_policy : UInt64
-    set_zone_custom_policy : UInt64
-    get_zone_action_policy : UInt64
-    set_zone_action_policy : UInt64
-    prompt_action : UInt64
-    log_action : UInt64
-    create_zone_enumerator : UInt64
-    get_zone_at : UInt64
-    destroy_zone_enumerator : UInt64
-    copy_template_policies_to_zone : UInt64
+    query_interface : Proc(IInternetZoneManager*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInternetZoneManager*, UInt32)
+    release : Proc(IInternetZoneManager*, UInt32)
+    get_zone_attributes : Proc(IInternetZoneManager*, UInt32, ZONEATTRIBUTES*, HRESULT)
+    set_zone_attributes : Proc(IInternetZoneManager*, UInt32, ZONEATTRIBUTES*, HRESULT)
+    get_zone_custom_policy : Proc(IInternetZoneManager*, UInt32, Guid*, UInt8**, UInt32*, URLZONEREG, HRESULT)
+    set_zone_custom_policy : Proc(IInternetZoneManager*, UInt32, Guid*, UInt8*, UInt32, URLZONEREG, HRESULT)
+    get_zone_action_policy : Proc(IInternetZoneManager*, UInt32, UInt32, UInt8*, UInt32, URLZONEREG, HRESULT)
+    set_zone_action_policy : Proc(IInternetZoneManager*, UInt32, UInt32, UInt8*, UInt32, URLZONEREG, HRESULT)
+    prompt_action : Proc(IInternetZoneManager*, UInt32, LibC::HANDLE, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
+    log_action : Proc(IInternetZoneManager*, UInt32, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
+    create_zone_enumerator : Proc(IInternetZoneManager*, UInt32*, UInt32*, UInt32, HRESULT)
+    get_zone_at : Proc(IInternetZoneManager*, UInt32, UInt32, UInt32*, HRESULT)
+    destroy_zone_enumerator : Proc(IInternetZoneManager*, UInt32, HRESULT)
+    copy_template_policies_to_zone : Proc(IInternetZoneManager*, UInt32, UInt32, UInt32, HRESULT)
   end
 
   IInternetZoneManager_GUID = "79eac9ef-baf9-11ce-8c82-00aa004ba90b"
@@ -1470,23 +1470,23 @@ lib LibWin32
   end
 
   struct IInternetZoneManagerExVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_zone_attributes : UInt64
-    set_zone_attributes : UInt64
-    get_zone_custom_policy : UInt64
-    set_zone_custom_policy : UInt64
-    get_zone_action_policy : UInt64
-    set_zone_action_policy : UInt64
-    prompt_action : UInt64
-    log_action : UInt64
-    create_zone_enumerator : UInt64
-    get_zone_at : UInt64
-    destroy_zone_enumerator : UInt64
-    copy_template_policies_to_zone : UInt64
-    get_zone_action_policy_ex : UInt64
-    set_zone_action_policy_ex : UInt64
+    query_interface : Proc(IInternetZoneManagerEx*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInternetZoneManagerEx*, UInt32)
+    release : Proc(IInternetZoneManagerEx*, UInt32)
+    get_zone_attributes : Proc(IInternetZoneManagerEx*, UInt32, ZONEATTRIBUTES*, HRESULT)
+    set_zone_attributes : Proc(IInternetZoneManagerEx*, UInt32, ZONEATTRIBUTES*, HRESULT)
+    get_zone_custom_policy : Proc(IInternetZoneManagerEx*, UInt32, Guid*, UInt8**, UInt32*, URLZONEREG, HRESULT)
+    set_zone_custom_policy : Proc(IInternetZoneManagerEx*, UInt32, Guid*, UInt8*, UInt32, URLZONEREG, HRESULT)
+    get_zone_action_policy : Proc(IInternetZoneManagerEx*, UInt32, UInt32, UInt8*, UInt32, URLZONEREG, HRESULT)
+    set_zone_action_policy : Proc(IInternetZoneManagerEx*, UInt32, UInt32, UInt8*, UInt32, URLZONEREG, HRESULT)
+    prompt_action : Proc(IInternetZoneManagerEx*, UInt32, LibC::HANDLE, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
+    log_action : Proc(IInternetZoneManagerEx*, UInt32, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
+    create_zone_enumerator : Proc(IInternetZoneManagerEx*, UInt32*, UInt32*, UInt32, HRESULT)
+    get_zone_at : Proc(IInternetZoneManagerEx*, UInt32, UInt32, UInt32*, HRESULT)
+    destroy_zone_enumerator : Proc(IInternetZoneManagerEx*, UInt32, HRESULT)
+    copy_template_policies_to_zone : Proc(IInternetZoneManagerEx*, UInt32, UInt32, UInt32, HRESULT)
+    get_zone_action_policy_ex : Proc(IInternetZoneManagerEx*, UInt32, UInt32, UInt8*, UInt32, URLZONEREG, UInt32, HRESULT)
+    set_zone_action_policy_ex : Proc(IInternetZoneManagerEx*, UInt32, UInt32, UInt8*, UInt32, URLZONEREG, UInt32, HRESULT)
   end
 
   IInternetZoneManagerEx_GUID = "a4c23339-8e06-431e-9bf4-7e711c085648"
@@ -1496,27 +1496,27 @@ lib LibWin32
   end
 
   struct IInternetZoneManagerEx2VTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_zone_attributes : UInt64
-    set_zone_attributes : UInt64
-    get_zone_custom_policy : UInt64
-    set_zone_custom_policy : UInt64
-    get_zone_action_policy : UInt64
-    set_zone_action_policy : UInt64
-    prompt_action : UInt64
-    log_action : UInt64
-    create_zone_enumerator : UInt64
-    get_zone_at : UInt64
-    destroy_zone_enumerator : UInt64
-    copy_template_policies_to_zone : UInt64
-    get_zone_action_policy_ex : UInt64
-    set_zone_action_policy_ex : UInt64
-    get_zone_attributes_ex : UInt64
-    get_zone_security_state : UInt64
-    get_ie_security_state : UInt64
-    fix_unsecure_settings : UInt64
+    query_interface : Proc(IInternetZoneManagerEx2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IInternetZoneManagerEx2*, UInt32)
+    release : Proc(IInternetZoneManagerEx2*, UInt32)
+    get_zone_attributes : Proc(IInternetZoneManagerEx2*, UInt32, ZONEATTRIBUTES*, HRESULT)
+    set_zone_attributes : Proc(IInternetZoneManagerEx2*, UInt32, ZONEATTRIBUTES*, HRESULT)
+    get_zone_custom_policy : Proc(IInternetZoneManagerEx2*, UInt32, Guid*, UInt8**, UInt32*, URLZONEREG, HRESULT)
+    set_zone_custom_policy : Proc(IInternetZoneManagerEx2*, UInt32, Guid*, UInt8*, UInt32, URLZONEREG, HRESULT)
+    get_zone_action_policy : Proc(IInternetZoneManagerEx2*, UInt32, UInt32, UInt8*, UInt32, URLZONEREG, HRESULT)
+    set_zone_action_policy : Proc(IInternetZoneManagerEx2*, UInt32, UInt32, UInt8*, UInt32, URLZONEREG, HRESULT)
+    prompt_action : Proc(IInternetZoneManagerEx2*, UInt32, LibC::HANDLE, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
+    log_action : Proc(IInternetZoneManagerEx2*, UInt32, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
+    create_zone_enumerator : Proc(IInternetZoneManagerEx2*, UInt32*, UInt32*, UInt32, HRESULT)
+    get_zone_at : Proc(IInternetZoneManagerEx2*, UInt32, UInt32, UInt32*, HRESULT)
+    destroy_zone_enumerator : Proc(IInternetZoneManagerEx2*, UInt32, HRESULT)
+    copy_template_policies_to_zone : Proc(IInternetZoneManagerEx2*, UInt32, UInt32, UInt32, HRESULT)
+    get_zone_action_policy_ex : Proc(IInternetZoneManagerEx2*, UInt32, UInt32, UInt8*, UInt32, URLZONEREG, UInt32, HRESULT)
+    set_zone_action_policy_ex : Proc(IInternetZoneManagerEx2*, UInt32, UInt32, UInt8*, UInt32, URLZONEREG, UInt32, HRESULT)
+    get_zone_attributes_ex : Proc(IInternetZoneManagerEx2*, UInt32, ZONEATTRIBUTES*, UInt32, HRESULT)
+    get_zone_security_state : Proc(IInternetZoneManagerEx2*, UInt32, LibC::BOOL, UInt32*, LibC::BOOL*, HRESULT)
+    get_ie_security_state : Proc(IInternetZoneManagerEx2*, LibC::BOOL, UInt32*, LibC::BOOL*, LibC::BOOL, HRESULT)
+    fix_unsecure_settings : Proc(IInternetZoneManagerEx2*, HRESULT)
   end
 
   IInternetZoneManagerEx2_GUID = "edc17559-dd5d-4846-8eef-8becba5a4abf"
@@ -1526,13 +1526,13 @@ lib LibWin32
   end
 
   struct ISoftDistExtVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    process_soft_dist : UInt64
-    get_first_code_base : UInt64
-    get_next_code_base : UInt64
-    async_install_distribution_unit : UInt64
+    query_interface : Proc(ISoftDistExt*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ISoftDistExt*, UInt32)
+    release : Proc(ISoftDistExt*, UInt32)
+    process_soft_dist : Proc(ISoftDistExt*, LibC::LPWSTR, IXMLElement, SOFTDISTINFO*, HRESULT)
+    get_first_code_base : Proc(ISoftDistExt*, LibC::LPWSTR*, UInt32*, HRESULT)
+    get_next_code_base : Proc(ISoftDistExt*, LibC::LPWSTR*, UInt32*, HRESULT)
+    async_install_distribution_unit : Proc(ISoftDistExt*, IBindCtx, Void*, UInt32, CODEBASEHOLD*, HRESULT)
   end
 
   ISoftDistExt_GUID = "b15b8dc1-c7e1-11d0-8680-00aa00bdcb71"
@@ -1542,11 +1542,11 @@ lib LibWin32
   end
 
   struct ICatalogFileInfoVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_catalog_file : UInt64
-    get_java_trust : UInt64
+    query_interface : Proc(ICatalogFileInfo*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ICatalogFileInfo*, UInt32)
+    release : Proc(ICatalogFileInfo*, UInt32)
+    get_catalog_file : Proc(ICatalogFileInfo*, PSTR*, HRESULT)
+    get_java_trust : Proc(ICatalogFileInfo*, Void**, HRESULT)
   end
 
   ICatalogFileInfo_GUID = "711c7600-6b48-11d1-b403-00aa00b92af1"
@@ -1556,12 +1556,12 @@ lib LibWin32
   end
 
   struct IDataFilterVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    do_encode : UInt64
-    do_decode : UInt64
-    set_encoding_level : UInt64
+    query_interface : Proc(IDataFilter*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDataFilter*, UInt32)
+    release : Proc(IDataFilter*, UInt32)
+    do_encode : Proc(IDataFilter*, UInt32, Int32, UInt8*, Int32, UInt8*, Int32, Int32*, Int32*, UInt32, HRESULT)
+    do_decode : Proc(IDataFilter*, UInt32, Int32, UInt8*, Int32, UInt8*, Int32, Int32*, Int32*, UInt32, HRESULT)
+    set_encoding_level : Proc(IDataFilter*, UInt32, HRESULT)
   end
 
   IDataFilter_GUID = "69d14c80-c18e-11d0-a9ce-006097942311"
@@ -1571,11 +1571,11 @@ lib LibWin32
   end
 
   struct IEncodingFilterFactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    find_best_filter : UInt64
-    get_default_filter : UInt64
+    query_interface : Proc(IEncodingFilterFactory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEncodingFilterFactory*, UInt32)
+    release : Proc(IEncodingFilterFactory*, UInt32)
+    find_best_filter : Proc(IEncodingFilterFactory*, LibC::LPWSTR, LibC::LPWSTR, DATAINFO, IDataFilter*, HRESULT)
+    get_default_filter : Proc(IEncodingFilterFactory*, LibC::LPWSTR, LibC::LPWSTR, IDataFilter*, HRESULT)
   end
 
   IEncodingFilterFactory_GUID = "70bdde00-c18e-11d0-a9ce-006097942311"
@@ -1585,10 +1585,10 @@ lib LibWin32
   end
 
   struct IWrappedProtocolVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_wrapper_code : UInt64
+    query_interface : Proc(IWrappedProtocol*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWrappedProtocol*, UInt32)
+    release : Proc(IWrappedProtocol*, UInt32)
+    get_wrapper_code : Proc(IWrappedProtocol*, Int32*, LibC::UINT_PTR, HRESULT)
   end
 
   IWrappedProtocol_GUID = "53c84785-8425-4dc5-971b-e58d9c19f9b6"
@@ -1598,10 +1598,10 @@ lib LibWin32
   end
 
   struct IGetBindHandleVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_bind_handle : UInt64
+    query_interface : Proc(IGetBindHandle*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IGetBindHandle*, UInt32)
+    release : Proc(IGetBindHandle*, UInt32)
+    get_bind_handle : Proc(IGetBindHandle*, BINDHANDLETYPES, LibC::HANDLE*, HRESULT)
   end
 
   IGetBindHandle_GUID = "af0ff408-129d-4b20-91f0-02bd23d88352"
@@ -1611,10 +1611,10 @@ lib LibWin32
   end
 
   struct IBindCallbackRedirectVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    redirect : UInt64
+    query_interface : Proc(IBindCallbackRedirect*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IBindCallbackRedirect*, UInt32)
+    release : Proc(IBindCallbackRedirect*, UInt32)
+    redirect : Proc(IBindCallbackRedirect*, LibC::LPWSTR, Int16*, HRESULT)
   end
 
   IBindCallbackRedirect_GUID = "11c81bc2-121e-4ed5-b9c4-b430bd54f2c0"
@@ -1624,10 +1624,10 @@ lib LibWin32
   end
 
   struct IBindHttpSecurityVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_ignore_cert_mask : UInt64
+    query_interface : Proc(IBindHttpSecurity*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IBindHttpSecurity*, UInt32)
+    release : Proc(IBindHttpSecurity*, UInt32)
+    get_ignore_cert_mask : Proc(IBindHttpSecurity*, UInt32*, HRESULT)
   end
 
   IBindHttpSecurity_GUID = "a9eda967-f50e-4a33-b358-206f6ef3086d"
@@ -1857,1101 +1857,1101 @@ lib LibWin32
   fun WriteHitLogging(lplogginginfo : HIT_LOGGING_INFO*) : LibC::BOOL
 end
 struct LibWin32::IPersistMoniker
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IPersistMoniker*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IPersistMoniker*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IPersistMoniker*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_class_id(pclassid : Guid*) : HRESULT
-    @lpVtbl.value.get_class_id.unsafe_as(Proc(Guid*, HRESULT)).call(pclassid)
+  def get_class_id(this : IPersistMoniker*, pclassid : Guid*) : HRESULT
+    @lpVtbl.value.get_class_id.call(this, pclassid)
   end
-  def is_dirty : HRESULT
-    @lpVtbl.value.is_dirty.unsafe_as(Proc(HRESULT)).call
+  def is_dirty(this : IPersistMoniker*) : HRESULT
+    @lpVtbl.value.is_dirty.call(this)
   end
-  def load(ffullyavailable : LibC::BOOL, pimkname : IMoniker, pibc : IBindCtx, grfmode : UInt32) : HRESULT
-    @lpVtbl.value.load.unsafe_as(Proc(LibC::BOOL, IMoniker, IBindCtx, UInt32, HRESULT)).call(ffullyavailable, pimkname, pibc, grfmode)
+  def load(this : IPersistMoniker*, ffullyavailable : LibC::BOOL, pimkname : IMoniker, pibc : IBindCtx, grfmode : UInt32) : HRESULT
+    @lpVtbl.value.load.call(this, ffullyavailable, pimkname, pibc, grfmode)
   end
-  def save(pimkname : IMoniker, pbc : IBindCtx, fremember : LibC::BOOL) : HRESULT
-    @lpVtbl.value.save.unsafe_as(Proc(IMoniker, IBindCtx, LibC::BOOL, HRESULT)).call(pimkname, pbc, fremember)
+  def save(this : IPersistMoniker*, pimkname : IMoniker, pbc : IBindCtx, fremember : LibC::BOOL) : HRESULT
+    @lpVtbl.value.save.call(this, pimkname, pbc, fremember)
   end
-  def save_completed(pimkname : IMoniker, pibc : IBindCtx) : HRESULT
-    @lpVtbl.value.save_completed.unsafe_as(Proc(IMoniker, IBindCtx, HRESULT)).call(pimkname, pibc)
+  def save_completed(this : IPersistMoniker*, pimkname : IMoniker, pibc : IBindCtx) : HRESULT
+    @lpVtbl.value.save_completed.call(this, pimkname, pibc)
   end
-  def get_cur_moniker(ppimkname : IMoniker*) : HRESULT
-    @lpVtbl.value.get_cur_moniker.unsafe_as(Proc(IMoniker*, HRESULT)).call(ppimkname)
+  def get_cur_moniker(this : IPersistMoniker*, ppimkname : IMoniker*) : HRESULT
+    @lpVtbl.value.get_cur_moniker.call(this, ppimkname)
   end
 end
 struct LibWin32::IMonikerProp
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMonikerProp*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMonikerProp*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMonikerProp*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def put_property(mkp : MONIKERPROPERTY, val : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.put_property.unsafe_as(Proc(MONIKERPROPERTY, LibC::LPWSTR, HRESULT)).call(mkp, val)
+  def put_property(this : IMonikerProp*, mkp : MONIKERPROPERTY, val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_property.call(this, mkp, val)
   end
 end
 struct LibWin32::IBindProtocol
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IBindProtocol*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IBindProtocol*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IBindProtocol*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_binding(szurl : LibC::LPWSTR, pbc : IBindCtx, ppb : IBinding*) : HRESULT
-    @lpVtbl.value.create_binding.unsafe_as(Proc(LibC::LPWSTR, IBindCtx, IBinding*, HRESULT)).call(szurl, pbc, ppb)
+  def create_binding(this : IBindProtocol*, szurl : LibC::LPWSTR, pbc : IBindCtx, ppb : IBinding*) : HRESULT
+    @lpVtbl.value.create_binding.call(this, szurl, pbc, ppb)
   end
 end
 struct LibWin32::IHttpNegotiate
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IHttpNegotiate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IHttpNegotiate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IHttpNegotiate*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def beginning_transaction(szurl : LibC::LPWSTR, szheaders : LibC::LPWSTR, dwreserved : UInt32, pszadditionalheaders : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.beginning_transaction.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, LibC::LPWSTR*, HRESULT)).call(szurl, szheaders, dwreserved, pszadditionalheaders)
+  def beginning_transaction(this : IHttpNegotiate*, szurl : LibC::LPWSTR, szheaders : LibC::LPWSTR, dwreserved : UInt32, pszadditionalheaders : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.beginning_transaction.call(this, szurl, szheaders, dwreserved, pszadditionalheaders)
   end
-  def on_response(dwresponsecode : UInt32, szresponseheaders : LibC::LPWSTR, szrequestheaders : LibC::LPWSTR, pszadditionalrequestheaders : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.on_response.unsafe_as(Proc(UInt32, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)).call(dwresponsecode, szresponseheaders, szrequestheaders, pszadditionalrequestheaders)
+  def on_response(this : IHttpNegotiate*, dwresponsecode : UInt32, szresponseheaders : LibC::LPWSTR, szrequestheaders : LibC::LPWSTR, pszadditionalrequestheaders : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.on_response.call(this, dwresponsecode, szresponseheaders, szrequestheaders, pszadditionalrequestheaders)
   end
 end
 struct LibWin32::IHttpNegotiate2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IHttpNegotiate2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IHttpNegotiate2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IHttpNegotiate2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def beginning_transaction(szurl : LibC::LPWSTR, szheaders : LibC::LPWSTR, dwreserved : UInt32, pszadditionalheaders : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.beginning_transaction.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, LibC::LPWSTR*, HRESULT)).call(szurl, szheaders, dwreserved, pszadditionalheaders)
+  def beginning_transaction(this : IHttpNegotiate2*, szurl : LibC::LPWSTR, szheaders : LibC::LPWSTR, dwreserved : UInt32, pszadditionalheaders : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.beginning_transaction.call(this, szurl, szheaders, dwreserved, pszadditionalheaders)
   end
-  def on_response(dwresponsecode : UInt32, szresponseheaders : LibC::LPWSTR, szrequestheaders : LibC::LPWSTR, pszadditionalrequestheaders : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.on_response.unsafe_as(Proc(UInt32, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)).call(dwresponsecode, szresponseheaders, szrequestheaders, pszadditionalrequestheaders)
+  def on_response(this : IHttpNegotiate2*, dwresponsecode : UInt32, szresponseheaders : LibC::LPWSTR, szrequestheaders : LibC::LPWSTR, pszadditionalrequestheaders : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.on_response.call(this, dwresponsecode, szresponseheaders, szrequestheaders, pszadditionalrequestheaders)
   end
-  def get_root_security_id(pbsecurityid : UInt8*, pcbsecurityid : UInt32*, dwreserved : LibC::UINT_PTR) : HRESULT
-    @lpVtbl.value.get_root_security_id.unsafe_as(Proc(UInt8*, UInt32*, LibC::UINT_PTR, HRESULT)).call(pbsecurityid, pcbsecurityid, dwreserved)
+  def get_root_security_id(this : IHttpNegotiate2*, pbsecurityid : UInt8*, pcbsecurityid : UInt32*, dwreserved : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.get_root_security_id.call(this, pbsecurityid, pcbsecurityid, dwreserved)
   end
 end
 struct LibWin32::IHttpNegotiate3
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IHttpNegotiate3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IHttpNegotiate3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IHttpNegotiate3*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def beginning_transaction(szurl : LibC::LPWSTR, szheaders : LibC::LPWSTR, dwreserved : UInt32, pszadditionalheaders : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.beginning_transaction.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, LibC::LPWSTR*, HRESULT)).call(szurl, szheaders, dwreserved, pszadditionalheaders)
+  def beginning_transaction(this : IHttpNegotiate3*, szurl : LibC::LPWSTR, szheaders : LibC::LPWSTR, dwreserved : UInt32, pszadditionalheaders : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.beginning_transaction.call(this, szurl, szheaders, dwreserved, pszadditionalheaders)
   end
-  def on_response(dwresponsecode : UInt32, szresponseheaders : LibC::LPWSTR, szrequestheaders : LibC::LPWSTR, pszadditionalrequestheaders : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.on_response.unsafe_as(Proc(UInt32, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)).call(dwresponsecode, szresponseheaders, szrequestheaders, pszadditionalrequestheaders)
+  def on_response(this : IHttpNegotiate3*, dwresponsecode : UInt32, szresponseheaders : LibC::LPWSTR, szrequestheaders : LibC::LPWSTR, pszadditionalrequestheaders : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.on_response.call(this, dwresponsecode, szresponseheaders, szrequestheaders, pszadditionalrequestheaders)
   end
-  def get_root_security_id(pbsecurityid : UInt8*, pcbsecurityid : UInt32*, dwreserved : LibC::UINT_PTR) : HRESULT
-    @lpVtbl.value.get_root_security_id.unsafe_as(Proc(UInt8*, UInt32*, LibC::UINT_PTR, HRESULT)).call(pbsecurityid, pcbsecurityid, dwreserved)
+  def get_root_security_id(this : IHttpNegotiate3*, pbsecurityid : UInt8*, pcbsecurityid : UInt32*, dwreserved : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.get_root_security_id.call(this, pbsecurityid, pcbsecurityid, dwreserved)
   end
-  def get_serialized_client_cert_context(ppbcert : UInt8**, pcbcert : UInt32*) : HRESULT
-    @lpVtbl.value.get_serialized_client_cert_context.unsafe_as(Proc(UInt8**, UInt32*, HRESULT)).call(ppbcert, pcbcert)
+  def get_serialized_client_cert_context(this : IHttpNegotiate3*, ppbcert : UInt8**, pcbcert : UInt32*) : HRESULT
+    @lpVtbl.value.get_serialized_client_cert_context.call(this, ppbcert, pcbcert)
   end
 end
 struct LibWin32::IWinInetFileStream
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWinInetFileStream*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWinInetFileStream*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWinInetFileStream*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_handle_for_unlock(hwininetlockhandle : LibC::UINT_PTR, dwreserved : LibC::UINT_PTR) : HRESULT
-    @lpVtbl.value.set_handle_for_unlock.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)).call(hwininetlockhandle, dwreserved)
+  def set_handle_for_unlock(this : IWinInetFileStream*, hwininetlockhandle : LibC::UINT_PTR, dwreserved : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.set_handle_for_unlock.call(this, hwininetlockhandle, dwreserved)
   end
-  def set_delete_file(dwreserved : LibC::UINT_PTR) : HRESULT
-    @lpVtbl.value.set_delete_file.unsafe_as(Proc(LibC::UINT_PTR, HRESULT)).call(dwreserved)
+  def set_delete_file(this : IWinInetFileStream*, dwreserved : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.set_delete_file.call(this, dwreserved)
   end
 end
 struct LibWin32::IWindowForBindingUI
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWindowForBindingUI*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWindowForBindingUI*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWindowForBindingUI*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_window(rguidreason : Guid*, phwnd : HANDLE*) : HRESULT
-    @lpVtbl.value.get_window.unsafe_as(Proc(Guid*, HANDLE*, HRESULT)).call(rguidreason, phwnd)
+  def get_window(this : IWindowForBindingUI*, rguidreason : Guid*, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window.call(this, rguidreason, phwnd)
   end
 end
 struct LibWin32::ICodeInstall
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ICodeInstall*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ICodeInstall*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ICodeInstall*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_window(rguidreason : Guid*, phwnd : HANDLE*) : HRESULT
-    @lpVtbl.value.get_window.unsafe_as(Proc(Guid*, HANDLE*, HRESULT)).call(rguidreason, phwnd)
+  def get_window(this : ICodeInstall*, rguidreason : Guid*, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window.call(this, rguidreason, phwnd)
   end
-  def on_code_install_problem(ulstatuscode : UInt32, szdestination : LibC::LPWSTR, szsource : LibC::LPWSTR, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.on_code_install_problem.unsafe_as(Proc(UInt32, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(ulstatuscode, szdestination, szsource, dwreserved)
+  def on_code_install_problem(this : ICodeInstall*, ulstatuscode : UInt32, szdestination : LibC::LPWSTR, szsource : LibC::LPWSTR, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.on_code_install_problem.call(this, ulstatuscode, szdestination, szsource, dwreserved)
   end
 end
 struct LibWin32::IUriContainer
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUriContainer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUriContainer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUriContainer*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_i_uri(ppiuri : IUri*) : HRESULT
-    @lpVtbl.value.get_i_uri.unsafe_as(Proc(IUri*, HRESULT)).call(ppiuri)
+  def get_i_uri(this : IUriContainer*, ppiuri : IUri*) : HRESULT
+    @lpVtbl.value.get_i_uri.call(this, ppiuri)
   end
 end
 struct LibWin32::IUriBuilderFactory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IUriBuilderFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IUriBuilderFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IUriBuilderFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_i_uri_builder(dwflags : UInt32, dwreserved : LibC::UINT_PTR, ppiuribuilder : IUriBuilder*) : HRESULT
-    @lpVtbl.value.create_i_uri_builder.unsafe_as(Proc(UInt32, LibC::UINT_PTR, IUriBuilder*, HRESULT)).call(dwflags, dwreserved, ppiuribuilder)
+  def create_i_uri_builder(this : IUriBuilderFactory*, dwflags : UInt32, dwreserved : LibC::UINT_PTR, ppiuribuilder : IUriBuilder*) : HRESULT
+    @lpVtbl.value.create_i_uri_builder.call(this, dwflags, dwreserved, ppiuribuilder)
   end
-  def create_initialized_i_uri_builder(dwflags : UInt32, dwreserved : LibC::UINT_PTR, ppiuribuilder : IUriBuilder*) : HRESULT
-    @lpVtbl.value.create_initialized_i_uri_builder.unsafe_as(Proc(UInt32, LibC::UINT_PTR, IUriBuilder*, HRESULT)).call(dwflags, dwreserved, ppiuribuilder)
+  def create_initialized_i_uri_builder(this : IUriBuilderFactory*, dwflags : UInt32, dwreserved : LibC::UINT_PTR, ppiuribuilder : IUriBuilder*) : HRESULT
+    @lpVtbl.value.create_initialized_i_uri_builder.call(this, dwflags, dwreserved, ppiuribuilder)
   end
 end
 struct LibWin32::IWinInetInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWinInetInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWinInetInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWinInetInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def query_option(dwoption : UInt32, pbuffer : Void*, pcbbuf : UInt32*) : HRESULT
-    @lpVtbl.value.query_option.unsafe_as(Proc(UInt32, Void*, UInt32*, HRESULT)).call(dwoption, pbuffer, pcbbuf)
+  def query_option(this : IWinInetInfo*, dwoption : UInt32, pbuffer : Void*, pcbbuf : UInt32*) : HRESULT
+    @lpVtbl.value.query_option.call(this, dwoption, pbuffer, pcbbuf)
   end
 end
 struct LibWin32::IHttpSecurity
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IHttpSecurity*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IHttpSecurity*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IHttpSecurity*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_window(rguidreason : Guid*, phwnd : HANDLE*) : HRESULT
-    @lpVtbl.value.get_window.unsafe_as(Proc(Guid*, HANDLE*, HRESULT)).call(rguidreason, phwnd)
+  def get_window(this : IHttpSecurity*, rguidreason : Guid*, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window.call(this, rguidreason, phwnd)
   end
-  def on_security_problem(dwproblem : UInt32) : HRESULT
-    @lpVtbl.value.on_security_problem.unsafe_as(Proc(UInt32, HRESULT)).call(dwproblem)
+  def on_security_problem(this : IHttpSecurity*, dwproblem : UInt32) : HRESULT
+    @lpVtbl.value.on_security_problem.call(this, dwproblem)
   end
 end
 struct LibWin32::IWinInetHttpInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWinInetHttpInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWinInetHttpInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWinInetHttpInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def query_option(dwoption : UInt32, pbuffer : Void*, pcbbuf : UInt32*) : HRESULT
-    @lpVtbl.value.query_option.unsafe_as(Proc(UInt32, Void*, UInt32*, HRESULT)).call(dwoption, pbuffer, pcbbuf)
+  def query_option(this : IWinInetHttpInfo*, dwoption : UInt32, pbuffer : Void*, pcbbuf : UInt32*) : HRESULT
+    @lpVtbl.value.query_option.call(this, dwoption, pbuffer, pcbbuf)
   end
-  def query_info(dwoption : UInt32, pbuffer : Void*, pcbbuf : UInt32*, pdwflags : UInt32*, pdwreserved : UInt32*) : HRESULT
-    @lpVtbl.value.query_info.unsafe_as(Proc(UInt32, Void*, UInt32*, UInt32*, UInt32*, HRESULT)).call(dwoption, pbuffer, pcbbuf, pdwflags, pdwreserved)
+  def query_info(this : IWinInetHttpInfo*, dwoption : UInt32, pbuffer : Void*, pcbbuf : UInt32*, pdwflags : UInt32*, pdwreserved : UInt32*) : HRESULT
+    @lpVtbl.value.query_info.call(this, dwoption, pbuffer, pcbbuf, pdwflags, pdwreserved)
   end
 end
 struct LibWin32::IWinInetHttpTimeouts
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWinInetHttpTimeouts*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWinInetHttpTimeouts*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWinInetHttpTimeouts*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_request_timeouts(pdwconnecttimeout : UInt32*, pdwsendtimeout : UInt32*, pdwreceivetimeout : UInt32*) : HRESULT
-    @lpVtbl.value.get_request_timeouts.unsafe_as(Proc(UInt32*, UInt32*, UInt32*, HRESULT)).call(pdwconnecttimeout, pdwsendtimeout, pdwreceivetimeout)
+  def get_request_timeouts(this : IWinInetHttpTimeouts*, pdwconnecttimeout : UInt32*, pdwsendtimeout : UInt32*, pdwreceivetimeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_request_timeouts.call(this, pdwconnecttimeout, pdwsendtimeout, pdwreceivetimeout)
   end
 end
 struct LibWin32::IWinInetCacheHints
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWinInetCacheHints*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWinInetCacheHints*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWinInetCacheHints*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_cache_extension(pwzext : LibC::LPWSTR, pszcachefile : Void*, pcbcachefile : UInt32*, pdwwinineterror : UInt32*, pdwreserved : UInt32*) : HRESULT
-    @lpVtbl.value.set_cache_extension.unsafe_as(Proc(LibC::LPWSTR, Void*, UInt32*, UInt32*, UInt32*, HRESULT)).call(pwzext, pszcachefile, pcbcachefile, pdwwinineterror, pdwreserved)
+  def set_cache_extension(this : IWinInetCacheHints*, pwzext : LibC::LPWSTR, pszcachefile : Void*, pcbcachefile : UInt32*, pdwwinineterror : UInt32*, pdwreserved : UInt32*) : HRESULT
+    @lpVtbl.value.set_cache_extension.call(this, pwzext, pszcachefile, pcbcachefile, pdwwinineterror, pdwreserved)
   end
 end
 struct LibWin32::IWinInetCacheHints2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWinInetCacheHints2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWinInetCacheHints2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWinInetCacheHints2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_cache_extension(pwzext : LibC::LPWSTR, pszcachefile : Void*, pcbcachefile : UInt32*, pdwwinineterror : UInt32*, pdwreserved : UInt32*) : HRESULT
-    @lpVtbl.value.set_cache_extension.unsafe_as(Proc(LibC::LPWSTR, Void*, UInt32*, UInt32*, UInt32*, HRESULT)).call(pwzext, pszcachefile, pcbcachefile, pdwwinineterror, pdwreserved)
+  def set_cache_extension(this : IWinInetCacheHints2*, pwzext : LibC::LPWSTR, pszcachefile : Void*, pcbcachefile : UInt32*, pdwwinineterror : UInt32*, pdwreserved : UInt32*) : HRESULT
+    @lpVtbl.value.set_cache_extension.call(this, pwzext, pszcachefile, pcbcachefile, pdwwinineterror, pdwreserved)
   end
-  def set_cache_extension2(pwzext : LibC::LPWSTR, pwzcachefile : LibC::LPWSTR, pcchcachefile : UInt32*, pdwwinineterror : UInt32*, pdwreserved : UInt32*) : HRESULT
-    @lpVtbl.value.set_cache_extension2.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32*, UInt32*, UInt32*, HRESULT)).call(pwzext, pwzcachefile, pcchcachefile, pdwwinineterror, pdwreserved)
+  def set_cache_extension2(this : IWinInetCacheHints2*, pwzext : LibC::LPWSTR, pwzcachefile : LibC::LPWSTR, pcchcachefile : UInt32*, pdwwinineterror : UInt32*, pdwreserved : UInt32*) : HRESULT
+    @lpVtbl.value.set_cache_extension2.call(this, pwzext, pwzcachefile, pcchcachefile, pdwwinineterror, pdwreserved)
   end
 end
 struct LibWin32::IInternet
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInternet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInternet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInternet*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
 end
 struct LibWin32::IInternetBindInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInternetBindInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInternetBindInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInternetBindInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_bind_info(grfbindf : UInt32*, pbindinfo : BINDINFO*) : HRESULT
-    @lpVtbl.value.get_bind_info.unsafe_as(Proc(UInt32*, BINDINFO*, HRESULT)).call(grfbindf, pbindinfo)
+  def get_bind_info(this : IInternetBindInfo*, grfbindf : UInt32*, pbindinfo : BINDINFO*) : HRESULT
+    @lpVtbl.value.get_bind_info.call(this, grfbindf, pbindinfo)
   end
-  def get_bind_string(ulstringtype : UInt32, ppwzstr : LibC::LPWSTR*, cel : UInt32, pcelfetched : UInt32*) : HRESULT
-    @lpVtbl.value.get_bind_string.unsafe_as(Proc(UInt32, LibC::LPWSTR*, UInt32, UInt32*, HRESULT)).call(ulstringtype, ppwzstr, cel, pcelfetched)
+  def get_bind_string(this : IInternetBindInfo*, ulstringtype : UInt32, ppwzstr : LibC::LPWSTR*, cel : UInt32, pcelfetched : UInt32*) : HRESULT
+    @lpVtbl.value.get_bind_string.call(this, ulstringtype, ppwzstr, cel, pcelfetched)
   end
 end
 struct LibWin32::IInternetBindInfoEx
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInternetBindInfoEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInternetBindInfoEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInternetBindInfoEx*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_bind_info(grfbindf : UInt32*, pbindinfo : BINDINFO*) : HRESULT
-    @lpVtbl.value.get_bind_info.unsafe_as(Proc(UInt32*, BINDINFO*, HRESULT)).call(grfbindf, pbindinfo)
+  def get_bind_info(this : IInternetBindInfoEx*, grfbindf : UInt32*, pbindinfo : BINDINFO*) : HRESULT
+    @lpVtbl.value.get_bind_info.call(this, grfbindf, pbindinfo)
   end
-  def get_bind_string(ulstringtype : UInt32, ppwzstr : LibC::LPWSTR*, cel : UInt32, pcelfetched : UInt32*) : HRESULT
-    @lpVtbl.value.get_bind_string.unsafe_as(Proc(UInt32, LibC::LPWSTR*, UInt32, UInt32*, HRESULT)).call(ulstringtype, ppwzstr, cel, pcelfetched)
+  def get_bind_string(this : IInternetBindInfoEx*, ulstringtype : UInt32, ppwzstr : LibC::LPWSTR*, cel : UInt32, pcelfetched : UInt32*) : HRESULT
+    @lpVtbl.value.get_bind_string.call(this, ulstringtype, ppwzstr, cel, pcelfetched)
   end
-  def get_bind_info_ex(grfbindf : UInt32*, pbindinfo : BINDINFO*, grfbindf2 : UInt32*, pdwreserved : UInt32*) : HRESULT
-    @lpVtbl.value.get_bind_info_ex.unsafe_as(Proc(UInt32*, BINDINFO*, UInt32*, UInt32*, HRESULT)).call(grfbindf, pbindinfo, grfbindf2, pdwreserved)
+  def get_bind_info_ex(this : IInternetBindInfoEx*, grfbindf : UInt32*, pbindinfo : BINDINFO*, grfbindf2 : UInt32*, pdwreserved : UInt32*) : HRESULT
+    @lpVtbl.value.get_bind_info_ex.call(this, grfbindf, pbindinfo, grfbindf2, pdwreserved)
   end
 end
 struct LibWin32::IInternetProtocolRoot
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInternetProtocolRoot*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInternetProtocolRoot*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInternetProtocolRoot*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def start(szurl : LibC::LPWSTR, poiprotsink : IInternetProtocolSink, poibindinfo : IInternetBindInfo, grfpi : UInt32, dwreserved : HANDLE_PTR) : HRESULT
-    @lpVtbl.value.start.unsafe_as(Proc(LibC::LPWSTR, IInternetProtocolSink, IInternetBindInfo, UInt32, HANDLE_PTR, HRESULT)).call(szurl, poiprotsink, poibindinfo, grfpi, dwreserved)
+  def start(this : IInternetProtocolRoot*, szurl : LibC::LPWSTR, poiprotsink : IInternetProtocolSink, poibindinfo : IInternetBindInfo, grfpi : UInt32, dwreserved : HANDLE_PTR) : HRESULT
+    @lpVtbl.value.start.call(this, szurl, poiprotsink, poibindinfo, grfpi, dwreserved)
   end
-  def continue(pprotocoldata : PROTOCOLDATA*) : HRESULT
-    @lpVtbl.value.continue.unsafe_as(Proc(PROTOCOLDATA*, HRESULT)).call(pprotocoldata)
+  def continue(this : IInternetProtocolRoot*, pprotocoldata : PROTOCOLDATA*) : HRESULT
+    @lpVtbl.value.continue.call(this, pprotocoldata)
   end
-  def abort(hrreason : HRESULT, dwoptions : UInt32) : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(HRESULT, UInt32, HRESULT)).call(hrreason, dwoptions)
+  def abort(this : IInternetProtocolRoot*, hrreason : HRESULT, dwoptions : UInt32) : HRESULT
+    @lpVtbl.value.abort.call(this, hrreason, dwoptions)
   end
-  def terminate(dwoptions : UInt32) : HRESULT
-    @lpVtbl.value.terminate.unsafe_as(Proc(UInt32, HRESULT)).call(dwoptions)
+  def terminate(this : IInternetProtocolRoot*, dwoptions : UInt32) : HRESULT
+    @lpVtbl.value.terminate.call(this, dwoptions)
   end
-  def suspend : HRESULT
-    @lpVtbl.value.suspend.unsafe_as(Proc(HRESULT)).call
+  def suspend(this : IInternetProtocolRoot*) : HRESULT
+    @lpVtbl.value.suspend.call(this)
   end
-  def resume : HRESULT
-    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  def resume(this : IInternetProtocolRoot*) : HRESULT
+    @lpVtbl.value.resume.call(this)
   end
 end
 struct LibWin32::IInternetProtocol
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInternetProtocol*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInternetProtocol*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInternetProtocol*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def start(szurl : LibC::LPWSTR, poiprotsink : IInternetProtocolSink, poibindinfo : IInternetBindInfo, grfpi : UInt32, dwreserved : HANDLE_PTR) : HRESULT
-    @lpVtbl.value.start.unsafe_as(Proc(LibC::LPWSTR, IInternetProtocolSink, IInternetBindInfo, UInt32, HANDLE_PTR, HRESULT)).call(szurl, poiprotsink, poibindinfo, grfpi, dwreserved)
+  def start(this : IInternetProtocol*, szurl : LibC::LPWSTR, poiprotsink : IInternetProtocolSink, poibindinfo : IInternetBindInfo, grfpi : UInt32, dwreserved : HANDLE_PTR) : HRESULT
+    @lpVtbl.value.start.call(this, szurl, poiprotsink, poibindinfo, grfpi, dwreserved)
   end
-  def continue(pprotocoldata : PROTOCOLDATA*) : HRESULT
-    @lpVtbl.value.continue.unsafe_as(Proc(PROTOCOLDATA*, HRESULT)).call(pprotocoldata)
+  def continue(this : IInternetProtocol*, pprotocoldata : PROTOCOLDATA*) : HRESULT
+    @lpVtbl.value.continue.call(this, pprotocoldata)
   end
-  def abort(hrreason : HRESULT, dwoptions : UInt32) : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(HRESULT, UInt32, HRESULT)).call(hrreason, dwoptions)
+  def abort(this : IInternetProtocol*, hrreason : HRESULT, dwoptions : UInt32) : HRESULT
+    @lpVtbl.value.abort.call(this, hrreason, dwoptions)
   end
-  def terminate(dwoptions : UInt32) : HRESULT
-    @lpVtbl.value.terminate.unsafe_as(Proc(UInt32, HRESULT)).call(dwoptions)
+  def terminate(this : IInternetProtocol*, dwoptions : UInt32) : HRESULT
+    @lpVtbl.value.terminate.call(this, dwoptions)
   end
-  def suspend : HRESULT
-    @lpVtbl.value.suspend.unsafe_as(Proc(HRESULT)).call
+  def suspend(this : IInternetProtocol*) : HRESULT
+    @lpVtbl.value.suspend.call(this)
   end
-  def resume : HRESULT
-    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  def resume(this : IInternetProtocol*) : HRESULT
+    @lpVtbl.value.resume.call(this)
   end
-  def read(pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
-    @lpVtbl.value.read.unsafe_as(Proc(Void*, UInt32, UInt32*, HRESULT)).call(pv, cb, pcbread)
+  def read(this : IInternetProtocol*, pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
+    @lpVtbl.value.read.call(this, pv, cb, pcbread)
   end
-  def seek(dlibmove : LARGE_INTEGER, dworigin : UInt32, plibnewposition : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.seek.unsafe_as(Proc(LARGE_INTEGER, UInt32, ULARGE_INTEGER*, HRESULT)).call(dlibmove, dworigin, plibnewposition)
+  def seek(this : IInternetProtocol*, dlibmove : LARGE_INTEGER, dworigin : UInt32, plibnewposition : ULARGE_INTEGER*) : HRESULT
+    @lpVtbl.value.seek.call(this, dlibmove, dworigin, plibnewposition)
   end
-  def lock_request(dwoptions : UInt32) : HRESULT
-    @lpVtbl.value.lock_request.unsafe_as(Proc(UInt32, HRESULT)).call(dwoptions)
+  def lock_request(this : IInternetProtocol*, dwoptions : UInt32) : HRESULT
+    @lpVtbl.value.lock_request.call(this, dwoptions)
   end
-  def unlock_request : HRESULT
-    @lpVtbl.value.unlock_request.unsafe_as(Proc(HRESULT)).call
+  def unlock_request(this : IInternetProtocol*) : HRESULT
+    @lpVtbl.value.unlock_request.call(this)
   end
 end
 struct LibWin32::IInternetProtocolEx
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInternetProtocolEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInternetProtocolEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInternetProtocolEx*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def start(szurl : LibC::LPWSTR, poiprotsink : IInternetProtocolSink, poibindinfo : IInternetBindInfo, grfpi : UInt32, dwreserved : HANDLE_PTR) : HRESULT
-    @lpVtbl.value.start.unsafe_as(Proc(LibC::LPWSTR, IInternetProtocolSink, IInternetBindInfo, UInt32, HANDLE_PTR, HRESULT)).call(szurl, poiprotsink, poibindinfo, grfpi, dwreserved)
+  def start(this : IInternetProtocolEx*, szurl : LibC::LPWSTR, poiprotsink : IInternetProtocolSink, poibindinfo : IInternetBindInfo, grfpi : UInt32, dwreserved : HANDLE_PTR) : HRESULT
+    @lpVtbl.value.start.call(this, szurl, poiprotsink, poibindinfo, grfpi, dwreserved)
   end
-  def continue(pprotocoldata : PROTOCOLDATA*) : HRESULT
-    @lpVtbl.value.continue.unsafe_as(Proc(PROTOCOLDATA*, HRESULT)).call(pprotocoldata)
+  def continue(this : IInternetProtocolEx*, pprotocoldata : PROTOCOLDATA*) : HRESULT
+    @lpVtbl.value.continue.call(this, pprotocoldata)
   end
-  def abort(hrreason : HRESULT, dwoptions : UInt32) : HRESULT
-    @lpVtbl.value.abort.unsafe_as(Proc(HRESULT, UInt32, HRESULT)).call(hrreason, dwoptions)
+  def abort(this : IInternetProtocolEx*, hrreason : HRESULT, dwoptions : UInt32) : HRESULT
+    @lpVtbl.value.abort.call(this, hrreason, dwoptions)
   end
-  def terminate(dwoptions : UInt32) : HRESULT
-    @lpVtbl.value.terminate.unsafe_as(Proc(UInt32, HRESULT)).call(dwoptions)
+  def terminate(this : IInternetProtocolEx*, dwoptions : UInt32) : HRESULT
+    @lpVtbl.value.terminate.call(this, dwoptions)
   end
-  def suspend : HRESULT
-    @lpVtbl.value.suspend.unsafe_as(Proc(HRESULT)).call
+  def suspend(this : IInternetProtocolEx*) : HRESULT
+    @lpVtbl.value.suspend.call(this)
   end
-  def resume : HRESULT
-    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  def resume(this : IInternetProtocolEx*) : HRESULT
+    @lpVtbl.value.resume.call(this)
   end
-  def read(pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
-    @lpVtbl.value.read.unsafe_as(Proc(Void*, UInt32, UInt32*, HRESULT)).call(pv, cb, pcbread)
+  def read(this : IInternetProtocolEx*, pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
+    @lpVtbl.value.read.call(this, pv, cb, pcbread)
   end
-  def seek(dlibmove : LARGE_INTEGER, dworigin : UInt32, plibnewposition : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.seek.unsafe_as(Proc(LARGE_INTEGER, UInt32, ULARGE_INTEGER*, HRESULT)).call(dlibmove, dworigin, plibnewposition)
+  def seek(this : IInternetProtocolEx*, dlibmove : LARGE_INTEGER, dworigin : UInt32, plibnewposition : ULARGE_INTEGER*) : HRESULT
+    @lpVtbl.value.seek.call(this, dlibmove, dworigin, plibnewposition)
   end
-  def lock_request(dwoptions : UInt32) : HRESULT
-    @lpVtbl.value.lock_request.unsafe_as(Proc(UInt32, HRESULT)).call(dwoptions)
+  def lock_request(this : IInternetProtocolEx*, dwoptions : UInt32) : HRESULT
+    @lpVtbl.value.lock_request.call(this, dwoptions)
   end
-  def unlock_request : HRESULT
-    @lpVtbl.value.unlock_request.unsafe_as(Proc(HRESULT)).call
+  def unlock_request(this : IInternetProtocolEx*) : HRESULT
+    @lpVtbl.value.unlock_request.call(this)
   end
-  def start_ex(puri : IUri, poiprotsink : IInternetProtocolSink, poibindinfo : IInternetBindInfo, grfpi : UInt32, dwreserved : HANDLE_PTR) : HRESULT
-    @lpVtbl.value.start_ex.unsafe_as(Proc(IUri, IInternetProtocolSink, IInternetBindInfo, UInt32, HANDLE_PTR, HRESULT)).call(puri, poiprotsink, poibindinfo, grfpi, dwreserved)
+  def start_ex(this : IInternetProtocolEx*, puri : IUri, poiprotsink : IInternetProtocolSink, poibindinfo : IInternetBindInfo, grfpi : UInt32, dwreserved : HANDLE_PTR) : HRESULT
+    @lpVtbl.value.start_ex.call(this, puri, poiprotsink, poibindinfo, grfpi, dwreserved)
   end
 end
 struct LibWin32::IInternetProtocolSink
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInternetProtocolSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInternetProtocolSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInternetProtocolSink*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def switch(pprotocoldata : PROTOCOLDATA*) : HRESULT
-    @lpVtbl.value.switch.unsafe_as(Proc(PROTOCOLDATA*, HRESULT)).call(pprotocoldata)
+  def switch(this : IInternetProtocolSink*, pprotocoldata : PROTOCOLDATA*) : HRESULT
+    @lpVtbl.value.switch.call(this, pprotocoldata)
   end
-  def report_progress(ulstatuscode : UInt32, szstatustext : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.report_progress.unsafe_as(Proc(UInt32, LibC::LPWSTR, HRESULT)).call(ulstatuscode, szstatustext)
+  def report_progress(this : IInternetProtocolSink*, ulstatuscode : UInt32, szstatustext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.report_progress.call(this, ulstatuscode, szstatustext)
   end
-  def report_data(grfbscf : UInt32, ulprogress : UInt32, ulprogressmax : UInt32) : HRESULT
-    @lpVtbl.value.report_data.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(grfbscf, ulprogress, ulprogressmax)
+  def report_data(this : IInternetProtocolSink*, grfbscf : UInt32, ulprogress : UInt32, ulprogressmax : UInt32) : HRESULT
+    @lpVtbl.value.report_data.call(this, grfbscf, ulprogress, ulprogressmax)
   end
-  def report_result(hrresult : HRESULT, dwerror : UInt32, szresult : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.report_result.unsafe_as(Proc(HRESULT, UInt32, LibC::LPWSTR, HRESULT)).call(hrresult, dwerror, szresult)
+  def report_result(this : IInternetProtocolSink*, hrresult : HRESULT, dwerror : UInt32, szresult : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.report_result.call(this, hrresult, dwerror, szresult)
   end
 end
 struct LibWin32::IInternetProtocolSinkStackable
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInternetProtocolSinkStackable*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInternetProtocolSinkStackable*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInternetProtocolSinkStackable*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def switch_sink(poiprotsink : IInternetProtocolSink) : HRESULT
-    @lpVtbl.value.switch_sink.unsafe_as(Proc(IInternetProtocolSink, HRESULT)).call(poiprotsink)
+  def switch_sink(this : IInternetProtocolSinkStackable*, poiprotsink : IInternetProtocolSink) : HRESULT
+    @lpVtbl.value.switch_sink.call(this, poiprotsink)
   end
-  def commit_switch : HRESULT
-    @lpVtbl.value.commit_switch.unsafe_as(Proc(HRESULT)).call
+  def commit_switch(this : IInternetProtocolSinkStackable*) : HRESULT
+    @lpVtbl.value.commit_switch.call(this)
   end
-  def rollback_switch : HRESULT
-    @lpVtbl.value.rollback_switch.unsafe_as(Proc(HRESULT)).call
+  def rollback_switch(this : IInternetProtocolSinkStackable*) : HRESULT
+    @lpVtbl.value.rollback_switch.call(this)
   end
 end
 struct LibWin32::IInternetSession
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInternetSession*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInternetSession*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInternetSession*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def register_name_space(pcf : IClassFactory, rclsid : Guid*, pwzprotocol : LibC::LPWSTR, cpatterns : UInt32, ppwzpatterns : LibC::LPWSTR*, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.register_name_space.unsafe_as(Proc(IClassFactory, Guid*, LibC::LPWSTR, UInt32, LibC::LPWSTR*, UInt32, HRESULT)).call(pcf, rclsid, pwzprotocol, cpatterns, ppwzpatterns, dwreserved)
+  def register_name_space(this : IInternetSession*, pcf : IClassFactory, rclsid : Guid*, pwzprotocol : LibC::LPWSTR, cpatterns : UInt32, ppwzpatterns : LibC::LPWSTR*, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.register_name_space.call(this, pcf, rclsid, pwzprotocol, cpatterns, ppwzpatterns, dwreserved)
   end
-  def unregister_name_space(pcf : IClassFactory, pszprotocol : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.unregister_name_space.unsafe_as(Proc(IClassFactory, LibC::LPWSTR, HRESULT)).call(pcf, pszprotocol)
+  def unregister_name_space(this : IInternetSession*, pcf : IClassFactory, pszprotocol : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.unregister_name_space.call(this, pcf, pszprotocol)
   end
-  def register_mime_filter(pcf : IClassFactory, rclsid : Guid*, pwztype : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.register_mime_filter.unsafe_as(Proc(IClassFactory, Guid*, LibC::LPWSTR, HRESULT)).call(pcf, rclsid, pwztype)
+  def register_mime_filter(this : IInternetSession*, pcf : IClassFactory, rclsid : Guid*, pwztype : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.register_mime_filter.call(this, pcf, rclsid, pwztype)
   end
-  def unregister_mime_filter(pcf : IClassFactory, pwztype : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.unregister_mime_filter.unsafe_as(Proc(IClassFactory, LibC::LPWSTR, HRESULT)).call(pcf, pwztype)
+  def unregister_mime_filter(this : IInternetSession*, pcf : IClassFactory, pwztype : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.unregister_mime_filter.call(this, pcf, pwztype)
   end
-  def create_binding(pbc : IBindCtx, szurl : LibC::LPWSTR, punkouter : IUnknown, ppunk : IUnknown*, ppoinetprot : IInternetProtocol*, dwoption : UInt32) : HRESULT
-    @lpVtbl.value.create_binding.unsafe_as(Proc(IBindCtx, LibC::LPWSTR, IUnknown, IUnknown*, IInternetProtocol*, UInt32, HRESULT)).call(pbc, szurl, punkouter, ppunk, ppoinetprot, dwoption)
+  def create_binding(this : IInternetSession*, pbc : IBindCtx, szurl : LibC::LPWSTR, punkouter : IUnknown, ppunk : IUnknown*, ppoinetprot : IInternetProtocol*, dwoption : UInt32) : HRESULT
+    @lpVtbl.value.create_binding.call(this, pbc, szurl, punkouter, ppunk, ppoinetprot, dwoption)
   end
-  def set_session_option(dwoption : UInt32, pbuffer : Void*, dwbufferlength : UInt32, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.set_session_option.unsafe_as(Proc(UInt32, Void*, UInt32, UInt32, HRESULT)).call(dwoption, pbuffer, dwbufferlength, dwreserved)
+  def set_session_option(this : IInternetSession*, dwoption : UInt32, pbuffer : Void*, dwbufferlength : UInt32, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.set_session_option.call(this, dwoption, pbuffer, dwbufferlength, dwreserved)
   end
-  def get_session_option(dwoption : UInt32, pbuffer : Void*, pdwbufferlength : UInt32*, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.get_session_option.unsafe_as(Proc(UInt32, Void*, UInt32*, UInt32, HRESULT)).call(dwoption, pbuffer, pdwbufferlength, dwreserved)
+  def get_session_option(this : IInternetSession*, dwoption : UInt32, pbuffer : Void*, pdwbufferlength : UInt32*, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.get_session_option.call(this, dwoption, pbuffer, pdwbufferlength, dwreserved)
   end
 end
 struct LibWin32::IInternetThreadSwitch
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInternetThreadSwitch*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInternetThreadSwitch*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInternetThreadSwitch*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def prepare : HRESULT
-    @lpVtbl.value.prepare.unsafe_as(Proc(HRESULT)).call
+  def prepare(this : IInternetThreadSwitch*) : HRESULT
+    @lpVtbl.value.prepare.call(this)
   end
-  def continue : HRESULT
-    @lpVtbl.value.continue.unsafe_as(Proc(HRESULT)).call
+  def continue(this : IInternetThreadSwitch*) : HRESULT
+    @lpVtbl.value.continue.call(this)
   end
 end
 struct LibWin32::IInternetPriority
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInternetPriority*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInternetPriority*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInternetPriority*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_priority(npriority : Int32) : HRESULT
-    @lpVtbl.value.set_priority.unsafe_as(Proc(Int32, HRESULT)).call(npriority)
+  def set_priority(this : IInternetPriority*, npriority : Int32) : HRESULT
+    @lpVtbl.value.set_priority.call(this, npriority)
   end
-  def get_priority(pnpriority : Int32*) : HRESULT
-    @lpVtbl.value.get_priority.unsafe_as(Proc(Int32*, HRESULT)).call(pnpriority)
+  def get_priority(this : IInternetPriority*, pnpriority : Int32*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, pnpriority)
   end
 end
 struct LibWin32::IInternetProtocolInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInternetProtocolInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInternetProtocolInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInternetProtocolInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def parse_url(pwzurl : LibC::LPWSTR, parseaction : PARSEACTION, dwparseflags : UInt32, pwzresult : LibC::LPWSTR, cchresult : UInt32, pcchresult : UInt32*, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.parse_url.unsafe_as(Proc(LibC::LPWSTR, PARSEACTION, UInt32, LibC::LPWSTR, UInt32, UInt32*, UInt32, HRESULT)).call(pwzurl, parseaction, dwparseflags, pwzresult, cchresult, pcchresult, dwreserved)
+  def parse_url(this : IInternetProtocolInfo*, pwzurl : LibC::LPWSTR, parseaction : PARSEACTION, dwparseflags : UInt32, pwzresult : LibC::LPWSTR, cchresult : UInt32, pcchresult : UInt32*, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.parse_url.call(this, pwzurl, parseaction, dwparseflags, pwzresult, cchresult, pcchresult, dwreserved)
   end
-  def combine_url(pwzbaseurl : LibC::LPWSTR, pwzrelativeurl : LibC::LPWSTR, dwcombineflags : UInt32, pwzresult : LibC::LPWSTR, cchresult : UInt32, pcchresult : UInt32*, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.combine_url.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, UInt32*, UInt32, HRESULT)).call(pwzbaseurl, pwzrelativeurl, dwcombineflags, pwzresult, cchresult, pcchresult, dwreserved)
+  def combine_url(this : IInternetProtocolInfo*, pwzbaseurl : LibC::LPWSTR, pwzrelativeurl : LibC::LPWSTR, dwcombineflags : UInt32, pwzresult : LibC::LPWSTR, cchresult : UInt32, pcchresult : UInt32*, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.combine_url.call(this, pwzbaseurl, pwzrelativeurl, dwcombineflags, pwzresult, cchresult, pcchresult, dwreserved)
   end
-  def compare_url(pwzurl1 : LibC::LPWSTR, pwzurl2 : LibC::LPWSTR, dwcompareflags : UInt32) : HRESULT
-    @lpVtbl.value.compare_url.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(pwzurl1, pwzurl2, dwcompareflags)
+  def compare_url(this : IInternetProtocolInfo*, pwzurl1 : LibC::LPWSTR, pwzurl2 : LibC::LPWSTR, dwcompareflags : UInt32) : HRESULT
+    @lpVtbl.value.compare_url.call(this, pwzurl1, pwzurl2, dwcompareflags)
   end
-  def query_info(pwzurl : LibC::LPWSTR, oueryoption : QUERYOPTION, dwqueryflags : UInt32, pbuffer : Void*, cbbuffer : UInt32, pcbbuf : UInt32*, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.query_info.unsafe_as(Proc(LibC::LPWSTR, QUERYOPTION, UInt32, Void*, UInt32, UInt32*, UInt32, HRESULT)).call(pwzurl, oueryoption, dwqueryflags, pbuffer, cbbuffer, pcbbuf, dwreserved)
+  def query_info(this : IInternetProtocolInfo*, pwzurl : LibC::LPWSTR, oueryoption : QUERYOPTION, dwqueryflags : UInt32, pbuffer : Void*, cbbuffer : UInt32, pcbbuf : UInt32*, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.query_info.call(this, pwzurl, oueryoption, dwqueryflags, pbuffer, cbbuffer, pcbbuf, dwreserved)
   end
 end
 struct LibWin32::IInternetSecurityMgrSite
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInternetSecurityMgrSite*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInternetSecurityMgrSite*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInternetSecurityMgrSite*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_window(phwnd : HANDLE*) : HRESULT
-    @lpVtbl.value.get_window.unsafe_as(Proc(HANDLE*, HRESULT)).call(phwnd)
+  def get_window(this : IInternetSecurityMgrSite*, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window.call(this, phwnd)
   end
-  def enable_modeless(fenable : LibC::BOOL) : HRESULT
-    @lpVtbl.value.enable_modeless.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fenable)
+  def enable_modeless(this : IInternetSecurityMgrSite*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_modeless.call(this, fenable)
   end
 end
 struct LibWin32::IInternetSecurityManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInternetSecurityManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInternetSecurityManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInternetSecurityManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_security_site(psite : IInternetSecurityMgrSite) : HRESULT
-    @lpVtbl.value.set_security_site.unsafe_as(Proc(IInternetSecurityMgrSite, HRESULT)).call(psite)
+  def set_security_site(this : IInternetSecurityManager*, psite : IInternetSecurityMgrSite) : HRESULT
+    @lpVtbl.value.set_security_site.call(this, psite)
   end
-  def get_security_site(ppsite : IInternetSecurityMgrSite*) : HRESULT
-    @lpVtbl.value.get_security_site.unsafe_as(Proc(IInternetSecurityMgrSite*, HRESULT)).call(ppsite)
+  def get_security_site(this : IInternetSecurityManager*, ppsite : IInternetSecurityMgrSite*) : HRESULT
+    @lpVtbl.value.get_security_site.call(this, ppsite)
   end
-  def map_url_to_zone(pwszurl : LibC::LPWSTR, pdwzone : UInt32*, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.map_url_to_zone.unsafe_as(Proc(LibC::LPWSTR, UInt32*, UInt32, HRESULT)).call(pwszurl, pdwzone, dwflags)
+  def map_url_to_zone(this : IInternetSecurityManager*, pwszurl : LibC::LPWSTR, pdwzone : UInt32*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.map_url_to_zone.call(this, pwszurl, pdwzone, dwflags)
   end
-  def get_security_id(pwszurl : LibC::LPWSTR, pbsecurityid : UInt8*, pcbsecurityid : UInt32*, dwreserved : LibC::UINT_PTR) : HRESULT
-    @lpVtbl.value.get_security_id.unsafe_as(Proc(LibC::LPWSTR, UInt8*, UInt32*, LibC::UINT_PTR, HRESULT)).call(pwszurl, pbsecurityid, pcbsecurityid, dwreserved)
+  def get_security_id(this : IInternetSecurityManager*, pwszurl : LibC::LPWSTR, pbsecurityid : UInt8*, pcbsecurityid : UInt32*, dwreserved : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.get_security_id.call(this, pwszurl, pbsecurityid, pcbsecurityid, dwreserved)
   end
-  def process_url_action(pwszurl : LibC::LPWSTR, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, pcontext : UInt8*, cbcontext : UInt32, dwflags : UInt32, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.process_url_action.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32, UInt32, HRESULT)).call(pwszurl, dwaction, ppolicy, cbpolicy, pcontext, cbcontext, dwflags, dwreserved)
+  def process_url_action(this : IInternetSecurityManager*, pwszurl : LibC::LPWSTR, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, pcontext : UInt8*, cbcontext : UInt32, dwflags : UInt32, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.process_url_action.call(this, pwszurl, dwaction, ppolicy, cbpolicy, pcontext, cbcontext, dwflags, dwreserved)
   end
-  def query_custom_policy(pwszurl : LibC::LPWSTR, guidkey : Guid*, pppolicy : UInt8**, pcbpolicy : UInt32*, pcontext : UInt8*, cbcontext : UInt32, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.query_custom_policy.unsafe_as(Proc(LibC::LPWSTR, Guid*, UInt8**, UInt32*, UInt8*, UInt32, UInt32, HRESULT)).call(pwszurl, guidkey, pppolicy, pcbpolicy, pcontext, cbcontext, dwreserved)
+  def query_custom_policy(this : IInternetSecurityManager*, pwszurl : LibC::LPWSTR, guidkey : Guid*, pppolicy : UInt8**, pcbpolicy : UInt32*, pcontext : UInt8*, cbcontext : UInt32, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.query_custom_policy.call(this, pwszurl, guidkey, pppolicy, pcbpolicy, pcontext, cbcontext, dwreserved)
   end
-  def set_zone_mapping(dwzone : UInt32, lpszpattern : LibC::LPWSTR, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.set_zone_mapping.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, HRESULT)).call(dwzone, lpszpattern, dwflags)
+  def set_zone_mapping(this : IInternetSecurityManager*, dwzone : UInt32, lpszpattern : LibC::LPWSTR, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_zone_mapping.call(this, dwzone, lpszpattern, dwflags)
   end
-  def get_zone_mappings(dwzone : UInt32, ppenumstring : IEnumString*, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.get_zone_mappings.unsafe_as(Proc(UInt32, IEnumString*, UInt32, HRESULT)).call(dwzone, ppenumstring, dwflags)
+  def get_zone_mappings(this : IInternetSecurityManager*, dwzone : UInt32, ppenumstring : IEnumString*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.get_zone_mappings.call(this, dwzone, ppenumstring, dwflags)
   end
 end
 struct LibWin32::IInternetSecurityManagerEx
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInternetSecurityManagerEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInternetSecurityManagerEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInternetSecurityManagerEx*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_security_site(psite : IInternetSecurityMgrSite) : HRESULT
-    @lpVtbl.value.set_security_site.unsafe_as(Proc(IInternetSecurityMgrSite, HRESULT)).call(psite)
+  def set_security_site(this : IInternetSecurityManagerEx*, psite : IInternetSecurityMgrSite) : HRESULT
+    @lpVtbl.value.set_security_site.call(this, psite)
   end
-  def get_security_site(ppsite : IInternetSecurityMgrSite*) : HRESULT
-    @lpVtbl.value.get_security_site.unsafe_as(Proc(IInternetSecurityMgrSite*, HRESULT)).call(ppsite)
+  def get_security_site(this : IInternetSecurityManagerEx*, ppsite : IInternetSecurityMgrSite*) : HRESULT
+    @lpVtbl.value.get_security_site.call(this, ppsite)
   end
-  def map_url_to_zone(pwszurl : LibC::LPWSTR, pdwzone : UInt32*, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.map_url_to_zone.unsafe_as(Proc(LibC::LPWSTR, UInt32*, UInt32, HRESULT)).call(pwszurl, pdwzone, dwflags)
+  def map_url_to_zone(this : IInternetSecurityManagerEx*, pwszurl : LibC::LPWSTR, pdwzone : UInt32*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.map_url_to_zone.call(this, pwszurl, pdwzone, dwflags)
   end
-  def get_security_id(pwszurl : LibC::LPWSTR, pbsecurityid : UInt8*, pcbsecurityid : UInt32*, dwreserved : LibC::UINT_PTR) : HRESULT
-    @lpVtbl.value.get_security_id.unsafe_as(Proc(LibC::LPWSTR, UInt8*, UInt32*, LibC::UINT_PTR, HRESULT)).call(pwszurl, pbsecurityid, pcbsecurityid, dwreserved)
+  def get_security_id(this : IInternetSecurityManagerEx*, pwszurl : LibC::LPWSTR, pbsecurityid : UInt8*, pcbsecurityid : UInt32*, dwreserved : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.get_security_id.call(this, pwszurl, pbsecurityid, pcbsecurityid, dwreserved)
   end
-  def process_url_action(pwszurl : LibC::LPWSTR, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, pcontext : UInt8*, cbcontext : UInt32, dwflags : UInt32, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.process_url_action.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32, UInt32, HRESULT)).call(pwszurl, dwaction, ppolicy, cbpolicy, pcontext, cbcontext, dwflags, dwreserved)
+  def process_url_action(this : IInternetSecurityManagerEx*, pwszurl : LibC::LPWSTR, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, pcontext : UInt8*, cbcontext : UInt32, dwflags : UInt32, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.process_url_action.call(this, pwszurl, dwaction, ppolicy, cbpolicy, pcontext, cbcontext, dwflags, dwreserved)
   end
-  def query_custom_policy(pwszurl : LibC::LPWSTR, guidkey : Guid*, pppolicy : UInt8**, pcbpolicy : UInt32*, pcontext : UInt8*, cbcontext : UInt32, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.query_custom_policy.unsafe_as(Proc(LibC::LPWSTR, Guid*, UInt8**, UInt32*, UInt8*, UInt32, UInt32, HRESULT)).call(pwszurl, guidkey, pppolicy, pcbpolicy, pcontext, cbcontext, dwreserved)
+  def query_custom_policy(this : IInternetSecurityManagerEx*, pwszurl : LibC::LPWSTR, guidkey : Guid*, pppolicy : UInt8**, pcbpolicy : UInt32*, pcontext : UInt8*, cbcontext : UInt32, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.query_custom_policy.call(this, pwszurl, guidkey, pppolicy, pcbpolicy, pcontext, cbcontext, dwreserved)
   end
-  def set_zone_mapping(dwzone : UInt32, lpszpattern : LibC::LPWSTR, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.set_zone_mapping.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, HRESULT)).call(dwzone, lpszpattern, dwflags)
+  def set_zone_mapping(this : IInternetSecurityManagerEx*, dwzone : UInt32, lpszpattern : LibC::LPWSTR, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_zone_mapping.call(this, dwzone, lpszpattern, dwflags)
   end
-  def get_zone_mappings(dwzone : UInt32, ppenumstring : IEnumString*, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.get_zone_mappings.unsafe_as(Proc(UInt32, IEnumString*, UInt32, HRESULT)).call(dwzone, ppenumstring, dwflags)
+  def get_zone_mappings(this : IInternetSecurityManagerEx*, dwzone : UInt32, ppenumstring : IEnumString*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.get_zone_mappings.call(this, dwzone, ppenumstring, dwflags)
   end
-  def process_url_action_ex(pwszurl : LibC::LPWSTR, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, pcontext : UInt8*, cbcontext : UInt32, dwflags : UInt32, dwreserved : UInt32, pdwoutflags : UInt32*) : HRESULT
-    @lpVtbl.value.process_url_action_ex.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32, UInt32, UInt32*, HRESULT)).call(pwszurl, dwaction, ppolicy, cbpolicy, pcontext, cbcontext, dwflags, dwreserved, pdwoutflags)
+  def process_url_action_ex(this : IInternetSecurityManagerEx*, pwszurl : LibC::LPWSTR, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, pcontext : UInt8*, cbcontext : UInt32, dwflags : UInt32, dwreserved : UInt32, pdwoutflags : UInt32*) : HRESULT
+    @lpVtbl.value.process_url_action_ex.call(this, pwszurl, dwaction, ppolicy, cbpolicy, pcontext, cbcontext, dwflags, dwreserved, pdwoutflags)
   end
 end
 struct LibWin32::IInternetSecurityManagerEx2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInternetSecurityManagerEx2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInternetSecurityManagerEx2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInternetSecurityManagerEx2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def set_security_site(psite : IInternetSecurityMgrSite) : HRESULT
-    @lpVtbl.value.set_security_site.unsafe_as(Proc(IInternetSecurityMgrSite, HRESULT)).call(psite)
+  def set_security_site(this : IInternetSecurityManagerEx2*, psite : IInternetSecurityMgrSite) : HRESULT
+    @lpVtbl.value.set_security_site.call(this, psite)
   end
-  def get_security_site(ppsite : IInternetSecurityMgrSite*) : HRESULT
-    @lpVtbl.value.get_security_site.unsafe_as(Proc(IInternetSecurityMgrSite*, HRESULT)).call(ppsite)
+  def get_security_site(this : IInternetSecurityManagerEx2*, ppsite : IInternetSecurityMgrSite*) : HRESULT
+    @lpVtbl.value.get_security_site.call(this, ppsite)
   end
-  def map_url_to_zone(pwszurl : LibC::LPWSTR, pdwzone : UInt32*, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.map_url_to_zone.unsafe_as(Proc(LibC::LPWSTR, UInt32*, UInt32, HRESULT)).call(pwszurl, pdwzone, dwflags)
+  def map_url_to_zone(this : IInternetSecurityManagerEx2*, pwszurl : LibC::LPWSTR, pdwzone : UInt32*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.map_url_to_zone.call(this, pwszurl, pdwzone, dwflags)
   end
-  def get_security_id(pwszurl : LibC::LPWSTR, pbsecurityid : UInt8*, pcbsecurityid : UInt32*, dwreserved : LibC::UINT_PTR) : HRESULT
-    @lpVtbl.value.get_security_id.unsafe_as(Proc(LibC::LPWSTR, UInt8*, UInt32*, LibC::UINT_PTR, HRESULT)).call(pwszurl, pbsecurityid, pcbsecurityid, dwreserved)
+  def get_security_id(this : IInternetSecurityManagerEx2*, pwszurl : LibC::LPWSTR, pbsecurityid : UInt8*, pcbsecurityid : UInt32*, dwreserved : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.get_security_id.call(this, pwszurl, pbsecurityid, pcbsecurityid, dwreserved)
   end
-  def process_url_action(pwszurl : LibC::LPWSTR, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, pcontext : UInt8*, cbcontext : UInt32, dwflags : UInt32, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.process_url_action.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32, UInt32, HRESULT)).call(pwszurl, dwaction, ppolicy, cbpolicy, pcontext, cbcontext, dwflags, dwreserved)
+  def process_url_action(this : IInternetSecurityManagerEx2*, pwszurl : LibC::LPWSTR, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, pcontext : UInt8*, cbcontext : UInt32, dwflags : UInt32, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.process_url_action.call(this, pwszurl, dwaction, ppolicy, cbpolicy, pcontext, cbcontext, dwflags, dwreserved)
   end
-  def query_custom_policy(pwszurl : LibC::LPWSTR, guidkey : Guid*, pppolicy : UInt8**, pcbpolicy : UInt32*, pcontext : UInt8*, cbcontext : UInt32, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.query_custom_policy.unsafe_as(Proc(LibC::LPWSTR, Guid*, UInt8**, UInt32*, UInt8*, UInt32, UInt32, HRESULT)).call(pwszurl, guidkey, pppolicy, pcbpolicy, pcontext, cbcontext, dwreserved)
+  def query_custom_policy(this : IInternetSecurityManagerEx2*, pwszurl : LibC::LPWSTR, guidkey : Guid*, pppolicy : UInt8**, pcbpolicy : UInt32*, pcontext : UInt8*, cbcontext : UInt32, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.query_custom_policy.call(this, pwszurl, guidkey, pppolicy, pcbpolicy, pcontext, cbcontext, dwreserved)
   end
-  def set_zone_mapping(dwzone : UInt32, lpszpattern : LibC::LPWSTR, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.set_zone_mapping.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, HRESULT)).call(dwzone, lpszpattern, dwflags)
+  def set_zone_mapping(this : IInternetSecurityManagerEx2*, dwzone : UInt32, lpszpattern : LibC::LPWSTR, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_zone_mapping.call(this, dwzone, lpszpattern, dwflags)
   end
-  def get_zone_mappings(dwzone : UInt32, ppenumstring : IEnumString*, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.get_zone_mappings.unsafe_as(Proc(UInt32, IEnumString*, UInt32, HRESULT)).call(dwzone, ppenumstring, dwflags)
+  def get_zone_mappings(this : IInternetSecurityManagerEx2*, dwzone : UInt32, ppenumstring : IEnumString*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.get_zone_mappings.call(this, dwzone, ppenumstring, dwflags)
   end
-  def process_url_action_ex(pwszurl : LibC::LPWSTR, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, pcontext : UInt8*, cbcontext : UInt32, dwflags : UInt32, dwreserved : UInt32, pdwoutflags : UInt32*) : HRESULT
-    @lpVtbl.value.process_url_action_ex.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32, UInt32, UInt32*, HRESULT)).call(pwszurl, dwaction, ppolicy, cbpolicy, pcontext, cbcontext, dwflags, dwreserved, pdwoutflags)
+  def process_url_action_ex(this : IInternetSecurityManagerEx2*, pwszurl : LibC::LPWSTR, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, pcontext : UInt8*, cbcontext : UInt32, dwflags : UInt32, dwreserved : UInt32, pdwoutflags : UInt32*) : HRESULT
+    @lpVtbl.value.process_url_action_ex.call(this, pwszurl, dwaction, ppolicy, cbpolicy, pcontext, cbcontext, dwflags, dwreserved, pdwoutflags)
   end
-  def map_url_to_zone_ex2(puri : IUri, pdwzone : UInt32*, dwflags : UInt32, ppwszmappedurl : LibC::LPWSTR*, pdwoutflags : UInt32*) : HRESULT
-    @lpVtbl.value.map_url_to_zone_ex2.unsafe_as(Proc(IUri, UInt32*, UInt32, LibC::LPWSTR*, UInt32*, HRESULT)).call(puri, pdwzone, dwflags, ppwszmappedurl, pdwoutflags)
+  def map_url_to_zone_ex2(this : IInternetSecurityManagerEx2*, puri : IUri, pdwzone : UInt32*, dwflags : UInt32, ppwszmappedurl : LibC::LPWSTR*, pdwoutflags : UInt32*) : HRESULT
+    @lpVtbl.value.map_url_to_zone_ex2.call(this, puri, pdwzone, dwflags, ppwszmappedurl, pdwoutflags)
   end
-  def process_url_action_ex2(puri : IUri, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, pcontext : UInt8*, cbcontext : UInt32, dwflags : UInt32, dwreserved : LibC::UINT_PTR, pdwoutflags : UInt32*) : HRESULT
-    @lpVtbl.value.process_url_action_ex2.unsafe_as(Proc(IUri, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32, LibC::UINT_PTR, UInt32*, HRESULT)).call(puri, dwaction, ppolicy, cbpolicy, pcontext, cbcontext, dwflags, dwreserved, pdwoutflags)
+  def process_url_action_ex2(this : IInternetSecurityManagerEx2*, puri : IUri, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, pcontext : UInt8*, cbcontext : UInt32, dwflags : UInt32, dwreserved : LibC::UINT_PTR, pdwoutflags : UInt32*) : HRESULT
+    @lpVtbl.value.process_url_action_ex2.call(this, puri, dwaction, ppolicy, cbpolicy, pcontext, cbcontext, dwflags, dwreserved, pdwoutflags)
   end
-  def get_security_id_ex2(puri : IUri, pbsecurityid : UInt8*, pcbsecurityid : UInt32*, dwreserved : LibC::UINT_PTR) : HRESULT
-    @lpVtbl.value.get_security_id_ex2.unsafe_as(Proc(IUri, UInt8*, UInt32*, LibC::UINT_PTR, HRESULT)).call(puri, pbsecurityid, pcbsecurityid, dwreserved)
+  def get_security_id_ex2(this : IInternetSecurityManagerEx2*, puri : IUri, pbsecurityid : UInt8*, pcbsecurityid : UInt32*, dwreserved : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.get_security_id_ex2.call(this, puri, pbsecurityid, pcbsecurityid, dwreserved)
   end
-  def query_custom_policy_ex2(puri : IUri, guidkey : Guid*, pppolicy : UInt8**, pcbpolicy : UInt32*, pcontext : UInt8*, cbcontext : UInt32, dwreserved : LibC::UINT_PTR) : HRESULT
-    @lpVtbl.value.query_custom_policy_ex2.unsafe_as(Proc(IUri, Guid*, UInt8**, UInt32*, UInt8*, UInt32, LibC::UINT_PTR, HRESULT)).call(puri, guidkey, pppolicy, pcbpolicy, pcontext, cbcontext, dwreserved)
+  def query_custom_policy_ex2(this : IInternetSecurityManagerEx2*, puri : IUri, guidkey : Guid*, pppolicy : UInt8**, pcbpolicy : UInt32*, pcontext : UInt8*, cbcontext : UInt32, dwreserved : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.query_custom_policy_ex2.call(this, puri, guidkey, pppolicy, pcbpolicy, pcontext, cbcontext, dwreserved)
   end
 end
 struct LibWin32::IZoneIdentifier
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IZoneIdentifier*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IZoneIdentifier*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IZoneIdentifier*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_id(pdwzone : UInt32*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwzone)
+  def get_id(this : IZoneIdentifier*, pdwzone : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pdwzone)
   end
-  def set_id(dwzone : UInt32) : HRESULT
-    @lpVtbl.value.set_id.unsafe_as(Proc(UInt32, HRESULT)).call(dwzone)
+  def set_id(this : IZoneIdentifier*, dwzone : UInt32) : HRESULT
+    @lpVtbl.value.set_id.call(this, dwzone)
   end
-  def remove : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(HRESULT)).call
+  def remove(this : IZoneIdentifier*) : HRESULT
+    @lpVtbl.value.remove.call(this)
   end
 end
 struct LibWin32::IZoneIdentifier2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IZoneIdentifier2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IZoneIdentifier2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IZoneIdentifier2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_id(pdwzone : UInt32*) : HRESULT
-    @lpVtbl.value.get_id.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwzone)
+  def get_id(this : IZoneIdentifier2*, pdwzone : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pdwzone)
   end
-  def set_id(dwzone : UInt32) : HRESULT
-    @lpVtbl.value.set_id.unsafe_as(Proc(UInt32, HRESULT)).call(dwzone)
+  def set_id(this : IZoneIdentifier2*, dwzone : UInt32) : HRESULT
+    @lpVtbl.value.set_id.call(this, dwzone)
   end
-  def remove : HRESULT
-    @lpVtbl.value.remove.unsafe_as(Proc(HRESULT)).call
+  def remove(this : IZoneIdentifier2*) : HRESULT
+    @lpVtbl.value.remove.call(this)
   end
-  def get_last_writer_package_family_name(packagefamilyname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_last_writer_package_family_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(packagefamilyname)
+  def get_last_writer_package_family_name(this : IZoneIdentifier2*, packagefamilyname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_last_writer_package_family_name.call(this, packagefamilyname)
   end
-  def set_last_writer_package_family_name(packagefamilyname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_last_writer_package_family_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(packagefamilyname)
+  def set_last_writer_package_family_name(this : IZoneIdentifier2*, packagefamilyname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_last_writer_package_family_name.call(this, packagefamilyname)
   end
-  def remove_last_writer_package_family_name : HRESULT
-    @lpVtbl.value.remove_last_writer_package_family_name.unsafe_as(Proc(HRESULT)).call
+  def remove_last_writer_package_family_name(this : IZoneIdentifier2*) : HRESULT
+    @lpVtbl.value.remove_last_writer_package_family_name.call(this)
   end
-  def get_app_zone_id(zone : UInt32*) : HRESULT
-    @lpVtbl.value.get_app_zone_id.unsafe_as(Proc(UInt32*, HRESULT)).call(zone)
+  def get_app_zone_id(this : IZoneIdentifier2*, zone : UInt32*) : HRESULT
+    @lpVtbl.value.get_app_zone_id.call(this, zone)
   end
-  def set_app_zone_id(zone : UInt32) : HRESULT
-    @lpVtbl.value.set_app_zone_id.unsafe_as(Proc(UInt32, HRESULT)).call(zone)
+  def set_app_zone_id(this : IZoneIdentifier2*, zone : UInt32) : HRESULT
+    @lpVtbl.value.set_app_zone_id.call(this, zone)
   end
-  def remove_app_zone_id : HRESULT
-    @lpVtbl.value.remove_app_zone_id.unsafe_as(Proc(HRESULT)).call
+  def remove_app_zone_id(this : IZoneIdentifier2*) : HRESULT
+    @lpVtbl.value.remove_app_zone_id.call(this)
   end
 end
 struct LibWin32::IInternetHostSecurityManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInternetHostSecurityManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInternetHostSecurityManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInternetHostSecurityManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_security_id(pbsecurityid : UInt8*, pcbsecurityid : UInt32*, dwreserved : LibC::UINT_PTR) : HRESULT
-    @lpVtbl.value.get_security_id.unsafe_as(Proc(UInt8*, UInt32*, LibC::UINT_PTR, HRESULT)).call(pbsecurityid, pcbsecurityid, dwreserved)
+  def get_security_id(this : IInternetHostSecurityManager*, pbsecurityid : UInt8*, pcbsecurityid : UInt32*, dwreserved : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.get_security_id.call(this, pbsecurityid, pcbsecurityid, dwreserved)
   end
-  def process_url_action(dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, pcontext : UInt8*, cbcontext : UInt32, dwflags : UInt32, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.process_url_action.unsafe_as(Proc(UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32, UInt32, HRESULT)).call(dwaction, ppolicy, cbpolicy, pcontext, cbcontext, dwflags, dwreserved)
+  def process_url_action(this : IInternetHostSecurityManager*, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, pcontext : UInt8*, cbcontext : UInt32, dwflags : UInt32, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.process_url_action.call(this, dwaction, ppolicy, cbpolicy, pcontext, cbcontext, dwflags, dwreserved)
   end
-  def query_custom_policy(guidkey : Guid*, pppolicy : UInt8**, pcbpolicy : UInt32*, pcontext : UInt8*, cbcontext : UInt32, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.query_custom_policy.unsafe_as(Proc(Guid*, UInt8**, UInt32*, UInt8*, UInt32, UInt32, HRESULT)).call(guidkey, pppolicy, pcbpolicy, pcontext, cbcontext, dwreserved)
+  def query_custom_policy(this : IInternetHostSecurityManager*, guidkey : Guid*, pppolicy : UInt8**, pcbpolicy : UInt32*, pcontext : UInt8*, cbcontext : UInt32, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.query_custom_policy.call(this, guidkey, pppolicy, pcbpolicy, pcontext, cbcontext, dwreserved)
   end
 end
 struct LibWin32::IInternetZoneManager
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInternetZoneManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInternetZoneManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInternetZoneManager*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_zone_attributes(dwzone : UInt32, pzoneattributes : ZONEATTRIBUTES*) : HRESULT
-    @lpVtbl.value.get_zone_attributes.unsafe_as(Proc(UInt32, ZONEATTRIBUTES*, HRESULT)).call(dwzone, pzoneattributes)
+  def get_zone_attributes(this : IInternetZoneManager*, dwzone : UInt32, pzoneattributes : ZONEATTRIBUTES*) : HRESULT
+    @lpVtbl.value.get_zone_attributes.call(this, dwzone, pzoneattributes)
   end
-  def set_zone_attributes(dwzone : UInt32, pzoneattributes : ZONEATTRIBUTES*) : HRESULT
-    @lpVtbl.value.set_zone_attributes.unsafe_as(Proc(UInt32, ZONEATTRIBUTES*, HRESULT)).call(dwzone, pzoneattributes)
+  def set_zone_attributes(this : IInternetZoneManager*, dwzone : UInt32, pzoneattributes : ZONEATTRIBUTES*) : HRESULT
+    @lpVtbl.value.set_zone_attributes.call(this, dwzone, pzoneattributes)
   end
-  def get_zone_custom_policy(dwzone : UInt32, guidkey : Guid*, pppolicy : UInt8**, pcbpolicy : UInt32*, urlzonereg : URLZONEREG) : HRESULT
-    @lpVtbl.value.get_zone_custom_policy.unsafe_as(Proc(UInt32, Guid*, UInt8**, UInt32*, URLZONEREG, HRESULT)).call(dwzone, guidkey, pppolicy, pcbpolicy, urlzonereg)
+  def get_zone_custom_policy(this : IInternetZoneManager*, dwzone : UInt32, guidkey : Guid*, pppolicy : UInt8**, pcbpolicy : UInt32*, urlzonereg : URLZONEREG) : HRESULT
+    @lpVtbl.value.get_zone_custom_policy.call(this, dwzone, guidkey, pppolicy, pcbpolicy, urlzonereg)
   end
-  def set_zone_custom_policy(dwzone : UInt32, guidkey : Guid*, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG) : HRESULT
-    @lpVtbl.value.set_zone_custom_policy.unsafe_as(Proc(UInt32, Guid*, UInt8*, UInt32, URLZONEREG, HRESULT)).call(dwzone, guidkey, ppolicy, cbpolicy, urlzonereg)
+  def set_zone_custom_policy(this : IInternetZoneManager*, dwzone : UInt32, guidkey : Guid*, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG) : HRESULT
+    @lpVtbl.value.set_zone_custom_policy.call(this, dwzone, guidkey, ppolicy, cbpolicy, urlzonereg)
   end
-  def get_zone_action_policy(dwzone : UInt32, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG) : HRESULT
-    @lpVtbl.value.get_zone_action_policy.unsafe_as(Proc(UInt32, UInt32, UInt8*, UInt32, URLZONEREG, HRESULT)).call(dwzone, dwaction, ppolicy, cbpolicy, urlzonereg)
+  def get_zone_action_policy(this : IInternetZoneManager*, dwzone : UInt32, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG) : HRESULT
+    @lpVtbl.value.get_zone_action_policy.call(this, dwzone, dwaction, ppolicy, cbpolicy, urlzonereg)
   end
-  def set_zone_action_policy(dwzone : UInt32, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG) : HRESULT
-    @lpVtbl.value.set_zone_action_policy.unsafe_as(Proc(UInt32, UInt32, UInt8*, UInt32, URLZONEREG, HRESULT)).call(dwzone, dwaction, ppolicy, cbpolicy, urlzonereg)
+  def set_zone_action_policy(this : IInternetZoneManager*, dwzone : UInt32, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG) : HRESULT
+    @lpVtbl.value.set_zone_action_policy.call(this, dwzone, dwaction, ppolicy, cbpolicy, urlzonereg)
   end
-  def prompt_action(dwaction : UInt32, hwndparent : LibC::HANDLE, pwszurl : LibC::LPWSTR, pwsztext : LibC::LPWSTR, dwpromptflags : UInt32) : HRESULT
-    @lpVtbl.value.prompt_action.unsafe_as(Proc(UInt32, LibC::HANDLE, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(dwaction, hwndparent, pwszurl, pwsztext, dwpromptflags)
+  def prompt_action(this : IInternetZoneManager*, dwaction : UInt32, hwndparent : LibC::HANDLE, pwszurl : LibC::LPWSTR, pwsztext : LibC::LPWSTR, dwpromptflags : UInt32) : HRESULT
+    @lpVtbl.value.prompt_action.call(this, dwaction, hwndparent, pwszurl, pwsztext, dwpromptflags)
   end
-  def log_action(dwaction : UInt32, pwszurl : LibC::LPWSTR, pwsztext : LibC::LPWSTR, dwlogflags : UInt32) : HRESULT
-    @lpVtbl.value.log_action.unsafe_as(Proc(UInt32, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(dwaction, pwszurl, pwsztext, dwlogflags)
+  def log_action(this : IInternetZoneManager*, dwaction : UInt32, pwszurl : LibC::LPWSTR, pwsztext : LibC::LPWSTR, dwlogflags : UInt32) : HRESULT
+    @lpVtbl.value.log_action.call(this, dwaction, pwszurl, pwsztext, dwlogflags)
   end
-  def create_zone_enumerator(pdwenum : UInt32*, pdwcount : UInt32*, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.create_zone_enumerator.unsafe_as(Proc(UInt32*, UInt32*, UInt32, HRESULT)).call(pdwenum, pdwcount, dwflags)
+  def create_zone_enumerator(this : IInternetZoneManager*, pdwenum : UInt32*, pdwcount : UInt32*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.create_zone_enumerator.call(this, pdwenum, pdwcount, dwflags)
   end
-  def get_zone_at(dwenum : UInt32, dwindex : UInt32, pdwzone : UInt32*) : HRESULT
-    @lpVtbl.value.get_zone_at.unsafe_as(Proc(UInt32, UInt32, UInt32*, HRESULT)).call(dwenum, dwindex, pdwzone)
+  def get_zone_at(this : IInternetZoneManager*, dwenum : UInt32, dwindex : UInt32, pdwzone : UInt32*) : HRESULT
+    @lpVtbl.value.get_zone_at.call(this, dwenum, dwindex, pdwzone)
   end
-  def destroy_zone_enumerator(dwenum : UInt32) : HRESULT
-    @lpVtbl.value.destroy_zone_enumerator.unsafe_as(Proc(UInt32, HRESULT)).call(dwenum)
+  def destroy_zone_enumerator(this : IInternetZoneManager*, dwenum : UInt32) : HRESULT
+    @lpVtbl.value.destroy_zone_enumerator.call(this, dwenum)
   end
-  def copy_template_policies_to_zone(dwtemplate : UInt32, dwzone : UInt32, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.copy_template_policies_to_zone.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(dwtemplate, dwzone, dwreserved)
+  def copy_template_policies_to_zone(this : IInternetZoneManager*, dwtemplate : UInt32, dwzone : UInt32, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.copy_template_policies_to_zone.call(this, dwtemplate, dwzone, dwreserved)
   end
 end
 struct LibWin32::IInternetZoneManagerEx
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInternetZoneManagerEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInternetZoneManagerEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInternetZoneManagerEx*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_zone_attributes(dwzone : UInt32, pzoneattributes : ZONEATTRIBUTES*) : HRESULT
-    @lpVtbl.value.get_zone_attributes.unsafe_as(Proc(UInt32, ZONEATTRIBUTES*, HRESULT)).call(dwzone, pzoneattributes)
+  def get_zone_attributes(this : IInternetZoneManagerEx*, dwzone : UInt32, pzoneattributes : ZONEATTRIBUTES*) : HRESULT
+    @lpVtbl.value.get_zone_attributes.call(this, dwzone, pzoneattributes)
   end
-  def set_zone_attributes(dwzone : UInt32, pzoneattributes : ZONEATTRIBUTES*) : HRESULT
-    @lpVtbl.value.set_zone_attributes.unsafe_as(Proc(UInt32, ZONEATTRIBUTES*, HRESULT)).call(dwzone, pzoneattributes)
+  def set_zone_attributes(this : IInternetZoneManagerEx*, dwzone : UInt32, pzoneattributes : ZONEATTRIBUTES*) : HRESULT
+    @lpVtbl.value.set_zone_attributes.call(this, dwzone, pzoneattributes)
   end
-  def get_zone_custom_policy(dwzone : UInt32, guidkey : Guid*, pppolicy : UInt8**, pcbpolicy : UInt32*, urlzonereg : URLZONEREG) : HRESULT
-    @lpVtbl.value.get_zone_custom_policy.unsafe_as(Proc(UInt32, Guid*, UInt8**, UInt32*, URLZONEREG, HRESULT)).call(dwzone, guidkey, pppolicy, pcbpolicy, urlzonereg)
+  def get_zone_custom_policy(this : IInternetZoneManagerEx*, dwzone : UInt32, guidkey : Guid*, pppolicy : UInt8**, pcbpolicy : UInt32*, urlzonereg : URLZONEREG) : HRESULT
+    @lpVtbl.value.get_zone_custom_policy.call(this, dwzone, guidkey, pppolicy, pcbpolicy, urlzonereg)
   end
-  def set_zone_custom_policy(dwzone : UInt32, guidkey : Guid*, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG) : HRESULT
-    @lpVtbl.value.set_zone_custom_policy.unsafe_as(Proc(UInt32, Guid*, UInt8*, UInt32, URLZONEREG, HRESULT)).call(dwzone, guidkey, ppolicy, cbpolicy, urlzonereg)
+  def set_zone_custom_policy(this : IInternetZoneManagerEx*, dwzone : UInt32, guidkey : Guid*, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG) : HRESULT
+    @lpVtbl.value.set_zone_custom_policy.call(this, dwzone, guidkey, ppolicy, cbpolicy, urlzonereg)
   end
-  def get_zone_action_policy(dwzone : UInt32, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG) : HRESULT
-    @lpVtbl.value.get_zone_action_policy.unsafe_as(Proc(UInt32, UInt32, UInt8*, UInt32, URLZONEREG, HRESULT)).call(dwzone, dwaction, ppolicy, cbpolicy, urlzonereg)
+  def get_zone_action_policy(this : IInternetZoneManagerEx*, dwzone : UInt32, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG) : HRESULT
+    @lpVtbl.value.get_zone_action_policy.call(this, dwzone, dwaction, ppolicy, cbpolicy, urlzonereg)
   end
-  def set_zone_action_policy(dwzone : UInt32, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG) : HRESULT
-    @lpVtbl.value.set_zone_action_policy.unsafe_as(Proc(UInt32, UInt32, UInt8*, UInt32, URLZONEREG, HRESULT)).call(dwzone, dwaction, ppolicy, cbpolicy, urlzonereg)
+  def set_zone_action_policy(this : IInternetZoneManagerEx*, dwzone : UInt32, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG) : HRESULT
+    @lpVtbl.value.set_zone_action_policy.call(this, dwzone, dwaction, ppolicy, cbpolicy, urlzonereg)
   end
-  def prompt_action(dwaction : UInt32, hwndparent : LibC::HANDLE, pwszurl : LibC::LPWSTR, pwsztext : LibC::LPWSTR, dwpromptflags : UInt32) : HRESULT
-    @lpVtbl.value.prompt_action.unsafe_as(Proc(UInt32, LibC::HANDLE, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(dwaction, hwndparent, pwszurl, pwsztext, dwpromptflags)
+  def prompt_action(this : IInternetZoneManagerEx*, dwaction : UInt32, hwndparent : LibC::HANDLE, pwszurl : LibC::LPWSTR, pwsztext : LibC::LPWSTR, dwpromptflags : UInt32) : HRESULT
+    @lpVtbl.value.prompt_action.call(this, dwaction, hwndparent, pwszurl, pwsztext, dwpromptflags)
   end
-  def log_action(dwaction : UInt32, pwszurl : LibC::LPWSTR, pwsztext : LibC::LPWSTR, dwlogflags : UInt32) : HRESULT
-    @lpVtbl.value.log_action.unsafe_as(Proc(UInt32, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(dwaction, pwszurl, pwsztext, dwlogflags)
+  def log_action(this : IInternetZoneManagerEx*, dwaction : UInt32, pwszurl : LibC::LPWSTR, pwsztext : LibC::LPWSTR, dwlogflags : UInt32) : HRESULT
+    @lpVtbl.value.log_action.call(this, dwaction, pwszurl, pwsztext, dwlogflags)
   end
-  def create_zone_enumerator(pdwenum : UInt32*, pdwcount : UInt32*, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.create_zone_enumerator.unsafe_as(Proc(UInt32*, UInt32*, UInt32, HRESULT)).call(pdwenum, pdwcount, dwflags)
+  def create_zone_enumerator(this : IInternetZoneManagerEx*, pdwenum : UInt32*, pdwcount : UInt32*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.create_zone_enumerator.call(this, pdwenum, pdwcount, dwflags)
   end
-  def get_zone_at(dwenum : UInt32, dwindex : UInt32, pdwzone : UInt32*) : HRESULT
-    @lpVtbl.value.get_zone_at.unsafe_as(Proc(UInt32, UInt32, UInt32*, HRESULT)).call(dwenum, dwindex, pdwzone)
+  def get_zone_at(this : IInternetZoneManagerEx*, dwenum : UInt32, dwindex : UInt32, pdwzone : UInt32*) : HRESULT
+    @lpVtbl.value.get_zone_at.call(this, dwenum, dwindex, pdwzone)
   end
-  def destroy_zone_enumerator(dwenum : UInt32) : HRESULT
-    @lpVtbl.value.destroy_zone_enumerator.unsafe_as(Proc(UInt32, HRESULT)).call(dwenum)
+  def destroy_zone_enumerator(this : IInternetZoneManagerEx*, dwenum : UInt32) : HRESULT
+    @lpVtbl.value.destroy_zone_enumerator.call(this, dwenum)
   end
-  def copy_template_policies_to_zone(dwtemplate : UInt32, dwzone : UInt32, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.copy_template_policies_to_zone.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(dwtemplate, dwzone, dwreserved)
+  def copy_template_policies_to_zone(this : IInternetZoneManagerEx*, dwtemplate : UInt32, dwzone : UInt32, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.copy_template_policies_to_zone.call(this, dwtemplate, dwzone, dwreserved)
   end
-  def get_zone_action_policy_ex(dwzone : UInt32, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.get_zone_action_policy_ex.unsafe_as(Proc(UInt32, UInt32, UInt8*, UInt32, URLZONEREG, UInt32, HRESULT)).call(dwzone, dwaction, ppolicy, cbpolicy, urlzonereg, dwflags)
+  def get_zone_action_policy_ex(this : IInternetZoneManagerEx*, dwzone : UInt32, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.get_zone_action_policy_ex.call(this, dwzone, dwaction, ppolicy, cbpolicy, urlzonereg, dwflags)
   end
-  def set_zone_action_policy_ex(dwzone : UInt32, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.set_zone_action_policy_ex.unsafe_as(Proc(UInt32, UInt32, UInt8*, UInt32, URLZONEREG, UInt32, HRESULT)).call(dwzone, dwaction, ppolicy, cbpolicy, urlzonereg, dwflags)
+  def set_zone_action_policy_ex(this : IInternetZoneManagerEx*, dwzone : UInt32, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_zone_action_policy_ex.call(this, dwzone, dwaction, ppolicy, cbpolicy, urlzonereg, dwflags)
   end
 end
 struct LibWin32::IInternetZoneManagerEx2
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IInternetZoneManagerEx2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IInternetZoneManagerEx2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IInternetZoneManagerEx2*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_zone_attributes(dwzone : UInt32, pzoneattributes : ZONEATTRIBUTES*) : HRESULT
-    @lpVtbl.value.get_zone_attributes.unsafe_as(Proc(UInt32, ZONEATTRIBUTES*, HRESULT)).call(dwzone, pzoneattributes)
+  def get_zone_attributes(this : IInternetZoneManagerEx2*, dwzone : UInt32, pzoneattributes : ZONEATTRIBUTES*) : HRESULT
+    @lpVtbl.value.get_zone_attributes.call(this, dwzone, pzoneattributes)
   end
-  def set_zone_attributes(dwzone : UInt32, pzoneattributes : ZONEATTRIBUTES*) : HRESULT
-    @lpVtbl.value.set_zone_attributes.unsafe_as(Proc(UInt32, ZONEATTRIBUTES*, HRESULT)).call(dwzone, pzoneattributes)
+  def set_zone_attributes(this : IInternetZoneManagerEx2*, dwzone : UInt32, pzoneattributes : ZONEATTRIBUTES*) : HRESULT
+    @lpVtbl.value.set_zone_attributes.call(this, dwzone, pzoneattributes)
   end
-  def get_zone_custom_policy(dwzone : UInt32, guidkey : Guid*, pppolicy : UInt8**, pcbpolicy : UInt32*, urlzonereg : URLZONEREG) : HRESULT
-    @lpVtbl.value.get_zone_custom_policy.unsafe_as(Proc(UInt32, Guid*, UInt8**, UInt32*, URLZONEREG, HRESULT)).call(dwzone, guidkey, pppolicy, pcbpolicy, urlzonereg)
+  def get_zone_custom_policy(this : IInternetZoneManagerEx2*, dwzone : UInt32, guidkey : Guid*, pppolicy : UInt8**, pcbpolicy : UInt32*, urlzonereg : URLZONEREG) : HRESULT
+    @lpVtbl.value.get_zone_custom_policy.call(this, dwzone, guidkey, pppolicy, pcbpolicy, urlzonereg)
   end
-  def set_zone_custom_policy(dwzone : UInt32, guidkey : Guid*, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG) : HRESULT
-    @lpVtbl.value.set_zone_custom_policy.unsafe_as(Proc(UInt32, Guid*, UInt8*, UInt32, URLZONEREG, HRESULT)).call(dwzone, guidkey, ppolicy, cbpolicy, urlzonereg)
+  def set_zone_custom_policy(this : IInternetZoneManagerEx2*, dwzone : UInt32, guidkey : Guid*, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG) : HRESULT
+    @lpVtbl.value.set_zone_custom_policy.call(this, dwzone, guidkey, ppolicy, cbpolicy, urlzonereg)
   end
-  def get_zone_action_policy(dwzone : UInt32, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG) : HRESULT
-    @lpVtbl.value.get_zone_action_policy.unsafe_as(Proc(UInt32, UInt32, UInt8*, UInt32, URLZONEREG, HRESULT)).call(dwzone, dwaction, ppolicy, cbpolicy, urlzonereg)
+  def get_zone_action_policy(this : IInternetZoneManagerEx2*, dwzone : UInt32, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG) : HRESULT
+    @lpVtbl.value.get_zone_action_policy.call(this, dwzone, dwaction, ppolicy, cbpolicy, urlzonereg)
   end
-  def set_zone_action_policy(dwzone : UInt32, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG) : HRESULT
-    @lpVtbl.value.set_zone_action_policy.unsafe_as(Proc(UInt32, UInt32, UInt8*, UInt32, URLZONEREG, HRESULT)).call(dwzone, dwaction, ppolicy, cbpolicy, urlzonereg)
+  def set_zone_action_policy(this : IInternetZoneManagerEx2*, dwzone : UInt32, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG) : HRESULT
+    @lpVtbl.value.set_zone_action_policy.call(this, dwzone, dwaction, ppolicy, cbpolicy, urlzonereg)
   end
-  def prompt_action(dwaction : UInt32, hwndparent : LibC::HANDLE, pwszurl : LibC::LPWSTR, pwsztext : LibC::LPWSTR, dwpromptflags : UInt32) : HRESULT
-    @lpVtbl.value.prompt_action.unsafe_as(Proc(UInt32, LibC::HANDLE, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(dwaction, hwndparent, pwszurl, pwsztext, dwpromptflags)
+  def prompt_action(this : IInternetZoneManagerEx2*, dwaction : UInt32, hwndparent : LibC::HANDLE, pwszurl : LibC::LPWSTR, pwsztext : LibC::LPWSTR, dwpromptflags : UInt32) : HRESULT
+    @lpVtbl.value.prompt_action.call(this, dwaction, hwndparent, pwszurl, pwsztext, dwpromptflags)
   end
-  def log_action(dwaction : UInt32, pwszurl : LibC::LPWSTR, pwsztext : LibC::LPWSTR, dwlogflags : UInt32) : HRESULT
-    @lpVtbl.value.log_action.unsafe_as(Proc(UInt32, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(dwaction, pwszurl, pwsztext, dwlogflags)
+  def log_action(this : IInternetZoneManagerEx2*, dwaction : UInt32, pwszurl : LibC::LPWSTR, pwsztext : LibC::LPWSTR, dwlogflags : UInt32) : HRESULT
+    @lpVtbl.value.log_action.call(this, dwaction, pwszurl, pwsztext, dwlogflags)
   end
-  def create_zone_enumerator(pdwenum : UInt32*, pdwcount : UInt32*, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.create_zone_enumerator.unsafe_as(Proc(UInt32*, UInt32*, UInt32, HRESULT)).call(pdwenum, pdwcount, dwflags)
+  def create_zone_enumerator(this : IInternetZoneManagerEx2*, pdwenum : UInt32*, pdwcount : UInt32*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.create_zone_enumerator.call(this, pdwenum, pdwcount, dwflags)
   end
-  def get_zone_at(dwenum : UInt32, dwindex : UInt32, pdwzone : UInt32*) : HRESULT
-    @lpVtbl.value.get_zone_at.unsafe_as(Proc(UInt32, UInt32, UInt32*, HRESULT)).call(dwenum, dwindex, pdwzone)
+  def get_zone_at(this : IInternetZoneManagerEx2*, dwenum : UInt32, dwindex : UInt32, pdwzone : UInt32*) : HRESULT
+    @lpVtbl.value.get_zone_at.call(this, dwenum, dwindex, pdwzone)
   end
-  def destroy_zone_enumerator(dwenum : UInt32) : HRESULT
-    @lpVtbl.value.destroy_zone_enumerator.unsafe_as(Proc(UInt32, HRESULT)).call(dwenum)
+  def destroy_zone_enumerator(this : IInternetZoneManagerEx2*, dwenum : UInt32) : HRESULT
+    @lpVtbl.value.destroy_zone_enumerator.call(this, dwenum)
   end
-  def copy_template_policies_to_zone(dwtemplate : UInt32, dwzone : UInt32, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.copy_template_policies_to_zone.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(dwtemplate, dwzone, dwreserved)
+  def copy_template_policies_to_zone(this : IInternetZoneManagerEx2*, dwtemplate : UInt32, dwzone : UInt32, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.copy_template_policies_to_zone.call(this, dwtemplate, dwzone, dwreserved)
   end
-  def get_zone_action_policy_ex(dwzone : UInt32, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.get_zone_action_policy_ex.unsafe_as(Proc(UInt32, UInt32, UInt8*, UInt32, URLZONEREG, UInt32, HRESULT)).call(dwzone, dwaction, ppolicy, cbpolicy, urlzonereg, dwflags)
+  def get_zone_action_policy_ex(this : IInternetZoneManagerEx2*, dwzone : UInt32, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.get_zone_action_policy_ex.call(this, dwzone, dwaction, ppolicy, cbpolicy, urlzonereg, dwflags)
   end
-  def set_zone_action_policy_ex(dwzone : UInt32, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.set_zone_action_policy_ex.unsafe_as(Proc(UInt32, UInt32, UInt8*, UInt32, URLZONEREG, UInt32, HRESULT)).call(dwzone, dwaction, ppolicy, cbpolicy, urlzonereg, dwflags)
+  def set_zone_action_policy_ex(this : IInternetZoneManagerEx2*, dwzone : UInt32, dwaction : UInt32, ppolicy : UInt8*, cbpolicy : UInt32, urlzonereg : URLZONEREG, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_zone_action_policy_ex.call(this, dwzone, dwaction, ppolicy, cbpolicy, urlzonereg, dwflags)
   end
-  def get_zone_attributes_ex(dwzone : UInt32, pzoneattributes : ZONEATTRIBUTES*, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.get_zone_attributes_ex.unsafe_as(Proc(UInt32, ZONEATTRIBUTES*, UInt32, HRESULT)).call(dwzone, pzoneattributes, dwflags)
+  def get_zone_attributes_ex(this : IInternetZoneManagerEx2*, dwzone : UInt32, pzoneattributes : ZONEATTRIBUTES*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.get_zone_attributes_ex.call(this, dwzone, pzoneattributes, dwflags)
   end
-  def get_zone_security_state(dwzoneindex : UInt32, frespectpolicy : LibC::BOOL, pdwstate : UInt32*, pfpolicyencountered : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_zone_security_state.unsafe_as(Proc(UInt32, LibC::BOOL, UInt32*, LibC::BOOL*, HRESULT)).call(dwzoneindex, frespectpolicy, pdwstate, pfpolicyencountered)
+  def get_zone_security_state(this : IInternetZoneManagerEx2*, dwzoneindex : UInt32, frespectpolicy : LibC::BOOL, pdwstate : UInt32*, pfpolicyencountered : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_zone_security_state.call(this, dwzoneindex, frespectpolicy, pdwstate, pfpolicyencountered)
   end
-  def get_ie_security_state(frespectpolicy : LibC::BOOL, pdwstate : UInt32*, pfpolicyencountered : LibC::BOOL*, fnocache : LibC::BOOL) : HRESULT
-    @lpVtbl.value.get_ie_security_state.unsafe_as(Proc(LibC::BOOL, UInt32*, LibC::BOOL*, LibC::BOOL, HRESULT)).call(frespectpolicy, pdwstate, pfpolicyencountered, fnocache)
+  def get_ie_security_state(this : IInternetZoneManagerEx2*, frespectpolicy : LibC::BOOL, pdwstate : UInt32*, pfpolicyencountered : LibC::BOOL*, fnocache : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_ie_security_state.call(this, frespectpolicy, pdwstate, pfpolicyencountered, fnocache)
   end
-  def fix_unsecure_settings : HRESULT
-    @lpVtbl.value.fix_unsecure_settings.unsafe_as(Proc(HRESULT)).call
+  def fix_unsecure_settings(this : IInternetZoneManagerEx2*) : HRESULT
+    @lpVtbl.value.fix_unsecure_settings.call(this)
   end
 end
 struct LibWin32::ISoftDistExt
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ISoftDistExt*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ISoftDistExt*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ISoftDistExt*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def process_soft_dist(szcdfurl : LibC::LPWSTR, psoftdistelement : IXMLElement, lpsdi : SOFTDISTINFO*) : HRESULT
-    @lpVtbl.value.process_soft_dist.unsafe_as(Proc(LibC::LPWSTR, IXMLElement, SOFTDISTINFO*, HRESULT)).call(szcdfurl, psoftdistelement, lpsdi)
+  def process_soft_dist(this : ISoftDistExt*, szcdfurl : LibC::LPWSTR, psoftdistelement : IXMLElement, lpsdi : SOFTDISTINFO*) : HRESULT
+    @lpVtbl.value.process_soft_dist.call(this, szcdfurl, psoftdistelement, lpsdi)
   end
-  def get_first_code_base(szcodebase : LibC::LPWSTR*, dwmaxsize : UInt32*) : HRESULT
-    @lpVtbl.value.get_first_code_base.unsafe_as(Proc(LibC::LPWSTR*, UInt32*, HRESULT)).call(szcodebase, dwmaxsize)
+  def get_first_code_base(this : ISoftDistExt*, szcodebase : LibC::LPWSTR*, dwmaxsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_first_code_base.call(this, szcodebase, dwmaxsize)
   end
-  def get_next_code_base(szcodebase : LibC::LPWSTR*, dwmaxsize : UInt32*) : HRESULT
-    @lpVtbl.value.get_next_code_base.unsafe_as(Proc(LibC::LPWSTR*, UInt32*, HRESULT)).call(szcodebase, dwmaxsize)
+  def get_next_code_base(this : ISoftDistExt*, szcodebase : LibC::LPWSTR*, dwmaxsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_next_code_base.call(this, szcodebase, dwmaxsize)
   end
-  def async_install_distribution_unit(pbc : IBindCtx, pvreserved : Void*, flags : UInt32, lpcbh : CODEBASEHOLD*) : HRESULT
-    @lpVtbl.value.async_install_distribution_unit.unsafe_as(Proc(IBindCtx, Void*, UInt32, CODEBASEHOLD*, HRESULT)).call(pbc, pvreserved, flags, lpcbh)
+  def async_install_distribution_unit(this : ISoftDistExt*, pbc : IBindCtx, pvreserved : Void*, flags : UInt32, lpcbh : CODEBASEHOLD*) : HRESULT
+    @lpVtbl.value.async_install_distribution_unit.call(this, pbc, pvreserved, flags, lpcbh)
   end
 end
 struct LibWin32::ICatalogFileInfo
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ICatalogFileInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ICatalogFileInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ICatalogFileInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_catalog_file(ppszcatalogfile : PSTR*) : HRESULT
-    @lpVtbl.value.get_catalog_file.unsafe_as(Proc(PSTR*, HRESULT)).call(ppszcatalogfile)
+  def get_catalog_file(this : ICatalogFileInfo*, ppszcatalogfile : PSTR*) : HRESULT
+    @lpVtbl.value.get_catalog_file.call(this, ppszcatalogfile)
   end
-  def get_java_trust(ppjavatrust : Void**) : HRESULT
-    @lpVtbl.value.get_java_trust.unsafe_as(Proc(Void**, HRESULT)).call(ppjavatrust)
+  def get_java_trust(this : ICatalogFileInfo*, ppjavatrust : Void**) : HRESULT
+    @lpVtbl.value.get_java_trust.call(this, ppjavatrust)
   end
 end
 struct LibWin32::IDataFilter
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDataFilter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDataFilter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDataFilter*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def do_encode(dwflags : UInt32, linbuffersize : Int32, pbinbuffer : UInt8*, loutbuffersize : Int32, pboutbuffer : UInt8*, linbytesavailable : Int32, plinbytesread : Int32*, ploutbyteswritten : Int32*, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.do_encode.unsafe_as(Proc(UInt32, Int32, UInt8*, Int32, UInt8*, Int32, Int32*, Int32*, UInt32, HRESULT)).call(dwflags, linbuffersize, pbinbuffer, loutbuffersize, pboutbuffer, linbytesavailable, plinbytesread, ploutbyteswritten, dwreserved)
+  def do_encode(this : IDataFilter*, dwflags : UInt32, linbuffersize : Int32, pbinbuffer : UInt8*, loutbuffersize : Int32, pboutbuffer : UInt8*, linbytesavailable : Int32, plinbytesread : Int32*, ploutbyteswritten : Int32*, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.do_encode.call(this, dwflags, linbuffersize, pbinbuffer, loutbuffersize, pboutbuffer, linbytesavailable, plinbytesread, ploutbyteswritten, dwreserved)
   end
-  def do_decode(dwflags : UInt32, linbuffersize : Int32, pbinbuffer : UInt8*, loutbuffersize : Int32, pboutbuffer : UInt8*, linbytesavailable : Int32, plinbytesread : Int32*, ploutbyteswritten : Int32*, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.do_decode.unsafe_as(Proc(UInt32, Int32, UInt8*, Int32, UInt8*, Int32, Int32*, Int32*, UInt32, HRESULT)).call(dwflags, linbuffersize, pbinbuffer, loutbuffersize, pboutbuffer, linbytesavailable, plinbytesread, ploutbyteswritten, dwreserved)
+  def do_decode(this : IDataFilter*, dwflags : UInt32, linbuffersize : Int32, pbinbuffer : UInt8*, loutbuffersize : Int32, pboutbuffer : UInt8*, linbytesavailable : Int32, plinbytesread : Int32*, ploutbyteswritten : Int32*, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.do_decode.call(this, dwflags, linbuffersize, pbinbuffer, loutbuffersize, pboutbuffer, linbytesavailable, plinbytesread, ploutbyteswritten, dwreserved)
   end
-  def set_encoding_level(dwenclevel : UInt32) : HRESULT
-    @lpVtbl.value.set_encoding_level.unsafe_as(Proc(UInt32, HRESULT)).call(dwenclevel)
+  def set_encoding_level(this : IDataFilter*, dwenclevel : UInt32) : HRESULT
+    @lpVtbl.value.set_encoding_level.call(this, dwenclevel)
   end
 end
 struct LibWin32::IEncodingFilterFactory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IEncodingFilterFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IEncodingFilterFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IEncodingFilterFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def find_best_filter(pwzcodein : LibC::LPWSTR, pwzcodeout : LibC::LPWSTR, info : DATAINFO, ppdf : IDataFilter*) : HRESULT
-    @lpVtbl.value.find_best_filter.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, DATAINFO, IDataFilter*, HRESULT)).call(pwzcodein, pwzcodeout, info, ppdf)
+  def find_best_filter(this : IEncodingFilterFactory*, pwzcodein : LibC::LPWSTR, pwzcodeout : LibC::LPWSTR, info : DATAINFO, ppdf : IDataFilter*) : HRESULT
+    @lpVtbl.value.find_best_filter.call(this, pwzcodein, pwzcodeout, info, ppdf)
   end
-  def get_default_filter(pwzcodein : LibC::LPWSTR, pwzcodeout : LibC::LPWSTR, ppdf : IDataFilter*) : HRESULT
-    @lpVtbl.value.get_default_filter.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, IDataFilter*, HRESULT)).call(pwzcodein, pwzcodeout, ppdf)
+  def get_default_filter(this : IEncodingFilterFactory*, pwzcodein : LibC::LPWSTR, pwzcodeout : LibC::LPWSTR, ppdf : IDataFilter*) : HRESULT
+    @lpVtbl.value.get_default_filter.call(this, pwzcodein, pwzcodeout, ppdf)
   end
 end
 struct LibWin32::IWrappedProtocol
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWrappedProtocol*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWrappedProtocol*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWrappedProtocol*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_wrapper_code(pncode : Int32*, dwreserved : LibC::UINT_PTR) : HRESULT
-    @lpVtbl.value.get_wrapper_code.unsafe_as(Proc(Int32*, LibC::UINT_PTR, HRESULT)).call(pncode, dwreserved)
+  def get_wrapper_code(this : IWrappedProtocol*, pncode : Int32*, dwreserved : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.get_wrapper_code.call(this, pncode, dwreserved)
   end
 end
 struct LibWin32::IGetBindHandle
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IGetBindHandle*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IGetBindHandle*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IGetBindHandle*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_bind_handle(enumrequestedhandle : BINDHANDLETYPES, prethandle : LibC::HANDLE*) : HRESULT
-    @lpVtbl.value.get_bind_handle.unsafe_as(Proc(BINDHANDLETYPES, LibC::HANDLE*, HRESULT)).call(enumrequestedhandle, prethandle)
+  def get_bind_handle(this : IGetBindHandle*, enumrequestedhandle : BINDHANDLETYPES, prethandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.get_bind_handle.call(this, enumrequestedhandle, prethandle)
   end
 end
 struct LibWin32::IBindCallbackRedirect
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IBindCallbackRedirect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IBindCallbackRedirect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IBindCallbackRedirect*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def redirect(lpcurl : LibC::LPWSTR, vbcancel : Int16*) : HRESULT
-    @lpVtbl.value.redirect.unsafe_as(Proc(LibC::LPWSTR, Int16*, HRESULT)).call(lpcurl, vbcancel)
+  def redirect(this : IBindCallbackRedirect*, lpcurl : LibC::LPWSTR, vbcancel : Int16*) : HRESULT
+    @lpVtbl.value.redirect.call(this, lpcurl, vbcancel)
   end
 end
 struct LibWin32::IBindHttpSecurity
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IBindHttpSecurity*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IBindHttpSecurity*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IBindHttpSecurity*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_ignore_cert_mask(pdwignorecertmask : UInt32*) : HRESULT
-    @lpVtbl.value.get_ignore_cert_mask.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwignorecertmask)
+  def get_ignore_cert_mask(this : IBindHttpSecurity*, pdwignorecertmask : UInt32*) : HRESULT
+    @lpVtbl.value.get_ignore_cert_mask.call(this, pdwignorecertmask)
   end
 end

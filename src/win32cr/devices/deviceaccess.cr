@@ -62,10 +62,10 @@ lib LibWin32
 
 
   struct IDeviceRequestCompletionCallbackVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    invoke : UInt64
+    query_interface : Proc(IDeviceRequestCompletionCallback*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDeviceRequestCompletionCallback*, UInt32)
+    release : Proc(IDeviceRequestCompletionCallback*, UInt32)
+    invoke : Proc(IDeviceRequestCompletionCallback*, HRESULT, UInt32, HRESULT)
   end
 
   IDeviceRequestCompletionCallback_GUID = "999bad24-9acd-45bb-8669-2a2fc0288b04"
@@ -75,12 +75,12 @@ lib LibWin32
   end
 
   struct IDeviceIoControlVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    device_io_control_sync : UInt64
-    device_io_control_async : UInt64
-    cancel_operation : UInt64
+    query_interface : Proc(IDeviceIoControl*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDeviceIoControl*, UInt32)
+    release : Proc(IDeviceIoControl*, UInt32)
+    device_io_control_sync : Proc(IDeviceIoControl*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32*, HRESULT)
+    device_io_control_async : Proc(IDeviceIoControl*, UInt32, UInt8*, UInt32, UInt8*, UInt32, IDeviceRequestCompletionCallback, LibC::UINT_PTR*, HRESULT)
+    cancel_operation : Proc(IDeviceIoControl*, LibC::UINT_PTR, HRESULT)
   end
 
   IDeviceIoControl_GUID = "9eefe161-23ab-4f18-9b49-991b586ae970"
@@ -90,13 +90,13 @@ lib LibWin32
   end
 
   struct ICreateDeviceAccessAsyncVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    cancel : UInt64
-    wait : UInt64
-    close : UInt64
-    get_result : UInt64
+    query_interface : Proc(ICreateDeviceAccessAsync*, Guid*, Void**, HRESULT)
+    add_ref : Proc(ICreateDeviceAccessAsync*, UInt32)
+    release : Proc(ICreateDeviceAccessAsync*, UInt32)
+    cancel : Proc(ICreateDeviceAccessAsync*, HRESULT)
+    wait : Proc(ICreateDeviceAccessAsync*, UInt32, HRESULT)
+    close : Proc(ICreateDeviceAccessAsync*, HRESULT)
+    get_result : Proc(ICreateDeviceAccessAsync*, Guid*, Void**, HRESULT)
   end
 
   ICreateDeviceAccessAsync_GUID = "3474628f-683d-42d2-abcb-db018c6503bc"
@@ -110,59 +110,59 @@ lib LibWin32
   fun CreateDeviceAccessInstance(deviceinterfacepath : LibC::LPWSTR, desiredaccess : UInt32, createasync : ICreateDeviceAccessAsync*) : HRESULT
 end
 struct LibWin32::IDeviceRequestCompletionCallback
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDeviceRequestCompletionCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDeviceRequestCompletionCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDeviceRequestCompletionCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def invoke(requestresult : HRESULT, bytesreturned : UInt32) : HRESULT
-    @lpVtbl.value.invoke.unsafe_as(Proc(HRESULT, UInt32, HRESULT)).call(requestresult, bytesreturned)
+  def invoke(this : IDeviceRequestCompletionCallback*, requestresult : HRESULT, bytesreturned : UInt32) : HRESULT
+    @lpVtbl.value.invoke.call(this, requestresult, bytesreturned)
   end
 end
 struct LibWin32::IDeviceIoControl
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IDeviceIoControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IDeviceIoControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IDeviceIoControl*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def device_io_control_sync(iocontrolcode : UInt32, inputbuffer : UInt8*, inputbuffersize : UInt32, outputbuffer : UInt8*, outputbuffersize : UInt32, bytesreturned : UInt32*) : HRESULT
-    @lpVtbl.value.device_io_control_sync.unsafe_as(Proc(UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32*, HRESULT)).call(iocontrolcode, inputbuffer, inputbuffersize, outputbuffer, outputbuffersize, bytesreturned)
+  def device_io_control_sync(this : IDeviceIoControl*, iocontrolcode : UInt32, inputbuffer : UInt8*, inputbuffersize : UInt32, outputbuffer : UInt8*, outputbuffersize : UInt32, bytesreturned : UInt32*) : HRESULT
+    @lpVtbl.value.device_io_control_sync.call(this, iocontrolcode, inputbuffer, inputbuffersize, outputbuffer, outputbuffersize, bytesreturned)
   end
-  def device_io_control_async(iocontrolcode : UInt32, inputbuffer : UInt8*, inputbuffersize : UInt32, outputbuffer : UInt8*, outputbuffersize : UInt32, requestcompletioncallback : IDeviceRequestCompletionCallback, cancelcontext : LibC::UINT_PTR*) : HRESULT
-    @lpVtbl.value.device_io_control_async.unsafe_as(Proc(UInt32, UInt8*, UInt32, UInt8*, UInt32, IDeviceRequestCompletionCallback, LibC::UINT_PTR*, HRESULT)).call(iocontrolcode, inputbuffer, inputbuffersize, outputbuffer, outputbuffersize, requestcompletioncallback, cancelcontext)
+  def device_io_control_async(this : IDeviceIoControl*, iocontrolcode : UInt32, inputbuffer : UInt8*, inputbuffersize : UInt32, outputbuffer : UInt8*, outputbuffersize : UInt32, requestcompletioncallback : IDeviceRequestCompletionCallback, cancelcontext : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.device_io_control_async.call(this, iocontrolcode, inputbuffer, inputbuffersize, outputbuffer, outputbuffersize, requestcompletioncallback, cancelcontext)
   end
-  def cancel_operation(cancelcontext : LibC::UINT_PTR) : HRESULT
-    @lpVtbl.value.cancel_operation.unsafe_as(Proc(LibC::UINT_PTR, HRESULT)).call(cancelcontext)
+  def cancel_operation(this : IDeviceIoControl*, cancelcontext : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.cancel_operation.call(this, cancelcontext)
   end
 end
 struct LibWin32::ICreateDeviceAccessAsync
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : ICreateDeviceAccessAsync*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : ICreateDeviceAccessAsync*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : ICreateDeviceAccessAsync*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def cancel : HRESULT
-    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  def cancel(this : ICreateDeviceAccessAsync*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
   end
-  def wait(timeout : UInt32) : HRESULT
-    @lpVtbl.value.wait.unsafe_as(Proc(UInt32, HRESULT)).call(timeout)
+  def wait(this : ICreateDeviceAccessAsync*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.wait.call(this, timeout)
   end
-  def close : HRESULT
-    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  def close(this : ICreateDeviceAccessAsync*) : HRESULT
+    @lpVtbl.value.close.call(this)
   end
-  def get_result(riid : Guid*, deviceaccess : Void**) : HRESULT
-    @lpVtbl.value.get_result.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, deviceaccess)
+  def get_result(this : ICreateDeviceAccessAsync*, riid : Guid*, deviceaccess : Void**) : HRESULT
+    @lpVtbl.value.get_result.call(this, riid, deviceaccess)
   end
 end

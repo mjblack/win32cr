@@ -287,13 +287,13 @@ lib LibWin32
 
 
   struct IWinMLModelVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_description : UInt64
-    enumerate_metadata : UInt64
-    enumerate_model_inputs : UInt64
-    enumerate_model_outputs : UInt64
+    query_interface : Proc(IWinMLModel*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWinMLModel*, UInt32)
+    release : Proc(IWinMLModel*, UInt32)
+    get_description : Proc(IWinMLModel*, WINML_MODEL_DESC**, HRESULT)
+    enumerate_metadata : Proc(IWinMLModel*, UInt32, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
+    enumerate_model_inputs : Proc(IWinMLModel*, UInt32, WINML_VARIABLE_DESC**, HRESULT)
+    enumerate_model_outputs : Proc(IWinMLModel*, UInt32, WINML_VARIABLE_DESC**, HRESULT)
   end
 
   IWinMLModel_GUID = "e2eeb6a9-f31f-4055-a521-e30b5b33664a"
@@ -303,12 +303,12 @@ lib LibWin32
   end
 
   struct IWinMLEvaluationContextVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    bind_value : UInt64
-    get_value_by_name : UInt64
-    clear : UInt64
+    query_interface : Proc(IWinMLEvaluationContext*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWinMLEvaluationContext*, UInt32)
+    release : Proc(IWinMLEvaluationContext*, UInt32)
+    bind_value : Proc(IWinMLEvaluationContext*, WINML_BINDING_DESC*, HRESULT)
+    get_value_by_name : Proc(IWinMLEvaluationContext*, LibC::LPWSTR, WINML_BINDING_DESC**, HRESULT)
+    clear : Proc(IWinMLEvaluationContext*, HRESULT)
   end
 
   IWinMLEvaluationContext_GUID = "95848f9e-583d-4054-af12-916387cd8426"
@@ -318,12 +318,12 @@ lib LibWin32
   end
 
   struct IWinMLRuntimeVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    load_model : UInt64
-    create_evaluation_context : UInt64
-    evaluate_model : UInt64
+    query_interface : Proc(IWinMLRuntime*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWinMLRuntime*, UInt32)
+    release : Proc(IWinMLRuntime*, UInt32)
+    load_model : Proc(IWinMLRuntime*, LibC::LPWSTR, IWinMLModel*, HRESULT)
+    create_evaluation_context : Proc(IWinMLRuntime*, ID3D12Device, IWinMLEvaluationContext*, HRESULT)
+    evaluate_model : Proc(IWinMLRuntime*, IWinMLEvaluationContext, HRESULT)
   end
 
   IWinMLRuntime_GUID = "a0425329-40ae-48d9-bce3-829ef7b8a41a"
@@ -333,10 +333,10 @@ lib LibWin32
   end
 
   struct IWinMLRuntimeFactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_runtime : UInt64
+    query_interface : Proc(IWinMLRuntimeFactory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWinMLRuntimeFactory*, UInt32)
+    release : Proc(IWinMLRuntimeFactory*, UInt32)
+    create_runtime : Proc(IWinMLRuntimeFactory*, WINML_RUNTIME_TYPE, IWinMLRuntime*, HRESULT)
   end
 
   IWinMLRuntimeFactory_GUID = "a807b84d-4ae5-4bc0-a76a-941aa246bd41"
@@ -346,13 +346,13 @@ lib LibWin32
   end
 
   struct IMLOperatorAttributesVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_attribute_element_count : UInt64
-    get_attribute : UInt64
-    get_string_attribute_element_length : UInt64
-    get_string_attribute_element : UInt64
+    query_interface : Proc(IMLOperatorAttributes*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLOperatorAttributes*, UInt32)
+    release : Proc(IMLOperatorAttributes*, UInt32)
+    get_attribute_element_count : Proc(IMLOperatorAttributes*, PSTR, MLOperatorAttributeType, UInt32*, HRESULT)
+    get_attribute : Proc(IMLOperatorAttributes*, PSTR, MLOperatorAttributeType, UInt32, LibC::UINT_PTR, Void*, HRESULT)
+    get_string_attribute_element_length : Proc(IMLOperatorAttributes*, PSTR, UInt32, UInt32*, HRESULT)
+    get_string_attribute_element : Proc(IMLOperatorAttributes*, PSTR, UInt32, UInt32, UInt8*, HRESULT)
   end
 
   IMLOperatorAttributes_GUID = "4b1b1759-ec40-466c-aab4-beb5347fd24c"
@@ -362,14 +362,14 @@ lib LibWin32
   end
 
   struct IMLOperatorTensorShapeDescriptionVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_input_tensor_dimension_count : UInt64
-    get_input_tensor_shape : UInt64
-    has_output_shape_description : UInt64
-    get_output_tensor_dimension_count : UInt64
-    get_output_tensor_shape : UInt64
+    query_interface : Proc(IMLOperatorTensorShapeDescription*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLOperatorTensorShapeDescription*, UInt32)
+    release : Proc(IMLOperatorTensorShapeDescription*, UInt32)
+    get_input_tensor_dimension_count : Proc(IMLOperatorTensorShapeDescription*, UInt32, UInt32*, HRESULT)
+    get_input_tensor_shape : Proc(IMLOperatorTensorShapeDescription*, UInt32, UInt32, UInt32*, HRESULT)
+    has_output_shape_description : Proc(IMLOperatorTensorShapeDescription*, Bool)
+    get_output_tensor_dimension_count : Proc(IMLOperatorTensorShapeDescription*, UInt32, UInt32*, HRESULT)
+    get_output_tensor_shape : Proc(IMLOperatorTensorShapeDescription*, UInt32, UInt32, UInt32*, HRESULT)
   end
 
   IMLOperatorTensorShapeDescription_GUID = "f20e8cbe-3b28-4248-be95-f96fbc6e4643"
@@ -379,22 +379,22 @@ lib LibWin32
   end
 
   struct IMLOperatorKernelCreationContextVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_attribute_element_count : UInt64
-    get_attribute : UInt64
-    get_string_attribute_element_length : UInt64
-    get_string_attribute_element : UInt64
-    get_input_count : UInt64
-    get_output_count : UInt64
-    is_input_valid : UInt64
-    is_output_valid : UInt64
-    get_input_edge_description : UInt64
-    get_output_edge_description : UInt64
-    has_tensor_shape_description : UInt64
-    get_tensor_shape_description : UInt64
-    get_execution_interface : UInt64
+    query_interface : Proc(IMLOperatorKernelCreationContext*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLOperatorKernelCreationContext*, UInt32)
+    release : Proc(IMLOperatorKernelCreationContext*, UInt32)
+    get_attribute_element_count : Proc(IMLOperatorKernelCreationContext*, PSTR, MLOperatorAttributeType, UInt32*, HRESULT)
+    get_attribute : Proc(IMLOperatorKernelCreationContext*, PSTR, MLOperatorAttributeType, UInt32, LibC::UINT_PTR, Void*, HRESULT)
+    get_string_attribute_element_length : Proc(IMLOperatorKernelCreationContext*, PSTR, UInt32, UInt32*, HRESULT)
+    get_string_attribute_element : Proc(IMLOperatorKernelCreationContext*, PSTR, UInt32, UInt32, UInt8*, HRESULT)
+    get_input_count : Proc(IMLOperatorKernelCreationContext*, UInt32)
+    get_output_count : Proc(IMLOperatorKernelCreationContext*, UInt32)
+    is_input_valid : Proc(IMLOperatorKernelCreationContext*, UInt32, Bool)
+    is_output_valid : Proc(IMLOperatorKernelCreationContext*, UInt32, Bool)
+    get_input_edge_description : Proc(IMLOperatorKernelCreationContext*, UInt32, MLOperatorEdgeDescription*, HRESULT)
+    get_output_edge_description : Proc(IMLOperatorKernelCreationContext*, UInt32, MLOperatorEdgeDescription*, HRESULT)
+    has_tensor_shape_description : Proc(IMLOperatorKernelCreationContext*, Bool)
+    get_tensor_shape_description : Proc(IMLOperatorKernelCreationContext*, IMLOperatorTensorShapeDescription*, HRESULT)
+    get_execution_interface : Proc(IMLOperatorKernelCreationContext*, IUnknown*, Void)
   end
 
   IMLOperatorKernelCreationContext_GUID = "5459b53d-a0fc-4665-addd-70171ef7e631"
@@ -404,16 +404,16 @@ lib LibWin32
   end
 
   struct IMLOperatorTensorVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_dimension_count : UInt64
-    get_shape : UInt64
-    get_tensor_data_type : UInt64
-    is_cpu_data : UInt64
-    is_data_interface : UInt64
-    get_data : UInt64
-    get_data_interface : UInt64
+    query_interface : Proc(IMLOperatorTensor*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLOperatorTensor*, UInt32)
+    release : Proc(IMLOperatorTensor*, UInt32)
+    get_dimension_count : Proc(IMLOperatorTensor*, UInt32)
+    get_shape : Proc(IMLOperatorTensor*, UInt32, UInt32*, HRESULT)
+    get_tensor_data_type : Proc(IMLOperatorTensor*, MLOperatorTensorDataType)
+    is_cpu_data : Proc(IMLOperatorTensor*, Bool)
+    is_data_interface : Proc(IMLOperatorTensor*, Bool)
+    get_data : Proc(IMLOperatorTensor*, Void**)
+    get_data_interface : Proc(IMLOperatorTensor*, IUnknown*, Void)
   end
 
   IMLOperatorTensor_GUID = "7fe41f41-f430-440e-aece-54416dc8b9db"
@@ -423,14 +423,14 @@ lib LibWin32
   end
 
   struct IMLOperatorKernelContextVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_input_tensor : UInt64
-    get_output_tensor : UInt64
-    get_output_tensor2 : UInt64
-    allocate_temporary_data : UInt64
-    get_execution_interface : UInt64
+    query_interface : Proc(IMLOperatorKernelContext*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLOperatorKernelContext*, UInt32)
+    release : Proc(IMLOperatorKernelContext*, UInt32)
+    get_input_tensor : Proc(IMLOperatorKernelContext*, UInt32, IMLOperatorTensor*, HRESULT)
+    get_output_tensor : Proc(IMLOperatorKernelContext*, UInt32, UInt32, UInt32*, IMLOperatorTensor*, HRESULT)
+    get_output_tensor2 : Proc(IMLOperatorKernelContext*, UInt32, IMLOperatorTensor*, HRESULT)
+    allocate_temporary_data : Proc(IMLOperatorKernelContext*, LibC::UINT_PTR, IUnknown*, HRESULT)
+    get_execution_interface : Proc(IMLOperatorKernelContext*, IUnknown*, Void)
   end
 
   IMLOperatorKernelContext_GUID = "82536a28-f022-4769-9d3f-8b278f84c0c3"
@@ -440,10 +440,10 @@ lib LibWin32
   end
 
   struct IMLOperatorKernelVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    compute : UInt64
+    query_interface : Proc(IMLOperatorKernel*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLOperatorKernel*, UInt32)
+    release : Proc(IMLOperatorKernel*, UInt32)
+    compute : Proc(IMLOperatorKernel*, IMLOperatorKernelContext, HRESULT)
   end
 
   IMLOperatorKernel_GUID = "11c4b4a0-b467-4eaa-a1a6-b961d8d0ed79"
@@ -453,21 +453,21 @@ lib LibWin32
   end
 
   struct IMLOperatorShapeInferenceContextVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_attribute_element_count : UInt64
-    get_attribute : UInt64
-    get_string_attribute_element_length : UInt64
-    get_string_attribute_element : UInt64
-    get_input_count : UInt64
-    get_output_count : UInt64
-    is_input_valid : UInt64
-    is_output_valid : UInt64
-    get_input_edge_description : UInt64
-    get_input_tensor_dimension_count : UInt64
-    get_input_tensor_shape : UInt64
-    set_output_tensor_shape : UInt64
+    query_interface : Proc(IMLOperatorShapeInferenceContext*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLOperatorShapeInferenceContext*, UInt32)
+    release : Proc(IMLOperatorShapeInferenceContext*, UInt32)
+    get_attribute_element_count : Proc(IMLOperatorShapeInferenceContext*, PSTR, MLOperatorAttributeType, UInt32*, HRESULT)
+    get_attribute : Proc(IMLOperatorShapeInferenceContext*, PSTR, MLOperatorAttributeType, UInt32, LibC::UINT_PTR, Void*, HRESULT)
+    get_string_attribute_element_length : Proc(IMLOperatorShapeInferenceContext*, PSTR, UInt32, UInt32*, HRESULT)
+    get_string_attribute_element : Proc(IMLOperatorShapeInferenceContext*, PSTR, UInt32, UInt32, UInt8*, HRESULT)
+    get_input_count : Proc(IMLOperatorShapeInferenceContext*, UInt32)
+    get_output_count : Proc(IMLOperatorShapeInferenceContext*, UInt32)
+    is_input_valid : Proc(IMLOperatorShapeInferenceContext*, UInt32, Bool)
+    is_output_valid : Proc(IMLOperatorShapeInferenceContext*, UInt32, Bool)
+    get_input_edge_description : Proc(IMLOperatorShapeInferenceContext*, UInt32, MLOperatorEdgeDescription*, HRESULT)
+    get_input_tensor_dimension_count : Proc(IMLOperatorShapeInferenceContext*, UInt32, UInt32*, HRESULT)
+    get_input_tensor_shape : Proc(IMLOperatorShapeInferenceContext*, UInt32, UInt32, UInt32*, HRESULT)
+    set_output_tensor_shape : Proc(IMLOperatorShapeInferenceContext*, UInt32, UInt32, UInt32*, HRESULT)
   end
 
   IMLOperatorShapeInferenceContext_GUID = "105b6b29-5408-4a68-9959-09b5955a3492"
@@ -477,19 +477,19 @@ lib LibWin32
   end
 
   struct IMLOperatorTypeInferenceContextVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    get_attribute_element_count : UInt64
-    get_attribute : UInt64
-    get_string_attribute_element_length : UInt64
-    get_string_attribute_element : UInt64
-    get_input_count : UInt64
-    get_output_count : UInt64
-    is_input_valid : UInt64
-    is_output_valid : UInt64
-    get_input_edge_description : UInt64
-    set_output_edge_description : UInt64
+    query_interface : Proc(IMLOperatorTypeInferenceContext*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLOperatorTypeInferenceContext*, UInt32)
+    release : Proc(IMLOperatorTypeInferenceContext*, UInt32)
+    get_attribute_element_count : Proc(IMLOperatorTypeInferenceContext*, PSTR, MLOperatorAttributeType, UInt32*, HRESULT)
+    get_attribute : Proc(IMLOperatorTypeInferenceContext*, PSTR, MLOperatorAttributeType, UInt32, LibC::UINT_PTR, Void*, HRESULT)
+    get_string_attribute_element_length : Proc(IMLOperatorTypeInferenceContext*, PSTR, UInt32, UInt32*, HRESULT)
+    get_string_attribute_element : Proc(IMLOperatorTypeInferenceContext*, PSTR, UInt32, UInt32, UInt8*, HRESULT)
+    get_input_count : Proc(IMLOperatorTypeInferenceContext*, UInt32)
+    get_output_count : Proc(IMLOperatorTypeInferenceContext*, UInt32)
+    is_input_valid : Proc(IMLOperatorTypeInferenceContext*, UInt32, Bool)
+    is_output_valid : Proc(IMLOperatorTypeInferenceContext*, UInt32, Bool)
+    get_input_edge_description : Proc(IMLOperatorTypeInferenceContext*, UInt32, MLOperatorEdgeDescription*, HRESULT)
+    set_output_edge_description : Proc(IMLOperatorTypeInferenceContext*, UInt32, MLOperatorEdgeDescription*, HRESULT)
   end
 
   IMLOperatorTypeInferenceContext_GUID = "ec893bb1-f938-427b-8488-c8dcf775f138"
@@ -499,10 +499,10 @@ lib LibWin32
   end
 
   struct IMLOperatorTypeInferrerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    infer_output_types : UInt64
+    query_interface : Proc(IMLOperatorTypeInferrer*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLOperatorTypeInferrer*, UInt32)
+    release : Proc(IMLOperatorTypeInferrer*, UInt32)
+    infer_output_types : Proc(IMLOperatorTypeInferrer*, IMLOperatorTypeInferenceContext, HRESULT)
   end
 
   IMLOperatorTypeInferrer_GUID = "781aeb48-9bcb-4797-bf77-8bf455217beb"
@@ -512,10 +512,10 @@ lib LibWin32
   end
 
   struct IMLOperatorShapeInferrerVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    infer_output_shapes : UInt64
+    query_interface : Proc(IMLOperatorShapeInferrer*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLOperatorShapeInferrer*, UInt32)
+    release : Proc(IMLOperatorShapeInferrer*, UInt32)
+    infer_output_shapes : Proc(IMLOperatorShapeInferrer*, IMLOperatorShapeInferenceContext, HRESULT)
   end
 
   IMLOperatorShapeInferrer_GUID = "540be5be-a6c9-40ee-83f6-d2b8b40a7798"
@@ -525,10 +525,10 @@ lib LibWin32
   end
 
   struct IMLOperatorKernelFactoryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    create_kernel : UInt64
+    query_interface : Proc(IMLOperatorKernelFactory*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLOperatorKernelFactory*, UInt32)
+    release : Proc(IMLOperatorKernelFactory*, UInt32)
+    create_kernel : Proc(IMLOperatorKernelFactory*, IMLOperatorKernelCreationContext, IMLOperatorKernel*, HRESULT)
   end
 
   IMLOperatorKernelFactory_GUID = "ef15ad6f-0dc9-4908-ab35-a575a30dfbf8"
@@ -538,11 +538,11 @@ lib LibWin32
   end
 
   struct IMLOperatorRegistryVTbl
-    query_interface : UInt64
-    add_ref : UInt64
-    release : UInt64
-    register_operator_set_schema : UInt64
-    register_operator_kernel : UInt64
+    query_interface : Proc(IMLOperatorRegistry*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IMLOperatorRegistry*, UInt32)
+    release : Proc(IMLOperatorRegistry*, UInt32)
+    register_operator_set_schema : Proc(IMLOperatorRegistry*, MLOperatorSetId*, Int32, MLOperatorSchemaDescription**, UInt32, IMLOperatorTypeInferrer, IMLOperatorShapeInferrer, HRESULT)
+    register_operator_kernel : Proc(IMLOperatorRegistry*, MLOperatorKernelDescription*, IMLOperatorKernelFactory, IMLOperatorShapeInferrer, HRESULT)
   end
 
   IMLOperatorRegistry_GUID = "2af9dd2d-b516-4672-9ab5-530c208493ad"
@@ -559,397 +559,397 @@ lib LibWin32
   fun MLCreateOperatorRegistry(registry : IMLOperatorRegistry*) : HRESULT
 end
 struct LibWin32::IWinMLModel
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWinMLModel*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWinMLModel*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWinMLModel*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_description(ppdescription : WINML_MODEL_DESC**) : HRESULT
-    @lpVtbl.value.get_description.unsafe_as(Proc(WINML_MODEL_DESC**, HRESULT)).call(ppdescription)
+  def get_description(this : IWinMLModel*, ppdescription : WINML_MODEL_DESC**) : HRESULT
+    @lpVtbl.value.get_description.call(this, ppdescription)
   end
-  def enumerate_metadata(index : UInt32, pkey : LibC::LPWSTR*, pvalue : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.enumerate_metadata.unsafe_as(Proc(UInt32, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)).call(index, pkey, pvalue)
+  def enumerate_metadata(this : IWinMLModel*, index : UInt32, pkey : LibC::LPWSTR*, pvalue : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.enumerate_metadata.call(this, index, pkey, pvalue)
   end
-  def enumerate_model_inputs(index : UInt32, ppinputdescriptor : WINML_VARIABLE_DESC**) : HRESULT
-    @lpVtbl.value.enumerate_model_inputs.unsafe_as(Proc(UInt32, WINML_VARIABLE_DESC**, HRESULT)).call(index, ppinputdescriptor)
+  def enumerate_model_inputs(this : IWinMLModel*, index : UInt32, ppinputdescriptor : WINML_VARIABLE_DESC**) : HRESULT
+    @lpVtbl.value.enumerate_model_inputs.call(this, index, ppinputdescriptor)
   end
-  def enumerate_model_outputs(index : UInt32, ppoutputdescriptor : WINML_VARIABLE_DESC**) : HRESULT
-    @lpVtbl.value.enumerate_model_outputs.unsafe_as(Proc(UInt32, WINML_VARIABLE_DESC**, HRESULT)).call(index, ppoutputdescriptor)
+  def enumerate_model_outputs(this : IWinMLModel*, index : UInt32, ppoutputdescriptor : WINML_VARIABLE_DESC**) : HRESULT
+    @lpVtbl.value.enumerate_model_outputs.call(this, index, ppoutputdescriptor)
   end
 end
 struct LibWin32::IWinMLEvaluationContext
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWinMLEvaluationContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWinMLEvaluationContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWinMLEvaluationContext*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def bind_value(pdescriptor : WINML_BINDING_DESC*) : HRESULT
-    @lpVtbl.value.bind_value.unsafe_as(Proc(WINML_BINDING_DESC*, HRESULT)).call(pdescriptor)
+  def bind_value(this : IWinMLEvaluationContext*, pdescriptor : WINML_BINDING_DESC*) : HRESULT
+    @lpVtbl.value.bind_value.call(this, pdescriptor)
   end
-  def get_value_by_name(name : LibC::LPWSTR, pdescriptor : WINML_BINDING_DESC**) : HRESULT
-    @lpVtbl.value.get_value_by_name.unsafe_as(Proc(LibC::LPWSTR, WINML_BINDING_DESC**, HRESULT)).call(name, pdescriptor)
+  def get_value_by_name(this : IWinMLEvaluationContext*, name : LibC::LPWSTR, pdescriptor : WINML_BINDING_DESC**) : HRESULT
+    @lpVtbl.value.get_value_by_name.call(this, name, pdescriptor)
   end
-  def clear : HRESULT
-    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  def clear(this : IWinMLEvaluationContext*) : HRESULT
+    @lpVtbl.value.clear.call(this)
   end
 end
 struct LibWin32::IWinMLRuntime
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWinMLRuntime*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWinMLRuntime*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWinMLRuntime*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def load_model(path : LibC::LPWSTR, ppmodel : IWinMLModel*) : HRESULT
-    @lpVtbl.value.load_model.unsafe_as(Proc(LibC::LPWSTR, IWinMLModel*, HRESULT)).call(path, ppmodel)
+  def load_model(this : IWinMLRuntime*, path : LibC::LPWSTR, ppmodel : IWinMLModel*) : HRESULT
+    @lpVtbl.value.load_model.call(this, path, ppmodel)
   end
-  def create_evaluation_context(device : ID3D12Device, ppcontext : IWinMLEvaluationContext*) : HRESULT
-    @lpVtbl.value.create_evaluation_context.unsafe_as(Proc(ID3D12Device, IWinMLEvaluationContext*, HRESULT)).call(device, ppcontext)
+  def create_evaluation_context(this : IWinMLRuntime*, device : ID3D12Device, ppcontext : IWinMLEvaluationContext*) : HRESULT
+    @lpVtbl.value.create_evaluation_context.call(this, device, ppcontext)
   end
-  def evaluate_model(pcontext : IWinMLEvaluationContext) : HRESULT
-    @lpVtbl.value.evaluate_model.unsafe_as(Proc(IWinMLEvaluationContext, HRESULT)).call(pcontext)
+  def evaluate_model(this : IWinMLRuntime*, pcontext : IWinMLEvaluationContext) : HRESULT
+    @lpVtbl.value.evaluate_model.call(this, pcontext)
   end
 end
 struct LibWin32::IWinMLRuntimeFactory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IWinMLRuntimeFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IWinMLRuntimeFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IWinMLRuntimeFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_runtime(runtimetype : WINML_RUNTIME_TYPE, ppruntime : IWinMLRuntime*) : HRESULT
-    @lpVtbl.value.create_runtime.unsafe_as(Proc(WINML_RUNTIME_TYPE, IWinMLRuntime*, HRESULT)).call(runtimetype, ppruntime)
+  def create_runtime(this : IWinMLRuntimeFactory*, runtimetype : WINML_RUNTIME_TYPE, ppruntime : IWinMLRuntime*) : HRESULT
+    @lpVtbl.value.create_runtime.call(this, runtimetype, ppruntime)
   end
 end
 struct LibWin32::IMLOperatorAttributes
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLOperatorAttributes*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLOperatorAttributes*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLOperatorAttributes*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_attribute_element_count(name : PSTR, type : MLOperatorAttributeType, elementcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_attribute_element_count.unsafe_as(Proc(PSTR, MLOperatorAttributeType, UInt32*, HRESULT)).call(name, type, elementcount)
+  def get_attribute_element_count(this : IMLOperatorAttributes*, name : PSTR, type : MLOperatorAttributeType, elementcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_attribute_element_count.call(this, name, type, elementcount)
   end
-  def get_attribute(name : PSTR, type : MLOperatorAttributeType, elementcount : UInt32, elementbytesize : LibC::UINT_PTR, value : Void*) : HRESULT
-    @lpVtbl.value.get_attribute.unsafe_as(Proc(PSTR, MLOperatorAttributeType, UInt32, LibC::UINT_PTR, Void*, HRESULT)).call(name, type, elementcount, elementbytesize, value)
+  def get_attribute(this : IMLOperatorAttributes*, name : PSTR, type : MLOperatorAttributeType, elementcount : UInt32, elementbytesize : LibC::UINT_PTR, value : Void*) : HRESULT
+    @lpVtbl.value.get_attribute.call(this, name, type, elementcount, elementbytesize, value)
   end
-  def get_string_attribute_element_length(name : PSTR, elementindex : UInt32, attributeelementbytesize : UInt32*) : HRESULT
-    @lpVtbl.value.get_string_attribute_element_length.unsafe_as(Proc(PSTR, UInt32, UInt32*, HRESULT)).call(name, elementindex, attributeelementbytesize)
+  def get_string_attribute_element_length(this : IMLOperatorAttributes*, name : PSTR, elementindex : UInt32, attributeelementbytesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_attribute_element_length.call(this, name, elementindex, attributeelementbytesize)
   end
-  def get_string_attribute_element(name : PSTR, elementindex : UInt32, attributeelementbytesize : UInt32, attributeelement : UInt8*) : HRESULT
-    @lpVtbl.value.get_string_attribute_element.unsafe_as(Proc(PSTR, UInt32, UInt32, UInt8*, HRESULT)).call(name, elementindex, attributeelementbytesize, attributeelement)
+  def get_string_attribute_element(this : IMLOperatorAttributes*, name : PSTR, elementindex : UInt32, attributeelementbytesize : UInt32, attributeelement : UInt8*) : HRESULT
+    @lpVtbl.value.get_string_attribute_element.call(this, name, elementindex, attributeelementbytesize, attributeelement)
   end
 end
 struct LibWin32::IMLOperatorTensorShapeDescription
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLOperatorTensorShapeDescription*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLOperatorTensorShapeDescription*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLOperatorTensorShapeDescription*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_input_tensor_dimension_count(inputindex : UInt32, dimensioncount : UInt32*) : HRESULT
-    @lpVtbl.value.get_input_tensor_dimension_count.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(inputindex, dimensioncount)
+  def get_input_tensor_dimension_count(this : IMLOperatorTensorShapeDescription*, inputindex : UInt32, dimensioncount : UInt32*) : HRESULT
+    @lpVtbl.value.get_input_tensor_dimension_count.call(this, inputindex, dimensioncount)
   end
-  def get_input_tensor_shape(inputindex : UInt32, dimensioncount : UInt32, dimensions : UInt32*) : HRESULT
-    @lpVtbl.value.get_input_tensor_shape.unsafe_as(Proc(UInt32, UInt32, UInt32*, HRESULT)).call(inputindex, dimensioncount, dimensions)
+  def get_input_tensor_shape(this : IMLOperatorTensorShapeDescription*, inputindex : UInt32, dimensioncount : UInt32, dimensions : UInt32*) : HRESULT
+    @lpVtbl.value.get_input_tensor_shape.call(this, inputindex, dimensioncount, dimensions)
   end
-  def has_output_shape_description : Bool
-    @lpVtbl.value.has_output_shape_description.unsafe_as(Proc(Bool)).call
+  def has_output_shape_description(this : IMLOperatorTensorShapeDescription*) : Bool
+    @lpVtbl.value.has_output_shape_description.call(this)
   end
-  def get_output_tensor_dimension_count(outputindex : UInt32, dimensioncount : UInt32*) : HRESULT
-    @lpVtbl.value.get_output_tensor_dimension_count.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(outputindex, dimensioncount)
+  def get_output_tensor_dimension_count(this : IMLOperatorTensorShapeDescription*, outputindex : UInt32, dimensioncount : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_tensor_dimension_count.call(this, outputindex, dimensioncount)
   end
-  def get_output_tensor_shape(outputindex : UInt32, dimensioncount : UInt32, dimensions : UInt32*) : HRESULT
-    @lpVtbl.value.get_output_tensor_shape.unsafe_as(Proc(UInt32, UInt32, UInt32*, HRESULT)).call(outputindex, dimensioncount, dimensions)
+  def get_output_tensor_shape(this : IMLOperatorTensorShapeDescription*, outputindex : UInt32, dimensioncount : UInt32, dimensions : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_tensor_shape.call(this, outputindex, dimensioncount, dimensions)
   end
 end
 struct LibWin32::IMLOperatorKernelCreationContext
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLOperatorKernelCreationContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLOperatorKernelCreationContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLOperatorKernelCreationContext*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_attribute_element_count(name : PSTR, type : MLOperatorAttributeType, elementcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_attribute_element_count.unsafe_as(Proc(PSTR, MLOperatorAttributeType, UInt32*, HRESULT)).call(name, type, elementcount)
+  def get_attribute_element_count(this : IMLOperatorKernelCreationContext*, name : PSTR, type : MLOperatorAttributeType, elementcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_attribute_element_count.call(this, name, type, elementcount)
   end
-  def get_attribute(name : PSTR, type : MLOperatorAttributeType, elementcount : UInt32, elementbytesize : LibC::UINT_PTR, value : Void*) : HRESULT
-    @lpVtbl.value.get_attribute.unsafe_as(Proc(PSTR, MLOperatorAttributeType, UInt32, LibC::UINT_PTR, Void*, HRESULT)).call(name, type, elementcount, elementbytesize, value)
+  def get_attribute(this : IMLOperatorKernelCreationContext*, name : PSTR, type : MLOperatorAttributeType, elementcount : UInt32, elementbytesize : LibC::UINT_PTR, value : Void*) : HRESULT
+    @lpVtbl.value.get_attribute.call(this, name, type, elementcount, elementbytesize, value)
   end
-  def get_string_attribute_element_length(name : PSTR, elementindex : UInt32, attributeelementbytesize : UInt32*) : HRESULT
-    @lpVtbl.value.get_string_attribute_element_length.unsafe_as(Proc(PSTR, UInt32, UInt32*, HRESULT)).call(name, elementindex, attributeelementbytesize)
+  def get_string_attribute_element_length(this : IMLOperatorKernelCreationContext*, name : PSTR, elementindex : UInt32, attributeelementbytesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_attribute_element_length.call(this, name, elementindex, attributeelementbytesize)
   end
-  def get_string_attribute_element(name : PSTR, elementindex : UInt32, attributeelementbytesize : UInt32, attributeelement : UInt8*) : HRESULT
-    @lpVtbl.value.get_string_attribute_element.unsafe_as(Proc(PSTR, UInt32, UInt32, UInt8*, HRESULT)).call(name, elementindex, attributeelementbytesize, attributeelement)
+  def get_string_attribute_element(this : IMLOperatorKernelCreationContext*, name : PSTR, elementindex : UInt32, attributeelementbytesize : UInt32, attributeelement : UInt8*) : HRESULT
+    @lpVtbl.value.get_string_attribute_element.call(this, name, elementindex, attributeelementbytesize, attributeelement)
   end
-  def get_input_count : UInt32
-    @lpVtbl.value.get_input_count.unsafe_as(Proc(UInt32)).call
+  def get_input_count(this : IMLOperatorKernelCreationContext*) : UInt32
+    @lpVtbl.value.get_input_count.call(this)
   end
-  def get_output_count : UInt32
-    @lpVtbl.value.get_output_count.unsafe_as(Proc(UInt32)).call
+  def get_output_count(this : IMLOperatorKernelCreationContext*) : UInt32
+    @lpVtbl.value.get_output_count.call(this)
   end
-  def is_input_valid(inputindex : UInt32) : Bool
-    @lpVtbl.value.is_input_valid.unsafe_as(Proc(UInt32, Bool)).call(inputindex)
+  def is_input_valid(this : IMLOperatorKernelCreationContext*, inputindex : UInt32) : Bool
+    @lpVtbl.value.is_input_valid.call(this, inputindex)
   end
-  def is_output_valid(outputindex : UInt32) : Bool
-    @lpVtbl.value.is_output_valid.unsafe_as(Proc(UInt32, Bool)).call(outputindex)
+  def is_output_valid(this : IMLOperatorKernelCreationContext*, outputindex : UInt32) : Bool
+    @lpVtbl.value.is_output_valid.call(this, outputindex)
   end
-  def get_input_edge_description(inputindex : UInt32, edgedescription : MLOperatorEdgeDescription*) : HRESULT
-    @lpVtbl.value.get_input_edge_description.unsafe_as(Proc(UInt32, MLOperatorEdgeDescription*, HRESULT)).call(inputindex, edgedescription)
+  def get_input_edge_description(this : IMLOperatorKernelCreationContext*, inputindex : UInt32, edgedescription : MLOperatorEdgeDescription*) : HRESULT
+    @lpVtbl.value.get_input_edge_description.call(this, inputindex, edgedescription)
   end
-  def get_output_edge_description(outputindex : UInt32, edgedescription : MLOperatorEdgeDescription*) : HRESULT
-    @lpVtbl.value.get_output_edge_description.unsafe_as(Proc(UInt32, MLOperatorEdgeDescription*, HRESULT)).call(outputindex, edgedescription)
+  def get_output_edge_description(this : IMLOperatorKernelCreationContext*, outputindex : UInt32, edgedescription : MLOperatorEdgeDescription*) : HRESULT
+    @lpVtbl.value.get_output_edge_description.call(this, outputindex, edgedescription)
   end
-  def has_tensor_shape_description : Bool
-    @lpVtbl.value.has_tensor_shape_description.unsafe_as(Proc(Bool)).call
+  def has_tensor_shape_description(this : IMLOperatorKernelCreationContext*) : Bool
+    @lpVtbl.value.has_tensor_shape_description.call(this)
   end
-  def get_tensor_shape_description(shapedescription : IMLOperatorTensorShapeDescription*) : HRESULT
-    @lpVtbl.value.get_tensor_shape_description.unsafe_as(Proc(IMLOperatorTensorShapeDescription*, HRESULT)).call(shapedescription)
+  def get_tensor_shape_description(this : IMLOperatorKernelCreationContext*, shapedescription : IMLOperatorTensorShapeDescription*) : HRESULT
+    @lpVtbl.value.get_tensor_shape_description.call(this, shapedescription)
   end
-  def get_execution_interface(executionobject : IUnknown*) : Void
-    @lpVtbl.value.get_execution_interface.unsafe_as(Proc(IUnknown*, Void)).call(executionobject)
+  def get_execution_interface(this : IMLOperatorKernelCreationContext*, executionobject : IUnknown*) : Void
+    @lpVtbl.value.get_execution_interface.call(this, executionobject)
   end
 end
 struct LibWin32::IMLOperatorTensor
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLOperatorTensor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLOperatorTensor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLOperatorTensor*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_dimension_count : UInt32
-    @lpVtbl.value.get_dimension_count.unsafe_as(Proc(UInt32)).call
+  def get_dimension_count(this : IMLOperatorTensor*) : UInt32
+    @lpVtbl.value.get_dimension_count.call(this)
   end
-  def get_shape(dimensioncount : UInt32, dimensions : UInt32*) : HRESULT
-    @lpVtbl.value.get_shape.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(dimensioncount, dimensions)
+  def get_shape(this : IMLOperatorTensor*, dimensioncount : UInt32, dimensions : UInt32*) : HRESULT
+    @lpVtbl.value.get_shape.call(this, dimensioncount, dimensions)
   end
-  def get_tensor_data_type : MLOperatorTensorDataType
-    @lpVtbl.value.get_tensor_data_type.unsafe_as(Proc(MLOperatorTensorDataType)).call
+  def get_tensor_data_type(this : IMLOperatorTensor*) : MLOperatorTensorDataType
+    @lpVtbl.value.get_tensor_data_type.call(this)
   end
-  def is_cpu_data : Bool
-    @lpVtbl.value.is_cpu_data.unsafe_as(Proc(Bool)).call
+  def is_cpu_data(this : IMLOperatorTensor*) : Bool
+    @lpVtbl.value.is_cpu_data.call(this)
   end
-  def is_data_interface : Bool
-    @lpVtbl.value.is_data_interface.unsafe_as(Proc(Bool)).call
+  def is_data_interface(this : IMLOperatorTensor*) : Bool
+    @lpVtbl.value.is_data_interface.call(this)
   end
-  def get_data : Void*
-    @lpVtbl.value.get_data.unsafe_as(Proc(Void**)).call
+  def get_data(this : IMLOperatorTensor*) : Void*
+    @lpVtbl.value.get_data.call(this)
   end
-  def get_data_interface(datainterface : IUnknown*) : Void
-    @lpVtbl.value.get_data_interface.unsafe_as(Proc(IUnknown*, Void)).call(datainterface)
+  def get_data_interface(this : IMLOperatorTensor*, datainterface : IUnknown*) : Void
+    @lpVtbl.value.get_data_interface.call(this, datainterface)
   end
 end
 struct LibWin32::IMLOperatorKernelContext
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLOperatorKernelContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLOperatorKernelContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLOperatorKernelContext*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_input_tensor(inputindex : UInt32, tensor : IMLOperatorTensor*) : HRESULT
-    @lpVtbl.value.get_input_tensor.unsafe_as(Proc(UInt32, IMLOperatorTensor*, HRESULT)).call(inputindex, tensor)
+  def get_input_tensor(this : IMLOperatorKernelContext*, inputindex : UInt32, tensor : IMLOperatorTensor*) : HRESULT
+    @lpVtbl.value.get_input_tensor.call(this, inputindex, tensor)
   end
-  def get_output_tensor(outputindex : UInt32, dimensioncount : UInt32, dimensionsizes : UInt32*, tensor : IMLOperatorTensor*) : HRESULT
-    @lpVtbl.value.get_output_tensor.unsafe_as(Proc(UInt32, UInt32, UInt32*, IMLOperatorTensor*, HRESULT)).call(outputindex, dimensioncount, dimensionsizes, tensor)
+  def get_output_tensor(this : IMLOperatorKernelContext*, outputindex : UInt32, dimensioncount : UInt32, dimensionsizes : UInt32*, tensor : IMLOperatorTensor*) : HRESULT
+    @lpVtbl.value.get_output_tensor.call(this, outputindex, dimensioncount, dimensionsizes, tensor)
   end
-  def get_output_tensor2(outputindex : UInt32, tensor : IMLOperatorTensor*) : HRESULT
-    @lpVtbl.value.get_output_tensor2.unsafe_as(Proc(UInt32, IMLOperatorTensor*, HRESULT)).call(outputindex, tensor)
+  def get_output_tensor2(this : IMLOperatorKernelContext*, outputindex : UInt32, tensor : IMLOperatorTensor*) : HRESULT
+    @lpVtbl.value.get_output_tensor2.call(this, outputindex, tensor)
   end
-  def allocate_temporary_data(size : LibC::UINT_PTR, data : IUnknown*) : HRESULT
-    @lpVtbl.value.allocate_temporary_data.unsafe_as(Proc(LibC::UINT_PTR, IUnknown*, HRESULT)).call(size, data)
+  def allocate_temporary_data(this : IMLOperatorKernelContext*, size : LibC::UINT_PTR, data : IUnknown*) : HRESULT
+    @lpVtbl.value.allocate_temporary_data.call(this, size, data)
   end
-  def get_execution_interface(executionobject : IUnknown*) : Void
-    @lpVtbl.value.get_execution_interface.unsafe_as(Proc(IUnknown*, Void)).call(executionobject)
+  def get_execution_interface(this : IMLOperatorKernelContext*, executionobject : IUnknown*) : Void
+    @lpVtbl.value.get_execution_interface.call(this, executionobject)
   end
 end
 struct LibWin32::IMLOperatorKernel
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLOperatorKernel*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLOperatorKernel*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLOperatorKernel*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def compute(context : IMLOperatorKernelContext) : HRESULT
-    @lpVtbl.value.compute.unsafe_as(Proc(IMLOperatorKernelContext, HRESULT)).call(context)
+  def compute(this : IMLOperatorKernel*, context : IMLOperatorKernelContext) : HRESULT
+    @lpVtbl.value.compute.call(this, context)
   end
 end
 struct LibWin32::IMLOperatorShapeInferenceContext
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLOperatorShapeInferenceContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLOperatorShapeInferenceContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLOperatorShapeInferenceContext*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_attribute_element_count(name : PSTR, type : MLOperatorAttributeType, elementcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_attribute_element_count.unsafe_as(Proc(PSTR, MLOperatorAttributeType, UInt32*, HRESULT)).call(name, type, elementcount)
+  def get_attribute_element_count(this : IMLOperatorShapeInferenceContext*, name : PSTR, type : MLOperatorAttributeType, elementcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_attribute_element_count.call(this, name, type, elementcount)
   end
-  def get_attribute(name : PSTR, type : MLOperatorAttributeType, elementcount : UInt32, elementbytesize : LibC::UINT_PTR, value : Void*) : HRESULT
-    @lpVtbl.value.get_attribute.unsafe_as(Proc(PSTR, MLOperatorAttributeType, UInt32, LibC::UINT_PTR, Void*, HRESULT)).call(name, type, elementcount, elementbytesize, value)
+  def get_attribute(this : IMLOperatorShapeInferenceContext*, name : PSTR, type : MLOperatorAttributeType, elementcount : UInt32, elementbytesize : LibC::UINT_PTR, value : Void*) : HRESULT
+    @lpVtbl.value.get_attribute.call(this, name, type, elementcount, elementbytesize, value)
   end
-  def get_string_attribute_element_length(name : PSTR, elementindex : UInt32, attributeelementbytesize : UInt32*) : HRESULT
-    @lpVtbl.value.get_string_attribute_element_length.unsafe_as(Proc(PSTR, UInt32, UInt32*, HRESULT)).call(name, elementindex, attributeelementbytesize)
+  def get_string_attribute_element_length(this : IMLOperatorShapeInferenceContext*, name : PSTR, elementindex : UInt32, attributeelementbytesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_attribute_element_length.call(this, name, elementindex, attributeelementbytesize)
   end
-  def get_string_attribute_element(name : PSTR, elementindex : UInt32, attributeelementbytesize : UInt32, attributeelement : UInt8*) : HRESULT
-    @lpVtbl.value.get_string_attribute_element.unsafe_as(Proc(PSTR, UInt32, UInt32, UInt8*, HRESULT)).call(name, elementindex, attributeelementbytesize, attributeelement)
+  def get_string_attribute_element(this : IMLOperatorShapeInferenceContext*, name : PSTR, elementindex : UInt32, attributeelementbytesize : UInt32, attributeelement : UInt8*) : HRESULT
+    @lpVtbl.value.get_string_attribute_element.call(this, name, elementindex, attributeelementbytesize, attributeelement)
   end
-  def get_input_count : UInt32
-    @lpVtbl.value.get_input_count.unsafe_as(Proc(UInt32)).call
+  def get_input_count(this : IMLOperatorShapeInferenceContext*) : UInt32
+    @lpVtbl.value.get_input_count.call(this)
   end
-  def get_output_count : UInt32
-    @lpVtbl.value.get_output_count.unsafe_as(Proc(UInt32)).call
+  def get_output_count(this : IMLOperatorShapeInferenceContext*) : UInt32
+    @lpVtbl.value.get_output_count.call(this)
   end
-  def is_input_valid(inputindex : UInt32) : Bool
-    @lpVtbl.value.is_input_valid.unsafe_as(Proc(UInt32, Bool)).call(inputindex)
+  def is_input_valid(this : IMLOperatorShapeInferenceContext*, inputindex : UInt32) : Bool
+    @lpVtbl.value.is_input_valid.call(this, inputindex)
   end
-  def is_output_valid(outputindex : UInt32) : Bool
-    @lpVtbl.value.is_output_valid.unsafe_as(Proc(UInt32, Bool)).call(outputindex)
+  def is_output_valid(this : IMLOperatorShapeInferenceContext*, outputindex : UInt32) : Bool
+    @lpVtbl.value.is_output_valid.call(this, outputindex)
   end
-  def get_input_edge_description(inputindex : UInt32, edgedescription : MLOperatorEdgeDescription*) : HRESULT
-    @lpVtbl.value.get_input_edge_description.unsafe_as(Proc(UInt32, MLOperatorEdgeDescription*, HRESULT)).call(inputindex, edgedescription)
+  def get_input_edge_description(this : IMLOperatorShapeInferenceContext*, inputindex : UInt32, edgedescription : MLOperatorEdgeDescription*) : HRESULT
+    @lpVtbl.value.get_input_edge_description.call(this, inputindex, edgedescription)
   end
-  def get_input_tensor_dimension_count(inputindex : UInt32, dimensioncount : UInt32*) : HRESULT
-    @lpVtbl.value.get_input_tensor_dimension_count.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(inputindex, dimensioncount)
+  def get_input_tensor_dimension_count(this : IMLOperatorShapeInferenceContext*, inputindex : UInt32, dimensioncount : UInt32*) : HRESULT
+    @lpVtbl.value.get_input_tensor_dimension_count.call(this, inputindex, dimensioncount)
   end
-  def get_input_tensor_shape(inputindex : UInt32, dimensioncount : UInt32, dimensions : UInt32*) : HRESULT
-    @lpVtbl.value.get_input_tensor_shape.unsafe_as(Proc(UInt32, UInt32, UInt32*, HRESULT)).call(inputindex, dimensioncount, dimensions)
+  def get_input_tensor_shape(this : IMLOperatorShapeInferenceContext*, inputindex : UInt32, dimensioncount : UInt32, dimensions : UInt32*) : HRESULT
+    @lpVtbl.value.get_input_tensor_shape.call(this, inputindex, dimensioncount, dimensions)
   end
-  def set_output_tensor_shape(outputindex : UInt32, dimensioncount : UInt32, dimensions : UInt32*) : HRESULT
-    @lpVtbl.value.set_output_tensor_shape.unsafe_as(Proc(UInt32, UInt32, UInt32*, HRESULT)).call(outputindex, dimensioncount, dimensions)
+  def set_output_tensor_shape(this : IMLOperatorShapeInferenceContext*, outputindex : UInt32, dimensioncount : UInt32, dimensions : UInt32*) : HRESULT
+    @lpVtbl.value.set_output_tensor_shape.call(this, outputindex, dimensioncount, dimensions)
   end
 end
 struct LibWin32::IMLOperatorTypeInferenceContext
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLOperatorTypeInferenceContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLOperatorTypeInferenceContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLOperatorTypeInferenceContext*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def get_attribute_element_count(name : PSTR, type : MLOperatorAttributeType, elementcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_attribute_element_count.unsafe_as(Proc(PSTR, MLOperatorAttributeType, UInt32*, HRESULT)).call(name, type, elementcount)
+  def get_attribute_element_count(this : IMLOperatorTypeInferenceContext*, name : PSTR, type : MLOperatorAttributeType, elementcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_attribute_element_count.call(this, name, type, elementcount)
   end
-  def get_attribute(name : PSTR, type : MLOperatorAttributeType, elementcount : UInt32, elementbytesize : LibC::UINT_PTR, value : Void*) : HRESULT
-    @lpVtbl.value.get_attribute.unsafe_as(Proc(PSTR, MLOperatorAttributeType, UInt32, LibC::UINT_PTR, Void*, HRESULT)).call(name, type, elementcount, elementbytesize, value)
+  def get_attribute(this : IMLOperatorTypeInferenceContext*, name : PSTR, type : MLOperatorAttributeType, elementcount : UInt32, elementbytesize : LibC::UINT_PTR, value : Void*) : HRESULT
+    @lpVtbl.value.get_attribute.call(this, name, type, elementcount, elementbytesize, value)
   end
-  def get_string_attribute_element_length(name : PSTR, elementindex : UInt32, attributeelementbytesize : UInt32*) : HRESULT
-    @lpVtbl.value.get_string_attribute_element_length.unsafe_as(Proc(PSTR, UInt32, UInt32*, HRESULT)).call(name, elementindex, attributeelementbytesize)
+  def get_string_attribute_element_length(this : IMLOperatorTypeInferenceContext*, name : PSTR, elementindex : UInt32, attributeelementbytesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_attribute_element_length.call(this, name, elementindex, attributeelementbytesize)
   end
-  def get_string_attribute_element(name : PSTR, elementindex : UInt32, attributeelementbytesize : UInt32, attributeelement : UInt8*) : HRESULT
-    @lpVtbl.value.get_string_attribute_element.unsafe_as(Proc(PSTR, UInt32, UInt32, UInt8*, HRESULT)).call(name, elementindex, attributeelementbytesize, attributeelement)
+  def get_string_attribute_element(this : IMLOperatorTypeInferenceContext*, name : PSTR, elementindex : UInt32, attributeelementbytesize : UInt32, attributeelement : UInt8*) : HRESULT
+    @lpVtbl.value.get_string_attribute_element.call(this, name, elementindex, attributeelementbytesize, attributeelement)
   end
-  def get_input_count : UInt32
-    @lpVtbl.value.get_input_count.unsafe_as(Proc(UInt32)).call
+  def get_input_count(this : IMLOperatorTypeInferenceContext*) : UInt32
+    @lpVtbl.value.get_input_count.call(this)
   end
-  def get_output_count : UInt32
-    @lpVtbl.value.get_output_count.unsafe_as(Proc(UInt32)).call
+  def get_output_count(this : IMLOperatorTypeInferenceContext*) : UInt32
+    @lpVtbl.value.get_output_count.call(this)
   end
-  def is_input_valid(inputindex : UInt32) : Bool
-    @lpVtbl.value.is_input_valid.unsafe_as(Proc(UInt32, Bool)).call(inputindex)
+  def is_input_valid(this : IMLOperatorTypeInferenceContext*, inputindex : UInt32) : Bool
+    @lpVtbl.value.is_input_valid.call(this, inputindex)
   end
-  def is_output_valid(outputindex : UInt32) : Bool
-    @lpVtbl.value.is_output_valid.unsafe_as(Proc(UInt32, Bool)).call(outputindex)
+  def is_output_valid(this : IMLOperatorTypeInferenceContext*, outputindex : UInt32) : Bool
+    @lpVtbl.value.is_output_valid.call(this, outputindex)
   end
-  def get_input_edge_description(inputindex : UInt32, edgedescription : MLOperatorEdgeDescription*) : HRESULT
-    @lpVtbl.value.get_input_edge_description.unsafe_as(Proc(UInt32, MLOperatorEdgeDescription*, HRESULT)).call(inputindex, edgedescription)
+  def get_input_edge_description(this : IMLOperatorTypeInferenceContext*, inputindex : UInt32, edgedescription : MLOperatorEdgeDescription*) : HRESULT
+    @lpVtbl.value.get_input_edge_description.call(this, inputindex, edgedescription)
   end
-  def set_output_edge_description(outputindex : UInt32, edgedescription : MLOperatorEdgeDescription*) : HRESULT
-    @lpVtbl.value.set_output_edge_description.unsafe_as(Proc(UInt32, MLOperatorEdgeDescription*, HRESULT)).call(outputindex, edgedescription)
+  def set_output_edge_description(this : IMLOperatorTypeInferenceContext*, outputindex : UInt32, edgedescription : MLOperatorEdgeDescription*) : HRESULT
+    @lpVtbl.value.set_output_edge_description.call(this, outputindex, edgedescription)
   end
 end
 struct LibWin32::IMLOperatorTypeInferrer
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLOperatorTypeInferrer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLOperatorTypeInferrer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLOperatorTypeInferrer*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def infer_output_types(context : IMLOperatorTypeInferenceContext) : HRESULT
-    @lpVtbl.value.infer_output_types.unsafe_as(Proc(IMLOperatorTypeInferenceContext, HRESULT)).call(context)
+  def infer_output_types(this : IMLOperatorTypeInferrer*, context : IMLOperatorTypeInferenceContext) : HRESULT
+    @lpVtbl.value.infer_output_types.call(this, context)
   end
 end
 struct LibWin32::IMLOperatorShapeInferrer
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLOperatorShapeInferrer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLOperatorShapeInferrer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLOperatorShapeInferrer*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def infer_output_shapes(context : IMLOperatorShapeInferenceContext) : HRESULT
-    @lpVtbl.value.infer_output_shapes.unsafe_as(Proc(IMLOperatorShapeInferenceContext, HRESULT)).call(context)
+  def infer_output_shapes(this : IMLOperatorShapeInferrer*, context : IMLOperatorShapeInferenceContext) : HRESULT
+    @lpVtbl.value.infer_output_shapes.call(this, context)
   end
 end
 struct LibWin32::IMLOperatorKernelFactory
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLOperatorKernelFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLOperatorKernelFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLOperatorKernelFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def create_kernel(context : IMLOperatorKernelCreationContext, kernel : IMLOperatorKernel*) : HRESULT
-    @lpVtbl.value.create_kernel.unsafe_as(Proc(IMLOperatorKernelCreationContext, IMLOperatorKernel*, HRESULT)).call(context, kernel)
+  def create_kernel(this : IMLOperatorKernelFactory*, context : IMLOperatorKernelCreationContext, kernel : IMLOperatorKernel*) : HRESULT
+    @lpVtbl.value.create_kernel.call(this, context, kernel)
   end
 end
 struct LibWin32::IMLOperatorRegistry
-  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  def query_interface(this : IMLOperatorRegistry*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref : UInt32
-    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  def add_ref(this : IMLOperatorRegistry*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
   end
-  def release : UInt32
-    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  def release(this : IMLOperatorRegistry*) : UInt32
+    @lpVtbl.value.release.call(this)
   end
-  def register_operator_set_schema(operatorsetid : MLOperatorSetId*, baselineversion : Int32, schema : MLOperatorSchemaDescription**, schemacount : UInt32, typeinferrer : IMLOperatorTypeInferrer, shapeinferrer : IMLOperatorShapeInferrer) : HRESULT
-    @lpVtbl.value.register_operator_set_schema.unsafe_as(Proc(MLOperatorSetId*, Int32, MLOperatorSchemaDescription**, UInt32, IMLOperatorTypeInferrer, IMLOperatorShapeInferrer, HRESULT)).call(operatorsetid, baselineversion, schema, schemacount, typeinferrer, shapeinferrer)
+  def register_operator_set_schema(this : IMLOperatorRegistry*, operatorsetid : MLOperatorSetId*, baselineversion : Int32, schema : MLOperatorSchemaDescription**, schemacount : UInt32, typeinferrer : IMLOperatorTypeInferrer, shapeinferrer : IMLOperatorShapeInferrer) : HRESULT
+    @lpVtbl.value.register_operator_set_schema.call(this, operatorsetid, baselineversion, schema, schemacount, typeinferrer, shapeinferrer)
   end
-  def register_operator_kernel(operatorkernel : MLOperatorKernelDescription*, operatorkernelfactory : IMLOperatorKernelFactory, shapeinferrer : IMLOperatorShapeInferrer) : HRESULT
-    @lpVtbl.value.register_operator_kernel.unsafe_as(Proc(MLOperatorKernelDescription*, IMLOperatorKernelFactory, IMLOperatorShapeInferrer, HRESULT)).call(operatorkernel, operatorkernelfactory, shapeinferrer)
+  def register_operator_kernel(this : IMLOperatorRegistry*, operatorkernel : MLOperatorKernelDescription*, operatorkernelfactory : IMLOperatorKernelFactory, shapeinferrer : IMLOperatorShapeInferrer) : HRESULT
+    @lpVtbl.value.register_operator_kernel.call(this, operatorkernel, operatorkernelfactory, shapeinferrer)
   end
 end
